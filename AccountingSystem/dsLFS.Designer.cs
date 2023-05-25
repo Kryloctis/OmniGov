@@ -16767,9 +16767,23 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtSummarySubsidiaryLedgerDataTable : global::System.Data.TypedTableBase<dtSummarySubsidiaryLedgerRow> {
             
-            private global::System.Data.DataColumn columnsub_acc_code;
+            private global::System.Data.DataColumn columnfunds_id;
             
-            private global::System.Data.DataColumn columnsub_acc_name;
+            private global::System.Data.DataColumn columnfund_code;
+            
+            private global::System.Data.DataColumn columnfund_name;
+            
+            private global::System.Data.DataColumn columngeneral_ledger_accounts_id;
+            
+            private global::System.Data.DataColumn columngeneral_ledger_accounts_code;
+            
+            private global::System.Data.DataColumn columngeneral_ledger_accounts_name;
+            
+            private global::System.Data.DataColumn columnsubsidiary_ledger_accounts_id;
+            
+            private global::System.Data.DataColumn columnsubsidiary_ledger_accounts_code;
+            
+            private global::System.Data.DataColumn columnsubsidiary_ledger_accounts_name;
             
             private global::System.Data.DataColumn columnbalance;
             
@@ -16808,17 +16822,73 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_acc_codeColumn {
+            public global::System.Data.DataColumn funds_idColumn {
                 get {
-                    return this.columnsub_acc_code;
+                    return this.columnfunds_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_acc_nameColumn {
+            public global::System.Data.DataColumn fund_codeColumn {
                 get {
-                    return this.columnsub_acc_name;
+                    return this.columnfund_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fund_nameColumn {
+                get {
+                    return this.columnfund_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn general_ledger_accounts_idColumn {
+                get {
+                    return this.columngeneral_ledger_accounts_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn general_ledger_accounts_codeColumn {
+                get {
+                    return this.columngeneral_ledger_accounts_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn general_ledger_accounts_nameColumn {
+                get {
+                    return this.columngeneral_ledger_accounts_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn subsidiary_ledger_accounts_idColumn {
+                get {
+                    return this.columnsubsidiary_ledger_accounts_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn subsidiary_ledger_accounts_codeColumn {
+                get {
+                    return this.columnsubsidiary_ledger_accounts_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn subsidiary_ledger_accounts_nameColumn {
+                get {
+                    return this.columnsubsidiary_ledger_accounts_name;
                 }
             }
             
@@ -16867,11 +16937,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSummarySubsidiaryLedgerRow AdddtSummarySubsidiaryLedgerRow(string sub_acc_code, string sub_acc_name, string balance) {
+            public dtSummarySubsidiaryLedgerRow AdddtSummarySubsidiaryLedgerRow(string funds_id, string fund_code, string fund_name, string general_ledger_accounts_id, string general_ledger_accounts_code, string general_ledger_accounts_name, string subsidiary_ledger_accounts_id, string subsidiary_ledger_accounts_code, string subsidiary_ledger_accounts_name, string balance) {
                 dtSummarySubsidiaryLedgerRow rowdtSummarySubsidiaryLedgerRow = ((dtSummarySubsidiaryLedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        sub_acc_code,
-                        sub_acc_name,
+                        funds_id,
+                        fund_code,
+                        fund_name,
+                        general_ledger_accounts_id,
+                        general_ledger_accounts_code,
+                        general_ledger_accounts_name,
+                        subsidiary_ledger_accounts_id,
+                        subsidiary_ledger_accounts_code,
+                        subsidiary_ledger_accounts_name,
                         balance};
                 rowdtSummarySubsidiaryLedgerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtSummarySubsidiaryLedgerRow);
@@ -16895,18 +16972,39 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnsub_acc_code = base.Columns["sub_acc_code"];
-                this.columnsub_acc_name = base.Columns["sub_acc_name"];
+                this.columnfunds_id = base.Columns["funds_id"];
+                this.columnfund_code = base.Columns["fund_code"];
+                this.columnfund_name = base.Columns["fund_name"];
+                this.columngeneral_ledger_accounts_id = base.Columns["general_ledger_accounts_id"];
+                this.columngeneral_ledger_accounts_code = base.Columns["general_ledger_accounts_code"];
+                this.columngeneral_ledger_accounts_name = base.Columns["general_ledger_accounts_name"];
+                this.columnsubsidiary_ledger_accounts_id = base.Columns["subsidiary_ledger_accounts_id"];
+                this.columnsubsidiary_ledger_accounts_code = base.Columns["subsidiary_ledger_accounts_code"];
+                this.columnsubsidiary_ledger_accounts_name = base.Columns["subsidiary_ledger_accounts_name"];
                 this.columnbalance = base.Columns["balance"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnsub_acc_code = new global::System.Data.DataColumn("sub_acc_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_acc_code);
-                this.columnsub_acc_name = new global::System.Data.DataColumn("sub_acc_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_acc_name);
+                this.columnfunds_id = new global::System.Data.DataColumn("funds_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunds_id);
+                this.columnfund_code = new global::System.Data.DataColumn("fund_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_code);
+                this.columnfund_name = new global::System.Data.DataColumn("fund_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_name);
+                this.columngeneral_ledger_accounts_id = new global::System.Data.DataColumn("general_ledger_accounts_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngeneral_ledger_accounts_id);
+                this.columngeneral_ledger_accounts_code = new global::System.Data.DataColumn("general_ledger_accounts_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngeneral_ledger_accounts_code);
+                this.columngeneral_ledger_accounts_name = new global::System.Data.DataColumn("general_ledger_accounts_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngeneral_ledger_accounts_name);
+                this.columnsubsidiary_ledger_accounts_id = new global::System.Data.DataColumn("subsidiary_ledger_accounts_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubsidiary_ledger_accounts_id);
+                this.columnsubsidiary_ledger_accounts_code = new global::System.Data.DataColumn("subsidiary_ledger_accounts_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubsidiary_ledger_accounts_code);
+                this.columnsubsidiary_ledger_accounts_name = new global::System.Data.DataColumn("subsidiary_ledger_accounts_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubsidiary_ledger_accounts_name);
                 this.columnbalance = new global::System.Data.DataColumn("balance", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbalance);
             }
@@ -30092,35 +30190,151 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_acc_code {
+            public string funds_id {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.sub_acc_codeColumn]));
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.funds_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_acc_code\' in table \'dtSummarySubsidiaryLedger\' is DBNul" +
-                                "l.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'funds_id\' in table \'dtSummarySubsidiaryLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSummarySubsidiaryLedger.sub_acc_codeColumn] = value;
+                    this[this.tabledtSummarySubsidiaryLedger.funds_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_acc_name {
+            public string fund_code {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.sub_acc_nameColumn]));
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.fund_codeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_acc_name\' in table \'dtSummarySubsidiaryLedger\' is DBNul" +
-                                "l.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'fund_code\' in table \'dtSummarySubsidiaryLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSummarySubsidiaryLedger.sub_acc_nameColumn] = value;
+                    this[this.tabledtSummarySubsidiaryLedger.fund_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string fund_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.fund_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fund_name\' in table \'dtSummarySubsidiaryLedger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.fund_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string general_ledger_accounts_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'general_ledger_accounts_id\' in table \'dtSummarySubsidiaryLe" +
+                                "dger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string general_ledger_accounts_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'general_ledger_accounts_code\' in table \'dtSummarySubsidiary" +
+                                "Ledger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string general_ledger_accounts_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'general_ledger_accounts_name\' in table \'dtSummarySubsidiary" +
+                                "Ledger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string subsidiary_ledger_accounts_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'subsidiary_ledger_accounts_id\' in table \'dtSummarySubsidiar" +
+                                "yLedger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string subsidiary_ledger_accounts_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'subsidiary_ledger_accounts_code\' in table \'dtSummarySubsidi" +
+                                "aryLedger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string subsidiary_ledger_accounts_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'subsidiary_ledger_accounts_name\' in table \'dtSummarySubsidi" +
+                                "aryLedger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_nameColumn] = value;
                 }
             }
             
@@ -30142,26 +30356,110 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_acc_codeNull() {
-                return this.IsNull(this.tabledtSummarySubsidiaryLedger.sub_acc_codeColumn);
+            public bool Isfunds_idNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.funds_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_acc_codeNull() {
-                this[this.tabledtSummarySubsidiaryLedger.sub_acc_codeColumn] = global::System.Convert.DBNull;
+            public void Setfunds_idNull() {
+                this[this.tabledtSummarySubsidiaryLedger.funds_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_acc_nameNull() {
-                return this.IsNull(this.tabledtSummarySubsidiaryLedger.sub_acc_nameColumn);
+            public bool Isfund_codeNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.fund_codeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_acc_nameNull() {
-                this[this.tabledtSummarySubsidiaryLedger.sub_acc_nameColumn] = global::System.Convert.DBNull;
+            public void Setfund_codeNull() {
+                this[this.tabledtSummarySubsidiaryLedger.fund_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfund_nameNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.fund_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfund_nameNull() {
+                this[this.tabledtSummarySubsidiaryLedger.fund_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isgeneral_ledger_accounts_idNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setgeneral_ledger_accounts_idNull() {
+                this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isgeneral_ledger_accounts_codeNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setgeneral_ledger_accounts_codeNull() {
+                this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isgeneral_ledger_accounts_nameNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setgeneral_ledger_accounts_nameNull() {
+                this[this.tabledtSummarySubsidiaryLedger.general_ledger_accounts_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issubsidiary_ledger_accounts_idNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsubsidiary_ledger_accounts_idNull() {
+                this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issubsidiary_ledger_accounts_codeNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsubsidiary_ledger_accounts_codeNull() {
+                this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issubsidiary_ledger_accounts_nameNull() {
+                return this.IsNull(this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsubsidiary_ledger_accounts_nameNull() {
+                this[this.tabledtSummarySubsidiaryLedger.subsidiary_ledger_accounts_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
