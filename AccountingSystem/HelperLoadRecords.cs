@@ -9,6 +9,7 @@ namespace AccountingSystem
     public class HelperLoadRecords
     {
         #region Controls Default Data
+
         public static Dictionary<int, string> SexDataSource()
         {
             var sex = new Dictionary<int, string>();
@@ -25,7 +26,8 @@ namespace AccountingSystem
             comboBox.SelectedIndex = 0;
         }
 
-        #endregion
+        #endregion Controls Default Data
+
         #region Business Addons
 
         internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
@@ -2943,5 +2945,28 @@ namespace AccountingSystem
             datagrid.Columns["description"].MinimumWidth = 150;
         }
 
+        internal static void SearchableCombobox(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, string searchSource = "", string searchText = "", bool isSearch = false)
+        {
+            DataView dataView = new DataView(dataTable);
+
+            if (isSearch)
+                dataView.RowFilter = $"{searchSource} Like '%{searchText}%'";
+
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+
+            comboBox.DataSource = dataView.ToTable();
+
+            if (isSearch)
+            {
+                comboBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                comboBox.DroppedDown = false;
+                comboBox.SelectedIndex = -1;
+            }
+        }
     }
 }

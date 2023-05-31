@@ -162,76 +162,81 @@ namespace AccountingSystem.Views.Reports.Ledgers
             nudYear.Maximum = Helper.GetCurrentDate().Year;
         }
 
+        private DataColumn[] DataColumnsAccounts()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+        }
+
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts;
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsAccounts());
 
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             else
                 dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
-            return dtAccounts;
-        }
-
-        private void LoadAccounts(bool isEdit = false)
-        {
-            cmbxAccount.DroppedDown = false;
-            cmbxAccount.TextChanged -= new System.EventHandler(cmbxAccount_TextChanged);
-
-            if (DatatableAccounts().Rows.Count == 0) return;
-
-            DataView dataView = new DataView(DatatableAccounts());
-
-            if (isEdit)
-                dataView.RowFilter = "ledger_name Like '" + cmbxAccount.Text.Trim() + "%'"; ;
-
-            Dictionary<ushort, string> accountDict = new Dictionary<ushort, string>();
-            foreach (DataRow item in dataView.ToTable().Rows)
+            foreach (DataRow row in dtAccounts.Rows)
             {
-                ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+                var newRow = dataTable.NewRow();
+                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
 
-                accountDict.Add(accountId, accountName);
+                newRow["id"] = accountId;
+                newRow["account_name"] = accountName;
+                dataTable.Rows.Add(newRow);
             }
 
-            cmbxAccount.DataSource = new BindingSource(accountDict, null);
-            cmbxAccount.DisplayMember = "value";
-            cmbxAccount.ValueMember = "key";
+            return dataTable;
+        }
 
-            if (isEdit)
-                cmbxAccount.DroppedDown = true;
-            else
-                cmbxAccount.SelectedIndex = -1;
-
-            cmbxAccount.TextChanged += new System.EventHandler(cmbxAccount_TextChanged);
-
-            Cursor.Current = Cursors.Default;
+        private void LoadAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
+            HelperLoadRecords.SearchableCombobox(cmbxAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
+            cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                if (!backgroundWorker1.IsBusy)
+                    LoadReport(reportViewer.LocalReport);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            string searchText = cmbxAccount.Text.Trim();
+
+            try
             {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-                LoadAccounts(true);
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    LoadAccounts(searchText, true);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
-                LoadAccounts(false);
+            try
+            {
+                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
+                    LoadAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
