@@ -19,51 +19,55 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
+        private DataColumn[] DataColumnsAccounts()
+        {
+            return new DataColumn[]
+            {
+               new DataColumn(Name = "id", typeof(int)),
+               new DataColumn(Name = "account_name", typeof(string))
+            };
+        }
+
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts;
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsAccounts());
 
-            if (string.IsNullOrWhiteSpace(cmbAccount.Text))
+            if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
 
                 dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             else
 
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
+                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
-            return dtAccounts;
-        }
-
-        private void LoadAccounts()
-        {
-            cmbAccount.DroppedDown = false;
-
-            if (DatatableAccounts().Rows.Count == 0) return;
-
-            var accountDict = new Dictionary<ushort, string>();
-            foreach (DataRow item in DatatableAccounts().Rows)
+            foreach (DataRow row in dtAccounts.Rows)
             {
-                ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+                var newRow = dataTable.NewRow();
+                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
 
-                accountDict.Add(accountId, accountName);
+                newRow["id"] = accountId;
+                newRow["account_name"] = accountName;
+                dataTable.Rows.Add(newRow);
             }
 
-            cmbAccount.DataSource = new BindingSource(accountDict, null);
-            cmbAccount.DisplayMember = "value";
-            cmbAccount.ValueMember = "key";
+            return dataTable;
+        }
+
+        private void LoadAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+            HelperLoadRecords.SearchableCombobox(cmbxAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
+            cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(cmbAccount.Text))
-                {
-                    cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
                     LoadAccounts();
-                    cmbAccount.SelectedIndex = -1;
-                    cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -157,7 +161,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private DataTable DataTableGeneralLedger()
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
             int year = Convert.ToInt16(cmbYear.Text);
 
             dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
@@ -195,7 +199,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void LoadReport(LocalReport report)
         {
             short year = Convert.ToInt16(cmbYear.Text);
-            ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
+            ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
 
             var lguDict = Helper.LGUDetails();
             var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
@@ -222,9 +226,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private bool AccountComboboxEmpty()
         {
-            if (string.IsNullOrEmpty(cmbAccount.Text.Trim()))
+            if (string.IsNullOrEmpty(cmbxAccount.Text.Trim()))
             {
-                cmbAccount.Tag = "Please enter an account.";
+                cmbxAccount.Tag = "Please enter an account.";
                 return true;
             }
             else
@@ -233,11 +237,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private bool AccountExist()
         {
-            string accountName = cmbAccount.Text.Trim();
+            string accountName = cmbxAccount.Text.Trim();
 
-            if (cmbAccount.FindStringExact(accountName) == -1 && !string.IsNullOrEmpty(accountName))
+            if (cmbxAccount.FindStringExact(accountName) == -1 && !string.IsNullOrEmpty(accountName))
             {
-                cmbAccount.Tag = "Account you entered doesn't exist";
+                cmbxAccount.Tag = "Account you entered doesn't exist";
                 return false;
             }
             return true;
@@ -245,9 +249,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private bool FundsComboboxEmpty()
         {
-            if (string.IsNullOrEmpty(cmbAccount.Text.Trim()))
+            if (string.IsNullOrEmpty(cmbxAccount.Text.Trim()))
             {
-                cmbAccount.Tag = "Please enter a Fund.";
+                cmbxAccount.Tag = "Please enter a Fund.";
                 return true;
             }
             else
@@ -260,7 +264,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             if (cmbFunds.FindStringExact(fundName) == -1 && !string.IsNullOrEmpty(fundName))
             {
-                cmbAccount.Tag = "Fund you entered doesn't exist";
+                cmbxAccount.Tag = "Fund you entered doesn't exist";
                 return false;
             }
             return true;
@@ -272,8 +276,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 LoadFunds();
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
                 LoadYear();
             }
         }
@@ -293,16 +295,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())
                 {
-                    Helper.MessageBoxError($"{cmbAccount.Tag}");
+                    Helper.MessageBoxError($"{cmbxAccount.Tag}");
                     return;
                 }
 
                 if (!backgroundWorker1.IsBusy)
-                {
-                    progressBar1.Style = ProgressBarStyle.Marquee;
-                    progressBar1.MarqueeAnimationSpeed = 1;
                     backgroundWorker1.RunWorkerAsync();
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -311,10 +309,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
+                string searchText = cmbxAccount.Text;
+
+                if (e.KeyCode == Keys.Enter)
                 {
-                    LoadAccounts();
-                    cmbAccount.DroppedDown = true;
+                    LoadAccounts(searchText.Trim(), true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -331,7 +332,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            progressBar1.Style = ProgressBarStyle.Blocks;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

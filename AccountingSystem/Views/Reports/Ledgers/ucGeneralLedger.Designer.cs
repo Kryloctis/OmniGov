@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.cmbFunds = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
-            this.cmbAccount = new System.Windows.Forms.ComboBox();
+            this.cmbxAccount = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -69,14 +69,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
-            // cmbAccount
+            // cmbxAccount
             // 
-            this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(160, 7);
-            this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(370, 23);
-            this.cmbAccount.TabIndex = 14;
-            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
+            this.cmbxAccount.FormattingEnabled = true;
+            this.cmbxAccount.Location = new System.Drawing.Point(160, 7);
+            this.cmbxAccount.Name = "cmbxAccount";
+            this.cmbxAccount.Size = new System.Drawing.Size(370, 23);
+            this.cmbxAccount.TabIndex = 14;
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             // 
             // panel1
             // 
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.cmbFunds);
-            this.flowLayoutPanel1.Controls.Add(this.cmbAccount);
+            this.flowLayoutPanel1.Controls.Add(this.cmbxAccount);
             this.flowLayoutPanel1.Controls.Add(this.cmbYear);
             this.flowLayoutPanel1.Controls.Add(this.btnRetrieve);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.ComboBox cmbFunds;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.ComboBox cmbAccount;
+        private System.Windows.Forms.ComboBox cmbxAccount;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ProgressBar progressBar1;
