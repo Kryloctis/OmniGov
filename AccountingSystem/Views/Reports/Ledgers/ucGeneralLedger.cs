@@ -30,16 +30,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
-
-            if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
-
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            else
-
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
@@ -66,7 +59,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
+                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
                     LoadAccounts();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -309,11 +302,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                string searchText = cmbxAccount.Text;
+                string searchText = cmbxAccount.Text.Trim();
 
                 if (e.KeyCode == Keys.Enter)
                 {
-                    LoadAccounts(searchText.Trim(), true);
+                    LoadAccounts(searchText, true);
                     e.Handled = true;
                     e.SuppressKeyPress = true;
                 }

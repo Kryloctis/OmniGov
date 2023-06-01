@@ -173,14 +173,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
+            DataTable dtAccounts  = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
-
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            else
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
@@ -226,7 +221,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     LoadAccounts(searchText, true);
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
@@ -236,7 +231,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
                     LoadAccounts();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

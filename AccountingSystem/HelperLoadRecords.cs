@@ -2957,8 +2957,12 @@ namespace AccountingSystem
 
             comboBox.DataSource = dataView.ToTable();
 
+            if (dataView.ToTable().Rows.Count < 1)
+                return;
+
             if (isSearch)
             {
+                comboBox.DroppedDown = false;
                 comboBox.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
             }
