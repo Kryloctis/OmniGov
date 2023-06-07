@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Domain.Interfaces;
+using Microsoft.Reporting.WinForms;
 using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             if (!DesignMode)
             {
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(cmbxLedgerAccout_TextChanged);
-
                 LoadFunds();
                 LoadYear();
             }
@@ -53,23 +51,34 @@ namespace AccountingSystem.Views.Reports.Ledgers
             HelperLoadRecords.YearComboBox(cmbYear);
         }
 
+        private DataColumn[] DataColumnSubsidiaryLedgers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "sub_name", typeof(string))
+            };
+        }
+
         private DataTable SubsidiaryLedgerDataTable()
         {
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("id", typeof(int));
-            dataTable.Columns.Add("sub_name");
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnSubsidiaryLedgers());
 
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
+            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
 
-            var dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+            DataTable dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger((byte)fundId, (ushort)generalLedgerId);
 
             foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
             {
+                var newRow = dataTable.NewRow();
                 string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
                 int subId = Convert.ToInt32(dataRow["id"]);
 
-                dataTable.Rows.Add(subId, subsidiaryName);
+                newRow["id"] = subId;
+                newRow["sub_name"] = subsidiaryName;
+                dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
@@ -157,12 +166,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            Cursor.Current = Cursors.WaitCursor;
             short year = Convert.ToInt16(cmbYear.Text);
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-            int subsidiaryLedgerId = (int)cmbSubsidiaryLedger.SelectedValue;
+            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+            int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
 
-            Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID((ushort)generalLedgerId);
             Dictionary<string, string> subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
             string fundName = cmbFunds.Text;
             report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\subsidiary-ledger.rdlc";
@@ -186,10 +194,47 @@ namespace AccountingSystem.Views.Reports.Ledgers
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
-            Cursor.Current = Cursors.Default;
         }
 
-        private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        private DataColumn[] DataColumnsAccounts()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+        }
+
+        private DataTable DatatableAccounts()
+        {
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsAccounts());
+
+            foreach (DataRow row in dtAccounts.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
+
+                newRow["id"] = accountId;
+                newRow["account_name"] = accountName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        private void LoadAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbAccount.TextChanged -= new EventHandler(cmbLedgerAccout_TextChanged);
+            cmbAccount.SelectedValueChanged -= new EventHandler(cmbAccount_SelectedValueChanged);
+            HelperLoadRecords.SearchableCombobox(cmbAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
+            cmbAccount.TextChanged += new EventHandler(cmbLedgerAccout_TextChanged);
+            cmbAccount.SelectedValueChanged += new EventHandler(cmbAccount_SelectedValueChanged);
+        }
+
+        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -198,50 +243,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable DatatableAccounts()
-        {
-            DataTable dtAccounts;
-
-            if (string.IsNullOrEmpty(cmbAccount.Text))
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            else
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
-
-            return dtAccounts;
-        }
-
-        private void LoadAccounts()
-        {
-            cmbAccount.DroppedDown = false;
-
-            if (DatatableAccounts().Rows.Count == 0) return;
-
-            Dictionary<ushort, string> accountDict = new Dictionary<ushort, string>();
-            foreach (DataRow item in DatatableAccounts().Rows)
-            {
-                ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                accountDict.Add(accountId, accountName);
-            }
-
-            cmbAccount.DataSource = new BindingSource(accountDict, null);
-            cmbAccount.DisplayMember = "value";
-            cmbAccount.ValueMember = "key";
-            Cursor.Current = Cursors.Default;
-        }
-
-        private void cmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        private void cmbLedgerAccout_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(cmbAccount.Text))
-                {
-                    cmbAccount.TextChanged -= new EventHandler(cmbxLedgerAccout_TextChanged);
+                if (string.IsNullOrWhiteSpace(cmbAccount.Text.Trim()))
                     LoadAccounts();
-                    cmbAccount.SelectedIndex = -1;
-                    cmbAccount.TextChanged += new EventHandler(cmbxLedgerAccout_TextChanged);
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -250,31 +257,59 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
+                string searchText = cmbAccount.Text.Trim();
+                if (e.KeyCode == Keys.Enter)
                 {
-                    LoadAccounts();
-                    cmbAccount.DroppedDown = true;
+                    LoadAccounts(searchText, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                AccountValidated(),
+                SubsidiaryLedgerValidated()
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private string AccountValidated()
+        {
+            string accountName = cmbAccount.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(accountName) || cmbAccount.FindStringExact(accountName) == -1)
+                return "Invalid account, Please select on the list";
+            else
+                return string.Empty;
+        }
+
+        private string SubsidiaryLedgerValidated()
+        {
+            string subsidiaryLedgerName = cmbSubsidiaryLedger.Text.Trim();
+            if (string.IsNullOrWhiteSpace(subsidiaryLedgerName) || cmbSubsidiaryLedger.FindStringExact(subsidiaryLedgerName) == -1)
+                return "Invalid subsidiary ledger, Please select on the list";
+            else
+                return string.Empty;
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(cmbAccount.Text) || string.IsNullOrWhiteSpace(cmbSubsidiaryLedger.Text))
+                if (!string.IsNullOrWhiteSpace(GetFormErrors()))
                 {
-                    Helper.MessageBoxError("Please select a subsidiary ledger account.");
+                    Helper.MessageBoxError(GetFormErrors());
                     return;
                 }
 
                 if (!backgroundWorker1.IsBusy)
-                {
-                    progressBar1.Style = ProgressBarStyle.Marquee;
-                    progressBar1.MarqueeAnimationSpeed = 1;
                     backgroundWorker1.RunWorkerAsync();
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -290,7 +325,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            progressBar1.Style = ProgressBarStyle.Blocks;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

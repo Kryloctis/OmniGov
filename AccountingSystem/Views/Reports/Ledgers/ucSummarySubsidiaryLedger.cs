@@ -173,7 +173,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts  = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
 
@@ -198,10 +198,27 @@ namespace AccountingSystem.Views.Reports.Ledgers
             cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
         }
 
+        private bool AccountValidated()
+        {
+            string accountName = cmbxAccount.Text.Trim();
+            if (cmbxAccount.FindStringExact(accountName) == -1 || !string.IsNullOrEmpty(accountName))
+            {
+                cmbxAccount.Tag = "Invalid account, Please select on the list";
+                return false;
+            }
+            return true;
+        }
+
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!AccountValidated())
+                {
+                    Helper.MessageBoxError($"{cmbxAccount.Tag}");
+                    return;
+                }
+
                 if (!backgroundWorker1.IsBusy)
                     LoadReport(reportViewer.LocalReport);
             }
