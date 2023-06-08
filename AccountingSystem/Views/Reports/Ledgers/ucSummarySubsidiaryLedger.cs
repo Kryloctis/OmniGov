@@ -30,6 +30,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadAccounts();
                 LoadFunds();
                 LoadYear();
+                cmbxFunds.Tag = string.Empty;
+                cmbxAccount.Tag = string.Empty;
+                nudYear.Tag = string.Empty;
             }
         }
 
@@ -198,24 +201,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
         }
 
-        private bool AccountValidated()
-        {
-            string accountName = cmbxAccount.Text.Trim();
-            if (cmbxAccount.FindStringExact(accountName) == -1 || !string.IsNullOrEmpty(accountName))
-            {
-                cmbxAccount.Tag = "Invalid account, Please select on the list";
-                return false;
-            }
-            return true;
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!AccountValidated())
+                if (!this.ValidateChildren())
                 {
-                    Helper.MessageBoxError($"{cmbxAccount.Tag}");
+                    Helper.MessageBoxError(GetFormErrors());
                     return;
                 }
 
@@ -238,7 +230,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     LoadAccounts(searchText, true);
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
@@ -248,7 +240,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
                     LoadAccounts();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -264,5 +256,67 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
+
+        #region Validations
+
+        private string GetFormErrors()
+        {
+            var arrayErrors = new string[]
+            {
+                cmbxFunds.Tag.ToString(),
+                cmbxAccount.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(arrayErrors).GenerateErrorMessage();
+        }
+
+        private bool FundValidated()
+        {
+            string fundName = cmbxFunds.Text.Trim();
+            if (cmbxFunds.FindStringExact(fundName) == -1 || string.IsNullOrWhiteSpace(fundName))
+            {
+                cmbxFunds.Tag = "Invalid fund, Please select on the list";
+                return false;
+            }
+            cmbxFunds.SelectedIndex = cmbxFunds.FindStringExact(fundName);
+            return true;
+        }
+
+        private bool AccountValidated()
+        {
+            string accountName = cmbxAccount.Text.Trim();
+            bool isAccountExist = cmbxAccount.FindStringExact(accountName) == -1 ? false : true;
+
+            if (!isAccountExist || string.IsNullOrEmpty(accountName))
+            {
+                cmbxAccount.Tag = "Invalid account, Please select on the list";
+                return false;
+            }
+
+            cmbxAccount.SelectedIndex = cmbxAccount.FindStringExact(accountName);
+            return true;
+        }
+
+        private void cmbxFunds_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !FundValidated();
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
+        }
+
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !AccountValidated();
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            cmbxAccount.Tag = string.Empty;
+        }
+
+        #endregion Validations
     }
 }

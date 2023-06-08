@@ -316,7 +316,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 return false;
             }
             else
+            {
+                cmbxAccount.SelectedIndex = cmbxAccount.FindStringExact(accountName);
                 return true;
+            }
         }
 
         private bool FundValidated()
@@ -329,7 +332,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 return false;
             }
             else
+            {
+                cmbFunds.SelectedIndex = cmbFunds.FindStringExact(fundName);
                 return true;
+            }
         }
 
         private void cmbxAccount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
