@@ -744,16 +744,6 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
             comboBox.DataSource = dataTable;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            }
         }
 
         #endregion Subsidiary Ledgers
@@ -2898,6 +2888,8 @@ namespace AccountingSystem
 
         #endregion Amortization Schedule
 
+        #region OtherPayments
+
         internal static void OtherPaymentRatesDatagridView(DataGridView datagrid, DataTable dataTable)
         {
             datagrid.DataSource = dataTable;
@@ -2945,6 +2937,10 @@ namespace AccountingSystem
             datagrid.Columns["description"].MinimumWidth = 150;
         }
 
+        #endregion OtherPayments
+
+        #region CustomFunctions
+
         internal static void SearchableCombobox(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, string searchSource = "", string searchText = "", bool isSearch = false)
         {
             DataView dataView = new DataView(dataTable);
@@ -2972,5 +2968,7 @@ namespace AccountingSystem
                 comboBox.SelectedIndex = -1;
             }
         }
+
+        #endregion CustomFunctions
     }
 }

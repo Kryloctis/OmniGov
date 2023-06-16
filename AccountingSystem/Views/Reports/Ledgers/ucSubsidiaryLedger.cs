@@ -28,6 +28,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadAccounts();
                 LoadFunds();
                 LoadYear();
+                cmbFunds.Tag = string.Empty;
+                cmbAccount.Tag = string.Empty;
+                cmbSubsidiaryLedger.Tag = string.Empty;
             }
         }
 
@@ -48,7 +51,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadYear()
         {
-            HelperLoadRecords.YearComboBox(cmbYear);
+            int currentYear = Helper.GetCurrentDate().Year;
+
+            nudYear.Maximum = currentYear;
+            nudYear.Value = currentYear;
         }
 
         private DataColumn[] DataColumnSubsidiaryLedgers()
@@ -86,6 +92,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadSubsidiaryAccounts()
         {
+            cmbSubsidiaryLedger.Text = string.Empty;
             HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
         }
 
@@ -108,7 +115,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
             int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
+            short year = Convert.ToInt16(nudYear.Value);
             DataTable dtSubsidiaryLedger = new dsLFS.dtSubsidiaryLedgerDataTable();
 
             DataTable dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
@@ -166,7 +173,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            short year = Convert.ToInt16(cmbYear.Text);
+            short year = Convert.ToInt16(nudYear.Value);
             int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
             int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
 
@@ -268,41 +275,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                AccountValidated(),
-                SubsidiaryLedgerValidated()
-            };
-
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private string AccountValidated()
-        {
-            string accountName = cmbAccount.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(accountName) || cmbAccount.FindStringExact(accountName) == -1)
-                return "Invalid account, Please select on the list";
-            else
-                return string.Empty;
-        }
-
-        private string SubsidiaryLedgerValidated()
-        {
-            string subsidiaryLedgerName = cmbSubsidiaryLedger.Text.Trim();
-            if (string.IsNullOrWhiteSpace(subsidiaryLedgerName) || cmbSubsidiaryLedger.FindStringExact(subsidiaryLedgerName) == -1)
-                return "Invalid subsidiary ledger, Please select on the list";
-            else
-                return string.Empty;
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(GetFormErrors()))
+                if (!this.ValidateChildren())
                 {
                     Helper.MessageBoxError(GetFormErrors());
                     return;
@@ -330,5 +307,99 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
+
+        #region Validations
+
+        private string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                cmbFunds.Tag.ToString(),
+                cmbAccount.Tag.ToString(),
+                cmbSubsidiaryLedger.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private bool AccountValidated()
+        {
+            string accountName = cmbAccount.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(accountName) || cmbAccount.FindStringExact(accountName) == -1)
+            {
+                cmbAccount.Tag = "Invalid account, Please select on the list";
+                return false;
+            }
+            else
+            {
+                cmbAccount.SelectedIndex = cmbAccount.FindStringExact(accountName);
+                return true;
+            }
+        }
+
+        private bool SubsidiaryAccValidated()
+        {
+            string subsidiaryAccName = cmbSubsidiaryLedger.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(subsidiaryAccName) || cmbSubsidiaryLedger.FindStringExact(subsidiaryAccName) == -1)
+            {
+                cmbSubsidiaryLedger.Tag = "Invalid subsidiary ledger, Please select on the list";
+                return false;
+            }
+            else
+            {
+                cmbSubsidiaryLedger.SelectedIndex = cmbSubsidiaryLedger.FindStringExact(subsidiaryAccName);
+                return true;
+            }
+        }
+
+        private bool FundValidated()
+        {
+            string fundName = cmbFunds.Text.Trim();
+
+            if (cmbFunds.FindStringExact(fundName) == -1 || string.IsNullOrWhiteSpace(fundName))
+            {
+                cmbFunds.Tag = "Invalid fund, Please select on the list";
+                return false;
+            }
+            else
+            {
+                cmbFunds.SelectedIndex = cmbFunds.FindStringExact(fundName);
+                return true;
+            }
+        }
+
+        private void cmbFunds_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !FundValidated();
+        }
+
+        private void cmbFunds_Validated(object sender, EventArgs e)
+        {
+            cmbFunds.Tag = string.Empty;
+        }
+
+        private void cmbAccount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !AccountValidated();
+        }
+
+        private void cmbAccount_Validated(object sender, EventArgs e)
+        {
+            cmbAccount.Tag = string.Empty;
+        }
+
+        private void cmbSubsidiaryLedger_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !SubsidiaryAccValidated();
+        }
+
+        private void cmbSubsidiaryLedger_Validated(object sender, EventArgs e)
+        {
+            cmbSubsidiaryLedger.Tag = string.Empty;
+        }
+
+        #endregion Validations
     }
 }
