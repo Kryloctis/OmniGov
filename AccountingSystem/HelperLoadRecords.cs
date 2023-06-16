@@ -725,20 +725,6 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
         }
 
-        internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].HeaderText = "Code";
-            datagrid.Columns[4].HeaderText = "Name";
-            datagrid.Columns[5].Visible = false;
-            datagrid.Columns[6].Visible = false;
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
         internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DisplayMember = displayMember;
@@ -1008,12 +994,16 @@ namespace AccountingSystem
 
         #endregion Receipts
 
+        #region Accountable Forms
+
         internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable)
         {
             combobox.DataSource = dataTable;
             combobox.ValueMember = "id";
             combobox.DisplayMember = "accountableForm";
         }
+
+        #endregion Accountable Forms
 
         #region Funds
 
@@ -1557,90 +1547,6 @@ namespace AccountingSystem
 
         #endregion Real Property Tax View
 
-        internal static void CollectionDataGridColumns(DataGridView datagrid)
-        {
-            datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
-            datagrid.Columns.Add("fund_id", "Fund Id");
-            datagrid.Columns.Add("fund", "Fund");
-            datagrid.Columns.Add("accountable_form_id", "Accountable Form ID");
-            datagrid.Columns.Add("accountable_form", "Accountable Form");
-            datagrid.Columns.Add("abstract_of_general_collection_id", "Abstract Of General Collection ID");
-            datagrid.Columns.Add("abstract_of_general_collection", "Abstract Of General Collection");
-            datagrid.Columns.Add("payee", "Payee");
-            datagrid.Columns.Add("receipt_no", "Receipt No.");
-            datagrid.Columns.Add("quantity", "Quantity");
-            datagrid.Columns.Add("payment_date", "Payment Date");
-            datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("created_by", "Created by");
-            datagrid.Columns.Add("updated_at", "Updated at");
-            datagrid.Columns.Add("updated_by", "Updated by");
-
-            datagrid.Columns["payment_collection_id"].Visible = false;
-            datagrid.Columns["fund"].Visible = false;
-            datagrid.Columns["fund_id"].Visible = false;
-            datagrid.Columns["accountable_form_id"].Visible = false;
-            datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
-            datagrid.Columns["payment_date"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
-
-            datagrid.Columns["accountable_form"].Width = 150;
-            datagrid.Columns["abstract_of_general_collection"].Width = 350;
-            datagrid.Columns["payee"].Width = 200;
-            datagrid.Columns["receipt_no"].Width = 80;
-            datagrid.Columns["quantity"].Width = 60;
-
-            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 80;
-            datagrid.Columns["amount"].MinimumWidth = 80;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-        }
-
-        #region CollectionDataGridView
-
-        internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            CollectionDataGridColumns(datagrid);
-
-            foreach (DataRow drPaymentCollection in dataTable.Rows)
-            {
-                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
-                datagrid.Rows.Add(new object[]
-                {
-                    drPaymentCollection["id"],
-                    drPaymentCollection["funds_id"],
-                    drPaymentCollection["fund_name"],
-                    drPaymentCollection["accountable_form_id"],
-                    drPaymentCollection["accountable_forms"],
-                    drPaymentCollection["general_ledger_accounts_id"],
-                    abstractOfGeneralCollection,
-                    drPaymentCollection["payee"],
-                    drPaymentCollection["receipt_no"],
-                    drPaymentCollection["quantity"],
-                    drPaymentCollection["payment_date"],
-                    drPaymentCollection["amount"],
-                    drPaymentCollection["created_at"],
-                    drPaymentCollection["created_by"],
-                    drPaymentCollection["updated_at"],
-                    drPaymentCollection["updated_by"]
-                });
-            }
-
-            datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
-        }
-
-        #endregion CollectionDataGridView
-
         #region PaymentCollection
 
         public static void PaymentSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
@@ -1671,89 +1577,6 @@ namespace AccountingSystem
                 {
                     row["collecting_officer_id"],
                     collectingOfficer,
-                    row["amount"]
-                });
-            }
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
-            datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
-        }
-
-        public static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("fund_id", "Fund Id");
-            datagrid.Columns.Add("fund_name", "Fund");
-            datagrid.Columns.Add("accountable_form_id", "Accountable Form ID");
-            datagrid.Columns.Add("accountable_form", "Accountable Form");
-            datagrid.Columns.Add("abstract_of_general_collection_id", "Abstract Of General Collection ID");
-            datagrid.Columns.Add("abstract_of_general_collection", "Abstract Of General Collection");
-            datagrid.Columns.Add("payee", "Payee");
-            datagrid.Columns.Add("receipt_no", "Receipt No.");
-            datagrid.Columns.Add("quantity", "Quantity");
-            datagrid.Columns.Add("payment_date", "Payment Date");
-            datagrid.Columns.Add("amount", "Amount");
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["fund_id"].Visible = false;
-            datagrid.Columns["fund_name"].Visible = false;
-            datagrid.Columns["accountable_form_id"].Visible = false;
-            datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
-
-            datagrid.Columns["accountable_form"].Width = 200;
-            datagrid.Columns["abstract_of_general_collection"].Width = 300;
-            datagrid.Columns["payee"].Width = 200;
-            datagrid.Columns["receipt_no"].Width = 80;
-            datagrid.Columns["quantity"].Width = 60;
-
-            datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-            datagrid.Columns["payment_date"].Width = 120;
-            datagrid.Columns["payment_date"].MinimumWidth = 120;
-
-            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 80;
-            datagrid.Columns["amount"].MinimumWidth = 80;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["receipt_no"].DefaultCellStyle.Format = "D7";
-            datagrid.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(row["id"]));
-                var quantity = 1;
-                var generalLedgerAccountsID = 0;
-                var abstractOfGeneralCollection = string.Empty;
-
-                if (generalPaymentsDict.Count != 0)
-                {
-                    quantity = Convert.ToInt32(generalPaymentsDict["quantity"]);
-                    generalLedgerAccountsID = Convert.ToInt32(generalPaymentsDict["general_ledger_accounts_id"]);
-                    abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
-                }
-
-                var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
-
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["funds_id"],
-                    row["fund_name"],
-                    row["accountable_forms_id"],
-                    accountableFOrms,
-                    generalLedgerAccountsID,
-                    abstractOfGeneralCollection,
-                    row["payee"],
-                    row["receipt_no"],
-                    quantity,
-                    row["payment_date"],
                     row["amount"]
                 });
             }
@@ -1878,21 +1701,6 @@ namespace AccountingSystem
         }
 
         #endregion AccountableForm
-
-        #region GeneralLedgerAccountSearch
-
-        internal static void GeneralLedgerSearchDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account Code";
-            datagrid.Columns[2].HeaderText = "Ledger Name";
-
-            datagrid.Columns[1].Width = 100;
-            datagrid.Columns[2].Width = 325;
-        }
-
-        #endregion GeneralLedgerAccountSearch
 
         #region Function/Program/Project
 
@@ -2732,30 +2540,6 @@ namespace AccountingSystem
         #endregion Obligation Request
 
         #region JEV
-
-        internal static void JEVREportDataGridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
-            datagrid.Columns["date_entry"].HeaderText = "Date";
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["fund_code"].Visible = false;
-            datagrid.Columns["explanation"].Visible = false;
-            datagrid.Columns["payee"].Visible = false;
-            datagrid.Columns["ref_no"].Visible = false;
-            datagrid.Columns["jev_no"].Visible = false;
-            datagrid.Columns["fund_code"].Visible = false;
-            datagrid.Columns["is_approved"].Visible = false;
-            datagrid.Columns["is_disapproved"].Visible = false;
-            datagrid.Columns["is_cancelled"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
-            datagrid.Columns["funds_id"].Visible = false;
-            datagrid.Columns["journals_id"].Visible = false;
-        }
 
         internal static void JEVDatagridView(DataGridView datagrid)
         {
