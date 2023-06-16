@@ -75,7 +75,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadYear()
         {
-            HelperLoadRecords.YearComboBox(cmbYear);
+            nudYear.Maximum = Helper.GetCurrentDate().Year;
+            nudYear.Value = Helper.GetCurrentDate().Year;
         }
 
         private string GetJournalAcronym(string journalName)
@@ -157,7 +158,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
-            int year = Convert.ToInt16(cmbYear.Text);
+            int year = Convert.ToInt16(nudYear.Value);
 
             dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
             DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
@@ -193,7 +194,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            short year = Convert.ToInt16(cmbYear.Text);
+            short year = Convert.ToInt16(nudYear.Value);
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
 
             var lguDict = Helper.LGUDetails();
