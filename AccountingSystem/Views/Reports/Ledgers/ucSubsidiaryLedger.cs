@@ -29,8 +29,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadFunds();
                 LoadYear();
                 cmbFunds.Tag = string.Empty;
-                cmbAccount.Tag = string.Empty;
-                cmbSubsidiaryLedger.Tag = string.Empty;
+                cmbxAccount.Tag = string.Empty;
+                cmbxSubsidiaryLedger.Tag = string.Empty;
             }
         }
 
@@ -57,6 +57,84 @@ namespace AccountingSystem.Views.Reports.Ledgers
             nudYear.Value = currentYear;
         }
 
+        #region Accounts
+
+        private DataColumn[] DataColumnsAccounts()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+        }
+
+        private DataTable DatatableAccounts()
+        {
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsAccounts());
+
+            foreach (DataRow row in dtAccounts.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
+
+                newRow["id"] = accountId;
+                newRow["account_name"] = accountName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        private void LoadAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
+            cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
+            HelperLoadRecords.SearchableCombobox(cmbxAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
+            cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
+            cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
+        }
+
+        private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadSubsidiaryAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxAccount_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
+                    LoadAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                string searchText = cmbxAccount.Text.Trim();
+                if (e.KeyCode == Keys.Enter && cmbxAccount.Focused)
+                {
+                    LoadAccounts(searchText, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Accounts
+
+        #region Subsidiary Ledgers
+
         private DataColumn[] DataColumnSubsidiaryLedgers()
         {
             return new DataColumn[]
@@ -72,7 +150,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             dataTable.Columns.AddRange(DataColumnSubsidiaryLedgers());
 
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
             DataTable dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger((byte)fundId, (ushort)generalLedgerId);
 
@@ -90,11 +168,42 @@ namespace AccountingSystem.Views.Reports.Ledgers
             return dataTable;
         }
 
-        private void LoadSubsidiaryAccounts()
+        private void LoadSubsidiaryAccounts(string searchText = "", bool isSearch = false)
         {
-            cmbSubsidiaryLedger.Text = string.Empty;
-            HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
+            cmbxSubsidiaryLedger.TextChanged -= new EventHandler(cmbSubsidiaryLedger_TextChanged);
+            cmbxSubsidiaryLedger.Text = string.Empty;
+            HelperLoadRecords.SearchableCombobox(cmbxSubsidiaryLedger, SubsidiaryLedgerDataTable(), "id", "sub_name", "sub_name", searchText, isSearch);
+            cmbxSubsidiaryLedger.TextChanged += new EventHandler(cmbSubsidiaryLedger_TextChanged);
         }
+
+        private void cmbxSubsidiaryLedger_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                string searchText = cmbxSubsidiaryLedger.Text.Trim();
+                if (e.KeyCode == Keys.Enter && cmbxSubsidiaryLedger.Focused)
+                {
+                    LoadSubsidiaryAccounts(searchText, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbSubsidiaryLedger_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchText = cmbxSubsidiaryLedger.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(searchText))
+                    LoadSubsidiaryAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Subsidiary Ledgers
 
         private static void ValidateDebitCreditRow(DataRow item, DataRow row)
         {
@@ -113,8 +222,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private DataTable DataTableSubsidiaryLedgerReport()
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
-            int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            int subsidiaryLedgerId = Convert.ToInt32(cmbxSubsidiaryLedger.SelectedValue);
             short year = Convert.ToInt16(nudYear.Value);
             DataTable dtSubsidiaryLedger = new dsLFS.dtSubsidiaryLedgerDataTable();
 
@@ -151,7 +260,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataRow BeginningBalanceRow(int fundId, short year, int generalLedgerId, DataTable dataTable)
         {
-            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
+            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbxSubsidiaryLedger.SelectedValue);
             Dictionary<string, string> dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId((byte)fundId, (ushort)generalLedgerId, year,
             subsidiaryLedgerId);
             decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, year, true, subsidiaryLedgerId);
@@ -174,8 +283,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void LoadReport(LocalReport report)
         {
             short year = Convert.ToInt16(nudYear.Value);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
-            int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            int subsidiaryLedgerId = Convert.ToInt32(cmbxSubsidiaryLedger.SelectedValue);
 
             Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID((ushort)generalLedgerId);
             Dictionary<string, string> subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
@@ -201,78 +310,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
-        }
-
-        private DataColumn[] DataColumnsAccounts()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "account_name", typeof(string))
-            };
-        }
-
-        private DataTable DatatableAccounts()
-        {
-            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsAccounts());
-
-            foreach (DataRow row in dtAccounts.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
-                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
-
-                newRow["id"] = accountId;
-                newRow["account_name"] = accountName;
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
-        }
-
-        private void LoadAccounts(string searchText = "", bool isSearch = false)
-        {
-            cmbAccount.TextChanged -= new EventHandler(cmbLedgerAccout_TextChanged);
-            cmbAccount.SelectedValueChanged -= new EventHandler(cmbAccount_SelectedValueChanged);
-            HelperLoadRecords.SearchableCombobox(cmbAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
-            cmbAccount.TextChanged += new EventHandler(cmbLedgerAccout_TextChanged);
-            cmbAccount.SelectedValueChanged += new EventHandler(cmbAccount_SelectedValueChanged);
-        }
-
-        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadSubsidiaryAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbLedgerAccout_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(cmbAccount.Text.Trim()))
-                    LoadAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                string searchText = cmbAccount.Text.Trim();
-                if (e.KeyCode == Keys.Enter)
-                {
-                    LoadAccounts(searchText, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -315,8 +352,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
             var errorArray = new string[]
             {
                 cmbFunds.Tag.ToString(),
-                cmbAccount.Tag.ToString(),
-                cmbSubsidiaryLedger.Tag.ToString()
+                cmbxAccount.Tag.ToString(),
+                cmbxSubsidiaryLedger.Tag.ToString()
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -324,32 +361,32 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private bool AccountValidated()
         {
-            string accountName = cmbAccount.Text.Trim();
+            string accountName = cmbxAccount.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(accountName) || cmbAccount.FindStringExact(accountName) == -1)
+            if (string.IsNullOrWhiteSpace(accountName) || cmbxAccount.FindStringExact(accountName) == -1)
             {
-                cmbAccount.Tag = "Invalid account, Please select on the list";
+                cmbxAccount.Tag = "Invalid account, Please select on the list";
                 return false;
             }
             else
             {
-                cmbAccount.SelectedIndex = cmbAccount.FindStringExact(accountName);
+                cmbxAccount.SelectedIndex = cmbxAccount.FindStringExact(accountName);
                 return true;
             }
         }
 
         private bool SubsidiaryAccValidated()
         {
-            string subsidiaryAccName = cmbSubsidiaryLedger.Text.Trim();
+            string subsidiaryAccName = cmbxSubsidiaryLedger.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(subsidiaryAccName) || cmbSubsidiaryLedger.FindStringExact(subsidiaryAccName) == -1)
+            if (string.IsNullOrWhiteSpace(subsidiaryAccName) || cmbxSubsidiaryLedger.FindStringExact(subsidiaryAccName) == -1)
             {
-                cmbSubsidiaryLedger.Tag = "Invalid subsidiary ledger, Please select on the list";
+                cmbxSubsidiaryLedger.Tag = "Invalid subsidiary ledger, Please select on the list";
                 return false;
             }
             else
             {
-                cmbSubsidiaryLedger.SelectedIndex = cmbSubsidiaryLedger.FindStringExact(subsidiaryAccName);
+                cmbxSubsidiaryLedger.SelectedIndex = cmbxSubsidiaryLedger.FindStringExact(subsidiaryAccName);
                 return true;
             }
         }
@@ -387,7 +424,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void cmbAccount_Validated(object sender, EventArgs e)
         {
-            cmbAccount.Tag = string.Empty;
+            cmbxAccount.Tag = string.Empty;
         }
 
         private void cmbSubsidiaryLedger_Validating(object sender, CancelEventArgs e)
@@ -397,7 +434,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void cmbSubsidiaryLedger_Validated(object sender, EventArgs e)
         {
-            cmbSubsidiaryLedger.Tag = string.Empty;
+            cmbxSubsidiaryLedger.Tag = string.Empty;
         }
 
         #endregion Validations

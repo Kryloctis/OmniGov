@@ -29,10 +29,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
         /// </summary>
         private void InitializeComponent()
         {
-            cmbSubsidiaryLedger = new System.Windows.Forms.ComboBox();
+            cmbxSubsidiaryLedger = new System.Windows.Forms.ComboBox();
             cmbFunds = new System.Windows.Forms.ComboBox();
             btnRetrieve = new System.Windows.Forms.Button();
-            cmbAccount = new System.Windows.Forms.ComboBox();
+            cmbxAccount = new System.Windows.Forms.ComboBox();
             panel1 = new System.Windows.Forms.Panel();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             nudYear = new System.Windows.Forms.NumericUpDown();
@@ -42,15 +42,16 @@ namespace AccountingSystem.Views.Reports.Ledgers
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             SuspendLayout();
             // 
-            // cmbSubsidiaryLedger
+            // cmbxSubsidiaryLedger
             // 
-            cmbSubsidiaryLedger.FormattingEnabled = true;
-            cmbSubsidiaryLedger.Location = new System.Drawing.Point(536, 7);
-            cmbSubsidiaryLedger.Name = "cmbSubsidiaryLedger";
-            cmbSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
-            cmbSubsidiaryLedger.TabIndex = 23;
-            cmbSubsidiaryLedger.Validating += cmbSubsidiaryLedger_Validating;
-            cmbSubsidiaryLedger.Validated += cmbSubsidiaryLedger_Validated;
+            cmbxSubsidiaryLedger.FormattingEnabled = true;
+            cmbxSubsidiaryLedger.Location = new System.Drawing.Point(536, 7);
+            cmbxSubsidiaryLedger.Name = "cmbxSubsidiaryLedger";
+            cmbxSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
+            cmbxSubsidiaryLedger.TabIndex = 23;
+            cmbxSubsidiaryLedger.KeyDown += cmbxSubsidiaryLedger_KeyDown;
+            cmbxSubsidiaryLedger.Validating += cmbSubsidiaryLedger_Validating;
+            cmbxSubsidiaryLedger.Validated += cmbSubsidiaryLedger_Validated;
             // 
             // cmbFunds
             // 
@@ -74,16 +75,16 @@ namespace AccountingSystem.Views.Reports.Ledgers
             btnRetrieve.UseVisualStyleBackColor = true;
             btnRetrieve.Click += btnRetrieve_Click;
             // 
-            // cmbAccount
+            // cmbxAccount
             // 
-            cmbAccount.FormattingEnabled = true;
-            cmbAccount.Location = new System.Drawing.Point(160, 7);
-            cmbAccount.Name = "cmbAccount";
-            cmbAccount.Size = new System.Drawing.Size(370, 23);
-            cmbAccount.TabIndex = 19;
-            cmbAccount.KeyDown += cmbAccount_KeyDown;
-            cmbAccount.Validating += cmbAccount_Validating;
-            cmbAccount.Validated += cmbAccount_Validated;
+            cmbxAccount.FormattingEnabled = true;
+            cmbxAccount.Location = new System.Drawing.Point(160, 7);
+            cmbxAccount.Name = "cmbxAccount";
+            cmbxAccount.Size = new System.Drawing.Size(370, 23);
+            cmbxAccount.TabIndex = 19;
+            cmbxAccount.KeyDown += cmbxAccount_KeyDown;
+            cmbxAccount.Validating += cmbAccount_Validating;
+            cmbxAccount.Validated += cmbAccount_Validated;
             // 
             // panel1
             // 
@@ -97,8 +98,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.Controls.Add(cmbFunds);
-            flowLayoutPanel1.Controls.Add(cmbAccount);
-            flowLayoutPanel1.Controls.Add(cmbSubsidiaryLedger);
+            flowLayoutPanel1.Controls.Add(cmbxAccount);
+            flowLayoutPanel1.Controls.Add(cmbxSubsidiaryLedger);
             flowLayoutPanel1.Controls.Add(nudYear);
             flowLayoutPanel1.Controls.Add(btnRetrieve);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -152,10 +153,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbSubsidiaryLedger;
+        private System.Windows.Forms.ComboBox cmbxSubsidiaryLedger;
         private System.Windows.Forms.ComboBox cmbFunds;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.ComboBox cmbAccount;
+        private System.Windows.Forms.ComboBox cmbxAccount;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ProgressBar progressBar1;

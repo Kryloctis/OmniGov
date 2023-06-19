@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using Org.BouncyCastle.Cms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,64 +20,183 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-        private void ucTransactionLog_Load(object sender, System.EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-
                 LoadFunds();
                 LoadYear();
+                cmbxFunds.Tag = string.Empty;
+                cmbxAccount.Tag = string.Empty;
+                cmbxSubsidiaryLedger.Tag = string.Empty;
             }
+        }
+
+        private void ucTransactionLog_Load(object sender, System.EventArgs e)
+        {
+            OnLoad();
         }
 
         private void LoadFunds()
         {
-            cmbFunds.DataSource = AccFactory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
+            DataTable dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadYear()
         {
-            HelperLoadRecords.YearComboBox(cmbYear);
+            nudYear.Maximum = Helper.GetCurrentDate().Year;
+            nudYear.Value = Helper.GetCurrentDate().Year;
         }
 
-        private DataTable SubsidiaryLegerAccountsDataTable()
+        #region Accounts
+
+        private DataColumn[] DataColumnsAccounts()
         {
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("id", typeof(Int32));
-            dataTable.Columns.Add("sub_name");
-
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-
-            var dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-
-            foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
+            return new DataColumn[]
             {
-                string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
-                int subId = Convert.ToInt32(dataRow["id"]);
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+        }
 
-                dataTable.Rows.Add(subId, subsidiaryName);
+        private DataTable DatatableAccounts()
+        {
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsAccounts());
+
+            foreach (DataRow row in dtAccounts.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                string accountName = $"{row["account_code"]} - {row["ledger_name"]}";
+
+                newRow["id"] = accountId;
+                newRow["account_name"] = accountName;
+                dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
         }
 
-        private void LoadSubsidiaryAccounts()
+        private void LoadAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
+            cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
+            HelperLoadRecords.SearchableCombobox(cmbxAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
+            cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
+            cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
+        }
+
+        private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
-                HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLegerAccountsDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
+                LoadSubsidiaryAccounts();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void cmbxAccount_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
+                    LoadAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                string searchText = cmbxAccount.Text.Trim();
+                if (e.KeyCode == Keys.Enter)
+                {
+                    LoadAccounts(searchText, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Accounts
+
+        #region Subsidiary Ledgers
+
+        private DataColumn[] DataColumnSubsidiaryLedgers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "sub_name", typeof(string))
+            };
+        }
+
+        private DataTable SubsidiaryLedgerDataTable()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnSubsidiaryLedgers());
+
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+            DataTable dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger((byte)fundId, (ushort)generalLedgerId);
+
+            foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
+                int subId = Convert.ToInt32(dataRow["id"]);
+
+                newRow["id"] = subId;
+                newRow["sub_name"] = subsidiaryName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        private void LoadSubsidiaryAccounts(string searchText = "", bool isSearch = false)
+        {
+            cmbxSubsidiaryLedger.TextChanged -= new EventHandler(cmbxSubsidiaryLedger_TextChanged);
+            cmbxSubsidiaryLedger.Text = string.Empty;
+            HelperLoadRecords.SearchableCombobox(cmbxSubsidiaryLedger, SubsidiaryLedgerDataTable(), "id", "sub_name", "sub_name", searchText, isSearch);
+            cmbxSubsidiaryLedger.TextChanged += new EventHandler(cmbxSubsidiaryLedger_TextChanged);
+        }
+
+        private void cmbxSubsidiaryLedger_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                string searchText = cmbxSubsidiaryLedger.Text.Trim();
+                if (e.KeyCode == Keys.Enter)
+                {
+                    LoadSubsidiaryAccounts(searchText, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxSubsidiaryLedger_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string subsidiaryLedger = cmbxSubsidiaryLedger.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(subsidiaryLedger))
+                    LoadSubsidiaryAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Subsidiary Ledgers
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
         {
@@ -111,10 +231,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable TransactionLogDataTable()
         {
-            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
-            int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            int subsidiaryLedgerId = Convert.ToInt32(cmbxSubsidiaryLedger.SelectedValue);
+            short year = Convert.ToInt16(nudYear.Value);
 
             var dtSubsidiaryLedger = new dsLFS.dtTransactionLogDataTable();
             var dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
@@ -145,7 +265,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
             beginningBalance = 0;
-            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
+            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbxSubsidiaryLedger.SelectedValue);
             var DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true, subsidiaryLedgerId);
             var CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false, subsidiaryLedgerId);
 
@@ -166,10 +286,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                byte fundId = (byte)cmbFunds.SelectedValue;
-                short year = Convert.ToInt16(cmbYear.Text);
-                ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-                int subsidiaryLedgerId = (int)cmbSubsidiaryLedger.SelectedValue;
+                byte fundId = (byte)cmbxFunds.SelectedValue;
+                short year = Convert.ToInt16(nudYear.Value);
+                ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
+                int subsidiaryLedgerId = (int)cmbxSubsidiaryLedger.SelectedValue;
 
                 string balanceDate, balanceDebit, balanceCredit, balance;
                 BeginningBalanceRow(fundId, year, generalLedgerId, out balanceDate, out balanceDebit, out balanceCredit, out balance);
@@ -177,7 +297,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 var lguDict = Helper.LGUDetails();
                 var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 var subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
-                var fundName = cmbFunds.Text;
+                var fundName = cmbxFunds.Text;
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
                 report.DataSources.Clear();
 
@@ -207,78 +327,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
         }
 
-        private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadSubsidiaryAccounts();
-        }
-
-        private DataTable DatatableAccounts()
-        {
-            DataTable dtAccounts;
-
-            if (string.IsNullOrEmpty(cmbAccount.Text))
-            {
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            }
-            else
-            {
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
-            }
-
-            return dtAccounts;
-        }
-
-        private void LoadAccounts()
-        {
-            try
-            {
-                cmbAccount.DroppedDown = false;
-
-                if (DatatableAccounts().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<ushort, string>();
-                foreach (DataRow item in DatatableAccounts().Rows)
-                {
-                    ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbAccount.DataSource = new BindingSource(accountDict, null);
-                cmbAccount.DisplayMember = "value";
-                cmbAccount.ValueMember = "key";
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbAccount.Text))
-            {
-                cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-            }
-        }
-
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
-            {
-                LoadAccounts();
-                cmbAccount.DroppedDown = true;
-            }
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbAccount.Text) || string.IsNullOrWhiteSpace(cmbSubsidiaryLedger.Text))
+            if (string.IsNullOrWhiteSpace(cmbxAccount.Text) || string.IsNullOrWhiteSpace(cmbxSubsidiaryLedger.Text))
             {
                 Helper.MessageBoxError("Please select a subsidiary ledger account.");
                 return;

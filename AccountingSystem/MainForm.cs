@@ -337,17 +337,14 @@ namespace AccountingSystem
                 tabControlLedgers.TabPages.Add(tabPageTransactionLog);
             tabControlLedgers.TabPages.Add(tabPageSummarySL);
 
-
             if (Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
-
 
             if (Helper.HasPermission("Report > General Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
 
             if (Helper.HasPermission("Report > General Ledger") || Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
-
 
             #endregion Ledgers
 
@@ -436,7 +433,7 @@ namespace AccountingSystem
 
         private void menuLogout_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
             loginForm.Show();
             loginForm.txtUsername.SelectAll();
             loginForm.txtUsername.Focus();

@@ -2734,10 +2734,9 @@ namespace AccountingSystem
 
             comboBox.ValueMember = valueMember;
             comboBox.DisplayMember = displayMember;
-
             comboBox.DataSource = dataView.ToTable();
 
-            if (dataView.ToTable().Rows.Count < 1)
+            if (dataTable.Rows.Count < 1)
                 return;
 
             if (isSearch)
