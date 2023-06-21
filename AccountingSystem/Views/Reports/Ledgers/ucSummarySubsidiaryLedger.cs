@@ -30,6 +30,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadAccounts();
                 LoadFunds();
                 LoadYear();
+                cmbxFunds.Tag = string.Empty;
+                cmbxAccount.Tag = string.Empty;
+                nudYear.Tag = string.Empty;
             }
         }
 
@@ -173,14 +176,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
-
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            else
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
@@ -207,6 +205,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
+                if (!this.ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
+
                 if (!backgroundWorker1.IsBusy)
                     LoadReport(reportViewer.LocalReport);
             }
@@ -252,5 +256,67 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
+
+        #region Validations
+
+        private string GetFormErrors()
+        {
+            var arrayErrors = new string[]
+            {
+                cmbxFunds.Tag.ToString(),
+                cmbxAccount.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(arrayErrors).GenerateErrorMessage();
+        }
+
+        private bool FundValidated()
+        {
+            string fundName = cmbxFunds.Text.Trim();
+            if (cmbxFunds.FindStringExact(fundName) == -1 || string.IsNullOrWhiteSpace(fundName))
+            {
+                cmbxFunds.Tag = "Invalid fund, Please select on the list";
+                return false;
+            }
+            cmbxFunds.SelectedIndex = cmbxFunds.FindStringExact(fundName);
+            return true;
+        }
+
+        private bool AccountValidated()
+        {
+            string accountName = cmbxAccount.Text.Trim();
+            bool isAccountExist = cmbxAccount.FindStringExact(accountName) == -1 ? false : true;
+
+            if (!isAccountExist || string.IsNullOrEmpty(accountName))
+            {
+                cmbxAccount.Tag = "Invalid account, Please select on the list";
+                return false;
+            }
+
+            cmbxAccount.SelectedIndex = cmbxAccount.FindStringExact(accountName);
+            return true;
+        }
+
+        private void cmbxFunds_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !FundValidated();
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
+        }
+
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !AccountValidated();
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            cmbxAccount.Tag = string.Empty;
+        }
+
+        #endregion Validations
     }
 }

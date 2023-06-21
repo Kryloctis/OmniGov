@@ -787,8 +787,9 @@
             // 
             this.tabPageTransactionLog.Controls.Add(this.ucTransactionLog1);
             this.tabPageTransactionLog.Location = new System.Drawing.Point(4, 24);
-            this.tabPageTransactionLog.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageTransactionLog.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTransactionLog.Name = "tabPageTransactionLog";
+            this.tabPageTransactionLog.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.tabPageTransactionLog.Size = new System.Drawing.Size(1205, 550);
             this.tabPageTransactionLog.TabIndex = 2;
             this.tabPageTransactionLog.Text = "Transaction Log";
@@ -797,10 +798,10 @@
             // ucTransactionLog1
             // 
             this.ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
+            this.ucTransactionLog1.Location = new System.Drawing.Point(0, 5);
             this.ucTransactionLog1.Name = "ucTransactionLog1";
             this.ucTransactionLog1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucTransactionLog1.Size = new System.Drawing.Size(1205, 550);
+            this.ucTransactionLog1.Size = new System.Drawing.Size(1205, 545);
             this.ucTransactionLog1.TabIndex = 0;
             // 
             // tabPageSummarySL
@@ -809,6 +810,7 @@
             this.tabPageSummarySL.Location = new System.Drawing.Point(4, 24);
             this.tabPageSummarySL.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageSummarySL.Name = "tabPageSummarySL";
+            this.tabPageSummarySL.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.tabPageSummarySL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabPageSummarySL.Size = new System.Drawing.Size(1205, 550);
             this.tabPageSummarySL.TabIndex = 3;
@@ -818,9 +820,9 @@
             // ucSummarySubsidiaryLedger1
             // 
             this.ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 5);
             this.ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
-            this.ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(1205, 550);
+            this.ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(1205, 545);
             this.ucSummarySubsidiaryLedger1.TabIndex = 0;
             // 
             // tabPageSubsidiaryLedger

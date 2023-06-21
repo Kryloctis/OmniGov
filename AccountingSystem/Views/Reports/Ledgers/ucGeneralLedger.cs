@@ -30,16 +30,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
-
-            if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
-
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-            else
-
-                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
@@ -66,7 +59,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(cmbxAccount.Text))
+                string accountName = cmbxAccount.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(accountName))
                     LoadAccounts();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -80,7 +75,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadYear()
         {
-            HelperLoadRecords.YearComboBox(cmbYear);
+            nudYear.Maximum = Helper.GetCurrentDate().Year;
+            nudYear.Value = Helper.GetCurrentDate().Year;
         }
 
         private string GetJournalAcronym(string journalName)
@@ -162,7 +158,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
-            int year = Convert.ToInt16(cmbYear.Text);
+            int year = Convert.ToInt16(nudYear.Value);
 
             dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
             DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
@@ -198,7 +194,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            short year = Convert.ToInt16(cmbYear.Text);
+            short year = Convert.ToInt16(nudYear.Value);
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
 
             var lguDict = Helper.LGUDetails();
@@ -224,52 +220,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             reportViewer.RefreshReport();
         }
 
-        private bool AccountComboboxEmpty()
-        {
-            if (string.IsNullOrEmpty(cmbxAccount.Text.Trim()))
-            {
-                cmbxAccount.Tag = "Please enter an account.";
-                return true;
-            }
-            else
-                return false;
-        }
-
-        private bool AccountExist()
-        {
-            string accountName = cmbxAccount.Text.Trim();
-
-            if (cmbxAccount.FindStringExact(accountName) == -1 && !string.IsNullOrEmpty(accountName))
-            {
-                cmbxAccount.Tag = "Account you entered doesn't exist";
-                return false;
-            }
-            return true;
-        }
-
-        private bool FundsComboboxEmpty()
-        {
-            if (string.IsNullOrEmpty(cmbxAccount.Text.Trim()))
-            {
-                cmbxAccount.Tag = "Please enter a Fund.";
-                return true;
-            }
-            else
-                return false;
-        }
-
-        private bool FundExist()
-        {
-            string fundName = cmbFunds.Text.Trim();
-
-            if (cmbFunds.FindStringExact(fundName) == -1 && !string.IsNullOrEmpty(fundName))
-            {
-                cmbxAccount.Tag = "Fund you entered doesn't exist";
-                return false;
-            }
-            return true;
-        }
-
         private void OnLoad()
         {
             if (!DesignMode)
@@ -277,6 +227,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadFunds();
                 LoadAccounts();
                 LoadYear();
+                cmbxAccount.Tag = string.Empty;
+                cmbFunds.Tag = string.Empty;
             }
         }
 
@@ -293,9 +245,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())
+                if (!this.ValidateChildren())
                 {
-                    Helper.MessageBoxError($"{cmbxAccount.Tag}");
+                    Helper.MessageBoxError(GetFormErrors());
                     return;
                 }
 
@@ -309,14 +261,17 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             try
             {
-                string searchText = cmbxAccount.Text;
+                string searchText = cmbxAccount.Text.Trim();
 
                 if (e.KeyCode == Keys.Enter)
                 {
-                    LoadAccounts(searchText.Trim(), true);
+                    LoadAccounts(searchText, true);
                     e.Handled = true;
                     e.SuppressKeyPress = true;
                 }
+
+                if (e.KeyData == (Keys.Control | Keys.V))
+                    LoadAccounts(searchText, true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -337,5 +292,72 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
         }
+
+        #region Validations
+
+        private string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                cmbxAccount.Tag.ToString(),
+                cmbFunds.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private bool AccountValidated()
+        {
+            string accountName = cmbxAccount.Text.Trim();
+
+            if (cmbxAccount.FindStringExact(accountName) == -1 || string.IsNullOrWhiteSpace(accountName))
+            {
+                cmbxAccount.Tag = "Invalid account, Please select on the list";
+                return false;
+            }
+            else
+            {
+                cmbxAccount.SelectedIndex = cmbxAccount.FindStringExact(accountName);
+                return true;
+            }
+        }
+
+        private bool FundValidated()
+        {
+            string fundName = cmbFunds.Text.Trim();
+
+            if (cmbFunds.FindStringExact(fundName) == -1 || string.IsNullOrWhiteSpace(fundName))
+            {
+                cmbFunds.Tag = "Invalid fund, Please select on the list";
+                return false;
+            }
+            else
+            {
+                cmbFunds.SelectedIndex = cmbFunds.FindStringExact(fundName);
+                return true;
+            }
+        }
+
+        private void cmbxAccount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !AccountValidated();
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            cmbxAccount.Tag = string.Empty;
+        }
+
+        private void cmbFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !FundValidated();
+        }
+
+        private void cmbFunds_Validated(object sender, EventArgs e)
+        {
+            cmbFunds.Tag = string.Empty;
+        }
+
+        #endregion Validations
     }
 }

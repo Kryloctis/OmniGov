@@ -29,108 +29,117 @@ namespace AccountingSystem.Views.Reports.Ledgers
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cmbFunds = new System.Windows.Forms.ComboBox();
-            this.cmbAccount = new System.Windows.Forms.ComboBox();
-            this.cmbSubsidiaryLedger = new System.Windows.Forms.ComboBox();
-            this.cmbYear = new System.Windows.Forms.ComboBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
+            cmbxAccount = new System.Windows.Forms.ComboBox();
+            nudYear = new System.Windows.Forms.NumericUpDown();
+            btnRetrieve = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.cmbFunds);
-            this.flowLayoutPanel1.Controls.Add(this.cmbAccount);
-            this.flowLayoutPanel1.Controls.Add(this.cmbSubsidiaryLedger);
-            this.flowLayoutPanel1.Controls.Add(this.cmbYear);
-            this.flowLayoutPanel1.Controls.Add(this.btnRetrieve);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1002, 31);
-            this.flowLayoutPanel1.TabIndex = 26;
+            flowLayoutPanel1.Controls.Add(cmbxFunds);
+            flowLayoutPanel1.Controls.Add(cmbxAccount);
+            flowLayoutPanel1.Controls.Add(nudYear);
+            flowLayoutPanel1.Controls.Add(btnRetrieve);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
+            flowLayoutPanel1.Size = new System.Drawing.Size(1140, 37);
+            flowLayoutPanel1.TabIndex = 26;
             // 
-            // cmbFunds
+            // cmbxFunds
             // 
-            this.cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFunds.FormattingEnabled = true;
-            this.cmbFunds.Location = new System.Drawing.Point(0, 3);
-            this.cmbFunds.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.cmbFunds.Name = "cmbFunds";
-            this.cmbFunds.Size = new System.Drawing.Size(150, 23);
-            this.cmbFunds.TabIndex = 21;
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(4, 7);
+            cmbxFunds.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(150, 23);
+            cmbxFunds.TabIndex = 21;
             // 
-            // cmbAccount
+            // cmbxAccount
             // 
-            this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(156, 3);
-            this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(370, 23);
-            this.cmbAccount.TabIndex = 19;
-            this.cmbAccount.SelectionChangeCommitted += new System.EventHandler(this.cmbAccount_SelectionChangeCommitted);
-            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
+            cmbxAccount.FormattingEnabled = true;
+            cmbxAccount.Location = new System.Drawing.Point(160, 7);
+            cmbxAccount.Name = "cmbxAccount";
+            cmbxAccount.Size = new System.Drawing.Size(370, 23);
+            cmbxAccount.TabIndex = 19;
+            cmbxAccount.KeyDown += cmbAccount_KeyDown;
             // 
-            // cmbSubsidiaryLedger
+            // nudYear
             // 
-            this.cmbSubsidiaryLedger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSubsidiaryLedger.FormattingEnabled = true;
-            this.cmbSubsidiaryLedger.Location = new System.Drawing.Point(532, 3);
-            this.cmbSubsidiaryLedger.Name = "cmbSubsidiaryLedger";
-            this.cmbSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
-            this.cmbSubsidiaryLedger.TabIndex = 23;
-            // 
-            // cmbYear
-            // 
-            this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(821, 3);
-            this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(93, 23);
-            this.cmbYear.TabIndex = 22;
+            nudYear.Location = new System.Drawing.Point(536, 7);
+            nudYear.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.ReadOnly = true;
+            nudYear.Size = new System.Drawing.Size(97, 23);
+            nudYear.TabIndex = 24;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(920, 3);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 20;
-            this.btnRetrieve.Text = "&Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRetrieve.Location = new System.Drawing.Point(639, 7);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            btnRetrieve.TabIndex = 20;
+            btnRetrieve.Text = "&Retrieve";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1002, 412);
-            this.panel1.TabIndex = 27;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 42);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1140, 529);
+            panel1.TabIndex = 27;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 37);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(1140, 5);
+            progressBar1.TabIndex = 28;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
             // ucTransactionLog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "ucTransactionLog";
-            this.Size = new System.Drawing.Size(1002, 443);
-            this.Load += new System.EventHandler(this.ucTransactionLog_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(panel1);
+            Controls.Add(progressBar1);
+            Controls.Add(flowLayoutPanel1);
+            Name = "ucTransactionLog";
+            Size = new System.Drawing.Size(1140, 571);
+            Load += ucTransactionLog_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.ComboBox cmbFunds;
-        private System.Windows.Forms.ComboBox cmbAccount;
-        private System.Windows.Forms.ComboBox cmbSubsidiaryLedger;
-        private System.Windows.Forms.ComboBox cmbYear;
+        private System.Windows.Forms.ComboBox cmbxFunds;
+        private System.Windows.Forms.ComboBox cmbxAccount;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.NumericUpDown nudYear;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
