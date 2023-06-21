@@ -32,11 +32,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             cmbxAccount = new System.Windows.Forms.ComboBox();
-            cmbxSubsidiaryLedger = new System.Windows.Forms.ComboBox();
             nudYear = new System.Windows.Forms.NumericUpDown();
             btnRetrieve = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             SuspendLayout();
@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             flowLayoutPanel1.Controls.Add(cmbxFunds);
             flowLayoutPanel1.Controls.Add(cmbxAccount);
-            flowLayoutPanel1.Controls.Add(cmbxSubsidiaryLedger);
             flowLayoutPanel1.Controls.Add(nudYear);
             flowLayoutPanel1.Controls.Add(btnRetrieve);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -75,18 +74,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             cmbxAccount.TabIndex = 19;
             cmbxAccount.KeyDown += cmbAccount_KeyDown;
             // 
-            // cmbxSubsidiaryLedger
-            // 
-            cmbxSubsidiaryLedger.FormattingEnabled = true;
-            cmbxSubsidiaryLedger.Location = new System.Drawing.Point(536, 7);
-            cmbxSubsidiaryLedger.Name = "cmbxSubsidiaryLedger";
-            cmbxSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
-            cmbxSubsidiaryLedger.TabIndex = 23;
-            cmbxSubsidiaryLedger.KeyDown += cmbxSubsidiaryLedger_KeyDown;
-            // 
             // nudYear
             // 
-            nudYear.Location = new System.Drawing.Point(825, 7);
+            nudYear.Location = new System.Drawing.Point(536, 7);
             nudYear.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
             nudYear.Name = "nudYear";
             nudYear.ReadOnly = true;
@@ -95,7 +85,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             // btnRetrieve
             // 
-            btnRetrieve.Location = new System.Drawing.Point(928, 7);
+            btnRetrieve.Location = new System.Drawing.Point(639, 7);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(75, 23);
             btnRetrieve.TabIndex = 20;
@@ -119,6 +109,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             progressBar1.Size = new System.Drawing.Size(1140, 5);
             progressBar1.TabIndex = 28;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // ucTransactionLog
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -139,10 +136,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.ComboBox cmbxAccount;
-        private System.Windows.Forms.ComboBox cmbxSubsidiaryLedger;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

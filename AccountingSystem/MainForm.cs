@@ -333,9 +333,11 @@ namespace AccountingSystem
 
             #region Ledgers
 
-            if (Helper.HasPermission("Report > Transaction Log"))
-                tabControlLedgers.TabPages.Add(tabPageTransactionLog);
-            tabControlLedgers.TabPages.Add(tabPageSummarySL);
+            //if (Helper.HasPermission("Report > Transaction Log"))
+            //    tabControlLedgers.TabPages.Add(tabPageTransactionLog);
+
+            if (Helper.HasPermission("Report > Summary Subsidiary Ledger"))
+                tabControlLedgers.TabPages.Add(tabPageSummarySL);
 
             if (Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);

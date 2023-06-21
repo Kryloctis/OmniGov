@@ -280,7 +280,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             Invoke((MethodInvoker)delegate
             {
-                reportViewer.ShowProgress = true;
                 LoadReport(reportViewer.LocalReport);
             });
         }

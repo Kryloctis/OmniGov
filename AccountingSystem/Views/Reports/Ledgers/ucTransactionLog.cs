@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadYear();
                 cmbxFunds.Tag = string.Empty;
                 cmbxAccount.Tag = string.Empty;
-                cmbxSubsidiaryLedger.Tag = string.Empty;
             }
         }
 
@@ -84,19 +83,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void LoadAccounts(string searchText = "", bool isSearch = false)
         {
             cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
-            cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
             HelperLoadRecords.SearchableCombobox(cmbxAccount, DatatableAccounts(), "id", "account_name", "account_name", searchText, isSearch);
             cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
-            cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
-        }
-
-        private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadSubsidiaryAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
@@ -126,78 +114,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         #endregion Accounts
 
-        #region Subsidiary Ledgers
-
-        private DataColumn[] DataColumnSubsidiaryLedgers()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "sub_name", typeof(string))
-            };
-        }
-
-        private DataTable SubsidiaryLedgerDataTable()
-        {
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnSubsidiaryLedgers());
-
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-            DataTable dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger((byte)fundId, (ushort)generalLedgerId);
-
-            foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
-                int subId = Convert.ToInt32(dataRow["id"]);
-
-                newRow["id"] = subId;
-                newRow["sub_name"] = subsidiaryName;
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
-        }
-
-        private void LoadSubsidiaryAccounts(string searchText = "", bool isSearch = false)
-        {
-            cmbxSubsidiaryLedger.TextChanged -= new EventHandler(cmbxSubsidiaryLedger_TextChanged);
-            cmbxSubsidiaryLedger.Text = string.Empty;
-            HelperLoadRecords.SearchableCombobox(cmbxSubsidiaryLedger, SubsidiaryLedgerDataTable(), "id", "sub_name", "sub_name", searchText, isSearch);
-            cmbxSubsidiaryLedger.TextChanged += new EventHandler(cmbxSubsidiaryLedger_TextChanged);
-        }
-
-        private void cmbxSubsidiaryLedger_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                string searchText = cmbxSubsidiaryLedger.Text.Trim();
-                if (e.KeyCode == Keys.Enter)
-                {
-                    LoadSubsidiaryAccounts(searchText, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxSubsidiaryLedger_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string subsidiaryLedger = cmbxSubsidiaryLedger.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(subsidiaryLedger))
-                    LoadSubsidiaryAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        #endregion Subsidiary Ledgers
-
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
@@ -219,127 +135,168 @@ namespace AccountingSystem.Views.Reports.Ledgers
             row["balance"] = balance;
         }
 
-        private static void GetJEVCreatedByAndUpdatedBy(int jevId, ref string createdBy, ref string updatedBy)
+        private string GetJournalAcronym(string journalName)
         {
-            var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+            switch (journalName)
+            {
+                case "General Journal":
+                    return "GJ";
 
-            int createdById = Convert.ToInt32(dictJev["created_by"]);
-            createdBy = Helper.GetUserDataById(createdById)["user_full_name"];
-            //int updatedById = Convert.ToInt32(dictJev["updated_by"]);
-            updatedBy = "";
+                case "Cash Receipts Journal":
+                    return "CRJ";
+
+                case "Procurement Received Journal":
+                    return "PRJ";
+
+                case "Cash Disbursements Journal":
+                    return "CsDJ";
+
+                case "Check Disbursements Journal":
+                    return "CkDJ";
+
+                case "Advice to Debit Account Disbursement Journal":
+                    return "ADADJ";
+            }
+
+            return "";
         }
 
         private DataTable TransactionLogDataTable()
         {
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
-            int subsidiaryLedgerId = Convert.ToInt32(cmbxSubsidiaryLedger.SelectedValue);
-            short year = Convert.ToInt16(nudYear.Value);
+            //int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            //int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            //short year = Convert.ToInt16(nudYear.Value);
 
-            var dtSubsidiaryLedger = new dsLFS.dtTransactionLogDataTable();
-            var dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
-            string particulars = string.Empty;
+            //var dataTable = new dsLFS.dtTransactionLogDataTable();
+            //var dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, year);
+            //int totalCount = dataTable.Rows.Count;
+            //int runningCount = 0;
 
-            foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
-            {
-                particulars = item["explanation"].ToString();
-                int jevId = Convert.ToInt32(item["jev_id"]);
-                string createBy = string.Empty;
-                string updatedBy = string.Empty;
+            //foreach (DataRow row in dtSubsidiaryLedgerFromDB.Rows)
+            //{
+            //    DataRow newRow = dataTable.NewRow();
+            //    int jevId = Convert.ToInt32(row["jev_id"]);
+            //    string jevNo = row["full_jev_no"].ToString();
+            //    string journalName = GetJournalAcronym(row["journal_name"].ToString());
+            //    string dvNo = row[""]
 
-                GetJEVCreatedByAndUpdatedBy(jevId, ref createBy, ref updatedBy);
+            //    newRow["jev_no"] = ;
+            //    newRow["journal"] = ;
+            //    newRow["respond_center"] = ;
+            //    newRow["cafoa_no"] = ;
+            //    newRow["dv_payroll_no"] = ;
+            //    newRow["check_no"] = ;
+            //    newRow["other_ref"] = ;
+            //    newRow["payee"] = ;
+            //    newRow["particulars"] = ;
+            //    newRow["account"] = ;
+            //    newRow["account_code"] = ;
+            //    newRow["sub_account_code"] = ;
+            //    newRow["debit_amount"] = ;
+            //    newRow["credit_amount"] = ;
 
-                DataRow row = dtSubsidiaryLedger.NewRow();
-                row["date"] = item["date_entry"];
-                row["ref"] = item["full_jev_no"];
-                row["proxy"] = createBy;
+            //    ValidateDebitCreditRow(particulars, row, newRow, ref beginningBalance);
 
-                ValidateDebitCreditRow(particulars, item, row, ref beginningBalance);
+            //    runningCount++;
+            //    int progressPercentage = (runningCount * 100) / totalCount;
+            //    dataTable.Rows.Add(newRow);
+            //}
 
-                dtSubsidiaryLedger.Rows.Add(row);
-            }
-
-            return dtSubsidiaryLedger;
+            return new DataTable();
         }
 
-        private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
+        private DataRow BeginningBalanceRow(int fundId, int year, int generalLedgerId, DataTable dataTable)
         {
-            beginningBalance = 0;
-            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbxSubsidiaryLedger.SelectedValue);
-            var DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true, subsidiaryLedgerId);
-            var CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false, subsidiaryLedgerId);
+            decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, true);
+            decimal CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, false);
 
-            beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
-            balance = beginningBalance.ToString();
+            decimal beginningBalance = DebitBeginningBalance - CreditBeginningBalance;
             decimal debit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(beginningBalance) : 0;
             decimal credit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(beginningBalance) : 0;
 
-            balanceDebit = debit.ToString();
-            balanceCredit = credit.ToString();
+            Dictionary<string, string> dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year);
 
-            var dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year, subsidiaryLedgerId);
-            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("dd/MM/yyyy");
+            object beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? DBNull.Value : Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
+
+            DataRow newRow = dataTable.NewRow();
+            newRow["jev_no"] = beginningBalanceDate;
+            newRow["particulars"] = "Beginning Balance";
+            newRow["ref"] = string.Empty;
+            newRow["debit_amount"] = debit;
+            newRow["credit_amount"] = credit;
+            return newRow;
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
-                Cursor.Current = Cursors.WaitCursor;
                 byte fundId = (byte)cmbxFunds.SelectedValue;
                 short year = Convert.ToInt16(nudYear.Value);
                 ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
-                int subsidiaryLedgerId = (int)cmbxSubsidiaryLedger.SelectedValue;
-
-                string balanceDate, balanceDebit, balanceCredit, balance;
-                BeginningBalanceRow(fundId, year, generalLedgerId, out balanceDate, out balanceDebit, out balanceCredit, out balance);
 
                 var lguDict = Helper.LGUDetails();
                 var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-                var subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 var fundName = cmbxFunds.Text;
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
 
-                var parameters = new[] {
+                ReportParameter[] parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramGLCode", generalLedgerDict["account_code"]),
-                    new ReportParameter("paramSLCode", subsidiaryLedgerDict["sub_code"]),
-                    new ReportParameter("paramAccountOf", generalLedgerDict["ledger_name"]),
-                    new ReportParameter("paramAddress", subsidiaryLedgerDict["address"]),
-                    new ReportParameter("paramContactPerson", subsidiaryLedgerDict["contact_person"]),
-                    new ReportParameter("paramContactNoEmail", subsidiaryLedgerDict["contact"]),
-                    new ReportParameter("paramBalanceDate", balanceDate),
-                    new ReportParameter("paramBalanceDebit", balanceDebit),
-                    new ReportParameter("paramBalanceCredit", balanceCredit),
-                    new ReportParameter("paramBalance", balance),
+                    new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
+                    new ReportParameter("paramAccount", generalLedgerDict["ledger_name"]),
                     new ReportParameter("paramYear",year.ToString())
                 };
                 report.SetParameters(parameters);
-                Cursor.Current = Cursors.Default;
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+        }
+
+        private string GetFormErrors()
+        {
+            var errorArray = new string[]
             {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+                cmbxFunds.Tag.ToString(),
+                cmbxAccount.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbxAccount.Text) || string.IsNullOrWhiteSpace(cmbxSubsidiaryLedger.Text))
+            try
             {
-                Helper.MessageBoxError("Please select a subsidiary ledger account.");
-                return;
-            }
+                if (!this.ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
 
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+                if (!backgroundWorker1.IsBusy)
+                    backgroundWorker1.RunWorkerAsync();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadReport(reportViewer.LocalReport);
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
         }
     }
 }
