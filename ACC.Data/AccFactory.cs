@@ -78,6 +78,8 @@ namespace AccountingSystem
 
         public static IRealignments RealignmentsRepository() => new RealignmentsRepository(mySqlGenericCommandsLFS);
 
+        public static IBudgetAppropriationsHasRealignments BudgetAppropriationsHasRealignments() => new BudgetAppropriationsHasRealignmentsRepository(mySqlGenericCommandsLFS);
+
         public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(mySqlGenericCommandsLFS);
 
         #endregion Budget Approprations
