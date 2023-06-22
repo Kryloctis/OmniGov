@@ -71,13 +71,20 @@ namespace AccountingSystem
         public static ISubFPPRepository SubFPPRepository() => new SubFPPRepository(mySqlGenericCommandsLFS);
 
         //A part of Budget System
+
+        #region Budget Approprations
+
         public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(mySqlGenericCommandsLFS, SupplementalAppropriationsRepository());
+
+        public static IRealignments RealignmentsRepository() => new RealignmentsRepository(mySqlGenericCommandsLFS);
+
+        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(mySqlGenericCommandsLFS);
+
+        #endregion Budget Approprations
 
         public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(mySqlGenericCommandsLFS, AllotmentAccountRepository());
 
         public static IAllotmentAccountRepository AllotmentAccountRepository() => new AllotmentAccountRepository(mySqlGenericCommandsLFS);
-
-        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(mySqlGenericCommandsLFS);
 
         public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(mySqlGenericCommandsLFS, ObligationAccountRepository());
 
