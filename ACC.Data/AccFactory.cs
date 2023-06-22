@@ -84,6 +84,8 @@ namespace AccountingSystem
 
         public static IAugmentations AugmentationsRepository() => new AugmentationsRepository(mySqlGenericCommandsLFS);
 
+        public static IBudgetAppropriationHasAugmentations BudgetAppropriationHasAugmentationsRepository() => new BudgetAppropriationHasAugmentationsRepository(mySqlGenericCommandsLFS);
+
         #endregion Budget Approprations
 
         public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(mySqlGenericCommandsLFS, AllotmentAccountRepository());
