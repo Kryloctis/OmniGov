@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.referencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,19 +206,11 @@
             // menuFile
             // 
             this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.referencesToolStripMenuItem,
             this.menuLogout,
             this.menuExitApp});
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(37, 24);
             this.menuFile.Text = "File";
-            // 
-            // referencesToolStripMenuItem
-            // 
-            this.referencesToolStripMenuItem.Enabled = false;
-            this.referencesToolStripMenuItem.Name = "referencesToolStripMenuItem";
-            this.referencesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.referencesToolStripMenuItem.Text = "Preferences...";
             // 
             // menuLogout
             // 
@@ -1559,7 +1550,6 @@
         private System.Windows.Forms.ToolStripMenuItem listOfDelinquentAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem issueRecieptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem referencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem businessToolStripMenuItem; 
         private System.Windows.Forms.ToolStripMenuItem businessCategoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
