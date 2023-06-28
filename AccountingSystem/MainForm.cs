@@ -77,34 +77,22 @@ namespace AccountingSystem
             tabControlFinancialStatements.TabPages.Clear();
         }
 
-        private void FocusLasTabPages()
-        {
-            int budgetTabPageCount = tabControlBudget.TabPages.Count;
-            int ledgersTabPageCount = tabControlLedgers.TabPages.Count;
-            int trialBalanceTabPageCount = tabControlTrialBalance.TabPages.Count;
-            int financialStatementsTabPageCount = tabControlFinancialStatements.TabPages.Count;
-
-            if (budgetTabPageCount > 1)
-                tabControlBudget.SelectedTab = tabControlBudget.TabPages[budgetTabPageCount - 1];
-
-            if (ledgersTabPageCount > 1)
-                tabControlLedgers.SelectedTab = tabControlLedgers.TabPages[ledgersTabPageCount - 1];
-
-            if (trialBalanceTabPageCount > 1)
-                tabControlTrialBalance.SelectedTab = tabControlTrialBalance.TabPages[trialBalanceTabPageCount - 1];
-
-            if (financialStatementsTabPageCount > 1)
-                tabControlFinancialStatements.SelectedTab = tabControlFinancialStatements.TabPages[financialStatementsTabPageCount - 1];
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadLoggedInUser();
                 ValidatePermissions();
-                FocusLasTabPages();
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadLoggedInUser()
@@ -298,11 +286,11 @@ namespace AccountingSystem
         {
             #region Journal Entry Voucher
 
-            if (Helper.HasPermission("Transaction > JEV") || Helper.HasPermission("Report > JEVs"))
-                tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
-
             if (!Helper.HasPermission("Transaction > JEV"))
                 ucjevDashboard1.btnAddJEV.Enabled = false;
+
+            if (Helper.HasPermission("Transaction > JEV") || Helper.HasPermission("Report > JEVs"))
+                tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
 
             #endregion Journal Entry Voucher
 
