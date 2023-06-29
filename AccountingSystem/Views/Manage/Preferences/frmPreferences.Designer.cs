@@ -124,6 +124,7 @@
             // txtProvince
             // 
             txtProvince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtProvince.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtProvince.Location = new System.Drawing.Point(116, 154);
             txtProvince.Name = "txtProvince";
             txtProvince.Size = new System.Drawing.Size(304, 23);
@@ -132,6 +133,7 @@
             // txtMunicipality
             // 
             txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtMunicipality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtMunicipality.Location = new System.Drawing.Point(116, 125);
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.Size = new System.Drawing.Size(304, 23);

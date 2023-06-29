@@ -16,8 +16,10 @@ namespace AccountingSystem
 
         internal void OnLoad()
         {
-            lblLgu.Text = $"LOCAL GOVERNMENT OF {Helper.LGUDetails()["municipality"]}";
-            lblProvince.Text = Helper.LGUDetails()["lgu_province"];
+            string lguPlaceHolder = $"LOCAL GOVERNMENT OF {Helper.LGUDetails()["municipality"]}";
+            string province = Helper.LGUDetails()["lgu_province"];
+            lblLgu.Text = lguPlaceHolder.ToUpper();
+            lblProvince.Text = province.ToUpper(); ;
 
             Image emblem = Helper.LGUDetails()["emblem"];
             if (emblem != null)
