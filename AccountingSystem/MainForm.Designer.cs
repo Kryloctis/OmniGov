@@ -59,13 +59,13 @@
             businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             businessAddOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            discountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            penaltiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            otherPaymentRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
+            databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -119,11 +119,11 @@
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
             ucrcdSummary1 = new Views.Dashboard.TreasuryDashboard.ucRCDSummary();
-            toolStrip2 = new System.Windows.Forms.ToolStrip();
+            ToolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripButtonRpt = new System.Windows.Forms.ToolStripButton();
+            RptToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStripButtonBpl = new System.Windows.Forms.ToolStripButton();
             toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,7 +184,7 @@
             tabPageSCF.SuspendLayout();
             tabPageTreasury.SuspendLayout();
             panel1.SuspendLayout();
-            toolStrip2.SuspendLayout();
+            ToolStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -231,7 +231,7 @@
             // 
             // menuManage
             // 
-            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountToolStripMenuItem, penaltyToolStripMenuItem, taxRateToolStripMenuItem, taxTypesToolStripMenuItem, toolStripMenuItem1, toolStripSeparator9, menuDatabaseSynchronization });
+            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, taxTypesToolStripMenuItem, otherPaymentRatesToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
             menuManage.Name = "menuManage";
             menuManage.Size = new System.Drawing.Size(62, 24);
             menuManage.Text = "Manage";
@@ -400,26 +400,26 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
-            // discountToolStripMenuItem
+            // discountsToolStripMenuItem
             // 
-            discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            discountToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            discountToolStripMenuItem.Text = "Discounts...";
-            discountToolStripMenuItem.Click += discountToolStripMenuItem_Click;
+            discountsToolStripMenuItem.Name = "discountsToolStripMenuItem";
+            discountsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            discountsToolStripMenuItem.Text = "Discounts...";
+            discountsToolStripMenuItem.Click += discountToolStripMenuItem_Click;
             // 
-            // penaltyToolStripMenuItem
+            // penaltiesToolStripMenuItem
             // 
-            penaltyToolStripMenuItem.Name = "penaltyToolStripMenuItem";
-            penaltyToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            penaltyToolStripMenuItem.Text = "Penalties...";
-            penaltyToolStripMenuItem.Click += penaltyToolStripMenuItem_Click;
+            penaltiesToolStripMenuItem.Name = "penaltiesToolStripMenuItem";
+            penaltiesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            penaltiesToolStripMenuItem.Text = "Penalties...";
+            penaltiesToolStripMenuItem.Click += penaltyToolStripMenuItem_Click;
             // 
-            // taxRateToolStripMenuItem
+            // taxRatesToolStripMenuItem
             // 
-            taxRateToolStripMenuItem.Name = "taxRateToolStripMenuItem";
-            taxRateToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            taxRateToolStripMenuItem.Text = "Tax Rates...";
-            taxRateToolStripMenuItem.Click += taxRateToolStripMenuItem_Click;
+            taxRatesToolStripMenuItem.Name = "taxRatesToolStripMenuItem";
+            taxRatesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            taxRatesToolStripMenuItem.Text = "Tax Rates...";
+            taxRatesToolStripMenuItem.Click += taxRateToolStripMenuItem_Click;
             // 
             // taxTypesToolStripMenuItem
             // 
@@ -428,24 +428,24 @@
             taxTypesToolStripMenuItem.Text = "Tax Types";
             taxTypesToolStripMenuItem.Click += taxTypesToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem1
+            // otherPaymentRatesToolStripMenuItem
             // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new System.Drawing.Size(223, 22);
-            toolStripMenuItem1.Text = "Other Payment Rates";
-            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
+            otherPaymentRatesToolStripMenuItem.Name = "otherPaymentRatesToolStripMenuItem";
+            otherPaymentRatesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            otherPaymentRatesToolStripMenuItem.Text = "Other Payment Rates";
+            otherPaymentRatesToolStripMenuItem.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator9
             // 
             toolStripSeparator9.Name = "toolStripSeparator9";
             toolStripSeparator9.Size = new System.Drawing.Size(220, 6);
             // 
-            // menuDatabaseSynchronization
+            // databaseSynchronizationToolStripMenuItem
             // 
-            menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
-            menuDatabaseSynchronization.Size = new System.Drawing.Size(223, 22);
-            menuDatabaseSynchronization.Text = "Database Synchronization...";
-            menuDatabaseSynchronization.Click += menuDatabaseSynchronization_Click;
+            databaseSynchronizationToolStripMenuItem.Name = "databaseSynchronizationToolStripMenuItem";
+            databaseSynchronizationToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            databaseSynchronizationToolStripMenuItem.Text = "Database Synchronization...";
+            databaseSynchronizationToolStripMenuItem.Click += menuDatabaseSynchronization_Click;
             // 
             // statusStrip1
             // 
@@ -808,11 +808,11 @@
             // tabPageTrialBalance
             // 
             tabPageTrialBalance.Controls.Add(tabControlTrialBalance);
-            tabPageTrialBalance.Location = new System.Drawing.Point(4, 26);
+            tabPageTrialBalance.Location = new System.Drawing.Point(4, 24);
             tabPageTrialBalance.Margin = new System.Windows.Forms.Padding(0);
             tabPageTrialBalance.Name = "tabPageTrialBalance";
             tabPageTrialBalance.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageTrialBalance.Size = new System.Drawing.Size(1213, 587);
+            tabPageTrialBalance.Size = new System.Drawing.Size(1213, 589);
             tabPageTrialBalance.TabIndex = 3;
             tabPageTrialBalance.Text = "Trial Balance";
             tabPageTrialBalance.UseVisualStyleBackColor = true;
@@ -826,7 +826,7 @@
             tabControlTrialBalance.Name = "tabControlTrialBalance";
             tabControlTrialBalance.Padding = new System.Drawing.Point(10, 3);
             tabControlTrialBalance.SelectedIndex = 0;
-            tabControlTrialBalance.Size = new System.Drawing.Size(1213, 582);
+            tabControlTrialBalance.Size = new System.Drawing.Size(1213, 584);
             tabControlTrialBalance.TabIndex = 0;
             // 
             // tabPagePreTrial
@@ -835,7 +835,7 @@
             tabPagePreTrial.Location = new System.Drawing.Point(4, 24);
             tabPagePreTrial.Name = "tabPagePreTrial";
             tabPagePreTrial.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePreTrial.Size = new System.Drawing.Size(1205, 554);
+            tabPagePreTrial.Size = new System.Drawing.Size(1205, 556);
             tabPagePreTrial.TabIndex = 0;
             tabPagePreTrial.Text = "Pre-Closing Trial Balance";
             tabPagePreTrial.UseVisualStyleBackColor = true;
@@ -845,7 +845,7 @@
             ucPreClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPreClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
             ucPreClosingTrialBalance1.Name = "ucPreClosingTrialBalance1";
-            ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1199, 548);
+            ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1199, 550);
             ucPreClosingTrialBalance1.TabIndex = 0;
             // 
             // tabPagePostTrial
@@ -999,7 +999,7 @@
             // panel1
             // 
             panel1.Controls.Add(ucrcdSummary1);
-            panel1.Controls.Add(toolStrip2);
+            panel1.Controls.Add(ToolStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel1.Location = new System.Drawing.Point(0, 5);
@@ -1015,17 +1015,17 @@
             ucrcdSummary1.Size = new System.Drawing.Size(1221, 586);
             ucrcdSummary1.TabIndex = 10;
             // 
-            // toolStrip2
+            // ToolStrip2
             // 
-            toolStrip2.BackColor = System.Drawing.Color.Transparent;
-            toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripSplitButton2, toolStripButtonRpt, toolStripButtonBpl, toolStripSplitButton3, toolStripSplitButton4 });
-            toolStrip2.Location = new System.Drawing.Point(0, 0);
-            toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new System.Drawing.Size(1221, 31);
-            toolStrip2.TabIndex = 9;
-            toolStrip2.Text = "toolStrip2";
+            ToolStrip2.BackColor = System.Drawing.Color.Transparent;
+            ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            ToolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            ToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripSplitButton2, RptToolStripButton, toolStripButtonBpl, toolStripSplitButton3, toolStripSplitButton4 });
+            ToolStrip2.Location = new System.Drawing.Point(0, 0);
+            ToolStrip2.Name = "ToolStrip2";
+            ToolStrip2.Size = new System.Drawing.Size(1221, 31);
+            ToolStrip2.TabIndex = 9;
+            ToolStrip2.Text = "toolStrip2";
             // 
             // toolStripSplitButton2
             // 
@@ -1051,14 +1051,14 @@
             returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             returnedReceiptsToolStripMenuItem.Click += returnedReceiptsToolStripMenuItem_Click;
             // 
-            // toolStripButtonRpt
+            // RptToolStripButton
             // 
-            toolStripButtonRpt.Image = Properties.Resources.building_9_archive_24px;
-            toolStripButtonRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonRpt.Name = "toolStripButtonRpt";
-            toolStripButtonRpt.Size = new System.Drawing.Size(55, 28);
-            toolStripButtonRpt.Text = "RPT";
-            toolStripButtonRpt.Click += toolStripButtonRpt_Click;
+            RptToolStripButton.Image = Properties.Resources.building_9_archive_24px;
+            RptToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            RptToolStripButton.Name = "RptToolStripButton";
+            RptToolStripButton.Size = new System.Drawing.Size(55, 28);
+            RptToolStripButton.Text = "RPT";
+            RptToolStripButton.Click += toolStripButtonRpt_Click;
             // 
             // toolStripButtonBpl
             // 
@@ -1330,8 +1330,8 @@
             tabPageTreasury.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            toolStrip2.ResumeLayout(false);
-            toolStrip2.PerformLayout();
+            ToolStrip2.ResumeLayout(false);
+            ToolStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1365,14 +1365,14 @@
         private System.Windows.Forms.ToolStripMenuItem signatoriesToolStripMenuItem;
         private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem discountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem penaltyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem discountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem penaltiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem taxRateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxRatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuTaxPayers;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem menuDatabaseSynchronization;
+        private System.Windows.Forms.ToolStripMenuItem databaseSynchronizationToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageBudget;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonBudgetAppropriations;
@@ -1384,7 +1384,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabPageTreasury;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip ToolStrip2;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton3;
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
@@ -1417,14 +1417,14 @@
         private System.Windows.Forms.ToolStripMenuItem businessCategoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRpt;
+        private System.Windows.Forms.ToolStripButton RptToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem otherPaymentRatesToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlBudget;
         private System.Windows.Forms.TabPage tabPageBudgetSummary;
         private System.Windows.Forms.TabPage tabPageBudgetDetailed;

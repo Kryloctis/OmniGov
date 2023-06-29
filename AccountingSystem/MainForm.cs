@@ -109,11 +109,11 @@ namespace AccountingSystem
 
             ValidateManagePermissions();
 
-            ValidateTransactionPermissions();
+            ValidateBudgetPermissions();
 
-            ValidateReportPermissions();
+            ValidateAccountingPermissions();
 
-            ValidateAccountingControlPermissions();
+            ValidateTreasuryPermissions();
         }
 
         private void ValidateDashboadPermissions()
@@ -128,58 +128,57 @@ namespace AccountingSystem
                 tabControlDashboard.TabPages.Add(tabPageTreasury);
         }
 
-        private void ValidateReportPermissions()
+        private void ValidateTreasuryPermissions()
         {
-            if (!Helper.HasPermission("Report > Report of Checks Issued"))
-                reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
+            //Manage
+            if (!Helper.HasPermission("Manage > Banks"))
+                menuBanks.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
-                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Collecting Officer"))
+                menuCollectingOfficer.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Abstract of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Accountable Forms"))
+                menuAccForm.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Bank Cashbook"))
-                bankCashbookToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Disbursing Officer"))
+                menuDisbursingOfficer.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Consolidated Receipts"))
-                consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Taxpayers"))
+                menuTaxPayers.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Daily Cash Position"))
-                dailyCashPositionsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Returned Receipts"))
+                returnedReceiptsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > SAAOB"))
-                sAAOBToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Database Synchronization"))
+                databaseSynchronizationToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > SAAOBB"))
-                sAAOBBToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Business Categories"))
+                businessCategoriesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Collector's RCD"))
-                collectorsRCDToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
-                realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
-                consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Business Add-on Charges"))
+                businessAddOnToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Bank Accounts"))
                 bankAccountsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
-                listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Tax Types"))
+                taxTypesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Released Cheques"))
-                releasedChequesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Other Payment Rates"))
+                otherPaymentRatesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Unreleased Cheques"))
-                unreleasedChequesToolStripMenuItem.Enabled = false;
-        }
+            if (!Helper.HasPermission("Manage > Real Properties"))
+                RptToolStripButton.Enabled = false;
 
-        private void ValidateTransactionPermissions()
-        {
-            if (!Helper.HasPermission("Transaction > Obligation Request"))
-                toolStripButtonObligation.Enabled = false;
+            if (!Helper.HasPermission("Manage > Preferences"))
+                preferencesToolStripMenuItem.Enabled = false;
+
+            //Transactions
+            if (!Helper.HasPermission("Transaction > Issue Check"))
+                checkIssuanceToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Generate RCD"))
+                liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > Issue Check"))
                 checkIssuanceToolStripMenuItem.Enabled = false;
@@ -198,6 +197,61 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction > Assessment Posting"))
                 assessmentPostingToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
+                releasedAndUnreleaseChecksToolStripMenu.Enabled = false;
+
+            //Reports
+            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
+                listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Report of Checks Issued"))
+                reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
+                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Abstract of General Collections"))
+                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Bank Cashbook"))
+                bankCashbookToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Consolidated Receipts"))
+                consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Daily Cash Position"))
+                dailyCashPositionsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Report > Collector's RCD"))
+                collectorsRCDToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
+                realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
+                consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
+                releasedChequesToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
+                unreleasedChequesToolStripMenuItem.Enabled = false;
+        }
+
+        private void ValidateBudgetPermissions()
+        {
+            //Manage
+            if (!Helper.HasPermission("Manage > Allotment Releases"))
+                toolStripButtonAllotmentRelease.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Budget Appropriations"))
+                toolStripButtonBudgetAppropriations.Enabled = false;
+
+            //Reports
+            if (!Helper.HasPermission("Report > SAAOB"))
+                sAAOBToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > SAAOBB"))
+                sAAOBBToolStripMenuItem.Enabled = false;
         }
 
         private void ValidateManagePermissions()
@@ -205,26 +259,14 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage > Allotment Classes"))
                 menuAllotmentClasses.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Budget Appropriations"))
-                toolStripButtonBudgetAppropriations.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Allotment Releases"))
-                toolStripButtonAllotmentRelease.Enabled = false;
-
             if (!Helper.HasPermission("Manage > Chart of Accounts"))
                 menuChartOfAccounts.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Function/Program/Project"))
                 menuFunctionProgramProject.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Collecting Officer"))
-                menuCollectingOfficer.Enabled = false;
-
             if (!Helper.HasPermission("Manage > Funds"))
                 menuFunds.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Journals"))
-                menuJournals.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Users") && !Helper.HasPermission("Manage Roles"))
                 menuUsers.Enabled = false;
@@ -235,55 +277,36 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage > Roles"))
                 menuRoles.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Banks"))
-                menuBanks.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Accountable Forms"))
-                menuAccForm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Disbursing Officer"))
-                menuDisbursingOfficer.Enabled = false;
-
             if (!Helper.HasPermission("Manage > Receipts"))
                 menuReceipts.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Issue Check"))
-                checkIssuanceToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Generate RCD"))
-                liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Taxpayers"))
-                menuTaxPayers.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Returned Receipts"))
-                returnedReceiptsToolStripMenuItem.Enabled = false;
-
             if (!Helper.HasPermission("Manage > Barangays"))
                 barangaysToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Database Synchronization"))
-                menuDatabaseSynchronization.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Business Categories"))
-                businessCategoriesToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Business Add-on Charges"))
-                businessAddOnToolStripMenuItem.Enabled = false;
-
             if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
             {
-                discountToolStripMenuItem.Enabled = false;
-                penaltyToolStripMenuItem.Enabled = false;
-                taxRateToolStripMenuItem.Enabled = false;
+                discountsToolStripMenuItem.Enabled = false;
+                penaltiesToolStripMenuItem.Enabled = false;
+                taxRatesToolStripMenuItem.Enabled = false;
             }
         }
 
-        private void ValidateAccountingControlPermissions()
+        private void ValidateAccountingPermissions()
         {
+            //Manage
+
+            if (!Helper.HasPermission("Manage > Journals"))
+                menuJournals.Enabled = false;
+
+            //Transactions
+            if (!Helper.HasPermission("Transaction > Obligation Request"))
+                toolStripButtonObligation.Enabled = false;
+
+            //Reports
+
             #region Journal Entry Voucher
 
             if (!Helper.HasPermission("Transaction > JEV"))
