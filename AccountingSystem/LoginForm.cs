@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AccountingSystem.Properties;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,11 +11,26 @@ namespace AccountingSystem
         public LoginForm()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+        }
+
+        internal void OnLoad()
+        {
+            lblLgu.Text = $"LOCAL GOVERNMENT OF {Helper.LGUDetails()["municipality"]}";
+            lblProvince.Text = Helper.LGUDetails()["lgu_province"];
+
+            Image emblem = Helper.LGUDetails()["emblem"];
+            if (emblem != null)
+                pcBoxEmblem.Image = Helper.LGUDetails()["emblem"];
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

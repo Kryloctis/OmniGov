@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 Cursor.Current = Cursors.WaitCursor;
                 Dictionary<string, string> data = AccFactory.JEVRepository().GetRecordByID(_jevId);
 
-                Dictionary<string, string> lguDetails = Helper.LGUDetails();
+                var lguDetails = Helper.LGUDetails();
 
                 string CertifiedBySignatory = string.Empty;
                 string CertifiedBysignatoryTitle = string.Empty;

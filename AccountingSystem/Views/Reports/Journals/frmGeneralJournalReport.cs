@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
             Cursor.Current = Cursors.WaitCursor;
-            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            var lguDetails = Helper.LGUDetails();
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

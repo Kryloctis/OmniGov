@@ -29,21 +29,20 @@ namespace AccountingSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             txtUsername = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             txtPassword = new System.Windows.Forms.TextBox();
             panel1 = new System.Windows.Forms.Panel();
-            label6 = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
-            pictureBox2 = new System.Windows.Forms.PictureBox();
+            lblProvince = new System.Windows.Forms.Label();
+            lblLgu = new System.Windows.Forms.Label();
+            pcBoxEmblem = new System.Windows.Forms.PictureBox();
             label3 = new System.Windows.Forms.Label();
             btnLogin = new System.Windows.Forms.Button();
             label4 = new System.Windows.Forms.Label();
             btnVisibility = new System.Windows.Forms.Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).BeginInit();
             SuspendLayout();
             // 
             // txtUsername
@@ -91,9 +90,9 @@ namespace AccountingSystem
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.FromArgb(24, 44, 97);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(lblProvince);
+            panel1.Controls.Add(lblLgu);
+            panel1.Controls.Add(pcBoxEmblem);
             panel1.Controls.Add(label3);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 0);
@@ -102,40 +101,39 @@ namespace AccountingSystem
             panel1.Size = new System.Drawing.Size(410, 118);
             panel1.TabIndex = 4;
             // 
-            // label6
+            // lblProvince
             // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label6.ForeColor = System.Drawing.Color.White;
-            label6.Location = new System.Drawing.Point(153, 73);
-            label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(116, 15);
-            label6.TabIndex = 4;
-            label6.Text = "Zamboanga Sibugay";
+            lblProvince.AutoSize = true;
+            lblProvince.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblProvince.ForeColor = System.Drawing.Color.White;
+            lblProvince.Location = new System.Drawing.Point(153, 73);
+            lblProvince.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblProvince.Name = "lblProvince";
+            lblProvince.Size = new System.Drawing.Size(115, 15);
+            lblProvince.TabIndex = 4;
+            lblProvince.Text = "ProvincePlaceholder";
             // 
-            // label5
+            // lblLgu
             // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label5.ForeColor = System.Drawing.Color.White;
-            label5.Location = new System.Drawing.Point(153, 57);
-            label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(174, 15);
-            label5.TabIndex = 3;
-            label5.Text = "Local Government Unit of Buug";
+            lblLgu.AutoSize = true;
+            lblLgu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblLgu.ForeColor = System.Drawing.Color.White;
+            lblLgu.Location = new System.Drawing.Point(153, 57);
+            lblLgu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblLgu.Name = "lblLgu";
+            lblLgu.Size = new System.Drawing.Size(94, 15);
+            lblLgu.TabIndex = 3;
+            lblLgu.Text = "LGU Placeholder";
             // 
-            // pictureBox2
+            // pcBoxEmblem
             // 
-            pictureBox2.Image = (System.Drawing.Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new System.Drawing.Point(68, 18);
-            pictureBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(77, 86);
-            pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
+            pcBoxEmblem.Location = new System.Drawing.Point(68, 18);
+            pcBoxEmblem.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            pcBoxEmblem.Name = "pcBoxEmblem";
+            pcBoxEmblem.Size = new System.Drawing.Size(77, 86);
+            pcBoxEmblem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pcBoxEmblem.TabIndex = 2;
+            pcBoxEmblem.TabStop = false;
             // 
             // label3
             // 
@@ -210,7 +208,7 @@ namespace AccountingSystem
             Load += LoginForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -219,12 +217,12 @@ namespace AccountingSystem
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pcBoxEmblem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblProvince;
+        private System.Windows.Forms.Label lblLgu;
         private System.Windows.Forms.Button btnVisibility;
         internal System.Windows.Forms.TextBox txtUsername;
         internal System.Windows.Forms.TextBox txtPassword;
