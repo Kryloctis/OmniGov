@@ -212,20 +212,21 @@
             // preferencesToolStripMenuItem
             // 
             preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            preferencesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             preferencesToolStripMenuItem.Text = "Preferences...";
+            preferencesToolStripMenuItem.Click += preferencesToolStripMenuItem_Click;
             // 
             // menuLogout
             // 
             menuLogout.Name = "menuLogout";
-            menuLogout.Size = new System.Drawing.Size(144, 22);
+            menuLogout.Size = new System.Drawing.Size(180, 22);
             menuLogout.Text = "Logout";
             menuLogout.Click += menuLogout_Click;
             // 
             // menuExitApp
             // 
             menuExitApp.Name = "menuExitApp";
-            menuExitApp.Size = new System.Drawing.Size(144, 22);
+            menuExitApp.Size = new System.Drawing.Size(180, 22);
             menuExitApp.Text = "Exit";
             menuExitApp.Click += menuExitApp_Click;
             // 

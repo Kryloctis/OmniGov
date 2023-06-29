@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.IO;
+using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -499,6 +500,25 @@ namespace AccountingSystem
 
         #region Miscellaneous
 
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
+        public static byte[] ImageToByteArray(Image image)
+        {
+            if (image == null)
+                return null;
+
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
         public static string GenerateFullAddress(string address, string barangay, string municipality, string province)
         {
             string _address = string.IsNullOrEmpty(address) ? string.Empty : $"{address}, ";
@@ -550,13 +570,20 @@ namespace AccountingSystem
             return dataGridView.Rows.Count;
         }
 
-        public static Dictionary<string, string> LGUDetails()
+        public static Dictionary<string, dynamic> LGUDetails()
         {
-            var lguDict = new Dictionary<string, string>
+            var dictPreferences = AccFactory.PreferencesRepository().GetDynamicRecordByID(1);
+
+            string municipality = dictPreferences["municipality"];
+            string province = dictPreferences["province"];
+            Image emblem = Convert.IsDBNull(dictPreferences["emblem"]) ? null : Helper.ByteArrayToImage(dictPreferences["emblem"]);
+
+            var lguDict = new Dictionary<string, dynamic>
             {
-                { "municipality", "Buug" },
-                { "lgu_name", "Municipality of Buug" },
-                { "lgu_province", "Zamboanga Sibugay"}
+                { "municipality", municipality },
+                { "lgu_name", $"Municipality of {municipality}" },
+                { "lgu_province", province},
+                { "emblem", emblem}
             };
 
             return lguDict;

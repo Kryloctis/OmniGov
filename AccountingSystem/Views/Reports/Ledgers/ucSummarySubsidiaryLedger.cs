@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport localReport)
         {
-            Dictionary<string, string> lguDict = Helper.LGUDetails();
+            var lguDict = Helper.LGUDetails();
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
             string fundName = cmbxFunds.Text;
             Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);

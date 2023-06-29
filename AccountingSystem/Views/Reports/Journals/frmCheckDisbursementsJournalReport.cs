@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Reports.Journals
             Cursor.Current = Cursors.WaitCursor;
 
             Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Check Disbursements Journal");
-            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            var lguDetails = Helper.LGUDetails();
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);

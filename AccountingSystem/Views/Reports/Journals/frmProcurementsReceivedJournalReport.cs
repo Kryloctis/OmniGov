@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 }
             }
 
-            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            var lguDetails = Helper.LGUDetails();
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);

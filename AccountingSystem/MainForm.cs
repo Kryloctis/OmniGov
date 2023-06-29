@@ -16,6 +16,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.OtherPaymentRates;
+using AccountingSystem.Views.Manage.Preferences;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
@@ -450,6 +451,7 @@ namespace AccountingSystem
             loginForm.Show();
             loginForm.txtUsername.SelectAll();
             loginForm.txtUsername.Focus();
+            loginForm.OnLoad();
         }
 
         private void menuExitApp_Click(object sender, EventArgs e)
@@ -687,6 +689,11 @@ namespace AccountingSystem
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _ = new frmOtherPaymentRates().ShowDialog();
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmPreferences().ShowDialog();
         }
     }
 }

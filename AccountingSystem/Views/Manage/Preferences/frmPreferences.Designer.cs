@@ -33,20 +33,22 @@
             radLguDetails = new System.Windows.Forms.RadioButton();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageLguDetails = new System.Windows.Forms.TabPage();
+            btnEmblem = new System.Windows.Forms.Button();
+            txtProvince = new System.Windows.Forms.TextBox();
+            txtMunicipality = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            pcEmblem = new System.Windows.Forms.PictureBox();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             btnClose = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            txtMunicipality = new System.Windows.Forms.TextBox();
-            txtProvince = new System.Windows.Forms.TextBox();
-            btnEmblem = new System.Windows.Forms.Button();
-            label3 = new System.Windows.Forms.Label();
-            textBox3 = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             flowLayoutPanel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageLguDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcEmblem).BeginInit();
             flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -59,7 +61,7 @@
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(196, 311);
+            flowLayoutPanel1.Size = new System.Drawing.Size(190, 311);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // radLguDetails
@@ -84,11 +86,11 @@
             tabControl1.Controls.Add(tabPageLguDetails);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            tabControl1.Location = new System.Drawing.Point(196, 0);
+            tabControl1.Location = new System.Drawing.Point(190, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(448, 311);
+            tabControl1.Size = new System.Drawing.Size(454, 311);
             tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl1.TabIndex = 1;
             // 
@@ -96,18 +98,82 @@
             // 
             tabPageLguDetails.Controls.Add(btnEmblem);
             tabPageLguDetails.Controls.Add(txtProvince);
-            tabPageLguDetails.Controls.Add(textBox3);
             tabPageLguDetails.Controls.Add(txtMunicipality);
             tabPageLguDetails.Controls.Add(label2);
             tabPageLguDetails.Controls.Add(label3);
             tabPageLguDetails.Controls.Add(label1);
+            tabPageLguDetails.Controls.Add(pcEmblem);
             tabPageLguDetails.Location = new System.Drawing.Point(4, 5);
             tabPageLguDetails.Name = "tabPageLguDetails";
             tabPageLguDetails.Padding = new System.Windows.Forms.Padding(3);
-            tabPageLguDetails.Size = new System.Drawing.Size(440, 302);
+            tabPageLguDetails.Size = new System.Drawing.Size(446, 302);
             tabPageLguDetails.TabIndex = 0;
             tabPageLguDetails.Text = "LGU Details";
             tabPageLguDetails.UseVisualStyleBackColor = true;
+            // 
+            // btnEmblem
+            // 
+            btnEmblem.Location = new System.Drawing.Point(391, 15);
+            btnEmblem.Name = "btnEmblem";
+            btnEmblem.Size = new System.Drawing.Size(25, 25);
+            btnEmblem.TabIndex = 3;
+            btnEmblem.Text = "...";
+            btnEmblem.UseVisualStyleBackColor = true;
+            btnEmblem.Click += btnEmblem_Click;
+            // 
+            // txtProvince
+            // 
+            txtProvince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtProvince.Location = new System.Drawing.Point(116, 154);
+            txtProvince.Name = "txtProvince";
+            txtProvince.Size = new System.Drawing.Size(304, 23);
+            txtProvince.TabIndex = 1;
+            // 
+            // txtMunicipality
+            // 
+            txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtMunicipality.Location = new System.Drawing.Point(116, 125);
+            txtMunicipality.Name = "txtMunicipality";
+            txtMunicipality.Size = new System.Drawing.Size(304, 23);
+            txtMunicipality.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(8, 158);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(53, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Province";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(8, 11);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(89, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Emblem / Logo";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(8, 129);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(102, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Muncipality / City";
+            // 
+            // pcEmblem
+            // 
+            pcEmblem.BackColor = System.Drawing.Color.White;
+            pcEmblem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pcEmblem.Location = new System.Drawing.Point(116, 11);
+            pcEmblem.Name = "pcEmblem";
+            pcEmblem.Size = new System.Drawing.Size(304, 108);
+            pcEmblem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pcEmblem.TabIndex = 4;
+            pcEmblem.TabStop = false;
             // 
             // flowLayoutPanel2
             // 
@@ -138,73 +204,17 @@
             btnSave.TabIndex = 0;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(8, 40);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(102, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Muncipality / City";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(8, 69);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(53, 15);
-            label2.TabIndex = 0;
-            label2.Text = "Province";
-            // 
-            // txtMunicipality
-            // 
-            txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtMunicipality.Location = new System.Drawing.Point(116, 36);
-            txtMunicipality.Name = "txtMunicipality";
-            txtMunicipality.Size = new System.Drawing.Size(304, 23);
-            txtMunicipality.TabIndex = 1;
-            // 
-            // txtProvince
-            // 
-            txtProvince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtProvince.Location = new System.Drawing.Point(116, 65);
-            txtProvince.Name = "txtProvince";
-            txtProvince.Size = new System.Drawing.Size(304, 23);
-            txtProvince.TabIndex = 1;
-            // 
-            // btnEmblem
-            // 
-            btnEmblem.Location = new System.Drawing.Point(395, 6);
-            btnEmblem.Name = "btnEmblem";
-            btnEmblem.Size = new System.Drawing.Size(25, 25);
-            btnEmblem.TabIndex = 3;
-            btnEmblem.Text = "...";
-            btnEmblem.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(8, 11);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(89, 15);
-            label3.TabIndex = 0;
-            label3.Text = "Emblem / Logo";
-            // 
-            // textBox3
-            // 
-            textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox3.Location = new System.Drawing.Point(116, 7);
-            textBox3.MaxLength = 99999999;
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new System.Drawing.Size(273, 23);
-            textBox3.TabIndex = 1;
+            btnSave.Click += btnSave_Click;
             // 
             // errorProvider1
             // 
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.Filter = "\"Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...\"";
+            openFileDialog1.FileOk += openFileDialog1_FileOk;
             // 
             // frmPreferences
             // 
@@ -216,16 +226,19 @@
             Controls.Add(tabControl1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel2);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmPreferences";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Preferences";
+            Load += frmPreferences_Load;
             flowLayoutPanel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPageLguDetails.ResumeLayout(false);
             tabPageLguDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcEmblem).EndInit();
             flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
@@ -246,7 +259,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEmblem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pcEmblem;
     }
 }

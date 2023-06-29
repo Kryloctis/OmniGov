@@ -14,11 +14,14 @@ namespace AccountingSystem
             Helper.LoadFormIcon(this);
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            lblLgu.Text = $"Local Goverment Unit of {Helper.LGUDetails()["municipality"]}";
+            lblLgu.Text = $"LOCAL GOVERNMENT OF {Helper.LGUDetails()["municipality"]}";
             lblProvince.Text = Helper.LGUDetails()["lgu_province"];
-            pcBoxEmblem.Image = Resources.lgu_buug_symbol;
+
+            Image emblem = Helper.LGUDetails()["emblem"];
+            if (emblem != null)
+                pcBoxEmblem.Image = Helper.LGUDetails()["emblem"];
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

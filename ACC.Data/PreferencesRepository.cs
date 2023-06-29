@@ -49,7 +49,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, dynamic> GetRecordById(int id)
+        public Dictionary<string, dynamic> GetDynamicRecordByID(int id)
         {
             var dictionary = new Dictionary<string, dynamic>();
 
@@ -95,8 +95,15 @@ namespace ACC.Data
                 new object[] { "@emblem", DbType.Object, entity.Emblem}
             };
 
+            TruncateRecords();
             string query = $"INSERT INTO {tableName} (municipality, province, emblem) VALUES (@municipality, @province, @emblem)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool TruncateRecords()
+        {
+            string query = $"TRUNCATE {tableName}";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query);
         }
 
         public bool Update(PreferencesModel entity)

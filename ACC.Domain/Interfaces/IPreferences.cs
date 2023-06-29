@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IPreferences : IAccRepository<PreferencesModel>
     {
-        Dictionary<string, dynamic> GetRecordById(int id);
+        Dictionary<string, dynamic> GetDynamicRecordByID(int id);
+
+        bool TruncateRecords();
     }
 }
