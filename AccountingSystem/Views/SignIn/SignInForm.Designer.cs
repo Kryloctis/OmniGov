@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem
 {
-    partial class LoginForm
+    partial class SignInForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,13 +34,13 @@ namespace AccountingSystem
             label2 = new System.Windows.Forms.Label();
             txtPassword = new System.Windows.Forms.TextBox();
             panel1 = new System.Windows.Forms.Panel();
-            lblProvince = new System.Windows.Forms.Label();
-            lblLgu = new System.Windows.Forms.Label();
             pcBoxEmblem = new System.Windows.Forms.PictureBox();
             label3 = new System.Windows.Forms.Label();
             btnLogin = new System.Windows.Forms.Button();
-            label4 = new System.Windows.Forms.Label();
             btnVisibility = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).BeginInit();
             SuspendLayout();
@@ -48,18 +48,18 @@ namespace AccountingSystem
             // txtUsername
             // 
             txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            txtUsername.Location = new System.Drawing.Point(79, 162);
+            txtUsername.Location = new System.Drawing.Point(301, 73);
             txtUsername.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             txtUsername.MaxLength = 45;
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new System.Drawing.Size(294, 23);
+            txtUsername.Size = new System.Drawing.Size(230, 23);
             txtUsername.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(14, 164);
+            label1.Location = new System.Drawing.Point(237, 76);
             label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(60, 15);
@@ -70,7 +70,7 @@ namespace AccountingSystem
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(14, 195);
+            label2.Location = new System.Drawing.Point(237, 105);
             label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(57, 15);
@@ -80,57 +80,32 @@ namespace AccountingSystem
             // txtPassword
             // 
             txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            txtPassword.Location = new System.Drawing.Point(79, 193);
+            txtPassword.Location = new System.Drawing.Point(301, 102);
             txtPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '•';
-            txtPassword.Size = new System.Drawing.Size(294, 23);
+            txtPassword.Size = new System.Drawing.Size(230, 23);
             txtPassword.TabIndex = 2;
             // 
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.FromArgb(24, 44, 97);
-            panel1.Controls.Add(lblProvince);
-            panel1.Controls.Add(lblLgu);
             panel1.Controls.Add(pcBoxEmblem);
             panel1.Controls.Add(label3);
-            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Dock = System.Windows.Forms.DockStyle.Left;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(410, 118);
+            panel1.Size = new System.Drawing.Size(219, 218);
             panel1.TabIndex = 4;
-            // 
-            // lblProvince
-            // 
-            lblProvince.AutoSize = true;
-            lblProvince.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblProvince.ForeColor = System.Drawing.Color.White;
-            lblProvince.Location = new System.Drawing.Point(153, 73);
-            lblProvince.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            lblProvince.Name = "lblProvince";
-            lblProvince.Size = new System.Drawing.Size(115, 15);
-            lblProvince.TabIndex = 4;
-            lblProvince.Text = "ProvincePlaceholder";
-            // 
-            // lblLgu
-            // 
-            lblLgu.AutoSize = true;
-            lblLgu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblLgu.ForeColor = System.Drawing.Color.White;
-            lblLgu.Location = new System.Drawing.Point(153, 57);
-            lblLgu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            lblLgu.Name = "lblLgu";
-            lblLgu.Size = new System.Drawing.Size(94, 15);
-            lblLgu.TabIndex = 3;
-            lblLgu.Text = "LGU Placeholder";
             // 
             // pcBoxEmblem
             // 
-            pcBoxEmblem.Location = new System.Drawing.Point(68, 18);
+            pcBoxEmblem.Image = Properties.Resources.local_finance_logo;
+            pcBoxEmblem.Location = new System.Drawing.Point(58, 38);
             pcBoxEmblem.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             pcBoxEmblem.Name = "pcBoxEmblem";
-            pcBoxEmblem.Size = new System.Drawing.Size(77, 86);
+            pcBoxEmblem.Size = new System.Drawing.Size(100, 100);
             pcBoxEmblem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pcBoxEmblem.TabIndex = 2;
             pcBoxEmblem.TabStop = false;
@@ -138,36 +113,25 @@ namespace AccountingSystem
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label3.ForeColor = System.Drawing.Color.White;
-            label3.Location = new System.Drawing.Point(150, 28);
+            label3.Location = new System.Drawing.Point(28, 141);
             label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(189, 25);
+            label3.Size = new System.Drawing.Size(172, 21);
             label3.TabIndex = 1;
             label3.Text = "Local Finance System";
             // 
             // btnLogin
             // 
-            btnLogin.Location = new System.Drawing.Point(273, 221);
+            btnLogin.Location = new System.Drawing.Point(431, 144);
             btnLogin.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new System.Drawing.Size(100, 25);
             btnLogin.TabIndex = 5;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
-            btnLogin.Click += btnLogin_Click;
-            // 
-            // label4
-            // 
-            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(0, 132);
-            label4.Margin = new System.Windows.Forms.Padding(2, 10, 2, 8);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(410, 17);
-            label4.TabIndex = 6;
-            label4.Text = "Welcome! Please enter your username and password below.";
-            label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            btnLogin.Click += btnSignIn_Click;
             // 
             // btnVisibility
             // 
@@ -176,7 +140,7 @@ namespace AccountingSystem
             btnVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnVisibility.Image = Properties.Resources.visible_16px;
-            btnVisibility.Location = new System.Drawing.Point(375, 191);
+            btnVisibility.Location = new System.Drawing.Point(533, 100);
             btnVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnVisibility.Name = "btnVisibility";
             btnVisibility.Size = new System.Drawing.Size(21, 25);
@@ -184,28 +148,63 @@ namespace AccountingSystem
             btnVisibility.UseVisualStyleBackColor = true;
             btnVisibility.Click += btnVisibility_Click;
             // 
-            // LoginForm
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(314, 194);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(217, 15);
+            label5.TabIndex = 8;
+            label5.Text = "(Tab) Server: Buug, Zamboanga Sibugay";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = System.Drawing.Color.Transparent;
+            label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label4.Location = new System.Drawing.Point(440, 19);
+            label4.Margin = new System.Windows.Forms.Padding(2, 10, 2, 8);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(91, 21);
+            label4.TabIndex = 6;
+            label4.Text = "Welcome! ";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(424, 48);
+            label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(107, 15);
+            label6.TabIndex = 1;
+            label6.Text = "Sign in to continue";
+            // 
+            // SignInForm
             // 
             AcceptButton = btnLogin;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(410, 260);
+            ClientSize = new System.Drawing.Size(567, 218);
+            Controls.Add(label5);
             Controls.Add(btnVisibility);
             Controls.Add(label4);
             Controls.Add(btnLogin);
-            Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(txtPassword);
+            Controls.Add(label6);
             Controls.Add(label1);
+            Controls.Add(panel1);
             Controls.Add(txtUsername);
-            Cursor = System.Windows.Forms.Cursors.Hand;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             MaximizeBox = false;
-            Name = "LoginForm";
+            MinimizeBox = false;
+            Name = "SignInForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Login";
-            Load += LoginForm_Load;
+            Text = "Sign In";
+            KeyDown += SignInForm_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).EndInit();
@@ -220,11 +219,11 @@ namespace AccountingSystem
         private System.Windows.Forms.PictureBox pcBoxEmblem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblProvince;
-        private System.Windows.Forms.Label lblLgu;
         private System.Windows.Forms.Button btnVisibility;
         internal System.Windows.Forms.TextBox txtUsername;
         internal System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
     }
 }

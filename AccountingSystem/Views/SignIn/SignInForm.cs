@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Properties;
+using AccountingSystem.Views.SignIn;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using System;
 using System.Drawing;
@@ -6,40 +7,18 @@ using System.Windows.Forms;
 
 namespace AccountingSystem
 {
-    public partial class LoginForm : Form
+    public partial class SignInForm : Form
     {
-        public LoginForm()
+        public SignInForm()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
         }
 
-        internal void OnLoad()
-        {
-            string lguPlaceHolder = $"LOCAL GOVERNMENT OF {Helper.LGUDetails()["municipality"]}";
-            string province = Helper.LGUDetails()["lgu_province"];
-            lblLgu.Text = lguPlaceHolder.ToUpper();
-            lblProvince.Text = province.ToUpper(); ;
-
-            Image emblem = Helper.LGUDetails()["emblem"];
-            if (emblem != null)
-                pcBoxEmblem.Image = Helper.LGUDetails()["emblem"];
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
+        private void btnSignIn_Click(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Cursor = Cursors.WaitCursor;
                 Image visibleImage = Properties.Resources.visible_16px;
                 string username = txtUsername.Text;
                 string password = txtPassword.Text;
@@ -61,7 +40,6 @@ namespace AccountingSystem
                     txtPassword.Clear();
                     btnVisibility.Image = visibleImage;
                     txtPassword.PasswordChar = '•';
-                    Cursor = Cursors.Default;
                     return;
                 }
 
@@ -89,6 +67,18 @@ namespace AccountingSystem
                 btnVisibility.Image = visibleImage;
                 txtPassword.PasswordChar = '•';
             }
+        }
+
+        private void SignIn_Shown(object sender, EventArgs e)
+        {
+            txtUsername.SelectAll();
+            txtUsername.Focus();
+        }
+
+        private void SignInForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.R)
+                _ = new frmDatabaseConfig().ShowDialog();
         }
     }
 }

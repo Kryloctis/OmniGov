@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
 
 namespace AccountingSystem
 {
@@ -468,7 +470,7 @@ namespace AccountingSystem
 
         #region Check Box Column Utility Datagrid
 
-        public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
+        public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, System.Windows.Forms.CheckBox checkBox)
         {
             if (dataGridView.Rows.Count < 1)
                 return;
@@ -570,20 +572,35 @@ namespace AccountingSystem
             return dataGridView.Rows.Count;
         }
 
+        private static DataColumn[] DataColumnsLgus()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("municipality_code", typeof(string)),
+                new DataColumn("municipality_name", typeof(string)),
+                new DataColumn("province_code", typeof(string)),
+                new DataColumn("province_name", typeof(string))
+            };
+        }
+
+        private static DataTable DataTableLgus()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsLgus());
+
+            dataTable.Rows.Add("BG", "Buug", "ZSI", "Zamboanga Sibugay");
+            dataTable.Rows.Add("TTY", "Titay", "ZSI", "Zamboanga Sibugay");
+
+            return dataTable;
+        }
+
         public static Dictionary<string, dynamic> LGUDetails()
         {
-            var dictPreferences = AccFactory.PreferencesRepository().GetDynamicRecordByID(1);
-
-            string municipality = dictPreferences["municipality"];
-            string province = dictPreferences["province"];
-            Image emblem = Convert.IsDBNull(dictPreferences["emblem"]) ? null : Helper.ByteArrayToImage(dictPreferences["emblem"]);
-
             var lguDict = new Dictionary<string, dynamic>
             {
-                { "municipality", municipality },
-                { "lgu_name", $"Municipality of {municipality}" },
-                { "lgu_province", province},
-                { "emblem", emblem}
+                { "municipality", "Buug" },
+                { "lgu_name", $"Municipality of Buug" },
+                { "lgu_province", "Zamboanga Sibugay"},
             };
 
             return lguDict;
