@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             menuFile = new System.Windows.Forms.ToolStripMenuItem();
-            preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
             menuManage = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,17 +203,10 @@
             // 
             // menuFile
             // 
-            menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { preferencesToolStripMenuItem, menuLogout, menuExitApp });
+            menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuLogout, menuExitApp });
             menuFile.Name = "menuFile";
             menuFile.Size = new System.Drawing.Size(37, 24);
             menuFile.Text = "File";
-            // 
-            // preferencesToolStripMenuItem
-            // 
-            preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            preferencesToolStripMenuItem.Text = "Preferences...";
-            preferencesToolStripMenuItem.Click += preferencesToolStripMenuItem_Click;
             // 
             // menuLogout
             // 
@@ -1429,7 +1421,6 @@
         private System.Windows.Forms.TabControl tabControlBudget;
         private System.Windows.Forms.TabPage tabPageBudgetSummary;
         private System.Windows.Forms.TabPage tabPageBudgetDetailed;
-        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlAccounting;
         private System.Windows.Forms.TabPage tabPageJournalEntryVoucher;
         private System.Windows.Forms.TabPage tabPageJournals;

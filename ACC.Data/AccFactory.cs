@@ -211,7 +211,5 @@ namespace AccountingSystem
         public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(mySqlGenericCommandsLFS);
 
         public static ICattleTransferOfOwnershipRepository CattleTransferOfOwnershipRepository() => new CattleTransferOfOwnershipRepository(mySqlGenericCommandsLFS);
-
-        public static IPreferences PreferencesRepository() => new PreferencesRepository(mySqlGenericCommandsLFS);
     }
 }

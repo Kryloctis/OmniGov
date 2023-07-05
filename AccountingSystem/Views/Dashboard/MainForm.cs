@@ -16,7 +16,6 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.OtherPaymentRates;
-using AccountingSystem.Views.Manage.Preferences;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
@@ -58,15 +57,15 @@ namespace AccountingSystem
     public partial class MainForm : Form
     {
         private readonly Dictionary<string, dynamic> userDict;
-        private readonly LoginForm loginForm;
+        private readonly SignInForm signInForm;
 
-        public MainForm(LoginForm _loginForm)
+        public MainForm(SignInForm _signInForm)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             ClearTabPages();
             userDict = Helper.LoggedInUserData();
-            loginForm = _loginForm;
+            signInForm = _signInForm;
         }
 
         private void ClearTabPages()
@@ -170,9 +169,6 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage > Real Properties"))
                 RptToolStripButton.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Preferences"))
-                preferencesToolStripMenuItem.Enabled = false;
 
             //Transactions
             if (!Helper.HasPermission("Transaction > Issue Check"))
@@ -448,20 +444,17 @@ namespace AccountingSystem
         private void menuLogout_Click(object sender, EventArgs e)
         {
             this.Close();
-            loginForm.Show();
-            loginForm.txtUsername.SelectAll();
-            loginForm.txtUsername.Focus();
-            loginForm.OnLoad();
+            signInForm.Show();
         }
 
         private void menuExitApp_Click(object sender, EventArgs e)
         {
-            loginForm.Close();
+            signInForm.Close();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            loginForm.Show();
+            signInForm.Show();
         }
 
         private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -693,7 +686,6 @@ namespace AccountingSystem
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmPreferences().ShowDialog();
         }
     }
 }
