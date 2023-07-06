@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -62,7 +61,7 @@ namespace AccountingSystem
             };
 
             string query = $"SELECT code FROM {tableName} WHERE id = @parent";
-            
+
             return _dbGenericCommands.ExecuteScalar(query, parameter).ToString();
         }
 

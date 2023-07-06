@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Manage.TaxTypes
 {
@@ -34,26 +33,34 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!isUpdate)
+            try
             {
-                if (InsertNewTaxTypes())
+                if (!isUpdate)
                 {
-                    Helper.MessageBoxSuccess("Tax type has been saved.");
-                    LoadTaxTypes();
-                    ResetForm();
-                    ClearFields();
+                    if (InsertNewTaxTypes())
+                    {
+                        Helper.MessageBoxSuccess("Tax type has been saved.");
+                        LoadTaxTypes();
+                        ResetForm();
+                        ClearFields();
+                    }
+                }
+                else
+                {
+                    if (UpdateTaxTypes())
+                    {
+                        Helper.MessageBoxSuccess("Tax type has been updated.");
+                        LoadTaxTypes();
+                        ResetForm();
+                        ClearFields();
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (UpdateTaxTypes())
-                {
-                    Helper.MessageBoxSuccess("Tax type has been updated.");
-                    LoadTaxTypes();
-                    ResetForm();
-                    ClearFields();
-                }
+                Helper.MessageBoxError(ex.Message);
             }
+
         }
 
         private bool InsertNewTaxTypes()
@@ -66,7 +73,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            int parent = Convert.ToInt32(cmbxParentCode.SelectedValue);
+            var parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
             var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
