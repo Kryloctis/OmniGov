@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.CollectingOfficer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -87,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             if (dgReceiptIssued.SelectedRows.Count > 0)
             {
-                btnEdit.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
+                btnEdit.Enabled = true;
                 btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes") && dgReceiptIssued.SelectedRows.Count == 1;
                 byte[] columnIndexTimestamp = { 7, 11 };
@@ -100,7 +99,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 btnDelete.Enabled = false;
                 btnReturn.Enabled = false;
             }
-
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
