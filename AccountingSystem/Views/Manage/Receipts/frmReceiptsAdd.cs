@@ -64,7 +64,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
-                frmReceipts.LoadRecordsBySearch();
                 uc.ResetForm();
             }
         }

@@ -29,84 +29,81 @@ namespace AccountingSystem.Views.Manage.Receipts
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.ucReceipts1 = new AccountingSystem.Views.Manage.Receipts.ucReceipts();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
+            ucReceipts1 = new ucReceipts();
+            flowLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 209);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(541, 27);
-            this.flowLayoutPanel1.TabIndex = 4;
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 209);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            flowLayoutPanel1.Size = new System.Drawing.Size(541, 27);
+            flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(456, 2);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(82, 22);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Location = new System.Drawing.Point(456, 2);
+            btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnCancel.Name = "btnCancel";
+            btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            btnCancel.Size = new System.Drawing.Size(82, 22);
+            btnCancel.TabIndex = 1;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(368, 2);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(82, 22);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Location = new System.Drawing.Point(368, 2);
+            btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnSave.Name = "btnSave";
+            btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            btnSave.Size = new System.Drawing.Size(82, 22);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save";
+            btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucReceipts1
             // 
-            this.ucReceipts1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ucReceipts1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucReceipts1.Location = new System.Drawing.Point(0, 0);
-            this.ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucReceipts1.Name = "ucReceipts1";
-            this.ucReceipts1.Size = new System.Drawing.Size(541, 209);
-            this.ucReceipts1.TabIndex = 5;
+            ucReceipts1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            ucReceipts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucReceipts1.Location = new System.Drawing.Point(0, 0);
+            ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            ucReceipts1.Name = "ucReceipts1";
+            ucReceipts1.Size = new System.Drawing.Size(541, 209);
+            ucReceipts1.TabIndex = 5;
             // 
             // frmReceiptsEdit
             // 
-            this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(541, 236);
-            this.Controls.Add(this.ucReceipts1);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmReceiptsEdit";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Receipts";
-            this.Load += new System.EventHandler(this.frmAccFromEdit_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(541, 236);
+            Controls.Add(ucReceipts1);
+            Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmReceiptsEdit";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Edit Receipts";
+            Load += frmAccFromEdit_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

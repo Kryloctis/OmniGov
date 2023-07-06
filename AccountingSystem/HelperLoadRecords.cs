@@ -979,7 +979,7 @@ namespace AccountingSystem
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
-                    $"{row["acc_form_no"]} - {row["acc_form_desc"]}",
+                    row["receipt"],
                     serialNumberFrom,
                     serialNumberTo,
                     row["quantity"],
