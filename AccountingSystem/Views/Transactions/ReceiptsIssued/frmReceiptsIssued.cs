@@ -103,11 +103,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgReceiptIssued.SelectedRows.Count != 0)
-            {
-                int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
-                _ = new frmReceiptsIssuedEdit(this, id).ShowDialog();
-            }
+            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+            _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
         }
 
         private void btnReturn_Click(object sender, EventArgs e)

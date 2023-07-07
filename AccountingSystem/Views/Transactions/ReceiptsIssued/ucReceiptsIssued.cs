@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -51,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 txtReceiptIssuedFrom.Text = "0";
                 txtReceiptIssuedTo.Text = "0";
                 txtReceiptQuantity.Clear();
-                dtpIssued.Value = DateTime.Today;
+                dtpDateIssued.Value = DateTime.Today;
                 LoadCollectors();
                 LoadReceipts();
             }
@@ -228,6 +227,31 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedFrom.Enabled = true;
             txtReceiptIssuedTo.Enabled = true;
             txtReceiptQuantity.ReadOnly = true;
+        }
+
+        internal void ReceiptsIssuedStatus()
+        {
+            bool isUsed = false;
+
+            int receiptID = Convert.ToInt32(cmbReceipt.SelectedValue);
+            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(receiptID);
+
+            int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
+            int receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
+            int receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
+
+            while (receiptNumberFrom <= receiptNumberTo)
+            {
+                isUsed = AccFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
+
+                receiptNumberFrom++;
+                if (isUsed)
+                    break;
+            }
+
+            cmbReceipt.Enabled = !isUsed;
+            txtReceiptIssuedFrom.Enabled = !isUsed;
+            txtReceiptIssuedTo.Enabled = !isUsed;
         }
 
         private void OnLoad()

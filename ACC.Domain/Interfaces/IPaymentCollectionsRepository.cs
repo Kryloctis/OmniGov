@@ -39,5 +39,6 @@ namespace ACC.Domain.Interfaces
         bool InsertWithBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel);
         bool InsertWithCattleOwnershipPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel);
         bool InsertWithTransferOfCattleOwnershipPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleTransferOfOwnershipModel cattleTransferOfOwnershipModel);
+        bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom);
     }
 }

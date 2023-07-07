@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 var receiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
-                var dateIssued = uc.dtpIssued.Value;
+                var dateIssued = uc.dtpDateIssued.Value;
                 var issueFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim());
                 var issueTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim());
                 var quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim());

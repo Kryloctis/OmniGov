@@ -22,35 +22,28 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT * FROM {tableName} id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
-                    record.Add("quantity", reader.Rows[0]["quantity"].ToString());
-                    record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
-                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
-                    record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
-                    record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());
-                    record.Add("date_issued", reader.Rows[0]["date_issued"].ToString());
-                    record.Add("issuefrom", reader.Rows[0]["issuefrom"].ToString());
-                    record.Add("issueto", reader.Rows[0]["issueto"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
+                record.Add("quantity", reader.Rows[0]["quantity"].ToString());
+                record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
+                record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
+                record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());
+                record.Add("date_issued", reader.Rows[0]["date_issued"].ToString());
+                record.Add("receipt_issued_from", reader.Rows[0]["receipt_issued_from"].ToString());
+                record.Add("receipt_issued_to", reader.Rows[0]["receipt_issued_to"].ToString());
             }
 
             return record;
@@ -265,26 +258,19 @@ namespace ACC.Data
 
         public bool Update(ReceiptsIssuedModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
-                    new object[] { "@date_issued", DbType.Date, entity.Issued},
-                    new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
-                    new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
+                new object[] { "@date_issued", DbType.Date, entity.Issued},
+                new object[] { "@receipt_issued_from", DbType.Int32, entity.IssuedFrom},
+                new object[] { "@receipt_issued_to", DbType.Int32, entity.IssuedTo},
+                new object[] { "@quantity", DbType.Int32, entity.Quantity}
+            };
 
-                string query = $"UPDATE {tableName} SET receipts_id=@receipts_id,collecting_officers_id=@collecting_officers_id,date_issued=@date_issued,issuefrom=@issuefrom,issueto=@issueto,quantity=@quantity WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET receipts_id = @receipts_id, collecting_officers_id = @collecting_officers_id, date_issued = @date_issued, receipt_issued_from = @receipt_issued_from, receipt_issued_to = @receipt_issued_to, quantity = @quantity WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateReturnedReceipt(ReceiptsIssuedModel entity)
