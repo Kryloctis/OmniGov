@@ -1,8 +1,11 @@
-﻿using AccountingSystem.Properties;
+﻿using ACC.Data;
+using AccountingSystem.Properties;
 using AccountingSystem.Views.SignIn;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
+using RPT.Data;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -35,9 +38,13 @@ namespace AccountingSystem
                 {
                     Helper.UserId = userId;
                     var mainForm = new MainForm(this);
+                    txtUsername.SelectAll();
+                    txtUsername.Focus();
+                    txtPassword.Clear();
+
                     mainForm.Show();
                     Hide();
-                    txtPassword.Clear();
+
                     btnVisibility.Image = visibleImage;
                     txtPassword.PasswordChar = '•';
                     return;
@@ -69,15 +76,35 @@ namespace AccountingSystem
             }
         }
 
-        private void SignIn_Shown(object sender, EventArgs e)
+        private void OnLoad()
         {
-            txtUsername.SelectAll();
-            txtUsername.Focus();
+            var serverList = Helper.LguServerModels();
+            string municipalityName = serverList.First().MunicipalityName;
+            string provinceName = serverList.First().ProvinceName;
+            Helper.selectedServerModel = serverList.First();
+
+            AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(serverList.First().LfsInstance);
+            RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(serverList.First().RpmInstance);
+
+            lblServer.Text = $"Server: {municipalityName}, {provinceName}";
+        }
+
+        private void SignInForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void SignInForm_VisibleChanged(object sender, EventArgs e)
+        {
         }
 
         private void SignInForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.R)
+            if (e.KeyCode == Keys.F12)
                 _ = new frmDatabaseConfig().ShowDialog();
         }
     }

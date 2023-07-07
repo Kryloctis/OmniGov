@@ -8,7 +8,7 @@ namespace AccountingSystem
 {
     public static class AccFactory
     {
-        private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
+        public static AccGenericCommands mySqlGenericCommandsLFS;
 
         public static byte UserId = 1;
 

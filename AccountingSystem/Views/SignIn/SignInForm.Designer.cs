@@ -38,7 +38,7 @@ namespace AccountingSystem
             label3 = new System.Windows.Forms.Label();
             btnLogin = new System.Windows.Forms.Button();
             btnVisibility = new System.Windows.Forms.Button();
-            label5 = new System.Windows.Forms.Label();
+            lblServer = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
@@ -148,14 +148,15 @@ namespace AccountingSystem
             btnVisibility.UseVisualStyleBackColor = true;
             btnVisibility.Click += btnVisibility_Click;
             // 
-            // label5
+            // lblServer
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(314, 194);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(217, 15);
-            label5.TabIndex = 8;
-            label5.Text = "(Tab) Server: Buug, Zamboanga Sibugay";
+            lblServer.AutoEllipsis = true;
+            lblServer.Location = new System.Drawing.Point(237, 194);
+            lblServer.Name = "lblServer";
+            lblServer.Size = new System.Drawing.Size(294, 15);
+            lblServer.TabIndex = 8;
+            lblServer.Text = "Server: ---";
+            lblServer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -187,7 +188,7 @@ namespace AccountingSystem
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(567, 218);
-            Controls.Add(label5);
+            Controls.Add(lblServer);
             Controls.Add(btnVisibility);
             Controls.Add(label4);
             Controls.Add(btnLogin);
@@ -197,13 +198,16 @@ namespace AccountingSystem
             Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(txtUsername);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SignInForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Sign In";
+            Load += SignInForm_Load;
+            VisibleChanged += SignInForm_VisibleChanged;
             KeyDown += SignInForm_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -222,7 +226,7 @@ namespace AccountingSystem
         private System.Windows.Forms.Button btnVisibility;
         internal System.Windows.Forms.TextBox txtUsername;
         internal System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblServer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
     }
