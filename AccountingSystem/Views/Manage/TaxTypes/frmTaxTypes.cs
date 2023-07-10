@@ -35,25 +35,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             try
             {
-                if (!isUpdate)
+                if (InsertNewTaxTypes())
                 {
-                    if (InsertNewTaxTypes())
-                    {
-                        Helper.MessageBoxSuccess("Tax type has been saved.");
-                        LoadTaxTypes();
-                        ResetForm();
-                        ClearFields();
-                    }
-                }
-                else
-                {
-                    if (UpdateTaxTypes())
-                    {
-                        Helper.MessageBoxSuccess("Tax type has been updated.");
-                        LoadTaxTypes();
-                        ResetForm();
-                        ClearFields();
-                    }
+                    Helper.MessageBoxSuccess("Tax type has been saved.");
+                    LoadTaxTypes();
+                    ResetForm();
+                    ClearFields();
                 }
             }
             catch (Exception ex)
@@ -102,7 +89,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            int parent = Convert.ToInt32(cmbxParentCode.SelectedValue);
+            var parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
             var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
@@ -226,6 +213,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
             ClearFields();
+            txtCode.Focus();
             panel2.Enabled = true;
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
@@ -257,7 +245,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             btnSave.Text = "Save";
             btnSave.Enabled = false;
             btnCancel.Enabled = false;
-            isUpdate = false;
+            btnSave.Visible = true;
+            btnUpdate.Visible = false;
+
         }
 
         private void ClearFields()
@@ -270,7 +260,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             cmbxFundType.SelectedIndex = -1;
             txtCOAAccountCode.Clear();
             txtBLFGAccountCode.Clear();
-            isUpdate = false;
             LoadParentCode();
         }
 
@@ -309,12 +298,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
+            txtCode.Focus();
             panel2.Enabled = true;
-            btnSave.Text = "Update";
-            btnSave.Enabled = true;
             btnCancel.Enabled = true;
             toolStrip2.Enabled = false;
-            isUpdate = true;
+            btnUpdate.Visible = true;
+            btnSave.Visible = false;
 
             ShowDetailsOfSelectedTaxType();
         }
@@ -423,5 +412,24 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UpdateTaxTypes())
+                {
+                    Helper.MessageBoxSuccess("Tax type has been updated.");
+                    LoadTaxTypes();
+                    ResetForm();
+                    ClearFields();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+
+        }
     }
 }
