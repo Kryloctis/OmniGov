@@ -948,7 +948,7 @@ namespace AccountingSystem
             datagrid.Columns.Clear();
 
             datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("receipt", "Receipt (Form)");
+            datagrid.Columns.Add("receipt", "Receipt Code and Description");
             datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
             datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
             datagrid.Columns.Add("quantity", "Quantity");

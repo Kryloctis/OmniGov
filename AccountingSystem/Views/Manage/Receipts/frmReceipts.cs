@@ -85,11 +85,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             var dataColumns = new DataColumn[]
             {
                 new DataColumn("id", typeof(int)),
-                new DataColumn("receipt", typeof(int)),
-                new DataColumn("receipt_number_from", typeof(string)),
-                new DataColumn("receipt_number_to", typeof(string)),
-                new DataColumn("quantity", typeof(string)),
-                new DataColumn("received_date", typeof(string)),
+                new DataColumn("receipt", typeof(string)),
+                new DataColumn("receipt_number_from", typeof(int)),
+                new DataColumn("receipt_number_to", typeof(int)),
+                new DataColumn("quantity", typeof(int)),
+                new DataColumn("received_date", typeof(DateTime)),
                 new DataColumn("officer", typeof(string)),
             };
 
@@ -116,11 +116,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                     var newRow = receiptDataTable.NewRow();
 
                     int id = Convert.ToInt32(row["id"]);
-                    string receipt = row["acc_form_no"].ToString();
-                    string receiptFrom = row["receipt_number_from"].ToString();
-                    string receipNumberTo = row["receipt_number_to"].ToString();
-                    string quantity = row["quantity"].ToString();
-                    string receivedDate = row["received_date"].ToString();
+                    string receipt = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                    int receiptFrom = Convert.ToInt32(row["receipt_number_from"]);
+                    int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
+                    int quantity = Convert.ToInt32(row["quantity"]);
+                    DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                     string officer = row["officer"].ToString();
 
                     newRow["id"] = id;
@@ -183,6 +183,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpReceivedDate.CustomFormat = "MMMM, dd yyyy";
         }
     }
 }

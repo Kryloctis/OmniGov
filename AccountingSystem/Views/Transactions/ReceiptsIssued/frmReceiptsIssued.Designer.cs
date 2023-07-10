@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             txtsearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtsearch.Location = new System.Drawing.Point(856, 18);
+            txtsearch.Location = new System.Drawing.Point(855, 18);
             txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtsearch.Name = "txtsearch";
             txtsearch.Size = new System.Drawing.Size(200, 23);
