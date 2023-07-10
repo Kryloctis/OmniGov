@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             cbAll = new System.Windows.Forms.CheckBox();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             panel1 = new System.Windows.Forms.Panel();
-            button1 = new System.Windows.Forms.Button();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -142,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             txtsearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtsearch.Location = new System.Drawing.Point(765, 19);
+            txtsearch.Location = new System.Drawing.Point(856, 18);
             txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtsearch.Name = "txtsearch";
             txtsearch.Size = new System.Drawing.Size(200, 23);
@@ -153,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(518, 22);
+            label2.Location = new System.Drawing.Point(609, 21);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(67, 15);
             label2.TabIndex = 31;
@@ -164,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "dd/MM/yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDateIssued.Location = new System.Drawing.Point(591, 19);
+            dtpDateIssued.Location = new System.Drawing.Point(682, 18);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(148, 23);
@@ -175,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             cbAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbAll.AutoSize = true;
-            cbAll.Location = new System.Drawing.Point(742, 20);
+            cbAll.Location = new System.Drawing.Point(833, 22);
             cbAll.Name = "cbAll";
             cbAll.Size = new System.Drawing.Size(15, 14);
             cbAll.TabIndex = 32;
@@ -192,16 +191,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             panel1.Padding = new System.Windows.Forms.Padding(4);
             panel1.Size = new System.Drawing.Size(1060, 490);
             panel1.TabIndex = 33;
-            // 
-            // button1
-            // 
-            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(969, 19);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 34;
-            button1.Text = "Search";
-            button1.UseVisualStyleBackColor = true;
             // 
             // statusStrip2
             // 
@@ -263,7 +252,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             ClientSize = new System.Drawing.Size(1060, 562);
             Controls.Add(panel1);
             Controls.Add(statusStrip2);
-            Controls.Add(button1);
             Controls.Add(cbAll);
             Controls.Add(label2);
             Controls.Add(dtpDateIssued);
@@ -304,7 +292,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.CheckBox cbAll;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;

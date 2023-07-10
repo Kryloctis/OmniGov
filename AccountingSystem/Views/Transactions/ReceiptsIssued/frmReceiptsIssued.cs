@@ -45,7 +45,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            int textSearchLength = txtsearch.Text.Length;
+            if (textSearchLength > 3 || textSearchLength == 0)
+                LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -140,6 +142,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
 
 
+            LoadRecords();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
             LoadRecords();
         }
     }

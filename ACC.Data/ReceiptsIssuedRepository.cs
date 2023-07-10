@@ -160,38 +160,7 @@ namespace ACC.Data
                 new object[]{"@date_issued", DbType.String, dateIssued },
             };
 
-            string query = $"SELECT  " +
-                            $"id, " +
-                            $"collecting_officer_id, " +
-                            $"collecting_officers_prefix, " +
-                            $"collecting_officers_first_name, " +
-                            $"collecting_officers_mid_initial, " +
-                            $"collecting_officers_last_name, " +
-                            $"collecting_officers_suffix, " +
-                            $"job_orders_id, " +
-                            $"job_orders_prefix, " +
-                            $"job_orders_first_name, " +
-                            $"job_orders_mid_initial, " +
-                            $"job_orders_last_name, " +
-                            $"job_orders_suffix, " +
-                            $"acc_form_no, " +
-                            $"acc_form_desc, " +
-                            $"accountable_forms, " +
-                            $"receipt_issued_from, " +
-                            $"receipt_issued_to,  " +
-                            $"date_issued,  " +
-                            $"quantity, " +
-                            $"last_issued, " +
-                            $"is_returned, " +
-                            $"returned_date,  " +
-                            $"issued_by  " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE " +
-                            $"(collecting_officers_last_name LIKE @searchKey OR  " +
-                            $"job_orders_last_name LIKE @searchKey) AND " +
-                            $"accountable_forms LIKE @searchKey AND " +
-                            $"date_issued = @date_issued " +
-                            $"ORDER BY date_issued DESC ";
+            string query = $"SELECT id, collecting_officer_id, collecting_officers_prefix, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, job_orders_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, acc_form_no, acc_form_desc, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date, issued_by FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey) AND accountable_forms LIKE @searchKey AND date_issued = @date_issued ORDER BY date_issued DESC ";
 
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
