@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem
 {
-    public partial class SignInForm : Form
+    public partial class frmSignIn : Form
     {
-        public SignInForm()
+        public frmSignIn()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -76,17 +76,21 @@ namespace AccountingSystem
             }
         }
 
-        private void OnLoad()
+        private void LoadFirstDetectedServer()
         {
             var serverList = Helper.LguServerModels();
             string municipalityName = serverList.First().MunicipalityName;
             string provinceName = serverList.First().ProvinceName;
             Helper.selectedServerModel = serverList.First();
-
             AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(serverList.First().LfsInstance);
             RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(serverList.First().RpmInstance);
 
-            lblServer.Text = $"Server: {municipalityName}, {provinceName}";
+            lblServer.Text = $"(F12) Server: {municipalityName}, {provinceName}";
+        }
+
+        private void OnLoad()
+        {
+            LoadFirstDetectedServer();
         }
 
         private void SignInForm_Load(object sender, EventArgs e)
@@ -105,7 +109,7 @@ namespace AccountingSystem
         private void SignInForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F12)
-                _ = new frmDatabaseConfig().ShowDialog();
+                _ = new frmDatabaseConfig(this).ShowDialog();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem
 {
-    partial class SignInForm
+    partial class frmSignIn
     {
         /// <summary>
         /// Required designer variable.
@@ -155,7 +155,7 @@ namespace AccountingSystem
             lblServer.Name = "lblServer";
             lblServer.Size = new System.Drawing.Size(294, 15);
             lblServer.TabIndex = 8;
-            lblServer.Text = "Server: ---";
+            lblServer.Text = "(F12) Server: ---";
             lblServer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -182,7 +182,7 @@ namespace AccountingSystem
             label6.TabIndex = 1;
             label6.Text = "Sign in to continue";
             // 
-            // SignInForm
+            // frmSignIn
             // 
             AcceptButton = btnLogin;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -203,7 +203,7 @@ namespace AccountingSystem
             Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "SignInForm";
+            Name = "frmSignIn";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Sign In";
             Load += SignInForm_Load;
@@ -226,8 +226,8 @@ namespace AccountingSystem
         private System.Windows.Forms.Button btnVisibility;
         internal System.Windows.Forms.TextBox txtUsername;
         internal System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label lblServer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.Label lblServer;
     }
 }

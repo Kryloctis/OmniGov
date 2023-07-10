@@ -626,9 +626,9 @@ namespace AccountingSystem
         {
             var lguDict = new Dictionary<string, dynamic>
             {
-                { "municipality", "Buug" },
-                { "lgu_name", $"Municipality of Buug" },
-                { "lgu_province", "Zamboanga Sibugay"},
+                { "municipality", selectedServerModel.MunicipalityName },
+                { "lgu_name", $"Municipality of {selectedServerModel.MunicipalityName}" },
+                { "lgu_province", selectedServerModel.ProvinceName},
             };
 
             return lguDict;

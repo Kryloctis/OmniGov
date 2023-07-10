@@ -57,9 +57,9 @@ namespace AccountingSystem
     public partial class MainForm : Form
     {
         private readonly Dictionary<string, dynamic> userDict;
-        private readonly SignInForm signInForm;
+        private readonly frmSignIn signInForm;
 
-        public MainForm(SignInForm _signInForm)
+        public MainForm(frmSignIn _signInForm)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
