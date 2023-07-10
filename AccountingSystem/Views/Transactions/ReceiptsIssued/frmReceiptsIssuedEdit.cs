@@ -80,6 +80,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt Issued has been updated.");
+                Close();
                 _frmReceiptsIssued.LoadRecords();
             }
         }

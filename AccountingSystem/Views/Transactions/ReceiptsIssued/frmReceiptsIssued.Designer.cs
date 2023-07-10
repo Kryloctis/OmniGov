@@ -162,7 +162,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // dtpDateIssued
             // 
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            dtpDateIssued.CustomFormat = "MMMM dd, yyyy";
+            dtpDateIssued.CustomFormat = "dd/MM/yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpDateIssued.Location = new System.Drawing.Point(591, 19);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -175,9 +175,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             cbAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbAll.AutoSize = true;
-            cbAll.Checked = true;
-            cbAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            cbAll.Location = new System.Drawing.Point(745, 23);
+            cbAll.Location = new System.Drawing.Point(742, 20);
             cbAll.Name = "cbAll";
             cbAll.Size = new System.Drawing.Size(15, 14);
             cbAll.TabIndex = 32;

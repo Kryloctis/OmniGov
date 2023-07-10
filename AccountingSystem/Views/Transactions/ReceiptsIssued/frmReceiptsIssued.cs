@@ -128,9 +128,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void cbAll_CheckedChanged(object sender, EventArgs e)
         {
             if (cbAll.Checked)
+            {
+                dtpDateIssued.CustomFormat = " ";
                 dtpDateIssued.Enabled = false;
+            }
+
             else
+            {
+                dtpDateIssued.CustomFormat = "dd/MM/yyyy";
                 dtpDateIssued.Enabled = true;
+            }
+
 
             LoadRecords();
         }
