@@ -30,13 +30,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 DataTable dtReceiptIssued = new();
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
 
-                if (cbAll.Checked)
-                    dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(searchText);
-                else
-                    dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
+                dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(dtReceiptIssued, dgReceiptIssued);
-                lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -134,27 +130,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
-        private void cbAll_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbAll.Checked)
-            {
-                dtpDateIssued.CustomFormat = " ";
-                dtpDateIssued.Enabled = false;
-            }
-
-            else
-            {
-                dtpDateIssued.CustomFormat = "dd/MM/yyyy";
-                dtpDateIssued.Enabled = true;
-            }
-
-
-            LoadRecords();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
     }
 }

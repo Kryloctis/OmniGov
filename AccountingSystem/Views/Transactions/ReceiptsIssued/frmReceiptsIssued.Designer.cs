@@ -40,9 +40,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtsearch = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             dtpDateIssued = new System.Windows.Forms.DateTimePicker();
-            cbAll = new System.Windows.Forms.CheckBox();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             panel1 = new System.Windows.Forms.Panel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -127,13 +127,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             dgReceiptIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgReceiptIssued.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceiptIssued.Location = new System.Drawing.Point(4, 4);
+            dgReceiptIssued.Location = new System.Drawing.Point(4, 9);
             dgReceiptIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgReceiptIssued.Name = "dgReceiptIssued";
             dgReceiptIssued.RowHeadersWidth = 51;
             dgReceiptIssued.RowTemplate.Height = 29;
             dgReceiptIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgReceiptIssued.Size = new System.Drawing.Size(1052, 482);
+            dgReceiptIssued.Size = new System.Drawing.Size(1052, 477);
             dgReceiptIssued.TabIndex = 8;
             dgReceiptIssued.SelectionChanged += dgissue_SelectionChanged;
             // 
@@ -152,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(609, 21);
+            label2.Location = new System.Drawing.Point(628, 21);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(67, 15);
             label2.TabIndex = 31;
@@ -163,34 +163,31 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "dd/MM/yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDateIssued.Location = new System.Drawing.Point(682, 18);
+            dtpDateIssued.Location = new System.Drawing.Point(701, 18);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(148, 23);
             dtpDateIssued.TabIndex = 30;
             dtpDateIssued.ValueChanged += dtpEndingDate_ValueChanged;
             // 
-            // cbAll
-            // 
-            cbAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cbAll.AutoSize = true;
-            cbAll.Location = new System.Drawing.Point(833, 22);
-            cbAll.Name = "cbAll";
-            cbAll.Size = new System.Drawing.Size(15, 14);
-            cbAll.TabIndex = 32;
-            toolTip1.SetToolTip(cbAll, "Disable date filter");
-            cbAll.UseVisualStyleBackColor = true;
-            cbAll.CheckedChanged += cbAll_CheckedChanged;
-            // 
             // panel1
             // 
             panel1.Controls.Add(dgReceiptIssued);
+            panel1.Controls.Add(progressBar1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 50);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
             panel1.Size = new System.Drawing.Size(1060, 490);
             panel1.TabIndex = 33;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(1052, 5);
+            progressBar1.TabIndex = 21;
             // 
             // statusStrip2
             // 
@@ -252,7 +249,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             ClientSize = new System.Drawing.Size(1060, 562);
             Controls.Add(panel1);
             Controls.Add(statusStrip2);
-            Controls.Add(cbAll);
             Controls.Add(label2);
             Controls.Add(dtpDateIssued);
             Controls.Add(txtsearch);
@@ -289,7 +285,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpDateIssued;
-        private System.Windows.Forms.CheckBox cbAll;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip2;
@@ -300,5 +295,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
