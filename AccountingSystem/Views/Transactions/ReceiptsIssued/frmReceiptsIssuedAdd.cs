@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 if (_receiptId != 0)
                 {
+                    uc.isUpdate = false;
                     uc.LoadCollectorsWithReceiptIssued(_receiptId);
                     uc.cmbReceipt.SelectedValue = _receiptId;
                     uc.cmbReceipt.Enabled = false;

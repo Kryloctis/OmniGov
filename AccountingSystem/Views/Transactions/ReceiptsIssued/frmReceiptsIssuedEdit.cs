@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -22,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                uc.LoadCollectors();
+                uc.isUpdate = true;
                 LoadSelectedValue();
                 uc.ReceiptsIssuedStatus();
             }
@@ -33,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(_receiptIssuedID);
+                Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(_receiptIssuedID);
 
                 uc.cmbCollector.SelectedValue = receiptIssuedDict["collecting_officers_id"];
                 uc.cmbReceipt.SelectedValue = receiptIssuedDict["receipts_id"];

@@ -13,8 +13,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal string receiptNumberFrom;
         internal string receiptNumberTo;
         internal int receiptQuantity;
+
         internal bool isCashTickets;
         internal bool isCollectorJO;
+        internal bool isUpdate;
 
         public ucReceiptsIssued()
         {
@@ -161,40 +163,37 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void LoadReceipts()
         {
-            try
+            DataTable receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
+
+            foreach (DataRow row in receiptsDt.Rows)
             {
-                var receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
+                int receiptsId = Convert.ToInt32(row["id"]);
+                string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                int quantity = Convert.ToInt32(row["quantity"]);
+                int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
+                int receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]);
+                int remainingReceipts = quantity - TotalIssued(receiptsId);
 
-                foreach (DataRow row in receiptsDt.Rows)
+                if (accountableForm.ToString().Contains("Tickets"))
+                    row["acc_form_desc"] = $"{accountableForm} ({remainingReceipts}) ";
+                else
+                    row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom:D7} - {receiptNumberTo:D7}) ";
+
+                //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
+                if (remainingReceipts == 0)
                 {
-                    var receiptsId = Convert.ToInt32(row["id"]);
-                    var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                    var quantity = Convert.ToInt32(row["quantity"]);
-                    string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
-                    string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
-
-                    if (accountableForm.ToString().Contains("Tickets"))
-                        row["acc_form_desc"] = $"{accountableForm} ({quantity - TotalIssued(receiptsId)}) ";
-                    else
-                        row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
-
-                    //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
-                    if ((quantity - TotalIssued(receiptsId)) == 0)
+                    if (isUpdate)
                         row.Delete();
                 }
-
-                cmbReceipt.DataSource = receiptsDt;
-                cmbReceipt.ValueMember = "id";
-                cmbReceipt.DisplayMember = "acc_form_desc";
-
-                int TotalIssued(int receiptId)
-                {
-                    return AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
-                }
             }
-            catch (Exception ex)
+
+            cmbReceipt.DataSource = receiptsDt;
+            cmbReceipt.ValueMember = "id";
+            cmbReceipt.DisplayMember = "acc_form_desc";
+
+            int TotalIssued(int receiptId)
             {
-                Helper.MessageBoxError(ex.Message);
+                return AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
             }
         }
 

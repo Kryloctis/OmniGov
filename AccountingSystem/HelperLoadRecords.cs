@@ -806,8 +806,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("issued_by", "Issued By");
             datagrid.Columns.Add(col);
             datagrid.Columns.Add("returned_date", "Returned Date");
-            datagrid.Columns.Add("returned_date", "Returned Date");
-            datagrid.Columns.Add("returned_date", "Returned Date");
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
@@ -884,6 +882,8 @@ namespace AccountingSystem
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
         }
+
+
 
         #endregion ReceiptsIssued
 
@@ -990,6 +990,13 @@ namespace AccountingSystem
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+        }
+
+        internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
+        {
+            combobox.DataSource = dataTable;
+            combobox.ValueMember = "id";
+            combobox.DisplayMember = "acc_form_desc";
         }
 
         #endregion Receipts
