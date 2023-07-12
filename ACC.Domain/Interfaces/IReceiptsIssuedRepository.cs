@@ -30,6 +30,6 @@ namespace ACC.Domain.Interfaces
 
         bool ReceiptIsUsed(int receiptId);
 
-        DataTable GetRecordsBySearch(string dateIssued, string searchText);
+        DataTable GetRecordsBySearch(DateTime dateIssued, string searchText);
     }
 }

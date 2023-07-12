@@ -101,7 +101,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Receipt";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmReceiptsIssuedAdd_FormClosing);
             this.Load += new System.EventHandler(this.frmReceiptsAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

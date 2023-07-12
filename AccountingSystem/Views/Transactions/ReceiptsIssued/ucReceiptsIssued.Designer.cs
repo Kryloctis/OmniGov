@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             cmbCollector = new System.Windows.Forms.ComboBox();
             cmbReceipt = new System.Windows.Forms.ComboBox();
             txtReceiptQuantity = new System.Windows.Forms.TextBox();
-            cbCollector = new System.Windows.Forms.CheckBox();
+            cbCollectingOfficerTypeJO = new System.Windows.Forms.CheckBox();
             txtReceiptIssuedFrom = new System.Windows.Forms.TextBox();
             txtReceiptIssuedTo = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
@@ -93,17 +93,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptQuantity.Validating += txtquantity_Validating;
             txtReceiptQuantity.Validated += txtquantity_Validated;
             // 
-            // cbCollector
+            // cbCollectingOfficerTypeJO
             // 
-            cbCollector.AutoSize = true;
-            cbCollector.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            cbCollector.Location = new System.Drawing.Point(165, 11);
-            cbCollector.Name = "cbCollector";
-            cbCollector.Size = new System.Drawing.Size(82, 17);
-            cbCollector.TabIndex = 14;
-            cbCollector.Text = "Job Orders";
-            cbCollector.UseVisualStyleBackColor = true;
-            cbCollector.CheckedChanged += cbCollector_CheckedChanged;
+            cbCollectingOfficerTypeJO.AutoSize = true;
+            cbCollectingOfficerTypeJO.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(165, 11);
+            cbCollectingOfficerTypeJO.Name = "cbCollectingOfficerTypeJO";
+            cbCollectingOfficerTypeJO.Size = new System.Drawing.Size(114, 17);
+            cbCollectingOfficerTypeJO.TabIndex = 14;
+            cbCollectingOfficerTypeJO.Text = "Show Job Orders";
+            cbCollectingOfficerTypeJO.UseVisualStyleBackColor = true;
+            cbCollectingOfficerTypeJO.CheckedChanged += cbCollector_CheckedChanged;
             // 
             // txtReceiptIssuedFrom
             // 
@@ -202,7 +202,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(cmbCollector);
-            Controls.Add(cbCollector);
+            Controls.Add(cbCollectingOfficerTypeJO);
             Controls.Add(cmbReceipt);
             Controls.Add(txtReceiptQuantity);
             Controls.Add(txtReceiptIssuedFrom);
@@ -222,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal System.Windows.Forms.ComboBox cmbCollector;
         internal System.Windows.Forms.ComboBox cmbReceipt;
         internal System.Windows.Forms.TextBox txtReceiptQuantity;
-        private System.Windows.Forms.CheckBox cbCollector;
+        private System.Windows.Forms.CheckBox cbCollectingOfficerTypeJO;
         internal System.Windows.Forms.TextBox txtReceiptIssuedFrom;
         internal System.Windows.Forms.TextBox txtReceiptIssuedTo;
         private System.Windows.Forms.Label label6;

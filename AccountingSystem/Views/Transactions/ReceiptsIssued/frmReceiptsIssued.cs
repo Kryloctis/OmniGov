@@ -24,17 +24,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd");
-                var searchText = txtsearch.Text.Trim();
-                var receiptIssuedDt = new DataTable();
+                DateTime dateIssued = dtpDateIssued.Value;
+                string searchText = txtsearch.Text.Trim();
+
+                DataTable dtReceiptIssued = new();
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
 
                 if (cbAll.Checked)
-                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(searchText);
+                    dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(searchText);
                 else
-                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
+                    dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
 
-                HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
+                HelperLoadRecords.ReceiptsIssuedDatagridView(dtReceiptIssued, dgReceiptIssued);
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }
             catch (Exception ex)
@@ -55,52 +56,58 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             _ = new frmReceiptsIssuedAdd(this).ShowDialog();
         }
 
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgReceiptIssued.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var receiptModelList = new List<ReceiptsIssuedModel>();
+
+                foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)
+                {
+                    int receiptIssuedId = Convert.ToInt32(row.Cells["id"].Value);
+                    receiptModelList.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
+                }
+
+                return AccFactory.ReceiptsIssuedRepository().Delete(receiptModelList);
+            }
+            return false;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (Helper.MessageBoxConfirmDelete(dgReceiptIssued.SelectedRows.Count))
+            try
             {
-                try
+                if (DeleteRecords())
                 {
-                    var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-                    var receiptModel = new List<ReceiptsIssuedModel>();
-
-                    foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)
-                    {
-                        int receiptIssuedId = int.Parse(row.Cells[0].Value.ToString());
-                        if (row.Cells[7].Value.ToString().Equals(string.Empty))
-                        {
-                            receiptModel.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
-                        }
-                    }
-                    _ = receiptIssuedRepo.Delete(receiptModel);
                     LoadRecords();
                 }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void ShowRecordTimeStamp(DataGridView dataGridView)
+        {
+            if (dataGridView.SelectedRows.Count == 1 && dataGridView.CurrentRow.Cells["id"].Value != null)
+            {
+                int rowIndex = dataGridView.CurrentCell.RowIndex;
+
+                //var createdAt = dataGridView.Rows[rowIndex].Cells["created_at"].Value.ToString();
+                //var updatedAt = dataGridView.Rows[rowIndex].Cells["updated_at"].Value.ToString();
+
+                //lblCreatedAt.Text = createdAt;
+                //lblUpdatedAt.Text = updatedAt;
             }
         }
 
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
-
-            if (dgReceiptIssued.SelectedRows.Count > 0)
-            {
-                btnEdit.Enabled = true;
-                btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
-                btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes") && dgReceiptIssued.SelectedRows.Count == 1;
-                byte[] columnIndexTimestamp = { 7, 11 };
-
-                Helper.ShowRecordTimestamp(dgReceiptIssued, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            }
-            else
-            {
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
-                btnReturn.Enabled = false;
-            }
+            ShowRecordTimeStamp(dgReceiptIssued);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

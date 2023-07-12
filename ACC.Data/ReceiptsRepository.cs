@@ -257,7 +257,7 @@ namespace ACC.Data
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
-        public bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo)
+        public bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo)
         {
             var parameters = new object[][]
             {
@@ -265,9 +265,7 @@ namespace ACC.Data
                 new object[] { "@receipt_number_to", DbType.Int32, receiptNumberTo },
                 new object[] { "@receipt_id", DbType.Int32, receiptId }
             };
-            string query = $"SELECT id " +
-                           $"FROM {tableName} " +
-                           $"WHERE receipt_number_from <= @receipt_number_from AND receipt_number_to >= @receipt_number_to AND id = @receipt_id";
+            string query = $"SELECT id FROM {tableName} WHERE receipt_number_from <= @receipt_number_from AND receipt_number_to >= @receipt_number_to AND id = @receipt_id";
 
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 

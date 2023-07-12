@@ -11,7 +11,7 @@ namespace ACC.Domain.Interfaces
 
         int GetReceiptNumberFromByReceiptId(int receiptId);
 
-        bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo);
+        bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo);
 
         DataTable GetRecordsByDateAndText(string dateReceived, string txtSearch);
     }

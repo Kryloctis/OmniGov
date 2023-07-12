@@ -154,7 +154,7 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            string query = $"SELECT collecting_officers_id, collecting_officers_prefix, collecting_officers_firstname, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, collecting_officers_job_title, collecting_officers_is_deleted, job_orders_id, job_orders_user_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name,job_orders_suffix,job_orders_job_title,job_orders_is_deleted FROM {viewTableName} WHERE job_orders_is_deleted = 0";
+            string query = $"SELECT collecting_officers_id, collecting_officers_prefix, collecting_officers_firstname, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, collecting_officers_job_title, collecting_officers_is_deleted, job_orders_id, job_orders_user_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix,job_orders_job_title, job_orders_is_deleted FROM {viewTableName} WHERE job_orders_is_deleted = 0";
 
             DataTable dataTable = new DataTable();
             return mySqlGenericCommands.Fill(query, dataTable);

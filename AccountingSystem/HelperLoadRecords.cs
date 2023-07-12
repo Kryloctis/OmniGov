@@ -792,7 +792,7 @@ namespace AccountingSystem
             datagrid.Columns.Clear();
             DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
             col.HeaderText = "Returned";
-            col.Name = "Returned";
+            col.Name = "is_returned";
 
             datagrid.Columns.Add("id", "ID");
             datagrid.Columns.Add("acc_form_no", "Form Code");
@@ -829,7 +829,7 @@ namespace AccountingSystem
             datagrid.Columns["date_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns["returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["is_returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["returned_date"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["returned_date"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -842,7 +842,7 @@ namespace AccountingSystem
             datagrid.Columns["returned_date"].Width = 150;
             datagrid.Columns["collecting_officer"].Width = 150;
             datagrid.Columns["quantity"].Width = 60;
-            datagrid.Columns["returned"].Width = 85;
+            datagrid.Columns["is_returned"].Width = 85;
             datagrid.Columns["issued_by"].Width = 150;
 
             datagrid.EnableHeadersVisualStyles = false;
@@ -1859,6 +1859,9 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
+
+            if (comboBox.Items.Count == 0)
+                comboBox.DropDownHeight = 106;
         }
 
         internal static void RegularAndJOCollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
