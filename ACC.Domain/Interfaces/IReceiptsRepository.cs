@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -13,6 +14,6 @@ namespace ACC.Domain.Interfaces
 
         bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo);
 
-        DataTable GetRecordsByDateAndText(string dateReceived, string txtSearch);
+        DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch);
     }
 }

@@ -9,7 +9,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceipts : Form
     {
-
         DataTable receiptDataTable;
 
         public frmReceipts()
@@ -22,11 +21,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void frmAccForms_Load(object sender, EventArgs e)
         {
             SetToolStripStatusData();
-
-            lblProgressCount.Visible = false;
-            progressBarLoadRecords.Visible = false;
         }
-
 
         private void SetToolStripStatusData()
         {
@@ -53,7 +48,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int receiptId = int.Parse(dgReceipts.CurrentRow.Cells[0].Value.ToString());
+            int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells["id"].Value);
             _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
         }
 
@@ -79,7 +74,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
-
         private DataColumn[] ReceiptsColumns()
         {
             var dataColumns = new DataColumn[]
@@ -97,97 +91,67 @@ namespace AccountingSystem.Views.Manage.Receipts
         }
 
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                int rowCount = 0;
-
-                receiptDataTable = new DataTable();
-                receiptDataTable.Columns.AddRange(ReceiptsColumns());
-
-                DateTime dateReceived = dtpReceivedDate.Value;
-                string searchKey = txtSearch.Text.Trim();
-
-                var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived.ToString("yyyy-MM-dd"), searchKey);
-
-                foreach (DataRow row in dtReceipts.Rows)
-                {
-                    var newRow = receiptDataTable.NewRow();
-
-                    int id = Convert.ToInt32(row["id"]);
-                    string receipt = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                    int receiptFrom = Convert.ToInt32(row["receipt_number_from"]);
-                    int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
-                    int quantity = Convert.ToInt32(row["quantity"]);
-                    DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
-                    string officer = row["officer"].ToString();
-
-                    newRow["id"] = id;
-                    newRow["receipt"] = receipt;
-                    newRow["receipt_number_from"] = receiptFrom;
-                    newRow["receipt_number_to"] = receipNumberTo;
-                    newRow["quantity"] = quantity;
-                    newRow["received_date"] = receivedDate;
-                    newRow["officer"] = officer;
-
-                    rowCount += 1;
-                    receiptDataTable.Rows.Add(newRow);
-                    bgwLoadReceipts.ReportProgress(((rowCount * 100) / dtReceipts.Rows.Count), rowCount);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            lblRecordCount.Text = e.UserState.ToString();
-            progressBarLoadRecords.Value = e.ProgressPercentage;
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            if (progressBarLoadRecords.Value == 100)
-            {
-                progressBarLoadRecords.Visible = false;
-                progressBarLoadRecords.Value = 0;
-            }
-
-
-            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
-            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgReceipts).ToString();
-
-            this.UseWaitCursor = false;
-            this.Enabled = true;
-            Cursor = Cursors.Default;
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadReceipts();
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void LoadReceipts()
         {
+            receiptDataTable = new DataTable();
+            receiptDataTable.Columns.AddRange(ReceiptsColumns());
+
+            DateTime dateReceived = dtpReceivedDate.Value;
+            string searchKey = txtSearch.Text.Trim();
+
+            var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
+            int totalRecordsFromDB = dtReceipts.Rows.Count;
+            int rowCount = 0;
+
+            foreach (DataRow row in dtReceipts.Rows)
+            {
+                var newRow = receiptDataTable.NewRow();
+
+                int id = Convert.ToInt32(row["id"]);
+                string receipt = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                int receiptFrom = Convert.ToInt32(row["receipt_number_from"]);
+                int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
+                int quantity = Convert.ToInt32(row["quantity"]);
+                DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
+                string officer = row["officer"].ToString();
+
+                newRow["id"] = id;
+                newRow["receipt"] = receipt;
+                newRow["receipt_number_from"] = receiptFrom;
+                newRow["receipt_number_to"] = receipNumberTo;
+                newRow["quantity"] = quantity;
+                newRow["received_date"] = receivedDate;
+                newRow["officer"] = officer;
+
+                rowCount++;
+                int progressBarPercentage = rowCount * 100 / totalRecordsFromDB;
+                bgwLoadReceipts.ReportProgress(progressBarPercentage);
+                receiptDataTable.Rows.Add(newRow);
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadReceipts();
+            });
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
             try
             {
                 if (!bgwLoadReceipts.IsBusy)
-                {
                     bgwLoadReceipts.RunWorkerAsync();
-                    this.UseWaitCursor = true;
-                    this.Enabled = false;
-                    progressBarLoadRecords.Visible = true;
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
-        {
-            dtpReceivedDate.CustomFormat = "MMMM, dd yyyy";
-        }
     }
 }

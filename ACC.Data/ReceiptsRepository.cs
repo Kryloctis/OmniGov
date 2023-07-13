@@ -275,10 +275,10 @@ namespace ACC.Data
             return true;
         }
 
-        public DataTable GetRecordsByDateAndText(string dateReceived, string txtSearch)
+        public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch)
         {
             var parameter = new object[][] {
-                new object[]{"@received_date", DbType.String, dateReceived},
+                new object[]{"@received_date", DbType.Date, dateReceived},
                 new object[]{"@txt_search", DbType.String, $"%{txtSearch}%"},
             };
 

@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     txtQuantity.Text = string.Empty;
                 }
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void OnLoad()

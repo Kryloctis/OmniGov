@@ -40,13 +40,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblQuantity = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblProgressCount = new System.Windows.Forms.ToolStripStatusLabel();
-            progressBarLoadRecords = new System.Windows.Forms.ToolStripProgressBar();
             txtSearch = new System.Windows.Forms.TextBox();
             dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
             label1 = new System.Windows.Forms.Label();
             btnSearch = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             bgwLoadReceipts = new System.ComponentModel.BackgroundWorker();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceipts).BeginInit();
@@ -106,20 +105,20 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             dgReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgReceipts.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceipts.Location = new System.Drawing.Point(4, 4);
+            dgReceipts.Location = new System.Drawing.Point(4, 9);
             dgReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgReceipts.Name = "dgReceipts";
             dgReceipts.RowHeadersWidth = 51;
             dgReceipts.RowTemplate.Height = 29;
             dgReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgReceipts.Size = new System.Drawing.Size(1052, 482);
+            dgReceipts.Size = new System.Drawing.Size(1052, 477);
             dgReceipts.TabIndex = 7;
             dgReceipts.SelectionChanged += dgreceipts_SelectionChanged;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel2, lblQuantity, toolStripStatusLabel3, lblProgressCount, progressBarLoadRecords });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel2, lblQuantity, toolStripStatusLabel3 });
             statusStrip1.Location = new System.Drawing.Point(0, 540);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -154,19 +153,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             // toolStripStatusLabel3
             // 
             toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(702, 17);
+            toolStripStatusLabel3.Size = new System.Drawing.Size(910, 17);
             toolStripStatusLabel3.Spring = true;
-            // 
-            // lblProgressCount
-            // 
-            lblProgressCount.Name = "lblProgressCount";
-            lblProgressCount.Size = new System.Drawing.Size(106, 17);
-            lblProgressCount.Text = "Loading Receipts...";
-            // 
-            // progressBarLoadRecords
-            // 
-            progressBarLoadRecords.Name = "progressBarLoadRecords";
-            progressBarLoadRecords.Size = new System.Drawing.Size(100, 16);
             // 
             // txtSearch
             // 
@@ -182,13 +170,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             dtpReceivedDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpReceivedDate.CustomFormat = " ";
-            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             dtpReceivedDate.Location = new System.Drawing.Point(640, 16);
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
             dtpReceivedDate.Size = new System.Drawing.Size(133, 23);
             dtpReceivedDate.TabIndex = 12;
-            dtpReceivedDate.ValueChanged += dtpReceivedDate_ValueChanged;
             // 
             // label1
             // 
@@ -213,6 +200,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // panel1
             // 
             panel1.Controls.Add(dgReceipts);
+            panel1.Controls.Add(pbLoadRecords);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 50);
             panel1.Name = "panel1";
@@ -220,12 +208,19 @@ namespace AccountingSystem.Views.Manage.Receipts
             panel1.Size = new System.Drawing.Size(1060, 490);
             panel1.TabIndex = 15;
             // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(4, 4);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1052, 5);
+            pbLoadRecords.TabIndex = 22;
+            // 
             // bgwLoadReceipts
             // 
             bgwLoadReceipts.WorkerReportsProgress = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
-            bgwLoadReceipts.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmReceipts
             // 
@@ -274,8 +269,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
         private System.ComponentModel.BackgroundWorker bgwLoadReceipts;
-        private System.Windows.Forms.ToolStripStatusLabel lblProgressCount;
-        private System.Windows.Forms.ToolStripProgressBar progressBarLoadRecords;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
