@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             try
             {
-                if (InsertNewTaxTypes())
+                if (SaveTaxType())
                 {
                     Helper.MessageBoxSuccess("Tax type has been saved.");
                     LoadTaxTypes();
@@ -47,10 +47,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
-        private bool InsertNewTaxTypes()
+        private bool SaveTaxType()
         {
             if (!ValidateChildren())
             {
@@ -60,8 +59,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            var parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
-            var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
+            object parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
+            object fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
 
@@ -89,7 +88,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            var parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
+            object parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
             var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
@@ -108,6 +107,53 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             return AccFactory.TaxTypesRepository().Update(taxTypesModel);
         }
 
+
+        private void PopulateTreeView(int parentID, TreeNode parentNode)
+        {
+            var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
+
+
+            ImageList nodeImageList = new();
+            CreateImageList(ref nodeImageList);
+
+            foreach (DataRow dr in dtChildNoTaxTypes.Rows)
+            {
+                TreeNode childNode = new();
+
+
+                string taxTypeCode = dr["code"].ToString();
+                string taxTypeDescription = dr["description"].ToString();
+                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+
+                if (parentNode == null)
+                {
+                    childNode = treeViewTaxTypes.Nodes.Add(displayText);
+                    childNode.ImageIndex = 0;
+                    childNode.SelectedImageIndex = 0;
+                }
+
+                else
+                {
+                    childNode = parentNode.Nodes.Add(displayText);
+                    childNode.ImageIndex = childImageIndexCounter;
+                    childNode.SelectedImageIndex = childImageIndexCounter;
+
+                    if (childImageIndexCounter >= nodeImageList.Images.Count)
+                        childImageIndexCounter = 1;
+                    else
+                        childImageIndexCounter++;
+                }
+
+                int taxTypeID = Convert.ToInt32(dr["id"]);
+                childNode.Tag = taxTypeID;
+                PopulateTreeView(taxTypeID, childNode);
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    childNode.ForeColor = Color.Gray;
+
+            }
+        }
+
         private void LoadTaxTypes()
         {
             treeViewTaxTypes.Nodes.Clear();
@@ -119,11 +165,14 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             foreach (DataRow dr in dtTaxTypes.Rows)
             {
+                int taxTypeID = Convert.ToInt32(dr["id"]);
+                string taxTypeCode = dr["code"].ToString();
+                string taxTypeDescription = dr["description"].ToString();
+                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
 
-                parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
-
-                string taxTypeID = dr["id"].ToString();
+                parentNode = treeViewTaxTypes.Nodes.Add(displayText);
                 parentNode.Tag = taxTypeID;
+
                 PopulateTreeView(taxTypeID, parentNode);
 
                 if (Convert.ToBoolean(dr["is_deleted"]))
@@ -146,47 +195,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         }
 
-        private void PopulateTreeView(string parentID, TreeNode parentNode)
-        {
-            var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
-
-
-            ImageList nodeImageList = new ImageList();
-            CreateImageList(ref nodeImageList);
-
-            foreach (DataRow dr in dtChildNoTaxTypes.Rows)
-            {
-                TreeNode childNode = new();
-
-                if (parentNode == null)
-                {
-                    childNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
-                    childNode.ImageIndex = 0;
-                    childNode.SelectedImageIndex = 0;
-                }
-
-                else
-                {
-                    childNode = parentNode.Nodes.Add(dr["description"].ToString());
-                    childNode.ImageIndex = childImageIndexCounter;
-                    childNode.SelectedImageIndex = childImageIndexCounter;
-
-                    if (childImageIndexCounter >= nodeImageList.Images.Count)
-                        childImageIndexCounter = 1;
-                    else
-                        childImageIndexCounter++;
-                }
-
-
-                string taxTypeID = dr["id"].ToString();
-                childNode.Tag = taxTypeID;
-                PopulateTreeView(taxTypeID, childNode);
-
-                if (Convert.ToBoolean(dr["is_deleted"]))
-                    childNode.ForeColor = Color.Gray;
-
-            }
-        }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {

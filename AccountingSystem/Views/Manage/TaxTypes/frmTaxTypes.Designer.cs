@@ -113,7 +113,7 @@
             cmbxParentCode.IntegralHeight = false;
             cmbxParentCode.Location = new System.Drawing.Point(163, 66);
             cmbxParentCode.Name = "cmbxParentCode";
-            cmbxParentCode.Size = new System.Drawing.Size(269, 23);
+            cmbxParentCode.Size = new System.Drawing.Size(353, 23);
             cmbxParentCode.TabIndex = 3;
             // 
             // cmbxFundType
@@ -121,28 +121,28 @@
             cmbxFundType.FormattingEnabled = true;
             cmbxFundType.Location = new System.Drawing.Point(163, 93);
             cmbxFundType.Name = "cmbxFundType";
-            cmbxFundType.Size = new System.Drawing.Size(269, 23);
+            cmbxFundType.Size = new System.Drawing.Size(353, 23);
             cmbxFundType.TabIndex = 4;
             // 
             // txtBLFGAccountCode
             // 
             txtBLFGAccountCode.Location = new System.Drawing.Point(163, 147);
             txtBLFGAccountCode.Name = "txtBLFGAccountCode";
-            txtBLFGAccountCode.Size = new System.Drawing.Size(269, 23);
+            txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
             txtBLFGAccountCode.TabIndex = 6;
             // 
             // txtCOAAccountCode
             // 
             txtCOAAccountCode.Location = new System.Drawing.Point(163, 120);
             txtCOAAccountCode.Name = "txtCOAAccountCode";
-            txtCOAAccountCode.Size = new System.Drawing.Size(269, 23);
+            txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
             txtCOAAccountCode.TabIndex = 5;
             // 
             // txtDesciption
             // 
             txtDesciption.Location = new System.Drawing.Point(163, 39);
             txtDesciption.Name = "txtDesciption";
-            txtDesciption.Size = new System.Drawing.Size(269, 23);
+            txtDesciption.Size = new System.Drawing.Size(353, 23);
             txtDesciption.TabIndex = 2;
             txtDesciption.Validating += txtDesciption_Validating;
             txtDesciption.Validated += txtDesciption_Validated;
@@ -151,7 +151,7 @@
             // 
             txtCode.Location = new System.Drawing.Point(163, 12);
             txtCode.Name = "txtCode";
-            txtCode.Size = new System.Drawing.Size(269, 23);
+            txtCode.Size = new System.Drawing.Size(353, 23);
             txtCode.TabIndex = 1;
             txtCode.Validating += txtCode_Validating;
             txtCode.Validated += txtCode_Validated;
@@ -188,9 +188,9 @@
             label3.AutoSize = true;
             label3.Location = new System.Drawing.Point(35, 69);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(72, 15);
+            label3.Size = new System.Drawing.Size(41, 15);
             label3.TabIndex = 0;
-            label3.Text = "Parent Code";
+            label3.Text = "Parent";
             // 
             // label2
             // 
