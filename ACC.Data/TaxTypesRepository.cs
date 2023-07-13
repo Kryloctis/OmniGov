@@ -120,7 +120,7 @@ namespace AccountingSystem
 
         public DataTable GetTaxTypeCodes()
         {
-            string query = $"SELECT id, code FROM {tableName}";
+            string query = $"SELECT id, code, parent FROM {tableName}";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);
@@ -151,9 +151,9 @@ namespace AccountingSystem
         public bool UnDeleteTaxType(int taxTypeID)
         {
             var parameters = new object[][]
-             {
-                new object[] { "@id", DbType.Int32, taxTypeID},
-             };
+            {
+            new object[] { "@id", DbType.Int32, taxTypeID},
+            };
 
             string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -167,7 +167,7 @@ namespace AccountingSystem
                 new object[] { "@code", DbType.String, entity.Code },
                 new object[] { "@description", DbType.String, entity.Description },
                 new object[] { "@parent", DbType.Int32, entity.ParentID },
-                new object[] { "@funds_id", DbType.Int32, entity.FundID },
+                new object[] { "@funds_id", DbType.Int16, entity.FundID },
                 new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
                 new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },
             };

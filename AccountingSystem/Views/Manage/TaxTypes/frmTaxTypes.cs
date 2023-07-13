@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,13 +11,38 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 {
     public partial class frmTaxTypes : Form
     {
-        private bool isUpdate = false;
         int childImageIndexCounter = 1;
 
         public frmTaxTypes()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+        }
+
+        private void ClearFields()
+        {
+            txtCode.Focus();
+            txtCode.Clear();
+            txtDesciption.Clear();
+            cmbxParent.Text = string.Empty;
+            cmbxFundType.Text = string.Empty;
+            cmbxFundType.SelectedIndex = -1;
+            txtCOAAccountCode.Clear();
+            txtBLFGAccountCode.Clear();
+            LoadParentCode();
+        }
+
+        private void ResetForm()
+        {
+            panel2.Enabled = false;
+            toolStrip2.Enabled = true;
+            toolStripButtonEdit.Enabled = true;
+            toolStripButtonDelete.Enabled = true;
+            btnSave.Text = "Save";
+            btnSave.Enabled = false;
+            btnCancel.Enabled = false;
+            btnSave.Visible = true;
+            btnUpdate.Visible = false;
         }
 
         internal string GetFormErrors()
@@ -29,6 +55,34 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
+        }
+
+        private bool SaveTaxType()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            string code = txtCode.Text;
+            string desciption = txtDesciption.Text;
+            object parent = (cmbxParent.SelectedIndex == -1) ? null : cmbxParent.SelectedValue;
+            object fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
+            string coaAccountCode = txtCOAAccountCode.Text;
+            string BLFGAccountCode = txtBLFGAccountCode.Text;
+
+            var taxTypesModel = new TaxTypesModel()
+            {
+                Code = code,
+                Description = desciption,
+                ParentID = parent,
+                FundID = fundID,
+                COAAccountCode = coaAccountCode,
+                BLGFAccountCode = BLFGAccountCode
+            };
+
+            return AccFactory.TaxTypesRepository().Insert(taxTypesModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -49,34 +103,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
-        private bool SaveTaxType()
-        {
-            if (!ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-                return false;
-            }
-
-            string code = txtCode.Text;
-            string desciption = txtDesciption.Text;
-            object parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
-            object fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
-            string coaAccountCode = txtCOAAccountCode.Text;
-            string BLFGAccountCode = txtBLFGAccountCode.Text;
-
-            var taxTypesModel = new TaxTypesModel()
-            {
-                Code = code,
-                Description = desciption,
-                ParentID = parent,
-                FundID = fundID,
-                COAAccountCode = coaAccountCode,
-                BLGFAccountCode = BLFGAccountCode
-            };
-
-            return AccFactory.TaxTypesRepository().Insert(taxTypesModel);
-        }
-
         private bool UpdateTaxTypes()
         {
             if (!ValidateChildren())
@@ -88,8 +114,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            object parent = (cmbxParentCode.SelectedIndex == -1) ? null : cmbxParentCode.SelectedValue;
-            var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
+            object parent = (cmbxParent.SelectedIndex == -1) ? null : cmbxParent.SelectedValue;
+            object fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
 
@@ -107,23 +133,52 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             return AccFactory.TaxTypesRepository().Update(taxTypesModel);
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UpdateTaxTypes())
+                {
+                    Helper.MessageBoxSuccess("Tax type has been updated.");
+                    LoadTaxTypes();
+                    ResetForm();
+                    ClearFields();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void CreateImageList(ref ImageList nodeImageList)
+        {
+            nodeImageList.Images.Add("0", Properties.Resources.tree_view_tax_18);
+            nodeImageList.Images.Add("1", Properties.Resources.tree_view_accounting_18);
+            nodeImageList.Images.Add("2", Properties.Resources.tree_view_estimates_18);
+            nodeImageList.Images.Add("3", Properties.Resources.tree_view_receipt_dollar_18);
+            nodeImageList.Images.Add("4", Properties.Resources.tree_view_bill_18);
+
+            treeViewTaxTypes.ImageList = nodeImageList;
+            treeViewTaxTypes.ImageIndex = 0;
+            treeViewTaxTypes.SelectedImageIndex = 0;
+
+        }
 
         private void PopulateTreeView(int parentID, TreeNode parentNode)
         {
-            var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
-
+            var dtChildNodeTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
 
             ImageList nodeImageList = new();
             CreateImageList(ref nodeImageList);
 
-            foreach (DataRow dr in dtChildNoTaxTypes.Rows)
+            foreach (DataRow dr in dtChildNodeTaxTypes.Rows)
             {
-                TreeNode childNode = new();
-
-
                 string taxTypeCode = dr["code"].ToString();
                 string taxTypeDescription = dr["description"].ToString();
                 string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+
+                TreeNode childNode = new();
 
                 if (parentNode == null)
                 {
@@ -154,6 +209,63 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
+        private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (treeViewTaxTypes.SelectedNode.ForeColor != Color.Gray)
+            {
+                toolStripButtonEdit.Enabled = true;
+                toolStripButtonDelete.Enabled = true;
+                toolStripSeparator1.Visible = false;
+                toolStripButtonUndelete.Visible = false;
+            }
+            else
+            {
+                toolStripButtonEdit.Enabled = false;
+                toolStripButtonDelete.Enabled = false;
+                toolStripSeparator1.Visible = true;
+                toolStripButtonUndelete.Visible = true;
+            }
+
+            if (panel2.Enabled)
+                ShowSelectedTaxTypeDetails();
+
+        }
+
+        private void toolStripButtonNew_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+            txtCode.Focus();
+            panel2.Enabled = true;
+            btnSave.Enabled = true;
+            btnCancel.Enabled = true;
+            toolStripButtonEdit.Enabled = false;
+            toolStripButtonDelete.Enabled = false;
+            btnSave.Text = "Save";
+
+            if (AccFactory.TaxTypesRepository().CountRecords() != 0)
+            {
+                int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
+                cmbxParent.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID);
+
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+            ClearFields();
+        }
+
+        internal void LoadFunds()
+        {
+            try
+            {
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFundType, "fund_name", "id");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void LoadTaxTypes()
         {
             treeViewTaxTypes.Nodes.Clear();
@@ -180,143 +292,44 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
-
-        private void CreateImageList(ref ImageList nodeImageList)
+        private void LoadParentCode()
         {
-            nodeImageList.Images.Add("0", Properties.Resources.tree_view_tax_18);
-            nodeImageList.Images.Add("1", Properties.Resources.tree_view_accounting_18);
-            nodeImageList.Images.Add("2", Properties.Resources.tree_view_estimates_18);
-            nodeImageList.Images.Add("3", Properties.Resources.tree_view_receipt_dollar_18);
-            nodeImageList.Images.Add("4", Properties.Resources.tree_view_bill_18);
+            DataTable dtTaxTypesCodes = AccFactory.TaxTypesRepository().GetTaxTypeCodes();
+            Dictionary<int, string> dtSource = new Dictionary<int, string>();
 
-            treeViewTaxTypes.ImageList = nodeImageList;
-            treeViewTaxTypes.ImageIndex = 0;
-            treeViewTaxTypes.SelectedImageIndex = 0;
-
-        }
-
-
-        private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (treeViewTaxTypes.SelectedNode.ForeColor != Color.Gray)
+            foreach (DataRow row in dtTaxTypesCodes.Rows)
             {
-                toolStripButtonEdit.Enabled = true;
-                toolStripButtonDelete.Enabled = true;
-                toolStripSeparator1.Visible = false;
-                toolStripButtonUndelete.Visible = false;
-            }
-            else
-            {
-                toolStripButtonEdit.Enabled = false;
-                toolStripButtonDelete.Enabled = false;
-                toolStripSeparator1.Visible = true;
-                toolStripButtonUndelete.Visible = true;
+                int id = Convert.ToInt32(row["id"]);
+                string code = row["code"].ToString();
+                string parent = row["parent"].ToString();
+
+                if (!string.IsNullOrEmpty(parent))
+                    dtSource.Add(id, code);
+                else
+                    dtSource.Add(id, code);
             }
 
-            if (panel2.Enabled)
-                ShowDetailsOfSelectedTaxType();
-
-        }
-
-        private void toolStripButtonNew_Click(object sender, EventArgs e)
-        {
-            ClearFields();
-            txtCode.Focus();
-            panel2.Enabled = true;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
-            toolStripButtonEdit.Enabled = false;
-            toolStripButtonDelete.Enabled = false;
-            btnSave.Text = "Save";
-            isUpdate = false;
-
-            if (AccFactory.TaxTypesRepository().CountRecords() != 0)
-            {
-                int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
-                cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID);
-
-            }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            ResetForm();
-            ClearFields();
-        }
-
-        private void ResetForm()
-        {
-            panel2.Enabled = false;
-            toolStrip2.Enabled = true;
-            toolStripButtonEdit.Enabled = true;
-            toolStripButtonDelete.Enabled = true;
-            btnSave.Text = "Save";
-            btnSave.Enabled = false;
-            btnCancel.Enabled = false;
-            btnSave.Visible = true;
-            btnUpdate.Visible = false;
-
-        }
-
-        private void ClearFields()
-        {
-            txtCode.Focus();
-            txtCode.Clear();
-            txtDesciption.Clear();
-            cmbxParentCode.Text = string.Empty;
-            cmbxFundType.Text = string.Empty;
-            cmbxFundType.SelectedIndex = -1;
-            txtCOAAccountCode.Clear();
-            txtBLFGAccountCode.Clear();
-            LoadParentCode();
+            cmbxParent.DataSource = new BindingSource(dtSource, null); ;
+            cmbxParent.ValueMember = "Key";
+            cmbxParent.DisplayMember = "Value";
+            cmbxParent.SelectedIndex = -1;
         }
 
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
-            LoadFunds();
-            LoadTaxTypes();
-            LoadParentCode();
-        }
-
-        private void LoadParentCode()
-        {
             try
             {
-                DataTable dtParentCode = AccFactory.TaxTypesRepository().GetTaxTypeCodes();
-                cmbxParentCode.DataSource = dtParentCode;
-                cmbxParentCode.ValueMember = "id";
-                cmbxParentCode.DisplayMember = "code";
-                cmbxParentCode.SelectedIndex = -1;
+                LoadFunds();
+                LoadTaxTypes();
+                LoadParentCode();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadFunds()
-        {
-            try
+            catch (Exception ex)
             {
-                var fundRepository = AccFactory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                cmbxFundType.DataSource = dtFund;
-                cmbxFundType.ValueMember = "id";
-                cmbxFundType.DisplayMember = "fund_name";
+                Helper.MessageBoxError(ex.Message);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void toolStripButtonEdit_Click(object sender, EventArgs e)
-        {
-            txtCode.Focus();
-            panel2.Enabled = true;
-            btnCancel.Enabled = true;
-            toolStrip2.Enabled = false;
-            btnUpdate.Visible = true;
-            btnSave.Visible = false;
-
-            ShowDetailsOfSelectedTaxType();
-        }
-
-        private void ShowDetailsOfSelectedTaxType()
+        private void ShowSelectedTaxTypeDetails()
         {
             try
             {
@@ -328,29 +341,34 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
                 txtCode.Text = dictTaxTypes["code"];
                 txtDesciption.Text = dictTaxTypes["description"];
-                cmbxParentCode.Text = parentCode;
-                cmbxFundType.SelectedValue = Convert.ToInt32(dictTaxTypes["funds_id"]);
+                cmbxParent.Text = parentCode;
+                cmbxFundType.SelectedValue = string.IsNullOrEmpty(dictTaxTypes["funds_id"]) ? 0 : Convert.ToInt32(dictTaxTypes["funds_id"]);
                 txtCOAAccountCode.Text = dictTaxTypes["coa_account_code"];
                 txtBLFGAccountCode.Text = dictTaxTypes["blgf_account_code"];
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
         }
 
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (DeleteTaxType())
-                {
-                    Helper.MessageBoxSuccess("Tax type has been deleted.");
-                    LoadTaxTypes();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            txtCode.Focus();
+            panel2.Enabled = true;
+            btnCancel.Enabled = true;
+            toolStrip2.Enabled = false;
+            btnUpdate.Visible = true;
+            btnSave.Visible = false;
+
+            ShowSelectedTaxTypeDetails();
+        }
+
+        private void treeViewTaxTypes_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (SystemColors.GrayText == e.Node.ForeColor)
+                e.Cancel = true;
         }
 
         private bool DeleteTaxType()
@@ -365,21 +383,14 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             return false;
         }
 
-        private void treeViewTaxTypes_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-        {
-            if (SystemColors.GrayText == e.Node.ForeColor)
-                e.Cancel = true;
-        }
-
-        private void toolStripButtonUndelete_Click(object sender, EventArgs e)
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                if (UnDeleteTaxType())
+                if (DeleteTaxType())
                 {
-                    Helper.MessageBoxSuccess("Tax type has been undeleted.");
+                    Helper.MessageBoxSuccess("Tax type has been deleted.");
                     LoadTaxTypes();
-                    treeViewTaxTypes.Refresh();
                 }
             }
             catch (Exception)
@@ -400,6 +411,25 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             return false;
         }
 
+        private void toolStripButtonUndelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UnDeleteTaxType())
+                {
+                    Helper.MessageBoxSuccess("Tax type has been undeleted.");
+                    LoadTaxTypes();
+                    treeViewTaxTypes.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+
+        #region Validations
         private void txtDesciption_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDesciption, "Description.");
@@ -419,25 +449,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (UpdateTaxTypes())
-                {
-                    Helper.MessageBoxSuccess("Tax type has been updated.");
-                    LoadTaxTypes();
-                    ResetForm();
-                    ClearFields();
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-
-        }
+        #endregion
     }
 }

@@ -219,8 +219,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             // bgwLoadReceipts
             // 
             bgwLoadReceipts.WorkerReportsProgress = true;
+            bgwLoadReceipts.WorkerSupportsCancellation = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
+            bgwLoadReceipts.RunWorkerCompleted += bgwLoadReceipts_RunWorkerCompleted;
             // 
             // frmReceipts
             // 

@@ -32,7 +32,7 @@
             panel1 = new System.Windows.Forms.Panel();
             treeViewTaxTypes = new System.Windows.Forms.TreeView();
             panel2 = new System.Windows.Forms.Panel();
-            cmbxParentCode = new System.Windows.Forms.ComboBox();
+            cmbxParent = new System.Windows.Forms.ComboBox();
             cmbxFundType = new System.Windows.Forms.ComboBox();
             txtBLFGAccountCode = new System.Windows.Forms.TextBox();
             txtCOAAccountCode = new System.Windows.Forms.TextBox();
@@ -87,7 +87,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(cmbxParentCode);
+            panel2.Controls.Add(cmbxParent);
             panel2.Controls.Add(cmbxFundType);
             panel2.Controls.Add(txtBLFGAccountCode);
             panel2.Controls.Add(txtCOAAccountCode);
@@ -106,15 +106,15 @@
             panel2.Size = new System.Drawing.Size(798, 179);
             panel2.TabIndex = 1;
             // 
-            // cmbxParentCode
+            // cmbxParent
             // 
-            cmbxParentCode.DropDownHeight = 100;
-            cmbxParentCode.FormattingEnabled = true;
-            cmbxParentCode.IntegralHeight = false;
-            cmbxParentCode.Location = new System.Drawing.Point(163, 66);
-            cmbxParentCode.Name = "cmbxParentCode";
-            cmbxParentCode.Size = new System.Drawing.Size(353, 23);
-            cmbxParentCode.TabIndex = 3;
+            cmbxParent.DropDownHeight = 100;
+            cmbxParent.FormattingEnabled = true;
+            cmbxParent.IntegralHeight = false;
+            cmbxParent.Location = new System.Drawing.Point(163, 66);
+            cmbxParent.Name = "cmbxParent";
+            cmbxParent.Size = new System.Drawing.Size(353, 23);
+            cmbxParent.TabIndex = 3;
             // 
             // cmbxFundType
             // 
@@ -389,7 +389,7 @@
         private System.Windows.Forms.TextBox txtCOAAccountCode;
         private System.Windows.Forms.TextBox txtDesciption;
         private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.ComboBox cmbxParentCode;
+        private System.Windows.Forms.ComboBox cmbxParent;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Panel panel3;

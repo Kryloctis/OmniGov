@@ -90,7 +90,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataColumns;
         }
 
-
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
@@ -128,10 +127,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 newRow["received_date"] = receivedDate;
                 newRow["officer"] = officer;
 
+                receiptDataTable.Rows.Add(newRow);
+
                 rowCount++;
                 int progressBarPercentage = rowCount * 100 / totalRecordsFromDB;
                 bgwLoadReceipts.ReportProgress(progressBarPercentage);
-                receiptDataTable.Rows.Add(newRow);
             }
         }
 
@@ -141,6 +141,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 LoadReceipts();
             });
+        }
+
+        private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
+            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgReceipts).ToString();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
