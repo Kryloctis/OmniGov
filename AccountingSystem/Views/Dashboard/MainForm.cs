@@ -344,14 +344,14 @@ namespace AccountingSystem
             //if (Helper.HasPermission("Report > Transaction Log"))
             //    tabControlLedgers.TabPages.Add(tabPageTransactionLog);
 
-            if (Helper.HasPermission("Report > Summary Subsidiary Ledger"))
-                tabControlLedgers.TabPages.Add(tabPageSummarySL);
+            if (Helper.HasPermission("Report > General Ledger"))
+                tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
 
             if (Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
 
-            if (Helper.HasPermission("Report > General Ledger"))
-                tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
+            if (Helper.HasPermission("Report > Summary Subsidiary Ledger"))
+                tabControlLedgers.TabPages.Add(tabPageSummarySL);
 
             if (Helper.HasPermission("Report > General Ledger") || Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
@@ -363,11 +363,11 @@ namespace AccountingSystem
             if (Helper.HasPermission("Report > Pre Trial Balance") || Helper.HasPermission("Report > Post Trial Balance"))
                 tabControlAccounting.TabPages.Add(tabPageTrialBalance);
 
-            if (Helper.HasPermission("Report > Post Trial Balance"))
-                tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
-
             if (Helper.HasPermission("Report > Pre Trial Balance"))
                 tabControlTrialBalance.TabPages.Add(tabPagePreTrial);
+
+            if (Helper.HasPermission("Report > Post Trial Balance"))
+                tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
 
             #endregion Trial Balance
 
@@ -376,20 +376,20 @@ namespace AccountingSystem
             if (Helper.HasPermission("Report > Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report > Statement of Financial Performance"))
                 tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
 
-            if (Helper.HasPermission("Report > Statement of Comparison of Budget and Actual Amounts"))
-                tabControlFinancialStatements.TabPages.Add(tabPageSCBAA);
-
-            if (Helper.HasPermission("Report > Statement of Cash Flows"))
-                tabControlFinancialStatements.TabPages.Add(tabPageSCF);
-
-            if (Helper.HasPermission("Report > Statement of Changes in Net Assets Equity"))
-                tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
+            if (Helper.HasPermission("Report > Statement of Financial Position"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
 
             if (Helper.HasPermission("Report > Statement of Financial Performance"))
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPerformance);
 
-            if (Helper.HasPermission("Report > Statement of Financial Position"))
-                tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
+            if (Helper.HasPermission("Report > Statement of Changes in Net Assets Equity"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
+
+            if (Helper.HasPermission("Report > Statement of Cash Flows"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSCF);
+
+            if (Helper.HasPermission("Report > Statement of Comparison of Budget and Actual Amounts"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSCBAA);
 
             #endregion Financial Statements
         }
