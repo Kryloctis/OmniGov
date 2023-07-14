@@ -120,7 +120,7 @@ namespace AccountingSystem
 
         public DataTable GetTaxTypeCodes()
         {
-            string query = $"SELECT id, code, parent FROM {tableName}";
+            string query = $"SELECT id, code, description, parent FROM {tableName}";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);

@@ -33,14 +33,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             lblQuantity.Text = quantity;
         }
 
-        private void dgreceipts_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
-
-            int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells[0].Value);
-            bool hasIssueance = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmReceiptsAdd(this).ShowDialog();
@@ -79,6 +71,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             var dataColumns = new DataColumn[]
             {
                 new DataColumn("id", typeof(int)),
+                new DataColumn("accountable_form_code", typeof(string)),
                 new DataColumn("receipt", typeof(string)),
                 new DataColumn("receipt_number_from", typeof(int)),
                 new DataColumn("receipt_number_to", typeof(int)),
@@ -103,7 +96,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             DateTime dateReceived = dtpReceivedDate.Value;
             string searchKey = txtSearch.Text.Trim();
 
-            var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
+            DataTable dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
             int totalRecordsFromDB = dtReceipts.Rows.Count;
             int rowCount = 0;
 
@@ -112,7 +105,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var newRow = receiptDataTable.NewRow();
 
                 int id = Convert.ToInt32(row["id"]);
-                string receipt = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                string accountableFormCode = row["acc_form_no"].ToString();
+                string receipt = row["acc_form_desc"].ToString();
                 int receiptFrom = Convert.ToInt32(row["receipt_number_from"]);
                 int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
                 int quantity = Convert.ToInt32(row["quantity"]);
@@ -120,6 +114,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 string officer = row["officer"].ToString();
 
                 newRow["id"] = id;
+                newRow["accountable_form_code"] = accountableFormCode;
                 newRow["receipt"] = receipt;
                 newRow["receipt_number_from"] = receiptFrom;
                 newRow["receipt_number_to"] = receipNumberTo;
@@ -130,9 +125,12 @@ namespace AccountingSystem.Views.Manage.Receipts
                 receiptDataTable.Rows.Add(newRow);
 
                 rowCount++;
-                int progressBarPercentage = rowCount * 100 / totalRecordsFromDB;
+                int progressBarPercentage = (rowCount * 100) / totalRecordsFromDB;
                 bgwLoadReceipts.ReportProgress(progressBarPercentage);
             }
+
+
+            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -141,12 +139,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 LoadReceipts();
             });
-        }
-
-        private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
-            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgReceipts).ToString();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

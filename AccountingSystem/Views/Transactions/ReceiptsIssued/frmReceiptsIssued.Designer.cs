@@ -42,15 +42,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             panel1 = new System.Windows.Forms.Panel();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             tsJOCount = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            btnSearch = new System.Windows.Forms.Button();
+            bgwLoadIssuedReceipts = new System.ComponentModel.BackgroundWorker();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceiptIssued).BeginInit();
             panel1.SuspendLayout();
@@ -77,8 +79,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(33, 39);
-            btnAdd.Text = "Add";
+            btnAdd.Size = new System.Drawing.Size(39, 39);
+            btnAdd.Text = "Add..";
             btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnAdd.Click += btnAdd_Click;
             // 
@@ -89,8 +91,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(31, 39);
-            btnEdit.Text = "Edit";
+            btnEdit.Size = new System.Drawing.Size(37, 39);
+            btnEdit.Text = "Edit..";
             btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnEdit.Click += btnEdit_Click;
             // 
@@ -127,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             dgReceiptIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgReceiptIssued.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceiptIssued.Location = new System.Drawing.Point(4, 9);
+            dgReceiptIssued.Location = new System.Drawing.Point(4, 4);
             dgReceiptIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgReceiptIssued.Name = "dgReceiptIssued";
             dgReceiptIssued.RowHeadersWidth = 51;
@@ -141,18 +143,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             txtsearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtsearch.Location = new System.Drawing.Point(855, 18);
+            txtsearch.Location = new System.Drawing.Point(772, 18);
             txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtsearch.Name = "txtsearch";
             txtsearch.Size = new System.Drawing.Size(200, 23);
             txtsearch.TabIndex = 11;
-            txtsearch.TextChanged += txtsearch_TextChanged;
             // 
             // label2
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(628, 21);
+            label2.Location = new System.Drawing.Point(545, 21);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(67, 15);
             label2.TabIndex = 31;
@@ -163,36 +164,34 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "dd/MM/yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDateIssued.Location = new System.Drawing.Point(701, 18);
+            dtpDateIssued.Location = new System.Drawing.Point(618, 18);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(148, 23);
             dtpDateIssued.TabIndex = 30;
-            dtpDateIssued.ValueChanged += dtpEndingDate_ValueChanged;
             // 
             // panel1
             // 
             panel1.Controls.Add(dgReceiptIssued);
-            panel1.Controls.Add(progressBar1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1060, 490);
+            panel1.Size = new System.Drawing.Size(1060, 485);
             panel1.TabIndex = 33;
             // 
-            // progressBar1
+            // pbLoadRecords
             // 
-            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(4, 4);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(1052, 5);
-            progressBar1.TabIndex = 21;
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1060, 5);
+            pbLoadRecords.TabIndex = 21;
             // 
             // statusStrip2
             // 
             statusStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, lblRecordCount, tsJOCount, toolStripStatusLabel6, lblCreatedAt, toolStripStatusLabel7, lblUpdatedAt });
+            statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, lblRecordCount, tsJOCount, toolStripStatusLabel6, lblCreatedAt, toolStripStatusLabelCreatedAt, lblUpdatedAt });
             statusStrip2.Location = new System.Drawing.Point(0, 540);
             statusStrip2.Name = "statusStrip2";
             statusStrip2.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -217,7 +216,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // tsJOCount
             // 
             tsJOCount.Name = "tsJOCount";
-            tsJOCount.Size = new System.Drawing.Size(850, 17);
+            tsJOCount.Size = new System.Drawing.Size(906, 17);
             tsJOCount.Spring = true;
             // 
             // toolStripStatusLabel6
@@ -231,16 +230,34 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             lblCreatedAt.Name = "lblCreatedAt";
             lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
-            // toolStripStatusLabel7
+            // toolStripStatusLabelCreatedAt
             // 
-            toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            toolStripStatusLabel7.Size = new System.Drawing.Size(68, 17);
-            toolStripStatusLabel7.Text = "Updated at:";
+            toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
+            toolStripStatusLabelCreatedAt.Text = "-";
             // 
             // lblUpdatedAt
             // 
             lblUpdatedAt.Name = "lblUpdatedAt";
             lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // btnSearch
+            // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSearch.Location = new System.Drawing.Point(978, 18);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 36;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // bgwLoadIssuedReceipts
+            // 
+            bgwLoadIssuedReceipts.WorkerReportsProgress = true;
+            bgwLoadIssuedReceipts.WorkerSupportsCancellation = true;
+            bgwLoadIssuedReceipts.DoWork += bgwLoadIssuedReceipts_DoWork;
+            bgwLoadIssuedReceipts.ProgressChanged += bgwLoadIssuedReceipts_ProgressChanged;
             // 
             // frmReceiptsIssued
             // 
@@ -248,6 +265,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1060, 562);
             Controls.Add(panel1);
+            Controls.Add(btnSearch);
+            Controls.Add(pbLoadRecords);
             Controls.Add(statusStrip2);
             Controls.Add(label2);
             Controls.Add(dtpDateIssued);
@@ -262,7 +281,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Issued Receipts";
-            Load += frmReceipts_Load;
+            Load += frmReceiptsIssued_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceiptIssued).EndInit();
@@ -293,8 +312,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.Button btnSearch;
+        private System.ComponentModel.BackgroundWorker bgwLoadIssuedReceipts;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
     }
 }

@@ -45,11 +45,11 @@
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
-            toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            btnNew = new System.Windows.Forms.ToolStripButton();
+            btnEdit = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripButtonUndelete = new System.Windows.Forms.ToolStripButton();
+            btnUndelete = new System.Windows.Forms.ToolStripButton();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
@@ -215,7 +215,7 @@
             toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButtonNew, toolStripButtonEdit, toolStripButtonDelete, toolStripSeparator1, toolStripButtonUndelete });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNew, btnEdit, btnDelete, toolStripSeparator1, btnUndelete });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
@@ -223,57 +223,57 @@
             toolStrip2.TabIndex = 10;
             toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButtonNew
+            // btnNew
             // 
-            toolStripButtonNew.Image = Properties.Resources.button_rounded_add_24px;
-            toolStripButtonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonNew.Name = "toolStripButtonNew";
-            toolStripButtonNew.Size = new System.Drawing.Size(35, 43);
-            toolStripButtonNew.Text = "&New";
-            toolStripButtonNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonNew.Click += toolStripButtonNew_Click;
+            btnNew.Image = Properties.Resources.button_rounded_add_24px;
+            btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnNew.Name = "btnNew";
+            btnNew.Size = new System.Drawing.Size(35, 43);
+            btnNew.Text = "&New";
+            btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnNew.Click += toolStripButtonNew_Click;
             // 
-            // toolStripButtonEdit
+            // btnEdit
             // 
-            toolStripButtonEdit.Enabled = false;
-            toolStripButtonEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            toolStripButtonEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonEdit.Name = "toolStripButtonEdit";
-            toolStripButtonEdit.Size = new System.Drawing.Size(31, 43);
-            toolStripButtonEdit.Text = "&Edit";
-            toolStripButtonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonEdit.Click += toolStripButtonEdit_Click;
+            btnEdit.Enabled = false;
+            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
+            btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(31, 43);
+            btnEdit.Text = "&Edit";
+            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += toolStripButtonEdit_Click;
             // 
-            // toolStripButtonDelete
+            // btnDelete
             // 
-            toolStripButtonDelete.Enabled = false;
-            toolStripButtonDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            toolStripButtonDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonDelete.Name = "toolStripButtonDelete";
-            toolStripButtonDelete.Size = new System.Drawing.Size(44, 43);
-            toolStripButtonDelete.Text = "&Delete";
-            toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonDelete.Click += toolStripButtonDelete_Click;
+            btnDelete.Enabled = false;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 43);
+            btnDelete.Text = "&Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += toolStripButtonDelete_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
             // 
-            // toolStripButtonUndelete
+            // btnUndelete
             // 
-            toolStripButtonUndelete.Image = Properties.Resources.symbol_refresh_28px;
-            toolStripButtonUndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            toolStripButtonUndelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonUndelete.Name = "toolStripButtonUndelete";
-            toolStripButtonUndelete.Size = new System.Drawing.Size(58, 43);
-            toolStripButtonUndelete.Text = "&Undelete";
-            toolStripButtonUndelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonUndelete.Visible = false;
-            toolStripButtonUndelete.Click += toolStripButtonUndelete_Click;
+            btnUndelete.Image = Properties.Resources.symbol_refresh_28px;
+            btnUndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            btnUndelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnUndelete.Name = "btnUndelete";
+            btnUndelete.Size = new System.Drawing.Size(58, 43);
+            btnUndelete.Text = "&Undelete";
+            btnUndelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnUndelete.Visible = false;
+            btnUndelete.Click += toolStripButtonUndelete_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -372,8 +372,8 @@
         private System.Windows.Forms.TreeView treeViewTaxTypes;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonNew;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        internal System.Windows.Forms.ToolStripButton btnNew;
+        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
@@ -383,7 +383,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
+        private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ComboBox cmbxFundType;
         private System.Windows.Forms.TextBox txtBLFGAccountCode;
         private System.Windows.Forms.TextBox txtCOAAccountCode;
@@ -393,7 +393,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ToolStripButton toolStripButtonUndelete;
+        private System.Windows.Forms.ToolStripButton btnUndelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnUpdate;

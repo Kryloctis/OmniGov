@@ -12,40 +12,26 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, false);
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true, false);
         }
 
-        private void frmReceipts_Load(object sender, EventArgs e)
+        private DataColumn[] ReceiptsIssuedDataColumn()
         {
-            LoadRecords();
-        }
-
-        internal void LoadRecords()
-        {
-            try
+            var dataColumns = new DataColumn[]
             {
-                DateTime dateIssued = dtpDateIssued.Value;
-                string searchText = txtsearch.Text.Trim();
+                new DataColumn("id", typeof(int)),
+                new DataColumn("receipts", typeof(string)),
+                new DataColumn("serial_number_from", typeof(int)),
+                new DataColumn("serial_number_to", typeof(int)),
+                new DataColumn("quantity", typeof(int)),
+                new DataColumn("date_issued", typeof(DateTime)),
+                new DataColumn("collecting_officer", typeof(string)),
+                new DataColumn("issued_by", typeof(string)),
+            };
 
-                DataTable dtReceiptIssued = new();
-                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-
-                dtReceiptIssued = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
-
-                HelperLoadRecords.ReceiptsIssuedDatagridView(dtReceiptIssued, dgReceiptIssued);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            return dataColumns;
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            int textSearchLength = txtsearch.Text.Length;
-            if (textSearchLength > 3 || textSearchLength == 0)
-                LoadRecords();
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -76,9 +62,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 if (DeleteRecords())
-                {
                     LoadRecords();
-                }
             }
             catch (Exception ex)
             {
@@ -92,11 +76,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 int rowIndex = dataGridView.CurrentCell.RowIndex;
 
-                //var createdAt = dataGridView.Rows[rowIndex].Cells["created_at"].Value.ToString();
-                //var updatedAt = dataGridView.Rows[rowIndex].Cells["updated_at"].Value.ToString();
+                string createdAt = dataGridView.Rows[rowIndex].Cells["date_issued"].Value.ToString();
 
-                //lblCreatedAt.Text = createdAt;
-                //lblUpdatedAt.Text = updatedAt;
+                toolStripStatusLabelCreatedAt.Text = createdAt;
             }
         }
 
@@ -125,10 +107,76 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }
 
-        private void dtpEndingDate_ValueChanged(object sender, EventArgs e)
+
+
+        internal void LoadRecords()
         {
-            LoadRecords();
+            DateTime searchDateIssued = dtpDateIssued.Value;
+            string searchText = txtsearch.Text.Trim();
+
+            DataTable dtReceiptsIssued = new();
+            dtReceiptsIssued.Columns.AddRange(ReceiptsIssuedDataColumn());
+
+            DataTable dtReceiptsIssuedFromDB = AccFactory.ReceiptsIssuedRepository().GetRecordsBySearch(searchDateIssued, searchText);
+            int totalRecordsFromDB = dtReceiptsIssuedFromDB.Rows.Count;
+            int rowCount = 0;
+
+            foreach (DataRow row in dtReceiptsIssuedFromDB.Rows)
+            {
+                var newRow = dtReceiptsIssued.NewRow();
+
+                int id = Convert.ToInt32(row["id"]);
+                string receipt = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                int receiptFrom = Convert.ToInt32(row["receipt_issued_from"]);
+                int receipNumberTo = Convert.ToInt32(row["receipt_issued_to"]);
+                int quantity = Convert.ToInt32(row["quantity"]);
+                DateTime dateIssued = Convert.ToDateTime(row["date_issued"]);
+                string officer = row["issued_by"].ToString();
+
+                newRow["id"] = id;
+                newRow["receipts"] = receipt;
+                newRow["serial_number_from"] = receiptFrom;
+                newRow["serial_number_to"] = receipNumberTo;
+                newRow["quantity"] = quantity;
+                newRow["date_issued"] = dateIssued;
+                newRow["collecting_officer"] = officer;
+                newRow["issued_by"] = officer;
+
+                dtReceiptsIssued.Rows.Add(newRow);
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / totalRecordsFromDB;
+                bgwLoadIssuedReceipts.ReportProgress(progressBarPercentage);
+            }
+
+            HelperLoadRecords.ReceiptsIssuedDatagridView(dtReceiptsIssued, dgReceiptIssued);
         }
 
+        private void bgwLoadIssuedReceipts_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadRecords();
+            });
+        }
+
+        private void bgwLoadIssuedReceipts_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!bgwLoadIssuedReceipts.IsBusy)
+                    bgwLoadIssuedReceipts.RunWorkerAsync();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmReceiptsIssued_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

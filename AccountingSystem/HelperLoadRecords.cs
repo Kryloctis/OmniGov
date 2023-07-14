@@ -788,101 +788,47 @@ namespace AccountingSystem
 
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-            DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
-            col.HeaderText = "Returned";
-            col.Name = "is_returned";
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("acc_form_no", "Form Code");
-            datagrid.Columns.Add("acc_form_desc", "Form Description");
-            datagrid.Columns.Add("serial_number_from", "Serial Number From");
-            datagrid.Columns.Add("serial_number_to", "Serial Number To");
-            datagrid.Columns.Add("last_issued", "Last Used");
-            datagrid.Columns.Add("quantity", "Quantity");
-            datagrid.Columns.Add("date_issued", "Date Issued");
-            datagrid.Columns.Add("collecting_officer", "Issued To");
-            datagrid.Columns.Add("issued_by", "Issued By");
-            datagrid.Columns.Add(col);
-            datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.DataSource = dataTable;
 
             datagrid.Columns["id"].Visible = false;
+
+            datagrid.Columns["receipts"].HeaderText = "Receipt";
+            datagrid.Columns["receipts"].Width = 450;
+            datagrid.Columns["receipts"].MinimumWidth = 450;
+
+            datagrid.Columns["serial_number_from"].HeaderText = "Serial Number From";
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
-            datagrid.Columns["serial_number_to"].DefaultCellStyle.Format = "D7";
-            datagrid.Columns["last_issued"].DefaultCellStyle.Format = "D7";
-            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMM  dd, yyyy";
-            datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
-
-            datagrid.Columns["acc_form_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            datagrid.Columns["acc_form_desc"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["serial_number_from"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["serial_number_to"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            datagrid.Columns["date_issued"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["date_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns["is_returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["returned_date"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["returned_date"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            datagrid.Columns["acc_form_no"].Width = 45;
-            datagrid.Columns["acc_form_desc"].Width = 250;
             datagrid.Columns["serial_number_from"].Width = 150;
+            datagrid.Columns["serial_number_from"].MinimumWidth = 150;
+            datagrid.Columns["serial_number_from"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            datagrid.Columns["serial_number_to"].HeaderText = "Serial Number To";
+            datagrid.Columns["serial_number_to"].DefaultCellStyle.Format = "D7";
             datagrid.Columns["serial_number_to"].Width = 150;
-            datagrid.Columns["last_issued"].Width = 85;
-            datagrid.Columns["returned_date"].Width = 150;
-            datagrid.Columns["returned_date"].Width = 150;
-            datagrid.Columns["collecting_officer"].Width = 150;
+            datagrid.Columns["serial_number_to"].MinimumWidth = 150;
+            datagrid.Columns["serial_number_to"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
             datagrid.Columns["quantity"].Width = 60;
-            datagrid.Columns["is_returned"].Width = 85;
+            datagrid.Columns["quantity"].MinimumWidth = 60;
+            datagrid.Columns["quantity"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["date_issued"].HeaderText = "Date Issued";
+            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "yyyy-dd-MM";
+            datagrid.Columns["date_issued"].Width = 80;
+            datagrid.Columns["date_issued"].MinimumWidth = 80;
+
+            datagrid.Columns["collecting_officer"].HeaderText = "Collecting Officer";
+            datagrid.Columns["collecting_officer"].Width = 150;
+            datagrid.Columns["collecting_officer"].MinimumWidth = 150;
+
+            datagrid.Columns["issued_by"].HeaderText = "Issued By";
             datagrid.Columns["issued_by"].Width = 150;
-
-            datagrid.EnableHeadersVisualStyles = false;
-            datagrid.ColumnHeadersHeight = 35;
-
-            string collectingOfficer;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
-                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
-                else
-                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
-
-                var issuedSerialNumberFrom = row["receipt_issued_from"].ToString().Equals("0") ? "" : row["receipt_issued_from"];
-                var issuedSerialNumberTo = row["receipt_issued_to"].ToString().ToString().Equals("0") ? "" : row["receipt_issued_to"];
-
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["acc_form_no"],
-                    row["acc_form_desc"],
-                    issuedSerialNumberFrom,
-                    issuedSerialNumberTo,
-                    row["last_issued"],
-                    row["quantity"],
-                    row["date_issued"],
-                    collectingOfficer,
-                    row["issued_by"],
-                    Convert.ToBoolean(row["is_returned"]),
-                    row["returned_date"],
-                });
-            }
-
-            datagrid.ClearSelection();
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+            datagrid.Columns["issued_by"].MinimumWidth = 150;
         }
-
 
 
         #endregion ReceiptsIssued
@@ -944,52 +890,43 @@ namespace AccountingSystem
 
         internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
 
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("receipt", "Receipt Code and Description");
-            datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
-            datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
-            datagrid.Columns.Add("quantity", "Quantity");
-            datagrid.Columns.Add("received_date", "Received Date");
-            datagrid.Columns.Add("officer", "User/Officer");
+            datagrid.Columns["accountable_form_code"].Width = 80;
+            datagrid.Columns["accountable_form_code"].MinimumWidth = 80;
+            datagrid.Columns["accountable_form_code"].HeaderText = "Form Code";
 
+            datagrid.Columns["receipt"].Width = 400;
+            datagrid.Columns["receipt"].MinimumWidth = 400;
+            datagrid.Columns["receipt"].HeaderText = "Receipt";
+
+            datagrid.Columns["receipt_number_from"].HeaderText = "Receipt Number From";
+            datagrid.Columns["receipt_number_from"].MinimumWidth = 150;
+            datagrid.Columns["receipt_number_from"].Width = 150;
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
+
+            datagrid.Columns["receipt_number_to"].HeaderText = "Receipt Number To";
+            datagrid.Columns["receipt_number_to"].MinimumWidth = 150;
+            datagrid.Columns["receipt_number_to"].Width = 150;
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
 
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["receipt_number_to"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns["receipt_number_from"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            datagrid.Columns["receipt"].Width = 500;
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "yyyy-mm-dd";
+            datagrid.Columns["received_date"].HeaderText = "Received Date";
             datagrid.Columns["received_date"].Width = 150;
+            datagrid.Columns["received_date"].MinimumWidth = 150;
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var serialNumberFrom = Convert.ToInt32(row["receipt_number_from"]) == 0 ? "" : row["receipt_number_from"];
-                var serialNumberTo = Convert.ToInt32(row["receipt_number_to"]) == 0 ? "" : row["receipt_number_to"];
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
+            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["quantity"].MinimumWidth = 80;
+            datagrid.Columns["quantity"].Width = 80;
 
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["receipt"],
-                    serialNumberFrom,
-                    serialNumberTo,
-                    row["quantity"],
-                    row["received_date"],
-                    row["officer"]
-                });
-            }
+            datagrid.Columns["officer"].Width = 150;
+            datagrid.Columns["officer"].MinimumWidth = 150;
+            datagrid.Columns["officer"].HeaderText = "Issued By";
 
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
         }
 
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)

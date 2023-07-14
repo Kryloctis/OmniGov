@@ -113,7 +113,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             dgReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgReceipts.Size = new System.Drawing.Size(1052, 477);
             dgReceipts.TabIndex = 7;
-            dgReceipts.SelectionChanged += dgreceipts_SelectionChanged;
             // 
             // statusStrip1
             // 
@@ -189,6 +188,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // btnSearch
             // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnSearch.Location = new System.Drawing.Point(981, 16);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -222,7 +222,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             bgwLoadReceipts.WorkerSupportsCancellation = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
-            bgwLoadReceipts.RunWorkerCompleted += bgwLoadReceipts_RunWorkerCompleted;
             // 
             // frmReceipts
             // 

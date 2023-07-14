@@ -22,6 +22,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void ClearFields()
         {
             txtCode.Focus();
+
             txtCode.Clear();
             txtDesciption.Clear();
             cmbxParent.Text = string.Empty;
@@ -36,10 +37,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             panel2.Enabled = false;
             toolStrip2.Enabled = true;
-            toolStripButtonEdit.Enabled = true;
-            toolStripButtonDelete.Enabled = true;
-            btnSave.Text = "Save";
-            btnSave.Enabled = false;
+            btnEdit.Enabled = true;
+            btnDelete.Enabled = true;
             btnCancel.Enabled = false;
             btnSave.Visible = true;
             btnUpdate.Visible = false;
@@ -162,7 +161,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             treeViewTaxTypes.ImageList = nodeImageList;
             treeViewTaxTypes.ImageIndex = 0;
             treeViewTaxTypes.SelectedImageIndex = 0;
-
         }
 
         private void PopulateTreeView(int parentID, TreeNode parentNode)
@@ -213,17 +211,17 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             if (treeViewTaxTypes.SelectedNode.ForeColor != Color.Gray)
             {
-                toolStripButtonEdit.Enabled = true;
-                toolStripButtonDelete.Enabled = true;
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
                 toolStripSeparator1.Visible = false;
-                toolStripButtonUndelete.Visible = false;
+                btnUndelete.Visible = false;
             }
             else
             {
-                toolStripButtonEdit.Enabled = false;
-                toolStripButtonDelete.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 toolStripSeparator1.Visible = true;
-                toolStripButtonUndelete.Visible = true;
+                btnUndelete.Visible = true;
             }
 
             if (panel2.Enabled)
@@ -238,8 +236,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             panel2.Enabled = true;
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
-            toolStripButtonEdit.Enabled = false;
-            toolStripButtonDelete.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
             btnSave.Text = "Save";
 
             if (AccFactory.TaxTypesRepository().CountRecords() != 0)
@@ -302,11 +300,13 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 int id = Convert.ToInt32(row["id"]);
                 string code = row["code"].ToString();
                 string parent = row["parent"].ToString();
+                string description = row["description"].ToString();
+                string cmbDisplay = $"{code} - {description}";
 
                 if (!string.IsNullOrEmpty(parent))
-                    dtSource.Add(id, code);
+                    dtSource.Add(id, cmbDisplay);
                 else
-                    dtSource.Add(id, code);
+                    dtSource.Add(id, cmbDisplay);
             }
 
             cmbxParent.DataSource = new BindingSource(dtSource, null); ;
@@ -393,9 +393,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                     LoadTaxTypes();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
