@@ -44,25 +44,39 @@ namespace AccountingSystem.Views.Manage.Receipts
             _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private bool DeleteRecords()
         {
-            if (Helper.MessageBoxConfirmDelete(dgReceipts.SelectedRows.Count))
+
+            int selectedRowsCount = dgReceipts.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
             {
-                var receiptsRepository = AccFactory.ReceiptsRepository();
-                var receiptModel = new List<ReceiptsModel>();
+                var receiptModelList = new List<ReceiptsModel>();
 
                 foreach (DataGridViewRow row in dgReceipts.SelectedRows)
                 {
-                    int receiptId = int.Parse(row.Cells[0].Value.ToString());
-
-                    var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
-
-                    if (!receiptIsUsed)
-                        receiptModel.Add(new ReceiptsModel() { Id = receiptId });
+                    int receiptId = Convert.ToInt32(row.Cells["id"].Value);
+                    receiptModelList.Add(new ReceiptsModel() { Id = receiptId });
                 }
-                _ = receiptsRepository.Delete(receiptModel);
+                return AccFactory.ReceiptsRepository().Delete(receiptModelList);
+            }
 
-                Helper.MessageBoxSuccess("Receipt successfullt deleted.");
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DeleteRecords())
+                {
+                    Helper.MessageBoxSuccess("Receipt successfullt deleted.");
+                    LoadReceipts();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -151,5 +165,9 @@ namespace AccountingSystem.Views.Manage.Receipts
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void dgReceipts_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

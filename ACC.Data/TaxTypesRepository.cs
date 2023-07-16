@@ -40,6 +40,19 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
+        public int GetChildNodesIDs(int taxTypeID)
+        {
+
+            var parameter = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, taxTypeID},
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE parent = @id";
+
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
+        }
+
         public DataTable GetChildNodesTaxTypes(int parentID)
         {
             var parameter = new object[][]

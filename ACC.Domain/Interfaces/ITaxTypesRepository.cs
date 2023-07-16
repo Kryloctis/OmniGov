@@ -11,5 +11,6 @@ namespace ACC.Domain.Interfaces
         string GetParentCodeByID(int parentID);
         bool DeleteTaxType(int taxTypeID);
         bool UnDeleteTaxType(int taxTypeID);
+        int GetChildNodesIDs(int taxTypeID);
     }
 }

@@ -91,7 +91,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // btnDelete
             // 
-            btnDelete.Enabled = false;
             btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -113,6 +112,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             dgReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgReceipts.Size = new System.Drawing.Size(1052, 477);
             dgReceipts.TabIndex = 7;
+            dgReceipts.SelectionChanged += dgReceipts_SelectionChanged;
             // 
             // statusStrip1
             // 

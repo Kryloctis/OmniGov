@@ -42,6 +42,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             btnCancel.Enabled = false;
             btnSave.Visible = true;
             btnUpdate.Visible = false;
+            btnUndelete.Visible = false;
+            toolStripSeparator1.Visible = false;
         }
 
         internal string GetFormErrors()
@@ -375,7 +377,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             if (Helper.MessageBoxConfirmCancel("Are you sure you want to delete selected tax type?"))
             {
-                int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+                //taxtypeID = 18;
+                object selectedNodeTag = treeViewTaxTypes.SelectedNode.Tag;
+                int taxTypeID = Convert.ToInt32(selectedNodeTag);
 
                 return AccFactory.TaxTypesRepository().DeleteTaxType(taxTypeID);
             }
@@ -387,6 +391,11 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             try
             {
+
+
+
+
+
                 if (DeleteTaxType())
                 {
                     Helper.MessageBoxSuccess("Tax type has been deleted.");
@@ -418,6 +427,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 if (UnDeleteTaxType())
                 {
                     Helper.MessageBoxSuccess("Tax type has been undeleted.");
+                    ResetForm();
                     LoadTaxTypes();
                     treeViewTaxTypes.Refresh();
                 }

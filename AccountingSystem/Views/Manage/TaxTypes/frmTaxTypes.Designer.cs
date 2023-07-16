@@ -262,6 +262,7 @@
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            toolStripSeparator1.Visible = false;
             // 
             // btnUndelete
             // 
