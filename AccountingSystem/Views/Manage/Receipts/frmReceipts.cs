@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,7 +31,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                             select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
             lblRecordCount.Text = dgReceipts.Rows.Count.ToString();
-            lblQuantity.Text = quantity;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -70,9 +70,15 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 if (DeleteRecords())
                 {
-                    Helper.MessageBoxSuccess("Receipt successfullt deleted.");
-                    LoadReceipts();
+                    Helper.MessageBoxSuccess("Receipt successfully deleted.");
+                    if (!bgwLoadReceipts.IsBusy)
+                        bgwLoadReceipts.RunWorkerAsync();
                 }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete receipt. The receipt was already used by a collecting officer.");
             }
             catch (Exception ex)
             {
@@ -102,7 +108,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void LoadReceipts()
+        private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
+        }
+
+        private DataTable ReceiptDataTable()
         {
             receiptDataTable = new DataTable();
             receiptDataTable.Columns.AddRange(ReceiptsColumns());
@@ -111,7 +122,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             string searchKey = txtSearch.Text.Trim();
 
             DataTable dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
-            int totalRecordsFromDB = dtReceipts.Rows.Count;
+            int totalRecordsCount = dtReceipts.Rows.Count;
             int rowCount = 0;
 
             foreach (DataRow row in dtReceipts.Rows)
@@ -136,15 +147,21 @@ namespace AccountingSystem.Views.Manage.Receipts
                 newRow["received_date"] = receivedDate;
                 newRow["officer"] = officer;
 
-                receiptDataTable.Rows.Add(newRow);
-
                 rowCount++;
-                int progressBarPercentage = (rowCount * 100) / totalRecordsFromDB;
+                int progressBarPercentage = (rowCount * 100) / totalRecordsCount;
                 bgwLoadReceipts.ReportProgress(progressBarPercentage);
+
+                receiptDataTable.Rows.Add(newRow);
             }
 
+            return receiptDataTable;
+        }
 
-            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
+
+        internal void LoadReceipts()
+        {
+            HelperLoadRecords.ReceiptsDatagridView(ReceiptDataTable(), dgReceipts);
+            SetToolStripStatusData();
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -162,12 +179,15 @@ namespace AccountingSystem.Views.Manage.Receipts
                 if (!bgwLoadReceipts.IsBusy)
                     bgwLoadReceipts.RunWorkerAsync();
             }
+
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
         {
-
+            Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
         }
+
+
     }
 }

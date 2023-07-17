@@ -313,9 +313,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Button btnSearch;
-        private System.ComponentModel.BackgroundWorker bgwLoadIssuedReceipts;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
+        internal System.ComponentModel.BackgroundWorker bgwLoadIssuedReceipts;
+        internal System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }

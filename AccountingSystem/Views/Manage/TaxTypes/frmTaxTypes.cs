@@ -165,49 +165,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             treeViewTaxTypes.SelectedImageIndex = 0;
         }
 
-        private void PopulateTreeView(int parentID, TreeNode parentNode)
-        {
-            var dtChildNodeTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
-
-            ImageList nodeImageList = new();
-            CreateImageList(ref nodeImageList);
-
-            foreach (DataRow dr in dtChildNodeTaxTypes.Rows)
-            {
-                string taxTypeCode = dr["code"].ToString();
-                string taxTypeDescription = dr["description"].ToString();
-                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
-
-                TreeNode childNode = new();
-
-                if (parentNode == null)
-                {
-                    childNode = treeViewTaxTypes.Nodes.Add(displayText);
-                    childNode.ImageIndex = 0;
-                    childNode.SelectedImageIndex = 0;
-                }
-
-                else
-                {
-                    childNode = parentNode.Nodes.Add(displayText);
-                    childNode.ImageIndex = childImageIndexCounter;
-                    childNode.SelectedImageIndex = childImageIndexCounter;
-
-                    if (childImageIndexCounter >= nodeImageList.Images.Count)
-                        childImageIndexCounter = 1;
-                    else
-                        childImageIndexCounter++;
-                }
-
-                int taxTypeID = Convert.ToInt32(dr["id"]);
-                childNode.Tag = taxTypeID;
-                PopulateTreeView(taxTypeID, childNode);
-
-                if (Convert.ToBoolean(dr["is_deleted"]))
-                    childNode.ForeColor = Color.Gray;
-
-            }
-        }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -266,6 +223,50 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void PopulateTreeView(int parentID, TreeNode parentNode)
+        {
+            DataTable dtChildNodeTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parentID);
+
+            ImageList nodeImageList = new();
+            CreateImageList(ref nodeImageList);
+
+            foreach (DataRow dr in dtChildNodeTaxTypes.Rows)
+            {
+                string taxTypeCode = dr["code"].ToString();
+                string taxTypeDescription = dr["description"].ToString();
+                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+
+                TreeNode childNode = new();
+
+                if (parentNode == null)
+                {
+                    childNode = treeViewTaxTypes.Nodes.Add(displayText);
+                    childNode.ImageIndex = 0;
+                    childNode.SelectedImageIndex = 0;
+                }
+
+                else
+                {
+                    childNode = parentNode.Nodes.Add(displayText);
+                    childNode.ImageIndex = childImageIndexCounter;
+                    childNode.SelectedImageIndex = childImageIndexCounter;
+
+                    if (childImageIndexCounter >= nodeImageList.Images.Count)
+                        childImageIndexCounter = 1;
+                    else
+                        childImageIndexCounter++;
+                }
+
+                int taxTypeID = Convert.ToInt32(dr["id"]);
+                childNode.Tag = taxTypeID;
+                PopulateTreeView(taxTypeID, childNode);
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    childNode.ForeColor = Color.Gray;
+
+            }
+        }
+
         private void LoadTaxTypes()
         {
             treeViewTaxTypes.Nodes.Clear();
@@ -292,11 +293,15 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
+        private void GetChildNode()
+        {
+
+        }
+
         private void LoadParentCode()
         {
             DataTable dtTaxTypesCodes = AccFactory.TaxTypesRepository().GetTaxTypeCodes();
             Dictionary<int, string> dtSource = new Dictionary<int, string>();
-
             foreach (DataRow row in dtTaxTypesCodes.Rows)
             {
                 int id = Convert.ToInt32(row["id"]);
@@ -305,17 +310,22 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 string description = row["description"].ToString();
                 string cmbDisplay = $"{code} - {description}";
 
-                if (!string.IsNullOrEmpty(parent))
-                    dtSource.Add(id, cmbDisplay);
-                else
-                    dtSource.Add(id, cmbDisplay);
+                //if (!string.IsNullOrEmpty(parent))
+                //    dtSource.Add(id, cmbDisplay.PadLeft(20));
+                //else
+                //    dtSource.Add(id, cmbDisplay);
+
+                dtSource.Add(id, cmbDisplay);
+
             }
 
             cmbxParent.DataSource = new BindingSource(dtSource, null); ;
             cmbxParent.ValueMember = "Key";
             cmbxParent.DisplayMember = "Value";
             cmbxParent.SelectedIndex = -1;
+
         }
+
 
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {

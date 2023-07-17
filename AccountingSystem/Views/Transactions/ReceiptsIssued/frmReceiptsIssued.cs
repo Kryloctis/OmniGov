@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             return dataColumns;
         }
 
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmReceiptsIssuedAdd(this).ShowDialog();
@@ -62,52 +62,93 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 if (DeleteRecords())
-                    LoadRecords();
+                {
+                    Helper.MessageBoxSuccess("Issued receipts has been deleted.");
+
+                    if (!bgwLoadIssuedReceipts.IsBusy)
+                        bgwLoadIssuedReceipts.RunWorkerAsync();
+                }
             }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete issued receipt. The receipt was already used by a collecting officer.");
+            }
+
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
 
-        private void ShowRecordTimeStamp(DataGridView dataGridView)
+        private void ShowRecordTimeStamp()
         {
-            if (dataGridView.SelectedRows.Count == 1 && dataGridView.CurrentRow.Cells["id"].Value != null)
+            if (dgReceiptIssued.SelectedRows.Count == 1 && dgReceiptIssued.CurrentRow.Cells["id"].Value != null)
             {
-                int rowIndex = dataGridView.CurrentCell.RowIndex;
+                int rowIndex = dgReceiptIssued.CurrentCell.RowIndex;
 
-                string createdAt = dataGridView.Rows[rowIndex].Cells["date_issued"].Value.ToString();
+                string createdAt = dgReceiptIssued.Rows[rowIndex].Cells["date_issued"].Value.ToString();
 
                 toolStripStatusLabelCreatedAt.Text = createdAt;
             }
+
+            int totalRows = dgReceiptIssued.Rows.Count;
+            lblRecordCount.Text = totalRows.ToString();
         }
 
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
-            ShowRecordTimeStamp(dgReceiptIssued);
+            ShowRecordTimeStamp();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
             _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
+        }
+
+        private void ReturnReceipts()
+        {
+            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-            int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+            Helper.MessageBoxSuccess("To be fixed.");
+            //int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+            //int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
 
-            int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
+            //int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
 
-            int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
-            int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
+            //int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
+            //int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
 
-            _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
+            //_ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }
 
+        private string CollectingOfficerFullName(DataRow row)
+        {
+            string jobOrdersID = row["job_orders_id"].ToString();
 
+            string prefix = row["collecting_officers_prefix"].ToString();
+            string firstName = row["collecting_officers_first_name"].ToString();
+            string midInitial = row["collecting_officers_mid_initial"].ToString();
+            string lastName = row["collecting_officers_last_name"].ToString();
+            string suffix = row["collecting_officers_suffix"].ToString();
+
+            if (!string.IsNullOrEmpty(jobOrdersID))
+            {
+                prefix = row["job_orders_prefix"].ToString();
+                firstName = row["job_orders_first_name"].ToString();
+                midInitial = row["job_orders_mid_initial"].ToString();
+                lastName = row["job_orders_last_name"].ToString();
+                suffix = row["job_orders_suffix"].ToString();
+            }
+
+            return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
+        }
 
         internal void LoadRecords()
         {
@@ -118,7 +159,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtReceiptsIssued.Columns.AddRange(ReceiptsIssuedDataColumn());
 
             DataTable dtReceiptsIssuedFromDB = AccFactory.ReceiptsIssuedRepository().GetRecordsBySearch(searchDateIssued, searchText);
-            int totalRecordsFromDB = dtReceiptsIssuedFromDB.Rows.Count;
+            int totalRecords = dtReceiptsIssuedFromDB.Rows.Count;
             int rowCount = 0;
 
             foreach (DataRow row in dtReceiptsIssuedFromDB.Rows)
@@ -131,7 +172,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 int receipNumberTo = Convert.ToInt32(row["receipt_issued_to"]);
                 int quantity = Convert.ToInt32(row["quantity"]);
                 DateTime dateIssued = Convert.ToDateTime(row["date_issued"]);
-                string officer = row["issued_by"].ToString();
+                string collectingOfficer = CollectingOfficerFullName(row);
+                string issuedBy = row["issued_by"].ToString();
 
                 newRow["id"] = id;
                 newRow["receipts"] = receipt;
@@ -139,16 +181,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 newRow["serial_number_to"] = receipNumberTo;
                 newRow["quantity"] = quantity;
                 newRow["date_issued"] = dateIssued;
-                newRow["collecting_officer"] = officer;
-                newRow["issued_by"] = officer;
+                newRow["collecting_officer"] = collectingOfficer;
+                newRow["issued_by"] = issuedBy;
 
                 dtReceiptsIssued.Rows.Add(newRow);
                 rowCount++;
-                int progressBarPercentage = (rowCount * 100) / totalRecordsFromDB;
+                int progressBarPercentage = (rowCount * 100) / totalRecords;
                 bgwLoadIssuedReceipts.ReportProgress(progressBarPercentage);
             }
 
             HelperLoadRecords.ReceiptsIssuedDatagridView(dtReceiptsIssued, dgReceiptIssued);
+
+            lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
         }
 
         private void bgwLoadIssuedReceipts_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -176,7 +220,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsIssued_Load(object sender, EventArgs e)
         {
-
+            ShowRecordTimeStamp();
         }
     }
 }

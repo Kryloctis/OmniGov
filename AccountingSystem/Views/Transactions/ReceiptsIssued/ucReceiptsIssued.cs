@@ -143,7 +143,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 if (remainingReceipts == 0)
                 {
-                    if (isUpdate)
+                    if (isUpdate && receiptId != receiptsId)
+                        row.Delete();
+
+                    if (!isUpdate)
                         row.Delete();
                 }
             }
@@ -244,6 +247,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
+                bool isFieldsEmpty = txtReceiptIssuedFrom.Text.Length == 0 || txtReceiptIssuedTo.Text.Length == 0;
+
+                if (isFieldsEmpty)
+                    return false;
+
                 int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
                 int receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
                 int receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
@@ -282,7 +290,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
             if (isCashTickets)
+            {
+                MessageBox.Show("Test");
                 return;
+            }
+
 
             if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
             {
@@ -290,9 +302,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 return;
             }
 
-            if (!ReceiptNumberInRange())
+            if (!ReceiptNumberInRange() && !string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
             {
-                errorProvider1.SetError(txtReceiptIssuedFrom, "Invalid receipt number to.");
+                errorProvider1.SetError(txtReceiptIssuedFrom, "Invalid receipt number from.");
                 e.Cancel = true;
             }
         }

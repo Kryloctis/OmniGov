@@ -97,6 +97,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt has been updated.");
+                if (!_frmReceipts.bgwLoadReceipts.IsBusy)
+                    _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
                 this.Close();
             }
         }

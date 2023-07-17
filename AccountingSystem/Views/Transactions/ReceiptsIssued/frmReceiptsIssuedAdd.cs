@@ -70,8 +70,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt issued has been saved.");
+                    _frmReceiptIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
                     uc.ResetForm();
-                    _frmReceiptIssued.LoadRecords();
                 }
             }
             catch (Exception ex)

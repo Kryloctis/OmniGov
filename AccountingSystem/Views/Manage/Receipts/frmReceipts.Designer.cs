@@ -37,8 +37,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblQuantity = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             txtSearch = new System.Windows.Forms.TextBox();
             dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
@@ -91,6 +89,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // btnDelete
             // 
+            btnDelete.Enabled = false;
             btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -117,7 +116,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel2, lblQuantity, toolStripStatusLabel3 });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel3 });
             statusStrip1.Location = new System.Drawing.Point(0, 540);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -137,22 +136,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             lblRecordCount.Size = new System.Drawing.Size(13, 17);
             lblRecordCount.Text = "0";
             // 
-            // toolStripStatusLabel2
-            // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(59, 17);
-            toolStripStatusLabel2.Text = " Quantity:";
-            // 
-            // lblQuantity
-            // 
-            lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new System.Drawing.Size(13, 17);
-            lblQuantity.Text = "0";
-            // 
             // toolStripStatusLabel3
             // 
             toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(910, 17);
+            toolStripStatusLabel3.Size = new System.Drawing.Size(982, 17);
             toolStripStatusLabel3.Spring = true;
             // 
             // txtSearch
@@ -222,6 +209,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             bgwLoadReceipts.WorkerSupportsCancellation = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
+            bgwLoadReceipts.RunWorkerCompleted += bgwLoadReceipts_RunWorkerCompleted;
             // 
             // frmReceipts
             // 
@@ -262,15 +250,13 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblQuantity;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DateTimePicker dtpReceivedDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
-        private System.ComponentModel.BackgroundWorker bgwLoadReceipts;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        internal System.ComponentModel.BackgroundWorker bgwLoadReceipts;
     }
 }

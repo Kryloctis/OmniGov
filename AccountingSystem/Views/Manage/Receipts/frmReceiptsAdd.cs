@@ -6,15 +6,15 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceiptsAdd : Form
     {
-        private readonly frmReceipts frmReceipts;
+        private readonly frmReceipts _frmReceipts;
         private readonly int userId;
         private static ucReceipts uc;
 
-        public frmReceiptsAdd(frmReceipts _frmReceipts)
+        public frmReceiptsAdd(frmReceipts frmReceipts)
         {
             InitializeComponent();
 
-            frmReceipts = _frmReceipts;
+            _frmReceipts = frmReceipts;
             userId = Helper.UserId;
             uc = ucReceipts;
         }
@@ -63,7 +63,10 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if (SaveData())
             {
+
                 Helper.MessageBoxSuccess("Receipt has been saved.");
+                if (!_frmReceipts.bgwLoadReceipts.IsBusy)
+                    _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
                 uc.ResetForm();
             }
         }

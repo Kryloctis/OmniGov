@@ -222,7 +222,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal System.Windows.Forms.ComboBox cmbCollector;
         internal System.Windows.Forms.ComboBox cmbReceipt;
         internal System.Windows.Forms.TextBox txtReceiptQuantity;
-        private System.Windows.Forms.CheckBox cbCollectingOfficerTypeJO;
         internal System.Windows.Forms.TextBox txtReceiptIssuedFrom;
         internal System.Windows.Forms.TextBox txtReceiptIssuedTo;
         private System.Windows.Forms.Label label6;
@@ -232,5 +231,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.CheckBox cbCollectingOfficerTypeJO;
     }
 }

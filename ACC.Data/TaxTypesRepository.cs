@@ -133,7 +133,7 @@ namespace AccountingSystem
 
         public DataTable GetTaxTypeCodes()
         {
-            string query = $"SELECT id, code, description, parent FROM {tableName}";
+            string query = $"SELECT id, code, description, parent FROM {tableName}  ORDER BY parent, id DESC";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);

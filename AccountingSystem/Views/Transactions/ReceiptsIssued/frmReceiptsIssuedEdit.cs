@@ -17,31 +17,42 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             _frmReceiptsIssued = frmReceiptsIssued;
             _receiptIssuedID = receiptIssuedID;
             uc = ucReceipts1;
-        }
-
-        private void frmReceiptsEdit_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                uc.isUpdate = true;
-                LoadSelectedValue();
-                uc.ReceiptsIssuedStatus();
-                uc.ControlsConfiguration();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.isUpdate = true;
         }
 
         internal void LoadSelectedValue()
         {
             Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(_receiptIssuedID);
+            uc.receiptId = Convert.ToInt32(receiptIssuedDict["receipts_id"]);
 
-            uc.cmbCollector.SelectedValue = receiptIssuedDict["collecting_officers_id"];
+            var jobOrderID = receiptIssuedDict["job_orders_id"];
+            var collectingOfficerID = receiptIssuedDict["collecting_officers_id"];
+
+            if (jobOrderID != null)
+                uc.cbCollectingOfficerTypeJO.Checked = true;
+
+            uc.cmbCollector.SelectedValue = jobOrderID == null ? collectingOfficerID : jobOrderID;
             uc.cmbReceipt.SelectedValue = receiptIssuedDict["receipts_id"];
             uc.dtpDateIssued.Value = Convert.ToDateTime(receiptIssuedDict["date_issued"]);
             uc.txtReceiptIssuedFrom.Text = receiptIssuedDict["receipt_issued_from"];
             uc.txtReceiptIssuedTo.Text = receiptIssuedDict["receipt_issued_to"];
             uc.txtReceiptQuantity.Text = receiptIssuedDict["quantity"];
         }
+
+        private void frmReceiptsEdit_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadSelectedValue();
+
+                uc.LoadReceipts();
+                uc.ReceiptsIssuedStatus();
+                uc.ControlsConfiguration();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
 
         private bool SaveData()
         {
@@ -73,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt Issued has been updated.");
-                    _frmReceiptsIssued.LoadRecords();
+                    _frmReceiptsIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
                     Close();
                 }
             }
