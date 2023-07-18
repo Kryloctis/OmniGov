@@ -45,13 +45,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isCashTickets = false;
             isUpdate = false;
             receiptNumberFrom = 0;
-            receiptNumberTo = "0";
-            txtReceiptIssuedFrom.Text = "0";
-            txtReceiptIssuedTo.Text = "0";
             txtReceiptQuantity.Clear();
             dtpDateIssued.Value = DateTime.Today;
             LoadCollectors();
             LoadReceipts();
+            ControlsConfiguration();
         }
 
         #region Collectors
@@ -186,21 +184,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedTo.Enabled = !isUsed;
         }
 
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadCollectors();
-                LoadReceipts();
-            }
-        }
-
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
-                cmbReceipt_SelectionChangeCommitted(sender, e);
+                if (!DesignMode)
+                {
+                    LoadCollectors();
+                    LoadReceipts();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -267,13 +259,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptQuantity, "Quantity");
             int quantity = string.IsNullOrEmpty(txtReceiptQuantity.Text) ? 0 : Convert.ToInt32(txtReceiptQuantity.Text);
-
-            if (string.IsNullOrWhiteSpace(quantity.ToString()))
-            {
-                e.Cancel = true;
-                return;
-            }
 
             if (receiptAvailableQuantity < quantity)
             {
@@ -290,11 +277,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
             if (isCashTickets)
-            {
-                MessageBox.Show("Test");
                 return;
-            }
-
 
             if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
             {
@@ -342,11 +325,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void SetFieldsForCashTickets()
         {
             isCashTickets = true;
-
             txtReceiptQuantity.ReadOnly = false;
-            txtReceiptIssuedFrom.ResetText();
-            txtReceiptIssuedTo.ResetText();
+            txtReceiptIssuedFrom.Clear();
             txtReceiptIssuedFrom.Enabled = false;
+            txtReceiptIssuedTo.Clear();
             txtReceiptIssuedTo.Enabled = false;
         }
 

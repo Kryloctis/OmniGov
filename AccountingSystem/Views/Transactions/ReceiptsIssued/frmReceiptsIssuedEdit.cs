@@ -25,13 +25,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(_receiptIssuedID);
             uc.receiptId = Convert.ToInt32(receiptIssuedDict["receipts_id"]);
 
-            var jobOrderID = receiptIssuedDict["job_orders_id"];
-            var collectingOfficerID = receiptIssuedDict["collecting_officers_id"];
+            string jobOrderID = receiptIssuedDict["job_orders_id"];
+            var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officers_id"]);
+            int collector = string.IsNullOrEmpty(jobOrderID) ? collectingOfficerID : Convert.ToInt32(jobOrderID);
 
-            if (jobOrderID != null)
+            if (!string.IsNullOrEmpty(jobOrderID))
                 uc.cbCollectingOfficerTypeJO.Checked = true;
 
-            uc.cmbCollector.SelectedValue = jobOrderID == null ? collectingOfficerID : jobOrderID;
+            uc.cmbCollector.SelectedValue = collector;
             uc.cmbReceipt.SelectedValue = receiptIssuedDict["receipts_id"];
             uc.dtpDateIssued.Value = Convert.ToDateTime(receiptIssuedDict["date_issued"]);
             uc.txtReceiptIssuedFrom.Text = receiptIssuedDict["receipt_issued_from"];
@@ -41,13 +42,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
         {
+            LoadSelectedValue();
             try
             {
-                LoadSelectedValue();
-
-                uc.LoadReceipts();
                 uc.ReceiptsIssuedStatus();
-                uc.ControlsConfiguration();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
