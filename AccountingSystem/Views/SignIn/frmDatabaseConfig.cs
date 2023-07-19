@@ -33,6 +33,15 @@ namespace AccountingSystem.Views.SignIn
                 int lguId = model.LguId;
                 string municipalityName = model.MunicipalityName;
                 string provinceName = model.ProvinceName;
+                string lfsInstance = model.LfsInstance;
+                string rptmInstance = model.RpmInstance;
+
+                AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(lfsInstance);
+                RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(rptmInstance);
+                bool isServerAvailable = AccFactory.UsersRepository().IsServerAvailable();
+
+                if (!isServerAvailable)
+                    continue;
 
                 var radioButton = new RadioButton()
                 {

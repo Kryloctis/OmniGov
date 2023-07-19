@@ -82,8 +82,6 @@ namespace AccountingSystem
             string municipalityName = serverList.First().MunicipalityName;
             string provinceName = serverList.First().ProvinceName;
             Helper.selectedServerModel = serverList.First();
-            AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(serverList.First().LfsInstance);
-            RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(serverList.First().RpmInstance);
 
             lblServer.Text = $"(F12) Server: {municipalityName}, {provinceName}";
         }
@@ -110,6 +108,22 @@ namespace AccountingSystem
         {
             if (e.KeyCode == Keys.F12)
                 _ = new frmDatabaseConfig(this).ShowDialog();
+        }
+
+        private void ScanAvailableServers()
+        {
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
         }
     }
 }

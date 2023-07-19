@@ -41,6 +41,7 @@ namespace AccountingSystem
             lblServer = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).BeginInit();
             SuspendLayout();
@@ -182,6 +183,14 @@ namespace AccountingSystem
             label6.TabIndex = 1;
             label6.Text = "Sign in to continue";
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
             // frmSignIn
             // 
             AcceptButton = btnLogin;
@@ -198,12 +207,13 @@ namespace AccountingSystem
             Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(txtUsername);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmSignIn";
+            ShowIcon = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Sign In";
             Load += SignInForm_Load;
@@ -229,5 +239,6 @@ namespace AccountingSystem
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label lblServer;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

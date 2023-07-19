@@ -4,6 +4,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAccGenericCommands
     {
+        bool TestConnection(string testConnectionName);
+
         DataTable Fill(string query, DataTable dataTable);
 
         DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters);

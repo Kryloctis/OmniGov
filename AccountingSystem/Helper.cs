@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Reporting.WinForms;
+using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -502,6 +503,79 @@ namespace AccountingSystem
 
         #endregion Check Box Column Utility Datagrid
 
+        #region ServerConfig and Server List
+
+        public class LguServerModel
+        {
+            public int LguId { get; set; }
+            public string MunicipalityCode { get; set; }
+            public string MunicipalityName { get; set; }
+            public string ProvinceCode { get; set; }
+            public string ProvinceName { get; set; }
+            public string LfsInstance { get; set; }
+            public string RpmInstance { get; set; }
+            public Image Emblem { get; set; }
+        }
+
+        public static List<LguServerModel> LguServerModels()
+        {
+            var lguModelList = new List<LguServerModel>();
+
+            var buugZsiModel = new LguServerModel()
+            {
+                LguId = 1,
+                MunicipalityCode = "BG",
+                MunicipalityName = "Buug",
+                ProvinceCode = "ZSI",
+                ProvinceName = "Zamboanga Sibugay",
+                LfsInstance = "bg_zsi_lfs_instance",
+                RpmInstance = "bg_zsi_rpm_instance",
+                Emblem = Properties.Resources.list_money_banknotes_18px
+            };
+
+            var titayZsiModel = new LguServerModel()
+            {
+                LguId = 2,
+                MunicipalityCode = "TTY",
+                MunicipalityName = "Titay",
+                ProvinceCode = "ZSI",
+                ProvinceName = "Zamboanga Sibugay",
+                LfsInstance = "tty_zsi_lfs_instance",
+                RpmInstance = "tty_zsi_rpm_instance",
+                Emblem = Properties.Resources.list_money_banknotes_18px
+            };
+
+            lguModelList.Add(buugZsiModel);
+            lguModelList.Add(titayZsiModel);
+
+            return lguModelList;
+        }
+
+        //public static List<LguServerModel> AvailableServerList()
+        //{
+        //    foreach (LguServerModel model in LguServerModels())
+        //    {
+        //        string lfsInstance = model.LfsInstance;
+        //        string rpmInstance = model.RpmInstance;
+
+        //        AccFactory.ServerRepository().TestConnection(lfsInstance);
+        //    }
+        //}
+
+        public static Dictionary<string, dynamic> LGUDetails()
+        {
+            var lguDict = new Dictionary<string, dynamic>
+            {
+                { "municipality", selectedServerModel.MunicipalityName },
+                { "lgu_name", $"Municipality of {selectedServerModel.MunicipalityName}" },
+                { "lgu_province", selectedServerModel.ProvinceName},
+            };
+
+            return lguDict;
+        }
+
+        #endregion ServerConfig and Server List
+
         #region Miscellaneous
 
         public static Image ByteArrayToImage(byte[] byteArrayIn)
@@ -573,68 +647,6 @@ namespace AccountingSystem
         {
             return dataGridView.Rows.Count;
         }
-
-        #region ServerConfig and Server List
-
-        public class LguServerModel
-        {
-            public int LguId { get; set; }
-            public string MunicipalityCode { get; set; }
-            public string MunicipalityName { get; set; }
-            public string ProvinceCode { get; set; }
-            public string ProvinceName { get; set; }
-            public string LfsInstance { get; set; }
-            public string RpmInstance { get; set; }
-            public Image Emblem { get; set; }
-        }
-
-        public static List<LguServerModel> LguServerModels()
-        {
-            var lguModelList = new List<LguServerModel>();
-
-            var buugZsiModel = new LguServerModel()
-            {
-                LguId = 1,
-                MunicipalityCode = "BG",
-                MunicipalityName = "Buug",
-                ProvinceCode = "ZSI",
-                ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "bg_zsi_lfs_instance",
-                RpmInstance = "bg_zsi_rpm_instance",
-                Emblem = Properties.Resources.list_money_banknotes_18px
-            };
-
-            var titayZsiModel = new LguServerModel()
-            {
-                LguId = 2,
-                MunicipalityCode = "TTY",
-                MunicipalityName = "Titay",
-                ProvinceCode = "ZSI",
-                ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "tty_zsi_lfs_instance",
-                RpmInstance = "tty_zsi_rpm_instance",
-                Emblem = Properties.Resources.list_money_banknotes_18px
-            };
-
-            lguModelList.Add(buugZsiModel);
-            lguModelList.Add(titayZsiModel);
-
-            return lguModelList;
-        }
-
-        public static Dictionary<string, dynamic> LGUDetails()
-        {
-            var lguDict = new Dictionary<string, dynamic>
-            {
-                { "municipality", selectedServerModel.MunicipalityName },
-                { "lgu_name", $"Municipality of {selectedServerModel.MunicipalityName}" },
-                { "lgu_province", selectedServerModel.ProvinceName},
-            };
-
-            return lguDict;
-        }
-
-        #endregion ServerConfig and Server List
 
         public static Color StatusColor(string status)
         {
