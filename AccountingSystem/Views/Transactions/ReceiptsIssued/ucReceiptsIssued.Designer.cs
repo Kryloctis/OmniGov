@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             cmbReceipt.Name = "cmbReceipt";
             cmbReceipt.Size = new System.Drawing.Size(426, 23);
             cmbReceipt.TabIndex = 1;
-            cmbReceipt.SelectionChangeCommitted += cmbReceipt_SelectionChangeCommitted;
+            cmbReceipt.SelectedIndexChanged += cmbReceipt_SelectedIndexChanged;
             cmbReceipt.Validating += cmbreceipt_Validating;
             cmbReceipt.Validated += cmbreceipt_Validated;
             // 

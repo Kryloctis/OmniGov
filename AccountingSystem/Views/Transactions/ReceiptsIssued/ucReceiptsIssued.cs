@@ -161,30 +161,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        internal void ReceiptsIssuedStatus()
-        {
-            bool isUsed = false;
 
-            int receiptID = Convert.ToInt32(cmbReceipt.SelectedValue);
-            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(receiptID);
-
-            int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
-            int receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
-            int receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
-
-            while (receiptNumberFrom <= receiptNumberTo)
-            {
-                isUsed = AccFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
-
-                receiptNumberFrom++;
-                if (isUsed)
-                    break;
-            }
-
-            cmbReceipt.Enabled = !isUsed;
-            txtReceiptIssuedFrom.Enabled = !isUsed;
-            txtReceiptIssuedTo.Enabled = !isUsed;
-        }
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
@@ -281,11 +258,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (isCashTickets)
                 return;
 
-            if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt Number From.");
-                return;
-            }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt Number From.");
 
             if (!ReceiptNumberInRange() && !string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
             {
@@ -304,11 +277,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (isCashTickets)
                 return;
 
-            if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt Number To.");
-                return;
-            }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt Number To.");
 
             if (!ReceiptNumberInRange())
             {
@@ -357,11 +326,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             else
             {
                 SetFieldsForNonCashTickets();
-                txtReceiptIssuedFrom.Text = (receiptNumberFrom + totalIssuedReceipt).ToString("D7");
+
+                if (!isUpdate)
+                    txtReceiptIssuedFrom.Text = (receiptNumberFrom + totalIssuedReceipt).ToString("D7");
             }
         }
 
-        private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbReceipt_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -404,5 +375,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             LoadCollectors();
         }
+
+
     }
 }
