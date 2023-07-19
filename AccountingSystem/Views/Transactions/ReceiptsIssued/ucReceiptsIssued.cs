@@ -46,6 +46,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isUpdate = false;
             receiptNumberFrom = 0;
             txtReceiptQuantity.Clear();
+            txtReceiptIssuedTo.Clear();
+            txtReceiptIssuedFrom.Clear();
             dtpDateIssued.Value = DateTime.Today;
             LoadCollectors();
             LoadReceipts();
