@@ -551,16 +551,26 @@ namespace AccountingSystem
             return lguModelList;
         }
 
-        //public static List<LguServerModel> AvailableServerList()
-        //{
-        //    foreach (LguServerModel model in LguServerModels())
-        //    {
-        //        string lfsInstance = model.LfsInstance;
-        //        string rpmInstance = model.RpmInstance;
+        public static List<LguServerModel> AvailableServerList()
+        {
+            var availableServerList = new List<LguServerModel>();
 
-        //        AccFactory.ServerRepository().TestConnection(lfsInstance);
-        //    }
-        //}
+            foreach (LguServerModel model in LguServerModels())
+            {
+                string lfsInstance = model.LfsInstance;
+                string rpmInstance = model.RpmInstance;
+
+                bool isLfsConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
+                bool isRptmConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
+
+                if (!isLfsConnected || !isRptmConnected)
+                    continue;
+
+                availableServerList.Add(model);
+            }
+
+            return availableServerList;
+        }
 
         public static Dictionary<string, dynamic> LGUDetails()
         {

@@ -15,5 +15,7 @@ namespace RPT.Data
         public static ILandPropertiesRepository LandPropertiesRepository() => new LandPropertiesRepository(mySqlGenericCommandsRPT);
 
         public static IPreviousAssessment PreviousAssessmentRepository() => new PreviousAssessmentRepository(mySqlGenericCommandsRPT);
+
+        public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsRPT);
     }
 }
