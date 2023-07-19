@@ -171,37 +171,35 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         #endregion
 
+        private void SetFieldsForCashTickets()
+        {
+            isCashTicket = true;
+            txtReceiptNumberFrom.Enabled = false;
+            txtReceiptNumberFrom.Clear();
+            txtReceiptNumberTo.Enabled = false;
+            txtReceiptNumberTo.Clear();
+            txtQuantity.ReadOnly = false;
+        }
+
+        private void SetFieldsForNonCashTickets()
+        {
+            isCashTicket = false;
+            txtReceiptNumberFrom.Enabled = true;
+            txtReceiptNumberTo.Enabled = true;
+            txtQuantity.ReadOnly = true;
+        }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+            if (item == null) return;
 
-                if (item == null)
-                    return;
-
-                if (item["accountableForm"].ToString().Contains("Tickets"))
-                {
-                    isCashTicket = true;
-                    txtReceiptNumberFrom.Enabled = false;
-                    txtReceiptNumberTo.Enabled = false;
-                    txtQuantity.ReadOnly = false;
-                    txtReceiptNumberFrom.ResetText();
-                    txtReceiptNumberTo.ResetText();
-                    txtQuantity.Text = string.Empty;
-                }
-                else
-                {
-                    isCashTicket = false;
-                    txtReceiptNumberFrom.Enabled = true;
-                    txtReceiptNumberTo.Enabled = true;
-                    txtQuantity.ReadOnly = true;
-                    txtQuantity.Text = string.Empty;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (item["accountableForm"].ToString().Contains("Tickets"))
+                SetFieldsForCashTickets();
+            else
+                SetFieldsForNonCashTickets();
         }
+
 
         private void ucReceipts_Load(object sender, EventArgs e)
         {

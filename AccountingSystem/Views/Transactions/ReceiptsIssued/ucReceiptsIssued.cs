@@ -324,7 +324,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         #endregion Validations
 
-        private void SetFieldsForCashTickets()
+        internal void SetFieldsForCashTickets()
         {
             isCashTickets = true;
             txtReceiptQuantity.ReadOnly = false;
@@ -334,7 +334,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedTo.Enabled = false;
         }
 
-        private void SetFieldsForNonCashTickets()
+        internal void SetFieldsForNonCashTickets()
         {
             isCashTickets = false;
             txtReceiptIssuedFrom.Enabled = true;
@@ -397,6 +397,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {
+            if (cbCollectingOfficerTypeJO.Checked)
+                isCollectorJO = true;
+            else
+                isCollectorJO = false;
+
             LoadCollectors();
         }
     }

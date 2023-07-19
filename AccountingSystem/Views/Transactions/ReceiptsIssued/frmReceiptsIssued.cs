@@ -22,8 +22,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 new DataColumn("id", typeof(int)),
                 new DataColumn("receipts", typeof(string)),
-                new DataColumn("serial_number_from", typeof(int)),
-                new DataColumn("serial_number_to", typeof(int)),
+                new DataColumn("serial_number_from", typeof(object)),
+                new DataColumn("serial_number_to", typeof(object)),
                 new DataColumn("quantity", typeof(int)),
                 new DataColumn("date_issued", typeof(DateTime)),
                 new DataColumn("collecting_officer", typeof(string)),
@@ -177,8 +177,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 newRow["id"] = id;
                 newRow["receipts"] = receipt;
-                newRow["serial_number_from"] = receiptFrom;
-                newRow["serial_number_to"] = receipNumberTo;
+                newRow["serial_number_from"] = receiptFrom == 0 ? string.Empty : receiptFrom;
+                newRow["serial_number_to"] = receipNumberTo == 0 ? string.Empty : receipNumberTo;
                 newRow["quantity"] = quantity;
                 newRow["date_issued"] = dateIssued;
                 newRow["collecting_officer"] = collectingOfficer;

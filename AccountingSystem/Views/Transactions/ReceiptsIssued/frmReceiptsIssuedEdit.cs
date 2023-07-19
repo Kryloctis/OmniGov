@@ -32,10 +32,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (!string.IsNullOrEmpty(jobOrderID))
                 uc.cbCollectingOfficerTypeJO.Checked = true;
 
-
-            uc.LoadReceipts();
-            uc.ControlsConfiguration();
-
             uc.cmbCollector.SelectedValue = collector;
             uc.cmbReceipt.SelectedValue = receiptIssuedDict["receipts_id"];
             uc.dtpDateIssued.Value = Convert.ToDateTime(receiptIssuedDict["date_issued"]);
