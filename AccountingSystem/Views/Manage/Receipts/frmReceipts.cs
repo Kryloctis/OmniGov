@@ -16,12 +16,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceipts, true);
-        }
-
-        private void frmAccForms_Load(object sender, EventArgs e)
-        {
-            SetToolStripStatusData();
+            Helper.DatagridFullRowSelectStyle(dgReceipts, true, true);
         }
 
         private void SetToolStripStatusData()
@@ -40,19 +35,17 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells["id"].Value);
+            int receiptId = Convert.ToInt32(dgReceipts.SelectedRows[0].Cells["id"].Value);
             _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
         }
 
         private bool DeleteRecords()
         {
-
             int selectedRowsCount = dgReceipts.SelectedRows.Count;
 
             if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
             {
                 var receiptModelList = new List<ReceiptsModel>();
-
                 foreach (DataGridViewRow row in dgReceipts.SelectedRows)
                 {
                     int receiptId = Convert.ToInt32(row.Cells["id"].Value);
@@ -93,8 +86,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 new DataColumn("id", typeof(int)),
                 new DataColumn("accountable_form_code", typeof(string)),
                 new DataColumn("receipt", typeof(string)),
-                new DataColumn("receipt_number_from", typeof(int)),
-                new DataColumn("receipt_number_to", typeof(int)),
+                new DataColumn("receipt_number_from", typeof(object)),
+                new DataColumn("receipt_number_to", typeof(object)),
                 new DataColumn("quantity", typeof(int)),
                 new DataColumn("received_date", typeof(DateTime)),
                 new DataColumn("officer", typeof(string)),
@@ -106,11 +99,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
-        }
-
-        private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
         }
 
         private DataTable ReceiptDataTable()
@@ -132,7 +120,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 int id = Convert.ToInt32(row["id"]);
                 string accountableFormCode = row["acc_form_no"].ToString();
                 string receipt = row["acc_form_desc"].ToString();
-                int receiptFrom = Convert.ToInt32(row["receipt_number_from"]);
+                int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
                 int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
                 int quantity = Convert.ToInt32(row["quantity"]);
                 DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
@@ -141,8 +129,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 newRow["id"] = id;
                 newRow["accountable_form_code"] = accountableFormCode;
                 newRow["receipt"] = receipt;
-                newRow["receipt_number_from"] = receiptFrom;
-                newRow["receipt_number_to"] = receipNumberTo;
+                newRow["receipt_number_from"] = receiptNumberFrom == 0 ? string.Empty : receiptNumberFrom;
+                newRow["receipt_number_to"] = receipNumberTo == 0 ? string.Empty : receipNumberTo; ;
                 newRow["quantity"] = quantity;
                 newRow["received_date"] = receivedDate;
                 newRow["officer"] = officer;

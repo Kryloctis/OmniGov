@@ -39,8 +39,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             DateTime dateIssued = uc.dtpDateIssued.Value;
             int receiptNumberFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
             int receiptNumberToTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
-            var quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim());
-            var userId = Helper.UserId;
+            int quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text);
+            int userId = Helper.UserId;
 
             var receiptIssuedModel = new ReceiptsIssuedModel()
             {
@@ -73,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     _frmReceiptIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
                     uc.ResetForm();
                 }
+
             }
             catch (Exception ex)
             {

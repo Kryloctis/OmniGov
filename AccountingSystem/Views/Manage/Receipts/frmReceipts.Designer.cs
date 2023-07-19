@@ -209,7 +209,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             bgwLoadReceipts.WorkerSupportsCancellation = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
-            bgwLoadReceipts.RunWorkerCompleted += bgwLoadReceipts_RunWorkerCompleted;
             // 
             // frmReceipts
             // 
@@ -229,7 +228,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Manage > Receipts";
-            Load += frmAccForms_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceipts).EndInit();

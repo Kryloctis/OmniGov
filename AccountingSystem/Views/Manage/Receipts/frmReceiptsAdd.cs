@@ -21,54 +21,54 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private bool SaveData()
         {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            var serialNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberFrom.Text) ? 0 : uc.txtReceiptNumberFrom.Text);
+            var serialNumberTo = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberTo.Text) ? 0 : uc.txtReceiptNumberTo.Text);
+            int accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
+            DateTime receiptDate = uc.dtpReceivedDate.Value;
+            int quantity = Convert.ToInt32(uc.txtQuantity.Text);
+            string remark = uc.txtRemark.Text.Trim();
+            int userId = this.userId;
+
+            var receiptModel = new ReceiptsModel()
+            {
+                AccountableFormId = accountableFormId,
+                SerialNoFrom = serialNumberFrom,
+                SerialNoTo = serialNumberTo,
+                ReceiptDate = receiptDate,
+                Quantity = quantity,
+                Remarks = remark,
+                UserId = userId
+            };
+
+            var receiptRepository = AccFactory.ReceiptsRepository();
+            return receiptRepository.Insert(receiptModel);
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
             try
             {
-                if (!uc.ValidateChildren())
+                if (SaveData())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
+
+                    Helper.MessageBoxSuccess("Receipt has been saved.");
+                    if (!_frmReceipts.bgwLoadReceipts.IsBusy)
+                        _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
+                    uc.ResetForm();
                 }
-
-                var serialNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberFrom.Text.Trim()) ? 0 : uc.txtReceiptNumberFrom.Text);
-                var serialNumberTo = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberTo.Text.Trim()) ? 0 : uc.txtReceiptNumberTo.Text);
-                var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue.ToString());
-                var receiptDate = uc.dtpReceivedDate.Value;
-                var quantity = Convert.ToInt32(uc.txtQuantity.Text.Trim());
-                var remark = uc.txtRemark.Text.Trim();
-                var userId = this.userId;
-
-                var receiptModel = new ReceiptsModel()
-                {
-                    AccountableFormId = accountableFormId,
-                    SerialNoFrom = serialNumberFrom,
-                    SerialNoTo = serialNumberTo,
-                    ReceiptDate = receiptDate,
-                    Quantity = quantity,
-                    Remarks = remark,
-                    UserId = userId
-                };
-
-                var receiptRepository = AccFactory.ReceiptsRepository();
-                return receiptRepository.Insert(receiptModel);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
 
-            return false;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-
-                Helper.MessageBoxSuccess("Receipt has been saved.");
-                if (!_frmReceipts.bgwLoadReceipts.IsBusy)
-                    _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
-                uc.ResetForm();
-            }
         }
     }
 }

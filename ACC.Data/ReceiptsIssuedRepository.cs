@@ -379,7 +379,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ReceiptIsUsed(int receiptId)
+        public bool ReceiptHasIssuance(int receiptId)
         {
             var parameters = new object[][]
            {

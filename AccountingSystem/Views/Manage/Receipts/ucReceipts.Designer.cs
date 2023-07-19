@@ -29,203 +29,175 @@ namespace AccountingSystem.Views.Manage.Receipts
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbAccountableForms = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtRemark = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.epAccountableForms = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtReceiptNumberFrom = new System.Windows.Forms.TextBox();
-            this.txtReceiptNumberTo = new System.Windows.Forms.TextBox();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.epReceiptNumberTo = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epQuantity = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epReceiptNumberFrom = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epReceivedDate = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForms)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberFrom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceivedDate)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            cmbAccountableForms = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
+            label4 = new System.Windows.Forms.Label();
+            txtRemark = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            errorProvider = new System.Windows.Forms.ErrorProvider(components);
+            txtReceiptNumberFrom = new System.Windows.Forms.TextBox();
+            txtReceiptNumberTo = new System.Windows.Forms.TextBox();
+            txtQuantity = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Accountable Forms";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(15, 15);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(110, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Accountable Forms";
             // 
             // cmbAccountableForms
             // 
-            this.cmbAccountableForms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAccountableForms.DropDownWidth = 400;
-            this.cmbAccountableForms.FormattingEnabled = true;
-            this.cmbAccountableForms.Location = new System.Drawing.Point(139, 12);
-            this.cmbAccountableForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbAccountableForms.Name = "cmbAccountableForms";
-            this.cmbAccountableForms.Size = new System.Drawing.Size(377, 23);
-            this.cmbAccountableForms.TabIndex = 1;
-            this.cmbAccountableForms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
-            this.cmbAccountableForms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
-            this.cmbAccountableForms.Validated += new System.EventHandler(this.cmbforms_Validated);
+            cmbAccountableForms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbAccountableForms.DropDownWidth = 400;
+            cmbAccountableForms.FormattingEnabled = true;
+            cmbAccountableForms.Location = new System.Drawing.Point(139, 12);
+            cmbAccountableForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbAccountableForms.Name = "cmbAccountableForms";
+            cmbAccountableForms.Size = new System.Drawing.Size(377, 23);
+            cmbAccountableForms.TabIndex = 1;
+            cmbAccountableForms.SelectedIndexChanged += cmbforms_SelectedIndexChanged;
+            cmbAccountableForms.Validating += cmbforms_Validating;
+            cmbAccountableForms.Validated += cmbforms_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Serial No. From ";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(15, 42);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(91, 15);
+            label2.TabIndex = 2;
+            label2.Text = "Serial No. From ";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Serial No. To";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(15, 69);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(72, 15);
+            label3.TabIndex = 3;
+            label3.Text = "Serial No. To";
             // 
             // dtpReceivedDate
             // 
-            this.dtpReceivedDate.Location = new System.Drawing.Point(139, 97);
-            this.dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpReceivedDate.Name = "dtpReceivedDate";
-            this.dtpReceivedDate.Size = new System.Drawing.Size(377, 23);
-            this.dtpReceivedDate.TabIndex = 4;
+            dtpReceivedDate.Location = new System.Drawing.Point(139, 97);
+            dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dtpReceivedDate.Name = "dtpReceivedDate";
+            dtpReceivedDate.Size = new System.Drawing.Size(377, 23);
+            dtpReceivedDate.TabIndex = 4;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 97);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Received Date ";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(15, 97);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(84, 15);
+            label4.TabIndex = 7;
+            label4.Text = "Received Date ";
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(139, 151);
-            this.txtRemark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtRemark.Multiline = true;
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(377, 46);
-            this.txtRemark.TabIndex = 6;
+            txtRemark.Location = new System.Drawing.Point(139, 151);
+            txtRemark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtRemark.Multiline = true;
+            txtRemark.Name = "txtRemark";
+            txtRemark.Size = new System.Drawing.Size(377, 46);
+            txtRemark.TabIndex = 6;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 124);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Quantity";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(15, 124);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(53, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Quantity";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 151);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Remarks ";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(15, 151);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(55, 15);
+            label6.TabIndex = 11;
+            label6.Text = "Remarks ";
             // 
-            // epAccountableForms
+            // errorProvider
             // 
-            this.epAccountableForms.ContainerControl = this;
+            errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider.ContainerControl = this;
             // 
             // txtReceiptNumberFrom
             // 
-            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(139, 42);
-            this.txtReceiptNumberFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReceiptNumberFrom.MaxLength = 7;
-            this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
-            this.txtReceiptNumberFrom.Size = new System.Drawing.Size(377, 23);
-            this.txtReceiptNumberFrom.TabIndex = 2;
-            this.txtReceiptNumberFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
-            this.txtReceiptNumberFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
-            this.txtReceiptNumberFrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);
-            this.txtReceiptNumberFrom.Validated += new System.EventHandler(this.txtfrom_Validated);
+            txtReceiptNumberFrom.Location = new System.Drawing.Point(139, 42);
+            txtReceiptNumberFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtReceiptNumberFrom.MaxLength = 7;
+            txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
+            txtReceiptNumberFrom.Size = new System.Drawing.Size(377, 23);
+            txtReceiptNumberFrom.TabIndex = 2;
+            txtReceiptNumberFrom.TextChanged += txtReceiptNumberFrom_TextChanged;
+            txtReceiptNumberFrom.KeyPress += txtfrom_KeyPress;
+            txtReceiptNumberFrom.Validating += txtfrom_Validating;
+            txtReceiptNumberFrom.Validated += txtfrom_Validated;
             // 
             // txtReceiptNumberTo
             // 
-            this.txtReceiptNumberTo.Location = new System.Drawing.Point(139, 69);
-            this.txtReceiptNumberTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReceiptNumberTo.MaxLength = 7;
-            this.txtReceiptNumberTo.Name = "txtReceiptNumberTo";
-            this.txtReceiptNumberTo.Size = new System.Drawing.Size(377, 23);
-            this.txtReceiptNumberTo.TabIndex = 3;
-            this.txtReceiptNumberTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
-            this.txtReceiptNumberTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
-            this.txtReceiptNumberTo.Validating += new System.ComponentModel.CancelEventHandler(this.txtto_Validating);
-            this.txtReceiptNumberTo.Validated += new System.EventHandler(this.txtto_Validated);
+            txtReceiptNumberTo.Location = new System.Drawing.Point(139, 69);
+            txtReceiptNumberTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtReceiptNumberTo.MaxLength = 7;
+            txtReceiptNumberTo.Name = "txtReceiptNumberTo";
+            txtReceiptNumberTo.Size = new System.Drawing.Size(377, 23);
+            txtReceiptNumberTo.TabIndex = 3;
+            txtReceiptNumberTo.TextChanged += txtReceiptNumberTo_TextChanged;
+            txtReceiptNumberTo.KeyPress += txtto_KeyPress;
+            txtReceiptNumberTo.Validating += txtto_Validating;
+            txtReceiptNumberTo.Validated += txtto_Validated;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(139, 124);
-            this.txtQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.ReadOnly = true;
-            this.txtQuantity.Size = new System.Drawing.Size(377, 23);
-            this.txtQuantity.TabIndex = 5;
-            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtquantity_KeyPress);
-            this.txtQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
-            this.txtQuantity.Validated += new System.EventHandler(this.txtquantity_Validated);
-            // 
-            // epReceiptNumberTo
-            // 
-            this.epReceiptNumberTo.ContainerControl = this;
-            // 
-            // epQuantity
-            // 
-            this.epQuantity.ContainerControl = this;
-            // 
-            // epReceiptNumberFrom
-            // 
-            this.epReceiptNumberFrom.ContainerControl = this;
-            // 
-            // epReceivedDate
-            // 
-            this.epReceivedDate.ContainerControl = this;
+            txtQuantity.Location = new System.Drawing.Point(139, 124);
+            txtQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtQuantity.Name = "txtQuantity";
+            txtQuantity.ReadOnly = true;
+            txtQuantity.Size = new System.Drawing.Size(377, 23);
+            txtQuantity.TabIndex = 5;
+            txtQuantity.KeyPress += txtquantity_KeyPress;
+            txtQuantity.Validating += txtquantity_Validating;
+            txtQuantity.Validated += txtquantity_Validated;
             // 
             // ucReceipts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.txtQuantity);
-            this.Controls.Add(this.txtReceiptNumberTo);
-            this.Controls.Add(this.txtReceiptNumberFrom);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtRemark);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.dtpReceivedDate);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbAccountableForms);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucReceipts";
-            this.Size = new System.Drawing.Size(540, 207);
-            this.Load += new System.EventHandler(this.ucReceipts_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForms)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberFrom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReceivedDate)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(txtQuantity);
+            Controls.Add(txtReceiptNumberTo);
+            Controls.Add(txtReceiptNumberFrom);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(txtRemark);
+            Controls.Add(label4);
+            Controls.Add(dtpReceivedDate);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(cmbAccountableForms);
+            Controls.Add(label1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Name = "ucReceipts";
+            Size = new System.Drawing.Size(540, 207);
+            Load += ucReceipts_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -236,16 +208,12 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ErrorProvider epAccountableForms;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.ComboBox cmbAccountableForms;
         internal System.Windows.Forms.DateTimePicker dtpReceivedDate;
         internal System.Windows.Forms.TextBox txtRemark;
         internal System.Windows.Forms.TextBox txtQuantity;
         internal System.Windows.Forms.TextBox txtReceiptNumberTo;
         internal System.Windows.Forms.TextBox txtReceiptNumberFrom;
-        private System.Windows.Forms.ErrorProvider epReceiptNumberTo;
-        private System.Windows.Forms.ErrorProvider epQuantity;
-        private System.Windows.Forms.ErrorProvider epReceiptNumberFrom;
-        private System.Windows.Forms.ErrorProvider epReceivedDate;
     }
 }

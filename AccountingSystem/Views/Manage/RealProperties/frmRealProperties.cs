@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     {
                         int realPropertiesID = int.Parse(row.Cells[0].Value.ToString());
 
-                        var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(realPropertiesID);
+                        var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(realPropertiesID);
 
                         if (!receiptIsUsed)
                             realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
