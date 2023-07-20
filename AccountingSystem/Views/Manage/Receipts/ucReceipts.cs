@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class ucReceipts : UserControl
     {
-        internal int receiptId;
+        internal int receiptID;
         internal int accountableFormId;
         internal bool isCashTicket;
 
@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void ResetForm()
         {
-            receiptId = 0;
+            receiptID = 0;
             accountableFormId = 0;
             isCashTicket = false;
 
@@ -55,10 +55,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataTable;
         }
 
-        internal void LoadAccountableForms()
-        {
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
-        }
 
         #region Validations
 
@@ -75,48 +71,76 @@ namespace AccountingSystem.Views.Manage.Receipts
             return _errors.GenerateErrorMessage();
         }
 
-        private void cmbforms_Validating(object sender, CancelEventArgs e)
+        private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
+
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form.");
         }
 
-        private void cmbforms_Validated(object sender, EventArgs e)
+        private void cmbAccountableForms_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
         }
 
-        private void txtfrom_Validating(object sender, CancelEventArgs e)
+        private bool ReceiptNumberExist(int receiptNumber)
+        {
+            int accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+            bool receiptNumberExist;
+
+            if (receiptID == 0)
+                receiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
+            else
+                receiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
+
+            return receiptNumberExist;
+        }
+
+        private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
             if (isCashTicket)
                 return;
 
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReceiptNumberFrom, "Receipt Number From.");
+            int receiptNumber = Convert.ToInt32(txtReceiptNumberFrom.Text);
+
+            if (ReceiptNumberExist(receiptNumber))
+            {
+                errorProvider.SetError(txtReceiptNumberFrom, "Receipt number from of this accountable form already exist.");
+                e.Cancel = true;
+            }
         }
 
-        private void txtfrom_Validated(object sender, EventArgs e)
+        private void txtReceiptNumberFrom_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtReceiptNumberFrom);
         }
 
-        private void txtto_Validating(object sender, CancelEventArgs e)
+        private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
         {
             if (isCashTicket)
                 return;
 
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReceiptNumberTo, "Receipt Number To.");
+            int receiptNumber = Convert.ToInt32(txtReceiptNumberTo.Text);
+
+            if (ReceiptNumberExist(receiptNumber))
+            {
+                errorProvider.SetError(txtReceiptNumberTo, "Receipt number to of this accountable form already exist.");
+                e.Cancel = true;
+            }
         }
 
-        private void txtto_Validated(object sender, EventArgs e)
+        private void txtReceiptNumberTo_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtReceiptNumberTo);
         }
 
-        private void txtquantity_Validating(object sender, CancelEventArgs e)
+        private void txtQuantity_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtQuantity, "Quantity.");
         }
 
-        private void txtquantity_Validated(object sender, EventArgs e)
+        private void txtQuantity_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtQuantity);
         }
@@ -189,17 +213,35 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtQuantity.ReadOnly = true;
         }
 
-        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        private void ControlsConfiguration()
         {
             DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
             if (item == null) return;
 
-            if (item["accountableForm"].ToString().Contains("Tickets"))
+            string accountableForm = item["accountableForm"].ToString();
+
+            if (accountableForm.Contains("Tickets"))
                 SetFieldsForCashTickets();
             else
                 SetFieldsForNonCashTickets();
         }
 
+        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ControlsConfiguration();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadAccountableForms()
+        {
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
+        }
 
         private void ucReceipts_Load(object sender, EventArgs e)
         {
@@ -215,7 +257,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
             }
         }
-
 
     }
 }

@@ -222,5 +222,42 @@ namespace ACC.Data
             var dtReceipts = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtReceipts, parameter);
         }
+
+        public bool ReceiptNumberExist(int accountableFormID, int receiptNumber)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormID },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return false;
+
+            return true;
+        }
+
+        public bool ReceiptNumberExist(int accountableFormID, int receiptNumber, int receiptID)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, receiptID },
+                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormID },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id AND id <> @id ";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return false;
+
+            return true;
+        }
     }
 }

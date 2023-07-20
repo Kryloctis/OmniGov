@@ -10,5 +10,7 @@ namespace ACC.Domain.Interfaces
         int GetMinReceiptNumberByAccountableFormId(int accountableFormId);
         bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo);
         DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch);
+        bool ReceiptNumberExist(int accountableFormID, int receiptNumber);
+        bool ReceiptNumberExist(int accountableFormID, int receiptNumber, int receiptID);
     }
 }

@@ -65,9 +65,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             cmbAccountableForms.Name = "cmbAccountableForms";
             cmbAccountableForms.Size = new System.Drawing.Size(377, 23);
             cmbAccountableForms.TabIndex = 1;
-            cmbAccountableForms.SelectedIndexChanged += cmbforms_SelectedIndexChanged;
-            cmbAccountableForms.Validating += cmbforms_Validating;
-            cmbAccountableForms.Validated += cmbforms_Validated;
+            cmbAccountableForms.Validating += cmbAccountableForms_Validating;
+            cmbAccountableForms.Validated += cmbAccountableForms_Validated;
             // 
             // label2
             // 
@@ -146,8 +145,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtReceiptNumberFrom.TabIndex = 2;
             txtReceiptNumberFrom.TextChanged += txtReceiptNumberFrom_TextChanged;
             txtReceiptNumberFrom.KeyPress += txtfrom_KeyPress;
-            txtReceiptNumberFrom.Validating += txtfrom_Validating;
-            txtReceiptNumberFrom.Validated += txtfrom_Validated;
+            txtReceiptNumberFrom.Validating += txtReceiptNumberFrom_Validating;
+            txtReceiptNumberFrom.Validated += txtReceiptNumberFrom_Validated;
             // 
             // txtReceiptNumberTo
             // 
@@ -159,8 +158,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtReceiptNumberTo.TabIndex = 3;
             txtReceiptNumberTo.TextChanged += txtReceiptNumberTo_TextChanged;
             txtReceiptNumberTo.KeyPress += txtto_KeyPress;
-            txtReceiptNumberTo.Validating += txtto_Validating;
-            txtReceiptNumberTo.Validated += txtto_Validated;
+            txtReceiptNumberTo.Validating += txtReceiptNumberTo_Validating;
+            txtReceiptNumberTo.Validated += txtReceiptNumberTo_Validated;
             // 
             // txtQuantity
             // 
@@ -171,8 +170,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtQuantity.Size = new System.Drawing.Size(377, 23);
             txtQuantity.TabIndex = 5;
             txtQuantity.KeyPress += txtquantity_KeyPress;
-            txtQuantity.Validating += txtquantity_Validating;
-            txtQuantity.Validated += txtquantity_Validated;
+            txtQuantity.Validating += txtQuantity_Validating;
+            txtQuantity.Validated += txtQuantity_Validated;
             // 
             // ucReceipts
             // 

@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             _receiptID = receiptID;
 
             uc = ucReceipts1;
-            uc.receiptId = receiptID;
+            uc.receiptID = receiptID;
         }
 
         private void frmAccFromEdit_Load(object sender, EventArgs e)
