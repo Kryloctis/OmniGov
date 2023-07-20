@@ -934,6 +934,10 @@ namespace AccountingSystem
             combobox.DataSource = dataTable;
             combobox.ValueMember = "id";
             combobox.DisplayMember = "acc_form_desc";
+
+            if (combobox.Items.Count == 0)
+                combobox.DropDownHeight = 106;
+
         }
 
         #endregion Receipts

@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                uc.LoadCollectors();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

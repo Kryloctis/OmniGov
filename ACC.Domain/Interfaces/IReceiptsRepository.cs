@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
     {
         int GetMaxReceiptNumberByAccountableFormId(int accountableFormId);
         int GetMinReceiptNumberByAccountableFormId(int accountableFormId);
-        bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo);
+        bool ReceiptNumberInRange(int receiptId, int receiptNumber);
         DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch);
         bool ReceiptNumberExist(int accountableFormID, int receiptNumber);
         bool ReceiptNumberExist(int accountableFormID, int receiptNumber, int receiptID);

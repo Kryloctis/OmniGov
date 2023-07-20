@@ -190,15 +190,14 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool ReceiptInRange(int receiptId, int receiptNumberFrom, int receiptNumberTo)
+        public bool ReceiptNumberInRange(int receiptId, int receiptNumber)
         {
             var parameters = new object[][]
             {
-                new object[] { "@receipt_number_from", DbType.Int32, receiptNumberFrom },
-                new object[] { "@receipt_number_to", DbType.Int32, receiptNumberTo },
-                new object[] { "@receipt_id", DbType.Int32, receiptId }
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber }
             };
-            string query = $"SELECT id FROM {tableName} WHERE receipt_number_from <= @receipt_number_from AND receipt_number_to >= @receipt_number_to AND id = @receipt_id";
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND id = @receipt_id";
 
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
@@ -207,6 +206,7 @@ namespace ACC.Data
 
             return true;
         }
+
 
         public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch)
         {

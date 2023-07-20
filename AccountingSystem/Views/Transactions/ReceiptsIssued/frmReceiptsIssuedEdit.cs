@@ -8,22 +8,21 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class frmReceiptsIssuedEdit : Form
     {
         private frmReceiptsIssued _frmReceiptsIssued;
-        private int _receiptIssuedID;
         private readonly ucReceiptsIssued uc;
 
         public frmReceiptsIssuedEdit(frmReceiptsIssued frmReceiptsIssued, int receiptIssuedID)
         {
             InitializeComponent();
             _frmReceiptsIssued = frmReceiptsIssued;
-            _receiptIssuedID = receiptIssuedID;
+
             uc = ucReceipts1;
             uc.isUpdate = true;
+            uc.receiptIssuedId = receiptIssuedID;
         }
 
         internal void LoadSelectedValue()
         {
-            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(_receiptIssuedID);
-            uc.receiptId = Convert.ToInt32(receiptIssuedDict["receipts_id"]);
+            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(uc.receiptIssuedId);
 
             string jobOrderID = receiptIssuedDict["job_orders_id"];
             var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officers_id"]);
@@ -37,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (!string.IsNullOrEmpty(jobOrderID))
                 uc.cbCollectingOfficerTypeJO.Checked = true;
 
+            uc.selectedReceiptID = receiptID;
             uc.cmbCollector.SelectedValue = collector;
             uc.cmbReceipt.SelectedValue = receiptID;
             uc.dtpDateIssued.Value = dateIssued;
@@ -45,12 +45,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             uc.txtReceiptQuantity.Text = quantity.ToString();
         }
 
-        internal void ReceiptsIssuedStatus()
+        internal void CheckReceiptsIssuedStatus()
         {
+            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
             bool isUsed = false;
-
-            int receiptID = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
-            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(receiptID);
 
             int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
             int receiptNumberFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
@@ -59,8 +57,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             while (receiptNumberFrom <= receiptNumberTo)
             {
                 isUsed = AccFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
-
                 receiptNumberFrom++;
+
                 if (isUsed)
                     break;
             }
@@ -75,13 +73,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 LoadSelectedValue();
-                ReceiptsIssuedStatus();
+                CheckReceiptsIssuedStatus();
+                uc.LoadReceipts();
                 uc.ControlsConfiguration();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
 
         private bool SaveData()
         {
@@ -102,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             var receiptIssuedModel = new ReceiptsIssuedModel()
             {
-                Id = _receiptIssuedID,
+                Id = uc.receiptIssuedId,
                 CollectorId = collectorID,
                 ReceiptId = receiptID,
                 IssuedDate = dateIssued,

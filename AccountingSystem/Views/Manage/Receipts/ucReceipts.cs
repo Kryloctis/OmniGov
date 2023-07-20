@@ -85,14 +85,11 @@ namespace AccountingSystem.Views.Manage.Receipts
         private bool ReceiptNumberExist(int receiptNumber)
         {
             int accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            bool receiptNumberExist;
 
             if (receiptID == 0)
-                receiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
             else
-                receiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
-
-            return receiptNumberExist;
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
         }
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
@@ -101,8 +98,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 return;
 
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReceiptNumberFrom, "Receipt Number From.");
-            int receiptNumber = Convert.ToInt32(txtReceiptNumberFrom.Text);
 
+            if (string.IsNullOrEmpty(txtReceiptNumberFrom.Text))
+                return;
+
+            int receiptNumber = Convert.ToInt32(txtReceiptNumberFrom.Text);
             if (ReceiptNumberExist(receiptNumber))
             {
                 errorProvider.SetError(txtReceiptNumberFrom, "Receipt number from of this accountable form already exist.");

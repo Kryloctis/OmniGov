@@ -358,10 +358,7 @@ namespace ACC.Data
 
             int queryResult = int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
 
-            if (receiptQuantity > queryResult)
-                return true;
-            else
-                return false;
+            return receiptQuantity > queryResult;
         }
 
         public bool CollectingOfficerHasReceiptAssigned(int id)
@@ -453,6 +450,41 @@ namespace ACC.Data
 
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
+        }
+
+        public bool ReceiptNumberInRange(int receiptId, int receiptNumber)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_issued_from AND receipt_issued_to AND receipts_id = @receipt_id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
+        }
+
+        public bool ReceiptNumberInRange(int receiptId, int receiptNumber, int receiptIssuedId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber },
+                new object[] { "@id", DbType.Int32, receiptIssuedId }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_issued_from AND receipt_issued_to AND receipts_id = @receipt_id AND id <> @id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return false;
+
+            return true;
         }
     }
 }

@@ -8,7 +8,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class ucReceiptsIssued : UserControl
     {
         internal int receiptIssuedId;
-        internal int receiptId;
+        internal int selectedReceiptID;
+
         internal int collectingOfficerId;
         internal int receiptNumberFrom;
         internal string receiptNumberTo;
@@ -40,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal void ResetForm()
         {
             receiptIssuedId = 0;
-            receiptId = 0;
+            selectedReceiptID = 0;
             collectingOfficerId = 0;
             isCashTickets = false;
             isUpdate = false;
@@ -134,7 +135,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 int quantity = Convert.ToInt32(row["quantity"]);
                 int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
                 int receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]);
-                int remainingReceipts = quantity - TotalIssued(receiptsId);
+                int receiptTotalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
+                int remainingReceipts = quantity - receiptTotalIssued;
 
                 if (accountableForm.ToString().Contains("Tickets"))
                     row["acc_form_desc"] = $"{accountableForm} ({remainingReceipts}) ";
@@ -143,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 if (remainingReceipts == 0)
                 {
-                    if (isUpdate && receiptId != receiptsId)
+                    if (isUpdate && selectedReceiptID != receiptsId)
                         row.Delete();
 
                     if (!isUpdate)
@@ -151,17 +153,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
             }
 
-            cmbReceipt.DataSource = receiptsDt;
-            cmbReceipt.ValueMember = "id";
-            cmbReceipt.DisplayMember = "acc_form_desc";
-
-            int TotalIssued(int receiptId)
-            {
-                return AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
-            }
+            HelperLoadRecords.ReceiptsCombobox(cmbReceipt, receiptsDt);
         }
-
-
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
@@ -214,28 +207,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorComboBox(errorProvider1, cmbReceipt);
         }
 
-        private bool ReceiptNumberInRange()
-        {
-            try
-            {
-                bool isFieldsEmpty = txtReceiptIssuedFrom.Text.Length == 0 || txtReceiptIssuedTo.Text.Length == 0;
-
-                if (isFieldsEmpty)
-                    return false;
-
-                int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
-                int receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
-                int receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
-
-                return AccFactory.ReceiptsRepository().ReceiptInRange(receiptId, receiptNumberFrom, receiptNumberTo);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                return false;
-            }
-        }
-
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptQuantity, "Quantity");
@@ -253,6 +224,43 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorTextBox(errorProvider1, txtReceiptQuantity);
         }
 
+        private bool ReceiptNumberInRange(int receiptNumber)
+        {
+            try
+            {
+                int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
+                bool isReceiptNumberExist;
+                bool isReceiptNumberInRange;
+
+                isReceiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
+
+                if (isUpdate)
+                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
+                else
+                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
+
+                if (isReceiptNumberExist && isReceiptNumberInRange)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+                return false;
+            }
+        }
+
+        private bool ReceiptNumberExist(int receiptNumber)
+        {
+            int receiptID = Convert.ToInt32(cmbReceipt.SelectedValue);
+
+            if (receiptID == 0)
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber);
+            else
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber, receiptID);
+        }
+
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
             if (isCashTickets)
@@ -260,9 +268,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt Number From.");
 
-            if (!ReceiptNumberInRange() && !string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
+            if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text))
+                return;
+
+            int receiptNumber = Convert.ToInt32(txtReceiptIssuedFrom.Text);
+            if (!ReceiptNumberInRange(receiptNumber) && ReceiptNumberExist(receiptNumber))
             {
-                errorProvider1.SetError(txtReceiptIssuedFrom, "Invalid receipt number from.");
+                errorProvider1.SetError(txtReceiptIssuedFrom, "Receipt series number is out of range.");
                 e.Cancel = true;
             }
         }
@@ -279,9 +291,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt Number To.");
 
-            if (!ReceiptNumberInRange())
+            if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text))
+                return;
+
+            int receiptNumber = Convert.ToInt32(txtReceiptIssuedTo.Text);
+            if (!ReceiptNumberInRange(receiptNumber) && ReceiptNumberExist(receiptNumber))
             {
-                errorProvider1.SetError(txtReceiptIssuedTo, "Invalid receipt number to.");
+                errorProvider1.SetError(txtReceiptIssuedTo, "Receipt series number is out of range.");
                 e.Cancel = true;
             }
         }
@@ -316,12 +332,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
             if (item == null) return;
 
-            receiptId = Convert.ToInt32(item["id"]);
-            int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+            selectedReceiptID = Convert.ToInt32(item["id"]);
+            int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedReceiptID);
             receiptAvailableQuantity = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
             receiptNumberFrom = Convert.ToInt32(item["receipt_number_from"]);
 
-            if (item["acc_form_desc"].ToString().Contains("Tickets"))
+            string accountableForm = item["acc_form_desc"].ToString();
+
+            if (accountableForm.Contains("Tickets"))
                 SetFieldsForCashTickets();
             else
             {
@@ -332,7 +350,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void cmbReceipt_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbReceipt_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -375,7 +393,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             LoadCollectors();
         }
-
 
     }
 }
