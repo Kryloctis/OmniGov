@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
@@ -123,6 +124,20 @@ namespace ACC.Data
                     return string.Empty;
                 }
             }
+        }
+
+        public bool TestConnection(string testConnectionName)
+        {
+            try
+            {
+                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
+                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
+                {
+                    connection.Open();
+                    return true;
+                }
+            }
+            catch (MySqlException) { return false; }
         }
     }
 }

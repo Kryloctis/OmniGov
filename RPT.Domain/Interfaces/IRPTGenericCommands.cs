@@ -4,6 +4,8 @@ namespace RPT.Domain.Interfaces
 {
     public interface IRPTGenericCommands
     {
+        bool TestConnection(string testConnectionName);
+
         DataTable Fill(string query, DataTable dataTable);
 
         DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters);
