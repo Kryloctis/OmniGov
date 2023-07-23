@@ -55,6 +55,8 @@ namespace AccountingSystem
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new System.Drawing.Size(230, 23);
             txtUsername.TabIndex = 0;
+            txtUsername.Validating += Username_Password_Validating;
+            txtUsername.Validated += Username_Password_Validated;
             // 
             // label1
             // 
@@ -87,6 +89,8 @@ namespace AccountingSystem
             txtPassword.PasswordChar = '•';
             txtPassword.Size = new System.Drawing.Size(230, 23);
             txtPassword.TabIndex = 2;
+            txtPassword.Validating += Username_Password_Validating;
+            txtPassword.Validated += Username_Password_Validated;
             // 
             // panel1
             // 
@@ -196,6 +200,7 @@ namespace AccountingSystem
             AcceptButton = btnLogin;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(567, 218);
             Controls.Add(lblServer);
             Controls.Add(btnVisibility);

@@ -1,5 +1,7 @@
 ﻿using ACC.Data;
+using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Presentation;
+using Microsoft.Reporting.WinForms;
 using RPT.Data;
 using System;
 using System.Collections.Generic;
@@ -26,22 +28,19 @@ namespace AccountingSystem.Views.SignIn
             _frmSignIn = frmSignIn;
         }
 
-        private void LoadAvailableServers()
+        private void LoadServers()
         {
-            foreach (var model in Helper.LguServerModels())
+            int totalServers = Helper.AvailableServerList().Count;
+            int serverCount = 0;
+
+            flowLayoutPanel1.Controls.Clear();
+            progressBar1.Value = 0;
+
+            foreach (var model in Helper.AvailableServerList())
             {
                 int lguId = model.LguId;
                 string municipalityName = model.MunicipalityName;
                 string provinceName = model.ProvinceName;
-                string lfsInstance = model.LfsInstance;
-                string rptmInstance = model.RpmInstance;
-
-                AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(lfsInstance);
-                RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(rptmInstance);
-                bool isServerAvailable = AccFactory.UsersRepository().IsServerAvailable();
-
-                if (!isServerAvailable)
-                    continue;
 
                 var radioButton = new RadioButton()
                 {
@@ -52,6 +51,9 @@ namespace AccountingSystem.Views.SignIn
                 };
 
                 flowLayoutPanel1.Controls.Add(radioButton);
+                serverCount++;
+                int progressPercentage = (serverCount * 100) / totalServers;
+                backgroundWorker1.ReportProgress(progressPercentage);
             }
 
             SelectCurrentServer();
@@ -59,7 +61,7 @@ namespace AccountingSystem.Views.SignIn
 
         private void SelectCurrentServer()
         {
-            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1)
+            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1 || Helper.selectedServerModel == null)
                 return;
 
             foreach (RadioButton radioButton in flowLayoutPanel1.Controls)
@@ -70,33 +72,28 @@ namespace AccountingSystem.Views.SignIn
             }
         }
 
-        private void SetSelectedServer()
+        private bool SetSelectedServer()
         {
+            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1)
+                return false;
+
             foreach (RadioButton radioButton in flowLayoutPanel1.Controls)
             {
                 if (radioButton.Checked)
                 {
-                    foreach (var model in Helper.LguServerModels())
-                    {
-                        if (Convert.ToInt32(radioButton.Tag) == model.LguId)
-                        {
-                            Helper.selectedServerModel = model;
-                            string municipalityName = model.MunicipalityName;
-                            string provinceName = model.ProvinceName;
-
-                            AccFactory.mySqlGenericCommandsLFS = new AccGenericCommands(model.LfsInstance);
-                            RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(model.RpmInstance);
-                            _frmSignIn.lblServer.Text = $"Server: {municipalityName}, {provinceName}";
-                            this.Close();
-                        }
-                    }
+                    var radTag = radioButton.Tag;
+                    var selectedModel = Helper.LguServerModels().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, LfsInstance = m.LfsInstance, RpmInstance = m.RpmInstance, Emblem = m.Emblem }).First();
+                    Helper.selectedServerModel = selectedModel;
+                    return true;
                 }
             }
+            return false;
         }
 
         private void OnLoad()
         {
-            LoadAvailableServers();
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
 
         private void frmDatabaseConfig_Load(object sender, EventArgs e)
@@ -118,9 +115,32 @@ namespace AccountingSystem.Views.SignIn
         {
             try
             {
-                SetSelectedServer();
+                if (SetSelectedServer())
+                {
+                    _frmSignIn.lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}";
+                    this.Close();
+                };
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadServers();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AccountingSystem
 {
     public static class AccFactory
     {
-        private static AccGenericCommands mySqlGenericCommandsLFS;
+        internal static AccGenericCommands mySqlGenericCommandsLFS;
 
         public static byte UserId = 1;
 
