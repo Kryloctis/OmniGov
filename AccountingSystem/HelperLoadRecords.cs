@@ -913,7 +913,7 @@ namespace AccountingSystem
             datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
 
-            datagrid.Columns["received_date"].DefaultCellStyle.Format = "yyyy-mm-dd";
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns["received_date"].HeaderText = "Received Date";
             datagrid.Columns["received_date"].Width = 150;
             datagrid.Columns["received_date"].MinimumWidth = 150;
