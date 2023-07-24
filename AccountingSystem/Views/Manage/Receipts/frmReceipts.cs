@@ -10,7 +10,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceipts : Form
     {
-        DataTable receiptDataTable;
+        private DataTable receiptDataTable;
 
         public frmReceipts()
         {
@@ -96,11 +96,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataColumns;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-            pbLoadRecords.Value = e.ProgressPercentage;
-        }
-
         private DataTable ReceiptDataTable()
         {
             receiptDataTable = new DataTable();
@@ -145,7 +140,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             return receiptDataTable;
         }
 
-
         internal void LoadReceipts()
         {
             HelperLoadRecords.ReceiptsDatagridView(ReceiptDataTable(), dgReceipts);
@@ -160,6 +154,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             });
         }
 
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
@@ -167,7 +166,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                 if (!bgwLoadReceipts.IsBusy)
                     bgwLoadReceipts.RunWorkerAsync();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -175,7 +173,5 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
         }
-
-
     }
 }

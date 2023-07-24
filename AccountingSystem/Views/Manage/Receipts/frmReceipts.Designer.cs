@@ -43,8 +43,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             label1 = new System.Windows.Forms.Label();
             btnSearch = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
-            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             bgwLoadReceipts = new System.ComponentModel.BackgroundWorker();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceipts).BeginInit();
             statusStrip1.SuspendLayout();
@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             dgReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgReceipts.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceipts.Location = new System.Drawing.Point(4, 9);
+            dgReceipts.Location = new System.Drawing.Point(4, 4);
             dgReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgReceipts.Name = "dgReceipts";
             dgReceipts.RowHeadersWidth = 51;
@@ -187,21 +187,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             // panel1
             // 
             panel1.Controls.Add(dgReceipts);
-            panel1.Controls.Add(pbLoadRecords);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1060, 490);
+            panel1.Size = new System.Drawing.Size(1060, 485);
             panel1.TabIndex = 15;
-            // 
-            // pbLoadRecords
-            // 
-            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(4, 4);
-            pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(1052, 5);
-            pbLoadRecords.TabIndex = 22;
             // 
             // bgwLoadReceipts
             // 
@@ -210,12 +201,21 @@ namespace AccountingSystem.Views.Manage.Receipts
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1060, 5);
+            pbLoadRecords.TabIndex = 23;
+            // 
             // frmReceipts
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1060, 562);
             Controls.Add(panel1);
+            Controls.Add(pbLoadRecords);
             Controls.Add(btnSearch);
             Controls.Add(label1);
             Controls.Add(dtpReceivedDate);
@@ -254,7 +254,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ProgressBar pbLoadRecords;
         internal System.ComponentModel.BackgroundWorker bgwLoadReceipts;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
