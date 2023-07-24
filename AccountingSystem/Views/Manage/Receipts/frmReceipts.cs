@@ -73,10 +73,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 if (ex.Number == 1451)
                     Helper.MessageBoxError("Can't delete receipt. The receipt was already used by a collecting officer.");
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private DataColumn[] ReceiptsColumns()

@@ -211,6 +211,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // frmReceipts
             // 
+            AcceptButton = btnSearch;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1060, 562);
