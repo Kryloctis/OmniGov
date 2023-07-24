@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using MySql.Data.MySqlClient;
 using RPT.Domain.Interfaces;
 using System;
 using System.Net.Http.Headers;
@@ -8,7 +9,7 @@ namespace AccountingSystem
 {
     public static class AccFactory
     {
-        private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
+        internal static AccGenericCommands mySqlGenericCommandsLFS;
 
         public static byte UserId = 1;
 
@@ -211,5 +212,7 @@ namespace AccountingSystem
         public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(mySqlGenericCommandsLFS);
 
         public static ICattleTransferOfOwnershipRepository CattleTransferOfOwnershipRepository() => new CattleTransferOfOwnershipRepository(mySqlGenericCommandsLFS);
+
+        public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsLFS);
     }
 }

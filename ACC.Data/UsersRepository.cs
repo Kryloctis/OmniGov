@@ -9,16 +9,16 @@ namespace ACC.Data
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
         private readonly string tableCollectionsOfficers = "collecting_officers";
         private readonly string tableName3 = "disbursing_officers";
         private readonly string tableName4 = "roles";
         private readonly string viewTableName = "view_users";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public UsersRepository(IAccGenericCommands dbGenericCommands)
+        public UsersRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -32,7 +32,7 @@ namespace ACC.Data
 
             string query = $"SELECT roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name FROM {viewTableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -68,7 +68,7 @@ namespace ACC.Data
 
                 string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
@@ -99,7 +99,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE b.role_name <> 'System Administrator'";
                 var dtUsers = new DataTable();
-                return _dbGenericCommands.Fill(query, dtUsers);
+                return mySqlGenericCommandsLFS.Fill(query, dtUsers);
             }
             catch (Exception)
             {
@@ -113,7 +113,7 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT {tableName4}.role_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.roles_id={tableName4}.id WHERE {tableName}.id='{id}'";
-                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -135,7 +135,7 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id='{id}'";
-                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -157,7 +157,7 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT id FROM {tableName3} WHERE users_id='{id}'";
-                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -199,7 +199,7 @@ namespace ACC.Data
                             $"GROUP BY id";
 
             var dtUsers = new DataTable();
-            return _dbGenericCommands.Fill(query, dtUsers);
+            return mySqlGenericCommandsLFS.Fill(query, dtUsers);
         }
 
         public DataTable GetLinksJOCollectingOfficers()
@@ -229,7 +229,7 @@ namespace ACC.Data
                             $"GROUP BY id";
 
             var dtUsers = new DataTable();
-            return _dbGenericCommands.Fill(query, dtUsers);
+            return mySqlGenericCommandsLFS.Fill(query, dtUsers);
         }
 
         public DataTable GetLinksDisbursingOfficers()
@@ -255,7 +255,7 @@ namespace ACC.Data
                 $"FROM {viewTableName} WHERE role_name LIKE '%disburs%' GROUP BY id";
 
             var dtUsers = new DataTable();
-            return _dbGenericCommands.Fill(query, dtUsers);
+            return mySqlGenericCommandsLFS.Fill(query, dtUsers);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -272,7 +272,7 @@ namespace ACC.Data
                 string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
                 var dtUsers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtUsers, parameters);
+                return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
             }
             catch (Exception)
             {
@@ -297,7 +297,7 @@ namespace ACC.Data
                 };
 
                 string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -320,7 +320,7 @@ namespace ACC.Data
             };
 
             string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateWithPassword(UsersModel entity)
@@ -339,7 +339,7 @@ namespace ACC.Data
             };
 
             string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username, password = sha2(@password, 224) WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<UsersModel> entityList)
@@ -356,7 +356,7 @@ namespace ACC.Data
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     }
 
                     scope.Complete();
@@ -375,7 +375,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -393,7 +393,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -414,7 +414,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM job_orders WHERE users_id = @users_id AND is_deleted = 0";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -430,7 +430,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id = @users_id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -448,7 +448,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName3} WHERE users_id = @users_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -471,7 +471,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT username FROM {tableName} WHERE username = @username";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -495,7 +495,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT username FROM {tableName} WHERE id <> @id AND username = @username";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -519,7 +519,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE BINARY username = @username AND password = sha2(@password, 224)";
-                string userId = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string userId = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(userId)) return Convert.ToByte(userId);
@@ -543,7 +543,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {viewTableName} WHERE id = @id AND permission_name = @permission_name";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -579,7 +579,7 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
 
-            return _dbGenericCommands.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public string GetCollectorNameByUserId(int userId)
@@ -590,7 +590,7 @@ namespace ACC.Data
 
             string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ' ,last_name) AS full_name FROM {tableCollectionsOfficers} WHERE users_id   = @user_id";
 
-            return string.IsNullOrEmpty(_dbGenericCommands.ExecuteScalar(query, parameter)) ? string.Empty : _dbGenericCommands.ExecuteScalar(query, parameter);
+            return string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter)) ? string.Empty : mySqlGenericCommandsLFS.ExecuteScalar(query, parameter);
         }
 
         public DataTable GetViewRecordsByOffice(string office)
@@ -612,7 +612,7 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
 
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsBySearch(string office, string searchTxt)
@@ -635,7 +635,7 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
 
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, dynamic> GetViewRecordById(int Id)
@@ -649,7 +649,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;

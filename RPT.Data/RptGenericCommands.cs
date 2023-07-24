@@ -124,5 +124,19 @@ namespace RPT.Data
                 }
             }
         }
+
+        public bool TestConnection(string testConnectionName)
+        {
+            try
+            {
+                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
+                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
+                {
+                    connection.Open();
+                    return true;
+                }
+            }
+            catch (MySqlException) { return false; }
+        }
     }
 }
