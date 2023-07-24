@@ -49,11 +49,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dtpDateIssued
             // 
+            dtpDateIssued.CustomFormat = "MM/dd/yyyy";
+            dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpDateIssued.Location = new System.Drawing.Point(141, 60);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(426, 23);
             dtpDateIssued.TabIndex = 6;
+            dtpDateIssued.ValueChanged += dtpDateIssued_ValueChanged;
             // 
             // cmbCollector
             // 
@@ -73,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             cmbReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbReceipt.FormattingEnabled = true;
             cmbReceipt.IntegralHeight = false;
-            cmbReceipt.Location = new System.Drawing.Point(141, 87);
+            cmbReceipt.Location = new System.Drawing.Point(141, 88);
             cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             cmbReceipt.Name = "cmbReceipt";
             cmbReceipt.Size = new System.Drawing.Size(426, 23);
@@ -97,7 +100,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             cbCollectingOfficerTypeJO.AutoSize = true;
             cbCollectingOfficerTypeJO.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(141, 11);
+            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(142, 12);
             cbCollectingOfficerTypeJO.Name = "cbCollectingOfficerTypeJO";
             cbCollectingOfficerTypeJO.Size = new System.Drawing.Size(114, 17);
             cbCollectingOfficerTypeJO.TabIndex = 14;
@@ -179,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(12, 66);
+            label3.Location = new System.Drawing.Point(12, 64);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(70, 15);
             label3.TabIndex = 17;

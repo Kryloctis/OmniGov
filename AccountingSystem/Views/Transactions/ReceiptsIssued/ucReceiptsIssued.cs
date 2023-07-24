@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 int receiptTotalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
                 int remainingReceipts = quantity - receiptTotalIssued;
 
-                if (accountableForm.ToString().Contains("Tickets"))
+                if (accountableForm.ToString().Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                     row["acc_form_desc"] = $"{accountableForm} ({remainingReceipts}) ";
                 else
                     row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom:D7} - {receiptNumberTo:D7}) ";
@@ -339,7 +339,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             string accountableForm = item["acc_form_desc"].ToString();
 
-            if (accountableForm.Contains("Tickets"))
+            if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                 SetFieldsForCashTickets();
             else
             {
@@ -392,6 +392,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 isCollectorJO = false;
 
             LoadCollectors();
+        }
+
+        private void FilterReceipts()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            FilterReceipts();
         }
 
     }
