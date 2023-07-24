@@ -139,6 +139,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void LoadReceipts()
         {
+            pbLoadRecords.Value = 0;
             HelperLoadRecords.ReceiptsDatagridView(ReceiptDataTable(), dgReceipts);
             SetToolStripStatusData();
         }
@@ -169,6 +170,21 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
+        }
+
+        private void OnLoad()
+        {
+            if (!bgwLoadReceipts.IsBusy)
+                bgwLoadReceipts.RunWorkerAsync();
+        }
+
+        private void frmReceipts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

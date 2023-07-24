@@ -229,6 +229,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Manage > Receipts";
+            Load += frmReceipts_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgReceipts).EndInit();
