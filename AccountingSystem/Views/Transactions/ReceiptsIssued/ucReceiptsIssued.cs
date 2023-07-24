@@ -131,6 +131,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             foreach (DataRow row in receiptsDt.Rows)
             {
                 int receiptsId = Convert.ToInt32(row["id"]);
+                DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                 string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
                 int quantity = Convert.ToInt32(row["quantity"]);
                 int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
@@ -151,6 +152,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     if (!isUpdate)
                         row.Delete();
                 }
+
+                DateTime dateIssued = dtpDateIssued.Value.Date;
+                if (receivedDate < dateIssued)
+                    row.Delete();
             }
 
             HelperLoadRecords.ReceiptsCombobox(cmbReceipt, receiptsDt);
@@ -394,14 +399,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadCollectors();
         }
 
-        private void FilterReceipts()
-        {
-            throw new NotImplementedException();
-        }
-
         private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
         {
-            FilterReceipts();
+            LoadReceipts();
         }
 
     }
