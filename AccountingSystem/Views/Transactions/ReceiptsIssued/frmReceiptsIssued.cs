@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true, false);
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true);
         }
 
         private DataColumn[] ReceiptsIssuedDataColumn()
@@ -86,9 +86,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (dgReceiptIssued.SelectedRows.Count == 1 && dgReceiptIssued.CurrentRow.Cells["id"].Value != null)
             {
                 int rowIndex = dgReceiptIssued.CurrentCell.RowIndex;
-
                 string createdAt = dgReceiptIssued.Rows[rowIndex].Cells["date_issued"].Value.ToString();
-
                 toolStripStatusLabelCreatedAt.Text = createdAt;
             }
 
@@ -106,12 +104,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
             _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
-        }
-
-        private void ReturnReceipts()
-        {
-            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -218,9 +210,29 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void OnLoad()
+        {
+            if (!bgwLoadIssuedReceipts.IsBusy)
+                bgwLoadIssuedReceipts.RunWorkerAsync();
+        }
+
         private void frmReceiptsIssued_Load(object sender, EventArgs e)
         {
-            ShowRecordTimeStamp();
+            try
+            {
+                OnLoad();
+                ShowRecordTimeStamp();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+        }
+
+        private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            OnLoad();
         }
     }
 }
