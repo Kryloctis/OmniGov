@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -631,5 +630,24 @@ namespace ACC.Data
                 return true;
             }
         }
+
+        public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormID },
+                new object[] { "@receipt_no", DbType.Int64, receiptNumberFrom },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
+
+            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
+        }
+
     }
 }

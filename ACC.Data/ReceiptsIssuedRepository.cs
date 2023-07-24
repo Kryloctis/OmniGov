@@ -22,35 +22,29 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT * FROM {tableName} id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
-                    record.Add("quantity", reader.Rows[0]["quantity"].ToString());
-                    record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
-                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
-                    record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
-                    record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());
-                    record.Add("date_issued", reader.Rows[0]["date_issued"].ToString());
-                    record.Add("issuefrom", reader.Rows[0]["issuefrom"].ToString());
-                    record.Add("issueto", reader.Rows[0]["issueto"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
+                record.Add("quantity", reader.Rows[0]["quantity"].ToString());
+                record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
+                record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
+                record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
+                record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());
+                record.Add("date_issued", reader.Rows[0]["date_issued"].ToString());
+                record.Add("receipt_issued_from", reader.Rows[0]["receipt_issued_from"].ToString());
+                record.Add("receipt_issued_to", reader.Rows[0]["receipt_issued_to"].ToString());
             }
 
             return record;
@@ -160,45 +154,16 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
-        public DataTable GetRecordsBySearch(string dateIssued, string searchText)
+        public DataTable GetRecordsBySearch(DateTime dateIssued, string searchText)
         {
             var parameter = new object[][] {
                 new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
-                new object[]{"@date_issued", DbType.String, dateIssued },
+                new object[]{"@date_issued_month", DbType.Byte, dateIssued.Month },
+                new object[]{"@date_issued_year", DbType.Int16, dateIssued.Year },
+                new object[]{"@date_issued", DbType.Date, dateIssued },
             };
 
-            string query = $"SELECT  " +
-                            $"id, " +
-                            $"collecting_officer_id, " +
-                            $"collecting_officers_prefix, " +
-                            $"collecting_officers_first_name, " +
-                            $"collecting_officers_mid_initial, " +
-                            $"collecting_officers_last_name, " +
-                            $"collecting_officers_suffix, " +
-                            $"job_orders_id, " +
-                            $"job_orders_prefix, " +
-                            $"job_orders_first_name, " +
-                            $"job_orders_mid_initial, " +
-                            $"job_orders_last_name, " +
-                            $"job_orders_suffix, " +
-                            $"acc_form_no, " +
-                            $"acc_form_desc, " +
-                            $"accountable_forms, " +
-                            $"receipt_issued_from, " +
-                            $"receipt_issued_to,  " +
-                            $"date_issued,  " +
-                            $"quantity, " +
-                            $"last_issued, " +
-                            $"is_returned, " +
-                            $"returned_date,  " +
-                            $"issued_by  " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE " +
-                            $"(collecting_officers_last_name LIKE @searchKey OR  " +
-                            $"job_orders_last_name LIKE @searchKey) AND " +
-                            $"accountable_forms LIKE @searchKey AND " +
-                            $"date_issued = @date_issued " +
-                            $"ORDER BY date_issued DESC ";
+            string query = $"SELECT id, collecting_officer_id, collecting_officers_prefix, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, job_orders_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, acc_form_no, acc_form_desc, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date, issued_by FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey) OR (date_issued = @date_issued OR MONTH(date_issued) = @date_issued_month) AND YEAR(date_issued) = @date_issued_year AND accountable_forms LIKE @searchKey ";
 
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
@@ -236,7 +201,7 @@ namespace ACC.Data
                     new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
                     new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
                     new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
-                    new object[] { "@date_issued", DbType.Date, entity.Issued},
+                    new object[] { "@date_issued", DbType.Date, entity.IssuedDate},
                     new object[] { "@receipt_issued_from", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@receipt_issued_to", DbType.Int32, entity.IssuedTo},
                     new object[] { "@quantity", DbType.Int32, entity.Quantity},
@@ -265,26 +230,19 @@ namespace ACC.Data
 
         public bool Update(ReceiptsIssuedModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
-                    new object[] { "@date_issued", DbType.Date, entity.Issued},
-                    new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
-                    new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
+                new object[] { "@date_issued", DbType.Date, entity.IssuedDate},
+                new object[] { "@receipt_issued_from", DbType.Int32, entity.IssuedFrom},
+                new object[] { "@receipt_issued_to", DbType.Int32, entity.IssuedTo},
+                new object[] { "@quantity", DbType.Int32, entity.Quantity}
+            };
 
-                string query = $"UPDATE {tableName} SET receipts_id=@receipts_id,collecting_officers_id=@collecting_officers_id,date_issued=@date_issued,issuefrom=@issuefrom,issueto=@issueto,quantity=@quantity WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET receipts_id = @receipts_id, collecting_officers_id = @collecting_officers_id, date_issued = @date_issued, receipt_issued_from = @receipt_issued_from, receipt_issued_to = @receipt_issued_to, quantity = @quantity WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateReturnedReceipt(ReceiptsIssuedModel entity)
@@ -400,10 +358,7 @@ namespace ACC.Data
 
             int queryResult = int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
 
-            if (receiptQuantity > queryResult)
-                return true;
-            else
-                return false;
+            return receiptQuantity > queryResult;
         }
 
         public bool CollectingOfficerHasReceiptAssigned(int id)
@@ -421,7 +376,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ReceiptIsUsed(int receiptId)
+        public bool ReceiptHasIssuance(int receiptId)
         {
             var parameters = new object[][]
            {
@@ -495,6 +450,41 @@ namespace ACC.Data
 
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
+        }
+
+        public bool ReceiptNumberInRange(int receiptId, int receiptNumber)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_issued_from AND receipt_issued_to AND receipts_id = @receipt_id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
+        }
+
+        public bool ReceiptNumberInRange(int receiptId, int receiptNumber, int receiptIssuedId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
+                new object[] { "@receipt_number", DbType.Int32, receiptNumber },
+                new object[] { "@id", DbType.Int32, receiptIssuedId }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_issued_from AND receipt_issued_to AND receipts_id = @receipt_id AND id <> @id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult))
+                return false;
+
+            return true;
         }
     }
 }

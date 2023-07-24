@@ -7,7 +7,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class frmReceiptsIssuedAdd : Form
     {
         private readonly frmReceiptsIssued _frmReceiptIssued;
-        private readonly int _receiptId = 0;
         private readonly ucReceiptsIssued uc;
 
         public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued)
@@ -22,73 +21,64 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                if (_receiptId != 0)
-                {
-                    uc.LoadCollectorsWithReceiptIssued(_receiptId);
-                    uc.cmbReceipt.SelectedValue = _receiptId;
-                    uc.cmbReceipt.Enabled = false;
-                }
-                else
-                    uc.LoadCollectors();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-                var receiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
-                var dateIssued = uc.dtpIssued.Value;
-                var issueFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim());
-                var issueTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim());
-                var quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim());
-                var userId = Helper.UserId;
-
-                var receiptIssuedModel = new ReceiptsIssuedModel()
-                {
-                    CollectorId = collectorId,
-                    ReceiptId = receiptId,
-                    Issued = dateIssued,
-                    IssuedFrom = issueFrom,
-                    IssuedTo = issueTo,
-                    Quantity = quantity,
-                    IssuedByUserId = userId
-                };
-
-                if (uc.isCollectorJO == true)
-                {
-                    receiptIssuedModel.JobOrderId = collectorId;
-                    receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
-                }
-
-                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                return receiptIssuedRepository.Insert(receiptIssuedModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+
+            int collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+            int receiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
+            DateTime dateIssued = uc.dtpDateIssued.Value;
+            int receiptNumberFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
+            int receiptNumberToTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
+            int quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text);
+            int userId = Helper.UserId;
+
+            var receiptIssuedModel = new ReceiptsIssuedModel()
+            {
+                CollectorId = collectorId,
+                ReceiptId = receiptId,
+                IssuedDate = dateIssued,
+                IssuedFrom = receiptNumberFrom,
+                IssuedTo = receiptNumberToTo,
+                Quantity = quantity,
+                IssuedByUserId = userId
+            };
+
+            if (uc.isCollectorJO)
+            {
+                receiptIssuedModel.JobOrderId = collectorId;
+                receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
+            }
+
+            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
+            return receiptIssuedRepository.Insert(receiptIssuedModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Receipt Issued has been saved.");
-                uc.ResetForm();
-                _frmReceiptIssued.LoadRecords();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Receipt issued has been saved.");
+                    _frmReceiptIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
+                    uc.ResetForm();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        private void frmReceiptsIssuedAdd_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _frmReceiptIssued.LoadRecords();
-        }
     }
 }

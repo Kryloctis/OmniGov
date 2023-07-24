@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -41,6 +40,19 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
+        public int GetChildNodesIDs(int taxTypeID)
+        {
+
+            var parameter = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, taxTypeID},
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE parent = @id";
+
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
+        }
+
         public DataTable GetChildNodesTaxTypes(int parentID)
         {
             var parameter = new object[][]
@@ -62,7 +74,7 @@ namespace AccountingSystem
             };
 
             string query = $"SELECT code FROM {tableName} WHERE id = @parent";
-            
+
             return _dbGenericCommands.ExecuteScalar(query, parameter).ToString();
         }
 
@@ -121,7 +133,7 @@ namespace AccountingSystem
 
         public DataTable GetTaxTypeCodes()
         {
-            string query = $"SELECT id, code FROM {tableName}";
+            string query = $"SELECT id, code, description, parent FROM {tableName}  ORDER BY parent, id DESC";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);
@@ -152,9 +164,9 @@ namespace AccountingSystem
         public bool UnDeleteTaxType(int taxTypeID)
         {
             var parameters = new object[][]
-             {
-                new object[] { "@id", DbType.Int32, taxTypeID},
-             };
+            {
+            new object[] { "@id", DbType.Int32, taxTypeID},
+            };
 
             string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -168,7 +180,7 @@ namespace AccountingSystem
                 new object[] { "@code", DbType.String, entity.Code },
                 new object[] { "@description", DbType.String, entity.Description },
                 new object[] { "@parent", DbType.Int32, entity.ParentID },
-                new object[] { "@funds_id", DbType.Int32, entity.FundID },
+                new object[] { "@funds_id", DbType.Int16, entity.FundID },
                 new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
                 new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },
             };

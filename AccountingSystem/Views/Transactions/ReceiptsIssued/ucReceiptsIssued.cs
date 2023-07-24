@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -9,13 +8,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class ucReceiptsIssued : UserControl
     {
         internal int receiptIssuedId;
-        internal int receiptId;
+        internal int selectedReceiptID;
+
         internal int collectingOfficerId;
-        internal string receiptNumberFrom;
+        internal int receiptNumberFrom;
         internal string receiptNumberTo;
-        internal int receiptQuantity;
+        internal int receiptAvailableQuantity;
+
         internal bool isCashTickets;
         internal bool isCollectorJO;
+        internal bool isUpdate;
 
         public ucReceiptsIssued()
         {
@@ -38,24 +40,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void ResetForm()
         {
-            try
-            {
-                receiptIssuedId = 0;
-                receiptId = 0;
-                receiptIssuedId = 0;
-                collectingOfficerId = 0;
-                isCashTickets = false;
-                isCollectorJO = false;
-                receiptNumberFrom = "0";
-                receiptNumberTo = "0";
-                txtReceiptIssuedFrom.Text = "0";
-                txtReceiptIssuedTo.Text = "0";
-                txtReceiptQuantity.Clear();
-                dtpIssued.Value = DateTime.Today;
-                LoadCollectors();
-                LoadReceipts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            receiptIssuedId = 0;
+            selectedReceiptID = 0;
+            collectingOfficerId = 0;
+            isCashTickets = false;
+            isUpdate = false;
+            receiptNumberFrom = 0;
+            txtReceiptQuantity.Clear();
+            txtReceiptIssuedTo.Clear();
+            txtReceiptIssuedFrom.Clear();
+            dtpDateIssued.Value = DateTime.Today;
+            LoadCollectors();
+            LoadReceipts();
+            ControlsConfiguration();
         }
 
         #region Collectors
@@ -69,11 +66,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             };
         }
 
-        private DataTable DataTableCollectingOfficers()
+        private DataTable DataTableRegularCollectingOfficers()
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-
             DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
 
             foreach (DataRow row in dtCollectingOfficers.Rows)
@@ -94,20 +90,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             return dataTable;
         }
 
-        private DataColumn[] DataColumnsCollectingOfficerHasJobOrders()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "job_orders_id", typeof(int)),
-                new DataColumn(Name = "job_orders_full_name", typeof(string))
-            };
-        }
-
-        private DataTable DataTableCollectingOfficerHasJobOrders()
+        private DataTable DataTableJobOrderCollectionOfficers()
         {
             DataTable dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsCollectingOfficerHasJobOrders());
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
             DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+
 
             foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
             {
@@ -116,12 +104,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 string firstName = row["job_orders_first_name"].ToString();
                 string middleInitial = row["job_orders_mid_initial"].ToString();
                 string lastName = row["job_orders_last_name"].ToString();
-                string suffix = row["job_orders_last_name"].ToString();
+                string suffix = row["job_orders_suffix"].ToString();
                 string jobOrderFullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
 
                 var newRow = dataTable.NewRow();
-                newRow["job_orders_id"] = jobOrderId;
-                newRow["job_orders_full_name"] = jobOrderFullName;
+                newRow["id"] = jobOrderId;
+                newRow["full_name"] = jobOrderFullName;
                 dataTable.Rows.Add(newRow);
             }
 
@@ -130,130 +118,66 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void LoadCollectors()
         {
-            if (cbCollector.Checked)
-            {
-                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficerHasJobOrders(), cmbCollector, "job_orders_full_name", "job_orders_id");
-                isCollectorJO = true;
-            }
-            else
-            {
-                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficers(), cmbCollector, "full_name", "id");
-                isCollectorJO = false;
-            }
+            DataTable dataTable = cbCollectingOfficerTypeJO.Checked ? DataTableJobOrderCollectionOfficers() : DataTableRegularCollectingOfficers();
+            HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
         }
 
         #endregion Collectors
 
-        internal void LoadCollectorsWithReceiptIssued(int receiptId)
-        {
-            try
-            {
-                var collectorRepository = AccFactory.CollectingOfficerRepository();
-                var dtCollector = collectorRepository.GetCollectorsWithReceiptsIssuedByReceiptId(receiptId);
-                cmbCollector.DataSource = dtCollector;
-                cmbCollector.ValueMember = "id";
-                cmbCollector.DisplayMember = "fullname";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         internal void LoadReceipts()
         {
-            try
+            DataTable receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
+
+            foreach (DataRow row in receiptsDt.Rows)
             {
-                var receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
+                int receiptsId = Convert.ToInt32(row["id"]);
+                string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                int quantity = Convert.ToInt32(row["quantity"]);
+                int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
+                int receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]);
+                int receiptTotalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
+                int remainingReceipts = quantity - receiptTotalIssued;
 
-                foreach (DataRow row in receiptsDt.Rows)
+                if (accountableForm.ToString().Contains("Tickets"))
+                    row["acc_form_desc"] = $"{accountableForm} ({remainingReceipts}) ";
+                else
+                    row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom:D7} - {receiptNumberTo:D7}) ";
+
+                if (remainingReceipts == 0)
                 {
-                    var receiptsId = Convert.ToInt32(row["id"]);
-                    var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                    var quantity = Convert.ToInt32(row["quantity"]);
-                    string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
-                    string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
+                    if (isUpdate && selectedReceiptID != receiptsId)
+                        row.Delete();
 
-                    if (accountableForm.ToString().Contains("Tickets"))
-                        row["acc_form_desc"] = $"{accountableForm} ({quantity - TotalIssued(receiptsId)}) ";
-                    else
-                        row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
-
-                    //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
-                    if ((quantity - TotalIssued(receiptsId)) == 0)
+                    if (!isUpdate)
                         row.Delete();
                 }
-
-                cmbReceipt.DataSource = receiptsDt;
-                cmbReceipt.ValueMember = "id";
-                cmbReceipt.DisplayMember = "acc_form_desc";
-
-                int TotalIssued(int receiptId)
-                {
-                    return AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
-                }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
 
-        private void SetReceiptNumberFrom(int receiptId, DataRowView item = null)
-        {
-            try
-            {
-                var totalUsedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
-                txtReceiptIssuedFrom.Text = (Convert.ToInt32(receiptNumberFrom) + Convert.ToInt32(totalUsedReceipt)).ToString("D7");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void SetFieldsForCashTickets()
-        {
-            txtReceiptQuantity.ReadOnly = false;
-            isCashTickets = true;
-            txtReceiptIssuedFrom.ResetText();
-            txtReceiptIssuedTo.ResetText();
-            txtReceiptIssuedFrom.Enabled = false;
-            txtReceiptIssuedTo.Enabled = false;
-        }
-
-        private void SetFieldsForNonCashTickets()
-        {
-            isCashTickets = false;
-            txtReceiptIssuedFrom.Enabled = true;
-            txtReceiptIssuedTo.Enabled = true;
-            txtReceiptQuantity.ReadOnly = true;
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadCollectors();
-                LoadReceipts();
-            }
+            HelperLoadRecords.ReceiptsCombobox(cmbReceipt, receiptsDt);
         }
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
-                cmbReceipt_SelectionChangeCommitted(sender, e);
+                if (!DesignMode)
+                {
+                    LoadCollectors();
+                    LoadReceipts();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ComputeReceiptIssueQuantity()
         {
-            var receiptNumberFrom = string.IsNullOrEmpty(txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(txtReceiptIssuedFrom.Text);
-            var receiptNumberTo = string.IsNullOrEmpty(txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(txtReceiptIssuedTo.Text);
-            var quantity = (receiptNumberTo - receiptNumberFrom) + 1;
+            string receiptNumberFrom = txtReceiptIssuedFrom.Text;
+            string receiptNumberTo = txtReceiptIssuedTo.Text;
+
+            if (string.IsNullOrEmpty(receiptNumberFrom) || string.IsNullOrEmpty(receiptNumberTo))
+                return;
+
+            var quantity = Convert.ToInt32(receiptNumberTo) - Convert.ToInt32(receiptNumberFrom) + 1;
 
             if (quantity >= 1)
                 txtReceiptQuantity.Text = quantity.ToString();
@@ -283,32 +207,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorComboBox(errorProvider1, cmbReceipt);
         }
 
-        private bool IsReceiptBetweenFromAndTo()
-        {
-            try
-            {
-                var receiptsRepo = AccFactory.ReceiptsRepository();
-                var receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
-                var receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
-                var receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
-
-                return receiptsRepo.IsReceiptBetweenFromAndTo(receiptId, receiptNumberFrom, receiptNumberTo);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtReceiptQuantity.Text.Trim()))
-            {
-                e.Cancel = true;
-                return;
-            }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptQuantity, "Quantity");
+            int quantity = string.IsNullOrEmpty(txtReceiptQuantity.Text) ? 0 : Convert.ToInt32(txtReceiptQuantity.Text);
 
-            if (receiptQuantity < Convert.ToInt32(txtReceiptQuantity.Text.Trim()))
+            if (receiptAvailableQuantity < quantity)
             {
                 errorProvider1.SetError(txtReceiptQuantity, "Not enough quantity");
                 e.Cancel = true;
@@ -320,39 +224,82 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorTextBox(errorProvider1, txtReceiptQuantity);
         }
 
-        private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
+        private bool ReceiptNumberInRange(int receiptNumber)
         {
-            if (!isCashTickets)
+            try
             {
-                if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
-                {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt No. From.");
-                    return;
-                }
+                int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
+                bool isReceiptNumberExist;
+                bool isReceiptNumberInRange;
+
+                isReceiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
+
+                if (isUpdate)
+                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
+                else
+                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
+
+                if (isReceiptNumberExist && isReceiptNumberInRange)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+                return false;
             }
         }
 
-        private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
+        private bool ReceiptNumberExist(int receiptNumber)
         {
-            if (!isCashTickets)
-            {
-                if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
-                {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt No. To.");
-                    return;
-                }
+            int receiptID = Convert.ToInt32(cmbReceipt.SelectedValue);
 
-                if (IsReceiptBetweenFromAndTo() == false)
-                {
-                    errorProvider1.SetError(txtReceiptIssuedTo, "Invalid receipt number to.");
-                    e.Cancel = true;
-                }
+            if (receiptID == 0)
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber);
+            else
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber, receiptID);
+        }
+
+        private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
+        {
+            if (isCashTickets)
+                return;
+
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt Number From.");
+
+            if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text))
+                return;
+
+            int receiptNumber = Convert.ToInt32(txtReceiptIssuedFrom.Text);
+            if (!ReceiptNumberInRange(receiptNumber) && ReceiptNumberExist(receiptNumber))
+            {
+                errorProvider1.SetError(txtReceiptIssuedFrom, "Receipt series number is out of range.");
+                e.Cancel = true;
             }
         }
 
         private void txtReceiptNumberFrom_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtReceiptIssuedFrom);
+        }
+
+        private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
+        {
+            if (isCashTickets)
+                return;
+
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt Number To.");
+
+            if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text))
+                return;
+
+            int receiptNumber = Convert.ToInt32(txtReceiptIssuedTo.Text);
+            if (!ReceiptNumberInRange(receiptNumber) && ReceiptNumberExist(receiptNumber))
+            {
+                errorProvider1.SetError(txtReceiptIssuedTo, "Receipt series number is out of range.");
+                e.Cancel = true;
+            }
         }
 
         private void txtReceiptNumberTo_Validated(object sender, EventArgs e)
@@ -362,23 +309,56 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         #endregion Validations
 
-        private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
+        internal void SetFieldsForCashTickets()
+        {
+            isCashTickets = true;
+            txtReceiptQuantity.ReadOnly = false;
+            txtReceiptIssuedFrom.Clear();
+            txtReceiptIssuedFrom.Enabled = false;
+            txtReceiptIssuedTo.Clear();
+            txtReceiptIssuedTo.Enabled = false;
+        }
+
+        internal void SetFieldsForNonCashTickets()
+        {
+            isCashTickets = false;
+            txtReceiptIssuedFrom.Enabled = true;
+            txtReceiptIssuedTo.Enabled = true;
+            txtReceiptQuantity.ReadOnly = true;
+        }
+
+        internal void ControlsConfiguration()
         {
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
             if (item == null) return;
 
-            //SET DATA
-            receiptId = int.Parse(item["id"].ToString());
-            receiptQuantity = (int)item["quantity"] - (AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId));
-            receiptNumberFrom = item["receipt_number_from"].ToString();
+            selectedReceiptID = Convert.ToInt32(item["id"]);
+            int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedReceiptID);
+            receiptAvailableQuantity = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
+            receiptNumberFrom = Convert.ToInt32(item["receipt_number_from"]);
 
-            if (item["acc_form_desc"].ToString().Contains("Tickets"))
+            string accountableForm = item["acc_form_desc"].ToString();
+
+            if (accountableForm.Contains("Tickets"))
                 SetFieldsForCashTickets();
             else
             {
                 SetFieldsForNonCashTickets();
-                SetReceiptNumberFrom(receiptId, item);
-                return;
+
+                if (!isUpdate)
+                    txtReceiptIssuedFrom.Text = (receiptNumberFrom + totalIssuedReceipt).ToString("D7");
+            }
+        }
+
+        private void cmbReceipt_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ControlsConfiguration();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -406,11 +386,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadCollectors();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (cbCollectingOfficerTypeJO.Checked)
+                isCollectorJO = true;
+            else
+                isCollectorJO = false;
+
+            LoadCollectors();
         }
+
     }
 }

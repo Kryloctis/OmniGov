@@ -1,108 +1,129 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReceiptsIssuedEdit : Form
     {
-        private frmReceiptsIssued frmr;
+        private frmReceiptsIssued _frmReceiptsIssued;
+        private readonly ucReceiptsIssued uc;
 
-        public frmReceiptsIssuedEdit(frmReceiptsIssued _frmr, int id)
+        public frmReceiptsIssuedEdit(frmReceiptsIssued frmReceiptsIssued, int receiptIssuedID)
         {
             InitializeComponent();
-            frmr = _frmr;
-            ucReceipts1.receiptIssuedId = id;
+            _frmReceiptsIssued = frmReceiptsIssued;
+
+            uc = ucReceipts1;
+            uc.isUpdate = true;
+            uc.receiptIssuedId = receiptIssuedID;
+        }
+
+        internal void LoadSelectedValue()
+        {
+            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(uc.receiptIssuedId);
+
+            string jobOrderID = receiptIssuedDict["job_orders_id"];
+            var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officers_id"]);
+            int collector = string.IsNullOrEmpty(jobOrderID) ? collectingOfficerID : Convert.ToInt32(jobOrderID);
+            int receiptID = Convert.ToInt32(receiptIssuedDict["receipts_id"]);
+            DateTime dateIssued = Convert.ToDateTime(receiptIssuedDict["date_issued"]);
+            int receiptNumberFrom = Convert.ToInt32(receiptIssuedDict["receipt_issued_from"]);
+            int receiptNumberTo = Convert.ToInt32(receiptIssuedDict["receipt_issued_to"]);
+            int quantity = Convert.ToInt32(receiptIssuedDict["quantity"]);
+
+            if (!string.IsNullOrEmpty(jobOrderID))
+                uc.cbCollectingOfficerTypeJO.Checked = true;
+
+            uc.selectedReceiptID = receiptID;
+            uc.cmbCollector.SelectedValue = collector;
+            uc.cmbReceipt.SelectedValue = receiptID;
+            uc.dtpDateIssued.Value = dateIssued;
+            uc.txtReceiptIssuedFrom.Text = receiptNumberFrom == 0 ? string.Empty : receiptNumberFrom.ToString("D7");
+            uc.txtReceiptIssuedTo.Text = receiptNumberTo == 0 ? string.Empty : receiptNumberTo.ToString("D7");
+            uc.txtReceiptQuantity.Text = quantity.ToString();
+        }
+
+        internal void CheckReceiptsIssuedStatus()
+        {
+            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
+            bool isUsed = false;
+
+            int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
+            int receiptNumberFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
+            int receiptNumberTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
+
+            while (receiptNumberFrom <= receiptNumberTo)
+            {
+                isUsed = AccFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
+                receiptNumberFrom++;
+
+                if (isUsed)
+                    break;
+            }
+
+            uc.cmbReceipt.Enabled = !isUsed;
+            uc.txtReceiptIssuedFrom.Enabled = !isUsed;
+            uc.txtReceiptIssuedTo.Enabled = !isUsed;
         }
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                ucReceipts1.LoadCollectors();
                 LoadSelectedValue();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadSelectedValue()
-        {
-            try
-            {
-                var uc = ucReceipts1;
-                var riRepository = AccFactory.ReceiptsIssuedRepository();
-                var riData = riRepository.GetRecordByID(uc.receiptIssuedId);
-
-                uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
-                uc.cmbReceipt.SelectedValue = riData["receipts_id"];
-                uc.dtpIssued.Value = Convert.ToDateTime(riData["date_issued"]);
-                uc.txtReceiptIssuedFrom.Text = riData["issuefrom"];
-                uc.txtReceiptIssuedTo.Text = riData["issueto"];
-                uc.txtReceiptQuantity.Text = riData["quantity"];
-
-                uc.txtReceiptIssuedFrom.ReadOnly = true;
-                uc.txtReceiptIssuedTo.ReadOnly = true;
+                CheckReceiptsIssuedStatus();
+                uc.LoadReceipts();
+                uc.ControlsConfiguration();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                var uc = ucReceipts1;
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-                var riModel = new ReceiptsIssuedModel()
-                {
-                    Id = uc.receiptIssuedId,
-                    CollectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue),
-                    ReceiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue),
-                    Issued = uc.dtpIssued.Value,
-                    IssuedFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()),
-                    IssuedTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()),
-                    Quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim())
-                };
-
-                var riRepository = AccFactory.ReceiptsIssuedRepository();
-                if (!uc.isCashTickets)
-                {
-                    if (Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()))
-                    {
-                        Helper.MessageBoxError("Invalid Receipt!");
-                        return false;
-                    }
-                    else if (int.Parse(uc.txtReceiptQuantity.Text.Trim()) <= 0)
-                    {
-                        Helper.MessageBoxError("Quantity Empty!");
-                        return false;
-                    }
-                    else return riRepository.Update(riModel);
-                }
-                else
-                {
-                    if (int.Parse(uc.txtReceiptQuantity.Text.Trim()) <= 0)
-                    {
-                        Helper.MessageBoxError("Quantity Empty!");
-                        return false;
-                    }
-                    else return riRepository.Update(riModel);
-                }
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+
+            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
+
+            int collectorID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+            int receiptID = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
+            var serialNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : uc.txtReceiptIssuedFrom.Text);
+            var serialNumberTo = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : uc.txtReceiptIssuedTo.Text);
+            DateTime dateIssued = uc.dtpDateIssued.Value;
+            int quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text);
+
+            var receiptIssuedModel = new ReceiptsIssuedModel()
+            {
+                Id = uc.receiptIssuedId,
+                CollectorId = collectorID,
+                ReceiptId = receiptID,
+                IssuedDate = dateIssued,
+                IssuedFrom = serialNumberFrom,
+                IssuedTo = serialNumberTo,
+                Quantity = quantity
+            };
+
+            return receiptIssuedRepository.Update(receiptIssuedModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Receipt Issued has been updated.");
-                frmr.LoadRecords();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Receipt Issued has been updated.");
+                    _frmReceiptsIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
+                    Close();
+                }
             }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

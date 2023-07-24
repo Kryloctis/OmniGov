@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class ucReceipts : UserControl
     {
-        internal int receiptId;
+        internal int receiptID;
         internal int accountableFormId;
         internal bool isCashTicket;
 
@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void ResetForm()
         {
-            receiptId = 0;
+            receiptID = 0;
             accountableFormId = 0;
             isCashTicket = false;
 
@@ -55,76 +55,115 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataTable;
         }
 
-        internal void LoadAccountableForms()
-        {
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
-        }
 
         #region Validations
 
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
-            errorArray[0] = epAccountableForms.GetError(cmbAccountableForms);
-            errorArray[1] = epReceiptNumberFrom.GetError(txtReceiptNumberFrom);
-            errorArray[2] = epReceiptNumberTo.GetError(txtReceiptNumberTo);
-            errorArray[3] = epReceivedDate.GetError(dtpReceivedDate);
-            errorArray[4] = epQuantity.GetError(txtQuantity);
+            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
+            errorArray[1] = errorProvider.GetError(txtReceiptNumberFrom);
+            errorArray[2] = errorProvider.GetError(txtReceiptNumberTo);
+            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
+            errorArray[4] = errorProvider.GetError(txtQuantity);
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
-        private void cmbforms_Validating(object sender, CancelEventArgs e)
+        private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForms, cmbAccountableForms, "Accountable Form.");
+
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form.");
         }
 
-        private void cmbforms_Validated(object sender, EventArgs e)
+        private void cmbAccountableForms_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epAccountableForms, cmbAccountableForms);
+            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
         }
 
-        private void txtfrom_Validating(object sender, CancelEventArgs e)
+        private bool ReceiptNumberExist(int receiptNumber)
         {
-            if (!isCashTicket)
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
+            int accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+
+            if (receiptID == 0)
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
+            else
+                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
         }
 
-        private void txtfrom_Validated(object sender, EventArgs e)
+        private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ClearErrorTextBox(epReceiptNumberFrom, txtReceiptNumberFrom);
-        }
+            if (isCashTicket)
+                return;
 
-        private void txtto_Validating(object sender, CancelEventArgs e)
-        {
-            if (!isCashTicket)
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberTo, txtReceiptNumberTo, "Receipt Number To.");
-        }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReceiptNumberFrom, "Receipt Number From.");
 
-        private void txtto_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epReceiptNumberTo, txtReceiptNumberTo);
-        }
+            if (string.IsNullOrEmpty(txtReceiptNumberFrom.Text))
+                return;
 
-        private void txtquantity_Validating(object sender, CancelEventArgs e)
-        {
-            bool isEmpty = Helper.ShowErrorTextBoxEmpty(epQuantity, txtQuantity, "Quantity.");
-            bool isZeroOrLess = Convert.ToInt32(string.IsNullOrEmpty(txtQuantity.Text.Trim()) ? 0 : txtQuantity.Text) <= 0;
-
-            if (isEmpty || isZeroOrLess)
+            int receiptNumber = Convert.ToInt32(txtReceiptNumberFrom.Text);
+            if (ReceiptNumberExist(receiptNumber))
             {
-                epQuantity.SetError(txtQuantity, "Please enter a valid quantity.");
+                errorProvider.SetError(txtReceiptNumberFrom, "Receipt number from of this accountable form already exist.");
                 e.Cancel = true;
             }
         }
 
-        private void txtquantity_Validated(object sender, EventArgs e)
+        private void txtReceiptNumberFrom_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epQuantity, txtQuantity);
+            Helper.ClearErrorTextBox(errorProvider, txtReceiptNumberFrom);
+        }
+
+        private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
+        {
+            if (isCashTicket)
+                return;
+
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReceiptNumberTo, "Receipt Number To.");
+            int receiptNumber = Convert.ToInt32(txtReceiptNumberTo.Text);
+
+            if (ReceiptNumberExist(receiptNumber))
+            {
+                errorProvider.SetError(txtReceiptNumberTo, "Receipt number to of this accountable form already exist.");
+                e.Cancel = true;
+            }
+        }
+
+        private void txtReceiptNumberTo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtReceiptNumberTo);
+        }
+
+        private void txtQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtQuantity, "Quantity.");
+        }
+
+        private void txtQuantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtQuantity);
         }
 
         #endregion Validations
+
+        #region Form Events Methods
+
+        private void ComputeReceipQuantity()
+        {
+            string receiptNumberFrom = txtReceiptNumberFrom.Text;
+            string receiptNumberTo = txtReceiptNumberTo.Text;
+
+            if (string.IsNullOrEmpty(receiptNumberFrom) || string.IsNullOrEmpty(receiptNumberTo))
+                return;
+
+            var quantity = Convert.ToInt32(receiptNumberTo) - Convert.ToInt32(receiptNumberFrom) + 1;
+
+            if (quantity >= 1)
+                txtQuantity.Text = quantity.ToString();
+            else
+                txtQuantity.Text = string.Empty;
+        }
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -144,74 +183,80 @@ namespace AccountingSystem.Views.Manage.Receipts
                 e.Handled = true;
         }
 
-        private void txtfrom_KeyUp(object sender, KeyEventArgs e)
+        private void txtReceiptNumberFrom_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) || string.IsNullOrEmpty(txtReceiptNumberFrom.Text.Trim()))
-                return;
-
-            int from = Convert.ToInt32(txtReceiptNumberFrom.Text.Trim());
-            int to = Convert.ToInt32(txtReceiptNumberTo.Text.Trim());
-
-            txtQuantity.Text = ((to - from) + 1).ToString();
+            ComputeReceipQuantity();
         }
 
-        private void txtto_KeyUp(object sender, KeyEventArgs e)
+        private void txtReceiptNumberTo_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) || string.IsNullOrEmpty(txtReceiptNumberFrom.Text.Trim()))
-                return;
+            ComputeReceipQuantity();
+        }
 
-            int from = Convert.ToInt32(txtReceiptNumberFrom.Text.Trim());
-            int to = Convert.ToInt32(txtReceiptNumberTo.Text.Trim());
+        #endregion
 
-            txtQuantity.Text = ((to - from) + 1).ToString();
+        private void SetFieldsForCashTickets()
+        {
+            isCashTicket = true;
+            txtReceiptNumberFrom.Enabled = false;
+            txtReceiptNumberFrom.Clear();
+            txtReceiptNumberTo.Enabled = false;
+            txtReceiptNumberTo.Clear();
+            txtQuantity.ReadOnly = false;
+        }
+
+        private void SetFieldsForNonCashTickets()
+        {
+            isCashTicket = false;
+            txtReceiptNumberFrom.Enabled = true;
+            txtReceiptNumberTo.Enabled = true;
+            txtQuantity.ReadOnly = true;
+        }
+
+        private void ControlsConfiguration()
+        {
+            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+            if (item == null) return;
+
+            string accountableForm = item["accountableForm"].ToString();
+
+            if (accountableForm.Contains("Tickets"))
+                SetFieldsForCashTickets();
+            else
+                SetFieldsForNonCashTickets();
         }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
-
-                if (item == null)
-                    return;
-
-                if (item["accountableForm"].ToString().Contains("Tickets"))
-                {
-                    isCashTicket = true;
-                    txtReceiptNumberFrom.Enabled = false;
-                    txtReceiptNumberTo.Enabled = false;
-                    txtQuantity.ReadOnly = false;
-                    txtReceiptNumberFrom.ResetText();
-                    txtReceiptNumberTo.ResetText();
-                    txtQuantity.Text = string.Empty;
-                }
-                else
-                {
-                    isCashTicket = false;
-                    txtReceiptNumberFrom.Enabled = true;
-                    txtReceiptNumberTo.Enabled = true;
-                    txtQuantity.ReadOnly = true;
-                    txtQuantity.Text = string.Empty;
-                }
+                ControlsConfiguration();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
-        private void OnLoad()
+        internal void LoadAccountableForms()
         {
-            try
-            {
-                LoadAccountableForms();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
         }
 
         private void ucReceipts_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                OnLoad();
+                try
+                {
+                    LoadAccountableForms();
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
             }
         }
+
     }
 }

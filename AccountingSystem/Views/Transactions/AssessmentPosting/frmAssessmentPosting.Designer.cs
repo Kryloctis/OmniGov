@@ -29,361 +29,335 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.chckBxAll = new System.Windows.Forms.CheckBox();
-            this.dgProperties = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtBarangay = new System.Windows.Forms.TextBox();
-            this.txtYear = new System.Windows.Forms.TextBox();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnPostSelected = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.progressBarLoadRecords = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblPostingAssessments = new System.Windows.Forms.ToolStripStatusLabel();
-            this.prgrsBarPostingAssessments = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblPostedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblPostedBy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.cmbxBarangays = new System.Windows.Forms.ComboBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
-            this.bgwAssessmentPostSelectAll = new System.ComponentModel.BackgroundWorker();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.SuspendLayout();
+            panel2 = new System.Windows.Forms.Panel();
+            chckBxAll = new System.Windows.Forms.CheckBox();
+            dgProperties = new System.Windows.Forms.DataGridView();
+            panel1 = new System.Windows.Forms.Panel();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            txtBarangay = new System.Windows.Forms.TextBox();
+            txtYear = new System.Windows.Forms.TextBox();
+            nudYear = new System.Windows.Forms.NumericUpDown();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnPostSelected = new System.Windows.Forms.ToolStripButton();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            progressBarLoadRecords = new System.Windows.Forms.ToolStripProgressBar();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblPostingAssessments = new System.Windows.Forms.ToolStripStatusLabel();
+            prgrsBarPostingAssessments = new System.Windows.Forms.ToolStripProgressBar();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblPostedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblPostedBy = new System.Windows.Forms.ToolStripStatusLabel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            cmbxBarangays = new System.Windows.Forms.ComboBox();
+            txtSearch = new System.Windows.Forms.TextBox();
+            btnRetrieve = new System.Windows.Forms.Button();
+            bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
+            bgwAssessmentPostSelectAll = new System.ComponentModel.BackgroundWorker();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgProperties).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
+            toolStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.chckBxAll);
-            this.panel2.Controls.Add(this.dgProperties);
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 50);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(1039, 433);
-            this.panel2.TabIndex = 10;
+            panel2.BackColor = System.Drawing.SystemColors.Control;
+            panel2.Controls.Add(chckBxAll);
+            panel2.Controls.Add(dgProperties);
+            panel2.Controls.Add(panel1);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 50);
+            panel2.Margin = new System.Windows.Forms.Padding(0);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(1039, 433);
+            panel2.TabIndex = 10;
             // 
             // chckBxAll
             // 
-            this.chckBxAll.AutoSize = true;
-            this.chckBxAll.Location = new System.Drawing.Point(8, 41);
-            this.chckBxAll.Name = "chckBxAll";
-            this.chckBxAll.Size = new System.Drawing.Size(15, 14);
-            this.chckBxAll.TabIndex = 16;
-            this.chckBxAll.UseVisualStyleBackColor = true;
-            this.chckBxAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkAll_MouseClick);
+            chckBxAll.AutoSize = true;
+            chckBxAll.Location = new System.Drawing.Point(8, 41);
+            chckBxAll.Name = "chckBxAll";
+            chckBxAll.Size = new System.Drawing.Size(15, 14);
+            chckBxAll.TabIndex = 16;
+            chckBxAll.UseVisualStyleBackColor = true;
+            chckBxAll.MouseClick += checkAll_MouseClick;
             // 
             // dgProperties
             // 
-            this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgProperties.Location = new System.Drawing.Point(4, 35);
-            this.dgProperties.Name = "dgProperties";
-            this.dgProperties.RowTemplate.Height = 25;
-            this.dgProperties.Size = new System.Drawing.Size(1031, 394);
-            this.dgProperties.TabIndex = 15;
-            this.dgProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProperties_CellValueChanged);
-            this.dgProperties.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgProperties_ColumnAdded);
-            this.dgProperties.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgProperties_CurrentCellDirtyStateChanged);
-            this.dgProperties.SelectionChanged += new System.EventHandler(this.dgProperties_SelectionChanged);
+            dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgProperties.Location = new System.Drawing.Point(4, 35);
+            dgProperties.Name = "dgProperties";
+            dgProperties.RowTemplate.Height = 25;
+            dgProperties.Size = new System.Drawing.Size(1031, 394);
+            dgProperties.TabIndex = 15;
+            dgProperties.CellValueChanged += dgProperties_CellValueChanged;
+            dgProperties.ColumnAdded += dgProperties_ColumnAdded;
+            dgProperties.CurrentCellDirtyStateChanged += dgProperties_CurrentCellDirtyStateChanged;
+            dgProperties.SelectionChanged += dgProperties_SelectionChanged;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtBarangay);
-            this.panel1.Controls.Add(this.txtYear);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1031, 31);
-            this.panel1.TabIndex = 17;
+            panel1.BackColor = System.Drawing.SystemColors.Control;
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(txtBarangay);
+            panel1.Controls.Add(txtYear);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(4, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1031, 31);
+            panel1.TabIndex = 17;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(804, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 15);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Note: Make sure to post previous year/s.";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(804, 7);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(219, 15);
+            label2.TabIndex = 19;
+            label2.Text = "Note: Make sure to post previous year/s.";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Currently Viewing";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 7);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(101, 15);
+            label1.TabIndex = 18;
+            label1.Text = "Currently Viewing";
             // 
             // txtBarangay
             // 
-            this.txtBarangay.BackColor = System.Drawing.SystemColors.Control;
-            this.txtBarangay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBarangay.Location = new System.Drawing.Point(110, 3);
-            this.txtBarangay.Name = "txtBarangay";
-            this.txtBarangay.Size = new System.Drawing.Size(188, 23);
-            this.txtBarangay.TabIndex = 17;
+            txtBarangay.BackColor = System.Drawing.SystemColors.Control;
+            txtBarangay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtBarangay.Location = new System.Drawing.Point(110, 3);
+            txtBarangay.Name = "txtBarangay";
+            txtBarangay.Size = new System.Drawing.Size(188, 23);
+            txtBarangay.TabIndex = 17;
             // 
             // txtYear
             // 
-            this.txtYear.BackColor = System.Drawing.SystemColors.Control;
-            this.txtYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtYear.Location = new System.Drawing.Point(304, 3);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(77, 23);
-            this.txtYear.TabIndex = 17;
+            txtYear.BackColor = System.Drawing.SystemColors.Control;
+            txtYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtYear.Location = new System.Drawing.Point(304, 3);
+            txtYear.Name = "txtYear";
+            txtYear.Size = new System.Drawing.Size(77, 23);
+            txtYear.TabIndex = 17;
             // 
             // nudYear
             // 
-            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.Location = new System.Drawing.Point(482, 20);
-            this.nudYear.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.nudYear.Minimum = new decimal(new int[] {
-            1500,
-            0,
-            0,
-            0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.Size = new System.Drawing.Size(73, 23);
-            this.nudYear.TabIndex = 14;
-            this.nudYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudYear.Value = new decimal(new int[] {
-            1971,
-            0,
-            0,
-            0});
+            nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            nudYear.Location = new System.Drawing.Point(482, 20);
+            nudYear.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            nudYear.Minimum = new decimal(new int[] { 1500, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.Size = new System.Drawing.Size(73, 23);
+            nudYear.TabIndex = 14;
+            nudYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            nudYear.Value = new decimal(new int[] { 1971, 0, 0, 0 });
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnPostSelected});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1039, 50);
-            this.toolStrip1.TabIndex = 14;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.BackColor = System.Drawing.Color.White;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnPostSelected });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(1039, 50);
+            toolStrip1.TabIndex = 14;
+            toolStrip1.Text = "toolStrip1";
             // 
             // btnPostSelected
             // 
-            this.btnPostSelected.Enabled = false;
-            this.btnPostSelected.Image = global::AccountingSystem.Properties.Resources.task_list_pin_20px;
-            this.btnPostSelected.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPostSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPostSelected.Name = "btnPostSelected";
-            this.btnPostSelected.Size = new System.Drawing.Size(34, 39);
-            this.btnPostSelected.Text = "Post";
-            this.btnPostSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPostSelected.Click += new System.EventHandler(this.btnPostSelected_Click);
+            btnPostSelected.Enabled = false;
+            btnPostSelected.Image = Properties.Resources.task_list_pin_20px;
+            btnPostSelected.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnPostSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnPostSelected.Name = "btnPostSelected";
+            btnPostSelected.Size = new System.Drawing.Size(34, 39);
+            btnPostSelected.Text = "Post";
+            btnPostSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnPostSelected.Click += btnPostSelected_Click;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblRecordCount,
-            this.progressBarLoadRecords,
-            this.toolStripStatusLabel2,
-            this.lblPostingAssessments,
-            this.prgrsBarPostingAssessments,
-            this.toolStripStatusLabel4,
-            this.toolStripStatusLabel3,
-            this.lblPostedAt,
-            this.toolStripStatusLabel6,
-            this.toolStripStatusLabel5,
-            this.lblPostedBy});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 483);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1039, 22);
-            this.statusStrip1.TabIndex = 15;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, progressBarLoadRecords, toolStripStatusLabel2, lblPostingAssessments, prgrsBarPostingAssessments, toolStripStatusLabel4, toolStripStatusLabel3, lblPostedAt, toolStripStatusLabel6, toolStripStatusLabel5, lblPostedBy });
+            statusStrip1.Location = new System.Drawing.Point(0, 483);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1039, 22);
+            statusStrip1.TabIndex = 15;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Records:";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            this.lblRecordCount.Text = "0";
+            lblRecordCount.Name = "lblRecordCount";
+            lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            lblRecordCount.Text = "0";
             // 
             // progressBarLoadRecords
             // 
-            this.progressBarLoadRecords.Name = "progressBarLoadRecords";
-            this.progressBarLoadRecords.Size = new System.Drawing.Size(100, 16);
-            this.progressBarLoadRecords.Visible = false;
+            progressBarLoadRecords.Name = "progressBarLoadRecords";
+            progressBarLoadRecords.Size = new System.Drawing.Size(100, 16);
+            progressBarLoadRecords.Visible = false;
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(566, 17);
-            this.toolStripStatusLabel2.Spring = true;
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(433, 17);
+            toolStripStatusLabel2.Spring = true;
             // 
             // lblPostingAssessments
             // 
-            this.lblPostingAssessments.Name = "lblPostingAssessments";
-            this.lblPostingAssessments.Size = new System.Drawing.Size(126, 17);
-            this.lblPostingAssessments.Text = "Posting Assessments...";
+            lblPostingAssessments.Name = "lblPostingAssessments";
+            lblPostingAssessments.Size = new System.Drawing.Size(126, 17);
+            lblPostingAssessments.Text = "Posting Assessments...";
             // 
             // prgrsBarPostingAssessments
             // 
-            this.prgrsBarPostingAssessments.Name = "prgrsBarPostingAssessments";
-            this.prgrsBarPostingAssessments.Size = new System.Drawing.Size(100, 16);
+            prgrsBarPostingAssessments.Name = "prgrsBarPostingAssessments";
+            prgrsBarPostingAssessments.Size = new System.Drawing.Size(100, 16);
             // 
             // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel4.Text = "|";
-            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel4.Text = "|";
+            toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel3
             // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(59, 17);
-            this.toolStripStatusLabel3.Text = "Posted at:";
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(59, 17);
+            toolStripStatusLabel3.Text = "Posted at:";
             // 
             // lblPostedAt
             // 
-            this.lblPostedAt.Name = "lblPostedAt";
-            this.lblPostedAt.Size = new System.Drawing.Size(12, 17);
-            this.lblPostedAt.Text = "-";
+            lblPostedAt.Name = "lblPostedAt";
+            lblPostedAt.Size = new System.Drawing.Size(12, 17);
+            lblPostedAt.Text = "-";
             // 
             // toolStripStatusLabel6
             // 
-            this.toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel6.Text = "|";
-            this.toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel6.Text = "|";
+            toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel5
             // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(62, 17);
-            this.toolStripStatusLabel5.Text = "Posted by:";
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(62, 17);
+            toolStripStatusLabel5.Text = "Posted by:";
             // 
             // lblPostedBy
             // 
-            this.lblPostedBy.Name = "lblPostedBy";
-            this.lblPostedBy.Size = new System.Drawing.Size(12, 17);
-            this.lblPostedBy.Text = "-";
+            lblPostedBy.Name = "lblPostedBy";
+            lblPostedBy.Size = new System.Drawing.Size(12, 17);
+            lblPostedBy.Text = "-";
             // 
             // backgroundWorker1
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // cmbxBarangays
             // 
-            this.cmbxBarangays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxBarangays.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbxBarangays.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbxBarangays.FormattingEnabled = true;
-            this.cmbxBarangays.Location = new System.Drawing.Point(561, 20);
-            this.cmbxBarangays.Name = "cmbxBarangays";
-            this.cmbxBarangays.Size = new System.Drawing.Size(166, 23);
-            this.cmbxBarangays.TabIndex = 16;
+            cmbxBarangays.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxBarangays.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cmbxBarangays.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cmbxBarangays.FormattingEnabled = true;
+            cmbxBarangays.Location = new System.Drawing.Point(561, 20);
+            cmbxBarangays.Name = "cmbxBarangays";
+            cmbxBarangays.Size = new System.Drawing.Size(166, 23);
+            cmbxBarangays.TabIndex = 16;
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(733, 19);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(221, 23);
-            this.txtSearch.TabIndex = 17;
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Location = new System.Drawing.Point(733, 19);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(221, 23);
+            txtSearch.TabIndex = 17;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRetrieve.Location = new System.Drawing.Point(960, 19);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 18;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRetrieve.Location = new System.Drawing.Point(960, 19);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            btnRetrieve.TabIndex = 18;
+            btnRetrieve.Text = "Retrieve";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // bgwLoadAsessmentPosts
             // 
-            this.bgwLoadAsessmentPosts.WorkerReportsProgress = true;
-            this.bgwLoadAsessmentPosts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwLoadAsessmentPosts_DoWork);
-            this.bgwLoadAsessmentPosts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwLoadAsessmentPosts_ProgressChanged);
-            this.bgwLoadAsessmentPosts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwLoadAsessmentPosts_RunWorkerCompleted);
+            bgwLoadAsessmentPosts.WorkerReportsProgress = true;
+            bgwLoadAsessmentPosts.DoWork += bgwLoadAsessmentPosts_DoWork;
+            bgwLoadAsessmentPosts.ProgressChanged += bgwLoadAsessmentPosts_ProgressChanged;
+            bgwLoadAsessmentPosts.RunWorkerCompleted += bgwLoadAsessmentPosts_RunWorkerCompleted;
             // 
             // bgwAssessmentPostSelectAll
             // 
-            this.bgwAssessmentPostSelectAll.WorkerReportsProgress = true;
-            this.bgwAssessmentPostSelectAll.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwAssessmentPostSelectAll_DoWork);
-            this.bgwAssessmentPostSelectAll.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwAssessmentPostSelectAll_ProgressChanged);
-            this.bgwAssessmentPostSelectAll.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwAssessmentPostSelectAll_RunWorkerCompleted);
+            bgwAssessmentPostSelectAll.WorkerReportsProgress = true;
+            bgwAssessmentPostSelectAll.DoWork += bgwAssessmentPostSelectAll_DoWork;
+            bgwAssessmentPostSelectAll.ProgressChanged += bgwAssessmentPostSelectAll_ProgressChanged;
+            bgwAssessmentPostSelectAll.RunWorkerCompleted += bgwAssessmentPostSelectAll_RunWorkerCompleted;
             // 
             // frmAssessmentPosting
             // 
-            this.AcceptButton = this.btnRetrieve;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1039, 505);
-            this.Controls.Add(this.btnRetrieve);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.nudYear);
-            this.Controls.Add(this.cmbxBarangays);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip1);
-            this.MinimizeBox = false;
-            this.Name = "frmAssessmentPosting";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Assessment Posting";
-            this.Load += new System.EventHandler(this.frmAssessmentPosting_Load);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = btnRetrieve;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(1039, 505);
+            Controls.Add(btnRetrieve);
+            Controls.Add(txtSearch);
+            Controls.Add(nudYear);
+            Controls.Add(cmbxBarangays);
+            Controls.Add(panel2);
+            Controls.Add(toolStrip1);
+            Controls.Add(statusStrip1);
+            MinimizeBox = false;
+            Name = "frmAssessmentPosting";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Transactions > Assessment Posting";
+            Load += frmAssessmentPosting_Load;
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgProperties).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
