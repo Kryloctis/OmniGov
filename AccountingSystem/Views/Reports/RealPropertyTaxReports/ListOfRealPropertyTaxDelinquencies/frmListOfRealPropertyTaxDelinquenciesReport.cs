@@ -1,5 +1,4 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
-using AccountingSystem.Views.Shared;
+﻿using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -49,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     btnFindTaxPayer.Visible = true;
                     cmbxBarangay.Visible = false;
                     cmbxMunicipality.Visible = false;
-                    taxPayerStatusStrip.Visible = true;
+                    taxpayerNamePanel.Visible = true;
                     _ownerName = string.Empty;
                     break;
 
@@ -57,7 +56,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     cmbxMunicipality.Visible = true;
                     cmbxBarangay.Visible = false;
                     btnFindTaxPayer.Visible = false;
-                    taxPayerStatusStrip.Visible = false;
+                    taxpayerNamePanel.Visible = false;
                     _ownerName = string.Empty;
                     LoadMunicipalities();
                     break;
@@ -66,7 +65,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     cmbxBarangay.Visible = true;
                     btnFindTaxPayer.Visible = false;
                     cmbxMunicipality.Visible = false;
-                    taxPayerStatusStrip.Visible = false;
+                    taxpayerNamePanel.Visible = false;
                     _ownerName = string.Empty;
                     LoadBarangays();
                     break;
@@ -75,7 +74,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     btnFindTaxPayer.Visible = false;
                     cmbxBarangay.Visible = false;
                     cmbxMunicipality.Visible = false;
-                    taxPayerStatusStrip.Visible = false;
+                    taxpayerNamePanel.Visible = false;
                     _ownerName = string.Empty;
                     break;
             }
@@ -96,7 +95,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         {
             try
             {
-                lblTaxPayerName.Text = _ownerName;
+                txtTaxpayerName.Text = _ownerName;
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 DateTime asOfDate = dtAsOf.Value.Date;
 
