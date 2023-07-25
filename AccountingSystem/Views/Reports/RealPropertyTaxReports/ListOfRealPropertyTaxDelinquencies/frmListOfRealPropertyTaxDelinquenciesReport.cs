@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -192,14 +193,16 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 foreach (DataRow row in referenceDatTable.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string rowOwnerName = row["owner_name"].ToString();
+                    //string rowOwnerName = row["owner_name"].ToString();
+                    string rowOwnerName = _ownerName;
                     string rowLotNo = row["lot_no"].ToString();
                     string rowArpNo = row["complete_arp_no"].ToString();
                     decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                     DateTime rowPostedAt = Convert.ToDateTime(row["posted_at"]);
                     int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                     decimal rowPenaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-                    string rowRptPaymentPostId = row["rpt_payment_posts_id"].ToString();
+                    //string rowRptPaymentPostId = row["rpt_payment_posts_id"].ToString();
+                    string rowRptPaymentPostId = row["rpt_payments_id"].ToString();
                     int rowYear = Convert.ToInt32(row["year"]);
 
                     decimal basicPenalty = 0;
@@ -221,7 +224,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     //If there's a payment
                     if (!string.IsNullOrEmpty(rowRptPaymentPostId))
                     {
-                        var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
+                        var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
 
                         #region Penalty
 
@@ -254,6 +257,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -276,7 +280,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            //_ = new frmRptTaxPayerList(null, null, this, null, null).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, this, null, null).ShowDialog();
         }
     }
 }

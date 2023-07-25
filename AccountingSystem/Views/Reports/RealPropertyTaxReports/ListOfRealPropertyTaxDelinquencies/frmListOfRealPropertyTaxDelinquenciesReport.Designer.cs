@@ -232,6 +232,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // 
             txtTaxpayerName.Location = new System.Drawing.Point(61, 3);
             txtTaxpayerName.Name = "txtTaxpayerName";
+            txtTaxpayerName.ReadOnly = true;
             txtTaxpayerName.Size = new System.Drawing.Size(182, 23);
             txtTaxpayerName.TabIndex = 1;
             // 
