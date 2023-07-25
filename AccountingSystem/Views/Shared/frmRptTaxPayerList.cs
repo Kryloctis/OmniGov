@@ -2,8 +2,6 @@
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.Payments;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
-using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -22,7 +20,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
-            frmAddRealProperties frmAddRealProperties, 
+            frmAddRealProperties frmAddRealProperties,
             frmPayments frmPayments
             )
         {
@@ -39,7 +37,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private Form ParentIdentifier()
         {
-            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmAddRealProperties, _frmPayments};
+            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmAddRealProperties, _frmPayments };
 
             foreach (Form form in forms)
             {
@@ -151,7 +149,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private void InitializeListOfDeliquentAccountsReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            _frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayer_name"].Value.ToString();
+            _frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
             _frmListOfRealPropertyTaxDelinquenciesReport.backgroundWorker1.RunWorkerAsync();
         }
 
