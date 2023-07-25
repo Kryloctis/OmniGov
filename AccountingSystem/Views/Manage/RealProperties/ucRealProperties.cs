@@ -96,12 +96,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
-           LoadPropertyKind();
-           LoadClassificationCodes();
-           LoadActualUseCodes();
-           LoadBarangay();
-           LoadPropertiesPreviousARPNumber();
-           cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
+            LoadPropertyKind();
+            LoadClassificationCodes();
+            LoadActualUseCodes();
+            LoadBarangay();
+            LoadPropertiesPreviousARPNumber();
+            cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
         }
 
         private void LoadBarangay()
@@ -171,6 +171,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (cmbxCompletePreviousARPNumber.Items.Count == 0)
+                return;
+
             string completeARPNo = cmbxCompletePreviousARPNumber.Text;
             var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
 
@@ -311,7 +314,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxActualUse, "Actual Used");
         }
- 
+
         private void cmbxActualUse_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxActualUse);
