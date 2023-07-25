@@ -228,7 +228,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     if (!string.IsNullOrEmpty(rowRptPaymentPostId))
                     {
                         var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
-
                         #region Penalty
 
                         basicPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
