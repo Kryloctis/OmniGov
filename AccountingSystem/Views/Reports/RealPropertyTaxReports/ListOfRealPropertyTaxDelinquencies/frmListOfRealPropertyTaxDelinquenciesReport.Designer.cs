@@ -196,10 +196,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // panel2
             // 
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 102);
+            panel2.Location = new System.Drawing.Point(0, 101);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(1141, 537);
+            panel2.Size = new System.Drawing.Size(1141, 538);
             panel2.TabIndex = 1;
             // 
             // backgroundWorker1
@@ -211,12 +211,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // 
             // flowLayoutPanel2
             // 
+            flowLayoutPanel2.AutoSize = true;
             flowLayoutPanel2.Controls.Add(groupBox1);
             flowLayoutPanel2.Controls.Add(taxpayerNamePanel);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(1141, 97);
+            flowLayoutPanel2.Size = new System.Drawing.Size(1141, 96);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // taxpayerNamePanel
@@ -248,7 +249,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 97);
+            pbLoadRecords.Location = new System.Drawing.Point(0, 96);
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
             pbLoadRecords.TabIndex = 21;
@@ -276,6 +277,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             taxpayerNamePanel.ResumeLayout(false);
             taxpayerNamePanel.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
