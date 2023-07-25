@@ -181,7 +181,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void LoadReports()
         {
             try
             {
@@ -189,6 +189,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
                 DataTable referenceDatTable = new DataTable();
                 Invoke((MethodInvoker)delegate { referenceDatTable = ReferenceDataTable(); });
+
+                int recordCount = referenceDatTable.Rows.Count;
+                int rowsCount = 0;
 
                 foreach (DataRow row in referenceDatTable.Rows)
                 {
@@ -246,6 +249,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     newRow["total"] = total;
                     newRow["remarks"] = rowClassificationCode;
 
+
+                    rowsCount++;
+                    int progressBarPercentage = (rowsCount * 100) / recordCount;
+                    backgroundWorker1.ReportProgress(progressBarPercentage);
+
                     dataTable.Rows.Add(newRow);
                 }
             }
@@ -254,10 +262,18 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 Helper.MessageBoxError(ex.Message);
             }
         }
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadReports();
+            });
+
+        }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -269,7 +285,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
+            try
+            {
+                if (!backgroundWorker1.IsBusy)
+                    backgroundWorker1.RunWorkerAsync();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dtAsOf_ValueChanged(object sender, EventArgs e)

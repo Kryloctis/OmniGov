@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             taxpayerNamePanel = new System.Windows.Forms.Panel();
             txtTaxpayerName = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudTaxYear).BeginInit();
@@ -245,13 +245,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             label4.TabIndex = 0;
             label4.Text = "Name";
             // 
-            // progressBar1
+            // pbLoadRecords
             // 
-            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 97);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(1141, 5);
-            progressBar1.TabIndex = 21;
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 97);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
+            pbLoadRecords.TabIndex = 21;
             // 
             // frmListOfRealPropertyTaxDelinquenciesReport
             // 
@@ -260,7 +260,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1141, 639);
             Controls.Add(panel2);
-            Controls.Add(progressBar1);
+            Controls.Add(pbLoadRecords);
             Controls.Add(flowLayoutPanel2);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(1157, 678);
@@ -299,5 +299,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTaxpayerName;
         private System.Windows.Forms.Panel taxpayerNamePanel;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
