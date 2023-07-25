@@ -1,3 +1,5 @@
+using Microsoft.Reporting.WinForms;
+using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -55,15 +57,8 @@ namespace AccountingSystem
 
         public static bool IsJobOrder(int userId)
         {
-            try
-            {
-                var jobOrderRepo = AccFactory.JobOrderRepository();
-                return jobOrderRepo.IsUserJobOrder(userId);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var jobOrderRepo = AccFactory.JobOrderRepository();
+            return jobOrderRepo.IsUserJobOrder(userId);
         }
 
         public static void LoadFormIcon(Form form)
@@ -1034,36 +1029,6 @@ namespace AccountingSystem
             month.Add(12, "December");
 
             return month;
-        }
-
-        public static DataTable QuarterDataTable()
-        {
-            var dtQuarter = new DataTable();
-            dtQuarter.Columns.Add("id");
-            dtQuarter.Columns.Add("quarter");
-
-            DataRow row1 = dtQuarter.NewRow();
-            row1["id"] = 1;
-            row1["quarter"] = "1st";
-            dtQuarter.Rows.Add(row1);
-
-            DataRow row2 = dtQuarter.NewRow();
-            row2["id"] = 2;
-
-            row2["quarter"] = "2nd";
-            dtQuarter.Rows.Add(row2);
-
-            DataRow row3 = dtQuarter.NewRow();
-            row3["id"] = 3;
-            row3["quarter"] = "3rd";
-            dtQuarter.Rows.Add(row3);
-
-            DataRow row4 = dtQuarter.NewRow();
-            row4["id"] = 4;
-            row4["quarter"] = "4th";
-            dtQuarter.Rows.Add(row4);
-
-            return dtQuarter;
         }
 
         public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)

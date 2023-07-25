@@ -199,7 +199,7 @@ namespace AccountingSystem
                 releasedAndUnreleaseChecksToolStripMenu.Enabled = false;
 
             //Reports
-            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
+            if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
                 listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Report of Checks Issued"))
@@ -222,10 +222,10 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report > Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
+            if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
                 realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
+            if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
                 consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
             if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
                 releasedChequesToolStripMenuItem.Enabled = false;

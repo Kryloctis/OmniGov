@@ -211,14 +211,14 @@
             // menuLogout
             // 
             menuLogout.Name = "menuLogout";
-            menuLogout.Size = new System.Drawing.Size(180, 22);
+            menuLogout.Size = new System.Drawing.Size(112, 22);
             menuLogout.Text = "Logout";
             menuLogout.Click += menuLogout_Click;
             // 
             // menuExitApp
             // 
             menuExitApp.Name = "menuExitApp";
-            menuExitApp.Size = new System.Drawing.Size(180, 22);
+            menuExitApp.Size = new System.Drawing.Size(112, 22);
             menuExitApp.Text = "Exit";
             menuExitApp.Click += menuExitApp_Click;
             // 
@@ -1199,7 +1199,6 @@
             // 
             // consolidatedRealPropertyTaxDeliquencesToolStripMenuItem
             // 
-            consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
             consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Name = "consolidatedRealPropertyTaxDeliquencesToolStripMenuItem";
             consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Text = "Consolidated Real Property Tax Deliquences";
@@ -1207,7 +1206,6 @@
             // 
             // listOfDelinquentAccountsToolStripMenuItem
             // 
-            listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
             listOfDelinquentAccountsToolStripMenuItem.Name = "listOfDelinquentAccountsToolStripMenuItem";
             listOfDelinquentAccountsToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             listOfDelinquentAccountsToolStripMenuItem.Text = "List of Delinquent Accounts";
