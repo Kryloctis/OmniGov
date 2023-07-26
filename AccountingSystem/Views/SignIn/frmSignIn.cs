@@ -44,21 +44,30 @@ namespace AccountingSystem
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnVisibility_Click(object sender, EventArgs e)
+        private void ToggleCharVisibility(TextBox textBox, Button button)
         {
-            Image invisibleImage = Properties.Resources.invisible_16px;
-            Image visibleImage = Properties.Resources.visible_16px;
+            Image invisibleImage = Resources.invisible_16px;
+            Image visibleImage = Resources.visible_16px;
 
-            if (txtPassword.PasswordChar == '•')
+            if (textBox.PasswordChar == '•')
             {
-                btnVisibility.Image = invisibleImage;
-                txtPassword.PasswordChar = default(char);
+                button.Image = invisibleImage;
+                textBox.PasswordChar = default(char);
             }
             else
             {
-                btnVisibility.Image = visibleImage;
-                txtPassword.PasswordChar = '•';
+                button.Image = visibleImage;
+                textBox.PasswordChar = '•';
             }
+        }
+
+        private void btnVisibility_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleCharVisibility(txtPassword, btnVisibility);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private string GetFormErrors()
