@@ -118,6 +118,8 @@ namespace AccountingSystem.Views.SignIn
                 if (SetSelectedServer())
                 {
                     _frmSignIn.lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}";
+                    AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.LfsInstance);
+                    RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.RpmInstance);
                     this.Close();
                 };
             }
