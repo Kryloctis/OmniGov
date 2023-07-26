@@ -115,6 +115,8 @@
             cmbxParent.Name = "cmbxParent";
             cmbxParent.Size = new System.Drawing.Size(353, 23);
             cmbxParent.TabIndex = 3;
+            cmbxParent.DropDown += cmbxParent_DropDown;
+            cmbxParent.SelectedIndexChanged += cmbxParent_SelectedIndexChanged;
             // 
             // cmbxFundType
             // 
