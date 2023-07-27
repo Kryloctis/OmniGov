@@ -196,7 +196,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 foreach (DataRow row in referenceDatTable.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    //string rowOwnerName = row["owner_name"].ToString();
                     string rowOwnerName = _ownerName;
                     string rowLotNo = row["lot_no"].ToString();
                     string rowArpNo = row["complete_arp_no"].ToString();
@@ -204,7 +203,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     DateTime rowPostedAt = Convert.ToDateTime(row["posted_at"]);
                     int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                     decimal rowPenaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-                    //string rowRptPaymentPostId = row["rpt_payment_posts_id"].ToString();
                     string rowRptPaymentPostId = row["rpt_payments_id"].ToString();
                     int rowYear = Convert.ToInt32(row["year"]);
 

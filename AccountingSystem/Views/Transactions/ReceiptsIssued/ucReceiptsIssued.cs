@@ -154,7 +154,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
 
                 DateTime dateIssued = dtpDateIssued.Value.Date;
-                if (receivedDate < dateIssued)
+
+                if (receivedDate > dateIssued)
                     row.Delete();
             }
 
