@@ -136,7 +136,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 //If there's a payment
                 if (!string.IsNullOrEmpty(rowRptPaymentPostId))
                 {
-                    var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
+                    var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
 
                     basicPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                     sefPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
