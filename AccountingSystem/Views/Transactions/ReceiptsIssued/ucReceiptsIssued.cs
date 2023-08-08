@@ -131,6 +131,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             foreach (DataRow row in receiptsDt.Rows)
             {
                 int receiptsId = Convert.ToInt32(row["id"]);
+                DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                 string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
                 int quantity = Convert.ToInt32(row["quantity"]);
                 int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
@@ -138,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 int receiptTotalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
                 int remainingReceipts = quantity - receiptTotalIssued;
 
-                if (accountableForm.ToString().Contains("Tickets"))
+                if (accountableForm.ToString().Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                     row["acc_form_desc"] = $"{accountableForm} ({remainingReceipts}) ";
                 else
                     row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom:D7} - {receiptNumberTo:D7}) ";
@@ -151,6 +152,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     if (!isUpdate)
                         row.Delete();
                 }
+
+                DateTime dateIssued = dtpDateIssued.Value.Date;
+
+                if (receivedDate > dateIssued)
+                    row.Delete();
             }
 
             HelperLoadRecords.ReceiptsCombobox(cmbReceipt, receiptsDt);
@@ -339,7 +345,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             string accountableForm = item["acc_form_desc"].ToString();
 
-            if (accountableForm.Contains("Tickets"))
+            if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                 SetFieldsForCashTickets();
             else
             {
@@ -392,6 +398,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 isCollectorJO = false;
 
             LoadCollectors();
+        }
+
+        private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            LoadReceipts();
         }
 
     }

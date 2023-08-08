@@ -219,8 +219,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (item == null) return;
 
             string accountableForm = item["accountableForm"].ToString();
-
-            if (accountableForm.Contains("Tickets"))
+            if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                 SetFieldsForCashTickets();
             else
                 SetFieldsForNonCashTickets();

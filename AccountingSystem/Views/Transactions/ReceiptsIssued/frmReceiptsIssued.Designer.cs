@@ -169,6 +169,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(148, 23);
             dtpDateIssued.TabIndex = 30;
+            dtpDateIssued.ValueChanged += dtpDateIssued_ValueChanged;
             // 
             // panel1
             // 

@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceipts, true, true);
+            Helper.DatagridFullRowSelectStyle(dgReceipts, true);
         }
 
         private void SetToolStripStatusData()

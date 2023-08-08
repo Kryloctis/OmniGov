@@ -49,11 +49,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dtpDateIssued
             // 
-            dtpDateIssued.Location = new System.Drawing.Point(141, 178);
+            dtpDateIssued.CustomFormat = "MM/dd/yyyy";
+            dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpDateIssued.Location = new System.Drawing.Point(141, 60);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(426, 23);
             dtpDateIssued.TabIndex = 6;
+            dtpDateIssued.ValueChanged += dtpDateIssued_ValueChanged;
             // 
             // cmbCollector
             // 
@@ -73,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             cmbReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbReceipt.FormattingEnabled = true;
             cmbReceipt.IntegralHeight = false;
-            cmbReceipt.Location = new System.Drawing.Point(141, 62);
+            cmbReceipt.Location = new System.Drawing.Point(141, 88);
             cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             cmbReceipt.Name = "cmbReceipt";
             cmbReceipt.Size = new System.Drawing.Size(426, 23);
@@ -84,7 +87,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // txtReceiptQuantity
             // 
-            txtReceiptQuantity.Location = new System.Drawing.Point(141, 149);
+            txtReceiptQuantity.Location = new System.Drawing.Point(141, 174);
             txtReceiptQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtReceiptQuantity.Name = "txtReceiptQuantity";
             txtReceiptQuantity.ReadOnly = true;
@@ -97,7 +100,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             cbCollectingOfficerTypeJO.AutoSize = true;
             cbCollectingOfficerTypeJO.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(141, 11);
+            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(142, 12);
             cbCollectingOfficerTypeJO.Name = "cbCollectingOfficerTypeJO";
             cbCollectingOfficerTypeJO.Size = new System.Drawing.Size(114, 17);
             cbCollectingOfficerTypeJO.TabIndex = 14;
@@ -107,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // txtReceiptIssuedFrom
             // 
-            txtReceiptIssuedFrom.Location = new System.Drawing.Point(141, 91);
+            txtReceiptIssuedFrom.Location = new System.Drawing.Point(141, 116);
             txtReceiptIssuedFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtReceiptIssuedFrom.MaxLength = 7;
             txtReceiptIssuedFrom.Name = "txtReceiptIssuedFrom";
@@ -120,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // txtReceiptIssuedTo
             // 
-            txtReceiptIssuedTo.Location = new System.Drawing.Point(141, 120);
+            txtReceiptIssuedTo.Location = new System.Drawing.Point(141, 145);
             txtReceiptIssuedTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtReceiptIssuedTo.MaxLength = 7;
             txtReceiptIssuedTo.Name = "txtReceiptIssuedTo";
@@ -134,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(12, 123);
+            label6.Location = new System.Drawing.Point(12, 148);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(108, 15);
             label6.TabIndex = 20;
@@ -152,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(12, 65);
+            label2.Location = new System.Drawing.Point(12, 90);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(49, 15);
             label2.TabIndex = 16;
@@ -161,7 +164,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(12, 152);
+            label5.Location = new System.Drawing.Point(12, 177);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(56, 15);
             label5.TabIndex = 19;
@@ -170,7 +173,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(12, 94);
+            label4.Location = new System.Drawing.Point(12, 119);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(127, 15);
             label4.TabIndex = 18;
@@ -179,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(12, 184);
+            label3.Location = new System.Drawing.Point(12, 64);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(70, 15);
             label3.TabIndex = 17;

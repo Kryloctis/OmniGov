@@ -29,151 +29,148 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.cmbxBarangays = new System.Windows.Forms.ComboBox();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1141, 64);
-            this.panel1.TabIndex = 0;
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            btnRetrieve = new System.Windows.Forms.Button();
+            cmbxBarangays = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            dtAsOf = new System.Windows.Forms.DateTimePicker();
+            label1 = new System.Windows.Forms.Label();
+            panel2 = new System.Windows.Forms.Panel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            groupBox1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnRetrieve);
-            this.groupBox1.Controls.Add(this.cmbxBarangays);
-            this.groupBox1.Controls.Add(this.dtAsOf);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1133, 56);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
+            groupBox1.Controls.Add(btnRetrieve);
+            groupBox1.Controls.Add(cmbxBarangays);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(dtAsOf);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            groupBox1.Location = new System.Drawing.Point(3, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(1134, 51);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Filter";
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRetrieve.Location = new System.Drawing.Point(426, 22);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(82, 23);
-            this.btnRetrieve.TabIndex = 5;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnRetrieve.Location = new System.Drawing.Point(429, 22);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(82, 23);
+            btnRetrieve.TabIndex = 5;
+            btnRetrieve.Text = "Retrieve";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // cmbxBarangays
             // 
-            this.cmbxBarangays.FormattingEnabled = true;
-            this.cmbxBarangays.Location = new System.Drawing.Point(70, 22);
-            this.cmbxBarangays.Name = "cmbxBarangays";
-            this.cmbxBarangays.Size = new System.Drawing.Size(165, 23);
-            this.cmbxBarangays.TabIndex = 4;
-            // 
-            // dtAsOf
-            // 
-            this.dtAsOf.CustomFormat = "MMM dd, yyyy";
-            this.dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtAsOf.Location = new System.Drawing.Point(294, 22);
-            this.dtAsOf.Name = "dtAsOf";
-            this.dtAsOf.Size = new System.Drawing.Size(120, 23);
-            this.dtAsOf.TabIndex = 2;
+            cmbxBarangays.FormattingEnabled = true;
+            cmbxBarangays.Location = new System.Drawing.Point(73, 22);
+            cmbxBarangays.Name = "cmbxBarangays";
+            cmbxBarangays.Size = new System.Drawing.Size(165, 23);
+            cmbxBarangays.TabIndex = 4;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Barangay";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(11, 26);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(56, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Barangay";
+            // 
+            // dtAsOf
+            // 
+            dtAsOf.CustomFormat = "MMM dd, yyyy";
+            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtAsOf.Location = new System.Drawing.Point(297, 22);
+            dtAsOf.Name = "dtAsOf";
+            dtAsOf.Size = new System.Drawing.Size(120, 23);
+            dtAsOf.TabIndex = 2;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "As of";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 617);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1141, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(257, 26);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(34, 15);
+            label1.TabIndex = 3;
+            label1.Text = "As of";
             // 
             // panel2
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 64);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(1141, 553);
-            this.panel2.TabIndex = 2;
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 65);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(1141, 574);
+            panel2.TabIndex = 2;
             // 
             // backgroundWorker1
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(groupBox1);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(1141, 60);
+            flowLayoutPanel1.TabIndex = 0;
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 60);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
+            pbLoadRecords.TabIndex = 22;
             // 
             // frmCertifiedListOfTaxDelinquences
             // 
-            this.AcceptButton = this.btnRetrieve;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1141, 639);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.panel1);
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1157, 678);
-            this.Name = "frmCertifiedListOfTaxDelinquences";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report > Collection/Payment > Certified List of Real Property Tax Delinquencies";
-            this.Load += new System.EventHandler(this.frmCertifiedListOfTaxDelinquences_Load);
-            this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = btnRetrieve;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.White;
+            ClientSize = new System.Drawing.Size(1141, 639);
+            Controls.Add(panel2);
+            Controls.Add(pbLoadRecords);
+            Controls.Add(flowLayoutPanel1);
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(1157, 678);
+            Name = "frmCertifiedListOfTaxDelinquences";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Report > Collection/Payment > Certified List of Real Property Tax Delinquencies";
+            Load += frmCertifiedListOfTaxDelinquences_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dtAsOf;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbxBarangays;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
