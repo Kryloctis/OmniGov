@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using Org.BouncyCastle.Utilities.Date;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -158,15 +159,15 @@ namespace ACC.Data
         {
             var parameter = new object[][] {
                 new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
-                new object[]{"@date_issued_month", DbType.Byte, dateIssued.Month },
-                new object[]{"@date_issued_year", DbType.Int16, dateIssued.Year },
-                new object[]{"@date_issued", DbType.Date, dateIssued },
+                new object[]{"@month", DbType.Int32, dateIssued.Month},
+                new object[]{"@year", DbType.Int32, dateIssued.Year },
+                new object[]{"@day", DbType.Int32, dateIssued.Day}
             };
 
-            string query = $"SELECT id, collecting_officer_id, collecting_officers_prefix, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, job_orders_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, acc_form_no, acc_form_desc, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date, issued_by FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey) OR (date_issued = @date_issued OR MONTH(date_issued) = @date_issued_month) AND YEAR(date_issued) = @date_issued_year AND accountable_forms LIKE @searchKey ";
+            string query = $"SELECT id, collecting_officer_id, collecting_officers_prefix, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, job_orders_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, acc_form_no, acc_form_desc, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date, issued_by FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey) AND (DAY(date_issued) <= @day AND MONTH(date_issued) <= @month AND YEAR(date_issued) = @year) AND accountable_forms LIKE @searchKey";
 
-            var dtri = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtri, parameter);
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public bool IdExist(int id)

@@ -607,7 +607,7 @@
             // 
             sAAOBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBToolStripMenuItem.Name = "sAAOBToolStripMenuItem";
-            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             sAAOBToolStripMenuItem.Text = "SAAOB";
             sAAOBToolStripMenuItem.Click += sAAOBToolStripMenuItem_Click;
             // 
@@ -615,7 +615,7 @@
             // 
             sAAOBBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBBToolStripMenuItem.Name = "sAAOBBToolStripMenuItem";
-            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             sAAOBBToolStripMenuItem.Text = "SAAOBB";
             sAAOBBToolStripMenuItem.Click += sAAOBBToolStripMenuItem_Click;
             // 

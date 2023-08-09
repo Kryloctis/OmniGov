@@ -219,6 +219,7 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report > Daily Cash Position"))
                 dailyCashPositionsToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Report > Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
@@ -227,6 +228,7 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
                 consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
                 releasedChequesToolStripMenuItem.Enabled = false;
 

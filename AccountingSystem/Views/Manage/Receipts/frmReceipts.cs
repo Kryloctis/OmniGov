@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceipts, true, true);
+            Helper.DatagridFullRowSelectStyle(dgReceipts, true);
         }
 
         private void SetToolStripStatusData()
@@ -93,9 +93,9 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataColumns;
         }
 
-        private DataTable ReceiptDataTable()
+        private void InitializeReceipts()
         {
-            receiptDataTable = new DataTable();
+            var receiptDataTable = new DataTable();
             receiptDataTable.Columns.AddRange(ReceiptsColumns());
 
             DateTime dateReceived = dtpReceivedDate.Value;
@@ -134,21 +134,24 @@ namespace AccountingSystem.Views.Manage.Receipts
                 receiptDataTable.Rows.Add(newRow);
             }
 
-            return receiptDataTable;
+            HelperLoadRecords.ReceiptsDatagridView(receiptDataTable, dgReceipts);
+
         }
 
         internal void LoadReceipts()
         {
-            pbLoadRecords.Value = 0;
-            HelperLoadRecords.ReceiptsDatagridView(ReceiptDataTable(), dgReceipts);
-            SetToolStripStatusData();
+            if (!bgwLoadReceipts.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                bgwLoadReceipts.RunWorkerAsync();
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Invoke((MethodInvoker)delegate
             {
-                LoadReceipts();
+                InitializeReceipts();
             });
         }
 
@@ -161,8 +164,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                if (!bgwLoadReceipts.IsBusy)
-                    bgwLoadReceipts.RunWorkerAsync();
+                LoadReceipts();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -174,8 +176,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void OnLoad()
         {
-            if (!bgwLoadReceipts.IsBusy)
-                bgwLoadReceipts.RunWorkerAsync();
+            LoadReceipts();
         }
 
         private void frmReceipts_Load(object sender, EventArgs e)
@@ -185,6 +186,20 @@ namespace AccountingSystem.Views.Manage.Receipts
                 OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReceipts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            SetToolStripStatusData();
         }
     }
 }

@@ -155,13 +155,14 @@ namespace AccountingSystem.Views.Manage.Receipts
             // dtpReceivedDate
             // 
             dtpReceivedDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            dtpReceivedDate.CustomFormat = " ";
-            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dtpReceivedDate.CustomFormat = " dd/MM/yyyy";
+            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpReceivedDate.Location = new System.Drawing.Point(640, 16);
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
             dtpReceivedDate.Size = new System.Drawing.Size(133, 23);
             dtpReceivedDate.TabIndex = 12;
+            dtpReceivedDate.ValueChanged += dtpReceivedDate_ValueChanged;
             // 
             // label1
             // 
@@ -200,6 +201,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             bgwLoadReceipts.WorkerSupportsCancellation = true;
             bgwLoadReceipts.DoWork += backgroundWorker1_DoWork;
             bgwLoadReceipts.ProgressChanged += backgroundWorker1_ProgressChanged;
+            bgwLoadReceipts.RunWorkerCompleted += bgwLoadReceipts_RunWorkerCompleted;
             // 
             // pbLoadRecords
             // 
