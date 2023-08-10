@@ -21,30 +21,29 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private bool SaveData()
         {
-            try
+            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
+            var riModel = new ReceiptsIssuedModel()
             {
-                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                var riModel = new ReceiptsIssuedModel()
-                {
-                    Id = issuanceId,
-                    Is_returned = 1,
-                    Returned_date = dtpreturn.Value
-                };
+                Id = issuanceId,
+                Is_returned = 1,
+                Returned_date = dtpreturn.Value
+            };
 
-                return receiptIssuedRepository.UpdateReturnedReceipt(riModel);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+            return receiptIssuedRepository.UpdateReturnedReceipt(riModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Receipt successfully returned.");
-                _frmReceiptsIssued.LoadRecords();
-                Close();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Receipt successfully returned.");
+                    _frmReceiptsIssued.LoadRecords();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

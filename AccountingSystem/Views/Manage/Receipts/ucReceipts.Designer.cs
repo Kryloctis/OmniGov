@@ -65,6 +65,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             cmbAccountableForms.Name = "cmbAccountableForms";
             cmbAccountableForms.Size = new System.Drawing.Size(377, 23);
             cmbAccountableForms.TabIndex = 1;
+            cmbAccountableForms.SelectedIndexChanged += cmbforms_SelectedIndexChanged;
             cmbAccountableForms.Validating += cmbAccountableForms_Validating;
             cmbAccountableForms.Validated += cmbAccountableForms_Validated;
             // 

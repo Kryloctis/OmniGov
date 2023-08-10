@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             asOfDate = dtAsOf.Value;
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void LoadReport()
         {
             dataTable = new dsLFS.dtCertListOfAllRptDelinquencesDataTable();
 
@@ -93,19 +93,22 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             DateTime asOfDate = DateTime.Now;
 
             Invoke((MethodInvoker)delegate
-           {
-               GetParameters(out barangayName, out asOfDate);
-           });
+            {
+                GetParameters(out barangayName, out asOfDate);
+            });
 
             var referenceDataTable = AccFactory.RptAssessmentPostsRepository().Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(barangayName, asOfDate);
+
+            int recordCount = referenceDataTable.Rows.Count;
+            int rowCounts = 0;
 
             foreach (DataRow row in referenceDataTable.Rows)
             {
                 var newRow = dataTable.NewRow();
-                string rowRptPaymentPostId = row["rpt_payment_posts_id"].ToString();
+                string rowRptPaymentPostId = row["rpt_payments_id"].ToString();
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
-                string rowOwnerName = row["owner_name"].ToString();
-                string rowOwnerAdress = row["owner_address"].ToString();
+                string rowOwnerName = row["taxpayer_name"].ToString();
+                string rowOwnerAdress = row["taxpayer_address"].ToString();
                 string rowClassification = row["classification_code"].ToString();
                 string rowPropertyKind = row["property_kind"].ToString();
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
@@ -133,7 +136,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 //If there's a payment
                 if (!string.IsNullOrEmpty(rowRptPaymentPostId))
                 {
-                    var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
+                    var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
 
                     basicPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                     sefPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
@@ -181,23 +184,35 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 newRow["grand_total"] = grandTotal;
                 newRow["remarks"] = remarks;
 
+                rowCounts++;
+                int progressBarPercentage = (rowCounts * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
                 dataTable.Rows.Add(newRow);
             }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadReport();
+            });
+
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            LoadReport(reportViewer.LocalReport);
-        }
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e) => pbLoadRecords.Value = e.ProgressPercentage;
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => LoadReport(reportViewer.LocalReport);
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (!backgroundWorker1.IsBusy)
-                backgroundWorker1.RunWorkerAsync();
+            try
+            {
+                if (!backgroundWorker1.IsBusy)
+                    backgroundWorker1.RunWorkerAsync();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -13,24 +13,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true, false);
-        }
-
-        private DataColumn[] ReceiptsIssuedDataColumn()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("receipts", typeof(string)),
-                new DataColumn("serial_number_from", typeof(object)),
-                new DataColumn("serial_number_to", typeof(object)),
-                new DataColumn("quantity", typeof(int)),
-                new DataColumn("date_issued", typeof(DateTime)),
-                new DataColumn("collecting_officer", typeof(string)),
-                new DataColumn("issued_by", typeof(string)),
-            };
-
-            return dataColumns;
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -74,7 +57,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (ex.Number == 1451)
                     Helper.MessageBoxError("Can't delete issued receipt. The receipt was already used by a collecting officer.");
             }
-
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
@@ -86,9 +68,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (dgReceiptIssued.SelectedRows.Count == 1 && dgReceiptIssued.CurrentRow.Cells["id"].Value != null)
             {
                 int rowIndex = dgReceiptIssued.CurrentCell.RowIndex;
-
                 string createdAt = dgReceiptIssued.Rows[rowIndex].Cells["date_issued"].Value.ToString();
-
                 toolStripStatusLabelCreatedAt.Text = createdAt;
             }
 
@@ -106,12 +86,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
             _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
-        }
-
-        private void ReturnReceipts()
-        {
-            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -150,12 +124,30 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
         }
 
-        internal void LoadRecords()
+        private DataColumn[] ReceiptsIssuedDataColumn()
+        {
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("receipts", typeof(string)),
+                new DataColumn("serial_number_from", typeof(object)),
+                new DataColumn("serial_number_to", typeof(object)),
+                new DataColumn("quantity", typeof(int)),
+                new DataColumn("date_issued", typeof(DateTime)),
+                new DataColumn("collecting_officer", typeof(string)),
+                new DataColumn("issued_by", typeof(string)),
+            };
+
+            return dataColumns;
+        }
+
+        private void InitializeRecords()
         {
             DateTime searchDateIssued = dtpDateIssued.Value;
+            pbLoadRecords.Value = 0;
             string searchText = txtsearch.Text.Trim();
 
-            DataTable dtReceiptsIssued = new();
+            var dtReceiptsIssued = new DataTable();
             dtReceiptsIssued.Columns.AddRange(ReceiptsIssuedDataColumn());
 
             DataTable dtReceiptsIssuedFromDB = AccFactory.ReceiptsIssuedRepository().GetRecordsBySearch(searchDateIssued, searchText);
@@ -199,8 +191,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             Invoke((MethodInvoker)delegate
             {
-                LoadRecords();
+                InitializeRecords();
             });
+        }
+
+        internal void LoadRecords()
+        {
+            if (!bgwLoadIssuedReceipts.IsBusy)
+                bgwLoadIssuedReceipts.RunWorkerAsync();
         }
 
         private void bgwLoadIssuedReceipts_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -218,9 +216,28 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void OnLoad()
+        {
+            LoadRecords();
+        }
+
         private void frmReceiptsIssued_Load(object sender, EventArgs e)
         {
-            ShowRecordTimeStamp();
+            try
+            {
+                OnLoad();
+                ShowRecordTimeStamp();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -211,16 +211,16 @@ namespace ACC.Data
         public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch)
         {
             var parameter = new object[][] {
-                new object[]{"@received_date", DbType.Date, dateReceived},
-                new object[]{"@received_date_month", DbType.Byte, dateReceived.Month},
-                new object[]{"@received_date_year", DbType.Int16, dateReceived.Year},
+                new object[]{"@day", DbType.Int32, dateReceived.Day},
+                new object[]{"@month", DbType.Int32, dateReceived.Month},
+                new object[]{"@year", DbType.Int32, dateReceived.Year},
                 new object[]{"@txt_search", DbType.String, $"%{txtSearch}%"},
             };
 
-            string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} WHERE (received_date = @received_date OR MONTH(received_date) = @received_date_month) AND YEAR(received_date) = @received_date_year AND acc_form_desc LIKE @txt_search";
+            string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} WHERE (DAY(received_date) <= @day AND MONTH(received_date) <= @month AND YEAR(received_date) = @year) AND acc_form_desc LIKE @txt_search";
 
-            var dtReceipts = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtReceipts, parameter);
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public bool ReceiptNumberExist(int accountableFormID, int receiptNumber)
