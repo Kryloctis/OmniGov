@@ -196,7 +196,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 foreach (DataRow row in referenceDatTable.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string rowOwnerName = _ownerName;
+                    string rowOwnerName = row["taxpayer_name"].ToString();
                     string rowLotNo = row["lot_no"].ToString();
                     string rowArpNo = row["complete_arp_no"].ToString();
                     decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
