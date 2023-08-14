@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgTaxpayers).BeginInit();
             toolStrip1.SuspendLayout();
@@ -194,6 +195,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // btnSearch
             // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnSearch.Location = new System.Drawing.Point(743, 15);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -204,6 +206,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtSearch
             // 
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Location = new System.Drawing.Point(537, 15);
             txtSearch.Name = "txtSearch";
@@ -217,6 +220,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(822, 5);
             pbLoadRecords.TabIndex = 24;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmTaxpayers
             // 
@@ -269,5 +280,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

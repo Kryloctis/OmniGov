@@ -37,6 +37,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(TaxpayersColumns());
 
+            int rowCount = 0;
+            int recordCount = dtTaxpayers.Rows.Count;
+
             foreach (DataRow row in dtTaxpayers.Rows)
             {
                 var newRow = dataTable.NewRow();
@@ -64,6 +67,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 newRow["created_at"] = createdAt;
                 newRow["updated_at"] = updatedAt;
 
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / rowCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
                 dataTable.Rows.Add(newRow);
             }
             return dataTable;
@@ -71,21 +78,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void LoadTaxpayers()
         {
-            try
+            if (!backgroundWorker1.IsBusy)
             {
-                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayersDataTable());
-                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
-                toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
-        {
-            LoadTaxpayers();
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadTaxpayers();
         }
@@ -138,6 +138,26 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadTaxpayers();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayersDataTable());
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+                toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
 
         }
