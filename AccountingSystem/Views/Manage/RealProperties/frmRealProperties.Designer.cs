@@ -46,6 +46,8 @@
             toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             panel2 = new System.Windows.Forms.Panel();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            txtSearch = new System.Windows.Forms.TextBox();
+            btnSearch = new System.Windows.Forms.Button();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgRealProperties).BeginInit();
@@ -216,11 +218,33 @@
             pbLoadRecords.Size = new System.Drawing.Size(1016, 5);
             pbLoadRecords.TabIndex = 24;
             // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Location = new System.Drawing.Point(729, 14);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 23);
+            txtSearch.TabIndex = 15;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSearch.Location = new System.Drawing.Point(935, 14);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 14;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // frmRealProperties
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1016, 584);
+            Controls.Add(txtSearch);
+            Controls.Add(btnSearch);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(toolStrip);
@@ -264,5 +288,7 @@
         private System.Windows.Forms.CheckBox cbxShowCanclled;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

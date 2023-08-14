@@ -155,5 +155,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
             taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
             _ = new frmEditRealProperties(this).ShowDialog();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadAllProperties();
+        }
     }
 }
