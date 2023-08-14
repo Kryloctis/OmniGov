@@ -77,10 +77,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadAllProperties();
-        }
 
         private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
         {

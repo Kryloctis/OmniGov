@@ -32,10 +32,9 @@
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             panel1 = new System.Windows.Forms.Panel();
-            cbxShowCanclled = new System.Windows.Forms.CheckBox();
             dgRealProperties = new System.Windows.Forms.DataGridView();
+            cbxShowCanclled = new System.Windows.Forms.CheckBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,7 +58,7 @@
             toolStrip.BackColor = System.Drawing.SystemColors.Control;
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, txtSearch });
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
             toolStrip.Location = new System.Drawing.Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.Padding = new System.Windows.Forms.Padding(4);
@@ -104,35 +103,15 @@
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
-            txtSearch.TextChanged += txtSearch_TextChanged;
-            // 
             // panel1
             // 
             panel1.Controls.Add(dgRealProperties);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 76);
+            panel1.Location = new System.Drawing.Point(0, 78);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1016, 486);
+            panel1.Size = new System.Drawing.Size(1016, 484);
             panel1.TabIndex = 12;
-            // 
-            // cbxShowCanclled
-            // 
-            cbxShowCanclled.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cbxShowCanclled.AutoSize = true;
-            cbxShowCanclled.Location = new System.Drawing.Point(905, 3);
-            cbxShowCanclled.Name = "cbxShowCanclled";
-            cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
-            cbxShowCanclled.TabIndex = 10;
-            cbxShowCanclled.Text = "Show cancelled";
-            cbxShowCanclled.UseVisualStyleBackColor = true;
-            cbxShowCanclled.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // dgRealProperties
             // 
@@ -144,9 +123,21 @@
             dgRealProperties.RowHeadersWidth = 51;
             dgRealProperties.RowTemplate.Height = 29;
             dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgRealProperties.Size = new System.Drawing.Size(1008, 478);
+            dgRealProperties.Size = new System.Drawing.Size(1008, 476);
             dgRealProperties.TabIndex = 9;
             dgRealProperties.SelectionChanged += dgRealProperties_SelectionChanged;
+            // 
+            // cbxShowCanclled
+            // 
+            cbxShowCanclled.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cbxShowCanclled.AutoSize = true;
+            cbxShowCanclled.Location = new System.Drawing.Point(905, 4);
+            cbxShowCanclled.Name = "cbxShowCanclled";
+            cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
+            cbxShowCanclled.TabIndex = 10;
+            cbxShowCanclled.Text = "Show cancelled";
+            cbxShowCanclled.UseVisualStyleBackColor = true;
+            cbxShowCanclled.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // statusStrip1
             // 
@@ -214,13 +205,13 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 50);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(1016, 26);
+            panel2.Size = new System.Drawing.Size(1016, 28);
             panel2.TabIndex = 11;
             // 
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Bottom;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 21);
+            pbLoadRecords.Location = new System.Drawing.Point(0, 23);
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(1016, 5);
             pbLoadRecords.TabIndex = 24;
@@ -259,7 +250,6 @@
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgRealProperties;
         private System.Windows.Forms.StatusStrip statusStrip1;
