@@ -115,6 +115,10 @@ namespace AccountingSystem
             dgvIsTaxableCheckBoxCol.HeaderText = "Taxable";
             dgvIsTaxableCheckBoxCol.Name = "is_taxable";
 
+            DataGridViewCheckBoxColumn dgvIsCancelled = new DataGridViewCheckBoxColumn();
+            dgvIsCancelled.HeaderText = "Cancelled";
+            dgvIsCancelled.Name = "is_cancelled";
+
             dataGridView.Columns.Add("real_properties_id", "Real Properties ID");
             dataGridView.Columns.Add("property_identifier", "Property Identifier");
             dataGridView.Columns.Add("complete_arp_no", "ARP No.");
@@ -158,6 +162,7 @@ namespace AccountingSystem
             dataGridView.Columns.Add("lot_no", "Lot No");
             dataGridView.Columns.Add("gr_year", "GR Year");
             dataGridView.Columns.Add(dgvIsTaxableCheckBoxCol);
+            dataGridView.Columns.Add(dgvIsCancelled);
             dataGridView.Columns.Add("created_at", "Created At");
             dataGridView.Columns.Add("updated_at", "Updated At");
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
@@ -249,6 +254,7 @@ namespace AccountingSystem
                     row["lot_no"],
                     row["gr_year"],
                     row["is_taxable"],
+                    row["is_cancelled"],
                     row["created_at"],
                     row["updated_at"],
                 });
