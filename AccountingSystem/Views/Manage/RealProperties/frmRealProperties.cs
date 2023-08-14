@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     }
                     _ = realPropertiesRepository.Delete(realPropertiesModels);
                     LoadAllProperties();
-                    
+
                     Helper.MessageBoxSuccess("Real properties has been deleted.");
                 }
                 catch (Exception)
