@@ -285,7 +285,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             try
             {
                 if (!backgroundWorker1.IsBusy)
+                {
+                    pbLoadRecords.Value = 0;
                     backgroundWorker1.RunWorkerAsync();
+                }
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
