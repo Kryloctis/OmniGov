@@ -137,5 +137,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             LoadTaxpayers();
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

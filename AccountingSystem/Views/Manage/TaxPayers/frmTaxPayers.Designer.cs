@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             chckBxInactiveTaxpayers = new System.Windows.Forms.CheckBox();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgTaxpayers).BeginInit();
             toolStrip1.SuspendLayout();
@@ -58,10 +59,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             panel1.Controls.Add(dgTaxpayers);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 77);
+            panel1.Location = new System.Drawing.Point(0, 82);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(822, 382);
+            panel1.Size = new System.Drawing.Size(822, 377);
             panel1.TabIndex = 1;
             // 
             // dgTaxpayers
@@ -72,7 +73,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dgTaxpayers.Name = "dgTaxpayers";
             dgTaxpayers.RowHeadersWidth = 51;
             dgTaxpayers.RowTemplate.Height = 25;
-            dgTaxpayers.Size = new System.Drawing.Size(814, 374);
+            dgTaxpayers.Size = new System.Drawing.Size(814, 369);
             dgTaxpayers.TabIndex = 1;
             dgTaxpayers.SelectionChanged += dgTaxpayers_SelectionChanged;
             // 
@@ -199,6 +200,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             btnSearch.TabIndex = 9;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -208,15 +210,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 10;
             // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 77);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(822, 5);
+            pbLoadRecords.TabIndex = 24;
+            // 
             // frmTaxpayers
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(822, 481);
+            Controls.Add(panel1);
+            Controls.Add(pbLoadRecords);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
-            Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel1);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
@@ -257,5 +268,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private System.Windows.Forms.CheckBox chckBxInactiveTaxpayers;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
