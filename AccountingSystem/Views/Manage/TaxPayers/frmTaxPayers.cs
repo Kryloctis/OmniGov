@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 dataTable.Rows.Add(newRow);
             }
-            return dataTable;   
+            return dataTable;
         }
 
         internal void LoadTaxpayers()
@@ -136,5 +136,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             LoadTaxpayers();
         }
+
     }
 }
