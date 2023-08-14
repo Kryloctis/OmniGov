@@ -37,12 +37,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void ResetForm()
         {
-            if (isEdit)
-            {
-                taxPayerId = 0;
-                isEdit = false;
-            }
-
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
@@ -50,7 +44,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtBarangay.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
+            cmbxTaxPayerType.SelectedIndex = -1;
             chckIsActive.Checked = true;
+            isEdit = false;
+            taxPayerId = 0;
         }
 
         private void ucTaxPayers_Load(object sender, EventArgs e)
@@ -62,7 +59,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     LoadTaxPayersType();
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
             }
         }
 
