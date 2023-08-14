@@ -56,6 +56,8 @@
             btnUpdate = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            progressBarRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip2.SuspendLayout();
@@ -71,7 +73,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(798, 169);
+            panel1.Size = new System.Drawing.Size(798, 164);
             panel1.TabIndex = 0;
             // 
             // treeViewTaxTypes
@@ -80,7 +82,7 @@
             treeViewTaxTypes.HideSelection = false;
             treeViewTaxTypes.Location = new System.Drawing.Point(4, 4);
             treeViewTaxTypes.Name = "treeViewTaxTypes";
-            treeViewTaxTypes.Size = new System.Drawing.Size(790, 161);
+            treeViewTaxTypes.Size = new System.Drawing.Size(790, 156);
             treeViewTaxTypes.TabIndex = 1;
             treeViewTaxTypes.BeforeSelect += treeViewTaxTypes_BeforeSelect;
             treeViewTaxTypes.AfterSelect += treeViewTaxTypes_AfterSelect;
@@ -339,6 +341,19 @@
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // progressBarRecords
+            // 
+            progressBarRecords.Dock = System.Windows.Forms.DockStyle.Bottom;
+            progressBarRecords.Location = new System.Drawing.Point(0, 164);
+            progressBarRecords.Name = "progressBarRecords";
+            progressBarRecords.Size = new System.Drawing.Size(798, 5);
+            progressBarRecords.TabIndex = 25;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            // 
             // frmTaxTypes
             // 
             AcceptButton = btnSave;
@@ -347,6 +362,7 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(798, 431);
             Controls.Add(panel1);
+            Controls.Add(progressBarRecords);
             Controls.Add(panel3);
             Controls.Add(flowLayoutPanel1);
             MinimizeBox = false;
@@ -400,5 +416,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ProgressBar progressBarRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

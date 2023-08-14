@@ -247,12 +247,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         internal void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFundType, "fund_name", "id");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFundType, "fund_name", "id");
         }
 
         private void LoadChildNodes(int parentID, TreeNode parentNode)
@@ -364,8 +360,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             try
             {
                 LoadFunds();
-                LoadTaxTypes();
                 LoadParentCode();
+                LoadTaxTypes();
             }
             catch (Exception ex)
             {
