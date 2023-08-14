@@ -355,7 +355,7 @@
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "TaxTypes";
+            Text = "Tax Types";
             Load += frmTaxTypes_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
