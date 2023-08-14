@@ -378,7 +378,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Penalty</Value>
+                                  <Value>Penalty /(Discount)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -452,7 +452,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Penalty</Value>
+                                  <Value>Penalty/ (Discount)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1207,6 +1207,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1398,7 +1399,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.14737cm</Top>
-              <Left>0cm</Left>
               <Height>0.65321cm</Height>
               <Width>28.28986cm</Width>
               <ZIndex>1</ZIndex>
@@ -1490,7 +1490,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>0.0001in</Left>
               <Height>1.14737cm</Height>
               <Width>28.28986cm</Width>
