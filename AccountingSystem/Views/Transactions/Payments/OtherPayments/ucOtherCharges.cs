@@ -1,15 +1,8 @@
-﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
-using AccountingSystem.Views.Manage.TaxPayers;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
@@ -99,11 +92,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void CreateImageList(ref ImageList nodeImageList)
         {
-            nodeImageList.Images.Add("0", Properties.Resources.tree_view_tax_18);
-            nodeImageList.Images.Add("1", Properties.Resources.tree_view_accounting_18);
-            nodeImageList.Images.Add("2", Properties.Resources.tree_view_estimates_18);
-            nodeImageList.Images.Add("3", Properties.Resources.tree_view_receipt_dollar_18);
-            nodeImageList.Images.Add("4", Properties.Resources.tree_view_bill_18);
+            nodeImageList.Images.Add("0", Properties.Resources.heirarchy1_20px);
+            nodeImageList.Images.Add("1", Properties.Resources.heirarchy2_20px);
+            nodeImageList.Images.Add("2", Properties.Resources.heirarchy3_20px);
+            nodeImageList.Images.Add("3", Properties.Resources.heirarchy4_20px);
+            nodeImageList.Images.Add("4", Properties.Resources.heirarchy4_20px);
 
             treeViewTaxTypes.ImageList = nodeImageList;
             treeViewTaxTypes.ImageIndex = 0;
@@ -218,7 +211,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             decimal totalPayment = 0;
             foreach (DataGridViewRow row in dgOtherPaymentCharges.Rows)
                 totalPayment += Convert.ToDecimal(row.Cells["total_amount"].Value);
-           
+
             return totalPayment;
         }
 

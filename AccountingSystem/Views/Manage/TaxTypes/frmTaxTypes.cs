@@ -158,11 +158,11 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void CreateImageList(ref ImageList nodeImageList)
         {
-            nodeImageList.Images.Add("0", Properties.Resources.tree_view_tax_18);
-            nodeImageList.Images.Add("1", Properties.Resources.tree_view_accounting_18);
-            nodeImageList.Images.Add("2", Properties.Resources.tree_view_estimates_18);
-            nodeImageList.Images.Add("3", Properties.Resources.tree_view_receipt_dollar_18);
-            nodeImageList.Images.Add("4", Properties.Resources.tree_view_bill_18);
+            nodeImageList.Images.Add("0", Properties.Resources.heirarchy1_20px);
+            nodeImageList.Images.Add("1", Properties.Resources.heirarchy2_20px);
+            nodeImageList.Images.Add("2", Properties.Resources.heirarchy3_20px);
+            nodeImageList.Images.Add("3", Properties.Resources.heirarchy4_20px);
+            nodeImageList.Images.Add("4", Properties.Resources.heirarchy4_20px);
 
             treeViewTaxTypes.ImageList = nodeImageList;
             treeViewTaxTypes.ImageIndex = 0;
@@ -279,7 +279,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 else
                     childImageIndexCounter++;
 
-
                 int taxTypeID = Convert.ToInt32(dr["id"]);
                 childNode.Tag = taxTypeID;
                 LoadChildNodes(taxTypeID, childNode);
@@ -287,6 +286,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 if (Convert.ToBoolean(dr["is_deleted"]))
                     childNode.ForeColor = Color.Gray;
 
+                childImageIndexCounter = 1;
             }
         }
 
@@ -336,7 +336,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 tabCount += 10;
                 LoadChildCode(id, ref dtSource);
             }
-
         }
 
         private void LoadParentCode()
@@ -404,7 +403,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                     LoadTaxTypes();
                 }
             }
-
             catch (MySqlException ex)
             {
                 if (ex.Number == 1451)
@@ -470,6 +468,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         }
 
         #region Validations
+
         private void txtDesciption_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDesciption, "Description.");
@@ -489,10 +488,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
-        #endregion
 
-
-
-
+        #endregion Validations
     }
 }
