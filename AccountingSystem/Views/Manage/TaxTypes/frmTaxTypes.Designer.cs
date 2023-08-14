@@ -56,7 +56,7 @@
             btnUpdate = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            progressBarRecords = new System.Windows.Forms.ProgressBar();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -341,18 +341,21 @@
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
-            // progressBarRecords
+            // pbLoadRecords
             // 
-            progressBarRecords.Dock = System.Windows.Forms.DockStyle.Bottom;
-            progressBarRecords.Location = new System.Drawing.Point(0, 164);
-            progressBarRecords.Name = "progressBarRecords";
-            progressBarRecords.Size = new System.Drawing.Size(798, 5);
-            progressBarRecords.TabIndex = 25;
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 164);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(798, 5);
+            pbLoadRecords.TabIndex = 25;
             // 
             // backgroundWorker1
             // 
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmTaxTypes
             // 
@@ -362,7 +365,7 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(798, 431);
             Controls.Add(panel1);
-            Controls.Add(progressBarRecords);
+            Controls.Add(pbLoadRecords);
             Controls.Add(panel3);
             Controls.Add(flowLayoutPanel1);
             MinimizeBox = false;
@@ -416,7 +419,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.ProgressBar progressBarRecords;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

@@ -31,8 +31,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             txtBLFGAccountCode.Clear();
             cmbxParent.Text = string.Empty;
             cmbxFundType.Text = string.Empty;
-
-            LoadParentCode();
         }
 
         private void ResetForm()
@@ -97,9 +95,10 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 if (SaveTaxType())
                 {
                     Helper.MessageBoxSuccess("Tax type has been saved.");
-                    LoadTaxTypes();
+                    LoadParentCode();
                     ResetForm();
                     ClearFields();
+                    if (!backgroundWorker1.IsBusy) backgroundWorker1.RunWorkerAsync();
                 }
             }
             catch (Exception ex)
@@ -286,32 +285,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
-        private void LoadTaxTypes()
-        {
-            treeViewTaxTypes.Nodes.Clear();
-            childImageIndexCounter = 1;
-
-            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
-
-            TreeNode parentNode;
-
-            foreach (DataRow dr in dtTaxTypes.Rows)
-            {
-                int taxTypeID = Convert.ToInt32(dr["id"]);
-                string taxTypeCode = dr["code"].ToString();
-                string taxTypeDescription = dr["description"].ToString();
-                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
-
-                parentNode = treeViewTaxTypes.Nodes.Add(displayText);
-                parentNode.Tag = taxTypeID;
-
-                LoadChildNodes(taxTypeID, parentNode);
-
-                if (Convert.ToBoolean(dr["is_deleted"]))
-                    parentNode.ForeColor = Color.Gray;
-            }
-        }
-
         private void LoadChildCode(int parent, ref Dictionary<int, string> dtSource)
         {
             DataTable dtChildTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parent);
@@ -355,13 +328,56 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             cmbxParent.SelectedIndex = -1;
         }
 
+        private void LoadTaxTypes()
+        {
+            treeViewTaxTypes.Nodes.Clear();
+            childImageIndexCounter = 1;
+            int rowCount = 0;
+
+            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+            int recordCount = dtTaxTypes.Rows.Count;
+
+            TreeNode parentNode;
+
+            foreach (DataRow dr in dtTaxTypes.Rows)
+            {
+                int taxTypeID = Convert.ToInt32(dr["id"]);
+                string taxTypeCode = dr["code"].ToString();
+                string taxTypeDescription = dr["description"].ToString();
+                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+
+                parentNode = treeViewTaxTypes.Nodes.Add(displayText);
+                parentNode.Tag = taxTypeID;
+
+                LoadChildNodes(taxTypeID, parentNode);
+
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    parentNode.ForeColor = Color.Gray;
+            }
+        }
+
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
             try
             {
                 LoadFunds();
                 LoadParentCode();
-                LoadTaxTypes();
+
+                if (!backgroundWorker1.IsBusy)
+                {
+                    pbLoadRecords.Value = 0;
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            }
+            catch (DivideByZeroException divideByZeroEx)
+            {
+                Helper.MessageBoxError(divideByZeroEx.Message);
             }
             catch (Exception ex)
             {
@@ -486,5 +502,24 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         }
 
         #endregion Validations
+
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadTaxTypes();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
     }
 }
