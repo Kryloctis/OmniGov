@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             btnDelete.Enabled = true;
             btnCancel.Enabled = false;
             btnSave.Visible = true;
+            btnSave.Enabled = false;
             btnUpdate.Visible = false;
             btnUndelete.Visible = false;
             toolStripSeparator1.Visible = false;
