@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
         }
 
-        private void frmTaxPayersSearch_Load(object sender, EventArgs e)
+        private void frmTaxPayers_Load(object sender, EventArgs e)
         {
             LoadTaxpayers();
         }
@@ -159,7 +159,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+        }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
         }
     }
 }
