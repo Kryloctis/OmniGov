@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -100,6 +102,39 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             ShowEditForm();
         }
 
+        private bool Delete()
+        {
+            var taxpayerModelList = new List<TaxpayersModel>();
+            int selectedRowCount = dgTaxpayers.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowCount))
+            {
+                foreach (DataGridViewRow row in dgTaxpayers.SelectedRows)
+                {
+                    int taxpayerId = Convert.ToInt32(row.Cells["taxpayers_id"].Value);
+                    var model = new TaxpayersModel() { Id = taxpayerId };
+                    taxpayerModelList.Add(model);
+                }
+            }
+
+            return AccFactory.TaxpayersRepository().Delete(taxpayerModelList);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowCount = dgTaxpayers.SelectedRows.Count;
+
+                if (Delete())
+                {
+                    Helper.MessageBoxError($"{selectedRowCount} record/s has been deleted.");
+                    LoadTaxpayers();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void ShowEditForm()
         {
             int rowIndex = dgTaxpayers.CurrentCell.RowIndex;
@@ -134,12 +169,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void chckBxInactiveTaxpayers_CheckedChanged(object sender, EventArgs e)
         {
-            LoadTaxpayers();
+            try
+            {
+                LoadTaxpayers();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadTaxpayers();
+            try
+            {
+                LoadTaxpayers();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -155,14 +198,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
         }
     }
 }
