@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgRCI).BeginInit();
             panel1.SuspendLayout();
@@ -112,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             dgRCI.Name = "dgRCI";
             dgRCI.RowHeadersWidth = 51;
             dgRCI.RowTemplate.Height = 29;
-            dgRCI.Size = new System.Drawing.Size(866, 348);
+            dgRCI.Size = new System.Drawing.Size(866, 343);
             dgRCI.TabIndex = 9;
             dgRCI.SelectionChanged += dgRCI_SelectionChanged;
             // 
@@ -120,10 +121,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             panel1.Controls.Add(dgRCI);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(874, 356);
+            panel1.Size = new System.Drawing.Size(874, 351);
             panel1.TabIndex = 11;
             // 
             // toolStrip1
@@ -202,14 +203,23 @@ namespace AccountingSystem.Views.Transactions.RCI
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(874, 5);
+            pbLoadRecords.TabIndex = 42;
+            // 
             // frmRCI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(874, 428);
+            Controls.Add(panel1);
+            Controls.Add(pbLoadRecords);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
-            Controls.Add(panel1);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -249,5 +259,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
