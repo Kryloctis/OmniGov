@@ -326,7 +326,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             cmbxParent.SelectedIndex = -1;
         }
 
-        private void LoadTaxTypes()
+        private void InitializeTaxTypes()
         {
             treeViewTaxTypes.Nodes.Clear();
             childImageIndexCounter = 1;
@@ -358,18 +358,22 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
+        private void LoadTaxTypes()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
             try
             {
                 LoadFunds();
                 LoadParentCode();
-
-                if (!backgroundWorker1.IsBusy)
-                {
-                    pbLoadRecords.Value = 0;
-                    backgroundWorker1.RunWorkerAsync();
-                }
+                LoadTaxTypes();
             }
             catch (DivideByZeroException divideByZeroEx) { Helper.MessageBoxError(divideByZeroEx.Message); }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -406,7 +410,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 }
             }
             catch (MySqlException ex) { if (ex.Number == 1451) Helper.MessageBoxError("Can't delete tax type. Tax type is used as reference to another record."); }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private bool UnDeleteTaxType()
@@ -471,7 +475,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             Invoke((MethodInvoker)delegate
             {
-                LoadTaxTypes();
+                InitializeTaxTypes();
             });
         }
 
