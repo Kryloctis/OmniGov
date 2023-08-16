@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnDelete = new System.Windows.Forms.ToolStripButton();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgRCI).BeginInit();
             panel1.SuspendLayout();
@@ -194,6 +195,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 41;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // frmRCI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -240,5 +248,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

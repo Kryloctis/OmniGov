@@ -181,5 +181,15 @@ namespace AccountingSystem.Views.Transactions.RCI
             byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
         }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
     }
 }
