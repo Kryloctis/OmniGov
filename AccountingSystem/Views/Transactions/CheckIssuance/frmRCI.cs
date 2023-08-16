@@ -84,26 +84,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtRCI = AccFactory.RCIRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
-
-                    lblRecordCount.Text = dgRCI.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
-            {
-                LoadRecords();
-            }
-        }
-
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexTimestamp = { 19, 20 };
