@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.RCI
     {
         private readonly frmRCI _frmRCI;
         private readonly ucRCI uc;
-        private int  _rciID;
+        private int _rciID;
         private int checkID;
 
 
@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 UpdateRCIObligation();
                 UpdateRCIDeductions();
                 Helper.MessageBoxSuccess("Account has been updated.");
-                _frmRCI.LoadRecords();
+                _frmRCI.LoadRCI();
                 this.Close();
             }
         }

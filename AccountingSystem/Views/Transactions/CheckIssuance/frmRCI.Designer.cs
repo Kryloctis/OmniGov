@@ -185,6 +185,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnSearch.TabIndex = 40;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 

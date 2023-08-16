@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCI_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            LoadRCI();
         }
 
         private DataColumn[] RCIDataColumns()
@@ -117,6 +117,11 @@ namespace AccountingSystem.Views.Transactions.RCI
                 newRow["created_at"] = createdAt;
                 newRow["updated_at"] = udpatedAt;
 
+                rowCount++;
+                int progressPercentage = (rowCount * 100) / recordsCount;
+                backgroundWorker1.ReportProgress(progressPercentage);
+
+                dtRCI.Rows.Add(newRow);
             }
 
             HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
@@ -146,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                         var rciRepository = AccFactory.RCIRepository();
                         _ = rciRepository.Delete(rciModelList);
-                        LoadRecords();
+                        LoadRCI();
                     }
                 }
             }
@@ -155,7 +160,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 switch (Mysqlex.Number)
                 {
                     case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
+                        Helper.MessageBoxError($"Cannot delete selected records. It has been used as referenced to different record.");
                         break;
                 }
             }
@@ -175,21 +180,38 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             if (dgRCI.SelectedRows.Count == 0) return;
 
-            var createdAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["created_at"].ColumnIndex - 1);
-            var updatedAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["updated_at"].ColumnIndex - 1);
+            var createdAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["created_at"].ColumnIndex);
+            var updatedAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["updated_at"].ColumnIndex);
 
             byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
         }
 
+        internal void LoadRCI()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-
+            Invoke((MethodInvoker)delegate
+            {
+                LoadRecords();
+            });
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRCI();
         }
     }
 }

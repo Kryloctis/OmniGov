@@ -1,7 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
-using DocumentFormat.OpenXml.Vml.Office;
+﻿using ACC.Domain.Models;
 using System;
 using System.Data;
 using System.Transactions;
@@ -82,8 +79,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCI has been saved.");
-
-                _frmRCI.LoadRecords();
+                _frmRCI.LoadRCI();
                 ucrci1.ResetForm();
             }
         }
