@@ -114,22 +114,22 @@ namespace AccountingSystem
             dataGridView.Columns["property_pin"].HeaderText = "PIN";
             dataGridView.Columns["property_pin"].Width = 130;
             dataGridView.Columns["property_pin"].MinimumWidth = 130;
-            dataGridView.Columns["real_taxpayers_name"].HeaderText = "Real Taxpayer Name";
+            dataGridView.Columns["real_taxpayers_name"].HeaderText = "Taxpayer Name";
             dataGridView.Columns["real_taxpayers_name"].Width = 150;
             dataGridView.Columns["real_taxpayers_name"].MinimumWidth = 150;
-            dataGridView.Columns["real_taxpayers_contact_info"].HeaderText = "Real Taxpayer Contact Info.";
+            dataGridView.Columns["real_taxpayers_contact_info"].HeaderText = "Taxpayer Contact Info.";
             dataGridView.Columns["real_taxpayers_contact_info"].Width = 160;
             dataGridView.Columns["real_taxpayers_contact_info"].MinimumWidth = 160;
-            dataGridView.Columns["real_properties_location"].HeaderText = "Real Property Location";
+            dataGridView.Columns["real_properties_location"].HeaderText = "Location";
             dataGridView.Columns["real_properties_location"].Width = 200;
             dataGridView.Columns["real_properties_location"].MinimumWidth = 200;
-            dataGridView.Columns["classification_codes"].HeaderText = "Class. Code";
-            dataGridView.Columns["actual_use_codes"].HeaderText = "Actual Use Code";
+            dataGridView.Columns["classification_codes"].HeaderText = "Classification";
+            dataGridView.Columns["actual_use_codes"].HeaderText = "Actual Use";
             dataGridView.Columns["property_kind"].HeaderText = "Kind";
             dataGridView.Columns["property_kind"].Width = 70;
             dataGridView.Columns["property_kind"].MinimumWidth = 70;
             dataGridView.Columns["effectivity_quarter_and_year"].HeaderText = "Effectivity Qtr/Year";
-            dataGridView.Columns["other_improvements"].HeaderText = "Other Improvements";
+            dataGridView.Columns["other_improvements"].HeaderText = "Other Imp.";
             dataGridView.Columns["other_improvements"].Width = 120;
             dataGridView.Columns["other_improvements"].MinimumWidth = 120;
             dataGridView.Columns["other_improvements"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -193,7 +193,6 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_barangays_name"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
             dataGridView.Columns["real_properties_provinces_name"].Visible = false;
-
         }
 
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
@@ -772,7 +771,6 @@ namespace AccountingSystem
             datagrid.Columns["issued_by"].MinimumWidth = 150;
         }
 
-
         #endregion ReceiptsIssued
 
         #region Returned Receipts
@@ -868,7 +866,6 @@ namespace AccountingSystem
             datagrid.Columns["officer"].Width = 150;
             datagrid.Columns["officer"].MinimumWidth = 150;
             datagrid.Columns["officer"].HeaderText = "Issued By";
-
         }
 
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
@@ -879,7 +876,6 @@ namespace AccountingSystem
 
             if (combobox.Items.Count == 0)
                 combobox.DropDownHeight = 106;
-
         }
 
         #endregion Receipts

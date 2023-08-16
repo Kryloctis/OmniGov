@@ -70,7 +70,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadPropertiesPreviousARPNumber()
         {
-
             try
             {
                 var dt = AccFactory.RealPropertiesRepository().GetCancelledProperties();
@@ -130,8 +129,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxClassification.ValueMember = "id";
             cmbxClassification.DisplayMember = "name";
         }
-
-
 
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -289,7 +286,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorComboBox(errorProvider1, cmbxCompletePreviousARPNumber);
         }
 
-
         private void cmbxBarangays_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBarangays, "Barangay");
@@ -322,22 +318,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void cmbxCompletePreviousARPNumber_Validating(object sender, CancelEventArgs e)
         {
-
         }
 
         private void cmbxCompletePreviousARPNumber_Validated(object sender, EventArgs e)
         {
-
         }
 
         private void txtTaxpayers_Validating(object sender, CancelEventArgs e)
         {
-
         }
 
         private void txtTaxpayers_Validated(object sender, EventArgs e)
         {
-
         }
 
         #endregion Validations

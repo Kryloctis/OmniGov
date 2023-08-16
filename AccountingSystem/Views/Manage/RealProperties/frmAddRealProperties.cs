@@ -19,12 +19,16 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Real property has been saved.");
-                _frmRealProperties.LoadProperties();
-                Close();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Real property has been saved.");
+                    _frmRealProperties.LoadProperties();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Save()
@@ -87,7 +91,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void frmAddRealProperties_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
