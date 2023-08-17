@@ -72,12 +72,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 uc.txtDVNo.Text = rcidata["dv_no"];
                 uc.cmbBank.SelectedValue = rcidata["bank_id"];
-                uc.cmbfund.SelectedValue = rcidata["fund_id"];
+                uc.cmbFund.SelectedValue = rcidata["fund_id"];
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
                 uc.txtCheckNo.Text = rcidata["cheque_no"];
                 uc.dtCheckDate.Value = Convert.ToDateTime(rcidata["cheque_date"]);
                 uc.txtPayee.Text = rcidata["payee"];
-                uc.txtNature.Text = rcidata["nature_of_payment"];
+                uc.txtNatureOfPayment.Text = rcidata["nature_of_payment"];
                 uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
                 checkID = Convert.ToInt32(rcidata["cheques_id"]);
             }
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     {
                         var functionreposity = AccFactory.FunctionProgramProjectRepository();
                         var functiondata = functionreposity.GetRecordByID(Id);
-                        uc.functionId = Id;
+                        uc.fppId = Id;
                         uc.cmbFPP.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
                     }
                 }
@@ -104,9 +104,6 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCIEdit_Load(object sender, EventArgs e)
         {
-            uc.LoadFunds();
-            uc.LoadBanks();
-
             LoadSelectedValue();
             LoadRCIObligations();
             LoadRCIDeductions();
@@ -179,11 +176,11 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rciModel = new RCIModel()
                 {
                     Id = _rciID,
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    FunctionProgramProjectId = uc.functionId,
+                    FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
+                    FunctionProgramProjectId = uc.fppId,
                     DVNo = uc.txtDVNo.Text.Trim(),
                     Payee = uc.txtPayee.Text.Trim(),
-                    NaturePayment = uc.txtNature.Text.Trim(),
+                    NaturePayment = uc.txtNatureOfPayment.Text.Trim(),
                 };
 
                 var rcirepository = AccFactory.RCIRepository();

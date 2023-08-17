@@ -89,6 +89,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            AcceptButton = btnSave;
             CancelButton = btnCancel;
             ClientSize = new System.Drawing.Size(456, 377);
             Controls.Add(ucrci1);

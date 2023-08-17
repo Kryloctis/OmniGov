@@ -252,9 +252,22 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ClearErrorTextBox(errorProvider1, txtCheckNo);
         }
 
+        private bool FPPNameNotExist()
+        {
+            string fppName = cmbFPP.Text.Trim();
+
+            if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName))
+            {
+                errorProvider1.SetError(cmbFPP, "FPP you entered doesn't exist.");
+                return true;
+            }
+
+            return false;
+        }
+
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFPP, "FPP.");
+            e.Cancel = FPPNameNotExist();
         }
 
         private void cmbFPP_Validated(object sender, EventArgs e)

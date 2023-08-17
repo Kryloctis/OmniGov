@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rciID = int.Parse(dgRCI.SelectedCells[0].Value.ToString());
+            int rciID = Convert.ToInt32(dgRCI.SelectedRows[0].Cells["id"].Value);
             _ = new frmRCIEdit(this, rciID).ShowDialog();
         }
 

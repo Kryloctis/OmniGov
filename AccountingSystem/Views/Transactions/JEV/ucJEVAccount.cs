@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+﻿using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
