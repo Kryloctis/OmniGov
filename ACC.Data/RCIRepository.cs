@@ -27,38 +27,31 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Int32, Id},
-                };
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("cheques_id", reader.Rows[0]["cheques_id"].ToString());
-                    record.Add("cheque_no", reader.Rows[0]["cheque_no"].ToString());
-                    record.Add("cheque_date", reader.Rows[0]["cheque_date"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
-                    record.Add("bank_id", reader.Rows[0]["bank_id"].ToString());
-                    record.Add("fund_id", reader.Rows[0]["fund_id"].ToString());
-                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
-                    record.Add("payee", reader.Rows[0]["payee"].ToString());
-                    record.Add("nature_of_payment", reader.Rows[0]["nature_of_payment"].ToString());
-                    record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
-                    record.Add("function_program_project_id", reader.Rows[0]["fpp_id"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("cheques_id", reader.Rows[0]["cheques_id"].ToString());
+                record.Add("cheque_no", reader.Rows[0]["cheque_no"].ToString());
+                record.Add("cheque_date", reader.Rows[0]["cheque_date"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("bank_id", reader.Rows[0]["bank_id"].ToString());
+                record.Add("fund_id", reader.Rows[0]["fund_id"].ToString());
+                record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
+                record.Add("payee", reader.Rows[0]["payee"].ToString());
+                record.Add("nature_of_payment", reader.Rows[0]["nature_of_payment"].ToString());
+                record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
+                record.Add("function_program_project_id", reader.Rows[0]["fpp_id"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
             }
 
             return record;
@@ -103,114 +96,75 @@ namespace ACC.Data
 
         public bool Update(RCIModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Int32, entity.Id},
                     new object[] { "@funds_id", DbType.Int32, entity.FundId},
                     new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
                     new object[] { "@dv_no", DbType.String, entity.DVNo},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
-                };
+            };
 
-                string query = $"UPDATE {tableName} SET funds_id = @funds_id, function_program_project_id = @function_program_project_id, dv_no = @dv_no, payee = @payee, nature_of_payment = @nature_of_payment WHERE id = @id";
+            string query = $"UPDATE {tableName} SET funds_id = @funds_id, function_program_project_id = @function_program_project_id, dv_no = @dv_no, payee = @payee, nature_of_payment = @nature_of_payment WHERE id = @id";
 
 
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<RCIModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
                             new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public int CountRecords()
         {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT COUNT(*) FROM {tableName}";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Int16, id },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
             };
+
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
 
             return false;
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var parameter = new object[][] {
+            var parameter = new object[][] {
                     new object[] { "@searchText", DbType.String, $"%{searchText}%"}
                 };
 
-                string query = $"SELECT * FROM {viewTableName} " +
-                               $"WHERE payee LIKE @searchText " +
-                               $"OR bank_name LIKE @searchText " +
-                               $"OR bank_account_no LIKE @searchText " +
-                               $"OR obligation_no LIKE @searchText";
+            string query = $"SELECT * FROM {viewTableName} WHERE payee LIKE @searchText OR bank_name LIKE @searchText  OR bank_account_no LIKE @searchText OR obligation_no LIKE @searchText";
 
-                var dtRCI = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtRCI = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
+
         }
 
         public DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountsID)
@@ -227,11 +181,11 @@ namespace ACC.Data
 
         }
 
-        public bool SaveRCIDVObligations(short rciId, string obligationNo, DateTime dateEntry)
+        public bool SaveRCIDVObligations(int rciId, string obligationNo, DateTime dateEntry)
         {
             var parameters = new object[][]
             {
-                new object[] { "@rciId", DbType.Int16, rciId},
+                new object[] { "@rciId", DbType.Int32, rciId},
                 new object[] { "@obligationNo", DbType.String, obligationNo},
                 new object[] { "@date_entry", DbType.DateTimeOffset, dateEntry},
             };
@@ -246,37 +200,24 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool SaveRCIDeductions(short rciId, string description, decimal amount)
+        public bool SaveRCIDeductions(int rciId, string description, decimal amount)
         {
             var parameters = new object[][]
             {
-                        new object[] { "@rciId", DbType.Int16, rciId},
+                        new object[] { "@rciId", DbType.Int32, rciId},
                         new object[] { "@obligationNo", DbType.String, description},
                         new object[] { "@deductionAmount", DbType.Decimal, amount},
             };
 
-            string query = $"INSERT INTO {tableRCIDeductions} " +
-                            $"(rci_id, description, amount) " +
-                            $"VALUES(" +
-                            $"@rciId, " +
-                            $"@obligationNo, " +
-                            $"@deductionAmount)";
+            string query = $"INSERT INTO {tableRCIDeductions} (rci_id, description, amount) VALUES(@rciId, @obligationNo, @deductionAmount)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public string GetRecentRCIId()
+        public int GetLastInsertId()
         {
-            try
-            {
-                string query = $"SELECT MAX(id) FROM {tableName}";
-
-                return _dbGenericCommands.ExecuteScalar(query);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
         }
 
         public DataTable GetViewRecords()
