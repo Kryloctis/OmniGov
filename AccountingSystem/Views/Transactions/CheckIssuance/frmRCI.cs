@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 string natureOfPayment = row["nature_of_payment"].ToString();
                 string obligationNo = row["obligation_no"].ToString();
                 string fppCode = row["fpp_code"].ToString();
-                decimal totalDeduction = Convert.ToDecimal(row["total_deductions"]);
+                decimal totalDeduction = !string.IsNullOrEmpty(row["total_deductions"].ToString()) ? Convert.ToDecimal(row["total_deductions"]) : 0;
                 decimal amount = Convert.ToDecimal(row["amount"]);
                 string createdAt = row["created_at"].ToString();
                 string udpatedAt = row["updated_at"].ToString();
