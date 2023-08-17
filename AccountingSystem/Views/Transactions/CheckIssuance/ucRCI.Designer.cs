@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbFPP = new System.Windows.Forms.ComboBox();
             txtDVNo = new System.Windows.Forms.TextBox();
             nudNetAmount = new System.Windows.Forms.NumericUpDown();
-            txtNature = new System.Windows.Forms.TextBox();
+            txtNatureOfPayment = new System.Windows.Forms.TextBox();
             cmbBank = new System.Windows.Forms.ComboBox();
             txtPayee = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             label7 = new System.Windows.Forms.Label();
             txtCheckNo = new System.Windows.Forms.TextBox();
             label12 = new System.Windows.Forms.Label();
-            cmbfund = new System.Windows.Forms.ComboBox();
+            cmbFund = new System.Windows.Forms.ComboBox();
             btnAddObligation = new System.Windows.Forms.Button();
             label2 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -96,6 +96,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbFPP.Name = "cmbFPP";
             cmbFPP.Size = new System.Drawing.Size(302, 23);
             cmbFPP.TabIndex = 7;
+            cmbFPP.Validating += cmbFPP_Validating;
+            cmbFPP.Validated += cmbFPP_Validated;
             // 
             // txtDVNo
             // 
@@ -123,17 +125,17 @@ namespace AccountingSystem.Views.Transactions.RCI
             nudNetAmount.Validating += txtamount_Validating;
             nudNetAmount.Validated += txtamount_Validated;
             // 
-            // txtNature
+            // txtNatureOfPayment
             // 
-            txtNature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtNature.Location = new System.Drawing.Point(133, 260);
-            txtNature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            txtNature.MaxLength = 150;
-            txtNature.Name = "txtNature";
-            txtNature.Size = new System.Drawing.Size(302, 23);
-            txtNature.TabIndex = 9;
-            txtNature.Validating += txtnature_Validating;
-            txtNature.Validated += txtnature_Validated;
+            txtNatureOfPayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtNatureOfPayment.Location = new System.Drawing.Point(133, 260);
+            txtNatureOfPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtNatureOfPayment.MaxLength = 150;
+            txtNatureOfPayment.Name = "txtNatureOfPayment";
+            txtNatureOfPayment.Size = new System.Drawing.Size(302, 23);
+            txtNatureOfPayment.TabIndex = 9;
+            txtNatureOfPayment.Validating += txtnature_Validating;
+            txtNatureOfPayment.Validated += txtnature_Validated;
             // 
             // cmbBank
             // 
@@ -144,7 +146,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbBank.Name = "cmbBank";
             cmbBank.Size = new System.Drawing.Size(302, 23);
             cmbBank.TabIndex = 3;
-            cmbBank.SelectionChangeCommitted += cmbBank_SelectionChangeCommitted;
             cmbBank.Validating += cmbbank_Validating;
             cmbBank.Validated += cmbbank_Validated;
             // 
@@ -203,20 +204,21 @@ namespace AccountingSystem.Views.Transactions.RCI
             label12.AutoSize = true;
             label12.Location = new System.Drawing.Point(14, 319);
             label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(51, 15);
+            label12.Size = new System.Drawing.Size(73, 15);
             label12.TabIndex = 11;
-            label12.Text = "Amount";
+            label12.Text = "Net Amount";
             // 
-            // cmbfund
+            // cmbFund
             // 
-            cmbfund.FormattingEnabled = true;
-            cmbfund.Location = new System.Drawing.Point(133, 68);
-            cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            cmbfund.Name = "cmbfund";
-            cmbfund.Size = new System.Drawing.Size(302, 23);
-            cmbfund.TabIndex = 2;
-            cmbfund.Validating += cmbfund_Validating;
-            cmbfund.Validated += cmbfund_Validated;
+            cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbFund.FormattingEnabled = true;
+            cmbFund.Location = new System.Drawing.Point(133, 68);
+            cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbFund.Name = "cmbFund";
+            cmbFund.Size = new System.Drawing.Size(302, 23);
+            cmbFund.TabIndex = 2;
+            cmbFund.Validating += cmbfund_Validating;
+            cmbFund.Validated += cmbfund_Validated;
             // 
             // btnAddObligation
             // 
@@ -272,7 +274,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(14, 212);
+            label3.Location = new System.Drawing.Point(14, 208);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(27, 15);
             label3.TabIndex = 7;
@@ -305,6 +307,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbBankAccounts.Name = "cmbBankAccounts";
             cmbBankAccounts.Size = new System.Drawing.Size(302, 23);
             cmbBankAccounts.TabIndex = 4;
+            cmbBankAccounts.Validating += cmbBankAccounts_Validating;
+            cmbBankAccounts.Validated += cmbBankAccounts_Validated;
             // 
             // label11
             // 
@@ -326,7 +330,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             Controls.Add(cmbFPP);
             Controls.Add(txtDVNo);
             Controls.Add(nudNetAmount);
-            Controls.Add(txtNature);
+            Controls.Add(txtNatureOfPayment);
             Controls.Add(cmbBank);
             Controls.Add(txtPayee);
             Controls.Add(label6);
@@ -334,7 +338,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             Controls.Add(label7);
             Controls.Add(txtCheckNo);
             Controls.Add(label12);
-            Controls.Add(cmbfund);
+            Controls.Add(cmbFund);
             Controls.Add(btnAddObligation);
             Controls.Add(label2);
             Controls.Add(label9);
@@ -360,7 +364,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.TextBox txtDVNo;
         internal System.Windows.Forms.NumericUpDown nudNetAmount;
-        internal System.Windows.Forms.TextBox txtNature;
+        internal System.Windows.Forms.TextBox txtNatureOfPayment;
         internal System.Windows.Forms.ComboBox cmbBank;
         internal System.Windows.Forms.TextBox txtPayee;
         private System.Windows.Forms.Label label6;
@@ -368,7 +372,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtCheckNo;
         private System.Windows.Forms.Label label12;
-        internal System.Windows.Forms.ComboBox cmbfund;
+        internal System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.Button btnAddObligation;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
