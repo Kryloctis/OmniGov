@@ -85,7 +85,7 @@ namespace ACC.Data
                     new object[] {"@rciId", DbType.Int32, rciId}
                 };
 
-                string query = $"SELECT obligation_no FROM {tableName} WHERE rci_id = @rciId";
+                string query = $"SELECT obligation_no, date_entry FROM {tableName} WHERE rci_id = @rciId";
                 var dtRCI = new DataTable();
 
                 return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);

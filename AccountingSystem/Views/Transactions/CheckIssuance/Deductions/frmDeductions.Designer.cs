@@ -29,195 +29,189 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddDeductions = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtDescription = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnConfirmDeductions = new System.Windows.Forms.Button();
-            this.dgDeductions = new System.Windows.Forms.DataGridView();
-            this.epDescription = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnRemoveDeductions = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDeductions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            btnAddDeductions = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            label6 = new System.Windows.Forms.Label();
+            txtDescription = new System.Windows.Forms.TextBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            btnConfirmDeductions = new System.Windows.Forms.Button();
+            dgDeductions = new System.Windows.Forms.DataGridView();
+            epDescription = new System.Windows.Forms.ErrorProvider(components);
+            epAmount = new System.Windows.Forms.ErrorProvider(components);
+            btnRemoveDeductions = new System.Windows.Forms.Button();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgDeductions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epDescription).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epAmount).BeginInit();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnAddDeductions);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.nudAmount);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(7, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 119);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Details ";
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(btnAddDeductions);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(nudAmount);
+            groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            groupBox1.Location = new System.Drawing.Point(7, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(367, 119);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Details ";
             // 
             // btnAddDeductions
             // 
-            this.btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddDeductions.Location = new System.Drawing.Point(282, 88);
-            this.btnAddDeductions.Name = "btnAddDeductions";
-            this.btnAddDeductions.Size = new System.Drawing.Size(59, 23);
-            this.btnAddDeductions.TabIndex = 2;
-            this.btnAddDeductions.Text = "Add";
-            this.btnAddDeductions.UseVisualStyleBackColor = true;
-            this.btnAddDeductions.Click += new System.EventHandler(this.btnAdd_Click);
+            btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnAddDeductions.Location = new System.Drawing.Point(282, 88);
+            btnAddDeductions.Name = "btnAddDeductions";
+            btnAddDeductions.Size = new System.Drawing.Size(59, 23);
+            btnAddDeductions.TabIndex = 2;
+            btnAddDeductions.Text = "Add";
+            btnAddDeductions.UseVisualStyleBackColor = true;
+            btnAddDeductions.Click += btnAdd_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(10, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Amount";
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(10, 64);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(48, 13);
+            label1.TabIndex = 32;
+            label1.Text = "Amount";
             // 
             // nudAmount
             // 
-            this.nudAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nudAmount.Location = new System.Drawing.Point(80, 62);
-            this.nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(260, 22);
-            this.nudAmount.TabIndex = 1;
-            this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
-            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
+            nudAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            nudAmount.DecimalPlaces = 2;
+            nudAmount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            nudAmount.Location = new System.Drawing.Point(80, 62);
+            nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            nudAmount.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+            nudAmount.Name = "nudAmount";
+            nudAmount.Size = new System.Drawing.Size(260, 22);
+            nudAmount.TabIndex = 1;
+            nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudAmount.ThousandsSeparator = true;
+            nudAmount.Validating += nudAmount_Validating;
+            nudAmount.Validated += nudAmount_Validated;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(17, 23);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Description ";
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(17, 23);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(69, 13);
+            label6.TabIndex = 21;
+            label6.Text = "Description ";
             // 
             // txtDescription
             // 
-            this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtDescription.Location = new System.Drawing.Point(87, 23);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtDescription.MaxLength = 150;
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(260, 37);
-            this.txtDescription.TabIndex = 0;
-            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
-            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
+            txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtDescription.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txtDescription.Location = new System.Drawing.Point(87, 23);
+            txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtDescription.MaxLength = 150;
+            txtDescription.Multiline = true;
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new System.Drawing.Size(260, 37);
+            txtDescription.TabIndex = 0;
+            txtDescription.Validating += txtDescription_Validating;
+            txtDescription.Validated += txtDescription_Validated;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btnConfirmDeductions);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(7, 128);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(367, 169);
-            this.groupBox2.TabIndex = 32;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "List";
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox2.Controls.Add(btnConfirmDeductions);
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            groupBox2.Location = new System.Drawing.Point(7, 128);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(367, 169);
+            groupBox2.TabIndex = 32;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "List";
             // 
             // btnConfirmDeductions
             // 
-            this.btnConfirmDeductions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirmDeductions.Enabled = false;
-            this.btnConfirmDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnConfirmDeductions.Location = new System.Drawing.Point(8, 141);
-            this.btnConfirmDeductions.Name = "btnConfirmDeductions";
-            this.btnConfirmDeductions.Size = new System.Drawing.Size(59, 23);
-            this.btnConfirmDeductions.TabIndex = 4;
-            this.btnConfirmDeductions.Text = "Confirm";
-            this.btnConfirmDeductions.UseVisualStyleBackColor = true;
-            this.btnConfirmDeductions.Click += new System.EventHandler(this.btnConfirmDeductions_Click);
+            btnConfirmDeductions.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnConfirmDeductions.Enabled = false;
+            btnConfirmDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnConfirmDeductions.Location = new System.Drawing.Point(8, 141);
+            btnConfirmDeductions.Name = "btnConfirmDeductions";
+            btnConfirmDeductions.Size = new System.Drawing.Size(59, 23);
+            btnConfirmDeductions.TabIndex = 4;
+            btnConfirmDeductions.Text = "Confirm";
+            btnConfirmDeductions.UseVisualStyleBackColor = true;
+            btnConfirmDeductions.Click += btnConfirmDeductions_Click;
             // 
             // dgDeductions
             // 
-            this.dgDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDeductions.Location = new System.Drawing.Point(16, 146);
-            this.dgDeductions.Name = "dgDeductions";
-            this.dgDeductions.RowTemplate.Height = 25;
-            this.dgDeductions.Size = new System.Drawing.Size(351, 121);
-            this.dgDeductions.TabIndex = 0;
-            this.dgDeductions.SelectionChanged += new System.EventHandler(this.dgDeductions_SelectionChanged);
+            dgDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgDeductions.Location = new System.Drawing.Point(16, 146);
+            dgDeductions.Name = "dgDeductions";
+            dgDeductions.RowTemplate.Height = 25;
+            dgDeductions.Size = new System.Drawing.Size(351, 121);
+            dgDeductions.TabIndex = 0;
+            dgDeductions.SelectionChanged += dgDeductions_SelectionChanged;
             // 
             // epDescription
             // 
-            this.epDescription.ContainerControl = this;
+            epDescription.ContainerControl = this;
             // 
             // epAmount
             // 
-            this.epAmount.ContainerControl = this;
+            epAmount.ContainerControl = this;
             // 
             // btnRemoveDeductions
             // 
-            this.btnRemoveDeductions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveDeductions.Enabled = false;
-            this.btnRemoveDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnRemoveDeductions.Location = new System.Drawing.Point(309, 269);
-            this.btnRemoveDeductions.Name = "btnRemoveDeductions";
-            this.btnRemoveDeductions.Size = new System.Drawing.Size(59, 23);
-            this.btnRemoveDeductions.TabIndex = 3;
-            this.btnRemoveDeductions.Text = "Remove";
-            this.btnRemoveDeductions.UseVisualStyleBackColor = true;
-            this.btnRemoveDeductions.Click += new System.EventHandler(this.btnRemove_Click);
+            btnRemoveDeductions.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnRemoveDeductions.Enabled = false;
+            btnRemoveDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnRemoveDeductions.Location = new System.Drawing.Point(309, 269);
+            btnRemoveDeductions.Name = "btnRemoveDeductions";
+            btnRemoveDeductions.Size = new System.Drawing.Size(59, 23);
+            btnRemoveDeductions.TabIndex = 3;
+            btnRemoveDeductions.Text = "Remove";
+            btnRemoveDeductions.UseVisualStyleBackColor = true;
+            btnRemoveDeductions.Click += btnRemove_Click;
             // 
             // frmDeductions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(386, 309);
-            this.Controls.Add(this.btnRemoveDeductions);
-            this.Controls.Add(this.dgDeductions);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmDeductions";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Deductions";
-            this.Load += new System.EventHandler(this.frmDeductions_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgDeductions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = btnAddDeductions;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(386, 309);
+            Controls.Add(btnRemoveDeductions);
+            Controls.Add(dgDeductions);
+            Controls.Add(groupBox2);
+            Controls.Add(txtDescription);
+            Controls.Add(label6);
+            Controls.Add(groupBox1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmDeductions";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Deductions";
+            Load += frmDeductions_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgDeductions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epDescription).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epAmount).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -187,15 +187,10 @@ namespace ACC.Data
             {
                 new object[] { "@rciId", DbType.Int32, rciId},
                 new object[] { "@obligationNo", DbType.String, obligationNo},
-                new object[] { "@date_entry", DbType.DateTimeOffset, dateEntry},
+                new object[] { "@date_entry", DbType.DateTime, dateEntry},
             };
 
-            string query = $"INSERT INTO {tableRCIObligations} " +
-                            $"(rci_id, obligation_no, date_entry) " +
-                            $"VALUES(" +
-                            $"@rciId, " +
-                            $"@obligationNo, " +
-                            $"@date_entry)";
+            string query = $"INSERT INTO {tableRCIObligations} (rci_id, obligation_no, date_entry) VALUES(@rciId, @obligationNo, @date_entry)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -206,10 +201,10 @@ namespace ACC.Data
             {
                         new object[] { "@rciId", DbType.Int32, rciId},
                         new object[] { "@obligationNo", DbType.String, description},
-                        new object[] { "@deductionAmount", DbType.Decimal, amount},
+                        new object[] { "@amount", DbType.Decimal, amount},
             };
 
-            string query = $"INSERT INTO {tableRCIDeductions} (rci_id, description, amount) VALUES(@rciId, @obligationNo, @deductionAmount)";
+            string query = $"INSERT INTO {tableRCIDeductions} (rci_id, description, amount) VALUES(@rciId, @obligationNo, @amount)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }

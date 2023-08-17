@@ -1279,9 +1279,9 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].HeaderText = "Obligation No. ";
-            datagrid.Columns[1].HeaderText = "Date Entry";
-            datagrid.Columns[1].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["obligation_no"].HeaderText = "Obligation No. ";
+            datagrid.Columns["date_entry"].HeaderText = "Date Entry";
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1290,11 +1290,11 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].HeaderText = "Description";
-            datagrid.Columns[1].HeaderText = "Amount";
+            datagrid.Columns["description"].HeaderText = "Description";
+            datagrid.Columns["amount"].HeaderText = "Amount";
 
-            datagrid.Columns[1].DefaultCellStyle.Format = "D2";
-            datagrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1333,9 +1333,11 @@ namespace AccountingSystem
 
             datagrid.Columns["total_deductions"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["total_deductions"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
         }
 
         internal static void RCIReleasedAndUnreleasedDatagridView(DataTable dataTable, DataGridView datagrid)

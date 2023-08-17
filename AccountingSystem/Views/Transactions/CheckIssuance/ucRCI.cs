@@ -29,12 +29,12 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void CreateObligationAndDeductionsColumns()
         {
             //obligations
-            dtObligations.Columns.Add("obligation_no");
-            dtObligations.Columns.Add("date_entry");
+            dtObligations.Columns.Add("obligation_no", typeof(string));
+            dtObligations.Columns.Add("date_entry", typeof(DateTime));
 
             //deductions
-            dtDeductions.Columns.Add("description");
-            dtDeductions.Columns.Add("amount");
+            dtDeductions.Columns.Add("description", typeof(string));
+            dtDeductions.Columns.Add("amount", typeof(decimal));
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
