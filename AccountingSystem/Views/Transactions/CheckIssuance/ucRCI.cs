@@ -11,14 +11,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 {
     public partial class ucRCI : UserControl
     {
-        internal int Id = 0;
-        internal int bankId = 0;
-        internal int fundsId = 0;
-        internal int functionId = 0;
-
-        internal short obligationNumberCount = 0;
-        internal decimal totalDeduction = 0;
-
+        internal int Id;
+        internal int bankId;
+        internal int fundsId;
+        internal int functionId;
+        internal short obligationNumberCount;
+        internal decimal totalDeduction;
         internal DataTable dtObligations = new();
         internal DataTable dtDeductions = new();
 
@@ -54,6 +52,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbBankAccounts.DataSource = dtBankAccounts;
             cmbBankAccounts.ValueMember = "id";
             cmbBankAccounts.DisplayMember = "account_no";
+
         }
 
         internal void LoadFPP()
@@ -216,13 +215,13 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal string GetFormErrors()
         {
             var errorArray = new string[7];
-            errorArray[0] = epFund.GetError(cmbfund);
-            errorArray[1] = epBank.GetError(cmbBank);
-            errorArray[2] = epCheckNo.GetError(txtCheckNo);
-            errorArray[3] = epCheckDate.GetError(dtCheckDate);
-            errorArray[4] = epPayee.GetError(txtPayee);
-            errorArray[5] = epNatureOfPayment.GetError(txtNature);
-            errorArray[6] = epNetAmount.GetError(nudNetAmount);
+            errorArray[0] = errorProvider1.GetError(cmbfund);
+            errorArray[1] = errorProvider1.GetError(cmbBank);
+            errorArray[2] = errorProvider1.GetError(txtCheckNo);
+            errorArray[3] = errorProvider1.GetError(dtCheckDate);
+            errorArray[4] = errorProvider1.GetError(txtPayee);
+            errorArray[5] = errorProvider1.GetError(txtNature);
+            errorArray[6] = errorProvider1.GetError(nudNetAmount);
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -230,72 +229,72 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epDVNo, txtDVNo, "Disbursement No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDVNo, "Disbursement No.");
         }
 
         private void txtdvno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epDVNo, txtDVNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtDVNo);
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbfund, "Fund.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbfund, "Fund.");
         }
 
         private void cmbfund_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epFund, cmbfund);
+            Helper.ClearErrorComboBox(errorProvider1, cmbfund);
         }
 
         private void cmbbank_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbBank, "Bank.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Bank.");
         }
 
         private void cmbbank_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epBank, cmbBank);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBank);
         }
 
         private void txtcheckno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCheckNo, txtCheckNo, "Check No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCheckNo, "Check No.");
         }
 
         private void txtcheckno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCheckNo, txtCheckNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtCheckNo);
         }
 
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
         }
 
         private void txtpayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
         private void txtnature_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtNature, "Nature of Payment");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNature, "Nature of Payment");
         }
 
         private void txtnature_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epNatureOfPayment, txtNature);
+            Helper.ClearErrorTextBox(errorProvider1, txtNature);
         }
 
         private void txtamount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epNetAmount, nudNetAmount, "Net Amount.");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudNetAmount, "Net Amount.");
         }
 
         private void txtamount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epNetAmount, nudNetAmount);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudNetAmount);
         }
 
         #endregion Validations
