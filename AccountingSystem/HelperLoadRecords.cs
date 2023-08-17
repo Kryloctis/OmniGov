@@ -997,7 +997,7 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
         }
 
-        internal static void ComboBoxBanks(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        internal static void BankComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.ValueMember = valueMember;
