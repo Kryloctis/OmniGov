@@ -203,6 +203,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // pbLoadRecords
             // 

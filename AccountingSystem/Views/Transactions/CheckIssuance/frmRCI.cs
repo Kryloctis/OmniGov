@@ -172,11 +172,11 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
-            ShowTimeStamp();
+            SetToolStripStatusData();
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }
 
-        private void ShowTimeStamp()
+        private void SetToolStripStatusData()
         {
             if (dgRCI.SelectedRows.Count == 0) return;
 
@@ -185,6 +185,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+
+            lblRecordCount.Text = dgRCI.Rows.Count.ToString();
         }
 
         internal void LoadRCI()
@@ -212,6 +214,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadRCI();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            SetToolStripStatusData();
         }
     }
 }
