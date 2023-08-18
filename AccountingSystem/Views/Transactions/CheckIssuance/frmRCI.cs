@@ -133,26 +133,26 @@ namespace AccountingSystem.Views.Transactions.RCI
             _ = new frmRCIEdit(this, rciID).ShowDialog();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void DeleteRCI()
         {
-            int selectedrowscount = dgRCI.SelectedRows.Count;
+            int selectedRowsCount = dgRCI.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
-                    {
-                        var rciModelList = new List<RCIModel>();
-                        foreach (DataGridViewRow row in dgRCI.SelectedRows)
-                        {
-                            int rciId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            rciModelList.Add(new RCIModel() { Id = rciId });
-                        }
+                if (selectedRowsCount == 0)
+                    return;
 
-                        var rciRepository = AccFactory.RCIRepository();
-                        _ = rciRepository.Delete(rciModelList);
-                        LoadRCI();
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var rciModelList = new List<RCIModel>();
+                    foreach (DataGridViewRow row in dgRCI.SelectedRows)
+                    {
+                        int rciId = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                        rciModelList.Add(new RCIModel() { Id = rciId });
                     }
+
+                    var rciRepository = AccFactory.RCIRepository();
+                    _ = rciRepository.Delete(rciModelList);
+                    LoadRCI();
                 }
             }
             catch (MySqlException Mysqlex)
@@ -168,6 +168,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteRCI();
         }
 
         private void dgRCI_SelectionChanged(object sender, EventArgs e)

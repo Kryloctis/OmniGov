@@ -19,8 +19,8 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             InitializeComponent();
             _frmRCI = frmRCI;
-            uc = ucrci2;
             _rciID = rciId;
+            uc = ucrci2;
         }
 
         private void LoadRCIObligations()
