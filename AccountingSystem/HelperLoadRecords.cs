@@ -1332,7 +1332,6 @@ namespace AccountingSystem
             datagrid.Columns["fpp_code"].HeaderText = "FPP Code";
             datagrid.Columns["total_deductions"].HeaderText = "Total Deductions";
             datagrid.Columns["total_deductions"].MinimumWidth = 150;
-
             datagrid.Columns["total_deductions"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["total_deductions"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";

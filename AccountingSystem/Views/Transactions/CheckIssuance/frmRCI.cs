@@ -59,12 +59,18 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal void LoadRecords()
         {
             DataTable dtRCI = new DataTable();
+            DataTable dtRCIFromDB;
+
             int rowCount = 0;
             int recordsCount;
             string searchText = txtSearch.Text.Trim();
-
             dtRCI.Columns.AddRange(RCIDataColumns());
-            var dtRCIFromDB = AccFactory.RCIRepository().GetViewRecordsBySearch(searchText);
+
+            if (searchText.Length > 2)
+                dtRCIFromDB = AccFactory.RCIRepository().GetViewRecordsBySearch(searchText);
+            else
+                dtRCIFromDB = AccFactory.RCIRepository().GetViewRecords();
+
             recordsCount = dtRCIFromDB.Rows.Count;
 
             foreach (DataRow row in dtRCIFromDB.Rows)
@@ -177,21 +183,26 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
-            SetToolStripStatusData();
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
+            SetToolStripStatusData();
         }
 
         private void SetToolStripStatusData()
         {
-            if (dgRCI.SelectedRows.Count == 0) return;
+            if (dgRCI.SelectedRows.Count == 1)
+            {
+                var createdAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["created_at"].ColumnIndex);
+                var updatedAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["updated_at"].ColumnIndex);
 
-            var createdAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["created_at"].ColumnIndex);
-            var updatedAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["updated_at"].ColumnIndex);
+                byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
+                Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgRCI).ToString();
+                return;
+            }
 
-            byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
-            Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-
-            lblRecordCount.Text = dgRCI.Rows.Count.ToString();
+            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgRCI).ToString();
+            lblCreatedAt.Text = string.Empty;
+            lblUpdatedAt.Text = string.Empty;
         }
 
         internal void LoadRCI()
