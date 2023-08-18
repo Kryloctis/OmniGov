@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 new DataColumn("fund_id", typeof(int)),
                 new DataColumn("fpp_id", typeof(int)),
                 new DataColumn("cheque_no", typeof(string)),
-                new DataColumn("cheque_date", typeof(string)),
+                new DataColumn("cheque_date", typeof(DateTime)),
                 new DataColumn("bank_account_no", typeof(string)),
                 new DataColumn("bank_name", typeof(string)),
                 new DataColumn("fund_code", typeof(int)),
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             DataTable dtRCI = new DataTable();
             int rowCount = 0;
-            int recordsCount = 0;
+            int recordsCount;
 
             dtRCI.Columns.AddRange(RCIDataColumns());
 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 string dateEntry = row["date_entry"].ToString();
                 int fppId = Convert.ToInt32(row["fpp_id"]);
                 string checkNo = row["cheque_no"].ToString();
-                string checkDate = row["cheque_date"].ToString();
+                DateTime checkDate = Convert.ToDateTime(row["cheque_date"]);
                 string bankAccountNo = row["bank_account_no"].ToString();
                 string bankName = row["bank_name"].ToString();
                 string fundName = row["fund_name"].ToString();
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 string natureOfPayment = row["nature_of_payment"].ToString();
                 string obligationNo = row["obligation_no"].ToString();
                 string fppCode = row["fpp_code"].ToString();
-                decimal totalDeduction = !string.IsNullOrEmpty(row["total_deductions"].ToString()) ? Convert.ToDecimal(row["total_deductions"]) : 0;
+                decimal totalDeduction = row.IsNull("total_deductions") ? 0 : Convert.ToDecimal(row["total_deductions"]);
                 decimal amount = Convert.ToDecimal(row["amount"]);
                 string createdAt = row["created_at"].ToString();
                 string udpatedAt = row["updated_at"].ToString();
