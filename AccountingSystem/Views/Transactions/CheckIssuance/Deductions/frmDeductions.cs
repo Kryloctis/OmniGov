@@ -103,9 +103,13 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
             {
                 _uc.SetDeductionLabel();
-
-                this.Close();
+                Close();
             }
+        }
+
+        private void frmDeductions_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _uc.SetDeductionLabel();
         }
     }
 }

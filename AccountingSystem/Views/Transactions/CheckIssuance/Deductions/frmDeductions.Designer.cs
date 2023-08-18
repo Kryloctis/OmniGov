@@ -202,6 +202,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Deductions";
+            FormClosing += frmDeductions_FormClosing;
             Load += frmDeductions_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
