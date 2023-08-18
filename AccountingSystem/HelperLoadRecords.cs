@@ -1313,13 +1313,15 @@ namespace AccountingSystem
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
 
-            datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
-            datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["cheque_no"].HeaderText = "Check No.";
+            datagrid.Columns["cheque_date"].HeaderText = "Check date";
+            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
             datagrid.Columns["amount"].HeaderText = "Amount";
             datagrid.Columns["bank_account_no"].HeaderText = "Bank Account No.";
             datagrid.Columns["bank_account_no"].MinimumWidth = 150;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";
+            datagrid.Columns["fund_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["fund_name"].HeaderText = "Fund Name";
             datagrid.Columns["dv_no"].HeaderText = "DV No.";
             datagrid.Columns["payee"].HeaderText = "Payee";
@@ -1335,9 +1337,6 @@ namespace AccountingSystem
             datagrid.Columns["total_deductions"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-
-            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
         }
 
         internal static void RCIReleasedAndUnreleasedDatagridView(DataTable dataTable, DataGridView datagrid)

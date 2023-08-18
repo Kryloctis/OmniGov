@@ -61,10 +61,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             DataTable dtRCI = new DataTable();
             int rowCount = 0;
             int recordsCount;
+            string searchText = txtSearch.Text.Trim();
 
             dtRCI.Columns.AddRange(RCIDataColumns());
-
-            var dtRCIFromDB = AccFactory.RCIRepository().GetViewRecords();
+            var dtRCIFromDB = AccFactory.RCIRepository().GetViewRecordsBySearch(searchText);
             recordsCount = dtRCIFromDB.Rows.Count;
 
             foreach (DataRow row in dtRCIFromDB.Rows)
@@ -196,11 +196,20 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal void LoadRCI()
         {
-            if (!backgroundWorker1.IsBusy)
+            try
             {
-                pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                if (!backgroundWorker1.IsBusy)
+                {
+                    pbLoadRecords.Value = 0;
+                    backgroundWorker1.RunWorkerAsync();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRCI();
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -215,15 +224,12 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRCI();
-        }
-
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             SetToolStripStatusData();
         }
+
+
+
     }
 }

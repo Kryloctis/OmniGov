@@ -225,7 +225,15 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT id, cheques_id, cheque_no, cheque_date, amount, bank_accounts_id, bank_account_no, bank_id, bank_name, fund_id, fund_code, fund_name, dv_no, payee, nature_of_payment, obligation_no, date_entry, fpp_id, fpp_code, total_deductions, created_at, updated_at FROM {viewTableName} WHERE cheque_no LIKE @search_text OR bank_account_no LIKE @search_text OR bank_name LIKE @search_text OR dv_no LIKE @search_text OR obligation_no LIKE @search_text OR payee LIKE @search_text";
+
+            var dtRCI = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
         }
     }
 }
