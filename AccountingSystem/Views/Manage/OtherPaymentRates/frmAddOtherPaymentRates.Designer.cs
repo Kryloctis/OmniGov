@@ -58,7 +58,6 @@
             // 
             // btnSave
             // 
-            btnSave.Image = Properties.Resources.save14px;
             btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSave.Location = new System.Drawing.Point(196, 3);
             btnSave.Name = "btnSave";
