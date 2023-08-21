@@ -233,13 +233,10 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["taxpayers_id"].Visible = false;
             dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
-            dataGridView.Columns["taxpayer_type"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].Visible = false;
             dataGridView.Columns["taxpayers_contact_info"].Visible = false;
-            dataGridView.Columns["taxpayers_street"].Visible = false;
-            dataGridView.Columns["taxpayers_barangay"].HeaderText = "Barangay";
+            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
-            dataGridView.Columns["taxpayers_municipality"].HeaderText = "Municipality";
-            dataGridView.Columns["taxpayers_province"].HeaderText = "Province";
         }
 
         public static void DatagridViewPaymentTaxpayerTaxDues(DataGridView dataGridView, DataTable dataTable)

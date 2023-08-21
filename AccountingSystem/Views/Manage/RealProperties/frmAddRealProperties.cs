@@ -91,6 +91,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void frmAddRealProperties_Load(object sender, EventArgs e)
         {
+            uc._form = this;
         }
     }
 }

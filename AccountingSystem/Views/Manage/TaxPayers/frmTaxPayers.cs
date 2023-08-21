@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 newRow["updated_at"] = updatedAt;
 
                 rowCount++;
-                int progressBarPercentage = (rowCount * 100) / rowCount;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
                 backgroundWorker1.ReportProgress(progressBarPercentage);
 
                 dataTable.Rows.Add(newRow);
@@ -147,8 +147,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Invoke((MethodInvoker)delegate
             {
                 HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayersDataTable());
-                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
-                toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
             });
         }
 
@@ -159,7 +157,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
+            dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+            toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
         }
     }
 }

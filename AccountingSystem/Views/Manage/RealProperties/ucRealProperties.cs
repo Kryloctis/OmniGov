@@ -1,5 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Manage.RealProperties;
+using AccountingSystem.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal int realPropertiesId = 0;
         internal int taxpayerID;
         internal string propertyIdentifier = "0";
+        internal Form _form;
 
         public ucRealProperties()
         {
@@ -93,14 +94,26 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 return AccFactory.RealPropertiesRepository().GetRecordsByCompleteARP(cmbxCompletePreviousARPNumber.Text);
         }
 
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadPropertyKind();
+                LoadClassificationCodes();
+                LoadActualUseCodes();
+                LoadBarangay();
+                LoadPropertiesPreviousARPNumber();
+            }
+        }
+
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
-            LoadPropertyKind();
-            LoadClassificationCodes();
-            LoadActualUseCodes();
-            LoadBarangay();
-            LoadPropertiesPreviousARPNumber();
-            cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
+            try
+            {
+                OnLoad();
+                cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadBarangay()
@@ -158,7 +171,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxpayersList(this).ShowDialog();
+            _ = new frmTaxPayerList(_form).ShowDialog();
         }
 
         private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -236,7 +237,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             Invoke((MethodInvoker)delegate
             {
@@ -244,7 +245,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             });
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
@@ -263,7 +264,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
             toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
