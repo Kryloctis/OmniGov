@@ -30,10 +30,6 @@
         {
             panel1 = new System.Windows.Forms.Panel();
             dgOtherPaymentRates = new System.Windows.Forms.DataGridView();
-            toolStrip2 = new System.Windows.Forms.ToolStrip();
-            btnAdd = new System.Windows.Forms.ToolStripButton();
-            btnEdit = new System.Windows.Forms.ToolStripButton();
-            btnDelete = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,20 +39,24 @@
             toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            btnAdd = new System.Windows.Forms.ToolStripButton();
+            btnEdit = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).BeginInit();
-            toolStrip2.SuspendLayout();
             statusStrip1.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.Controls.Add(dgOtherPaymentRates);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 54);
+            panel1.Location = new System.Drawing.Point(0, 50);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(791, 342);
+            panel1.Size = new System.Drawing.Size(791, 346);
             panel1.TabIndex = 16;
             // 
             // dgOtherPaymentRates
@@ -67,57 +67,9 @@
             dgOtherPaymentRates.Name = "dgOtherPaymentRates";
             dgOtherPaymentRates.RowHeadersWidth = 51;
             dgOtherPaymentRates.RowTemplate.Height = 25;
-            dgOtherPaymentRates.Size = new System.Drawing.Size(783, 334);
+            dgOtherPaymentRates.Size = new System.Drawing.Size(783, 338);
             dgOtherPaymentRates.TabIndex = 1;
             dgOtherPaymentRates.SelectionChanged += dgOtherPaymentRates_SelectionChanged;
-            // 
-            // toolStrip2
-            // 
-            toolStrip2.BackColor = System.Drawing.SystemColors.Control;
-            toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
-            toolStrip2.Location = new System.Drawing.Point(0, 0);
-            toolStrip2.Name = "toolStrip2";
-            toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(791, 54);
-            toolStrip2.TabIndex = 15;
-            toolStrip2.Text = "toolStrip2";
-            // 
-            // btnAdd
-            // 
-            btnAdd.Image = Properties.Resources.button_rounded_add_24px;
-            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(33, 43);
-            btnAdd.Text = "&Add";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnAdd.Click += btnAdd_Click_1;
-            // 
-            // btnEdit
-            // 
-            btnEdit.Enabled = false;
-            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(31, 43);
-            btnEdit.Text = "&Edit";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnEdit.Click += toolStripButtonEdit_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Enabled = false;
-            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 43);
-            btnDelete.Text = "&Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnDelete.Click += btnDelete_Click;
             // 
             // statusStrip1
             // 
@@ -178,14 +130,62 @@
             toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
             toolStripStatusLabelUpdatedAt.Text = "-";
             // 
+            // btnAdd
+            // 
+            btnAdd.Image = Properties.Resources.button_rounded_add_20px;
+            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(42, 39);
+            btnAdd.Text = "Add...";
+            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Enabled = false;
+            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
+            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(40, 39);
+            btnEdit.Text = "Edit...";
+            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Enabled = false;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Text = "Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(791, 50);
+            toolStrip1.TabIndex = 18;
+            toolStrip1.Text = "toolStrip1";
+            // 
             // frmOtherPaymentRates
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(791, 418);
             Controls.Add(panel1);
+            Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
-            Controls.Add(toolStrip2);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(807, 457);
             Name = "frmOtherPaymentRates";
@@ -195,10 +195,10 @@
             Load += frmOtherPaymentRates_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).EndInit();
-            toolStrip2.ResumeLayout(false);
-            toolStrip2.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,10 +207,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgOtherPaymentRates;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        internal System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRecordCount;
@@ -220,5 +216,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
+        private System.Windows.Forms.ToolStripButton btnAdd;
+        private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }

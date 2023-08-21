@@ -2589,6 +2589,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
+            datagrid.Columns["starting_year"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         internal static void CattleDatagridView(DataGridView datagrid, DataTable dataTable)

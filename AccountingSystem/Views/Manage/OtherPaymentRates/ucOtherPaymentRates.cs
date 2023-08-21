@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.OtherPaymentRates
@@ -20,12 +15,10 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         internal string GetFormError()
         {
-            var errorArray = new string[4];
+            var errorArray = new string[2];
 
             errorArray[0] = errorProvider1.GetError(cmbxTaxType);
             errorArray[1] = errorProvider1.GetError(txtDescription);
-            errorArray[2] = errorProvider1.GetError(nudAmount);
-            errorArray[3] = errorProvider1.GetError(nudStartingYear);
 
             IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
@@ -34,12 +27,11 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         internal void ResetForm()
         {
             cmbxTaxType.SelectedValue = -1;
-            txtDescription.Clear();
             nudAmount.Value = 0.0m;
             nudStartingYear.Value = 2023;
             cbIsRateEditable.Checked = false;
+            txtDescription.Clear();
         }
-
 
         private void ucOtherPaymentRates_Load(object sender, EventArgs e)
         {
@@ -62,6 +54,8 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        #region Validation
+
         private void cmbxTaxType_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxTaxType, "Tax Type");
@@ -82,14 +76,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
 
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
-        }
-
-        private void nudAmount_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
-        }
+        #endregion Validation
     }
 }

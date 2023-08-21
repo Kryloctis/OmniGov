@@ -42,14 +42,14 @@
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 183);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 167);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(312, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(355, 29);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(234, 3);
+            btnCancel.Location = new System.Drawing.Point(277, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             btnSave.Image = Properties.Resources.save14px;
             btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSave.Location = new System.Drawing.Point(153, 3);
+            btnSave.Location = new System.Drawing.Point(196, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 23);
             btnSave.TabIndex = 0;
@@ -74,7 +74,7 @@
             ucOtherPaymentRates1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherPaymentRates1.Location = new System.Drawing.Point(0, 0);
             ucOtherPaymentRates1.Name = "ucOtherPaymentRates1";
-            ucOtherPaymentRates1.Size = new System.Drawing.Size(312, 183);
+            ucOtherPaymentRates1.Size = new System.Drawing.Size(355, 167);
             ucOtherPaymentRates1.TabIndex = 0;
             // 
             // frmAddOtherPaymentRates
@@ -84,13 +84,12 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(312, 212);
+            ClientSize = new System.Drawing.Size(355, 196);
             Controls.Add(ucOtherPaymentRates1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(323, 251);
             Name = "frmAddOtherPaymentRates";
             ShowIcon = false;
             ShowInTaskbar = false;
