@@ -68,7 +68,6 @@
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(598, 3);
             this.btnSave.Name = "btnSave";
@@ -93,7 +92,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Real Properties";
+            this.Text = "Edit Real Property";
             this.Load += new System.EventHandler(this.frmEditRealProperties_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -20,6 +20,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetCancelledRecordsBySearch(string searchText);
 
+        DataTable GetRecordsBySearch(string searchText, bool isCancelled = false);
+
         int GetLastInsertedId();
 
         bool Synchronize(RealPropertiesModel realPropertiesModel);
