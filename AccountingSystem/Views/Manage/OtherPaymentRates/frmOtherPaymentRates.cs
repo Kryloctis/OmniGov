@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -81,22 +82,30 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                     HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
                     dtOtherPaymentRates.Rows.Add(newRow);
                 }
+                SetStatusStripData();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgOtherPaymentRates_SelectionChanged(object sender, EventArgs e)
         {
+            SetStatusStripData();
+        }
+
+        private void SetStatusStripData()
+        {
             if (dgOtherPaymentRates.Columns.Count < 1)
                 return;
 
+            int rowCount = dgOtherPaymentRates.Rows.Count;
+            toolStripStatusLabelRecordCount.Text = rowCount.ToString();
             byte createdByIndex = (byte)dgOtherPaymentRates.Columns["created_at"].Index;
             byte updatedByIndex = (byte)dgOtherPaymentRates.Columns["updated_at"].Index;
 
             var indexes = new byte[] { createdByIndex, updatedByIndex };
             Helper.EnableDisableToolStripButtons(dgOtherPaymentRates, btnEdit, btnDelete);
             Helper.ShowRecordTimestamp(dgOtherPaymentRates, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -114,30 +123,38 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgOtherPaymentRates.SelectedRows.Count;
             try
             {
-                if (selectedRowsCount > 0)
+                if (DeleteRecords())
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var otherPaymentRatesModelList = new List<OtherPaymentRatesModel>();
-                        foreach (DataGridViewRow row in dgOtherPaymentRates.SelectedRows)
-                        {
-                            int otherPaymentRatesID = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            otherPaymentRatesModelList.Add(new OtherPaymentRatesModel() { Id = otherPaymentRatesID });
-                        }
-
-                        var otherPaymentRatesRepository = AccFactory.OtherPaymentRatesRepository();
-                        _ = otherPaymentRatesRepository.Delete(otherPaymentRatesModelList);
-                        LoadRecords();
-                    }
+                    Helper.MessageBoxSuccess("Other payment rate/s successfully deleted.");
+                    LoadRecords();
                 }
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete payment rate. The record/s was used as reference to different record.");
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgOtherPaymentRates.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var otherPaymentRatesModelList = new List<OtherPaymentRatesModel>();
+                foreach (DataGridViewRow row in dgOtherPaymentRates.SelectedRows)
+                {
+                    int otherPaymentRateId = Convert.ToInt32(row.Cells["id"].Value);
+                    otherPaymentRatesModelList.Add(new OtherPaymentRatesModel() { Id = otherPaymentRateId });
+                }
+                return AccFactory.OtherPaymentRatesRepository().Delete(otherPaymentRatesModelList);
+            }
+
+            return false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
