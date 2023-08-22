@@ -310,6 +310,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void LoadParentCode()
         {
             DataTable dtTaxTypesCodes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+            if (dtTaxTypesCodes.Rows.Count == 0)
+                return;
+
             Dictionary<int, string> dtSource = new Dictionary<int, string>();
             foreach (DataRow row in dtTaxTypesCodes.Rows)
             {
@@ -364,10 +367,10 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
+            LoadParentCode();
             try
             {
                 LoadFunds();
-                LoadParentCode();
 
                 if (!backgroundWorker1.IsBusy)
                 {

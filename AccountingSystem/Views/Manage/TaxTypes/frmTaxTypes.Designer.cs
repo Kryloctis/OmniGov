@@ -131,6 +131,7 @@
             // txtBLFGAccountCode
             // 
             txtBLFGAccountCode.Location = new System.Drawing.Point(163, 147);
+            txtBLFGAccountCode.MaxLength = 99;
             txtBLFGAccountCode.Name = "txtBLFGAccountCode";
             txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
             txtBLFGAccountCode.TabIndex = 6;
@@ -138,6 +139,7 @@
             // txtCOAAccountCode
             // 
             txtCOAAccountCode.Location = new System.Drawing.Point(163, 120);
+            txtCOAAccountCode.MaxLength = 99;
             txtCOAAccountCode.Name = "txtCOAAccountCode";
             txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
             txtCOAAccountCode.TabIndex = 5;
@@ -145,6 +147,7 @@
             // txtDesciption
             // 
             txtDesciption.Location = new System.Drawing.Point(163, 39);
+            txtDesciption.MaxLength = 99;
             txtDesciption.Name = "txtDesciption";
             txtDesciption.Size = new System.Drawing.Size(353, 23);
             txtDesciption.TabIndex = 2;
@@ -154,6 +157,7 @@
             // txtCode
             // 
             txtCode.Location = new System.Drawing.Point(163, 12);
+            txtCode.MaxLength = 45;
             txtCode.Name = "txtCode";
             txtCode.Size = new System.Drawing.Size(353, 23);
             txtCode.TabIndex = 1;
