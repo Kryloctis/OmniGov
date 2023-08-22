@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Other payment has been saved.");
-                _frmOtherPaymentRates.LoadRecords();
+                _frmOtherPaymentRates.RunBackgroundWorker();
                 _ucOtherPaymentRates.ResetForm();
             }
         }

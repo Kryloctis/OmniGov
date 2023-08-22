@@ -18,8 +18,9 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void frmOtherPaymentRates_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            RunBackgroundWorker();
         }
+
         private DataColumn[] OtherPaymentRatesColumns()
         {
             var dataColumns = new DataColumn[]
@@ -46,6 +47,8 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                 string searchText = txtSearch.Text.Trim();
                 var dtOtherPaymentRates = new DataTable();
                 var dtOtherPaymentRatesFromDB = new DataTable();
+                int recordsCount = 0;
+                int rowCount = 0;
 
                 dtOtherPaymentRates.Columns.AddRange(OtherPaymentRatesColumns());
 
@@ -53,6 +56,8 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                     dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecordsBySearch(searchText);
                 else
                     dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecords();
+
+                recordsCount = dtOtherPaymentRatesFromDB.Rows.Count;
 
                 foreach (DataRow row in dtOtherPaymentRatesFromDB.Rows)
                 {
@@ -79,9 +84,14 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                     newRow["updated_by"] = updateBy;
                     newRow["updated_at"] = updateAt;
 
-                    HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
+                    rowCount++;
+                    int progressBarPercentage = (rowCount * 100) / recordsCount;
+                    backgroundWorker1.ReportProgress(progressBarPercentage);
+
                     dtOtherPaymentRates.Rows.Add(newRow);
                 }
+
+                HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
                 SetStatusStripData();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -105,7 +115,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             var indexes = new byte[] { createdByIndex, updatedByIndex };
             Helper.EnableDisableToolStripButtons(dgOtherPaymentRates, btnEdit, btnDelete);
             Helper.ShowRecordTimestamp(dgOtherPaymentRates, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -128,7 +137,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                 if (DeleteRecords())
                 {
                     Helper.MessageBoxSuccess("Other payment rate/s successfully deleted.");
-                    LoadRecords();
+                    RunBackgroundWorker();
                 }
             }
             catch (MySqlException ex)
@@ -159,7 +168,33 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadRecords();
+            RunBackgroundWorker();
+        }
+
+        internal void RunBackgroundWorker()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadRecords();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
         }
     }
 }

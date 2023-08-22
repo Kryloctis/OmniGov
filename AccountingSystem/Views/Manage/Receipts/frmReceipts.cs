@@ -64,8 +64,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 if (DeleteRecords())
                 {
                     Helper.MessageBoxSuccess("Receipt successfully deleted.");
-                    if (!bgwLoadReceipts.IsBusy)
-                        bgwLoadReceipts.RunWorkerAsync();
+                    LoadReceipts();
                 }
             }
             catch (MySqlException ex)

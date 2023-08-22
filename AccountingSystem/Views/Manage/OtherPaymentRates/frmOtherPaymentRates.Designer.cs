@@ -45,6 +45,8 @@
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).BeginInit();
             statusStrip1.SuspendLayout();
@@ -55,10 +57,10 @@
             // 
             panel1.Controls.Add(dgOtherPaymentRates);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(791, 346);
+            panel1.Size = new System.Drawing.Size(791, 341);
             panel1.TabIndex = 16;
             // 
             // dgOtherPaymentRates
@@ -69,7 +71,7 @@
             dgOtherPaymentRates.Name = "dgOtherPaymentRates";
             dgOtherPaymentRates.RowHeadersWidth = 51;
             dgOtherPaymentRates.RowTemplate.Height = 25;
-            dgOtherPaymentRates.Size = new System.Drawing.Size(783, 338);
+            dgOtherPaymentRates.Size = new System.Drawing.Size(783, 333);
             dgOtherPaymentRates.TabIndex = 1;
             dgOtherPaymentRates.SelectionChanged += dgOtherPaymentRates_SelectionChanged;
             // 
@@ -201,14 +203,31 @@
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 19;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(791, 5);
+            pbLoadRecords.TabIndex = 24;
+            // 
             // frmOtherPaymentRates
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(791, 418);
+            Controls.Add(panel1);
+            Controls.Add(pbLoadRecords);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
-            Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
@@ -247,5 +266,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
