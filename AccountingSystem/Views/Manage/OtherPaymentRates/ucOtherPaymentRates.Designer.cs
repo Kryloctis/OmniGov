@@ -65,7 +65,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(10, 90);
+            label4.Location = new System.Drawing.Point(10, 89);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(51, 15);
             label4.TabIndex = 3;
@@ -74,7 +74,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(10, 138);
+            label5.Location = new System.Drawing.Point(10, 141);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(73, 15);
             label5.TabIndex = 4;
@@ -88,7 +88,7 @@
             cmbxTaxType.IntegralHeight = false;
             cmbxTaxType.Location = new System.Drawing.Point(90, 13);
             cmbxTaxType.Name = "cmbxTaxType";
-            cmbxTaxType.Size = new System.Drawing.Size(242, 23);
+            cmbxTaxType.Size = new System.Drawing.Size(315, 23);
             cmbxTaxType.TabIndex = 1;
             cmbxTaxType.Validating += cmbxTaxType_Validating;
             cmbxTaxType.Validated += cmbxTaxType_Validated;
@@ -98,7 +98,7 @@
             txtDescription.Location = new System.Drawing.Point(90, 42);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new System.Drawing.Size(242, 40);
+            txtDescription.Size = new System.Drawing.Size(315, 38);
             txtDescription.TabIndex = 2;
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
@@ -111,21 +111,21 @@
             // nudAmount
             // 
             nudAmount.DecimalPlaces = 1;
-            nudAmount.Location = new System.Drawing.Point(90, 88);
+            nudAmount.Location = new System.Drawing.Point(90, 87);
             nudAmount.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
             nudAmount.Name = "nudAmount";
-            nudAmount.Size = new System.Drawing.Size(242, 23);
+            nudAmount.Size = new System.Drawing.Size(315, 23);
             nudAmount.TabIndex = 3;
             nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             nudAmount.ThousandsSeparator = true;
             // 
             // nudStartingYear
             // 
-            nudStartingYear.Location = new System.Drawing.Point(90, 135);
+            nudStartingYear.Location = new System.Drawing.Point(90, 139);
             nudStartingYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudStartingYear.Minimum = new decimal(new int[] { 1901, 0, 0, 0 });
             nudStartingYear.Name = "nudStartingYear";
-            nudStartingYear.Size = new System.Drawing.Size(242, 23);
+            nudStartingYear.Size = new System.Drawing.Size(315, 23);
             nudStartingYear.TabIndex = 4;
             nudStartingYear.Value = new decimal(new int[] { 2023, 0, 0, 0 });
             // 
@@ -133,7 +133,7 @@
             // 
             cbIsRateEditable.AutoSize = true;
             cbIsRateEditable.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            cbIsRateEditable.Location = new System.Drawing.Point(244, 113);
+            cbIsRateEditable.Location = new System.Drawing.Point(311, 116);
             cbIsRateEditable.Name = "cbIsRateEditable";
             cbIsRateEditable.Size = new System.Drawing.Size(94, 17);
             cbIsRateEditable.TabIndex = 5;
@@ -156,7 +156,7 @@
             Controls.Add(label4);
             Controls.Add(label2);
             Name = "ucOtherPaymentRates";
-            Size = new System.Drawing.Size(353, 170);
+            Size = new System.Drawing.Size(429, 170);
             Load += ucOtherPaymentRates_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();

@@ -367,10 +367,10 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
-            LoadParentCode();
             try
             {
                 LoadFunds();
+                LoadParentCode();
 
                 if (!backgroundWorker1.IsBusy)
                 {

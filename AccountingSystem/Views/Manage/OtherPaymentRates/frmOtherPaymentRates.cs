@@ -195,6 +195,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+
         }
     }
 }

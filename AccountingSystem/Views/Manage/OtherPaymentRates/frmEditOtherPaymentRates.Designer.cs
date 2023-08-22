@@ -42,14 +42,14 @@
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 167);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 173);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(355, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(426, 29);
             flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(277, 3);
+            btnCancel.Location = new System.Drawing.Point(348, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 0;
@@ -59,7 +59,7 @@
             // btnUpdate
             // 
             btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnUpdate.Location = new System.Drawing.Point(185, 3);
+            btnUpdate.Location = new System.Drawing.Point(256, 3);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(86, 23);
             btnUpdate.TabIndex = 0;
@@ -73,7 +73,7 @@
             ucOtherPaymentRates1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherPaymentRates1.Location = new System.Drawing.Point(0, 0);
             ucOtherPaymentRates1.Name = "ucOtherPaymentRates1";
-            ucOtherPaymentRates1.Size = new System.Drawing.Size(355, 167);
+            ucOtherPaymentRates1.Size = new System.Drawing.Size(426, 173);
             ucOtherPaymentRates1.TabIndex = 7;
             // 
             // frmEditOtherPaymentRates
@@ -83,7 +83,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(355, 196);
+            ClientSize = new System.Drawing.Size(426, 202);
             Controls.Add(ucOtherPaymentRates1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
