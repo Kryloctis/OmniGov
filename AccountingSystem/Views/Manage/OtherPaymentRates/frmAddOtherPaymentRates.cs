@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Other payment has been saved.");
-                _frmOtherPaymentRates.LoadOtherPaymentRates();
+                _frmOtherPaymentRates.LoadRecords();
                 _ucOtherPaymentRates.ResetForm();
             }
         }

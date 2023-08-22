@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             if (Update())
             {
                 Helper.MessageBoxSuccess("Other payment rate has been updated.");
-                _frmOtherPaymentRates.LoadOtherPaymentRates();
+                _frmOtherPaymentRates.LoadRecords();
                 _ucOtherPaymentRates.ResetForm();
                 Close();
             }

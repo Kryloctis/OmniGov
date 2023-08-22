@@ -43,6 +43,8 @@
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnSearch = new System.Windows.Forms.Button();
+            txtSearch = new System.Windows.Forms.TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).BeginInit();
             statusStrip1.SuspendLayout();
@@ -178,11 +180,34 @@
             toolStrip1.TabIndex = 18;
             toolStrip1.Text = "toolStrip1";
             // 
+            // btnSearch
+            // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSearch.Location = new System.Drawing.Point(710, 14);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 20;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Location = new System.Drawing.Point(508, 14);
+            txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 23);
+            txtSearch.TabIndex = 19;
+            // 
             // frmOtherPaymentRates
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(791, 418);
+            Controls.Add(btnSearch);
+            Controls.Add(txtSearch);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
@@ -220,5 +245,7 @@
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

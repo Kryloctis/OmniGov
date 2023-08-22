@@ -17,17 +17,23 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void frmOtherPaymentRates_Load(object sender, EventArgs e)
         {
-            LoadOtherPaymentRates();
+            LoadRecords();
         }
 
-        internal void LoadOtherPaymentRates()
+        internal void LoadRecords()
         {
             try
             {
-                var dtOtherPaymentRates = new DataTable();
-                dtOtherPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecords();
-                HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
+                string searchText = txtSearch.Text.Trim();
 
+                var dtOtherPaymentRates = new DataTable();
+
+                if (searchText.Length > 2)
+                    dtOtherPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordsBySearch(searchText);
+                else
+                    dtOtherPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecords();
+
+                HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -76,7 +82,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
                         var otherPaymentRatesRepository = AccFactory.OtherPaymentRatesRepository();
                         _ = otherPaymentRatesRepository.Delete(otherPaymentRatesModelList);
-                        LoadOtherPaymentRates();
+                        LoadRecords();
                     }
                 }
             }
@@ -86,5 +92,9 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             }
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }
