@@ -2573,7 +2573,6 @@ namespace AccountingSystem
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["tax_type_id"].Visible = false;
-            datagrid.Columns["is_rate_editable"].Visible = false;
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
@@ -2590,6 +2589,10 @@ namespace AccountingSystem
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
             datagrid.Columns["starting_year"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["is_rate_editable"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["is_rate_editable"].HeaderText = "Editable Rate";
+            datagrid.Columns["is_rate_editable"].Width = 85;
+            datagrid.Columns["is_rate_editable"].MinimumWidth = 85;
         }
 
         internal static void CattleDatagridView(DataGridView datagrid, DataTable dataTable)
