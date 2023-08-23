@@ -133,6 +133,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             btnSave.Size = new System.Drawing.Size(42, 39);
             btnSave.Text = "Add...";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSave.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
@@ -143,6 +144,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             btnEdit.Size = new System.Drawing.Size(40, 39);
             btnEdit.Text = "Edit...";
             btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
@@ -153,6 +155,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             btnDelete.Size = new System.Drawing.Size(44, 39);
             btnDelete.Text = "Delete";
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // txtSearch
             // 
@@ -172,6 +175,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             btnSearch.TabIndex = 21;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // pbLoadRecords
             // 

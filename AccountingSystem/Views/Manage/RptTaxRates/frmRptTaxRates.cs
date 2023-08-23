@@ -106,11 +106,6 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadTaxRates();
-        }
-
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
@@ -128,6 +123,11 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         {
             LoadTaxRates();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadTaxRates();
         }
     }
 }
