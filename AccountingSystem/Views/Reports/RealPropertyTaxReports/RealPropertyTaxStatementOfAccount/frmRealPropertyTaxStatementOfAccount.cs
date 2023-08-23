@@ -1,5 +1,4 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
-using AccountingSystem.Views.Shared;
+﻿using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using RPT.Data;
 using System;
