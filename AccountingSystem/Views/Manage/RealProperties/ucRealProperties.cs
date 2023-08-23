@@ -1,5 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Manage.RealProperties;
+using AccountingSystem.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal int realPropertiesId = 0;
         internal int taxpayerID;
         internal string propertyIdentifier = "0";
+        internal Form _form;
 
         public ucRealProperties()
         {
@@ -70,7 +71,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadPropertiesPreviousARPNumber()
         {
-
             try
             {
                 var dt = AccFactory.RealPropertiesRepository().GetCancelledProperties();
@@ -94,14 +94,26 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 return AccFactory.RealPropertiesRepository().GetRecordsByCompleteARP(cmbxCompletePreviousARPNumber.Text);
         }
 
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadPropertyKind();
+                LoadClassificationCodes();
+                LoadActualUseCodes();
+                LoadBarangay();
+                LoadPropertiesPreviousARPNumber();
+            }
+        }
+
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
-            LoadPropertyKind();
-            LoadClassificationCodes();
-            LoadActualUseCodes();
-            LoadBarangay();
-            LoadPropertiesPreviousARPNumber();
-            cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
+            try
+            {
+                OnLoad();
+                cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadBarangay()
@@ -131,8 +143,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxClassification.DisplayMember = "name";
         }
 
-
-
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
         {
             string propertyKind = cmbxPropertyKind.Text;
@@ -161,7 +171,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxpayersList(this).ShowDialog();
+            _ = new frmTaxPayerList(_form).ShowDialog();
         }
 
         private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)
@@ -289,7 +299,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorComboBox(errorProvider1, cmbxCompletePreviousARPNumber);
         }
 
-
         private void cmbxBarangays_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBarangays, "Barangay");
@@ -322,22 +331,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void cmbxCompletePreviousARPNumber_Validating(object sender, CancelEventArgs e)
         {
-
         }
 
         private void cmbxCompletePreviousARPNumber_Validated(object sender, EventArgs e)
         {
-
         }
 
         private void txtTaxpayers_Validating(object sender, CancelEventArgs e)
         {
-
         }
 
         private void txtTaxpayers_Validated(object sender, EventArgs e)
         {
-
         }
 
         #endregion Validations

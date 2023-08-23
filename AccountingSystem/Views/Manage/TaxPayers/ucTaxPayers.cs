@@ -44,7 +44,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtBarangay.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
-            cmbxTaxPayerType.SelectedIndex = -1;
             chckIsActive.Checked = true;
             isEdit = false;
             taxPayerId = 0;
