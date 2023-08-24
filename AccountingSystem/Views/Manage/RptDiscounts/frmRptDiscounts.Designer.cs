@@ -42,8 +42,8 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             textBox1 = new System.Windows.Forms.TextBox();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnSave = new System.Windows.Forms.ToolStripButton();
-            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            btnEdit = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             statusStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -108,7 +108,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(194, 23);
             txtSearch.TabIndex = 7;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // contextMenuStrip1
             // 
@@ -132,6 +131,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             btnSearch.TabIndex = 24;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // textBox1
             // 
@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             toolStrip2.BackColor = System.Drawing.Color.Transparent;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSave, toolStripButton1, toolStripButton2 });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSave, btnEdit, btnDelete });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
@@ -163,26 +163,29 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             btnSave.Size = new System.Drawing.Size(42, 39);
             btnSave.Text = "Add...";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSave.Click += btnAdd_Click;
             // 
-            // toolStripButton1
+            // btnEdit
             // 
-            toolStripButton1.Image = Properties.Resources.button_rounded_edit_20px;
-            toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new System.Drawing.Size(40, 39);
-            toolStripButton1.Text = "Edit...";
-            toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
+            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(40, 39);
+            btnEdit.Text = "Edit...";
+            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += btnEdit_Click;
             // 
-            // toolStripButton2
+            // btnDelete
             // 
-            toolStripButton2.Image = Properties.Resources.button_rounded_remove_20px;
-            toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(44, 39);
-            toolStripButton2.Text = "Delete";
-            toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Text = "Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // pbLoadRecords
             // 
@@ -235,8 +238,8 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         internal System.Windows.Forms.ToolStripButton btnSave;
-        internal System.Windows.Forms.ToolStripButton toolStripButton1;
-        internal System.Windows.Forms.ToolStripButton toolStripButton2;
+        internal System.Windows.Forms.ToolStripButton btnEdit;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
