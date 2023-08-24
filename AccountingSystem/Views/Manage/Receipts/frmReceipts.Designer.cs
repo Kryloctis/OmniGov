@@ -155,12 +155,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             // dtpReceivedDate
             // 
             dtpReceivedDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            dtpReceivedDate.CustomFormat = " dd/MM/yyyy";
+            dtpReceivedDate.CustomFormat = "yyyy/mm/dd";
             dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpReceivedDate.Location = new System.Drawing.Point(640, 16);
+            dtpReceivedDate.Location = new System.Drawing.Point(575, 16);
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
-            dtpReceivedDate.Size = new System.Drawing.Size(133, 23);
+            dtpReceivedDate.Size = new System.Drawing.Size(200, 23);
             dtpReceivedDate.TabIndex = 12;
             dtpReceivedDate.ValueChanged += dtpReceivedDate_ValueChanged;
             // 
@@ -168,11 +168,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(550, 20);
+            label1.Location = new System.Drawing.Point(489, 20);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(84, 15);
+            label1.Size = new System.Drawing.Size(81, 15);
             label1.TabIndex = 13;
-            label1.Text = "Received Date ";
+            label1.Text = "Date Received";
             // 
             // btnSearch
             // 

@@ -170,7 +170,17 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgReceipts.Rows.Count == 0)
+                return;
+
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
+
+            if (dgReceipts.SelectedRows.Count != 0)
+            {
+                int receiptId = Convert.ToInt32(dgReceipts.SelectedRows[0].Cells["id"].Value);
+                int totalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+                btnDelete.Enabled = totalIssued == 0;
+            }
         }
 
         private void OnLoad()
