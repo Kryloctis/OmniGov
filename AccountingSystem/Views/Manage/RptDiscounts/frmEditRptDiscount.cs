@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             if (Save())
             {
                 Helper.MessageBoxSuccess("Discount has been updated.");
-                _frmRptDiscounts.LoadDiscounts();
+                _frmRptDiscounts.RunBackgroundWorker();
                 Close();
             }
         }

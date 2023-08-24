@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             statusStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -195,6 +196,13 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             pbLoadRecords.Size = new System.Drawing.Size(740, 5);
             pbLoadRecords.TabIndex = 26;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // frmRptDiscounts
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -241,5 +249,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

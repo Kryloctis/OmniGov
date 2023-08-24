@@ -82,6 +82,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             else
                 dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
 
+            int recordCount = dtRptDiscounts.Rows.Count;
+            int rowCount = 0;
+
             foreach (DataRow row in dtRptDiscounts.Rows)
             {
                 int id = Convert.ToInt32(row["id"]);
@@ -91,6 +94,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                 decimal rate = Convert.ToDecimal(row["rate"]);
                 bool isAdvance = Convert.ToBoolean(row["is_advance"]);
                 Image isAdvanceImg = isAdvance ? Properties.Resources.ok14px : null;
+
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
 
                 dataTable.Rows.Add(id, month, montName, description, rate, isAdvanceImg);
             }
@@ -113,7 +121,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void frmRptDiscount_Load(object sender, EventArgs e)
         {
-            LoadDiscounts();
+            RunBackgroundWorker();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -180,7 +188,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             if (Delete(out deletedRecordCount))
             {
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadDiscounts();
+                RunBackgroundWorker();
             }
         }
 
@@ -192,9 +200,32 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             }
         }
 
+        internal void RunBackgroundWorker()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadDiscounts();
+            RunBackgroundWorker();
         }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadDiscounts();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
     }
 }

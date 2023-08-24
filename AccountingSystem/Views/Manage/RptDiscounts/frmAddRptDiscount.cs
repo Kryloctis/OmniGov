@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             if (Save())
             {
                 Helper.MessageBoxSuccess("Discount has been saved.");
-                _frmRptDiscounts.LoadDiscounts();
+                _frmRptDiscounts.RunBackgroundWorker();
                 uc.ResetForm();
             }
         }
