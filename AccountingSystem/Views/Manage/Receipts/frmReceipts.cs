@@ -197,15 +197,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadReceipts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void bgwLoadReceipts_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             SetToolStripStatusData();

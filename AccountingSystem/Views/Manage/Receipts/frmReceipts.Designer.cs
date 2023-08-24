@@ -162,7 +162,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             dtpReceivedDate.Name = "dtpReceivedDate";
             dtpReceivedDate.Size = new System.Drawing.Size(200, 23);
             dtpReceivedDate.TabIndex = 12;
-            dtpReceivedDate.ValueChanged += dtpReceivedDate_ValueChanged;
             // 
             // label1
             // 
