@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
@@ -23,21 +24,39 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             lblRecordCount.Text = recordCount.ToString();
         }
 
+
         internal void LoadPenalties()
         {
             string searchText = txtSearch.Text.Trim();
+            DataTable dtRptPenalties;
+            var dataTable = new DataTable();
+
+            dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("description", typeof(string));
+            dataTable.Columns.Add("frequency", typeof(string));
+            dataTable.Columns.Add("rate", typeof(decimal));
 
             if (searchText.Length < 2)
-            {
-                var dt = AccFactory.RptPenaltiesRepository().GetRecords();
-                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
-            }
+                dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecords();
             else
+                dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
+
+            int recordCount = dtRptPenalties.Rows.Count;
+            int rowCount = 0;
+
+            foreach (DataRow row in dtRptPenalties.Rows)
             {
-                var dt = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
-                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
+                int id = Convert.ToInt32(row["id"]);
+                string description = row["description"].ToString();
+                string frequency = row["frequency"].ToString();
+                decimal rate = Convert.ToDecimal(row["rate"]);
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                dataTable.Rows.Add(id, description, frequency, rate);
             }
 
+            HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
             UpdateRecordCount(dataGridView1);
         }
 
@@ -110,11 +129,6 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadPenalties();
-        }
-
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadPenalties();
@@ -127,5 +141,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 contextMenuStrip1.Show(Cursor.Position);
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
