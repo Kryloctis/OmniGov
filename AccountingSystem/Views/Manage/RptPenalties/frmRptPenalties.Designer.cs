@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -187,6 +188,13 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             toolStrip2.TabIndex = 23;
             toolStrip2.Text = "toolStrip2";
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // frmRptPenalties
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -231,5 +239,6 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

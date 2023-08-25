@@ -54,6 +54,8 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 rowCount++;
                 int progressBarPercentage = (rowCount * 100) / recordCount;
                 dataTable.Rows.Add(id, description, frequency, rate);
+
+                backgroundWorker1.ReportProgress(progressBarPercentage);
             }
 
             HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
@@ -114,7 +116,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             if (Delete(out deletedRecordCount))
             {
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadPenalties();
+                RunBackgroundWorker();
             }
         }
 
@@ -125,13 +127,13 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void frmRptPenalties_Load(object sender, EventArgs e)
         {
-            LoadPenalties();
+            RunBackgroundWorker();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadPenalties();
+            RunBackgroundWorker();
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
@@ -144,8 +146,29 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            RunBackgroundWorker();
         }
 
+        internal void RunBackgroundWorker()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadPenalties();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
     }
 }

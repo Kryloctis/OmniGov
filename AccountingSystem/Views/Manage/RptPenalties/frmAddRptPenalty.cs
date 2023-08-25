@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             {
                 Helper.MessageBoxSuccess("Penalty has been saved.");
                 uc.ResetForm();
-                _frmRptPenalties.LoadPenalties();
+                _frmRptPenalties.RunBackgroundWorker();
             }
         }
 

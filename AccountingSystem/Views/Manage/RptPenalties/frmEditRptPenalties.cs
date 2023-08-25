@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             if (Save())
             {
                 Helper.MessageBoxSuccess("Penalty has been updated.");
-                _frmRptPenalties.LoadPenalties();
+                _frmRptPenalties.RunBackgroundWorker();
                 Close();
             }
         }
