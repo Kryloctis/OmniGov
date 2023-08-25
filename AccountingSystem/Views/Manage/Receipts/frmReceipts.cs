@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void SetToolStripStatusData()
         {
             var quantity = (from DataGridViewRow row in dgReceipts.Rows
-                            where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
+                            where !string.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
                             select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
             lblRecordCount.Text = dgReceipts.Rows.Count.ToString();

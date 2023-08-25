@@ -108,6 +108,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             txtRemark.Location = new System.Drawing.Point(139, 151);
             txtRemark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtRemark.MaxLength = 500;
             txtRemark.Multiline = true;
             txtRemark.Name = "txtRemark";
             txtRemark.Size = new System.Drawing.Size(377, 46);
