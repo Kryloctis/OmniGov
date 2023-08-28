@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
             frmJev.createdById = createdById;
-            frmJev.ShowDialog();   
+            frmJev.ShowDialog();
             Cursor = Cursors.Default;
         }
 
@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        internal void LoadJEVList()
+        internal void LoadRecords()
         {
             try
             {
@@ -167,6 +167,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                 short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
 
                 var dataTable = AccFactory.JEVRepository().GetViewRecords_By_Status_JournalName_Search_Month_Year(jevStatus, searchTxt, _journalName, _fundName, month, _year);
+
+                int rowCount = 0;
+                int recordCount = dataTable.Rows.Count;
 
                 foreach (DataRow row in dataTable.Rows)
                 {
@@ -216,6 +219,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     rowItem.Cells["updated_by_id"].Value = rowUpdatedById;
                     rowItem.Cells["updated_by_name"].Value = rowUpdatedByName;
                     rowItem.Cells["status"].Value = rowStatus;
+
+                    rowCount++;
+                    int progressBarPercentage = (rowCount * 100) / recordCount;
+                    backgroundWorker1.ReportProgress(progressBarPercentage);
                 }
 
                 dgJEV.CurrentCell = dgJEV.FirstDisplayedCell;
@@ -269,6 +276,28 @@ namespace AccountingSystem.Views.Transactions.JEV
                 return;
 
             LoadSelected();
+        }
+
+        internal void LoadJEVList()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadRecords();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
     }
 }

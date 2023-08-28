@@ -330,6 +330,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            this.backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
             // pbLoadRecords
             // 
