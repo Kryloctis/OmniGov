@@ -1277,7 +1277,6 @@
             DoubleBuffered = true;
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(2);
-            MinimumSize = new System.Drawing.Size(1244, 718);
             Name = "MainForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Local Finance System";

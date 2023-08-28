@@ -451,7 +451,7 @@ namespace AccountingSystem
 
         private void menuExitApp_Click(object sender, EventArgs e)
         {
-            signInForm.Close();
+            Application.Exit();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -684,10 +684,6 @@ namespace AccountingSystem
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _ = new frmOtherPaymentRates().ShowDialog();
-        }
-
-        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
         }
     }
 }
