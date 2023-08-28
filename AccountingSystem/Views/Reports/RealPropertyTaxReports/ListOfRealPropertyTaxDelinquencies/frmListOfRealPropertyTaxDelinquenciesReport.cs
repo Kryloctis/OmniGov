@@ -1,5 +1,4 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
-using AccountingSystem.Views.Shared;
+﻿using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -196,7 +195,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 foreach (DataRow row in referenceDatTable.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string rowOwnerName = _ownerName;
+                    string rowOwnerName = row["taxpayer_name"].ToString();
                     string rowLotNo = row["lot_no"].ToString();
                     string rowArpNo = row["complete_arp_no"].ToString();
                     decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
@@ -226,6 +225,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     if (!string.IsNullOrEmpty(rowRptPaymentPostId))
                     {
                         var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
+
                         #region Penalty
 
                         basicPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
@@ -246,7 +246,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     newRow["total"] = total;
                     newRow["remarks"] = rowClassificationCode;
 
-
                     rowsCount++;
                     int progressBarPercentage = (rowsCount * 100) / recordCount;
                     backgroundWorker1.ReportProgress(progressBarPercentage);
@@ -259,13 +258,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             Invoke((MethodInvoker)delegate
             {
                 LoadReports();
             });
-
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -285,7 +284,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             try
             {
                 if (!backgroundWorker1.IsBusy)
+                {
+                    pbLoadRecords.Value = 0;
                     backgroundWorker1.RunWorkerAsync();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -298,7 +300,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, this, null, null).ShowDialog();
+            _ = new frmTaxPayerList(this).ShowDialog();
         }
     }
 }

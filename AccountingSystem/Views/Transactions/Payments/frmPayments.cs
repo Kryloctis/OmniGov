@@ -176,7 +176,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucCattleOwnership.LoadTaxpayerInfo(taxpayerId);
             ucCattleTransferOfOwnership.LoadOldOwnerInfo(taxpayerId);
             ucBurialPermit.LoadTaxpayerInfo(taxpayerId);
-
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -436,7 +435,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 cattleTransferOfOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
                 cattleTransferOfOwnershipModel.CreatedBy = Helper.UserId;
                 cattleTransferOfOwnershipModel.CreatedAt = DateTime.Now;
-
             }
             catch (Exception ex)
             {
@@ -594,6 +592,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                             case "54":
                                 SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
                                 break;
+
                             case "58":
                                 SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel());
                                 break;
@@ -635,6 +634,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         #endregion Save Payment
 
         #region Current Payment Transaction Identifier
+
         private void tabPageAF51ANDAF57_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "51";
@@ -671,8 +671,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
-        #endregion
-
-
+        #endregion Current Payment Transaction Identifier
     }
 }

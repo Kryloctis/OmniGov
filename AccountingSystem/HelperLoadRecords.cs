@@ -108,59 +108,54 @@ namespace AccountingSystem
 
         public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
-            dataGridView.Rows.Clear();
-            dataGridView.Columns.Clear();
+            dataGridView.DataSource = dataTable;
 
-            DataGridViewCheckBoxColumn dgvIsTaxableCheckBoxCol = new DataGridViewCheckBoxColumn();
-            dgvIsTaxableCheckBoxCol.HeaderText = "Taxable";
-            dgvIsTaxableCheckBoxCol.Name = "is_taxable";
-
-            dataGridView.Columns.Add("real_properties_id", "Real Properties ID");
-            dataGridView.Columns.Add("property_identifier", "Property Identifier");
-            dataGridView.Columns.Add("complete_arp_no", "ARP No.");
-            dataGridView.Columns.Add("property_pin", "PIN");
-            dataGridView.Columns.Add("real_taxpayers_id", "Owner ID");
-            dataGridView.Columns.Add("real_taxpayers_tin", "Owner TIN");
-            dataGridView.Columns.Add("real_taxpayers_name", "Owner Name");
-            dataGridView.Columns.Add("real_taxpayers_contact_info", "Owner Contact Info.");
-            dataGridView.Columns.Add("real_taxpayers_street", "Owner Street");
-            dataGridView.Columns.Add("real_taxpayers_is_active", "Owner Is Active");
-            dataGridView.Columns.Add("taxpayer_tin", "Taxpayer TIN");
-            dataGridView.Columns.Add("taxpayer_name", "Taxpayer Name");
-            dataGridView.Columns.Add("taxpayer_contact_info", "Taxpayer Contact Info");
-            dataGridView.Columns.Add("taxpayer_address", "Taxpayer Address");
-            dataGridView.Columns.Add("real_properties_street", "Street");
-            dataGridView.Columns.Add("real_properties_barangays_id", "Real Property Barangays ID");
-            dataGridView.Columns.Add("real_properties_barangays_code", "Real Property Barangays Name Code");
-            dataGridView.Columns.Add("real_properties_barangays_name", "Real Property Barangays Name");
-            dataGridView.Columns.Add("real_properties_municipalities_id", "Real Property Municipality ID");
-            dataGridView.Columns.Add("real_properties_municipalities_code", "Municipality Code");
-            dataGridView.Columns.Add("real_properties_municipalities_name", "Real Properties Municipality");
-            dataGridView.Columns.Add("real_properties_provinces_id", "Real Properties Province ID");
-            dataGridView.Columns.Add("real_properties_provinces_code", "Real Properties Province Code");
-            dataGridView.Columns.Add("real_properties_provinces_name", "Real Properties Province Name");
-            dataGridView.Columns.Add("real_properties_location", "Location");
-            dataGridView.Columns.Add("classification_codes_id", "Classfication Codes ID");
-            dataGridView.Columns.Add("classification_codes", "Classfication");
-            dataGridView.Columns.Add("classification_codes_name", "Classfication Codes Name");
-            dataGridView.Columns.Add("classification_codes_is_special", "Classfication Codes Is Special");
-            dataGridView.Columns.Add("actual_use_codes_id", "Actual Use Codes ID");
-            dataGridView.Columns.Add("actual_use_codes", "Actual Use");
-            dataGridView.Columns.Add("actual_use_codes_name", "Actual Use Codes Name");
-            dataGridView.Columns.Add("actual_use_codes_is_government", "Actual Use Codes Is Government");
-            dataGridView.Columns.Add("property_kind", "Property Kind");
-            dataGridView.Columns.Add("effectivity_quarter", "Effectivity Quarter");
-            dataGridView.Columns.Add("effectivity_year", "Effectivity Year");
-            dataGridView.Columns.Add("effectivity_quarter_and_year", "Effectivity Quarter and Year");
-            dataGridView.Columns.Add("other_improvements", "Other Improvements");
-            dataGridView.Columns.Add("assessed_value", "Assessed Value");
-            dataGridView.Columns.Add("area", "Area");
-            dataGridView.Columns.Add("lot_no", "Lot No");
-            dataGridView.Columns.Add("gr_year", "GR Year");
-            dataGridView.Columns.Add(dgvIsTaxableCheckBoxCol);
-            dataGridView.Columns.Add("created_at", "Created At");
-            dataGridView.Columns.Add("updated_at", "Updated At");
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["property_pin"].Width = 130;
+            dataGridView.Columns["property_pin"].MinimumWidth = 130;
+            dataGridView.Columns["real_taxpayers_name"].HeaderText = "Taxpayer Name";
+            dataGridView.Columns["real_taxpayers_name"].Width = 150;
+            dataGridView.Columns["real_taxpayers_name"].MinimumWidth = 150;
+            dataGridView.Columns["real_taxpayers_contact_info"].HeaderText = "Taxpayer Contact Info.";
+            dataGridView.Columns["real_taxpayers_contact_info"].Width = 160;
+            dataGridView.Columns["real_taxpayers_contact_info"].MinimumWidth = 160;
+            dataGridView.Columns["real_properties_location"].HeaderText = "Location";
+            dataGridView.Columns["real_properties_location"].Width = 200;
+            dataGridView.Columns["real_properties_location"].MinimumWidth = 200;
+            dataGridView.Columns["classification_codes"].HeaderText = "Classification";
+            dataGridView.Columns["actual_use_codes"].HeaderText = "Actual Use";
+            dataGridView.Columns["property_kind"].HeaderText = "Kind";
+            dataGridView.Columns["property_kind"].Width = 70;
+            dataGridView.Columns["property_kind"].MinimumWidth = 70;
+            dataGridView.Columns["effectivity_quarter_and_year"].HeaderText = "Effectivity Qtr/Year";
+            dataGridView.Columns["other_improvements"].HeaderText = "Other Imp.";
+            dataGridView.Columns["other_improvements"].Width = 120;
+            dataGridView.Columns["other_improvements"].MinimumWidth = 120;
+            dataGridView.Columns["other_improvements"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["other_improvements"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].Width = 120;
+            dataGridView.Columns["assessed_value"].MinimumWidth = 120;
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["area"].HeaderText = "Area";
+            dataGridView.Columns["area"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["area"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["lot_no"].Width = 70;
+            dataGridView.Columns["lot_no"].MinimumWidth = 70;
+            dataGridView.Columns["lot_no"].HeaderText = "Lot No.";
+            dataGridView.Columns["lot_no"].Width = 70;
+            dataGridView.Columns["lot_no"].MinimumWidth = 70;
+            dataGridView.Columns["gr_year"].HeaderText = "GR Year";
+            dataGridView.Columns["gr_year"].Width = 60;
+            dataGridView.Columns["gr_year"].MinimumWidth = 60;
+            dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
+            dataGridView.Columns["is_taxable"].Width = 60;
+            dataGridView.Columns["is_taxable"].MinimumWidth = 60;
+            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            dataGridView.Columns["is_cancelled"].Width = 60;
+            dataGridView.Columns["is_cancelled"].MinimumWidth = 60;
 
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
@@ -198,63 +193,6 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_barangays_name"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
             dataGridView.Columns["real_properties_provinces_name"].Visible = false;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var location = $"{row["real_properties_street"]} {row["real_properties_barangays_name"]} {row["real_properties_municipalities_name"]} {row["real_properties_provinces_name"]}";
-                var effectivityQuarterAndYear = $"{row["effectivity_quarter"]}/{row["effectivity_year"]}";
-
-                dataGridView.Rows.Add(new object[]
-                {
-                    row["real_properties_id"],
-                    row["property_identifier"],
-                    row["complete_arp_no"],
-                    row["property_pin"],
-                    row["real_taxpayers_id"],
-                    row["real_taxpayers_tin"],
-                    row["real_taxpayers_name"],
-                    row["real_taxpayers_contact_info"],
-                    row["real_taxpayers_street"],
-                    row["real_taxpayers_is_active"],
-                    row["taxpayer_tin"],
-                    row["taxpayer_name"],
-                    row["taxpayer_contact_info"],
-                    row["taxpayer_address"],
-                    row["real_properties_street"],
-                    row["real_properties_barangays_id"],
-                    row["real_properties_barangays_code"],
-                    row["real_properties_barangays_name"],
-                    row["real_properties_municipalities_id"],
-                    row["real_properties_municipalities_code"],
-                    row["real_properties_municipalities_name"],
-                    row["real_properties_provinces_id"],
-                    row["real_properties_provinces_code"],
-                    row["real_properties_provinces_name"],
-                    location,
-                    row["classification_codes_id"],
-                    row["classification_codes"],
-                    row["classification_codes_name"],
-                    row["classification_codes_is_special"],
-                    row["actual_use_codes_id"],
-                    row["actual_use_codes"],
-                    row["actual_use_codes_name"],
-                    row["actual_use_codes_is_government"],
-                    row["property_kind"],
-                    row["effectivity_quarter"],
-                    row["effectivity_year"],
-                    effectivityQuarterAndYear,
-                    row["other_improvements"],
-                    row["assessed_value"],
-                    row["area"],
-                    row["lot_no"],
-                    row["gr_year"],
-                    row["is_taxable"],
-                    row["created_at"],
-                    row["updated_at"],
-                });
-            }
-
-            dataGridView.ClearSelection();
         }
 
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
@@ -295,13 +233,10 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["taxpayers_id"].Visible = false;
             dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
-            dataGridView.Columns["taxpayer_type"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].Visible = false;
             dataGridView.Columns["taxpayers_contact_info"].Visible = false;
-            dataGridView.Columns["taxpayers_street"].Visible = false;
-            dataGridView.Columns["taxpayers_barangay"].HeaderText = "Barangay";
+            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
-            dataGridView.Columns["taxpayers_municipality"].HeaderText = "Municipality";
-            dataGridView.Columns["taxpayers_province"].HeaderText = "Province";
         }
 
         public static void DatagridViewPaymentTaxpayerTaxDues(DataGridView dataGridView, DataTable dataTable)
@@ -833,7 +768,6 @@ namespace AccountingSystem
             datagrid.Columns["issued_by"].MinimumWidth = 150;
         }
 
-
         #endregion ReceiptsIssued
 
         #region Returned Receipts
@@ -929,7 +863,6 @@ namespace AccountingSystem
             datagrid.Columns["officer"].Width = 150;
             datagrid.Columns["officer"].MinimumWidth = 150;
             datagrid.Columns["officer"].HeaderText = "Issued By";
-
         }
 
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
@@ -940,7 +873,6 @@ namespace AccountingSystem
 
             if (combobox.Items.Count == 0)
                 combobox.DropDownHeight = 106;
-
         }
 
         #endregion Receipts

@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmEditRealProperties : Form
     {
-        private ucRealProperties _ucRealProperties;
+        private ucRealProperties uc;
         private int _propertyId;
         private int _taxpayerId;
         private frmRealProperties _frmRealProperties;
@@ -18,32 +18,37 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _frmRealProperties = frmRealProperties;
             _propertyId = frmRealProperties.realPropertiesID;
             _taxpayerId = frmRealProperties.taxpayerID;
-            _ucRealProperties = ucRealProperties1;
+            uc = ucRealProperties1;
         }
 
         private void frmEditRealProperties_Load(object sender, EventArgs e)
         {
-            LoadSelectedProperty();
-            LoadTaxpayer();
+            try
+            {
+                uc._form = this;
+                LoadSelectedProperty();
+                LoadTaxpayer();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadSelectedProperty()
         {
             var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(_propertyId);
 
-            _ucRealProperties.txtArpNo.Text = dictRealProperties["complete_arp_no"];
-            _ucRealProperties.txtPropertyPin.Text = dictRealProperties["property_pin"];
-            _ucRealProperties.cmbxBarangays.SelectedValue = dictRealProperties["real_properties_barangays_id"];
-            _ucRealProperties.cmbxClassification.SelectedValue = dictRealProperties["classification_codes_id"];
-            _ucRealProperties.cmbxActualUse.SelectedValue = dictRealProperties["actual_use_codes_id"];
-            _ucRealProperties.cmbxPropertyKind.SelectedText = dictRealProperties["property_kind"];
-            _ucRealProperties.nudEffectivityQuarter.Text = dictRealProperties["effectivity_quarter"];
-            _ucRealProperties.nudEffectivityYear.Text = dictRealProperties["effectivity_year"];
-            _ucRealProperties.nudAssessedValue.Value = Convert.ToDecimal(dictRealProperties["assessed_value"]);
-            _ucRealProperties.nudGrYear.Text = dictRealProperties["gr_year"];
-            _ucRealProperties.nudOtherImprv.Text = dictRealProperties["other_improvements"];
-            _ucRealProperties.nudArea.Text = dictRealProperties["area"];
-            _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
+            uc.txtArpNo.Text = dictRealProperties["complete_arp_no"];
+            uc.txtPropertyPin.Text = dictRealProperties["property_pin"];
+            uc.cmbxBarangays.SelectedValue = dictRealProperties["real_properties_barangays_id"];
+            uc.cmbxClassification.SelectedValue = dictRealProperties["classification_codes_id"];
+            uc.cmbxActualUse.SelectedValue = dictRealProperties["actual_use_codes_id"];
+            uc.cmbxPropertyKind.SelectedText = dictRealProperties["property_kind"];
+            uc.nudEffectivityQuarter.Text = dictRealProperties["effectivity_quarter"];
+            uc.nudEffectivityYear.Text = dictRealProperties["effectivity_year"];
+            uc.nudAssessedValue.Value = Convert.ToDecimal(dictRealProperties["assessed_value"]);
+            uc.nudGrYear.Text = dictRealProperties["gr_year"];
+            uc.nudOtherImprv.Text = dictRealProperties["other_improvements"];
+            uc.nudArea.Text = dictRealProperties["area"];
+            uc.txtLotNo.Text = dictRealProperties["lot_no"];
         }
 
         private void LoadTaxpayer()
@@ -52,65 +57,61 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             var address = $"{dictRealProperties["street"]}, {dictRealProperties["barangay"]}, {dictRealProperties["municipality"]} {dictRealProperties["province"]}";
 
-            _ucRealProperties.txtTaxpayers.Text = dictRealProperties["name"];
-            _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type_id"];
-            _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["tin"];
-            _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["contact_info"];
-            _ucRealProperties.txtTaxpayerAddress.Text = address;
+            uc.txtTaxpayers.Text = dictRealProperties["name"];
+            uc.txtTaxpayerType.Text = dictRealProperties["taxpayer_type_id"];
+            uc.txtTaxpayerTIN.Text = dictRealProperties["tin"];
+            uc.txtTaxpayerContact.Text = dictRealProperties["contact_info"];
+            uc.txtTaxpayerAddress.Text = address;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Real property has been updated.");
-                _frmRealProperties.LoadAllProperties();
-                Close();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Real property has been updated.");
+                    _frmRealProperties.LoadProperties();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!_ucRealProperties.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucRealProperties.GetFormError());
-                    return false;
-                }
-
-                var realPropertiesModel = new RealPropertiesModel()
-                {
-                    Id = _propertyId,
-                    RealTaxpayersId = _taxpayerId,
-                    CompleteArpNo = _ucRealProperties.txtArpNo.Text,
-                    ClassificationCodesId = Convert.ToInt32(_ucRealProperties.cmbxClassification.SelectedValue),
-                    ActualUseCodesId = Convert.ToInt32(_ucRealProperties.cmbxActualUse.SelectedValue),
-                    BarangaysId = Convert.ToInt32(_ucRealProperties.cmbxBarangays.SelectedValue),
-                    PropertyIdentifier = _ucRealProperties.propertyIdentifier,
-                    TaxpayerName = _ucRealProperties.txtTaxpayers.Text,
-                    TaxpayerAddress = _ucRealProperties.txtTaxpayerAddress.Text,
-                    PropertyPin = _ucRealProperties.txtPropertyPin.Text,
-                    PropertyKind = _ucRealProperties.cmbxPropertyKind.Text,
-                    EffectivityQuarter = Convert.ToInt32(_ucRealProperties.nudEffectivityQuarter.Value),
-                    EffectivityYear = Convert.ToInt32(_ucRealProperties.nudEffectivityYear.Value),
-                    AssessedValue = _ucRealProperties.nudAssessedValue.Value,
-                    GrYear = Convert.ToInt32(_ucRealProperties.nudGrYear.Value),
-                    OtherImprovements = _ucRealProperties.nudOtherImprv.Value,
-                    Area = Convert.ToDecimal(_ucRealProperties.nudArea.Value),
-                    LotNo = _ucRealProperties.txtLotNo.Text,
-                    IsTaxable = _ucRealProperties.chckTaxable.Checked,
-                    IsCancelled = _ucRealProperties.chckCancelled.Checked,
-                    CreatedBy = Helper.UserId
-                };
-
-                return AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
+                Helper.MessageBoxError(uc.GetFormError());
+                return false;
             }
-            catch (Exception ex)
+
+            var realPropertiesModel = new RealPropertiesModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = _propertyId,
+                RealTaxpayersId = _taxpayerId,
+                CompleteArpNo = uc.txtArpNo.Text,
+                ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
+                ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
+                BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
+                PropertyIdentifier = uc.propertyIdentifier,
+                TaxpayerName = uc.txtTaxpayers.Text,
+                TaxpayerAddress = uc.txtTaxpayerAddress.Text,
+                PropertyPin = uc.txtPropertyPin.Text,
+                PropertyKind = uc.cmbxPropertyKind.Text,
+                EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
+                EffectivityYear = Convert.ToInt32(uc.nudEffectivityYear.Value),
+                AssessedValue = uc.nudAssessedValue.Value,
+                GrYear = Convert.ToInt32(uc.nudGrYear.Value),
+                OtherImprovements = uc.nudOtherImprv.Value,
+                Area = Convert.ToDecimal(uc.nudArea.Value),
+                LotNo = uc.txtLotNo.Text,
+                IsTaxable = uc.chckTaxable.Checked,
+                IsCancelled = uc.chckCancelled.Checked,
+                CreatedBy = Helper.UserId
+            };
+
+            return AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
         }
     }
 }

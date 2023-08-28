@@ -28,25 +28,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadTaxPayersType()
         {
-            try
-            {
-                var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
+            var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
 
-                cmbxTaxPayerType.DataSource = dtTaxpayerType;
-                cmbxTaxPayerType.ValueMember = "id";
-                cmbxTaxPayerType.DisplayMember = "taxpayer_type";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            cmbxTaxPayerType.DataSource = dtTaxpayerType;
+            cmbxTaxPayerType.ValueMember = "id";
+            cmbxTaxPayerType.DisplayMember = "taxpayer_type";
         }
 
         internal void ResetForm()
         {
-            if (isEdit)
-            {
-                taxPayerId = 0;
-                isEdit = false;
-            }
-
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
@@ -55,14 +45,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtMunicipality.Clear();
             txtProvince.Clear();
             chckIsActive.Checked = true;
-            LoadTaxPayersType();
+            isEdit = false;
+            taxPayerId = 0;
         }
 
         private void ucTaxPayers_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadTaxPayersType();
+                try
+                {
+                    LoadTaxPayersType();
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
         }
 
