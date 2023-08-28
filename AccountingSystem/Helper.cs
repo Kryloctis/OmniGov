@@ -987,7 +987,7 @@ namespace AccountingSystem
             }
         }
 
-        public static void EnableDisableToolStripMenuItems(DataGridView dgv, ToolStripMenuItem tsBtnEdit, ToolStripMenuItem tsBtnDelete)
+        public static void EnableDisableToolStripMenuItems(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
             if (SelectedRows == 1)

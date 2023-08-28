@@ -28,252 +28,266 @@
         /// </summary>
         private void InitializeComponent()
         {
-            toolStrip = new System.Windows.Forms.ToolStrip();
-            btnAdd = new System.Windows.Forms.ToolStripButton();
-            btnEdit = new System.Windows.Forms.ToolStripButton();
-            btnDelete = new System.Windows.Forms.ToolStripButton();
-            panel1 = new System.Windows.Forms.Panel();
-            dgRealProperties = new System.Windows.Forms.DataGridView();
-            cbxShowCanclled = new System.Windows.Forms.CheckBox();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            panel2 = new System.Windows.Forms.Panel();
-            pbLoadRecords = new System.Windows.Forms.ProgressBar();
-            txtSearch = new System.Windows.Forms.TextBox();
-            btnSearch = new System.Windows.Forms.Button();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            toolStrip.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgRealProperties).BeginInit();
-            statusStrip1.SuspendLayout();
-            panel2.SuspendLayout();
-            SuspendLayout();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgRealProperties = new System.Windows.Forms.DataGridView();
+            this.cbxShowCanclled = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            this.toolStrip.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRealProperties)).BeginInit();
+            this.statusStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
             // 
             // toolStrip
             // 
-            toolStrip.BackColor = System.Drawing.SystemColors.Control;
-            toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
-            toolStrip.Location = new System.Drawing.Point(0, 0);
-            toolStrip.Name = "toolStrip";
-            toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            toolStrip.Size = new System.Drawing.Size(1016, 50);
-            toolStrip.TabIndex = 8;
-            toolStrip.Text = "toolStrip1";
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAdd,
+            this.btnEdit,
+            this.btnDelete});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip.Size = new System.Drawing.Size(1016, 50);
+            this.toolStrip.TabIndex = 8;
+            this.toolStrip.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            btnAdd.Image = Properties.Resources.button_rounded_add_20px;
-            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(39, 39);
-            btnAdd.Text = "&Add..";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnAdd.ToolTipText = "Add";
-            btnAdd.Click += btnAdd_Click;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(39, 39);
+            this.btnAdd.Text = "&Add..";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.ToolTipText = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
-            btnEdit.Enabled = false;
-            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(37, 39);
-            btnEdit.Text = "&Edit..";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnEdit.Click += btnEdit_Click;
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(37, 39);
+            this.btnEdit.Text = "&Edit..";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
-            btnDelete.Enabled = false;
-            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
-            btnDelete.Text = "&Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnDelete.Click += btnDelete_Click;
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 39);
+            this.btnDelete.Text = "&Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // panel1
             // 
-            panel1.Controls.Add(dgRealProperties);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 78);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1016, 484);
-            panel1.TabIndex = 12;
+            this.panel1.Controls.Add(this.dgRealProperties);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 83);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1016, 479);
+            this.panel1.TabIndex = 12;
             // 
             // dgRealProperties
             // 
-            dgRealProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgRealProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgRealProperties.Location = new System.Drawing.Point(4, 4);
-            dgRealProperties.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            dgRealProperties.Name = "dgRealProperties";
-            dgRealProperties.RowHeadersWidth = 51;
-            dgRealProperties.RowTemplate.Height = 29;
-            dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgRealProperties.Size = new System.Drawing.Size(1008, 476);
-            dgRealProperties.TabIndex = 9;
-            dgRealProperties.SelectionChanged += dgRealProperties_SelectionChanged;
+            this.dgRealProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRealProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRealProperties.Location = new System.Drawing.Point(4, 4);
+            this.dgRealProperties.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgRealProperties.Name = "dgRealProperties";
+            this.dgRealProperties.RowHeadersWidth = 51;
+            this.dgRealProperties.RowTemplate.Height = 29;
+            this.dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgRealProperties.Size = new System.Drawing.Size(1008, 471);
+            this.dgRealProperties.TabIndex = 9;
+            this.dgRealProperties.SelectionChanged += new System.EventHandler(this.dgRealProperties_SelectionChanged);
             // 
             // cbxShowCanclled
             // 
-            cbxShowCanclled.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cbxShowCanclled.AutoSize = true;
-            cbxShowCanclled.Location = new System.Drawing.Point(905, 4);
-            cbxShowCanclled.Name = "cbxShowCanclled";
-            cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
-            cbxShowCanclled.TabIndex = 10;
-            cbxShowCanclled.Text = "Show cancelled";
-            cbxShowCanclled.UseVisualStyleBackColor = true;
-            cbxShowCanclled.CheckedChanged += cbxShowCanclled_CheckedChanged;
+            this.cbxShowCanclled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxShowCanclled.AutoSize = true;
+            this.cbxShowCanclled.Location = new System.Drawing.Point(905, 4);
+            this.cbxShowCanclled.Name = "cbxShowCanclled";
+            this.cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
+            this.cbxShowCanclled.TabIndex = 10;
+            this.cbxShowCanclled.Text = "Show cancelled";
+            this.cbxShowCanclled.UseVisualStyleBackColor = true;
+            this.cbxShowCanclled.CheckedChanged += new System.EventHandler(this.cbxShowCanclled_CheckedChanged);
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabelRecordCount, toolStripStatusLabel2, toolStripStatusLabel3, toolStripStatusLabelCreatedAt, toolStripStatusLabel5, toolStripStatusLabel6, toolStripStatusLabelUpdatedAt });
-            statusStrip1.Location = new System.Drawing.Point(0, 562);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(1016, 22);
-            statusStrip1.TabIndex = 13;
-            statusStrip1.Text = "statusStrip1";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelRecordCount,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabelCreatedAt,
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabelUpdatedAt});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 562);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1016, 22);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
-            toolStripStatusLabel1.Text = "Records: ";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
+            this.toolStripStatusLabel1.Text = "Records: ";
             // 
             // toolStripStatusLabelRecordCount
             // 
-            toolStripStatusLabelRecordCount.Name = "toolStripStatusLabelRecordCount";
-            toolStripStatusLabelRecordCount.Size = new System.Drawing.Size(13, 17);
-            toolStripStatusLabelRecordCount.Text = "0";
+            this.toolStripStatusLabelRecordCount.Name = "toolStripStatusLabelRecordCount";
+            this.toolStripStatusLabelRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.toolStripStatusLabelRecordCount.Text = "0";
             // 
             // toolStripStatusLabel2
             // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(761, 17);
-            toolStripStatusLabel2.Spring = true;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(761, 17);
+            this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
             // 
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
-            toolStripStatusLabel3.Text = "Created at: ";
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel3.Text = "Created at: ";
             // 
             // toolStripStatusLabelCreatedAt
             // 
-            toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
-            toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
-            toolStripStatusLabelCreatedAt.Text = "-";
+            this.toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            this.toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabelCreatedAt.Text = "-";
             // 
             // toolStripStatusLabel5
             // 
-            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            toolStripStatusLabel5.Text = "|";
-            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel6
             // 
-            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
-            toolStripStatusLabel6.Text = "Updated at: ";
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
+            this.toolStripStatusLabel6.Text = "Updated at: ";
             // 
             // toolStripStatusLabelUpdatedAt
             // 
-            toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
-            toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
-            toolStripStatusLabelUpdatedAt.Text = "-";
+            this.toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
+            this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabelUpdatedAt.Text = "-";
             // 
             // panel2
             // 
-            panel2.Controls.Add(pbLoadRecords);
-            panel2.Controls.Add(cbxShowCanclled);
-            panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            panel2.Location = new System.Drawing.Point(0, 50);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(1016, 28);
-            panel2.TabIndex = 11;
-            // 
-            // pbLoadRecords
-            // 
-            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Bottom;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 23);
-            pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(1016, 5);
-            pbLoadRecords.TabIndex = 24;
+            this.panel2.Controls.Add(this.cbxShowCanclled);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 50);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1016, 28);
+            this.panel2.TabIndex = 11;
             // 
             // txtSearch
             // 
-            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Location = new System.Drawing.Point(729, 14);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 23);
-            txtSearch.TabIndex = 15;
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(729, 14);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(200, 23);
+            this.txtSearch.TabIndex = 15;
             // 
             // btnSearch
             // 
-            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSearch.Location = new System.Drawing.Point(935, 14);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(75, 23);
-            btnSearch.TabIndex = 14;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(935, 14);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 14;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // backgroundWorker1
             // 
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // pbLoadRecords
+            // 
+            this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbLoadRecords.Location = new System.Drawing.Point(0, 78);
+            this.pbLoadRecords.Name = "pbLoadRecords";
+            this.pbLoadRecords.Size = new System.Drawing.Size(1016, 5);
+            this.pbLoadRecords.TabIndex = 25;
             // 
             // frmRealProperties
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1016, 584);
-            Controls.Add(txtSearch);
-            Controls.Add(btnSearch);
-            Controls.Add(panel1);
-            Controls.Add(panel2);
-            Controls.Add(toolStrip);
-            Controls.Add(statusStrip1);
-            MinimizeBox = false;
-            Name = "frmRealProperties";
-            ShowInTaskbar = false;
-            SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Real Properties";
-            Load += frmRealProperties_Load;
-            toolStrip.ResumeLayout(false);
-            toolStrip.PerformLayout();
-            panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgRealProperties).EndInit();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AcceptButton = this.btnSearch;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1016, 584);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pbLoadRecords);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.statusStrip1);
+            this.MinimizeBox = false;
+            this.Name = "frmRealProperties";
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Real Properties";
+            this.Load += new System.EventHandler(this.frmRealProperties_Load);
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgRealProperties)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -295,9 +309,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
         private System.Windows.Forms.CheckBox cbxShowCanclled;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }

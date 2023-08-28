@@ -1,14 +1,6 @@
-﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
-using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+﻿using AccountingSystem.Views.Shared;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
@@ -42,10 +34,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             }
         }
 
-
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, null, _frmPayments).ShowDialog();
+            _ = new frmTaxPayerList(_frmPayments).ShowDialog();
         }
 
         private void linkSearch_Click(object sender, EventArgs e)
@@ -93,6 +84,4 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             panel1Control.BringToFront();
         }
     }
-
-
 }
