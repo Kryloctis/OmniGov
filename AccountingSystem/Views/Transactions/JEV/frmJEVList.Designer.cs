@@ -51,6 +51,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSelect = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.dgJEV = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.pbLoadRecords = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.panel2.SuspendLayout();
@@ -304,10 +306,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.panel7.Controls.Add(this.dgJEV);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(0, 29);
+            this.panel7.Location = new System.Drawing.Point(0, 34);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(4);
-            this.panel7.Size = new System.Drawing.Size(1316, 468);
+            this.panel7.Size = new System.Drawing.Size(1316, 463);
             this.panel7.TabIndex = 9;
             // 
             // dgJEV
@@ -318,11 +320,24 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgJEV.Margin = new System.Windows.Forms.Padding(1);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(1308, 460);
+            this.dgJEV.Size = new System.Drawing.Size(1308, 455);
             this.dgJEV.TabIndex = 7;
             this.dgJEV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgJEV_CellDoubleClick);
             this.dgJEV.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgJEV_ColumnAdded);
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            // 
+            // pbLoadRecords
+            // 
+            this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbLoadRecords.Location = new System.Drawing.Point(0, 29);
+            this.pbLoadRecords.Name = "pbLoadRecords";
+            this.pbLoadRecords.Size = new System.Drawing.Size(1316, 5);
+            this.pbLoadRecords.TabIndex = 24;
             // 
             // frmJEVList
             // 
@@ -332,6 +347,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1316, 525);
             this.Controls.Add(this.panel7);
+            this.Controls.Add(this.pbLoadRecords);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
@@ -376,5 +392,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.DataGridView dgJEV;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }
