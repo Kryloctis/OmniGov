@@ -14,8 +14,6 @@ namespace ACC.Data
         private readonly string tableRCIObligations = "rci_obligations";
         private readonly string tableRCIDeductions = "rci_deductions";
 
-
-
         private readonly string viewTableName = "view_rci";
 
         public RCIRepository(IAccGenericCommands dbGenericCommands)
@@ -108,7 +106,6 @@ namespace ACC.Data
 
             string query = $"UPDATE {tableName} SET funds_id = @funds_id, function_program_project_id = @function_program_project_id, dv_no = @dv_no, payee = @payee, nature_of_payment = @nature_of_payment WHERE id = @id";
 
-
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
@@ -164,7 +161,6 @@ namespace ACC.Data
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
-
         }
 
         public DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountsID)
@@ -178,7 +174,6 @@ namespace ACC.Data
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
-
         }
 
         public bool SaveRCIDVObligations(int rciId, string obligationNo, DateTime dateEntry)
@@ -217,7 +212,7 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            string query = $"SELECT id, cheques_id, cheque_no, cheque_date, amount, bank_accounts_id, bank_account_no, bank_id, bank_name, fund_id, fund_code, fund_name, dv_no, payee, nature_of_payment, obligation_no, date_entry, fpp_id, fpp_code, total_deductions, created_at, updated_at FROM {viewTableName}";
+            string query = $"SELECT * FROM {viewTableName}";
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.Fill(query, dtRCI);
@@ -230,7 +225,7 @@ namespace ACC.Data
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"},
             };
 
-            string query = $"SELECT id, cheques_id, cheque_no, cheque_date, amount, bank_accounts_id, bank_account_no, bank_id, bank_name, fund_id, fund_code, fund_name, dv_no, payee, nature_of_payment, obligation_no, date_entry, fpp_id, fpp_code, total_deductions, created_at, updated_at FROM {viewTableName} WHERE cheque_no LIKE @search_text OR bank_account_no LIKE @search_text OR bank_name LIKE @search_text OR dv_no LIKE @search_text OR obligation_no LIKE @search_text OR payee LIKE @search_text";
+            string query = $"SELECT * FROM {viewTableName} WHERE cheque_no LIKE @search_text OR bank_account_no LIKE @search_text OR bank_name LIKE @search_text OR dv_no LIKE @search_text OR obligation_no LIKE @search_text OR payee LIKE @search_text";
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
