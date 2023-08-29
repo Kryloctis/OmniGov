@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -40,14 +41,13 @@ namespace AccountingSystem.Views.Transactions.RCI
                 new DataColumn("cheque_date", typeof(DateTime)),
                 new DataColumn("bank_account_no", typeof(string)),
                 new DataColumn("bank_name", typeof(string)),
-                new DataColumn("fund_code", typeof(int)),
-                new DataColumn("fund_name", typeof(string)),
+                new DataColumn("fund", typeof(string)),
                 new DataColumn("dv_no", typeof(string)),
                 new DataColumn("payee", typeof(string)),
                 new DataColumn("nature_of_payment", typeof(string)),
                 new DataColumn("obligation_no", typeof(string)),
                 new DataColumn("date_entry", typeof(string)),
-                new DataColumn("fpp_code", typeof(string)),
+                new DataColumn("fpp", typeof(string)),
                 new DataColumn("total_deductions", typeof(decimal)),
                 new DataColumn("amount", typeof(decimal)),
                 new DataColumn("created_at", typeof(string)),
@@ -56,14 +56,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             return dataColumn;
         }
 
-        internal void LoadRecords()
+        private DataTable InitializeRciDataTable(string searchText)
         {
             DataTable dtRCI = new DataTable();
             DataTable dtRCIFromDB;
 
             int rowCount = 0;
             int recordsCount;
-            string searchText = txtSearch.Text.Trim();
             dtRCI.Columns.AddRange(RCIDataColumns());
 
             if (searchText.Length > 2)
@@ -95,6 +94,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 string natureOfPayment = row["nature_of_payment"].ToString();
                 string obligationNo = row["obligation_no"].ToString();
                 string fppCode = row["fpp_code"].ToString();
+                string fppName = row["fpp_name"].ToString();
                 decimal totalDeduction = row.IsNull("total_deductions") ? 0 : Convert.ToDecimal(row["total_deductions"]);
                 decimal amount = Convert.ToDecimal(row["amount"]);
                 string createdAt = row["created_at"].ToString();
@@ -111,13 +111,12 @@ namespace AccountingSystem.Views.Transactions.RCI
                 newRow["cheque_date"] = checkDate;
                 newRow["bank_account_no"] = bankAccountNo;
                 newRow["bank_name"] = bankName;
-                newRow["fund_code"] = fundCode;
-                newRow["fund_name"] = fundName;
+                newRow["fund"] = $"{fundCode} - {fundName}";
                 newRow["dv_no"] = dvNo;
                 newRow["payee"] = payee;
                 newRow["nature_of_payment"] = natureOfPayment;
                 newRow["obligation_no"] = obligationNo;
-                newRow["fpp_code"] = fppCode;
+                newRow["fpp"] = $"{fppCode} - {fppName}";
                 newRow["total_deductions"] = totalDeduction;
                 newRow["amount"] = amount;
                 newRow["created_at"] = createdAt;
@@ -129,8 +128,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 dtRCI.Rows.Add(newRow);
             }
-
-            HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
+            return dtRCI;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -212,7 +210,8 @@ namespace AccountingSystem.Views.Transactions.RCI
                 if (!backgroundWorker1.IsBusy)
                 {
                     pbLoadRecords.Value = 0;
-                    backgroundWorker1.RunWorkerAsync();
+                    string searchText = txtSearch.Text.Trim();
+                    backgroundWorker1.RunWorkerAsync(searchText);
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -223,11 +222,14 @@ namespace AccountingSystem.Views.Transactions.RCI
             LoadRCI();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            string searchText = e.Argument as string;
+            var dtRci = InitializeRciDataTable(searchText);
+
             Invoke((MethodInvoker)delegate
             {
-                LoadRecords();
+                HelperLoadRecords.RCIDatagridView(dtRci, dgRCI);
             });
         }
 
@@ -235,12 +237,10 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             SetToolStripStatusData();
         }
-
-
-
     }
 }
