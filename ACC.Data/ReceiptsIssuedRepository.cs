@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Utilities.Date;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,7 +27,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
             using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
@@ -486,6 +485,38 @@ namespace ACC.Data
                 return false;
 
             return true;
+        }
+
+        public Dictionary<string, string> GetViewRecordReceiptId(int receiptID)
+        {
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@receipts_id", DbType.Int32, receiptID},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE receipts_id = @receipts_id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
+                record.Add("quantity", reader.Rows[0]["quantity"].ToString());
+                record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
+                record.Add("collecting_officer_id", reader.Rows[0]["collecting_officer_id"].ToString());
+                record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
+                record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
+                record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());
+                record.Add("date_issued", reader.Rows[0]["date_issued"].ToString());
+                record.Add("receipt_issued_from", reader.Rows[0]["receipt_issued_from"].ToString());
+                record.Add("receipt_issued_to", reader.Rows[0]["receipt_issued_to"].ToString());
+            }
+
+            return record;
         }
     }
 }

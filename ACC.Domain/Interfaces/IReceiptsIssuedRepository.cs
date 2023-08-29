@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -21,5 +22,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsBySearch(DateTime dateIssued, string searchText);
         bool ReceiptNumberInRange(int receiptId, int receiptNumber);
         bool ReceiptNumberInRange(int receiptId, int receiptNumber, int receiptIssuedId);
+        Dictionary<string, string> GetViewRecordReceiptId(int receiptID);
     }
 }

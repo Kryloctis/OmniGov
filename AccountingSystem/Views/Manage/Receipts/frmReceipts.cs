@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void SetToolStripStatusData()
         {
             var quantity = (from DataGridViewRow row in dgReceipts.Rows
-                            where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
+                            where !string.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
                             select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
             lblRecordCount.Text = dgReceipts.Rows.Count.ToString();
@@ -170,7 +170,17 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgReceipts.Rows.Count == 0)
+                return;
+
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
+
+            if (dgReceipts.SelectedRows.Count != 0)
+            {
+                int receiptId = Convert.ToInt32(dgReceipts.SelectedRows[0].Cells["id"].Value);
+                int totalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+                btnDelete.Enabled = totalIssued == 0;
+            }
         }
 
         private void OnLoad()
@@ -183,15 +193,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             try
             {
                 OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadReceipts();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

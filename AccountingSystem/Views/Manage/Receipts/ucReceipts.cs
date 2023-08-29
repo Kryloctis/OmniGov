@@ -231,10 +231,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 ControlsConfiguration();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadAccountableForms()
