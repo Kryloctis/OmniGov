@@ -1,14 +1,5 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Manage.TaxPayers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.OtherPaymentRates
@@ -56,7 +47,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             if (Update())
             {
                 Helper.MessageBoxSuccess("Other payment rate has been updated.");
-                _frmOtherPaymentRates.LoadOtherPaymentRates();
+                _frmOtherPaymentRates.RunBackgroundWorker();
                 _ucOtherPaymentRates.ResetForm();
                 Close();
             }

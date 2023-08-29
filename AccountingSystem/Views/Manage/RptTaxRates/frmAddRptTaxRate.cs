@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             if (Save())
             {
                 Helper.MessageBoxSuccess("Tax Rate has been saved.");
-                _frmRptTaxRates.LoadTaxRates();
+                _frmRptTaxRates.RunBackgroundWorker();
                 uc.ResetForm();
             }
         }

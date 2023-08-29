@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             if (Save())
             {
                 Helper.MessageBoxSuccess("Tax Rate has been updated.");
-                _frmRptTaxRates.LoadTaxRates();
+                _frmRptTaxRates.RunBackgroundWorker();
                 Close();
             }
         }
