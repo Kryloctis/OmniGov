@@ -18,31 +18,30 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        private void UpdateRecordCount(DataGridView dataGridView)
+        private DataColumn[] DataColumnsPenalties()
         {
-            int recordCount = dataGridView.Rows.Count;
-            lblRecordCount.Text = recordCount.ToString();
+            return new DataColumn[]
+            {
+                new DataColumn(Name  = "id", typeof(int)),
+                new DataColumn(Name =  "description", typeof(string)),
+                new DataColumn(Name = "frequency", typeof(string)),
+                new DataColumn(Name = "rate", typeof(decimal))
+            };
         }
 
-
-        internal void LoadPenalties()
+        private DataTable DataTablePenalties(string searchText)
         {
-            string searchText = txtSearch.Text.Trim();
             DataTable dtRptPenalties;
             var dataTable = new DataTable();
-
-            dataTable.Columns.Add("id", typeof(int));
-            dataTable.Columns.Add("description", typeof(string));
-            dataTable.Columns.Add("frequency", typeof(string));
-            dataTable.Columns.Add("rate", typeof(decimal));
+            dataTable.Columns.AddRange(DataColumnsPenalties());
 
             if (searchText.Length < 2)
                 dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecords();
             else
                 dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
 
-            int recordCount = dtRptPenalties.Rows.Count;
-            int rowCount = 0;
+            int totalProgressCount = dtRptPenalties.Rows.Count;
+            int progressCount = 0;
 
             foreach (DataRow row in dtRptPenalties.Rows)
             {
@@ -51,15 +50,12 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 string frequency = row["frequency"].ToString();
                 decimal rate = Convert.ToDecimal(row["rate"]);
 
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordCount;
+                progressCount++;
+                int progressBarPercentage = (progressCount * 100) / totalProgressCount;
                 dataTable.Rows.Add(id, description, frequency, rate);
-
                 backgroundWorker1.ReportProgress(progressBarPercentage);
             }
-
-            HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
-            UpdateRecordCount(dataGridView1);
+            return dataTable;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -67,42 +63,34 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             _ = new frmAddRptPenalty(this).ShowDialog();
         }
 
-        private void ShowEditForm()
-        {
-            int rowIndex = dataGridView1.CurrentCell.RowIndex;
-            int penaltiesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
-
-            _ = new frmEditRptPenalties(penaltiesId, this).ShowDialog();
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditForm();
+            try
+            {
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                int penaltiesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+
+                _ = new frmEditRptPenalties(penaltiesId, this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete(out int deletedCount)
         {
-            try
-            {
-                var rptPenalitiesModelList = new List<RptPenaltiesModel>();
-                int rowCount = dataGridView1.SelectedRows.Count;
+            var rptPenalitiesModelList = new List<RptPenaltiesModel>();
+            int rowCount = dataGridView1.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+            if (Helper.MessageBoxConfirmDelete(rowCount))
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                    {
-                        int penaltiesId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new RptPenaltiesModel() { Id = penaltiesId };
-                        rptPenalitiesModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
+                    int penaltiesId = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new RptPenaltiesModel() { Id = penaltiesId };
+                    rptPenalitiesModelList.Add(model);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+
+                deletedCount = rowCount;
+                return AccFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
             }
 
             deletedCount = 0;
@@ -111,64 +99,71 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (Delete(out deletedRecordCount))
+            try
             {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                RunBackgroundWorker();
+                int deletedRecordCount;
+
+                if (Delete(out deletedRecordCount))
+                {
+                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                    LoadPenalties();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            try
+            {
+                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRptPenalties_Load(object sender, EventArgs e)
         {
-            RunBackgroundWorker();
+            LoadPenalties();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RunBackgroundWorker();
-        }
-
-        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                contextMenuStrip1.Show(Cursor.Position);
-            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            RunBackgroundWorker();
+            LoadPenalties();
         }
 
-        internal void RunBackgroundWorker()
+        internal void LoadPenalties()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                string searchText = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchText);
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            var searchText = e.Argument as string;
+            var dataTable = DataTablePenalties(searchText);
+
             Invoke((MethodInvoker)delegate
             {
-                LoadPenalties();
+                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
             });
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            int recordCount = dataGridView1.RowCount;
+            lblRecordCount.Text = recordCount.ToString();
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }
