@@ -1,7 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
-using DocumentFormat.OpenXml.Vml.Office;
+﻿using ACC.Domain.Models;
 using System;
 using System.Data;
 using System.Transactions;
@@ -11,13 +8,13 @@ namespace AccountingSystem.Views.Transactions.RCI
 {
     public partial class frmRCIAdd : Form
     {
-        private frmRCI _frmRCI;
+        private readonly frmRCI _frmRCI;
         private readonly ucRCI uc;
 
-        public frmRCIAdd(frmRCI frmrci)
+        public frmRCIAdd(frmRCI frmRCI)
         {
             InitializeComponent();
-            _frmRCI = frmrci;
+            _frmRCI = frmRCI;
             uc = ucrci1;
         }
 
@@ -29,31 +26,73 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private bool SaveCheque()
         {
+            int bankAccountId = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue);
+            string chequeNo = uc.txtCheckNo.Text.Trim();
+            DateTime chequeDate = uc.dtCheckDate.Value;
+            decimal amount = uc.nudNetAmount.Value;
+
             var chequeModel = new ChequesModel()
             {
-                BankAccountsId = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
-                ChequeNo = uc.txtCheckNo.Text,
-                ChequeDate = Convert.ToDateTime(uc.dtCheckDate.Value),
-                Amount = uc.nudNetAmount.Value,
+                BankAccountsId = bankAccountId,
+                ChequeNo = chequeNo,
+                ChequeDate = chequeDate,
+                Amount = amount
             };
 
             return AccFactory.ChequesRepository().Insert(chequeModel);
         }
+
         private bool SaveRCI()
         {
+            var chequeID = AccFactory.ChequesRepository().GetLastInsertId();
+            int fundID = Convert.ToInt32(uc.cmbFund.SelectedValue);
+            int fpp = Convert.ToInt32(uc.cmbFPP.SelectedValue);
+            string dVNo = uc.txtDVNo.Text.Trim();
+            string payee = uc.txtPayee.Text.Trim();
+            string natureOfPayment = uc.txtNatureOfPayment.Text.Trim();
+
             var RCIModel = new RCIModel()
             {
-                ChequeID = AccFactory.ChequesRepository().GetLastInsertId(),
-                FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                FunctionProgramProjectId = uc.functionId,
-                DVNo = uc.txtDVNo.Text.Trim(),
-                Payee = uc.txtPayee.Text.Trim(),
-                NaturePayment = uc.txtNature.Text.Trim(),
+                ChequeID = chequeID,
+                FundId = fundID,
+                FunctionProgramProjectId = fpp,
+                DVNo = dVNo,
+                Payee = payee,
+                NaturePayment = natureOfPayment
             };
 
             return AccFactory.RCIRepository().Insert(RCIModel);
         }
 
+        internal void SaveDVObligationsNumber()
+        {
+            int lastInsertedId = AccFactory.RCIRepository().GetLastInsertId();
+            string obligationNo;
+            DateTime dateEntry;
+
+            foreach (DataRow row in uc.dtObligations.Rows)
+            {
+                obligationNo = row["obligation_no"].ToString();
+                dateEntry = Convert.ToDateTime(row["date_entry"]);
+                AccFactory.RCIRepository().SaveRCIDVObligations(lastInsertedId, obligationNo, dateEntry);
+            }
+        }
+
+        internal void SaveDeductions()
+        {
+            int lastRecentRCIId = AccFactory.RCIRepository().GetLastInsertId();
+            string deductionDescription;
+            decimal deductionAmount;
+
+            foreach (DataRow row in uc.dtDeductions.Rows)
+            {
+                deductionDescription = row["description"].ToString();
+                deductionAmount = Convert.ToDecimal(row["amount"]);
+                uc.totalDeduction += deductionAmount;
+
+                AccFactory.RCIRepository().SaveRCIDeductions(lastRecentRCIId, deductionDescription, deductionAmount);
+            }
+        }
 
         private bool SaveData()
         {
@@ -63,77 +102,36 @@ namespace AccountingSystem.Views.Transactions.RCI
                 return false;
             }
 
-            using (var scope = new TransactionScope())
+            using var scope = new TransactionScope();
+            if (SaveCheque())
             {
-                if (SaveCheque())
-                {
-                    SaveRCI();
-                    SaveDVObligations();
-                    SaveDeductions();
-                    scope.Complete();
-                    return true;
-                }
-                return false;
+                SaveRCI();
+                SaveDVObligationsNumber();
+                SaveDeductions();
+                scope.Complete();
+                return true;
             }
+
+            return false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("RCI has been saved.");
-
-                _frmRCI.LoadRecords();
-                ucrci1.ResetForm();
-            }
-        }
-
-        internal void SaveDVObligations()
-        {
             try
             {
-                string lastRecentRCIId = AccFactory.RCIRepository().GetRecentRCIId();
-
-                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
-                string obligationNo = String.Empty;
-                DateTime dateEntry;
-
-                foreach (DataRow row in uc.dtObligations.Rows)
+                if (SaveData())
                 {
-                    obligationNo = row["obligation_no"].ToString();
-                    dateEntry = Convert.ToDateTime(row["date_entry"]);
-                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo, dateEntry);
+                    Helper.MessageBoxSuccess("RCI has been saved.");
+                    _frmRCI.LoadRCI();
+                    uc.ResetForm();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void SaveDeductions()
-        {
-            try
-            {
-                string lastRecentRCIId = AccFactory.RCIRepository().GetRecentRCIId();
-                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
 
-                string deductionDescription = String.Empty;
-                decimal deductionAmount = 0;
-
-                foreach (DataRow row in uc.dtDeductions.Rows)
-                {
-                    deductionDescription = row[0].ToString();
-                    deductionAmount = Convert.ToDecimal(row[1].ToString());
-                    uc.totalDeduction += deductionAmount;
-
-                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, deductionAmount);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

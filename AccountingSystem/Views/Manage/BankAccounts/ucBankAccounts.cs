@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         private void LoadBanks()
         {
             DataTable dataTable = AccFactory.BanksRepository().GetRecords();
-            HelperLoadRecords.ComboBoxBanks(dataTable, cmbxBank, "id", "bank_name");
+            HelperLoadRecords.BankComboBox(dataTable, cmbxBank, "id", "bank_name");
         }
 
         private void txtAccountNo_Validating(object sender, CancelEventArgs e)

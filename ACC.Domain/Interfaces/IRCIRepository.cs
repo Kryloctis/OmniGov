@@ -10,9 +10,9 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchText);
         DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountID);
-        bool SaveRCIDVObligations(short rciId, string obligationNo, DateTime dateEntry);
-        bool SaveRCIDeductions(short rciId, string description, decimal amount);
-        string GetRecentRCIId();
+        bool SaveRCIDVObligations(int rciId, string obligationNo, DateTime dateEntry);
+        bool SaveRCIDeductions(int rciId, string description, decimal amount);
+        int GetLastInsertId();
 
 
     }

@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Interfaces;
-using AccountingSystem;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;

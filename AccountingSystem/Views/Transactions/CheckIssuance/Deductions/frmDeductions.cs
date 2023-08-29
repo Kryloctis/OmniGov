@@ -2,7 +2,6 @@
 using AccountingSystem.Views.Transactions.RCI;
 using System;
 using System.ComponentModel;
-using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
@@ -10,13 +9,12 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
     public partial class frmDeductions : Form
     {
         private readonly ucRCI _uc;
-        private DataTable dtDeductions = new();
+        //private DataTable dtDeductions = new();
 
         public frmDeductions(ucRCI uc)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgDeductions);
-
             _uc = uc;
         }
 
@@ -52,14 +50,17 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void ResetForm()
         {
-            txtDescription.Text = String.Empty;
+            txtDescription.Text = string.Empty;
             nudAmount.Value = 0;
             txtDescription.Focus();
         }
 
         private void AddToList()
         {
-            _uc.dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value.ToString("N2"));
+            string description = txtDescription.Text.Trim();
+            decimal amount = nudAmount.Value;
+
+            _uc.dtDeductions.Rows.Add(description, amount);
             HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
@@ -102,9 +103,13 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
             {
                 _uc.SetDeductionLabel();
-
-                this.Close();
+                Close();
             }
+        }
+
+        private void frmDeductions_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _uc.SetDeductionLabel();
         }
     }
 }
