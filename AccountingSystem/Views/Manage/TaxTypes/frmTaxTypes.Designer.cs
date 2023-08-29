@@ -225,40 +225,39 @@
             // 
             // txtBLFGAccountCode
             // 
-            txtBLFGAccountCode.Location = new System.Drawing.Point(163, 147);
-            txtBLFGAccountCode.MaxLength = 99;
-            txtBLFGAccountCode.Name = "txtBLFGAccountCode";
-            txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
-            txtBLFGAccountCode.TabIndex = 6;
+            this.txtBLFGAccountCode.Location = new System.Drawing.Point(132, 141);
+            this.txtBLFGAccountCode.MaxLength = 99;
+            this.txtBLFGAccountCode.Name = "txtBLFGAccountCode";
+            this.txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
+            this.txtBLFGAccountCode.TabIndex = 6;
             // 
             // txtCOAAccountCode
             // 
-            txtCOAAccountCode.Location = new System.Drawing.Point(163, 120);
-            txtCOAAccountCode.MaxLength = 99;
-            txtCOAAccountCode.Name = "txtCOAAccountCode";
-            txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
-            txtCOAAccountCode.TabIndex = 5;
+            this.txtCOAAccountCode.Location = new System.Drawing.Point(132, 114);
+            this.txtCOAAccountCode.MaxLength = 99;
+            this.txtCOAAccountCode.Name = "txtCOAAccountCode";
+            this.txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
+            this.txtCOAAccountCode.TabIndex = 5;
             // 
             // txtDesciption
             // 
-            txtDesciption.Location = new System.Drawing.Point(163, 39);
-            txtDesciption.MaxLength = 99;
-            txtDesciption.Name = "txtDesciption";
-            txtDesciption.Size = new System.Drawing.Size(353, 23);
-            txtDesciption.TabIndex = 2;
-            txtDesciption.Validating += txtDesciption_Validating;
-            txtDesciption.Validated += txtDesciption_Validated;
+            this.txtDesciption.Location = new System.Drawing.Point(132, 33);
+            this.txtDesciption.MaxLength = 99;
+            this.txtDesciption.Name = "txtDesciption";
+            this.txtDesciption.Size = new System.Drawing.Size(353, 23);
+            this.txtDesciption.TabIndex = 2;
+            this.txtDesciption.Validating += new System.ComponentModel.CancelEventHandler(this.txtDesciption_Validating);
+            this.txtDesciption.Validated += new System.EventHandler(this.txtDesciption_Validated);
             // 
             // txtCode
             // 
-            txtCode.Location = new System.Drawing.Point(163, 12);
-            txtCode.MaxLength = 45;
-            txtCode.Name = "txtCode";
-            txtCode.Size = new System.Drawing.Size(353, 23);
-            txtCode.TabIndex = 1;
-            txtCode.Validating += txtCode_Validating;
-            txtCode.Validated += txtCode_Validated;
-
+            this.txtCode.Location = new System.Drawing.Point(132, 6);
+            this.txtCode.MaxLength = 45;
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(353, 23);
+            this.txtCode.TabIndex = 1;
+            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
+            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // label6
             // 
@@ -334,8 +333,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNew.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(35, 43);
@@ -418,7 +416,8 @@
 
         }
 
-        #endregion
+        #endregion Windows Form Designer generated code
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
