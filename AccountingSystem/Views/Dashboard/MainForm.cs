@@ -45,6 +45,7 @@ using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
@@ -52,7 +53,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem
+namespace AccountingSystem.Views.Dashboard
 {
     public partial class MainForm : Form
     {
@@ -638,7 +639,6 @@ namespace AccountingSystem
 
         private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmPayments().ShowDialog();
         }
 
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
@@ -684,6 +684,16 @@ namespace AccountingSystem
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _ = new frmOtherPaymentRates().ShowDialog();
+        }
+
+        private void aF5157ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmAF51_57().ShowDialog();
+        }
+
+        private void rPTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptPayments().ShowDialog();
         }
     }
 }

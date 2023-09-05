@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
 using AccountingSystem.Properties;
+using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.SignIn;
 using DocumentFormat.OpenXml.Office2016.Excel;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
