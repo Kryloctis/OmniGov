@@ -2559,6 +2559,20 @@ namespace AccountingSystem
 
         #region OtherPayments
 
+        internal static void DatagridViewPayees(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Type";
+            dataGridView.Columns["taxpayer_type_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["taxpayer_type_code"].MinimumWidth = 30;
+            dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
+            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
+            dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
+        }
+
         internal static void OtherPaymentRatesDatagridView(DataGridView datagrid, DataTable dataTable)
         {
             datagrid.DataSource = dataTable;

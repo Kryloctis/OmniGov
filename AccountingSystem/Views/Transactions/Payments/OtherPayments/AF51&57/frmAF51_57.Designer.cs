@@ -51,12 +51,16 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.tabNewPayee = new System.Windows.Forms.TabPage();
             this.ucTaxPayers1 = new AccountingSystem.Views.Manage.TaxPayers.ucTaxPayers();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnBack = new System.Windows.Forms.ToolStripButton();
             this.tabPageFees = new System.Windows.Forms.TabPage();
+            this.ucOtherCharges1 = new AccountingSystem.Views.Transactions.Payments.OtherPayments.ucOtherCharges();
             this.tabPagePayment = new System.Windows.Forms.TabPage();
+            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
@@ -68,6 +72,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.tabNewPayee.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.tabPageFees.SuspendLayout();
+            this.tabPagePayment.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel2
@@ -281,6 +287,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.btnSearch.Size = new System.Drawing.Size(46, 35);
             this.btnSearch.Text = "Search";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -317,29 +324,51 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             // 
             this.ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTaxPayers1.Location = new System.Drawing.Point(0, 88);
+            this.ucTaxPayers1.Location = new System.Drawing.Point(0, 133);
             this.ucTaxPayers1.Name = "ucTaxPayers1";
-            this.ucTaxPayers1.Padding = new System.Windows.Forms.Padding(50);
-            this.ucTaxPayers1.Size = new System.Drawing.Size(851, 420);
+            this.ucTaxPayers1.Padding = new System.Windows.Forms.Padding(50, 10, 50, 50);
+            this.ucTaxPayers1.Size = new System.Drawing.Size(851, 375);
             this.ucTaxPayers1.TabIndex = 1;
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.panel1.Size = new System.Drawing.Size(851, 50);
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 50, 0, 0);
+            this.panel1.Size = new System.Drawing.Size(851, 95);
             this.panel1.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(137, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 25);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "New Payee";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(137, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(148, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Provide information below";
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(1194, 28);
+            this.label2.Location = new System.Drawing.Point(1244, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(205, 17);
             this.label2.TabIndex = 2;
@@ -350,7 +379,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(1335, 3);
+            this.label1.Location = new System.Drawing.Point(1385, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 25);
             this.label1.TabIndex = 3;
@@ -380,6 +409,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             // 
             // tabPageFees
             // 
+            this.tabPageFees.Controls.Add(this.ucOtherCharges1);
             this.tabPageFees.Location = new System.Drawing.Point(4, 5);
             this.tabPageFees.Name = "tabPageFees";
             this.tabPageFees.Padding = new System.Windows.Forms.Padding(3);
@@ -389,8 +419,18 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.tabPageFees.UseVisualStyleBackColor = true;
             this.tabPageFees.Enter += new System.EventHandler(this.tabPageFees_Enter);
             // 
+            // ucOtherCharges1
+            // 
+            this.ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
+            this.ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucOtherCharges1.Name = "ucOtherCharges1";
+            this.ucOtherCharges1.Size = new System.Drawing.Size(853, 511);
+            this.ucOtherCharges1.TabIndex = 0;
+            // 
             // tabPagePayment
             // 
+            this.tabPagePayment.Controls.Add(this.ucPayment1);
             this.tabPagePayment.Location = new System.Drawing.Point(4, 5);
             this.tabPagePayment.Name = "tabPagePayment";
             this.tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
@@ -400,11 +440,21 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.tabPagePayment.UseVisualStyleBackColor = true;
             this.tabPagePayment.Enter += new System.EventHandler(this.tabPagePayment_Enter);
             // 
+            // ucPayment1
+            // 
+            this.ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPayment1.Location = new System.Drawing.Point(3, 3);
+            this.ucPayment1.Name = "ucPayment1";
+            this.ucPayment1.Size = new System.Drawing.Size(853, 511);
+            this.ucPayment1.TabIndex = 0;
+            // 
             // frmAF51_57
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1062, 557);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -414,6 +464,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Payments > AF51 & 57";
+            this.Load += new System.EventHandler(this.frmAF51_57_Load);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
@@ -430,6 +481,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             this.panel1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.tabPageFees.ResumeLayout(false);
+            this.tabPagePayment.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -463,5 +516,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.TabPage tabPageFees;
         private System.Windows.Forms.TabPage tabPagePayment;
+        private ucPayment ucPayment1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private ucOtherCharges ucOtherCharges1;
     }
 }
