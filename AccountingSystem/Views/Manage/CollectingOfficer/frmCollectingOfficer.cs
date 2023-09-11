@@ -1,10 +1,8 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.JobOrders;
-using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.CollectingOfficer
@@ -31,16 +29,20 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             };
         }
 
-        private DataTable DataTableCollectingOfficer(string searchText)
+        private DataTable DataTableCollectingOfficer()
         {
+            string textSearch = txtSearch.Text.Trim();
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
             DataTable dtCollectingOfficers;
 
-            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
+            if (string.IsNullOrWhiteSpace(textSearch) || textSearch.Length < 2)
                 dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
             else
-                dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(searchText);
+                dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(textSearch);
+
+            int rowCount = 0;
+            int recordCount = dtCollectingOfficers.Rows.Count;
 
             foreach (DataRow row in dtCollectingOfficers.Rows)
             {
@@ -63,16 +65,20 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 newRow["is_deleted"] = rowIsDeleted;
                 newRow["created_at"] = rowCreatedAt;
                 newRow["updated_at"] = rowUpdatedAt;
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
                 dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
         }
 
-        internal void LoadRecords()
+        internal void LoadCollectingOfficers()
         {
-            string searchText = txtsearch.Text.Trim();
-            HelperLoadRecords.CollectingOfficerDatagridView(DataTableCollectingOfficer(searchText), dgCollectingOfficer);
+            HelperLoadRecords.CollectingOfficerDatagridView(DataTableCollectingOfficer(), dgCollectingOfficer);
             lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
         }
 
@@ -149,19 +155,38 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnJobOrder.Enabled = selectedRowCount == 1;
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
 
         private void btnJobOrder_Click(object sender, EventArgs e)
         {
             int collectingOfficerId = int.Parse(dgCollectingOfficer.SelectedCells[0].Value.ToString());
             _ = new frmJobOrder(collectingOfficerId).ShowDialog();
+        }
+
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadCollectingOfficers();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }
