@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Manage.Banks
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             statusStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBanks).BeginInit();
@@ -207,6 +208,14 @@ namespace AccountingSystem.Views.Manage.Banks
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 25;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
             // frmBanks
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -258,5 +267,6 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
