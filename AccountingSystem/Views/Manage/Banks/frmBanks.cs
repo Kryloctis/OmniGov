@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -102,32 +103,41 @@ namespace AccountingSystem.Views.Manage.Banks
             _ = new frmEditBank(this, bankId).ShowDialog();
         }
 
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgBanks.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var banksModelList = new List<BanksModel>();
+                foreach (DataGridViewRow row in dgBanks.SelectedRows)
+                {
+                    int bankId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                    banksModelList.Add(new BanksModel() { Id = bankId });
+                }
+
+                return AccFactory.BanksRepository().Delete(banksModelList);
+            }
+
+            return false;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedrowscount = dgBanks.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
+                if (DeleteRecords())
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
-                    {
-                        var banksModelList = new List<BanksModel>();
-                        foreach (DataGridViewRow row in dgBanks.SelectedRows)
-                        {
-                            int bankId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            banksModelList.Add(new BanksModel() { Id = bankId });
-                        }
-
-                        var banksRepository = AccFactory.BanksRepository();
-                        _ = banksRepository.Delete(banksModelList);
-                        LoadRecords();
-                    }
+                    Helper.MessageBoxSuccess("Bank successfully deleted.");
+                    LoadRecords();
                 }
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete bank. The bank has been used as referenced to another record.");
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgBanks_SelectionChanged(object sender, EventArgs e)
