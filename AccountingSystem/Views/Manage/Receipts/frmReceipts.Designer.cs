@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             dtpReceivedDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpReceivedDate.CustomFormat = "yyyy/mm/dd";
-            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             dtpReceivedDate.Location = new System.Drawing.Point(575, 16);
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
