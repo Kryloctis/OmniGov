@@ -86,13 +86,10 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
     }
 }

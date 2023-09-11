@@ -41,9 +41,11 @@ namespace AccountingSystem.Views.Manage.Banks
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             dgBanks = new System.Windows.Forms.DataGridView();
             panel1 = new System.Windows.Forms.Panel();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            btnSearch = new System.Windows.Forms.Button();
+            txtSearch = new System.Windows.Forms.TextBox();
             statusStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBanks).BeginInit();
@@ -108,7 +110,7 @@ namespace AccountingSystem.Views.Manage.Banks
             toolStrip.BackColor = System.Drawing.SystemColors.Control;
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, txtSearch });
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
             toolStrip.Location = new System.Drawing.Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.Padding = new System.Windows.Forms.Padding(4);
@@ -152,14 +154,6 @@ namespace AccountingSystem.Views.Manage.Banks
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
-            txtSearch.TextChanged += txtSearch_TextChanged;
-            // 
             // dgBanks
             // 
             dgBanks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -170,7 +164,7 @@ namespace AccountingSystem.Views.Manage.Banks
             dgBanks.RowHeadersWidth = 51;
             dgBanks.RowTemplate.Height = 29;
             dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgBanks.Size = new System.Drawing.Size(786, 317);
+            dgBanks.Size = new System.Drawing.Size(786, 312);
             dgBanks.TabIndex = 8;
             dgBanks.SelectionChanged += dgBanks_SelectionChanged;
             // 
@@ -178,11 +172,40 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             panel1.Controls.Add(dgBanks);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(794, 325);
+            panel1.Size = new System.Drawing.Size(794, 320);
             panel1.TabIndex = 10;
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(794, 5);
+            pbLoadRecords.TabIndex = 24;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSearch.Location = new System.Drawing.Point(707, 16);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 26;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Location = new System.Drawing.Point(505, 16);
+            txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 23);
+            txtSearch.TabIndex = 25;
             // 
             // frmBanks
             // 
@@ -191,6 +214,9 @@ namespace AccountingSystem.Views.Manage.Banks
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(794, 397);
             Controls.Add(panel1);
+            Controls.Add(pbLoadRecords);
+            Controls.Add(btnSearch);
+            Controls.Add(txtSearch);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -229,6 +255,8 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBanks;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }
