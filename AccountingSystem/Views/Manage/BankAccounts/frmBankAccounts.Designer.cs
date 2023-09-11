@@ -41,6 +41,7 @@
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBankAccounts).BeginInit();
             statusStrip1.SuspendLayout();
@@ -121,6 +122,7 @@
             btnAdd.Text = "Add";
             btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnAdd.ToolTipText = "Add";
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
@@ -132,6 +134,7 @@
             btnEdit.Size = new System.Drawing.Size(31, 39);
             btnEdit.Text = "Edit";
             btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
@@ -143,6 +146,7 @@
             btnDelete.Size = new System.Drawing.Size(44, 39);
             btnDelete.Text = "Delete";
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSearch
             // 
@@ -171,6 +175,13 @@
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(794, 5);
             pbLoadRecords.TabIndex = 29;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
             // frmBankAccounts
             // 
@@ -221,5 +232,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

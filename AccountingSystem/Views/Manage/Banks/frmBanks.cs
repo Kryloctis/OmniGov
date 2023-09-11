@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Manage.Banks
             catch (MySqlException ex)
             {
                 if (ex.Number == 1451)
-                    Helper.MessageBoxError("Can't delete bank. The bank has been used as referenced to another record.");
+                    Helper.MessageBoxError("Can't delete bank. The record/s has been used as referenced to another record.");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

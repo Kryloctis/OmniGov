@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,19 +25,76 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal void LoadBankAccounts()
+        private DataColumn[] BankAccountsDataColumns()
         {
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("banks_id", typeof(string)),
+                new DataColumn("bank_name", typeof(string)),
+                new DataColumn("bank_code", typeof(string)),
+                new DataColumn("bank_branch", typeof(string)),
+                new DataColumn("account_no", typeof(string)),
+                new DataColumn("created_at", typeof(DateTime)),
+                new DataColumn("updated_at", typeof(DateTime)),
+            };
+
+            return dataColumns;
+        }
+
+        internal void LoadRecords()
+        {
+            DataTable dtBankAccount = new();
+            DataTable dtBankAccountFromDB;
+            dtBankAccount.Columns.AddRange(BankAccountsDataColumns());
+
             var searchText = txtSearch.Text.Trim();
-            DataTable dtBankAccount;
 
             if (searchText.Length > 2)
-                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(searchText);
+                dtBankAccountFromDB = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(searchText);
             else
-                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecords();
+                dtBankAccountFromDB = AccFactory.BankAccountsRepository().GetViewRecords();
+
+
+            int recordCount = dtBankAccountFromDB.Rows.Count;
+            int rowCount = 0;
+
+            foreach (DataRow row in dtBankAccountFromDB.Rows)
+            {
+                var newRow = dtBankAccount.NewRow();
+
+                int id = Convert.ToInt32(row["id"]);
+                int bankID = Convert.ToInt32(row["banks_id"]);
+                string bankName = row["bank_name"].ToString();
+                string bankCode = row["bank_code"].ToString();
+                string bankBranch = row["bank_branch"].ToString();
+                string bankAccount = row["account_no"].ToString();
+
+                newRow["id"] = id;
+                newRow["banks_id"] = bankID;
+                newRow["bank_name"] = bankName;
+                newRow["bank_code"] = bankCode;
+                newRow["bank_branch"] = bankBranch;
+                newRow["account_no"] = bankAccount;
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+                dtBankAccount.Rows.Add(newRow);
+            }
 
             HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
 
             toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
+        }
+
+        internal void LoadBankAccounts()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
@@ -64,7 +122,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                     var bankAccountsModelList = new List<BankAccountsModel>();
                     foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
                     {
-                        int bankAccountID = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        int bankAccountID = Convert.ToInt16(row.Cells["id"].Value.ToString());
                         bankAccountsModelList.Add(new BankAccountsModel() { ID = bankAccountID });
                     }
 
@@ -81,7 +139,13 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             {
                 DeleteData();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete bank account. The record/s has been used as referenced to another record.");
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -91,9 +155,21 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rowIndex = dgBankAccounts.CurrentRow.Index;
-            int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
+            int bankAccountId = Convert.ToInt32(dgBankAccounts.SelectedRows[0].Cells["id"].Value);
             _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadRecords();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
     }
 }
