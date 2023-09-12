@@ -32,9 +32,11 @@
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
-            toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             panel1 = new System.Windows.Forms.Panel();
             dgBarangay = new System.Windows.Forms.DataGridView();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            btnSearch = new System.Windows.Forms.Button();
+            txtSearch = new System.Windows.Forms.TextBox();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBarangay).BeginInit();
@@ -45,7 +47,7 @@
             toolStrip.BackColor = System.Drawing.SystemColors.Control;
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, toolStripTextBoxSearch });
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
             toolStrip.Location = new System.Drawing.Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.Padding = new System.Windows.Forms.Padding(4);
@@ -90,22 +92,14 @@
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
-            // toolStripTextBoxSearch
-            // 
-            toolStripTextBoxSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripTextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
-            toolStripTextBoxSearch.Size = new System.Drawing.Size(200, 42);
-            toolStripTextBoxSearch.TextChanged += toolStripTextBoxSearch_TextChanged;
-            // 
             // panel1
             // 
             panel1.Controls.Add(dgBarangay);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 55);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(612, 335);
+            panel1.Size = new System.Drawing.Size(612, 330);
             panel1.TabIndex = 11;
             // 
             // dgBarangay
@@ -118,16 +112,47 @@
             dgBarangay.RowHeadersWidth = 51;
             dgBarangay.RowTemplate.Height = 29;
             dgBarangay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgBarangay.Size = new System.Drawing.Size(604, 327);
+            dgBarangay.Size = new System.Drawing.Size(604, 322);
             dgBarangay.TabIndex = 9;
             dgBarangay.SelectionChanged += dgBarangay_SelectionChanged;
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(612, 5);
+            pbLoadRecords.TabIndex = 25;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSearch.Location = new System.Drawing.Point(532, 14);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 28;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Location = new System.Drawing.Point(329, 14);
+            txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 23);
+            txtSearch.TabIndex = 27;
             // 
             // frmBarangay
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(612, 385);
+            Controls.Add(btnSearch);
             Controls.Add(panel1);
+            Controls.Add(txtSearch);
+            Controls.Add(pbLoadRecords);
             Controls.Add(toolStrip);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MinimizeBox = false;
@@ -152,6 +177,8 @@
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgBarangay;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxSearch;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Barangay
         internal void LoadRecords()
         {
             DataTable dtBarangay;
-            var searchText = toolStripTextBoxSearch.Text.Trim();
+            var searchText = txtSearch.Text.Trim();
 
             if (searchText.Length > 2)
                 dtBarangay = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
