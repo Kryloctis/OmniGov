@@ -170,7 +170,7 @@ namespace ACC.Data
                 new object[] { "@last_name", DbType.String, entity.LastName},
                 new object[] { "@suffix", DbType.String, entity.Suffix},
                 new object[] { "@job_title", DbType.String, entity.JobTitle},
-                new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
+                new object[] { "@users_id", DbType.Int32, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
             };
 
             string query = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";

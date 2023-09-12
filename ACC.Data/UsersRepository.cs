@@ -173,33 +173,17 @@ namespace ACC.Data
             return data;
         }
 
-        public DataTable GetLinksCollectingOfficers()
+        public DataTable GetLinksCollectingOfficers(string searchText)
         {
-            string query = $"SELECT " +
-                            $"id, " +
-                            $"roles_id, " +
-                            $"prefix, " +
-                            $"first_name, " +
-                            $"mid_initial, " +
-                            $"last_name, " +
-                            $"suffix, " +
-                            $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
-                            $"username, " +
-                            $"password, " +
-                            $"is_deleted, " +
-                            $"created_at, " +
-                            $"updated_at, " +
-                            $"office, " +
-                            $"role_name, " +
-                            $"permission_name, " +
-                            $"permission_office " +
-                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' " +
-                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
-                            $"AND id NOT IN (SELECT users_id FROM collecting_officers)" +
-                            $"GROUP BY id";
+            var parameters = new object[][]
+            {
+                new object[] { "@text_search", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE role_name LIKE '%collect%' AND last_name LIKE @text_search AND first_name LIKE @text_search AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) AND id NOT IN (SELECT users_id FROM collecting_officers) GROUP BY id";
 
             var dtUsers = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dtUsers);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
         }
 
         public DataTable GetLinksJOCollectingOfficers()

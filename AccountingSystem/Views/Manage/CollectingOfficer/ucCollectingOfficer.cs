@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Manage.LinkUser;
+﻿using AccountingSystem.Views.Manage.LinkUser;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,8 +7,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class ucCollectingOfficer : UserControl
     {
-        internal int OfficerId = 0;
-        internal int UserId = 0;
+        internal int officerID = 0;
+        internal int userID = 0;
 
         public ucCollectingOfficer()
         {
@@ -29,33 +28,40 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        internal void SetReadOnlyConrol(bool reaonly)
         {
-            if (UserId > 0)
-            {
-                UserId = 0;
-                linkuser.Text = "+ Link User";
-            }
-            else
-            {
-                frmLinkUser fuser = new();
-                fuser.userType = "collector";
+            txtPrefix.ReadOnly = reaonly;
+            txtLastName.ReadOnly = reaonly;
+            txtFirstName.ReadOnly = reaonly;
+            txtMiddleInitial.ReadOnly = reaonly;
+            txtSuffix.ReadOnly = reaonly;
+        }
 
-                if (fuser.ShowDialog() == DialogResult.OK)
+        private void SelectUser()
+        {
+            frmLinkUser frmLinkuser = new() { userType = "collector" };
+
+            if (frmLinkuser.ShowDialog() == DialogResult.OK)
+            {
+                userID = frmLinkuser.UserId;
+                linkUser.Text = $"{frmLinkuser.userName}";
+
+                int selectedUserCount = frmLinkuser.dgUsers.SelectedRows.Count;
+                if (selectedUserCount == 1)
                 {
-                    UserId = fuser.UserId;
-                    linkuser.Text = string.Format("@{0}", fuser.Username);
-                    if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMiddleInitial.Text == string.Empty)
-                    {
-                        SetReadOnlyConrol(true);
-                        txtPrefix.Text = fuser.prefix;
-                        txtLastName.Text = fuser.lastName;
-                        txtFirstName.Text = fuser.firstName;
-                        txtMiddleInitial.Text = fuser.middleInitial;
-                        txtSuffix.Text = fuser.suffix;
-                    }
+                    SetReadOnlyConrol(true);
+                    txtPrefix.Text = frmLinkuser.prefix;
+                    txtLastName.Text = frmLinkuser.lastName;
+                    txtFirstName.Text = frmLinkuser.firstName;
+                    txtMiddleInitial.Text = frmLinkuser.middleInitial;
+                    txtSuffix.Text = frmLinkuser.suffix;
                 }
             }
+        }
+
+        internal void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SelectUser();
         }
 
         internal void LoadLink(int id)
@@ -66,13 +72,13 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var data = userRepository.GetUserByID(id);
                 if (data.Count > 0)
                 {
-                    UserId = id;
-                    linkuser.Text = String.Format("@{0}", data["username"]);
+                    userID = id;
+                    linkUser.Text = String.Format("@{0}", data["username"]);
                 }
                 else
                 {
-                    UserId = 0;
-                    linkuser.Text = "+ Link User";
+                    userID = 0;
+                    linkUser.Text = "Link User";
                 }
             }
             catch (Exception ex)
@@ -89,17 +95,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             txtLastName.Clear();
             txtSuffix.Clear();
             txtJobtitle.Text = "Collecting Officer";
-            UserId = 0;
-            linkuser.Text = "+ Link User";
-        }
-
-        internal void SetReadOnlyConrol(bool reaonly)
-        {
-            txtPrefix.ReadOnly = reaonly;
-            txtLastName.ReadOnly = reaonly;
-            txtFirstName.ReadOnly = reaonly;
-            txtMiddleInitial.ReadOnly = reaonly;
-            txtSuffix.ReadOnly = reaonly;
+            userID = 0;
+            linkUser.Text = "Link User";
         }
 
         private void txtFname_Validated(object sender, EventArgs e)
@@ -112,12 +109,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "first name");
 
             var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-            string fName = txtFirstName.Text.Trim();
+            string firstName = txtFirstName.Text.Trim();
             string midInitial = txtMiddleInitial.Text.Trim();
-            string lname = txtLastName.Text.Trim();
+            string lastName = txtLastName.Text.Trim();
             bool fullNameExist;
 
-            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, OfficerId); // add form
+            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, midInitial, lastName, officerID);
 
             if (fullNameExist)
             {
@@ -141,7 +138,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             bool fullNameExist;
 
             var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, middleInitial, lastName, OfficerId);
+            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, middleInitial, lastName, officerID);
 
             if (fullNameExist)
             {
@@ -165,7 +162,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             string lname = txtLastName.Text.Trim();
             bool fullNameExist;
 
-            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, OfficerId); // add form
+            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, officerID);
 
             if (fullNameExist)
             {
@@ -176,6 +173,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
         {
+
         }
     }
 }

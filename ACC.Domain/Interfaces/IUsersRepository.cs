@@ -18,7 +18,7 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetUserByID(int Id);
 
-        DataTable GetLinksCollectingOfficers();
+        DataTable GetLinksCollectingOfficers(string searchText);
 
         DataTable GetLinksDisbursingOfficers();
 

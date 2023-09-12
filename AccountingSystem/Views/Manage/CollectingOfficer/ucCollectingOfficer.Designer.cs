@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             txtLastName = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
             txtJobtitle = new System.Windows.Forms.TextBox();
-            linkuser = new System.Windows.Forms.LinkLabel();
+            linkUser = new System.Windows.Forms.LinkLabel();
             txtPrefix = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             txtSuffix = new System.Windows.Forms.TextBox();
@@ -121,26 +121,25 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // txtJobtitle
             // 
-            txtJobtitle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtJobtitle.Location = new System.Drawing.Point(84, 155);
             txtJobtitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtJobtitle.MaxLength = 99;
             txtJobtitle.Name = "txtJobtitle";
             txtJobtitle.Size = new System.Drawing.Size(324, 23);
             txtJobtitle.TabIndex = 5;
-            txtJobtitle.Text = "COLLECTING OFFICER";
+            txtJobtitle.Text = "Collecting Officer";
             // 
-            // linkuser
+            // linkUser
             // 
-            linkuser.AutoSize = true;
-            linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
-            linkuser.Location = new System.Drawing.Point(353, 3);
-            linkuser.Name = "linkuser";
-            linkuser.Size = new System.Drawing.Size(55, 15);
-            linkuser.TabIndex = 14;
-            linkuser.TabStop = true;
-            linkuser.Text = "Link User";
-            linkuser.LinkClicked += linkuser_LinkClicked;
+            linkUser.AutoSize = true;
+            linkUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            linkUser.Location = new System.Drawing.Point(353, 3);
+            linkUser.Name = "linkUser";
+            linkUser.Size = new System.Drawing.Size(55, 15);
+            linkUser.TabIndex = 14;
+            linkUser.TabStop = true;
+            linkUser.Text = "Link User";
+            linkUser.LinkClicked += linkuser_LinkClicked;
             // 
             // txtPrefix
             // 
@@ -193,7 +192,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Controls.Add(label8);
             Controls.Add(txtPrefix);
             Controls.Add(label5);
-            Controls.Add(linkuser);
+            Controls.Add(linkUser);
             Controls.Add(label4);
             Controls.Add(txtJobtitle);
             Controls.Add(label3);
@@ -220,7 +219,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         internal System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtJobtitle;
-        internal System.Windows.Forms.LinkLabel linkuser;
+        internal System.Windows.Forms.LinkLabel linkUser;
         internal System.Windows.Forms.TextBox txtPrefix;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox txtSuffix;

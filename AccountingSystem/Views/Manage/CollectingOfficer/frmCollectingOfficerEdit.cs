@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             InitializeComponent();
             _frmCollectingOfficer = frmCollectingOfficer;
             _uc = ucCollectingOfficer1;
-            _uc.OfficerId = OfficerId;
+            _uc.officerID = OfficerId;
         }
 
         private void LoadSelectedRecord()
@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 var uc = ucCollectingOfficer1;
                 var repository = AccFactory.CollectingOfficerRepository();
-                var data = repository.GetRecordByID(uc.OfficerId);
+                var data = repository.GetRecordByID(uc.officerID);
 
                 uc.txtPrefix.Text = data["prefix"];
                 uc.txtFirstName.Text = data["first_name"];
@@ -31,8 +31,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 uc.txtLastName.Text = data["last_name"];
                 uc.txtSuffix.Text = data["suffix"];
                 uc.txtJobtitle.Text = data["job_title"];
-                uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);
-                uc.LoadLink(uc.UserId);
+                uc.userID = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);
+                uc.LoadLink(uc.userID);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -47,14 +47,14 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             var collectingmodel = new CollectingOfficerModel()
             {
-                Id = _uc.OfficerId,
+                Id = _uc.officerID,
                 Prefix = _uc.txtPrefix.Text.Trim(),
                 FirstName = _uc.txtFirstName.Text.Trim(),
                 MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
                 LastName = _uc.txtLastName.Text.Trim(),
                 Suffix = _uc.txtSuffix.Text.Trim(),
                 JobTitle = _uc.txtJobtitle.Text.Trim(),
-                UserId = _uc.UserId
+                UserId = _uc.userID
             };
 
             var collectingrepository = AccFactory.CollectingOfficerRepository();
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.LoadFormIcon(this);
             LoadSelectedRecord();
             _uc.SetReadOnlyConrol(true);
-            _uc.linkuser.LinkClicked -= new LinkLabelLinkClickedEventHandler(_uc.linkuser_LinkClicked);
+            _uc.linkUser.LinkClicked -= new LinkLabelLinkClickedEventHandler(_uc.linkuser_LinkClicked);
         }
     }
 }

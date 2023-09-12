@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
             if (frmLinkuser.ShowDialog() == DialogResult.OK)
             {
-                linkuser.Text = string.Format("@{0}", frmLinkuser.Username);
+                linkuser.Text = string.Format("@{0}", frmLinkuser.userName);
 
                 users_id = frmLinkuser.UserId;
                 txtPrefix.Text = frmLinkuser.prefix;

@@ -6,8 +6,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerAdd : Form
     {
-        private frmCollectingOfficer _frmCollectingOfficer;
-        private ucCollectingOfficer _uc;
+        private readonly frmCollectingOfficer _frmCollectingOfficer;
+        private readonly ucCollectingOfficer _uc;
 
         public frmCollectingOfficerAdd(frmCollectingOfficer frmCollectingOfficer)
         {
@@ -35,11 +35,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 LastName = _uc.txtLastName.Text.Trim(),
                 Suffix = _uc.txtSuffix.Text.Trim(),
                 JobTitle = _uc.txtJobtitle.Text.Trim(),
-                UserId = _uc.UserId
+                UserId = _uc.userID
             };
 
-            var repository = AccFactory.CollectingOfficerRepository();
-            return repository.Insert(model);
+            var collectingOfficerRepo = AccFactory.CollectingOfficerRepository();
+            return collectingOfficerRepo.Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -59,6 +59,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void frmCollectingOfficerAdd_Load(object sender, EventArgs e)
         {
+
         }
+
     }
 }
