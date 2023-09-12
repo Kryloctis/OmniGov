@@ -37,6 +37,7 @@
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBarangay).BeginInit();
@@ -133,6 +134,7 @@
             btnSearch.TabIndex = 28;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -143,6 +145,13 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 27;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             // 
             // frmBarangay
             // 
@@ -180,5 +189,6 @@
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

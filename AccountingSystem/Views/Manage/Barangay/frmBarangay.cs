@@ -37,15 +37,50 @@ namespace AccountingSystem.Views.Manage.Barangay
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal void LoadRecords()
+        private DataColumn[] BarangayDataColumns()
         {
-            DataTable dtBarangay;
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("code", typeof(string)),
+                new DataColumn("name", typeof(string)),
+            };
+
+            return dataColumns;
+        }
+
+        internal void LoadBarangay()
+        {
+            DataTable dtBarangay = new();
+            DataTable dtBarangayFromDB;
             var searchText = txtSearch.Text.Trim();
+            dtBarangay.Columns.AddRange(BarangayDataColumns());
 
             if (searchText.Length > 2)
-                dtBarangay = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
+                dtBarangayFromDB = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
             else
-                dtBarangay = AccFactory.BarangayRepository().GetRecords();
+                dtBarangayFromDB = AccFactory.BarangayRepository().GetRecords();
+
+            int recordCount = dtBarangayFromDB.Rows.Count;
+            int rowCount = 0;
+
+            foreach (DataRow row in dtBarangayFromDB.Rows)
+            {
+                var newRow = dtBarangay.NewRow();
+
+                int id = Convert.ToInt32(row["id"]);
+                string code = row["code"].ToString();
+                string name = row["name"].ToString();
+
+                newRow["id"] = id;
+                newRow["code"] = code;
+                newRow["name"] = name;
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+                dtBarangay.Rows.Add(newRow);
+            }
 
             HelperLoadRecords.BarangaysDatagridView(dgBarangay, dtBarangay);
         }
@@ -102,6 +137,34 @@ namespace AccountingSystem.Views.Manage.Barangay
 
             deletedCount = 0;
             return false;
+        }
+
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadBarangay();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

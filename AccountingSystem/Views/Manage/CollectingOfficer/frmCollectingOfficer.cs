@@ -100,8 +100,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             if (dgCollectingOfficer.Rows.Count > 0)
             {
-                int OfficerId = int.Parse(dgCollectingOfficer.SelectedCells[0].Value.ToString());
-                _ = new frmCollectingOfficerEdit(this, OfficerId).ShowDialog();
+                int collectingOfficerId = Convert.ToInt32(dgCollectingOfficer.SelectedCells[0].Value);
+                _ = new frmCollectingOfficerEdit(this, collectingOfficerId).ShowDialog();
             }
         }
 
@@ -120,9 +120,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                         var modelList = new List<CollectingOfficerModel>();
                         foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                         {
-                            int OfficerID = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            if (!issuedReceiptRepo.CollectingOfficerHasReceiptAssigned(OfficerID))
-                                modelList.Add(new CollectingOfficerModel() { Id = OfficerID });
+                            int collectingOfficerID = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                            if (!issuedReceiptRepo.CollectingOfficerHasReceiptAssigned(collectingOfficerID))
+                                modelList.Add(new CollectingOfficerModel() { Id = collectingOfficerID });
                         }
                         _ = repository.Delete(modelList);
                         LoadRecords();
