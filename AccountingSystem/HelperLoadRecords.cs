@@ -1567,7 +1567,7 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Form Number";
+            datagrid.Columns[1].HeaderText = "Form Code";
             datagrid.Columns[2].HeaderText = "Form Description";
             datagrid.Columns[3].HeaderText = "Face Value";
 

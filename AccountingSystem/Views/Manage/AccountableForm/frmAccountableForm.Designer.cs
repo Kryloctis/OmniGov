@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             btnSearch = new System.Windows.Forms.Button();
             txtSearch = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             toolStrip.SuspendLayout();
             statusStrip.SuspendLayout();
             panel1.SuspendLayout();
@@ -186,6 +187,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnSearch.TabIndex = 25;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -197,8 +199,16 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             txtSearch.Size = new System.Drawing.Size(200, 23);
             txtSearch.TabIndex = 26;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // frmAccountableForm
             // 
+            AcceptButton = btnSearch;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
@@ -246,5 +256,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

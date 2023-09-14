@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,19 +16,62 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Helper.DatagridFullRowSelectStyle(dgAccountableForm, true);
         }
 
-        internal void LoadRecords()
+        private DataColumn[] AccountableFormColumns()
+        {
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("form_code", typeof(string)),
+                new DataColumn("form_description", typeof(string)),
+                new DataColumn("form_face_value", typeof(decimal)),
+            };
+
+            return dataColumns;
+        }
+
+
+        internal void LoadAccountableForms()
         {
             string searchText = txtSearch.Text.Trim();
-            DataTable dataTable;
+            DataTable dtAccountableFormsFromDB;
+            DataTable dtAccountableForms = new();
+            dtAccountableForms.Columns.AddRange(AccountableFormColumns());
 
             if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
-                dataTable = AccFactory.AccountableFormsRepository().GetRecords();
+                dtAccountableFormsFromDB = AccFactory.AccountableFormsRepository().GetRecords();
             else
-                dataTable = AccFactory.AccountableFormsRepository().GetRecordsBySearch(searchText);
+                dtAccountableFormsFromDB = AccFactory.AccountableFormsRepository().GetRecordsBySearch(searchText);
 
-            HelperLoadRecords.AccFormDatagridView(dataTable, dgAccountableForm);
+            int rowCount = 0;
+            int recordCount = dtAccountableFormsFromDB.Rows.Count;
+
+            foreach (DataRow row in dtAccountableFormsFromDB.Rows)
+            {
+                var newRow = dtAccountableForms.NewRow();
+                int id = Convert.ToInt32(row["id"]);
+                string accountableFormCode = row["acc_form_no"].ToString();
+                string accountableFormDesc = row["acc_form_desc"].ToString();
+                decimal accountableFormFaceValue = row.IsNull("amount") ? 0 : Convert.ToDecimal(row["amount"]);
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
+                dtAccountableForms.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.AccFormDatagridView(dtAccountableFormsFromDB, dgAccountableForm);
 
             lblRecordCount.Text = dgAccountableForm.Rows.Count.ToString();
+        }
+
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -41,7 +85,15 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             {
                 DeleteData();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete accountable form/s. The record/s has been used as reference to different record.");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -101,13 +153,23 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            try
+            Invoke((MethodInvoker)delegate
             {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                LoadAccountableForms();
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }
