@@ -6,8 +6,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class frmEditAccountableForm : Form
     {
-        private frmAccountableForm _frmAccountable;
-        private ucAccountableForm uc;
+        private readonly frmAccountableForm _frmAccountable;
+        private readonly ucAccountableForm uc;
 
         public frmEditAccountableForm(frmAccountableForm frmAccountable, int accountableFormId)
         {
@@ -23,8 +23,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             var uc = ucAccountable1;
             var accRepository = AccFactory.AccountableFormsRepository();
             var accData = accRepository.GetRecordByID(uc.accountableFormId);
-            uc.txtformno.Text = accData["acc_form_no"];
-            uc.txtformdesc.Text = accData["acc_form_desc"];
+            uc.txtFormNo.Text = accData["acc_form_no"];
+            uc.txtFormDescription.Text = accData["acc_form_desc"];
         }
 
         private void frmAccountableEdit_Load(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             var accModel = new AccountableModel()
             {
                 Id = uc.accountableFormId,
-                AccFormNo = uc.txtformno.Text.Trim(),
-                AccFormDesc = uc.txtformdesc.Text.Trim()
+                AccFormNo = uc.txtFormNo.Text.Trim(),
+                AccFormDesc = uc.txtFormDescription.Text.Trim()
             };
 
             return AccFactory.AccountableFormsRepository().Update(accModel);

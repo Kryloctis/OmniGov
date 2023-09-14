@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ucAccountable1.Size = new System.Drawing.Size(460, 53);
             ucAccountable1.TabIndex = 0;
             // 
-            // frmAccountableAdd
+            // frmAddAccountableForm
             // 
             AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -102,11 +102,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmAccountableAdd";
+            Name = "frmAddAccountableForm";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Accountable Form";
-            Load += frmAccountableAdd_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

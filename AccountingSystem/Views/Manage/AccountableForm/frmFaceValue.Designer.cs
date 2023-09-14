@@ -29,242 +29,226 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.dgfacevalue = new System.Windows.Forms.DataGridView();
-            this.txtamount = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnsave = new System.Windows.Forms.Button();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnEdit = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dtdate = new System.Windows.Forms.DateTimePicker();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblRecords = new System.Windows.Forms.ToolStripStatusLabel();
-            this.springLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgfacevalue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
-            this.toolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.statusStrip1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            dgfacevalue = new System.Windows.Forms.DataGridView();
+            txtamount = new System.Windows.Forms.NumericUpDown();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            btnsave = new System.Windows.Forms.Button();
+            toolStrip = new System.Windows.Forms.ToolStrip();
+            btnEdit = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
+            errorProvider = new System.Windows.Forms.ErrorProvider(components);
+            dtdate = new System.Windows.Forms.DateTimePicker();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            lblRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            springLbl = new System.Windows.Forms.ToolStripStatusLabel();
+            lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            ((System.ComponentModel.ISupportInitialize)dgfacevalue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtamount).BeginInit();
+            toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // dgfacevalue
             // 
-            this.dgfacevalue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgfacevalue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgfacevalue.Location = new System.Drawing.Point(10, 105);
-            this.dgfacevalue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgfacevalue.Name = "dgfacevalue";
-            this.dgfacevalue.RowHeadersWidth = 51;
-            this.dgfacevalue.RowTemplate.Height = 29;
-            this.dgfacevalue.Size = new System.Drawing.Size(491, 118);
-            this.dgfacevalue.TabIndex = 0;
-            this.dgfacevalue.SelectionChanged += new System.EventHandler(this.dgfacevalue_SelectionChanged);
+            dgfacevalue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dgfacevalue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgfacevalue.Location = new System.Drawing.Point(10, 83);
+            dgfacevalue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dgfacevalue.Name = "dgfacevalue";
+            dgfacevalue.RowHeadersWidth = 51;
+            dgfacevalue.RowTemplate.Height = 29;
+            dgfacevalue.Size = new System.Drawing.Size(491, 140);
+            dgfacevalue.TabIndex = 0;
+            dgfacevalue.SelectionChanged += dgfacevalue_SelectionChanged;
             // 
             // txtamount
             // 
-            this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(332, 73);
-            this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtamount.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(81, 23);
-            this.txtamount.TabIndex = 1;
-            this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            txtamount.DecimalPlaces = 2;
+            txtamount.Location = new System.Drawing.Point(231, 56);
+            txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtamount.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            txtamount.Name = "txtamount";
+            txtamount.Size = new System.Drawing.Size(81, 23);
+            txtamount.TabIndex = 1;
+            txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 73);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(4);
-            this.label1.Size = new System.Drawing.Size(42, 23);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Date ";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(10, 56);
+            label1.Name = "label1";
+            label1.Padding = new System.Windows.Forms.Padding(4);
+            label1.Size = new System.Drawing.Size(42, 23);
+            label1.TabIndex = 3;
+            label1.Text = "Date ";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(267, 73);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(4);
-            this.label2.Size = new System.Drawing.Size(62, 23);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Amount ";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(163, 57);
+            label2.Name = "label2";
+            label2.Padding = new System.Windows.Forms.Padding(4);
+            label2.Size = new System.Drawing.Size(62, 23);
+            label2.TabIndex = 4;
+            label2.Text = "Amount ";
             // 
             // btnsave
             // 
-            this.btnsave.Location = new System.Drawing.Point(432, 74);
-            this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnsave.Name = "btnsave";
-            this.btnsave.Size = new System.Drawing.Size(69, 22);
-            this.btnsave.TabIndex = 2;
-            this.btnsave.Text = "Add";
-            this.btnsave.UseVisualStyleBackColor = true;
-            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
+            btnsave.Location = new System.Drawing.Point(318, 57);
+            btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnsave.Name = "btnsave";
+            btnsave.Size = new System.Drawing.Size(69, 22);
+            btnsave.TabIndex = 2;
+            btnsave.Text = "Add";
+            btnsave.UseVisualStyleBackColor = true;
+            btnsave.Click += btnsave_Click;
             // 
             // toolStrip
             // 
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEdit,
-            this.btnDelete});
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(511, 58);
-            this.toolStrip.TabIndex = 9;
-            this.toolStrip.Text = "toolStrip1";
+            toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnEdit, btnDelete });
+            toolStrip.Location = new System.Drawing.Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip.Size = new System.Drawing.Size(511, 50);
+            toolStrip.TabIndex = 9;
+            toolStrip.Text = "toolStrip1";
             // 
             // btnEdit
             // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
-            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            btnEdit.Enabled = false;
+            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
+            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(31, 39);
+            btnEdit.Text = "Edit";
+            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            btnDelete.Enabled = false;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Text = "Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // errorProvider
             // 
-            this.errorProvider.ContainerControl = this;
+            errorProvider.ContainerControl = this;
             // 
             // dtdate
             // 
-            this.dtdate.Location = new System.Drawing.Point(49, 73);
-            this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(215, 23);
-            this.dtdate.TabIndex = 0;
+            dtdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dtdate.Location = new System.Drawing.Point(53, 56);
+            dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dtdate.Name = "dtdate";
+            dtdate.Size = new System.Drawing.Size(103, 23);
+            dtdate.TabIndex = 0;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblRecords,
-            this.springLbl,
-            this.lblDateEntry,
-            this.toolStripStatusLabel2,
-            this.lblCreatedAt,
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel3,
-            this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 225);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(511, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.Stretch = false;
-            this.statusStrip1.TabIndex = 10;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblRecords, springLbl, lblDateEntry, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel1, toolStripStatusLabel3, lblUpdatedAt });
+            statusStrip1.Location = new System.Drawing.Point(0, 225);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(511, 22);
+            statusStrip1.SizingGrip = false;
+            statusStrip1.Stretch = false;
+            statusStrip1.TabIndex = 10;
+            statusStrip1.Text = "statusStrip1";
             // 
             // lblRecords
             // 
-            this.lblRecords.Name = "lblRecords";
-            this.lblRecords.Size = new System.Drawing.Size(0, 17);
+            lblRecords.Name = "lblRecords";
+            lblRecords.Size = new System.Drawing.Size(0, 17);
             // 
             // springLbl
             // 
-            this.springLbl.Name = "springLbl";
-            this.springLbl.Size = new System.Drawing.Size(354, 17);
-            this.springLbl.Spring = true;
+            springLbl.Name = "springLbl";
+            springLbl.Size = new System.Drawing.Size(354, 17);
+            springLbl.Spring = true;
             // 
             // lblDateEntry
             // 
-            this.lblDateEntry.Name = "lblDateEntry";
-            this.lblDateEntry.Size = new System.Drawing.Size(0, 17);
+            lblDateEntry.Name = "lblDateEntry";
+            lblDateEntry.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel2.Text = "Created at:";
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
+            toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
-            this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            lblCreatedAt.Name = "lblCreatedAt";
+            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel1.Text = "|";
-            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel1.Text = "|";
+            toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel3
             // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel3.Text = "Updated at:";
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
+            toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
-            this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            lblUpdatedAt.Name = "lblUpdatedAt";
+            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // frmFaceValue
             // 
-            this.AcceptButton = this.btnsave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 247);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dtdate);
-            this.Controls.Add(this.toolStrip);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dgfacevalue);
-            this.Controls.Add(this.txtamount);
-            this.Controls.Add(this.btnsave);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmFaceValue";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Face Values";
-            this.Load += new System.EventHandler(this.frmFaceValue_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgfacevalue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = btnsave;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(511, 247);
+            Controls.Add(statusStrip1);
+            Controls.Add(label1);
+            Controls.Add(dtdate);
+            Controls.Add(toolStrip);
+            Controls.Add(label2);
+            Controls.Add(dgfacevalue);
+            Controls.Add(txtamount);
+            Controls.Add(btnsave);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmFaceValue";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Face Values";
+            Load += frmFaceValue_Load;
+            ((System.ComponentModel.ISupportInitialize)dgfacevalue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtamount).EndInit();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
