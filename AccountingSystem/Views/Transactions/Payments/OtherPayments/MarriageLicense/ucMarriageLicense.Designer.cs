@@ -36,6 +36,7 @@
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
             nudHusbandAgeMonth = new System.Windows.Forms.NumericUpDown();
@@ -54,16 +55,16 @@
             label3 = new System.Windows.Forms.Label();
             txtHusbandStreet = new System.Windows.Forms.TextBox();
             label12 = new System.Windows.Forms.Label();
-            groupBox5 = new System.Windows.Forms.GroupBox();
             panel5 = new System.Windows.Forms.Panel();
-            cmbxWifeBarangay = new System.Windows.Forms.ComboBox();
-            cmbxWifeMunicipality = new System.Windows.Forms.ComboBox();
-            cmbxWifeProvince = new System.Windows.Forms.ComboBox();
-            label14 = new System.Windows.Forms.Label();
-            label15 = new System.Windows.Forms.Label();
-            label16 = new System.Windows.Forms.Label();
-            txtWifeStreet = new System.Windows.Forms.TextBox();
             label17 = new System.Windows.Forms.Label();
+            txtWifeStreet = new System.Windows.Forms.TextBox();
+            label16 = new System.Windows.Forms.Label();
+            label15 = new System.Windows.Forms.Label();
+            label14 = new System.Windows.Forms.Label();
+            cmbxWifeProvince = new System.Windows.Forms.ComboBox();
+            cmbxWifeMunicipality = new System.Windows.Forms.ComboBox();
+            cmbxWifeBarangay = new System.Windows.Forms.ComboBox();
+            groupBox5 = new System.Windows.Forms.GroupBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
             panel3 = new System.Windows.Forms.Panel();
             nudWifeAgeMonth = new System.Windows.Forms.NumericUpDown();
@@ -74,14 +75,15 @@
             label11 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudHusbandAgeMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudHusbandAgeYear).BeginInit();
             groupBox4.SuspendLayout();
             panel4.SuspendLayout();
-            groupBox5.SuspendLayout();
             panel5.SuspendLayout();
+            groupBox5.SuspendLayout();
             groupBox3.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWifeAgeMonth).BeginInit();
@@ -121,7 +123,7 @@
             dtpIssuedDate.Location = new System.Drawing.Point(626, 8);
             dtpIssuedDate.Name = "dtpIssuedDate";
             dtpIssuedDate.Size = new System.Drawing.Size(143, 23);
-            dtpIssuedDate.TabIndex = 6;
+            dtpIssuedDate.TabIndex = 2;
             // 
             // dtpPublishedDate
             // 
@@ -130,14 +132,14 @@
             dtpPublishedDate.Location = new System.Drawing.Point(410, 8);
             dtpPublishedDate.Name = "dtpPublishedDate";
             dtpPublishedDate.Size = new System.Drawing.Size(143, 23);
-            dtpPublishedDate.TabIndex = 6;
+            dtpPublishedDate.TabIndex = 1;
             // 
             // txtRegistrationNumber
             // 
             txtRegistrationNumber.Location = new System.Drawing.Point(113, 8);
             txtRegistrationNumber.Name = "txtRegistrationNumber";
             txtRegistrationNumber.Size = new System.Drawing.Size(201, 23);
-            txtRegistrationNumber.TabIndex = 3;
+            txtRegistrationNumber.TabIndex = 0;
             // 
             // label5
             // 
@@ -166,14 +168,31 @@
             label1.TabIndex = 2;
             label1.Text = "Registration No.";
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(groupBox4, 0, 1);
+            tableLayoutPanel1.Controls.Add(groupBox5, 1, 1);
+            tableLayoutPanel1.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(groupBox3, 1, 0);
+            tableLayoutPanel1.Location = new System.Drawing.Point(3, 65);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(790, 253);
+            tableLayoutPanel1.TabIndex = 7;
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(panel1);
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox1.Location = new System.Drawing.Point(3, 68);
+            groupBox1.Location = new System.Drawing.Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(391, 120);
-            groupBox1.TabIndex = 6;
+            groupBox1.Size = new System.Drawing.Size(389, 120);
+            groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Husband's Info.";
             // 
@@ -189,7 +208,7 @@
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel1.Location = new System.Drawing.Point(3, 19);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(385, 98);
+            panel1.Size = new System.Drawing.Size(383, 98);
             panel1.TabIndex = 0;
             // 
             // nudHusbandAgeMonth
@@ -198,7 +217,7 @@
             nudHusbandAgeMonth.Maximum = new decimal(new int[] { 12, 0, 0, 0 });
             nudHusbandAgeMonth.Name = "nudHusbandAgeMonth";
             nudHusbandAgeMonth.Size = new System.Drawing.Size(89, 23);
-            nudHusbandAgeMonth.TabIndex = 4;
+            nudHusbandAgeMonth.TabIndex = 5;
             // 
             // nudHusbandAgeYear
             // 
@@ -246,10 +265,10 @@
             // 
             groupBox4.Controls.Add(panel4);
             groupBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox4.Location = new System.Drawing.Point(3, 196);
+            groupBox4.Location = new System.Drawing.Point(3, 129);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new System.Drawing.Size(391, 154);
-            groupBox4.TabIndex = 6;
+            groupBox4.Size = new System.Drawing.Size(389, 121);
+            groupBox4.TabIndex = 8;
             groupBox4.TabStop = false;
             groupBox4.Text = "Husband's Address";
             // 
@@ -267,7 +286,7 @@
             panel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel4.Location = new System.Drawing.Point(3, 19);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(385, 132);
+            panel4.Size = new System.Drawing.Size(383, 99);
             panel4.TabIndex = 0;
             // 
             // cmbxHusbandBarangay
@@ -284,7 +303,7 @@
             cmbxHusbandMunicipality.Location = new System.Drawing.Point(75, 69);
             cmbxHusbandMunicipality.Name = "cmbxHusbandMunicipality";
             cmbxHusbandMunicipality.Size = new System.Drawing.Size(294, 23);
-            cmbxHusbandMunicipality.TabIndex = 7;
+            cmbxHusbandMunicipality.TabIndex = 8;
             // 
             // cmbxHusbandProvince
             // 
@@ -326,7 +345,7 @@
             txtHusbandStreet.Location = new System.Drawing.Point(75, 11);
             txtHusbandStreet.Name = "txtHusbandStreet";
             txtHusbandStreet.Size = new System.Drawing.Size(294, 23);
-            txtHusbandStreet.TabIndex = 3;
+            txtHusbandStreet.TabIndex = 6;
             // 
             // label12
             // 
@@ -336,17 +355,6 @@
             label12.Size = new System.Drawing.Size(37, 15);
             label12.TabIndex = 2;
             label12.Text = "Street";
-            // 
-            // groupBox5
-            // 
-            groupBox5.Controls.Add(panel5);
-            groupBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox5.Location = new System.Drawing.Point(403, 196);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new System.Drawing.Size(390, 154);
-            groupBox5.TabIndex = 6;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "Wife's Address";
             // 
             // panel5
             // 
@@ -362,66 +370,8 @@
             panel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel5.Location = new System.Drawing.Point(3, 19);
             panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(384, 132);
+            panel5.Size = new System.Drawing.Size(383, 99);
             panel5.TabIndex = 0;
-            // 
-            // cmbxWifeBarangay
-            // 
-            cmbxWifeBarangay.FormattingEnabled = true;
-            cmbxWifeBarangay.Location = new System.Drawing.Point(75, 98);
-            cmbxWifeBarangay.Name = "cmbxWifeBarangay";
-            cmbxWifeBarangay.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeBarangay.TabIndex = 7;
-            // 
-            // cmbxWifeMunicipality
-            // 
-            cmbxWifeMunicipality.FormattingEnabled = true;
-            cmbxWifeMunicipality.Location = new System.Drawing.Point(75, 69);
-            cmbxWifeMunicipality.Name = "cmbxWifeMunicipality";
-            cmbxWifeMunicipality.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeMunicipality.TabIndex = 7;
-            // 
-            // cmbxWifeProvince
-            // 
-            cmbxWifeProvince.FormattingEnabled = true;
-            cmbxWifeProvince.Location = new System.Drawing.Point(75, 40);
-            cmbxWifeProvince.Name = "cmbxWifeProvince";
-            cmbxWifeProvince.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeProvince.TabIndex = 7;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(9, 100);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(56, 15);
-            label14.TabIndex = 2;
-            label14.Text = "Barangay";
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(9, 71);
-            label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(61, 15);
-            label15.TabIndex = 2;
-            label15.Text = "Mun./City";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(9, 42);
-            label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(53, 15);
-            label16.TabIndex = 2;
-            label16.Text = "Province";
-            // 
-            // txtWifeStreet
-            // 
-            txtWifeStreet.Location = new System.Drawing.Point(75, 11);
-            txtWifeStreet.Name = "txtWifeStreet";
-            txtWifeStreet.Size = new System.Drawing.Size(294, 23);
-            txtWifeStreet.TabIndex = 3;
             // 
             // label17
             // 
@@ -432,14 +382,83 @@
             label17.TabIndex = 2;
             label17.Text = "Street";
             // 
+            // txtWifeStreet
+            // 
+            txtWifeStreet.Location = new System.Drawing.Point(75, 11);
+            txtWifeStreet.Name = "txtWifeStreet";
+            txtWifeStreet.Size = new System.Drawing.Size(294, 23);
+            txtWifeStreet.TabIndex = 12;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(9, 42);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(53, 15);
+            label16.TabIndex = 2;
+            label16.Text = "Province";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(9, 71);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(61, 15);
+            label15.TabIndex = 2;
+            label15.Text = "Mun./City";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(9, 100);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(56, 15);
+            label14.TabIndex = 2;
+            label14.Text = "Barangay";
+            // 
+            // cmbxWifeProvince
+            // 
+            cmbxWifeProvince.FormattingEnabled = true;
+            cmbxWifeProvince.Location = new System.Drawing.Point(75, 40);
+            cmbxWifeProvince.Name = "cmbxWifeProvince";
+            cmbxWifeProvince.Size = new System.Drawing.Size(294, 23);
+            cmbxWifeProvince.TabIndex = 13;
+            // 
+            // cmbxWifeMunicipality
+            // 
+            cmbxWifeMunicipality.FormattingEnabled = true;
+            cmbxWifeMunicipality.Location = new System.Drawing.Point(75, 69);
+            cmbxWifeMunicipality.Name = "cmbxWifeMunicipality";
+            cmbxWifeMunicipality.Size = new System.Drawing.Size(294, 23);
+            cmbxWifeMunicipality.TabIndex = 14;
+            // 
+            // cmbxWifeBarangay
+            // 
+            cmbxWifeBarangay.FormattingEnabled = true;
+            cmbxWifeBarangay.Location = new System.Drawing.Point(75, 98);
+            cmbxWifeBarangay.Name = "cmbxWifeBarangay";
+            cmbxWifeBarangay.Size = new System.Drawing.Size(294, 23);
+            cmbxWifeBarangay.TabIndex = 7;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(panel5);
+            groupBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            groupBox5.Location = new System.Drawing.Point(398, 129);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new System.Drawing.Size(389, 121);
+            groupBox5.TabIndex = 6;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Wife's Address";
+            // 
             // groupBox3
             // 
             groupBox3.Controls.Add(panel3);
             groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox3.Location = new System.Drawing.Point(403, 68);
+            groupBox3.Location = new System.Drawing.Point(398, 3);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(390, 120);
-            groupBox3.TabIndex = 6;
+            groupBox3.Size = new System.Drawing.Size(389, 120);
+            groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Wife's Info.";
             // 
@@ -455,7 +474,7 @@
             panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel3.Location = new System.Drawing.Point(3, 19);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(384, 98);
+            panel3.Size = new System.Drawing.Size(383, 98);
             panel3.TabIndex = 0;
             // 
             // nudWifeAgeMonth
@@ -464,7 +483,7 @@
             nudWifeAgeMonth.Maximum = new decimal(new int[] { 12, 0, 0, 0 });
             nudWifeAgeMonth.Name = "nudWifeAgeMonth";
             nudWifeAgeMonth.Size = new System.Drawing.Size(89, 23);
-            nudWifeAgeMonth.TabIndex = 4;
+            nudWifeAgeMonth.TabIndex = 11;
             // 
             // nudWifeAgeYear
             // 
@@ -472,7 +491,7 @@
             nudWifeAgeYear.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudWifeAgeYear.Name = "nudWifeAgeYear";
             nudWifeAgeYear.Size = new System.Drawing.Size(89, 23);
-            nudWifeAgeYear.TabIndex = 4;
+            nudWifeAgeYear.TabIndex = 10;
             // 
             // label9
             // 
@@ -497,7 +516,7 @@
             txtWifeName.Location = new System.Drawing.Point(75, 8);
             txtWifeName.Name = "txtWifeName";
             txtWifeName.Size = new System.Drawing.Size(294, 23);
-            txtWifeName.TabIndex = 3;
+            txtWifeName.TabIndex = 9;
             // 
             // label11
             // 
@@ -512,17 +531,15 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(groupBox5);
-            Controls.Add(groupBox4);
-            Controls.Add(groupBox3);
-            Controls.Add(groupBox1);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(groupBox2);
             Name = "ucMarriageLicense";
-            Size = new System.Drawing.Size(800, 357);
+            Size = new System.Drawing.Size(800, 321);
             Load += ucMarriageLicense_Load;
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -531,9 +548,9 @@
             groupBox4.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            groupBox5.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
+            groupBox5.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -552,22 +569,25 @@
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.DateTimePicker dtpIssuedDate;
         internal System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.NumericUpDown nudHusbandAgeMonth;
+        internal System.Windows.Forms.NumericUpDown nudHusbandAgeYear;
+        internal System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.TextBox txtHusbandName;
         internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.Label label6;
-        internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.Panel panel4;
+        internal System.Windows.Forms.ComboBox cmbxHusbandBarangay;
+        internal System.Windows.Forms.ComboBox cmbxHusbandMunicipality;
+        internal System.Windows.Forms.ComboBox cmbxHusbandProvince;
+        internal System.Windows.Forms.Label label13;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtHusbandStreet;
         internal System.Windows.Forms.Label label12;
-        internal System.Windows.Forms.Label label13;
-        internal System.Windows.Forms.ComboBox cmbxHusbandBarangay;
-        internal System.Windows.Forms.ComboBox cmbxHusbandMunicipality;
-        internal System.Windows.Forms.ComboBox cmbxHusbandProvince;
         internal System.Windows.Forms.GroupBox groupBox5;
         internal System.Windows.Forms.Panel panel5;
         internal System.Windows.Forms.ComboBox cmbxWifeBarangay;
@@ -580,13 +600,11 @@
         internal System.Windows.Forms.Label label17;
         internal System.Windows.Forms.GroupBox groupBox3;
         internal System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.NumericUpDown nudWifeAgeMonth;
+        internal System.Windows.Forms.NumericUpDown nudWifeAgeYear;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.TextBox txtWifeName;
         internal System.Windows.Forms.Label label11;
-        internal System.Windows.Forms.NumericUpDown nudHusbandAgeYear;
-        internal System.Windows.Forms.NumericUpDown nudWifeAgeYear;
-        internal System.Windows.Forms.NumericUpDown nudHusbandAgeMonth;
-        internal System.Windows.Forms.NumericUpDown nudWifeAgeMonth;
     }
 }
