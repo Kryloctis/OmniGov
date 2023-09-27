@@ -8,6 +8,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         public frmMarriageLicense()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
