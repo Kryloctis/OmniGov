@@ -46,6 +46,7 @@ using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
@@ -694,6 +695,11 @@ namespace AccountingSystem.Views.Dashboard
         private void rPTToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRptPayments().ShowDialog();
+        }
+
+        private void aF54ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmMarriageLicense().ShowDialog();
         }
     }
 }
