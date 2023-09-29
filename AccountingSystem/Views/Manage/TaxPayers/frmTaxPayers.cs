@@ -203,6 +203,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
         }
-
     }
 }

@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
-    public partial class frmPayments : Form
+    public partial class frmRptPayments : Form
     {
         private ucRptTaxDues ucRptTaxDues;
         private ucPayment ucPayment;
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucCattleOwnership ucCattleOwnership;
         internal ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
 
-        public frmPayments()
+        public frmRptPayments()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

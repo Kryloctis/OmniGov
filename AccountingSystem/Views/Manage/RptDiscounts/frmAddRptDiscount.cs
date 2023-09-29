@@ -24,39 +24,35 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var model = new RptDiscountsModel()
-                {
-                    Month = Convert.ToInt32(uc.cmbxMonth.SelectedValue),
-                    Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value,
-                    IsAdvance = uc.chckBxAdvance.Checked
-                };
-
-                return AccFactory.RptDiscountRepository().Insert(model);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var model = new RptDiscountsModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Month = Convert.ToInt32(uc.cmbxMonth.SelectedValue),
+                Description = uc.txtDescription.Text.Trim(),
+                Rate = uc.nudRate.Value,
+                IsAdvance = uc.chckBxAdvance.Checked
+            };
+
+            return AccFactory.RptDiscountRepository().Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Discount has been saved.");
-                _frmRptDiscounts.LoadDiscounts();
-                uc.ResetForm();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Discount has been saved.");
+                    _frmRptDiscounts.LoadDiscounts();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

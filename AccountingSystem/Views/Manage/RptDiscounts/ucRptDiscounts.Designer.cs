@@ -83,11 +83,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // nudRate
             // 
             this.nudRate.DecimalPlaces = 2;
-            this.nudRate.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.nudRate.Location = new System.Drawing.Point(81, 88);
             this.nudRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudRate.Name = "nudRate";

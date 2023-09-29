@@ -25,15 +25,31 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
             LoadSelectedValue();
+            SetUpdateRestrictions();
+        }
 
-            //prevent from updating the series number of the receipts.
-            bool receiptHasIssuance = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
-            if (receiptHasIssuance)
+        private void SetUpdateRestrictions()
+        {
+            try
             {
-                uc.cmbAccountableForms.Enabled = false;
-                uc.txtReceiptNumberFrom.Enabled = false;
-                uc.txtReceiptNumberTo.Enabled = false;
+                //restrict updating series number and set the max date of received date receipts if receipts has been issued.
+                bool receiptHasIssuance = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
+
+                if (receiptHasIssuance)
+                {
+                    uc.cmbAccountableForms.Enabled = false;
+                    uc.txtReceiptNumberFrom.Enabled = false;
+                    uc.txtReceiptNumberTo.Enabled = false;
+
+                    //set max date of date received.
+                    Dictionary<string, string> dict = AccFactory.ReceiptsIssuedRepository().GetViewRecordReceiptId(_receiptID);
+                    if (dict.Count != 0)
+                        uc.dtpReceivedDate.MaxDate = Convert.ToDateTime(dict["date_issued"]);
+                }
+
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
         }
 
         private void LoadSelectedValue()
