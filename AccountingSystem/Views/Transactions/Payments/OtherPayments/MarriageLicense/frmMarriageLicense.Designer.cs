@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             ucPayment1 = new ucPayment();
-            ucOtherCharges1 = new ucOtherCharges();
             tabPageFees = new System.Windows.Forms.TabPage();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            ucMarriageLicense1 = new ucMarriageLicense();
+            ucOtherCharges1 = new ucOtherCharges();
             btnBack = new System.Windows.Forms.ToolStripButton();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             label4 = new System.Windows.Forms.Label();
@@ -41,7 +43,7 @@
             panel1 = new System.Windows.Forms.Panel();
             tabNewPayee = new System.Windows.Forms.TabPage();
             btnNew = new System.Windows.Forms.ToolStripButton();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
+            dgPayees = new System.Windows.Forms.DataGridView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -60,11 +62,16 @@
             radFees = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabPageFees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             toolStrip2.SuspendLayout();
             panel1.SuspendLayout();
             tabNewPayee.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgPayees).BeginInit();
             toolStrip1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabPayeeList.SuspendLayout();
@@ -84,18 +91,9 @@
             ucPayment1.Size = new System.Drawing.Size(853, 511);
             ucPayment1.TabIndex = 0;
             // 
-            // ucOtherCharges1
-            // 
-            ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
-            ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
-            ucOtherCharges1.Name = "ucOtherCharges1";
-            ucOtherCharges1.Size = new System.Drawing.Size(853, 511);
-            ucOtherCharges1.TabIndex = 0;
-            // 
             // tabPageFees
             // 
-            tabPageFees.Controls.Add(ucOtherCharges1);
+            tabPageFees.Controls.Add(splitContainer1);
             tabPageFees.Location = new System.Drawing.Point(4, 5);
             tabPageFees.Name = "tabPageFees";
             tabPageFees.Padding = new System.Windows.Forms.Padding(3);
@@ -103,6 +101,44 @@
             tabPageFees.TabIndex = 1;
             tabPageFees.Text = "tabPageFees";
             tabPageFees.UseVisualStyleBackColor = true;
+            tabPageFees.Enter += tabPageFees_Enter;
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.Location = new System.Drawing.Point(3, 3);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(ucMarriageLicense1);
+            splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(3);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(ucOtherCharges1);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
+            splitContainer1.Size = new System.Drawing.Size(853, 511);
+            splitContainer1.SplitterDistance = 348;
+            splitContainer1.TabIndex = 2;
+            // 
+            // ucMarriageLicense1
+            // 
+            ucMarriageLicense1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucMarriageLicense1.Location = new System.Drawing.Point(3, 3);
+            ucMarriageLicense1.Name = "ucMarriageLicense1";
+            ucMarriageLicense1.Size = new System.Drawing.Size(847, 342);
+            ucMarriageLicense1.TabIndex = 0;
+            // 
+            // ucOtherCharges1
+            // 
+            ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
+            ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
+            ucOtherCharges1.Name = "ucOtherCharges1";
+            ucOtherCharges1.Size = new System.Drawing.Size(847, 153);
+            ucOtherCharges1.TabIndex = 1;
             // 
             // btnBack
             // 
@@ -112,6 +148,7 @@
             btnBack.Size = new System.Drawing.Size(36, 35);
             btnBack.Text = "Back";
             btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnBack.Click += btnBack_Click;
             // 
             // toolStrip2
             // 
@@ -210,16 +247,17 @@
             btnNew.Size = new System.Drawing.Size(35, 35);
             btnNew.Text = "New";
             btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnNew.Click += btnNew_Click;
             // 
-            // dataGridView1
+            // dgPayees
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(0, 43);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(851, 465);
-            dataGridView1.TabIndex = 1;
+            dgPayees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgPayees.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgPayees.Location = new System.Drawing.Point(0, 43);
+            dgPayees.Name = "dgPayees";
+            dgPayees.RowTemplate.Height = 25;
+            dgPayees.Size = new System.Drawing.Size(851, 465);
+            dgPayees.TabIndex = 1;
             // 
             // progressBar1
             // 
@@ -257,6 +295,7 @@
             btnSearch.Size = new System.Drawing.Size(46, 35);
             btnSearch.Text = "Search";
             btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSearch.Click += btnSearch_Click;
             // 
             // tabPagePayment
             // 
@@ -268,10 +307,11 @@
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
+            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // tabPayeeList
             // 
-            tabPayeeList.Controls.Add(dataGridView1);
+            tabPayeeList.Controls.Add(dgPayees);
             tabPayeeList.Controls.Add(progressBar1);
             tabPayeeList.Controls.Add(toolStrip1);
             tabPayeeList.Location = new System.Drawing.Point(4, 5);
@@ -308,6 +348,7 @@
             tabPagePayee.TabIndex = 0;
             tabPagePayee.Text = "tabPagePayee";
             tabPagePayee.UseVisualStyleBackColor = true;
+            tabPagePayee.Enter += tabPagePayee_Enter;
             // 
             // tabControlMain
             // 
@@ -330,6 +371,9 @@
             // 
             bgwPayee.WorkerReportsProgress = true;
             bgwPayee.WorkerSupportsCancellation = true;
+            bgwPayee.DoWork += bgwPayee_DoWork;
+            bgwPayee.ProgressChanged += bgwPayee_ProgressChanged;
+            bgwPayee.RunWorkerCompleted += bgwPayee_RunWorkerCompleted;
             // 
             // flowLayoutPanel1
             // 
@@ -364,6 +408,7 @@
             btnNextMain.TabIndex = 0;
             btnNextMain.Text = "Next";
             btnNextMain.UseVisualStyleBackColor = true;
+            btnNextMain.Click += btnNextMain_Click;
             // 
             // btnBackMain
             // 
@@ -374,6 +419,7 @@
             btnBackMain.TabIndex = 0;
             btnBackMain.Text = "Back";
             btnBackMain.UseVisualStyleBackColor = true;
+            btnBackMain.Click += btnBackMain_Click;
             // 
             // radPayee
             // 
@@ -421,6 +467,7 @@
             // 
             // flowLayoutPanel2
             // 
+            flowLayoutPanel2.BackColor = System.Drawing.Color.White;
             flowLayoutPanel2.Controls.Add(radPayee);
             flowLayoutPanel2.Controls.Add(radFees);
             flowLayoutPanel2.Controls.Add(radPayment);
@@ -433,6 +480,12 @@
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 557);
             flowLayoutPanel2.TabIndex = 7;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            // 
             // frmMarriageLicense
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -443,17 +496,23 @@
             Controls.Add(flowLayoutPanel2);
             MinimizeBox = false;
             Name = "frmMarriageLicense";
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Payment > AF 54 - Marriage License";
             Load += frmMarriageLicense_Load;
             tabPageFees.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabNewPayee.ResumeLayout(false);
             tabNewPayee.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgPayees).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabPagePayment.ResumeLayout(false);
@@ -470,7 +529,6 @@
         #endregion
 
         private ucPayment ucPayment1;
-        private ucOtherCharges ucOtherCharges1;
         private System.Windows.Forms.TabPage tabPageFees;
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.ToolStrip toolStrip2;
@@ -482,7 +540,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabPage tabNewPayee;
         private System.Windows.Forms.ToolStripButton btnNew;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgPayees;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -501,5 +559,9 @@
         private System.Windows.Forms.RadioButton radFees;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private ucOtherCharges ucOtherCharges1;
+        private ucMarriageLicense ucMarriageLicense1;
+        internal System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
