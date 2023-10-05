@@ -12,14 +12,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
     public partial class frmMarriageLicense : Form
     {
 
-        private ucTaxPayers ucTaxPayers;
-        private ucPayment ucPayment;
+        private readonly ucTaxPayers ucTaxPayers;
+        private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
         private bool paymentComplete = false;
+        private readonly ucOtherCharges ucOtherCharges;
+        private readonly ucMarriageLicense ucMarriageLicense;
 
-        private ucOtherCharges ucOtherCharges;
-
-        private ucMarriageLicense ucMarriageLicense;
+        private bool isNewPayee = false;
 
         public frmMarriageLicense()
         {
@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             ucPayment = ucPayment1;
             ucMarriageLicense = ucMarriageLicense1;
             ucOtherCharges = ucOtherCharges1;
+            ucOtherCharges.accountableForm = "54";
         }
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
@@ -53,7 +54,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 new DataColumn("taxpayers_address", typeof(string)),
                 new DataColumn("taxpayers_contact_info", typeof(string)),
             };
-
         }
 
         private DataTable DataTablePayees(string searchText)
@@ -126,7 +126,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
         private void ConfirmPayment()
         {
-
             try
             {
                 if (!ucPayment.ValidateChildren())
@@ -138,6 +137,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
                     return;
 
+                bgwSavingPayment.RunWorkerAsync();
                 dialog.ShowDialog();
                 dialog.Text = "Processing Payment...";
                 dialog.label1.Text = "Processing Payment...";
@@ -211,6 +211,18 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             radFees.Checked = true;
         }
 
+        private Dictionary<string, string> GetTaxPayerData()
+        {
+            var dict = new Dictionary<string, string>();
+            int rowIndex = dgPayees.CurrentRow.Index;
+            int taxpayerId = Convert.ToInt32(dgPayees.Rows[rowIndex].Cells["taxpayers_id"].Value);
+            string taxpayerName = dgPayees.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+
+            dict.Add("taxpayers_id", taxpayerId.ToString());
+            dict.Add("taxpayer_name", taxpayerName);
+            return dict;
+        }
+
         private void LoadPaymentTab()
         {
             btnNextMain.Text = "Confirm Payment";
@@ -218,13 +230,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             radPayment.Checked = true;
 
             ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
-            //ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
-            //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+            ucPayment.OnLoad("54");
 
-            ucPayment.txtTaxpayer.Text = "ARCHIE SORIANO SALE";
-            ucPayment.txtPayee.Text = "ARCHIE SORIANO SALE";
-
-            ucPayment.OnLoad(ucPayment.selectedAccountableFormNo);
+            if (isNewPayee)
+                ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
+            else
+                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
         }
 
         private void tabPagePayee_Enter(object sender, EventArgs e)
@@ -264,16 +275,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        #region Payment
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             int totalProgress = ucPayment.dgCheques.Rows.Count;
             int progressCount = 0;
             var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
-
-            //rptPayments Model
-            var rptPaymentsModel = new RptPaymentsModel();
-
-            rptPaymentsModel.PostedBy = Helper.UserId;
 
             var chequesModels = new List<ChequesModel>();
             try
@@ -322,7 +329,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                     };
 
                     progressCount += 1;
-                    backgroundWorker1.ReportProgress((progressCount * 100) / totalProgress);
+                    bgwSavingPayment.ReportProgress((progressCount * 100) / totalProgress);
                     chequesModels.Add(model);
                 }
 
@@ -330,7 +337,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-
                     SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
                 });
 
@@ -339,6 +345,29 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void bgwSavingPayment_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            dialog.label1.Text = e.ProgressPercentage.ToString();
+            dialog.btnClose.Enabled = false;
+        }
+
+        private void bgwSavingPayment_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result.ToString() == "complete")
+            {
+                dialog.label1.Text = "Payment Process Complete!";
+                dialog.btnClose.Enabled = true;
+                btnNextMain.Text = "Finish";
+                btnBack.Enabled = false;
+                paymentComplete = true;
+                ucPayment.Enabled = false;
+                return;
+            }
+
+            paymentComplete = false;
+        }
+        #endregion
 
         private bool SaveMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
         {
@@ -382,7 +411,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         private MarriageLicenseModel MarriageLicenseModel()
         {
             var marriageLicenseModel = new MarriageLicenseModel();
-
             try
             {
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
@@ -414,6 +442,16 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             }
 
             return marriageLicenseModel;
+        }
+
+        private void tabNewPayee_Enter(object sender, EventArgs e)
+        {
+            isNewPayee = true;
+        }
+
+        private void tabPayeeList_Enter(object sender, EventArgs e)
+        {
+            isNewPayee = false;
         }
     }
 }

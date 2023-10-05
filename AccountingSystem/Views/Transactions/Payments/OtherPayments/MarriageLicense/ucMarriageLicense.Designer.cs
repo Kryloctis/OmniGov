@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             dtpIssuedDate = new System.Windows.Forms.DateTimePicker();
@@ -73,6 +74,7 @@
             label10 = new System.Windows.Forms.Label();
             txtWifeName = new System.Windows.Forms.TextBox();
             label11 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -88,6 +90,7 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWifeAgeMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudWifeAgeYear).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -97,7 +100,7 @@
             groupBox2.Location = new System.Drawing.Point(3, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(790, 59);
-            groupBox2.TabIndex = 2;
+            groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Marriage Details";
             // 
@@ -120,7 +123,7 @@
             // 
             dtpIssuedDate.CustomFormat = "MMMM dd,  yyyy";
             dtpIssuedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpIssuedDate.Location = new System.Drawing.Point(626, 8);
+            dtpIssuedDate.Location = new System.Drawing.Point(624, 8);
             dtpIssuedDate.Name = "dtpIssuedDate";
             dtpIssuedDate.Size = new System.Drawing.Size(143, 23);
             dtpIssuedDate.TabIndex = 2;
@@ -129,7 +132,7 @@
             // 
             dtpPublishedDate.CustomFormat = "MMMM dd,  yyyy";
             dtpPublishedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpPublishedDate.Location = new System.Drawing.Point(410, 8);
+            dtpPublishedDate.Location = new System.Drawing.Point(406, 8);
             dtpPublishedDate.Name = "dtpPublishedDate";
             dtpPublishedDate.Size = new System.Drawing.Size(143, 23);
             dtpPublishedDate.TabIndex = 1;
@@ -138,13 +141,13 @@
             // 
             txtRegistrationNumber.Location = new System.Drawing.Point(113, 8);
             txtRegistrationNumber.Name = "txtRegistrationNumber";
-            txtRegistrationNumber.Size = new System.Drawing.Size(201, 23);
+            txtRegistrationNumber.Size = new System.Drawing.Size(195, 23);
             txtRegistrationNumber.TabIndex = 0;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(563, 11);
+            label5.Location = new System.Drawing.Point(561, 11);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(57, 15);
             label5.TabIndex = 2;
@@ -153,10 +156,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(328, 11);
+            label4.Location = new System.Drawing.Point(324, 11);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(76, 15);
-            label4.TabIndex = 2;
+            label4.TabIndex = 1;
             label4.Text = "Published on";
             // 
             // label1
@@ -165,7 +168,7 @@
             label1.Location = new System.Drawing.Point(15, 11);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(92, 15);
-            label1.TabIndex = 2;
+            label1.TabIndex = 5;
             label1.Text = "Registration No.";
             // 
             // tableLayoutPanel1
@@ -218,24 +221,24 @@
             cmbxHusbandBarangay.FormattingEnabled = true;
             cmbxHusbandBarangay.Location = new System.Drawing.Point(75, 98);
             cmbxHusbandBarangay.Name = "cmbxHusbandBarangay";
-            cmbxHusbandBarangay.Size = new System.Drawing.Size(294, 23);
-            cmbxHusbandBarangay.TabIndex = 7;
+            cmbxHusbandBarangay.Size = new System.Drawing.Size(290, 23);
+            cmbxHusbandBarangay.TabIndex = 12;
             // 
             // cmbxHusbandMunicipality
             // 
             cmbxHusbandMunicipality.FormattingEnabled = true;
             cmbxHusbandMunicipality.Location = new System.Drawing.Point(75, 69);
             cmbxHusbandMunicipality.Name = "cmbxHusbandMunicipality";
-            cmbxHusbandMunicipality.Size = new System.Drawing.Size(294, 23);
-            cmbxHusbandMunicipality.TabIndex = 8;
+            cmbxHusbandMunicipality.Size = new System.Drawing.Size(290, 23);
+            cmbxHusbandMunicipality.TabIndex = 11;
             // 
             // cmbxHusbandProvince
             // 
             cmbxHusbandProvince.FormattingEnabled = true;
             cmbxHusbandProvince.Location = new System.Drawing.Point(75, 40);
             cmbxHusbandProvince.Name = "cmbxHusbandProvince";
-            cmbxHusbandProvince.Size = new System.Drawing.Size(294, 23);
-            cmbxHusbandProvince.TabIndex = 7;
+            cmbxHusbandProvince.Size = new System.Drawing.Size(290, 23);
+            cmbxHusbandProvince.TabIndex = 10;
             // 
             // label13
             // 
@@ -268,8 +271,8 @@
             // 
             txtHusbandStreet.Location = new System.Drawing.Point(75, 11);
             txtHusbandStreet.Name = "txtHusbandStreet";
-            txtHusbandStreet.Size = new System.Drawing.Size(294, 23);
-            txtHusbandStreet.TabIndex = 6;
+            txtHusbandStreet.Size = new System.Drawing.Size(290, 23);
+            txtHusbandStreet.TabIndex = 9;
             // 
             // label12
             // 
@@ -313,24 +316,24 @@
             cmbxWifeBarangay.FormattingEnabled = true;
             cmbxWifeBarangay.Location = new System.Drawing.Point(75, 98);
             cmbxWifeBarangay.Name = "cmbxWifeBarangay";
-            cmbxWifeBarangay.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeBarangay.TabIndex = 7;
+            cmbxWifeBarangay.Size = new System.Drawing.Size(289, 23);
+            cmbxWifeBarangay.TabIndex = 16;
             // 
             // cmbxWifeMunicipality
             // 
             cmbxWifeMunicipality.FormattingEnabled = true;
             cmbxWifeMunicipality.Location = new System.Drawing.Point(75, 69);
             cmbxWifeMunicipality.Name = "cmbxWifeMunicipality";
-            cmbxWifeMunicipality.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeMunicipality.TabIndex = 14;
+            cmbxWifeMunicipality.Size = new System.Drawing.Size(289, 23);
+            cmbxWifeMunicipality.TabIndex = 15;
             // 
             // cmbxWifeProvince
             // 
             cmbxWifeProvince.FormattingEnabled = true;
             cmbxWifeProvince.Location = new System.Drawing.Point(75, 40);
             cmbxWifeProvince.Name = "cmbxWifeProvince";
-            cmbxWifeProvince.Size = new System.Drawing.Size(294, 23);
-            cmbxWifeProvince.TabIndex = 13;
+            cmbxWifeProvince.Size = new System.Drawing.Size(289, 23);
+            cmbxWifeProvince.TabIndex = 14;
             // 
             // label14
             // 
@@ -363,8 +366,8 @@
             // 
             txtWifeStreet.Location = new System.Drawing.Point(75, 11);
             txtWifeStreet.Name = "txtWifeStreet";
-            txtWifeStreet.Size = new System.Drawing.Size(294, 23);
-            txtWifeStreet.TabIndex = 12;
+            txtWifeStreet.Size = new System.Drawing.Size(289, 23);
+            txtWifeStreet.TabIndex = 13;
             // 
             // label17
             // 
@@ -439,7 +442,7 @@
             // 
             txtHusbandName.Location = new System.Drawing.Point(75, 8);
             txtHusbandName.Name = "txtHusbandName";
-            txtHusbandName.Size = new System.Drawing.Size(294, 23);
+            txtHusbandName.Size = new System.Drawing.Size(290, 23);
             txtHusbandName.TabIndex = 3;
             // 
             // label8
@@ -483,7 +486,7 @@
             nudWifeAgeMonth.Maximum = new decimal(new int[] { 12, 0, 0, 0 });
             nudWifeAgeMonth.Name = "nudWifeAgeMonth";
             nudWifeAgeMonth.Size = new System.Drawing.Size(89, 23);
-            nudWifeAgeMonth.TabIndex = 11;
+            nudWifeAgeMonth.TabIndex = 8;
             // 
             // nudWifeAgeYear
             // 
@@ -491,7 +494,7 @@
             nudWifeAgeYear.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudWifeAgeYear.Name = "nudWifeAgeYear";
             nudWifeAgeYear.Size = new System.Drawing.Size(89, 23);
-            nudWifeAgeYear.TabIndex = 10;
+            nudWifeAgeYear.TabIndex = 7;
             // 
             // label9
             // 
@@ -515,8 +518,8 @@
             // 
             txtWifeName.Location = new System.Drawing.Point(75, 8);
             txtWifeName.Name = "txtWifeName";
-            txtWifeName.Size = new System.Drawing.Size(294, 23);
-            txtWifeName.TabIndex = 9;
+            txtWifeName.Size = new System.Drawing.Size(289, 23);
+            txtWifeName.TabIndex = 6;
             // 
             // label11
             // 
@@ -526,6 +529,10 @@
             label11.Size = new System.Drawing.Size(39, 15);
             label11.TabIndex = 2;
             label11.Text = "Name";
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
             // 
             // ucMarriageLicense
             // 
@@ -556,6 +563,7 @@
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudWifeAgeMonth).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudWifeAgeYear).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -606,5 +614,6 @@
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.TextBox txtWifeName;
         internal System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

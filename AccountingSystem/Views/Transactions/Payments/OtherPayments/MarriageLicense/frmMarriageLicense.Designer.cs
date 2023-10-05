@@ -62,7 +62,7 @@
             radFees = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             tabPageFees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -238,6 +238,7 @@
             tabNewPayee.TabIndex = 1;
             tabNewPayee.Text = "tabNewPayee";
             tabNewPayee.UseVisualStyleBackColor = true;
+            tabNewPayee.Enter += tabNewPayee_Enter;
             // 
             // btnNew
             // 
@@ -321,6 +322,7 @@
             tabPayeeList.TabIndex = 0;
             tabPayeeList.Text = "tabPayeeList";
             tabPayeeList.UseVisualStyleBackColor = true;
+            tabPayeeList.Enter += tabPayeeList_Enter;
             // 
             // tabControlPayee
             // 
@@ -480,11 +482,13 @@
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 557);
             flowLayoutPanel2.TabIndex = 7;
             // 
-            // backgroundWorker1
+            // bgwSavingPayment
             // 
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            bgwSavingPayment.WorkerReportsProgress = true;
+            bgwSavingPayment.WorkerSupportsCancellation = true;
+            bgwSavingPayment.DoWork += backgroundWorker1_DoWork;
+            bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
+            bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
             // 
             // frmMarriageLicense
             // 
@@ -562,6 +566,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ucOtherCharges ucOtherCharges1;
         private ucMarriageLicense ucMarriageLicense1;
-        internal System.ComponentModel.BackgroundWorker backgroundWorker1;
+        internal System.ComponentModel.BackgroundWorker bgwSavingPayment;
     }
 }
