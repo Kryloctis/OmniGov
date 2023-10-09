@@ -128,11 +128,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             try
             {
-                if (!ucPayment.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucPayment.GetFormErrors());
+                if (!FormValidations())
                     return;
-                }
 
                 if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
                     return;
@@ -163,10 +160,51 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 ConfirmPayment();
         }
 
+        private bool FormValidations()
+        {
+            var selectedTab = tabControlMain.SelectedTab;
+
+            if (selectedTab == tabPagePayee)
+            {
+                if (isNewPayee)
+                {
+                    if (!ucTaxPayers.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucTaxPayers.GetFormErrors());
+                        return false;
+                    }
+                }
+            }
+
+            else if (selectedTab == tabPageFees)
+            {
+                if (!ucMarriageLicense.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucMarriageLicense.GetFormErrors());
+                    return false;
+                }
+            }
+
+            else if (selectedTab == tabPagePayment)
+            {
+                if (!ucPayment.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucPayment.GetFormErrors());
+                    return false;
+                }
+            }
+
+
+            return true;
+        }
+
         private void btnNextMain_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!FormValidations())
+                    return;
+
                 ChangeTabs();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

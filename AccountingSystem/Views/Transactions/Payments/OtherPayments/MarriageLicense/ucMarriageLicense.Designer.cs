@@ -143,6 +143,8 @@
             txtRegistrationNumber.Name = "txtRegistrationNumber";
             txtRegistrationNumber.Size = new System.Drawing.Size(195, 23);
             txtRegistrationNumber.TabIndex = 0;
+            txtRegistrationNumber.Validating += txtRegistrationNumber_Validating;
+            txtRegistrationNumber.Validated += txtRegistrationNumber_Validated;
             // 
             // label5
             // 
@@ -223,6 +225,8 @@
             cmbxHusbandBarangay.Name = "cmbxHusbandBarangay";
             cmbxHusbandBarangay.Size = new System.Drawing.Size(290, 23);
             cmbxHusbandBarangay.TabIndex = 12;
+            cmbxHusbandBarangay.Validating += cmbxHusbandBarangay_Validating;
+            cmbxHusbandBarangay.Validated += cmbxHusbandBarangay_Validated;
             // 
             // cmbxHusbandMunicipality
             // 
@@ -231,6 +235,8 @@
             cmbxHusbandMunicipality.Name = "cmbxHusbandMunicipality";
             cmbxHusbandMunicipality.Size = new System.Drawing.Size(290, 23);
             cmbxHusbandMunicipality.TabIndex = 11;
+            cmbxHusbandMunicipality.Validating += cmbxHusbandMunicipality_Validating;
+            cmbxHusbandMunicipality.Validated += cmbxHusbandMunicipality_Validated;
             // 
             // cmbxHusbandProvince
             // 
@@ -239,6 +245,8 @@
             cmbxHusbandProvince.Name = "cmbxHusbandProvince";
             cmbxHusbandProvince.Size = new System.Drawing.Size(290, 23);
             cmbxHusbandProvince.TabIndex = 10;
+            cmbxHusbandProvince.Validating += cmbxHusbandProvince_Validating;
+            cmbxHusbandProvince.Validated += cmbxHusbandProvince_Validated;
             // 
             // label13
             // 
@@ -273,6 +281,8 @@
             txtHusbandStreet.Name = "txtHusbandStreet";
             txtHusbandStreet.Size = new System.Drawing.Size(290, 23);
             txtHusbandStreet.TabIndex = 9;
+            txtHusbandStreet.Validating += txtHusbandStreet_Validating;
+            txtHusbandStreet.Validated += txtHusbandStreet_Validated;
             // 
             // label12
             // 
@@ -318,6 +328,8 @@
             cmbxWifeBarangay.Name = "cmbxWifeBarangay";
             cmbxWifeBarangay.Size = new System.Drawing.Size(289, 23);
             cmbxWifeBarangay.TabIndex = 16;
+            cmbxWifeBarangay.Validating += cmbxWifeBarangay_Validating;
+            cmbxWifeBarangay.Validated += cmbxWifeBarangay_Validated;
             // 
             // cmbxWifeMunicipality
             // 
@@ -326,6 +338,8 @@
             cmbxWifeMunicipality.Name = "cmbxWifeMunicipality";
             cmbxWifeMunicipality.Size = new System.Drawing.Size(289, 23);
             cmbxWifeMunicipality.TabIndex = 15;
+            cmbxWifeMunicipality.Validating += cmbxWifeMunicipality_Validating;
+            cmbxWifeMunicipality.Validated += cmbxWifeMunicipality_Validated;
             // 
             // cmbxWifeProvince
             // 
@@ -334,6 +348,8 @@
             cmbxWifeProvince.Name = "cmbxWifeProvince";
             cmbxWifeProvince.Size = new System.Drawing.Size(289, 23);
             cmbxWifeProvince.TabIndex = 14;
+            cmbxWifeProvince.Validating += cmbxWifeProvince_Validating;
+            cmbxWifeProvince.Validated += cmbxWifeProvince_Validated;
             // 
             // label14
             // 
@@ -368,6 +384,8 @@
             txtWifeStreet.Name = "txtWifeStreet";
             txtWifeStreet.Size = new System.Drawing.Size(289, 23);
             txtWifeStreet.TabIndex = 13;
+            txtWifeStreet.Validating += txtWifeStreet_Validating;
+            txtWifeStreet.Validated += txtWifeStreet_Validated;
             // 
             // label17
             // 
@@ -411,6 +429,8 @@
             nudHusbandAgeMonth.Name = "nudHusbandAgeMonth";
             nudHusbandAgeMonth.Size = new System.Drawing.Size(89, 23);
             nudHusbandAgeMonth.TabIndex = 5;
+            nudHusbandAgeMonth.Validating += nudHusbandAgeMonth_Validating;
+            nudHusbandAgeMonth.Validated += nudHusbandAgeMonth_Validated;
             // 
             // nudHusbandAgeYear
             // 
@@ -419,6 +439,8 @@
             nudHusbandAgeYear.Name = "nudHusbandAgeYear";
             nudHusbandAgeYear.Size = new System.Drawing.Size(89, 23);
             nudHusbandAgeYear.TabIndex = 4;
+            nudHusbandAgeYear.Validating += nudHusbandAgeYear_Validating;
+            nudHusbandAgeYear.Validated += nudHusbandAgeYear_Validated;
             // 
             // label7
             // 
@@ -444,6 +466,8 @@
             txtHusbandName.Name = "txtHusbandName";
             txtHusbandName.Size = new System.Drawing.Size(290, 23);
             txtHusbandName.TabIndex = 3;
+            txtHusbandName.Validating += txtHusbandName_Validating;
+            txtHusbandName.Validated += txtHusbandName_Validated;
             // 
             // label8
             // 
@@ -487,6 +511,8 @@
             nudWifeAgeMonth.Name = "nudWifeAgeMonth";
             nudWifeAgeMonth.Size = new System.Drawing.Size(89, 23);
             nudWifeAgeMonth.TabIndex = 8;
+            nudWifeAgeMonth.Validating += nudWifeAgeMonth_Validating;
+            nudWifeAgeMonth.Validated += nudWifeAgeMonth_Validated;
             // 
             // nudWifeAgeYear
             // 
@@ -495,6 +521,8 @@
             nudWifeAgeYear.Name = "nudWifeAgeYear";
             nudWifeAgeYear.Size = new System.Drawing.Size(89, 23);
             nudWifeAgeYear.TabIndex = 7;
+            nudWifeAgeYear.Validating += nudWifeAgeYear_Validating;
+            nudWifeAgeYear.Validated += nudWifeAgeYear_Validated;
             // 
             // label9
             // 
@@ -520,6 +548,8 @@
             txtWifeName.Name = "txtWifeName";
             txtWifeName.Size = new System.Drawing.Size(289, 23);
             txtWifeName.TabIndex = 6;
+            txtWifeName.Validating += txtWifeName_Validating;
+            txtWifeName.Validated += txtWifeName_Validated;
             // 
             // label11
             // 
@@ -532,12 +562,14 @@
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
             // ucMarriageLicense
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(tableLayoutPanel1);
             Controls.Add(groupBox2);
             Name = "ucMarriageLicense";
