@@ -33,7 +33,7 @@
             panel2 = new System.Windows.Forms.Panel();
             txtPermission = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            txtTaxpayer = new System.Windows.Forms.TextBox();
+            txtPayer = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
@@ -88,7 +88,7 @@
             // 
             panel2.Controls.Add(txtPermission);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(txtTaxpayer);
+            panel2.Controls.Add(txtPayer);
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -113,13 +113,13 @@
             label2.TabIndex = 2;
             label2.Text = "Permission";
             // 
-            // txtTaxpayer
+            // txtPayer
             // 
-            txtTaxpayer.Location = new System.Drawing.Point(77, 18);
-            txtTaxpayer.Name = "txtTaxpayer";
-            txtTaxpayer.ReadOnly = true;
-            txtTaxpayer.Size = new System.Drawing.Size(203, 23);
-            txtTaxpayer.TabIndex = 3;
+            txtPayer.Location = new System.Drawing.Point(77, 18);
+            txtPayer.Name = "txtPayer";
+            txtPayer.ReadOnly = true;
+            txtPayer.Size = new System.Drawing.Size(203, 23);
+            txtPayer.TabIndex = 3;
             // 
             // label1
             // 
@@ -215,6 +215,8 @@
             txtRemainsName.Name = "txtRemainsName";
             txtRemainsName.Size = new System.Drawing.Size(203, 23);
             txtRemainsName.TabIndex = 3;
+            txtRemainsName.Validating += txtRemainsName_Validating;
+            txtRemainsName.Validated += txtRemainsName_Validated;
             // 
             // label4
             // 
@@ -412,7 +414,7 @@
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.TextBox txtPermission;
         internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.TextBox txtTaxpayer;
+        internal System.Windows.Forms.TextBox txtPayer;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.Panel panel1;
