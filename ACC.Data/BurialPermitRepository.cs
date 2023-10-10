@@ -60,7 +60,6 @@ namespace AccountingSystem
         {
             var parameters = new object[][]
             {
-                new object[] { "@taxpayers_id", DbType.Int32, burialPermitModel.TaxpayersID},
                 new object[] { "@permission", DbType.String, burialPermitModel.Permission},
                 new object[] { "@remains_name", DbType.String, burialPermitModel.RemainsName},
                 new object[] { "@remains_nationality", DbType.String, burialPermitModel.RemainsNationality},
@@ -77,7 +76,7 @@ namespace AccountingSystem
                 new object[] { "@created_by", DbType.Int32, burialPermitModel.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (taxpayers_id, permission, remains_name, remains_nationality, remains_age, remains_sex, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_at, created_by) VALUES(@taxpayers_id, @permission, @remains_name, @remains_nationality, @remains_age, @remains_sex, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_at, @created_by)";
+            string query = $"INSERT INTO {tableName} (permission, remains_name, remains_nationality, remains_age, remains_sex, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_at, created_by) VALUES(@permission, @remains_name, @remains_nationality, @remains_age, @remains_sex, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_at, @created_by)";
 
             bool result = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             return result;

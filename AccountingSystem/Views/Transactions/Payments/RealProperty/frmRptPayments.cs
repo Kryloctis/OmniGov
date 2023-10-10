@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
@@ -361,8 +360,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             {
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-                burialPermitModel.TaxpayersID = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
                 burialPermitModel.Permission = ucBurialPermit.txtPermission.Text;
                 burialPermitModel.RemainsName = ucBurialPermit.txtCemetery.Text;
                 burialPermitModel.RemainsNationality = ucBurialPermit.txtRemainsNationality.Text;

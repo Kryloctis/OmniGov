@@ -1,6 +1,8 @@
-﻿using AccountingSystem.Views.Dialogs;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -28,7 +30,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             ucOtherCharges = ucOtherCharges1;
             ucOtherCharges.accountableForm = "58";
         }
-
 
         private void frmBurialPermit_Load(object sender, System.EventArgs e)
         {
@@ -232,6 +233,253 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
                 tabControlMain.SelectedIndex = tabControlMain.SelectedIndex - 1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool SaveBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
+        {
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private PaymentCollectionsModel PaymentCollectionsModel()
+        {
+            var paymentCollectionsModel = new PaymentCollectionsModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+                paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+                paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+                paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
+                paymentCollectionsModel.Amount = ucPayment.amountPayment;
+                paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
+                paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
+                paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
+                paymentCollectionsModel.CreatedBy = Helper.UserId;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return paymentCollectionsModel;
+        }
+
+        private BurialPermitModel BurialPermitModel()
+        {
+            var burialPermitModel = new BurialPermitModel();
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+                burialPermitModel.Permission = ucBurialPermit.txtPermission.Text;
+                burialPermitModel.RemainsName = ucBurialPermit.txtRemainsName.Text;
+                burialPermitModel.RemainsNationality = ucBurialPermit.txtRemainsNationality.Text;
+                burialPermitModel.RemainsAge = Convert.ToInt32(ucBurialPermit.nudRemainsAge.Value);
+                burialPermitModel.RemainsSex = ucBurialPermit.cmbxRemainsSex.Text;
+                burialPermitModel.DeathDate = ucBurialPermit.dtpDeathDate.Value;
+                burialPermitModel.CauseOfDeath = ucBurialPermit.txtCauseOfDeath.Text;
+                burialPermitModel.Cemetery = ucBurialPermit.txtCemetery.Text;
+                burialPermitModel.Disinterment = ucBurialPermit.txtDisinterment.Text;
+                burialPermitModel.IsInfectious = ucBurialPermit.cbxIsInfectious.Checked;
+                burialPermitModel.IsEmbalmed = ucBurialPermit.cbxIsEmbalbed.Checked;
+                burialPermitModel.Disposition = ucBurialPermit.txtDisposition.Text;
+                burialPermitModel.CreatedBy = Helper.UserId;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return burialPermitModel;
+        }
+
+
+
+        private void bgwSavingPayment_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            int totalProgress = ucPayment.dgCheques.Rows.Count;
+            int progressCount = 0;
+            var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
+
+            var chequesModels = new List<ChequesModel>();
+            try
+            {
+                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
+                {
+                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
+                    string bankName = row.Cells["bank_name"].Value.ToString();
+                    var rowBankBranch = row.Cells["bank_branch"].Value;
+                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
+                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
+                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
+                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
+                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
+
+                    int bankAccountId;
+
+                    if (!bankAccountExist)
+                    {
+                        //banks model
+                        var banksModel = new BanksModel()
+                        {
+                            BankName = bankName,
+                            BankBranch = bankBranch
+                        };
+
+                        //bank accounts model
+                        var bankAccountModel = new BankAccountsModel()
+                        {
+                            AccountNumber = bankAccountNo,
+                            banksModel = banksModel
+                        };
+
+                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
+                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
+                    }
+                    else
+                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
+
+                    var model = new ChequesModel()
+                    {
+                        Amount = chequeAmount,
+                        ChequeDate = chequeDate,
+                        ChequeNo = chequeNo,
+                        BankAccountsId = bankAccountId
+                    };
+
+                    progressCount += 1;
+                    bgwSavingPayment.ReportProgress((progressCount * 100) / totalProgress);
+                    chequesModels.Add(model);
+                }
+
+                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
+
+                var methodInvoker = new MethodInvoker(delegate
+                {
+                    SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel());
+                });
+
+                Invoke(methodInvoker);
+                e.Result = "complete";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void bgwSavingPayment_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            dialog.label1.Text = e.ProgressPercentage.ToString();
+            dialog.btnClose.Enabled = false;
+        }
+
+        private void bgwSavingPayment_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result.ToString() == "complete")
+            {
+                dialog.label1.Text = "Payment Process Complete!";
+                dialog.btnClose.Enabled = true;
+                btnNextMain.Text = "Finish";
+                btnBack.Enabled = false;
+                paymentComplete = true;
+                ucPayment.Enabled = false;
+                return;
+            }
+
+            paymentComplete = false;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchText = txtSearch.Text;
+                LoadPayees(searchText);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
+        private Dictionary<string, string> GetTaxPayerData()
+        {
+            var dict = new Dictionary<string, string>();
+            int rowIndex = dgPayees.CurrentRow.Index;
+            int taxpayerId = Convert.ToInt32(dgPayees.Rows[rowIndex].Cells["taxpayers_id"].Value);
+            string taxpayerName = dgPayees.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+
+            dict.Add("taxpayers_id", taxpayerId.ToString());
+            dict.Add("taxpayer_name", taxpayerName);
+            return dict;
+        }
+
+        private void LoadFeesAndChargesTab()
+        {
+            btnBackMain.Enabled = true;
+            btnNextMain.Text = "Proceed to Payment";
+            radFees.Checked = true;
+
+            ucBurialPermit.txtPayer.Text = string.IsNullOrEmpty(ucTaxPayers.txtName.Text) ? GetTaxPayerData()["taxpayer_name"] : ucTaxPayers.txtName.Text;
+        }
+
+        private void LoadPaymentTab()
+        {
+            btnNextMain.Text = "Confirm Payment";
+            btnBackMain.Enabled = true;
+            radPayment.Checked = true;
+
+            ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
+            ucPayment.OnLoad("58");
+
+            if (isNewPayee)
+                ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
+            else
+                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+        }
+        private void tabPagePayment_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadPaymentTab();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tabPageFees_Enter(object sender, EventArgs e)
+        {
+            LoadFeesAndChargesTab();
+        }
+
+        private void tabPagePayee_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadPayee();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+        private void LoadPayee()
+        {
+            btnBackMain.Enabled = false;
+            radPayee.Checked = true;
+        }
+
+        private void tabNewPayee_Enter(object sender, EventArgs e)
+        {
+            isNewPayee = true;
+        }
+
+        private void tabPayeeList_Enter(object sender, EventArgs e)
+        {
+            isNewPayee = false;
         }
     }
 }

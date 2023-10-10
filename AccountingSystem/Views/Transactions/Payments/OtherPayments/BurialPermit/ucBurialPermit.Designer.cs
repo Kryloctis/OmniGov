@@ -101,7 +101,7 @@
             // 
             txtPermission.Location = new System.Drawing.Point(77, 47);
             txtPermission.Name = "txtPermission";
-            txtPermission.Size = new System.Drawing.Size(203, 23);
+            txtPermission.Size = new System.Drawing.Size(198, 23);
             txtPermission.TabIndex = 3;
             // 
             // label2
@@ -118,7 +118,7 @@
             txtPayer.Location = new System.Drawing.Point(77, 18);
             txtPayer.Name = "txtPayer";
             txtPayer.ReadOnly = true;
-            txtPayer.Size = new System.Drawing.Size(203, 23);
+            txtPayer.Size = new System.Drawing.Size(198, 23);
             txtPayer.TabIndex = 3;
             // 
             // label1
@@ -197,7 +197,7 @@
             // 
             txtRemainsNationality.Location = new System.Drawing.Point(77, 47);
             txtRemainsNationality.Name = "txtRemainsNationality";
-            txtRemainsNationality.Size = new System.Drawing.Size(203, 23);
+            txtRemainsNationality.Size = new System.Drawing.Size(200, 23);
             txtRemainsNationality.TabIndex = 3;
             // 
             // label3
@@ -213,7 +213,7 @@
             // 
             txtRemainsName.Location = new System.Drawing.Point(77, 18);
             txtRemainsName.Name = "txtRemainsName";
-            txtRemainsName.Size = new System.Drawing.Size(203, 23);
+            txtRemainsName.Size = new System.Drawing.Size(200, 23);
             txtRemainsName.TabIndex = 3;
             txtRemainsName.Validating += txtRemainsName_Validating;
             txtRemainsName.Validated += txtRemainsName_Validated;
@@ -284,7 +284,7 @@
             // 
             dtpDeathDate.Location = new System.Drawing.Point(99, 18);
             dtpDeathDate.Name = "dtpDeathDate";
-            dtpDeathDate.Size = new System.Drawing.Size(200, 23);
+            dtpDeathDate.Size = new System.Drawing.Size(195, 23);
             dtpDeathDate.TabIndex = 0;
             // 
             // label7
@@ -354,28 +354,28 @@
             // 
             txtCauseOfDeath.Location = new System.Drawing.Point(99, 132);
             txtCauseOfDeath.Name = "txtCauseOfDeath";
-            txtCauseOfDeath.Size = new System.Drawing.Size(200, 23);
+            txtCauseOfDeath.Size = new System.Drawing.Size(195, 23);
             txtCauseOfDeath.TabIndex = 3;
             // 
             // txtDisposition
             // 
             txtDisposition.Location = new System.Drawing.Point(99, 103);
             txtDisposition.Name = "txtDisposition";
-            txtDisposition.Size = new System.Drawing.Size(200, 23);
+            txtDisposition.Size = new System.Drawing.Size(195, 23);
             txtDisposition.TabIndex = 3;
             // 
             // txtDisinterment
             // 
             txtDisinterment.Location = new System.Drawing.Point(99, 74);
             txtDisinterment.Name = "txtDisinterment";
-            txtDisinterment.Size = new System.Drawing.Size(200, 23);
+            txtDisinterment.Size = new System.Drawing.Size(195, 23);
             txtDisinterment.TabIndex = 3;
             // 
             // txtCemetery
             // 
             txtCemetery.Location = new System.Drawing.Point(99, 45);
             txtCemetery.Name = "txtCemetery";
-            txtCemetery.Size = new System.Drawing.Size(200, 23);
+            txtCemetery.Size = new System.Drawing.Size(195, 23);
             txtCemetery.TabIndex = 3;
             // 
             // errorProvider1

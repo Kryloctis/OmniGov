@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
     public class BurialPermitModel
     {
         public int ID { get; set; }
-        public int TaxpayersID { get; set; }
         public string Permission { get; set; }
         public string RemainsName { get; set; }
         public string RemainsNationality { get; set; }
