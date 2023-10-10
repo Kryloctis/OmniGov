@@ -68,7 +68,7 @@
             this.panel2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // flowLayoutPanel1
             //
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
@@ -224,41 +224,41 @@
             this.cmbxFundType.TabIndex = 4;
             //
             // txtBLFGAccountCode
-            //
-            this.txtBLFGAccountCode.Location = new System.Drawing.Point(132, 141);
-            this.txtBLFGAccountCode.MaxLength = 99;
-            this.txtBLFGAccountCode.Name = "txtBLFGAccountCode";
-            this.txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
-            this.txtBLFGAccountCode.TabIndex = 6;
-            //
+            // 
+            txtBLFGAccountCode.Location = new System.Drawing.Point(163, 147);
+            txtBLFGAccountCode.MaxLength = 99;
+            txtBLFGAccountCode.Name = "txtBLFGAccountCode";
+            txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
+            txtBLFGAccountCode.TabIndex = 6;
+            // 
             // txtCOAAccountCode
-            //
-            this.txtCOAAccountCode.Location = new System.Drawing.Point(132, 114);
-            this.txtCOAAccountCode.MaxLength = 99;
-            this.txtCOAAccountCode.Name = "txtCOAAccountCode";
-            this.txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
-            this.txtCOAAccountCode.TabIndex = 5;
-            //
+            // 
+            txtCOAAccountCode.Location = new System.Drawing.Point(163, 120);
+            txtCOAAccountCode.MaxLength = 99;
+            txtCOAAccountCode.Name = "txtCOAAccountCode";
+            txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
+            txtCOAAccountCode.TabIndex = 5;
+            // 
             // txtDesciption
-            //
-            this.txtDesciption.Location = new System.Drawing.Point(132, 33);
-            this.txtDesciption.MaxLength = 99;
-            this.txtDesciption.Name = "txtDesciption";
-            this.txtDesciption.Size = new System.Drawing.Size(353, 23);
-            this.txtDesciption.TabIndex = 2;
-            this.txtDesciption.Validating += new System.ComponentModel.CancelEventHandler(this.txtDesciption_Validating);
-            this.txtDesciption.Validated += new System.EventHandler(this.txtDesciption_Validated);
-            //
+            // 
+            txtDesciption.Location = new System.Drawing.Point(163, 39);
+            txtDesciption.MaxLength = 99;
+            txtDesciption.Name = "txtDesciption";
+            txtDesciption.Size = new System.Drawing.Size(353, 23);
+            txtDesciption.TabIndex = 2;
+            txtDesciption.Validating += txtDesciption_Validating;
+            txtDesciption.Validated += txtDesciption_Validated;
+            // 
             // txtCode
-            //
-            this.txtCode.Location = new System.Drawing.Point(132, 6);
-            this.txtCode.MaxLength = 45;
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(353, 23);
-            this.txtCode.TabIndex = 1;
-            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
-            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
-            //
+            // 
+            txtCode.Location = new System.Drawing.Point(163, 12);
+            txtCode.MaxLength = 45;
+            txtCode.Name = "txtCode";
+            txtCode.Size = new System.Drawing.Size(353, 23);
+            txtCode.TabIndex = 1;
+            txtCode.Validating += txtCode_Validating;
+            txtCode.Validated += txtCode_Validated;
+            // 
             // label6
             //
             this.label6.AutoSize = true;
