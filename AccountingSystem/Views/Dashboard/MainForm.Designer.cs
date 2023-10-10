@@ -128,6 +128,7 @@
             paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             rPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF5157ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -155,7 +156,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF58ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1079,7 +1080,7 @@
             // 
             // paymentsToolStripMenuItem
             // 
-            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem });
+            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58ToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             paymentsToolStripMenuItem.Text = "Payments";
@@ -1097,6 +1098,13 @@
             aF5157ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             aF5157ToolStripMenuItem.Text = "AF 51 && 57";
             aF5157ToolStripMenuItem.Click += aF5157ToolStripMenuItem_Click;
+            // 
+            // aF54ToolStripMenuItem
+            // 
+            aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
+            aF54ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            aF54ToolStripMenuItem.Text = "AF 54";
+            aF54ToolStripMenuItem.Click += aF54ToolStripMenuItem_Click;
             // 
             // toolStripSeparator10
             // 
@@ -1281,12 +1289,12 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // aF54ToolStripMenuItem
+            // aF58ToolStripMenuItem
             // 
-            aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
-            aF54ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            aF54ToolStripMenuItem.Text = "AF 54";
-            aF54ToolStripMenuItem.Click += aF54ToolStripMenuItem_Click;
+            aF58ToolStripMenuItem.Name = "aF58ToolStripMenuItem";
+            aF58ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            aF58ToolStripMenuItem.Text = "AF 58";
+            aF58ToolStripMenuItem.Click += aF58ToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1484,5 +1492,6 @@
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF58ToolStripMenuItem;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             txtPermission = new System.Windows.Forms.TextBox();
@@ -60,6 +61,7 @@
             txtDisposition = new System.Windows.Forms.TextBox();
             txtDisinterment = new System.Windows.Forms.TextBox();
             txtCemetery = new System.Windows.Forms.TextBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -67,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)nudRemainsAge).BeginInit();
             groupBox3.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -79,7 +82,7 @@
             groupBox2.Size = new System.Drawing.Size(299, 241);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Taxpayer's Info.";
+            groupBox2.Text = "Payer's Info.";
             // 
             // panel2
             // 
@@ -373,6 +376,11 @@
             txtCemetery.Size = new System.Drawing.Size(200, 23);
             txtCemetery.TabIndex = 3;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
             // ucBurialPermit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -393,6 +401,7 @@
             groupBox3.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -430,5 +439,6 @@
         internal System.Windows.Forms.Label label11;
         internal System.Windows.Forms.Label label13;
         internal System.Windows.Forms.TextBox txtCauseOfDeath;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
