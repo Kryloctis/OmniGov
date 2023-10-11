@@ -101,8 +101,8 @@
             // 
             txtPermission.Location = new System.Drawing.Point(77, 47);
             txtPermission.Name = "txtPermission";
-            txtPermission.Size = new System.Drawing.Size(198, 23);
-            txtPermission.TabIndex = 3;
+            txtPermission.Size = new System.Drawing.Size(194, 23);
+            txtPermission.TabIndex = 0;
             txtPermission.Validating += txtPermission_Validating;
             txtPermission.Validated += txtPermission_Validated;
             // 
@@ -120,7 +120,7 @@
             txtPayer.Location = new System.Drawing.Point(77, 18);
             txtPayer.Name = "txtPayer";
             txtPayer.ReadOnly = true;
-            txtPayer.Size = new System.Drawing.Size(198, 23);
+            txtPayer.Size = new System.Drawing.Size(194, 23);
             txtPayer.TabIndex = 3;
             // 
             // label1
@@ -167,7 +167,7 @@
             nudRemainsAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudRemainsAge.Name = "nudRemainsAge";
             nudRemainsAge.Size = new System.Drawing.Size(99, 23);
-            nudRemainsAge.TabIndex = 5;
+            nudRemainsAge.TabIndex = 3;
             // 
             // cmbxRemainsSex
             // 
@@ -201,8 +201,8 @@
             // 
             txtRemainsNationality.Location = new System.Drawing.Point(77, 47);
             txtRemainsNationality.Name = "txtRemainsNationality";
-            txtRemainsNationality.Size = new System.Drawing.Size(200, 23);
-            txtRemainsNationality.TabIndex = 3;
+            txtRemainsNationality.Size = new System.Drawing.Size(198, 23);
+            txtRemainsNationality.TabIndex = 2;
             // 
             // label3
             // 
@@ -217,8 +217,8 @@
             // 
             txtRemainsName.Location = new System.Drawing.Point(77, 18);
             txtRemainsName.Name = "txtRemainsName";
-            txtRemainsName.Size = new System.Drawing.Size(200, 23);
-            txtRemainsName.TabIndex = 3;
+            txtRemainsName.Size = new System.Drawing.Size(198, 23);
+            txtRemainsName.TabIndex = 1;
             txtRemainsName.Validating += txtRemainsName_Validating;
             txtRemainsName.Validated += txtRemainsName_Validated;
             // 
@@ -272,7 +272,7 @@
             cbxIsEmbalbed.Location = new System.Drawing.Point(99, 190);
             cbxIsEmbalbed.Name = "cbxIsEmbalbed";
             cbxIsEmbalbed.Size = new System.Drawing.Size(15, 14);
-            cbxIsEmbalbed.TabIndex = 4;
+            cbxIsEmbalbed.TabIndex = 11;
             cbxIsEmbalbed.UseVisualStyleBackColor = true;
             // 
             // cbxIsInfectious
@@ -281,15 +281,15 @@
             cbxIsInfectious.Location = new System.Drawing.Point(99, 166);
             cbxIsInfectious.Name = "cbxIsInfectious";
             cbxIsInfectious.Size = new System.Drawing.Size(15, 14);
-            cbxIsInfectious.TabIndex = 4;
+            cbxIsInfectious.TabIndex = 10;
             cbxIsInfectious.UseVisualStyleBackColor = true;
             // 
             // dtpDeathDate
             // 
             dtpDeathDate.Location = new System.Drawing.Point(99, 18);
             dtpDeathDate.Name = "dtpDeathDate";
-            dtpDeathDate.Size = new System.Drawing.Size(195, 23);
-            dtpDeathDate.TabIndex = 0;
+            dtpDeathDate.Size = new System.Drawing.Size(192, 23);
+            dtpDeathDate.TabIndex = 5;
             // 
             // label7
             // 
@@ -358,8 +358,8 @@
             // 
             txtCauseOfDeath.Location = new System.Drawing.Point(99, 132);
             txtCauseOfDeath.Name = "txtCauseOfDeath";
-            txtCauseOfDeath.Size = new System.Drawing.Size(195, 23);
-            txtCauseOfDeath.TabIndex = 3;
+            txtCauseOfDeath.Size = new System.Drawing.Size(192, 23);
+            txtCauseOfDeath.TabIndex = 9;
             txtCauseOfDeath.Validating += txtCauseOfDeath_Validating;
             txtCauseOfDeath.Validated += txtCauseOfDeath_Validated;
             // 
@@ -367,8 +367,8 @@
             // 
             txtDisposition.Location = new System.Drawing.Point(99, 103);
             txtDisposition.Name = "txtDisposition";
-            txtDisposition.Size = new System.Drawing.Size(195, 23);
-            txtDisposition.TabIndex = 3;
+            txtDisposition.Size = new System.Drawing.Size(192, 23);
+            txtDisposition.TabIndex = 8;
             txtDisposition.Validating += txtDisposition_Validating;
             txtDisposition.Validated += txtDisposition_Validated;
             // 
@@ -376,8 +376,8 @@
             // 
             txtDisinterment.Location = new System.Drawing.Point(99, 74);
             txtDisinterment.Name = "txtDisinterment";
-            txtDisinterment.Size = new System.Drawing.Size(195, 23);
-            txtDisinterment.TabIndex = 3;
+            txtDisinterment.Size = new System.Drawing.Size(192, 23);
+            txtDisinterment.TabIndex = 7;
             txtDisinterment.Validating += txtDisinterment_Validating;
             txtDisinterment.Validated += txtDisinterment_Validated;
             // 
@@ -385,8 +385,8 @@
             // 
             txtCemetery.Location = new System.Drawing.Point(99, 45);
             txtCemetery.Name = "txtCemetery";
-            txtCemetery.Size = new System.Drawing.Size(195, 23);
-            txtCemetery.TabIndex = 3;
+            txtCemetery.Size = new System.Drawing.Size(192, 23);
+            txtCemetery.TabIndex = 6;
             txtCemetery.Validating += txtCemetery_Validating;
             txtCemetery.Validated += txtCemetery_Validated;
             // 
@@ -399,6 +399,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);

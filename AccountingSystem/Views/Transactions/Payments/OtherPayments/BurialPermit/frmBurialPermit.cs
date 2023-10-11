@@ -172,14 +172,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
                 }
             }
 
-            //else if (selectedTab == tabPagePayment)
-            //{
-            //    if (!ucPayment.ValidateChildren())
-            //    {
-            //        Helper.MessageBoxError(ucPayment.GetFormErrors());
-            //        return false;
-            //    }
-            //}
+            else if (selectedTab == tabPagePayment)
+            {
+                if (!ucPayment.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucPayment.GetFormErrors());
+                    return false;
+                }
+            }
 
 
             return true;
@@ -303,8 +303,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
             return burialPermitModel;
         }
-
-
 
         private void bgwSavingPayment_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -455,7 +453,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
         private void tabPageFees_Enter(object sender, EventArgs e)
         {
-            LoadFeesAndChargesTab();
+            try
+            {
+                LoadFeesAndChargesTab();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tabPagePayee_Enter(object sender, EventArgs e)

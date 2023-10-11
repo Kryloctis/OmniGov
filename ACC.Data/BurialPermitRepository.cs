@@ -65,18 +65,17 @@ namespace AccountingSystem
                 new object[] { "@remains_nationality", DbType.String, burialPermitModel.RemainsNationality},
                 new object[] { "@remains_age", DbType.Int32, burialPermitModel.RemainsAge},
                 new object[] { "@remains_sex", DbType.String, burialPermitModel.RemainsSex},
-                new object[] { "@death_date", DbType.DateTime, burialPermitModel.DeathDate},
+                new object[] { "@death_date", DbType.Date, burialPermitModel.DeathDate},
                 new object[] { "@cause_of_death", DbType.String, burialPermitModel.CauseOfDeath},
                 new object[] { "@cemetery", DbType.String, burialPermitModel.Cemetery},
                 new object[] { "@disinterment", DbType.String, burialPermitModel.Disinterment},
                 new object[] { "@is_infectious", DbType.Boolean, burialPermitModel.IsInfectious},
                 new object[] { "@is_embalmed", DbType.Boolean, burialPermitModel.IsEmbalmed},
                 new object[] { "@disposition", DbType.String, burialPermitModel.Disposition},
-                new object[] { "@created_at", DbType.DateTime, burialPermitModel.CreatedAt},
                 new object[] { "@created_by", DbType.Int32, burialPermitModel.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (permission, remains_name, remains_nationality, remains_age, remains_sex, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_at, created_by) VALUES(@permission, @remains_name, @remains_nationality, @remains_age, @remains_sex, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_at, @created_by)";
+            string query = $"INSERT INTO {tableName} (permission, remains_name, remains_nationality, remains_age, remains_sex, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_by) VALUES(@permission, @remains_name, @remains_nationality, @remains_age, @remains_sex, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_by)";
 
             bool result = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             return result;
