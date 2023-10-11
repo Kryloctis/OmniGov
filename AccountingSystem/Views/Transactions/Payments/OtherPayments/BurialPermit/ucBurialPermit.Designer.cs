@@ -103,6 +103,8 @@
             txtPermission.Name = "txtPermission";
             txtPermission.Size = new System.Drawing.Size(198, 23);
             txtPermission.TabIndex = 3;
+            txtPermission.Validating += txtPermission_Validating;
+            txtPermission.Validated += txtPermission_Validated;
             // 
             // label2
             // 
@@ -174,6 +176,8 @@
             cmbxRemainsSex.Name = "cmbxRemainsSex";
             cmbxRemainsSex.Size = new System.Drawing.Size(99, 23);
             cmbxRemainsSex.TabIndex = 4;
+            cmbxRemainsSex.Validating += cmbxRemainsSex_Validating;
+            cmbxRemainsSex.Validated += cmbxRemainsSex_Validated;
             // 
             // label6
             // 
@@ -356,6 +360,8 @@
             txtCauseOfDeath.Name = "txtCauseOfDeath";
             txtCauseOfDeath.Size = new System.Drawing.Size(195, 23);
             txtCauseOfDeath.TabIndex = 3;
+            txtCauseOfDeath.Validating += txtCauseOfDeath_Validating;
+            txtCauseOfDeath.Validated += txtCauseOfDeath_Validated;
             // 
             // txtDisposition
             // 
@@ -363,6 +369,8 @@
             txtDisposition.Name = "txtDisposition";
             txtDisposition.Size = new System.Drawing.Size(195, 23);
             txtDisposition.TabIndex = 3;
+            txtDisposition.Validating += txtDisposition_Validating;
+            txtDisposition.Validated += txtDisposition_Validated;
             // 
             // txtDisinterment
             // 
@@ -370,6 +378,8 @@
             txtDisinterment.Name = "txtDisinterment";
             txtDisinterment.Size = new System.Drawing.Size(195, 23);
             txtDisinterment.TabIndex = 3;
+            txtDisinterment.Validating += txtDisinterment_Validating;
+            txtDisinterment.Validated += txtDisinterment_Validated;
             // 
             // txtCemetery
             // 
@@ -377,6 +387,8 @@
             txtCemetery.Name = "txtCemetery";
             txtCemetery.Size = new System.Drawing.Size(195, 23);
             txtCemetery.TabIndex = 3;
+            txtCemetery.Validating += txtCemetery_Validating;
+            txtCemetery.Validated += txtCemetery_Validated;
             // 
             // errorProvider1
             // 

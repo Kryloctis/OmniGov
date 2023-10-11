@@ -55,5 +55,64 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             Helper.ClearErrorTextBox(errorProvider1, txtRemainsName);
         }
 
+        private void txtPermission_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPermission, "Permisssion.");
+        }
+
+        private void txtPermission_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPermission);
+        }
+
+        private void cmbxRemainsSex_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxRemainsSex, "Sex.");
+        }
+
+        private void cmbxRemainsSex_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxRemainsSex);
+        }
+
+        private void txtCemetery_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCemetery, "Cemetery.");
+        }
+
+        private void txtCemetery_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCemetery);
+        }
+
+        private void txtDisinterment_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDisinterment, "Disinterment.");
+        }
+
+        private void txtDisinterment_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDisinterment);
+        }
+
+        private void txtDisposition_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDisposition, "Disposition.");
+        }
+
+        private void txtDisposition_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDisposition);
+        }
+
+        private void txtCauseOfDeath_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCauseOfDeath, "Cause of Death.");
+        }
+
+        private void txtCauseOfDeath_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCauseOfDeath);
+        }
     }
 }
