@@ -160,6 +160,8 @@
             txtOwnerName.Name = "txtOwnerName";
             txtOwnerName.Size = new System.Drawing.Size(203, 23);
             txtOwnerName.TabIndex = 0;
+            txtOwnerName.Validating += txtOwnerName_Validating;
+            txtOwnerName.Validated += txtOwnerName_Validated;
             // 
             // label1
             // 
@@ -234,6 +236,8 @@
             cmbxSex.Name = "cmbxSex";
             cmbxSex.Size = new System.Drawing.Size(83, 23);
             cmbxSex.TabIndex = 4;
+            cmbxSex.Validating += cmbxSex_Validating;
+            cmbxSex.Validated += cmbxSex_Validated;
             // 
             // label9
             // 
@@ -260,6 +264,8 @@
             cmbxType.Name = "cmbxType";
             cmbxType.Size = new System.Drawing.Size(265, 23);
             cmbxType.TabIndex = 4;
+            cmbxType.Validating += cmbxType_Validating;
+            cmbxType.Validated += cmbxType_Validated;
             // 
             // label6
             // 
