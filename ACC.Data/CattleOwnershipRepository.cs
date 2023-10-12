@@ -70,9 +70,10 @@ namespace AccountingSystem
             {
                 new object[] { "@owner_id", DbType.Int32, cattleOwnershipModel.OwnerID},
                 new object[] { "@tag", DbType.Int32, cattleOwnershipModel.Tag},
-                new object[] { "@barangay", DbType.String, cattleOwnershipModel.Barangay},
-                new object[] { "@municipality", DbType.String, cattleOwnershipModel.Municipality},
-                new object[] { "@province", DbType.String, cattleOwnershipModel.Province},
+                new object[] { "@owner_name", DbType.String, cattleOwnershipModel.OwnerName},
+                new object[] { "@owner_barangay", DbType.String, cattleOwnershipModel.OwnerBarangay},
+                new object[] { "@owner_municipality", DbType.String, cattleOwnershipModel.OwnerMunicipality},
+                new object[] { "@owner_province", DbType.String, cattleOwnershipModel.OwnerProvince},
                 new object[] { "@cattle_type", DbType.String, cattleOwnershipModel.CattleType},
                 new object[] { "@cattle_sex", DbType.String, cattleOwnershipModel.CattleSex},
                 new object[] { "@cattle_age", DbType.String, cattleOwnershipModel.CattleAge},
@@ -81,7 +82,7 @@ namespace AccountingSystem
                 new object[] { "@created_by", DbType.Int32, cattleOwnershipModel.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (owner_id, tag, barangay, municipality, province, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@owner_id, @tag, @barangay, @municipality, @province, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
+            string query = $"INSERT INTO {tableName} (owner_id, tag, owner_name, owner_barangay, owner_municipality, owner_province, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@owner_id, @tag, @owner_name, @owner_barangay, @owner_municipality, @owner_province, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
 
 
             bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);

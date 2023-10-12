@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Shared;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
     public partial class ucCattleOwnership : UserControl
     {
         internal int ownerID;
+        internal frmCattleOwnership frmCattleOwnership;
 
         public ucCattleOwnership()
         {
@@ -28,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-
+            _ = new frmTaxPayerList(frmCattleOwnership).ShowDialog();
         }
 
         internal void LoadTaxpayerInfo(int taxpayerID)

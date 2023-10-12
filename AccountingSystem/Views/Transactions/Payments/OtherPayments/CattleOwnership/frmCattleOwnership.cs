@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private dialogPayment dialog = new dialogPayment();
         private bool paymentComplete = false;
         private readonly ucOtherCharges ucOtherCharges;
-        private readonly ucCattleOwnership ucCattleOwnership;
+        internal readonly ucCattleOwnership ucCattleOwnership;
         private bool isNewPayee = false;
 
         public frmCattleOwnership()
@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             ucOtherCharges = ucOtherCharges1;
             ucCattleOwnership = ucCattleOwnership1;
             ucOtherCharges.accountableForm = "53";
+            ucCattleOwnership.frmCattleOwnership = this;
         }
 
         private void frmCattleOwnership_Load(object sender, EventArgs e)
@@ -282,13 +283,22 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-
+                cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
+                cattleOwnershipModel.Tag = 1;
+                cattleOwnershipModel.OwnerName = ucCattleOwnership.txtOwnerName.Text;
+                cattleOwnershipModel.OwnerBarangay = ucCattleOwnership.cmbxBarangay.Text;
+                cattleOwnershipModel.OwnerMunicipality = ucCattleOwnership.cmbxMunicipality.Text;
+                cattleOwnershipModel.OwnerProvince = ucCattleOwnership.cmbxProvince.Text;
+                cattleOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
+                cattleOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
+                cattleOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
+                cattleOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
                 cattleOwnershipModel.CreatedBy = Helper.UserId;
+                cattleOwnershipModel.CreatedAt = DateTime.Now;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Helper.MessageBoxError(ex.Message);
             }
 
             return cattleOwnershipModel;

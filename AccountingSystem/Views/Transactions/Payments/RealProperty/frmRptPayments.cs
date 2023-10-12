@@ -393,9 +393,9 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
                 cattleOwnershipModel.Tag = 1;
-                cattleOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
-                cattleOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
-                cattleOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
+                cattleOwnershipModel.OwnerBarangay = ucCattleOwnership.cmbxBarangay.Text;
+                cattleOwnershipModel.OwnerMunicipality = ucCattleOwnership.cmbxMunicipality.Text;
+                cattleOwnershipModel.OwnerProvince = ucCattleOwnership.cmbxProvince.Text;
                 cattleOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
                 cattleOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
                 cattleOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);

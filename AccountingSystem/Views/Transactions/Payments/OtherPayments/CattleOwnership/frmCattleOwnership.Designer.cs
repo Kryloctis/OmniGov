@@ -202,11 +202,11 @@
             // 
             // ucPayment1
             // 
+            ucPayment1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(956, 542);
+            ucPayment1.Size = new System.Drawing.Size(956, 515);
             ucPayment1.TabIndex = 0;
             // 
             // tabControlMain
@@ -440,7 +440,7 @@
             // 
             // splitContainer1
             // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             splitContainer1.Location = new System.Drawing.Point(3, 3);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -454,17 +454,17 @@
             // 
             splitContainer1.Panel2.Controls.Add(ucOtherCharges1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            splitContainer1.Size = new System.Drawing.Size(956, 542);
-            splitContainer1.SplitterDistance = 173;
+            splitContainer1.Size = new System.Drawing.Size(956, 512);
+            splitContainer1.SplitterDistance = 171;
             splitContainer1.TabIndex = 3;
             // 
             // ucCattleOwnership1
             // 
+            ucCattleOwnership1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             ucCattleOwnership1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucCattleOwnership1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCattleOwnership1.Location = new System.Drawing.Point(3, 3);
             ucCattleOwnership1.Name = "ucCattleOwnership1";
-            ucCattleOwnership1.Size = new System.Drawing.Size(950, 167);
+            ucCattleOwnership1.Size = new System.Drawing.Size(950, 165);
             ucCattleOwnership1.TabIndex = 0;
             // 
             // ucOtherCharges1
@@ -473,7 +473,7 @@
             ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
             ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucOtherCharges1.Name = "ucOtherCharges1";
-            ucOtherCharges1.Size = new System.Drawing.Size(950, 359);
+            ucOtherCharges1.Size = new System.Drawing.Size(950, 331);
             ucOtherCharges1.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -567,6 +567,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ucOtherCharges ucOtherCharges1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private ucCattleOwnership ucCattleOwnership1;
+        internal ucCattleOwnership ucCattleOwnership1;
     }
 }
