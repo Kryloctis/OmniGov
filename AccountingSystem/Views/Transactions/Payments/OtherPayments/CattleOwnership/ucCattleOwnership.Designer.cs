@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             btnBrowse = new System.Windows.Forms.Button();
@@ -51,12 +52,14 @@
             label6 = new System.Windows.Forms.Label();
             txtDescription = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -92,7 +95,7 @@
             // btnBrowse
             // 
             btnBrowse.Image = Properties.Resources.user_browse_14px;
-            btnBrowse.Location = new System.Drawing.Point(319, 16);
+            btnBrowse.Location = new System.Drawing.Point(92, 15);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new System.Drawing.Size(22, 23);
             btnBrowse.TabIndex = 6;
@@ -104,7 +107,7 @@
             cmbxBarangay.FormattingEnabled = true;
             cmbxBarangay.Location = new System.Drawing.Point(93, 103);
             cmbxBarangay.Name = "cmbxBarangay";
-            cmbxBarangay.Size = new System.Drawing.Size(223, 23);
+            cmbxBarangay.Size = new System.Drawing.Size(227, 23);
             cmbxBarangay.TabIndex = 4;
             // 
             // cmbxMunicipality
@@ -112,7 +115,7 @@
             cmbxMunicipality.FormattingEnabled = true;
             cmbxMunicipality.Location = new System.Drawing.Point(93, 74);
             cmbxMunicipality.Name = "cmbxMunicipality";
-            cmbxMunicipality.Size = new System.Drawing.Size(223, 23);
+            cmbxMunicipality.Size = new System.Drawing.Size(227, 23);
             cmbxMunicipality.TabIndex = 4;
             // 
             // label5
@@ -129,7 +132,7 @@
             cmbxProvince.FormattingEnabled = true;
             cmbxProvince.Location = new System.Drawing.Point(93, 45);
             cmbxProvince.Name = "cmbxProvince";
-            cmbxProvince.Size = new System.Drawing.Size(223, 23);
+            cmbxProvince.Size = new System.Drawing.Size(227, 23);
             cmbxProvince.TabIndex = 4;
             // 
             // label4
@@ -153,10 +156,10 @@
             // txtOwnerName
             // 
             txtOwnerName.Enabled = false;
-            txtOwnerName.Location = new System.Drawing.Point(93, 16);
+            txtOwnerName.Location = new System.Drawing.Point(118, 15);
             txtOwnerName.Name = "txtOwnerName";
-            txtOwnerName.Size = new System.Drawing.Size(223, 23);
-            txtOwnerName.TabIndex = 3;
+            txtOwnerName.Size = new System.Drawing.Size(203, 23);
+            txtOwnerName.TabIndex = 0;
             // 
             // label1
             // 
@@ -284,10 +287,16 @@
             label10.TabIndex = 2;
             label10.Text = "Description";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
             // ucCattleOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Name = "ucCattleOwnership";
@@ -301,6 +310,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -329,5 +339,6 @@
         internal System.Windows.Forms.TextBox txtDescription;
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.NumericUpDown nudAge;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

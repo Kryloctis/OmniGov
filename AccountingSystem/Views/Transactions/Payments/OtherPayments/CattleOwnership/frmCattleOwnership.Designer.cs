@@ -60,7 +60,7 @@
             btnBack = new System.Windows.Forms.ToolStripButton();
             tabPageFees = new System.Windows.Forms.TabPage();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            ucBurialPermit1 = new BurialPermit.ucBurialPermit();
+            ucCattleOwnership1 = new ucCattleOwnership();
             ucOtherCharges1 = new ucOtherCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             flowLayoutPanel1.SuspendLayout();
@@ -86,6 +86,9 @@
             // 
             bgwSavingPayment.WorkerReportsProgress = true;
             bgwSavingPayment.WorkerSupportsCancellation = true;
+            bgwSavingPayment.DoWork += bgwSavingPayment_DoWork;
+            bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
+            bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
             // 
             // radPayee
             // 
@@ -150,6 +153,7 @@
             btnNextMain.TabIndex = 0;
             btnNextMain.Text = "Next";
             btnNextMain.UseVisualStyleBackColor = true;
+            btnNextMain.Click += btnNextMain_Click;
             // 
             // btnBackMain
             // 
@@ -160,6 +164,7 @@
             btnBackMain.TabIndex = 0;
             btnBackMain.Text = "Back";
             btnBackMain.UseVisualStyleBackColor = true;
+            btnBackMain.Click += btnBackMain_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -179,6 +184,9 @@
             // 
             bgwPayee.WorkerReportsProgress = true;
             bgwPayee.WorkerSupportsCancellation = true;
+            bgwPayee.DoWork += bgwPayee_DoWork;
+            bgwPayee.ProgressChanged += bgwPayee_ProgressChanged;
+            bgwPayee.RunWorkerCompleted += bgwPayee_RunWorkerCompleted;
             // 
             // tabPagePayment
             // 
@@ -190,6 +198,7 @@
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
+            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // ucPayment1
             // 
@@ -227,6 +236,7 @@
             tabPagePayee.TabIndex = 0;
             tabPagePayee.Text = "tabPagePayee";
             tabPagePayee.UseVisualStyleBackColor = true;
+            tabPagePayee.Enter += tabPagePayee_Enter;
             // 
             // tabControlPayee
             // 
@@ -256,6 +266,7 @@
             tabPayeeList.TabIndex = 0;
             tabPayeeList.Text = "tabPayeeList";
             tabPayeeList.UseVisualStyleBackColor = true;
+            tabPayeeList.Enter += tabPayeeList_Enter;
             // 
             // dgPayees
             // 
@@ -295,6 +306,7 @@
             btnSearch.Size = new System.Drawing.Size(46, 35);
             btnSearch.Text = "Search";
             btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -312,6 +324,7 @@
             btnNew.Size = new System.Drawing.Size(35, 35);
             btnNew.Text = "New";
             btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnNew.Click += btnNew_Click;
             // 
             // tabNewPayee
             // 
@@ -325,6 +338,7 @@
             tabNewPayee.TabIndex = 1;
             tabNewPayee.Text = "tabNewPayee";
             tabNewPayee.UseVisualStyleBackColor = true;
+            tabNewPayee.Enter += tabNewPayee_Enter;
             // 
             // ucTaxPayers1
             // 
@@ -410,6 +424,7 @@
             btnBack.Size = new System.Drawing.Size(36, 35);
             btnBack.Text = "Back";
             btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnBack.Click += btnBack_Click;
             // 
             // tabPageFees
             // 
@@ -421,6 +436,7 @@
             tabPageFees.TabIndex = 1;
             tabPageFees.Text = "tabPageFees";
             tabPageFees.UseVisualStyleBackColor = true;
+            tabPageFees.Enter += tabPageFees_Enter;
             // 
             // splitContainer1
             // 
@@ -431,7 +447,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(ucBurialPermit1);
+            splitContainer1.Panel1.Controls.Add(ucCattleOwnership1);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(3);
             // 
             // splitContainer1.Panel2
@@ -439,17 +455,17 @@
             splitContainer1.Panel2.Controls.Add(ucOtherCharges1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
             splitContainer1.Size = new System.Drawing.Size(956, 542);
-            splitContainer1.SplitterDistance = 274;
+            splitContainer1.SplitterDistance = 173;
             splitContainer1.TabIndex = 3;
             // 
-            // ucBurialPermit1
+            // ucCattleOwnership1
             // 
-            ucBurialPermit1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucBurialPermit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBurialPermit1.Location = new System.Drawing.Point(3, 3);
-            ucBurialPermit1.Name = "ucBurialPermit1";
-            ucBurialPermit1.Size = new System.Drawing.Size(950, 268);
-            ucBurialPermit1.TabIndex = 0;
+            ucCattleOwnership1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucCattleOwnership1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucCattleOwnership1.Location = new System.Drawing.Point(3, 3);
+            ucCattleOwnership1.Name = "ucCattleOwnership1";
+            ucCattleOwnership1.Size = new System.Drawing.Size(950, 167);
+            ucCattleOwnership1.TabIndex = 0;
             // 
             // ucOtherCharges1
             // 
@@ -457,7 +473,7 @@
             ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
             ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucOtherCharges1.Name = "ucOtherCharges1";
-            ucOtherCharges1.Size = new System.Drawing.Size(950, 258);
+            ucOtherCharges1.Size = new System.Drawing.Size(950, 359);
             ucOtherCharges1.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -489,6 +505,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Payment > AF 33 - Cattle Ownership";
+            Load += frmCattleOwnership_Load;
             flowLayoutPanel1.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
@@ -548,8 +565,8 @@
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.TabPage tabPageFees;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private BurialPermit.ucBurialPermit ucBurialPermit1;
         private ucOtherCharges ucOtherCharges1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private ucCattleOwnership ucCattleOwnership1;
     }
 }

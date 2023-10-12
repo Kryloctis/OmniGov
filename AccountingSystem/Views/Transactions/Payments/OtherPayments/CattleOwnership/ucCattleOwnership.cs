@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
@@ -17,6 +11,19 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         public ucCattleOwnership()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtOwnerName),
+                errorProvider1.GetError(cmbxType),
+                errorProvider1.GetError(cmbxSex)
+            };
+
+            IError error = AccFactory.CreateErrors(errorArray);
+            return error.GenerateErrorMessage();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
