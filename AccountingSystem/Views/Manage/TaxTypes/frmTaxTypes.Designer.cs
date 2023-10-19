@@ -68,7 +68,7 @@
             this.panel2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // flowLayoutPanel1
             //
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
@@ -224,23 +224,23 @@
             this.cmbxFundType.TabIndex = 4;
             //
             // txtBLFGAccountCode
-            // 
+            //
             txtBLFGAccountCode.Location = new System.Drawing.Point(163, 147);
             txtBLFGAccountCode.MaxLength = 99;
             txtBLFGAccountCode.Name = "txtBLFGAccountCode";
             txtBLFGAccountCode.Size = new System.Drawing.Size(353, 23);
             txtBLFGAccountCode.TabIndex = 6;
-            // 
+            //
             // txtCOAAccountCode
-            // 
+            //
             txtCOAAccountCode.Location = new System.Drawing.Point(163, 120);
             txtCOAAccountCode.MaxLength = 99;
             txtCOAAccountCode.Name = "txtCOAAccountCode";
             txtCOAAccountCode.Size = new System.Drawing.Size(353, 23);
             txtCOAAccountCode.TabIndex = 5;
-            // 
+            //
             // txtDesciption
-            // 
+            //
             txtDesciption.Location = new System.Drawing.Point(163, 39);
             txtDesciption.MaxLength = 99;
             txtDesciption.Name = "txtDesciption";
@@ -248,9 +248,9 @@
             txtDesciption.TabIndex = 2;
             txtDesciption.Validating += txtDesciption_Validating;
             txtDesciption.Validated += txtDesciption_Validated;
-            // 
+            //
             // txtCode
-            // 
+            //
             txtCode.Location = new System.Drawing.Point(163, 12);
             txtCode.MaxLength = 45;
             txtCode.Name = "txtCode";
@@ -258,7 +258,7 @@
             txtCode.TabIndex = 1;
             txtCode.Validating += txtCode_Validating;
             txtCode.Validated += txtCode_Validated;
-            // 
+            //
             // label6
             //
             this.label6.AutoSize = true;

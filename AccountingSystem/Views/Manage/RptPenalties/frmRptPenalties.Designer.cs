@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(732, 317);
+            this.dataGridView1.Size = new System.Drawing.Size(732, 313);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -65,11 +65,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 55);
+            this.panel1.Location = new System.Drawing.Point(0, 59);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(740, 325);
+            this.panel1.Size = new System.Drawing.Size(740, 321);
             this.panel1.TabIndex = 11;
             // 
             // statusStrip1
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // pbLoadRecords
             // 
             this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            this.pbLoadRecords.Location = new System.Drawing.Point(0, 54);
             this.pbLoadRecords.Name = "pbLoadRecords";
             this.pbLoadRecords.Size = new System.Drawing.Size(740, 5);
             this.pbLoadRecords.TabIndex = 27;
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(42, 39);
+            this.btnSave.Size = new System.Drawing.Size(42, 43);
             this.btnSave.Text = "Add...";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnAdd_Click);
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 39);
+            this.btnEdit.Size = new System.Drawing.Size(40, 43);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -154,13 +154,14 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 39);
+            this.btnDelete.Size = new System.Drawing.Size(44, 43);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStrip2
             // 
+            this.toolStrip2.AutoSize = false;
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip2.Size = new System.Drawing.Size(740, 50);
+            this.toolStrip2.Size = new System.Drawing.Size(740, 54);
             this.toolStrip2.TabIndex = 23;
             this.toolStrip2.Text = "toolStrip2";
             // 
