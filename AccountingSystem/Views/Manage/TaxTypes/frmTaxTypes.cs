@@ -329,38 +329,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             cmbxParent.SelectedIndex = -1;
         }
 
-        private void InitializeTaxTypes()
-        {
-            treeViewTaxTypes.Nodes.Clear();
-            childImageIndexCounter = 1;
-            int rowCount = 0;
-
-            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
-            int recordCount = dtTaxTypes.Rows.Count;
-
-            TreeNode parentNode;
-
-            foreach (DataRow dr in dtTaxTypes.Rows)
-            {
-                int taxTypeID = Convert.ToInt32(dr["id"]);
-                string taxTypeCode = dr["code"].ToString();
-                string taxTypeDescription = dr["description"].ToString();
-                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
-
-                parentNode = treeViewTaxTypes.Nodes.Add(displayText);
-                parentNode.Tag = taxTypeID;
-
-                LoadChildNodes(taxTypeID, parentNode);
-
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                if (Convert.ToBoolean(dr["is_deleted"]))
-                    parentNode.ForeColor = Color.Gray;
-            }
-        }
-
         private void LoadTaxTypes()
         {
             if (!backgroundWorker1.IsBusy)
@@ -472,6 +440,38 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 senderComboBox.DropDownWidth = width;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void InitializeTaxTypes()
+        {
+            treeViewTaxTypes.Nodes.Clear();
+            childImageIndexCounter = 1;
+            int rowCount = 0;
+
+            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+            int recordCount = dtTaxTypes.Rows.Count;
+
+            TreeNode parentNode;
+
+            foreach (DataRow dr in dtTaxTypes.Rows)
+            {
+                int taxTypeID = Convert.ToInt32(dr["id"]);
+                string taxTypeCode = dr["code"].ToString();
+                string taxTypeDescription = dr["description"].ToString();
+                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+
+                parentNode = treeViewTaxTypes.Nodes.Add(displayText);
+                parentNode.Tag = taxTypeID;
+
+                LoadChildNodes(taxTypeID, parentNode);
+
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    parentNode.ForeColor = Color.Gray;
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

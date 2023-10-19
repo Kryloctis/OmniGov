@@ -10,7 +10,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         internal int cattleID;
         internal int oldOwnerID;
         internal int newOwnerID;
-        internal frmPayments _frmPayments;
+        internal frmRptPayments _frmPayments;
 
         public ucCattleTransferOfOwnership()
         {

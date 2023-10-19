@@ -2,6 +2,7 @@ using Microsoft.Reporting.WinForms;
 using RPT.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -577,6 +578,12 @@ namespace AccountingSystem
         #endregion ServerConfig and Server List
 
         #region Miscellaneous
+
+        public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
+        {
+            int progressBarPercentage = (progressCount * 100) / totalProgressCount;
+            backgroundWorker.ReportProgress(progressBarPercentage, progressText);
+        }
 
         public static Image ByteArrayToImage(byte[] byteArrayIn)
         {

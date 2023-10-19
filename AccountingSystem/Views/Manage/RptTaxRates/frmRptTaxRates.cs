@@ -1,6 +1,8 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Dashboard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -18,69 +20,6 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        private void UpdateRecordCount(DataGridView dataGridView)
-        {
-            int recordCount = dataGridView.Rows.Count;
-            lblRecordCount.Text = recordCount.ToString();
-        }
-
-        private DataColumn[] TaxRatesDataColumns()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("code", typeof(string)),
-                new DataColumn("description", typeof(string)),
-                new DataColumn("rate", typeof(decimal)),
-            };
-
-            return dataColumns;
-        }
-
-        internal void LoadTaxRates()
-        {
-            string searchText = txtSearch.Text.Trim();
-            DataTable dtTaxRates = new();
-            DataTable dtTaxRatesFromDB = new();
-            int rowCount = 0;
-            int recordsCount = 0;
-
-            dtTaxRates.Columns.AddRange(TaxRatesDataColumns());
-
-            if (searchText.Length < 2)
-                dtTaxRatesFromDB = AccFactory.RptTaxRatesRepository().GetRecords();
-            else
-                dtTaxRatesFromDB = AccFactory.RptTaxRatesRepository().GetRecordsBySearch(searchText);
-
-            recordsCount = dtTaxRatesFromDB.Rows.Count;
-
-            foreach (DataRow row in dtTaxRatesFromDB.Rows)
-            {
-                var newRow = dtTaxRates.NewRow();
-
-                int id = Convert.ToInt32(row["id"]);
-                string code = row["code"].ToString();
-                string description = row["description"].ToString();
-                decimal rate = Convert.ToDecimal(row["rate"]);
-
-                newRow["id"] = id;
-                newRow["code"] = code;
-                newRow["description"] = description;
-                newRow["rate"] = rate;
-
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordsCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                dtTaxRates.Rows.Add(newRow);
-            }
-
-
-            HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dtTaxRates);
-
-            UpdateRecordCount(dataGridView1);
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddRptTaxRate(this).ShowDialog();
@@ -88,47 +27,37 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void ShowEditForm()
         {
-            try
-            {
-                int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                int rptTaxRatesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            int rptTaxRatesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
-                _ = new frmEditRptTaxRates(rptTaxRatesId, this).ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            _ = new frmEditRptTaxRates(rptTaxRatesId, this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditForm();
+            try
+            {
+                ShowEditForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete(out int deletedCount)
         {
-            try
-            {
-                var rptTaxRatesModelList = new List<RptTaxRatesModel>();
-                int rowCount = dataGridView1.SelectedRows.Count;
+            var rptTaxRatesModelList = new List<RptTaxRatesModel>();
+            int rowCount = dataGridView1.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+            if (Helper.MessageBoxConfirmDelete(rowCount))
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                    {
-                        int penaltiesId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new RptTaxRatesModel() { Id = penaltiesId };
-                        rptTaxRatesModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.RptTaxRatesRepository().Delete(rptTaxRatesModelList);
+                    int penaltiesId = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new RptTaxRatesModel() { Id = penaltiesId };
+                    rptTaxRatesModelList.Add(model);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+
+                deletedCount = rowCount;
+                return AccFactory.RptTaxRatesRepository().Delete(rptTaxRatesModelList);
             }
 
             deletedCount = 0;
@@ -137,13 +66,17 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (Delete(out deletedRecordCount))
+            try
             {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadTaxRates();
+                int deletedRecordCount;
+
+                if (Delete(out deletedRecordCount))
+                {
+                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                    LoadTaxRates();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -161,40 +94,105 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void frmRptTaxRates_Load(object sender, EventArgs e)
         {
-            RunBackgroundWorker();
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            try
+            {
+                LoadTaxRates();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            RunBackgroundWorker();
+            try
+            {
+                LoadTaxRates();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal void RunBackgroundWorker()
+        internal void LoadTaxRates()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                string searchText = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchText);
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private DataColumn[] TaxRatesDataColumns()
         {
-            Invoke((MethodInvoker)delegate
+            var dataColumns = new DataColumn[]
             {
-                LoadTaxRates();
-            });
+                new DataColumn("id", typeof(int)),
+                new DataColumn("code", typeof(string)),
+                new DataColumn("description", typeof(string)),
+                new DataColumn("rate", typeof(decimal)),
+            };
+
+            return dataColumns;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var searchText = e.Argument as string;
+
+                DataTable dataTable = new DataTable();
+                DataTable dtTaxRatesFromDb = AccFactory.RptTaxRatesRepository().GetRecordsBySearch(searchText);
+
+                dataTable.Columns.AddRange(TaxRatesDataColumns());
+
+                if (dtTaxRatesFromDb.Rows.Count < 1)
+                {
+                    backgroundWorker1.ReportProgress(100);
+                    e.Result = dataTable;
+                    return;
+                }
+
+                int progressCount = 0;
+                int totalProgressCount = dtTaxRatesFromDb.Rows.Count;
+
+                foreach (DataRow row in dtTaxRatesFromDb.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+
+                    int id = Convert.ToInt32(row["id"]);
+                    string code = row["code"].ToString();
+                    string description = row["description"].ToString();
+                    decimal rate = Convert.ToDecimal(row["rate"]);
+
+                    newRow["id"] = id;
+                    newRow["code"] = code;
+                    newRow["description"] = description;
+                    newRow["rate"] = rate;
+                    dataTable.Rows.Add(newRow);
+
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is not DataTable dataTable)
+                return;
 
+            HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dataTable);
+            int recordCount = dataGridView1.RowCount;
+            lblRecordCount.Text = recordCount.ToString();
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }

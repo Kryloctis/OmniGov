@@ -61,10 +61,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.panel1.Controls.Add(this.dgTaxpayers);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Location = new System.Drawing.Point(0, 79);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(822, 377);
+            this.panel1.Size = new System.Drawing.Size(822, 380);
             this.panel1.TabIndex = 1;
             // 
             // dgTaxpayers
@@ -75,12 +75,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.dgTaxpayers.Name = "dgTaxpayers";
             this.dgTaxpayers.RowHeadersWidth = 51;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(814, 369);
+            this.dgTaxpayers.Size = new System.Drawing.Size(814, 372);
             this.dgTaxpayers.TabIndex = 1;
             this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dgTaxpayers_SelectionChanged);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.AutoSize = false;
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -91,38 +92,40 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(822, 54);
+            this.toolStrip1.Size = new System.Drawing.Size(822, 51);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(33, 43);
-            this.btnAdd.Text = "&Add";
+            this.btnAdd.Size = new System.Drawing.Size(42, 40);
+            this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(31, 43);
-            this.btnEdit.Text = "&Edit";
+            this.btnEdit.Size = new System.Drawing.Size(40, 40);
+            this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 43);
+            this.btnDelete.Size = new System.Drawing.Size(44, 40);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -199,7 +202,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.flowLayoutPanel1.Controls.Add(this.chckBxInactiveTaxpayers);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 54);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 51);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(822, 23);
             this.flowLayoutPanel1.TabIndex = 8;
@@ -218,7 +221,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(743, 15);
+            this.btnSearch.Location = new System.Drawing.Point(743, 12);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 9;
@@ -230,7 +233,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(537, 15);
+            this.txtSearch.Location = new System.Drawing.Point(537, 12);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(200, 23);
             this.txtSearch.TabIndex = 10;
@@ -238,7 +241,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // pbLoadRecords
             // 
             this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbLoadRecords.Location = new System.Drawing.Point(0, 77);
+            this.pbLoadRecords.Location = new System.Drawing.Point(0, 74);
             this.pbLoadRecords.Name = "pbLoadRecords";
             this.pbLoadRecords.Size = new System.Drawing.Size(822, 5);
             this.pbLoadRecords.TabIndex = 24;
@@ -249,6 +252,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // frmTaxpayers
             // 
