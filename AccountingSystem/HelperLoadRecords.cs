@@ -2426,58 +2426,39 @@ namespace AccountingSystem
 
         #region JEV
 
-        internal static void JEVDatagridView(DataGridView datagrid)
+        internal static void JevDatagridView(DataGridView datagrid, DataTable dataTable)
         {
-            datagrid.Columns.Clear();
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("jev_no", "JEV No.");
-            datagrid.Columns.Add("full_jev_no", "JEV No.");
-            datagrid.Columns.Add("date_entry", "Date Entry");
-            datagrid.Columns.Add("funds_id", "Funds ID");
-            datagrid.Columns.Add("fund_name", "Fund");
-            datagrid.Columns.Add("journals_id", "Journals ID");
-            datagrid.Columns.Add("journal_name", "Journal");
-            datagrid.Columns.Add("ref_no", "Ref No.");
-            datagrid.Columns.Add("payee", "Payee");
-            datagrid.Columns.Add("explanation", "Explanation");
-            datagrid.Columns.Add("created_at", "Created At");
-            datagrid.Columns.Add("created_by_id", "Created By ID");
-            datagrid.Columns.Add("created_by_name", "Created By");
-            datagrid.Columns.Add("updated_at", "Updated At");
-            datagrid.Columns.Add("updated_by_id", "Updated By ID");
-            datagrid.Columns.Add("updated_by_name", "Updated By");
-            datagrid.Columns.Add("status", "Status");
-
-            #region Datagrid Column Formats
-
+            datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["fund_name"].HeaderText = "Fund";
+            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
             datagrid.Columns["journals_id"].Visible = false;
-            datagrid.Columns["full_jev_no"].Width = 60;
             datagrid.Columns["full_jev_no"].MinimumWidth = 60;
+            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["ref_no"].Width = 60;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
-            datagrid.Columns["status"].Width = 40;
             datagrid.Columns["status"].MinimumWidth = 40;
             datagrid.Columns["status"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["status"].HeaderText = "Status";
             datagrid.Columns["created_by_name"].Width = 50;
-            datagrid.Columns["payee"].Width = 100;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
-            datagrid.Columns["date_entry"].Width = 60;
             datagrid.Columns["date_entry"].MinimumWidth = 60;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["date_entry"].HeaderText = "Date Entry";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
+            datagrid.Columns["created_by_name"].HeaderText = "Recording Person";
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
-            datagrid.Columns["explanation"].Width = 100;
-            datagrid.Columns["journal_name"].Width = 200;
-
-            #endregion Datagrid Column Formats
+            datagrid.Columns["explanation"].MinimumWidth = 100;
+            datagrid.Columns["explanation"].HeaderText = "Explanation";
+            datagrid.Columns["journal_name"].MinimumWidth = 200;
+            datagrid.Columns["journal_name"].HeaderText = "Journal";
         }
 
         #endregion JEV
@@ -2558,6 +2539,20 @@ namespace AccountingSystem
         #endregion Amortization Schedule
 
         #region OtherPayments
+
+        internal static void DatagridViewPayees(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Type";
+            dataGridView.Columns["taxpayer_type_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["taxpayer_type_code"].MinimumWidth = 30;
+            dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
+            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
+            dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
+        }
 
         internal static void OtherPaymentRatesDatagridView(DataGridView datagrid, DataTable dataTable)
         {

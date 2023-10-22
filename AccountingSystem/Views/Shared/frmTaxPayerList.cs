@@ -207,7 +207,7 @@ namespace AccountingSystem.Views.Shared
             frmAddRealProperties.uc.txtTaxpayerAddress.Text = address;
         }
 
-        private void InitializeNewOwnerDetails(frmPayments frmPayments)
+        private void InitializeNewOwnerDetails(frmRptPayments frmPayments)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
 
@@ -254,8 +254,8 @@ namespace AccountingSystem.Views.Shared
                     InitializeRealProperties((frmAddRealProperties)refForm);
                     break;
 
-                case frmPayments:
-                    InitializeNewOwnerDetails((frmPayments)refForm);
+                case frmRptPayments:
+                    InitializeNewOwnerDetails((frmRptPayments)refForm);
                     break;
 
                 default:

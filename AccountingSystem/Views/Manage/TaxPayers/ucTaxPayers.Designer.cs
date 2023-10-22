@@ -53,6 +53,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // cmbxTaxPayerType
             // 
+            this.cmbxTaxPayerType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxTaxPayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxTaxPayerType.FormattingEnabled = true;
             this.cmbxTaxPayerType.Location = new System.Drawing.Point(93, 87);
@@ -62,6 +64,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtTIN
             // 
+            this.txtTIN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTIN.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTIN.Location = new System.Drawing.Point(93, 29);
             this.txtTIN.Name = "txtTIN";
@@ -79,6 +84,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtContact
             // 
+            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContact.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtContact.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtContact.Location = new System.Drawing.Point(93, 232);
             this.txtContact.MaxLength = 13;
@@ -106,6 +114,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtName
             // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtName.Location = new System.Drawing.Point(93, 58);
@@ -140,6 +151,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // chckIsActive
             // 
+            this.chckIsActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chckIsActive.AutoSize = true;
             this.chckIsActive.Checked = true;
             this.chckIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -152,6 +164,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtStreet
             // 
+            this.txtStreet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtStreet.Location = new System.Drawing.Point(93, 116);
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(299, 23);
@@ -168,6 +183,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtBarangay
             // 
+            this.txtBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBarangay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBarangay.Location = new System.Drawing.Point(93, 145);
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.Size = new System.Drawing.Size(299, 23);
@@ -175,6 +193,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtMunicipality
             // 
+            this.txtMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMunicipality.Location = new System.Drawing.Point(93, 174);
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.Size = new System.Drawing.Size(299, 23);
@@ -182,6 +203,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtProvince
             // 
+            this.txtProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtProvince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProvince.Location = new System.Drawing.Point(93, 203);
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.Size = new System.Drawing.Size(299, 23);
