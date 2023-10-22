@@ -22,6 +22,7 @@ namespace AccountingSystem.Views.Manage.Banks
             try
             {
                 LoadRecords();
+                Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -204,6 +205,7 @@ namespace AccountingSystem.Views.Manage.Banks
             HelperLoadRecords.BanksDatagridView(dataTable, dgBanks);
             dgBanks.CurrentCell = dgBanks.FirstDisplayedCell;
             lblRecordCount.Text = dgBanks.Rows.Count.ToString();
+            Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
 
         private void frmBanks_FormClosed(object sender, FormClosedEventArgs e)
