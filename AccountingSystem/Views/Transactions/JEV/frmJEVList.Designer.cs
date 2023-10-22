@@ -330,8 +330,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            this.backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // pbLoadRecords
             // 
@@ -358,6 +359,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of JEVs";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmJEVList_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmJEVList_FormClosed);
             this.Load += new System.EventHandler(this.frmJEVList_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
