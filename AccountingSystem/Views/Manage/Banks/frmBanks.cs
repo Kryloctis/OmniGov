@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Banks
                 var banksModelList = new List<BanksModel>();
                 foreach (DataGridViewRow row in dgBanks.SelectedRows)
                 {
-                    int bankId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                    int bankId = Convert.ToInt16(row.Cells["id"].Value.ToString());
                     banksModelList.Add(new BanksModel() { Id = bankId });
                 }
 
