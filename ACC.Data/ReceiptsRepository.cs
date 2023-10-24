@@ -150,13 +150,13 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                    new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
-                    new object[] { "@receipt_number_from", DbType.Int32, entity.SerialNoFrom},
-                    new object[] { "@receipt_number_to", DbType.Int32, entity.SerialNoTo},
-                    new object[] { "@received_date", DbType.Date, entity.ReceiptDate},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity},
-                    new object[] { "@users_id", DbType.Int32, entity.UserId},
-                    new object[] { "@remarks", DbType.String, entity.Remarks}
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
+                new object[] { "@receipt_number_from", DbType.Int32, entity.SerialNoFrom},
+                new object[] { "@receipt_number_to", DbType.Int32, entity.SerialNoTo},
+                new object[] { "@received_date", DbType.Date, entity.ReceiptDate},
+                new object[] { "@quantity", DbType.Int32, entity.Quantity},
+                new object[] { "@users_id", DbType.Int32, entity.UserId},
+                new object[] { "@remarks", DbType.String, entity.Remarks}
             };
 
             string query = $"INSERT INTO {tableName} (accountable_forms_id, receipt_number_from, receipt_number_to, received_date, quantity, users_id, remarks) VALUES (@accountable_forms_id, @receipt_number_from, @receipt_number_to, @received_date, @quantity, @users_id, @remarks)";

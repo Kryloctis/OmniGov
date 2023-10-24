@@ -46,8 +46,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 UserId = userId
             };
 
-            var receiptRepository = AccFactory.ReceiptsRepository();
-            return receiptRepository.Insert(receiptModel);
+            return AccFactory.ReceiptsRepository().Insert(receiptModel);
 
         }
 
@@ -59,16 +58,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                 {
 
                     Helper.MessageBoxSuccess("Receipt has been saved.");
-                    if (!_frmReceipts.bgwLoadReceipts.IsBusy)
-                        _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
+                    _frmReceipts.LoadReceipts();
                     uc.ResetForm();
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
+            } catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

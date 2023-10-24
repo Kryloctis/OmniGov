@@ -832,31 +832,22 @@ namespace AccountingSystem
 
             datagrid.Columns["accountable_form_code"].Width = 80;
             datagrid.Columns["accountable_form_code"].MinimumWidth = 80;
-            datagrid.Columns["accountable_form_code"].HeaderText = "Form Code";
+            datagrid.Columns["accountable_form_code"].HeaderText = "Form";
 
             datagrid.Columns["receipt"].Width = 400;
             datagrid.Columns["receipt"].MinimumWidth = 400;
             datagrid.Columns["receipt"].HeaderText = "Receipt";
 
-            datagrid.Columns["receipt_number_from"].HeaderText = "Receipt Number From";
-            datagrid.Columns["receipt_number_from"].MinimumWidth = 150;
-            datagrid.Columns["receipt_number_from"].Width = 150;
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["receipt_number"].HeaderText = "Receipt No. (Range)";
+            datagrid.Columns["receipt_number"].MinimumWidth = 150;
+            datagrid.Columns["receipt_number"].Width = 150;
 
-            datagrid.Columns["receipt_number_to"].HeaderText = "Receipt Number To";
-            datagrid.Columns["receipt_number_to"].MinimumWidth = 150;
-            datagrid.Columns["receipt_number_to"].Width = 150;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
-
-            datagrid.Columns["received_date"].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns["received_date"].HeaderText = "Received Date";
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["received_date"].HeaderText = "Date Received";
             datagrid.Columns["received_date"].Width = 150;
             datagrid.Columns["received_date"].MinimumWidth = 150;
 
             datagrid.Columns["quantity"].HeaderText = "Quantity";
-            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["quantity"].MinimumWidth = 80;
             datagrid.Columns["quantity"].Width = 80;
 
