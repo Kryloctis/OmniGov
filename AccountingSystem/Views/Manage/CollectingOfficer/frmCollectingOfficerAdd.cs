@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Collecting Officer has been saved.");
-                    _frmCollectingOfficer.LoadRecords();
+                    _frmCollectingOfficer.LoadCollectingOfficers();
                     _uc.ResetForm();
                     _uc.SetReadOnlyConrol(false);
                 }

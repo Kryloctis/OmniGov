@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Collecting Officer has been saved.");
-                    _frmCollectingOfficer.LoadRecords();
+                    _frmCollectingOfficer.LoadCollectingOfficers();
                     this.Close();
                 }
             }

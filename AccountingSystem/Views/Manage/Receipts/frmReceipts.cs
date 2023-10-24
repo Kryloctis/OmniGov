@@ -113,62 +113,66 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.Argument is not Dictionary<string, string> dictParameters)
-                return;
-
-            string searchKey = dictParameters["search_key"];
-            DateTime dateReceived = Convert.ToDateTime(dictParameters["date_received"]);
-
-            var dataTable = new DataTable();
-            DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
-
-            dataTable.Columns.AddRange(ReceiptsColumns());
-
-            if (dtReceiptsDb.Rows.Count < 1)
+            try
             {
-                bgwLoadReceipts.ReportProgress(100);
-                e.Result = dataTable;
-                return;
-            }
+                if (e.Argument is not Dictionary<string, string> dictParameters)
+                    return;
 
-            int totalProgressCount = dtReceiptsDb.Rows.Count;
-            int progressCount = 0;
+                string searchKey = dictParameters["search_key"];
+                DateTime dateReceived = Convert.ToDateTime(dictParameters["date_received"]);
 
-            foreach (DataRow row in dtReceiptsDb.Rows)
-            {
-                if (bgwLoadReceipts.CancellationPending)
+                var dataTable = new DataTable();
+                DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
+
+                dataTable.Columns.AddRange(ReceiptsColumns());
+
+                if (dtReceiptsDb.Rows.Count < 1)
                 {
-                    e.Cancel = true;
+                    bgwLoadReceipts.ReportProgress(100);
+                    e.Result = dataTable;
                     return;
                 }
 
-                var newRow = dataTable.NewRow();
+                int totalProgressCount = dtReceiptsDb.Rows.Count;
+                int progressCount = 0;
 
-                int id = Convert.ToInt32(row["id"]);
-                string accountableFormCode = row["acc_form_no"].ToString();
-                string receipt = row["acc_form_desc"].ToString();
-                int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
-                int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
-                string receiptNumber = receipNumberTo == 0 && receiptNumberFrom == 0 ? "--" : $"{receiptNumberFrom.ToString("D7")} > {receipNumberTo.ToString("D7")}";
-                int quantity = Convert.ToInt32(row["quantity"]);
-                DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
-                string officer = row["officer"].ToString();
+                foreach (DataRow row in dtReceiptsDb.Rows)
+                {
+                    if (bgwLoadReceipts.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
 
-                newRow["id"] = id;
-                newRow["accountable_form_code"] = accountableFormCode;
-                newRow["receipt"] = receipt;
-                newRow["receipt_number"] = receiptNumber;
-                newRow["quantity"] = quantity;
-                newRow["received_date"] = receivedDate;
-                newRow["officer"] = officer;
+                    var newRow = dataTable.NewRow();
 
-                progressCount++;
-                dataTable.Rows.Add(newRow);
+                    int id = Convert.ToInt32(row["id"]);
+                    string accountableFormCode = row["acc_form_no"].ToString();
+                    string receipt = row["acc_form_desc"].ToString();
+                    int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
+                    int receipNumberTo = Convert.ToInt32(row["receipt_number_to"]);
+                    string receiptNumber = receipNumberTo == 0 && receiptNumberFrom == 0 ? "--" : $"{receiptNumberFrom.ToString("D7")} > {receipNumberTo.ToString("D7")}";
+                    int quantity = Convert.ToInt32(row["quantity"]);
+                    DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
+                    string officer = row["officer"].ToString();
 
-                Helper.ProgressCounter(bgwLoadReceipts, totalProgressCount, progressCount);
+                    newRow["id"] = id;
+                    newRow["accountable_form_code"] = accountableFormCode;
+                    newRow["receipt"] = receipt;
+                    newRow["receipt_number"] = receiptNumber;
+                    newRow["quantity"] = quantity;
+                    newRow["received_date"] = receivedDate;
+                    newRow["officer"] = officer;
+
+                    progressCount++;
+                    dataTable.Rows.Add(newRow);
+
+                    Helper.ProgressCounter(bgwLoadReceipts, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
             }
-
-            e.Result = dataTable;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
