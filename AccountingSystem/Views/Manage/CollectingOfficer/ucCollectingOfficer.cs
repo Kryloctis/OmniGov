@@ -1,5 +1,5 @@
-﻿using AccountingSystem.Views.Manage.LinkUser;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -7,8 +7,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class ucCollectingOfficer : UserControl
     {
-        internal int officerID = 0;
-        internal int userID = 0;
+        internal int Id;
 
         public ucCollectingOfficer()
         {
@@ -28,62 +27,27 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void SetReadOnlyConrol(bool reaonly)
+        private void LoadUsers(bool isSearch = false)
         {
-            txtPrefix.ReadOnly = reaonly;
-            txtLastName.ReadOnly = reaonly;
-            txtFirstName.ReadOnly = reaonly;
-            txtMiddleInitial.ReadOnly = reaonly;
-            txtSuffix.ReadOnly = reaonly;
+            string searchKey = cmbxLinkedAcc.Text.Trim();
+            var dtUsers = AccFactory.UsersRepository().GetRecords();
+            HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
+
+            var searchSources = new List<string>
+            {
+                "first_name",
+                "last_name",
+                "role_name"
+            };
+
+            HelperLoadRecords.SearchableComboboxParameters(cmbxLinkedAcc, dtUsers, "id", "first_name", searchSources, searchKey, isSearch);
         }
 
-        private void SelectUser()
+        private void OnLoad()
         {
-            frmLinkUser frmLinkuser = new() { userType = "collector" };
-
-            if (frmLinkuser.ShowDialog() == DialogResult.OK)
+            if (!DesignMode)
             {
-                userID = frmLinkuser.UserId;
-                linkUser.Text = $"{frmLinkuser.userName}";
-
-                int selectedUserCount = frmLinkuser.dgUsers.SelectedRows.Count;
-                if (selectedUserCount == 1)
-                {
-                    SetReadOnlyConrol(true);
-                    txtPrefix.Text = frmLinkuser.prefix;
-                    txtLastName.Text = frmLinkuser.lastName;
-                    txtFirstName.Text = frmLinkuser.firstName;
-                    txtMiddleInitial.Text = frmLinkuser.middleInitial;
-                    txtSuffix.Text = frmLinkuser.suffix;
-                }
-            }
-        }
-
-        internal void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SelectUser();
-        }
-
-        internal void LoadLink(int id)
-        {
-            try
-            {
-                var userRepository = AccFactory.UsersRepository();
-                var data = userRepository.GetUserByID(id);
-                if (data.Count > 0)
-                {
-                    userID = id;
-                    linkUser.Text = String.Format("@{0}", data["username"]);
-                }
-                else
-                {
-                    userID = 0;
-                    linkUser.Text = "Link User";
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                LoadUsers();
             }
         }
 
@@ -95,8 +59,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             txtLastName.Clear();
             txtSuffix.Clear();
             txtJobtitle.Text = "Collecting Officer";
-            userID = 0;
-            linkUser.Text = "Link User";
         }
 
         private void txtFname_Validated(object sender, EventArgs e)
@@ -104,23 +66,27 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
         }
 
-        private void txtFname_Validating(object sender, CancelEventArgs e)
+        private bool CollectorNameValidated(string message)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "first name");
-
-            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             string firstName = txtFirstName.Text.Trim();
             string midInitial = txtMiddleInitial.Text.Trim();
             string lastName = txtLastName.Text.Trim();
-            bool fullNameExist;
 
-            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, midInitial, lastName, officerID);
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, message))
+                return false;
 
+            bool fullNameExist = AccFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
             if (fullNameExist)
             {
-                errorProvider1.SetError(txtFirstName, "Validation");
-                e.Cancel = true;
+                errorProvider1.SetError(txtFirstName, "Name already exist.");
+                return false;
             }
+            return true;
+        }
+
+        private void txtFname_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !CollectorNameValidated("first name");
         }
 
         private void txtLname_Validated(object sender, EventArgs e)
@@ -130,21 +96,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtLname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, "last name");
-
-            string firstName = txtFirstName.Text.Trim();
-            string middleInitial = txtMiddleInitial.Text.Trim();
-            string lastName = txtLastName.Text.Trim();
-            bool fullNameExist;
-
-            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, middleInitial, lastName, officerID);
-
-            if (fullNameExist)
-            {
-                errorProvider1.SetError(txtLastName, "Fullname Details already exist in your records. ");
-                e.Cancel = true;
-            }
+            e.Cancel = e.Cancel = !CollectorNameValidated("last name");
         }
 
         private void txtMI_Validated(object sender, EventArgs e)
@@ -154,26 +106,79 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtMI_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMiddleInitial, "middle initial");
+            e.Cancel = !CollectorNameValidated("middle initial");
+        }
 
-            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-            string fName = txtFirstName.Text.Trim();
-            string midInitial = txtMiddleInitial.Text.Trim();
-            string lname = txtLastName.Text.Trim();
-            bool fullNameExist;
-
-            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, officerID);
-
-            if (fullNameExist)
+        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chckLinkAcc.Checked)
             {
-                errorProvider1.SetError(txtMiddleInitial, "Officer's Fullname");
-                e.Cancel = true;
+                chckLinkAcc.Image = Properties.Resources.link_14px;
+                cmbxLinkedAcc.Enabled = false;
+                cmbxLinkedAcc.SelectedIndex = -1;
+            }
+            else
+            {
+                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                cmbxLinkedAcc.Enabled = true;
             }
         }
 
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
+        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
+                {
+                    LoadUsers(true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.V))
+                    LoadUsers(true);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadSelectedRecord()
+        {
+            var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByID(Id);
+
+            txtPrefix.Text = dictCollectingOfficer["prefix"];
+            txtFirstName.Text = dictCollectingOfficer["first_name"];
+            txtMiddleInitial.Text = dictCollectingOfficer["mid_initial"];
+            txtLastName.Text = dictCollectingOfficer["last_name"];
+            txtSuffix.Text = dictCollectingOfficer["suffix"];
+            txtJobtitle.Text = dictCollectingOfficer["job_title"];
+            var linkedUserId = dictCollectingOfficer["users_id"];
+
+            if (string.IsNullOrWhiteSpace(linkedUserId))
+            {
+                chckLinkAcc.Checked = false;
+            }
+            else
+            {
+                chckLinkAcc.Checked = true;
+                cmbxLinkedAcc.SelectedValue = linkedUserId;
+            }
+        }
+
+        private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
+        {
+        }
+
+        private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
+        {
         }
     }
 }

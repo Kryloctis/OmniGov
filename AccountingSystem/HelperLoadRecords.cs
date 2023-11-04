@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -1822,6 +1824,13 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static void UsersComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+        }
+
         #endregion Users
 
         #region Others FPP
@@ -2599,6 +2608,36 @@ namespace AccountingSystem
         #endregion OtherPayments
 
         #region CustomFunctions
+
+        internal static void SearchableComboboxParameters(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, List<string> searchSources, string searchText = "", bool isSearch = false)
+        {
+            DataView dataView = new DataView(dataTable);
+
+            if (isSearch)
+            {
+                string filter = string.Join(" OR ", searchSources.Select(source => $"{source} Like '%{searchText}%'"));
+                dataView.RowFilter = filter;
+            }
+
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataView.ToTable();
+
+            if (dataTable.Rows.Count < 1)
+                return;
+
+            if (isSearch)
+            {
+                comboBox.DroppedDown = false;
+                comboBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                comboBox.DroppedDown = false;
+                comboBox.SelectedIndex = -1;
+            }
+        }
 
         internal static void SearchableCombobox(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, string searchSource = "", string searchText = "", bool isSearch = false)
         {

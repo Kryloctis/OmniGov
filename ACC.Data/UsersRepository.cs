@@ -244,24 +244,17 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@search_text", DbType.String, $"%{searchText}%"},
-                };
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
 
-                var srchtxt = searchText;
+            var srchtxt = searchText;
 
-                string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
+            string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
-                var dtUsers = new DataTable();
-                return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtUsers = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
         }
 
         public bool Insert(UsersModel entity)
