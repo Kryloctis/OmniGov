@@ -21,7 +21,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 errorProvider1.GetError(txtFirstName),
                 errorProvider1.GetError(txtMiddleInitial),
                 errorProvider1.GetError(txtLastName),
-                errorProvider1.GetError(txtJobtitle)
+                errorProvider1.GetError(txtJobtitle),
+                errorProvider1.GetError(chckLinkAcc)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -66,19 +67,19 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
         }
 
-        private bool CollectorNameValidated(string message)
+        private bool CollectorNameValidated(TextBox textBox, ErrorProvider errorProvider, string message)
         {
             string firstName = txtFirstName.Text.Trim();
             string midInitial = txtMiddleInitial.Text.Trim();
             string lastName = txtLastName.Text.Trim();
 
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, message))
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, message))
                 return false;
 
             bool fullNameExist = AccFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
             if (fullNameExist)
             {
-                errorProvider1.SetError(txtFirstName, "Name already exist.");
+                errorProvider.SetError(textBox, "Name already exist.");
                 return false;
             }
             return true;
@@ -86,7 +87,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtFname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !CollectorNameValidated("first name");
+            e.Cancel = !CollectorNameValidated(txtFirstName, errorProvider1, "first name");
         }
 
         private void txtLname_Validated(object sender, EventArgs e)
@@ -96,7 +97,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtLname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = e.Cancel = !CollectorNameValidated("last name");
+            e.Cancel = !CollectorNameValidated(txtLastName, errorProvider1, "last name");
         }
 
         private void txtMI_Validated(object sender, EventArgs e)
@@ -106,7 +107,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtMI_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !CollectorNameValidated("middle initial");
+            e.Cancel = !CollectorNameValidated(txtMiddleInitial, errorProvider1, "middle initial");
         }
 
         private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
@@ -116,6 +117,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 chckLinkAcc.Image = Properties.Resources.link_14px;
                 cmbxLinkedAcc.Enabled = false;
                 cmbxLinkedAcc.SelectedIndex = -1;
+                cmbxLinkedAcc.Text = string.Empty;
+                errorProvider1.SetError(chckLinkAcc, string.Empty);
             }
             else
             {
@@ -173,12 +176,33 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             }
         }
 
+        private bool LinkedUserValidated(ErrorProvider errorProvider, string message, Control source)
+        {
+            var linkedUserId = cmbxLinkedAcc.SelectedValue;
+
+            if (string.IsNullOrWhiteSpace(cmbxLinkedAcc.Text.Trim()) || linkedUserId == null)
+            {
+                errorProvider.SetError(source, message);
+                return false;
+            }
+            else if (!AccFactory.UsersRepository().IdExist(Convert.ToInt32(linkedUserId)))
+            {
+                errorProvider.SetError(source, message);
+                return false;
+            }
+
+            return true;
+        }
+
         private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
         {
+            if (chckLinkAcc.Checked)
+                e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
         }
 
         private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
         {
+            errorProvider1.SetError(chckLinkAcc, string.Empty);
         }
     }
 }

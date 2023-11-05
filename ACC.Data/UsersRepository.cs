@@ -440,24 +440,16 @@ namespace ACC.Data
 
         public bool NameExist(string userName)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@username", DbType.String, userName },
-                };
-
-                string query = $"SELECT username FROM {tableName} WHERE username = @username";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@username", DbType.String, userName }
             };
 
+            string query = $"SELECT username FROM {tableName} WHERE username = @username";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
         }
 
