@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             dgfacevalue.RowTemplate.Height = 29;
             dgfacevalue.Size = new System.Drawing.Size(491, 140);
             dgfacevalue.TabIndex = 0;
-            dgfacevalue.SelectionChanged += dgfacevalue_SelectionChanged;
+            dgfacevalue.SelectionChanged += new System.EventHandler(dgfacevalue_SelectionChanged);
             // 
             // txtamount
             // 
@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnsave.TabIndex = 2;
             btnsave.Text = "Add";
             btnsave.UseVisualStyleBackColor = true;
-            btnsave.Click += btnsave_Click;
+            btnsave.Click += new System.EventHandler(btnsave_Click);
             // 
             // toolStrip
             // 
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnEdit.Size = new System.Drawing.Size(31, 39);
             btnEdit.Text = "Edit";
             btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnEdit.Click += btnEdit_Click;
+            btnEdit.Click += new System.EventHandler(btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnDelete.Size = new System.Drawing.Size(44, 39);
             btnDelete.Text = "Delete";
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnDelete.Click += btnDelete_Click;
+            btnDelete.Click += new System.EventHandler(btnDelete_Click);
             // 
             // errorProvider
             // 
@@ -239,7 +239,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Face Values";
-            Load += frmFaceValue_Load;
+            Load += new System.EventHandler(frmFaceValue_Load);
             ((System.ComponentModel.ISupportInitialize)dgfacevalue).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtamount).EndInit();
             toolStrip.ResumeLayout(false);

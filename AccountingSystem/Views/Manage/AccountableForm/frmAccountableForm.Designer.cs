@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnAdd.Size = new System.Drawing.Size(42, 39);
             btnAdd.Text = "Add...";
             btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnAdd.Click += btnAdd_Click;
+            btnAdd.Click += new System.EventHandler(btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnEdit.Size = new System.Drawing.Size(40, 39);
             btnEdit.Text = "Edit...";
             btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnEdit.Click += btnEdit_Click;
+            btnEdit.Click += new System.EventHandler(btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnDelete.Size = new System.Drawing.Size(44, 39);
             btnDelete.Text = "Delete";
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnDelete.Click += btnDelete_Click;
+            btnDelete.Click += new System.EventHandler(btnDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnFaceValue.Size = new System.Drawing.Size(66, 39);
             btnFaceValue.Text = "Face Value";
             btnFaceValue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnFaceValue.Click += btnFaceValue_Click;
+            btnFaceValue.Click += new System.EventHandler(btnFaceValue_Click);
             // 
             // statusStrip
             // 
@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             dgAccountableForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgAccountableForm.Size = new System.Drawing.Size(786, 312);
             dgAccountableForm.TabIndex = 10;
-            dgAccountableForm.SelectionChanged += dgAccountableForm_SelectionChanged;
+            dgAccountableForm.SelectionChanged += new System.EventHandler(dgAccountableForm_SelectionChanged);
             // 
             // pbLoadRecords
             // 
@@ -187,7 +187,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnSearch.TabIndex = 25;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            btnSearch.Click += new System.EventHandler(btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -203,8 +203,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(backgroundWorker1_DoWork);
+            backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
             // 
             // frmAccountableForm
             // 
@@ -228,7 +228,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Manage > Accountable Form";
-            Load += frmAccountable_Load;
+            Load += new System.EventHandler(frmAccountable_Load);
             toolStrip.ResumeLayout(false);
             toolStrip.PerformLayout();
             statusStrip.ResumeLayout(false);

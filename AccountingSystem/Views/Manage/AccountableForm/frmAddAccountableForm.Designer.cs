@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnSave.TabIndex = 1;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
+            btnSave.Click += new System.EventHandler(btnSave_Click);
             // 
             // panel1
             // 

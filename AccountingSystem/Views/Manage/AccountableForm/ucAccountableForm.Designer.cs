@@ -64,8 +64,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             txtFormNo.Name = "txtFormNo";
             txtFormNo.Size = new System.Drawing.Size(370, 23);
             txtFormNo.TabIndex = 0;
-            txtFormNo.Validating += txtformno_Validating;
-            txtFormNo.Validated += txtformno_Validated;
+            txtFormNo.Validating += new System.ComponentModel.CancelEventHandler(txtformno_Validating);
+            txtFormNo.Validated += new System.EventHandler(txtformno_Validated);
             // 
             // txtFormDescription
             // 
@@ -75,8 +75,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             txtFormDescription.Name = "txtFormDescription";
             txtFormDescription.Size = new System.Drawing.Size(370, 23);
             txtFormDescription.TabIndex = 1;
-            txtFormDescription.Validating += txtformdesc_Validating;
-            txtFormDescription.Validated += txtformdesc_Validated;
+            txtFormDescription.Validating += new System.ComponentModel.CancelEventHandler(txtformdesc_Validating);
+            txtFormDescription.Validated += new System.EventHandler(txtformdesc_Validated);
             // 
             // errorProvider1
             // 
