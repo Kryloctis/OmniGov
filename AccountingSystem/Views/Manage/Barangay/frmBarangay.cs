@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -29,63 +30,6 @@ namespace AccountingSystem.Views.Manage.Barangay
         }
 
         private void frmBarangay_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private DataColumn[] BarangayDataColumns()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("code", typeof(string)),
-                new DataColumn("name", typeof(string)),
-            };
-
-            return dataColumns;
-        }
-
-        internal void LoadBarangay()
-        {
-            DataTable dtBarangay = new();
-            DataTable dtBarangayFromDB;
-            var searchText = txtSearch.Text.Trim();
-            dtBarangay.Columns.AddRange(BarangayDataColumns());
-
-            if (searchText.Length > 2)
-                dtBarangayFromDB = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
-            else
-                dtBarangayFromDB = AccFactory.BarangayRepository().GetRecords();
-
-            int recordCount = dtBarangayFromDB.Rows.Count;
-            int rowCount = 0;
-
-            foreach (DataRow row in dtBarangayFromDB.Rows)
-            {
-                var newRow = dtBarangay.NewRow();
-
-                int id = Convert.ToInt32(row["id"]);
-                string code = row["code"].ToString();
-                string name = row["name"].ToString();
-
-                newRow["id"] = id;
-                newRow["code"] = code;
-                newRow["name"] = name;
-
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-                dtBarangay.Rows.Add(newRow);
-            }
-
-            HelperLoadRecords.BarangaysDatagridView(dgBarangay, dtBarangay);
-        }
-
-        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -144,20 +88,68 @@ namespace AccountingSystem.Views.Manage.Barangay
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                string searchKey = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchKey);
             }
         }
 
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private DataColumn[] BarangayDataColumns()
         {
-            Invoke((MethodInvoker)delegate
+            var dataColumns = new DataColumn[]
             {
-                LoadBarangay();
-            });
+                new DataColumn("id", typeof(int)),
+                new DataColumn("code", typeof(string)),
+                new DataColumn("name", typeof(string)),
+            };
+
+            return dataColumns;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                if (e.Argument is not string searchKey)
+                    return;
+
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(BarangayDataColumns());
+
+                DataTable dtBarangayFromDB = AccFactory.BarangayRepository().GetRecordsBySearch(searchKey, Helper.selectedServerModel.LguId);
+
+                if (dtBarangayFromDB.Rows.Count < 1)
+                {
+                    backgroundWorker1.ReportProgress(100);
+                    e.Result = dataTable;
+                    return;
+                }
+
+                int totalProgressCount = dtBarangayFromDB.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow row in dtBarangayFromDB.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+
+                    int id = Convert.ToInt32(row["id"]);
+                    string code = row["code"].ToString();
+                    string name = row["name"].ToString();
+
+                    newRow["id"] = id;
+                    newRow["code"] = code;
+                    newRow["name"] = name;
+
+                    progressCount++;
+                    dataTable.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
@@ -165,6 +157,18 @@ namespace AccountingSystem.Views.Manage.Barangay
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadRecords();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.BarangaysDatagridView(dgBarangay, dataTable);
+            dgBarangay.CurrentCell = dgBarangay.FirstDisplayedCell;
+            lblRecordCount.Text = dgBarangay.Rows.Count.ToString();
         }
     }
 }

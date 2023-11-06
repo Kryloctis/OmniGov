@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
@@ -22,5 +23,7 @@ namespace ACC.Domain.Interfaces
         bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName, int id);
 
         int GetIdByName_MunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName);
+
+        DataTable GetRecordsBySearch(string searchText, int municipalityId);
     }
 }
