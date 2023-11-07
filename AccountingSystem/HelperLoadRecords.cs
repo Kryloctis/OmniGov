@@ -1559,18 +1559,18 @@ namespace AccountingSystem
         internal static void AccFormDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Form Code";
-            datagrid.Columns[2].HeaderText = "Form Description";
-            datagrid.Columns[3].HeaderText = "Face Value";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["form_code"].HeaderText = "Form Code";
+            datagrid.Columns["form_description"].HeaderText = "Form Description";
+            datagrid.Columns["form_face_value"].HeaderText = "Face Value";
 
-            datagrid.Columns[1].MinimumWidth = 90;
-            datagrid.Columns[1].Width = 90;
+            datagrid.Columns["form_code"].MinimumWidth = 90;
+            datagrid.Columns["form_code"].Width = 90;
 
-            datagrid.Columns[2].MinimumWidth = 500;
-            datagrid.Columns[2].Width = 500;
+            datagrid.Columns["form_description"].MinimumWidth = 500;
+            datagrid.Columns["form_description"].Width = 500;
 
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["form_face_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
