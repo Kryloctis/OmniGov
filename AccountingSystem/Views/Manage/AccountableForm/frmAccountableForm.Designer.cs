@@ -282,6 +282,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.dgfacevalue.RowTemplate.Height = 29;
             this.dgfacevalue.Size = new System.Drawing.Size(340, 285);
             this.dgfacevalue.TabIndex = 1;
+            this.dgfacevalue.SelectionChanged += new System.EventHandler(this.dgfacevalue_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -304,6 +305,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnAddFV.Name = "btnAddFV";
             this.btnAddFV.Size = new System.Drawing.Size(58, 22);
             this.btnAddFV.Text = "Add...";
+            this.btnAddFV.Click += new System.EventHandler(this.btnAddFV_Click);
             // 
             // btnEditFV
             // 
@@ -312,6 +314,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnEditFV.Name = "btnEditFV";
             this.btnEditFV.Size = new System.Drawing.Size(56, 22);
             this.btnEditFV.Text = "Edit...";
+            this.btnEditFV.Click += new System.EventHandler(this.btnEditFV_Click);
             // 
             // btnDeleteFV
             // 
@@ -320,6 +323,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnDeleteFV.Name = "btnDeleteFV";
             this.btnDeleteFV.Size = new System.Drawing.Size(60, 22);
             this.btnDeleteFV.Text = "Delete";
+            this.btnDeleteFV.Click += new System.EventHandler(this.btnDeleteFV_Click);
             // 
             // frmAccountableForm
             // 

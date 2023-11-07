@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -996,46 +995,20 @@ namespace AccountingSystem
 
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("accountable_forms_id", "Accountable Form ID");
-            datagrid.Columns.Add("date", "Date");
-            datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("updated_at", "Updated at");
+            datagrid.DataSource = dataTable;
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["accountable_forms_id"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-
-            datagrid.Columns["date"].Width = 230;
-            datagrid.Columns["amount"].Width = 100;
-
-            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["amount"].HeaderText = "Amount";
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
+            datagrid.Columns["date"].HeaderText = "Date Effective";
             datagrid.Columns["date"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagrid.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            foreach (DataRow drFaceValue in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    drFaceValue["id"],
-                    drFaceValue["accountable_forms_id"],
-                    drFaceValue["date"],
-                    drFaceValue["amount"],
-                    drFaceValue["created_at"],
-                    drFaceValue["updated_at"]
-                });
-            }
-
-            datagrid.ClearSelection();
+            datagrid.Columns["is_default"].HeaderText = "Default";
+            datagrid.Columns["is_default"].MinimumWidth = 10;
+            datagrid.Columns["is_default"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         #endregion FaceValue
