@@ -148,6 +148,8 @@
             consolidatedRealPropertyTaxDeliquencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             listOfDelinquentAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            realPropertyTaxReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            lTOM16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             reportOfCheckIssuedRCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             releasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             unreleasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,8 +157,6 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            realPropertyTaxReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1234,6 +1234,20 @@
             toolStripSeparator13.Name = "toolStripSeparator13";
             toolStripSeparator13.Size = new System.Drawing.Size(397, 6);
             // 
+            // realPropertyTaxReportsToolStripMenuItem
+            // 
+            realPropertyTaxReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM16ToolStripMenuItem });
+            realPropertyTaxReportsToolStripMenuItem.Name = "realPropertyTaxReportsToolStripMenuItem";
+            realPropertyTaxReportsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
+            realPropertyTaxReportsToolStripMenuItem.Text = "Real Property Tax Reports";
+            // 
+            // lTOM16ToolStripMenuItem
+            // 
+            lTOM16ToolStripMenuItem.Name = "lTOM16ToolStripMenuItem";
+            lTOM16ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM16ToolStripMenuItem.Text = "LTOM 16";
+            lTOM16ToolStripMenuItem.Click += lTOM16ToolStripMenuItem_Click;
+            // 
             // reportOfCheckIssuedRCIToolStripMenuItem
             // 
             reportOfCheckIssuedRCIToolStripMenuItem.Name = "reportOfCheckIssuedRCIToolStripMenuItem";
@@ -1281,19 +1295,6 @@
             imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // realPropertyTaxReportsToolStripMenuItem
-            // 
-            realPropertyTaxReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM16ToolStripMenuItem });
-            realPropertyTaxReportsToolStripMenuItem.Name = "realPropertyTaxReportsToolStripMenuItem";
-            realPropertyTaxReportsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
-            realPropertyTaxReportsToolStripMenuItem.Text = "Real Property Tax Reports";
-            // 
-            // lTOM16ToolStripMenuItem
-            // 
-            lTOM16ToolStripMenuItem.Name = "lTOM16ToolStripMenuItem";
-            lTOM16ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            lTOM16ToolStripMenuItem.Text = "LTOM 16";
             // 
             // MainForm
             // 

@@ -37,6 +37,7 @@ using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.SAAOB;
@@ -695,5 +696,11 @@ namespace AccountingSystem.Views.Dashboard
         {
             _ = new frmRptPayments().ShowDialog();
         }
+
+        private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
+        }
+
     }
 }
