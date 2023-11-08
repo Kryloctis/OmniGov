@@ -6,8 +6,8 @@ namespace AccountingSystem.Views.Manage.LinkUser
 {
     public partial class frmLinkUser : Form
     {
-        internal int UserId = 0;
-        internal string Username = string.Empty;
+        internal int UserId;
+        internal string userName = string.Empty;
         internal string prefix = string.Empty;
         internal string lastName = string.Empty;
         internal string firstName = string.Empty;
@@ -18,59 +18,44 @@ namespace AccountingSystem.Views.Manage.LinkUser
         public frmLinkUser()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgvusers, true);
-            dgvusers.MultiSelect = false;
+            Helper.DatagridFullRowSelectStyle(dgUsers, true);
         }
 
         private void frmlinkuser_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            if (!string.IsNullOrEmpty(userType))
+                LoadRecords();
         }
 
         internal void LoadRecords()
         {
             try
             {
-                if (!string.IsNullOrEmpty(userType))
+                string textSearch = txtSearch.Text.Trim();
+                var userRepository = AccFactory.UsersRepository();
+                var dataTableUsers = new DataTable();
+
+                switch (userType)
                 {
-                    if (userType.Equals("collector"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksCollectingOfficers();
-
-                        foreach (DataRow row in dtusers.Rows)
-                        {
-                            int userId = Convert.ToInt32(row["id"]);
-                            var dictUser = Helper.GetUserDataById(userId);
-                            row["user_full_name"] = dictUser["user_full_name"];
-                        }
-
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
-
-                    if (userType.Equals("disburser"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksDisbursingOfficers();
-
-                        foreach (DataRow row in dtusers.Rows)
-                        {
-                            int userId = Convert.ToInt32(row["id"]);
-                            var dictUser = Helper.GetUserDataById(userId);
-                            row["user_full_name"] = dictUser["user_full_name"];
-                        }
-
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
-
-                    if (userType.Equals("JO"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksJOCollectingOfficers();
-
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
+                    case "collector":
+                        dataTableUsers = userRepository.GetLinksCollectingOfficers(textSearch);
+                        break;
+                    case "disburser":
+                        dataTableUsers = userRepository.GetLinksDisbursingOfficers();
+                        break;
+                    case "JO":
+                        dataTableUsers = userRepository.GetLinksJOCollectingOfficers();
+                        break;
                 }
+
+                foreach (DataRow row in dataTableUsers.Rows)
+                {
+                    int userId = Convert.ToInt32(row["id"]);
+                    var dictUser = Helper.GetUserDataById(userId);
+                    row["user_full_name"] = dictUser["user_full_name"];
+                }
+
+                HelperLoadRecords.UsersDatagridView(dataTableUsers, dgUsers);
             }
             catch (Exception ex)
             {
@@ -80,15 +65,15 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvusers.SelectedRows.Count != 0)
+            if (dgUsers.SelectedRows.Count != 0)
             {
-                UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
-                Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
-                prefix = dgvusers.CurrentRow.Cells["prefix"].Value.ToString();
-                firstName = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
-                middleInitial = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
-                lastName = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
-                suffix = dgvusers.CurrentRow.Cells["suffix"].Value.ToString();
+                UserId = int.Parse(dgUsers.CurrentRow.Cells[0].Value.ToString());
+                userName = dgUsers.CurrentRow.Cells["username"].Value.ToString();
+                prefix = dgUsers.CurrentRow.Cells["prefix"].Value.ToString();
+                firstName = dgUsers.CurrentRow.Cells["first_name"].Value.ToString();
+                middleInitial = dgUsers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                lastName = dgUsers.CurrentRow.Cells["last_name"].Value.ToString();
+                suffix = dgUsers.CurrentRow.Cells["suffix"].Value.ToString();
             }
         }
 
@@ -100,8 +85,5 @@ namespace AccountingSystem.Views.Manage.LinkUser
             }
         }
 
-        private void dgvusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
     }
 }

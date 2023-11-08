@@ -6,20 +6,15 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class frmAddAccountableForm : Form
     {
-        private frmAccountableForm frmAccountable;
-        private ucAccountableForm uc;
+        private readonly frmAccountableForm _frmAccountableForm;
+        private readonly ucAccountableForm uc;
 
-        public frmAddAccountableForm(frmAccountableForm frmacc)
+        public frmAddAccountableForm(frmAccountableForm frmAccountableForm)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            frmAccountable = frmacc;
+            _frmAccountableForm = frmAccountableForm;
             uc = ucAccountable1;
-        }
-
-        private void frmAccountableAdd_Load(object sender, EventArgs e)
-        {
-            uc.isEdit = false;
         }
 
         private bool SaveData()
@@ -32,8 +27,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
             var accModel = new AccountableModel()
             {
-                AccFormNo = uc.txtformno.Text.Trim(),
-                AccFormDesc = uc.txtformdesc.Text.Trim()
+                AccFormNo = uc.txtFormNo.Text.Trim(),
+                AccFormDesc = uc.txtFormDescription.Text.Trim()
             };
 
             return AccFactory.AccountableFormsRepository().Insert(accModel);
@@ -46,7 +41,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Accountable Form has been saved.");
-                    frmAccountable.LoadRecords();
+                    _frmAccountableForm.LoadRecords();
                     uc.ResetForm();
                 }
             }
