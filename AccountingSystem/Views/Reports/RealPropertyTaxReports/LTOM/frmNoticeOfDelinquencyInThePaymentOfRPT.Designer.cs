@@ -128,7 +128,7 @@
             MinimizeBox = false;
             Name = "frmNoticeOfDelinquencyInThePaymentOfRPT";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Report > Real Property Tax Reports > LTOM - Notice of Deliquency In The Payment of Real Property Tax";
+            Text = "Report > Real Property Tax Reports > LTOM - Notice of Delinquency In The Payment of Real Property Tax";
             groupBox1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)nudTaxYear).EndInit();
