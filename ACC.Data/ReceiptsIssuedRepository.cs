@@ -38,7 +38,7 @@ namespace ACC.Data
                 record.Add("receipts_id", reader.Rows[0]["receipts_id"].ToString());
                 record.Add("quantity", reader.Rows[0]["quantity"].ToString());
                 record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
-                record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                record.Add("collecting_officer_id", reader.Rows[0]["collecting_officer_id"].ToString());
                 record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
                 record.Add("is_returned", reader.Rows[0]["is_returned"].ToString());
                 record.Add("returned_date", reader.Rows[0]["returned_date"].ToString());

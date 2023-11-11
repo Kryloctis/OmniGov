@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                uc.isEdit = true;
                 LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

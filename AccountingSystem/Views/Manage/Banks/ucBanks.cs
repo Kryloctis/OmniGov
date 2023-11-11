@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -8,7 +7,6 @@ namespace AccountingSystem.Views.Manage.Banks
     public partial class ucBanks : UserControl
     {
         internal int bankId;
-        internal bool isEdit;
 
         public ucBanks()
         {
@@ -17,6 +15,7 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void ucBanks_Load(object sender, EventArgs e)
         {
+
         }
 
         internal void ResetForm()

@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {
                     UserId = fuser.UserId;
-                    linkuser.Text = String.Format("@{0}", fuser.Username);
+                    linkuser.Text = String.Format("@{0}", fuser.userName);
                     if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
                     {
                         txtPrefix.Text = fuser.prefix;
