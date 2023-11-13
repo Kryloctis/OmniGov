@@ -633,7 +633,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!years_of_delinquence.Value &lt; 12, Fields!years_of_delinquence.Value &amp; " Month/s", Fields!years_of_delinquence.Value &amp; " Year/s")</Value>
+                                  <Value>=IIf(Fields!years_of_delinquence.Value &lt; 12, Fields!years_of_delinquence.Value &amp; " Month/s", Round(Fields!years_of_delinquence.Value / 12) &amp; " Year/s")</Value>
                                   <Style>
                                     <FontFamily>CALIBri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -658,6 +658,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -695,7 +696,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

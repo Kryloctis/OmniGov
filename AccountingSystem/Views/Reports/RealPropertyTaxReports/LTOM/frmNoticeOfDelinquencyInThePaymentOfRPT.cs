@@ -1,5 +1,7 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using AccountingSystem.Views.Shared;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -45,6 +47,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
             return dataTable;
         }
 
+
         private void LoadReports()
         {
             try
@@ -74,15 +77,52 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     var asOfDate = dtAsOf.Value.Date;
                     var rowYearsOfDelinquency = (asOfDate - postedAt).Days / 30;
 
-                    decimal rowTaxDue = 2341;
 
+                    decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
+                    decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
+                    decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+                    int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                    int assessmentPostYear = Convert.ToInt32(row["year"]);
+
+
+                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, rowTotalAssessedValue);
+                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, rowTotalAssessedValue);
+
+                    //Apply Penalties
+                    Dictionary<string, string> dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(rowARPNo, assessmentPostYear);
+
+                    Dictionary<string, string> dictAssessmentPost = new Dictionary<string, string>();
+                    dictAssessmentPost.Add("posted_at", postedAt.ToString());
+                    dictAssessmentPost.Add("effectivity_year", effectivityYear.ToString());
+                    dictAssessmentPost.Add("year", assessmentPostYear.ToString());
+
+                    int monthsDelinquent = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(dictAssessmentPost, asOfDate, dictPreviousAssessmentPost);
+                    decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+                    decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+                    //Get discount rate
+                    bool discountIsAdvance = false;
+                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(dictAssessmentPost, dictPreviousAssessmentPost, asOfDate, ref discountIsAdvance);
+
+                    //Apply Discounts
+                    decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDue);
+                    decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDue);
+
+                    decimal basicPenaltyDiscount = basicDiscount < 1 ? basicPenalty : -basicDiscount;
+                    decimal sefPenaltyDiscount = sefDiscount < 1 ? sefPenalty : -sefDiscount;
+
+                    decimal totalBasicPayment = (basicTaxDue + basicPenalty) - basicDiscount;
+                    decimal totalSefPayment = (sefTaxDue + sefPenalty) - sefDiscount;
+
+                    decimal rowTaxDue = totalBasicPayment + totalSefPayment;
 
                     newRow["declared_owner"] = rowOwnerName;
                     newRow["tax_declaration_number"] = rowARPNo;
                     newRow["location_of_property"] = rowPropertyLocation;
                     newRow["kind_of_property"] = rowKindOfProperty;
                     newRow["total_assessed_value"] = rowTotalAssessedValue;
-                    newRow["years_of_delinquence"] = rowYearsOfDelinquency;
+                    //newRow["years_of_delinquence"] = rowYearsOfDelinquency;
+                    newRow["years_of_delinquence"] = monthsDelinquent;
                     newRow["tax_due"] = rowTaxDue;
 
                     rowsCount++;
