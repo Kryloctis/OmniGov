@@ -419,7 +419,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtNoticeOfDelinquenceInThePaymentOfRPTRow AdddtNoticeOfDelinquenceInThePaymentOfRPTRow(string declared_owner, string tax_declaration_number, string location_of_property, string kind_of_property, string total_assessed_value, string years_of_delinquence, string tax_due_as_of) {
+            public dtNoticeOfDelinquenceInThePaymentOfRPTRow AdddtNoticeOfDelinquenceInThePaymentOfRPTRow(string declared_owner, string tax_declaration_number, string location_of_property, string kind_of_property, decimal total_assessed_value, int years_of_delinquence, string tax_due_as_of) {
                 dtNoticeOfDelinquenceInThePaymentOfRPTRow rowdtNoticeOfDelinquenceInThePaymentOfRPTRow = ((dtNoticeOfDelinquenceInThePaymentOfRPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         declared_owner,
@@ -471,9 +471,9 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnlocation_of_property);
                 this.columnkind_of_property = new global::System.Data.DataColumn("kind_of_property", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnkind_of_property);
-                this.columntotal_assessed_value = new global::System.Data.DataColumn("total_assessed_value", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columntotal_assessed_value = new global::System.Data.DataColumn("total_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_assessed_value);
-                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnyears_of_delinquence);
                 this.columntax_due_as_of = new global::System.Data.DataColumn("tax_due_as_of", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_due_as_of);
@@ -687,10 +687,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string total_assessed_value {
+            public decimal total_assessed_value {
                 get {
                     try {
-                        return ((string)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.total_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.total_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'total_assessed_value\' in table \'dtNoticeOfDelinquenceInTheP" +
@@ -704,10 +704,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string years_of_delinquence {
+            public int years_of_delinquence {
                 get {
                     try {
-                        return ((string)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.years_of_delinquenceColumn]));
+                        return ((int)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.years_of_delinquenceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'years_of_delinquence\' in table \'dtNoticeOfDelinquenceInTheP" +

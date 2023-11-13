@@ -292,7 +292,10 @@ namespace ACC.Data
 
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences()
         {
-            throw new NotImplementedException();
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo)

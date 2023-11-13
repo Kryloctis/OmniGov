@@ -32,13 +32,12 @@
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             label1 = new System.Windows.Forms.Label();
             dtAsOf = new System.Windows.Forms.DateTimePicker();
-            label2 = new System.Windows.Forms.Label();
-            nudTaxYear = new System.Windows.Forms.NumericUpDown();
-            chkbxTaxYear = new System.Windows.Forms.CheckBox();
             btnRetrieve = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudTaxYear).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -56,9 +55,6 @@
             // 
             flowLayoutPanel1.Controls.Add(label1);
             flowLayoutPanel1.Controls.Add(dtAsOf);
-            flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(nudTaxYear);
-            flowLayoutPanel1.Controls.Add(chkbxTaxYear);
             flowLayoutPanel1.Controls.Add(btnRetrieve);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
@@ -84,54 +80,58 @@
             dtAsOf.Size = new System.Drawing.Size(120, 23);
             dtAsOf.TabIndex = 7;
             // 
-            // label2
-            // 
-            label2.Location = new System.Drawing.Point(169, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(49, 26);
-            label2.TabIndex = 10;
-            label2.Text = "Tax Year";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nudTaxYear
-            // 
-            nudTaxYear.Location = new System.Drawing.Point(224, 3);
-            nudTaxYear.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
-            nudTaxYear.Name = "nudTaxYear";
-            nudTaxYear.Size = new System.Drawing.Size(120, 23);
-            nudTaxYear.TabIndex = 11;
-            // 
-            // chkbxTaxYear
-            // 
-            chkbxTaxYear.Location = new System.Drawing.Point(350, 3);
-            chkbxTaxYear.Name = "chkbxTaxYear";
-            chkbxTaxYear.Size = new System.Drawing.Size(15, 23);
-            chkbxTaxYear.TabIndex = 12;
-            chkbxTaxYear.UseVisualStyleBackColor = true;
-            // 
             // btnRetrieve
             // 
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnRetrieve.Location = new System.Drawing.Point(371, 3);
+            btnRetrieve.Location = new System.Drawing.Point(169, 3);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(86, 23);
             btnRetrieve.TabIndex = 14;
             btnRetrieve.Text = "Retrieve";
             btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
+            // 
+            // panel2
+            // 
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 60);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(1141, 579);
+            panel2.TabIndex = 22;
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 55);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
+            pbLoadRecords.TabIndex = 23;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmNoticeOfDelinquencyInThePaymentOfRPT
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1141, 639);
+            Controls.Add(panel2);
+            Controls.Add(pbLoadRecords);
             Controls.Add(groupBox1);
             MinimizeBox = false;
             Name = "frmNoticeOfDelinquencyInThePaymentOfRPT";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Report > Real Property Tax Reports > LTOM - Notice of Delinquency In The Payment of Real Property Tax";
+            Load += frmNoticeOfDelinquencyInThePaymentOfRPT_Load;
             groupBox1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)nudTaxYear).EndInit();
             ResumeLayout(false);
         }
 
@@ -141,9 +141,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtAsOf;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown nudTaxYear;
-        private System.Windows.Forms.CheckBox chkbxTaxYear;
         private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

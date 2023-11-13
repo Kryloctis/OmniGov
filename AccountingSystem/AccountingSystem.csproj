@@ -47,6 +47,7 @@
     <None Remove="Reports\journal-entry-voucher.rdlc" />
     <None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
     <None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
+    <None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
     <None Remove="Reports\procurements-received-journal.rdlc" />
@@ -110,6 +111,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\list_of_real-property-tax-delinquencies.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\LTOMs\notice-delinquency-in-the-payment-of-rpt.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">
@@ -196,6 +200,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>dsLFS.xsd</DependentUpon>
     </Compile>
+    <Compile Update="dsLTOM.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsLTOM.xsd</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -231,6 +240,10 @@
     <None Update="dsLFS.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsLFS.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="dsLTOM.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLTOM.Designer.cs</LastGenOutput>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
