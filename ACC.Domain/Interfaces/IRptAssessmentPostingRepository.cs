@@ -24,6 +24,8 @@ namespace RPT.Domain.Interfaces
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences();
+
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear);
 
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear);

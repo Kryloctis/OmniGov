@@ -290,6 +290,11 @@ namespace ACC.Data
             return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences()
+        {
+            throw new NotImplementedException();
+        }
+
         public DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo)
         {
             var parameters = new object[][]
@@ -492,5 +497,7 @@ namespace ACC.Data
                 return dict;
             }
         }
+
+
     }
 }
