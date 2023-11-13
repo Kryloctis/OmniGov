@@ -291,7 +291,7 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnyears_of_delinquence;
             
-            private global::System.Data.DataColumn columntax_due_as_of;
+            private global::System.Data.DataColumn columntax_due;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -376,9 +376,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn tax_due_as_ofColumn {
+            public global::System.Data.DataColumn tax_dueColumn {
                 get {
-                    return this.columntax_due_as_of;
+                    return this.columntax_due;
                 }
             }
             
@@ -419,7 +419,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtNoticeOfDelinquenceInThePaymentOfRPTRow AdddtNoticeOfDelinquenceInThePaymentOfRPTRow(string declared_owner, string tax_declaration_number, string location_of_property, string kind_of_property, decimal total_assessed_value, int years_of_delinquence, string tax_due_as_of) {
+            public dtNoticeOfDelinquenceInThePaymentOfRPTRow AdddtNoticeOfDelinquenceInThePaymentOfRPTRow(string declared_owner, string tax_declaration_number, string location_of_property, string kind_of_property, decimal total_assessed_value, string years_of_delinquence, decimal tax_due) {
                 dtNoticeOfDelinquenceInThePaymentOfRPTRow rowdtNoticeOfDelinquenceInThePaymentOfRPTRow = ((dtNoticeOfDelinquenceInThePaymentOfRPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         declared_owner,
@@ -428,7 +428,7 @@ namespace AccountingSystem {
                         kind_of_property,
                         total_assessed_value,
                         years_of_delinquence,
-                        tax_due_as_of};
+                        tax_due};
                 rowdtNoticeOfDelinquenceInThePaymentOfRPTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtNoticeOfDelinquenceInThePaymentOfRPTRow);
                 return rowdtNoticeOfDelinquenceInThePaymentOfRPTRow;
@@ -457,7 +457,7 @@ namespace AccountingSystem {
                 this.columnkind_of_property = base.Columns["kind_of_property"];
                 this.columntotal_assessed_value = base.Columns["total_assessed_value"];
                 this.columnyears_of_delinquence = base.Columns["years_of_delinquence"];
-                this.columntax_due_as_of = base.Columns["tax_due_as_of"];
+                this.columntax_due = base.Columns["tax_due"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -473,10 +473,10 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnkind_of_property);
                 this.columntotal_assessed_value = new global::System.Data.DataColumn("total_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_assessed_value);
-                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnyears_of_delinquence);
-                this.columntax_due_as_of = new global::System.Data.DataColumn("tax_due_as_of", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntax_due_as_of);
+                this.columntax_due = new global::System.Data.DataColumn("tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_due);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -704,10 +704,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int years_of_delinquence {
+            public string years_of_delinquence {
                 get {
                     try {
-                        return ((int)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.years_of_delinquenceColumn]));
+                        return ((string)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.years_of_delinquenceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'years_of_delinquence\' in table \'dtNoticeOfDelinquenceInTheP" +
@@ -721,18 +721,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string tax_due_as_of {
+            public decimal tax_due {
                 get {
                     try {
-                        return ((string)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_due_as_ofColumn]));
+                        return ((decimal)(this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_dueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'tax_due_as_of\' in table \'dtNoticeOfDelinquenceInThePaymentO" +
-                                "fRPT\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_due\' in table \'dtNoticeOfDelinquenceInThePaymentOfRPT\' " +
+                                "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_due_as_ofColumn] = value;
+                    this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_dueColumn] = value;
                 }
             }
             
@@ -810,14 +810,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Istax_due_as_ofNull() {
-                return this.IsNull(this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_due_as_ofColumn);
+            public bool Istax_dueNull() {
+                return this.IsNull(this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_dueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Settax_due_as_ofNull() {
-                this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_due_as_ofColumn] = global::System.Convert.DBNull;
+            public void Settax_dueNull() {
+                this[this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.tax_dueColumn] = global::System.Convert.DBNull;
             }
         }
         

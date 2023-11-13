@@ -35,15 +35,15 @@
         </Field>
         <Field Name="total_assessed_value">
           <DataField>total_assessed_value</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="years_of_delinquence">
           <DataField>years_of_delinquence</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="tax_due_as_of">
-          <DataField>tax_due_as_of</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="tax_due">
+          <DataField>tax_due</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -148,7 +148,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.54063cm</Width>
+                  <Width>4.31143cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.68521cm</Width>
@@ -157,16 +157,16 @@
                   <Width>3.56898cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.0502cm</Width>
+                  <Width>1.7327cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.65588cm</Width>
+                  <Width>2.15604cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.52773cm</Width>
+                  <Width>2.54877cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.50224cm</Width>
+                  <Width>2.50192cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -338,7 +338,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Right</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -404,10 +404,18 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TAX DUE AS OF</Value>
+                                  <Value>TAX DUE AS OF </Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Parameters!paramAsOf.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>MMM yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -487,7 +495,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>tax_declaration_number</rd:DefaultName>
@@ -521,7 +531,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>location_of_property</rd:DefaultName>
@@ -621,7 +633,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!years_of_delinquence.Value &lt; 365, Fields!years_of_delinquence.Value &amp; " Month/s", Fields!years_of_delinquence.Value &amp; " Year/s")</Value>
+                                  <Value>=IIf(Fields!years_of_delinquence.Value &lt; 12, Fields!years_of_delinquence.Value &amp; " Month/s", Fields!years_of_delinquence.Value &amp; " Year/s")</Value>
                                   <Style>
                                     <FontFamily>CALIBri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -646,29 +658,31 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="tax_due_as_of">
+                        <Textbox Name="tax_due">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tax_due_as_of.Value</Value>
+                                  <Value>=Fields!tax_due.Value</Value>
                                   <Style>
                                     <FontFamily>CALIBri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>n2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>tax_due_as_of</rd:DefaultName>
+                          <rd:DefaultName>tax_due</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -681,6 +695,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -710,8 +725,9 @@
             </TablixRowHierarchy>
             <DataSetName>dsNoticeOfRealPropertyTaxDelinquence</DataSetName>
             <Top>2.17696cm</Top>
+            <Left>0.02582cm</Left>
             <Height>1.94084cm</Height>
-            <Width>19.53087cm</Width>
+            <Width>19.50505cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -993,9 +1009,8 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramAsOf">
-      <DataType>String</DataType>
+      <DataType>DateTime</DataType>
       <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramDate">

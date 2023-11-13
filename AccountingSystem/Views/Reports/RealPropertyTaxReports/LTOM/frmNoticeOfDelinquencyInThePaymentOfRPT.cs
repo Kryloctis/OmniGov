@@ -63,25 +63,27 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
 
                     string rowOwnerName = row["taxpayer_name"].ToString();
                     string rowARPNo = row["complete_arp_no"].ToString();
-
                     string rowPropertyStreet = row["street"].ToString();
                     string rowPropertyBarangay = row["barangay_name"].ToString();
                     string rowPropertyMunicipality = row["municipality_name"].ToString();
                     string rowPropertyProvince = row["province_name"].ToString();
-                    string rowLocation = $"{rowPropertyStreet} {rowPropertyBarangay}, {rowPropertyMunicipality}, {rowPropertyProvince}";
-                    string kindOfProperty = row["property_kind"].ToString();
-                    decimal totalAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-
+                    string rowPropertyLocation = $"{rowPropertyStreet} {rowPropertyBarangay}, {rowPropertyMunicipality}, {rowPropertyProvince}";
+                    string rowKindOfProperty = row["property_kind"].ToString();
+                    decimal rowTotalAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                     var postedAt = Convert.ToDateTime(row["posted_at"]);
                     var asOfDate = dtAsOf.Value.Date;
-                    int yearsOfDelinquency = (asOfDate - postedAt).Days;
+                    var rowYearsOfDelinquency = (asOfDate - postedAt).Days / 30;
+
+                    decimal rowTaxDue = 2341;
+
 
                     newRow["declared_owner"] = rowOwnerName;
                     newRow["tax_declaration_number"] = rowARPNo;
-                    newRow["location_of_property"] = rowLocation;
-                    newRow["kind_of_property"] = kindOfProperty;
-                    newRow["total_assessed_value"] = totalAssessedValue;
-                    newRow["years_of_delinquence"] = yearsOfDelinquency;
+                    newRow["location_of_property"] = rowPropertyLocation;
+                    newRow["kind_of_property"] = rowKindOfProperty;
+                    newRow["total_assessed_value"] = rowTotalAssessedValue;
+                    newRow["years_of_delinquence"] = rowYearsOfDelinquency;
+                    newRow["tax_due"] = rowTaxDue;
 
                     rowsCount++;
                     int progressBarPercentage = (rowsCount * 100) / recordCount;
@@ -116,7 +118,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                 localReport.DataSources.Add(new ReportDataSource("dsNoticeOfRealPropertyTaxDelinquence", dataTable));
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
 
                 reportViewer.RefreshReport();
