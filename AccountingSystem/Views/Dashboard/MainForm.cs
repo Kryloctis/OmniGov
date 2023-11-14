@@ -702,5 +702,9 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
         }
 
+        private void lTOM17ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquencyFirstNotice().ShowDialog();
+        }
     }
 }

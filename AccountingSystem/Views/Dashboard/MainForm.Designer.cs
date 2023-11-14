@@ -1302,6 +1302,7 @@
             lTOM17ToolStripMenuItem.Name = "lTOM17ToolStripMenuItem";
             lTOM17ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             lTOM17ToolStripMenuItem.Text = "LTOM 17";
+            lTOM17ToolStripMenuItem.Click += lTOM17ToolStripMenuItem_Click;
             // 
             // MainForm
             // 
