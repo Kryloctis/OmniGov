@@ -1,6 +1,7 @@
 ﻿using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.Payments;
 using System;
@@ -128,7 +129,7 @@ namespace AccountingSystem.Views.Shared
             {
                 LoadTaxpayerList();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRptOwnerList_Load(object sender, EventArgs e)
@@ -225,6 +226,20 @@ namespace AccountingSystem.Views.Shared
             frmPayments.ucCattleTransferOfOwnership.cmbxBarangay.Text = taxpayerBarangay;
         }
 
+        private void InitializeNoticeOfRealPropertyTaxDelinquencyFirstNotice(frmNoticeOfRealPropertyTaxDelinquencyFirstNotice frmNoticeOfRealPropertyTaxDelinquencyFirstNotice)
+        {
+            int rowIndex = dataGridView1.CurrentRow.Index;
+
+            var taxpayerId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["taxpayers_id"].Value);
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            var taxpayer = dictTaxpayer["taxpayers_name"].ToString();
+
+            frmNoticeOfRealPropertyTaxDelinquencyFirstNotice.taxpayerID = taxpayerId;
+            frmNoticeOfRealPropertyTaxDelinquencyFirstNotice.txtTaxpayerName.Text = taxpayer;
+            frmNoticeOfRealPropertyTaxDelinquencyFirstNotice.PopulateDelinquentProperty();
+
+        }
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             try
@@ -256,6 +271,10 @@ namespace AccountingSystem.Views.Shared
 
                 case frmRptPayments:
                     InitializeNewOwnerDetails((frmRptPayments)refForm);
+                    break;
+
+                case frmNoticeOfRealPropertyTaxDelinquencyFirstNotice:
+                    InitializeNoticeOfRealPropertyTaxDelinquencyFirstNotice((frmNoticeOfRealPropertyTaxDelinquencyFirstNotice)refForm);
                     break;
 
                 default:

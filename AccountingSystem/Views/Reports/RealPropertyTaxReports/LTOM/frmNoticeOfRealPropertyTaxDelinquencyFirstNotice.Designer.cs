@@ -30,9 +30,11 @@
         {
             groupBox1 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnFindTaxPayer = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
             txtTaxpayerName = new System.Windows.Forms.TextBox();
+            btnFindTaxPayer = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            cmbxDelinquentProperties = new System.Windows.Forms.ComboBox();
             btnRetrieve = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
@@ -54,9 +56,11 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(btnFindTaxPayer);
             flowLayoutPanel1.Controls.Add(label3);
             flowLayoutPanel1.Controls.Add(txtTaxpayerName);
+            flowLayoutPanel1.Controls.Add(btnFindTaxPayer);
+            flowLayoutPanel1.Controls.Add(label1);
+            flowLayoutPanel1.Controls.Add(cmbxDelinquentProperties);
             flowLayoutPanel1.Controls.Add(btnRetrieve);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
@@ -64,20 +68,9 @@
             flowLayoutPanel1.Size = new System.Drawing.Size(1135, 33);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // btnFindTaxPayer
-            // 
-            btnFindTaxPayer.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnFindTaxPayer.Image = Properties.Resources.user_browse_14px;
-            btnFindTaxPayer.Location = new System.Drawing.Point(3, 3);
-            btnFindTaxPayer.Name = "btnFindTaxPayer";
-            btnFindTaxPayer.Size = new System.Drawing.Size(39, 23);
-            btnFindTaxPayer.TabIndex = 15;
-            btnFindTaxPayer.UseVisualStyleBackColor = true;
-            btnFindTaxPayer.Visible = false;
-            // 
             // label3
             // 
-            label3.Location = new System.Drawing.Point(48, 3);
+            label3.Location = new System.Drawing.Point(3, 3);
             label3.Margin = new System.Windows.Forms.Padding(3);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(49, 23);
@@ -87,16 +80,47 @@
             // 
             // txtTaxpayerName
             // 
-            txtTaxpayerName.Location = new System.Drawing.Point(103, 3);
+            txtTaxpayerName.Location = new System.Drawing.Point(58, 3);
             txtTaxpayerName.Name = "txtTaxpayerName";
             txtTaxpayerName.ReadOnly = true;
-            txtTaxpayerName.Size = new System.Drawing.Size(182, 23);
+            txtTaxpayerName.Size = new System.Drawing.Size(309, 23);
             txtTaxpayerName.TabIndex = 17;
+            // 
+            // btnFindTaxPayer
+            // 
+            btnFindTaxPayer.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnFindTaxPayer.Image = Properties.Resources.user_browse_14px;
+            btnFindTaxPayer.Location = new System.Drawing.Point(373, 3);
+            btnFindTaxPayer.Name = "btnFindTaxPayer";
+            btnFindTaxPayer.Size = new System.Drawing.Size(39, 23);
+            btnFindTaxPayer.TabIndex = 15;
+            btnFindTaxPayer.UseVisualStyleBackColor = true;
+            btnFindTaxPayer.Click += btnFindTaxPayer_Click;
+            // 
+            // label1
+            // 
+            label1.Location = new System.Drawing.Point(418, 3);
+            label1.Margin = new System.Windows.Forms.Padding(3);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(63, 23);
+            label1.TabIndex = 8;
+            label1.Text = "ARP No.";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbxDelinquentProperties
+            // 
+            cmbxDelinquentProperties.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxDelinquentProperties.DropDownWidth = 213;
+            cmbxDelinquentProperties.FormattingEnabled = true;
+            cmbxDelinquentProperties.Location = new System.Drawing.Point(487, 3);
+            cmbxDelinquentProperties.Name = "cmbxDelinquentProperties";
+            cmbxDelinquentProperties.Size = new System.Drawing.Size(213, 23);
+            cmbxDelinquentProperties.TabIndex = 18;
             // 
             // btnRetrieve
             // 
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnRetrieve.Location = new System.Drawing.Point(291, 3);
+            btnRetrieve.Location = new System.Drawing.Point(706, 3);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(86, 23);
             btnRetrieve.TabIndex = 14;
@@ -154,9 +178,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFindTaxPayer;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.TextBox txtTaxpayerName;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        internal System.Windows.Forms.TextBox txtTaxpayerName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbxDelinquentProperties;
     }
 }

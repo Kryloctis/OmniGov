@@ -501,6 +501,30 @@ namespace ACC.Data
             }
         }
 
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@real_property_id", DbType.Int32, realPropertyID }
+            };
 
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND rpt_assessment_posts_id = @real_property_id ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+        }
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(int taxPayerID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@real_taxpayers_id", DbType.Int32, taxPayerID }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND real_taxpayers_id = @real_taxpayers_id  GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+        }
     }
 }

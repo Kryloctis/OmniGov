@@ -26,6 +26,10 @@ namespace RPT.Domain.Interfaces
 
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences();
 
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(int taxpayerID);
+
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID);
+
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear);
 
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear);
