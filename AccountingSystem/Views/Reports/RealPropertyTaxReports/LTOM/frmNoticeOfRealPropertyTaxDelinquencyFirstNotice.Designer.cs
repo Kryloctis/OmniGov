@@ -30,12 +30,13 @@
         {
             groupBox1 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            label3 = new System.Windows.Forms.Label();
             btnFindTaxPayer = new System.Windows.Forms.Button();
-            btnRetrieve = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
             txtTaxpayerName = new System.Windows.Forms.TextBox();
+            btnRetrieve = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -63,16 +64,6 @@
             flowLayoutPanel1.Size = new System.Drawing.Size(1135, 33);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // label3
-            // 
-            label3.Location = new System.Drawing.Point(48, 3);
-            label3.Margin = new System.Windows.Forms.Padding(3);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(49, 23);
-            label3.TabIndex = 8;
-            label3.Text = "Owner ";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnFindTaxPayer
             // 
             btnFindTaxPayer.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -84,6 +75,24 @@
             btnFindTaxPayer.UseVisualStyleBackColor = true;
             btnFindTaxPayer.Visible = false;
             // 
+            // label3
+            // 
+            label3.Location = new System.Drawing.Point(48, 3);
+            label3.Margin = new System.Windows.Forms.Padding(3);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(49, 23);
+            label3.TabIndex = 8;
+            label3.Text = "Owner ";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtTaxpayerName
+            // 
+            txtTaxpayerName.Location = new System.Drawing.Point(103, 3);
+            txtTaxpayerName.Name = "txtTaxpayerName";
+            txtTaxpayerName.ReadOnly = true;
+            txtTaxpayerName.Size = new System.Drawing.Size(182, 23);
+            txtTaxpayerName.TabIndex = 17;
+            // 
             // btnRetrieve
             // 
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -93,14 +102,7 @@
             btnRetrieve.TabIndex = 14;
             btnRetrieve.Text = "Retrieve";
             btnRetrieve.UseVisualStyleBackColor = true;
-            // 
-            // txtTaxpayerName
-            // 
-            txtTaxpayerName.Location = new System.Drawing.Point(103, 3);
-            txtTaxpayerName.Name = "txtTaxpayerName";
-            txtTaxpayerName.ReadOnly = true;
-            txtTaxpayerName.Size = new System.Drawing.Size(182, 23);
-            txtTaxpayerName.TabIndex = 17;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // panel2
             // 
@@ -118,6 +120,14 @@
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
             pbLoadRecords.TabIndex = 25;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmNoticeOfRealPropertyTaxDelinquencyFirstNotice
             // 
@@ -147,5 +157,6 @@
         private System.Windows.Forms.TextBox txtTaxpayerName;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
