@@ -173,7 +173,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     new ReportParameter("paramSignatoryTitle", signatoryTitle)
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOMs\\notice-delinquency-in-the-payment-of-rpt.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOMs\\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc";
                 localReport.SetParameters(reportParameters);
 
                 localReport.DataSources.Clear();

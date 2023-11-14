@@ -26,6 +26,8 @@ namespace AccountingSystem {
         
         private dtNoticeOfDelinquenceInThePaymentOfRPTDataTable tabledtNoticeOfDelinquenceInThePaymentOfRPT;
         
+        private dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -57,6 +59,9 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtNoticeOfDelinquenceInThePaymentOfRPT"] != null)) {
                     base.Tables.Add(new dtNoticeOfDelinquenceInThePaymentOfRPTDataTable(ds.Tables["dtNoticeOfDelinquenceInThePaymentOfRPT"]));
                 }
+                if ((ds.Tables["dtNoticeOfRealPropertyTaxDelinquencyFirstNotice"] != null)) {
+                    base.Tables.Add(new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable(ds.Tables["dtNoticeOfRealPropertyTaxDelinquencyFirstNotice"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -82,6 +87,16 @@ namespace AccountingSystem {
         public dtNoticeOfDelinquenceInThePaymentOfRPTDataTable dtNoticeOfDelinquenceInThePaymentOfRPT {
             get {
                 return this.tabledtNoticeOfDelinquenceInThePaymentOfRPT;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable dtNoticeOfRealPropertyTaxDelinquencyFirstNotice {
+            get {
+                return this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice;
             }
         }
         
@@ -155,6 +170,9 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtNoticeOfDelinquenceInThePaymentOfRPT"] != null)) {
                     base.Tables.Add(new dtNoticeOfDelinquenceInThePaymentOfRPTDataTable(ds.Tables["dtNoticeOfDelinquenceInThePaymentOfRPT"]));
                 }
+                if ((ds.Tables["dtNoticeOfRealPropertyTaxDelinquencyFirstNotice"] != null)) {
+                    base.Tables.Add(new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable(ds.Tables["dtNoticeOfRealPropertyTaxDelinquencyFirstNotice"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -194,6 +212,12 @@ namespace AccountingSystem {
                     this.tabledtNoticeOfDelinquenceInThePaymentOfRPT.InitVars();
                 }
             }
+            this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice = ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable)(base.Tables["dtNoticeOfRealPropertyTaxDelinquencyFirstNotice"]));
+            if ((initTable == true)) {
+                if ((this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice != null)) {
+                    this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -206,11 +230,19 @@ namespace AccountingSystem {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tabledtNoticeOfDelinquenceInThePaymentOfRPT = new dtNoticeOfDelinquenceInThePaymentOfRPTDataTable();
             base.Tables.Add(this.tabledtNoticeOfDelinquenceInThePaymentOfRPT);
+            this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice = new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable();
+            base.Tables.Add(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializedtNoticeOfDelinquenceInThePaymentOfRPT() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializedtNoticeOfRealPropertyTaxDelinquencyFirstNotice() {
             return false;
         }
         
@@ -271,6 +303,9 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtNoticeOfDelinquenceInThePaymentOfRPTRowChangeEventHandler(object sender, dtNoticeOfDelinquenceInThePaymentOfRPTRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler(object sender, dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -604,6 +639,323 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable : global::System.Data.TypedTableBase<dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow> {
+            
+            private global::System.Data.DataColumn columntax_year;
+            
+            private global::System.Data.DataColumn columnbasic_tax;
+            
+            private global::System.Data.DataColumn columnbasic_penalty;
+            
+            private global::System.Data.DataColumn columnsef_tax;
+            
+            private global::System.Data.DataColumn columnsef_penalty;
+            
+            private global::System.Data.DataColumn columntotal_amount;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable() {
+                this.TableName = "dtNoticeOfRealPropertyTaxDelinquencyFirstNotice";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn tax_yearColumn {
+                get {
+                    return this.columntax_year;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn basic_taxColumn {
+                get {
+                    return this.columnbasic_tax;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn basic_penaltyColumn {
+                get {
+                    return this.columnbasic_penalty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sef_taxColumn {
+                get {
+                    return this.columnsef_tax;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sef_penaltyColumn {
+                get {
+                    return this.columnsef_penalty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn total_amountColumn {
+                get {
+                    return this.columntotal_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow this[int index] {
+                get {
+                    return ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AdddtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow(dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow AdddtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow(int tax_year, decimal basic_tax, decimal basic_penalty, decimal sef_tax, decimal sef_penalty, decimal total_amount) {
+                dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow rowdtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow = ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        tax_year,
+                        basic_tax,
+                        basic_penalty,
+                        sef_tax,
+                        sef_penalty,
+                        total_amount};
+                rowdtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow);
+                return rowdtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable cln = ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columntax_year = base.Columns["tax_year"];
+                this.columnbasic_tax = base.Columns["basic_tax"];
+                this.columnbasic_penalty = base.Columns["basic_penalty"];
+                this.columnsef_tax = base.Columns["sef_tax"];
+                this.columnsef_penalty = base.Columns["sef_penalty"];
+                this.columntotal_amount = base.Columns["total_amount"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columntax_year = new global::System.Data.DataColumn("tax_year", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_year);
+                this.columnbasic_tax = new global::System.Data.DataColumn("basic_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbasic_tax);
+                this.columnbasic_penalty = new global::System.Data.DataColumn("basic_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbasic_penalty);
+                this.columnsef_tax = new global::System.Data.DataColumn("sef_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsef_tax);
+                this.columnsef_penalty = new global::System.Data.DataColumn("sef_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsef_penalty);
+                this.columntotal_amount = new global::System.Data.DataColumn("total_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_amount);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow NewdtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow() {
+                return ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanged != null)) {
+                    this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanged(this, new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent(((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanging != null)) {
+                    this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanging(this, new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent(((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleted != null)) {
+                    this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleted(this, new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent(((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleting != null)) {
+                    this.dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleting(this, new dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent(((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovedtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow(dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLTOM ds = new dsLTOM();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtNoticeOfDelinquenceInThePaymentOfRPTRow : global::System.Data.DataRow {
@@ -822,6 +1174,195 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow : global::System.Data.DataRow {
+            
+            private dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice = ((dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int tax_year {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.tax_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_year\' in table \'dtNoticeOfRealPropertyTaxDelinquencyFir" +
+                                "stNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.tax_yearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal basic_tax {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_taxColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtNoticeOfRealPropertyTaxDelinquencyFi" +
+                                "rstNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_taxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal basic_penalty {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_penaltyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtNoticeOfRealPropertyTaxDelinquen" +
+                                "cyFirstNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_penaltyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal sef_tax {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_taxColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtNoticeOfRealPropertyTaxDelinquencyFirs" +
+                                "tNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_taxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal sef_penalty {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_penaltyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtNoticeOfRealPropertyTaxDelinquency" +
+                                "FirstNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_penaltyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal total_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.total_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_amount\' in table \'dtNoticeOfRealPropertyTaxDelinquenc" +
+                                "yFirstNotice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.total_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istax_yearNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.tax_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settax_yearNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.tax_yearColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isbasic_taxNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_taxColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setbasic_taxNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_taxColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isbasic_penaltyNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_penaltyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setbasic_penaltyNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.basic_penaltyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Issef_taxNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_taxColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setsef_taxNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_taxColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Issef_penaltyNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_penaltyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setsef_penaltyNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.sef_penaltyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istotal_amountNull() {
+                return this.IsNull(this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.total_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settotal_amountNull() {
+                this[this.tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice.total_amountColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -841,6 +1382,40 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtNoticeOfDelinquenceInThePaymentOfRPTRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent : global::System.EventArgs {
+            
+            private dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent(dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -25,6 +25,18 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtNoticeOfRealPropertyTaxDelinquencyFirstNotice" msprop:Generator_RowEvHandlerName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEventHandler" msprop:Generator_RowDeletedName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleted" msprop:Generator_RowDeletingName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowDeleting" msprop:Generator_RowEvArgName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChangeEvent" msprop:Generator_TablePropName="dtNoticeOfRealPropertyTaxDelinquencyFirstNotice" msprop:Generator_RowChangedName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanged" msprop:Generator_RowChangingName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRowChanging" msprop:Generator_TableClassName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeDataTable" msprop:Generator_RowClassName="dtNoticeOfRealPropertyTaxDelinquencyFirstNoticeRow" msprop:Generator_TableVarName="tabledtNoticeOfRealPropertyTaxDelinquencyFirstNotice" msprop:Generator_UserTableName="dtNoticeOfRealPropertyTaxDelinquencyFirstNotice">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="tax_year" msprop:Generator_ColumnPropNameInRow="tax_year" msprop:Generator_ColumnPropNameInTable="tax_yearColumn" msprop:Generator_ColumnVarNameInTable="columntax_year" msprop:Generator_UserColumnName="tax_year" type="xs:int" minOccurs="0" />
+              <xs:element name="basic_tax" msprop:Generator_ColumnPropNameInRow="basic_tax" msprop:Generator_ColumnPropNameInTable="basic_taxColumn" msprop:Generator_ColumnVarNameInTable="columnbasic_tax" msprop:Generator_UserColumnName="basic_tax" type="xs:decimal" minOccurs="0" />
+              <xs:element name="basic_penalty" msprop:Generator_ColumnPropNameInRow="basic_penalty" msprop:Generator_ColumnPropNameInTable="basic_penaltyColumn" msprop:Generator_ColumnVarNameInTable="columnbasic_penalty" msprop:Generator_UserColumnName="basic_penalty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sef_tax" msprop:Generator_ColumnPropNameInRow="sef_tax" msprop:Generator_ColumnPropNameInTable="sef_taxColumn" msprop:Generator_ColumnVarNameInTable="columnsef_tax" msprop:Generator_UserColumnName="sef_tax" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sef_penalty" msprop:Generator_ColumnPropNameInRow="sef_penalty" msprop:Generator_ColumnPropNameInTable="sef_penaltyColumn" msprop:Generator_ColumnVarNameInTable="columnsef_penalty" msprop:Generator_UserColumnName="sef_penalty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_amount" msprop:Generator_ColumnPropNameInRow="total_amount" msprop:Generator_ColumnPropNameInTable="total_amountColumn" msprop:Generator_ColumnVarNameInTable="columntotal_amount" msprop:Generator_UserColumnName="total_amount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
