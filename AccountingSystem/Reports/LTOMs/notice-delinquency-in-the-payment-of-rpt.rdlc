@@ -658,7 +658,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -772,13 +771,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.76611in</Height>
+        <Height>2.73731in</Height>
         <Style />
       </Body>
       <Width>7.72998in</Width>
       <Page>
         <PageHeader>
-          <Height>2.56646cm</Height>
+          <Height>1.01042in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -871,7 +870,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1.61424cm</Height>
+          <Height>0.63553in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -883,18 +882,21 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Date : </Value>
-                      <Style />
+                      <Style>
+                        <Format>d</Format>
+                      </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Parameters!paramDate.Value</Value>
-                      <Style />
+                      <Value>=CDate(Parameters!paramDate.Value)</Value>
+                      <Style>
+                        <Format>d</Format>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.20257cm</Top>
               <Left>0.68664cm</Left>
               <Height>0.6cm</Height>
               <Width>4.82833cm</Width>
@@ -915,7 +917,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Local Treasurer</Value>
+                      <Value>=Parameters!paramSignatoryTitle.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -925,10 +927,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.83785cm</Top>
-              <Left>14.2027cm</Left>
+              <Top>0.52035cm</Top>
+              <Left>12.58874cm</Left>
               <Height>0.6cm</Height>
-              <Width>4.82833cm</Width>
+              <Width>6.44229cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -950,7 +952,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!paramLocalTreasurer.Value</Value>
+                      <Value>=Parameters!paramSignatory.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -960,10 +962,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.23785cm</Top>
-              <Left>14.2027cm</Left>
+              <Left>12.58874cm</Left>
               <Height>0.6cm</Height>
-              <Width>4.82833cm</Width>
+              <Width>6.44229cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -990,7 +991,7 @@
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.5in</TopMargin>
         <BottomMargin>0.25in</BottomMargin>
-        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -1014,6 +1015,18 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramDate">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramSignatory">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramSignatoryTitle">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1045,9 +1058,19 @@
           <RowIndex>0</RowIndex>
           <ParameterName>paramDate</ParameterName>
         </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramSignatory</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramSignatoryTitle</ParameterName>
+        </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>25412a02-3401-443d-8a2b-fb89203562a7</rd:ReportID>
 </Report>
