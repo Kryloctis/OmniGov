@@ -157,6 +157,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
+            lTOM17ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1236,7 +1237,7 @@
             // 
             // realPropertyTaxReportsToolStripMenuItem
             // 
-            realPropertyTaxReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM16ToolStripMenuItem });
+            realPropertyTaxReportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM16ToolStripMenuItem, lTOM17ToolStripMenuItem });
             realPropertyTaxReportsToolStripMenuItem.Name = "realPropertyTaxReportsToolStripMenuItem";
             realPropertyTaxReportsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             realPropertyTaxReportsToolStripMenuItem.Text = "Real Property Tax Reports";
@@ -1295,6 +1296,12 @@
             imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // lTOM17ToolStripMenuItem
+            // 
+            lTOM17ToolStripMenuItem.Name = "lTOM17ToolStripMenuItem";
+            lTOM17ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM17ToolStripMenuItem.Text = "LTOM 17";
             // 
             // MainForm
             // 
@@ -1493,5 +1500,6 @@
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxReportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM16ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOM17ToolStripMenuItem;
     }
 }
