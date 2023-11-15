@@ -128,6 +128,7 @@
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aF5157ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -1137,7 +1138,8 @@
             // 
             this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rPTToolStripMenuItem,
-            this.aF5157ToolStripMenuItem});
+            this.aF5157ToolStripMenuItem,
+            this.aF54ToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
@@ -1145,16 +1147,23 @@
             // rPTToolStripMenuItem
             // 
             this.rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
-            this.rPTToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.rPTToolStripMenuItem.Text = "RPT";
+            this.rPTToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.rPTToolStripMenuItem.Text = "AF 56 - Real Property Tax";
             this.rPTToolStripMenuItem.Click += new System.EventHandler(this.rPTToolStripMenuItem_Click);
             // 
             // aF5157ToolStripMenuItem
             // 
             this.aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
-            this.aF5157ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.aF5157ToolStripMenuItem.Text = "AF51&&57";
+            this.aF5157ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aF5157ToolStripMenuItem.Text = "AF 51 && 57";
             this.aF5157ToolStripMenuItem.Click += new System.EventHandler(this.aF5157ToolStripMenuItem_Click);
+            // 
+            // aF54ToolStripMenuItem
+            // 
+            this.aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
+            this.aF54ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aF54ToolStripMenuItem.Text = "AF 54 - Marriage License";
+            this.aF54ToolStripMenuItem.Click += new System.EventHandler(this.aF54ToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -1554,5 +1563,6 @@
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;
     }
 }

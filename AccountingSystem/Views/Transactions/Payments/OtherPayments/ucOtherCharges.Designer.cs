@@ -193,7 +193,6 @@
             Controls.Add(groupBox1);
             Name = "ucOtherCharges";
             Size = new System.Drawing.Size(688, 340);
-            Load += ucOtherCharges_Load;
             groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
