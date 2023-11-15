@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private bool SaveData()
         {
-            var uc = ucBarangay1;
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
@@ -55,7 +54,11 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void frmAddBarangay_Load(object sender, EventArgs e)
         {
-            uc.isEdit = false;
+            try
+            {
+                uc.isEdit = false;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

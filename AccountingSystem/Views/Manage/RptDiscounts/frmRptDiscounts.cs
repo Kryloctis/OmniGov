@@ -66,53 +66,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             }
         }
 
-        private DataColumn[] DiscountsDataColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "month", typeof(int)),
-                new DataColumn(Name = "month_name", typeof(string)),
-                new DataColumn(Name = "description", typeof(string)),
-                new DataColumn(Name = "rate", typeof(decimal)),
-                new DataColumn(Name = "is_advance", typeof(Image))
-            };
-        }
-
-        private DataTable DataTableDiscounts(string searchText)
-        {
-            DataTable dtRptDiscounts;
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DiscountsDataColumns());
-
-            if (searchText.Length < 2)
-                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecords();
-            else
-                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
-
-            int totalProgressCount = dtRptDiscounts.Rows.Count;
-            int progressCount = 0;
-
-            foreach (DataRow row in dtRptDiscounts.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                int month = Convert.ToInt32(row["month"]);
-                string montName = MonthToName(month);
-                string description = row["description"].ToString();
-                decimal rate = Convert.ToDecimal(row["rate"]);
-                bool isAdvance = Convert.ToBoolean(row["is_advance"]);
-                Image isAdvanceImg = isAdvance ? Properties.Resources.ok14px : null;
-
-                progressCount++;
-                int progressBarPercentage = (progressCount * 100) / totalProgressCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                dataTable.Rows.Add(id, month, montName, description, rate, isAdvanceImg);
-            }
-
-            return dataTable;
-        }
-
         internal void LoadDiscounts()
         {
             if (!backgroundWorker1.IsBusy)
@@ -196,15 +149,60 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private DataColumn[] DiscountsDataColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "month", typeof(int)),
+                new DataColumn(Name = "month_name", typeof(string)),
+                new DataColumn(Name = "description", typeof(string)),
+                new DataColumn(Name = "rate", typeof(decimal)),
+                new DataColumn(Name = "is_advance", typeof(bool))
+            };
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var searchText = e.Argument as string;
-            var dataTable = DataTableDiscounts(searchText);
+            string searchText = e.Argument as string;
 
-            Invoke((MethodInvoker)delegate
+            DataTable dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DiscountsDataColumns());
+
+            if (dtRptDiscounts.Rows.Count < 1)
             {
-                HelperLoadRecords.DiscountsDatagridView(dataGridView1, dataTable);
-            });
+                e.Result = dataTable;
+                backgroundWorker1.ReportProgress(100);
+                return;
+            }
+
+            int totalProgressCount = dtRptDiscounts.Rows.Count;
+            int progressCount = 0;
+
+            foreach (DataRow row in dtRptDiscounts.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int id = Convert.ToInt32(row["id"]);
+                int month = Convert.ToInt32(row["month"]);
+                string monthName = MonthToName(month);
+                string description = row["description"].ToString();
+                decimal rate = Convert.ToDecimal(row["rate"]);
+                bool isAdvance = Convert.ToBoolean(row["is_advance"]);
+
+                newRow["id"] = id;
+                newRow["month"] = month;
+                newRow["month_name"] = monthName;
+                newRow["description"] = description;
+                newRow["rate"] = rate;
+                newRow["is_advance"] = isAdvance;
+                dataTable.Rows.Add(newRow);
+
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+            }
+
+            e.Result = dataTable;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -214,6 +212,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.DiscountsDatagridView(dataGridView1, dataTable);
             lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
             dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);

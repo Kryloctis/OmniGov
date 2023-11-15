@@ -107,20 +107,12 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameters = new object[][]
-            {
-                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
-            };
-
-            string query = $"SELECT id, code, name FROM {tableName} WHERE code LIKE @search_text OR name LIKE @search_text";
-
-            var dtBarangay = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtBarangay, parameters);
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(BarangayModel entity)
@@ -253,6 +245,20 @@ namespace ACC.Data
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
             return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
+
+        public DataTable GetRecordsBySearch(string searchText, int municipalityId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+                new object[] { "@municipalities_id", DbType.Int32, municipalityId}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE (code LIKE @search_text OR name LIKE @search_text) AND municipalities_id = @municipalities_id";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

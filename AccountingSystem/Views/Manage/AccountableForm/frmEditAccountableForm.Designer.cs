@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnUpdate.TabIndex = 1;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnUpdate.Click += new System.EventHandler(btnUpdate_Click);
             // 
             // panel1
             // 
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Accountable Form";
-            Load += frmAccountableEdit_Load;
+            Load += new System.EventHandler(frmAccountableEdit_Load);
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

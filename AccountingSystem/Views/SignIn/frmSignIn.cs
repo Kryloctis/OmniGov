@@ -1,17 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using AccountingSystem.Properties;
+﻿using AccountingSystem.Properties;
 using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.SignIn;
-using DocumentFormat.OpenXml.Office2016.Excel;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
-using Org.BouncyCastle.Pkcs;
 using RPT.Data;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -24,15 +18,15 @@ namespace AccountingSystem
             Helper.LoadFormIcon(this);
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
 

@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -44,7 +43,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-             string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName}";
 
             var dtBanks = new DataTable();
             return _dbGenericCommands.Fill(query, dtBanks);
