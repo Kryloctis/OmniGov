@@ -7,9 +7,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 {
     public partial class ucMarriageLicense : UserControl
     {
+        internal ucOtherCharges ucOtherCharges;
+
         public ucMarriageLicense()
         {
             InitializeComponent();
+            ucOtherCharges = ucOtherCharges1;
+            ucOtherCharges.accountableForm = "54";
         }
 
         internal string GetFormErrors()
@@ -33,18 +37,15 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 errorProvider1.GetError(cmbxWifeBarangay),
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ucMarriageLicense_Load(object sender, EventArgs e)
+        internal void OnLoad() 
         {
-            if (!DesignMode)
-            {
-                LoadProvince();
-                LoadBarangay();
-                LoadMunicipality();
-            }
+            LoadProvince();
+            LoadBarangay();
+            LoadMunicipality();
+            ucOtherCharges.OnLoad();
         }
 
         private void LoadProvince()
@@ -68,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxWifeBarangay, "name", "id");
         }
 
-        #region Validation
+        #region Validations
 
         private void txtRegistrationNumber_Validating(object sender, CancelEventArgs e)
         {
@@ -80,6 +81,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
         }
 
+        #region Husband
         private void txtHusbandName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtHusbandName, "Husband Name.");
@@ -149,7 +151,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxHusbandBarangay);
         }
+        #endregion
 
+        #region  Wife
         private void txtWifeName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtWifeName, "Wife Name.");
@@ -218,7 +222,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         private void cmbxWifeBarangay_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxWifeBarangay);
-        }
+        } 
+        #endregion
 
         #endregion Validation
     }

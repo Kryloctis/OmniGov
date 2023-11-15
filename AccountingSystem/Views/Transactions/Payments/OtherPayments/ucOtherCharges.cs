@@ -15,7 +15,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         internal int unit = 1;
         internal decimal debitAmount;
         internal decimal subTotalAmount;
-        internal decimal totalAmount;
 
 
         public ucOtherCharges()
@@ -105,13 +104,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         }
         #endregion
 
-        private void ucOtherCharges_Load(object sender, EventArgs e)
+        internal void OnLoad() 
         {
-            if (!DesignMode)
-            {
-                LoadOtherPaymentCharges();
-                CreatedOtherPaymentChargesColumns(dgOtherPaymentCharges);
-            }
+            LoadOtherPaymentCharges();
+            CreatedOtherPaymentChargesColumns(dgOtherPaymentCharges);
         }
 
         internal void CreatedOtherPaymentChargesColumns(DataGridView datagrid)
@@ -214,6 +210,5 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             return totalPayment;
         }
-
     }
 }

@@ -15,8 +15,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
-        private bool paymentComplete = false;
-        private readonly ucOtherCharges ucOtherCharges;
         private readonly ucMarriageLicense ucMarriageLicense;
 
         private bool isNewPayee = false;
@@ -25,11 +23,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgPayees, true);
+            Helper.LoadFormIcon(this);
             ucTaxPayers = ucTaxPayers1;
             ucPayment = ucPayment1;
             ucMarriageLicense = ucMarriageLicense1;
-            ucOtherCharges = ucOtherCharges1;
-            ucOtherCharges.accountableForm = "54";
         }
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
@@ -39,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 string searchText = txtSearch.Text;
                 LoadPayees(searchText);
                 ucTaxPayers.chckIsActive.Enabled = false;
+                ucMarriageLicense.OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -267,7 +265,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
+            ucPayment.amountPayment = ucMarriageLicense.ucOtherCharges.GetTotalOtherCharges();
             ucPayment.OnLoad("54");
 
             if (isNewPayee)
@@ -398,12 +396,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 dialog.btnClose.Enabled = true;
                 btnNextMain.Text = "Finish";
                 btnBack.Enabled = false;
-                paymentComplete = true;
                 ucPayment.Enabled = false;
                 return;
             }
-
-            paymentComplete = false;
         }
         #endregion
 
