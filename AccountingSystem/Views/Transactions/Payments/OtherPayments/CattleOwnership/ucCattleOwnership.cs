@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +22,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-
         }
 
         internal void LoadTaxpayerInfo(int taxpayerID)

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,11 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRealProperties(this).ShowDialog();
+            try
+            {
+                _ = new frmAddRealProperties(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete()
@@ -129,9 +134,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             try
             {
-                LoadProperties();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            LoadProperties();
         }
 
         private DataTable DataTableRealProperties()

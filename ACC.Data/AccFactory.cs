@@ -1,11 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using MySql.Data.MySqlClient;
+﻿using ACC.Domain.Interfaces;
 using RPT.Domain.Interfaces;
 using System;
-using System.Net.Http.Headers;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     public static class AccFactory
     {

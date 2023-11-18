@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class BusinessCategoriesRepository : IBusinessCategoriesRepository
     {
@@ -20,7 +20,7 @@ namespace AccountingSystem
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
@@ -69,7 +69,7 @@ namespace AccountingSystem
 
         public int CountRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(BusinessCategoriesModel entity)

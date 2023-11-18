@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -912,6 +913,13 @@ namespace AccountingSystem
         }
 
         #endregion Funds
+
+        internal static void BankAccountsComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+        }
 
         #region Banks
 

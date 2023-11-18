@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,15 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         }
 
         private void CollectorsRCD_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             ValidateLocalPermission();
             if (uc.dgPayments.Rows.Count == 0) return;
@@ -158,9 +168,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             }
 
             if (MessageBox.Show("Create RCD?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
                 return AccFactory.CollectorReportRepository().InsertWithCollectorReportPayments(CollectorReportModelData(), CollectorReportPaymentModelData());
-            }
 
             return false;
         }
@@ -196,113 +204,94 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmCollectorsRCDSearch(this, uc).ShowDialog();
+            try
+            {
+                _ = new frmCollectorsRCDSearch(this, uc).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadSelectedValue(string reportNo)
         {
-            try
+            var rcdData = AccFactory.CollectorReportRepository().GetRecordByID(reportNo);
+
+            uc.reportId = (ushort)Convert.ToInt32(rcdData["id"]);
+            uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
+            uc.jobOrderId = (ushort)Convert.ToInt16(string.IsNullOrEmpty(rcdData["job_orders_id"]) ? 0 : rcdData["job_orders_id"]);
+            uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
+            uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
+            uc.txtReport.Text = rcdData["report_no"];
+            uc.dtRCDDate.Value = Convert.ToDateTime(rcdData["date"]);
+
+            if (uc.jobOrderId != 0)
             {
-                var collectorReportRepo = AccFactory.CollectorReportRepository();
-                var rcdData = collectorReportRepo.GetRecordByID(reportNo);
-
-                uc.reportId = (ushort)Convert.ToInt32(rcdData["id"]);
-                uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
-                uc.jobOrderId = (ushort)Convert.ToInt16(string.IsNullOrEmpty(rcdData["job_orders_id"]) ? 0 : rcdData["job_orders_id"]);
-                uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
-                uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
-                uc.txtReport.Text = rcdData["report_no"];
-                uc.dtRCDDate.Value = Convert.ToDateTime(rcdData["date"]);
-
-                if (uc.jobOrderId != 0)
-                {
-                    uc.cbJOCollector.Checked = true;
-                    uc.cmbCollector.SelectedValue = rcdData["job_orders_id"];
-                }
-                else
-                {
-                    uc.cbJOCollector.Checked = false;
-                    uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
-                }
-
-                var collectionOfPaymentReportsRepo = AccFactory.CollectorReportPaymentsRepository();
-                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
+                uc.cbJOCollector.Checked = true;
+                uc.cmbCollector.SelectedValue = rcdData["job_orders_id"];
             }
-            catch (Exception ex)
+            else
             {
-                Helper.MessageBoxError(ex.Message);
+                uc.cbJOCollector.Checked = false;
+                uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
             }
+
+            var collectionOfPaymentReportDt = AccFactory.CollectorReportPaymentsRepository().GetRecordsByReportNo(reportNo);
+            HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
         }
 
         internal void CheckRCDStatus(string reportNo)
         {
-            try
+            switch (AccFactory.CollectorReportRepository().GetRCDStatus(reportNo))
             {
-                switch (AccFactory.CollectorReportRepository().GetRCDStatus(reportNo))
-                {
-                    case "pending":
-                        //PENDING
-                        lblReportStatus.Text = "PENDING";
-                        lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
-                        lblShowMessage.Visible = false;
-                        btnPrint.Enabled = true;
-                        btnCancelPrint.Enabled = true;
-                        btnApprove.Enabled = true;
-                        btnDisapprove.Enabled = true;
-                        btnDelete.Enabled = true;
-                        uc.Enabled = true;
-                        btnSave.Text = "Update";
-                        btnSave.Enabled = true;
-                        break;
+                case "pending":
+                    //PENDING
+                    lblReportStatus.Text = "PENDING";
+                    lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                    lblShowMessage.Visible = false;
+                    btnPrint.Enabled = true;
+                    btnCancelPrint.Enabled = true;
+                    btnApprove.Enabled = true;
+                    btnDisapprove.Enabled = true;
+                    btnDelete.Enabled = true;
+                    uc.Enabled = true;
+                    btnSave.Text = "Update";
+                    btnSave.Enabled = true;
+                    break;
 
-                    case "approved":
-                        //APPROVED
-                        lblReportStatus.Text = "APPROVED";
-                        lblReportStatus.ForeColor = Color.FromArgb(78, 159, 61);
-                        lblShowMessage.Visible = false;
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnPrint.Enabled = true;
-                        btnCancelPrint.Enabled = true;
-                        btnSave.Enabled = true;
-                        uc.Enabled = false;
-                        btnDelete.Enabled = false;
-                        btnSave.Enabled = false;
-                        break;
+                case "approved":
+                    //APPROVED
+                    lblReportStatus.Text = "APPROVED";
+                    lblReportStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                    lblShowMessage.Visible = false;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnPrint.Enabled = true;
+                    btnCancelPrint.Enabled = true;
+                    btnSave.Enabled = true;
+                    uc.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnSave.Enabled = false;
+                    break;
 
-                    case "disapproved":
-                        //DISSAPROVED
-                        lblReportStatus.Text = "DISAPPROVED";
-                        lblReportStatus.ForeColor = Color.FromArgb(149, 1, 1);
-                        lblShowMessage.Visible = true;
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnPrint.Enabled = false;
-                        btnCancelPrint.Enabled = false;
-                        btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
-                        uc.Enabled = false;
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                case "disapproved":
+                    //DISSAPROVED
+                    lblReportStatus.Text = "DISAPPROVED";
+                    lblReportStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                    lblShowMessage.Visible = true;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnPrint.Enabled = false;
+                    btnCancelPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = true;
+                    uc.Enabled = false;
+                    break;
             }
         }
 
         internal bool SetRCDStatus(byte status, string reportNo)
         {
-            try
-            {
-                var updateResult = AccFactory.CollectorReportRepository().SetRCDStatus(status, reportNo);
-                return updateResult;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var updateResult = AccFactory.CollectorReportRepository().SetRCDStatus(status, reportNo);
+            return updateResult;
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
@@ -322,73 +311,77 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     return;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)"); }
         }
 
         private void lblShowMessage_Click(object sender, EventArgs e)
         {
-            var frmCollectorsRCDRemarks = new frmCollectorsRCDRemarks(this);
-
-            if (uc.Enabled)
+            try
             {
-                frmCollectorsRCDRemarks.btnAccept.Visible = false;
-                frmCollectorsRCDRemarks.btnCancel.Text = "Close";
-            }
+                var frmCollectorsRCDRemarks = new frmCollectorsRCDRemarks(this);
 
-            frmCollectorsRCDRemarks.ShowDialog();
+                if (uc.Enabled)
+                {
+                    frmCollectorsRCDRemarks.btnAccept.Visible = false;
+                    frmCollectorsRCDRemarks.btnCancel.Text = "Close";
+                }
+
+                frmCollectorsRCDRemarks.ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            string reportNumber = uc.txtReport.Text.Trim();
-            _ = new PaymentCollection.frmCollectorsRCD(reportNumber).ShowDialog();
+            try
+            {
+                string reportNumber = uc.txtReport.Text.Trim();
+                _ = new PaymentCollection.frmCollectorsRCD(reportNumber).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            string reportNo = uc.txtReport.Text;
-            if (String.IsNullOrEmpty(reportNo)) return;
+            try
+            {
+                string reportNo = uc.txtReport.Text;
+                if (String.IsNullOrEmpty(reportNo)) return;
 
-            _ = new frmCollectorsRCDRemarks(this).ShowDialog();
+                _ = new frmCollectorsRCDRemarks(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DeleteReport())
+            try
             {
-                Helper.MessageBoxSuccess("Report of Collection successfully deleted.");
-                ResetLocalControls();
-                uc.ResetForm();
+                if (DeleteReport())
+                {
+                    Helper.MessageBoxSuccess("Report of Collection successfully deleted.");
+                    ResetLocalControls();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteReport()
         {
-            try
+            if (MessageBox.Show("Are you sure you want to delete report of collection?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                if (MessageBox.Show("Are you sure you want to delete report of collection?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                int reportId = uc.reportId;
+                string reportNo = uc.txtReport.Text.Trim();
+
+                var collectorReportPaymentModel = new CollectorReportPaymentModel() { CollectorsReportId = reportId };
+                bool isDeleteSuccess = AccFactory.CollectorReportPaymentsRepository().Delete(collectorReportPaymentModel);
+
+                if (isDeleteSuccess)
                 {
-                    int reportId = uc.reportId;
-                    string reportNo = uc.txtReport.Text.Trim();
-
-                    var collectorReportPaymentModel = new CollectorReportPaymentModel() { CollectorsReportId = reportId };
-                    var collectorReportPaymentRepo = AccFactory.CollectorReportPaymentsRepository();
-                    bool isDeleteSuccess = collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
-
-                    if (isDeleteSuccess)
-                    {
-                        var collectorReportModel = new CollectorReportModel() { Id = reportId, ReportNo = reportNo };
-                        var collectorReportRepo = AccFactory.CollectorReportRepository();
-                        return collectorReportRepo.Delete(collectorReportModel);
-                    }
+                    var collectorReportModel = new CollectorReportModel() { Id = reportId, ReportNo = reportNo };
+                    return AccFactory.CollectorReportRepository().Delete(collectorReportModel);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
             return false;
         }
@@ -409,20 +402,28 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_TextChanged(object sender, EventArgs e)
         {
-            if (btnSave.Text == "Save")
-                uc.ActionPerformIsSave(true);
-            else
-                uc.ActionPerformIsSave(false);
+            try
+            {
+                if (btnSave.Text == "Save")
+                    uc.ActionPerformIsSave(true);
+                else
+                    uc.ActionPerformIsSave(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnCancelPrint_Click(object sender, EventArgs e)
         {
-            if (Helper.MessageBoxConfirmCancel("Do you want to cancel printing."))
+            try
             {
-                ResetLocalControls();
-                uc.ResetForm();
-                uc.Enabled = true;
+                if (Helper.MessageBoxConfirmCancel("Do you want to cancel printing."))
+                {
+                    ResetLocalControls();
+                    uc.ResetForm();
+                    uc.Enabled = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

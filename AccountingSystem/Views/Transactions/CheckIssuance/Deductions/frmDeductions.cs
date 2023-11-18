@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Transactions.RCI;
 using System;
 using System.ComponentModel;
@@ -18,15 +19,28 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             _uc = uc;
         }
 
-        private void frmDeductions_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
+        private void frmDeductions_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgDeductions.SelectedRows)
-                dgDeductions.Rows.Remove(row);
+            try
+            {
+                foreach (DataGridViewRow row in dgDeductions.SelectedRows)
+                    dgDeductions.Rows.Remove(row);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgDeductions_SelectionChanged(object sender, EventArgs e)
@@ -38,14 +52,18 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!ValidateChildren())
+            try
             {
-                Helper.MessageBoxError(GetFormErrors());
-                return;
-            }
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
 
-            AddToList();
-            ResetForm();
+                AddToList();
+                ResetForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ResetForm()
@@ -68,12 +86,13 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epDescription.GetError(txtDescription);
-            errorArray[1] = epAmount.GetError(nudAmount);
+            var errorArray = new string[]
+            {
+                epDescription.GetError(txtDescription),
+                epAmount.GetError(nudAmount)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
@@ -100,16 +119,24 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void btnConfirmDeductions_Click(object sender, EventArgs e)
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
+            try
             {
-                _uc.SetDeductionLabel();
-                Close();
+                if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
+                {
+                    _uc.SetDeductionLabel();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmDeductions_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _uc.SetDeductionLabel();
+            try
+            {
+                _uc.SetDeductionLabel();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

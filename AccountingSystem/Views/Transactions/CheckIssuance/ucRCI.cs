@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using System;
@@ -187,19 +188,20 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[9];
-            errorArray[0] = errorProvider1.GetError(cmbFund);
-            errorArray[1] = errorProvider1.GetError(cmbBank);
-            errorArray[2] = errorProvider1.GetError(cmbBankAccounts);
-            errorArray[3] = errorProvider1.GetError(txtCheckNo);
-            errorArray[4] = errorProvider1.GetError(cmbFPP);
-            errorArray[5] = errorProvider1.GetError(dtCheckDate);
-            errorArray[6] = errorProvider1.GetError(txtPayee);
-            errorArray[7] = errorProvider1.GetError(txtNatureOfPayment);
-            errorArray[8] = errorProvider1.GetError(nudNetAmount);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbFund),
+                errorProvider1.GetError(cmbBank),
+                errorProvider1.GetError(cmbBankAccounts),
+                errorProvider1.GetError(txtCheckNo),
+                errorProvider1.GetError(cmbFPP),
+                errorProvider1.GetError(dtCheckDate),
+                errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(txtNatureOfPayment),
+                errorProvider1.GetError(nudNetAmount)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
@@ -275,7 +277,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ClearErrorComboBox(errorProvider1, cmbFPP);
         }
 
-
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
@@ -307,7 +308,5 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
         #endregion Validations
-
-
     }
 }

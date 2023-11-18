@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -72,13 +73,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     _frmReceiptIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
                     uc.ResetForm();
                 }
-
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
     }
 }

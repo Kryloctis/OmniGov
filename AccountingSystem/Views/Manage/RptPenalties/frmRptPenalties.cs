@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dashboard;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRptPenalty(this).ShowDialog();
+            try
+            {
+                _ = new frmAddRptPenalty(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -91,7 +96,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadPenalties();
+            try
+            {
+                LoadPenalties();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadPenalties()

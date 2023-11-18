@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
@@ -42,62 +43,40 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         internal void LoadAccountGroup()
         {
-            try
-            {
-                var dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
-                HelperLoadRecords.AccountGroupDatagridView(dtAccountGroup, dgAccountGroup);
-                DisplayRecordCount(dgAccountGroup);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
+            HelperLoadRecords.AccountGroupDatagridView(dtAccountGroup, dgAccountGroup);
+            DisplayRecordCount(dgAccountGroup);
         }
 
         internal void LoadMajorAccountGroup()
         {
-            try
-            {
-                byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
-                var dtMajorAccountGroup = AccFactory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
-                HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
-                DisplayRecordCount(dgMajorAccountGroup);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
+            var dtMajorAccountGroup = AccFactory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
+            HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
+            DisplayRecordCount(dgMajorAccountGroup);
         }
 
         private void LoadSubMajorAccountGroup()
         {
-            try
+            if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
             {
-                if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
-                {
-                    short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
-                    DataTable dtSubMajorAccountGroup = AccFactory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
-                    HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
-                    DisplayRecordCount(dgSubMajorAccount);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
+                DataTable dtSubMajorAccountGroup = AccFactory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
+                HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
+                DisplayRecordCount(dgSubMajorAccount);
             }
         }
 
         private void LoadTotalBalances()
         {
-            try
-            {
-                int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-                short year = Convert.ToInt16(cmbxYear.Text);
+            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
 
-                decimal totalDebit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
-                decimal totalCredit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
+            decimal totalDebit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
+            decimal totalCredit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
 
-                txtTotalCredit.Text = totalCredit.ToString("N2");
-                txtTotalDebit.Text = totalDebit.ToString("N2");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            txtTotalCredit.Text = totalCredit.ToString("N2");
+            txtTotalDebit.Text = totalDebit.ToString("N2");
         }
 
         private DataTable GeneralLedgersDataTable(int limitSize)
@@ -132,43 +111,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         internal void LoadGeneralLedgers(int limitSize)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(limitSize), dgGeneralLedgerAccounts);
-                lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
-                Cursor.Current = Cursors.Default;
-                DisplayRecordCount(dgGeneralLedgerAccounts);
-                LoadTotalBalances();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Cursor.Current = Cursors.WaitCursor;
+            HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(limitSize), dgGeneralLedgerAccounts);
+            lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
+            Cursor.Current = Cursors.Default;
+            DisplayRecordCount(dgGeneralLedgerAccounts);
+            LoadTotalBalances();
         }
 
         private void LoadAccountGroupComboBox()
         {
-            try
-            {
-                DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
-                HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
-                HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
+            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
+            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
         }
 
         private void LoadMajorAccountGroupComboBox()
         {
-            try
-            {
-                DataTable dtAccountGroup = AccFactory.MajorAccountGroupRepository().GetRecords();
-                HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            DataTable dtAccountGroup = AccFactory.MajorAccountGroupRepository().GetRecords();
+            HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
         }
 
         private void LoadFunds()
@@ -257,7 +218,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
-        private void frmChartOfAccounts_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
             Helper.DatagridFullRowSelectStyle(dgAccountGroup);
@@ -270,46 +231,63 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             LoadYear();
         }
 
+        private void frmChartOfAccounts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            try
             {
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+                {
+                    _ = new frmMajorAccountGroupAdd(this).ShowDialog();
+                }
+                else
+                    _ = new frmAccountGroupAdd(this).ShowDialog();
             }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                _ = new frmMajorAccountGroupAdd(this).ShowDialog();
-            }
-            else
-                _ = new frmAccountGroupAdd(this).ShowDialog();
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            try
             {
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+                {
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+                {
+                    short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
+                    _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
+                }
+                else
+                {
+                    byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
+                    _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
+                }
             }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
-                _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
-            }
-            else
-            {
-                byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
-                _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -342,7 +320,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void BtnSubsidiary_Click(object sender, EventArgs e)
         {
-            ShowSubsidiaryForm();
+            try
+            {
+                ShowSubsidiaryForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowSetBalanceForm()
@@ -390,41 +372,45 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            try
             {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                DisplayRecordCount(dgGeneralLedgerAccounts);
-                DisableEditDeleteButtons();
-                SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
-                dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+                {
+                    byte[] columnIndexTimestamp = { 3, 4 };
+                    DisplayRecordCount(dgGeneralLedgerAccounts);
+                    DisableEditDeleteButtons();
+                    SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+                    dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+                {
+                    byte[] columnIndexTimestamp = { 3, 4 };
+                    LoadSubMajorAccountGroup();
+                    DisableEditDeleteButtons();
+                    BtnSubsidiary.Enabled = false;
+                    BtnSetBalance.Enabled = false;
+                    SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
+                }
+                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+                {
+                    byte[] columnIndexTimestamp = { 3, 4 };
+                    LoadMajorAccountGroup();
+                    DisableEditDeleteButtons();
+                    SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+                    BtnSubsidiary.Enabled = false;
+                    BtnSetBalance.Enabled = false;
+                }
+                else
+                {
+                    byte[] columnIndexTimestamp = { 3, 4 };
+                    LoadAccountGroup();
+                    DisableEditDeleteButtons();
+                    SetActionControls(dgAccountGroup, columnIndexTimestamp);
+                    BtnSubsidiary.Enabled = false;
+                    BtnSetBalance.Enabled = false;
+                }
             }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                LoadSubMajorAccountGroup();
-                DisableEditDeleteButtons();
-                BtnSubsidiary.Enabled = false;
-                BtnSetBalance.Enabled = false;
-                SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                LoadMajorAccountGroup();
-                DisableEditDeleteButtons();
-                SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
-                BtnSubsidiary.Enabled = false;
-                BtnSetBalance.Enabled = false;
-            }
-            else
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                LoadAccountGroup();
-                DisableEditDeleteButtons();
-                SetActionControls(dgAccountGroup, columnIndexTimestamp);
-                BtnSubsidiary.Enabled = false;
-                BtnSetBalance.Enabled = false;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void DisplayRecordCount(DataGridView dataGridView)
@@ -455,64 +441,96 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
-
-            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            try
             {
-                BtnSubsidiary.Enabled = true;
-                BtnSetBalance.Enabled = true;
-                EnableDisableSubsidiaryButton();
-                return;
+                byte[] columnIndexTimestamp = { 3, 4 };
+                SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+
+                if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+                {
+                    BtnSubsidiary.Enabled = true;
+                    BtnSetBalance.Enabled = true;
+                    EnableDisableSubsidiaryButton();
+                    return;
+                }
+                BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
             }
-            BtnSubsidiary.Enabled = false;
-            BtnSetBalance.Enabled = false;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            SetActionControls(dgAccountGroup, columnIndexTimestamp);
+            try
+            {
+                byte[] columnIndexTimestamp = { 3, 4 };
+                SetActionControls(dgAccountGroup, columnIndexTimestamp);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgMajorAccountGroup_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 4, 5 };
-            SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+            try
+            {
+                byte[] columnIndexTimestamp = { 4, 5 };
+                SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadMajorAccountGroup();
+            try
+            {
+                LoadMajorAccountGroup();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadSubMajorAccountGroup();
+            try
+            {
+                LoadSubMajorAccountGroup();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtSearch.TextLength > 2)
-                LoadGeneralLedgers(0);
-
-            if (string.IsNullOrEmpty(txtSearch.Text))
+            try
             {
-                var dataTable = (DataTable)dgGeneralLedgerAccounts.DataSource;
-                dataTable.Rows.Clear();
+                if (txtSearch.TextLength > 2)
+                    LoadGeneralLedgers(0);
+
+                if (string.IsNullOrEmpty(txtSearch.Text))
+                {
+                    var dataTable = (DataTable)dgGeneralLedgerAccounts.DataSource;
+                    dataTable.Rows.Clear();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRetrieveAll_Click(object sender, EventArgs e)
         {
-            txtSearch.Clear();
-            LoadGeneralLedgers(0);
+            try
+            {
+                txtSearch.Clear();
+                LoadGeneralLedgers(0);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgSubMajorAccount_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 4, 5 };
-            SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
+            try
+            {
+                byte[] columnIndexTimestamp = { 4, 5 };
+                SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

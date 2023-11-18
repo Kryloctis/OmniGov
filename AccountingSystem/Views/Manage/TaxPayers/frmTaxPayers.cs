@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,19 +21,32 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                LoadTaxpayers();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void OnLoad()
+        {
+            LoadTaxpayers();
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddTaxpayers().ShowDialog();
+            try
+            {
+                _ = new frmAddTaxpayers().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditForm();
+            try
+            {
+                ShowEditForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete()
@@ -94,10 +108,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
                 Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void chckBxInactiveTaxpayers_CheckedChanged(object sender, EventArgs e)
@@ -226,7 +237,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             if (e.Result is not DataTable dataTable)
                 return;
-
 
             HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, dataTable);
 

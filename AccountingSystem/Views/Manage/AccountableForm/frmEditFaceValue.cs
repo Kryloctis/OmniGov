@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -17,10 +18,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             uc = ucFaceValue1;
             this.faceValueId = faceValueId;
             this.accountableFormId = accountableFormId;
-            this.frmAccountableForm = frmAccountableForm; 
+            this.frmAccountableForm = frmAccountableForm;
         }
 
-        private bool UpdateData() 
+        private bool UpdateData()
         {
             if (!uc.ValidateChildren())
             {

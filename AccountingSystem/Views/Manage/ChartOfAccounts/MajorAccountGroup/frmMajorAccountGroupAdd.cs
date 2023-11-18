@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,55 +8,53 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
     public partial class frmMajorAccountGroupAdd : Form
     {
         private readonly frmChartOfAccounts _frmChartOfAccounts;
+        private UcMajorAccountGroup uc;
 
         public frmMajorAccountGroupAdd(frmChartOfAccounts frmChartOfAccounts)
         {
             InitializeComponent();
             _frmChartOfAccounts = frmChartOfAccounts;
+            uc = ucMajorAccountGroup1;
         }
 
         private bool SaveData()
         {
-            try
+            // if error occurs, show messagebox error
+            if (!uc.ValidateChildren())
             {
-                var uc = ucMajorAccountGroup1;
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to insert
-                var majorAccountGroupModel = new MajorAccountGroupModel()
-                {
-                    AccountGroupId = byte.Parse(uc.cmbAccountGroup.SelectedValue.ToString()),
-                    MajorAccountGroupCode = uc.txtCode.Text.Trim(),
-                    MajorAccountGroupName = uc.txtName.Text.Trim()
-                };
-
-                var majorAccountGroupRepository = AccFactory.MajorAccountGroupRepository();
-                return majorAccountGroupRepository.Insert(majorAccountGroupModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
-            return false;
+            // proceed to insert
+            var majorAccountGroupModel = new MajorAccountGroupModel()
+            {
+                AccountGroupId = byte.Parse(uc.cmbAccountGroup.SelectedValue.ToString()),
+                MajorAccountGroupCode = uc.txtCode.Text.Trim(),
+                MajorAccountGroupName = uc.txtName.Text.Trim()
+            };
+
+            return AccFactory.MajorAccountGroupRepository().Insert(majorAccountGroupModel);
         }
 
         private void frmMajorAccountGroupAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            ucMajorAccountGroup1.LoadAccountGroup();
+            uc.LoadAccountGroup();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Major account group has been saved.");
-                ucMajorAccountGroup1.ResetForm();
-                _frmChartOfAccounts.LoadMajorAccountGroup();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Major account group has been saved.");
+                    uc.ResetForm();
+                    _frmChartOfAccounts.LoadMajorAccountGroup();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

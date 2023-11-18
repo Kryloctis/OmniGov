@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -15,7 +16,6 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void ucBanks_Load(object sender, EventArgs e)
         {
-
         }
 
         internal void ResetForm()

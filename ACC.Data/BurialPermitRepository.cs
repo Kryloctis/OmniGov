@@ -1,10 +1,9 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class BurialPermitRepository : IBurialPermitRepository
     {

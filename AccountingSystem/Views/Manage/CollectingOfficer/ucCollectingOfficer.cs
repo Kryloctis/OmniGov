@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -112,19 +113,23 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chckLinkAcc.Checked)
+            try
             {
-                chckLinkAcc.Image = Properties.Resources.link_14px;
-                cmbxLinkedAcc.Enabled = false;
-                cmbxLinkedAcc.SelectedIndex = -1;
-                cmbxLinkedAcc.Text = string.Empty;
-                errorProvider1.SetError(chckLinkAcc, string.Empty);
+                if (!chckLinkAcc.Checked)
+                {
+                    chckLinkAcc.Image = Properties.Resources.link_14px;
+                    cmbxLinkedAcc.Enabled = false;
+                    cmbxLinkedAcc.SelectedIndex = -1;
+                    cmbxLinkedAcc.Text = string.Empty;
+                    errorProvider1.SetError(chckLinkAcc, string.Empty);
+                }
+                else
+                {
+                    chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                    cmbxLinkedAcc.Enabled = true;
+                }
             }
-            else
-            {
-                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
-                cmbxLinkedAcc.Enabled = true;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
@@ -166,9 +171,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             var linkedUserId = dictCollectingOfficer["users_id"];
 
             if (string.IsNullOrWhiteSpace(linkedUserId))
-            {
                 chckLinkAcc.Checked = false;
-            }
             else
             {
                 chckLinkAcc.Checked = true;
@@ -196,8 +199,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
         {
-            if (chckLinkAcc.Checked)
-                e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
+            try
+            {
+                if (chckLinkAcc.Checked)
+                    e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxLinkedAcc_Validated(object sender, EventArgs e)

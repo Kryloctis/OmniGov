@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -27,15 +28,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         internal void LoadAccountGroup()
         {
-            try
-            {
-                DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
-                HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
+            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
         }
 
         internal void ResetForm()

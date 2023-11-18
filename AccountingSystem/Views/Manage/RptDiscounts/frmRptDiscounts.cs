@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dashboard;
 using System;
 using System.Collections.Generic;
@@ -87,7 +88,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRptDiscount(this).ShowDialog();
+            try
+            {
+                _ = new frmAddRptDiscount(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowEditRptDiscounts()
@@ -100,7 +105,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditRptDiscounts();
+            try
+            {
+                ShowEditRptDiscounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete(out int deletedCount)
@@ -164,45 +173,49 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            string searchText = e.Argument as string;
-
-            DataTable dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DiscountsDataColumns());
-
-            if (dtRptDiscounts.Rows.Count < 1)
+            try
             {
+                string searchText = e.Argument as string;
+
+                DataTable dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(DiscountsDataColumns());
+
+                if (dtRptDiscounts.Rows.Count < 1)
+                {
+                    e.Result = dataTable;
+                    backgroundWorker1.ReportProgress(100);
+                    return;
+                }
+
+                int totalProgressCount = dtRptDiscounts.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow row in dtRptDiscounts.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    int id = Convert.ToInt32(row["id"]);
+                    int month = Convert.ToInt32(row["month"]);
+                    string monthName = MonthToName(month);
+                    string description = row["description"].ToString();
+                    decimal rate = Convert.ToDecimal(row["rate"]);
+                    bool isAdvance = Convert.ToBoolean(row["is_advance"]);
+
+                    newRow["id"] = id;
+                    newRow["month"] = month;
+                    newRow["month_name"] = monthName;
+                    newRow["description"] = description;
+                    newRow["rate"] = rate;
+                    newRow["is_advance"] = isAdvance;
+                    dataTable.Rows.Add(newRow);
+
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
                 e.Result = dataTable;
-                backgroundWorker1.ReportProgress(100);
-                return;
             }
-
-            int totalProgressCount = dtRptDiscounts.Rows.Count;
-            int progressCount = 0;
-
-            foreach (DataRow row in dtRptDiscounts.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int id = Convert.ToInt32(row["id"]);
-                int month = Convert.ToInt32(row["month"]);
-                string monthName = MonthToName(month);
-                string description = row["description"].ToString();
-                decimal rate = Convert.ToDecimal(row["rate"]);
-                bool isAdvance = Convert.ToBoolean(row["is_advance"]);
-
-                newRow["id"] = id;
-                newRow["month"] = month;
-                newRow["month_name"] = monthName;
-                newRow["description"] = description;
-                newRow["rate"] = rate;
-                newRow["is_advance"] = isAdvance;
-                dataTable.Rows.Add(newRow);
-
-                progressCount++;
-                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-            }
-
-            e.Result = dataTable;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)

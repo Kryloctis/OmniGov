@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
@@ -11,7 +12,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 {
     public partial class frmMarriageLicense : Form
     {
-
         private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
@@ -173,7 +173,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                     }
                 }
             }
-
             else if (selectedTab == tabPageFees)
             {
                 if (!ucMarriageLicense.ValidateChildren())
@@ -182,7 +181,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                     return false;
                 }
             }
-
             else if (selectedTab == tabPagePayment)
             {
                 if (!ucPayment.ValidateChildren())
@@ -191,7 +189,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                     return false;
                 }
             }
-
 
             return true;
         }
@@ -312,6 +309,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         }
 
         #region Payment
+
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             int totalProgress = ucPayment.dgCheques.Rows.Count;
@@ -400,7 +398,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 return;
             }
         }
-        #endregion
+
+        #endregion Payment
 
         private bool SaveMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
         {

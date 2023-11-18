@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 _ = new frmReceiptsAdd(this).ShowDialog();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 int receiptId = Convert.ToInt32(dgReceipts.Rows[index].Cells["id"].Value);
                 _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteRecords()
@@ -222,7 +223,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             LoadReceipts();
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
-
         }
 
         private void frmReceipts_Load(object sender, EventArgs e)

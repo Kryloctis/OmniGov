@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -14,58 +15,50 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             InitializeComponent();
             _frmOtherPaymentRates = frmOtherPaymentRates;
             _ucOtherPaymentRates = ucOtherPaymentRates1;
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Other payment has been saved.");
-                _frmOtherPaymentRates.RunBackgroundWorker();
-                _ucOtherPaymentRates.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Other payment has been saved.");
+                    _frmOtherPaymentRates.RunBackgroundWorker();
+                    _ucOtherPaymentRates.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
         {
-            try
+            if (!_ucOtherPaymentRates.ValidateChildren())
             {
-                if (!_ucOtherPaymentRates.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
-                    return false;
-                }
-                int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
-                string description = _ucOtherPaymentRates.txtDescription.Text;
-                decimal amount = _ucOtherPaymentRates.nudAmount.Value;
-                int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
-                bool isRateEditable = _ucOtherPaymentRates.cbIsRateEditable.Checked;
-
-                var otherPaymentRatesModel = new OtherPaymentRatesModel()
-                {
-                    TaxTypeID = taxTypeID,
-                    Description = description,
-                    Amount = amount,
-                    StartingYear = startingYear,
-                    IsRateEditable = isRateEditable,
-                    CreatedBy = Helper.UserId
-                };
-
-                var otherPaymentRatesRepository = AccFactory.OtherPaymentRatesRepository();
-                return otherPaymentRatesRepository.Insert(otherPaymentRatesModel);
+                Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
+                return false;
             }
-            catch (Exception ex)
+            int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
+            string description = _ucOtherPaymentRates.txtDescription.Text;
+            decimal amount = _ucOtherPaymentRates.nudAmount.Value;
+            int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
+            bool isRateEditable = _ucOtherPaymentRates.cbIsRateEditable.Checked;
+
+            var otherPaymentRatesModel = new OtherPaymentRatesModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
+                TaxTypeID = taxTypeID,
+                Description = description,
+                Amount = amount,
+                StartingYear = startingYear,
+                IsRateEditable = isRateEditable,
+                CreatedBy = Helper.UserId
+            };
 
-            return false;
+            return AccFactory.OtherPaymentRatesRepository().Insert(otherPaymentRatesModel);
         }
 
         private void frmAddOtherPaymentRates_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

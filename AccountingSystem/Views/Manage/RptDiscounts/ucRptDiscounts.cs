@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -39,16 +40,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void LoadMonths()
         {
-            try
-            {
-                cmbxMonth.DataSource = Months();
-                cmbxMonth.DisplayMember = "month_name";
-                cmbxMonth.ValueMember = "month";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            cmbxMonth.DataSource = Months();
+            cmbxMonth.DisplayMember = "month_name";
+            cmbxMonth.ValueMember = "month";
         }
 
         internal void ResetForm()
@@ -70,6 +64,23 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private void ucRptDiscounts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadMonths();
+            }
         }
 
         #region Validations
@@ -110,13 +121,5 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         }
 
         #endregion Validations
-
-        private void ucRptDiscounts_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadMonths();
-            }
-        }
     }
 }

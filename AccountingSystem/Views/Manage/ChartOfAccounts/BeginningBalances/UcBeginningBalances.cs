@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -30,31 +31,19 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         internal void LoadSelectedGeneralLedger()
         {
-            try
-            {
-                var generalLedgerAccount = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            var generalLedgerAccount = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
-                txtAccountCode.Text = generalLedgerAccount["account_code"];
-                txtAccountName.Text = generalLedgerAccount["ledger_name"];
-            }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
+            txtAccountCode.Text = generalLedgerAccount["account_code"];
+            txtAccountName.Text = generalLedgerAccount["ledger_name"];
         }
 
         internal void LoadSelectedSubsidiaryAccount()
         {
-            try
+            if (subsidiaryLedgerId != 0)
             {
-                if (subsidiaryLedgerId != 0)
-                {
-                    var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
-                    txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
-                    txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
+                txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
             }
         }
 
@@ -70,12 +59,16 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+            try
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void OnLoad()
         {
-            try
+            if (!DesignMode)
             {
                 var dtFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 txtFunName.Text = dtFund["fund_name"];
@@ -83,18 +76,15 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 dtpDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
                 dtpDateEntry.MinDate = new DateTime(year, 1, 1);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
         }
 
         private void UcBeginningBalances_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
                 OnLoad();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

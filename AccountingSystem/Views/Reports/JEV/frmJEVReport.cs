@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -188,7 +189,6 @@ namespace AccountingSystem.Views.Reports.JEV
         private DataTable DataTableJournalEntryVoucherAccount()
         {
             var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
-
             var dtJEVAccountsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
 
             byte i = 0;
@@ -213,11 +213,16 @@ namespace AccountingSystem.Views.Reports.JEV
             return dtJEVAccounts;
         }
 
+        private void OnLoad()
+        {
+            LoadReport(reportViewer.LocalReport);
+        }
+
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

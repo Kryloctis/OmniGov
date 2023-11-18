@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -41,20 +42,29 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         internal void LoadRecords()
         {
-            try
-            {
-                HelperLoadRecords.UsersDatagridView(UsersDataTable(), dgUsers);
-                lblRecordCount.Text = dgUsers.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.UsersDatagridView(UsersDataTable(), dgUsers);
+            lblRecordCount.Text = dgUsers.Rows.Count.ToString();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmUsersAdd(this).ShowDialog();
+            try
+            {
+                _ = new frmUsersAdd(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadRecords();
         }
@@ -72,27 +82,34 @@ namespace AccountingSystem.Views.Manage.Users.List
             _ = new frmUsersEdit(this, userId).ShowDialog();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private bool DeleteData()
         {
             int selectedRowsCount = dgUsers.SelectedRows.Count;
+
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var usersModelList = new List<UsersModel>();
+                    foreach (DataGridViewRow row in dgUsers.SelectedRows)
+                    {
+                        int userId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        usersModelList.Add(new UsersModel() { Id = userId });
+                    }
+
+                    var usersRepository = AccFactory.UsersRepository();
+                    return usersRepository.Delete(usersModelList);
+                }
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
             try
             {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var usersModelList = new List<UsersModel>();
-                        foreach (DataGridViewRow row in dgUsers.SelectedRows)
-                        {
-                            int userId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            usersModelList.Add(new UsersModel() { Id = userId });
-                        }
-
-                        var usersRepository = AccFactory.UsersRepository();
-                        _ = usersRepository.Delete(usersModelList);
-                        LoadRecords();
-                    }
-                }
+                if (DeleteData())
+                    LoadRecords();
             }
             catch (MySqlException mysqlEx)
             {
@@ -103,15 +120,16 @@ namespace AccountingSystem.Views.Manage.Users.List
                         break;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

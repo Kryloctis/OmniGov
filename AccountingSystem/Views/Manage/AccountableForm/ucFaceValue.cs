@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
@@ -29,7 +30,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             dtDateEffective.Value = Helper.GetCurrentDate();
             nudAmount.Value = 0;
