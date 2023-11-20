@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.RCDCollector;
+﻿using ACC.Data;
+using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Windows.Forms;
 
@@ -22,51 +23,42 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void LoadFunds()
         {
-            try
-            {
-                var fundrepo = AccFactory.FundsRepository();
-                var dtfunds = fundrepo.GetRecords();
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "fund_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtfunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtfunds, cmbfunds, "fund_name", "id");
         }
 
-        private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadFunds();
             LoadRecords();
         }
 
-        private void LoadRecords()
+        private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
             try
             {
-                string status = cmbstatus.Text.ToLower();
-                byte fundId = Convert.ToByte(cmbfunds.SelectedValue);
-                string keySearch = txtsearch.Text;
-
-                var colectorRepository = AccFactory.CollectorReportRepository();
-                var dtRCD = colectorRepository.FilterRecords(status, fundId, keySearch);
-
-                HelperLoadRecords.CollectorReportDatagridView(dtRCD, dgCollectorsReport);
-
-                if (dgCollectorsReport.Rows.Count == 0)
-                {
-                    btnSelect.Enabled = false;
-                    return;
-                }
-
-                btnSelect.Enabled = true;
+                OnLoad();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadRecords()
+        {
+            string status = cmbstatus.Text.ToLower();
+            byte fundId = Convert.ToByte(cmbfunds.SelectedValue);
+            string keySearch = txtsearch.Text;
+
+            var dtRCD = AccFactory.CollectorReportRepository().FilterRecords(status, fundId, keySearch);
+
+            HelperLoadRecords.CollectorReportDatagridView(dtRCD, dgCollectorsReport);
+
+            if (dgCollectorsReport.Rows.Count == 0)
             {
-                Helper.MessageBoxError(ex.Message);
+                btnSelect.Enabled = false;
+                return;
             }
+
+            btnSelect.Enabled = true;
         }
 
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
@@ -77,35 +69,55 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            _frmCollectorsRCD.LoadSelectedValue(reportNo);
-            _frmCollectorsRCD.CheckRCDStatus(reportNo);
+            try
+            {
+                _frmCollectorsRCD.LoadSelectedValue(reportNo);
+                _frmCollectorsRCD.CheckRCDStatus(reportNo);
 
-            _uc.TotalCollections();
-            this.Close();
+                _uc.TotalCollections();
+                this.Close();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbstatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgCollectorsReport_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            _frmCollectorsRCD.LoadSelectedValue(reportNo);
-            _frmCollectorsRCD.CheckRCDStatus(reportNo);
+            try
+            {
+                _frmCollectorsRCD.LoadSelectedValue(reportNo);
+                _frmCollectorsRCD.CheckRCDStatus(reportNo);
 
-            _uc.TotalCollections();
-            Close();
+                _uc.TotalCollections();
+                Close();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.RealProperties;
+﻿using ACC.Data;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
@@ -128,7 +129,7 @@ namespace AccountingSystem.Views.Shared
             {
                 LoadTaxpayerList();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRptOwnerList_Load(object sender, EventArgs e)

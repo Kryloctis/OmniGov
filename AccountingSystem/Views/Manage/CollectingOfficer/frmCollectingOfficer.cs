@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Collections.Generic;
@@ -98,9 +99,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
-                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-
-                btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
+                btnDelete.Enabled = AccFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
                 btnJobOrder.Enabled = selectedRowCount == 1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

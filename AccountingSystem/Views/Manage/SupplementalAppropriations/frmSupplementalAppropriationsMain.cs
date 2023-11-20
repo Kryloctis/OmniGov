@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             cmbxSubFPP.Text = string.Empty;
             cmbxSubFPP.Enabled = true;
         }
-
-        #region General Ledger Accounts
 
         private DataTable DatatableAccounts()
         {
@@ -103,27 +102,31 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void CmbxLedgerAccount_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            try
             {
-                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccount_TextChanged);
-                LoadAccounts();
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
+                if (string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccount_TextChanged);
+                    LoadAccounts();
+                    cmbxAccount.SelectedIndex = -1;
+                    cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
+            try
             {
-                LoadAccounts();
-                cmbxAccount.DroppedDown = true;
+                if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    LoadAccounts();
+                    cmbxAccount.DroppedDown = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion General Ledger Accounts
-
-        #region Supplemental Appropriations
 
         private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
         {
@@ -180,7 +183,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void dgSupplementalAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons(dgSupplementalAppropriations, btnEdit, btnRemove);
+            try
+            {
+                EnableDisableButtons(dgSupplementalAppropriations, btnEdit, btnRemove);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -190,7 +197,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ShowSupplementalAppropriationAdd();
+            try
+            {
+                ShowSupplementalAppropriationAdd();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowSupplementalAppropriationAdd()
@@ -208,11 +219,15 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
-            if (selectedRowCount == 1)
+            try
             {
-                ShowSupplementalAppropriationEdit();
+                int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
+                if (selectedRowCount == 1)
+                {
+                    ShowSupplementalAppropriationEdit();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowSupplementalAppropriationEdit()
@@ -238,17 +253,21 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
-
-            if (MessageBoxConfirmDelete(selectedRowCount))
+            try
             {
-                foreach (DataGridViewRow row in dgSupplementalAppropriations.SelectedRows)
-                {
-                    dgSupplementalAppropriations.Rows.RemoveAt(row.Index);
-                }
+                int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
 
-                GetTotalSupplementalAmount();
+                if (MessageBoxConfirmDelete(selectedRowCount))
+                {
+                    foreach (DataGridViewRow row in dgSupplementalAppropriations.SelectedRows)
+                    {
+                        dgSupplementalAppropriations.Rows.RemoveAt(row.Index);
+                    }
+
+                    GetTotalSupplementalAmount();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool MessageBoxConfirmDelete(int rowCount)
@@ -268,21 +287,27 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void dgSupplementalAppropriations_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            SetEnableDisableDetailFields(false);
-            GetTotalSupplementalAmount();
+            try
+            {
+                SetEnableDisableDetailFields(false);
+                GetTotalSupplementalAmount();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgSupplementalAppropriations_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            int rowCount = dgSupplementalAppropriations.RowCount;
+            try
+            {
+                int rowCount = dgSupplementalAppropriations.RowCount;
 
-            if (rowCount == 0)
-                SetEnableDisableDetailFields(true);
+                if (rowCount == 0)
+                    SetEnableDisableDetailFields(true);
 
-            GetTotalSupplementalAmount();
+                GetTotalSupplementalAmount();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Supplemental Appropriations
 
         internal void SetEnableDisableDetailFields(bool isEnabled)
         {
@@ -307,201 +332,74 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void LoadSelectedRecord(int budgetAppropriationId)
         {
-            try
-            {
-                var selectedBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+            var selectedBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
-                int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
-                int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
-                int? othersFPPId = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"]) ? null : Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
-                int allotmentClassId = Convert.ToInt32(selectedBudgetAppropriation["allotment_classes_id"]);
-                int generalLedgerAccountId = Convert.ToInt32(selectedBudgetAppropriation["general_ledger_accounts_id"]);
-                DateTime dateEntry = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
-                short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
-                decimal appropriationAmount = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
+            int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
+            int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
+            int? othersFPPId = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"]) ? null : Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
+            int allotmentClassId = Convert.ToInt32(selectedBudgetAppropriation["allotment_classes_id"]);
+            int generalLedgerAccountId = Convert.ToInt32(selectedBudgetAppropriation["general_ledger_accounts_id"]);
+            DateTime dateEntry = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
+            short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
+            decimal appropriationAmount = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
 
-                bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
+            bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
 
-                if (othersFPPId == null)
-                    cmbxSubFPP.SelectedIndex = -1;
-                else
-                    cmbxSubFPP.SelectedValue = othersFPPId;
+            if (othersFPPId == null)
+                cmbxSubFPP.SelectedIndex = -1;
+            else
+                cmbxSubFPP.SelectedValue = othersFPPId;
 
-                cmbxAccount.SelectedValue = generalLedgerAccountId;
-                dtpDateEntry.Value = dateEntry;
-                txtYear.Text = year.ToString();
-                txtRemarks.Text = selectedBudgetAppropriation["remarks"];
-                chckbxContinuing.Checked = continuing;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            cmbxAccount.SelectedValue = generalLedgerAccountId;
+            dtpDateEntry.Value = dateEntry;
+            txtYear.Text = year.ToString();
+            txtRemarks.Text = selectedBudgetAppropriation["remarks"];
+            chckbxContinuing.Checked = continuing;
         }
 
         private void LoadFields()
         {
-            try
+            var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dictAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+            string fppName = $"{dictFPP["fpp_code"]} - {dictFPP["fpp_name"]}";
+            string fundName = $"{dictFund["fund_code"]} - {dictFund["fund_name"]}";
+            string allotmentClassName = $"{dictAllotmentClass["allotment_code"]} - {dictAllotmentClass["allotment_name"]}";
+            DateTime maxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+            DateTime minDate = new DateTime(year, 1, 1);
+
+            txtFPP.Text = fppName;
+            txtFund.Text = fundName;
+            txtAllotmentClass.Text = allotmentClassName;
+            txtYear.Text = year.ToString();
+            dtpDateEntry.MaxDate = maxDate;
+            dtpDateEntry.MinDate = minDate;
+
+            LoadSubFPPByFPPIdCombobox(fppId);
+            LoadAccounts();
+            cmbxAccount.SelectedIndex = -1;
+            cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
+            LoadSupplementalAppropriationRecords();
+            SetEnableDisableDetailFields(true);
+
+            if (budgetAppropriationId != 0)
             {
-                var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-                var dictAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-
-                string fppName = $"{dictFPP["fpp_code"]} - {dictFPP["fpp_name"]}";
-                string fundName = $"{dictFund["fund_code"]} - {dictFund["fund_name"]}";
-                string allotmentClassName = $"{dictAllotmentClass["allotment_code"]} - {dictAllotmentClass["allotment_name"]}";
-                DateTime maxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
-                DateTime minDate = new DateTime(year, 1, 1);
-
-                txtFPP.Text = fppName;
-                txtFund.Text = fundName;
-                txtAllotmentClass.Text = allotmentClassName;
-                txtYear.Text = year.ToString();
-                dtpDateEntry.MaxDate = maxDate;
-                dtpDateEntry.MinDate = minDate;
-
-                LoadSubFPPByFPPIdCombobox(fppId);
-                LoadAccounts();
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
-                LoadSupplementalAppropriationRecords();
-                SetEnableDisableDetailFields(true);
-
-                if (budgetAppropriationId != 0)
-                {
-                    LoadSelectedRecord(budgetAppropriationId);
-                    SetEnableDisableDetailFields(false);
-                }
+                LoadSelectedRecord(budgetAppropriationId);
+                SetEnableDisableDetailFields(false);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Validations
-
-        #region Sub FPP Validation
-
-        private bool SubFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
-        {
-            try
-            {
-                if (!AccFactory.SubFPPRepository().NameExist(cmbxSubFPP.Text) && !string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                {
-                    ep.SetError(comboBox, fieldText);
-                    return true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
-        }
-
-        private void cmbxSubFPP_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = SubFPPNameExist(errorProvider1, cmbxSubFPP, "Invalid Sub FPP. Please select on the list.");
-        }
-
-        private void cmbxSubFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxSubFPP);
-        }
-
-        #endregion Sub FPP Validation
-
-        #region Account Validation
-
-        private bool ShowErrorLedgerNameNotExist()
-        {
-            try
-            {
-                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    errorProvider1.SetError(cmbxAccount, "Invalid General Ledger Account. Please select on the list.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorBudgetAppropriationContinuing()
-        {
-            try
-            {
-                int? othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
-                int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                bool budgetAppropriationExist;
-
-                if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
-                else
-                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
-
-                if (budgetAppropriationExist)
-                {
-                    errorProvider1.SetError(cmbxAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorBudgetAppropriationExist()
-        {
-            try
-            {
-                int? othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
-                int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
-                string remarks = txtRemarks.Text;
-
-                bool budgetAppropriationExist;
-
-                if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
-                else
-                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
-
-                if (budgetAppropriationExist)
-                {
-                    errorProvider1.SetError(cmbxAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "General Ledger Account");
-            else if (ShowErrorLedgerNameNotExist())
-                e.Cancel = ShowErrorLedgerNameNotExist();
-            else if (ShowErrorBudgetAppropriationContinuing())
-                e.Cancel = ShowErrorBudgetAppropriationContinuing();
-            else
-                e.Cancel = ShowErrorBudgetAppropriationExist();
-        }
-
-        private void cmbxAccount_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
-        }
-
-        #endregion Account Validation
-
-        #endregion Validations
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             EnableDisableButtons(dgSupplementalAppropriations, btnEdit, btnRemove);
             LoadFields();
@@ -509,72 +407,175 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private bool SaveData()
         {
-            try
+            if (!this.ValidateChildren())
             {
-                if (!this.ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return false;
-                }
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
 
-                var budgetAppropriationsModel = new BudgetAppropriationsModel()
+            var budgetAppropriationsModel = new BudgetAppropriationsModel()
+            {
+                FundsId = fundId,
+                FunctionProgramProjectId = fppId,
+                OthersFPPId = cmbxSubFPP.SelectedValue == null ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue),
+                AllotmentClassesId = allotmentClassId,
+                GeneralLedgerAccountsId = Convert.ToInt32(cmbxAccount.SelectedValue),
+                Year = (short)year,
+                DateEntry = dtpDateEntry.Value,
+                Continuing = chckbxContinuing.Checked,
+                Remarks = txtRemarks.Text.Trim()
+            };
+
+            var SupplementalAppropriationList = new List<SupplementalAppropriationsModel>();
+
+            foreach (DataGridViewRow row in dgSupplementalAppropriations.Rows)
+            {
+                var supplementalAppropriationsModel = new SupplementalAppropriationsModel()
                 {
-                    FundsId = fundId,
-                    FunctionProgramProjectId = fppId,
-                    OthersFPPId = cmbxSubFPP.SelectedValue == null ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue),
-                    AllotmentClassesId = allotmentClassId,
-                    GeneralLedgerAccountsId = Convert.ToInt32(cmbxAccount.SelectedValue),
-                    Year = (short)year,
-                    DateEntry = dtpDateEntry.Value,
-                    Continuing = chckbxContinuing.Checked,
-                    Remarks = txtRemarks.Text.Trim()
+                    date_entry = Convert.ToDateTime(row.Cells["date_entry"].Value),
+                    amount = Convert.ToDecimal(row.Cells["amount"].Value),
+                    remarks = row.Cells["remarks"].Value.ToString().Trim()
                 };
 
-                var SupplementalAppropriationList = new List<SupplementalAppropriationsModel>();
+                if (budgetAppropriationId != 0)
+                    supplementalAppropriationsModel.BudgetAppropriationID = budgetAppropriationId;
 
-                foreach (DataGridViewRow row in dgSupplementalAppropriations.Rows)
-                {
-                    var supplementalAppropriationsModel = new SupplementalAppropriationsModel()
-                    {
-                        date_entry = Convert.ToDateTime(row.Cells["date_entry"].Value),
-                        amount = Convert.ToDecimal(row.Cells["amount"].Value),
-                        remarks = row.Cells["remarks"].Value.ToString().Trim()
-                    };
-
-                    if (budgetAppropriationId != 0)
-                        supplementalAppropriationsModel.BudgetAppropriationID = budgetAppropriationId;
-
-                    SupplementalAppropriationList.Add(supplementalAppropriationsModel);
-                }
-
-                if (budgetAppropriationId == 0)
-                    return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel, SupplementalAppropriationList);
-                else
-                    return AccFactory.SupplementalAppropriationsRepository().Insert(SupplementalAppropriationList, budgetAppropriationId);
+                SupplementalAppropriationList.Add(supplementalAppropriationsModel);
             }
-            catch (Exception ex) { Helper.MessageBoxSuccess(ex.Message); }
-            return false;
+
+            if (budgetAppropriationId == 0)
+                return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel, SupplementalAppropriationList);
+            else
+                return AccFactory.SupplementalAppropriationsRepository().Insert(SupplementalAppropriationList, budgetAppropriationId);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                string generalLedgerAccountName = cmbxAccount.Text;
-                string remarks = txtRemarks.Text;
-                string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
-                string subFPP = cmbxSubFPP.Text;
-                string message = budgetAppropriationId == 0 ? "Supplemental Appropriation has been saved." : "Changes has been saved.";
+                if (SaveData())
+                {
+                    string generalLedgerAccountName = cmbxAccount.Text;
+                    string remarks = txtRemarks.Text;
+                    string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
+                    string subFPP = cmbxSubFPP.Text;
+                    string message = budgetAppropriationId == 0 ? "Supplemental Appropriation has been saved." : "Changes has been saved.";
 
-                Helper.MessageBoxSuccess(message);
-                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
-                _frmBudgetAppropriations.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, objectOfExpenditures, subFPP);
+                    Helper.MessageBoxSuccess(message);
+                    _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+                    _frmBudgetAppropriations.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, objectOfExpenditures, subFPP);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        #region Validations
+
+        private bool SubFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
+        {
+            if (!AccFactory.SubFPPRepository().NameExist(cmbxSubFPP.Text) && !string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
+            {
+                ep.SetError(comboBox, fieldText);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void cmbxSubFPP_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = SubFPPNameExist(errorProvider1, cmbxSubFPP, "Invalid Sub FPP. Please select on the list.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxSubFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxSubFPP);
+        }
+
+        private bool ShowErrorLedgerNameNotExist()
+        {
+            if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                errorProvider1.SetError(cmbxAccount, "Invalid General Ledger Account. Please select on the list.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ShowErrorBudgetAppropriationContinuing()
+        {
+            int? othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
+            int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+            bool budgetAppropriationExist;
+
+            if (budgetAppropriationId == 0)
+                budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+            else
+                budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+
+            if (budgetAppropriationExist)
+            {
+                errorProvider1.SetError(cmbxAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ShowErrorBudgetAppropriationExist()
+        {
+            int? othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
+            int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            string remarks = txtRemarks.Text;
+
+            bool budgetAppropriationExist;
+
+            if (budgetAppropriationId == 0)
+                budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
+            else
+                budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
+
+            if (budgetAppropriationExist)
+            {
+                errorProvider1.SetError(cmbxAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxAccount.Text))
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "General Ledger Account");
+                else if (ShowErrorLedgerNameNotExist())
+                    e.Cancel = ShowErrorLedgerNameNotExist();
+                else if (ShowErrorBudgetAppropriationContinuing())
+                    e.Cancel = ShowErrorBudgetAppropriationContinuing();
+                else
+                    e.Cancel = ShowErrorBudgetAppropriationExist();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
+        }
+
+        #endregion Validations
     }
 }

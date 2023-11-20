@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -95,7 +94,6 @@ namespace ACC.Data
             }
         }
 
-
         public DataTable GetCancelledRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
@@ -103,8 +101,6 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
-
-
 
         public DataTable GetRecords()
         {
@@ -484,7 +480,6 @@ namespace ACC.Data
         public DataTable GetRecordsBySearch(string searchText, bool isCancelled = false)
         {
             var parameters = new object[][] {
-
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"},
                 new object[] { "@is_cancelled", DbType.Boolean, isCancelled},
             };

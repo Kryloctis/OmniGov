@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -23,67 +24,77 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
         private void frmlinkuser_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             if (!string.IsNullOrEmpty(userType))
                 LoadRecords();
         }
 
         internal void LoadRecords()
         {
-            try
+            string textSearch = txtSearch.Text.Trim();
+            var dataTableUsers = new DataTable();
+
+            switch (userType)
             {
-                string textSearch = txtSearch.Text.Trim();
-                var userRepository = AccFactory.UsersRepository();
-                var dataTableUsers = new DataTable();
+                case "collector":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksCollectingOfficers(textSearch);
+                    break;
 
-                switch (userType)
-                {
-                    case "collector":
-                        dataTableUsers = userRepository.GetLinksCollectingOfficers(textSearch);
-                        break;
-                    case "disburser":
-                        dataTableUsers = userRepository.GetLinksDisbursingOfficers();
-                        break;
-                    case "JO":
-                        dataTableUsers = userRepository.GetLinksJOCollectingOfficers();
-                        break;
-                }
+                case "disburser":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksDisbursingOfficers();
+                    break;
 
-                foreach (DataRow row in dataTableUsers.Rows)
-                {
-                    int userId = Convert.ToInt32(row["id"]);
-                    var dictUser = Helper.GetUserDataById(userId);
-                    row["user_full_name"] = dictUser["user_full_name"];
-                }
-
-                HelperLoadRecords.UsersDatagridView(dataTableUsers, dgUsers);
+                case "JO":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksJOCollectingOfficers();
+                    break;
             }
-            catch (Exception ex)
+
+            foreach (DataRow row in dataTableUsers.Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                int userId = Convert.ToInt32(row["id"]);
+                var dictUser = Helper.GetUserDataById(userId);
+                row["user_full_name"] = dictUser["user_full_name"];
             }
+
+            HelperLoadRecords.UsersDatagridView(dataTableUsers, dgUsers);
         }
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgUsers.SelectedRows.Count != 0)
+            try
             {
-                UserId = int.Parse(dgUsers.CurrentRow.Cells[0].Value.ToString());
-                userName = dgUsers.CurrentRow.Cells["username"].Value.ToString();
-                prefix = dgUsers.CurrentRow.Cells["prefix"].Value.ToString();
-                firstName = dgUsers.CurrentRow.Cells["first_name"].Value.ToString();
-                middleInitial = dgUsers.CurrentRow.Cells["mid_initial"].Value.ToString();
-                lastName = dgUsers.CurrentRow.Cells["last_name"].Value.ToString();
-                suffix = dgUsers.CurrentRow.Cells["suffix"].Value.ToString();
+                if (dgUsers.SelectedRows.Count != 0)
+                {
+                    UserId = int.Parse(dgUsers.CurrentRow.Cells[0].Value.ToString());
+                    userName = dgUsers.CurrentRow.Cells["username"].Value.ToString();
+                    prefix = dgUsers.CurrentRow.Cells["prefix"].Value.ToString();
+                    firstName = dgUsers.CurrentRow.Cells["first_name"].Value.ToString();
+                    middleInitial = dgUsers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                    lastName = dgUsers.CurrentRow.Cells["last_name"].Value.ToString();
+                    suffix = dgUsers.CurrentRow.Cells["suffix"].Value.ToString();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvusers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                this.DialogResult = DialogResult.OK;
+                if (e.RowIndex != -1)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
     }
 }

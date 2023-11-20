@@ -68,7 +68,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.cmbSectorName.Name = "cmbSectorName";
             this.cmbSectorName.Size = new System.Drawing.Size(324, 23);
             this.cmbSectorName.TabIndex = 12;
-            this.cmbSectorName.SelectedIndexChanged += new System.EventHandler(this.cmbSectorName_SelectedIndexChanged);
             this.cmbSectorName.Validating += new System.ComponentModel.CancelEventHandler(this.cmbSectorName_Validating);
             this.cmbSectorName.Validated += new System.EventHandler(this.cmbSectorName_Validated);
             // 

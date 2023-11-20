@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -13,70 +14,60 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmFunctionProgramProject = frmFunctionProgramProject;
             uc = ucFunctionalClassification1;
             uc.functionalClassificationId = functionalClassificationId;
+            _frmFunctionProgramProject = frmFunctionProgramProject;
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
-                var functionalClassificationData = functionalClassificationRepository.GetRecordByID(uc.functionalClassificationId);
+            var functionalClassificationData = AccFactory.FunctionalClassificationRepository().GetRecordByID(uc.functionalClassificationId);
 
-                uc.txtCode.Text = functionalClassificationData["sector_code"];
-                uc.txtName.Text = functionalClassificationData["sector_name"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.txtCode.Text = functionalClassificationData["sector_code"];
+            uc.txtName.Text = functionalClassificationData["sector_name"];
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var functionalClassificationModel = new FunctionalClassificationModel()
-                {
-                    Id = uc.functionalClassificationId,
-                    SectorCode = uc.txtCode.Text.Trim(),
-                    SectorName = uc.txtName.Text.Trim()
-                };
-
-                var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
-                return functionalClassificationRepository.Update(functionalClassificationModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            var functionalClassificationModel = new FunctionalClassificationModel()
+            {
+                Id = uc.functionalClassificationId,
+                SectorCode = uc.txtCode.Text.Trim(),
+                SectorName = uc.txtName.Text.Trim()
+            };
+
+            return AccFactory.FunctionalClassificationRepository().Update(functionalClassificationModel);
         }
 
         private void frmFunctionalClassificationEdit_Load(object sender, EventArgs e)
         {
-            LoadSelectedRecord();
+            try
+            {
+                LoadSelectedRecord();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Functional Classification has been saved.");
-                _frmFunctionProgramProject.LoadFunctionalClassifications();
-                _frmFunctionProgramProject.LoadSectorComboBox();
-                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
-                Close();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Functional Classification has been saved.");
+                    _frmFunctionProgramProject.LoadFunctionalClassifications();
+                    _frmFunctionProgramProject.LoadSectorComboBox();
+                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

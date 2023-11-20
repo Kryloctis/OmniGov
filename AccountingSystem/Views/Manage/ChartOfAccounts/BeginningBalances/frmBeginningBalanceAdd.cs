@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
@@ -26,36 +27,27 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                ushort subsidiaryId = uc.subsidiaryLedgerId;
-                var beginningBalanceModel = new BeginningBalancesModel()
-                {
-                    FundsId = uc.fundId,
-                    GeneralLedgerId = uc.generalLedgerId,
-                    SubsidiaryLedgerId = subsidiaryId != 0 ? subsidiaryId : null,
-                    IsDebit = uc.radioDebit.Checked,
-                    DateEntry = uc.dtpDateEntry.Value,
-                    Amount = uc.nudAmount.Value
-                };
-
-                return AccFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            ushort subsidiaryId = uc.subsidiaryLedgerId;
+            var beginningBalanceModel = new BeginningBalancesModel()
+            {
+                FundsId = uc.fundId,
+                GeneralLedgerId = uc.generalLedgerId,
+                SubsidiaryLedgerId = subsidiaryId != 0 ? subsidiaryId : null,
+                IsDebit = uc.radioDebit.Checked,
+                DateEntry = uc.dtpDateEntry.Value,
+                Amount = uc.nudAmount.Value
+            };
+
+            return AccFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
         }
 
-        private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.LoadFormIcon(this);
             uc.LoadSelectedGeneralLedger();
@@ -63,16 +55,29 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             uc.radioDebit.Checked = true;
         }
 
+        private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Beginning balance has been saved.");
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Beginning balance has been saved.");
 
-                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                Close();
+                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

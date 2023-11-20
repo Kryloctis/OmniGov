@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +22,11 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
@@ -97,44 +102,37 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Pre Trial Balance");
-                var lguDict = Helper.LGUDetails();
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
-                report.DataSources.Clear();
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Pre Trial Balance");
+            var lguDict = Helper.LGUDetails();
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
+            report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePreTrialBalance()));
+            report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePreTrialBalance()));
 
-                var certifiedCorrectSignatory = string.Empty;
-                var certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            var certifiedCorrectSignatory = string.Empty;
+            var certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var fundName = cmbFund.Text;
-                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
+            var fundName = cmbFund.Text;
+            var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
-                var parameters = new[] {
+            var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramAsOf", asOfDate),
                   };
-                report.SetParameters(parameters);
-                Cursor.Current = Cursors.Default;
+            report.SetParameters(parameters);
+            Cursor.Current = Cursors.Default;
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                cbHideZeroBalance.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            cbHideZeroBalance.Enabled = true;
         }
 
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
@@ -157,20 +155,20 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void OnLoad()
         {
-            try
+            if (!DesignMode)
             {
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucPreClosingTrialBalance_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
                 OnLoad();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

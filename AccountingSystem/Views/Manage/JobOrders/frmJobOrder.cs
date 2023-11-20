@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -18,54 +19,65 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmJobOrderAdd(this).ShowDialog();
+            try
+            {
+                _ = new frmJobOrderAdd(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmJobOrder_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadRecords();
         }
 
         internal void LoadRecords()
         {
-            try
-            {
-                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-                var collectingOfficerHasJODT = collectingOfficerHasJORepo.GetJobOrdersByCollectingOfficerId(collectingOfficerId);
-
-                HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODT, dgJobOrders);
-                lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var collectingOfficerHasJODT = AccFactory.CollectingOfficerHasJobOrdersRepository().GetJobOrdersByCollectingOfficerId(collectingOfficerId);
+            HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODT, dgJobOrders);
+            lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
         }
 
         private void dgJobOrders_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
+            try
+            {
+                Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
 
-            int id = int.Parse(dgJobOrders.CurrentRow.Cells[0].Value.ToString());
-            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-            btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
+                int id = int.Parse(dgJobOrders.CurrentRow.Cells[0].Value.ToString());
+                btnDelete.Enabled = AccFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.Trim();
-            var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-            var collectingOfficerHasJODt = collectingOfficerHasJORepo.GetRecordsBySearch(collectingOfficerId, searchText);
+            try
+            {
+                string searchText = txtSearch.Text.Trim();
+                var collectingOfficerHasJODt = AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecordsBySearch(collectingOfficerId, searchText);
 
-            HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
-            lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
+                HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
+                lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgJobOrders.SelectedRows.Count;
             try
             {
+                int selectedRowsCount = dgJobOrders.SelectedRows.Count;
+
                 if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
                     var jobOrderModel = new List<JobOrderModel>();
@@ -84,20 +96,11 @@ namespace AccountingSystem.Views.Manage.JobOrders
                         jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId });
                     }
 
-                    var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-
-                    var jobOrderRepo = AccFactory.JobOrderRepository();
-
-                    if (collectingOfficerHasJORepo.Delete(collectingOfficerHasJOModel) == true && jobOrderRepo.Delete(jobOrderModel) == true)
-                    {
+                    if (AccFactory.CollectingOfficerHasJobOrdersRepository().Delete(collectingOfficerHasJOModel) == true && AccFactory.JobOrderRepository().Delete(jobOrderModel) == true)
                         LoadRecords();
-                    }
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

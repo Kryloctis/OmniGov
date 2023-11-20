@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -72,11 +73,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
 
-            try
-            {
-                dtStatementOfFinancialPerformance.Rows.Add(StatementOfFinancialPerformanceData());
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            dtStatementOfFinancialPerformance.Rows.Add(StatementOfFinancialPerformanceData());
 
             return dtStatementOfFinancialPerformance;
         }
@@ -92,54 +89,41 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void LoadReport(LocalReport report)
         {
-            try
+            Cursor.Current = Cursors.WaitCursor;
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Financial Performance");
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            DateTime dateEnded = dtPickerDateEnds.Value;
+
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-financial-performance.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPerformance", StatementOfFinancialPerformanceDatatable()));
+
+            var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var parameters = new[]
             {
-                Cursor.Current = Cursors.WaitCursor;
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Financial Performance");
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new ReportParameter("paramFund", fundRepo["fund_name"]),
+                new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
+            };
 
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                DateTime dateEnded = dtPickerDateEnds.Value;
+            report.SetParameters(parameters);
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-financial-performance.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPerformance", StatementOfFinancialPerformanceDatatable()));
-
-                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
-                var parameters = new[] {
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramFund", fundRepo["fund_name"]),
-                    new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
-                };
-                report.SetParameters(parameters);
-
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -147,12 +131,21 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             LoadReport(reportViewer.LocalReport);
         }
 
-        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadFunds();
             }
+        }
+
+        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

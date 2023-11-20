@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -37,43 +38,40 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateBusinessAddOnCharges())
+            try
             {
-                Helper.MessageBoxSuccess("Business Add-on has been updated.");
-                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
-                Close();
+                if (UpdateBusinessAddOnCharges())
+                {
+                    Helper.MessageBoxSuccess("Business Add-on has been updated.");
+                    _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateBusinessAddOnCharges()
         {
-            try
+            if (!_ucBusinessAddOnCharges.ValidateChildren())
             {
-                if (!_ucBusinessAddOnCharges.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucBusinessAddOnCharges.GetFormErrors());
-                    return false;
-                }
-
-                var code = _ucBusinessAddOnCharges.txtCode.Text.Trim();
-                var description = _ucBusinessAddOnCharges.txtDescription.Text.Trim();
-                var appliedEachBusiness = _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked;
-
-                var businessAdOnChargesModel = new BusinessAddOnChargesModel()
-                {
-                    BusinessAddOnChargesID = _businessAddOnChargesID,
-                    Code = code,
-                    Description = description,
-                    IsAppliedEachBusiness = appliedEachBusiness,
-                    CreatedBy = Helper.UserId
-                };
-
-                return AccFactory.BusinessAddOnChargesRepository().Update(businessAdOnChargesModel);
+                Helper.MessageBoxError(_ucBusinessAddOnCharges.GetFormErrors());
+                return false;
             }
-            catch (Exception)
+
+            var code = _ucBusinessAddOnCharges.txtCode.Text.Trim();
+            var description = _ucBusinessAddOnCharges.txtDescription.Text.Trim();
+            var appliedEachBusiness = _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked;
+
+            var businessAdOnChargesModel = new BusinessAddOnChargesModel()
             {
-                throw;
-            }
+                BusinessAddOnChargesID = _businessAddOnChargesID,
+                Code = code,
+                Description = description,
+                IsAppliedEachBusiness = appliedEachBusiness,
+                CreatedBy = Helper.UserId
+            };
+
+            return AccFactory.BusinessAddOnChargesRepository().Update(businessAdOnChargesModel);
         }
     }
 }

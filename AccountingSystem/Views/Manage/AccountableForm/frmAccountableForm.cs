@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -207,7 +208,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         //Face Value
 
-        private DataColumn[] FaceValueDataColumns() 
+        private DataColumn[] FaceValueDataColumns()
         {
             return new DataColumn[]
             {

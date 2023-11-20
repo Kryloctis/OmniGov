@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -159,7 +160,8 @@ namespace AccountingSystem.Views.Reports.Journals
             var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-            var parameters = new[] {
+            var parameters = new[]
+            {
                 new ReportParameter("paramDate", date.ToString()),
                 new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                 new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
@@ -194,11 +196,16 @@ namespace AccountingSystem.Views.Reports.Journals
             Cursor.Current = Cursors.Default;
         }
 
+        private void OnLoad()
+        {
+            LoadReport(reportViewer.LocalReport);
+        }
+
         private void frmADADisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

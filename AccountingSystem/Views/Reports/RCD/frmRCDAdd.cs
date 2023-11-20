@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -19,13 +20,18 @@ namespace AccountingSystem.Views.Reports.RCD
             _frmRCD = frmRCD;
         }
 
+        private void OnLoad()
+        {
+            LoadCollectors();
+            LoadFunds();
+            LoadRecords();
+        }
+
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadCollectors();
-                LoadFunds();
-                LoadRecords();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -117,18 +123,8 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void LoadFunds()
         {
-            try
-            {
-                var fundrepo = AccFactory.FundsRepository();
-                var dtfunds = fundrepo.GetRecords();
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "fund_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtfunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtfunds, cmbfunds, "fund_name", "id");
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -142,54 +138,60 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            string reportId;
-            string collectingOfficer;
-            string reportNo;
-            string reportNoChecker;
-            decimal amount;
-
-            foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
+            try
             {
-                reportId = row.Cells["id"].Value.ToString();
-                collectingOfficer = row.Cells["collector_officer"].Value.ToString();
-                reportNo = row.Cells["report_no"].Value.ToString();
-                amount = Convert.ToDecimal(row.Cells["amount"].Value);
+                string reportId;
+                string collectingOfficer;
+                string reportNo;
+                string reportNoChecker;
+                decimal amount;
 
-                foreach (DataGridViewRow _frmRCDRow in _frmRCD.dgListOfApprovedReport.Rows)
+                foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
                 {
-                    reportNoChecker = _frmRCDRow.Cells[2].Value.ToString();
+                    reportId = row.Cells["id"].Value.ToString();
+                    collectingOfficer = row.Cells["collector_officer"].Value.ToString();
+                    reportNo = row.Cells["report_no"].Value.ToString();
+                    amount = Convert.ToDecimal(row.Cells["amount"].Value);
 
-                    if (reportNo == reportNoChecker)
+                    foreach (DataGridViewRow _frmRCDRow in _frmRCD.dgListOfApprovedReport.Rows)
                     {
-                        Helper.MessageBoxSuccess("Selected collector's report is already on the list.");
-                        return;
-                    }
-                }
+                        reportNoChecker = _frmRCDRow.Cells[2].Value.ToString();
 
-                object[] reportRow = new object[]
-                {
+                        if (reportNo == reportNoChecker)
+                        {
+                            Helper.MessageBoxSuccess("Selected collector's report is already on the list.");
+                            return;
+                        }
+                    }
+
+                    object[] reportRow = new object[]
+                    {
                     reportId,
                     collectingOfficer,
                     reportNo,
                     amount.ToString("N2")
-                };
+                    };
 
-                _frmRCD.dgListOfApprovedReport.Rows.Add(reportRow);
+                    _frmRCD.dgListOfApprovedReport.Rows.Add(reportRow);
+                }
             }
-
-            //this.Close();
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
         {
-            btnSelect.Enabled = dgCollectorsReport.SelectedRows.Count != 0;
-
-            foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
+            try
             {
-                collectorsReportId = row.Cells[0].Value.ToString();
-                reportNo = row.Cells[1].Value.ToString();
-                collector = row.Cells[3].Value.ToString();
+                btnSelect.Enabled = dgCollectorsReport.SelectedRows.Count != 0;
+
+                foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
+                {
+                    collectorsReportId = row.Cells[0].Value.ToString();
+                    reportNo = row.Cells[1].Value.ToString();
+                    collector = row.Cells[3].Value.ToString();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbCollector_SelectedValueChanged(object sender, EventArgs e)
@@ -201,13 +203,12 @@ namespace AccountingSystem.Views.Reports.RCD
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dgCollectorsReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
         private void dgCollectorsReport_DoubleClick(object sender, EventArgs e)
         {
-            btnSelect.PerformClick();
+            btnSelect.PerformClick(); try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

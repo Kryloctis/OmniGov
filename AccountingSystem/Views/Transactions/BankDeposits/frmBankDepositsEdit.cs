@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -8,8 +9,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     {
         private frmBankDeposits _frmBankDeposits;
         private int _bankDepositID;
-        private readonly ucBankDeposits _ucBankDeposits;
-
+        private readonly ucBankDeposits uc;
 
         public frmBankDepositsEdit(frmBankDeposits frmBankDeposits, int bankDepositID)
         {
@@ -17,34 +17,39 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             _frmBankDeposits = frmBankDeposits;
             _bankDepositID = bankDepositID;
 
-            _ucBankDeposits = ucBankDeposit1;
-            _ucBankDeposits.userid = Helper.UserId;
+            uc = ucBankDeposit1;
+            uc.userid = Helper.UserId;
         }
 
-        private void frmBankDepositsEdit_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadSelectedValue();
         }
 
-        private void LoadSelectedValue()
+        private void frmBankDepositsEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                var bdRepository = AccFactory.BankDepositsRepository();
-                var bdData = bdRepository.GetRecordByID(_bankDepositID);
-
-                _ucBankDeposits.cmbBank.SelectedValue = bdData["banks_id"];
-                _ucBankDeposits.cmbFund.SelectedValue = bdData["funds_id"];
-                _ucBankDeposits.txtReferenceNumber.Text = bdData["reference"];
-                _ucBankDeposits.dtDate.Value = Convert.ToDateTime(bdData["date"]);
-                _ucBankDeposits.nudAmount.Value = Convert.ToDecimal(bdData["amount"]);
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveData()
+        private void LoadSelectedValue()
         {
-            var uc = ucBankDeposit1;
+            var bdRepository = AccFactory.BankDepositsRepository();
+            var bdData = bdRepository.GetRecordByID(_bankDepositID);
+
+            uc.cmbBank.SelectedValue = bdData["banks_id"];
+            uc.cmbFund.SelectedValue = bdData["funds_id"];
+            uc.txtReferenceNumber.Text = bdData["reference"];
+            uc.dtDate.Value = Convert.ToDateTime(bdData["date"]);
+            uc.nudAmount.Value = Convert.ToDecimal(bdData["amount"]);
+        }
+
+        private bool SaveData()
+
+        {
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
@@ -62,17 +67,20 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 UpdatedBy = uc.userid,
             };
 
-            var bdrepository = AccFactory.BankDepositsRepository();
-            return bdrepository.Update(bankDepositModel);
+            return AccFactory.BankDepositsRepository().Update(bankDepositModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Bank Deposit has been updated.");
-                _frmBankDeposits.LoadRecords();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Bank Deposit has been updated.");
+                    _frmBankDeposits.LoadRecords();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,19 @@ namespace AccountingSystem.Views.Reports.RCI
             panel1.Controls.Add(reportViewer);
         }
 
-        private void frmRCIReport_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadBanks();
             LoadBankAccounts();
+        }
+
+        private void frmRCIReport_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal string GetFormErrors()
@@ -40,20 +50,9 @@ namespace AccountingSystem.Views.Reports.RCI
 
         internal void LoadBanks()
         {
-            try
-            {
-                var bankRepository = AccFactory.BanksRepository();
-                var dtBank = bankRepository.GetRecords();
-                cmbBank.DataSource = dtBank;
-                cmbBank.ValueMember = "id";
-                cmbBank.DisplayMember = "bank_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtBank = AccFactory.BanksRepository().GetRecords();
+            HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
         }
-
 
         private void LoadBankAccounts()
         {
@@ -64,7 +63,6 @@ namespace AccountingSystem.Views.Reports.RCI
             cmbBankAccounts.ValueMember = "id";
             cmbBankAccounts.DisplayMember = "account_no";
         }
-
 
         private DataTable DataTableRCI()
         {
@@ -125,82 +123,79 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void LoadReport(LocalReport report)
         {
+            Cursor = Cursors.WaitCursor;
 
-            try
+            if (!ValidateChildren())
             {
-                Cursor = Cursors.WaitCursor;
-
-                if (!ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return;
-                }
-
-                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
-                {
-                    if (dictSignatory.Count > 0)
-                    {
-                        string prefix = dictSignatory["signatories_prefix"].ToString();
-                        string firstName = dictSignatory["signatories_first_name"].ToString();
-                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                        string lastName = dictSignatory["signatories_last_name"].ToString();
-                        string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                        signatory = signatoryName;
-                        signatoryTitle = dictSignatory["signatories_title"];
-                    }
-                }
-
-                string departmentHeadSignatory = string.Empty;
-                string departmentHeadSignatoryTitle = string.Empty;
-                ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
-
-                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
-                string administrativeOfficerSignatory = string.Empty;
-                string administrativeOfficerSignatoryTitle = string.Empty;
-                ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
-
-                var lguDetails = Helper.LGUDetails();
-                int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
-                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
-                var fund = fundName;
-
-                string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
-                var parameters = new[] {
-                    new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramBankaccount", bankDetails),
-                    new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
-                    new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
-                    new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
-                    new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
-                    new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
-                };
-
-                report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
-                report.DataSources.Clear();
-
-                report.DataSources.Add(new ReportDataSource("dtRCINew", DataTableRCI()));
-                report.SetParameters(parameters);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-
-                Cursor = Cursors.Default;
+                Helper.MessageBoxError(GetFormErrors());
+                return;
             }
-            catch (Exception ex)
+
+            var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
+            static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (dictSignatory.Count > 0)
+                {
+                    string prefix = dictSignatory["signatories_prefix"].ToString();
+                    string firstName = dictSignatory["signatories_first_name"].ToString();
+                    char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                    string lastName = dictSignatory["signatories_last_name"].ToString();
+                    string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                    string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                    signatory = signatoryName;
+                    signatoryTitle = dictSignatory["signatories_title"];
+                }
             }
+
+            string departmentHeadSignatory = string.Empty;
+            string departmentHeadSignatoryTitle = string.Empty;
+            ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
+
+            var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
+            string administrativeOfficerSignatory = string.Empty;
+            string administrativeOfficerSignatoryTitle = string.Empty;
+            ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
+
+            var lguDetails = Helper.LGUDetails();
+            int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
+            var fund = fundName;
+
+            string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
+            var parameters = new[]
+            {
+                new ReportParameter("paramFund", fundName),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramBankaccount", bankDetails),
+                new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
+                new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
+                new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
+                new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
+                new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
+            };
+
+            report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
+            report.DataSources.Clear();
+
+            report.DataSources.Add(new ReportDataSource("dtRCINew", DataTableRCI()));
+            report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+
+            Cursor = Cursors.Default;
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)

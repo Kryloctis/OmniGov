@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Diagnostics.Contracts;
 using System.Transactions;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class BankAccountsRepository : IBankAccountsRepository
     {
@@ -39,7 +38,7 @@ namespace AccountingSystem
 
         public int CountRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Delete(List<BankAccountsModel> entityList)
@@ -163,7 +162,7 @@ namespace AccountingSystem
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(BankAccountsModel entity)
@@ -267,7 +266,5 @@ namespace AccountingSystem
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
-
-
     }
 }

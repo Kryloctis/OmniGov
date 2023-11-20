@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,31 +24,29 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             var dataSet = new dsLFS();
             var dtStatementOfChangesInNetAssetsEquity = dataSet.dtStatementOfChangesInNetAssetsEquity;
 
-            try
+            byte fundId = Convert.ToByte(cmbxFunds.SelectedValue);
+            var presentYear = dtPickerDateEnds.Value;
+            var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
+
+            var dictStatementOfChanges = new StatementOfChangesInNetAssetsEquityData().GetStatementOfChangesOfAssetsEquity(fundId, presentYear, previousYear);
+
+            var records = new object[]
             {
-                byte fundId = Convert.ToByte(cmbxFunds.SelectedValue);
-                var presentYear = dtPickerDateEnds.Value;
-                var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
+                dictStatementOfChanges["present_starting_balance"],
+                0,
+                0,
+                0,
+                0,
+                dictStatementOfChanges["present_surplus_deficits_for_the_period"],
+                dictStatementOfChanges["previous_starting_balance"],
+                0,
+                0,
+                0,
+                0,
+                dictStatementOfChanges["previous_surplus_deficits_for_the_period"]
+            };
 
-                var dictStatementOfChanges = new StatementOfChangesInNetAssetsEquityData().GetStatementOfChangesOfAssetsEquity(fundId, presentYear, previousYear);
-
-                var records = new object[] {
-                    dictStatementOfChanges["present_starting_balance"],
-                    0,
-                    0,
-                    0,
-                    0,
-                    dictStatementOfChanges["present_surplus_deficits_for_the_period"],
-                    dictStatementOfChanges["previous_starting_balance"],
-                    0,
-                    0,
-                    0,
-                    0,
-                    dictStatementOfChanges["previous_surplus_deficits_for_the_period"] };
-
-                dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
 
             return dtStatementOfChangesInNetAssetsEquity;
         }
@@ -63,59 +62,44 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Changes in Assets/Equity");
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Changes in Assets/Equity");
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                DateTime dateEnded = dtPickerDateEnds.Value;
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            DateTime dateEnded = dtPickerDateEnds.Value;
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-changes-in-net-assets-equity.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtStatementOfChangesInNetAssetsEquity", StatementOfChangesInNetAssetsEquityDatatable()));
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-changes-in-net-assets-equity.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtStatementOfChangesInNetAssetsEquity", StatementOfChangesInNetAssetsEquityDatatable()));
 
-                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
-                var parameters = new[] {
+            var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var parameters = new[] {
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramFund", fundRepo["fund_name"]),
                     new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
                 };
 
-                report.SetParameters(parameters);
+            report.SetParameters(parameters);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
-        private void ucStatementOfChangesInNetAssetsquity_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -123,9 +107,22 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
+        private void ucStatementOfChangesInNetAssetsquity_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

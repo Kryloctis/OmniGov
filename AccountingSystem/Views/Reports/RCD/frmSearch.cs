@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
@@ -23,12 +24,17 @@ namespace AccountingSystem.Views.Reports.RCD
             _frmRCD = frmRCD;
         }
 
+        private void OnLoad()
+        {
+            LoadFunds();
+            LoadRecords();
+        }
+
         private void frmSearch_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadFunds();
-                LoadRecords();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -112,8 +118,7 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 fundId = Convert.ToInt32(cmbfunds.SelectedValue);
-                var rcdRepository = AccFactory.GeneralCollectionsRepository();
-                var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
+                var dtRCD = AccFactory.GeneralCollectionsRepository().GetRecordsByFundId(fundId);
 
                 HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
             }

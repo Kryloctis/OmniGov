@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -184,35 +185,32 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 Cursor = Cursors.Default;
                 return true;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
         }
 
         private void frmSAAOBB_Load(object sender, EventArgs e)
         {
-            LoadFunds();
+            try
+            {
+                LoadFunds();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

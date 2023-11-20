@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,60 +23,62 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var functionalClassificationServiceRepository = AccFactory.FunctionalClassificationServiceRepository();
-                Dictionary<string, string> data = functionalClassificationServiceRepository.GetRecordByID(uc.serviceID);
+            Dictionary<string, string> data = AccFactory.FunctionalClassificationServiceRepository().GetRecordByID(uc.serviceID);
 
-                uc.cmbSectorName.SelectedValue = data["functional_classifications_id"];
-                uc.txtName.Text = data["service_name"];
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.cmbSectorName.SelectedValue = data["functional_classifications_id"];
+            uc.txtName.Text = data["service_name"];
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to insert
-                int functionClassificationId = Convert.ToInt32(uc.cmbSectorName.SelectedValue);
-                string serviceName = uc.txtName.Text.Trim();
-
-                var functionalClassificationServiceModel = new FunctionalClassificationServiceModel()
-                {
-                    Id = uc.serviceID,
-                    functionalClassificationId = functionClassificationId,
-                    ServiceName = serviceName,
-                };
-
-                return AccFactory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
-            return false;
+            // proceed to insert
+            int functionClassificationId = Convert.ToInt32(uc.cmbSectorName.SelectedValue);
+            string serviceName = uc.txtName.Text.Trim();
+
+            var functionalClassificationServiceModel = new FunctionalClassificationServiceModel()
+            {
+                Id = uc.serviceID,
+                functionalClassificationId = functionClassificationId,
+                ServiceName = serviceName,
+            };
+
+            return AccFactory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
         }
 
         private void frmFunctonalClassificationServiceEdit_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Functional Classification Services has been updated.");
-                _frmFunctionProgramProject.LoadServiceNameComboBox();
-                _frmFunctionProgramProject.LoadFunctionClassificationServices();
-                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFuntionalClassificationServices, "service_name", uc.txtName.Text);
-                Close();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Functional Classification Services has been updated.");
+                    _frmFunctionProgramProject.LoadServiceNameComboBox();
+                    _frmFunctionProgramProject.LoadFunctionClassificationServices();
+                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFuntionalClassificationServices, "service_name", uc.txtName.Text);
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

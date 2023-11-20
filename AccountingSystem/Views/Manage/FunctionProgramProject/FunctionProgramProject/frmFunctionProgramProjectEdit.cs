@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,71 +16,71 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmFunctionProgramProject = frmFunctionProgramProject;
-            ucFunctionProgramProject1.fppId = fppID;
             uc = ucFunctionProgramProject1;
+            uc.fppId = fppID;
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
-                Dictionary<string, string> dicfunctionProgramProject = functionProgramProjectRepository.GetRecordByID(uc.fppId);
-
-                uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
-                uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
-                uc.txtName.Text = dicfunctionProgramProject["fpp_name"];
-                uc.chckboxSpecial.Checked = Convert.ToByte(dicfunctionProgramProject["is_special"]) == 0 ? false : true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Dictionary<string, string> dicfunctionProgramProject = AccFactory.FunctionProgramProjectRepository().GetRecordByID(uc.fppId);
+            uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
+            uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
+            uc.txtName.Text = dicfunctionProgramProject["fpp_name"];
+            uc.chckboxSpecial.Checked = Convert.ToByte(dicfunctionProgramProject["is_special"]) == 0 ? false : true;
         }
 
         private bool UpdateData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
-
-                var functionProgramProjectModel = new FunctionProgramProjectModel()
-                {
-                    Id = ucFunctionProgramProject1.fppId,
-                    functionalClassificationServiceId = functionalClassificationServiceId,
-                    FppName = uc.txtName.Text.Trim(),
-                    FppCode = uc.txtCode.Text.Trim(),
-                    IsSpecial = uc.chckboxSpecial.Checked ? true : false
-                };
-
-                return AccFactory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
-            return false;
+            int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
+
+            var functionProgramProjectModel = new FunctionProgramProjectModel()
+            {
+                Id = ucFunctionProgramProject1.fppId,
+                functionalClassificationServiceId = functionalClassificationServiceId,
+                FppName = uc.txtName.Text.Trim(),
+                FppCode = uc.txtCode.Text.Trim(),
+                IsSpecial = uc.chckboxSpecial.Checked ? true : false
+            };
+
+            return AccFactory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
         }
 
         private void frmFunctionProgramProjectEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             ucFunctionProgramProject1.LoadServiceNameComboBox();
             LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateData())
+            try
             {
-                Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                bool isSpecial = uc.chckboxSpecial.Checked;
-                _frmFunctionProgramProject.chckbxSpecial.Checked = isSpecial;
-                _frmFunctionProgramProject.LoadFPP();
-                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
-                Close();
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Function Program Project has been saved.");
+                    bool isSpecial = uc.chckboxSpecial.Checked;
+                    _frmFunctionProgramProject.chckbxSpecial.Checked = isSpecial;
+                    _frmFunctionProgramProject.LoadFPP();
+                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

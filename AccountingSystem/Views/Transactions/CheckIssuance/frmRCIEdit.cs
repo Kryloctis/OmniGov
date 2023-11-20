@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using System;
@@ -13,7 +14,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private readonly ucRCI uc;
         private int _rciID;
         private int checkID;
-
 
         public frmRCIEdit(frmRCI frmRCI, int rciId)
         {
@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
 
             HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
-
         }
 
         private void LoadRCIDeductions()
@@ -113,6 +112,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 }
             }
         }
+
         private void UpdateRCIDeductions()
         {
             var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
@@ -131,7 +131,6 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void UpdateCheque()
         {
-
             var chequesModel = new ChequesModel()
             {
                 Id = checkID,
@@ -144,7 +143,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             var chequesRepository = AccFactory.ChequesRepository();
             _ = chequesRepository.Update(chequesModel);
         }
-
 
         private bool UpdateData()
         {
@@ -170,8 +168,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 NaturePayment = natureOfPayment
             };
 
-            var rcirepository = AccFactory.RCIRepository();
-            return rcirepository.Update(rciModel);
+            return AccFactory.RCIRepository().Update(rciModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -154,8 +155,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                         rciModelList.Add(new RCIModel() { Id = rciId });
                     }
 
-                    var rciRepository = AccFactory.RCIRepository();
-                    _ = rciRepository.Delete(rciModelList);
+                    _ = AccFactory.RCIRepository().Delete(rciModelList);
                     LoadRCI();
                 }
             }
@@ -168,10 +168,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                         break;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -42,12 +43,16 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Business Add-on has been saved.");
-                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
-                _ucBusinessAddOnCharges.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Business Add-on has been saved.");
+                    _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                    _ucBusinessAddOnCharges.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

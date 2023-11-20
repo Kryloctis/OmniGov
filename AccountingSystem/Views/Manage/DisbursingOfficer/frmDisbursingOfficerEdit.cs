@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,20 +29,16 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var disbursingOfficerDict = AccFactory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
+            var disbursingOfficerDict = AccFactory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
 
-                uc.txtPrefix.Text = disbursingOfficerDict["prefix"];
-                uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
-                uc.txtMidInitial.Text = disbursingOfficerDict["mid_initial"];
-                uc.txtLastName.Text = disbursingOfficerDict["last_name"];
-                uc.txtSuffix.Text = disbursingOfficerDict["suffix"];
-                uc.txtJobTitle.Text = disbursingOfficerDict["job_title"];
-                uc.UserId = disbursingOfficerDict["users_id"] == string.Empty ? 0 : Convert.ToInt16(disbursingOfficerDict["users_id"]);
-                uc.LoadLink(uc.UserId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.txtPrefix.Text = disbursingOfficerDict["prefix"];
+            uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
+            uc.txtMidInitial.Text = disbursingOfficerDict["mid_initial"];
+            uc.txtLastName.Text = disbursingOfficerDict["last_name"];
+            uc.txtSuffix.Text = disbursingOfficerDict["suffix"];
+            uc.txtJobTitle.Text = disbursingOfficerDict["job_title"];
+            uc.UserId = disbursingOfficerDict["users_id"] == string.Empty ? 0 : Convert.ToInt16(disbursingOfficerDict["users_id"]);
+            uc.LoadLink(uc.UserId);
         }
 
         private bool UpdateData()
@@ -84,6 +81,15 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         }
 
         private void frmDisbursingOfficerEdit_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadSelectedRecord();
         }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 {
     public partial class ucOtherPaymentRates : UserControl
     {
-
         public ucOtherPaymentRates()
         {
             InitializeComponent();
@@ -17,13 +17,13 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         internal string GetFormError()
         {
-            var errorArray = new string[2];
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbxTaxType),
+                errorProvider1.GetError(txtDescription)
+            };
 
-            errorArray[0] = errorProvider1.GetError(cmbxTaxType);
-            errorArray[1] = errorProvider1.GetError(txtDescription);
-
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -36,6 +36,15 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         }
 
         private void ucOtherPaymentRates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -85,7 +94,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             cmbxTaxType.SelectedIndex = -1;
         }
 
-        #region Validation
+        #region Validations
 
         private void cmbxTaxType_Validating(object sender, CancelEventArgs e)
         {
@@ -107,6 +116,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
 
-        #endregion Validation
+        #endregion Validations
     }
 }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -22,8 +23,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 errorProvider1.GetError(txtName)
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadTaxPayersType()
@@ -51,19 +51,28 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void ucTaxPayers_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             if (!DesignMode)
             {
-                try
-                {
-                    LoadTaxPayersType();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                LoadTaxPayersType();
             }
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Name");
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Name");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtName_Validated(object sender, EventArgs e)

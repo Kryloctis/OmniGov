@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -19,47 +20,51 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void frmFunctionProgramProjectAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             ucFunctionProgramProject1.LoadServiceNameComboBox();
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
-
-                var functionProgramProjectModel = new FunctionProgramProjectModel()
-                {
-                    functionalClassificationServiceId = functionalClassificationServiceId,
-                    FppName = uc.txtName.Text.Trim(),
-                    FppCode = uc.txtCode.Text.Trim(),
-                    IsSpecial = uc.chckboxSpecial.Checked ? true : false
-                };
-
-                var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
-                return functionProgramProjectRepository.Insert(functionProgramProjectModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
-            return false;
+            int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
+            var functionProgramProjectModel = new FunctionProgramProjectModel()
+            {
+                functionalClassificationServiceId = functionalClassificationServiceId,
+                FppName = uc.txtName.Text.Trim(),
+                FppCode = uc.txtCode.Text.Trim(),
+                IsSpecial = uc.chckboxSpecial.Checked ? true : false
+            };
+
+            return AccFactory.FunctionProgramProjectRepository().Insert(functionProgramProjectModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                _frmFunctionProgramProject.LoadFPP();
-                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
-                ucFunctionProgramProject1.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Function Program Project has been saved.");
+                    _frmFunctionProgramProject.LoadFPP();
+                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
