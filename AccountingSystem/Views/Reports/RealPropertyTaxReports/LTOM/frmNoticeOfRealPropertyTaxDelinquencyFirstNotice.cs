@@ -202,7 +202,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     locationOfProperty = rowPropertyLocation;
                     kindOfProperty = Convert.ToChar(rowKindOfProperty);
                     assessedValue = rowAssessedValue;
-                    decimal totalAmount = sefTaxDue + basicTaxDue;
+                    decimal totalAmount = sefTaxDue + basicTaxDue + basicPenalty + sefPenalty;
 
                     newRow["tax_year"] = rowTaxYear;
                     newRow["basic_tax"] = basicTaxDue;
@@ -210,6 +210,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     newRow["sef_tax"] = sefTaxDue;
                     newRow["sef_penalty"] = sefPenalty;
                     newRow["total_amount"] = totalAmount;
+
+
+                    rowsCount++;
+                    int progressBarPercentage = (rowsCount * 100) / recordCount;
+                    backgroundWorker1.ReportProgress(progressBarPercentage);
 
                     dataTable.Rows.Add(newRow);
                 }
