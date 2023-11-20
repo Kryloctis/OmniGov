@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
@@ -24,7 +22,7 @@ namespace ACC.Domain.Models
         public string WifeBarangay { get; set; }
         public string WifeMunicipality { get; set; }
         public string WifeProvince { get; set; }
-        public int   CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
 
     }
 }

@@ -28,6 +28,166 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
+            this.barangaysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFunds = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuJournals = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFunctionProgramProject = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuChartOfAccounts = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAllotmentClasses = new System.Windows.Forms.ToolStripMenuItem();
+            this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessAddOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.discountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.penaltiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otherPaymentRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabControlDashboard = new System.Windows.Forms.TabControl();
+            this.tabPageBudget = new System.Windows.Forms.TabPage();
+            this.tabControlBudget = new System.Windows.Forms.TabControl();
+            this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
+            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAllotmentRelease = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonObligation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.sAAOBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sAAOBBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageAccounting = new System.Windows.Forms.TabPage();
+            this.tabControlAccounting = new System.Windows.Forms.TabControl();
+            this.tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
+            this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
+            this.tabPageJournals = new System.Windows.Forms.TabPage();
+            this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
+            this.tabPageLedgers = new System.Windows.Forms.TabPage();
+            this.tabControlLedgers = new System.Windows.Forms.TabControl();
+            this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
+            this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
+            this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
+            this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
+            this.tabPageSummarySL = new System.Windows.Forms.TabPage();
+            this.ucSummarySubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSummarySubsidiaryLedger();
+            this.tabPageTransactionLog = new System.Windows.Forms.TabPage();
+            this.ucTransactionLog1 = new AccountingSystem.Views.Reports.Ledgers.ucTransactionLog();
+            this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
+            this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
+            this.tabPagePreTrial = new System.Windows.Forms.TabPage();
+            this.ucPreClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPreClosingTrialBalance();
+            this.tabPagePostTrial = new System.Windows.Forms.TabPage();
+            this.ucPostClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPostClosingTrialBalance();
+            this.tabPageFinancialStatements = new System.Windows.Forms.TabPage();
+            this.tabControlFinancialStatements = new System.Windows.Forms.TabControl();
+            this.tabPageSFPosition = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPosition1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
+            this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
+            this.tabPageSCNAE = new System.Windows.Forms.TabPage();
+            this.ucStatementOfChangesInNetAssetsEquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
+            this.tabPageSCF = new System.Windows.Forms.TabPage();
+            this.ucStatementOfCashFlows1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfCashFlows();
+            this.tabPageSCBAA = new System.Windows.Forms.TabPage();
+            this.tabPageTreasury = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.ucrcdSummary1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
+            this.ToolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RptToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBpl = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
+            this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aF5157ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
+            this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.collectionPaymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportOfCollectionsDepositsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.realPropertyTaxAccountRegisterRPTARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.realPropertyTaxStatementOfAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.consolidatedRealPropertyTaxDeliquencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfDelinquentAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.reportOfCheckIssuedRCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.releasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unreleasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.tabControlDashboard.SuspendLayout();
+            this.tabPageBudget.SuspendLayout();
+            this.tabControlBudget.SuspendLayout();
+            this.tabPageBudgetSummary.SuspendLayout();
+            this.tabPageBudgetDetailed.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.tabPageAccounting.SuspendLayout();
+            this.tabControlAccounting.SuspendLayout();
+            this.tabPageJournalEntryVoucher.SuspendLayout();
+            this.tabPageJournals.SuspendLayout();
+            this.tabPageLedgers.SuspendLayout();
+            this.tabControlLedgers.SuspendLayout();
+            this.tabPageGeneralLedger.SuspendLayout();
+            this.tabPageSubsidiaryLedger.SuspendLayout();
+            this.tabPageSummarySL.SuspendLayout();
+            this.tabPageTransactionLog.SuspendLayout();
+            this.tabPageTrialBalance.SuspendLayout();
+            this.tabControlTrialBalance.SuspendLayout();
+            this.tabPagePreTrial.SuspendLayout();
+            this.tabPagePostTrial.SuspendLayout();
+            this.tabPageFinancialStatements.SuspendLayout();
+            this.tabControlFinancialStatements.SuspendLayout();
+            this.tabPageSFPosition.SuspendLayout();
+            this.tabPageSFPerformance.SuspendLayout();
+            this.tabPageSCNAE.SuspendLayout();
+            this.tabPageSCF.SuspendLayout();
+            this.tabPageTreasury.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.ToolStrip2.SuspendLayout();
+            this.SuspendLayout();
             components = new System.ComponentModel.Container();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             menuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -1081,6 +1241,13 @@
             // 
             // paymentsToolStripMenuItem
             // 
+            this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rPTToolStripMenuItem,
+            this.aF5157ToolStripMenuItem,
+            this.aF54ToolStripMenuItem});
+            this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.paymentsToolStripMenuItem.Text = "Payments";
             paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
@@ -1088,6 +1255,10 @@
             // 
             // rPTToolStripMenuItem
             // 
+            this.rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
+            this.rPTToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.rPTToolStripMenuItem.Text = "AF 56 - Real Property Tax";
+            this.rPTToolStripMenuItem.Click += new System.EventHandler(this.rPTToolStripMenuItem_Click);
             rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
             rPTToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             rPTToolStripMenuItem.Text = "RPT";
@@ -1095,10 +1266,21 @@
             // 
             // aF5157ToolStripMenuItem
             // 
+            this.aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
+            this.aF5157ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aF5157ToolStripMenuItem.Text = "AF 51 && 57";
+            this.aF5157ToolStripMenuItem.Click += new System.EventHandler(this.aF5157ToolStripMenuItem_Click);
             aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
             aF5157ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             aF5157ToolStripMenuItem.Text = "AF51&&57";
             aF5157ToolStripMenuItem.Click += aF5157ToolStripMenuItem_Click;
+            // 
+            // aF54ToolStripMenuItem
+            // 
+            this.aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
+            this.aF54ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aF54ToolStripMenuItem.Text = "AF 54 - Marriage License";
+            this.aF54ToolStripMenuItem.Click += new System.EventHandler(this.aF54ToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -1499,6 +1681,7 @@
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxReportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM16ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM17ToolStripMenuItem;
