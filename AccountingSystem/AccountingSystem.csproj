@@ -49,6 +49,7 @@
     <None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
     <None Remove="Reports\LTOMs\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc" />
     <None Remove="Reports\LTOMs\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc" />
+    <None Remove="Reports\LTOMs\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc" />
     <None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
@@ -122,6 +123,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\LTOMs\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\LTOMs\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">
