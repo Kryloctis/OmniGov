@@ -15,6 +15,8 @@ using Color = System.Drawing.Color;
 
 namespace AccountingSystem
 {
+
+
     public static class Helper
     {
         internal static byte UserId = AccFactory.UserId;
