@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using ACC.Data;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
