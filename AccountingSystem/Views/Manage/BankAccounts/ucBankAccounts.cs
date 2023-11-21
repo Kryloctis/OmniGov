@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 LoadBanks();
                 txtAccountNo.Clear();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal string GetFormErrors()
@@ -43,7 +44,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             {
                 OnLoad();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void OnLoad()

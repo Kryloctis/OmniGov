@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -21,11 +22,12 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = errorProvider1.GetError(txtDescription);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtDescription)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -37,30 +39,26 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private bool IsDescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            try
-            {
-                bool descriptionExist = isEdit ? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
+            bool descriptionExist = isEdit ? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
 
-                if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
-                    return false;
-                else if (descriptionExist)
-                {
-                    errorProvider.SetError(textBox, "Description exist in your records.");
-                    return false;
-                }
-                else
-                    return true;
-            }
-            catch (Exception ex)
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
+                return false;
+            else if (descriptionExist)
             {
-                Helper.MessageBoxError(ex.Message);
+                errorProvider.SetError(textBox, "Description exist in your records.");
+                return false;
             }
-            return false;
+            else
+                return true;
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
+            try
+            {
+                e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)

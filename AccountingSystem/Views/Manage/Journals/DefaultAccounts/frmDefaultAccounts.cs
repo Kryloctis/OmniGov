@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 cmbxFunds.Tag.ToString()
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private int GetMaxNumberOfDefaultAccounts()
@@ -79,91 +79,76 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadAccounts()
         {
-            try
+            string searchKey = txtAccounts.Text.Trim();
+            CreateDatagridViewColumns(dgAccounts);
+
+            var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
+
+            foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
             {
-                string searchKey = txtAccounts.Text.Trim();
-                CreateDatagridViewColumns(dgAccounts);
+                int generalLedgerAccountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
+                string accountCode = row["account_code"].ToString();
+                string generalLedgerAccountName = row["ledger_name"].ToString();
+                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                bool isDebit = radDebit.Checked;
 
-                var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
+                if (AccFactory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
 
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
+                dgAccounts.Rows.Add(new object[]
                 {
-                    int generalLedgerAccountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
-                    string accountCode = row["account_code"].ToString();
-                    string generalLedgerAccountName = row["ledger_name"].ToString();
-                    int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                    bool isDebit = radDebit.Checked;
-
-                    if (AccFactory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
-
-                    dgAccounts.Rows.Add(new object[]
-                    {
                     generalLedgerAccountId,
                     accountCode,
                     generalLedgerAccountName
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                });
             }
         }
 
         private void LoadDefaultAccounts()
         {
-            try
+            CreateDatagridViewColumns(dgDefaultAccounts);
+
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            bool isDebit = radDebit.Checked;
+
+            var dtDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
+
+            foreach (DataRow row in dtDefaultAccounts.Rows)
             {
-                CreateDatagridViewColumns(dgDefaultAccounts);
+                int generalLedgerAccountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
+                string accountCode = row["account_code"].ToString();
+                string generalLedgerAccountName = row["general_ledger_accounts_name"].ToString();
 
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                bool isDebit = radDebit.Checked;
-
-                var dtDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
-
-                foreach (DataRow row in dtDefaultAccounts.Rows)
+                dgDefaultAccounts.Rows.Add(new object[]
                 {
-                    int generalLedgerAccountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
-                    string accountCode = row["account_code"].ToString();
-                    string generalLedgerAccountName = row["general_ledger_accounts_name"].ToString();
-
-                    dgDefaultAccounts.Rows.Add(new object[]
-                    {
                     generalLedgerAccountId,
                     accountCode,
                     generalLedgerAccountName
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                });
             }
         }
 
         private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
-                var dtJournals = AccFactory.JournalsRepository().GetRecordByID(journalId);
-                lblJournalName.Text = dtJournals["journal_name"].ToString();
-                LoadFunds();
-                LoadDefaultAccounts();
-                lblMaxAccounts.Text = $"Max: {GetMaxNumberOfDefaultAccounts()}";
+                OnLoad();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            var dtJournals = AccFactory.JournalsRepository().GetRecordByID(journalId);
+            lblJournalName.Text = dtJournals["journal_name"].ToString();
+            LoadFunds();
+            LoadDefaultAccounts();
+            lblMaxAccounts.Text = $"Max: {GetMaxNumberOfDefaultAccounts()}";
         }
 
         private void EnableDisableButtons()
@@ -181,12 +166,20 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void dgAccounts_SelectionChanged(object sender, System.EventArgs e)
         {
-            EnableDisableButtons();
+            try
+            {
+                EnableDisableButtons();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgDefaultAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons();
+            try
+            {
+                EnableDisableButtons();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void SetDefaultAccounts()
@@ -231,73 +224,80 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
         {
-            SetDefaultAccounts();
+            try
+            {
+                SetDefaultAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRemoveDefaultAccount_Click(object sender, EventArgs e)
         {
-            RemoveDefaultAccounts();
+            try
+            {
+                RemoveDefaultAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Save()
         {
-            try
+            if (!ValidateChildren())
             {
-                if (!ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return false;
-                }
-
-                var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                bool isDebit = radDebit.Checked ? true : false;
-
-                foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
-                {
-                    int accountId = Convert.ToInt32(item.Cells["id"].Value);
-                    var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
-                    {
-                        JournalId = journalId,
-                        fundId = fundId,
-                        AccountId = accountId,
-                        IsDebit = isDebit
-                    };
-
-                    journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
-                }
-
-                return AccFactory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
             }
 
-            return false;
+            var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            bool isDebit = radDebit.Checked ? true : false;
+
+            foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
+            {
+                int accountId = Convert.ToInt32(item.Cells["id"].Value);
+                var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
+                {
+                    JournalId = journalId,
+                    fundId = fundId,
+                    AccountId = accountId,
+                    IsDebit = isDebit
+                };
+
+                journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
+            }
+
+            return AccFactory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Default Accounts has been saved.");
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Default Accounts has been saved.");
+                    if (txtAccounts.Text.Length > 3)
+                        LoadAccounts();
+                    else
+                        dgAccounts.Rows.Clear();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxFunds.Text))
+            try
             {
-                e.Cancel = true;
-                cmbxFunds.Tag = Helper.ErrorMessage("Funds");
+                if (string.IsNullOrEmpty(cmbxFunds.Text))
+                {
+                    e.Cancel = true;
+                    cmbxFunds.Tag = Helper.ErrorMessage("Funds");
+                }
+                else
+                    e.Cancel = false;
             }
-            else
-                e.Cancel = false;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFunds_Validated(object sender, EventArgs e)
@@ -307,37 +307,53 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadDefaultAccounts();
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
+            try
+            {
+                LoadDefaultAccounts();
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtAccounts_TextChanged(object sender, EventArgs e)
         {
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
+            try
+            {
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radDebit_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDefaultAccounts();
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
+            try
+            {
+                LoadDefaultAccounts();
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radCredit_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDefaultAccounts();
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
+            try
+            {
+                LoadDefaultAccounts();
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

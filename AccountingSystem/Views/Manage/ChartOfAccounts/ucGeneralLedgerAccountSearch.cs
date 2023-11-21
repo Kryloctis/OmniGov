@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -14,25 +15,29 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void btnGet_Click(object sender, EventArgs e)
         {
-            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
-
-            if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text)) return;
-
-            var accountDict = new Dictionary<int, string>();
-            foreach (DataRow item in dtAccounts.Rows)
+            try
             {
-                int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+                DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
 
-                accountDict.Add(accountId, accountName);
+                if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text)) return;
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in dtAccounts.Rows)
+                {
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbGeneralLedgerAccount.DataSource = new BindingSource(accountDict, null);
+                cmbGeneralLedgerAccount.DisplayMember = "value";
+                cmbGeneralLedgerAccount.ValueMember = "key";
+                cmbGeneralLedgerAccount.DroppedDown = true;
+
+                Helper.ClearErrorComboBox(epAccount, cmbGeneralLedgerAccount);
             }
-
-            cmbGeneralLedgerAccount.DataSource = new BindingSource(accountDict, null);
-            cmbGeneralLedgerAccount.DisplayMember = "value";
-            cmbGeneralLedgerAccount.ValueMember = "key";
-            cmbGeneralLedgerAccount.DroppedDown = true;
-
-            Helper.ClearErrorComboBox(epAccount, cmbGeneralLedgerAccount);
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool GeneralLedgerAccountValidated(ErrorProvider errorProvider, ComboBox comboBox)

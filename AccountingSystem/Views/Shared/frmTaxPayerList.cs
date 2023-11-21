@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.RealProperties;
+﻿using ACC.Data;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;

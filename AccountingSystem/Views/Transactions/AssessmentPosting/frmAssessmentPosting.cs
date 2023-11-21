@@ -1,4 +1,5 @@
-﻿using RPT.Domain.Models;
+﻿using ACC.Data;
+using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,12 +22,21 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             prgrsBarPostingAssessments.Visible = false;
         }
 
-        private void frmAssessmentPosting_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadBarangays();
             nudYear.Value = Helper.GetCurrentDate().Year;
             PreloadProperties();
             EnableDisableToolStripButton(dgProperties, btnPostSelected);
+        }
+
+        private void frmAssessmentPosting_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadBarangays()
@@ -393,114 +403,107 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            var assessmentPostingModels = new List<RptAssessmentPostsModel>();
+
+            int progressCount = 0;
+            int totalCheckedRowCount = 0;
+
+            foreach (DataGridViewRow row in dgProperties.Rows)
             {
-                var assessmentPostingModels = new List<RptAssessmentPostsModel>();
+                bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                string postingStatus = row.Cells["posting_status"].Value.ToString();
 
-                int progressCount = 0;
-                int totalCheckedRowCount = 0;
+                if (isChecked && string.IsNullOrEmpty(postingStatus))
+                    totalCheckedRowCount += 1;
+            }
 
-                foreach (DataGridViewRow row in dgProperties.Rows)
+            foreach (DataGridViewRow dgvRow in dgProperties.Rows)
+            {
+                bool isChecked = Convert.ToBoolean(dgvRow.Cells["is_checked"].Value);
+                string postingStatus = dgvRow.Cells["posting_status"].Value.ToString();
+                if (isChecked && string.IsNullOrEmpty(postingStatus))
                 {
-                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
-                    string postingStatus = row.Cells["posting_status"].Value.ToString();
+                    int rowRealPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
+                    int rowRealTaxpayerId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_taxpayers_id");
+                    string rowPropertyIdentifier = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_identifier");
+                    string rowCompleteArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
+                    string rowPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
+                    string rowTaxpayerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_name");
+                    string rowTaxpayerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_tin");
+                    string rowTaxpayerContactInfo = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_contact_info");
+                    string rowTaxpeyerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_address");
+                    string rowBarangayName = GetDatagridViewValue(dgProperties, dgvRow.Index, "barangay_name");
+                    string rowMunicipalityName = GetDatagridViewValue(dgProperties, dgvRow.Index, "municipality_name");
+                    string rowProvinceName = GetDatagridViewValue(dgProperties, dgvRow.Index, "province_name");
+                    string rowPropertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
+                    int rowEffectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
+                    int rowEffectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
+                    decimal rowOtherImprovements = GetDatagridViewValue(dgProperties, dgvRow.Index, "other_improvements");
+                    decimal rowAssessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
+                    decimal rowTotalArea = GetDatagridViewValue(dgProperties, dgvRow.Index, "area");
+                    string rowLotNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "lot_no");
+                    string rowClassificationCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_code");
+                    string rowClassificationName = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_name");
+                    string rowActualUseCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_code");
+                    string rowActualUseName = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_name");
+                    int rowGrYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "gr_year");
+                    bool rowIsTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
+                    int rowYear = Convert.ToInt32(txtYear.Text);
 
-                    if (isChecked && string.IsNullOrEmpty(postingStatus))
-                        totalCheckedRowCount += 1;
-                }
+                    //Get Penalty and Tax Rates
+                    var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
 
-                foreach (DataGridViewRow dgvRow in dgProperties.Rows)
-                {
-                    bool isChecked = Convert.ToBoolean(dgvRow.Cells["is_checked"].Value);
-                    string postingStatus = dgvRow.Cells["posting_status"].Value.ToString();
-                    if (isChecked && string.IsNullOrEmpty(postingStatus))
+                    decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate")) ? 0 :
+                                                               Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
+                    string penaltyFrequency = GetPenaltyRecord("RPT monthly penalty", "frequency");
+                    decimal basicRate = GetTaxRate("Basic");
+                    decimal sefRate = GetTaxRate("Special Educational Fund");
+                    DateTime postedAt = DateTime.Now;
+                    bool rowIsCancelled = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_cancelled");
+
+                    var assessmentPostingModel = new RptAssessmentPostsModel()
                     {
-                        int rowRealPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
-                        int rowRealTaxpayerId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_taxpayers_id");
-                        string rowPropertyIdentifier = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_identifier");
-                        string rowCompleteArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
-                        string rowPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
-                        string rowTaxpayerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_name");
-                        string rowTaxpayerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_tin");
-                        string rowTaxpayerContactInfo = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_contact_info");
-                        string rowTaxpeyerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_address");
-                        string rowBarangayName = GetDatagridViewValue(dgProperties, dgvRow.Index, "barangay_name");
-                        string rowMunicipalityName = GetDatagridViewValue(dgProperties, dgvRow.Index, "municipality_name");
-                        string rowProvinceName = GetDatagridViewValue(dgProperties, dgvRow.Index, "province_name");
-                        string rowPropertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
-                        int rowEffectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
-                        int rowEffectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
-                        decimal rowOtherImprovements = GetDatagridViewValue(dgProperties, dgvRow.Index, "other_improvements");
-                        decimal rowAssessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
-                        decimal rowTotalArea = GetDatagridViewValue(dgProperties, dgvRow.Index, "area");
-                        string rowLotNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "lot_no");
-                        string rowClassificationCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_code");
-                        string rowClassificationName = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_name");
-                        string rowActualUseCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_code");
-                        string rowActualUseName = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_name");
-                        int rowGrYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "gr_year");
-                        bool rowIsTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
-                        int rowYear = Convert.ToInt32(txtYear.Text);
+                        PropertyIdentifier = rowPropertyIdentifier,
+                        CompleteArpNo = rowCompleteArpNo,
+                        PropertyPin = rowPin,
+                        RealTaxPayerID = rowRealTaxpayerId,
+                        TaxpayerName = rowTaxpayerName,
+                        TaxpayerTin = rowTaxpayerTin,
+                        TaxpayerAddress = rowTaxpeyerAddress,
+                        TaxpayerContactInfo = rowTaxpayerContactInfo,
+                        BarangayName = rowBarangayName,
+                        MunicipalityName = rowMunicipalityName,
+                        ProvinceName = rowProvinceName,
+                        PropertyKind = rowPropertyKind,
+                        EffectivityQuarter = rowEffectiviyQuarter,
+                        EffectivityYear = rowEffectivityYear,
+                        AssessedValue = rowAssessedValue,
+                        Area = rowTotalArea,
+                        LotNo = rowLotNo,
+                        OtherImprovements = rowOtherImprovements,
+                        ClassificationCode = rowClassificationCode,
+                        ClassificationName = rowClassificationName,
+                        ActualUseCode = rowActualUseCode,
+                        ActualUseName = rowActualUseName,
+                        GrYear = rowGrYear,
+                        IsTaxable = rowIsTaxable,
+                        IsCancelled = rowIsCancelled,
+                        PenaltyRate = penaltyRate,
+                        PenaltyFrequency = penaltyFrequency,
+                        BasicRate = basicRate,
+                        SefRate = sefRate,
+                        Year = rowYear,
+                        PostedAt = postedAt,
+                        PostedBy = Helper.UserId
+                    };
 
-                        //Get Penalty and Tax Rates
-                        var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
-
-                        decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate")) ? 0 :
-                                                                   Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
-                        string penaltyFrequency = GetPenaltyRecord("RPT monthly penalty", "frequency");
-                        decimal basicRate = GetTaxRate("Basic");
-                        decimal sefRate = GetTaxRate("Special Educational Fund");
-                        DateTime postedAt = DateTime.Now;
-                        bool rowIsCancelled = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_cancelled");
-
-                        var assessmentPostingModel = new RptAssessmentPostsModel()
-                        {
-                            PropertyIdentifier = rowPropertyIdentifier,
-                            CompleteArpNo = rowCompleteArpNo,
-                            PropertyPin = rowPin,
-                            RealTaxPayerID = rowRealTaxpayerId,
-                            TaxpayerName = rowTaxpayerName,
-                            TaxpayerTin = rowTaxpayerTin,
-                            TaxpayerAddress = rowTaxpeyerAddress,
-                            TaxpayerContactInfo = rowTaxpayerContactInfo,
-                            BarangayName = rowBarangayName,
-                            MunicipalityName = rowMunicipalityName,
-                            ProvinceName = rowProvinceName,
-                            PropertyKind = rowPropertyKind,
-                            EffectivityQuarter = rowEffectiviyQuarter,
-                            EffectivityYear = rowEffectivityYear,
-                            AssessedValue = rowAssessedValue,
-                            Area = rowTotalArea,
-                            LotNo = rowLotNo,
-                            OtherImprovements = rowOtherImprovements,
-                            ClassificationCode = rowClassificationCode,
-                            ClassificationName = rowClassificationName,
-                            ActualUseCode = rowActualUseCode,
-                            ActualUseName = rowActualUseName,
-                            GrYear = rowGrYear,
-                            IsTaxable = rowIsTaxable,
-                            IsCancelled = rowIsCancelled,
-                            PenaltyRate = penaltyRate,
-                            PenaltyFrequency = penaltyFrequency,
-                            BasicRate = basicRate,
-                            SefRate = sefRate,
-                            Year = rowYear,
-                            PostedAt = postedAt,
-                            PostedBy = Helper.UserId
-                        };
-
-                        assessmentPostingModels.Add(assessmentPostingModel);
-                        progressCount += 1;
-                        backgroundWorker1.ReportProgress((progressCount * 100) / totalCheckedRowCount);
-                    }
+                    assessmentPostingModels.Add(assessmentPostingModel);
+                    progressCount += 1;
+                    backgroundWorker1.ReportProgress((progressCount * 100) / totalCheckedRowCount);
                 }
+            }
 
-                AccFactory.RptAssessmentPostsRepository().BulkInsert(assessmentPostingModels);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            AccFactory.RptAssessmentPostsRepository().BulkInsert(assessmentPostingModels);
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)

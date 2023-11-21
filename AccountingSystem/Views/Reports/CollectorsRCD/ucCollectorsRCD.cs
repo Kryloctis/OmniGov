@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Reports.CollectorsRCD;
 using System;
 using System.ComponentModel;
@@ -244,65 +245,83 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void cmbCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
+            try
+            {
+                collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btndelete_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.dgPayments.SelectedRows)
+            try
             {
-                dgPayments.Rows.RemoveAt(item.Index);
-            }
+                foreach (DataGridViewRow item in this.dgPayments.SelectedRows)
+                {
+                    dgPayments.Rows.RemoveAt(item.Index);
+                }
 
-            TotalCollections();
+                TotalCollections();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnclear_Click(object sender, EventArgs e)
         {
-            dgPayments.Rows.Clear();
-            btnClear.Enabled = false;
+            try
+            {
+                dgPayments.Rows.Clear();
+                btnClear.Enabled = false;
 
-            TotalCollections();
+                TotalCollections();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgPayments_SelectionChanged(object sender, EventArgs e)
         {
-            var selectedRowCount = dgPayments.SelectedRows.Count;
-            var rowCount = dgPayments.Rows.Count;
+            try
+            {
+                var selectedRowCount = dgPayments.SelectedRows.Count;
+                var rowCount = dgPayments.Rows.Count;
 
-            btnRemove.Enabled = selectedRowCount != 0;
-            btnClear.Enabled = rowCount > 0;
+                btnRemove.Enabled = selectedRowCount != 0;
+                btnClear.Enabled = rowCount > 0;
 
-            TotalCollections();
+                TotalCollections();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         #region Validation
 
         private void txtReport_Validating(object sender, CancelEventArgs e)
         {
-            string reportNo = txtReport.Text.Trim();
-            bool reportNoExist;
-
-            if (string.IsNullOrEmpty(reportNo))
+            try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
-                return;
-            }
+                string reportNo = txtReport.Text.Trim();
+                bool reportNoExist;
 
-            if (isSaveFunction)
-                reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
-            else
-                reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
+                if (string.IsNullOrEmpty(reportNo))
+                {
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
+                    return;
+                }
 
-            if (reportNoExist)
-            {
-                epReportNo.SetError(txtReport, "Report number already existed.");
-                e.Cancel = true;
+                if (isSaveFunction)
+                    reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
+                else
+                    reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
+
+                if (reportNoExist)
+                {
+                    epReportNo.SetError(txtReport, "Report number already existed.");
+                    e.Cancel = true;
+                }
+                else
+                    e.Cancel = false;
             }
-            else
-            {
-                e.Cancel = false;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtReport_Validated(object sender, EventArgs e)
@@ -332,7 +351,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void label1_Click(object sender, EventArgs e)
         {
-            ResetForm();
+            try
+            {
+                ResetForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cbJOCollector_CheckedChanged(object sender, EventArgs e)

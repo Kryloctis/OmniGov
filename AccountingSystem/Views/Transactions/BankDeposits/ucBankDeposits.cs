@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -20,25 +21,34 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epBank.GetError(cmbBank);
-            errorArray[1] = epFund.GetError(cmbFund);
-            errorArray[2] = epReferenceNumber.GetError(txtReferenceNumber);
-            errorArray[3] = epAmount.GetError(nudAmount);
+            var errorArray = new string[]
+            {
+                epBank.GetError(cmbBank),
+                epFund.GetError(cmbFund),
+                epReferenceNumber.GetError(txtReferenceNumber),
+                epAmount.GetError(nudAmount)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ucBD_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadBanks();
                 LoadBankAccounts();
                 LoadFunds();
-
             }
+        }
+
+        private void ucBD_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void ResetForm()
@@ -58,10 +68,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbBank.ValueMember = "id";
                 cmbBank.DisplayMember = "bank_name";
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadFunds()
@@ -116,17 +123,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         #endregion Validations
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadBankAccounts();
         }
 
-        private void LoadBankAccounts() 
+        private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbBank.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);

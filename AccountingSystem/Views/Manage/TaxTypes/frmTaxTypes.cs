@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
@@ -476,10 +477,14 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                InitializeTaxTypes();
-            });
+                Invoke((MethodInvoker)delegate
+                  {
+                      InitializeTaxTypes();
+                  });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -22,28 +22,23 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
-
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT acc_form_no, acc_form_desc FROM {tableName} WHERE id = @id";
+
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                foreach (DataRow row in reader.Rows)
                 {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
-
-                string query = $"SELECT acc_form_no, acc_form_desc FROM {tableName} WHERE id = @id";
-
-                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("acc_form_no", reader.Rows[0][0].ToString());
-                    record.Add("acc_form_desc", reader.Rows[0][1].ToString());
+                    record.Add("acc_form_no", row["acc_form_no"].ToString());
+                    record.Add("acc_form_desc", row["acc_form_desc"].ToString());
                 }
-            }
-            catch (Exception)
-            {
-                throw;
             }
 
             return record;
@@ -104,16 +99,9 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
+            string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)

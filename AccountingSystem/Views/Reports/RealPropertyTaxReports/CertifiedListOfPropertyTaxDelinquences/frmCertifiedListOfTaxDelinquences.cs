@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using ACC.Data;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -87,7 +88,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
         private void LoadReport()
         {
-            dataTable = new dsLFS.dtCertListOfAllRptDelinquencesDataTable();
+            var dataTable = new dsLFS.dtCertListOfAllRptDelinquencesDataTable();
 
             string barangayName = string.Empty;
             DateTime asOfDate = DateTime.Now;
@@ -99,8 +100,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
             var referenceDataTable = AccFactory.RptAssessmentPostsRepository().Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(barangayName, asOfDate);
 
-            int recordCount = referenceDataTable.Rows.Count;
-            int rowCounts = 0;
+            int totalProgressCount = referenceDataTable.Rows.Count;
+            int progressCount = 0;
 
             foreach (DataRow row in referenceDataTable.Rows)
             {
@@ -184,21 +185,22 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 newRow["grand_total"] = grandTotal;
                 newRow["remarks"] = remarks;
 
-                rowCounts++;
-                int progressBarPercentage = (rowCounts * 100) / recordCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-
+                progressCount++;
                 dataTable.Rows.Add(newRow);
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                LoadReport();
-            });
-
+                Invoke((MethodInvoker)delegate
+                 {
+                     LoadReport();
+                 });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e) => pbLoadRecords.Value = e.ProgressPercentage;

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -65,10 +66,15 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         {
             try
             {
-                uc.isEdit = true;
-                LoadRecord();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            uc.isEdit = true;
+            LoadRecord();
         }
     }
 }

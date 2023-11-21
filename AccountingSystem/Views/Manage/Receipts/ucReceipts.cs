@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -55,25 +56,85 @@ namespace AccountingSystem.Views.Manage.Receipts
             return dataTable;
         }
 
+        private void SetFieldsForCashTickets()
+        {
+            isCashTicket = true;
+            txtReceiptNumberFrom.Enabled = false;
+            txtReceiptNumberFrom.Clear();
+            txtReceiptNumberTo.Enabled = false;
+            txtReceiptNumberTo.Clear();
+            txtQuantity.ReadOnly = false;
+        }
+
+        private void SetFieldsForNonCashTickets()
+        {
+            isCashTicket = false;
+            txtReceiptNumberFrom.Enabled = true;
+            txtReceiptNumberTo.Enabled = true;
+            txtQuantity.ReadOnly = true;
+        }
+
+        private void ControlsConfiguration()
+        {
+            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+            if (item == null) return;
+
+            string accountableForm = item["accountableForm"].ToString();
+            if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
+                SetFieldsForCashTickets();
+            else
+                SetFieldsForNonCashTickets();
+        }
+
+        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ControlsConfiguration();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadAccountableForms()
+        {
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
+        }
+
+        private void ucReceipts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadAccountableForms();
+            }
+        }
 
         #region Validations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[5];
-            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
-            errorArray[1] = errorProvider.GetError(txtReceiptNumberFrom);
-            errorArray[2] = errorProvider.GetError(txtReceiptNumberTo);
-            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
-            errorArray[4] = errorProvider.GetError(txtQuantity);
+            var errorArray = new[]
+            {
+                errorProvider.GetError(cmbAccountableForms),
+                errorProvider.GetError(txtReceiptNumberFrom),
+                errorProvider.GetError(txtReceiptNumberTo),
+                errorProvider.GetError(dtpReceivedDate),
+                errorProvider.GetError(txtQuantity)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
-
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form.");
         }
 
@@ -167,25 +228,41 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    e.Handled = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    e.Handled = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtquantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    e.Handled = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtReceiptNumberFrom_TextChanged(object sender, EventArgs e)
         {
-            ComputeReceipQuantity();
+            try
+            {
+                ComputeReceipQuantity();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtReceiptNumberTo_TextChanged(object sender, EventArgs e)
@@ -193,66 +270,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             ComputeReceipQuantity();
         }
 
-        #endregion
-
-        private void SetFieldsForCashTickets()
-        {
-            isCashTicket = true;
-            txtReceiptNumberFrom.Enabled = false;
-            txtReceiptNumberFrom.Clear();
-            txtReceiptNumberTo.Enabled = false;
-            txtReceiptNumberTo.Clear();
-            txtQuantity.ReadOnly = false;
-        }
-
-        private void SetFieldsForNonCashTickets()
-        {
-            isCashTicket = false;
-            txtReceiptNumberFrom.Enabled = true;
-            txtReceiptNumberTo.Enabled = true;
-            txtQuantity.ReadOnly = true;
-        }
-
-        private void ControlsConfiguration()
-        {
-            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
-            if (item == null) return;
-
-            string accountableForm = item["accountableForm"].ToString();
-            if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
-                SetFieldsForCashTickets();
-            else
-                SetFieldsForNonCashTickets();
-        }
-
-        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ControlsConfiguration();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadAccountableForms()
-        {
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
-        }
-
-        private void ucReceipts_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                try
-                {
-                    LoadAccountableForms();
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
-            }
-        }
-
+        #endregion Form Events Methods
     }
 }

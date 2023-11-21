@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -16,36 +17,48 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         internal void LoadBusinessAddOnCharges()
         {
-            try
-            {
-                var searchText = toolStripTextBoxSearch.Text.Trim();
-                var dt = AccFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
-                HelperLoadRecords.BusinessAddOnChargesDataGridView(dgBusinessAddOnCharges, dt);
-                dgBusinessAddOnCharges.CurrentCell = dgBusinessAddOnCharges.FirstDisplayedCell;
-                toolStripStatusLabelRecordCount.Text = dgBusinessAddOnCharges.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var searchText = toolStripTextBoxSearch.Text.Trim();
+            var dt = AccFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
+            HelperLoadRecords.BusinessAddOnChargesDataGridView(dgBusinessAddOnCharges, dt);
+            dgBusinessAddOnCharges.CurrentCell = dgBusinessAddOnCharges.FirstDisplayedCell;
+            toolStripStatusLabelRecordCount.Text = dgBusinessAddOnCharges.Rows.Count.ToString();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddBusinessAddOnCharges(this).ShowDialog();
+            try
+            {
+                _ = new frmAddBusinessAddOnCharges(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
-            _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
+            try
+            {
+                int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
+                _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmBusinessAddOnCharges_Load(object sender, EventArgs e)
         {
-            LoadBusinessAddOnCharges();
+            try
+            {
+                LoadBusinessAddOnCharges();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadBusinessAddOnCharges();
+            try
+            {
+                LoadBusinessAddOnCharges();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadRecordTimeStamp(DataGridView dataGridView)
@@ -69,13 +82,17 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (DeleteBusinessAddOnCharges(out deletedRecordCount))
+            try
             {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadBusinessAddOnCharges();
+                int deletedRecordCount;
+
+                if (DeleteBusinessAddOnCharges(out deletedRecordCount))
+                {
+                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                    LoadBusinessAddOnCharges();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteBusinessAddOnCharges(out int deletedCount)

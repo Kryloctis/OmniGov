@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -47,7 +48,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             };
 
             return AccFactory.ReceiptsRepository().Insert(receiptModel);
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -56,12 +56,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 if (SaveData())
                 {
-
                     Helper.MessageBoxSuccess("Receipt has been saved.");
                     _frmReceipts.LoadReceipts();
                     uc.ResetForm();
                 }
-            } catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

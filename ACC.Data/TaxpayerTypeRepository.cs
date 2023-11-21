@@ -1,11 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class TaxpayerTypeRepository : ITaxpayerTypeRepository
     {
@@ -19,7 +18,7 @@ namespace AccountingSystem
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
@@ -31,17 +30,17 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int CountRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(TaxpayerTypeModel entity)
@@ -71,7 +70,7 @@ namespace AccountingSystem
 
         public bool Delete(List<TaxpayerTypeModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool NameExist(string name)

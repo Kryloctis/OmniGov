@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,7 +9,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
     public partial class ucFunctionalClassification : UserControl
     {
         internal byte functionalClassificationId = 0;
-        private IFunctionalClassificationRepository _functionalClassificationRepository;
 
         public ucFunctionalClassification()
         {
@@ -39,21 +39,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
-
-            string functionalClassificationCode = txtCode.Text.Trim();
-            bool codeExist;
-
-            if (functionalClassificationId == 0)
-                codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode);
-            else
-                codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode, functionalClassificationId);
-
-            if (codeExist)
+            try
             {
-                epCode.SetError(txtCode, $"Code you entered is not allowed. Already exist in your record.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
+
+                string functionalClassificationCode = txtCode.Text.Trim();
+                bool codeExist;
+
+                if (functionalClassificationId == 0)
+                    codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode);
+                else
+                    codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode, functionalClassificationId);
+
+                if (codeExist)
+                {
+                    epCode.SetError(txtCode, $"Code you entered is not allowed. Already exist in your record.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -63,21 +67,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
-
-            string functionalClassificationName = txtName.Text.Trim();
-            bool nameExist;
-
-            if (functionalClassificationId == 0)
-                nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName);
-            else
-                nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName, functionalClassificationId);
-
-            if (nameExist)
+            try
             {
-                epName.SetError(txtName, $"Name you entered is not allowed. Already exist in your record.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
+
+                string functionalClassificationName = txtName.Text.Trim();
+                bool nameExist;
+
+                if (functionalClassificationId == 0)
+                    nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName);
+                else
+                    nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName, functionalClassificationId);
+
+                if (nameExist)
+                {
+                    epName.SetError(txtName, $"Name you entered is not allowed. Already exist in your record.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

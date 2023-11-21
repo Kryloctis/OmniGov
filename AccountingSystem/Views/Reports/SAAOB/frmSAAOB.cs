@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,10 +28,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private DataTable DatatableSAAOB()
@@ -42,58 +40,56 @@ namespace AccountingSystem.Views.Reports.SAAOB
             short year = Convert.ToInt16(dtAsOf.Value.Year);
             int fppSpecial = chkbxSpecialFPP.Checked ? 1 : 0;
 
-            try
+            var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
+
+            foreach (DataRow row in dtBudgetAppropriations.Rows)
             {
-                var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
+                int rowBudgetAppropriationId = Convert.ToInt32(row["id"]);
+                int rowfundId = Convert.ToInt32(row["funds_id"]);
+                string rowFundCode = row["fund_code"].ToString();
+                string rowFundName = row["fund_name"].ToString();
+                int rowFunctionClassificationId = Convert.ToInt32(row["functional_classification_id"]);
+                string rowFunctionClassificationSectorCode = row["functional_classification_sector_code"].ToString();
+                string rowFunctionClassificationSectorName = row["functional_classification_sector_name"].ToString();
+                int rowFunctionClassificationServicesId = Convert.ToInt32(row["functional_classification_service_id"]);
+                string rowFunctionClassificationServicesName = row["functional_classification_service_name"].ToString();
+                int rowFPPId = Convert.ToInt32(row["fpp_id"]);
+                string rowFPPCode = row["fpp_code"].ToString();
+                string rowFPPName = row["fpp_name"].ToString();
+                var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
+                byte rowFPPIsSpecial = Convert.ToByte(dictFPP["is_special"]);
+                byte rowIsContinuing = Convert.ToByte(row["continuing"]);
+                string rowSubFPPId = row["others_fpp_id"].ToString();
+                string rowSubFPPCode = row["others_fpp_code"].ToString();
+                string rowSubFPPName = row["others_fpp_name"].ToString();
+                int rowAllotmentClassId = Convert.ToInt32(row["allotment_class_id"]);
+                string rowAllotmentClassCode = row["allotment_class_code"].ToString();
+                string rowAllotmentClassName = row["allotment_class_name"].ToString();
+                string rowAccountCode = row["account_code"].ToString();
+                string rowAccountName = row["general_ledger_accounts_name"].ToString();
+                short rowYear = Convert.ToInt16(row["year"]);
+                string rowRemarks = row["remarks"].ToString();
+                decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
 
-                foreach (DataRow row in dtBudgetAppropriations.Rows)
+                //SUPPLEMENTED AMOUNT
+                var dtSupplemtedAmount = AccFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, date);
+                decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
+
+                decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
+
+                //ALLOTMENT RELEASE
+                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
+                decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
+
+                //OBLIGATIONS
+                var dtObligation = AccFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, date);
+                decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
+
+                //UNOBLIGATED BALANCE
+                decimal unobligatedBalance = allotmentReleaseAmount - obligationRequestAmount;
+
+                var items = new object[]
                 {
-                    int rowBudgetAppropriationId = Convert.ToInt32(row["id"]);
-                    int rowfundId = Convert.ToInt32(row["funds_id"]);
-                    string rowFundCode = row["fund_code"].ToString();
-                    string rowFundName = row["fund_name"].ToString();
-                    int rowFunctionClassificationId = Convert.ToInt32(row["functional_classification_id"]);
-                    string rowFunctionClassificationSectorCode = row["functional_classification_sector_code"].ToString();
-                    string rowFunctionClassificationSectorName = row["functional_classification_sector_name"].ToString();
-                    int rowFunctionClassificationServicesId = Convert.ToInt32(row["functional_classification_service_id"]);
-                    string rowFunctionClassificationServicesName = row["functional_classification_service_name"].ToString();
-                    int rowFPPId = Convert.ToInt32(row["fpp_id"]);
-                    string rowFPPCode = row["fpp_code"].ToString();
-                    string rowFPPName = row["fpp_name"].ToString();
-                    var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
-                    byte rowFPPIsSpecial = Convert.ToByte(dictFPP["is_special"]);
-                    byte rowIsContinuing = Convert.ToByte(row["continuing"]);
-                    string rowSubFPPId = row["others_fpp_id"].ToString();
-                    string rowSubFPPCode = row["others_fpp_code"].ToString();
-                    string rowSubFPPName = row["others_fpp_name"].ToString();
-                    int rowAllotmentClassId = Convert.ToInt32(row["allotment_class_id"]);
-                    string rowAllotmentClassCode = row["allotment_class_code"].ToString();
-                    string rowAllotmentClassName = row["allotment_class_name"].ToString();
-                    string rowAccountCode = row["account_code"].ToString();
-                    string rowAccountName = row["general_ledger_accounts_name"].ToString();
-                    short rowYear = Convert.ToInt16(row["year"]);
-                    string rowRemarks = row["remarks"].ToString();
-                    decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
-
-                    //SUPPLEMENTED AMOUNT
-                    var dtSupplemtedAmount = AccFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, date);
-                    decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
-
-                    decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
-
-                    //ALLOTMENT RELEASE
-                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
-                    decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
-
-                    //OBLIGATIONS
-                    var dtObligation = AccFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, date);
-                    decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
-
-                    //UNOBLIGATED BALANCE
-                    decimal unobligatedBalance = allotmentReleaseAmount - obligationRequestAmount;
-
-                    var items = new object[]
-                    {
                     rowfundId,
                     rowFundCode,
                     rowFundName,
@@ -120,14 +116,9 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     allotmentReleaseAmount,
                     obligationRequestAmount,
                     unobligatedBalance
-                    };
+                };
 
-                    dtSAAOB.Rows.Add(items);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                dtSAAOB.Rows.Add(items);
             }
 
             return dtSAAOB;
@@ -155,23 +146,19 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
         private bool LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOB");
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOB");
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-                DateTime AsOf = dtAsOf.Value;
+            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            DateTime AsOf = dtAsOf.Value;
 
-                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
-
-                var parameters = new[] {
-                    new ReportParameter("paramFundName", fundRepo["fund_name"]),
-                    new ReportParameter("paramFundCode", fundRepo["fund_code"]),
+            var parameters = new[] {
+                    new ReportParameter("paramFundName", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
+                    new ReportParameter("paramFundCode", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
@@ -179,38 +166,43 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
-                report.SetParameters(parameters);
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
+            report.SetParameters(parameters);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
 
-                reportViewer.RefreshReport();
-                Cursor = Cursors.Default;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            reportViewer.RefreshReport();
+            Cursor = Cursors.Default;
+            return true;
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (LoadReport(reportViewer.LocalReport))
+            try
             {
-                panelConfig.Enabled = true;
+                if (LoadReport(reportViewer.LocalReport))
+                    panelConfig.Enabled = true;
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            Helper.LoadFormIcon(this);
+            LoadFunds();
         }
 
         private void frmSAAOB_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         //FILTER

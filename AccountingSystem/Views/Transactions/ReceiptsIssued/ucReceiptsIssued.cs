@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -95,7 +96,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
             DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
-
 
             foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
             {
@@ -404,6 +404,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             LoadReceipts();
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -81,67 +82,60 @@ namespace AccountingSystem.Views.Reports.Journals
             dictionary.Add("defaultAccCodeCredit2", string.Empty);
             dictionary.Add("defaultAccCodeCredit3", string.Empty);
 
-            try
+            DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+
+            DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+
+            //Debit default Accounts
+
+            dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
+            dictionary["defaultAccIdDebit2"] = ParseDebitAccountIds(1).ToString();
+            dictionary["defaultAccIdDebit3"] = ParseDebitAccountIds(2).ToString();
+
+            int ParseDebitAccountIds(int row)
             {
-                DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+                if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                    return 0;
 
-                DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
-
-                //Debit default Accounts
-
-                dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
-                dictionary["defaultAccIdDebit2"] = ParseDebitAccountIds(1).ToString();
-                dictionary["defaultAccIdDebit3"] = ParseDebitAccountIds(2).ToString();
-
-                int ParseDebitAccountIds(int row)
-                {
-                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
-                        return 0;
-
-                    return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
-                }
-
-                dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
-                dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
-                dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
-
-                string ParseDebitAccountCodes(int row)
-                {
-                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
-                        return string.Empty;
-
-                    return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
-                }
-
-                //Credit default Accounts
-
-                dictionary["defaultAccIdCredit1"] = ParseCreditAccountIds(0).ToString();
-                dictionary["defaultAccIdCredit2"] = ParseCreditAccountIds(1).ToString();
-                dictionary["defaultAccIdCredit3"] = ParseCreditAccountIds(2).ToString();
-
-                int ParseCreditAccountIds(int row)
-                {
-                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
-                        return 0;
-
-                    return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
-                }
-
-                dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
-                dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
-                dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
-
-                string ParseCreditAccountCodes(int row)
-                {
-                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
-                        return string.Empty;
-
-                    return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
-                }
+                return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
             }
-            catch (Exception ex)
+
+            dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
+            dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
+            dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
+
+            string ParseDebitAccountCodes(int row)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                    return string.Empty;
+
+                return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
+            }
+
+            //Credit default Accounts
+
+            dictionary["defaultAccIdCredit1"] = ParseCreditAccountIds(0).ToString();
+            dictionary["defaultAccIdCredit2"] = ParseCreditAccountIds(1).ToString();
+            dictionary["defaultAccIdCredit3"] = ParseCreditAccountIds(2).ToString();
+
+            int ParseCreditAccountIds(int row)
+            {
+                if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                    return 0;
+
+                return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
+            }
+
+            dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
+            dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
+            dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
+
+            string ParseCreditAccountCodes(int row)
+            {
+                if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                    return string.Empty;
+
+                return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
             }
 
             return dictionary;
@@ -199,11 +193,16 @@ namespace AccountingSystem.Views.Reports.Journals
             Cursor.Current = Cursors.Default;
         }
 
+        private void OnLoad()
+        {
+            LoadReport(reportViewer.LocalReport);
+        }
+
         private void frmCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

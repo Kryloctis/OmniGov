@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,14 +21,19 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
-            var parameters = new[] {
-                        new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
-                };
+            var parameters = new[]
+            {
+                new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
 
             reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.RefreshReport();
@@ -143,25 +149,23 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Post Trial Balance");
-                var lguDict = Helper.LGUDetails();
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
-                report.DataSources.Clear();
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Post Trial Balance");
+            var lguDict = Helper.LGUDetails();
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
+            report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePostTrialBalance()));
+            report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePostTrialBalance()));
 
-                var certifiedCorrectSignatory = string.Empty;
-                var certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            var certifiedCorrectSignatory = string.Empty;
+            var certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var fundName = cmbFund.Text;
-                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
+            var fundName = cmbFund.Text;
+            var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
-                var parameters = new[] {
+            var parameters = new[] {
                         new ReportParameter("paramLGUName", lguDict["lgu_name"]),
                         new ReportParameter("paramFund", fundName),
                         new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
@@ -169,45 +173,44 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                         new ReportParameter("paramAsOf", asOfDate),
                       };
 
-                cbHideZeroBalance.Enabled = true;
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
+            cbHideZeroBalance.Enabled = true;
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
 
-                report.SetParameters(parameters);
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            report.SetParameters(parameters);
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbHideZeroBalance.Checked)
-                RecordsFilter(reportViewer.LocalReport, 1);
-            else
-                RecordsFilter(reportViewer.LocalReport, 0);
-        }
-
-        private void OnLoad()
-        {
             try
             {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+                if (cbHideZeroBalance.Checked)
+                    RecordsFilter(reportViewer.LocalReport, 1);
+                else
+                    RecordsFilter(reportViewer.LocalReport, 0);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ucPostClosingTrialBalance_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            }
+        }
+
+        private void ucPostClosingTrialBalance_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 OnLoad();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

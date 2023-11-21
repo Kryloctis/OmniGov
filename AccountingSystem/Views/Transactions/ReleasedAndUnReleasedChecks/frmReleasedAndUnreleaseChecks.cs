@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using DocumentFormat.OpenXml.Bibliography;
@@ -16,14 +17,13 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     public partial class frmReleasedAndUnreleaseChecks : Form
     {
-
         private DataTable releasedAndUnreleasedDT;
 
         public frmReleasedAndUnreleaseChecks()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false );
+            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false);
         }
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
@@ -68,7 +68,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             cmbxBankAccountNo.DisplayMember = "account_no";
         }
 
-
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
@@ -94,7 +93,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
 
-
                 foreach (DataRow row in dtViewReleasedCheques.Rows)
                 {
                     var newRow = releasedAndUnreleasedDT.NewRow();
@@ -114,7 +112,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
                     string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
 
-
                     newRow["rci_id"] = id;
                     newRow["cheques_id"] = chquesID;
                     newRow["bank_accounts_id"] = bankAccountsID;
@@ -132,7 +129,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
                     releasedAndUnreleasedDT.Rows.Add(newRow);
                 }
-
 
                 HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
 
@@ -162,7 +158,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 new DataColumn("nature_of_payment", typeof(string)),
                 new DataColumn("released_date", typeof(string)),
                 new DataColumn("status", typeof(string)),
-
         };
 
             return dataColumns;
@@ -195,10 +190,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
                 var releasedChequesModel = new ReleasedChequesModel()
                 {
-                   RCIID = RCIID,
-                   DateReleased = DateTime.Now,
+                    RCIID = RCIID,
+                    DateReleased = DateTime.Now,
                 };
-
 
                 var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
                 return releasedChequesRepository.Insert(releasedChequesModel);
@@ -207,13 +201,10 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             return false;
         }
 
-
-
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadChecks();
         }
-
 
         private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
         {

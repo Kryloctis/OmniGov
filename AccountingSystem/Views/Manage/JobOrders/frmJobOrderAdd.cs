@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data.SqlClient;
@@ -22,27 +23,13 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
-            {
-                _frmJobOrder.LoadRecords();
-                Helper.MessageBoxSuccess("JO Collecting Officer has been saved.");
-                _uc.ResetForm();
-            }
-        }
-
-        private bool SaveData()
-        {
             try
             {
-                using (var scope = new TransactionScope())
+                if (SaveData())
                 {
-                    if (InsertJobOrder() == true && AssignJOTORegularCollector() == true)
-                    {
-                        scope.Complete();
-                        return true;
-                    }
-
-                    return false;
+                    _frmJobOrder.LoadRecords();
+                    Helper.MessageBoxSuccess("JO Collecting Officer has been saved.");
+                    _uc.ResetForm();
                 }
             }
             catch (SqlException ex)
@@ -50,72 +37,54 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 if (ex.Number == 2601)
                 {
                     Helper.MessageBoxError("Record already added.");
-                    return false;
                 }
                 else
-                {
                     Helper.MessageBoxError(ex.Message);
-                    return false;
+            }
+        }
+
+        private bool SaveData()
+        {
+            using (var scope = new TransactionScope())
+            {
+                if (InsertJobOrder() == true && AssignJOTORegularCollector() == true)
+                {
+                    scope.Complete();
+                    return true;
                 }
+
+                return false;
             }
         }
 
         private bool InsertJobOrder()
         {
-            try
+            var jobOrderModel = new JobOrderModel()
             {
-                var jobOrderModel = new JobOrderModel()
-                {
-                    Prefix = _uc.txtPrefix.Text.Trim(),
-                    FirstName = _uc.txtFirstName.Text.Trim(),
-                    MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
-                    LastName = _uc.txtLastName.Text.Trim(),
-                    Suffix = _uc.txtSuffix.Text.Trim(),
-                    JobTitle = _uc.txtJobtitle.Text.Trim(),
-                    UserId = _uc.users_id
-                };
+                Prefix = _uc.txtPrefix.Text.Trim(),
+                FirstName = _uc.txtFirstName.Text.Trim(),
+                MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
+                LastName = _uc.txtLastName.Text.Trim(),
+                Suffix = _uc.txtSuffix.Text.Trim(),
+                JobTitle = _uc.txtJobtitle.Text.Trim(),
+                UserId = _uc.users_id
+            };
 
-                var repository = AccFactory.JobOrderRepository();
-                return repository.Insert(jobOrderModel);
-            }
-            catch (Exception)
-            {
-                return false;
-                throw;
-            }
+            return AccFactory.JobOrderRepository().Insert(jobOrderModel);
         }
 
         private bool AssignJOTORegularCollector()
         {
-            try
-            {
-                var regularCollectingOfficerId = _frmJobOrder.collectingOfficerId;
-                var JOCollectingOfficerId = AccFactory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
-                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
+            var regularCollectingOfficerId = _frmJobOrder.collectingOfficerId;
+            var JOCollectingOfficerId = AccFactory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
 
-                var collectingOfficerHasJOModel = new CollectingOfficerHasJobOrdersModel()
-                {
-                    CollectingOfficerId = regularCollectingOfficerId,
-                    JobOrdersId = JOCollectingOfficerId
-                };
+            var collectingOfficerHasJOModel = new CollectingOfficerHasJobOrdersModel()
+            {
+                CollectingOfficerId = regularCollectingOfficerId,
+                JobOrdersId = JOCollectingOfficerId
+            };
 
-                return collectingOfficerHasJORepo.Insert(collectingOfficerHasJOModel);
-            }
-            catch (MySqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 1062:
-                        Helper.MessageBoxError($"Selected record already added.");
-                        break;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                return false;
-            }
+            return AccFactory.CollectingOfficerHasJobOrdersRepository().Insert(collectingOfficerHasJOModel);
         }
     }
 }

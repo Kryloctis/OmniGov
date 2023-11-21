@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.LinkUser;
+﻿using ACC.Data;
+using AccountingSystem.Views.Manage.LinkUser;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -78,48 +79,48 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (UserId > 0)
-            {
-                UserId = 0;
-                linkuser.Text = "+ Link User";
-            }
-            else
-            {
-                frmLinkUser fuser = new frmLinkUser();
-                fuser.userType = "disburser";
-                if (fuser.ShowDialog() == DialogResult.OK)
-                {
-                    UserId = fuser.UserId;
-                    linkuser.Text = String.Format("@{0}", fuser.userName);
-                    if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
-                    {
-                        txtPrefix.Text = fuser.prefix;
-                        txtLastName.Text = fuser.lastName;
-                        txtFirstName.Text = fuser.firstName;
-                        txtMidInitial.Text = fuser.middleInitial;
-                        txtSuffix.Text = fuser.suffix;
-                    }
-                }
-            }
-        }
-
-        internal void LoadLink(int id)
-        {
             try
             {
-                var data = AccFactory.UsersRepository().GetUserByID(id);
-                if (data.Count > 0)
-                {
-                    UserId = id;
-                    linkuser.Text = String.Format("@{0}", data["username"]);
-                }
-                else
+                if (UserId > 0)
                 {
                     UserId = 0;
                     linkuser.Text = "+ Link User";
                 }
+                else
+                {
+                    frmLinkUser fuser = new frmLinkUser();
+                    fuser.userType = "disburser";
+                    if (fuser.ShowDialog() == DialogResult.OK)
+                    {
+                        UserId = fuser.UserId;
+                        linkuser.Text = String.Format("@{0}", fuser.userName);
+                        if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
+                        {
+                            txtPrefix.Text = fuser.prefix;
+                            txtLastName.Text = fuser.lastName;
+                            txtFirstName.Text = fuser.firstName;
+                            txtMidInitial.Text = fuser.middleInitial;
+                            txtSuffix.Text = fuser.suffix;
+                        }
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadLink(int id)
+        {
+            var data = AccFactory.UsersRepository().GetUserByID(id);
+            if (data.Count > 0)
+            {
+                UserId = id;
+                linkuser.Text = String.Format("@{0}", data["username"]);
+            }
+            else
+            {
+                UserId = 0;
+                linkuser.Text = "+ Link User";
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -73,27 +74,20 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         internal void ValidateReferenced()
         {
-            try
+            foreach (DataGridViewRow row in dgReferences.Rows)
             {
-                foreach (DataGridViewRow row in dgReferences.Rows)
-                {
-                    int referenceId = Convert.ToInt32(row.Cells["id"].Value);
-                    bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
-                    bool isReferencedBySignatoryId = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
+                int referenceId = Convert.ToInt32(row.Cells["id"].Value);
+                bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
+                bool isReferencedBySignatoryId = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
 
-                    if (!isEdit ? isReferenced : isReferencedBySignatoryId)
-                    {
-                        row.ReadOnly = true;
-                        row.DefaultCellStyle.BackColor = Color.LightGray;
-                        row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
-                        row.DefaultCellStyle.ForeColor = Color.Gray;
-                        row.DefaultCellStyle.SelectionForeColor = Color.Gray;
-                    }
+                if (!isEdit ? isReferenced : isReferencedBySignatoryId)
+                {
+                    row.ReadOnly = true;
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                    row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                    row.DefaultCellStyle.ForeColor = Color.Gray;
+                    row.DefaultCellStyle.SelectionForeColor = Color.Gray;
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -127,7 +121,77 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         #endregion References
 
-        #region Validation
+        private void ucSignatories_Load(object sender, System.EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                cmbxOfficeFilter.SelectedIndex = 0;
+                ValidatePermissions();
+            }
+        }
+
+        private void dgReferences_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void cmbxOfficeFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReferences();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #region Validations
+
+        private List<int> SelectedReferences()
+        {
+            List<int> referencesIdList = new List<int>();
+
+            foreach (DataGridViewRow row in dgReferences.Rows)
+            {
+                var isReferenced = Convert.ToBoolean(row.Cells["is_referenced"].Value);
+                if (isReferenced)
+                    referencesIdList.Add(Convert.ToInt32(row.Cells["id"].Value));
+            }
+
+            return referencesIdList;
+        }
+
+        private bool ReferencesIsEmpty()
+        {
+            if (SelectedReferences().Count < 1)
+            {
+                dgReferences.Tag = "No reference has been selected";
+                return true;
+            }
+            return false;
+        }
+
+        private void dgReferences_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = ReferencesIsEmpty();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgReferences_Validated(object sender, EventArgs e)
+        {
+            dgReferences.Tag = string.Empty;
+        }
 
         private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -169,59 +233,6 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.ClearErrorTextBox(errorProvider1, txtTitle);
         }
 
-        private List<int> SelectedReferences()
-        {
-            List<int> referencesIdList = new List<int>();
-
-            foreach (DataGridViewRow row in dgReferences.Rows)
-            {
-                var isReferenced = Convert.ToBoolean(row.Cells["is_referenced"].Value);
-                if (isReferenced)
-                    referencesIdList.Add(Convert.ToInt32(row.Cells["id"].Value));
-            }
-
-            return referencesIdList;
-        }
-
-        private bool ReferencesIsEmpty()
-        {
-            if (SelectedReferences().Count < 1)
-            {
-                dgReferences.Tag = "No reference has been selected";
-                return true;
-            }
-            return false;
-        }
-
-        #endregion Validation
-
-        private void ucSignatories_Load(object sender, System.EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                cmbxOfficeFilter.SelectedIndex = 0;
-                ValidatePermissions();
-            }
-        }
-
-        private void dgReferences_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
-        }
-
-        private void dgReferences_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = ReferencesIsEmpty();
-        }
-
-        private void dgReferences_Validated(object sender, EventArgs e)
-        {
-            dgReferences.Tag = string.Empty;
-        }
-
-        private void cmbxOfficeFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadReferences();
-        }
+        #endregion Validations
     }
 }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,15 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         }
 
         private void frmOtherPaymentRates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             RunBackgroundWorker();
         }
@@ -42,64 +52,64 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         internal void LoadRecords()
         {
-            try
+            string searchText = txtSearch.Text.Trim();
+            var dtOtherPaymentRates = new DataTable();
+            var dtOtherPaymentRatesFromDB = new DataTable();
+            int recordsCount = 0;
+            int rowCount = 0;
+
+            dtOtherPaymentRates.Columns.AddRange(OtherPaymentRatesColumns());
+
+            if (searchText.Length > 2)
+                dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecordsBySearch(searchText);
+            else
+                dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecords();
+
+            recordsCount = dtOtherPaymentRatesFromDB.Rows.Count;
+
+            foreach (DataRow row in dtOtherPaymentRatesFromDB.Rows)
             {
-                string searchText = txtSearch.Text.Trim();
-                var dtOtherPaymentRates = new DataTable();
-                var dtOtherPaymentRatesFromDB = new DataTable();
-                int recordsCount = 0;
-                int rowCount = 0;
+                var newRow = dtOtherPaymentRates.NewRow();
+                int id = Convert.ToInt32(row["id"]);
+                int taxTypeId = Convert.ToInt32(row["tax_type_id"]);
+                string description = row["description"].ToString();
+                decimal amount = row.IsNull("amount") ? 0 : Convert.ToDecimal(row["amount"]);
+                int startingYear = row.IsNull("starting_year") ? 0 : Convert.ToInt32(row["starting_year"]);
+                bool isEditableRate = Convert.ToBoolean(row["is_rate_editable"]);
+                int createdBy = Convert.ToInt32(row["created_by"]);
+                object createdAt = row["created_at"].ToString();
+                int updateBy = row.IsNull("updated_by") ? 0 : Convert.ToInt32(row["updated_by"]);
+                object updateAt = row["updated_at"].ToString();
 
-                dtOtherPaymentRates.Columns.AddRange(OtherPaymentRatesColumns());
+                newRow["id"] = id;
+                newRow["tax_type_id"] = taxTypeId;
+                newRow["description"] = description;
+                newRow["amount"] = amount;
+                newRow["starting_year"] = startingYear;
+                newRow["is_rate_editable"] = isEditableRate;
+                newRow["created_by"] = createdBy;
+                newRow["created_at"] = createdAt;
+                newRow["updated_by"] = updateBy;
+                newRow["updated_at"] = updateAt;
 
-                if (searchText.Length > 2)
-                    dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecordsBySearch(searchText);
-                else
-                    dtOtherPaymentRatesFromDB = AccFactory.OtherPaymentRatesRepository().GetRecords();
+                rowCount++;
+                int progressBarPercentage = (rowCount * 100) / recordsCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
 
-                recordsCount = dtOtherPaymentRatesFromDB.Rows.Count;
-
-                foreach (DataRow row in dtOtherPaymentRatesFromDB.Rows)
-                {
-                    var newRow = dtOtherPaymentRates.NewRow();
-                    int id = Convert.ToInt32(row["id"]);
-                    int taxTypeId = Convert.ToInt32(row["tax_type_id"]);
-                    string description = row["description"].ToString();
-                    decimal amount = row.IsNull("amount") ? 0 : Convert.ToDecimal(row["amount"]);
-                    int startingYear = row.IsNull("starting_year") ? 0 : Convert.ToInt32(row["starting_year"]);
-                    bool isEditableRate = Convert.ToBoolean(row["is_rate_editable"]);
-                    int createdBy = Convert.ToInt32(row["created_by"]);
-                    object createdAt = row["created_at"].ToString();
-                    int updateBy = row.IsNull("updated_by") ? 0 : Convert.ToInt32(row["updated_by"]);
-                    object updateAt = row["updated_at"].ToString();
-
-                    newRow["id"] = id;
-                    newRow["tax_type_id"] = taxTypeId;
-                    newRow["description"] = description;
-                    newRow["amount"] = amount;
-                    newRow["starting_year"] = startingYear;
-                    newRow["is_rate_editable"] = isEditableRate;
-                    newRow["created_by"] = createdBy;
-                    newRow["created_at"] = createdAt;
-                    newRow["updated_by"] = updateBy;
-                    newRow["updated_at"] = updateAt;
-
-                    rowCount++;
-                    int progressBarPercentage = (rowCount * 100) / recordsCount;
-                    backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                    dtOtherPaymentRates.Rows.Add(newRow);
-                }
-
-                HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
-                SetStatusStripData();
+                dtOtherPaymentRates.Rows.Add(newRow);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            HelperLoadRecords.OtherPaymentRatesDatagridView(dgOtherPaymentRates, dtOtherPaymentRates);
+            SetStatusStripData();
         }
 
         private void dgOtherPaymentRates_SelectionChanged(object sender, EventArgs e)
         {
-            SetStatusStripData();
+            try
+            {
+                SetStatusStripData();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void SetStatusStripData()
@@ -119,15 +129,23 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddOtherPaymentRates(this).ShowDialog();
+            try
+            {
+                _ = new frmAddOtherPaymentRates(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rowIndex = dgOtherPaymentRates.CurrentCell.RowIndex;
-            int otherPaymentRatesID = Convert.ToInt32(dgOtherPaymentRates.Rows[rowIndex].Cells["id"].Value);
+            try
+            {
+                int rowIndex = dgOtherPaymentRates.CurrentCell.RowIndex;
+                int otherPaymentRatesID = Convert.ToInt32(dgOtherPaymentRates.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmEditOtherPaymentRates(this, otherPaymentRatesID).ShowDialog();
+                _ = new frmEditOtherPaymentRates(this, otherPaymentRatesID).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -168,7 +186,11 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            RunBackgroundWorker();
+            try
+            {
+                RunBackgroundWorker();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void RunBackgroundWorker()
@@ -182,10 +204,14 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                LoadRecords();
-            });
+                Invoke((MethodInvoker)delegate
+                 {
+                     LoadRecords();
+                 });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -195,7 +221,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
         }
     }
 }

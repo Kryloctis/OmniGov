@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -40,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void OnLoad() 
+        internal void OnLoad()
         {
             LoadProvince();
             LoadBarangay();
@@ -82,6 +83,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         }
 
         #region Husband
+
         private void txtHusbandName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtHusbandName, "Husband Name.");
@@ -151,9 +153,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxHusbandBarangay);
         }
-        #endregion
 
-        #region  Wife
+        #endregion Husband
+
+        #region Wife
+
         private void txtWifeName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtWifeName, "Wife Name.");
@@ -222,9 +226,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         private void cmbxWifeBarangay_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxWifeBarangay);
-        } 
-        #endregion
+        }
 
-        #endregion Validation
+        #endregion Wife
+
+        #endregion Validations
     }
 }
