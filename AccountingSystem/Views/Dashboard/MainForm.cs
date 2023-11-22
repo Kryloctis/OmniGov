@@ -46,6 +46,7 @@ using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
@@ -638,10 +639,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBarangay().ShowDialog();
         }
 
-        private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
         {
             _ = new frmRealProperties().ShowDialog();
@@ -700,6 +697,11 @@ namespace AccountingSystem.Views.Dashboard
         private void aF54ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmMarriageLicense().ShowDialog();
+        }
+
+        private void aF58BurialPermitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBurialPermit().ShowDialog();
         }
     }
 }

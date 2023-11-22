@@ -218,12 +218,6 @@ namespace AccountingSystem.Views.Shared
             var taxpayerBarangay = dictTaxpayer["taxpayers_barangay"].ToString();
             var taxpayerMunicipality = dictTaxpayer["taxpayers_municipality"].ToString();
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
-
-            frmPayments.ucCattleTransferOfOwnership.newOwnerID = taxpayerId;
-            frmPayments.ucCattleTransferOfOwnership.txtCattleNewOwner.Text = taxpayer;
-            frmPayments.ucCattleTransferOfOwnership.cmbxProvince.Text = taxpayerProvince;
-            frmPayments.ucCattleTransferOfOwnership.cmbxMunicipality.Text = taxpayerMunicipality;
-            frmPayments.ucCattleTransferOfOwnership.cmbxBarangay.Text = taxpayerBarangay;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
