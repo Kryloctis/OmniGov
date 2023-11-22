@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -8,15 +9,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
     public partial class ucOtherCharges : UserControl
     {
-
-        int childImageIndexCounter = 1;
+        private int childImageIndexCounter = 1;
         internal string description = string.Empty;
         internal string accountableForm = string.Empty;
         internal int unit = 1;
         internal decimal debitAmount;
         internal decimal subTotalAmount;
-        internal decimal totalAmount;
-
 
         public ucOtherCharges()
         {
@@ -25,6 +23,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         }
 
         #region OtherPaymentCharges
+
         private void LoadOtherPaymentCharges()
         {
             treeViewTaxTypes.Nodes.Clear();
@@ -36,7 +35,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             foreach (DataRow dr in dtTaxTypes.Rows)
             {
-
                 parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
 
                 string taxTypeID = dr["id"].ToString();
@@ -52,7 +50,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         {
             var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
 
-
             ImageList nodeImageList = new ImageList();
             CreateImageList(ref nodeImageList);
 
@@ -66,7 +63,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
                     childNode.ImageIndex = 0;
                     childNode.SelectedImageIndex = 0;
                 }
-
                 else
                 {
                     childNode = parentNode.Nodes.Add(dr["description"].ToString());
@@ -79,14 +75,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
                         childImageIndexCounter++;
                 }
 
-
                 string taxTypeID = dr["id"].ToString();
                 childNode.Tag = taxTypeID;
                 PopulateTreeView(taxTypeID, childNode);
 
                 if (Convert.ToBoolean(dr["is_deleted"]))
                     childNode.ForeColor = Color.Gray;
-
             }
         }
 
@@ -101,17 +95,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             treeViewTaxTypes.ImageList = nodeImageList;
             treeViewTaxTypes.ImageIndex = 0;
             treeViewTaxTypes.SelectedImageIndex = 0;
-
         }
-        #endregion
 
-        private void ucOtherCharges_Load(object sender, EventArgs e)
+        #endregion OtherPaymentCharges
+
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadOtherPaymentCharges();
-                CreatedOtherPaymentChargesColumns(dgOtherPaymentCharges);
-            }
+            LoadOtherPaymentCharges();
+            CreatedOtherPaymentChargesColumns(dgOtherPaymentCharges);
         }
 
         internal void CreatedOtherPaymentChargesColumns(DataGridView datagrid)
@@ -146,7 +137,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             datagrid.Columns["total_amount"].DefaultCellStyle.Format = "#,0.00###";
             datagrid.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["total_amount"].MinimumWidth = 80;
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -214,6 +204,5 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             return totalPayment;
         }
-
     }
 }

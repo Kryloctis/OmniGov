@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,71 +9,64 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
     public partial class frmMajorAccountGroupEdit : Form
     {
         private readonly frmChartOfAccounts _frmChartOfAccounts;
+        private UcMajorAccountGroup uc;
 
         public frmMajorAccountGroupEdit(frmChartOfAccounts frmChartOfAccounts, short majorAccountGroupId)
         {
             InitializeComponent();
             _frmChartOfAccounts = frmChartOfAccounts;
-            ucMajorAccountGroup1.majorAccountGroupId = majorAccountGroupId;
+            uc = ucMajorAccountGroup1;
+            uc.majorAccountGroupId = majorAccountGroupId;
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var uc = ucMajorAccountGroup1;
-                var majorAccountGroupRepository = AccFactory.MajorAccountGroupRepository();
-                Dictionary<string, string> data = majorAccountGroupRepository.GetRecordByID(uc.majorAccountGroupId);
+            Dictionary<string, string> data = AccFactory.MajorAccountGroupRepository().GetRecordByID(uc.majorAccountGroupId);
 
-                uc.cmbAccountGroup.SelectedValue = data["account_group_id"];
-                uc.txtCode.Text = data["maj_acc_group_code"];
-                uc.txtName.Text = data["maj_acc_group_name"];
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.cmbAccountGroup.SelectedValue = data["account_group_id"];
+            uc.txtCode.Text = data["maj_acc_group_code"];
+            uc.txtName.Text = data["maj_acc_group_name"];
         }
 
         private bool SaveData()
         {
-            try
+            // if error occurs, show messagebox error
+            if (!uc.ValidateChildren())
             {
-                var uc = ucMajorAccountGroup1;
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to insert
-                var majorAccountGroupModel = new MajorAccountGroupModel()
-                {
-                    Id = ucMajorAccountGroup1.majorAccountGroupId,
-                    AccountGroupId = byte.Parse(uc.cmbAccountGroup.SelectedValue.ToString()),
-                    MajorAccountGroupCode = uc.txtCode.Text.Trim(),
-                    MajorAccountGroupName = uc.txtName.Text.Trim()
-                };
-
-                return AccFactory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
-            return false;
+            // proceed to insert
+            var majorAccountGroupModel = new MajorAccountGroupModel()
+            {
+                Id = uc.majorAccountGroupId,
+                AccountGroupId = byte.Parse(uc.cmbAccountGroup.SelectedValue.ToString()),
+                MajorAccountGroupCode = uc.txtCode.Text.Trim(),
+                MajorAccountGroupName = uc.txtName.Text.Trim()
+            };
+
+            return AccFactory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
         }
 
         private void frmMajorAccountGroupEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            ucMajorAccountGroup1.LoadAccountGroup();
+            uc.LoadAccountGroup();
             LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Major account group has been saved.");
-                _frmChartOfAccounts.LoadMajorAccountGroup();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Major account group has been saved.");
+                    _frmChartOfAccounts.LoadMajorAccountGroup();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

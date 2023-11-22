@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
@@ -31,23 +32,16 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                Dictionary<string, string> beginningBalanceDict = new();
-                if (uc.subsidiaryLedgerId == 0)
-                    beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
-                else
-                    beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
+            Dictionary<string, string> beginningBalanceDict = new();
+            if (uc.subsidiaryLedgerId == 0)
+                beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
+            else
+                beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
-                uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
-                CheckedDebitCredit(beginningBalanceDict["is_debit"]);
-                uc.dtpDateEntry.Value = Convert.ToDateTime(beginningBalanceDict["date_entry"]);
-                uc.nudAmount.Value = Convert.ToDecimal(beginningBalanceDict["amount"]);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
+            CheckedDebitCredit(beginningBalanceDict["is_debit"]);
+            uc.dtpDateEntry.Value = Convert.ToDateTime(beginningBalanceDict["date_entry"]);
+            uc.nudAmount.Value = Convert.ToDecimal(beginningBalanceDict["amount"]);
         }
 
         private void CheckedDebitCredit(string isDebit)
@@ -63,37 +57,28 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private bool UpdateData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                ushort subsidiaryId = uc.subsidiaryLedgerId;
-                var beginningBalanceModel = new BeginningBalancesModel()
-                {
-                    Id = uc.beginningBalanceId,
-                    FundsId = fundId,
-                    GeneralLedgerId = uc.generalLedgerId,
-                    SubsidiaryLedgerId = subsidiaryId != 0 ? subsidiaryId : null,
-                    IsDebit = uc.radioDebit.Checked,
-                    DateEntry = uc.dtpDateEntry.Value,
-                    Amount = uc.nudAmount.Value
-                };
-
-                return AccFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            ushort subsidiaryId = uc.subsidiaryLedgerId;
+            var beginningBalanceModel = new BeginningBalancesModel()
+            {
+                Id = uc.beginningBalanceId,
+                FundsId = fundId,
+                GeneralLedgerId = uc.generalLedgerId,
+                SubsidiaryLedgerId = subsidiaryId != 0 ? subsidiaryId : null,
+                IsDebit = uc.radioDebit.Checked,
+                DateEntry = uc.dtpDateEntry.Value,
+                Amount = uc.nudAmount.Value
+            };
+
+            return AccFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
         }
 
-        private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.LoadFormIcon(this);
             uc.LoadSelectedGeneralLedger();
@@ -102,16 +87,29 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             LoadSelectedRecord();
         }
 
+        private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateData())
+            try
             {
-                Helper.MessageBoxSuccess("Balance has been saved.");
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Balance has been saved.");
 
-                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                Close();
+                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete()
@@ -135,10 +133,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                 }
                 Close();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

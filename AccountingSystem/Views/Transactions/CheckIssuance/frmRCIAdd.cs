@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Data;
 using System.Transactions;
@@ -126,12 +127,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     uc.ResetForm();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
     }
 }

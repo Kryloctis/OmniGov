@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -17,11 +18,12 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = errorProvider1.GetError(txtDescription);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtDescription)
+        };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -35,9 +37,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void ucBusinessCategories_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-            }
         }
 
         private bool DescriptionValidated(ErrorProvider errorProvider, TextBox textBox)

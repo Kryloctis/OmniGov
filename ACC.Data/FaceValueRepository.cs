@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class FaceValueRepository : IFaceValueRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "face_values";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public FaceValueRepository(IAccGenericCommands dbGenericCommands)
+        public FaceValueRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
@@ -23,7 +23,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -33,28 +33,21 @@ namespace ACC.Data
 
         public bool Delete(List<FaceValueModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
                             new object[] { "@id", DbType.Int16, entity.id},
-                        };
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -62,29 +55,23 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("date", reader.Rows[0]["date"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
+                record.Add("date", reader.Rows[0]["date"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("is_default", reader.Rows[0]["is_default"].ToString());
             }
 
             return record;
@@ -92,17 +79,10 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} ORDER BY id DESC";
+            string query = $"SELECT * FROM {tableName} ORDER BY id DESC";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByAccountableFormId(int accountableFormId)
@@ -113,7 +93,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountableFormId ORDER BY id DESC";
 
             var dtBanks = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtBanks, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtBanks, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -123,7 +103,7 @@ namespace ACC.Data
                 string query = $"SELECT * FROM {tableName} WHERE date LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
+                return mySqlGenericCommandsLFS.Fill(query, dtBanks);
             }
             catch (Exception)
             {
@@ -138,43 +118,31 @@ namespace ACC.Data
 
         public bool Insert(FaceValueModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@date", DbType.DateTime, entity.facedate},
-                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
-                };
+                new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
+                new object[] { "@date", DbType.DateTime, entity.facedate},
+                new object[] { "@amount", DbType.Decimal, entity.facevalue},
+                new object[] { "@is_default", DbType.Boolean, entity.isDefault}
+            };
 
-                string query = $"INSERT INTO {tableName} (accountable_forms_id,date,amount) VALUES (@accountable_forms_id, @date, @amount)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (accountable_forms_id,date,amount, is_default) VALUES (@accountable_forms_id, @date, @amount, @is_default)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(FaceValueModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.id},
-                    new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@date", DbType.DateTime, entity.facedate},
-                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
-                };
+                new object[] { "@id", DbType.Int32, entity.id},
+                new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
+                new object[] { "@date", DbType.DateTime, entity.facedate},
+                new object[] { "@amount", DbType.Decimal, entity.facevalue},
+                new object[] { "@is_default", DbType.Boolean, entity.isDefault}
+            };
 
-                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id, date=@date, amount=@amount WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id, date=@date, amount=@amount, is_default = @is_default WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public decimal GetFaceValueByAccountableFormId(int id)
@@ -185,7 +153,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id = @accountableFormId";
-            var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            var queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return 0;

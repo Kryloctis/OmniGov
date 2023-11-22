@@ -1,4 +1,4 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
     public partial class ucAccountableForm : UserControl
     {
         internal int accountableFormId;
-        internal bool isEdit = false;
+        internal bool isEdit;
 
         public ucAccountableForm()
         {
@@ -19,8 +19,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(txtformno),
-                errorProvider1.GetError(txtformdesc)
+                errorProvider1.GetError(txtFormNo),
+                errorProvider1.GetError(txtFormDescription)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -28,17 +28,17 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         internal void ResetForm()
         {
-            txtformno.Clear();
-            txtformdesc.Clear();
-            txtformno.Focus();
+            txtFormNo.Clear();
+            txtFormDescription.Clear();
+            txtFormNo.Focus();
         }
 
         private bool FormNoValidated()
         {
-            string formNumber = txtformno.Text.Trim();
+            string formNumber = txtFormNo.Text.Trim();
 
             bool formNumberExist;
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtformno, "Form No."))
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFormNo, "Form No."))
                 return false;
 
             if (!isEdit)
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
             if (formNumberExist)
             {
-                errorProvider1.SetError(txtformno, "Accountable Form Number already exist in your records.");
+                errorProvider1.SetError(txtFormNo, "Accountable Form Number already exist in your records.");
                 return !formNumberExist;
             }
             return true;
@@ -61,17 +61,17 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void txtformno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtformno);
+            Helper.ClearErrorTextBox(errorProvider1, txtFormNo);
         }
 
         private void txtformdesc_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtformdesc, "Form Description.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFormDescription, "Form Description.");
         }
 
         private void txtformdesc_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtformdesc);
+            Helper.ClearErrorTextBox(errorProvider1, txtFormDescription);
         }
     }
 }

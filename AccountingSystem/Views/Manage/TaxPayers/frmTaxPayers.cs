@@ -1,6 +1,8 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -15,91 +17,36 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
         }
 
-        private DataColumn[] TaxpayersColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayer_type_code", typeof(string)),
-                new DataColumn("taxpayers_tin", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
-                new DataColumn("taxpayers_address", typeof(string)),
-                new DataColumn("taxpayers_contact_info", typeof(string)),
-                new DataColumn("is_active", typeof(bool)),
-                new DataColumn("created_at", typeof(string)),
-                new DataColumn("updated_at", typeof(string))
-            };
-        }
-
-        private DataTable TaxpayersDataTable()
-        {
-            string searchText = txtSearch.Text.Trim();
-            bool showInactive = chckBxInactiveTaxpayers.Checked;
-            var dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText, showInactive);
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(TaxpayersColumns());
-
-            int rowCount = 0;
-            int recordCount = dtTaxpayers.Rows.Count;
-
-            foreach (DataRow row in dtTaxpayers.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
-                string taxpayerTin = row["taxpayers_tin"].ToString();
-                string taxpayerName = row["taxpayers_name"].ToString();
-                string taxpayerTypeCode = row["taxpayer_type"].ToString();
-                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
-                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
-                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
-                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
-                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
-                string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
-                bool isActive = Convert.ToBoolean(Convert.ToByte(row["is_active"]));
-                string createdAt = row["created_at"].ToString();
-                string updatedAt = row["updated_at"].ToString();
-
-                newRow["taxpayers_id"] = taxpayerId;
-                newRow["taxpayer_type_code"] = taxpayerTypeCode;
-                newRow["taxpayers_tin"] = taxpayerTin;
-                newRow["taxpayers_name"] = taxpayerName;
-                newRow["taxpayers_address"] = taxpayerAddress;
-                newRow["taxpayers_contact_info"] = taxpayerContactInfo;
-                newRow["is_active"] = isActive;
-                newRow["created_at"] = createdAt;
-                newRow["updated_at"] = updatedAt;
-
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                dataTable.Rows.Add(newRow);
-            }
-            return dataTable;
-        }
-
-        internal void LoadTaxpayers()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
-            }
-        }
-
         private void frmTaxPayers_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadTaxpayers();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddTaxpayers().ShowDialog();
+            try
+            {
+                _ = new frmAddTaxpayers().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditForm();
+            try
+            {
+                ShowEditForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete()
@@ -161,10 +108,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
                 Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void chckBxInactiveTaxpayers_CheckedChanged(object sender, EventArgs e)
@@ -185,21 +129,117 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private DataColumn[] TaxpayersColumns()
         {
-            Invoke((MethodInvoker)delegate
+            return new DataColumn[]
             {
-                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayersDataTable());
-            });
+                new DataColumn("taxpayers_id", typeof (int)),
+                new DataColumn("taxpayer_type_code", typeof(string)),
+                new DataColumn("taxpayers_tin", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("taxpayers_address", typeof(string)),
+                new DataColumn("taxpayers_contact_info", typeof(string)),
+                new DataColumn("is_active", typeof(bool)),
+                new DataColumn("created_at", typeof(string)),
+                new DataColumn("updated_at", typeof(string))
+            };
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private DataTable TaxpayersDataTable(string searchText, bool showInactive)
+        {
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText, showInactive);
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(TaxpayersColumns());
+
+            int progressCount = 0;
+            int totalProgressCount = dtTaxpayers.Rows.Count;
+
+            if (dtTaxpayers.Rows.Count < 1)
+            {
+                backgroundWorker1.ReportProgress(100);
+                return dataTable;
+            }
+
+            foreach (DataRow row in dtTaxpayers.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
+                string taxpayerTin = row["taxpayers_tin"].ToString();
+                string taxpayerName = row["taxpayers_name"].ToString();
+                string taxpayerTypeCode = row["taxpayer_type"].ToString();
+                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
+                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
+                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
+                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
+                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
+                string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
+                bool isActive = Convert.ToBoolean(Convert.ToByte(row["is_active"]));
+                string createdAt = row["created_at"].ToString();
+                string updatedAt = row["updated_at"].ToString();
+
+                newRow["taxpayers_id"] = taxpayerId;
+                newRow["taxpayer_type_code"] = taxpayerTypeCode;
+                newRow["taxpayers_tin"] = taxpayerTin;
+                newRow["taxpayers_name"] = taxpayerName;
+                newRow["taxpayers_address"] = taxpayerAddress;
+                newRow["taxpayers_contact_info"] = taxpayerContactInfo;
+                newRow["is_active"] = isActive;
+                newRow["created_at"] = createdAt;
+                newRow["updated_at"] = updatedAt;
+
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
+        }
+
+        internal void LoadTaxpayers()
+        {
+            var dictParameters = new Dictionary<string, string>();
+            string searchText = txtSearch.Text.Trim();
+            bool showInactive = chckBxInactiveTaxpayers.Checked;
+
+            dictParameters.Add("search_key", searchText);
+            dictParameters.Add("is_active", showInactive.ToString());
+
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync(dictParameters);
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                if (e.Argument is not Dictionary<string, string> dictionaryParameters)
+                    return;
+                if (dictionaryParameters.Count < 1)
+                    return;
+
+                string searchText = dictionaryParameters["search_key"];
+                bool is_active = Convert.ToBoolean(dictionaryParameters["is_active"]);
+
+                e.Result = TaxpayersDataTable(searchText, is_active);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, dataTable);
+
             dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
         }

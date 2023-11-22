@@ -1,10 +1,4 @@
-﻿using AccountingSystem;
-using RPT.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RPT.Domain.Interfaces;
 using System.Transactions;
 
 namespace RPT.Data

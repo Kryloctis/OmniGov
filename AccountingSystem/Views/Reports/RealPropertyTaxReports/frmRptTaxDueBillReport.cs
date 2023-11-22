@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
+﻿using ACC.Data;
+using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         public frmRptTaxDueBillReport(DataTable dtRPTDueBill, rptPropertyPaymentTaxPayerInfoModel paymentTaxPayerInfoModel)
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             panel1.Controls.Add(reportViewer);
@@ -34,53 +36,50 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 
         private void LoadReport(LocalReport report)
         {
-            try
+            Cursor.Current = Cursors.WaitCursor;
+
+            var lguDetails = Helper.LGUDetails();
+            var dictPenalty = AccFactory.RptPenaltiesRepository().GetRecordByDescription("RPT monthly penalty");
+            string penaltyRate = dictPenalty.Values.Count < 1 ? "0" : dictPenalty["rate"];
+            var dictCheckedBy = Helper.GetSignatoryDataBy_Reference_DocumentName("Checked By", "Real Property Tax Due Bill");
+            var dictCertCorrect = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Real Property Tax Due Bill");
+
+            var parameters = new[]
             {
-                Cursor.Current = Cursors.WaitCursor;
-                var lguDetails = Helper.LGUDetails();
-                var dictPenalty = AccFactory.RptPenaltiesRepository().GetRecordByDescription("RPT monthly penalty");
-                string penaltyRate = dictPenalty.Values.Count < 1 ? "0" : dictPenalty["rate"];
-                var dictCheckedBy = Helper.GetSignatoryDataBy_Reference_DocumentName("Checked By", "Real Property Tax Due Bill");
-                var dictCertCorrect = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Real Property Tax Due Bill");
+                new ReportParameter("paramMunicipality",  lguDetails["lgu_name"]),
+                new ReportParameter("paramProvince", lguDetails["lgu_province"]),
+                new ReportParameter("paramTaxPayerName", _rptPropertyPaymentTaxPayerInfoModel.TaxPayerName),
+                new ReportParameter("paramAddress", _rptPropertyPaymentTaxPayerInfoModel.Address),
+                new ReportParameter("paramTin", _rptPropertyPaymentTaxPayerInfoModel.TIN),
+                new ReportParameter("paramPreparedBy", Helper.LoggedInUserData()["user_full_name"]),
+                new ReportParameter("paramCurrentDate", Helper.GetCurrentDate().ToString()),
+                new ReportParameter("paramPenaltyRate", penaltyRate),
+                new ReportParameter("paramCheckedBy", GetSignatories(dictCheckedBy)),
+                new ReportParameter("paramCertifiedCorrect", GetSignatories(dictCertCorrect))
+            };
 
-                var parameters = new[]
-                {
-                    new ReportParameter("paramMunicipality",  lguDetails["lgu_name"]),
-                    new ReportParameter("paramProvince", lguDetails["lgu_province"]),
-                    new ReportParameter("paramTaxPayerName", _rptPropertyPaymentTaxPayerInfoModel.TaxPayerName),
-                    new ReportParameter("paramAddress", _rptPropertyPaymentTaxPayerInfoModel.Address),
-                    new ReportParameter("paramTin", _rptPropertyPaymentTaxPayerInfoModel.TIN),
-                    new ReportParameter("paramPreparedBy", Helper.LoggedInUserData()["user_full_name"]),
-                    new ReportParameter("paramCurrentDate", Helper.GetCurrentDate().ToString()),
-                    new ReportParameter("paramPenaltyRate", penaltyRate),
-                    new ReportParameter("paramCheckedBy", GetSignatories(dictCheckedBy)),
-                    new ReportParameter("paramCertifiedCorrect", GetSignatories(dictCertCorrect))
-                };
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-due-bill.rdlc";
+            report.DataSources.Clear();
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-due-bill.rdlc";
-                report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtRPTDueBill", _dtRPTDueBill));
+            report.SetParameters(parameters);
 
-                report.DataSources.Add(new ReportDataSource("dtRPTDueBill", _dtRPTDueBill));
-                report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
+            reportViewer.ZoomPercent = 100;
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
-                reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
 
-                reportViewer.RefreshReport();
-
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-                Cursor.Current = Cursors.Default;
-            }
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmRptTaxDueBillReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

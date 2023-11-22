@@ -173,33 +173,17 @@ namespace ACC.Data
             return data;
         }
 
-        public DataTable GetLinksCollectingOfficers()
+        public DataTable GetLinksCollectingOfficers(string searchText)
         {
-            string query = $"SELECT " +
-                            $"id, " +
-                            $"roles_id, " +
-                            $"prefix, " +
-                            $"first_name, " +
-                            $"mid_initial, " +
-                            $"last_name, " +
-                            $"suffix, " +
-                            $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
-                            $"username, " +
-                            $"password, " +
-                            $"is_deleted, " +
-                            $"created_at, " +
-                            $"updated_at, " +
-                            $"office, " +
-                            $"role_name, " +
-                            $"permission_name, " +
-                            $"permission_office " +
-                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' " +
-                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
-                            $"AND id NOT IN (SELECT users_id FROM collecting_officers)" +
-                            $"GROUP BY id";
+            var parameters = new object[][]
+            {
+                new object[] { "@text_search", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE role_name LIKE '%collect%' AND last_name LIKE @text_search AND first_name LIKE @text_search AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) AND id NOT IN (SELECT users_id FROM collecting_officers) GROUP BY id";
 
             var dtUsers = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dtUsers);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
         }
 
         public DataTable GetLinksJOCollectingOfficers()
@@ -260,24 +244,17 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@search_text", DbType.String, $"%{searchText}%"},
-                };
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
 
-                var srchtxt = searchText;
+            var srchtxt = searchText;
 
-                string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
+            string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
-                var dtUsers = new DataTable();
-                return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtUsers = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
         }
 
         public bool Insert(UsersModel entity)
@@ -463,24 +440,16 @@ namespace ACC.Data
 
         public bool NameExist(string userName)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@username", DbType.String, userName },
-                };
-
-                string query = $"SELECT username FROM {tableName} WHERE username = @username";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@username", DbType.String, userName }
             };
 
+            string query = $"SELECT username FROM {tableName} WHERE username = @username";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
         }
 

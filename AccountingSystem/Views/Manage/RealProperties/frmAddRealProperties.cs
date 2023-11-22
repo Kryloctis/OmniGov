@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Windows.Forms;
@@ -33,60 +34,52 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormError());
-                    return false;
-                }
+                Helper.MessageBoxError(uc.GetFormError());
+                return false;
+            }
 
-                var realPropertiesModel = new RealPropertiesModel()
+            var realPropertiesModel = new RealPropertiesModel()
+            {
+                CompleteArpNo = uc.txtArpNo.Text,
+                ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
+                ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
+                BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
+                PropertyIdentifier = uc.propertyIdentifier,
+                RealTaxpayersId = uc.taxpayerID,
+                TaxpayerName = uc.txtTaxpayers.Text,
+                TaxpayerAddress = uc.txtTaxpayerAddress.Text,
+                PropertyPin = uc.txtPropertyPin.Text,
+                PropertyKind = uc.cmbxPropertyKind.Text,
+                EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
+                EffectivityYear = Convert.ToInt32(uc.nudEffectivityYear.Value),
+                AssessedValue = uc.nudAssessedValue.Value,
+                GrYear = Convert.ToInt32(uc.nudGrYear.Value),
+                OtherImprovements = uc.nudOtherImprv.Value,
+                Area = Convert.ToDecimal(uc.nudArea.Value),
+                LotNo = uc.txtLotNo.Text,
+                IsTaxable = uc.chckTaxable.Checked,
+                IsCancelled = uc.chckCancelled.Checked,
+                CreatedBy = Helper.UserId
+            };
+
+            if (uc.propertyIdentifier != "0")
+            {
+                var previousAssessment = new RptPreviousAssessmentModel()
                 {
-                    CompleteArpNo = uc.txtArpNo.Text,
-                    ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
-                    ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
-                    BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
-                    PropertyIdentifier = uc.propertyIdentifier,
-                    RealTaxpayersId = uc.taxpayerID,
-                    TaxpayerName = uc.txtTaxpayers.Text,
-                    TaxpayerAddress = uc.txtTaxpayerAddress.Text,
-                    PropertyPin = uc.txtPropertyPin.Text,
-                    PropertyKind = uc.cmbxPropertyKind.Text,
-                    EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
-                    EffectivityYear = Convert.ToInt32(uc.nudEffectivityYear.Value),
-                    AssessedValue = uc.nudAssessedValue.Value,
-                    GrYear = Convert.ToInt32(uc.nudGrYear.Value),
-                    OtherImprovements = uc.nudOtherImprv.Value,
-                    Area = Convert.ToDecimal(uc.nudArea.Value),
-                    LotNo = uc.txtLotNo.Text,
-                    IsTaxable = uc.chckTaxable.Checked,
-                    IsCancelled = uc.chckCancelled.Checked,
-                    CreatedBy = Helper.UserId
+                    RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
+                    PropertyPin = uc.txtPreviousPin.Text,
+                    CompleteArpNo = uc.cmbxCompletePreviousARPNumber.Text,
+                    AssessedValue = Convert.ToDecimal(uc.txtPreviousAssessedValue.Text),
+                    PreviousOwner = uc.txtPreviousOwner.Text,
+                    EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text
                 };
 
-                if (uc.propertyIdentifier != "0")
-                {
-                    var previousAssessment = new RptPreviousAssessmentModel()
-                    {
-                        RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
-                        PropertyPin = uc.txtPreviousPin.Text,
-                        CompleteArpNo = uc.cmbxCompletePreviousARPNumber.Text,
-                        AssessedValue = Convert.ToDecimal(uc.txtPreviousAssessedValue.Text),
-                        PreviousOwner = uc.txtPreviousOwner.Text,
-                        EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text
-                    };
-
-                    return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
-                }
-                else
-                    return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
+                return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            else
+                return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
         }
 
         private void frmAddRealProperties_Load(object sender, EventArgs e)

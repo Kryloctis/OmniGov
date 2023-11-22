@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations
@@ -54,6 +55,15 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         }
 
         private void ucSupplementalAppropriations_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {

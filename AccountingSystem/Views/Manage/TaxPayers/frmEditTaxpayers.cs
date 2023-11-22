@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -22,39 +23,45 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmEditTaxpayers_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             LoadSelectedRecord();
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
-                uc.txtTIN.Text = dictTaxpayer["tin"];
-                uc.txtName.Text = dictTaxpayer["name"];
-                uc.txtStreet.Text = dictTaxpayer["street"];
-                uc.txtBarangay.Text = dictTaxpayer["barangay"];
-                uc.txtMunicipality.Text = dictTaxpayer["municipality"];
-                uc.txtProvince.Text = dictTaxpayer["province"];
-                uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
-                uc.txtContact.Text = dictTaxpayer["contact_info"];
-                uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.txtTIN.Text = dictTaxpayer["tin"];
+            uc.txtName.Text = dictTaxpayer["name"];
+            uc.txtStreet.Text = dictTaxpayer["street"];
+            uc.txtBarangay.Text = dictTaxpayer["barangay"];
+            uc.txtMunicipality.Text = dictTaxpayer["municipality"];
+            uc.txtProvince.Text = dictTaxpayer["province"];
+            uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
+            uc.txtContact.Text = dictTaxpayer["contact_info"];
+            uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateTaxpayer())
+            try
             {
-                Helper.MessageBoxSuccess("Taxpayer has been updated.");
-                _frmTaxpayers.LoadTaxpayers();
-                Close();
+                if (UpdateTaxpayer())
+                {
+                    Helper.MessageBoxSuccess("Taxpayer has been updated.");
+                    _frmTaxpayers.LoadTaxpayers();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateTaxpayer()
@@ -90,8 +97,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 UpdatedBy = Helper.UserId
             };
 
-            var taxpayersRepo = AccFactory.TaxpayersRepository();
-            return taxpayersRepo.Update(taxpayersModel);
+            return AccFactory.TaxpayersRepository().Update(taxpayersModel);
         }
     }
 }

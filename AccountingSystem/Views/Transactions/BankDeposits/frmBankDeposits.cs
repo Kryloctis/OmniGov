@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -21,15 +22,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         internal void LoadRecords()
         {
-            try
-            {
-                var depositsRepository = AccFactory.BankDepositsRepository();
-                var dtdeposits = depositsRepository.GetRecords();
-                HelperLoadRecords.DepositsDatagridView(dtdeposits, dgbankdeposits);
+            var depositsRepository = AccFactory.BankDepositsRepository();
+            var dtdeposits = depositsRepository.GetRecords();
+            HelperLoadRecords.DepositsDatagridView(dtdeposits, dgbankdeposits);
 
-                lblRecordCount.Text = depositsRepository.CountRecords().ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            lblRecordCount.Text = depositsRepository.CountRecords().ToString();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -51,30 +48,30 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     LoadRecords();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length == 0)
+            try
             {
-                LoadRecords();
-                return; 
-            }
-            
-            string searchkey = Convert.ToString(txtsearch.Text.Trim());
-            var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
-            HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
+                if (txtsearch.Text.Length == 0)
+                {
+                    LoadRecords();
+                    return;
+                }
 
-            lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
+                string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
+
+                lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgbankdeposits_SelectionChanged(object sender, EventArgs e)
         {
-
             try
             {
                 if (dgbankdeposits.Columns.Count < 1)
@@ -86,16 +83,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var indexes = new byte[] { createdByIndex, updatedByIndex };
                 EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
                 Helper.ShowRecordTimestamp(dgbankdeposits, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
 
-
-            byte[] columnIndexData = { 6, 7, 8, 9 };
-            Helper.ShowRecordTimestamp(dgbankdeposits, columnIndexData, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
+                byte[] columnIndexData = { 6, 7, 8, 9 };
+                Helper.ShowRecordTimestamp(dgbankdeposits, columnIndexData, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         public static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
@@ -120,13 +113,21 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmBankDepositsAdd(this, 0, string.Empty, 0).ShowDialog();
+            try
+            {
+                _ = new frmBankDepositsAdd(this, 0, string.Empty, 0).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int bankDepositID = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
-            _ = new frmBankDepositsEdit(this, bankDepositID).ShowDialog();
+            try
+            {
+                int bankDepositID = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
+                _ = new frmBankDepositsEdit(this, bankDepositID).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

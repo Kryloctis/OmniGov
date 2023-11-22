@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using RPT.Data;
 using System;
 using System.Data;
@@ -35,10 +36,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     backgroundWorkerRptSync.RunWorkerAsync();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         #region Database Sync Progresses
@@ -48,7 +46,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             try
             {
                 var dtRealProperties = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecords();
-                int totalRecordCount = dtRealProperties.Rows.Count;
+                int totalProgressCount = dtRealProperties.Rows.Count;
                 int progressCount = 0;
                 int remainingItems = dtRealProperties.Rows.Count;
 
@@ -220,7 +218,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
                     progressCount++;
                     remainingItems--;
-                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, $"Importing ARP No. {completeArpNo} | Remaining Items {remainingItems}");
+                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalProgressCount, $"Importing ARP No. {completeArpNo} | Remaining Items {remainingItems}");
                 }
 
                 if (backgroundWorkerRptSync.CancellationPending)
@@ -273,7 +271,11 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            backgroundWorkerRptSync.CancelAsync();
+            try
+            {
+                backgroundWorkerRptSync.CancelAsync();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

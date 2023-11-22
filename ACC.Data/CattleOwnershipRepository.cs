@@ -3,7 +3,7 @@ using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class CattleOwnershipRepository : ICattleOwnershipRepository
     {
@@ -82,7 +82,6 @@ namespace AccountingSystem
             };
 
             string query = $"INSERT INTO {tableName} (owner_id, tag, barangay, municipality, province, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@owner_id, @tag, @barangay, @municipality, @province, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
-
 
             bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);
             return result;

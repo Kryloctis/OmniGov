@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ReturnedReceipts
@@ -14,23 +15,24 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 
         private void frmReturnedReceipts_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             LoadRecords();
         }
 
         private void LoadRecords()
         {
-            try
-            {
-                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-                var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
+            var returnedReceiptDt = AccFactory.ReceiptsIssuedRepository().GetReturnedReceipts();
 
-                HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
-                lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+            lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -45,10 +47,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
                 lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

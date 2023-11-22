@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.RCDCollector;
+﻿using ACC.Data;
+using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -26,8 +27,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            LoadCollections();
-            EnableDisableLocalControls();
+            try
+            {
+                LoadCollections();
+                EnableDisableLocalControls();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadCollections()
@@ -36,7 +41,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             var collectionTo = Convert.ToDateTime(dtto.SelectionRange.Start.ToShortDateString());
             var isCollectorJO = _uc.cbJOCollector.Checked;
 
-            var parameter = new object[] {
+            var parameter = new object[]
+            {
                 _collectorId,
                 _fundId,
                 collectionFrom,
@@ -78,9 +84,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelectCollections_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
-            _uc.TotalCollections();
-            Close();
+            try
+            {
+                HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
+                _uc.TotalCollections();
+                Close();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dtfrom_DateChanged(object sender, DateRangeEventArgs e)

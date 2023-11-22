@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -16,11 +17,12 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = epName.GetError(txtName);
+            var errorArray = new string[]
+            {
+                epName.GetError(txtName)
+            };
 
-            var _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -43,30 +45,21 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         internal void LoadPermissions()
         {
-            try
+            dgPermissions.DataSource = null;
+            dgPermissions.Rows.Clear();
+
+            string office = cmbOffice.Text;
+
+            var dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
+
+            foreach (DataRow row in dtPermissions.Rows)
             {
-                dgPermissions.DataSource = null;
-                dgPermissions.Rows.Clear();
+                string permissionId = row["id"].ToString();
+                string permissionName = row["permission_name"].ToString();
 
-                var dtPermissions = new DataTable();
-                var userDict = Helper.LoggedInUserData();
-                string office = cmbOffice.Text;
+                if (AuthorizedPermissionExist(permissionId)) continue;
 
-                dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
-
-                foreach (DataRow row in dtPermissions.Rows)
-                {
-                    string permissionId = row["id"].ToString();
-                    string permissionName = row["permission_name"].ToString();
-
-                    if (AuthorizedPermissionExist(permissionId)) continue;
-
-                    dgPermissions.Rows.Add(new string[] { permissionId, permissionName });
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                dgPermissions.Rows.Add(new string[] { permissionId, permissionName });
             }
         }
 
@@ -87,7 +80,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             }
 
             cmbOffice.SelectedIndex = 0;
-
             cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
         }
 
@@ -112,23 +104,26 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "role name");
-
-            var rolesRepository = AccFactory.RolesRepository();
-            string roleName = txtName.Text.Trim();
-            string office = cmbOffice.Text;
-            bool roleNameExist;
-
-            if (roleId == 0)
-                roleNameExist = rolesRepository.NameExist(roleName, office); // add form
-            else
-                roleNameExist = rolesRepository.NameExist(roleName, office, roleId); // edit form
-
-            if (roleNameExist)
+            try
             {
-                epName.SetError(txtName, "Role name already exist in this office.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "role name");
+
+                string roleName = txtName.Text.Trim();
+                string office = cmbOffice.Text;
+                bool roleNameExist;
+
+                if (roleId == 0)
+                    roleNameExist = AccFactory.RolesRepository().NameExist(roleName, office); // add form
+                else
+                    roleNameExist = AccFactory.RolesRepository().NameExist(roleName, office, roleId); // edit form
+
+                if (roleNameExist)
+                {
+                    epName.SetError(txtName, "Role name already exist in this office.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -138,6 +133,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void ucRoles_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             Helper.DatagridDefaultStyle(dgPermissions);
             Helper.DatagridDefaultStyle(dgPermissionGranted);
             CreateDatagridViewColumns(dgPermissions);
@@ -146,28 +150,36 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void dgPermissions_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgPermissions.SelectedRows.Count > 0)
+            try
             {
-                btnGrantPermission.Enabled = true;
-                btnGrantAllPermissions.Enabled = true;
-                return;
-            }
+                if (dgPermissions.SelectedRows.Count > 0)
+                {
+                    btnGrantPermission.Enabled = true;
+                    btnGrantAllPermissions.Enabled = true;
+                    return;
+                }
 
-            btnGrantPermission.Enabled = false;
-            btnGrantAllPermissions.Enabled = false;
+                btnGrantPermission.Enabled = false;
+                btnGrantAllPermissions.Enabled = false;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgPermissionGranted_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgPermissionGranted.SelectedRows.Count > 0)
+            try
             {
-                btnDenyPermission.Enabled = true;
-                btnDenyAllPermissions.Enabled = true;
-                return;
-            }
+                if (dgPermissionGranted.SelectedRows.Count > 0)
+                {
+                    btnDenyPermission.Enabled = true;
+                    btnDenyAllPermissions.Enabled = true;
+                    return;
+                }
 
-            btnDenyPermission.Enabled = false;
-            btnDenyAllPermissions.Enabled = false;
+                btnDenyPermission.Enabled = false;
+                btnDenyAllPermissions.Enabled = false;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void AddPermission(string permissionId, string permissionName, DataGridView datagrid)
@@ -187,56 +199,72 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void btnGrantAllPermissions_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgPermissions.Rows)
+            try
             {
-                string permissionId = row.Cells["id"].Value.ToString();
-                string permissionName = row.Cells["permission_name"].Value.ToString();
-                AddPermission(permissionId, permissionName, dgPermissionGranted);
-            }
+                foreach (DataGridViewRow row in dgPermissions.Rows)
+                {
+                    string permissionId = row.Cells["id"].Value.ToString();
+                    string permissionName = row.Cells["permission_name"].Value.ToString();
+                    AddPermission(permissionId, permissionName, dgPermissionGranted);
+                }
 
-            RemoveAllPermissions(dgPermissions);
+                RemoveAllPermissions(dgPermissions);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDenyAllPermissions_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgPermissionGranted.Rows)
+            try
             {
-                string permissionId = row.Cells["id"].Value.ToString();
-                string permissionName = row.Cells["permission_name"].Value.ToString();
-                AddPermission(permissionId, permissionName, dgPermissions);
-            }
+                foreach (DataGridViewRow row in dgPermissionGranted.Rows)
+                {
+                    string permissionId = row.Cells["id"].Value.ToString();
+                    string permissionName = row.Cells["permission_name"].Value.ToString();
+                    AddPermission(permissionId, permissionName, dgPermissions);
+                }
 
-            RemoveAllPermissions(dgPermissionGranted);
+                RemoveAllPermissions(dgPermissionGranted);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnGrantPermission_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgPermissions.SelectedRows)
+            try
             {
-                string permissionId = row.Cells["id"].Value.ToString();
-                string permissionName = row.Cells["permission_name"].Value.ToString();
-                AddPermission(permissionId, permissionName, dgPermissionGranted);
-            }
+                foreach (DataGridViewRow row in dgPermissions.SelectedRows)
+                {
+                    string permissionId = row.Cells["id"].Value.ToString();
+                    string permissionName = row.Cells["permission_name"].Value.ToString();
+                    AddPermission(permissionId, permissionName, dgPermissionGranted);
+                }
 
-            foreach (DataGridViewRow row in dgPermissions.SelectedRows)
-            {
-                RemovePermission(row, dgPermissions);
+                foreach (DataGridViewRow row in dgPermissions.SelectedRows)
+                {
+                    RemovePermission(row, dgPermissions);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDenyPermission_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
+            try
             {
-                string permissionId = row.Cells["id"].Value.ToString();
-                string permissionName = row.Cells["permission_name"].Value.ToString();
-                AddPermission(permissionId, permissionName, dgPermissions);
-            }
+                foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
+                {
+                    string permissionId = row.Cells["id"].Value.ToString();
+                    string permissionName = row.Cells["permission_name"].Value.ToString();
+                    AddPermission(permissionId, permissionName, dgPermissions);
+                }
 
-            foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
-            {
-                RemovePermission(row, dgPermissionGranted);
+                foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
+                {
+                    RemovePermission(row, dgPermissionGranted);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

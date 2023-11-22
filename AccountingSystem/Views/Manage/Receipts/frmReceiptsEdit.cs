@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,61 +23,56 @@ namespace AccountingSystem.Views.Manage.Receipts
             uc.receiptID = receiptID;
         }
 
-        private void frmAccFromEdit_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadSelectedValue();
             SetUpdateRestrictions();
         }
 
-        private void SetUpdateRestrictions()
+        private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                //restrict updating series number and set the max date of received date receipts if receipts has been issued.
-                bool receiptHasIssuance = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
-
-                if (receiptHasIssuance)
-                {
-                    uc.cmbAccountableForms.Enabled = false;
-                    uc.txtReceiptNumberFrom.Enabled = false;
-                    uc.txtReceiptNumberTo.Enabled = false;
-
-                    //set max date of date received.
-                    Dictionary<string, string> dict = AccFactory.ReceiptsIssuedRepository().GetViewRecordReceiptId(_receiptID);
-                    if (dict.Count != 0)
-                        uc.dtpReceivedDate.MaxDate = Convert.ToDateTime(dict["date_issued"]);
-                }
-
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
+        private void SetUpdateRestrictions()
+        {
+            //restrict updating series number and set the max date of received date receipts if receipts has been issued.
+            bool receiptHasIssuance = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
+
+            if (receiptHasIssuance)
+            {
+                uc.cmbAccountableForms.Enabled = false;
+                uc.txtReceiptNumberFrom.Enabled = false;
+                uc.txtReceiptNumberTo.Enabled = false;
+
+                //set max date of date received.
+                Dictionary<string, string> dict = AccFactory.ReceiptsIssuedRepository().GetViewRecordReceiptId(_receiptID);
+                if (dict.Count != 0)
+                    uc.dtpReceivedDate.MaxDate = Convert.ToDateTime(dict["date_issued"]);
+            }
         }
 
         private void LoadSelectedValue()
         {
-            try
-            {
-                var receiptRepository = AccFactory.ReceiptsRepository();
-                Dictionary<string, string> dictReceipts = receiptRepository.GetRecordByID(_receiptID);
+            Dictionary<string, string> dictReceipts = AccFactory.ReceiptsRepository().GetRecordByID(_receiptID);
 
-                int accountableFormID = Convert.ToInt32(dictReceipts["accountable_forms_id"]);
-                int receiptNumberFrom = Convert.ToInt32(dictReceipts["receipt_number_from"]);
-                int receiptNumberTo = Convert.ToInt32(dictReceipts["receipt_number_to"]);
-                DateTime dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
-                int quantity = Convert.ToInt32(dictReceipts["quantity"]);
-                string remarks = dictReceipts["remarks"].ToString();
+            int accountableFormID = Convert.ToInt32(dictReceipts["accountable_forms_id"]);
+            int receiptNumberFrom = Convert.ToInt32(dictReceipts["receipt_number_from"]);
+            int receiptNumberTo = Convert.ToInt32(dictReceipts["receipt_number_to"]);
+            DateTime dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
+            int quantity = Convert.ToInt32(dictReceipts["quantity"]);
+            string remarks = dictReceipts["remarks"].ToString();
 
-                uc.cmbAccountableForms.SelectedValue = accountableFormID;
-                uc.txtReceiptNumberFrom.Text = receiptNumberFrom == 0 ? string.Empty : receiptNumberFrom.ToString("D7");
-                uc.txtReceiptNumberTo.Text = receiptNumberTo == 0 ? string.Empty : receiptNumberTo.ToString("D7");
-                uc.dtpReceivedDate.Value = dateReceived;
-                uc.txtQuantity.Text = quantity.ToString();
-                uc.txtRemark.Text = remarks;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.cmbAccountableForms.SelectedValue = accountableFormID;
+            uc.txtReceiptNumberFrom.Text = receiptNumberFrom == 0 ? string.Empty : receiptNumberFrom.ToString("D7");
+            uc.txtReceiptNumberTo.Text = receiptNumberTo == 0 ? string.Empty : receiptNumberTo.ToString("D7");
+            uc.dtpReceivedDate.Value = dateReceived;
+            uc.txtQuantity.Text = quantity.ToString();
+            uc.txtRemark.Text = remarks;
         }
 
         private bool SaveData()
@@ -106,8 +102,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 UserId = userId
             };
 
-            var receiptsRepository = AccFactory.ReceiptsRepository();
-            return receiptsRepository.Update(receiptModel);
+            return AccFactory.ReceiptsRepository().Update(receiptModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -117,16 +112,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt has been updated.");
-                    if (!_frmReceipts.bgwLoadReceipts.IsBusy)
-                        _frmReceipts.bgwLoadReceipts.RunWorkerAsync();
-                    this.Close();
+                    _frmReceipts.LoadReceipts();
+                    Close();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

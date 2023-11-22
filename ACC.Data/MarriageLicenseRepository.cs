@@ -1,16 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
-using System.Transactions;
-using System.Xml.XPath;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     public class MarriageLicenseRepository : IMarriageLicenseRepository
     {
-
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "marriage_license";
 
@@ -56,8 +52,8 @@ namespace AccountingSystem
 
         public bool InsertWithMarriageLicensePayment(MarriageLicenseModel marriageLicenseModel)
         {
-                var parameters = new object[][]
-                   {
+            var parameters = new object[][]
+               {
                         new object[] { "@issued_on", DbType.DateTime, marriageLicenseModel.IssuedOn},
                         new object[] { "@register_no", DbType.String, marriageLicenseModel.RegisterNo},
                         new object[] { "@published_on", DbType.DateTime, marriageLicenseModel.PublishedOn},
@@ -77,17 +73,16 @@ namespace AccountingSystem
                         new object[] { "@wife_province", DbType.String, marriageLicenseModel.WifeProvince},
                         new object[] { "@created_at", DbType.DateTime, marriageLicenseModel.IssuedOn},
                         new object[] { "@created_by", DbType.Int32, marriageLicenseModel.CreatedBy}
-                   };
+               };
 
-                string query = $"INSERT INTO {tableName} (issued_on, register_no, published_on, husband_name, husband_age, husband_months, husband_street, husband_barangay, husband_municipality, husband_province, wife_name, wife_months, wife_age, wife_street, wife_barangay, wife_municipality, wife_province, created_at, created_by) VALUES(@issued_on, @register_no, @published_on, @husband_name, @husband_age, @husband_months, @husband_street, @husband_barangay, @husband_municipality, @husband_province, @wife_name, @wife_months, @wife_age, @wife_street, @wife_barangay, @wife_municipality, @wife_province, @created_at, @created_by)";
+            string query = $"INSERT INTO {tableName} (issued_on, register_no, published_on, husband_name, husband_age, husband_months, husband_street, husband_barangay, husband_municipality, husband_province, wife_name, wife_months, wife_age, wife_street, wife_barangay, wife_municipality, wife_province, created_at, created_by) VALUES(@issued_on, @register_no, @published_on, @husband_name, @husband_age, @husband_months, @husband_street, @husband_barangay, @husband_municipality, @husband_province, @wife_name, @wife_months, @wife_age, @wife_street, @wife_barangay, @wife_municipality, @wife_province, @created_at, @created_by)";
 
-
-                bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                return result;
+            bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return result;
         }
 
         public bool Update(MarriageLicenseModel entity)
-                //    return true;
+        //    return true;
         {
             throw new System.NotImplementedException();
         }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -33,23 +34,14 @@ namespace AccountingSystem.Views.Manage.Users.List
             }
 
             cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
-
             cmbOffice.SelectedIndex = 0;
         }
 
         internal void LoadRoles()
         {
-            try
-            {
-                string office = cmbOffice.Text;
-
-                DataTable dtRoleName = AccFactory.RolesRepository().GetRecordsByOffice(office);
-                HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            string office = cmbOffice.Text;
+            DataTable dtRoleName = AccFactory.RolesRepository().GetRecordsByOffice(office);
+            HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
         }
 
         private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
@@ -60,17 +52,18 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
-            errorArray[0] = epRole.GetError(cmbRoles);
-            errorArray[1] = epFirstName.GetError(txtFirstname);
-            errorArray[2] = epMiddleInitial.GetError(txtMiddleInitial);
-            errorArray[3] = epLastName.GetError(txtLastname);
-            errorArray[4] = epUserName.GetError(txtUsername);
-            errorArray[5] = txtPassword.Tag.ToString();
-            errorArray[6] = txtConfirmPassword.Tag.ToString();
+            var errorArray = new string[]
+            {
+                epRole.GetError(cmbRoles),
+                epFirstName.GetError(txtFirstname),
+                epMiddleInitial.GetError(txtMiddleInitial),
+                epLastName.GetError(txtLastname),
+                epUserName.GetError(txtUsername),
+                txtPassword.Tag.ToString(),
+                txtConfirmPassword.Tag.ToString()
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -88,22 +81,26 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtUsername_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epUserName, txtUsername, "username");
-
-            var usersRepository = AccFactory.UsersRepository();
-            string userName = txtUsername.Text.Trim();
-            bool userNameExist;
-
-            if (userId == 0)
-                userNameExist = usersRepository.NameExist(userName); // add form
-            else
-                userNameExist = usersRepository.NameExist(userName, userId); // edit form
-
-            if (userNameExist)
+            try
             {
-                epUserName.SetError(txtUsername, "Username already exist in your records.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epUserName, txtUsername, "username");
+
+                var usersRepository = AccFactory.UsersRepository();
+                string userName = txtUsername.Text.Trim();
+                bool userNameExist;
+
+                if (userId == 0)
+                    userNameExist = usersRepository.NameExist(userName); // add form
+                else
+                    userNameExist = usersRepository.NameExist(userName, userId); // edit form
+
+                if (userNameExist)
+                {
+                    epUserName.SetError(txtUsername, "Username already exist in your records.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtUsername_Validated(object sender, EventArgs e)
@@ -113,16 +110,20 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void cmbRoles_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epRole, cmbRoles, "role name");
-
-            int roleId = Convert.ToByte(cmbRoles.SelectedValue);
-            bool idExist = AccFactory.RolesRepository().IdExist(roleId);
-
-            if (!idExist)
+            try
             {
-                epRole.SetError(cmbRoles, "Invalid role name. Please select on the list.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epRole, cmbRoles, "role name");
+
+                int roleId = Convert.ToByte(cmbRoles.SelectedValue);
+                bool idExist = AccFactory.RolesRepository().IdExist(roleId);
+
+                if (!idExist)
+                {
+                    epRole.SetError(cmbRoles, "Invalid role name. Please select on the list.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbRoles_Validated(object sender, EventArgs e)
@@ -198,13 +199,17 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (userId != 0) return;
-            e.Cancel = textBoxIsEmpty(txtConfirmPassword, "Please confirm password");
-
-            if (!string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtConfirmPassword.Text))
+            try
             {
-                e.Cancel = PasswordDoesNotMatch(txtConfirmPassword);
+                if (userId != 0) return;
+                e.Cancel = textBoxIsEmpty(txtConfirmPassword, "Please confirm password");
+
+                if (!string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtConfirmPassword.Text))
+                {
+                    e.Cancel = PasswordDoesNotMatch(txtConfirmPassword);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtConfirmPassword_Validated(object sender, EventArgs e)
@@ -214,39 +219,56 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void btnPasswordVisibility_Click(object sender, EventArgs e)
         {
-            Image invisibleImage = Properties.Resources.invisible_16px;
-            Image visibleImage = Properties.Resources.visible_16px;
+            try
+            {
+                Image invisibleImage = Properties.Resources.invisible_16px;
+                Image visibleImage = Properties.Resources.visible_16px;
 
-            if (txtPassword.PasswordChar == '•')
-            {
-                btnPasswordVisibility.Image = invisibleImage;
-                txtPassword.PasswordChar = default(char);
+                if (txtPassword.PasswordChar == '•')
+                {
+                    btnPasswordVisibility.Image = invisibleImage;
+                    txtPassword.PasswordChar = default(char);
+                }
+                else
+                {
+                    btnPasswordVisibility.Image = visibleImage;
+                    txtPassword.PasswordChar = '•';
+                }
             }
-            else
-            {
-                btnPasswordVisibility.Image = visibleImage;
-                txtPassword.PasswordChar = '•';
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnConfirmPasswordVisibility_Click(object sender, EventArgs e)
         {
-            Image invisibleImage = Properties.Resources.invisible_16px;
-            Image visibleImage = Properties.Resources.visible_16px;
+            try
+            {
+                Image invisibleImage = Properties.Resources.invisible_16px;
+                Image visibleImage = Properties.Resources.visible_16px;
 
-            if (txtConfirmPassword.PasswordChar == '•')
-            {
-                btnConfirmPasswordVisibility.Image = invisibleImage;
-                txtConfirmPassword.PasswordChar = default(char);
+                if (txtConfirmPassword.PasswordChar == '•')
+                {
+                    btnConfirmPasswordVisibility.Image = invisibleImage;
+                    txtConfirmPassword.PasswordChar = default(char);
+                }
+                else
+                {
+                    btnConfirmPasswordVisibility.Image = visibleImage;
+                    txtConfirmPassword.PasswordChar = '•';
+                }
             }
-            else
-            {
-                btnConfirmPasswordVisibility.Image = visibleImage;
-                txtConfirmPassword.PasswordChar = '•';
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucUsers_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {

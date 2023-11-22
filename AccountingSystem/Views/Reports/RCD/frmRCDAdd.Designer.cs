@@ -164,7 +164,6 @@ namespace AccountingSystem.Views.Reports.RCD
             dgCollectorsReport.RowTemplate.Height = 29;
             dgCollectorsReport.Size = new System.Drawing.Size(748, 304);
             dgCollectorsReport.TabIndex = 20;
-            dgCollectorsReport.CellContentClick += dgCollectorsReport_CellContentClick;
             dgCollectorsReport.SelectionChanged += dgCollectorsReport_SelectionChanged;
             dgCollectorsReport.DoubleClick += dgCollectorsReport_DoubleClick;
             // 

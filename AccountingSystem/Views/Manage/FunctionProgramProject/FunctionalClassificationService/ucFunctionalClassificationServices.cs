@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -15,13 +16,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         public void LoadSectorNameComboBox()
         {
-            try
-            {
-                DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
-                byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
+            HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
+            byte id = Convert.ToByte(cmbSectorName.SelectedValue);
         }
 
         internal string GetFormErrors()
@@ -40,11 +37,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             txtName.Clear();
         }
 
-        private void cmbSectorName_SelectedIndexChanged(object sender, EventArgs e)
+        private void ucFunctonalClassificationServices_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ucFunctonalClassificationServices_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -64,26 +66,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private bool ServicesNameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            try
+            if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
-                {
-                    errorProvider.SetError(textBox, Helper.ErrorMessage("Service Name"));
-                    return false;
-                }
-
-                bool nameExist = serviceID == 0 ? AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
-                                                  AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
-                if (nameExist)
-                {
-                    errorProvider.SetError(textBox, "Service Name already exist.");
-                    return false;
-                }
-
-                return true;
+                errorProvider.SetError(textBox, Helper.ErrorMessage("Service Name"));
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+
+            bool nameExist = serviceID == 0 ? AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
+                                              AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
+            if (nameExist)
+            {
+                errorProvider.SetError(textBox, "Service Name already exist.");
+                return false;
+            }
+
+            return true;
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -93,7 +90,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !ServicesNameValidated(epName, txtName);
+            try
+            {
+                e.Cancel = !ServicesNameValidated(epName, txtName);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

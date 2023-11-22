@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using Org.BouncyCastle.Cms;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void ucTransactionLog_Load(object sender, System.EventArgs e)
         {
-            OnLoad();
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadFunds()
@@ -229,34 +234,32 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            try
+            byte fundId = (byte)cmbxFunds.SelectedValue;
+            short year = Convert.ToInt16(nudYear.Value);
+            ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
+
+            var lguDict = Helper.LGUDetails();
+            var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            var fundName = cmbxFunds.Text;
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
+            report.DataSources.Clear();
+
+            report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
+
+            ReportParameter[] parameters = new[]
             {
-                byte fundId = (byte)cmbxFunds.SelectedValue;
-                short year = Convert.ToInt16(nudYear.Value);
-                ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
+                new ReportParameter("paramLGUName", lguDict["lgu_name"]),
+                new ReportParameter("paramFund", fundName),
+                new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
+                new ReportParameter("paramAccount", generalLedgerDict["ledger_name"]),
+                new ReportParameter("paramYear",year.ToString())
+            };
 
-                var lguDict = Helper.LGUDetails();
-                var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-                var fundName = cmbxFunds.Text;
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
-                report.DataSources.Clear();
-
-                report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
-
-                ReportParameter[] parameters = new[] {
-                    new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
-                    new ReportParameter("paramAccount", generalLedgerDict["ledger_name"]),
-                    new ReportParameter("paramYear",year.ToString())
-                };
-                report.SetParameters(parameters);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
         }
 
         private string GetFormErrors()
@@ -288,10 +291,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                LoadReport(reportViewer.LocalReport);
-            });
+                Invoke((MethodInvoker)delegate
+                 {
+                     LoadReport(reportViewer.LocalReport);
+                 });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)

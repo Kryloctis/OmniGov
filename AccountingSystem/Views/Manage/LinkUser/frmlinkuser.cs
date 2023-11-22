@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -6,8 +7,8 @@ namespace AccountingSystem.Views.Manage.LinkUser
 {
     public partial class frmLinkUser : Form
     {
-        internal int UserId = 0;
-        internal string Username = string.Empty;
+        internal int UserId;
+        internal string userName = string.Empty;
         internal string prefix = string.Empty;
         internal string lastName = string.Empty;
         internal string firstName = string.Empty;
@@ -18,90 +19,82 @@ namespace AccountingSystem.Views.Manage.LinkUser
         public frmLinkUser()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgvusers, true);
-            dgvusers.MultiSelect = false;
+            Helper.DatagridFullRowSelectStyle(dgUsers, true);
         }
 
         private void frmlinkuser_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            if (!string.IsNullOrEmpty(userType))
+                LoadRecords();
         }
 
         internal void LoadRecords()
         {
-            try
+            string textSearch = txtSearch.Text.Trim();
+            var dataTableUsers = new DataTable();
+
+            switch (userType)
             {
-                if (!string.IsNullOrEmpty(userType))
-                {
-                    if (userType.Equals("collector"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksCollectingOfficers();
+                case "collector":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksCollectingOfficers(textSearch);
+                    break;
 
-                        foreach (DataRow row in dtusers.Rows)
-                        {
-                            int userId = Convert.ToInt32(row["id"]);
-                            var dictUser = Helper.GetUserDataById(userId);
-                            row["user_full_name"] = dictUser["user_full_name"];
-                        }
+                case "disburser":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksDisbursingOfficers();
+                    break;
 
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
-
-                    if (userType.Equals("disburser"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksDisbursingOfficers();
-
-                        foreach (DataRow row in dtusers.Rows)
-                        {
-                            int userId = Convert.ToInt32(row["id"]);
-                            var dictUser = Helper.GetUserDataById(userId);
-                            row["user_full_name"] = dictUser["user_full_name"];
-                        }
-
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
-
-                    if (userType.Equals("JO"))
-                    {
-                        var userRepository = AccFactory.UsersRepository();
-                        var dtusers = userRepository.GetLinksJOCollectingOfficers();
-
-                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
-                    }
-                }
+                case "JO":
+                    dataTableUsers = AccFactory.UsersRepository().GetLinksJOCollectingOfficers();
+                    break;
             }
-            catch (Exception ex)
+
+            foreach (DataRow row in dataTableUsers.Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                int userId = Convert.ToInt32(row["id"]);
+                var dictUser = Helper.GetUserDataById(userId);
+                row["user_full_name"] = dictUser["user_full_name"];
             }
+
+            HelperLoadRecords.UsersDatagridView(dataTableUsers, dgUsers);
         }
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvusers.SelectedRows.Count != 0)
+            try
             {
-                UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
-                Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
-                prefix = dgvusers.CurrentRow.Cells["prefix"].Value.ToString();
-                firstName = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
-                middleInitial = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
-                lastName = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
-                suffix = dgvusers.CurrentRow.Cells["suffix"].Value.ToString();
+                if (dgUsers.SelectedRows.Count != 0)
+                {
+                    UserId = int.Parse(dgUsers.CurrentRow.Cells[0].Value.ToString());
+                    userName = dgUsers.CurrentRow.Cells["username"].Value.ToString();
+                    prefix = dgUsers.CurrentRow.Cells["prefix"].Value.ToString();
+                    firstName = dgUsers.CurrentRow.Cells["first_name"].Value.ToString();
+                    middleInitial = dgUsers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                    lastName = dgUsers.CurrentRow.Cells["last_name"].Value.ToString();
+                    suffix = dgUsers.CurrentRow.Cells["suffix"].Value.ToString();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvusers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                this.DialogResult = DialogResult.OK;
+                if (e.RowIndex != -1)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
-        }
-
-        private void dgvusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

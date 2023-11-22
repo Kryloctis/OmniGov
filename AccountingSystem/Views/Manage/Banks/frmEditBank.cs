@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -30,7 +31,6 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                uc.isEdit = true;
                 LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

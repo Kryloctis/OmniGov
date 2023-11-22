@@ -1153,4 +1153,40 @@
   <data name="arrow_left_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow-left-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="link_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="link_cancel_2_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\link-cancel-2-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
