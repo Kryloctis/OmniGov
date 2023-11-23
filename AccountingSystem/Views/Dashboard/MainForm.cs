@@ -47,6 +47,7 @@ using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
@@ -54,7 +55,6 @@ using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
 namespace AccountingSystem.Views.Dashboard
 {
     public partial class MainForm : Form
@@ -639,10 +639,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBarangay().ShowDialog();
         }
 
-        private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
         {
             _ = new frmRealProperties().ShowDialog();
@@ -701,6 +697,11 @@ namespace AccountingSystem.Views.Dashboard
         private void aF54ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmMarriageLicense().ShowDialog();
+        }
+
+        private void aF58BurialPermitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBurialPermit().ShowDialog();
         }
 
         private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)

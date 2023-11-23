@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         public frmAF51_57()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
             ucTaxPayers = ucTaxPayers1;
         }
@@ -126,6 +128,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnBackMain.Enabled = true;
             btnNextMain.Text = "Proceed to Payment";
             radFees.Checked = true;
+            ucOtherCharges1.OnLoad();
         }
 
         private void LoadPaymentTab()
@@ -133,6 +136,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnNextMain.Text = "Confirm Payment";
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
+
+            ucPayment1.amountPayment = ucOtherCharges1.GetTotalOtherCharges();
+            ucPayment1.OnLoad();
         }
 
         private void ConfirmPayment()

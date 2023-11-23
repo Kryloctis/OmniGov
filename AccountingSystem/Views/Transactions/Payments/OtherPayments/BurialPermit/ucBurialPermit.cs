@@ -1,12 +1,6 @@
 ﻿using ACC.Data;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit
@@ -18,19 +12,89 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             InitializeComponent();
         }
 
-        internal void LoadTaxpayerInfo(int taxpayerId)
+        internal string GetFormErrors()
         {
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtRemainsName),
+                errorProvider1.GetError(dtpDeathDate),
+                errorProvider1.GetError(txtCemetery),
+                errorProvider1.GetError(txtDisinterment),
+                errorProvider1.GetError(txtDisposition),
+                errorProvider1.GetError(txtCauseOfDeath)
+            };
 
-            txtTaxpayer.Text = dictTaxpayer["taxpayers_name"];
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ucBurialPermit_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             if (!DesignMode)
             {
-                HelperLoadRecords.SexComboBox(cmbxRemainsSex);
             }
         }
+
+        #region Validations
+
+        private void txtRemainsName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRemainsName, "Remain's Name.");
+        }
+
+        private void txtRemainsName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtRemainsName);
+        }
+
+        private void txtCemetery_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCemetery, "Cemetery.");
+        }
+
+        private void txtCemetery_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCemetery);
+        }
+
+        private void txtDisinterment_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDisinterment, "Disinterment.");
+        }
+
+        private void txtDisinterment_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDisinterment);
+        }
+
+        private void txtDisposition_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDisposition, "Disposition.");
+        }
+
+        private void txtDisposition_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDisposition);
+        }
+
+        private void txtCauseOfDeath_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCauseOfDeath, "Cause of Death.");
+        }
+
+        private void txtCauseOfDeath_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCauseOfDeath);
+        }
+
+        #endregion Validations
     }
 }
