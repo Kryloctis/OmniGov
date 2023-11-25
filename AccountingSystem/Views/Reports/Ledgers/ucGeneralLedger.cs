@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -277,10 +278,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                LoadReport(reportViewer.LocalReport);
-            });
+                Invoke((MethodInvoker)delegate
+                  {
+                      LoadReport(reportViewer.LocalReport);
+                  });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)

@@ -30,9 +30,7 @@
         {
             ucPayment1 = new ucPayment();
             tabPageFees = new System.Windows.Forms.TabPage();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
             ucBurialPermit1 = new ucBurialPermit();
-            ucOtherCharges1 = new ucOtherCharges();
             btnBack = new System.Windows.Forms.ToolStripButton();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             label4 = new System.Windows.Forms.Label();
@@ -64,10 +62,6 @@
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             tabPageFees.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
             toolStrip2.SuspendLayout();
             panel1.SuspendLayout();
             tabNewPayee.SuspendLayout();
@@ -88,57 +82,30 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(956, 511);
+            ucPayment1.Size = new System.Drawing.Size(853, 511);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageFees
             // 
-            tabPageFees.Controls.Add(splitContainer1);
+            tabPageFees.Controls.Add(ucBurialPermit1);
             tabPageFees.Location = new System.Drawing.Point(4, 5);
+            tabPageFees.Margin = new System.Windows.Forms.Padding(0);
             tabPageFees.Name = "tabPageFees";
-            tabPageFees.Padding = new System.Windows.Forms.Padding(3);
-            tabPageFees.Size = new System.Drawing.Size(962, 517);
+            tabPageFees.Size = new System.Drawing.Size(859, 517);
             tabPageFees.TabIndex = 1;
             tabPageFees.Text = "tabPageFees";
             tabPageFees.UseVisualStyleBackColor = true;
             tabPageFees.Enter += tabPageFees_Enter;
             // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.Location = new System.Drawing.Point(3, 3);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(ucBurialPermit1);
-            splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(3);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(ucOtherCharges1);
-            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            splitContainer1.Size = new System.Drawing.Size(956, 511);
-            splitContainer1.SplitterDistance = 259;
-            splitContainer1.TabIndex = 3;
-            // 
             // ucBurialPermit1
             // 
+            ucBurialPermit1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucBurialPermit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBurialPermit1.Location = new System.Drawing.Point(3, 3);
+            ucBurialPermit1.Location = new System.Drawing.Point(0, 0);
+            ucBurialPermit1.Margin = new System.Windows.Forms.Padding(0);
             ucBurialPermit1.Name = "ucBurialPermit1";
-            ucBurialPermit1.Size = new System.Drawing.Size(950, 253);
-            ucBurialPermit1.TabIndex = 0;
-            // 
-            // ucOtherCharges1
-            // 
-            ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges1.Location = new System.Drawing.Point(3, 3);
-            ucOtherCharges1.Margin = new System.Windows.Forms.Padding(0);
-            ucOtherCharges1.Name = "ucOtherCharges1";
-            ucOtherCharges1.Size = new System.Drawing.Size(950, 242);
-            ucOtherCharges1.TabIndex = 1;
+            ucBurialPermit1.Size = new System.Drawing.Size(859, 517);
+            ucBurialPermit1.TabIndex = 1;
             // 
             // btnBack
             // 
@@ -157,14 +124,14 @@
             toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnBack });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new System.Drawing.Size(954, 38);
+            toolStrip2.Size = new System.Drawing.Size(851, 38);
             toolStrip2.TabIndex = 2;
             toolStrip2.Text = "toolStrip2";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             label4.Location = new System.Drawing.Point(137, 101);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(109, 25);
@@ -184,8 +151,8 @@
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(1998, 128);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            label2.Location = new System.Drawing.Point(1895, 128);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(205, 17);
             label2.TabIndex = 2;
@@ -195,8 +162,8 @@
             // 
             label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(2139, 103);
+            label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(2036, 103);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(64, 25);
             label1.TabIndex = 3;
@@ -209,7 +176,7 @@
             ucTaxPayers1.Location = new System.Drawing.Point(0, 183);
             ucTaxPayers1.Name = "ucTaxPayers1";
             ucTaxPayers1.Padding = new System.Windows.Forms.Padding(50, 10, 50, 50);
-            ucTaxPayers1.Size = new System.Drawing.Size(954, 325);
+            ucTaxPayers1.Size = new System.Drawing.Size(851, 325);
             ucTaxPayers1.TabIndex = 1;
             // 
             // panel1
@@ -223,7 +190,7 @@
             panel1.Location = new System.Drawing.Point(0, 38);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(0, 50, 0, 0);
-            panel1.Size = new System.Drawing.Size(954, 145);
+            panel1.Size = new System.Drawing.Size(851, 145);
             panel1.TabIndex = 5;
             // 
             // tabNewPayee
@@ -234,7 +201,7 @@
             tabNewPayee.Location = new System.Drawing.Point(4, 5);
             tabNewPayee.Margin = new System.Windows.Forms.Padding(0);
             tabNewPayee.Name = "tabNewPayee";
-            tabNewPayee.Size = new System.Drawing.Size(954, 508);
+            tabNewPayee.Size = new System.Drawing.Size(851, 508);
             tabNewPayee.TabIndex = 1;
             tabNewPayee.Text = "tabNewPayee";
             tabNewPayee.UseVisualStyleBackColor = true;
@@ -276,7 +243,7 @@
             dgPayees.Location = new System.Drawing.Point(0, 43);
             dgPayees.Name = "dgPayees";
             dgPayees.RowTemplate.Height = 25;
-            dgPayees.Size = new System.Drawing.Size(954, 465);
+            dgPayees.Size = new System.Drawing.Size(851, 465);
             dgPayees.TabIndex = 1;
             // 
             // progressBar1
@@ -284,7 +251,7 @@
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(0, 38);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(954, 5);
+            progressBar1.Size = new System.Drawing.Size(851, 5);
             progressBar1.TabIndex = 2;
             // 
             // tabPayeeList
@@ -295,7 +262,7 @@
             tabPayeeList.Location = new System.Drawing.Point(4, 5);
             tabPayeeList.Margin = new System.Windows.Forms.Padding(0);
             tabPayeeList.Name = "tabPayeeList";
-            tabPayeeList.Size = new System.Drawing.Size(954, 508);
+            tabPayeeList.Size = new System.Drawing.Size(851, 508);
             tabPayeeList.TabIndex = 0;
             tabPayeeList.Text = "tabPayeeList";
             tabPayeeList.UseVisualStyleBackColor = true;
@@ -308,7 +275,7 @@
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSearch, txtSearch, btnNew });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(954, 38);
+            toolStrip1.Size = new System.Drawing.Size(851, 38);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -324,7 +291,7 @@
             tabControlPayee.Name = "tabControlPayee";
             tabControlPayee.Padding = new System.Drawing.Point(0, 0);
             tabControlPayee.SelectedIndex = 0;
-            tabControlPayee.Size = new System.Drawing.Size(962, 517);
+            tabControlPayee.Size = new System.Drawing.Size(859, 517);
             tabControlPayee.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlPayee.TabIndex = 1;
             // 
@@ -334,7 +301,7 @@
             tabPagePayee.Location = new System.Drawing.Point(4, 5);
             tabPagePayee.Margin = new System.Windows.Forms.Padding(0);
             tabPagePayee.Name = "tabPagePayee";
-            tabPagePayee.Size = new System.Drawing.Size(962, 517);
+            tabPagePayee.Size = new System.Drawing.Size(859, 517);
             tabPagePayee.TabIndex = 0;
             tabPagePayee.Text = "tabPagePayee";
             tabPagePayee.UseVisualStyleBackColor = true;
@@ -353,7 +320,7 @@
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(970, 526);
+            tabControlMain.Size = new System.Drawing.Size(867, 526);
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
             // 
@@ -363,7 +330,7 @@
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(962, 517);
+            tabPagePayment.Size = new System.Drawing.Size(859, 517);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -388,22 +355,22 @@
             flowLayoutPanel1.Location = new System.Drawing.Point(195, 526);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(970, 31);
+            flowLayoutPanel1.Size = new System.Drawing.Size(867, 31);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(832, 3);
+            btnCancel.Location = new System.Drawing.Point(729, 3);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(134, 23);
-            btnCancel.TabIndex = 0;
+            btnCancel.TabIndex = 3;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnNextMain
             // 
-            btnNextMain.Location = new System.Drawing.Point(690, 3);
+            btnNextMain.Location = new System.Drawing.Point(587, 3);
             btnNextMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnNextMain.Name = "btnNextMain";
             btnNextMain.Size = new System.Drawing.Size(134, 23);
@@ -414,11 +381,11 @@
             // 
             // btnBackMain
             // 
-            btnBackMain.Location = new System.Drawing.Point(548, 3);
+            btnBackMain.Location = new System.Drawing.Point(445, 3);
             btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnBackMain.Name = "btnBackMain";
             btnBackMain.Size = new System.Drawing.Size(134, 23);
-            btnBackMain.TabIndex = 0;
+            btnBackMain.TabIndex = 2;
             btnBackMain.Text = "Back";
             btnBackMain.UseVisualStyleBackColor = true;
             btnBackMain.Click += btnBackMain_Click;
@@ -492,22 +459,23 @@
             // 
             // frmBurialPermit
             // 
+            AcceptButton = btnNextMain;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1165, 557);
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(1062, 557);
             Controls.Add(tabControlMain);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel2);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmBurialPermit";
-            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Payment > AF 58 - Burial Permit";
+            Text = "Payment > AF 58 - Burial Permit & Fee";
             Load += frmBurialPermit_Load;
             tabPageFees.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -562,8 +530,6 @@
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.ComponentModel.BackgroundWorker bgwSavingPayment;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private ucOtherCharges ucOtherCharges1;
         private ucBurialPermit ucBurialPermit1;
     }
 }

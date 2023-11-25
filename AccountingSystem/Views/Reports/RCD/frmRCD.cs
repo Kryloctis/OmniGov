@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
@@ -46,25 +47,16 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void LoadFunds()
         {
-            try
-            {
-                var fundrepo = AccFactory.FundsRepository();
-                var dtfunds = fundrepo.GetRecords();
+            var dtfunds = AccFactory.FundsRepository().GetRecords();
 
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "fund_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            cmbfunds.DataSource = dtfunds;
+            cmbfunds.ValueMember = "id";
+            cmbfunds.DisplayMember = "fund_name";
         }
 
         internal void LoadSelectedRCD(string rcdNo)
         {
-            var generalCollectionsPaymentRepo = AccFactory.GeneralCollectionsPaymentsRepository();
-            var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
+            var dtRCD = AccFactory.GeneralCollectionsPaymentsRepository().GetRecordsByRCDNO(rcdNo);
 
             string reportId;
             string collectingOfficer;
@@ -97,22 +89,15 @@ namespace AccountingSystem.Views.Reports.RCD
         //Questionable Code
         internal void LoadSelectedReport(string reportNo)
         {
-            try
-            {
-                var rcdRepository = AccFactory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(reportNo);
+            var rcdData = AccFactory.CollectorReportRepository().GetRecordByID(reportNo);
 
-                collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
-                fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
-                reportNo = rcdData["report_no"];
-                date = Convert.ToDateTime(rcdData["date"]);
+            collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
+            fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
+            reportNo = rcdData["report_no"];
+            date = Convert.ToDateTime(rcdData["date"]);
 
-                var colectorRepository = AccFactory.CollectorReportRepository();
-                var dtrcd = new DataTable();
-                dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
-                HelperLoadRecords.RCDDatagridView(dtrcd, dgListOfApprovedReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dataTable = AccFactory.CollectorReportRepository().FilterRecords(fundId, collectorId, reportNo);
+            HelperLoadRecords.RCDDatagridView(dataTable, dgListOfApprovedReport);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -203,25 +188,37 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
-            string referenceNumber = txtRCDNo.Text.Trim();
-            decimal amount = Convert.ToDecimal(txtTotal.Text);
-            int rcdId = int.Parse(this.rcdId);
+            try
+            {
+                string referenceNumber = txtRCDNo.Text.Trim();
+                decimal amount = Convert.ToDecimal(txtTotal.Text);
+                int rcdId = int.Parse(this.rcdId);
 
-            _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
+                _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            string reportNo = txtRCDNo.Text.Trim();
-            _ = new frmLiquidatingRCD(reportNo).ShowDialog();
+            try
+            {
+                string reportNo = txtRCDNo.Text.Trim();
+                _ = new frmLiquidatingRCD(reportNo).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in dgListOfApprovedReport.SelectedRows)
+            try
             {
-                dgListOfApprovedReport.Rows.RemoveAt(item.Index);
+                foreach (DataGridViewRow item in dgListOfApprovedReport.SelectedRows)
+                {
+                    dgListOfApprovedReport.Rows.RemoveAt(item.Index);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgListOfApprovedReport_SelectionChanged(object sender, EventArgs e)

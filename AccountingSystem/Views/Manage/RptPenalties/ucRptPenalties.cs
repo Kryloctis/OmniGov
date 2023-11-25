@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -85,12 +86,21 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         #endregion Validations
 
-        private void ucRptPenalties_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadFrequencies();
             }
+        }
+
+        private void ucRptPenalties_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

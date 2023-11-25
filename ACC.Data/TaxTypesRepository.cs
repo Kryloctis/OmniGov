@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     public class TaxTypesRepository : ITaxTypesRepository
     {
-
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "tax_type";
         //private readonly string viewTableName = "view_taxtypes";
@@ -26,7 +25,7 @@ namespace AccountingSystem
 
         public bool Delete(List<TaxTypesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool DeleteTaxType(int taxTypeID)
@@ -42,7 +41,6 @@ namespace AccountingSystem
 
         public int GetChildNodesIDs(int taxTypeID)
         {
-
             var parameter = new object[][]
             {
                 new object[] { "@id", DbType.Int32, taxTypeID},
@@ -123,12 +121,11 @@ namespace AccountingSystem
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);
-
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetTaxTypeCodes()
@@ -141,7 +138,7 @@ namespace AccountingSystem
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(TaxTypesModel entity)

@@ -157,7 +157,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            aF53ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF58BurialPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -475,7 +475,7 @@
             tabControlDashboard.Controls.Add(tabPageAccounting);
             tabControlDashboard.Controls.Add(tabPageTreasury);
             tabControlDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlDashboard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabControlDashboard.Font = new System.Drawing.Font("Segoe UI Light", 12F);
             tabControlDashboard.ItemSize = new System.Drawing.Size(200, 30);
             tabControlDashboard.Location = new System.Drawing.Point(0, 24);
             tabControlDashboard.Margin = new System.Windows.Forms.Padding(0);
@@ -490,7 +490,7 @@
             // 
             tabPageBudget.Controls.Add(tabControlBudget);
             tabPageBudget.Controls.Add(toolStrip1);
-            tabPageBudget.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageBudget.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageBudget.Location = new System.Drawing.Point(4, 34);
             tabPageBudget.Name = "tabPageBudget";
             tabPageBudget.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
@@ -627,7 +627,7 @@
             // tabPageAccounting
             // 
             tabPageAccounting.Controls.Add(tabControlAccounting);
-            tabPageAccounting.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageAccounting.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageAccounting.Location = new System.Drawing.Point(4, 34);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(0);
             tabPageAccounting.Name = "tabPageAccounting";
@@ -999,7 +999,7 @@
             panel1.Controls.Add(ucrcdSummary1);
             panel1.Controls.Add(ToolStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel1.Location = new System.Drawing.Point(0, 5);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(1221, 617);
@@ -1081,7 +1081,7 @@
             // 
             // paymentsToolStripMenuItem
             // 
-            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58ToolStripMenuItem, aF53ToolStripMenuItem });
+            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58BurialPermitToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             paymentsToolStripMenuItem.Text = "Payments";
@@ -1089,22 +1089,22 @@
             // rPTToolStripMenuItem
             // 
             rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
-            rPTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            rPTToolStripMenuItem.Text = "RPT";
+            rPTToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            rPTToolStripMenuItem.Text = "AF 56 - Real Property Tax";
             rPTToolStripMenuItem.Click += rPTToolStripMenuItem_Click;
             // 
             // aF5157ToolStripMenuItem
             // 
             aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
-            aF5157ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            aF5157ToolStripMenuItem.Text = "AF 51 && 57";
+            aF5157ToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF5157ToolStripMenuItem.Text = "AF 51 && 57 OR and  Slaughter Permit && Fee";
             aF5157ToolStripMenuItem.Click += aF5157ToolStripMenuItem_Click;
             // 
             // aF54ToolStripMenuItem
             // 
             aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
-            aF54ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            aF54ToolStripMenuItem.Text = "AF 54";
+            aF54ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            aF54ToolStripMenuItem.Text = "AF 54 - Marriage License";
             aF54ToolStripMenuItem.Click += aF54ToolStripMenuItem_Click;
             // 
             // aF58ToolStripMenuItem
@@ -1297,12 +1297,12 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // aF53ToolStripMenuItem
+            // aF58BurialPermitToolStripMenuItem
             // 
-            aF53ToolStripMenuItem.Name = "aF53ToolStripMenuItem";
-            aF53ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            aF53ToolStripMenuItem.Text = "AF 53";
-            aF53ToolStripMenuItem.Click += aF53ToolStripMenuItem_Click;
+            aF58BurialPermitToolStripMenuItem.Name = "aF58BurialPermitToolStripMenuItem";
+            aF58BurialPermitToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF58BurialPermitToolStripMenuItem.Text = "AF 58 - Burial Permit && Fee ";
+            aF58BurialPermitToolStripMenuItem.Click += aF58BurialPermitToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1500,7 +1500,6 @@
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aF58ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aF53ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF58BurialPermitToolStripMenuItem;
     }
 }

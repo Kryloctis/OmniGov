@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Amortization

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -19,6 +20,15 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         }
 
         private void frmEditOtherPaymentRates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadSelectedOtherPaymentRates();
         }
@@ -44,50 +54,46 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Update())
-            {
-                Helper.MessageBoxSuccess("Other payment rate has been updated.");
-                _frmOtherPaymentRates.RunBackgroundWorker();
-                _ucOtherPaymentRates.ResetForm();
-                Close();
-            }
-        }
-
-        private bool Update()
-        {
             try
             {
-                if (!_ucOtherPaymentRates.ValidateChildren())
+                if (UpdateData())
                 {
-                    Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
-                    return false;
+                    Helper.MessageBoxSuccess("Other payment rate has been updated.");
+                    _frmOtherPaymentRates.RunBackgroundWorker();
+                    _ucOtherPaymentRates.ResetForm();
+                    Close();
                 }
-
-                int otherPaymentRateID = _otherPaymentRatesID;
-                int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
-                string description = _ucOtherPaymentRates.txtDescription.Text;
-                decimal amount = _ucOtherPaymentRates.nudAmount.Value;
-                int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
-                bool isRateEditable = Convert.ToBoolean(_ucOtherPaymentRates.cbIsRateEditable.Checked);
-
-                var otherPaymentRatesModel = new OtherPaymentRatesModel()
-                {
-                    Id = otherPaymentRateID,
-                    TaxTypeID = taxTypeID,
-                    Description = description,
-                    Amount = amount,
-                    StartingYear = startingYear,
-                    IsRateEditable = isRateEditable,
-                    CreatedBy = Helper.UserId
-                };
-
-                return AccFactory.OtherPaymentRatesRepository().Update(otherPaymentRatesModel);
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool UpdateData()
+        {
+            if (!_ucOtherPaymentRates.ValidateChildren())
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
+                return false;
             }
-            return false;
+
+            int otherPaymentRateID = _otherPaymentRatesID;
+            int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
+            string description = _ucOtherPaymentRates.txtDescription.Text;
+            decimal amount = _ucOtherPaymentRates.nudAmount.Value;
+            int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
+            bool isRateEditable = Convert.ToBoolean(_ucOtherPaymentRates.cbIsRateEditable.Checked);
+
+            var otherPaymentRatesModel = new OtherPaymentRatesModel()
+            {
+                Id = otherPaymentRateID,
+                TaxTypeID = taxTypeID,
+                Description = description,
+                Amount = amount,
+                StartingYear = startingYear,
+                IsRateEditable = isRateEditable,
+                CreatedBy = Helper.UserId
+            };
+
+            return AccFactory.OtherPaymentRatesRepository().Update(otherPaymentRatesModel);
         }
     }
 }

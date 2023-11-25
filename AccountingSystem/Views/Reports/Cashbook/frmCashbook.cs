@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -19,37 +20,36 @@ namespace AccountingSystem.Views.Reports.Cashbook
 
         private void frmCashbook_Load(object sender, EventArgs e)
         {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             LoadBanks();
             LoadBankAccounts();
         }
 
         internal void LoadBanks()
         {
-            try
-            {
-                var banksRepository = AccFactory.BanksRepository();
-                var dtBank = banksRepository.GetRecords();
-                cmbBank.DataSource = dtBank;
-                cmbBank.ValueMember = "id";
-                cmbBank.DisplayMember = "bank_name";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dtBanks = AccFactory.BanksRepository().GetRecords();
+            HelperLoadRecords.BankComboBox(dtBanks, cmbBank, "id", "bank_name");
         }
 
         internal void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbBank.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
-
-            cmbBankAccounts.DataSource = dtBankAccounts;
-            cmbBankAccounts.ValueMember = "id";
-            cmbBankAccounts.DisplayMember = "account_no";
+            HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbBankAccounts, "id", "account_no");
         }
 
         private DataTable DataTableCashBook(int bankID, int bankAccountID)
         {
             var dtCashBook = new dsLFS.dtCashbookDataTable();
-            var dtCashBookFromDB = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID );
+            var dtCashBookFromDB = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID);
             var dtRCI = AccFactory.RCIRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID);
 
             if (dtCashBookFromDB.Rows.Count > 0 || dtRCI.Rows.Count > 0)
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
 
                 if (dtCashBook.Rows.Count > 0)
                 {
-                    foreach (DataRow item in dtCashBook .Rows)
+                    foreach (DataRow item in dtCashBook.Rows)
                     {
                         debit += item["debit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["debit"]);
                         credit += item["credit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["credit"]);
@@ -98,47 +98,50 @@ namespace AccountingSystem.Views.Reports.Cashbook
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-                int bankAccountID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            int bankAccountID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
 
-                var lguDetails = Helper.LGUDetails();
-                var account = cmbBank.Text;
-                var parameters = new[] {
-                        new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                        new ReportParameter("paramBankaccount", account)
-                };
-                report.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtCashbook", DataTableCashBook(bankID, bankAccountID)));
-                report.SetParameters(parameters);
-                report.Refresh();
-            }
-            catch (Exception ex)
+            var lguDetails = Helper.LGUDetails();
+            var account = cmbBank.Text;
+            var parameters = new[]
             {
-                Helper.MessageBoxError(ex.Message);
-            }
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramBankaccount", account)
+            };
+
+            report.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtCashbook", DataTableCashBook(bankID, bankAccountID)));
+            report.SetParameters(parameters);
+            report.Refresh();
         }
 
         private void btnretrieve_Click(object sender, EventArgs e)
         {
-            if (cmbBank.SelectedIndex == -1 && cmbBankAccounts.SelectedIndex == -1 )
+            try
             {
-              Helper.MessageBoxError("Please select Bank and Bank Accounts");
-                return;
-            }
+                if (cmbBank.SelectedIndex == -1 && cmbBankAccounts.SelectedIndex == -1)
+                {
+                    Helper.MessageBoxError("Please select Bank and Bank Accounts");
+                    return;
+                }
 
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            //reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+                LoadReport(reportViewer.LocalReport);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                //reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadBankAccounts();
+            try
+            {
+                LoadBankAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

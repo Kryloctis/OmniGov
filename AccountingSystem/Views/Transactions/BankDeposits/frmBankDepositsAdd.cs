@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -36,79 +37,72 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            var bankDepositModel = new BankDepositsModel()
+            {
+                BankID = Convert.ToInt32(uc.cmbBank.SelectedValue),
+                BankAccountsID = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
+                fundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
+                Reference = uc.txtReferenceNumber.Text.Trim(),
+                Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
+                Amount = Convert.ToDecimal(uc.nudAmount.Value),
+                CreatedBy = uc.userid,
+            };
+
+            var bankDepositRepo = AccFactory.BankDepositsRepository();
+
+            if (generalCollectionId > 0)
+            {
+                int insertId = bankDepositRepo.Deposits(bankDepositModel);
+
+                if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var bankDepositModel = new BankDepositsModel()
-                {
-                    BankID = Convert.ToInt32(uc.cmbBank.SelectedValue),
-                    BankAccountsID = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
-                    fundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
-                    Reference = uc.txtReferenceNumber.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.nudAmount.Value),
-                    CreatedBy = uc.userid,
-                };
-
-                var bankDepositRepo = AccFactory.BankDepositsRepository();
-
-                if (generalCollectionId > 0)
-                {
-                    int insertId = bankDepositRepo.Deposits(bankDepositModel);
-
-                    if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
+                    var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
                     {
-                        var generalCollectionDepositsRepo = AccFactory.GeneralCollectionsDepositsRepository();
-                        var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
-                        {
-                            BankDepositId = insertId,
-                            GeneralCollectionId = generalCollectionId
-                        };
+                        BankDepositId = insertId,
+                        GeneralCollectionId = generalCollectionId
+                    };
 
-                        if (!generalCollectionDepositsRepo.IdExist(generalCollectionId))
-                        {
-                            return generalCollectionDepositsRepo.Insert(generalCollectionDepositModel);
-                        }
-                        else
-                        {
-                            Helper.MessageBoxSuccess("General Collection has already been deposited!");
-                        }
-                    }
-                }
-                else
-                {
-                    return bankDepositRepo.Insert(bankDepositModel);
+                    if (!AccFactory.GeneralCollectionsDepositsRepository().IdExist(generalCollectionId))
+
+                        return AccFactory.GeneralCollectionsDepositsRepository().Insert(generalCollectionDepositModel);
+                    else
+                        Helper.MessageBoxSuccess("General Collection has already been deposited!");
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            else
+
+                return bankDepositRepo.Insert(bankDepositModel);
+
             return false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                if (generalCollectionId > 0)
+                if (SaveData())
                 {
-                    Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    Helper.MessageBoxSuccess("Bank Deposit has been saved.");
-                    _frmBankDeposits.LoadRecords();
-                    ucBankDeposit1.ResetForm();
+                    if (generalCollectionId > 0)
+                    {
+                        Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        Helper.MessageBoxSuccess("Bank Deposit has been saved.");
+                        _frmBankDeposits.LoadRecords();
+                        ucBankDeposit1.ResetForm();
+                    }
                 }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

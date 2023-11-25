@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -85,7 +86,11 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void nudRate_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = RateValidated();
+            try
+            {
+                e.Cancel = RateValidated();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudRate_Validated(object sender, EventArgs e)

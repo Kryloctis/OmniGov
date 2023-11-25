@@ -1,4 +1,6 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Windows.Forms;
 
@@ -7,80 +9,71 @@ namespace AccountingSystem.Views.Manage.Journals
     public partial class frmJournalsEdit : Form
     {
         private frmJournals _frmJournals;
+        private ucJournals uc;
 
         public frmJournalsEdit(frmJournals frmJournals, int journalId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+
             _frmJournals = frmJournals;
-            ucJournals1.journalId = journalId;
+            uc = ucJournals1;
+            uc.journalId = journalId;
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var uc = ucJournals1;
-                var journalsRepository = AccFactory.JournalsRepository();
-                var journalData = journalsRepository.GetRecordByID(uc.journalId);
+            var journalData = AccFactory.JournalsRepository().GetRecordByID(uc.journalId);
 
-                uc.txtName.Text = journalData["journal_name"];
-                uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.txtName.Text = journalData["journal_name"];
+            uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
         }
 
         private bool SaveData()
         {
-            try
+            // if error occurs, show messagebox error
+            if (!uc.ValidateChildren())
             {
-                var uc = ucJournals1;
-
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to update
-                var journalModel = new JournalsModel()
-                {
-                    Id = uc.journalId,
-                    JournalName = uc.txtName.Text.Trim(),
-                    IsSpecialJournal = uc.chkSpecialJournal.Checked
-                };
-
-                var journalsRepository = AccFactory.JournalsRepository();
-                return journalsRepository.Update(journalModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            // proceed to update
+            var journalModel = new JournalsModel()
+            {
+                Id = uc.journalId,
+                JournalName = uc.txtName.Text.Trim(),
+                IsSpecialJournal = uc.chkSpecialJournal.Checked
+            };
+
+            return AccFactory.JournalsRepository().Update(journalModel);
         }
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Journal has been saved.");
-                _frmJournals.LoadRecords();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Journal has been saved.");
+                    _frmJournals.LoadRecords();
+                }
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dashboard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -19,49 +21,13 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        private DataColumn[] DataColumnsPenalties()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name  = "id", typeof(int)),
-                new DataColumn(Name =  "description", typeof(string)),
-                new DataColumn(Name = "frequency", typeof(string)),
-                new DataColumn(Name = "rate", typeof(decimal))
-            };
-        }
-
-        private DataTable DataTablePenalties(string searchText)
-        {
-            DataTable dtRptPenalties;
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsPenalties());
-
-            if (searchText.Length < 2)
-                dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecords();
-            else
-                dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
-
-            int totalProgressCount = dtRptPenalties.Rows.Count;
-            int progressCount = 0;
-
-            foreach (DataRow row in dtRptPenalties.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                string description = row["description"].ToString();
-                string frequency = row["frequency"].ToString();
-                decimal rate = Convert.ToDecimal(row["rate"]);
-
-                progressCount++;
-                int progressBarPercentage = (progressCount * 100) / totalProgressCount;
-                dataTable.Rows.Add(id, description, frequency, rate);
-                backgroundWorker1.ReportProgress(progressBarPercentage);
-            }
-            return dataTable;
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRptPenalty(this).ShowDialog();
+            try
+            {
+                _ = new frmAddRptPenalty(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -130,7 +96,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadPenalties();
+            try
+            {
+                LoadPenalties();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadPenalties()
@@ -143,24 +113,70 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private DataColumn[] DataColumnsPenalties()
         {
-            var searchText = e.Argument as string;
-            var dataTable = DataTablePenalties(searchText);
-
-            Invoke((MethodInvoker)delegate
+            return new DataColumn[]
             {
-                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
-            });
+                new DataColumn(Name  = "id", typeof(int)),
+                new DataColumn(Name =  "description", typeof(string)),
+                new DataColumn(Name = "frequency", typeof(string)),
+                new DataColumn(Name = "rate", typeof(decimal))
+            };
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var searchText = e.Argument as string;
+                DataTable dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(DataColumnsPenalties());
+
+                if (dtRptPenalties.Rows.Count < 1)
+                {
+                    backgroundWorker1.ReportProgress(100);
+                    e.Result = dataTable;
+                    return;
+                }
+
+                int progressCount = 0;
+                int totalProgressCount = dtRptPenalties.Rows.Count;
+
+                foreach (DataRow row in dtRptPenalties.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    int id = Convert.ToInt32(row["id"]);
+                    string description = row["description"].ToString();
+                    string frequency = row["frequency"].ToString();
+                    decimal rate = Convert.ToDecimal(row["rate"]);
+
+                    newRow["id"] = id;
+                    newRow["description"] = description;
+                    newRow["frequency"] = frequency;
+                    newRow["rate"] = rate;
+                    dataTable.Rows.Add(newRow);
+
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dataTable);
             int recordCount = dataGridView1.RowCount;
             lblRecordCount.Text = recordCount.ToString();
             dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;

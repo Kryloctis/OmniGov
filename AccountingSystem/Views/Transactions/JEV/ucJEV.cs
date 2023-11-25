@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
@@ -64,15 +65,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 fundId == 0 ? "Please select a fund source" : string.Empty,
                 journalId == 0 ? "Please select the type of journal" : string.Empty,
-                epJEV.GetError(txtJEVNo),
+                errorProvider1.GetError(txtJEVNo),
                 dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty,
-                epPayee.GetError(txtPayee),
-                epExplanation.GetError(txtExplanation),
-                epCollectingDisbursing.GetError(cmbCollectingDisbursingOfficer)
+                errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(txtExplanation),
+                errorProvider1.GetError(cmbCollectingDisbursingOfficer)
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -490,10 +490,14 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void radioJournals_Click(object sender, EventArgs e)
         {
-            var radJournals = sender as RadioButton;
-            journalId = Convert.ToByte(radJournals.Tag);
-            ClearErrors();
-            SumDebitCredit();
+            try
+            {
+                var radJournals = sender as RadioButton;
+                journalId = Convert.ToByte(radJournals.Tag);
+                ClearErrors();
+                SumDebitCredit();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
@@ -511,21 +515,21 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void OnLoad()
         {
-            try
+            if (!DesignMode)
             {
-                if (!DesignMode)
-                {
-                    LoadFunds();
-                    LoadJournals();
-                    SetJournalFields("General Journal");
-                }
+                LoadFunds();
+                LoadJournals();
+                SetJournalFields("General Journal");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucJEV_Load(object sender, EventArgs e)
         {
-            OnLoad();
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
@@ -624,81 +628,64 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void ClearErrors()
         {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
-            Helper.ClearMaskedTextboxError(epJEV, txtJEVNo);
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
-            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+            Helper.ClearMaskedTextboxError(errorProvider1, txtJEVNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
+            Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
         }
 
         #region Validations
 
-        private void txtJEVNo_Validating(object sender, CancelEventArgs e)
-        {
-            //int year = dtpDateEntry.Value.Year;
-
-            //if (!txtJEVNo.MaskCompleted)
-            //{
-            //    epJEV.SetError(txtJEVNo, "Please enter a valid series number");
-            //    e.Cancel = true;
-            //}
-
-            //string jevNo = txtJEVNo.Text;
-            //bool jevNoExist;
-            //if (jevId == 0)
-            //    jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevNo_FundId_Year(jevNo, fundId, year);
-            //else
-            //    jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevId_JevNo_FundId_Year(jevId, jevNo, fundId, year);
-
-            //if (jevNoExist)
-            //{
-            //    epJEV.SetError(txtJEVNo, "JEV number already exist.");
-            //    e.Cancel = true;
-            //}
-        }
-
-        private void txtJEVNo_Validated(object sender, EventArgs e)
-        {
-            //epJEV.SetError(txtJEVNo, string.Empty);
-        }
-
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
-            if (txtPayee.Enabled)
+            try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, lblPayee.Text);
+                if (txtPayee.Enabled)
+                {
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, lblPayee.Text);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtPayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
         private void txtExplanation_Validating(object sender, CancelEventArgs e)
         {
-            if (txtExplanation.Enabled)
+            try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, lblExplanation.Text);
+                if (txtExplanation.Enabled)
+                {
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtExplanation, lblExplanation.Text);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtExplanation_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
         }
 
         private void cmbCollectingDisbursingOfficer_Validating(object sender, CancelEventArgs e)
         {
-            if (journalName == "Cash Disbursements Journal" || journalName == "Cash Receipts Journal")
+            try
             {
-                string message = journalName == "Cash Disbursements Journal" ? "Disbursing Officer" : "Collecting Officer";
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingDisbursing, cmbCollectingDisbursingOfficer, message);
+                if (journalName == "Cash Disbursements Journal" || journalName == "Cash Receipts Journal")
+                {
+                    string message = journalName == "Cash Disbursements Journal" ? "Disbursing Officer" : "Collecting Officer";
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbCollectingDisbursingOfficer, message);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
+            Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
         }
 
         #endregion Validations

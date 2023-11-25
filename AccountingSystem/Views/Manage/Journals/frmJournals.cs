@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Journals.DefaultAccounts;
 using MySql.Data.MySqlClient;
 using System;
@@ -27,16 +28,20 @@ namespace AccountingSystem.Views.Manage.Journals
 
         internal void LoadRecords()
         {
+            HelperLoadRecords.JournalsDatagridView(dgJournals);
+            lblRecordCount.Text = dgJournals.Rows.Count.ToString();
+        }
+
+        private void frmJournals_Load(object sender, EventArgs e)
+        {
             try
             {
-                HelperLoadRecords.JournalsDatagridView(dgJournals);
-
-                lblRecordCount.Text = dgJournals.Rows.Count.ToString();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmJournals_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             UserVerification();
             Helper.DatagridFullRowSelectStyle(dgJournals, true);
@@ -45,47 +50,64 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void dgJournals_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
-            int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
-            if (journalId == 1) btnDefaultAccounts.Enabled = false;
-            else btnDefaultAccounts.Enabled = true;
-            UserVerification();
+            try
+            {
+                byte[] columnIndexTimestamp = { 3, 4 };
+                Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
+                int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
+                if (journalId == 1) btnDefaultAccounts.Enabled = false;
+                else btnDefaultAccounts.Enabled = true;
+                UserVerification();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmJournalsAdd(this).ShowDialog();
+            try
+            {
+                _ = new frmJournalsAdd(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int journalId = int.Parse(dgJournals.SelectedCells[0].Value.ToString());
-            _ = new frmJournalsEdit(this, journalId).ShowDialog();
+            try
+            {
+                int journalId = int.Parse(dgJournals.SelectedCells[0].Value.ToString());
+                _ = new frmJournalsEdit(this, journalId).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgJournals.SelectedRows.Count;
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var journalsModelList = new List<JournalsModel>();
+                    foreach (DataGridViewRow row in dgJournals.SelectedRows)
+                    {
+                        int journalId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        journalsModelList.Add(new JournalsModel() { Id = journalId });
+                    }
+
+                    return AccFactory.JournalsRepository().Delete(journalsModelList);
+                }
+            }
+            return false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgJournals.SelectedRows.Count;
             try
             {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var journalsModelList = new List<JournalsModel>();
-                        foreach (DataGridViewRow row in dgJournals.SelectedRows)
-                        {
-                            int journalId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            journalsModelList.Add(new JournalsModel() { Id = journalId });
-                        }
-
-                        var journalsRepository = AccFactory.JournalsRepository();
-                        _ = journalsRepository.Delete(journalsModelList);
-                        LoadRecords();
-                    }
-                }
+                if (DeleteData())
+                    LoadRecords();
             }
             catch (MySqlException ex)
             {
@@ -96,10 +118,7 @@ namespace AccountingSystem.Views.Manage.Journals
                         break;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void showDefaultAccounts()
@@ -112,7 +131,11 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void btnDefaultAccounts_Click(object sender, EventArgs e)
         {
-            showDefaultAccounts();
+            try
+            {
+                showDefaultAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

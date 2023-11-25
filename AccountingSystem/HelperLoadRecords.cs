@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -832,31 +834,22 @@ namespace AccountingSystem
 
             datagrid.Columns["accountable_form_code"].Width = 80;
             datagrid.Columns["accountable_form_code"].MinimumWidth = 80;
-            datagrid.Columns["accountable_form_code"].HeaderText = "Form Code";
+            datagrid.Columns["accountable_form_code"].HeaderText = "Form";
 
             datagrid.Columns["receipt"].Width = 400;
             datagrid.Columns["receipt"].MinimumWidth = 400;
             datagrid.Columns["receipt"].HeaderText = "Receipt";
 
-            datagrid.Columns["receipt_number_from"].HeaderText = "Receipt Number From";
-            datagrid.Columns["receipt_number_from"].MinimumWidth = 150;
-            datagrid.Columns["receipt_number_from"].Width = 150;
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["receipt_number"].HeaderText = "Receipt No. (Range)";
+            datagrid.Columns["receipt_number"].MinimumWidth = 150;
+            datagrid.Columns["receipt_number"].Width = 150;
 
-            datagrid.Columns["receipt_number_to"].HeaderText = "Receipt Number To";
-            datagrid.Columns["receipt_number_to"].MinimumWidth = 150;
-            datagrid.Columns["receipt_number_to"].Width = 150;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
-
-            datagrid.Columns["received_date"].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns["received_date"].HeaderText = "Received Date";
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["received_date"].HeaderText = "Date Received";
             datagrid.Columns["received_date"].Width = 150;
             datagrid.Columns["received_date"].MinimumWidth = 150;
 
             datagrid.Columns["quantity"].HeaderText = "Quantity";
-            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["quantity"].MinimumWidth = 80;
             datagrid.Columns["quantity"].Width = 80;
 
@@ -920,6 +913,13 @@ namespace AccountingSystem
         }
 
         #endregion Funds
+
+        internal static void BankAccountsComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+        }
 
         #region Banks
 
@@ -1003,46 +1003,20 @@ namespace AccountingSystem
 
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("accountable_forms_id", "Accountable Form ID");
-            datagrid.Columns.Add("date", "Date");
-            datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("updated_at", "Updated at");
+            datagrid.DataSource = dataTable;
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["accountable_forms_id"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-
-            datagrid.Columns["date"].Width = 230;
-            datagrid.Columns["amount"].Width = 100;
-
-            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["amount"].HeaderText = "Amount";
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
+            datagrid.Columns["date"].HeaderText = "Date Effective";
             datagrid.Columns["date"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagrid.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            foreach (DataRow drFaceValue in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    drFaceValue["id"],
-                    drFaceValue["accountable_forms_id"],
-                    drFaceValue["date"],
-                    drFaceValue["amount"],
-                    drFaceValue["created_at"],
-                    drFaceValue["updated_at"]
-                });
-            }
-
-            datagrid.ClearSelection();
+            datagrid.Columns["is_default"].HeaderText = "Default";
+            datagrid.Columns["is_default"].MinimumWidth = 10;
+            datagrid.Columns["is_default"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         #endregion FaceValue
@@ -1566,18 +1540,18 @@ namespace AccountingSystem
         internal static void AccFormDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Form Number";
-            datagrid.Columns[2].HeaderText = "Form Description";
-            datagrid.Columns[3].HeaderText = "Face Value";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["form_code"].HeaderText = "Form Code";
+            datagrid.Columns["form_description"].HeaderText = "Form Description";
+            datagrid.Columns["form_face_value"].HeaderText = "Face Value";
 
-            datagrid.Columns[1].MinimumWidth = 90;
-            datagrid.Columns[1].Width = 90;
+            datagrid.Columns["form_code"].MinimumWidth = 90;
+            datagrid.Columns["form_code"].Width = 90;
 
-            datagrid.Columns[2].MinimumWidth = 500;
-            datagrid.Columns[2].Width = 500;
+            datagrid.Columns["form_description"].MinimumWidth = 500;
+            datagrid.Columns["form_description"].Width = 500;
 
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["form_face_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1829,6 +1803,13 @@ namespace AccountingSystem
             datagrid.Columns["permission_office"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        internal static void UsersComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
         }
 
         #endregion Users
@@ -2426,58 +2407,39 @@ namespace AccountingSystem
 
         #region JEV
 
-        internal static void JEVDatagridView(DataGridView datagrid)
+        internal static void JevDatagridView(DataGridView datagrid, DataTable dataTable)
         {
-            datagrid.Columns.Clear();
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("jev_no", "JEV No.");
-            datagrid.Columns.Add("full_jev_no", "JEV No.");
-            datagrid.Columns.Add("date_entry", "Date Entry");
-            datagrid.Columns.Add("funds_id", "Funds ID");
-            datagrid.Columns.Add("fund_name", "Fund");
-            datagrid.Columns.Add("journals_id", "Journals ID");
-            datagrid.Columns.Add("journal_name", "Journal");
-            datagrid.Columns.Add("ref_no", "Ref No.");
-            datagrid.Columns.Add("payee", "Payee");
-            datagrid.Columns.Add("explanation", "Explanation");
-            datagrid.Columns.Add("created_at", "Created At");
-            datagrid.Columns.Add("created_by_id", "Created By ID");
-            datagrid.Columns.Add("created_by_name", "Created By");
-            datagrid.Columns.Add("updated_at", "Updated At");
-            datagrid.Columns.Add("updated_by_id", "Updated By ID");
-            datagrid.Columns.Add("updated_by_name", "Updated By");
-            datagrid.Columns.Add("status", "Status");
-
-            #region Datagrid Column Formats
-
+            datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["fund_name"].HeaderText = "Fund";
+            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
             datagrid.Columns["journals_id"].Visible = false;
-            datagrid.Columns["full_jev_no"].Width = 60;
             datagrid.Columns["full_jev_no"].MinimumWidth = 60;
+            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["ref_no"].Width = 60;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
-            datagrid.Columns["status"].Width = 40;
             datagrid.Columns["status"].MinimumWidth = 40;
             datagrid.Columns["status"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["status"].HeaderText = "Status";
             datagrid.Columns["created_by_name"].Width = 50;
-            datagrid.Columns["payee"].Width = 100;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
-            datagrid.Columns["date_entry"].Width = 60;
             datagrid.Columns["date_entry"].MinimumWidth = 60;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["date_entry"].HeaderText = "Date Entry";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
+            datagrid.Columns["created_by_name"].HeaderText = "Recording Person";
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
-            datagrid.Columns["explanation"].Width = 100;
-            datagrid.Columns["journal_name"].Width = 200;
-
-            #endregion Datagrid Column Formats
+            datagrid.Columns["explanation"].MinimumWidth = 100;
+            datagrid.Columns["explanation"].HeaderText = "Explanation";
+            datagrid.Columns["journal_name"].MinimumWidth = 200;
+            datagrid.Columns["journal_name"].HeaderText = "Journal";
         }
 
         #endregion JEV
@@ -2627,6 +2589,36 @@ namespace AccountingSystem
         #endregion OtherPayments
 
         #region CustomFunctions
+
+        internal static void SearchableComboboxParameters(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, List<string> searchSources, string searchText = "", bool isSearch = false)
+        {
+            DataView dataView = new DataView(dataTable);
+
+            if (isSearch)
+            {
+                string filter = string.Join(" OR ", searchSources.Select(source => $"{source} Like '%{searchText}%'"));
+                dataView.RowFilter = filter;
+            }
+
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataView.ToTable();
+
+            if (dataTable.Rows.Count < 1)
+                return;
+
+            if (isSearch)
+            {
+                comboBox.DroppedDown = false;
+                comboBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                comboBox.DroppedDown = false;
+                comboBox.SelectedIndex = -1;
+            }
+        }
 
         internal static void SearchableCombobox(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, string searchSource = "", string searchText = "", bool isSearch = false)
         {

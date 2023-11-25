@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class Error : IError
     {

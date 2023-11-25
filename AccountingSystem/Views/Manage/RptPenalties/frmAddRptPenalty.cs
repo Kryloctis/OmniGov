@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -45,8 +46,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     _frmRptPenalties.LoadPenalties();
                 }
             }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRptAddPenalty_Load(object sender, EventArgs e)

@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.Banks
             btnUpdate.TabIndex = 1;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnUpdate.Click += new System.EventHandler(btnUpdate_Click);
             // 
             // ucBanks1
             // 
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.Banks
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Bank";
-            Load += frmBankEdit_Load;
+            Load += new System.EventHandler(frmBankEdit_Load);
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

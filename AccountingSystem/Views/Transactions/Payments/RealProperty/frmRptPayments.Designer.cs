@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             panel1 = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageTaxpayer = new System.Windows.Forms.TabPage();
@@ -39,36 +39,6 @@
             flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             txtTaxpayerSearch = new System.Windows.Forms.TextBox();
             tabPageTaxDues = new System.Windows.Forms.TabPage();
-            tabControlTaxDues = new System.Windows.Forms.TabControl();
-            tabPageRpt = new System.Windows.Forms.TabPage();
-            ucRptTaxDues1 = new RealProperty.ucRptTaxDues();
-            tabPageBpl = new System.Windows.Forms.TabPage();
-            tabPageOthers = new System.Windows.Forms.TabPage();
-            tabControlOthers = new System.Windows.Forms.TabControl();
-            tabPageAF51ANDAF57 = new System.Windows.Forms.TabPage();
-            splitContainer5 = new System.Windows.Forms.SplitContainer();
-            ucaF51_571 = new OtherPayments.AF51_57.ucAF51_57();
-            ucOtherCharges1 = new OtherPayments.ucOtherCharges();
-            tabPageCertificateOfTransferOfCattle = new System.Windows.Forms.TabPage();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
-            ucCattleTransferOfOwnership1 = new OtherPayments.CattleTransferOfOwnership.ucCattleTransferOfOwnership();
-            ucOtherCharges2 = new OtherPayments.ucOtherCharges();
-            tabPageCattleOwnership = new System.Windows.Forms.TabPage();
-            splitContainer2 = new System.Windows.Forms.SplitContainer();
-            ucCattleOwnership2 = new OtherPayments.CattleOwnership.ucCattleOwnership();
-            ucOtherCharges3 = new OtherPayments.ucOtherCharges();
-            tabPageMarriageLicense = new System.Windows.Forms.TabPage();
-            splitContainer3 = new System.Windows.Forms.SplitContainer();
-            ucMarriageLicense1 = new OtherPayments.MarriageLicense.ucMarriageLicense();
-            ucOtherCharges4 = new OtherPayments.ucOtherCharges();
-            tabPageBurialPermit = new System.Windows.Forms.TabPage();
-            splitContainer4 = new System.Windows.Forms.SplitContainer();
-            ucBurialPermit1 = new OtherPayments.BurialPermit.ucBurialPermit();
-            ucOtherCharges5 = new OtherPayments.ucOtherCharges();
-            flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            radOthers = new System.Windows.Forms.RadioButton();
-            radBpl = new System.Windows.Forms.RadioButton();
-            radRpt = new System.Windows.Forms.RadioButton();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -80,6 +50,7 @@
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            ucRptTaxDues1 = new RealProperty.ucRptTaxDues();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
@@ -87,36 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)dgTaxpayers).BeginInit();
             flowLayoutPanel4.SuspendLayout();
             tabPageTaxDues.SuspendLayout();
-            tabControlTaxDues.SuspendLayout();
-            tabPageRpt.SuspendLayout();
-            tabPageOthers.SuspendLayout();
-            tabControlOthers.SuspendLayout();
-            tabPageAF51ANDAF57.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
-            splitContainer5.Panel1.SuspendLayout();
-            splitContainer5.Panel2.SuspendLayout();
-            splitContainer5.SuspendLayout();
-            tabPageCertificateOfTransferOfCattle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            tabPageCattleOwnership.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
-            tabPageMarriageLicense.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
-            splitContainer3.Panel1.SuspendLayout();
-            splitContainer3.Panel2.SuspendLayout();
-            splitContainer3.SuspendLayout();
-            tabPageBurialPermit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
-            splitContainer4.Panel1.SuspendLayout();
-            splitContainer4.Panel2.SuspendLayout();
-            splitContainer4.SuspendLayout();
-            flowLayoutPanel3.SuspendLayout();
             tabPagePayment.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -141,7 +82,7 @@
             tabControl1.Controls.Add(tabPageTaxDues);
             tabControl1.Controls.Add(tabPagePayment);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabControl1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             tabControl1.Location = new System.Drawing.Point(195, 0);
             tabControl1.Margin = new System.Windows.Forms.Padding(0);
@@ -157,7 +98,7 @@
             // 
             tabPageTaxpayer.BackColor = System.Drawing.Color.Transparent;
             tabPageTaxpayer.Controls.Add(panel2);
-            tabPageTaxpayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageTaxpayer.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageTaxpayer.Location = new System.Drawing.Point(4, 5);
             tabPageTaxpayer.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxpayer.Name = "tabPageTaxpayer";
@@ -181,35 +122,35 @@
             // dgTaxpayers
             // 
             dgTaxpayers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle2;
             dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
             dgTaxpayers.Location = new System.Drawing.Point(4, 36);
             dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dgTaxpayers.Name = "dgTaxpayers";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgTaxpayers.RowTemplate.Height = 25;
             dgTaxpayers.Size = new System.Drawing.Size(851, 478);
             dgTaxpayers.TabIndex = 2;
@@ -236,9 +177,8 @@
             // 
             // tabPageTaxDues
             // 
-            tabPageTaxDues.Controls.Add(tabControlTaxDues);
-            tabPageTaxDues.Controls.Add(flowLayoutPanel3);
-            tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageTaxDues.Controls.Add(ucRptTaxDues1);
+            tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageTaxDues.Location = new System.Drawing.Point(4, 5);
             tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxDues.Name = "tabPageTaxDues";
@@ -248,401 +188,10 @@
             tabPageTaxDues.UseVisualStyleBackColor = true;
             tabPageTaxDues.Enter += tabPageTaxDues_Enter;
             // 
-            // tabControlTaxDues
-            // 
-            tabControlTaxDues.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            tabControlTaxDues.Controls.Add(tabPageRpt);
-            tabControlTaxDues.Controls.Add(tabPageBpl);
-            tabControlTaxDues.Controls.Add(tabPageOthers);
-            tabControlTaxDues.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlTaxDues.ItemSize = new System.Drawing.Size(0, 1);
-            tabControlTaxDues.Location = new System.Drawing.Point(0, 27);
-            tabControlTaxDues.Margin = new System.Windows.Forms.Padding(0);
-            tabControlTaxDues.Name = "tabControlTaxDues";
-            tabControlTaxDues.Padding = new System.Drawing.Point(0, 0);
-            tabControlTaxDues.SelectedIndex = 0;
-            tabControlTaxDues.Size = new System.Drawing.Size(859, 490);
-            tabControlTaxDues.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            tabControlTaxDues.TabIndex = 2;
-            // 
-            // tabPageRpt
-            // 
-            tabPageRpt.Controls.Add(ucRptTaxDues1);
-            tabPageRpt.Location = new System.Drawing.Point(4, 5);
-            tabPageRpt.Name = "tabPageRpt";
-            tabPageRpt.Padding = new System.Windows.Forms.Padding(3);
-            tabPageRpt.Size = new System.Drawing.Size(851, 481);
-            tabPageRpt.TabIndex = 0;
-            tabPageRpt.Text = "tabPageRpt";
-            tabPageRpt.UseVisualStyleBackColor = true;
-            // 
-            // ucRptTaxDues1
-            // 
-            ucRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucRptTaxDues1.Location = new System.Drawing.Point(3, 3);
-            ucRptTaxDues1.Name = "ucRptTaxDues1";
-            ucRptTaxDues1.Size = new System.Drawing.Size(845, 475);
-            ucRptTaxDues1.TabIndex = 0;
-            // 
-            // tabPageBpl
-            // 
-            tabPageBpl.Location = new System.Drawing.Point(4, 5);
-            tabPageBpl.Name = "tabPageBpl";
-            tabPageBpl.Padding = new System.Windows.Forms.Padding(3);
-            tabPageBpl.Size = new System.Drawing.Size(851, 481);
-            tabPageBpl.TabIndex = 1;
-            tabPageBpl.Text = "tabPageBpl";
-            tabPageBpl.UseVisualStyleBackColor = true;
-            // 
-            // tabPageOthers
-            // 
-            tabPageOthers.Controls.Add(tabControlOthers);
-            tabPageOthers.Location = new System.Drawing.Point(4, 5);
-            tabPageOthers.Name = "tabPageOthers";
-            tabPageOthers.Padding = new System.Windows.Forms.Padding(3);
-            tabPageOthers.Size = new System.Drawing.Size(851, 481);
-            tabPageOthers.TabIndex = 2;
-            tabPageOthers.Text = "tabPageOthers";
-            tabPageOthers.UseVisualStyleBackColor = true;
-            // 
-            // tabControlOthers
-            // 
-            tabControlOthers.Controls.Add(tabPageAF51ANDAF57);
-            tabControlOthers.Controls.Add(tabPageCertificateOfTransferOfCattle);
-            tabControlOthers.Controls.Add(tabPageCattleOwnership);
-            tabControlOthers.Controls.Add(tabPageMarriageLicense);
-            tabControlOthers.Controls.Add(tabPageBurialPermit);
-            tabControlOthers.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlOthers.Location = new System.Drawing.Point(3, 3);
-            tabControlOthers.Name = "tabControlOthers";
-            tabControlOthers.SelectedIndex = 0;
-            tabControlOthers.Size = new System.Drawing.Size(845, 475);
-            tabControlOthers.TabIndex = 2;
-            // 
-            // tabPageAF51ANDAF57
-            // 
-            tabPageAF51ANDAF57.BackColor = System.Drawing.Color.White;
-            tabPageAF51ANDAF57.Controls.Add(splitContainer5);
-            tabPageAF51ANDAF57.Location = new System.Drawing.Point(4, 24);
-            tabPageAF51ANDAF57.Name = "tabPageAF51ANDAF57";
-            tabPageAF51ANDAF57.Padding = new System.Windows.Forms.Padding(3);
-            tabPageAF51ANDAF57.Size = new System.Drawing.Size(837, 447);
-            tabPageAF51ANDAF57.TabIndex = 0;
-            tabPageAF51ANDAF57.Text = "AF 51 & AF 57";
-            tabPageAF51ANDAF57.Enter += tabPageAF51ANDAF57_Enter;
-            // 
-            // splitContainer5
-            // 
-            splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer5.Location = new System.Drawing.Point(3, 3);
-            splitContainer5.Name = "splitContainer5";
-            splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer5.Panel1
-            // 
-            splitContainer5.Panel1.AutoScroll = true;
-            splitContainer5.Panel1.Controls.Add(ucaF51_571);
-            splitContainer5.Panel1MinSize = 66;
-            // 
-            // splitContainer5.Panel2
-            // 
-            splitContainer5.Panel2.Controls.Add(ucOtherCharges1);
-            splitContainer5.Panel2MinSize = 122;
-            splitContainer5.Size = new System.Drawing.Size(831, 441);
-            splitContainer5.SplitterDistance = 68;
-            splitContainer5.TabIndex = 3;
-            // 
-            // ucaF51_571
-            // 
-            ucaF51_571.BackColor = System.Drawing.Color.Transparent;
-            ucaF51_571.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucaF51_571.Location = new System.Drawing.Point(0, 0);
-            ucaF51_571.Name = "ucaF51_571";
-            ucaF51_571.Size = new System.Drawing.Size(831, 68);
-            ucaF51_571.TabIndex = 2;
-            // 
-            // ucOtherCharges1
-            // 
-            ucOtherCharges1.BackColor = System.Drawing.Color.White;
-            ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges1.Location = new System.Drawing.Point(0, 0);
-            ucOtherCharges1.Name = "ucOtherCharges1";
-            ucOtherCharges1.Size = new System.Drawing.Size(831, 369);
-            ucOtherCharges1.TabIndex = 1;
-            // 
-            // tabPageCertificateOfTransferOfCattle
-            // 
-            tabPageCertificateOfTransferOfCattle.BackColor = System.Drawing.Color.White;
-            tabPageCertificateOfTransferOfCattle.Controls.Add(splitContainer1);
-            tabPageCertificateOfTransferOfCattle.Location = new System.Drawing.Point(4, 24);
-            tabPageCertificateOfTransferOfCattle.Name = "tabPageCertificateOfTransferOfCattle";
-            tabPageCertificateOfTransferOfCattle.Padding = new System.Windows.Forms.Padding(3);
-            tabPageCertificateOfTransferOfCattle.Size = new System.Drawing.Size(837, 447);
-            tabPageCertificateOfTransferOfCattle.TabIndex = 1;
-            tabPageCertificateOfTransferOfCattle.Text = "AF 52 - Cetificate of Transfer of Cattle ";
-            tabPageCertificateOfTransferOfCattle.Enter += tabPageCertificateOfTransferOfCattle_Enter;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer1.Location = new System.Drawing.Point(3, 3);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.AutoScroll = true;
-            splitContainer1.Panel1.Controls.Add(ucCattleTransferOfOwnership1);
-            splitContainer1.Panel1MinSize = 205;
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
-            splitContainer1.Panel2.Controls.Add(ucOtherCharges2);
-            splitContainer1.Panel2MinSize = 121;
-            splitContainer1.Size = new System.Drawing.Size(831, 441);
-            splitContainer1.SplitterDistance = 205;
-            splitContainer1.TabIndex = 1;
-            // 
-            // ucCattleTransferOfOwnership1
-            // 
-            ucCattleTransferOfOwnership1.BackColor = System.Drawing.Color.Transparent;
-            ucCattleTransferOfOwnership1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucCattleTransferOfOwnership1.Location = new System.Drawing.Point(0, 0);
-            ucCattleTransferOfOwnership1.Name = "ucCattleTransferOfOwnership1";
-            ucCattleTransferOfOwnership1.Size = new System.Drawing.Size(831, 205);
-            ucCattleTransferOfOwnership1.TabIndex = 1;
-            // 
-            // ucOtherCharges2
-            // 
-            ucOtherCharges2.BackColor = System.Drawing.Color.Transparent;
-            ucOtherCharges2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges2.Location = new System.Drawing.Point(0, 0);
-            ucOtherCharges2.Name = "ucOtherCharges2";
-            ucOtherCharges2.Size = new System.Drawing.Size(831, 232);
-            ucOtherCharges2.TabIndex = 0;
-            // 
-            // tabPageCattleOwnership
-            // 
-            tabPageCattleOwnership.Controls.Add(splitContainer2);
-            tabPageCattleOwnership.Location = new System.Drawing.Point(4, 24);
-            tabPageCattleOwnership.Name = "tabPageCattleOwnership";
-            tabPageCattleOwnership.Padding = new System.Windows.Forms.Padding(3);
-            tabPageCattleOwnership.Size = new System.Drawing.Size(837, 447);
-            tabPageCattleOwnership.TabIndex = 2;
-            tabPageCattleOwnership.Text = "AF 53 - Cattle Ownership";
-            tabPageCattleOwnership.UseVisualStyleBackColor = true;
-            tabPageCattleOwnership.Enter += tabPageCattleOwnership_Enter;
-            // 
-            // splitContainer2
-            // 
-            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer2.Location = new System.Drawing.Point(3, 3);
-            splitContainer2.Name = "splitContainer2";
-            splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            splitContainer2.Panel1.BackColor = System.Drawing.Color.White;
-            splitContainer2.Panel1.Controls.Add(ucCattleOwnership2);
-            splitContainer2.Panel1MinSize = 162;
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.BackColor = System.Drawing.Color.White;
-            splitContainer2.Panel2.Controls.Add(ucOtherCharges3);
-            splitContainer2.Panel2MinSize = 118;
-            splitContainer2.Size = new System.Drawing.Size(831, 441);
-            splitContainer2.SplitterDistance = 162;
-            splitContainer2.TabIndex = 1;
-            // 
-            // ucCattleOwnership2
-            // 
-            ucCattleOwnership2.BackColor = System.Drawing.Color.Transparent;
-            ucCattleOwnership2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucCattleOwnership2.Location = new System.Drawing.Point(0, 0);
-            ucCattleOwnership2.Name = "ucCattleOwnership2";
-            ucCattleOwnership2.Size = new System.Drawing.Size(831, 162);
-            ucCattleOwnership2.TabIndex = 1;
-            // 
-            // ucOtherCharges3
-            // 
-            ucOtherCharges3.BackColor = System.Drawing.Color.Transparent;
-            ucOtherCharges3.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges3.Location = new System.Drawing.Point(0, 0);
-            ucOtherCharges3.Name = "ucOtherCharges3";
-            ucOtherCharges3.Size = new System.Drawing.Size(831, 275);
-            ucOtherCharges3.TabIndex = 1;
-            // 
-            // tabPageMarriageLicense
-            // 
-            tabPageMarriageLicense.BackColor = System.Drawing.Color.White;
-            tabPageMarriageLicense.Controls.Add(splitContainer3);
-            tabPageMarriageLicense.Location = new System.Drawing.Point(4, 24);
-            tabPageMarriageLicense.Name = "tabPageMarriageLicense";
-            tabPageMarriageLicense.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMarriageLicense.Size = new System.Drawing.Size(837, 447);
-            tabPageMarriageLicense.TabIndex = 3;
-            tabPageMarriageLicense.Text = "AF 54 - Marriage License";
-            tabPageMarriageLicense.Enter += tabPageMarriageLicense_Enter;
-            // 
-            // splitContainer3
-            // 
-            splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer3.Location = new System.Drawing.Point(3, 3);
-            splitContainer3.Name = "splitContainer3";
-            splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            splitContainer3.Panel1.AutoScroll = true;
-            splitContainer3.Panel1.AutoScrollMargin = new System.Drawing.Size(0, 150);
-            splitContainer3.Panel1.AutoScrollMinSize = new System.Drawing.Size(0, 200);
-            splitContainer3.Panel1.Controls.Add(ucMarriageLicense1);
-            splitContainer3.Panel1MinSize = 350;
-            // 
-            // splitContainer3.Panel2
-            // 
-            splitContainer3.Panel2.Controls.Add(ucOtherCharges4);
-            splitContainer3.Size = new System.Drawing.Size(831, 441);
-            splitContainer3.SplitterDistance = 350;
-            splitContainer3.TabIndex = 1;
-            // 
-            // ucMarriageLicense1
-            // 
-            ucMarriageLicense1.BackColor = System.Drawing.Color.Transparent;
-            ucMarriageLicense1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucMarriageLicense1.Location = new System.Drawing.Point(0, 0);
-            ucMarriageLicense1.Name = "ucMarriageLicense1";
-            ucMarriageLicense1.Size = new System.Drawing.Size(831, 350);
-            ucMarriageLicense1.TabIndex = 1;
-            // 
-            // ucOtherCharges4
-            // 
-            ucOtherCharges4.AutoScroll = true;
-            ucOtherCharges4.AutoScrollMargin = new System.Drawing.Size(0, 70);
-            ucOtherCharges4.AutoScrollMinSize = new System.Drawing.Size(0, 70);
-            ucOtherCharges4.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges4.Location = new System.Drawing.Point(0, 0);
-            ucOtherCharges4.Name = "ucOtherCharges4";
-            ucOtherCharges4.Size = new System.Drawing.Size(831, 87);
-            ucOtherCharges4.TabIndex = 0;
-            // 
-            // tabPageBurialPermit
-            // 
-            tabPageBurialPermit.AutoScroll = true;
-            tabPageBurialPermit.BackColor = System.Drawing.Color.White;
-            tabPageBurialPermit.Controls.Add(splitContainer4);
-            tabPageBurialPermit.Location = new System.Drawing.Point(4, 24);
-            tabPageBurialPermit.Name = "tabPageBurialPermit";
-            tabPageBurialPermit.Padding = new System.Windows.Forms.Padding(3);
-            tabPageBurialPermit.Size = new System.Drawing.Size(837, 447);
-            tabPageBurialPermit.TabIndex = 5;
-            tabPageBurialPermit.Text = "AF 58 - Burial Permit";
-            tabPageBurialPermit.Enter += tabPageBurialPermit_Enter;
-            // 
-            // splitContainer4
-            // 
-            splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer4.Location = new System.Drawing.Point(3, 3);
-            splitContainer4.Name = "splitContainer4";
-            splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            splitContainer4.Panel1.AutoScroll = true;
-            splitContainer4.Panel1.AutoScrollMargin = new System.Drawing.Size(470, 0);
-            splitContainer4.Panel1.AutoScrollMinSize = new System.Drawing.Size(470, 0);
-            splitContainer4.Panel1.Controls.Add(ucBurialPermit1);
-            splitContainer4.Panel1MinSize = 267;
-            // 
-            // splitContainer4.Panel2
-            // 
-            splitContainer4.Panel2.AutoScroll = true;
-            splitContainer4.Panel2.Controls.Add(ucOtherCharges5);
-            splitContainer4.Panel2MinSize = 122;
-            splitContainer4.Size = new System.Drawing.Size(831, 441);
-            splitContainer4.SplitterDistance = 267;
-            splitContainer4.TabIndex = 0;
-            // 
-            // ucBurialPermit1
-            // 
-            ucBurialPermit1.BackColor = System.Drawing.Color.Transparent;
-            ucBurialPermit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBurialPermit1.Location = new System.Drawing.Point(0, 0);
-            ucBurialPermit1.Name = "ucBurialPermit1";
-            ucBurialPermit1.Size = new System.Drawing.Size(940, 250);
-            ucBurialPermit1.TabIndex = 0;
-            // 
-            // ucOtherCharges5
-            // 
-            ucOtherCharges5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ucOtherCharges5.BackColor = System.Drawing.Color.Transparent;
-            ucOtherCharges5.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucOtherCharges5.Location = new System.Drawing.Point(0, 0);
-            ucOtherCharges5.Name = "ucOtherCharges5";
-            ucOtherCharges5.Size = new System.Drawing.Size(831, 170);
-            ucOtherCharges5.TabIndex = 0;
-            // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Controls.Add(radOthers);
-            flowLayoutPanel3.Controls.Add(radBpl);
-            flowLayoutPanel3.Controls.Add(radRpt);
-            flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new System.Drawing.Size(859, 27);
-            flowLayoutPanel3.TabIndex = 1;
-            // 
-            // radOthers
-            // 
-            radOthers.AutoSize = true;
-            radOthers.Location = new System.Drawing.Point(795, 3);
-            radOthers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            radOthers.Name = "radOthers";
-            radOthers.Size = new System.Drawing.Size(60, 19);
-            radOthers.TabIndex = 2;
-            radOthers.Text = "Others";
-            radOthers.UseVisualStyleBackColor = true;
-            radOthers.CheckedChanged += radOthers_CheckedChanged;
-            // 
-            // radBpl
-            // 
-            radBpl.AutoSize = true;
-            radBpl.Location = new System.Drawing.Point(742, 3);
-            radBpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            radBpl.Name = "radBpl";
-            radBpl.Size = new System.Drawing.Size(45, 19);
-            radBpl.TabIndex = 2;
-            radBpl.Text = "BPL";
-            radBpl.UseVisualStyleBackColor = true;
-            radBpl.CheckedChanged += radBpl_CheckedChanged;
-            // 
-            // radRpt
-            // 
-            radRpt.AutoSize = true;
-            radRpt.Checked = true;
-            radRpt.Location = new System.Drawing.Point(689, 3);
-            radRpt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            radRpt.Name = "radRpt";
-            radRpt.Size = new System.Drawing.Size(45, 19);
-            radRpt.TabIndex = 2;
-            radRpt.TabStop = true;
-            radRpt.Text = "RPT";
-            radRpt.UseVisualStyleBackColor = true;
-            radRpt.CheckedChanged += radRpt_CheckedChanged;
-            // 
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
-            tabPagePayment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPagePayment.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPagePayment.Name = "tabPagePayment";
@@ -774,7 +323,15 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // frmPayments
+            // ucRptTaxDues1
+            // 
+            ucRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucRptTaxDues1.Location = new System.Drawing.Point(0, 0);
+            ucRptTaxDues1.Name = "ucRptTaxDues1";
+            ucRptTaxDues1.Size = new System.Drawing.Size(859, 517);
+            ucRptTaxDues1.TabIndex = 1;
+            // 
+            // frmRptPayments
             // 
             AcceptButton = btnNext;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -787,7 +344,7 @@
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(1078, 596);
-            Name = "frmPayments";
+            Name = "frmRptPayments";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -801,37 +358,6 @@
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
             tabPageTaxDues.ResumeLayout(false);
-            tabControlTaxDues.ResumeLayout(false);
-            tabPageRpt.ResumeLayout(false);
-            tabPageOthers.ResumeLayout(false);
-            tabControlOthers.ResumeLayout(false);
-            tabPageAF51ANDAF57.ResumeLayout(false);
-            splitContainer5.Panel1.ResumeLayout(false);
-            splitContainer5.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
-            splitContainer5.ResumeLayout(false);
-            tabPageCertificateOfTransferOfCattle.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            tabPageCattleOwnership.ResumeLayout(false);
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
-            tabPageMarriageLicense.ResumeLayout(false);
-            splitContainer3.Panel1.ResumeLayout(false);
-            splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
-            splitContainer3.ResumeLayout(false);
-            tabPageBurialPermit.ResumeLayout(false);
-            splitContainer4.Panel1.ResumeLayout(false);
-            splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
-            splitContainer4.ResumeLayout(false);
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
             tabPagePayment.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
@@ -854,39 +380,10 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgTaxpayers;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.RadioButton radOthers;
-        private System.Windows.Forms.RadioButton radBpl;
-        private System.Windows.Forms.RadioButton radRpt;
         private ucPayment ucPayment1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.TextBox txtTaxpayerSearch;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TabControl tabControlTaxDues;
-        private System.Windows.Forms.TabPage tabPageRpt;
-        private System.Windows.Forms.TabPage tabPageBpl;
-        private System.Windows.Forms.TabPage tabPageOthers;
-        private System.Windows.Forms.TabControl tabControlOthers;
-        private System.Windows.Forms.TabPage tabPageAF51ANDAF57;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private OtherPayments.AF51_57.ucAF51_57 ucaF51_571;
-        private OtherPayments.ucOtherCharges ucOtherCharges1;
-        private System.Windows.Forms.TabPage tabPageCertificateOfTransferOfCattle;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private OtherPayments.CattleTransferOfOwnership.ucCattleTransferOfOwnership ucCattleTransferOfOwnership1;
-        private OtherPayments.ucOtherCharges ucOtherCharges2;
-        private System.Windows.Forms.TabPage tabPageCattleOwnership;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private OtherPayments.CattleOwnership.ucCattleOwnership ucCattleOwnership2;
-        private OtherPayments.ucOtherCharges ucOtherCharges3;
-        private System.Windows.Forms.TabPage tabPageMarriageLicense;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private OtherPayments.MarriageLicense.ucMarriageLicense ucMarriageLicense1;
-        private OtherPayments.ucOtherCharges ucOtherCharges4;
-        private System.Windows.Forms.TabPage tabPageBurialPermit;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private OtherPayments.BurialPermit.ucBurialPermit ucBurialPermit1;
-        private OtherPayments.ucOtherCharges ucOtherCharges5;
         private RealProperty.ucRptTaxDues ucRptTaxDues1;
     }
 }

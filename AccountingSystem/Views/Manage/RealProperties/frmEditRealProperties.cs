@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.RealProperties;
 using System;
 using System.Windows.Forms;
@@ -25,11 +26,16 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                uc._form = this;
-                LoadSelectedProperty();
-                LoadTaxpayer();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            uc._form = this;
+            LoadSelectedProperty();
+            LoadTaxpayer();
         }
 
         private void LoadSelectedProperty()

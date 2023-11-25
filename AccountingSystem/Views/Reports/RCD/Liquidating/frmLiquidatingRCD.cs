@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +23,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
             _reportNumber = reportNumber;
         }
 
-        private void frmLiquidatingRCD_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
@@ -31,63 +32,65 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
             reportViewer.RefreshReport();
         }
 
-        private void LoadReport(LocalReport report)
+        private void frmLiquidatingRCD_Load(object sender, EventArgs e)
         {
             try
             {
-                Cursor = Cursors.WaitCursor;
-                string accountableOfficer = AccFactory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
-                string verificationSignatory = string.Empty;
-                string verificationSignatoryTitle = string.Empty;
-
-                var dictVerification = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
-                {
-                    if (dictSignatory.Count > 0)
-                    {
-                        string prefix = dictSignatory["signatories_prefix"].ToString();
-                        string firstName = dictSignatory["signatories_first_name"].ToString();
-                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                        string lastName = dictSignatory["signatories_last_name"].ToString();
-                        string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                        signatory = signatoryName;
-                        signatoryTitle = dictSignatory["signatories_title"];
-                    }
-                }
-
-                ParseSignatory(dictVerification, ref verificationSignatory, ref verificationSignatoryTitle);
-
-                var lguDetails = Helper.LGUDetails();
-                var totalChecksAmount = 0;
-
-                var parameters = new[]
-                {
-                    new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
-                    new ReportParameter("paramAccountableOfficer", value:accountableOfficer),
-                    new ReportParameter("paramVerificationSignatory", verificationSignatory),
-                    new ReportParameter("paramSummaryDate", DateTime.Now.ToString()),
-                    new ReportParameter("paramDate", DateTime.Now.ToString()),
-                    new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString())
-                };
-
-                report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtRCDDetails", ReportDetails()));
-                report.DataSources.Add(new ReportDataSource("dtCollections", CollectionDetails()));
-                report.DataSources.Add(new ReportDataSource("dtCollectorsReports", CollectorsReports()));
-                report.DataSources.Add(new ReportDataSource("dtRemittanceDeposits", RemittanceAndDeposits()));
-                report.DataSources.Add(new ReportDataSource("dtAccountabilityForAccountableForms", AccountabilityForAccountableForms()));
-
-                report.SetParameters(parameters);
-                report.Refresh();
+                OnLoad();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReport(LocalReport report)
+        {
+            Cursor = Cursors.WaitCursor;
+            string accountableOfficer = AccFactory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
+            string verificationSignatory = string.Empty;
+            string verificationSignatoryTitle = string.Empty;
+
+            var dictVerification = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+            static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (dictSignatory.Count > 0)
+                {
+                    string prefix = dictSignatory["signatories_prefix"].ToString();
+                    string firstName = dictSignatory["signatories_first_name"].ToString();
+                    char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                    string lastName = dictSignatory["signatories_last_name"].ToString();
+                    string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                    string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                    signatory = signatoryName;
+                    signatoryTitle = dictSignatory["signatories_title"];
+                }
             }
+
+            ParseSignatory(dictVerification, ref verificationSignatory, ref verificationSignatoryTitle);
+
+            var lguDetails = Helper.LGUDetails();
+            var totalChecksAmount = 0;
+
+            var parameters = new[]
+            {
+                new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
+                new ReportParameter("paramAccountableOfficer", value:accountableOfficer),
+                new ReportParameter("paramVerificationSignatory", verificationSignatory),
+                new ReportParameter("paramSummaryDate", DateTime.Now.ToString()),
+                new ReportParameter("paramDate", DateTime.Now.ToString()),
+                new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString())
+            };
+
+            report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtRCDDetails", ReportDetails()));
+            report.DataSources.Add(new ReportDataSource("dtCollections", CollectionDetails()));
+            report.DataSources.Add(new ReportDataSource("dtCollectorsReports", CollectorsReports()));
+            report.DataSources.Add(new ReportDataSource("dtRemittanceDeposits", RemittanceAndDeposits()));
+            report.DataSources.Add(new ReportDataSource("dtAccountabilityForAccountableForms", AccountabilityForAccountableForms()));
+
+            report.SetParameters(parameters);
+            report.Refresh();
         }
 
         private DataTable AccountabilityForAccountableForms()
@@ -267,13 +270,13 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
 
         private DataTable DataTableReceipts(int id)
         {
-            var dtRC = new dsLFS.dtReceiptsDataTable();
+            var dataSetReceipts = new dsLFS.dtReceiptsDataTable();
             var dt = AccFactory.GeneralCollectionsRepository().GetRecordByReceipts(id);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataRow row = dtRC.NewRow();
+                    DataRow row = dataSetReceipts.NewRow();
                     row["form"] = item["form"];
                     row["receiptfrom"] = item["receiptsfrom"];
                     row["receiptto"] = item["receiptsto"];
@@ -281,11 +284,11 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
                     row["issueto"] = item["issueto"];
                     row["usedfrom"] = item["ifrom"];
                     row["usedto"] = item["ito"];
-                    dtRC.Rows.Add(row);
+                    dataSetReceipts.Rows.Add(row);
                 }
             }
 
-            return dtRC;
+            return dataSetReceipts;
         }
     }
 }

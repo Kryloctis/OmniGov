@@ -640,10 +640,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBarangay().ShowDialog();
         }
 
-        private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
         {
             _ = new frmRealProperties().ShowDialog();
@@ -704,7 +700,7 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmMarriageLicense().ShowDialog();
         }
 
-        private void aF58ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aF58BurialPermitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmBurialPermit().ShowDialog();
         }
