@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
             tabPageFees = new System.Windows.Forms.TabPage();
-            ucOtherCharges1 = new ucOtherCharges();
+            ucOtherCharges1 = new ucFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             flowLayoutPanel2.SuspendLayout();
@@ -516,6 +516,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         private ucPayment ucPayment1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private ucOtherCharges ucOtherCharges1;
+        private ucFeesCharges ucOtherCharges1;
     }
 }

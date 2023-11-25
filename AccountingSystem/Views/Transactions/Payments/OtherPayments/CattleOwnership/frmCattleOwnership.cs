@@ -1,6 +1,9 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Manage.TaxPayers;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,34 +14,30 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 {
     public partial class frmCattleOwnership : Form
     {
-
-        private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
-        private bool paymentComplete = false;
-        private readonly ucOtherCharges ucOtherCharges;
-        internal readonly ucCattleOwnership ucCattleOwnership;
+        private readonly ucFeesCharges ucOtherCharges;
+
+        //internal readonly ucCattleOwnership ucCattleOwnership;
         private bool isNewPayee = false;
 
         public frmCattleOwnership()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgPayees, true);
-            ucTaxPayers = ucTaxPayers1;
             ucPayment = ucPayment1;
-            ucOtherCharges = ucOtherCharges1;
-            ucCattleOwnership = ucCattleOwnership1;
-            ucOtherCharges.accountableForm = "53";
-            ucCattleOwnership.frmCattleOwnership = this;
+            //ucOtherCharges.accountableForm = "53";
+        }
+
+        private void OnLoad()
+        {
+            LoadTabContents();
         }
 
         private void frmCattleOwnership_Load(object sender, EventArgs e)
         {
             try
             {
-                string searchText = txtSearch.Text;
-                LoadPayees(searchText);
-                ucTaxPayers.chckIsActive.Enabled = false;
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -105,23 +104,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
         private void bgwPayee_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            string searchText = e.Argument.ToString();
-            var dataTable = DataTablePayees(searchText);
-
-            Invoke((MethodInvoker)delegate
-            {
-                HelperLoadRecords.DatagridViewPayees(dgPayees, dataTable);
-            });
         }
 
         private void bgwPayee_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void bgwPayee_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            dgPayees.CurrentCell = dgPayees.FirstDisplayedCell;
         }
 
         private void ConfirmPayment()
@@ -150,103 +140,42 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
         private bool FormValidations()
         {
-            var selectedTab = tabControlMain.SelectedTab;
+            //var selectedTab = tabControlMain.SelectedTab;
 
-            if (selectedTab == tabPagePayee)
-            {
-                if (isNewPayee)
-                {
-                    if (!ucTaxPayers.ValidateChildren())
-                    {
-                        Helper.MessageBoxError(ucTaxPayers.GetFormErrors());
-                        return false;
-                    }
-                }
-            }
-
-            else if (selectedTab == tabPageFees)
-            {
-                if (!ucCattleOwnership.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucCattleOwnership.GetFormErrors());
-                    return false;
-                }
-            }
-
-            else if (selectedTab == tabPagePayment)
-            {
-                if (!ucPayment.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucPayment.GetFormErrors());
-                    return false;
-                }
-            }
-
+            //if (selectedTab == tabPagePayee)
+            //{
+            //    if (isNewPayee)
+            //    {
+            //        if (!ucTaxPayers.ValidateChildren())
+            //        {
+            //            Helper.MessageBoxError(ucTaxPayers.GetFormErrors());
+            //            return false;
+            //        }
+            //    }
+            //}
+            //else if (selectedTab == tabPageCharges)
+            //{
+            //    if (!ucCattleOwnership.ValidateChildren())
+            //    {
+            //        Helper.MessageBoxError(ucCattleOwnership.GetFormErrors());
+            //        return false;
+            //    }
+            //}
+            //else if (selectedTab == tabPagePayment)
+            //{
+            //    if (!ucPayment.ValidateChildren())
+            //    {
+            //        Helper.MessageBoxError(ucPayment.GetFormErrors());
+            //        return false;
+            //    }
+            //}
 
             return true;
         }
 
-        private void ChangeTabs()
-        {
-            var selectedTab = tabControlMain.SelectedTab;
-
-            if (selectedTab == tabPagePayee)
-                tabControlMain.SelectedTab = tabPageFees;
-            else if (selectedTab == tabPageFees)
-                tabControlMain.SelectedTab = tabPagePayment;
-            else if (selectedTab == tabPagePayment)
-                ConfirmPayment();
-        }
-
-        private void btnNextMain_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!FormValidations())
-                    return;
-
-                ChangeTabs();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            tabControlPayee.SelectedTab = tabNewPayee;
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            if (Helper.MessageBoxConfirmCancel("Your input won't be stored."))
-            {
-                tabControlPayee.SelectedTab = tabPayeeList;
-                ucTaxPayers.ResetForm();
-            }
-        }
-
-        private void btnBackMain_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (tabControlMain.SelectedIndex < 0)
-                    return;
-
-                tabControlMain.SelectedIndex = tabControlMain.SelectedIndex - 1;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private bool SaveCattleOwnership(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
         {
-            try
-            {
-                return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
         }
 
         private PaymentCollectionsModel PaymentCollectionsModel()
@@ -278,28 +207,21 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private CattleOwnershipModel CattleOwnershipModel()
         {
             var cattleOwnershipModel = new CattleOwnershipModel();
-            try
-            {
-                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+            //var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+            //bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-                cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
-                cattleOwnershipModel.Tag = 1;
-                cattleOwnershipModel.OwnerName = ucCattleOwnership.txtOwnerName.Text;
-                cattleOwnershipModel.OwnerBarangay = ucCattleOwnership.cmbxBarangay.Text;
-                cattleOwnershipModel.OwnerMunicipality = ucCattleOwnership.cmbxMunicipality.Text;
-                cattleOwnershipModel.OwnerProvince = ucCattleOwnership.cmbxProvince.Text;
-                cattleOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
-                cattleOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
-                cattleOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
-                cattleOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
-                cattleOwnershipModel.CreatedBy = Helper.UserId;
-                cattleOwnershipModel.CreatedAt = DateTime.Now;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
+            //cattleOwnershipModel.Tag = 1;
+            //cattleOwnershipModel.OwnerName = ucCattleOwnership.txtOwnerName.Text;
+            //cattleOwnershipModel.OwnerBarangay = ucCattleOwnership.cmbxBarangay.Text;
+            //cattleOwnershipModel.OwnerMunicipality = ucCattleOwnership.cmbxMunicipality.Text;
+            //cattleOwnershipModel.OwnerProvince = ucCattleOwnership.cmbxProvince.Text;
+            //cattleOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
+            //cattleOwnershipModel.CattleSex = ucCattleOwnership.radCattleMale.Checked ? "Male" : "Female";
+            //cattleOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
+            //cattleOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
+            //cattleOwnershipModel.CreatedBy = Helper.UserId;
+            //cattleOwnershipModel.CreatedAt = DateTime.Now;
 
             return cattleOwnershipModel;
         }
@@ -387,43 +309,92 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
                 dialog.label1.Text = "Payment Process Complete!";
                 dialog.btnClose.Enabled = true;
                 btnNextMain.Text = "Finish";
-                btnBack.Enabled = false;
-                paymentComplete = true;
                 ucPayment.Enabled = false;
                 return;
             }
-
-            paymentComplete = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                string searchText = txtSearch.Text;
-                LoadPayees(searchText);
+                //LoadPayees(searchText);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        //TAB CHANGING METHODS
 
-        private Dictionary<string, string> GetTaxPayerData()
+        private void btnNextMain_Click(object sender, EventArgs e)
         {
-            var dict = new Dictionary<string, string>();
-            int rowIndex = dgPayees.CurrentRow.Index;
-            int taxpayerId = Convert.ToInt32(dgPayees.Rows[rowIndex].Cells["taxpayers_id"].Value);
-            string taxpayerName = dgPayees.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+            try
+            {
+                //if (!FormValidations())
+                //    return;
 
-            dict.Add("taxpayers_id", taxpayerId.ToString());
-            dict.Add("taxpayer_name", taxpayerName);
-            return dict;
+                tabControlMain.SelectedIndex++;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+        }
+
+        private void btnBackMain_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControlMain.SelectedIndex--;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadTabContents()
+        {
+            if (tabControlMain.SelectedIndex == 0)
+                btnBackMain.Enabled = false;
+            else
+                btnBackMain.Enabled = true;
+
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageOwner":
+                    //Load Owner Here...
+                    LoadOwner();
+                    break;
+
+                case "tabPageCattleDetails":
+                    //Load Cattle Details Here...
+                    LoadCattleDetailsTab();
+                    break;
+
+                case "tabPageFeesCharges":
+                    //Load Fees and Charges Here...
+                    LoadFeesAndChargesTab();
+                    break;
+
+                case "tabPagePayment":
+                    radPayment.Checked = true;
+                    LoadPaymentTab();
+                    //ConfirmPayment();
+                    break;
+            }
+        }
+
+        private void LoadOwner()
+        {
+            radOwner.Checked = true;
+            btnNextMain.Text = "Next";
+        }
+
+        private void LoadCattleDetailsTab()
+        {
+            btnNextMain.Text = "Next";
+            radCattleDetails.Checked = true;
         }
 
         private void LoadFeesAndChargesTab()
         {
-            btnBackMain.Enabled = true;
             btnNextMain.Text = "Proceed to Payment";
-            radFees.Checked = true;
+            btnBackMain.Enabled = true;
+            radFeesCharges.Checked = true;
         }
 
         private void LoadPaymentTab()
@@ -432,56 +403,22 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
+            //ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
             ucPayment.OnLoad("58");
 
-            if (isNewPayee)
-                ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
-            else
-                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+            //if (isNewPayee)
+            //    ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
+            //else
+            //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
         }
 
-        private void tabPagePayment_Enter(object sender, EventArgs e)
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                LoadPaymentTab();
+                LoadTabContents();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        private void tabPageFees_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadFeesAndChargesTab();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tabPagePayee_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadPayee();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-        private void LoadPayee()
-        {
-            btnBackMain.Enabled = false;
-            radPayee.Checked = true;
-        }
-
-        private void tabNewPayee_Enter(object sender, EventArgs e)
-        {
-            isNewPayee = true;
-        }
-
-        private void tabPayeeList_Enter(object sender, EventArgs e)
-        {
-            isNewPayee = false;
-        }
-
     }
 }

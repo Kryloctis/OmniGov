@@ -62,7 +62,7 @@
             txtDisinterment = new System.Windows.Forms.TextBox();
             txtCemetery = new System.Windows.Forms.TextBox();
             tabPageCharges = new System.Windows.Forms.TabPage();
-            ucOtherCharges1 = new ucOtherCharges();
+            ucOtherCharges1 = new ucFeesCharges();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             tabControl1.SuspendLayout();
             tabPageRemainsInfo.SuspendLayout();
@@ -483,7 +483,7 @@
         internal System.Windows.Forms.TabPage tabPageDeathDetails;
         internal System.Windows.Forms.TabPage tabPageCharges;
         internal System.Windows.Forms.TabPage tabPageRemainsInfo;
-        internal ucOtherCharges ucOtherCharges1;
+        internal ucFeesCharges ucOtherCharges1;
         internal System.Windows.Forms.RadioButton radFemale;
         internal System.Windows.Forms.RadioButton radMale;
         internal System.Windows.Forms.FlowLayoutPanel flpEmbalmed;

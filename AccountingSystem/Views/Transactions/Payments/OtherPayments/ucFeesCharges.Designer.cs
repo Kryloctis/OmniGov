@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
-    partial class ucOtherCharges
+    partial class ucFeesCharges
     {
         /// <summary> 
         /// Required designer variable.
@@ -55,24 +55,24 @@
             groupBox1.BackColor = System.Drawing.Color.Transparent;
             groupBox1.Controls.Add(panel2);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(4);
             groupBox1.Size = new System.Drawing.Size(688, 340);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Charges";
+            groupBox1.Text = "Fees && Charges";
             // 
             // panel2
             // 
             panel2.Controls.Add(splitContainer1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            panel2.Location = new System.Drawing.Point(4, 20);
+            panel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel2.Location = new System.Drawing.Point(4, 24);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(5);
-            panel2.Size = new System.Drawing.Size(680, 316);
+            panel2.Size = new System.Drawing.Size(680, 312);
             panel2.TabIndex = 9;
             // 
             // splitContainer1
@@ -90,7 +90,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(dgOtherPaymentCharges);
             splitContainer1.Panel2.Controls.Add(panel4);
-            splitContainer1.Size = new System.Drawing.Size(670, 306);
+            splitContainer1.Size = new System.Drawing.Size(670, 302);
             splitContainer1.SplitterDistance = 223;
             splitContainer1.TabIndex = 10;
             // 
@@ -99,7 +99,7 @@
             treeViewTaxTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             treeViewTaxTypes.Location = new System.Drawing.Point(0, 0);
             treeViewTaxTypes.Name = "treeViewTaxTypes";
-            treeViewTaxTypes.Size = new System.Drawing.Size(223, 306);
+            treeViewTaxTypes.Size = new System.Drawing.Size(223, 302);
             treeViewTaxTypes.TabIndex = 0;
             treeViewTaxTypes.AfterSelect += treeViewTaxTypes_AfterSelect;
             // 
@@ -107,7 +107,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -116,7 +116,7 @@
             dgOtherPaymentCharges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -127,14 +127,14 @@
             dgOtherPaymentCharges.Name = "dgOtherPaymentCharges";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgOtherPaymentCharges.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgOtherPaymentCharges.RowTemplate.Height = 25;
-            dgOtherPaymentCharges.Size = new System.Drawing.Size(405, 306);
+            dgOtherPaymentCharges.Size = new System.Drawing.Size(405, 302);
             dgOtherPaymentCharges.TabIndex = 8;
             dgOtherPaymentCharges.CellEndEdit += dgOtherPaymentCharges_CellEndEdit;
             // 
@@ -147,14 +147,14 @@
             panel4.Dock = System.Windows.Forms.DockStyle.Left;
             panel4.Location = new System.Drawing.Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(38, 306);
+            panel4.Size = new System.Drawing.Size(38, 302);
             panel4.TabIndex = 4;
             // 
             // btnRemove
             // 
             btnRemove.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btnRemove.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            btnRemove.Location = new System.Drawing.Point(3, 169);
+            btnRemove.Font = new System.Drawing.Font("Segoe UI", 9F);
+            btnRemove.Location = new System.Drawing.Point(3, 167);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new System.Drawing.Size(31, 23);
             btnRemove.TabIndex = 4;
@@ -165,8 +165,8 @@
             // btnAdd
             // 
             btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            btnAdd.Location = new System.Drawing.Point(3, 111);
+            btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F);
+            btnAdd.Location = new System.Drawing.Point(3, 109);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(31, 23);
             btnAdd.TabIndex = 6;
@@ -177,8 +177,8 @@
             // btnUndo
             // 
             btnUndo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btnUndo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            btnUndo.Location = new System.Drawing.Point(3, 140);
+            btnUndo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            btnUndo.Location = new System.Drawing.Point(3, 138);
             btnUndo.Name = "btnUndo";
             btnUndo.Size = new System.Drawing.Size(31, 23);
             btnUndo.TabIndex = 5;

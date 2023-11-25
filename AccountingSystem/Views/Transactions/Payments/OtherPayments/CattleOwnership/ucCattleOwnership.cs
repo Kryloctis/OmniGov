@@ -1,4 +1,4 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
 using AccountingSystem.Views.Shared;
 using System;
 using System.Windows.Forms;
@@ -21,11 +21,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             {
                 errorProvider1.GetError(txtOwnerName),
                 errorProvider1.GetError(cmbxType),
-                errorProvider1.GetError(cmbxSex)
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -48,7 +46,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             if (!DesignMode)
             {
-                HelperLoadRecords.SexComboBox(cmbxSex);
             }
         }
 
@@ -72,14 +69,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             Helper.ClearErrorComboBox(errorProvider1, cmbxType);
         }
 
-        private void cmbxSex_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxSex, "Cattle Sex.");
+            tabControlOwner.SelectedTab = tabPageNewOwner;
         }
 
-        private void cmbxSex_Validated(object sender, EventArgs e)
+        private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxSex);
+            tabControlOwner.SelectedTab = tabPageList;
         }
     }
 }

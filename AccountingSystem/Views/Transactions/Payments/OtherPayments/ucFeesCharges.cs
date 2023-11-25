@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
-    public partial class ucOtherCharges : UserControl
+    public partial class ucFeesCharges : UserControl
     {
         private int childImageIndexCounter = 1;
         internal string description = string.Empty;
@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         internal decimal debitAmount;
         internal decimal subTotalAmount;
 
-        public ucOtherCharges()
+        public ucFeesCharges()
         {
             InitializeComponent();
             Helper.DatagridEditableRowStyle(dgOtherPaymentCharges);

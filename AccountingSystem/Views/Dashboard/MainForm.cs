@@ -705,7 +705,7 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBurialPermit().ShowDialog();
         }
 
-        private void aF53ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aF53CattleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmCattleOwnership().ShowDialog();
         }

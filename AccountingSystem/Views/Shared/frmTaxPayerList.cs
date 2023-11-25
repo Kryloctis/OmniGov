@@ -221,7 +221,6 @@ namespace AccountingSystem.Views.Shared
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
         }
 
-
         private void InitializeOwnerDetails(frmCattleOwnership frmCattleOwnership)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
@@ -232,13 +231,6 @@ namespace AccountingSystem.Views.Shared
             var taxpayerBarangay = dictTaxpayer["taxpayers_barangay"].ToString();
             var taxpayerMunicipality = dictTaxpayer["taxpayers_municipality"].ToString();
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
-
-
-            frmCattleOwnership.ucCattleOwnership.ownerID = taxpayerId;
-            frmCattleOwnership.ucCattleOwnership.txtOwnerName.Text = taxpayer;
-            frmCattleOwnership.ucCattleOwnership.cmbxProvince.Text = taxpayerProvince;
-            frmCattleOwnership.ucCattleOwnership.cmbxMunicipality.Text = taxpayerMunicipality;
-            frmCattleOwnership.ucCattleOwnership.cmbxBarangay.Text = taxpayerBarangay;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)

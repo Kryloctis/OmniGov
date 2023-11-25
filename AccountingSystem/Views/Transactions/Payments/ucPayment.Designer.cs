@@ -84,7 +84,7 @@
             // 
             groupBox6.Controls.Add(panel5);
             groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            groupBox6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox6.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             groupBox6.Location = new System.Drawing.Point(0, 0);
             groupBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox6.Name = "groupBox6";
@@ -92,14 +92,14 @@
             groupBox6.Size = new System.Drawing.Size(848, 205);
             groupBox6.TabIndex = 0;
             groupBox6.TabStop = false;
-            groupBox6.Text = "Payment";
+            groupBox6.Text = "Total Payment";
             // 
             // panel5
             // 
             panel5.Controls.Add(lblTotalPayment);
             panel5.Controls.Add(label5);
             panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel5.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel5.Location = new System.Drawing.Point(4, 23);
             panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel5.Name = "panel5";
@@ -109,7 +109,7 @@
             // lblTotalPayment
             // 
             lblTotalPayment.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F);
             lblTotalPayment.Location = new System.Drawing.Point(4, 49);
             lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblTotalPayment.Name = "lblTotalPayment";
@@ -122,12 +122,12 @@
             // 
             label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(379, 115);
+            label5.Location = new System.Drawing.Point(393, 114);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(82, 15);
+            label5.Size = new System.Drawing.Size(51, 15);
             label5.TabIndex = 3;
-            label5.Text = "Total Payment";
+            label5.Text = "Amount";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer1
@@ -156,7 +156,7 @@
             // 
             gpBxChequeDetails.Controls.Add(panel9);
             gpBxChequeDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            gpBxChequeDetails.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            gpBxChequeDetails.Font = new System.Drawing.Font("Segoe UI", 9F);
             gpBxChequeDetails.Location = new System.Drawing.Point(0, 57);
             gpBxChequeDetails.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gpBxChequeDetails.Name = "gpBxChequeDetails";
@@ -171,7 +171,7 @@
             panel9.Controls.Add(dgCheques);
             panel9.Controls.Add(toolStrip1);
             panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel9.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel9.Location = new System.Drawing.Point(4, 19);
             panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel9.Name = "panel9";
@@ -183,7 +183,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -192,7 +192,7 @@
             dgCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -204,7 +204,7 @@
             dgCheques.Name = "dgCheques";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -257,7 +257,7 @@
             // 
             groupBox2.Controls.Add(flowLayoutPanel6);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
@@ -274,7 +274,7 @@
             flowLayoutPanel6.Controls.Add(radPaymentCash);
             flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             flowLayoutPanel6.Location = new System.Drawing.Point(4, 23);
             flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel6.Name = "flowLayoutPanel6";
@@ -324,7 +324,7 @@
             // 
             groupBox5.Controls.Add(panel7);
             groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox5.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             groupBox5.Location = new System.Drawing.Point(0, 0);
             groupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox5.Name = "groupBox5";
@@ -349,7 +349,7 @@
             panel7.Controls.Add(txtPayee);
             panel7.Controls.Add(dtPaymentDate);
             panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel7.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel7.Location = new System.Drawing.Point(4, 23);
             panel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel7.Name = "panel7";

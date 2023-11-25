@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
         private readonly ucBurialPermit ucBurialPermit;
-        private readonly ucOtherCharges ucOtherCharges;
+        private readonly ucFeesCharges ucOtherCharges;
         private dialogPayment dialog = new dialogPayment();
         private bool isNewPayee = false;
 

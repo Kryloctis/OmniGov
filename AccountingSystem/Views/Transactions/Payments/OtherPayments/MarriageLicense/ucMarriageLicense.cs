@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 {
     public partial class ucMarriageLicense : UserControl
     {
-        internal ucOtherCharges ucOtherCharges;
+        internal ucFeesCharges ucOtherCharges;
 
         public ucMarriageLicense()
         {
