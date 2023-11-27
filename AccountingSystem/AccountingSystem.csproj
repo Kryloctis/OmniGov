@@ -51,6 +51,7 @@
     <None Remove="Reports\LTOMs\ltom-21-notice-of-levy.rdlc" />
     <None Remove="Reports\LTOMs\ltom-22-report-of-levy.rdlc" />
     <None Remove="Reports\LTOMs\ltom-23-notice-of-auction-sale-of-delinquent-real-properties.rdlc" />
+    <None Remove="Reports\LTOMs\ltom-24-notice-of-sale.rdlc" />
     <None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
@@ -138,6 +139,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\LTOMs\ltom-23-notice-of-auction-sale-of-delinquent-real-properties.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\LTOMs\ltom-24-notice-of-sale.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">
