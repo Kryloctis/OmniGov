@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsLTOM">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>0829353d-c432-4ed5-bb4f-4cf9278f505b</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsNoticeOfSale">
+      <Query>
+        <DataSourceName>dsLTOM</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="tax_year">
+          <DataField>tax_year</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="basic_tax">
+          <DataField>basic_tax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="basic_penalty">
+          <DataField>basic_penalty</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sef_tax">
+          <DataField>sef_tax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sef_penalty">
+          <DataField>sef_penalty</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="total_amount">
+          <DataField>total_amount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsLTOM</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Home\OneDrive\Desktop\Archie LFS\AccountingSystem\dsLTOM.xsd</rd:SchemaPath>
+        <rd:TableName>dtNoticeOfSale</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -643,7 +694,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!tax_year.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -679,7 +730,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!basic_tax.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -716,7 +767,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!basic_penalty.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -753,7 +804,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!sef_tax.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -790,7 +841,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!sef_penalty.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -827,7 +878,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!total_amount.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -882,10 +933,10 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dsNoticeOfRealPropertyTaxDelinquencyFirstNotice</DataSetName>
+            <DataSetName>dsNoticeOfSale</DataSetName>
             <Top>2.22396in</Top>
             <Height>0.78125in</Height>
-            <Width>7.74399in</Width>
+            <Width>7.74397in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
