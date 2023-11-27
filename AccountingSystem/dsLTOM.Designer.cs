@@ -34,6 +34,8 @@ namespace AccountingSystem {
         
         private dtNoticeOfSaleDataTable tabledtNoticeOfSale;
         
+        private dtListOfRegisteredBiddersDataTable tabledtListOfRegisteredBidders;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -76,6 +78,9 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtNoticeOfSale"] != null)) {
                     base.Tables.Add(new dtNoticeOfSaleDataTable(ds.Tables["dtNoticeOfSale"]));
+                }
+                if ((ds.Tables["dtListOfRegisteredBidders"] != null)) {
+                    base.Tables.Add(new dtListOfRegisteredBiddersDataTable(ds.Tables["dtListOfRegisteredBidders"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -142,6 +147,16 @@ namespace AccountingSystem {
         public dtNoticeOfSaleDataTable dtNoticeOfSale {
             get {
                 return this.tabledtNoticeOfSale;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtListOfRegisteredBiddersDataTable dtListOfRegisteredBidders {
+            get {
+                return this.tabledtListOfRegisteredBidders;
             }
         }
         
@@ -227,6 +242,9 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtNoticeOfSale"] != null)) {
                     base.Tables.Add(new dtNoticeOfSaleDataTable(ds.Tables["dtNoticeOfSale"]));
                 }
+                if ((ds.Tables["dtListOfRegisteredBidders"] != null)) {
+                    base.Tables.Add(new dtListOfRegisteredBiddersDataTable(ds.Tables["dtListOfRegisteredBidders"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -290,6 +308,12 @@ namespace AccountingSystem {
                     this.tabledtNoticeOfSale.InitVars();
                 }
             }
+            this.tabledtListOfRegisteredBidders = ((dtListOfRegisteredBiddersDataTable)(base.Tables["dtListOfRegisteredBidders"]));
+            if ((initTable == true)) {
+                if ((this.tabledtListOfRegisteredBidders != null)) {
+                    this.tabledtListOfRegisteredBidders.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -310,6 +334,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtNoticeOfAuctionSaleOfDelinquentRealProperties);
             this.tabledtNoticeOfSale = new dtNoticeOfSaleDataTable();
             base.Tables.Add(this.tabledtNoticeOfSale);
+            this.tabledtListOfRegisteredBidders = new dtListOfRegisteredBiddersDataTable();
+            base.Tables.Add(this.tabledtListOfRegisteredBidders);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -339,6 +365,12 @@ namespace AccountingSystem {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializedtNoticeOfSale() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializedtListOfRegisteredBidders() {
             return false;
         }
         
@@ -411,6 +443,9 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtNoticeOfSaleRowChangeEventHandler(object sender, dtNoticeOfSaleRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void dtListOfRegisteredBiddersRowChangeEventHandler(object sender, dtListOfRegisteredBiddersRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2054,6 +2089,309 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtListOfRegisteredBiddersDataTable : global::System.Data.TypedTableBase<dtListOfRegisteredBiddersRow> {
+            
+            private global::System.Data.DataColumn columnassigned_bidders_no;
+            
+            private global::System.Data.DataColumn columnname_of_bidders_or_representative;
+            
+            private global::System.Data.DataColumn columncomplete_address_or_business_address;
+            
+            private global::System.Data.DataColumn columncontact_no;
+            
+            private global::System.Data.DataColumn columnofficial_receipts_no;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersDataTable() {
+                this.TableName = "dtListOfRegisteredBidders";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtListOfRegisteredBiddersDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected dtListOfRegisteredBiddersDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn assigned_bidders_noColumn {
+                get {
+                    return this.columnassigned_bidders_no;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn name_of_bidders_or_representativeColumn {
+                get {
+                    return this.columnname_of_bidders_or_representative;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn complete_address_or_business_addressColumn {
+                get {
+                    return this.columncomplete_address_or_business_address;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn contact_noColumn {
+                get {
+                    return this.columncontact_no;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn official_receipts_noColumn {
+                get {
+                    return this.columnofficial_receipts_no;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersRow this[int index] {
+                get {
+                    return ((dtListOfRegisteredBiddersRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtListOfRegisteredBiddersRowChangeEventHandler dtListOfRegisteredBiddersRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtListOfRegisteredBiddersRowChangeEventHandler dtListOfRegisteredBiddersRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtListOfRegisteredBiddersRowChangeEventHandler dtListOfRegisteredBiddersRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtListOfRegisteredBiddersRowChangeEventHandler dtListOfRegisteredBiddersRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AdddtListOfRegisteredBiddersRow(dtListOfRegisteredBiddersRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersRow AdddtListOfRegisteredBiddersRow(string assigned_bidders_no, string name_of_bidders_or_representative, string complete_address_or_business_address, string contact_no, string official_receipts_no) {
+                dtListOfRegisteredBiddersRow rowdtListOfRegisteredBiddersRow = ((dtListOfRegisteredBiddersRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        assigned_bidders_no,
+                        name_of_bidders_or_representative,
+                        complete_address_or_business_address,
+                        contact_no,
+                        official_receipts_no};
+                rowdtListOfRegisteredBiddersRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtListOfRegisteredBiddersRow);
+                return rowdtListOfRegisteredBiddersRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtListOfRegisteredBiddersDataTable cln = ((dtListOfRegisteredBiddersDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtListOfRegisteredBiddersDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnassigned_bidders_no = base.Columns["assigned_bidders_no"];
+                this.columnname_of_bidders_or_representative = base.Columns["name_of_bidders_or_representative"];
+                this.columncomplete_address_or_business_address = base.Columns["complete_address_or_business_address"];
+                this.columncontact_no = base.Columns["contact_no"];
+                this.columnofficial_receipts_no = base.Columns["official_receipts_no"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnassigned_bidders_no = new global::System.Data.DataColumn("assigned_bidders_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnassigned_bidders_no);
+                this.columnname_of_bidders_or_representative = new global::System.Data.DataColumn("name_of_bidders_or_representative", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnname_of_bidders_or_representative);
+                this.columncomplete_address_or_business_address = new global::System.Data.DataColumn("complete_address_or_business_address", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncomplete_address_or_business_address);
+                this.columncontact_no = new global::System.Data.DataColumn("contact_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncontact_no);
+                this.columnofficial_receipts_no = new global::System.Data.DataColumn("official_receipts_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnofficial_receipts_no);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersRow NewdtListOfRegisteredBiddersRow() {
+                return ((dtListOfRegisteredBiddersRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtListOfRegisteredBiddersRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtListOfRegisteredBiddersRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtListOfRegisteredBiddersRowChanged != null)) {
+                    this.dtListOfRegisteredBiddersRowChanged(this, new dtListOfRegisteredBiddersRowChangeEvent(((dtListOfRegisteredBiddersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtListOfRegisteredBiddersRowChanging != null)) {
+                    this.dtListOfRegisteredBiddersRowChanging(this, new dtListOfRegisteredBiddersRowChangeEvent(((dtListOfRegisteredBiddersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtListOfRegisteredBiddersRowDeleted != null)) {
+                    this.dtListOfRegisteredBiddersRowDeleted(this, new dtListOfRegisteredBiddersRowChangeEvent(((dtListOfRegisteredBiddersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtListOfRegisteredBiddersRowDeleting != null)) {
+                    this.dtListOfRegisteredBiddersRowDeleting(this, new dtListOfRegisteredBiddersRowChangeEvent(((dtListOfRegisteredBiddersRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovedtListOfRegisteredBiddersRow(dtListOfRegisteredBiddersRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLTOM ds = new dsLTOM();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtListOfRegisteredBiddersDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtNoticeOfDelinquenceInThePaymentOfRPTRow : global::System.Data.DataRow {
@@ -3109,6 +3447,166 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtListOfRegisteredBiddersRow : global::System.Data.DataRow {
+            
+            private dtListOfRegisteredBiddersDataTable tabledtListOfRegisteredBidders;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtListOfRegisteredBiddersRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtListOfRegisteredBidders = ((dtListOfRegisteredBiddersDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string assigned_bidders_no {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtListOfRegisteredBidders.assigned_bidders_noColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'assigned_bidders_no\' in table \'dtListOfRegisteredBidders\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtListOfRegisteredBidders.assigned_bidders_noColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string name_of_bidders_or_representative {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtListOfRegisteredBidders.name_of_bidders_or_representativeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'name_of_bidders_or_representative\' in table \'dtListOfRegist" +
+                                "eredBidders\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtListOfRegisteredBidders.name_of_bidders_or_representativeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string complete_address_or_business_address {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtListOfRegisteredBidders.complete_address_or_business_addressColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'complete_address_or_business_address\' in table \'dtListOfReg" +
+                                "isteredBidders\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtListOfRegisteredBidders.complete_address_or_business_addressColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string contact_no {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtListOfRegisteredBidders.contact_noColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'contact_no\' in table \'dtListOfRegisteredBidders\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tabledtListOfRegisteredBidders.contact_noColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string official_receipts_no {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtListOfRegisteredBidders.official_receipts_noColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'official_receipts_no\' in table \'dtListOfRegisteredBidders\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtListOfRegisteredBidders.official_receipts_noColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isassigned_bidders_noNull() {
+                return this.IsNull(this.tabledtListOfRegisteredBidders.assigned_bidders_noColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setassigned_bidders_noNull() {
+                this[this.tabledtListOfRegisteredBidders.assigned_bidders_noColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isname_of_bidders_or_representativeNull() {
+                return this.IsNull(this.tabledtListOfRegisteredBidders.name_of_bidders_or_representativeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setname_of_bidders_or_representativeNull() {
+                this[this.tabledtListOfRegisteredBidders.name_of_bidders_or_representativeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscomplete_address_or_business_addressNull() {
+                return this.IsNull(this.tabledtListOfRegisteredBidders.complete_address_or_business_addressColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcomplete_address_or_business_addressNull() {
+                this[this.tabledtListOfRegisteredBidders.complete_address_or_business_addressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscontact_noNull() {
+                return this.IsNull(this.tabledtListOfRegisteredBidders.contact_noColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcontact_noNull() {
+                this[this.tabledtListOfRegisteredBidders.contact_noColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isofficial_receipts_noNull() {
+                return this.IsNull(this.tabledtListOfRegisteredBidders.official_receipts_noColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setofficial_receipts_noNull() {
+                this[this.tabledtListOfRegisteredBidders.official_receipts_noColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -3264,6 +3762,40 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtNoticeOfSaleRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class dtListOfRegisteredBiddersRowChangeEvent : global::System.EventArgs {
+            
+            private dtListOfRegisteredBiddersRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersRowChangeEvent(dtListOfRegisteredBiddersRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtListOfRegisteredBiddersRow Row {
                 get {
                     return this.eventRow;
                 }
