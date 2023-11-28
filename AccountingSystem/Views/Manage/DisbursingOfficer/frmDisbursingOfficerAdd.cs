@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,9 +20,9 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         public frmDisbursingOfficerAdd(frmDisbursingOfficer _frmDisbursingOfficer)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             frmDisbursingOfficer = _frmDisbursingOfficer;
             uc = ucDisbursingOfficer1;
-            Helper.LoadFormIcon(this);
         }
 
         private bool SaveData()

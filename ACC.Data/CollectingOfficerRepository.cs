@@ -9,20 +9,20 @@ namespace ACC.Data
 {
     public class CollectingOfficerRepository : ICollectingOfficerRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "collecting_officers";
         private readonly string tableName3 = "receipts_issued";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public CollectingOfficerRepository(IAccGenericCommands dbGenericCommands)
+        public CollectingOfficerRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
         {
             string query = $"SELECT COUNT(id) FROM {tableName}";
 
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool Delete(List<CollectingOfficerModel> entityList)
@@ -37,7 +37,7 @@ namespace ACC.Data
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -54,22 +54,25 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
 
-                record.Add("prefix", reader.Rows[0][0].ToString());
-                record.Add("first_name", reader.Rows[0][1].ToString());
-                record.Add("mid_initial", reader.Rows[0][2].ToString());
-                record.Add("last_name", reader.Rows[0][3].ToString());
-                record.Add("suffix", reader.Rows[0][4].ToString());
-                record.Add("job_title", reader.Rows[0][5].ToString());
-                record.Add("created_at", reader.Rows[0][6].ToString());
-                record.Add("updated_at", reader.Rows[0][7].ToString());
-                record.Add("users_id", reader.Rows[0][8].ToString());
+                foreach (DataRow item in reader.Rows)
+                {
+                    record.Add("prefix", item["prefix"].ToString());
+                    record.Add("first_name", item["first_name"].ToString());
+                    record.Add("mid_initial", item["mid_initial"].ToString());
+                    record.Add("last_name", item["last_name"].ToString());
+                    record.Add("suffix", item["suffix"].ToString());
+                    record.Add("job_title", item["job_title"].ToString());
+                    record.Add("created_at", item["created_at"].ToString());
+                    record.Add("updated_at", item["updated_at"].ToString());
+                    record.Add("users_id", item["users_id"].ToString());
+                }
             }
 
             return record;
@@ -86,7 +89,7 @@ namespace ACC.Data
 
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -113,8 +116,8 @@ namespace ACC.Data
         {
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName}";
 
-            var dtFunds = new DataTable();
-            return _dbGenericCommands.Fill(query, dtFunds);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetCollectorsWithReceiptsIssuedByReceiptId(int receiptsId)
@@ -129,7 +132,7 @@ namespace ACC.Data
                             $"WHERE receipts_id = @receipts_id AND is_returned='NO')";
 
             var collectingOfficerReceiptsDt = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, collectingOfficerReceiptsDt, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, collectingOfficerReceiptsDt, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -142,7 +145,7 @@ namespace ACC.Data
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName} WHERE prefix LIKE @search_text OR first_name LIKE @search_text OR last_name LIKE @search_text OR suffix LIKE @search_text OR job_title LIKE @search_text";
 
             var dtFunds = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtFunds, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtFunds, parameters);
         }
 
         public bool IdExist(int id)
@@ -153,7 +156,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
 
@@ -170,31 +173,29 @@ namespace ACC.Data
                 new object[] { "@last_name", DbType.String, entity.LastName},
                 new object[] { "@suffix", DbType.String, entity.Suffix},
                 new object[] { "@job_title", DbType.String, entity.JobTitle},
-                new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
+                new object[] { "@users_id", DbType.Object, entity.UserId}
             };
 
             string query = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
-
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CollectingOfficerModel entity)
         {
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@prefix", DbType.String, entity.Prefix},
-                    new object[] { "@first_name", DbType.String, entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@suffix", DbType.String, entity.Suffix},
-                    new object[] { "@job_title", DbType.String, entity.JobTitle},
-                    new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value : entity.UserId }
+                new object[] { "@id", DbType.Int16, entity.Id},
+                new object[] { "@prefix", DbType.String, entity.Prefix},
+                new object[] { "@first_name", DbType.String, entity.FirstName},
+                new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
+                new object[] { "@last_name", DbType.String, entity.LastName},
+                new object[] { "@suffix", DbType.String, entity.Suffix},
+                new object[] { "@job_title", DbType.String, entity.JobTitle},
+                new object[] { "@users_id", DbType.Object, entity.UserId }
             };
 
-            string query = $"UPDATE {tableName} " +
-            $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =             @job_title,users_id=@users_id WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            string query = $"UPDATE {tableName} SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title = @job_title, users_id = @users_id WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool FullNameExist(string firstName, string middleInitial, string lastName, int id)
@@ -210,7 +211,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {tableName} " +
                            $"WHERE id <> @id AND first_name = @first_name AND mid_initial = @middle_initial AND last_name = @last_name";
 
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -227,7 +228,7 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(collecting_officers_id) FROM collecting_officers_has_job_orders WHERE collecting_officers_id =    @collecting_officers_id";
 
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }
     }
 }

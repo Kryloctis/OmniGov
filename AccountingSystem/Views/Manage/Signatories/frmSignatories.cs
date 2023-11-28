@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +13,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgSignatories, true);
         }
 
         private DataTable SignatoriesDatatable()
@@ -23,32 +25,25 @@ namespace AccountingSystem.Views.Manage.Signatories
             dataTable.Columns.Add("created_at");
             dataTable.Columns.Add("updated_at");
 
-            try
+            var dictUserLoggedIn = Helper.LoggedInUserData();
+            var dtSignatories = AccFactory.SignatoriesHasReferencesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
+
+            foreach (DataRow row in dtSignatories.Rows)
             {
-                var dictUserLoggedIn = Helper.LoggedInUserData();
-                var dtSignatories = AccFactory.SignatoriesHasReferencesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
+                int signatoryId = Convert.ToInt32(row["signatories_id"]);
+                string prefix = row["signatories_prefix"].ToString();
+                string firstName = row["signatories_first_name"].ToString();
+                char middleInitial = Convert.ToChar(row["signatories_middle_initial"]);
+                string lastName = row["signatories_last_name"].ToString();
+                string suffix = row["signatories_suffix"].ToString();
+                string title = row["signatories_title"].ToString();
+                string createdAt = row["signatories_created_at"].ToString();
+                string updatedAt = row["signatories_updated_at"].ToString();
+                string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName} {(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
 
-                foreach (DataRow row in dtSignatories.Rows)
-                {
-                    int signatoryId = Convert.ToInt32(row["signatories_id"]);
-                    string prefix = row["signatories_prefix"].ToString();
-                    string firstName = row["signatories_first_name"].ToString();
-                    char middleInitial = Convert.ToChar(row["signatories_middle_initial"]);
-                    string lastName = row["signatories_last_name"].ToString();
-                    string suffix = row["signatories_suffix"].ToString();
-                    string title = row["signatories_title"].ToString();
-                    string createdAt = row["signatories_created_at"].ToString();
-                    string updatedAt = row["signatories_updated_at"].ToString();
-                    string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName} {(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+                var item = new dynamic[] { signatoryId, signatoryName, title, createdAt, updatedAt };
 
-                    var item = new dynamic[] { signatoryId, signatoryName, title, createdAt, updatedAt };
-
-                    dataTable.Rows.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                dataTable.Rows.Add(item);
             }
 
             return dataTable;
@@ -56,54 +51,48 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         internal void LoadSignatories()
         {
-            try
-            {
-                HelperLoadRecords.SignatoriesDatagridView(SignatoriesDatatable(), dgSignatories);
-                lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
-                Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
-                dgSignatories.CurrentCell = dgSignatories.FirstDisplayedCell;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            HelperLoadRecords.SignatoriesDatagridView(SignatoriesDatatable(), dgSignatories);
+            lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
+            Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
+            dgSignatories.CurrentCell = dgSignatories.FirstDisplayedCell;
         }
 
         internal void LoadReferencedDocuments()
         {
-            try
-            {
-                listDocuments.Items.Clear();
+            listDocuments.Items.Clear();
 
-                if (dgSignatories.SelectedRows.Count == 1)
+            if (dgSignatories.SelectedRows.Count == 1)
+            {
+                int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentCell.RowIndex].Cells["id"].Value);
+
+                var dtReferencedDocuments = AccFactory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
+                foreach (DataRow row in dtReferencedDocuments.Rows)
                 {
-                    int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentCell.RowIndex].Cells["id"].Value);
-
-                    var dtReferencedDocuments = AccFactory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
-                    foreach (DataRow row in dtReferencedDocuments.Rows)
-                    {
-                        listDocuments.Items.Add(row["documents_name"]);
-                    }
+                    listDocuments.Items.Add(row["documents_name"]);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
-            _ = new frmAddSignatories(this).ShowDialog();
+            try
+            {
+                _ = new frmAddSignatories(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
-            int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentRow.Index].Cells["id"].Value);
+            try
+            {
+                int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentRow.Index].Cells["id"].Value);
 
-            var _frmEditSignatories = new frmEditSignatories(this);
-            _frmEditSignatories.uc.signatoriesId = signatoriesId;
-            _frmEditSignatories.ShowDialog();
+                var _frmEditSignatories = new frmEditSignatories(this);
+                _frmEditSignatories.uc.signatoriesId = signatoriesId;
+                _frmEditSignatories.ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableButtons()
@@ -113,64 +102,74 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void dgSignatories_SelectionChanged(object sender, System.EventArgs e)
         {
-            EnableDisableButtons();
-            LoadReferencedDocuments();
+            try
+            {
+                EnableDisableButtons();
+                LoadReferencedDocuments();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmSignatories_Load(object sender, System.EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgSignatories, true);
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
             LoadSignatories();
             EnableDisableButtons();
         }
 
-        private void DeleteRealignment()
+        private bool DeleteRealignment()
         {
-            try
+            int selectedRowCount = 0;
+
+            foreach (DataGridViewRow row in dgSignatories.SelectedRows)
             {
-                int selectedRowCount = 0;
+                if (row.Cells[0].Value != null)
+                    selectedRowCount += 1;
+            }
 
-                foreach (DataGridViewRow row in dgSignatories.SelectedRows)
+            if (selectedRowCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                 {
-                    if (row.Cells[0].Value != null)
-                        selectedRowCount += 1;
-                }
+                    var signatoriesModelList = new List<SignatoriesModel>();
 
-                if (selectedRowCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowCount))
+                    foreach (DataGridViewRow row in dgSignatories.SelectedRows)
                     {
-                        var signatoriesModelList = new List<SignatoriesModel>();
-
-                        foreach (DataGridViewRow row in dgSignatories.SelectedRows)
+                        if (row.Cells[0].Value != null)
                         {
-                            if (row.Cells[0].Value != null)
+                            ushort signatoriesId = (ushort)Convert.ToInt16(row.Cells["id"].Value);
+
+                            var signatoriesModel = new SignatoriesModel()
                             {
-                                ushort signatoriesId = (ushort)Convert.ToInt16(row.Cells["id"].Value);
+                                Id = signatoriesId
+                            };
 
-                                var signatoriesModel = new SignatoriesModel()
-                                {
-                                    Id = signatoriesId
-                                };
-
-                                signatoriesModelList.Add(signatoriesModel);
-                            }
+                            signatoriesModelList.Add(signatoriesModel);
                         }
-
-                        _ = AccFactory.SignatoriesRepository().Delete(signatoriesModelList);
-                        LoadSignatories();
                     }
+
+                    return AccFactory.SignatoriesRepository().Delete(signatoriesModelList);
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DeleteRealignment();
+            try
+            {
+                if (DeleteRealignment())
+                    LoadSignatories();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

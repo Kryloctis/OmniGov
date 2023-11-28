@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bank";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // epBank
             // 
@@ -185,7 +184,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.label6.Size = new System.Drawing.Size(86, 15);
             this.label6.TabIndex = 0;
             this.label6.Text = "Bank Accounts";
-            this.label6.Click += new System.EventHandler(this.label1_Click);
             // 
             // cmbBankAccounts
             // 

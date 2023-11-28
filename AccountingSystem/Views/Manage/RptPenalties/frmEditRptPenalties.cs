@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -20,54 +21,55 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var model = new RptPenaltiesModel()
-                {
-                    Id = uc.rptPenaltiesId,
-                    Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value,
-                    Frequency = uc.cmbxFrequency.Text.Trim()
-                };
-
-                return AccFactory.RptPenaltiesRepository().Update(model);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var model = new RptPenaltiesModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = uc.rptPenaltiesId,
+                Description = uc.txtDescription.Text.Trim(),
+                Rate = uc.nudRate.Value,
+                Frequency = uc.cmbxFrequency.Text.Trim()
+            };
+
+            return AccFactory.RptPenaltiesRepository().Update(model);
         }
 
         private void LoadRecord()
         {
             var dictRptDiscounts = AccFactory.RptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
+            decimal rate = Convert.ToDecimal(dictRptDiscounts["rate"]);
 
             uc.txtDescription.Text = dictRptDiscounts["description"];
-            uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
+            uc.nudRate.Value = (rate * 100);
             uc.cmbxFrequency.Text = dictRptDiscounts["frequency"];
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Penalty has been updated.");
-                _frmRptPenalties.LoadPenalties();
-                Close();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Penalty has been updated.");
+                    _frmRptPenalties.LoadPenalties();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmEditRptPenalties_Load(object sender, EventArgs e)
         {
-            uc.isEdit = true;
-            LoadRecord();
+            try
+            {
+                uc.isEdit = true;
+                LoadRecord();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

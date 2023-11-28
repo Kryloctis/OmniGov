@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using System;
@@ -11,38 +12,47 @@ namespace AccountingSystem.Views.Transactions.RCI
 {
     public partial class ucRCI : UserControl
     {
-        internal int Id = 0;
-        internal int bankId = 0;
-        internal int fundsId = 0;
-        internal int functionId = 0;
-
-        internal short obligationNumberCount = 0;
-        internal decimal totalDeduction = 0;
-
+        internal int Id;
+        internal int bankId;
+        internal int fundsId;
+        internal int fppId;
+        internal short obligationNumberCount;
+        internal decimal totalDeduction;
         internal DataTable dtObligations = new();
         internal DataTable dtDeductions = new();
 
         public ucRCI()
         {
             InitializeComponent();
+            CreateObligationAndDeductionsColumns();
+        }
+
+        private void CreateObligationAndDeductionsColumns()
+        {
+            //obligations
+            dtObligations.Columns.Add("obligation_no", typeof(string));
+            dtObligations.Columns.Add("date_entry", typeof(DateTime));
+
+            //deductions
+            dtDeductions.Columns.Add("description", typeof(string));
+            dtDeductions.Columns.Add("amount", typeof(decimal));
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadBanks();
-                LoadBankAccounts();
-                LoadFunds();
-
-                cmbFPP.SelectedValueChanged -= new EventHandler(cmbFPP_SelectedValueChanged);
-                LoadFPP();
-                cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
-
-                dtObligations.Columns.Add("obligation_no");
-                dtObligations.Columns.Add("date_entry");
-                dtDeductions.Columns.Add("description");
-                dtDeductions.Columns.Add("amount");
+                try
+                {
+                    LoadBanks();
+                    LoadBankAccounts();
+                    LoadFunds();
+                    LoadFPP();
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxSuccess(ex.Message);
+                }
             }
         }
 
@@ -58,30 +68,23 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal void LoadFPP()
         {
-            try
+            cmbFPP.DroppedDown = false;
+            Cursor.Current = Cursors.Default;
+
+            if (DataTableFPP().Rows.Count == 0) return;
+
+            var fppDict = new Dictionary<int, string>();
+            foreach (DataRow item in DataTableFPP().Rows)
             {
-                cmbFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
+                int fppId = Convert.ToInt32(item["id"]);
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
 
-                if (DataTableFPP().Rows.Count == 0) return;
-
-                var fppDict = new Dictionary<int, string>();
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    int fppId = Convert.ToInt32(item["id"]);
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbFPP.DataSource = new BindingSource(fppDict, null);
-                cmbFPP.DisplayMember = "value";
-                cmbFPP.ValueMember = "key";
+                fppDict.Add(fppId, fppName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbFPP.DataSource = new BindingSource(fppDict, null);
+            cmbFPP.DisplayMember = "value";
+            cmbFPP.ValueMember = "key";
         }
 
         private DataTable DataTableFPP()
@@ -99,75 +102,50 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal void ResetForm()
         {
             txtDVNo.Clear();
-            cmbfund.SelectedIndex = -1;
-            bankId = fundsId = functionId = 0;
-            cmbBank.SelectedIndex = -1;
             txtCheckNo.Clear();
-            cmbFPP.SelectedIndex = -1;
-            dtCheckDate.Value = DateTime.Now;
             txtPayee.Clear();
-            txtNature.Clear();
-            nudNetAmount.Value = Convert.ToDecimal("0.00");
-
+            txtNatureOfPayment.Clear();
             dtObligations.Rows.Clear();
             dtDeductions.Rows.Clear();
-
+            cmbFund.SelectedIndex = -1;
+            cmbBank.SelectedIndex = -1;
+            cmbBankAccounts.SelectedIndex = -1;
+            cmbFPP.SelectedIndex = -1;
+            bankId = 0;
+            fundsId = 0;
+            fppId = 0;
+            dtCheckDate.Value = DateTime.Now;
+            nudNetAmount.Value = Convert.ToDecimal("0.00");
             btnAddObligation.Text = "Click to add obligation no.";
             btnAddDeductions.Text = "Click to add deductions.";
         }
 
         internal void LoadFunds()
         {
-            try
-            {
-                var fundRepository = AccFactory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbfund.DataSource = dtFund;
-                cmbfund.ValueMember = "id";
-                cmbfund.DisplayMember = "funddisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var fundRepository = AccFactory.FundsRepository();
+            var dtFunds = fundRepository.GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
         }
 
         internal void LoadBanks()
         {
-            try
-            {
-                var fundRepository = AccFactory.BanksRepository();
-                var dtBank = fundRepository.GetRecords();
-                cmbBank.DataSource = dtBank;
-                cmbBank.ValueMember = "id";
-                cmbBank.DisplayMember = "bank_name";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var banksRepository = AccFactory.BanksRepository();
+            var dtBank = banksRepository.GetRecords();
+            HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
         }
 
         internal void SetSelectedValue(int Id, string table)
         {
-            try
+            if (!string.IsNullOrEmpty(table) || Id > 0)
             {
-                if (!string.IsNullOrEmpty(table) || Id > 0)
+                if (table.Equals("functions"))
                 {
-                    if (table.Equals("functions"))
-                    {
-                        var functionRepository = AccFactory.FunctionProgramProjectRepository();
-                        var functionData = functionRepository.GetRecordByID(Id);
-                        functionId = Convert.ToInt16(functionData["id"]);
-                        cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
-                    }
+                    var functionRepository = AccFactory.FunctionProgramProjectRepository();
+                    var functionData = functionRepository.GetRecordByID(Id);
+                    fppId = Convert.ToInt16(functionData["id"]);
+                    cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        public void LoadSelectedFunction(int Id, string value)
-        {
-            functionId = Id;
-            cmbFPP.Text = value;
         }
 
         internal void cmbxFPP_TextChanged(object sender, EventArgs e)
@@ -179,11 +157,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 cmbFPP.SelectedIndex = -1;
                 cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
             }
-        }
-
-        internal void cmbFPP_SelectedValueChanged(object sender, EventArgs e)
-        {
-            functionId = Convert.ToInt32(cmbFPP.SelectedValue);
         }
 
         private void btnAddObligation_Click(object sender, EventArgs e)
@@ -215,94 +188,125 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
-            errorArray[0] = epFund.GetError(cmbfund);
-            errorArray[1] = epBank.GetError(cmbBank);
-            errorArray[2] = epCheckNo.GetError(txtCheckNo);
-            errorArray[3] = epCheckDate.GetError(dtCheckDate);
-            errorArray[4] = epPayee.GetError(txtPayee);
-            errorArray[5] = epNatureOfPayment.GetError(txtNature);
-            errorArray[6] = epNetAmount.GetError(nudNetAmount);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbFund),
+                errorProvider1.GetError(cmbBank),
+                errorProvider1.GetError(cmbBankAccounts),
+                errorProvider1.GetError(txtCheckNo),
+                errorProvider1.GetError(cmbFPP),
+                errorProvider1.GetError(dtCheckDate),
+                errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(txtNatureOfPayment),
+                errorProvider1.GetError(nudNetAmount)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epDVNo, txtDVNo, "Disbursement No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDVNo, "Disbursement No.");
         }
 
         private void txtdvno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epDVNo, txtDVNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtDVNo);
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbfund, "Fund.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
         }
 
         private void cmbfund_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epFund, cmbfund);
+            Helper.ClearErrorComboBox(errorProvider1, cmbFund);
         }
 
         private void cmbbank_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbBank, "Bank.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Bank.");
         }
 
         private void cmbbank_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epBank, cmbBank);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBank);
+        }
+
+        private void cmbBankAccounts_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBankAccounts, "Bank Account.");
+        }
+
+        private void cmbBankAccounts_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbBankAccounts);
         }
 
         private void txtcheckno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCheckNo, txtCheckNo, "Check No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCheckNo, "Check No.");
         }
 
         private void txtcheckno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCheckNo, txtCheckNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtCheckNo);
+        }
+
+        private bool FPPNameNotExist()
+        {
+            string fppName = cmbFPP.Text.Trim();
+
+            if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName))
+            {
+                errorProvider1.SetError(cmbFPP, "FPP you entered doesn't exist.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private void cmbFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = FPPNameNotExist();
+        }
+
+        private void cmbFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbFPP);
         }
 
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
         }
 
         private void txtpayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
         private void txtnature_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtNature, "Nature of Payment");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNatureOfPayment, "Nature of Payment.");
         }
 
         private void txtnature_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epNatureOfPayment, txtNature);
+            Helper.ClearErrorTextBox(errorProvider1, txtNatureOfPayment);
         }
 
         private void txtamount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epNetAmount, nudNetAmount, "Net Amount.");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudNetAmount, "Net Amount.");
         }
 
         private void txtamount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epNetAmount, nudNetAmount);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudNetAmount);
         }
 
         #endregion Validations
-
-        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadBankAccounts();
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.RealProperties;
+﻿using ACC.Data;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
@@ -128,7 +129,7 @@ namespace AccountingSystem.Views.Shared
             {
                 LoadTaxpayerList();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRptOwnerList_Load(object sender, EventArgs e)
@@ -207,7 +208,7 @@ namespace AccountingSystem.Views.Shared
             frmAddRealProperties.uc.txtTaxpayerAddress.Text = address;
         }
 
-        private void InitializeNewOwnerDetails(frmPayments frmPayments)
+        private void InitializeNewOwnerDetails(frmRptPayments frmPayments)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
 
@@ -217,12 +218,6 @@ namespace AccountingSystem.Views.Shared
             var taxpayerBarangay = dictTaxpayer["taxpayers_barangay"].ToString();
             var taxpayerMunicipality = dictTaxpayer["taxpayers_municipality"].ToString();
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
-
-            frmPayments.ucCattleTransferOfOwnership.newOwnerID = taxpayerId;
-            frmPayments.ucCattleTransferOfOwnership.txtCattleNewOwner.Text = taxpayer;
-            frmPayments.ucCattleTransferOfOwnership.cmbxProvince.Text = taxpayerProvince;
-            frmPayments.ucCattleTransferOfOwnership.cmbxMunicipality.Text = taxpayerMunicipality;
-            frmPayments.ucCattleTransferOfOwnership.cmbxBarangay.Text = taxpayerBarangay;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -254,8 +249,8 @@ namespace AccountingSystem.Views.Shared
                     InitializeRealProperties((frmAddRealProperties)refForm);
                     break;
 
-                case frmPayments:
-                    InitializeNewOwnerDetails((frmPayments)refForm);
+                case frmRptPayments:
+                    InitializeNewOwnerDetails((frmRptPayments)refForm);
                     break;
 
                 default:

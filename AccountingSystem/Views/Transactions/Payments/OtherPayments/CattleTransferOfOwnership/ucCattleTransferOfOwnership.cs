@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using ACC.Data;
+using AccountingSystem.Views.Shared;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         internal int cattleID;
         internal int oldOwnerID;
         internal int newOwnerID;
-        internal frmPayments _frmPayments;
+        internal frmRptPayments _frmPayments;
 
         public ucCattleTransferOfOwnership()
         {

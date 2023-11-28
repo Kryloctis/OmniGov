@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,34 +21,36 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             DataTable dtOthersFPP;
             string searchTxt = toolStripTxtSearch.Text.Trim();
 
-            try
-            {
-                if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
-                {
-                    dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
-                }
-                else
-                {
-                    dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
-                }
+            if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
+                dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
+            else
+                dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
 
-                HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
-                lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
+            lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
         }
 
         private void dgOthersFPP_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 4, 5 };
-            Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete);
+            try
+            {
+                byte[] columnIndexTimestamp = { 4, 5 };
+                Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmOthersFunctionProgramProject_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             LoadRecords();
         }
@@ -75,48 +78,55 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             ShowOthersFunctionProgramProjectAdd();
         }
 
-        private void toolStripBtnDelete_Click(object sender, EventArgs e)
+        private bool DeleteData()
         {
             int selectedRowsCount = dgOthersFPP.SelectedRows.Count;
-
             var otherFPPModelList = new List<SubFPPModel>();
 
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                foreach (DataGridViewRow row in dgOthersFPP.SelectedRows)
+                {
+                    int otherFPPId = int.Parse(row.Cells[0].Value.ToString());
+                    var otherFPPModel = new SubFPPModel()
+                    {
+                        Id = otherFPPId
+                    };
+
+                    otherFPPModelList.Add(otherFPPModel);
+                }
+
+                return AccFactory.SubFPPRepository().Delete(otherFPPModelList);
+            }
+            return false;
+        }
+
+        private void toolStripBtnDelete_Click(object sender, EventArgs e)
+        {
             try
             {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        foreach (DataGridViewRow row in dgOthersFPP.SelectedRows)
-                        {
-                            int otherFPPId = int.Parse(row.Cells[0].Value.ToString());
-                            var otherFPPModel = new SubFPPModel()
-                            {
-                                Id = otherFPPId
-                            };
-
-                            otherFPPModelList.Add(otherFPPModel);
-                        }
-
-                        _ = AccFactory.SubFPPRepository().Delete(otherFPPModelList);
-                        LoadRecords();
-                    }
-                }
+                if (DeleteData())
+                    LoadRecords();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripBtnEdit_Click(object sender, EventArgs e)
         {
-            ShowOthersFunctionProgramProjectEdit();
+            try
+            {
+                ShowOthersFunctionProgramProjectEdit();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripTxtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -18,11 +19,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveTaxpayer())
+            try
             {
-                Helper.MessageBoxSuccess("Barangay has been saved.");
-                uc.ResetForm();
+                if (SaveTaxpayer())
+                {
+                    Helper.MessageBoxSuccess("Barangay has been saved.");
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveTaxpayer()
@@ -57,8 +62,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 CreatedBy = Helper.UserId
             };
 
-            var taxpayersRepo = AccFactory.TaxpayersRepository();
-            return taxpayersRepo.Insert(taxpayersModel);
+            return AccFactory.TaxpayersRepository().Insert(taxpayersModel);
         }
     }
 }

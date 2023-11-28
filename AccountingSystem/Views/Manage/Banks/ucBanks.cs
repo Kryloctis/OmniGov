@@ -1,4 +1,4 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Manage.Banks
     public partial class ucBanks : UserControl
     {
         internal int bankId;
-        internal bool isEdit;
 
         public ucBanks()
         {

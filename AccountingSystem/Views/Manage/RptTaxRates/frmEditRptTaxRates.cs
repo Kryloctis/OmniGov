@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -21,50 +22,56 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         private void LoadRecord()
         {
             var dictTaxRates = AccFactory.RptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
+            decimal taxRate = Convert.ToDecimal(dictTaxRates["rate"]);
 
             uc.txtCode.Text = dictTaxRates["code"];
             uc.txtDescription.Text = dictTaxRates["description"];
-            uc.nudRate.Value = Convert.ToDecimal(dictTaxRates["rate"]);
+            uc.nudRate.Value = (taxRate * 100);
         }
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var model = new RptTaxRatesModel()
-                {
-                    Id = uc.rptTaxRatesId,
-                    Code = uc.txtCode.Text.Trim(),
-                    Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
-                };
-
-                return AccFactory.RptTaxRatesRepository().Update(model);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var model = new RptTaxRatesModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = uc.rptTaxRatesId,
+                Code = uc.txtCode.Text.Trim(),
+                Description = uc.txtDescription.Text.Trim(),
+                Rate = uc.nudRate.Value
+            };
+
+            return AccFactory.RptTaxRatesRepository().Update(model);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Tax Rate has been updated.");
-                _frmRptTaxRates.LoadTaxRates();
-                Close();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Tax Rate has been updated.");
+                    _frmRptTaxRates.LoadTaxRates();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmEditRptTaxRates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             uc.isEdit = true;
             LoadRecord();

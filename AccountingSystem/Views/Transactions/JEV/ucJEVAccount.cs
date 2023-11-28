@@ -1,4 +1,4 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
@@ -98,6 +98,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         private void ucJEVAccount_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -20,9 +21,18 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ucBusinessCategories.isEdit = true;
         }
 
-        private void frmEditBusinessCategories_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadSelectedRecord();
+        }
+
+        private void frmEditBusinessCategories_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadSelectedRecord()

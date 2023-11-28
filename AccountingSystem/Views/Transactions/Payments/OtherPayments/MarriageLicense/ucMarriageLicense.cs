@@ -1,30 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Data;
+using ACC.Domain.Interfaces;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense
 {
     public partial class ucMarriageLicense : UserControl
     {
+        internal ucOtherCharges ucOtherCharges;
+
         public ucMarriageLicense()
         {
             InitializeComponent();
+            ucOtherCharges = ucOtherCharges1;
+            ucOtherCharges.accountableForm = "54";
         }
 
-        private void ucMarriageLicense_Load(object sender, EventArgs e)
+        internal string GetFormErrors()
         {
-            if (!DesignMode)
+            var errorArray = new string[]
             {
-                LoadProvince();
-                LoadBarangay();
-                LoadMunicipality();
-            }
+                errorProvider1.GetError(txtRegistrationNumber),
+                errorProvider1.GetError(txtHusbandName),
+                errorProvider1.GetError(nudHusbandAgeYear),
+                errorProvider1.GetError(nudHusbandAgeMonth),
+                errorProvider1.GetError(txtHusbandStreet),
+                errorProvider1.GetError(cmbxHusbandProvince),
+                errorProvider1.GetError(cmbxHusbandMunicipality),
+                errorProvider1.GetError(cmbxHusbandBarangay),
+                errorProvider1.GetError(txtWifeName),
+                errorProvider1.GetError(nudWifeAgeYear),
+                errorProvider1.GetError(nudWifeAgeMonth),
+                errorProvider1.GetError(txtWifeStreet),
+                errorProvider1.GetError(cmbxWifeProvince),
+                errorProvider1.GetError(cmbxWifeMunicipality),
+                errorProvider1.GetError(cmbxWifeBarangay),
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void OnLoad()
+        {
+            LoadProvince();
+            LoadBarangay();
+            LoadMunicipality();
+            ucOtherCharges.OnLoad();
         }
 
         private void LoadProvince()
@@ -33,7 +55,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxHusbandProvince, "name", "id");
             HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxWifeProvince, "name", "id");
         }
-
 
         private void LoadMunicipality()
         {
@@ -48,5 +69,167 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxHusbandBarangay, "name", "id");
             HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxWifeBarangay, "name", "id");
         }
+
+        #region Validations
+
+        private void txtRegistrationNumber_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRegistrationNumber, "Registration Number.");
+        }
+
+        private void txtRegistrationNumber_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
+        }
+
+        #region Husband
+
+        private void txtHusbandName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtHusbandName, "Husband Name.");
+        }
+
+        private void txtHusbandName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtHusbandName);
+        }
+
+        private void nudHusbandAgeYear_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudHusbandAgeYear, "Husband Age.");
+        }
+
+        private void nudHusbandAgeYear_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudHusbandAgeYear);
+        }
+
+        private void nudHusbandAgeMonth_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudHusbandAgeMonth, "Husband Age In month.");
+        }
+
+        private void nudHusbandAgeMonth_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudHusbandAgeMonth);
+        }
+
+        private void txtHusbandStreet_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtHusbandStreet, "Husband Street.");
+        }
+
+        private void txtHusbandStreet_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtHusbandStreet);
+        }
+
+        private void cmbxHusbandProvince_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxHusbandProvince, "Husband Province.");
+        }
+
+        private void cmbxHusbandProvince_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxHusbandProvince);
+        }
+
+        private void cmbxHusbandMunicipality_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxHusbandMunicipality, "Husband Municipality.");
+        }
+
+        private void cmbxHusbandMunicipality_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxHusbandMunicipality);
+        }
+
+        private void cmbxHusbandBarangay_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxHusbandBarangay, "Husband Barangay.");
+        }
+
+        private void cmbxHusbandBarangay_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxHusbandBarangay);
+        }
+
+        #endregion Husband
+
+        #region Wife
+
+        private void txtWifeName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtWifeName, "Wife Name.");
+        }
+
+        private void txtWifeName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtWifeName);
+        }
+
+        private void nudWifeAgeYear_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudWifeAgeYear, "Wife Age.");
+        }
+
+        private void nudWifeAgeYear_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudWifeAgeYear);
+        }
+
+        private void nudWifeAgeMonth_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudWifeAgeMonth, "Wife Age in Month.");
+        }
+
+        private void nudWifeAgeMonth_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudWifeAgeMonth);
+        }
+
+        private void txtWifeStreet_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtWifeStreet, "Wife Street.");
+        }
+
+        private void txtWifeStreet_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtWifeStreet);
+        }
+
+        private void cmbxWifeProvince_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxWifeProvince, "Wife Province.");
+        }
+
+        private void cmbxWifeProvince_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxWifeProvince);
+        }
+
+        private void cmbxWifeMunicipality_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxWifeMunicipality, "Wife Municipality.");
+        }
+
+        private void cmbxWifeMunicipality_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxWifeMunicipality);
+        }
+
+        private void cmbxWifeBarangay_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxWifeBarangay, "Wife Barangay.");
+        }
+
+        private void cmbxWifeBarangay_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxWifeBarangay);
+        }
+
+        #endregion Wife
+
+        #endregion Validations
     }
 }

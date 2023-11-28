@@ -1,4 +1,6 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Packaging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,17 +54,22 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
         internal void LoadRecords()
         {
-            try
-            {
-                HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
-                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+        }
+
+        private void OnLoad()
+        {
+            LoadRecords();
         }
 
         private void frmBusinessCategoriesAddOnCharges_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

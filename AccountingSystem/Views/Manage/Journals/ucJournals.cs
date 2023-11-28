@@ -1,4 +1,4 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -14,20 +14,14 @@ namespace AccountingSystem.Views.Manage.Journals
             InitializeComponent();
         }
 
-        private void UserVerification()
-        {
-            var dictLoggedInUser = Helper.LoggedInUserData();
-            if (dictLoggedInUser["role_name"] != "System Administrator")
-                txtName.Enabled = false;
-        }
-
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = epName.GetError(txtName);
+            var errorArray = new string[]
+            {
+                 epName.GetError(txtName)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -36,23 +30,11 @@ namespace AccountingSystem.Views.Manage.Journals
             chkSpecialJournal.Checked = false;
         }
 
-        private void txtName_Validating(object sender, CancelEventArgs e)
+        private void OnLoad()
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
-
-            var journalsRepository = AccFactory.JournalsRepository();
-            string journalName = txtName.Text.Trim();
-            bool journalNameExist;
-
-            if (journalId == 0)
-                journalNameExist = journalsRepository.NameExist(journalName); // add form
-            else
-                journalNameExist = journalsRepository.NameExist(journalName, journalId); // edit form
-
-            if (journalNameExist)
+            if (!DesignMode)
             {
-                epName.SetError(txtName, "Journal name already exist in your records.");
-                e.Cancel = true;
+                UserVerification();
             }
         }
 
@@ -61,12 +43,43 @@ namespace AccountingSystem.Views.Manage.Journals
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
+
+                string journalName = txtName.Text.Trim();
+                bool journalNameExist;
+
+                if (journalId == 0)
+                    journalNameExist = AccFactory.JournalsRepository().NameExist(journalName); // add form
+                else
+                    journalNameExist = AccFactory.JournalsRepository().NameExist(journalName, journalId); // edit form
+
+                if (journalNameExist)
+                {
+                    epName.SetError(txtName, "Journal name already exist in your records.");
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void ucJournals_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
-                UserVerification();
+                OnLoad();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void UserVerification()
+        {
+            var dictLoggedInUser = Helper.LoggedInUserData();
+            if (dictLoggedInUser["role_name"] != "System Administrator")
+                txtName.Enabled = false;
         }
     }
 }

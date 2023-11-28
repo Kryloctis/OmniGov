@@ -1,6 +1,9 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Dashboard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -64,61 +67,32 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             }
         }
 
-        private DataTable DataTableDiscounts()
-        {
-            DataTable dtRptDiscounts;
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("id", typeof(int));
-            dataTable.Columns.Add("month", typeof(int));
-            dataTable.Columns.Add("month_name", typeof(string));
-            dataTable.Columns.Add("description", typeof(string));
-            dataTable.Columns.Add("rate", typeof(decimal));
-            dataTable.Columns.Add("is_advance", typeof(Image));
-
-            string searchText = txtSearch.Text.Trim();
-
-            if (searchText.Length < 2)
-                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecords();
-            else
-                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
-
-            foreach (DataRow row in dtRptDiscounts.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                int month = Convert.ToInt32(row["month"]);
-                string montName = MonthToName(month);
-                string description = row["description"].ToString();
-                decimal rate = Convert.ToDecimal(row["rate"]);
-                bool isAdvance = Convert.ToBoolean(row["is_advance"]);
-                Image isAdvanceImg = isAdvance ? Properties.Resources.ok14px : null;
-
-                dataTable.Rows.Add(id, month, montName, description, rate, isAdvanceImg);
-            }
-
-            return dataTable;
-        }
-
         internal void LoadDiscounts()
         {
-            try
+            if (!backgroundWorker1.IsBusy)
             {
-                HelperLoadRecords.DiscountsDatagridView(dataGridView1, DataTableDiscounts());
-                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                pbLoadRecords.Value = 0;
+                string searchText = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchText);
             }
         }
 
         private void frmRptDiscount_Load(object sender, EventArgs e)
         {
-            LoadDiscounts();
+            try
+            {
+                LoadDiscounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRptDiscount(this).ShowDialog();
+            try
+            {
+                _ = new frmAddRptDiscount(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowEditRptDiscounts()
@@ -131,42 +105,29 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowEditRptDiscounts();
-        }
-
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadDiscounts();
+            try
+            {
+                ShowEditRptDiscounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete(out int deletedCount)
         {
-            try
-            {
-                var rptDiscountsModelList = new List<RptDiscountsModel>();
-                int rowCount = dataGridView1.SelectedRows.Count;
+            var rptDiscountsModelList = new List<RptDiscountsModel>();
+            int rowCount = dataGridView1.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+            if (Helper.MessageBoxConfirmDelete(rowCount))
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                    {
-                        int discountsId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new RptDiscountsModel() { Id = discountsId };
-                        rptDiscountsModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
+                    int discountsId = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new RptDiscountsModel() { Id = discountsId };
+                    rptDiscountsModelList.Add(model);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+
+                deletedCount = rowCount;
+                return AccFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
             }
 
             deletedCount = 0;
@@ -175,26 +136,107 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (Delete(out deletedRecordCount))
+            try
             {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                int deletedRecordCount;
+
+                if (Delete(out deletedRecordCount))
+                {
+                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                    LoadDiscounts();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 LoadDiscounts();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        private DataColumn[] DiscountsDataColumns()
         {
-            if (e.Button == MouseButtons.Right)
+            return new DataColumn[]
             {
-                contextMenuStrip1.Show(Cursor.Position);
-            }
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "month", typeof(int)),
+                new DataColumn(Name = "month_name", typeof(string)),
+                new DataColumn(Name = "description", typeof(string)),
+                new DataColumn(Name = "rate", typeof(decimal)),
+                new DataColumn(Name = "is_advance", typeof(bool))
+            };
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadDiscounts();
+            try
+            {
+                string searchText = e.Argument as string;
+
+                DataTable dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(DiscountsDataColumns());
+
+                if (dtRptDiscounts.Rows.Count < 1)
+                {
+                    e.Result = dataTable;
+                    backgroundWorker1.ReportProgress(100);
+                    return;
+                }
+
+                int totalProgressCount = dtRptDiscounts.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow row in dtRptDiscounts.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    int id = Convert.ToInt32(row["id"]);
+                    int month = Convert.ToInt32(row["month"]);
+                    string monthName = MonthToName(month);
+                    string description = row["description"].ToString();
+                    decimal rate = Convert.ToDecimal(row["rate"]);
+                    bool isAdvance = Convert.ToBoolean(row["is_advance"]);
+
+                    newRow["id"] = id;
+                    newRow["month"] = month;
+                    newRow["month_name"] = monthName;
+                    newRow["description"] = description;
+                    newRow["rate"] = rate;
+                    newRow["is_advance"] = isAdvance;
+                    dataTable.Rows.Add(newRow);
+
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.DiscountsDatagridView(dataGridView1, dataTable);
+            lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }

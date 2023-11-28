@@ -29,188 +29,247 @@ namespace AccountingSystem.Views.Manage.Banks
         /// </summary>
         private void InitializeComponent()
         {
-            statusStrip = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStrip = new System.Windows.Forms.ToolStrip();
-            btnAdd = new System.Windows.Forms.ToolStripButton();
-            btnEdit = new System.Windows.Forms.ToolStripButton();
-            btnDelete = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            dgBanks = new System.Windows.Forms.DataGridView();
-            panel1 = new System.Windows.Forms.Panel();
-            statusStrip.SuspendLayout();
-            toolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgBanks).BeginInit();
-            panel1.SuspendLayout();
-            SuspendLayout();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.dgBanks = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip.SuspendLayout();
+            this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBanks)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // statusStrip
             // 
-            statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel3, lblUpdatedAt });
-            statusStrip.Location = new System.Drawing.Point(0, 375);
-            statusStrip.Name = "statusStrip";
-            statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            statusStrip.Size = new System.Drawing.Size(794, 22);
-            statusStrip.SizingGrip = false;
-            statusStrip.Stretch = false;
-            statusStrip.TabIndex = 7;
-            statusStrip.Text = "statusStrip1";
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblRecordCount,
+            this.toolStripStatusLabel4,
+            this.toolStripStatusLabel2,
+            this.lblCreatedAt,
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel3,
+            this.lblUpdatedAt});
+            this.statusStrip.Location = new System.Drawing.Point(0, 375);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip.SizingGrip = false;
+            this.statusStrip.Stretch = false;
+            this.statusStrip.TabIndex = 7;
+            this.statusStrip.Text = "s";
             // 
             // toolStripStatusLabel1
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            toolStripStatusLabel1.Text = "Records:";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
-            lblRecordCount.Name = "lblRecordCount";
-            lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            lblRecordCount.Text = "0";
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
-            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
-            toolStripStatusLabel4.Spring = true;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(519, 17);
+            this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            toolStripStatusLabel2.Text = "Created at:";
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
+            this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
-            lblCreatedAt.Name = "lblCreatedAt";
-            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblCreatedAt.Name = "lblCreatedAt";
+            this.lblCreatedAt.Size = new System.Drawing.Size(17, 17);
+            this.lblCreatedAt.Text = "--";
             // 
             // toolStripStatusLabel3
             // 
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            toolStripStatusLabel3.Text = "Updated at:";
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
-            lblUpdatedAt.Name = "lblUpdatedAt";
-            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblUpdatedAt.Name = "lblUpdatedAt";
+            this.lblUpdatedAt.Size = new System.Drawing.Size(17, 17);
+            this.lblUpdatedAt.Text = "--";
             // 
             // toolStrip
             // 
-            toolStrip.BackColor = System.Drawing.SystemColors.Control;
-            toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, txtSearch });
-            toolStrip.Location = new System.Drawing.Point(0, 0);
-            toolStrip.Name = "toolStrip";
-            toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip.Size = new System.Drawing.Size(794, 50);
-            toolStrip.TabIndex = 6;
-            toolStrip.Text = "toolStrip1";
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAdd,
+            this.btnEdit,
+            this.btnDelete});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip.Size = new System.Drawing.Size(794, 50);
+            this.toolStrip.TabIndex = 6;
+            this.toolStrip.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            btnAdd.Image = Properties.Resources.button_rounded_add_20px;
-            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(33, 39);
-            btnAdd.Text = "Add";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnAdd.ToolTipText = "Add";
-            btnAdd.Click += btnAdd_Click;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(42, 39);
+            this.btnAdd.Text = "&Add...";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.ToolTipText = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
-            btnEdit.Enabled = false;
-            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(31, 39);
-            btnEdit.Text = "Edit";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnEdit.Click += btnEdit_Click;
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(40, 39);
+            this.btnEdit.Text = "&Edit...";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
-            btnDelete.Enabled = false;
-            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
-            btnDelete.Text = "Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnDelete.Click += btnDelete_Click;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
-            txtSearch.TextChanged += txtSearch_TextChanged;
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 39);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // dgBanks
             // 
-            dgBanks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgBanks.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgBanks.Location = new System.Drawing.Point(4, 4);
-            dgBanks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            dgBanks.Name = "dgBanks";
-            dgBanks.RowHeadersWidth = 51;
-            dgBanks.RowTemplate.Height = 29;
-            dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgBanks.Size = new System.Drawing.Size(786, 317);
-            dgBanks.TabIndex = 8;
-            dgBanks.SelectionChanged += dgBanks_SelectionChanged;
+            this.dgBanks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBanks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgBanks.Location = new System.Drawing.Point(4, 4);
+            this.dgBanks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgBanks.Name = "dgBanks";
+            this.dgBanks.RowHeadersWidth = 51;
+            this.dgBanks.RowTemplate.Height = 29;
+            this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgBanks.Size = new System.Drawing.Size(786, 312);
+            this.dgBanks.TabIndex = 8;
+            this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
             // panel1
             // 
-            panel1.Controls.Add(dgBanks);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(794, 325);
-            panel1.TabIndex = 10;
+            this.panel1.Controls.Add(this.dgBanks);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 55);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(794, 320);
+            this.panel1.TabIndex = 10;
+            // 
+            // pbLoadRecords
+            // 
+            this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            this.pbLoadRecords.Name = "pbLoadRecords";
+            this.pbLoadRecords.Size = new System.Drawing.Size(794, 5);
+            this.pbLoadRecords.TabIndex = 24;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(707, 16);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 26;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(505, 16);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(200, 23);
+            this.txtSearch.TabIndex = 25;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmBanks
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(794, 397);
-            Controls.Add(panel1);
-            Controls.Add(statusStrip);
-            Controls.Add(toolStrip);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "frmBanks";
-            ShowInTaskbar = false;
-            SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Manage > Banks";
-            Load += frmBanks_Load;
-            statusStrip.ResumeLayout(false);
-            statusStrip.PerformLayout();
-            toolStrip.ResumeLayout(false);
-            toolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgBanks).EndInit();
-            panel1.ResumeLayout(false);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(794, 397);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pbLoadRecords);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.toolStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmBanks";
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Manage > Banks";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBanks_FormClosed);
+            this.Load += new System.EventHandler(this.frmBanks_Load);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBanks)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -229,6 +288,10 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBanks;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }

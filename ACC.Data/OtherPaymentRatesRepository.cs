@@ -1,11 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class OtherPaymentRatesRepository : IOtherPaymentRatesRepository
     {
@@ -77,7 +76,14 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[]{ "@search_text", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE description LIKE @search_text";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetRecordsByTaxTypeID(int taxTypeID)

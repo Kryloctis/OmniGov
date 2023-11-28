@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
 using MySql.Data.MySqlClient;
@@ -27,33 +28,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void LoadSelectedGeneralLedger()
         {
-            try
-            {
-                var data = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-                txtCode.Text = data["ledger_code"];
-                txtAccount.Text = data["ledger_name"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dictGeneralLedger = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            txtCode.Text = dictGeneralLedger["ledger_code"];
+            txtAccount.Text = dictGeneralLedger["ledger_name"];
         }
 
         internal void LoadSubsidiaryRecordsByFundAndGeneralLedger()
         {
-            try
-            {
-                var dtSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-
-                HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+            HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
         }
 
-        private void frmSubsidiary_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
@@ -67,6 +53,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             btnDelete.Enabled = false;
             btnSetBalance.Enabled = false;
             EnableDisableButtons();
+        }
+
+        private void frmSubsidiary_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableButtons()
@@ -84,7 +79,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons();
+            try
+            {
+                EnableDisableButtons();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -94,34 +93,45 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            if (dgSubsidiary.SelectedRows.Count == 1)
+            try
             {
-                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
+                if (dgSubsidiary.SelectedRows.Count == 1)
+                {
+                    ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-                _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+                    _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgSubsidiary.SelectedRows.Count;
+
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var subsidiaryModelList = new List<SubsidiaryLedgerAccountsModel>();
+                    foreach (DataGridViewRow row in dgSubsidiary.SelectedRows)
+                    {
+                        int subsidiaryLedgerId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        subsidiaryModelList.Add(new SubsidiaryLedgerAccountsModel() { Id = subsidiaryLedgerId });
+                    }
+
+                    return AccFactory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
+                }
+            }
+            return false;
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgSubsidiary.SelectedRows.Count;
             try
             {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var subsidiaryModelList = new List<SubsidiaryLedgerAccountsModel>();
-                        foreach (DataGridViewRow row in dgSubsidiary.SelectedRows)
-                        {
-                            int subsidiaryLedgerId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            subsidiaryModelList.Add(new SubsidiaryLedgerAccountsModel() { Id = subsidiaryLedgerId });
-                        }
-
-                        _ = AccFactory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
-                        LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    }
-                }
+                if (DeleteData())
+                    LoadSubsidiaryRecordsByFundAndGeneralLedger();
             }
             catch (MySqlException mysqlEx)
             {
@@ -136,10 +146,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                         break;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void BtnSetBalance_Click(object sender, EventArgs e)
@@ -161,10 +168,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

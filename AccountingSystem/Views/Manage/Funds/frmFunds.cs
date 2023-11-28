@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -17,18 +18,22 @@ namespace AccountingSystem.Views.Manage.Funds
 
         internal void LoadRecords()
         {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
+
+            lblRecordCount.Text = dgFunds.Rows.Count.ToString();
+        }
+
+        private void frmFunds_Load(object sender, EventArgs e)
+        {
             try
             {
-                var fundsRepository = AccFactory.FundsRepository();
-                var dtFunds = fundsRepository.GetRecords();
-                HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
-
-                lblRecordCount.Text = dgFunds.Rows.Count.ToString();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmFunds_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.DatagridFullRowSelectStyle(dgFunds, true);
             dgFunds.ShowCellToolTips = false;
@@ -37,76 +42,84 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmFundAdd(this).ShowDialog();
+            try
+            {
+                _ = new frmFundAdd(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgFunds.Rows.Count > 0)
+            try
             {
-                int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
-                _ = new frmFundEdit(this, fundId).ShowDialog();
+                if (dgFunds.Rows.Count > 0)
+                {
+                    int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
+                    _ = new frmFundEdit(this, fundId).ShowDialog();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgFunds.SelectedRows.Count;
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var fundsModelList = new List<FundsModel>();
+                    foreach (DataGridViewRow row in dgFunds.SelectedRows)
+                    {
+                        int fundId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        fundsModelList.Add(new FundsModel() { Id = fundId });
+                    }
+
+                    return AccFactory.FundsRepository().Delete(fundsModelList);
+                }
+            }
+            return false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgFunds.SelectedRows.Count;
             try
             {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var fundsModelList = new List<FundsModel>();
-                        foreach (DataGridViewRow row in dgFunds.SelectedRows)
-                        {
-                            int fundId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            fundsModelList.Add(new FundsModel() { Id = fundId });
-                        }
-
-                        var fundsRepository = AccFactory.FundsRepository();
-                        _ = fundsRepository.Delete(fundsModelList);
-                        LoadRecords();
-                    }
-                }
+                if (DeleteData())
+                    LoadRecords();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgFunds_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
+            try
+            {
+                byte[] columnIndexTimestamp = { 3, 4 };
+                Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = toolStripTextBoxSearch.Text.Trim();
-
-            if (searchText.Length > 0)
+            try
             {
-                try
+                string searchText = toolStripTextBoxSearch.Text.Trim();
+
+                if (searchText.Length > 0)
                 {
                     var dtFunds = AccFactory.FundsRepository().GetRecordsBySearch(searchText);
                     HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
 
                     lblRecordCount.Text = dgFunds.Rows.Count.ToString();
                 }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                else
+                    LoadRecords();
             }
-            else
-            {
-                LoadRecords();
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

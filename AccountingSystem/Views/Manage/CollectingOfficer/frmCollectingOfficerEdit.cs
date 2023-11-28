@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -6,81 +7,67 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerEdit : Form
     {
-        private frmCollectingOfficer _frmCollectingOfficer;
-        private ucCollectingOfficer _uc;
+        private frmCollectingOfficer frmCollectingOfficer;
+        private ucCollectingOfficer uc;
 
-        public frmCollectingOfficerEdit(frmCollectingOfficer frmCollectingOfficer, int OfficerId)
+        public frmCollectingOfficerEdit(frmCollectingOfficer _frmCollectingOfficer, int OfficerId)
         {
             InitializeComponent();
-            _frmCollectingOfficer = frmCollectingOfficer;
-            _uc = ucCollectingOfficer1;
-            _uc.OfficerId = OfficerId;
-        }
-
-        private void LoadSelectedRecord()
-        {
-            try
-            {
-                var uc = ucCollectingOfficer1;
-                var repository = AccFactory.CollectingOfficerRepository();
-                var data = repository.GetRecordByID(uc.OfficerId);
-
-                uc.txtPrefix.Text = data["prefix"];
-                uc.txtFirstName.Text = data["first_name"];
-                uc.txtMiddleInitial.Text = data["mid_initial"];
-                uc.txtLastName.Text = data["last_name"];
-                uc.txtSuffix.Text = data["suffix"];
-                uc.txtJobtitle.Text = data["job_title"];
-                uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);
-                uc.LoadLink(uc.UserId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            frmCollectingOfficer = _frmCollectingOfficer;
+            uc = ucCollectingOfficer1;
+            uc.Id = OfficerId;
         }
 
         private bool UpdateData()
         {
-            if (!_uc.ValidateChildren())
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(_uc.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            var collectingmodel = new CollectingOfficerModel()
+            var model = new CollectingOfficerModel()
             {
-                Id = _uc.OfficerId,
-                Prefix = _uc.txtPrefix.Text.Trim(),
-                FirstName = _uc.txtFirstName.Text.Trim(),
-                MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
-                LastName = _uc.txtLastName.Text.Trim(),
-                Suffix = _uc.txtSuffix.Text.Trim(),
-                JobTitle = _uc.txtJobtitle.Text.Trim(),
-                UserId = _uc.UserId
+                Id = uc.Id,
+                Prefix = uc.txtPrefix.Text.Trim(),
+                FirstName = uc.txtFirstName.Text.Trim(),
+                MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
+                LastName = uc.txtLastName.Text.Trim(),
+                Suffix = uc.txtSuffix.Text.Trim(),
+                JobTitle = uc.txtJobtitle.Text.Trim(),
+                UserId = uc.cmbxLinkedAcc.SelectedValue
             };
 
-            var collectingrepository = AccFactory.CollectingOfficerRepository();
-            return collectingrepository.Update(collectingmodel);
+            return AccFactory.CollectingOfficerRepository().Update(model);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
                 if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Collecting Officer has been saved.");
-                    _frmCollectingOfficer.LoadRecords();
-                    this.Close();
+                    frmCollectingOfficer.LoadCollectingOfficers();
+                    Close();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmCollectingOfficerEdit_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             Helper.LoadFormIcon(this);
-            LoadSelectedRecord();
-            _uc.SetReadOnlyConrol(true);
-            _uc.linkuser.LinkClicked -= new LinkLabelLinkClickedEventHandler(_uc.linkuser_LinkClicked);
+            uc.LoadSelectedRecord();
+        }
+
+        private void frmCollectingOfficerEdit_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

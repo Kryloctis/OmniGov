@@ -1,14 +1,10 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Dialogs;
-using DocumentFormat.OpenXml.Office.CustomUI;
+﻿using ACC.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -213,7 +209,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             if (!DesignMode)
             {
-
             }
         }
 

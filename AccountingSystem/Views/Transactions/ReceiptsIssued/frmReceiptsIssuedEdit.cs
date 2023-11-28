@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -25,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(uc.receiptIssuedId);
 
             string jobOrderID = receiptIssuedDict["job_orders_id"];
-            var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officers_id"]);
+            var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officer_id"]);
             int collector = string.IsNullOrEmpty(jobOrderID) ? collectingOfficerID : Convert.ToInt32(jobOrderID);
             int receiptID = Convert.ToInt32(receiptIssuedDict["receipts_id"]);
             DateTime dateIssued = Convert.ToDateTime(receiptIssuedDict["date_issued"]);
@@ -122,7 +123,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     Close();
                 }
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

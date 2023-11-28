@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -16,29 +17,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         public void LoadServiceNameComboBox()
         {
-            try
+            DataTable dtServiceName = new DataTable();
+
+            dtServiceName.Columns.Add("id");
+            dtServiceName.Columns.Add("service_name");
+
+            foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
             {
-                DataTable dtServiceName = new DataTable();
+                string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
 
-                dtServiceName.Columns.Add("id");
-                dtServiceName.Columns.Add("service_name");
-
-                foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+                var items = new object[]
                 {
-                    string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
-
-                    var items = new object[]
-                    {
                        item["id"],
                        serviceName
-                    };
-
-                    dtServiceName.Rows.Add(items);
                 };
 
-                HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                dtServiceName.Rows.Add(items);
+            };
+
+            HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
         }
 
         internal string GetFormErrors()
@@ -130,7 +127,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !NameValidated(epName, txtName);
+            try
+            {
+                e.Cancel = !NameValidated(epName, txtName);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucFunctionProgramProject_Load(object sender, EventArgs e)

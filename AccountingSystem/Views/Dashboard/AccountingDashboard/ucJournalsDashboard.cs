@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.Journals;
+﻿using ACC.Data;
+using AccountingSystem.Views.Reports.Journals;
 using System;
 using System.Windows.Forms;
 

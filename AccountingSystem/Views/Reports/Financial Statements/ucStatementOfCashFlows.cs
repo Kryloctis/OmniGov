@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -73,59 +74,46 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void LoadReport(LocalReport localReport)
         {
-            try
+            Cursor.Current = Cursors.WaitCursor;
+
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Cash Flows");
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            DateTime date = dtPickerDate.Value;
+
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\statement_of_cash_flows.rdlc";
+            localReport.DataSources.Clear();
+            localReport.DataSources.Add(new ReportDataSource("dtStatementOfCashFlows", SCFDatatable()));
+
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+
+            var parameters = new[]
             {
-                Cursor.Current = Cursors.WaitCursor;
+                new ReportParameter("paramCertifiedCorrectSignatory", ""),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", ""),
+                new ReportParameter("paramFund", dictFund["fund_name"]),
+                new ReportParameter("paramDate", date.ToString("MMMM dd, yyyy")),
+            };
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Cash Flows");
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            localReport.SetParameters(parameters);
 
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                DateTime date = dtPickerDate.Value;
-
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\statement_of_cash_flows.rdlc";
-                localReport.DataSources.Clear();
-                localReport.DataSources.Add(new ReportDataSource("dtStatementOfCashFlows", SCFDatatable()));
-
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-                var parameters = new[] {
-                    new ReportParameter("paramCertifiedCorrectSignatory", ""),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", ""),
-                    new ReportParameter("paramFund", dictFund["fund_name"]),
-                    new ReportParameter("paramDate", date.ToString("MMMM dd, yyyy")),
-                };
-
-                localReport.SetParameters(parameters);
-
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
-        private void ucStatementOfCashFlows_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -133,9 +121,22 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
+        private void ucStatementOfCashFlows_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

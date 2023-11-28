@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem
+﻿namespace AccountingSystem.Views.Dashboard
 {
     partial class MainForm
     {
@@ -72,9 +72,9 @@
             tabPageBudget = new System.Windows.Forms.TabPage();
             tabControlBudget = new System.Windows.Forms.TabControl();
             tabPageBudgetSummary = new System.Windows.Forms.TabPage();
-            ucBudgetSummary1 = new Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            ucBudgetSummary1 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
             tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
-            ucBudgetDetailed1 = new Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
+            ucBudgetDetailed1 = new BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             toolStripButtonBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             toolStripButtonAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -85,39 +85,39 @@
             tabPageAccounting = new System.Windows.Forms.TabPage();
             tabControlAccounting = new System.Windows.Forms.TabControl();
             tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
-            ucjevDashboard1 = new Views.Dashboard.ucJEVDashboard();
+            ucjevDashboard1 = new ucJEVDashboard();
             tabPageJournals = new System.Windows.Forms.TabPage();
-            ucJournalsDashboard1 = new Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
+            ucJournalsDashboard1 = new AccountingDashboard.ucJournalsDashboard();
             tabPageLedgers = new System.Windows.Forms.TabPage();
             tabControlLedgers = new System.Windows.Forms.TabControl();
             tabPageGeneralLedger = new System.Windows.Forms.TabPage();
-            ucGeneralLedger1 = new Views.Reports.Ledgers.ucGeneralLedger();
+            ucGeneralLedger1 = new Reports.Ledgers.ucGeneralLedger();
             tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
-            ucSubsidiaryLedger1 = new Views.Reports.Ledgers.ucSubsidiaryLedger();
+            ucSubsidiaryLedger1 = new Reports.Ledgers.ucSubsidiaryLedger();
             tabPageSummarySL = new System.Windows.Forms.TabPage();
-            ucSummarySubsidiaryLedger1 = new Views.Reports.Ledgers.ucSummarySubsidiaryLedger();
+            ucSummarySubsidiaryLedger1 = new Reports.Ledgers.ucSummarySubsidiaryLedger();
             tabPageTransactionLog = new System.Windows.Forms.TabPage();
-            ucTransactionLog1 = new Views.Reports.Ledgers.ucTransactionLog();
+            ucTransactionLog1 = new Reports.Ledgers.ucTransactionLog();
             tabPageTrialBalance = new System.Windows.Forms.TabPage();
             tabControlTrialBalance = new System.Windows.Forms.TabControl();
             tabPagePreTrial = new System.Windows.Forms.TabPage();
-            ucPreClosingTrialBalance1 = new Views.Reports.TrialBalance.ucPreClosingTrialBalance();
+            ucPreClosingTrialBalance1 = new Reports.TrialBalance.ucPreClosingTrialBalance();
             tabPagePostTrial = new System.Windows.Forms.TabPage();
-            ucPostClosingTrialBalance1 = new Views.Reports.TrialBalance.ucPostClosingTrialBalance();
+            ucPostClosingTrialBalance1 = new Reports.TrialBalance.ucPostClosingTrialBalance();
             tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             tabControlFinancialStatements = new System.Windows.Forms.TabControl();
             tabPageSFPosition = new System.Windows.Forms.TabPage();
-            ucStatementOfFinancialPosition1 = new Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
+            ucStatementOfFinancialPosition1 = new Reports.Financial_Statements.ucStatementOfFinancialPosition();
             tabPageSFPerformance = new System.Windows.Forms.TabPage();
-            ucStatementOfFinancialPerformance1 = new Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
+            ucStatementOfFinancialPerformance1 = new Reports.Financial_Statements.ucStatementOfFinancialPerformance();
             tabPageSCNAE = new System.Windows.Forms.TabPage();
-            ucStatementOfChangesInNetAssetsEquity1 = new Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
+            ucStatementOfChangesInNetAssetsEquity1 = new Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
             tabPageSCF = new System.Windows.Forms.TabPage();
-            ucStatementOfCashFlows1 = new Views.Reports.Financial_Statements.ucStatementOfCashFlows();
+            ucStatementOfCashFlows1 = new Reports.Financial_Statements.ucStatementOfCashFlows();
             tabPageSCBAA = new System.Windows.Forms.TabPage();
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
-            ucrcdSummary1 = new Views.Dashboard.TreasuryDashboard.ucRCDSummary();
+            ucrcdSummary1 = new TreasuryDashboard.ucRCDSummary();
             ToolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,6 +126,9 @@
             toolStripButtonBpl = new System.Windows.Forms.ToolStripButton();
             toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            rPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF5157ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -153,6 +156,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
+            aF58BurialPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -470,7 +474,7 @@
             tabControlDashboard.Controls.Add(tabPageAccounting);
             tabControlDashboard.Controls.Add(tabPageTreasury);
             tabControlDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlDashboard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabControlDashboard.Font = new System.Drawing.Font("Segoe UI Light", 12F);
             tabControlDashboard.ItemSize = new System.Drawing.Size(200, 30);
             tabControlDashboard.Location = new System.Drawing.Point(0, 24);
             tabControlDashboard.Margin = new System.Windows.Forms.Padding(0);
@@ -485,7 +489,7 @@
             // 
             tabPageBudget.Controls.Add(tabControlBudget);
             tabPageBudget.Controls.Add(toolStrip1);
-            tabPageBudget.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageBudget.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageBudget.Location = new System.Drawing.Point(4, 34);
             tabPageBudget.Name = "tabPageBudget";
             tabPageBudget.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
@@ -607,7 +611,7 @@
             // 
             sAAOBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBToolStripMenuItem.Name = "sAAOBToolStripMenuItem";
-            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             sAAOBToolStripMenuItem.Text = "SAAOB";
             sAAOBToolStripMenuItem.Click += sAAOBToolStripMenuItem_Click;
             // 
@@ -615,14 +619,14 @@
             // 
             sAAOBBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBBToolStripMenuItem.Name = "sAAOBBToolStripMenuItem";
-            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             sAAOBBToolStripMenuItem.Text = "SAAOBB";
             sAAOBBToolStripMenuItem.Click += sAAOBBToolStripMenuItem_Click;
             // 
             // tabPageAccounting
             // 
             tabPageAccounting.Controls.Add(tabControlAccounting);
-            tabPageAccounting.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tabPageAccounting.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageAccounting.Location = new System.Drawing.Point(4, 34);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(0);
             tabPageAccounting.Name = "tabPageAccounting";
@@ -994,7 +998,7 @@
             panel1.Controls.Add(ucrcdSummary1);
             panel1.Controls.Add(ToolStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel1.Location = new System.Drawing.Point(0, 5);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(1221, 617);
@@ -1076,10 +1080,31 @@
             // 
             // paymentsToolStripMenuItem
             // 
+            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58BurialPermitToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             paymentsToolStripMenuItem.Text = "Payments";
-            paymentsToolStripMenuItem.Click += paymentsToolStripMenuItem_Click;
+            // 
+            // rPTToolStripMenuItem
+            // 
+            rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
+            rPTToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            rPTToolStripMenuItem.Text = "AF 56 - Real Property Tax";
+            rPTToolStripMenuItem.Click += rPTToolStripMenuItem_Click;
+            // 
+            // aF5157ToolStripMenuItem
+            // 
+            aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
+            aF5157ToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF5157ToolStripMenuItem.Text = "AF 51 && 57 OR and  Slaughter Permit && Fee";
+            aF5157ToolStripMenuItem.Click += aF5157ToolStripMenuItem_Click;
+            // 
+            // aF54ToolStripMenuItem
+            // 
+            aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
+            aF54ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            aF54ToolStripMenuItem.Text = "AF 54 - Marriage License";
+            aF54ToolStripMenuItem.Click += aF54ToolStripMenuItem_Click;
             // 
             // toolStripSeparator10
             // 
@@ -1264,6 +1289,13 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // aF58BurialPermitToolStripMenuItem
+            // 
+            aF58BurialPermitToolStripMenuItem.Name = "aF58BurialPermitToolStripMenuItem";
+            aF58BurialPermitToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF58BurialPermitToolStripMenuItem.Text = "AF 58 - Burial Permit && Fee ";
+            aF58BurialPermitToolStripMenuItem.Click += aF58BurialPermitToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1324,6 +1356,11 @@
             ToolStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void MainForm_FormClosed1(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
@@ -1452,5 +1489,9 @@
         private System.Windows.Forms.TabPage tabPageSCBAA;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
+        private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF58BurialPermitToolStripMenuItem;
     }
 }

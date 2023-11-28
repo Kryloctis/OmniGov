@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -6,40 +7,39 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerAdd : Form
     {
-        private frmCollectingOfficer _frmCollectingOfficer;
-        private ucCollectingOfficer _uc;
+        private readonly frmCollectingOfficer frmCollectingOfficer;
+        private readonly ucCollectingOfficer uc;
 
-        public frmCollectingOfficerAdd(frmCollectingOfficer frmCollectingOfficer)
+        public frmCollectingOfficerAdd(frmCollectingOfficer _frmCollectingOfficer)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmCollectingOfficer = frmCollectingOfficer;
-            _uc = ucCollectingOfficer1;
+            this.frmCollectingOfficer = _frmCollectingOfficer;
+            uc = ucCollectingOfficer1;
         }
 
         private bool SaveData()
         {
             // if error occurs, show messagebox error
-            if (!_uc.ValidateChildren())
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(_uc.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
             // proceed to insert
             var model = new CollectingOfficerModel()
             {
-                Prefix = _uc.txtPrefix.Text.Trim(),
-                FirstName = _uc.txtFirstName.Text.Trim(),
-                MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
-                LastName = _uc.txtLastName.Text.Trim(),
-                Suffix = _uc.txtSuffix.Text.Trim(),
-                JobTitle = _uc.txtJobtitle.Text.Trim(),
-                UserId = _uc.UserId
+                Prefix = uc.txtPrefix.Text.Trim(),
+                FirstName = uc.txtFirstName.Text.Trim(),
+                MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
+                LastName = uc.txtLastName.Text.Trim(),
+                Suffix = uc.txtSuffix.Text.Trim(),
+                JobTitle = uc.txtJobtitle.Text.Trim(),
+                UserId = uc.cmbxLinkedAcc.SelectedValue
             };
 
-            var repository = AccFactory.CollectingOfficerRepository();
-            return repository.Insert(model);
+            return AccFactory.CollectingOfficerRepository().Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -49,16 +49,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Collecting Officer has been saved.");
-                    _frmCollectingOfficer.LoadRecords();
-                    _uc.ResetForm();
-                    _uc.SetReadOnlyConrol(false);
+                    frmCollectingOfficer.LoadCollectingOfficers();
+                    uc.ResetForm();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmCollectingOfficerAdd_Load(object sender, EventArgs e)
-        {
         }
     }
 }

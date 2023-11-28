@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -18,38 +19,34 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private bool Save()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var model = new RptTaxRatesModel()
-                {
-                    Code = uc.txtCode.Text.Trim(),
-                    Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
-                };
-
-                return AccFactory.RptTaxRatesRepository().Insert(model);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var model = new RptTaxRatesModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Code = uc.txtCode.Text.Trim(),
+                Description = uc.txtDescription.Text.Trim(),
+                Rate = uc.nudRate.Value
+            };
+
+            return AccFactory.RptTaxRatesRepository().Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Tax Rate has been saved.");
-                _frmRptTaxRates.LoadTaxRates();
-                uc.ResetForm();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Tax Rate has been saved.");
+                    _frmRptTaxRates.LoadTaxRates();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

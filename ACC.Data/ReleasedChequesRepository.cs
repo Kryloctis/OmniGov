@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace AccountingSystem
+namespace ACC.Data
 {
     internal class ReleasedChequesRepository : IReleasedCheques
     {
@@ -33,22 +33,22 @@ namespace AccountingSystem
 
         public bool Delete(List<ReleasedChequesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetViewRecords()
@@ -69,8 +69,8 @@ namespace AccountingSystem
             };
 
             string showReleasedOnlyQuery = showReleasedOnly == true ? $"AND date_released IS NOT NULL" : $"";
-            
-            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id AND (cheque_no LIKE  @search_text OR payee LIKE @search_text) {showReleasedOnlyQuery}"; 
+
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id AND (cheque_no LIKE  @search_text OR payee LIKE @search_text) {showReleasedOnlyQuery}";
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
@@ -113,7 +113,7 @@ namespace AccountingSystem
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(ReleasedChequesModel entity)
@@ -149,7 +149,7 @@ namespace AccountingSystem
 
         public bool Update(ReleasedChequesModel entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

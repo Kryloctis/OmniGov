@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using System;
@@ -11,102 +12,80 @@ namespace AccountingSystem.Views.Transactions.RCI
     {
         private readonly frmRCI _frmRCI;
         private readonly ucRCI uc;
-        private int  _rciID;
+        private int _rciID;
         private int checkID;
-
 
         public frmRCIEdit(frmRCI frmRCI, int rciId)
         {
             InitializeComponent();
             _frmRCI = frmRCI;
-            uc = ucrci2;
             _rciID = rciId;
+            uc = ucrci2;
         }
 
         private void LoadRCIObligations()
         {
-            try
+            frmObligations frmObligations = new(uc);
+
+            var rciObligationsRepo = AccFactory.RCIObligationsRepository();
+            var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(_rciID);
+
+            foreach (DataRow row in dtRCIObligations.Rows)
             {
-                frmObligations frmObligations = new(uc);
+                string obligationNumber = row["obligation_no"].ToString();
+                var dateEntry = Convert.ToDateTime(row["date_entry"]);
 
-                var rciObligationsRepo = AccFactory.RCIObligationsRepository();
-                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(_rciID);
-
-                foreach (DataRow row in dtRCIObligations.Rows)
-                    uc.dtObligations.Rows.Add(row[0].ToString());
-
-                HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
+                uc.dtObligations.Rows.Add(obligationNumber, dateEntry);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
         }
 
         private void LoadRCIDeductions()
         {
-            try
-            {
-                frmDeductions frmDeductions = new(uc);
+            frmDeductions frmDeductions = new(uc);
 
-                var rciDeductionRepo = AccFactory.RCIDeductionsRepository();
-                var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(_rciID);
+            var rciDeductionRepo = AccFactory.RCIDeductionsRepository();
+            var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(_rciID);
 
-                foreach (DataRow row in dtRCIDeductions.Rows)
-                    uc.dtDeductions.Rows.Add(row[0].ToString(), row[1].ToString());
+            foreach (DataRow row in dtRCIDeductions.Rows)
+                uc.dtDeductions.Rows.Add(row[0].ToString(), row[1].ToString());
 
-                HelperLoadRecords.RCIDeductionsDatagridview(uc.dtDeductions, frmDeductions.dgDeductions);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            HelperLoadRecords.RCIDeductionsDatagridview(uc.dtDeductions, frmDeductions.dgDeductions);
         }
 
         private void LoadSelectedValue()
         {
-            try
-            {
-                var rciRepository = AccFactory.RCIRepository();
-                var rcidata = rciRepository.GetRecordByID(_rciID);
+            var rciRepository = AccFactory.RCIRepository();
+            var dictRCI = rciRepository.GetRecordByID(_rciID);
 
-                uc.txtDVNo.Text = rcidata["dv_no"];
-                uc.cmbBank.SelectedValue = rcidata["bank_id"];
-                uc.cmbfund.SelectedValue = rcidata["fund_id"];
-                LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
-                uc.txtCheckNo.Text = rcidata["cheque_no"];
-                uc.dtCheckDate.Value = Convert.ToDateTime(rcidata["cheque_date"]);
-                uc.txtPayee.Text = rcidata["payee"];
-                uc.txtNature.Text = rcidata["nature_of_payment"];
-                uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
-                checkID = Convert.ToInt32(rcidata["cheques_id"]);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+            if (dictRCI.Count == 0) return;
 
-        private void LoadSelectedRecord(ucRCI uc, string table, int Id)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(table))
-                {
-                    if (table.Equals("functions"))
-                    {
-                        var functionreposity = AccFactory.FunctionProgramProjectRepository();
-                        var functiondata = functionreposity.GetRecordByID(Id);
-                        uc.functionId = Id;
-                        uc.cmbFPP.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int chequeId = Convert.ToInt32(dictRCI["cheques_id"]);
+            string dvNumber = dictRCI["dv_no"];
+            int bankId = Convert.ToInt32(dictRCI["bank_id"]);
+            int fundId = Convert.ToInt32(dictRCI["fund_id"]);
+            int fppId = Convert.ToInt32(dictRCI["function_program_project_id"]);
+            string checkNumber = dictRCI["cheque_no"];
+            DateTime checkDate = Convert.ToDateTime(dictRCI["cheque_date"]);
+            string payee = dictRCI["payee"];
+            string natureOfPayment = dictRCI["nature_of_payment"];
+            decimal amount = Convert.ToDecimal(dictRCI["amount"]);
+
+            uc.txtDVNo.Text = dvNumber;
+            uc.cmbBank.SelectedValue = bankId;
+            uc.cmbFund.SelectedValue = fundId;
+            uc.cmbFPP.SelectedValue = fppId;
+            uc.txtCheckNo.Text = checkNumber;
+            uc.dtCheckDate.Value = checkDate;
+            uc.txtPayee.Text = payee;
+            uc.txtNatureOfPayment.Text = natureOfPayment;
+            uc.nudNetAmount.Value = amount;
+            checkID = chequeId;
         }
 
         private void frmRCIEdit_Load(object sender, EventArgs e)
         {
-            uc.LoadFunds();
-            uc.LoadBanks();
-
             LoadSelectedValue();
             LoadRCIObligations();
             LoadRCIDeductions();
@@ -121,21 +100,37 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             if (deleteResult)
             {
-                short rcid = (short)_rciID;
-                string obligationNo = String.Empty;
-                DateTime dateEntry = DateTime.Now;
+                int rciId = _rciID;
+                string obligationNo;
+                DateTime dateEntry;
 
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
-                    obligationNo = row[0].ToString();
-                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo, dateEntry);
+                    obligationNo = row["obligation_no"].ToString();
+                    dateEntry = Convert.ToDateTime(row["date_entry"]);
+                    AccFactory.RCIRepository().SaveRCIDVObligations(rciId, obligationNo, dateEntry);
+                }
+            }
+        }
+
+        private void UpdateRCIDeductions()
+        {
+            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
+
+            if (deleteResult)
+            {
+                short rcid = (short)_rciID;
+                foreach (DataRow row in uc.dtDeductions.Rows)
+                {
+                    string description = row["description"].ToString();
+                    decimal amount = Convert.ToDecimal(row["amount"]);
+                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
                 }
             }
         }
 
         private void UpdateCheque()
         {
-
             var chequesModel = new ChequesModel()
             {
                 Id = checkID,
@@ -149,51 +144,31 @@ namespace AccountingSystem.Views.Transactions.RCI
             _ = chequesRepository.Update(chequesModel);
         }
 
-
-        private void UpdateRCIDeductions()
-        {
-            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
-
-            if (deleteResult)
-            {
-                short rcid = (short)_rciID;
-                foreach (DataRow row in uc.dtDeductions.Rows)
-                {
-                    string description = row[0].ToString();
-                    decimal amount = Convert.ToDecimal(row[1].ToString());
-                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
-                }
-            }
-        }
-
         private bool UpdateData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var rciModel = new RCIModel()
-                {
-                    Id = _rciID,
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    FunctionProgramProjectId = uc.functionId,
-                    DVNo = uc.txtDVNo.Text.Trim(),
-                    Payee = uc.txtPayee.Text.Trim(),
-                    NaturePayment = uc.txtNature.Text.Trim(),
-                };
-
-                var rcirepository = AccFactory.RCIRepository();
-                return rcirepository.Update(rciModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            int fundID = Convert.ToInt32(uc.cmbFund.SelectedValue);
+            int fpp = Convert.ToInt32(uc.cmbFPP.SelectedValue);
+            string dVNo = uc.txtDVNo.Text.Trim();
+            string payee = uc.txtPayee.Text.Trim();
+            string natureOfPayment = uc.txtNatureOfPayment.Text.Trim();
+
+            var rciModel = new RCIModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = _rciID,
+                FundId = fundID,
+                FunctionProgramProjectId = fpp,
+                DVNo = dVNo,
+                Payee = payee,
+                NaturePayment = natureOfPayment
+            };
+
+            return AccFactory.RCIRepository().Update(rciModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -203,9 +178,9 @@ namespace AccountingSystem.Views.Transactions.RCI
                 UpdateCheque();
                 UpdateRCIObligation();
                 UpdateRCIDeductions();
-                Helper.MessageBoxSuccess("Account has been updated.");
-                _frmRCI.LoadRecords();
-                this.Close();
+                Helper.MessageBoxSuccess("RCI has been updated.");
+                _frmRCI.LoadRCI();
+                Close();
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges;
 using MySql.Data.MySqlClient;
 using System;
@@ -20,7 +21,11 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddBusinessCategories(this).ShowDialog();
+            try
+            {
+                _ = new frmAddBusinessCategories(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete, ToolStripButton tsBtnAddOnCharges)
@@ -49,26 +54,31 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             }
         }
 
-        private void frmBusinessCategories_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadBusinessCategories();
         }
 
-        internal void LoadBusinessCategories()
+        private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
             try
             {
-                var searchText = toolStripTextBoxSearch.Text.Trim();
-                var dtBusinessCategories = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
-                var dataTable = dtBusinessCategories.Clone();
-                dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
-                foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
-                HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
-                dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
-                EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
-                toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadBusinessCategories()
+        {
+            var searchText = toolStripTextBoxSearch.Text.Trim();
+            var dtBusinessCategories = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
+            var dataTable = dtBusinessCategories.Clone();
+            dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
+            foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
+            HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
+            dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
+            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+            toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
         }
 
         private int GetCurrentCellId()
@@ -158,19 +168,19 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void ShowAddOnCharges()
         {
-            try
-            {
-                int rowIndex = dgBusinessCategories.CurrentCell.RowIndex;
-                int categoriesId = Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
+            int rowIndex = dgBusinessCategories.CurrentCell.RowIndex;
+            int categoriesId = Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
 
-                _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
         }
 
         private void btnAddOnCharges_Click(object sender, EventArgs e)
         {
-            ShowAddOnCharges();
+            try
+            {
+                ShowAddOnCharges();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

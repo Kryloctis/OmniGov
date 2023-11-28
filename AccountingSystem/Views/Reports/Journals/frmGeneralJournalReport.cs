@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -129,11 +130,16 @@ namespace AccountingSystem.Views.Reports.Journals
             Cursor.Current = Cursors.Default;
         }
 
+        private void OnLoad()
+        {
+            LoadReport(reportViewer.LocalReport);
+        }
+
         private void frmGeneralJournalReport_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
