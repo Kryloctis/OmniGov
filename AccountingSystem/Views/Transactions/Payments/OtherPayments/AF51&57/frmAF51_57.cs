@@ -137,8 +137,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            ucPayment1.amountPayment = ucOtherCharges1.GetTotalOtherCharges();
-            ucPayment1.OnLoad();
+            decimal totalPayment = ucOtherCharges1.GetTotalOtherCharges();
+            ucPayment1.OnLoad(string.Empty, totalPayment);
         }
 
         private void ConfirmPayment()

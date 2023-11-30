@@ -30,23 +30,22 @@
         {
             tabControlRegistry = new System.Windows.Forms.TabControl();
             tabRegistryList = new System.Windows.Forms.TabPage();
-            dgPayees = new System.Windows.Forms.DataGridView();
+            dgRegistry = new System.Windows.Forms.DataGridView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnSearch = new System.Windows.Forms.ToolStripButton();
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
             btnRegister = new System.Windows.Forms.ToolStripButton();
             tabRegister = new System.Windows.Forms.TabPage();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            ucTaxPayers1 = new Manage.TaxPayers.ucTaxPayers();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            ucTaxPayers1 = new Manage.TaxPayers.ucTaxPayers();
             tabControlRegistry.SuspendLayout();
             tabRegistryList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPayees).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgRegistry).BeginInit();
             toolStrip1.SuspendLayout();
             tabRegister.SuspendLayout();
-            groupBox1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,7 +67,7 @@
             // 
             // tabRegistryList
             // 
-            tabRegistryList.Controls.Add(dgPayees);
+            tabRegistryList.Controls.Add(dgRegistry);
             tabRegistryList.Controls.Add(progressBar1);
             tabRegistryList.Controls.Add(toolStrip1);
             tabRegistryList.Location = new System.Drawing.Point(4, 5);
@@ -79,15 +78,15 @@
             tabRegistryList.Text = "tabPayeeList";
             tabRegistryList.UseVisualStyleBackColor = true;
             // 
-            // dgPayees
+            // dgRegistry
             // 
-            dgPayees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgPayees.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgPayees.Location = new System.Drawing.Point(0, 36);
-            dgPayees.Name = "dgPayees";
-            dgPayees.RowTemplate.Height = 25;
-            dgPayees.Size = new System.Drawing.Size(669, 305);
-            dgPayees.TabIndex = 1;
+            dgRegistry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgRegistry.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgRegistry.Location = new System.Drawing.Point(0, 36);
+            dgRegistry.Name = "dgRegistry";
+            dgRegistry.RowTemplate.Height = 25;
+            dgRegistry.Size = new System.Drawing.Size(669, 305);
+            dgRegistry.TabIndex = 1;
             // 
             // progressBar1
             // 
@@ -119,6 +118,7 @@
             btnSearch.Size = new System.Drawing.Size(23, 20);
             btnSearch.Text = "Search";
             btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -141,7 +141,7 @@
             // 
             // tabRegister
             // 
-            tabRegister.Controls.Add(groupBox1);
+            tabRegister.Controls.Add(ucTaxPayers1);
             tabRegister.Controls.Add(toolStrip2);
             tabRegister.Location = new System.Drawing.Point(4, 5);
             tabRegister.Margin = new System.Windows.Forms.Padding(0);
@@ -150,28 +150,6 @@
             tabRegister.TabIndex = 1;
             tabRegister.Text = "tabNewPayee";
             tabRegister.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(ucTaxPayers1);
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            groupBox1.Location = new System.Drawing.Point(0, 31);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(669, 310);
-            groupBox1.TabIndex = 3;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Register";
-            // 
-            // ucTaxPayers1
-            // 
-            ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucTaxPayers1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucTaxPayers1.Location = new System.Drawing.Point(3, 23);
-            ucTaxPayers1.Name = "ucTaxPayers1";
-            ucTaxPayers1.Size = new System.Drawing.Size(663, 284);
-            ucTaxPayers1.TabIndex = 2;
             // 
             // toolStrip2
             // 
@@ -196,6 +174,24 @@
             btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnBack.Click += btnBack_Click;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // ucTaxPayers1
+            // 
+            ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucTaxPayers1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucTaxPayers1.Location = new System.Drawing.Point(0, 31);
+            ucTaxPayers1.Name = "ucTaxPayers1";
+            ucTaxPayers1.Size = new System.Drawing.Size(669, 310);
+            ucTaxPayers1.TabIndex = 5;
+            // 
             // ucPaymentRegistry
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -207,12 +203,11 @@
             tabControlRegistry.ResumeLayout(false);
             tabRegistryList.ResumeLayout(false);
             tabRegistryList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPayees).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgRegistry).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabRegister.ResumeLayout(false);
             tabRegister.PerformLayout();
-            groupBox1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             ResumeLayout(false);
@@ -222,7 +217,7 @@
 
         private System.Windows.Forms.TabControl tabControlRegistry;
         private System.Windows.Forms.TabPage tabRegistryList;
-        private System.Windows.Forms.DataGridView dgPayees;
+        private System.Windows.Forms.DataGridView dgRegistry;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSearch;
@@ -231,7 +226,7 @@
         private System.Windows.Forms.TabPage tabRegister;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnBack;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
     }
 }

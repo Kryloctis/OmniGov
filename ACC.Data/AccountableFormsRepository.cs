@@ -191,5 +191,18 @@ namespace ACC.Data
                 return dict;
             }
         }
+
+        public DataTable GetRecordsByAccFormNo(string accFormNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@acc_form_no", DbType.String, accFormNo }
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE acc_form_no = @acc_form_no";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
     }
 }

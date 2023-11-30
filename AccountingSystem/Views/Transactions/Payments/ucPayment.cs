@@ -1,23 +1,45 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class ucPayment : UserControl
     {
-        internal decimal amountPayment = 0;
-        internal string taxpayerName = string.Empty;
-        internal string selectedAccountableFormNo = string.Empty;
+        private decimal totalPaymentAmount;
 
         public ucPayment()
         {
             InitializeComponent();
         }
+
+        internal PaymentCollectionsModel PaymentCollectionsModel()
+        {
+            var paymentCollectionsModel = new PaymentCollectionsModel();
+
+            var collectingOfficerData = GetCollectingOfficerData();
+            bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+            paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+            paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+            paymentCollectionsModel.AccountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
+            paymentCollectionsModel.Amount = totalPaymentAmount;
+            paymentCollectionsModel.Payee = txtPayee.Text;
+            paymentCollectionsModel.ReceiptNo = txtReceipts.Text.Trim();
+            paymentCollectionsModel.PaymentDate = dtPaymentDate.Value;
+            paymentCollectionsModel.CreatedBy = Helper.UserId;
+
+            return paymentCollectionsModel;
+        }
+
+        #region Private Methods
 
         internal string GetFormErrors()
         {
@@ -33,25 +55,22 @@ namespace AccountingSystem.Views.Transactions.Payments
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        internal void OnLoad(string accountableFormCode = "")
+        internal void OnLoad(string accountableFormNo, decimal totalAmount = 0)
         {
-            try
-            {
-                lblTotalPayment.Text = amountPayment.ToString("N2");
-                txtCollectingOfficer.Text = GetCollectingOfficerData().Count < 1 ? string.Empty : GetCollectingOfficerData()["collector_full_name"];
-                PaymentMethods();
-                Helper.DatagridFullRowSelectStyle(dgCheques, false, false, true);
-                LoadAccountableForms(accountableFormCode);
-                LoadReceipts();
-                LoadCheques();
-                dtPaymentDate.Value = Helper.GetCurrentDate();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            totalPaymentAmount = totalAmount;
+            lblTotalPayment.Text = totalAmount.ToString("N2");
+            txtCollectingOfficer.Text = GetCollectingOfficerData().Count < 1 ? string.Empty : GetCollectingOfficerData()["collector_full_name"];
+            PaymentMethods();
+            Helper.DatagridFullRowSelectStyle(dgCheques, false, false, true);
+            LoadAccountableForms(accountableFormNo);
+            LoadReceipts();
+            LoadCheques();
+            dtPaymentDate.Value = Helper.GetCurrentDate();
         }
 
-        private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
+        private void LoadAccountableForms(string accountableForNo = "")
         {
-            LoadReceipts();
+            HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, DataTableAccountableForm(accountableForNo));
         }
 
         private DataColumn[] DataColumnAccountableForms()
@@ -63,34 +82,21 @@ namespace AccountingSystem.Views.Transactions.Payments
             };
         }
 
-        private DataTable DataTableAccountableForm(string accountableFormCode)
+        private DataTable DataTableAccountableForm(string accountableFormNo)
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnAccountableForms());
+            var dtAccountableForm = AccFactory.AccountableFormsRepository().GetRecordsByAccFormNo(accountableFormNo);
 
-            if (string.IsNullOrEmpty(accountableFormCode))
+            foreach (DataRow row in dtAccountableForm.Rows)
             {
-                var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
-                foreach (DataRow row in dtAccoutnableForm.Rows)
-                {
-                    var newRow = dataTable.NewRow();
-                    newRow["id"] = row["id"];
-                    newRow["accountableForm"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                    dataTable.Rows.Add(newRow);
-                }
-                cmbxAccountableForm.Enabled = true;
-                return dataTable;
-            }
-            else
-            {
-                var dictAccountableForm = AccFactory.AccountableFormsRepository().GetRecordByAccFormNo(accountableFormCode);
                 var newRow = dataTable.NewRow();
-                newRow["id"] = dictAccountableForm["id"];
-                newRow["accountableForm"] = $"{dictAccountableForm["acc_form_no"]} - {dictAccountableForm["acc_form_desc"]}";
+                newRow["id"] = row["id"];
+                newRow["accountableForm"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
                 dataTable.Rows.Add(newRow);
-                cmbxAccountableForm.Enabled = false;
-                return dataTable;
             }
+            cmbxAccountableForm.Enabled = true;
+            return dataTable;
         }
 
         internal Dictionary<string, string> GetCollectingOfficerData()
@@ -148,11 +154,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             return list;
         }
 
-        private void LoadAccountableForms(string accountableFormCode = "")
-        {
-            HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, DataTableAccountableForm(accountableFormCode));
-        }
-
         private void LoadReceipts()
         {
             //Added for Autocomplete Source Collection
@@ -160,30 +161,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             GetReceiptsList().ForEach(x => autoCompleteCollection.Add(x.ToString("#######")));
             txtReceipts.AutoCompleteCustomSource = autoCompleteCollection;
             string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1 ? string.Empty : GetReceiptsList()[0].ToString();
-        }
-
-        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
-        {
-            PaymentMethods();
-        }
-
-        private void radPaymentCashCheque_CheckedChanged(object sender, EventArgs e)
-        {
-            PaymentMethods();
-        }
-
-        private void radPaymentCheque_CheckedChanged(object sender, EventArgs e)
-        {
-            PaymentMethods();
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-        }
-
-        private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private string PaymentMethods()
@@ -205,12 +182,85 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private void ucPayment_Load(object sender, EventArgs e)
+        #endregion Private Methods
+
+        #region Cheque Details
+
+        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
         {
-            if (!DesignMode)
+            return new DataGridViewColumn[]
             {
+                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
+                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
+                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
+                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
+                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
+                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
+                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
+            };
+        }
+
+        private void LoadCheques()
+        {
+            try
+            {
+                dgCheques.Columns.Clear();
+                dgCheques.Rows.Clear();
+                dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
+                dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Cheque Details
+
+        #region Event Methods
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            dgCheques.Rows.Add();
+        }
+
+        private void dgCheques_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            dgCheques.Rows[e.RowIndex].Cells["cheque_date"].Value = "mm/dd/yyyy";
+            dgCheques.Rows[e.RowIndex].Cells["cheque_amount"].Value = "0.00";
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgCheques.SelectedRows)
+            {
+                dgCheques.Rows.Remove(row);
             }
         }
+
+        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
+        }
+
+        private void radPaymentCashCheque_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
+        }
+
+        private void radPaymentCheque_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
+        }
+
+        private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadReceipts();
+        }
+
+        #endregion Event Methods
 
         #region Validations
 
@@ -348,54 +398,5 @@ namespace AccountingSystem.Views.Transactions.Payments
         }
 
         #endregion Validations
-
-        #region Cheque Details
-
-        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
-        {
-            return new DataGridViewColumn[]
-            {
-                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
-                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
-                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
-                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
-                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
-                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
-                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
-            };
-        }
-
-        private void LoadCheques()
-        {
-            try
-            {
-                dgCheques.Columns.Clear();
-                dgCheques.Rows.Clear();
-                dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
-                dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        #endregion Cheque Details
-
-        private void toolStripButtonAdd_Click(object sender, EventArgs e)
-        {
-            dgCheques.Rows.Add();
-        }
-
-        private void dgCheques_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            dgCheques.Rows[e.RowIndex].Cells["cheque_date"].Value = "mm/dd/yyyy";
-            dgCheques.Rows[e.RowIndex].Cells["cheque_amount"].Value = "0.00";
-        }
-
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dgCheques.SelectedRows)
-            {
-                dgCheques.Rows.Remove(row);
-            }
-        }
     }
 }

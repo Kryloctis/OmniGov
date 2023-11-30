@@ -262,8 +262,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            ucPayment.amountPayment = ucMarriageLicense.ucOtherCharges.GetTotalOtherCharges();
-            ucPayment.OnLoad("54");
+            decimal totalPayment = ucMarriageLicense.ucOtherCharges.GetTotalOtherCharges();
+            ucPayment.OnLoad("54", totalPayment);
 
             if (isNewPayee)
                 ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
@@ -371,7 +371,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
+                    SaveMarriageLicensePayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), MarriageLicenseModel());
                 });
 
                 Invoke(methodInvoker);
@@ -412,32 +412,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-        }
-
-        private PaymentCollectionsModel PaymentCollectionsModel()
-        {
-            var paymentCollectionsModel = new PaymentCollectionsModel();
-
-            try
-            {
-                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-                paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-                paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-                paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
-                paymentCollectionsModel.Amount = ucPayment.amountPayment;
-                paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
-                paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
-                paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
-                paymentCollectionsModel.CreatedBy = Helper.UserId;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return paymentCollectionsModel;
         }
 
         private MarriageLicenseModel MarriageLicenseModel()

@@ -6,6 +6,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -16,102 +17,24 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
     {
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
-        private readonly ucFeesCharges ucOtherCharges;
-
-        //internal readonly ucCattleOwnership ucCattleOwnership;
-        private bool isNewPayee = false;
+        private readonly ucFeesCharges ucFeesCharges;
+        private readonly ucPaymentRegistry ucPaymentRegistry;
 
         public frmCattleOwnership()
         {
             InitializeComponent();
             ucPayment = ucPayment1;
-            //ucOtherCharges.accountableForm = "53";
+            ucFeesCharges = ucFeesCharges1;
+            ucPaymentRegistry = ucPaymentRegistry1;
+            ucFeesCharges.accountableForm = "53";
         }
+
+        #region Private Methods
 
         private void OnLoad()
         {
             LoadTabContents();
-        }
-
-        private void frmCattleOwnership_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private DataColumn[] PayeesColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayer_type_code", typeof(string)),
-                new DataColumn("taxpayers_tin", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
-                new DataColumn("taxpayers_address", typeof(string)),
-                new DataColumn("taxpayers_contact_info", typeof(string)),
-            };
-        }
-
-        private DataTable DataTablePayees(string searchText)
-        {
-            var dtPayees = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText.Trim());
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(PayeesColumns());
-
-            int progressCount = 0;
-            int totalProgressCount = dtPayees.Rows.Count;
-
-            foreach (DataRow row in dtPayees.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
-                string taxpayerTin = row["taxpayers_tin"].ToString();
-                string taxpayerName = row["taxpayers_name"].ToString();
-                string taxpayerTypeCode = row["taxpayer_type"].ToString();
-                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
-                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
-                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
-                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
-                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
-                string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
-
-                newRow["taxpayers_id"] = taxpayerId;
-                newRow["taxpayer_type_code"] = taxpayerTypeCode;
-                newRow["taxpayers_tin"] = taxpayerTin;
-                newRow["taxpayers_name"] = taxpayerName;
-                newRow["taxpayers_address"] = taxpayerAddress;
-                newRow["taxpayers_contact_info"] = taxpayerContactInfo;
-
-                progressCount++;
-                Helper.ProgressCounter(bgwPayee, totalProgressCount, progressCount);
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
-        }
-
-        private void LoadPayees(string searchText)
-        {
-            if (!bgwPayee.IsBusy)
-            {
-                bgwPayee.RunWorkerAsync(searchText);
-            }
-        }
-
-        private void bgwPayee_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-        }
-
-        private void bgwPayee_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-        }
-
-        private void bgwPayee_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
+            ucPaymentRegistry.LoadRegistry();
         }
 
         private void ConfirmPayment()
@@ -178,32 +101,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
         }
 
-        private PaymentCollectionsModel PaymentCollectionsModel()
-        {
-            var paymentCollectionsModel = new PaymentCollectionsModel();
-
-            try
-            {
-                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-                paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-                paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-                paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
-                paymentCollectionsModel.Amount = ucPayment.amountPayment;
-                paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
-                paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
-                paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
-                paymentCollectionsModel.CreatedBy = Helper.UserId;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return paymentCollectionsModel;
-        }
-
         private CattleOwnershipModel CattleOwnershipModel()
         {
             var cattleOwnershipModel = new CattleOwnershipModel();
@@ -224,126 +121,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             //cattleOwnershipModel.CreatedAt = DateTime.Now;
 
             return cattleOwnershipModel;
-        }
-
-        private void bgwSavingPayment_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            int totalProgress = ucPayment.dgCheques.Rows.Count;
-            int progressCount = 0;
-            var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
-
-            var chequesModels = new List<ChequesModel>();
-            try
-            {
-                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
-                {
-                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
-                    string bankName = row.Cells["bank_name"].Value.ToString();
-                    var rowBankBranch = row.Cells["bank_branch"].Value;
-                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
-                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
-                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
-                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
-                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
-
-                    int bankAccountId;
-
-                    if (!bankAccountExist)
-                    {
-                        //banks model
-                        var banksModel = new BanksModel()
-                        {
-                            BankName = bankName,
-                            BankBranch = bankBranch
-                        };
-
-                        //bank accounts model
-                        var bankAccountModel = new BankAccountsModel()
-                        {
-                            AccountNumber = bankAccountNo,
-                            banksModel = banksModel
-                        };
-
-                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
-                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
-                    }
-                    else
-                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
-
-                    var model = new ChequesModel()
-                    {
-                        Amount = chequeAmount,
-                        ChequeDate = chequeDate,
-                        ChequeNo = chequeNo,
-                        BankAccountsId = bankAccountId
-                    };
-
-                    progressCount += 1;
-                    bgwSavingPayment.ReportProgress((progressCount * 100) / totalProgress);
-                    chequesModels.Add(model);
-                }
-
-                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
-
-                var methodInvoker = new MethodInvoker(delegate
-                {
-                    SaveCattleOwnership(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleOwnershipModel());
-                });
-
-                Invoke(methodInvoker);
-                e.Result = "complete";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bgwSavingPayment_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-            dialog.label1.Text = e.ProgressPercentage.ToString();
-            dialog.btnClose.Enabled = false;
-        }
-
-        private void bgwSavingPayment_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result.ToString() == "complete")
-            {
-                dialog.label1.Text = "Payment Process Complete!";
-                dialog.btnClose.Enabled = true;
-                btnNextMain.Text = "Finish";
-                ucPayment.Enabled = false;
-                return;
-            }
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //LoadPayees(searchText);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        //TAB CHANGING METHODS
-
-        private void btnNextMain_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //if (!FormValidations())
-                //    return;
-
-                tabControlMain.SelectedIndex++;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
-        }
-
-        private void btnBackMain_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                tabControlMain.SelectedIndex--;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadTabContents()
@@ -395,6 +172,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnNextMain.Text = "Proceed to Payment";
             btnBackMain.Enabled = true;
             radFeesCharges.Checked = true;
+            ucFeesCharges.OnLoad();
         }
 
         private void LoadPaymentTab()
@@ -403,14 +181,18 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            //ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
-            ucPayment.OnLoad("58");
+            decimal totalPayment = ucFeesCharges.GetTotalOtherCharges();
+            ucPayment.OnLoad("58", totalPayment);
 
             //if (isNewPayee)
             //    ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
             //else
             //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
         }
+
+        #endregion Private Methods
+
+        #region Event Handlers
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -420,5 +202,125 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnNextMain_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (!FormValidations())
+                //    return;
+
+                tabControlMain.SelectedIndex++;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+        }
+
+        private void btnBackMain_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControlMain.SelectedIndex--;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void bgwSavingPayment_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                int totalProgressCount = ucPayment.dgCheques.Rows.Count;
+                int progressCount = 0;
+                var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
+                var chequesModels = new List<ChequesModel>();
+
+                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
+                {
+                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
+                    string bankName = row.Cells["bank_name"].Value.ToString();
+                    var rowBankBranch = row.Cells["bank_branch"].Value;
+                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
+                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
+                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
+                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
+                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
+
+                    int bankAccountId;
+
+                    if (!bankAccountExist)
+                    {
+                        //banks model
+                        var banksModel = new BanksModel()
+                        {
+                            BankName = bankName,
+                            BankBranch = bankBranch
+                        };
+
+                        //bank accounts model
+                        var bankAccountModel = new BankAccountsModel()
+                        {
+                            AccountNumber = bankAccountNo,
+                            banksModel = banksModel
+                        };
+
+                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
+                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
+                    }
+                    else
+                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
+
+                    var model = new ChequesModel()
+                    {
+                        Amount = chequeAmount,
+                        ChequeDate = chequeDate,
+                        ChequeNo = chequeNo,
+                        BankAccountsId = bankAccountId
+                    };
+
+                    progressCount++;
+                    Helper.ProgressCounter(bgwSavingPayment, totalProgressCount, progressCount);
+                    chequesModels.Add(model);
+                }
+
+                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
+
+                var methodInvoker = new MethodInvoker(delegate
+                {
+                    SaveCattleOwnership(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), CattleOwnershipModel());
+                });
+
+                Invoke(methodInvoker);
+                e.Result = "complete";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void bgwSavingPayment_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            dialog.label1.Text = e.ProgressPercentage.ToString();
+            dialog.btnClose.Enabled = false;
+        }
+
+        private void bgwSavingPayment_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result.ToString() == "complete")
+            {
+                dialog.label1.Text = "Payment Process Complete!";
+                dialog.btnClose.Enabled = true;
+                btnNextMain.Text = "Finish";
+                ucPayment.Enabled = false;
+                return;
+            }
+        }
+
+        private void frmCattleOwnership_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Event Handlers
     }
 }

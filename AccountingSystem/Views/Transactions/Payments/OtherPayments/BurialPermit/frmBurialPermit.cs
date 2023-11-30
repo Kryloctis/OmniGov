@@ -246,25 +246,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
         }
 
-        private PaymentCollectionsModel PaymentCollectionsModel()
-        {
-            var paymentCollectionsModel = new PaymentCollectionsModel();
-
-            var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-            bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-            paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-            paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-            paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
-            paymentCollectionsModel.Amount = ucPayment.amountPayment;
-            paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
-            paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
-            paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
-            paymentCollectionsModel.CreatedBy = Helper.UserId;
-
-            return paymentCollectionsModel;
-        }
-
         private BurialPermitModel BurialPermitModel()
         {
             var burialPermitModel = new BurialPermitModel();
@@ -348,7 +329,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
                 paymentCollectionHasChequesModel.ChequesModels = chequesModels;
 
-                e.Result = SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel());
+                e.Result = SaveBurialPermitPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), BurialPermitModel());
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -412,8 +393,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            ucPayment.amountPayment = ucBurialPermit.ucOtherCharges1.GetTotalOtherCharges();
-            ucPayment.OnLoad("58");
+            decimal totalPayment = ucBurialPermit.ucOtherCharges1.GetTotalOtherCharges();
+            ucPayment.OnLoad("58", totalPayment);
 
             if (isNewPayee)
                 ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
