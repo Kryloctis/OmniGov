@@ -19,12 +19,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private dialogPayment dialog = new dialogPayment();
         private readonly ucFeesCharges ucFeesCharges;
         private readonly ucPaymentRegistry ucPaymentRegistry;
+        private readonly ucCattleDetails ucCattleDetails;
 
         public frmCattleOwnership()
         {
             InitializeComponent();
             ucPayment = ucPayment1;
             ucFeesCharges = ucFeesCharges1;
+            ucCattleDetails = ucCattleDetails1;
             ucPaymentRegistry = ucPaymentRegistry1;
             ucFeesCharges.accountableForm = "53";
         }
@@ -41,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             try
             {
-                if (!FormValidations())
+                if (!TabValidated())
                     return;
 
                 if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
@@ -61,8 +63,46 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             }
         }
 
-        private bool FormValidations()
+        private bool TabValidated()
         {
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageOwner":
+                    if (!ucPaymentRegistry.FormValidated("owner"))
+                    {
+                        Helper.MessageBoxError(ucPaymentRegistry.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageCattleDetails":
+                    if (!ucCattleDetails.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucCattleDetails.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageFeesCharges":
+                    if (!ucFeesCharges.FormValidated())
+                    {
+                        Helper.MessageBoxError(ucFeesCharges.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPagePayment":
+                    if (!ucPayment.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPayment.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                default:
+                    return true;
+            }
+
             //var selectedTab = tabControlMain.SelectedTab;
 
             //if (selectedTab == tabPagePayee)
@@ -200,15 +240,15 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             {
                 LoadTabContents();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
         {
             try
             {
-                //if (!FormValidations())
-                //    return;
+                if (!TabValidated())
+                    return;
 
                 tabControlMain.SelectedIndex++;
             }

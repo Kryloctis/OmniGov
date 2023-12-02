@@ -89,9 +89,11 @@
             // 
             nudAge.Location = new System.Drawing.Point(75, 32);
             nudAge.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
             nudAge.Size = new System.Drawing.Size(80, 23);
             nudAge.TabIndex = 15;
+            nudAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtDescription
             // 
@@ -101,6 +103,8 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(394, 23);
             txtDescription.TabIndex = 13;
+            txtDescription.Validating += txtDescription_Validating;
+            txtDescription.Validated += txtDescription_Validated;
             // 
             // nudPrice
             // 
@@ -111,6 +115,8 @@
             nudPrice.Name = "nudPrice";
             nudPrice.Size = new System.Drawing.Size(394, 23);
             nudPrice.TabIndex = 16;
+            nudPrice.Validating += nudPrice_Validating;
+            nudPrice.Validated += nudPrice_Validated;
             // 
             // label10
             // 
@@ -147,6 +153,8 @@
             cmbxType.Name = "cmbxType";
             cmbxType.Size = new System.Drawing.Size(394, 23);
             cmbxType.TabIndex = 14;
+            cmbxType.Validating += cmbxType_Validating;
+            cmbxType.Validated += cmbxType_Validated;
             // 
             // label9
             // 

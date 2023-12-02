@@ -35,19 +35,19 @@
             panel2 = new System.Windows.Forms.Panel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             treeViewTaxTypes = new System.Windows.Forms.TreeView();
-            dgOtherPaymentCharges = new System.Windows.Forms.DataGridView();
             panel4 = new System.Windows.Forms.Panel();
             btnRemove = new System.Windows.Forms.Button();
             btnAdd = new System.Windows.Forms.Button();
             btnUndo = new System.Windows.Forms.Button();
+            dgOtherPaymentCharges = new System.Windows.Forms.DataGridView();
             groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgOtherPaymentCharges).BeginInit();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgOtherPaymentCharges).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -103,41 +103,6 @@
             treeViewTaxTypes.TabIndex = 0;
             treeViewTaxTypes.AfterSelect += treeViewTaxTypes_AfterSelect;
             // 
-            // dgOtherPaymentCharges
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgOtherPaymentCharges.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgOtherPaymentCharges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgOtherPaymentCharges.DefaultCellStyle = dataGridViewCellStyle2;
-            dgOtherPaymentCharges.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgOtherPaymentCharges.Location = new System.Drawing.Point(38, 0);
-            dgOtherPaymentCharges.Name = "dgOtherPaymentCharges";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgOtherPaymentCharges.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgOtherPaymentCharges.RowTemplate.Height = 25;
-            dgOtherPaymentCharges.Size = new System.Drawing.Size(405, 302);
-            dgOtherPaymentCharges.TabIndex = 8;
-            dgOtherPaymentCharges.CellEndEdit += dgOtherPaymentCharges_CellEndEdit;
-            // 
             // panel4
             // 
             panel4.BackColor = System.Drawing.Color.Transparent;
@@ -186,12 +151,47 @@
             btnUndo.UseVisualStyleBackColor = true;
             btnUndo.Click += btnUndo_Click;
             // 
-            // ucOtherCharges
+            // dgOtherPaymentCharges
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgOtherPaymentCharges.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgOtherPaymentCharges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgOtherPaymentCharges.DefaultCellStyle = dataGridViewCellStyle2;
+            dgOtherPaymentCharges.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgOtherPaymentCharges.Location = new System.Drawing.Point(38, 0);
+            dgOtherPaymentCharges.Name = "dgOtherPaymentCharges";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgOtherPaymentCharges.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgOtherPaymentCharges.RowTemplate.Height = 25;
+            dgOtherPaymentCharges.Size = new System.Drawing.Size(405, 302);
+            dgOtherPaymentCharges.TabIndex = 8;
+            dgOtherPaymentCharges.CellEndEdit += dgOtherPaymentCharges_CellEndEdit;
+            // 
+            // ucFeesCharges
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(groupBox1);
-            Name = "ucOtherCharges";
+            Name = "ucFeesCharges";
             Size = new System.Drawing.Size(688, 340);
             groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
@@ -199,8 +199,8 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgOtherPaymentCharges).EndInit();
             panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgOtherPaymentCharges).EndInit();
             ResumeLayout(false);
         }
 
@@ -208,11 +208,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dgOtherPaymentCharges;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.TreeView treeViewTaxTypes;
+        private System.Windows.Forms.DataGridView dgOtherPaymentCharges;
     }
 }

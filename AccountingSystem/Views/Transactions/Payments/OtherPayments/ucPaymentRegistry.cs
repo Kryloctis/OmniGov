@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
     public partial class ucPaymentRegistry : UserControl
     {
+        private string error;
         private readonly ucTaxPayers ucTaxPayers;
 
         public ucPaymentRegistry()
@@ -18,28 +19,45 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             Helper.DatagridFullRowSelectStyle(dgRegistry, true);
         }
 
+        #region Private Methods
+
+        internal string GetFormErrors()
+        {
+            var errors = new string[]
+            {
+                error
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        internal bool FormValidated(string fieldName)
+        {
+            switch (tabControlRegistry.SelectedTab.Name)
+            {
+                case "tabRegistryList":
+                    if (dgRegistry.SelectedRows.Count != 1)
+                    {
+                        error = $"Select only one {fieldName}";
+                        return false;
+                    }
+                    break;
+
+                case "tabRegister":
+                    if (!ucTaxPayers.ValidateChildren())
+                    {
+                        error = $"Fill all required fields {fieldName}";
+                        return false;
+                    }
+                    break;
+            }
+
+            error = string.Empty;
+            return true;
+        }
+
         private void OnLoad()
         {
-        }
-
-        private void ucRegistry_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-                ucTaxPayers1.chckIsActive.Enabled = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnRegister_Click(object sender, EventArgs e)
-        {
-            tabControlRegistry.SelectedTab = tabRegister;
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            tabControlRegistry.SelectedTab = tabRegistryList;
         }
 
         internal void LoadRegistry()
@@ -53,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             }
         }
 
-        private DataColumn[] RegisstryColumns()
+        private DataColumn[] RegistryColumns()
         {
             return new DataColumn[]
             {
@@ -66,6 +84,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             };
         }
 
+        #endregion Private Methods
+
+        #region Event Methods
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -74,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
                     return;
 
                 var dataTable = new DataTable();
-                dataTable.Columns.AddRange(RegisstryColumns());
+                dataTable.Columns.AddRange(RegistryColumns());
 
                 int progressCount = 0;
                 int totalProgressCount = sourceDb.Rows.Count;
@@ -134,5 +156,27 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void ucRegistry_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+                ucTaxPayers1.chckIsActive.Enabled = false;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            tabControlRegistry.SelectedTab = tabRegister;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            tabControlRegistry.SelectedTab = tabRegistryList;
+        }
+
+        #endregion Event Methods
     }
 }
