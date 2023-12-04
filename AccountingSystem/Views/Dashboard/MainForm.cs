@@ -24,7 +24,7 @@ using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Manage.TaxTypes;
+using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Dashboard
                 bankAccountsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Tax Types"))
-                taxTypesToolStripMenuItem.Enabled = false;
+                feesChargesConfigToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Other Payment Rates"))
                 otherPaymentRatesToolStripMenuItem.Enabled = false;
@@ -675,9 +675,9 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBankAccounts().ShowDialog();
         }
 
-        private void taxTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void feesChargesConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxTypes().ShowDialog();
+            _ = new frmFeesChargesClassification().ShowDialog();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

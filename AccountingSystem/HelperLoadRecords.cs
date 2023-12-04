@@ -2648,5 +2648,13 @@ namespace AccountingSystem
         }
 
         #endregion CustomFunctions
+
+        #region Fees and Charges Classification
+
+        internal static void FeesChargesConfig(DataTable dataTable, TreeView treeView)
+        {
+        }
+
+        #endregion Fees and Charges Classification
     }
 }

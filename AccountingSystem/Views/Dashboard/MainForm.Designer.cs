@@ -61,7 +61,7 @@
             discountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             penaltiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            feesChargesConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             otherPaymentRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,6 +130,7 @@
             aF5157ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF58BurialPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF53CattleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -157,7 +158,6 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            aF53CattleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -229,7 +229,7 @@
             // 
             // menuManage
             // 
-            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, taxTypesToolStripMenuItem, otherPaymentRatesToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
+            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, feesChargesConfigToolStripMenuItem, otherPaymentRatesToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
             menuManage.Name = "menuManage";
             menuManage.Size = new System.Drawing.Size(62, 24);
             menuManage.Text = "Manage";
@@ -419,12 +419,12 @@
             taxRatesToolStripMenuItem.Text = "Tax Rates...";
             taxRatesToolStripMenuItem.Click += taxRateToolStripMenuItem_Click;
             // 
-            // taxTypesToolStripMenuItem
+            // feesChargesConfigToolStripMenuItem
             // 
-            taxTypesToolStripMenuItem.Name = "taxTypesToolStripMenuItem";
-            taxTypesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            taxTypesToolStripMenuItem.Text = "Tax Types";
-            taxTypesToolStripMenuItem.Click += taxTypesToolStripMenuItem_Click;
+            feesChargesConfigToolStripMenuItem.Name = "feesChargesConfigToolStripMenuItem";
+            feesChargesConfigToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            feesChargesConfigToolStripMenuItem.Text = "Fees && Charges Config.";
+            feesChargesConfigToolStripMenuItem.Click += feesChargesConfigToolStripMenuItem_Click;
             // 
             // otherPaymentRatesToolStripMenuItem
             // 
@@ -1114,6 +1114,13 @@
             aF58BurialPermitToolStripMenuItem.Text = "AF 58 - Burial Permit && Fee ";
             aF58BurialPermitToolStripMenuItem.Click += aF58BurialPermitToolStripMenuItem_Click;
             // 
+            // aF53CattleToolStripMenuItem
+            // 
+            aF53CattleToolStripMenuItem.Name = "aF53CattleToolStripMenuItem";
+            aF53CattleToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Cattle Ownership ";
+            aF53CattleToolStripMenuItem.Click += aF53CattleToolStripMenuItem_Click;
+            // 
             // toolStripSeparator10
             // 
             toolStripSeparator10.Name = "toolStripSeparator10";
@@ -1297,13 +1304,6 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // aF53CattleToolStripMenuItem
-            // 
-            aF53CattleToolStripMenuItem.Name = "aF53CattleToolStripMenuItem";
-            aF53CattleToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Cattle Ownership ";
-            aF53CattleToolStripMenuItem.Click += aF53CattleToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1458,7 +1458,7 @@
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem feesChargesConfigToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otherPaymentRatesToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlBudget;
         private System.Windows.Forms.TabPage tabPageBudgetSummary;

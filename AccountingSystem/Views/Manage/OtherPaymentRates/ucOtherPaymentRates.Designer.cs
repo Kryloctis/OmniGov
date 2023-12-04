@@ -47,7 +47,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(10, 13);
+            label2.Location = new System.Drawing.Point(4, 26);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(51, 15);
             label2.TabIndex = 1;
@@ -56,7 +56,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(10, 41);
+            label3.Location = new System.Drawing.Point(4, 54);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(67, 15);
             label3.TabIndex = 2;
@@ -65,7 +65,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(10, 89);
+            label4.Location = new System.Drawing.Point(4, 86);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(51, 15);
             label4.TabIndex = 3;
@@ -74,7 +74,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(10, 141);
+            label5.Location = new System.Drawing.Point(4, 115);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(73, 15);
             label5.TabIndex = 4;
@@ -82,23 +82,25 @@
             // 
             // cmbxTaxType
             // 
+            cmbxTaxType.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxTaxType.DropDownHeight = 100;
             cmbxTaxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxTaxType.FormattingEnabled = true;
             cmbxTaxType.IntegralHeight = false;
-            cmbxTaxType.Location = new System.Drawing.Point(90, 13);
+            cmbxTaxType.Location = new System.Drawing.Point(83, 26);
             cmbxTaxType.Name = "cmbxTaxType";
-            cmbxTaxType.Size = new System.Drawing.Size(315, 23);
+            cmbxTaxType.Size = new System.Drawing.Size(250, 23);
             cmbxTaxType.TabIndex = 1;
             cmbxTaxType.Validating += cmbxTaxType_Validating;
             cmbxTaxType.Validated += cmbxTaxType_Validated;
             // 
             // txtDescription
             // 
-            txtDescription.Location = new System.Drawing.Point(90, 42);
+            txtDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDescription.Location = new System.Drawing.Point(83, 55);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new System.Drawing.Size(315, 38);
+            txtDescription.Size = new System.Drawing.Size(250, 23);
             txtDescription.TabIndex = 2;
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
@@ -110,30 +112,33 @@
             // 
             // nudAmount
             // 
+            nudAmount.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudAmount.DecimalPlaces = 1;
-            nudAmount.Location = new System.Drawing.Point(90, 87);
+            nudAmount.Location = new System.Drawing.Point(83, 84);
             nudAmount.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
             nudAmount.Name = "nudAmount";
-            nudAmount.Size = new System.Drawing.Size(315, 23);
+            nudAmount.Size = new System.Drawing.Size(250, 23);
             nudAmount.TabIndex = 3;
             nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             nudAmount.ThousandsSeparator = true;
             // 
             // nudStartingYear
             // 
-            nudStartingYear.Location = new System.Drawing.Point(90, 139);
+            nudStartingYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudStartingYear.Location = new System.Drawing.Point(83, 113);
             nudStartingYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudStartingYear.Minimum = new decimal(new int[] { 1901, 0, 0, 0 });
             nudStartingYear.Name = "nudStartingYear";
-            nudStartingYear.Size = new System.Drawing.Size(315, 23);
+            nudStartingYear.Size = new System.Drawing.Size(250, 23);
             nudStartingYear.TabIndex = 4;
             nudStartingYear.Value = new decimal(new int[] { 2023, 0, 0, 0 });
             // 
             // cbIsRateEditable
             // 
+            cbIsRateEditable.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbIsRateEditable.AutoSize = true;
-            cbIsRateEditable.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            cbIsRateEditable.Location = new System.Drawing.Point(311, 116);
+            cbIsRateEditable.Font = new System.Drawing.Font("Segoe UI", 8F);
+            cbIsRateEditable.Location = new System.Drawing.Point(239, 3);
             cbIsRateEditable.Name = "cbIsRateEditable";
             cbIsRateEditable.Size = new System.Drawing.Size(94, 17);
             cbIsRateEditable.TabIndex = 5;
@@ -156,7 +161,7 @@
             Controls.Add(label4);
             Controls.Add(label2);
             Name = "ucOtherPaymentRates";
-            Size = new System.Drawing.Size(429, 170);
+            Size = new System.Drawing.Size(350, 142);
             Load += ucOtherPaymentRates_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
@@ -166,15 +171,15 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.ComboBox cmbxTaxType;
         internal System.Windows.Forms.TextBox txtDescription;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.NumericUpDown nudStartingYear;
         internal System.Windows.Forms.CheckBox cbIsRateEditable;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
