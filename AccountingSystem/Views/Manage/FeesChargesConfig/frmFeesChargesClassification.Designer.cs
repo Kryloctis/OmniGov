@@ -117,12 +117,14 @@
             btnNewClassification.Name = "btnNewClassification";
             btnNewClassification.Size = new System.Drawing.Size(180, 22);
             btnNewClassification.Text = "Classification";
+            btnNewClassification.Click += btnNewClassification_Click;
             // 
             // btnFeesCharges
             // 
             btnFeesCharges.Name = "btnFeesCharges";
             btnFeesCharges.Size = new System.Drawing.Size(180, 22);
             btnFeesCharges.Text = "Fees and Charges";
+            btnFeesCharges.Click += btnFeesCharges_Click;
             // 
             // btnModify
             // 
@@ -131,6 +133,7 @@
             btnModify.Name = "btnModify";
             btnModify.Size = new System.Drawing.Size(69, 24);
             btnModify.Text = "Modify";
+            btnModify.Click += btnModify_Click;
             // 
             // btnDelete
             // 

@@ -129,11 +129,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void CreateImageList(ref ImageList nodeImageList)
         {
-            nodeImageList.Images.Add("0", Properties.Resources.heirarchy1_20px);
-            nodeImageList.Images.Add("1", Properties.Resources.heirarchy2_20px);
-            nodeImageList.Images.Add("2", Properties.Resources.heirarchy3_20px);
-            nodeImageList.Images.Add("3", Properties.Resources.heirarchy4_20px);
-            nodeImageList.Images.Add("4", Properties.Resources.heirarchy4_20px);
+            //nodeImageList.Images.Add("0", Properties.Resources.heirarchy1_20px);
+            //nodeImageList.Images.Add("1", Properties.Resources.heirarchy2_20px);
+            //nodeImageList.Images.Add("2", Properties.Resources.heirarchy3_20px);
+            //nodeImageList.Images.Add("3", Properties.Resources.heirarchy4_20px);
+            //nodeImageList.Images.Add("4", Properties.Resources.heirarchy4_20px);
 
             treeViewTaxTypes.ImageList = nodeImageList;
             treeViewTaxTypes.ImageIndex = 0;

@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges;
 using DocumentFormat.OpenXml.EMMA;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Security.Certificates;
@@ -26,11 +27,11 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void CreateImageList(ref ImageList nodeImageList)
         {
-            nodeImageList.Images.Add("0", Properties.Resources.heirarchy1_20px);
-            nodeImageList.Images.Add("1", Properties.Resources.heirarchy2_20px);
-            nodeImageList.Images.Add("2", Properties.Resources.heirarchy3_20px);
-            nodeImageList.Images.Add("3", Properties.Resources.heirarchy4_20px);
-            nodeImageList.Images.Add("4", Properties.Resources.heirarchy4_20px);
+            nodeImageList.Images.Add("0", Properties.Resources.folder_filled_20px);
+            nodeImageList.Images.Add("1", Properties.Resources.folder_filled_20px);
+            nodeImageList.Images.Add("2", Properties.Resources.folder_filled_20px);
+            nodeImageList.Images.Add("3", Properties.Resources.folder_filled_20px);
+            nodeImageList.Images.Add("4", Properties.Resources.folder_filled_20px);
 
             treeViewFeesCharges.ImageList = nodeImageList;
             treeViewFeesCharges.ImageIndex = 0;
@@ -200,6 +201,38 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         private void treeViewFeesCharges_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ToggleButtons(treeViewFeesCharges);
+        }
+
+        private void btnNewClassification_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmAddFeesChargesClassification().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnFeesCharges_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmAddFeesCharges().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ShowModifyForm()
+        {
+            //if node is a classification go to
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowModifyForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
