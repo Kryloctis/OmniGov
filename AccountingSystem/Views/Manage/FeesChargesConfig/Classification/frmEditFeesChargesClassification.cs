@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +36,18 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
-            return true;
+
+            var feesChargesClassificationModel = new TaxTypesModel()
+            {
+                Id = feesChargesClassificationId,
+                Code = uc.txtCode.Text.Trim(),
+                Description = uc.txtDesciption.Text.Trim(),
+                COAAccountCode = uc.txtCOAAccountCode.Text.Trim(),
+                BLGFAccountCode = uc.txtBLFGAccountCode.Text.Trim(),
+                FundID = uc.cmbxFund.SelectedValue
+            };
+
+            return AccFactory.TaxTypesRepository().Update(feesChargesClassificationModel);
         }
 
         #endregion Private Methods
@@ -58,6 +71,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
                 {
                     frmFeesChargesClassification.LoadFeesCharges();
                     Close();
+                    Helper.MessageBoxSuccess("Fees & Charges classification has been updated.");
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

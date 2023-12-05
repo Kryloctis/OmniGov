@@ -105,28 +105,28 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 int progressCount = 0;
                 int totalProgressCount = dataTable.Rows.Count;
 
-                foreach (DataRow row in parentNodes)
+                foreach (DataRow parentRow in parentNodes)
                 {
-                    TreeNode parentNode = new TreeNode(row.Field<string>("description"));
-                    parentNode.Tag = $"classification-{row.Field<int>("id")}";
+                    TreeNode parentNode = new TreeNode($"{parentRow.Field<string>("code")}: {parentRow.Field<string>("description")}");
+                    parentNode.Tag = $"classification-{parentRow.Field<int>("id")}";
                     parentNode.ImageKey = "classification";
 
                     mainTreeView.Nodes.Add(parentNode);
-                    LoadFeesChargesNodes(row.Field<int>("id"), parentNode);
+                    LoadFeesChargesNodes(parentRow.Field<int>("id"), parentNode);
 
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                    EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == row.Field<int>("id"));
+                    EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == parentRow.Field<int>("id"));
 
                     foreach (DataRow childRow in childNodes)
                     {
-                        TreeNode childNode = new TreeNode(row.Field<string>("description"));
-                        childNode.Tag = $"classification-{row.Field<int>("id")}";
+                        TreeNode childNode = new TreeNode($"{childRow.Field<string>("code")}: {childRow.Field<string>("description")}");
+                        childNode.Tag = $"classification-{childRow.Field<int>("id")}";
                         childNode.ImageKey = "classification";
 
                         parentNode.Nodes.Add(childNode);
-                        LoadFeesChargesNodes(row.Field<int>("id"), parentNode);
+                        LoadFeesChargesNodes(childRow.Field<int>("id"), childNode);
 
                         progressCount++;
                         Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -199,7 +199,8 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         {
             try
             {
-                _ = new frmAddFeesChargesClassification(this).ShowDialog();
+                var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+                _ = new frmAddFeesChargesClassification(nodeParameter.paramId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

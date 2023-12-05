@@ -127,7 +127,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, entity.ID},
+                new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@code", DbType.String, entity.Code },
                 new object[] { "@description", DbType.String, entity.Description },
                 new object[] { "@parent", DbType.Int32, entity.ParentID },

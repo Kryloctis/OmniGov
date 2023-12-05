@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 cmbxFund.Enabled = true;
             else
             {
-                cmbxFund.Text = string.Empty;
+                cmbxFund.SelectedIndex = -1;
                 cmbxFund.Enabled = false;
             }
         }
