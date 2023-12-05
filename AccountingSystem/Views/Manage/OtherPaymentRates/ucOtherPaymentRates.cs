@@ -54,44 +54,44 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void LoadChildCode(int parent, ref Dictionary<int, string> dtSource)
         {
-            DataTable dtChildTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parent);
+            //DataTable dtChildTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parent);
 
-            if (dtChildTaxTypes.Rows.Count == 0)
-                return;
+            //if (dtChildTaxTypes.Rows.Count == 0)
+            //    return;
 
-            foreach (DataRow row in dtChildTaxTypes.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                string code = row["code"].ToString();
-                string description = row["description"].ToString();
-                string cmbDisplay = $"{code} - {description}";
-                dtSource.Add(id, cmbDisplay);
-                LoadChildCode(id, ref dtSource);
-            }
+            //foreach (DataRow row in dtChildTaxTypes.Rows)
+            //{
+            //    int id = Convert.ToInt32(row["id"]);
+            //    string code = row["code"].ToString();
+            //    string description = row["description"].ToString();
+            //    string cmbDisplay = $"{code} - {description}";
+            //    dtSource.Add(id, cmbDisplay);
+            //    LoadChildCode(id, ref dtSource);
+            //}
         }
 
         private void LoadParentCode()
         {
-            DataTable dtTaxTypesCodes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
-            if (dtTaxTypesCodes.Rows.Count == 0)
-                return;
+            //DataTable dtTaxTypesCodes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+            //if (dtTaxTypesCodes.Rows.Count == 0)
+            //    return;
 
-            Dictionary<int, string> dtSource = new Dictionary<int, string>();
-            foreach (DataRow row in dtTaxTypesCodes.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                string code = row["code"].ToString();
-                string parent = row["parent"].ToString();
-                string description = row["description"].ToString();
-                string cmbDisplay = $"{code} - {description}";
-                dtSource.Add(id, cmbDisplay);
-                LoadChildCode(id, ref dtSource);
-            }
+            //Dictionary<int, string> dtSource = new Dictionary<int, string>();
+            //foreach (DataRow row in dtTaxTypesCodes.Rows)
+            //{
+            //    int id = Convert.ToInt32(row["id"]);
+            //    string code = row["code"].ToString();
+            //    string parent = row["parent"].ToString();
+            //    string description = row["description"].ToString();
+            //    string cmbDisplay = $"{code} - {description}";
+            //    dtSource.Add(id, cmbDisplay);
+            //    LoadChildCode(id, ref dtSource);
+            //}
 
-            cmbxTaxType.DataSource = new BindingSource(dtSource, null); ;
-            cmbxTaxType.ValueMember = "Key";
-            cmbxTaxType.DisplayMember = "Value";
-            cmbxTaxType.SelectedIndex = -1;
+            //cmbxTaxType.DataSource = new BindingSource(dtSource, null); ;
+            //cmbxTaxType.ValueMember = "Key";
+            //cmbxTaxType.DisplayMember = "Value";
+            //cmbxTaxType.SelectedIndex = -1;
         }
 
         #region Validations

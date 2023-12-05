@@ -46,12 +46,12 @@
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 157);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(430, 30);
+            flowLayoutPanel1.Size = new System.Drawing.Size(401, 30);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(352, 3);
+            btnCancel.Location = new System.Drawing.Point(323, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 0;
@@ -60,12 +60,13 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(271, 3);
+            btnSave.Location = new System.Drawing.Point(242, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 23);
             btnSave.TabIndex = 0;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // panel1
             // 
@@ -74,7 +75,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(430, 187);
+            panel1.Size = new System.Drawing.Size(401, 187);
             panel1.TabIndex = 4;
             // 
             // ucFeesChargesClassification1
@@ -82,7 +83,7 @@
             ucFeesChargesClassification1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucFeesChargesClassification1.Location = new System.Drawing.Point(4, 4);
             ucFeesChargesClassification1.Name = "ucFeesChargesClassification1";
-            ucFeesChargesClassification1.Size = new System.Drawing.Size(422, 179);
+            ucFeesChargesClassification1.Size = new System.Drawing.Size(393, 179);
             ucFeesChargesClassification1.TabIndex = 1;
             // 
             // frmEditFeesChargesClassification
@@ -92,7 +93,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(430, 187);
+            ClientSize = new System.Drawing.Size(401, 187);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -102,6 +103,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Modify Fees & Charges Classification";
+            Load += frmEditFeesChargesClassification_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

@@ -8,19 +8,18 @@ namespace ACC.Data
 {
     public class TaxTypesRepository : ITaxTypesRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "tax_type";
-        //private readonly string viewTableName = "view_taxtypes";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public TaxTypesRepository(IAccGenericCommands dbGenericCommands)
+        public TaxTypesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
         {
             string query = $"SELECT COUNT(id) FROM {tableName} ";
-            return Convert.ToInt32(_dbGenericCommands.ExecuteNonQuery(query));
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteNonQuery(query));
         }
 
         public bool Delete(List<TaxTypesModel> entityList)
@@ -36,52 +35,7 @@ namespace ACC.Data
             };
 
             string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id OR parent = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-        }
-
-        public int GetChildNodesIDs(int taxTypeID)
-        {
-            var parameter = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, taxTypeID},
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE parent = @id";
-
-            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
-        }
-
-        public DataTable GetChildNodesTaxTypes(int parentID)
-        {
-            var parameter = new object[][]
-            {
-                new object[] { "@parent", DbType.Int32, parentID},
-            };
-
-            string query = $"SELECT * FROM {tableName} WHERE parent = @parent";
-
-            var dt = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dt, parameter);
-        }
-
-        public string GetParentCodeByID(int parentID)
-        {
-            var parameter = new object[][]
-            {
-                new object[] { "@parent", DbType.Int32, parentID},
-            };
-
-            string query = $"SELECT code FROM {tableName} WHERE id = @parent";
-
-            return _dbGenericCommands.ExecuteScalar(query, parameter).ToString();
-        }
-
-        public DataTable GetParentNodesTaxTypes()
-        {
-            string query = $"SELECT * FROM {tableName} WHERE parent IS NULL";
-
-            var dt = new DataTable();
-            return _dbGenericCommands.Fill(query, dt);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -90,12 +44,12 @@ namespace ACC.Data
 
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, Id},
+                new object[] { "@id", DbType.Int32, Id},
             };
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -119,8 +73,8 @@ namespace ACC.Data
         {
             string query = $"SELECT * FROM {tableName}";
 
-            var dt = new DataTable();
-            return _dbGenericCommands.Fill(query, dt);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -133,7 +87,7 @@ namespace ACC.Data
             string query = $"SELECT id, code, description, parent FROM {tableName}  ORDER BY parent, id DESC";
 
             var dt = new DataTable();
-            return _dbGenericCommands.Fill(query, dt);
+            return mySqlGenericCommandsLFS.Fill(query, dt);
         }
 
         public bool IdExist(int id)
@@ -155,7 +109,7 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (code, description, parent, funds_id, coa_account_code, blgf_account_code) VALUES (@code, @description, @parent, @funds_id, @coa_account_code, @blgf_account_code)";
 
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool UnDeleteTaxType(int taxTypeID)
@@ -166,7 +120,7 @@ namespace ACC.Data
             };
 
             string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(TaxTypesModel entity)
@@ -184,7 +138,7 @@ namespace ACC.Data
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, parent = @parent, funds_id = @funds_id, coa_account_code = @coa_account_code, blgf_account_code = @blgf_account_code WHERE id = @id";
 
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

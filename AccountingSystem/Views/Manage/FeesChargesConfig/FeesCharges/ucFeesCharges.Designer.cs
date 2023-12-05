@@ -28,28 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cbIsRateEditable = new System.Windows.Forms.CheckBox();
+            components = new System.ComponentModel.Container();
+            chckEditableRate = new System.Windows.Forms.CheckBox();
             nudStartingYear = new System.Windows.Forms.NumericUpDown();
             nudAmount = new System.Windows.Forms.NumericUpDown();
             txtDescription = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)nudStartingYear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // cbIsRateEditable
+            // chckEditableRate
             // 
-            cbIsRateEditable.AutoSize = true;
-            cbIsRateEditable.Font = new System.Drawing.Font("Segoe UI", 8F);
-            cbIsRateEditable.Location = new System.Drawing.Point(238, 4);
-            cbIsRateEditable.Name = "cbIsRateEditable";
-            cbIsRateEditable.Size = new System.Drawing.Size(94, 17);
-            cbIsRateEditable.TabIndex = 14;
-            cbIsRateEditable.Text = "Editable Rate";
-            cbIsRateEditable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            cbIsRateEditable.UseVisualStyleBackColor = true;
+            chckEditableRate.AutoSize = true;
+            chckEditableRate.Font = new System.Drawing.Font("Segoe UI", 8F);
+            chckEditableRate.Location = new System.Drawing.Point(238, 4);
+            chckEditableRate.Name = "chckEditableRate";
+            chckEditableRate.Size = new System.Drawing.Size(94, 17);
+            chckEditableRate.TabIndex = 14;
+            chckEditableRate.Text = "Editable Rate";
+            chckEditableRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            chckEditableRate.UseVisualStyleBackColor = true;
             // 
             // nudStartingYear
             // 
@@ -79,6 +82,8 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(250, 23);
             txtDescription.TabIndex = 8;
+            txtDescription.Validating += txtDescription_Validating;
+            txtDescription.Validated += txtDescription_Validated;
             // 
             // label5
             // 
@@ -94,9 +99,9 @@
             label3.AutoSize = true;
             label3.Location = new System.Drawing.Point(3, 26);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(67, 15);
+            label3.Size = new System.Drawing.Size(72, 15);
             label3.TabIndex = 9;
-            label3.Text = "Description";
+            label3.Text = "Description*";
             // 
             // label4
             // 
@@ -107,11 +112,15 @@
             label4.TabIndex = 11;
             label4.Text = "Amount";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // ucFeesCharges
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(cbIsRateEditable);
+            Controls.Add(chckEditableRate);
             Controls.Add(nudStartingYear);
             Controls.Add(nudAmount);
             Controls.Add(txtDescription);
@@ -122,18 +131,20 @@
             Size = new System.Drawing.Size(350, 113);
             ((System.ComponentModel.ISupportInitialize)nudStartingYear).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        internal System.Windows.Forms.CheckBox cbIsRateEditable;
+        internal System.Windows.Forms.CheckBox chckEditableRate;
         internal System.Windows.Forms.NumericUpDown nudStartingYear;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.TextBox txtDescription;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

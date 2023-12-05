@@ -1,15 +1,14 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.FeesChargesConfig.Classification;
 using AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges;
 using DocumentFormat.OpenXml.EMMA;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Security.Certificates;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -25,27 +24,25 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             Helper.LoadFormIcon(this);
         }
 
-        private void CreateImageList(ref ImageList nodeImageList)
+        private ImageList ImageList()
         {
-            nodeImageList.Images.Add("0", Properties.Resources.folder_filled_20px);
-            nodeImageList.Images.Add("1", Properties.Resources.folder_filled_20px);
-            nodeImageList.Images.Add("2", Properties.Resources.folder_filled_20px);
-            nodeImageList.Images.Add("3", Properties.Resources.folder_filled_20px);
-            nodeImageList.Images.Add("4", Properties.Resources.folder_filled_20px);
+            ImageList imageList = new ImageList();
 
-            treeViewFeesCharges.ImageList = nodeImageList;
-            treeViewFeesCharges.ImageIndex = 0;
-            treeViewFeesCharges.SelectedImageIndex = 0;
+            imageList.Images.Add("classification", Properties.Resources.folder_filled_20px);
+            imageList.Images.Add("feescharges", Properties.Resources.document_color_green_filled_20px);
+
+            return imageList;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
         }
 
-        private void LoadTaxTypes()
+        internal void LoadTaxTypes()
         {
             if (!backgroundWorker1.IsBusy)
             {
+                treeViewFeesCharges.ImageList = ImageList();
                 treeViewFeesCharges.Nodes.Clear();
                 childImageIndexCounter = 1;
                 pbLoadRecords.Value = 0;
@@ -71,79 +68,77 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             return false;
         }
 
-        private void LoadChildNodes(int parentID, TreeNode parentNode)
+        private void LoadFeesChargesNodes(int feesChargesClassificationId, TreeNode nodeFeesChargesClassification)
         {
-            DataTable dtChildNodeTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parentID);
+            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(feesChargesClassificationId);
+            List<TreeNode> nodes = new List<TreeNode>();
 
-            ImageList nodeImageList = new();
-            CreateImageList(ref nodeImageList);
-
-            foreach (DataRow dr in dtChildNodeTaxTypes.Rows)
+            foreach (DataRow row in dtFeesCharges.Rows)
             {
-                string taxTypeCode = dr["code"].ToString();
-                string taxTypeDescription = dr["description"].ToString();
-                string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+                var feesChargesNode = new TreeNode
+                {
+                    Text = row["description"].ToString(),
+                    Tag = $"feescharges-{row["id"]}",
+                    ImageKey = "feescharges",
+                    SelectedImageKey = "feescharges"
+                };
 
-                TreeNode childNode;
-
-                childNode = parentNode.Nodes.Add(displayText);
-                childNode.ImageIndex = childImageIndexCounter;
-                childNode.SelectedImageIndex = childImageIndexCounter;
-
-                if (childImageIndexCounter >= nodeImageList.Images.Count)
-                    childImageIndexCounter = 1;
-                else
-                    childImageIndexCounter++;
-
-                int taxTypeID = Convert.ToInt32(dr["id"]);
-                childNode.Tag = taxTypeID;
-                LoadChildNodes(taxTypeID, childNode);
-
-                if (Convert.ToBoolean(dr["is_deleted"]))
-                    childNode.ForeColor = Color.Gray;
-
-                childImageIndexCounter = 1;
+                nodes.Add(feesChargesNode);
             }
+
+            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                Invoke(new MethodInvoker(delegate
+
+                var mainTreeView = new TreeNode()
                 {
-                    var rootNode = new TreeNode();
-                    rootNode.Text = "Classifications";
-                    var dataTable = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+                    Text = "Classifications",
+                    Tag = null,
+                    ImageKey = "classification",
+                };
 
-                    int progressCount = 0;
-                    int totalProgressCount = dataTable.Rows.Count;
+                mainTreeView.ExpandAll();
 
-                    treeViewFeesCharges.Nodes.Add(rootNode);
 
-                    TreeNode node;
+                var dataTable = AccFactory.TaxTypesRepository().GetRecords();
+                EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
-                    foreach (DataRow dr in dataTable.Rows)
+                int progressCount = 0;
+                int totalProgressCount = dataTable.Rows.Count;
+
+                foreach (DataRow row in parentNodes)
+                {
+                    TreeNode parentNode = new TreeNode(row.Field<string>("description"));
+                    parentNode.Tag = $"classification-{row.Field<int>("id")}";
+                    parentNode.ImageKey = "classification";
+
+                    mainTreeView.Nodes.Add(parentNode);
+                    LoadFeesChargesNodes(row.Field<int>("id"), parentNode);
+
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                    EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == row.Field<int>("id"));
+
+                    foreach (DataRow childRow in childNodes)
                     {
-                        int taxTypeID = Convert.ToInt32(dr["id"]);
-                        string taxTypeCode = dr["code"].ToString();
-                        string taxTypeDescription = dr["description"].ToString();
-                        string displayText = $"({taxTypeCode}) {taxTypeDescription}";
+                        TreeNode childNode = new TreeNode(row.Field<string>("description"));
+                        childNode.Tag = $"classification-{row.Field<int>("id")}";
+                        childNode.ImageKey = "classification";
 
-                        node = rootNode.Nodes.Add(displayText);
-                        node.Tag = taxTypeID;
-
-                        LoadChildNodes(taxTypeID, node);
+                        parentNode.Nodes.Add(childNode);
+                        LoadFeesChargesNodes(row.Field<int>("id"), parentNode);
 
                         progressCount++;
                         Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-
-                        if (Convert.ToBoolean(dr["is_deleted"]))
-                            node.ForeColor = Color.Gray;
                     }
+                }
 
-                    e.Result = dataTable;
-                }));
+                e.Result = mainTreeView;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -155,10 +150,12 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //if (e.Cancelled)
-            //    return;
-            //if (e.Result is not DataTable dataTable)
-            //    return;
+            if (e.Cancelled)
+                return;
+            if (e.Result is not TreeNode treeNode)
+                return;
+
+            treeViewFeesCharges.Nodes.Add(treeNode);
             treeViewFeesCharges.ExpandAll();
         }
 
@@ -192,7 +189,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 btnUndelete.Enabled = true;
             }
 
-            if (treeView.SelectedNode.ForeColor == Color.Gray)
+            if (treeView.SelectedNode.ForeColor == System.Drawing.Color.Gray)
                 btnUndelete.Enabled = true;
             else
                 btnUndelete.Enabled = false;
@@ -207,7 +204,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         {
             try
             {
-                _ = new frmAddFeesChargesClassification().ShowDialog();
+                _ = new frmAddFeesChargesClassification(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -216,21 +213,47 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         {
             try
             {
-                _ = new frmAddFeesCharges().ShowDialog();
+                _ = new frmAddFeesCharges(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ShowModifyForm()
+        private string GetNodeTitle(System.Windows.Forms.TreeView treeView)
         {
+            var nodeTag = treeView.SelectedNode.Tag.ToString();
+            string nodeTagTitle = nodeTag.Substring(0, nodeTag.IndexOf('-'));
+
+            return nodeTagTitle;
+        }
+
+        private int GetNodeId(System.Windows.Forms.TreeView treeView)
+        {
+            var nodeTag = treeView.SelectedNode.Tag.ToString();
+            int nodeId = Convert.ToInt32(nodeTag.Substring(nodeTag.IndexOf('-') + 1));
+
+            return nodeId;
+        }
+
+        private void ShowModifyForm(System.Windows.Forms.TreeView treeView)
+        {
+            if (treeView.SelectedNode?.Tag is null)
+                return;
+
+            var nodeTagTitle = GetNodeTitle(treeView);
+            var nodeId = GetNodeId(treeView);
+
             //if node is a classification go to
+            if (nodeTagTitle == "classification")
+                _ = new frmEditFeesChargesClassification(nodeId, this).ShowDialog();
+            else if (nodeTagTitle == "feescharges")
+                _ = new frmEditFeesCharges(nodeId, this).ShowDialog();
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
             try
             {
-                ShowModifyForm();
+                ShowModifyForm(treeViewFeesCharges);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

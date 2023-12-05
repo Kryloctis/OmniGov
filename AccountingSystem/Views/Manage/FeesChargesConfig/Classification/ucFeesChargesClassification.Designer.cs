@@ -46,7 +46,6 @@
             // 
             // cmbxFund
             // 
-            cmbxFund.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxFund.FormattingEnabled = true;
             cmbxFund.Location = new System.Drawing.Point(122, 61);
             cmbxFund.Name = "cmbxFund";
@@ -55,7 +54,6 @@
             // 
             // txtBLFGAccountCode
             // 
-            txtBLFGAccountCode.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtBLFGAccountCode.Location = new System.Drawing.Point(122, 119);
             txtBLFGAccountCode.MaxLength = 99;
             txtBLFGAccountCode.Name = "txtBLFGAccountCode";
@@ -64,7 +62,6 @@
             // 
             // txtCOAAccountCode
             // 
-            txtCOAAccountCode.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCOAAccountCode.Location = new System.Drawing.Point(122, 90);
             txtCOAAccountCode.MaxLength = 99;
             txtCOAAccountCode.Name = "txtCOAAccountCode";
@@ -73,7 +70,6 @@
             // 
             // txtDesciption
             // 
-            txtDesciption.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtDesciption.Location = new System.Drawing.Point(122, 32);
             txtDesciption.MaxLength = 99;
             txtDesciption.Name = "txtDesciption";
@@ -84,7 +80,6 @@
             // 
             // txtCode
             // 
-            txtCode.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCode.Location = new System.Drawing.Point(122, 3);
             txtCode.MaxLength = 45;
             txtCode.Name = "txtCode";

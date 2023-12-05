@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             treeViewTaxTypes.Nodes.Clear();
             childImageIndexCounter = 1;
 
-            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+            var dtTaxTypes = AccFactory.TaxTypesRepository().GetRecords();
 
             TreeNode parentNode;
 
@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void PopulateTreeView(string parentID, TreeNode parentNode)
         {
-            var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
+            var dtChildNoTaxTypes = new DataTable();
 
             ImageList nodeImageList = new ImageList();
             CreateImageList(ref nodeImageList);
@@ -201,19 +201,19 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            try
-            {
-                int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
-                Dictionary<string, string> dictPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(taxTypeID);
+            //try
+            //{
+            //    int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+            //    Dictionary<string, string> dictPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(taxTypeID);
 
-                if (dictPaymentRates.Count <= 0)
-                    return;
+            //    if (dictPaymentRates.Count <= 0)
+            //        return;
 
-                description = dictPaymentRates["description"];
-                debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
-                subTotalAmount = unit * debitAmount;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            //    description = dictPaymentRates["description"];
+            //    debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
+            //    subTotalAmount = unit * debitAmount;
+            //}
+            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnUndo_Click(object sender, EventArgs e)

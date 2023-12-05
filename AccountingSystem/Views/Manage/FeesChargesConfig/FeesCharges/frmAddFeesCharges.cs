@@ -12,9 +12,55 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
 {
     public partial class frmAddFeesCharges : Form
     {
-        public frmAddFeesCharges()
+        private readonly frmFeesChargesClassification frmFeesChargesClassification;
+        private readonly ucFeesCharges uc;
+
+        public frmAddFeesCharges(frmFeesChargesClassification frmFeesChargesClassification)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            uc = ucFeesCharges1;
+            this.frmFeesChargesClassification = frmFeesChargesClassification;
+        }
+
+        #region Private Methods
+
+        private bool Save()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+            return true;
+        }
+
+        #endregion Private Methods
+
+        #region Event Methods
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Save())
+                {
+                    this.frmFeesChargesClassification.LoadTaxTypes();
+                    Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Event Methods
+
+        private void frmAddFeesCharges_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

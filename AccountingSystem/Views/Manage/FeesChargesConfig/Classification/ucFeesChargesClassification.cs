@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,9 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 {
     public partial class ucFeesChargesClassification : UserControl
     {
+        private int? feesChargesClassificationId;
+        private bool isEdit;
+
         public ucFeesChargesClassification()
         {
             InitializeComponent();
@@ -20,20 +24,26 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         #region Private Methods
 
-        private void LoadChildCode(int parent, ref Dictionary<int, string> dtSource)
+        internal string GetFormErrors()
         {
-            DataTable dtChildTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(parent);
-
-            foreach (DataRow row in dtChildTaxTypes.Rows)
+            var errorArray = new string[]
             {
-                //int id = Convert.ToInt32(row["id"]);
-                //string code = row["code"].ToString();
-                //string description = row["description"].ToString();
-                //string cmbDisplay = $"{new string(' ', tabCount)}{code} - {description}";
-                //dtSource.Add(id, cmbDisplay);
-                //tabCount += 10;
-                //LoadChildCode(id, ref dtSource);
-            }
+                errorProvider1.GetError(txtDesciption),
+                errorProvider1.GetError(txtCode)
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void OnLoad(bool isEdit, int? feesChargesClassificationId = null)
+        {
+            //Assign values to private variables
+            this.isEdit = isEdit;
+            this.feesChargesClassificationId = feesChargesClassificationId;
+
+            //Load Contents
+            LoadFunds();
+            if (isEdit) LoadSelectedRecord(Convert.ToInt32(feesChargesClassificationId));
         }
 
         internal void LoadFunds()
@@ -50,16 +60,40 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             txtBLFGAccountCode.Clear();
         }
 
-        internal string GetFormErrors()
+        private void EnableDisableFund()
         {
-            var errorArray = new string[]
+            if (chckBxFund.Checked)
+                cmbxFund.Enabled = true;
+            else
             {
-                errorProvider1.GetError(txtDesciption),
-                errorProvider1.GetError(txtCode)
-            };
-
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+                cmbxFund.Text = string.Empty;
+                cmbxFund.Enabled = false;
+            }
         }
+
+        internal void LoadSelectedRecord(int feesChargesClassificationId)
+        {
+            var dictFeesChargesClassification = AccFactory.TaxTypesRepository().GetRecordByID(feesChargesClassificationId);
+            txtCode.Text = dictFeesChargesClassification["code"];
+            txtDesciption.Text = dictFeesChargesClassification["description"];
+
+            //retrieve fund id
+            string rawFundId = dictFeesChargesClassification["funds_id"];
+            if (!string.IsNullOrWhiteSpace(rawFundId))
+            {
+                chckBxFund.Checked = true;
+                cmbxFund.SelectedValue = Convert.ToInt32(rawFundId);
+            }
+            else
+                chckBxFund.Checked = false;
+
+            txtCOAAccountCode.Text = dictFeesChargesClassification["coa_account_code"];
+            txtBLFGAccountCode.Text = dictFeesChargesClassification["blgf_account_code"];
+        }
+
+        #endregion Private Methods
+
+        #region Event Methods
 
         #region Validations
 
@@ -93,16 +127,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         #endregion Validations
 
-        #endregion Private Methods
-
-        private void EnableDisableFund()
-        {
-            if (chckBxFund.Checked)
-                cmbxFund.Enabled = true;
-            else
-                cmbxFund.Enabled = false;
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -111,5 +135,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        #endregion Event Methods
     }
 }
