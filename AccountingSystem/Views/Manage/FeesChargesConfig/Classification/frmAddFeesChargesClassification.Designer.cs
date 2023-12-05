@@ -100,6 +100,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAddFeesChargesClassification";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Fees & Charges Classification";

@@ -156,6 +156,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void ToggleButtons(System.Windows.Forms.TreeView treeView)
         {
+
             //Check if no selected node
             if (treeView.SelectedNode is null)
             {
@@ -184,6 +185,13 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 btnUndelete.Enabled = true;
             }
 
+            var nodeParameters = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+
+            if (nodeParameters.paramRef == "feescharges")
+                drpDownBtnNew.Enabled = false;
+            else
+                drpDownBtnNew.Enabled = true;
+
             if (treeView.SelectedNode.ForeColor == System.Drawing.Color.Gray)
                 btnUndelete.Enabled = true;
             else
@@ -192,7 +200,11 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void treeViewFeesCharges_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            ToggleButtons(treeViewFeesCharges);
+            try
+            {
+                ToggleButtons(treeViewFeesCharges);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnNewClassification_Click(object sender, EventArgs e)

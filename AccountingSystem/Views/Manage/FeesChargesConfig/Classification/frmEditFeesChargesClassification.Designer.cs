@@ -100,6 +100,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditFeesChargesClassification";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Modify Fees & Charges Classification";
