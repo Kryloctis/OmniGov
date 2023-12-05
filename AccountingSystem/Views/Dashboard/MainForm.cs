@@ -677,7 +677,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void feesChargesConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmFeesChargesClassification().ShowDialog();
+            _ = new frmFeesChargesConfig().ShowDialog();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

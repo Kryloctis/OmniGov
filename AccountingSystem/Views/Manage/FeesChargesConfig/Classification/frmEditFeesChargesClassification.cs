@@ -12,11 +12,11 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
 {
     public partial class frmEditFeesChargesClassification : Form
     {
-        private readonly frmFeesChargesClassification frmFeesChargesClassification;
+        private readonly frmFeesChargesConfig frmFeesChargesClassification;
         private readonly ucFeesChargesClassification uc;
         private readonly int feesChargesClassificationId;
 
-        public frmEditFeesChargesClassification(int feesChargesClassificationId, frmFeesChargesClassification frmFeesChargesClassification)
+        public frmEditFeesChargesClassification(int feesChargesClassificationId, frmFeesChargesConfig frmFeesChargesClassification)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
             {
                 if (Save())
                 {
-                    frmFeesChargesClassification.LoadTaxTypes();
+                    frmFeesChargesClassification.LoadFeesCharges();
                     Close();
                 }
             }

@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.FeesChargesConfig
 {
-    partial class frmFeesChargesClassification
+    partial class frmFeesChargesConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -115,14 +115,14 @@
             // btnNewClassification
             // 
             btnNewClassification.Name = "btnNewClassification";
-            btnNewClassification.Size = new System.Drawing.Size(180, 22);
+            btnNewClassification.Size = new System.Drawing.Size(166, 22);
             btnNewClassification.Text = "Classification";
             btnNewClassification.Click += btnNewClassification_Click;
             // 
             // btnFeesCharges
             // 
             btnFeesCharges.Name = "btnFeesCharges";
-            btnFeesCharges.Size = new System.Drawing.Size(180, 22);
+            btnFeesCharges.Size = new System.Drawing.Size(166, 22);
             btnFeesCharges.Text = "Fees and Charges";
             btnFeesCharges.Click += btnFeesCharges_Click;
             // 
@@ -156,7 +156,7 @@
             btnUndelete.Size = new System.Drawing.Size(78, 24);
             btnUndelete.Text = "Undelete";
             // 
-            // frmFeesChargesClassification
+            // frmFeesChargesConfig
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -167,12 +167,12 @@
             Controls.Add(pbLoadRecords);
             Controls.Add(toolStrip1);
             MinimizeBox = false;
-            Name = "frmFeesChargesClassification";
+            Name = "frmFeesChargesConfig";
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Fees & Charges Config.";
-            Load += frmTaxTypes_Load;
+            Load += frmFeesChargesConfig_Load;
             panel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
