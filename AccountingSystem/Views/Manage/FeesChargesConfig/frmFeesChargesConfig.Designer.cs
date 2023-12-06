@@ -142,6 +142,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
+            btnDelete.Click += btnDelete_Click;
             // 
             // toolStripSeparator2
             // 
