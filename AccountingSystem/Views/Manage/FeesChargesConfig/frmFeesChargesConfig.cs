@@ -179,7 +179,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             {
                 btnDelete.Enabled = false;
                 btnModify.Enabled = false;
-                btnFeesCharges.Enabled = false;
+                btnNewFeesCharges.Enabled = false;
                 btnUndelete.Enabled = false;
                 return;
             }
@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 drpDownBtnNew.Enabled = true;
                 btnDelete.Enabled = false;
                 btnModify.Enabled = false;
-                btnFeesCharges.Enabled = false;
+                btnNewFeesCharges.Enabled = false;
                 btnUndelete.Enabled = false;
             }
             else
@@ -199,7 +199,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 drpDownBtnNew.Enabled = true;
                 btnDelete.Enabled = true;
                 btnModify.Enabled = true;
-                btnFeesCharges.Enabled = true;
+                btnNewFeesCharges.Enabled = true;
                 btnUndelete.Enabled = true;
 
                 var nodeParameters = GetNodeParameters(treeView.SelectedNode);
@@ -245,11 +245,12 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnFeesCharges_Click(object sender, EventArgs e)
+        private void btnNewFeesCharges_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmAddFeesCharges(this).ShowDialog();
+                var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+                _ = new frmAddFeesCharges(nodeParameter.paramId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -274,7 +275,10 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             if (parameters.paramRef == "classification")
                 _ = new frmEditFeesChargesClassification(parameters.paramId, this).ShowDialog();
             else if (parameters.paramRef == "feescharges")
-                _ = new frmEditFeesCharges(parameters.paramId, this).ShowDialog();
+            {
+                var getParentNodeParameters = GetNodeParameters(treeView.SelectedNode.Parent);
+                _ = new frmEditFeesCharges(parameters.paramId, getParentNodeParameters.paramId, this).ShowDialog();
+            }
         }
 
         private void btnModify_Click(object sender, EventArgs e)

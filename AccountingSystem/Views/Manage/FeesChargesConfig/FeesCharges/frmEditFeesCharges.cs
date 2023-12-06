@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,14 +15,16 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
     public partial class frmEditFeesCharges : Form
     {
         private readonly frmFeesChargesConfig frmFeesChargesClassification;
+        private readonly int feesClassificationId;
         private readonly int feesChargesId;
         private readonly ucFeesCharges uc;
 
-        public frmEditFeesCharges(int feesChargesId, frmFeesChargesConfig frmFeesChargesClassification)
+        public frmEditFeesCharges(int feesChargesId, int feesClassificationId, frmFeesChargesConfig frmFeesChargesClassification)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucFeesCharges1;
+            this.feesClassificationId = feesClassificationId;
             this.feesChargesId = feesChargesId;
             this.frmFeesChargesClassification = frmFeesChargesClassification;
         }
@@ -34,7 +38,19 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
-            return true;
+
+            var feesChargesModel = new OtherPaymentRatesModel()
+            {
+                Id = feesChargesId,
+                TaxTypeID = feesClassificationId,
+                IsRateEditable = uc.chckEditableRate.Checked,
+                Description = uc.txtDescription.Text.Trim(),
+                Amount = uc.nudAmount.Value,
+                StartingYear = (int)uc.nudStartingYear.Value,
+                UpdatedBy = Helper.UserId
+            };
+
+            return AccFactory.OtherPaymentRatesRepository().Update(feesChargesModel);
         }
 
         #endregion Private Methods
@@ -57,6 +73,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
                 if (Save())
                 {
                     this.frmFeesChargesClassification.LoadFeesCharges();
+                    Helper.MessageBoxSuccess("Fees & Charges has been updated");
                     Close();
                 }
             }

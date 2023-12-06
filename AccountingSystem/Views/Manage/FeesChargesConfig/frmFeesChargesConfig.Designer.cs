@@ -36,7 +36,7 @@
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             drpDownBtnNew = new System.Windows.Forms.ToolStripDropDownButton();
             btnNewClassification = new System.Windows.Forms.ToolStripMenuItem();
-            btnFeesCharges = new System.Windows.Forms.ToolStripMenuItem();
+            btnNewFeesCharges = new System.Windows.Forms.ToolStripMenuItem();
             btnModify = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -105,7 +105,7 @@
             // 
             // drpDownBtnNew
             // 
-            drpDownBtnNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNewClassification, btnFeesCharges });
+            drpDownBtnNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNewClassification, btnNewFeesCharges });
             drpDownBtnNew.Image = Properties.Resources.button_rounded_add_20px;
             drpDownBtnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             drpDownBtnNew.Name = "drpDownBtnNew";
@@ -115,16 +115,16 @@
             // btnNewClassification
             // 
             btnNewClassification.Name = "btnNewClassification";
-            btnNewClassification.Size = new System.Drawing.Size(166, 22);
+            btnNewClassification.Size = new System.Drawing.Size(180, 22);
             btnNewClassification.Text = "Classification";
             btnNewClassification.Click += btnNewClassification_Click;
             // 
-            // btnFeesCharges
+            // btnNewFeesCharges
             // 
-            btnFeesCharges.Name = "btnFeesCharges";
-            btnFeesCharges.Size = new System.Drawing.Size(166, 22);
-            btnFeesCharges.Text = "Fees and Charges";
-            btnFeesCharges.Click += btnFeesCharges_Click;
+            btnNewFeesCharges.Name = "btnNewFeesCharges";
+            btnNewFeesCharges.Size = new System.Drawing.Size(180, 22);
+            btnNewFeesCharges.Text = "Fees and Charges";
+            btnNewFeesCharges.Click += btnNewFeesCharges_Click;
             // 
             // btnModify
             // 
@@ -196,6 +196,6 @@
         private System.Windows.Forms.ToolStripButton btnUndelete;
         private System.Windows.Forms.ToolStripDropDownButton drpDownBtnNew;
         private System.Windows.Forms.ToolStripMenuItem btnNewClassification;
-        private System.Windows.Forms.ToolStripMenuItem btnFeesCharges;
+        private System.Windows.Forms.ToolStripMenuItem btnNewFeesCharges;
     }
 }

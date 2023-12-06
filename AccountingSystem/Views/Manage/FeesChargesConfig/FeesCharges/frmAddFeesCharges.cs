@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +14,15 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
 {
     public partial class frmAddFeesCharges : Form
     {
+        private readonly int feesChargesClassificationId;
         private readonly frmFeesChargesConfig frmFeesChargesClassification;
         private readonly ucFeesCharges uc;
 
-        public frmAddFeesCharges(frmFeesChargesConfig frmFeesChargesClassification)
+        public frmAddFeesCharges(int feesChargesClassificationId, frmFeesChargesConfig frmFeesChargesClassification)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            this.feesChargesClassificationId = feesChargesClassificationId;
             uc = ucFeesCharges1;
             this.frmFeesChargesClassification = frmFeesChargesClassification;
         }
@@ -32,7 +36,18 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
-            return true;
+
+            var feesChargesModel = new OtherPaymentRatesModel()
+            {
+                IsRateEditable = uc.chckEditableRate.Checked,
+                TaxTypeID = feesChargesClassificationId,
+                Description = uc.txtDescription.Text.Trim(),
+                Amount = uc.nudAmount.Value,
+                StartingYear = (int)uc.nudStartingYear.Value,
+                CreatedBy = Helper.UserId
+            };
+
+            return AccFactory.OtherPaymentRatesRepository().Insert(feesChargesModel);
         }
 
         #endregion Private Methods
@@ -46,6 +61,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
                 if (Save())
                 {
                     this.frmFeesChargesClassification.LoadFeesCharges();
+                    Helper.MessageBoxSuccess("Fees & Charges has been saved");
                     Close();
                 }
             }
