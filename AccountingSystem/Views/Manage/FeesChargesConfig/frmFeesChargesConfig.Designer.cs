@@ -38,8 +38,8 @@
             btnNewClassification = new System.Windows.Forms.ToolStripMenuItem();
             btnNewFeesCharges = new System.Windows.Forms.ToolStripMenuItem();
             btnModify = new System.Windows.Forms.ToolStripButton();
-            btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
             btnUndelete = new System.Windows.Forms.ToolStripButton();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -95,7 +95,7 @@
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { drpDownBtnNew, btnModify, btnDelete, toolStripSeparator2, btnUndelete });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { drpDownBtnNew, btnModify, toolStripSeparator2, btnDelete, btnUndelete });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -115,14 +115,14 @@
             // btnNewClassification
             // 
             btnNewClassification.Name = "btnNewClassification";
-            btnNewClassification.Size = new System.Drawing.Size(180, 22);
+            btnNewClassification.Size = new System.Drawing.Size(166, 22);
             btnNewClassification.Text = "Classification";
             btnNewClassification.Click += btnNewClassification_Click;
             // 
             // btnNewFeesCharges
             // 
             btnNewFeesCharges.Name = "btnNewFeesCharges";
-            btnNewFeesCharges.Size = new System.Drawing.Size(180, 22);
+            btnNewFeesCharges.Size = new System.Drawing.Size(166, 22);
             btnNewFeesCharges.Text = "Fees and Charges";
             btnNewFeesCharges.Click += btnNewFeesCharges_Click;
             // 
@@ -135,6 +135,11 @@
             btnModify.Text = "Modify";
             btnModify.Click += btnModify_Click;
             // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
             // btnDelete
             // 
             btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
@@ -144,11 +149,6 @@
             btnDelete.Text = "Delete";
             btnDelete.Click += btnDelete_Click;
             // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
             // btnUndelete
             // 
             btnUndelete.Image = Properties.Resources.symbol_refresh_28px;
@@ -156,6 +156,7 @@
             btnUndelete.Name = "btnUndelete";
             btnUndelete.Size = new System.Drawing.Size(78, 24);
             btnUndelete.Text = "Undelete";
+            btnUndelete.Click += btnUndelete_Click;
             // 
             // frmFeesChargesConfig
             // 

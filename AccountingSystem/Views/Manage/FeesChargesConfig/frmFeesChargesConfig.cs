@@ -4,6 +4,7 @@ using AccountingSystem.Views.Manage.FeesChargesConfig.Classification;
 using AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using System;
 using System.Collections.Generic;
@@ -32,18 +33,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             ToggleButtons(treeViewFeesCharges);
         }
 
-        private bool UnDeleteTaxType()
-        {
-            if (Helper.MessageBoxConfirmCancel("Are you sure you want to undelete selected tax type?"))
-            {
-                int taxTypeID = Convert.ToInt32(treeViewFeesCharges.SelectedNode.Tag);
-
-                return AccFactory.TaxTypesRepository().UnDeleteTaxType(taxTypeID);
-            }
-
-            return false;
-        }
-
         internal void LoadFeesCharges()
         {
             if (!backgroundWorker1.IsBusy)
@@ -61,25 +50,30 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             ImageList imageList = new ImageList();
 
             imageList.Images.Add("classification_active", Properties.Resources.folder_filled_20px);
-            imageList.Images.Add("feescharges", Properties.Resources.document_color_green_filled_20px);
             imageList.Images.Add("classification_disabled", Properties.Resources.disabled_folder_filled_20px);
+
+            imageList.Images.Add("feescharges_active", Properties.Resources.document_color_green_filled_20px);
+            imageList.Images.Add("feescharges_disabled", Properties.Resources.disabled_document_filled_20px);
 
             return imageList;
         }
 
-        private void LoadFeesChargesNodes(int feesChargesClassificationId, TreeNode nodeFeesChargesClassification)
+        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
             var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(feesChargesClassificationId);
             List<TreeNode> nodes = new List<TreeNode>();
 
             foreach (DataRow row in dtFeesCharges.Rows)
             {
+                var imageKey = isDeleted ? "feescharges_disabled" : "feescharges_active";
+
                 var feesChargesNode = new TreeNode
                 {
                     Text = row["description"].ToString(),
                     Tag = $"feescharges-{row["id"]}",
-                    ImageKey = "feescharges",
-                    SelectedImageKey = "feescharges"
+                    ImageKey = imageKey,
+                    SelectedImageKey = imageKey,
+                    ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
                 };
 
                 nodes.Add(feesChargesNode);
@@ -109,20 +103,21 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
                 foreach (DataRow parentRow in parentNodes)
                 {
+                    bool isParentDeleted = parentRow.Field<sbyte>("is_deleted") == 1 ? true : false;
                     string parentRawName = parentRow.Field<string>("description");
-                    string parentNodeName = parentRow.Field<sbyte>("is_deleted") == 1 ? $"{parentRawName} (Deleted)" : parentRawName;
+                    string parentNodeName = isParentDeleted ? $"{parentRawName} (Deleted)" : parentRawName;
                     TreeNode parentNode = new TreeNode(parentNodeName);
                     parentNode.Tag = $"classification-{parentRow.Field<int>("id")}";
 
-                    var parentImageKey = parentRow.Field<sbyte>("is_deleted") == 1 ? "classification_disabled" : "classification_active";
-                    var parentForeColor = parentRow.Field<sbyte>("is_deleted") == 1 ? System.Drawing.Color.Gray : parentNode.ForeColor;
+                    var parentImageKey = isParentDeleted ? "classification_disabled" : "classification_active";
+                    var parentForeColor = isParentDeleted ? System.Drawing.Color.Gray : parentNode.ForeColor;
 
                     parentNode.ImageKey = parentImageKey;
                     parentNode.SelectedImageKey = parentImageKey;
                     parentNode.ForeColor = parentForeColor;
 
                     mainTreeView.Nodes.Add(parentNode);
-                    LoadFeesChargesNodes(parentRow.Field<int>("id"), parentNode);
+                    LoadFeesChargesNodes(parentRow.Field<int>("id"), isParentDeleted, parentNode);
 
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -132,12 +127,14 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                     foreach (DataRow childRow in childNodes)
                     {
                         string childRawName = childRow.Field<string>("description");
-                        string childNodeName = childRow.Field<sbyte>("is_deleted") == 1 ? $"{childRawName} (Deleted)" : childRawName;
+                        bool isChildDeleted = childRow.Field<sbyte>("is_deleted") == 1 ? true : false;
+
+                        string childNodeName = isChildDeleted ? $"{childRawName} (Deleted)" : childRawName;
                         TreeNode childNode = new TreeNode(childNodeName);
                         childNode.Tag = $"classification-{childRow.Field<int>("id")}";
 
-                        var childImageKey = childRow.Field<sbyte>("is_deleted") == 1 ? "classification_disabled" : "classification_active";
-                        var childForeColor = childRow.Field<sbyte>("is_deleted") == 1 ? System.Drawing.Color.Gray : childNode.ForeColor;
+                        var childImageKey = isChildDeleted ? "classification_disabled" : "classification_active";
+                        var childForeColor = isChildDeleted ? System.Drawing.Color.Gray : childNode.ForeColor;
 
                         childNode.ImageKey = childImageKey;
                         childNode.SelectedImageKey = childImageKey;
@@ -145,7 +142,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
                         parentNode.Nodes.Add(childNode);
 
-                        LoadFeesChargesNodes(childRow.Field<int>("id"), childNode);
+                        LoadFeesChargesNodes(childRow.Field<int>("id"), isChildDeleted, childNode);
 
                         progressCount++;
                         Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -175,54 +172,40 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void ToggleButtons(System.Windows.Forms.TreeView treeView)
         {
-            if (treeView.SelectedNode is null)
-            {
-                btnDelete.Enabled = false;
-                btnModify.Enabled = false;
-                btnNewFeesCharges.Enabled = false;
-                btnUndelete.Enabled = false;
-                return;
-            }
-            else
+            drpDownBtnNew.Enabled = true;
+            btnDelete.Enabled = false;
+            btnModify.Enabled = false;
+            btnNewFeesCharges.Enabled = false;
+            btnUndelete.Enabled = false;
+            btnUndelete.Visible = false;
 
-            //Check if selected node tag is null
-            if (treeView.SelectedNode.Tag is null)
+            if (treeView.SelectedNode is not null && treeView.SelectedNode.Tag is not null)
             {
-                drpDownBtnNew.Enabled = true;
-                btnDelete.Enabled = false;
-                btnModify.Enabled = false;
-                btnNewFeesCharges.Enabled = false;
-                btnUndelete.Enabled = false;
-            }
-            else
-            {
-                drpDownBtnNew.Enabled = true;
-                btnDelete.Enabled = true;
-                btnModify.Enabled = true;
-                btnNewFeesCharges.Enabled = true;
-                btnUndelete.Enabled = true;
-
                 var nodeParameters = GetNodeParameters(treeView.SelectedNode);
 
                 if (nodeParameters.paramRef == "feescharges")
+                {
+                    btnDelete.Enabled = true;
+                    btnModify.Enabled = true;
                     drpDownBtnNew.Enabled = false;
+                    btnUndelete.Visible = false;
+                }
                 else
+                {
                     drpDownBtnNew.Enabled = true;
-            }
+                    btnDelete.Enabled = true;
+                    btnModify.Enabled = true;
+                    btnNewFeesCharges.Enabled = true;
+                    btnUndelete.Enabled = true;
+                }
 
-            if (treeView.SelectedNode.Text.ToLower().Contains("deleted"))
-            {
-                btnDelete.Enabled = false;
-                btnUndelete.Enabled = true;
-                btnModify.Enabled = false;
-                drpDownBtnNew.Enabled = false;
-            }
-            else
-            {
-                btnDelete.Enabled = true;
-                btnUndelete.Enabled = false;
-                btnModify.Enabled = true;
-                drpDownBtnNew.Enabled = true;
+                if (treeView.SelectedNode.Text.ToLower().Contains("deleted") || treeView.SelectedNode.Parent.Text.ToLower().Contains("deleted"))
+                {
+                    btnDelete.Enabled = false;
+                    btnUndelete.Visible = nodeParameters.paramRef == "feescharges" ? false : true;
+                    btnModify.Enabled = false;
+                    drpDownBtnNew.Enabled = false;
+                }
             }
         }
 
@@ -297,7 +280,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             switch (nodeParameter.paramRef)
             {
                 case "classification":
-                    if (Helper.MessageBoxConfirmCancel("Deleting this classification removes all linked fees & charges. Confirm deletion?"))
+                    if (Helper.MessageBoxConfirmCancel("Deleting this classification disable all linked fees & charges. Confirm deletion?"))
                     {
                         deleteMessage = "Classification";
                         return AccFactory.TaxTypesRepository().DeleteTaxType(nodeParameter.paramId);
@@ -307,7 +290,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                     return false;
 
                 case "feescharges":
-                    if (Helper.MessageBoxConfirmCancel("Confirm deletion?"))
+                    if (Helper.MessageBoxConfirmCancel("Confirm permanent deletion?"))
                     {
                         var feesChargesModels = new List<OtherPaymentRatesModel>() { new OtherPaymentRatesModel() { Id = nodeParameter.paramId } };
                         deleteMessage = "Fees & Charges";
@@ -331,6 +314,38 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 {
                     LoadFeesCharges();
                     Helper.MessageBoxSuccess($"{deleteMessage} has been deleted");
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool UndeleteClassification(System.Windows.Forms.TreeView treeView)
+        {
+            if (treeView.SelectedNode?.Tag is null)
+                return false;
+
+            var nodeParameters = GetNodeParameters(treeView.SelectedNode);
+
+            if (nodeParameters.paramRef != "classification")
+                return false;
+
+            if (treeView.SelectedNode.Parent.Text.ToLower().Contains("deleted"))
+            {
+                Helper.MessageBoxError("Unable to proceed with the action as the parent fees and charges classification has been deleted.");
+                return false;
+            }
+
+            return AccFactory.TaxTypesRepository().UnDeleteTaxType(nodeParameters.paramId);
+        }
+
+        private void btnUndelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UndeleteClassification(treeViewFeesCharges))
+                {
+                    LoadFeesCharges();
+                    Helper.MessageBoxSuccess("Fees & Charges Classification undeleted.");
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

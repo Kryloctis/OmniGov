@@ -116,10 +116,10 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-            new object[] { "@id", DbType.Int32, taxTypeID},
+                new object[] { "@id", DbType.Int32, taxTypeID},
             };
 
-            string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id";
+            string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id OR parent = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
