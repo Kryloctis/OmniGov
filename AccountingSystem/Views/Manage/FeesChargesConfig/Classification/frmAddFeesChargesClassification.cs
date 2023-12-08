@@ -14,11 +14,11 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 {
     public partial class frmAddFeesChargesClassification : Form
     {
-        private int parentId;
+        private int? parentId;
         private readonly frmFeesChargesConfig frmFeesChargesClassification;
         private readonly ucFeesChargesClassification uc;
 
-        public frmAddFeesChargesClassification(int parentId, frmFeesChargesConfig frmFeesChargesClassification)
+        public frmAddFeesChargesClassification(int? parentId, frmFeesChargesConfig frmFeesChargesClassification)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

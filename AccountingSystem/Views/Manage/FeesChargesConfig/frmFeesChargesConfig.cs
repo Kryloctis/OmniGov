@@ -19,8 +19,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 {
     public partial class frmFeesChargesConfig : Form
     {
-        private int childImageIndexCounter = 1;
-
         public frmFeesChargesConfig()
         {
             InitializeComponent();
@@ -37,10 +35,9 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         {
             if (!backgroundWorker1.IsBusy)
             {
+                pbLoadRecords.Value = 0;
                 treeViewFeesCharges.ImageList = ImageList();
                 treeViewFeesCharges.Nodes.Clear();
-                childImageIndexCounter = 1;
-                pbLoadRecords.Value = 0;
                 backgroundWorker1.RunWorkerAsync();
             }
         }
@@ -222,8 +219,12 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
         {
             try
             {
-                var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
-                _ = new frmAddFeesChargesClassification(nodeParameter.paramId, this).ShowDialog();
+                int? parentId = null;
+                TreeNode selectedNode = treeViewFeesCharges.SelectedNode;
+                if (selectedNode is not null && selectedNode.Tag is not null)
+                    parentId = GetNodeParameters(selectedNode).paramId;
+
+                _ = new frmAddFeesChargesClassification(parentId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
