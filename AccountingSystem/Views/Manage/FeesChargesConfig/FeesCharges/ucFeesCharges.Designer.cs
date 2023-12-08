@@ -62,11 +62,12 @@
             nudStartingYear.Name = "nudStartingYear";
             nudStartingYear.Size = new System.Drawing.Size(250, 23);
             nudStartingYear.TabIndex = 12;
+            nudStartingYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             nudStartingYear.Value = new decimal(new int[] { 2023, 0, 0, 0 });
             // 
             // nudAmount
             // 
-            nudAmount.DecimalPlaces = 1;
+            nudAmount.DecimalPlaces = 2;
             nudAmount.Location = new System.Drawing.Point(82, 56);
             nudAmount.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
             nudAmount.Name = "nudAmount";
@@ -78,6 +79,7 @@
             // txtDescription
             // 
             txtDescription.Location = new System.Drawing.Point(82, 27);
+            txtDescription.MaxLength = 9999999;
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(250, 23);

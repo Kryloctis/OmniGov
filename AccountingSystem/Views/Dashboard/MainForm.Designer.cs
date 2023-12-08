@@ -62,7 +62,6 @@
             penaltiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             feesChargesConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            otherPaymentRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -229,7 +228,7 @@
             // 
             // menuManage
             // 
-            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, feesChargesConfigToolStripMenuItem, otherPaymentRatesToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
+            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, menuTaxPayers, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, feesChargesConfigToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
             menuManage.Name = "menuManage";
             menuManage.Size = new System.Drawing.Size(62, 24);
             menuManage.Text = "Manage";
@@ -425,13 +424,6 @@
             feesChargesConfigToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             feesChargesConfigToolStripMenuItem.Text = "Fees && Charges Config.";
             feesChargesConfigToolStripMenuItem.Click += feesChargesConfigToolStripMenuItem_Click;
-            // 
-            // otherPaymentRatesToolStripMenuItem
-            // 
-            otherPaymentRatesToolStripMenuItem.Name = "otherPaymentRatesToolStripMenuItem";
-            otherPaymentRatesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            otherPaymentRatesToolStripMenuItem.Text = "Other Payment Rates";
-            otherPaymentRatesToolStripMenuItem.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator9
             // 
@@ -1459,7 +1451,6 @@
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem feesChargesConfigToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem otherPaymentRatesToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlBudget;
         private System.Windows.Forms.TabPage tabPageBudgetSummary;
         private System.Windows.Forms.TabPage tabPageBudgetDetailed;

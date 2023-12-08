@@ -15,7 +15,6 @@ using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
-using AccountingSystem.Views.Manage.OtherPaymentRates;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
@@ -165,11 +164,8 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Manage > Bank Accounts"))
                 bankAccountsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Tax Types"))
+            if (!Helper.HasPermission("Manage > Fees & Charges Config."))
                 feesChargesConfigToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Other Payment Rates"))
-                otherPaymentRatesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Real Properties"))
                 RptToolStripButton.Enabled = false;
@@ -678,11 +674,6 @@ namespace AccountingSystem.Views.Dashboard
         private void feesChargesConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmFeesChargesConfig().ShowDialog();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            _ = new frmOtherPaymentRates().ShowDialog();
         }
 
         private void aF5157ToolStripMenuItem_Click(object sender, EventArgs e)
