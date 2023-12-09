@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.Registry
 {
-    partial class frmAddRegistry
+    partial class frmEditRegistry
     {
         /// <summary>
         /// Required designer variable.
@@ -30,24 +30,22 @@
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
-            btnAdd = new System.Windows.Forms.Button();
-            panel1 = new System.Windows.Forms.Panel();
+            btnUpdate = new System.Windows.Forms.Button();
             ucRegistry1 = new ucRegistry();
             flowLayoutPanel1.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnAdd);
+            flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 417);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(378, 30);
-            flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -58,52 +56,39 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnAdd
+            // btnUpdate
             // 
-            btnAdd.Location = new System.Drawing.Point(219, 3);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(75, 23);
-            btnAdd.TabIndex = 0;
-            btnAdd.Text = "Save";
-            btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(ucRegistry1);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(378, 417);
-            panel1.TabIndex = 1;
+            btnUpdate.Location = new System.Drawing.Point(219, 3);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(75, 23);
+            btnUpdate.TabIndex = 0;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
             // 
             // ucRegistry1
             // 
             ucRegistry1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucRegistry1.Location = new System.Drawing.Point(4, 4);
+            ucRegistry1.Location = new System.Drawing.Point(0, 0);
             ucRegistry1.Name = "ucRegistry1";
-            ucRegistry1.Size = new System.Drawing.Size(370, 409);
-            ucRegistry1.TabIndex = 0;
+            ucRegistry1.Size = new System.Drawing.Size(378, 417);
+            ucRegistry1.TabIndex = 2;
             // 
-            // frmAddRegistry
+            // frmEditRegistry
             // 
-            AcceptButton = btnAdd;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            CancelButton = btnCancel;
             ClientSize = new System.Drawing.Size(378, 447);
-            Controls.Add(panel1);
+            Controls.Add(ucRegistry1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmAddRegistry";
+            Name = "frmEditRegistry";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Add Registry";
+            Text = "Edit Registry";
             flowLayoutPanel1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -111,8 +96,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnUpdate;
         private ucRegistry ucRegistry1;
     }
 }
