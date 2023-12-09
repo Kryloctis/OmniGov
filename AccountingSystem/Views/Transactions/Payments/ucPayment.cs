@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             dtPaymentDate.Value = Helper.GetCurrentDate();
         }
 
-        private void LoadAccountableForms(string accountableForNo = "")
+        private void LoadAccountableForms(string accountableForNo)
         {
             HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, DataTableAccountableForm(accountableForNo));
         }
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnAccountableForms());
-            var dtAccountableForm = AccFactory.AccountableFormsRepository().GetRecordsByAccFormNo(accountableFormNo);
+            var dtAccountableForm = string.IsNullOrWhiteSpace(accountableFormNo) ? AccFactory.AccountableFormsRepository().GetRecords() : AccFactory.AccountableFormsRepository().GetRecordsByAccFormNo(accountableFormNo);
 
             foreach (DataRow row in dtAccountableForm.Rows)
             {

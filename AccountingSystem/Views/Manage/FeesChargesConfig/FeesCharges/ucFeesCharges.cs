@@ -13,9 +13,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
 {
     public partial class ucFeesCharges : UserControl
     {
-        private readonly int feesChargesId;
-        private readonly bool isEdit;
-
         public ucFeesCharges()
         {
             InitializeComponent();

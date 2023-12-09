@@ -183,8 +183,6 @@
         }
 
         #endregion Windows Form Designer generated code
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.StatusStrip statusStrip1;
