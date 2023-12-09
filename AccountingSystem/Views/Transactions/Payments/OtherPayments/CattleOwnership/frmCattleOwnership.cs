@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
     {
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
-        private readonly ucPaymentFeesCharges ucFeesCharges;
+        private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucPaymentRegistry ucPaymentRegistry;
         private readonly ucCattleDetails ucCattleDetails;
 
@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             InitializeComponent();
             ucPayment = ucPayment1;
-            ucFeesCharges = ucFeesCharges1;
+            this.ucPaymentFeesCharges = ucPaymentFeesCharges1;
             ucCattleDetails = ucCattleDetails1;
             ucPaymentRegistry = ucPaymentRegistry1;
         }
@@ -85,9 +85,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
                 case "tabPageFeesCharges":
 
-                    if (!ucFeesCharges.ValidateChildren())
+                    if (!ucPaymentFeesCharges.ValidateChildren())
                     {
-                        Helper.MessageBoxError(ucFeesCharges.GetFormErrors());
+                        Helper.MessageBoxError(ucPaymentFeesCharges.GetFormErrors());
                         return false;
                     }
                     break;
@@ -180,7 +180,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnNextMain.Text = "Proceed to Payment";
             btnBackMain.Enabled = true;
             radFeesCharges.Checked = true;
-            ucFeesCharges.OnLoad();
+            ucPaymentFeesCharges.OnLoad();
         }
 
         private void LoadPaymentTab()
@@ -189,7 +189,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            decimal totalAmountPayable = ucFeesCharges.ComputeTotalAmountPayable();
+            decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
             ucPayment.OnLoad("53", totalAmountPayable);
 
             //if (isNewPayee)
@@ -208,7 +208,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             {
                 LoadTabContents();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -220,7 +220,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
                 tabControlMain.SelectedIndex++;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

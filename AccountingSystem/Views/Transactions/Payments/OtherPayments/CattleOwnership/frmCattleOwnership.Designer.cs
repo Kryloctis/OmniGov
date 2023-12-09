@@ -45,10 +45,10 @@
             groupBox2 = new System.Windows.Forms.GroupBox();
             ucCattleDetails1 = new ucCattleDetails();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
-            ucFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radOwner = new System.Windows.Forms.RadioButton();
             radCattleDetails = new System.Windows.Forms.RadioButton();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -246,7 +246,7 @@
             // 
             // tabPageFeesCharges
             // 
-            tabPageFeesCharges.Controls.Add(ucFeesCharges1);
+            tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
             tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
             tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
@@ -254,14 +254,6 @@
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFeesCharges";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
-            // 
-            // ucFeesCharges1
-            // 
-            ucFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucFeesCharges1.Location = new System.Drawing.Point(0, 0);
-            ucFeesCharges1.Name = "ucFeesCharges1";
-            ucFeesCharges1.Size = new System.Drawing.Size(824, 456);
-            ucFeesCharges1.TabIndex = 0;
             // 
             // flowLayoutPanel2
             // 
@@ -307,6 +299,14 @@
             radCattleDetails.TabIndex = 7;
             radCattleDetails.Text = "Cattle Details";
             radCattleDetails.UseVisualStyleBackColor = true;
+            // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // frmCattleOwnership
             // 
@@ -360,6 +360,6 @@
         private ucPaymentRegistry ucPaymentRegistry1;
         private System.Windows.Forms.GroupBox groupBox2;
         private ucCattleDetails ucCattleDetails1;
-        private ucPaymentFeesCharges ucFeesCharges1;
+        private ucPaymentFeesCharges ucPaymentFeesCharges1;
     }
 }

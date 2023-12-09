@@ -31,21 +31,20 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         {
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radPayee = new System.Windows.Forms.RadioButton();
-            radFees = new System.Windows.Forms.RadioButton();
+            radFeesCharges = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             btnBackMain = new System.Windows.Forms.Button();
             btnNextMain = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            bgwPayee = new System.ComponentModel.BackgroundWorker();
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPagePayee = new System.Windows.Forms.TabPage();
             groupBox1 = new System.Windows.Forms.GroupBox();
             ucPaymentRegistry1 = new ucPaymentRegistry();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
-            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -58,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.Controls.Add(radPayee);
-            flowLayoutPanel2.Controls.Add(radFees);
+            flowLayoutPanel2.Controls.Add(radFeesCharges);
             flowLayoutPanel2.Controls.Add(radPayment);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             flowLayoutPanel2.Enabled = false;
@@ -83,19 +82,19 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             radPayee.Text = "Payee";
             radPayee.UseVisualStyleBackColor = true;
             // 
-            // radFees
+            // radFeesCharges
             // 
-            radFees.Appearance = System.Windows.Forms.Appearance.Button;
-            radFees.FlatAppearance.BorderSize = 0;
-            radFees.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radFees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radFees.Location = new System.Drawing.Point(0, 37);
-            radFees.Margin = new System.Windows.Forms.Padding(0);
-            radFees.Name = "radFees";
-            radFees.Size = new System.Drawing.Size(195, 37);
-            radFees.TabIndex = 5;
-            radFees.Text = "Fees && Charges";
-            radFees.UseVisualStyleBackColor = true;
+            radFeesCharges.Appearance = System.Windows.Forms.Appearance.Button;
+            radFeesCharges.FlatAppearance.BorderSize = 0;
+            radFeesCharges.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radFeesCharges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radFeesCharges.Location = new System.Drawing.Point(0, 37);
+            radFeesCharges.Margin = new System.Windows.Forms.Padding(0);
+            radFeesCharges.Name = "radFeesCharges";
+            radFeesCharges.Size = new System.Drawing.Size(195, 37);
+            radFeesCharges.TabIndex = 5;
+            radFeesCharges.Text = "Fees && Charges";
+            radFeesCharges.UseVisualStyleBackColor = true;
             // 
             // radPayment
             // 
@@ -157,14 +156,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
             flowLayoutPanel1.TabIndex = 5;
             // 
-            // bgwPayee
-            // 
-            bgwPayee.WorkerReportsProgress = true;
-            bgwPayee.WorkerSupportsCancellation = true;
-            bgwPayee.DoWork += bgwPayee_DoWork;
-            bgwPayee.ProgressChanged += bgwPayee_ProgressChanged;
-            bgwPayee.RunWorkerCompleted += bgwPayee_RunWorkerCompleted;
-            // 
             // tabControlMain
             // 
             tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
@@ -181,6 +172,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             tabControlMain.Size = new System.Drawing.Size(832, 465);
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 6;
+            tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPagePayee
             // 
@@ -192,7 +184,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             tabPagePayee.TabIndex = 0;
             tabPagePayee.Text = "tabPagePayee";
             tabPagePayee.UseVisualStyleBackColor = true;
-            tabPagePayee.Enter += tabPagePayee_Enter;
             // 
             // groupBox1
             // 
@@ -220,41 +211,37 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
             tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Padding = new System.Windows.Forms.Padding(3);
             tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
-            tabPageFeesCharges.Enter += tabPageFees_Enter;
+            // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Name = "tabPagePayment";
-            tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
             tabPagePayment.Size = new System.Drawing.Size(824, 456);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
-            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // ucPayment1
             // 
             ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPayment1.Location = new System.Drawing.Point(3, 3);
+            ucPayment1.Location = new System.Drawing.Point(0, 0);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(818, 450);
+            ucPayment1.Size = new System.Drawing.Size(824, 456);
             ucPayment1.TabIndex = 0;
-            // 
-            // ucPaymentFeesCharges1
-            // 
-            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPaymentFeesCharges1.Location = new System.Drawing.Point(3, 3);
-            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(818, 450);
-            ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // frmAF51_57
             // 
@@ -289,13 +276,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RadioButton radPayee;
-        private System.Windows.Forms.RadioButton radFees;
+        private System.Windows.Forms.RadioButton radFeesCharges;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.Button btnBackMain;
         private System.Windows.Forms.Button btnNextMain;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.ComponentModel.BackgroundWorker bgwPayee;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPagePayee;
         private System.Windows.Forms.TabPage tabPageFeesCharges;
