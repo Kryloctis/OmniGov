@@ -208,8 +208,8 @@ namespace ACC.Data
 
         public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(mySqlGenericCommandsLFS);
 
-        public static ICattleTransferOfOwnershipRepository CattleTransferOfOwnershipRepository() => new CattleTransferOfOwnershipRepository(mySqlGenericCommandsLFS);
-
         public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsLFS);
+
+        public static IRegistry RegistryRepository() => new RegistryRepository(mySqlGenericCommandsLFS);
     }
 }
