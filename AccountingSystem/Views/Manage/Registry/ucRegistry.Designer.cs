@@ -77,6 +77,7 @@
             // 
             // txtFirstName
             // 
+            txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtFirstName.Location = new System.Drawing.Point(88, 6);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(250, 23);
@@ -95,6 +96,7 @@
             // 
             // txtLastName
             // 
+            txtLastName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtLastName.Location = new System.Drawing.Point(88, 64);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(250, 23);
@@ -113,6 +115,7 @@
             // 
             // txtMiddleName
             // 
+            txtMiddleName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtMiddleName.Location = new System.Drawing.Point(88, 35);
             txtMiddleName.Name = "txtMiddleName";
             txtMiddleName.Size = new System.Drawing.Size(250, 23);
@@ -129,6 +132,7 @@
             // 
             // flowPanelSex
             // 
+            flowPanelSex.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             flowPanelSex.Controls.Add(radMale);
             flowPanelSex.Controls.Add(radFemale);
             flowPanelSex.Location = new System.Drawing.Point(88, 93);
@@ -169,6 +173,7 @@
             // 
             // txtNationality
             // 
+            txtNationality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtNationality.Location = new System.Drawing.Point(88, 122);
             txtNationality.Name = "txtNationality";
             txtNationality.Size = new System.Drawing.Size(250, 23);
@@ -187,6 +192,7 @@
             // 
             // txtStreet
             // 
+            txtStreet.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtStreet.Location = new System.Drawing.Point(88, 6);
             txtStreet.Name = "txtStreet";
             txtStreet.Size = new System.Drawing.Size(250, 23);
@@ -194,6 +200,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(panel1);
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox1.Location = new System.Drawing.Point(3, 230);
@@ -224,6 +231,7 @@
             // 
             // txtCountry
             // 
+            txtCountry.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCountry.Location = new System.Drawing.Point(88, 122);
             txtCountry.Name = "txtCountry";
             txtCountry.Size = new System.Drawing.Size(250, 23);
@@ -242,6 +250,7 @@
             // 
             // txtProvince
             // 
+            txtProvince.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtProvince.Location = new System.Drawing.Point(88, 93);
             txtProvince.Name = "txtProvince";
             txtProvince.Size = new System.Drawing.Size(250, 23);
@@ -260,6 +269,7 @@
             // 
             // txtMunicipality
             // 
+            txtMunicipality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtMunicipality.Location = new System.Drawing.Point(88, 64);
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.Size = new System.Drawing.Size(250, 23);
@@ -278,6 +288,7 @@
             // 
             // txtBarangay
             // 
+            txtBarangay.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtBarangay.Location = new System.Drawing.Point(88, 35);
             txtBarangay.Name = "txtBarangay";
             txtBarangay.Size = new System.Drawing.Size(250, 23);
@@ -296,6 +307,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.Controls.Add(panel2);
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 11F);
             groupBox2.Location = new System.Drawing.Point(3, 3);
@@ -339,6 +351,7 @@
             // 
             // txtContactInfo
             // 
+            txtContactInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtContactInfo.Location = new System.Drawing.Point(88, 151);
             txtContactInfo.Name = "txtContactInfo";
             txtContactInfo.Size = new System.Drawing.Size(250, 23);
