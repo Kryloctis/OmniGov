@@ -4,6 +4,7 @@ using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
@@ -54,12 +55,6 @@ namespace AccountingSystem
             }
 
             return false;
-        }
-
-        public static bool IsJobOrder(int userId)
-        {
-            var jobOrderRepo = AccFactory.JobOrderRepository();
-            return jobOrderRepo.IsUserJobOrder(userId);
         }
 
         public static void LoadFormIcon(Form form)
