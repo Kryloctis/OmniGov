@@ -215,7 +215,6 @@
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Button btnBrowse;
         internal System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.FlowLayoutPanel flwPanelCattleSex;
         internal System.Windows.Forms.RadioButton radCattleMale;

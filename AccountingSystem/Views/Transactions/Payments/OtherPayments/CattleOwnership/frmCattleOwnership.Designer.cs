@@ -45,7 +45,7 @@
             groupBox2 = new System.Windows.Forms.GroupBox();
             ucCattleDetails1 = new ucCattleDetails();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
-            ucFeesCharges1 = new ucFeesCharges();
+            ucFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radOwner = new System.Windows.Forms.RadioButton();
             radCattleDetails = new System.Windows.Forms.RadioButton();
@@ -313,6 +313,7 @@
             AcceptButton = btnNextMain;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
             ClientSize = new System.Drawing.Size(1027, 496);
             Controls.Add(tabControlMain);
@@ -361,6 +362,6 @@
         private ucPaymentRegistry ucPaymentRegistry1;
         private System.Windows.Forms.GroupBox groupBox2;
         private ucCattleDetails ucCattleDetails1;
-        private ucFeesCharges ucFeesCharges1;
+        private ucPaymentFeesCharges ucFeesCharges1;
     }
 }

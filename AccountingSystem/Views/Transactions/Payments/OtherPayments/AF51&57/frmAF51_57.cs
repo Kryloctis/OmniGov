@@ -16,8 +16,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-            ucTaxPayers = ucTaxPayers1;
         }
 
         private DataColumn[] PayeesColumns()
@@ -82,40 +80,17 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
 
         private void bgwPayee_DoWork(object sender, DoWorkEventArgs e)
         {
-            string searchText = e.Argument.ToString();
-            var dataTable = DataTablePayees(searchText);
-
-            Invoke((MethodInvoker)delegate
-            {
-                HelperLoadRecords.DatagridViewPayees(dataGridView1, dataTable);
-            });
         }
 
         private void bgwPayee_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void bgwPayee_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
         }
 
         #region Content
-
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            tabControlPayee.SelectedTab = tabNewPayee;
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            if (Helper.MessageBoxConfirmCancel("Your input won't be stored."))
-            {
-                tabControlPayee.SelectedTab = tabPayeeList;
-                ucTaxPayers.ResetForm();
-            }
-        }
 
         private void LoadPayee()
         {
@@ -128,7 +103,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnBackMain.Enabled = true;
             btnNextMain.Text = "Proceed to Payment";
             radFees.Checked = true;
-            ucOtherCharges1.OnLoad();
         }
 
         private void LoadPaymentTab()
@@ -137,8 +111,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            decimal totalPayment = ucOtherCharges1.GetTotalOtherCharges();
-            ucPayment1.OnLoad(string.Empty, totalPayment);
+            ucPayment1.OnLoad(string.Empty, 0);
         }
 
         private void ConfirmPayment()
@@ -151,8 +124,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             var selectedTab = tabControlMain.SelectedTab;
 
             if (selectedTab == tabPagePayee)
-                tabControlMain.SelectedTab = tabPageFees;
-            else if (selectedTab == tabPageFees)
+                tabControlMain.SelectedTab = tabPageFeesCharges;
+            else if (selectedTab == tabPageFeesCharges)
                 tabControlMain.SelectedTab = tabPagePayment;
             else if (selectedTab == tabPagePayment)
                 ConfirmPayment();
@@ -210,23 +183,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
 
         private void frmAF51_57_Load(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = txtSearch.Text;
-                LoadPayees(searchText);
-                ucTaxPayers.chckIsActive.Enabled = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string searchText = txtSearch.Text;
-                LoadPayees(searchText);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -262,7 +262,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            decimal totalPayment = ucMarriageLicense.ucOtherCharges.GetTotalOtherCharges();
+            decimal totalPayment = 0;
             ucPayment.OnLoad("54", totalPayment);
 
             if (isNewPayee)

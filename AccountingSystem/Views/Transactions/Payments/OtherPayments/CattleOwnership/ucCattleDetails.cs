@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 {
     public partial class ucCattleDetails : UserControl
     {
-        internal int ownerID;
         internal frmCattleOwnership frmCattleOwnership;
 
         public ucCattleDetails()
@@ -16,8 +15,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             InitializeComponent();
         }
 
-
         #region Private Methods
+
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -30,9 +29,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Event Methods
+
         private void ucCattleOwnership_Load(object sender, EventArgs e)
         {
             if (!DesignMode)

@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
+using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.TaxPayers;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -17,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
     {
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
-        private readonly ucFeesCharges ucFeesCharges;
+        private readonly ucPaymentFeesCharges ucFeesCharges;
         private readonly ucPaymentRegistry ucPaymentRegistry;
         private readonly ucCattleDetails ucCattleDetails;
 
@@ -28,7 +29,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             ucFeesCharges = ucFeesCharges1;
             ucCattleDetails = ucCattleDetails1;
             ucPaymentRegistry = ucPaymentRegistry1;
-            ucFeesCharges.accountableForm = "53";
         }
 
         #region Private Methods
@@ -84,7 +84,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
                     break;
 
                 case "tabPageFeesCharges":
-                    if (!ucFeesCharges.FormValidated())
+
+                    if (!ucFeesCharges.ValidateChildren())
                     {
                         Helper.MessageBoxError(ucFeesCharges.GetFormErrors());
                         return false;
@@ -102,36 +103,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
                 default:
                     return true;
             }
-
-            //var selectedTab = tabControlMain.SelectedTab;
-
-            //if (selectedTab == tabPagePayee)
-            //{
-            //    if (isNewPayee)
-            //    {
-            //        if (!ucTaxPayers.ValidateChildren())
-            //        {
-            //            Helper.MessageBoxError(ucTaxPayers.GetFormErrors());
-            //            return false;
-            //        }
-            //    }
-            //}
-            //else if (selectedTab == tabPageCharges)
-            //{
-            //    if (!ucCattleOwnership.ValidateChildren())
-            //    {
-            //        Helper.MessageBoxError(ucCattleOwnership.GetFormErrors());
-            //        return false;
-            //    }
-            //}
-            //else if (selectedTab == tabPagePayment)
-            //{
-            //    if (!ucPayment.ValidateChildren())
-            //    {
-            //        Helper.MessageBoxError(ucPayment.GetFormErrors());
-            //        return false;
-            //    }
-            //}
 
             return true;
         }
@@ -173,17 +144,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             switch (tabControlMain.SelectedTab.Name)
             {
                 case "tabPageOwner":
-                    //Load Owner Here...
                     LoadOwner();
                     break;
 
                 case "tabPageCattleDetails":
-                    //Load Cattle Details Here...
                     LoadCattleDetailsTab();
                     break;
 
                 case "tabPageFeesCharges":
-                    //Load Fees and Charges Here...
                     LoadFeesAndChargesTab();
                     break;
 
@@ -221,8 +189,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            decimal totalPayment = ucFeesCharges.GetTotalOtherCharges();
-            ucPayment.OnLoad("58", totalPayment);
+            decimal totalAmountPayable = ucFeesCharges.ComputeTotalAmountPayable();
+            ucPayment.OnLoad("53", totalAmountPayable);
 
             //if (isNewPayee)
             //    ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;

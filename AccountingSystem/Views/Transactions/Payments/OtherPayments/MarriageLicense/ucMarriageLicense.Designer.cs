@@ -78,7 +78,7 @@
             this.txtWifeName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPageCharges = new System.Windows.Forms.TabPage();
-            this.ucOtherCharges1 = new AccountingSystem.Views.Transactions.Payments.OtherPayments.ucFeesCharges();
+            this.ucOtherCharges1 = new AccountingSystem.Views.Transactions.Payments.OtherPayments.ucPaymentFeesCharges();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageDetails.SuspendLayout();
@@ -791,6 +791,6 @@
         internal System.Windows.Forms.TabPage tabPageDetails;
         internal System.Windows.Forms.TabPage tabPageSpousalInfo;
         internal System.Windows.Forms.TabPage tabPageCharges;
-        internal ucFeesCharges ucOtherCharges1;
+        internal ucPaymentFeesCharges ucOtherCharges1;
     }
 }

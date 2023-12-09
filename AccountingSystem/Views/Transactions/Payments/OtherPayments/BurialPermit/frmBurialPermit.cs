@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
         private readonly ucBurialPermit ucBurialPermit;
-        private readonly ucFeesCharges ucOtherCharges;
+        private readonly ucPaymentFeesCharges ucOtherCharges;
         private dialogPayment dialog = new dialogPayment();
         private bool isNewPayee = false;
 
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             ucPayment = ucPayment1;
             ucBurialPermit = ucBurialPermit1;
             ucOtherCharges = ucBurialPermit.ucOtherCharges1;
-            ucOtherCharges.accountableForm = "58";
+            //ucOtherCharges.accountableForm = "58";
         }
 
         private void frmBurialPermit_Load(object sender, EventArgs e)
@@ -393,8 +393,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            decimal totalPayment = ucBurialPermit.ucOtherCharges1.GetTotalOtherCharges();
-            ucPayment.OnLoad("58", totalPayment);
+            decimal totalAmountPayable = 0;
+            ucPayment.OnLoad("58", totalAmountPayable);
 
             if (isNewPayee)
                 ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
