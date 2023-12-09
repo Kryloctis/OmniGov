@@ -8,8 +8,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 {
     public partial class ucCattleDetails : UserControl
     {
-        internal frmCattleOwnership frmCattleOwnership;
-
         public ucCattleDetails()
         {
             InitializeComponent();

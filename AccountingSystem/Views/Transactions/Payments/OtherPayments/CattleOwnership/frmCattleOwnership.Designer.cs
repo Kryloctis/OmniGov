@@ -351,8 +351,6 @@
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageFeesCharges;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.TabPage tabPageOwner;
         private System.Windows.Forms.TabPage tabPageCattleDetails;
         private System.Windows.Forms.RadioButton radFeesCharges;

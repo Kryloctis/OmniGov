@@ -203,18 +203,6 @@
 
         #endregion
 
-        internal System.Windows.Forms.GroupBox groupBox2;
-        internal System.Windows.Forms.Panel panel2;
-        internal System.Windows.Forms.ComboBox cmbxBarangay;
-        internal System.Windows.Forms.ComboBox cmbxMunicipality;
-        internal System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.ComboBox cmbxProvince;
-        internal System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox txtOwnerName;
-        internal System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.Button btnBrowse;
-        internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.FlowLayoutPanel flwPanelCattleSex;
         internal System.Windows.Forms.RadioButton radCattleMale;
