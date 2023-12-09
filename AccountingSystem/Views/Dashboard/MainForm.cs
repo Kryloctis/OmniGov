@@ -15,7 +15,6 @@ using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
-using AccountingSystem.Views.Manage.OtherPaymentRates;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
@@ -24,7 +23,7 @@ using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Manage.TaxTypes;
+using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
@@ -47,6 +46,7 @@ using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
@@ -164,11 +164,8 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Manage > Bank Accounts"))
                 bankAccountsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Tax Types"))
-                taxTypesToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Other Payment Rates"))
-                otherPaymentRatesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage > Fees & Charges Config."))
+                feesChargesConfigToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Real Properties"))
                 RptToolStripButton.Enabled = false;
@@ -674,14 +671,9 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmBankAccounts().ShowDialog();
         }
 
-        private void taxTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void feesChargesConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxTypes().ShowDialog();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            _ = new frmOtherPaymentRates().ShowDialog();
+            _ = new frmFeesChargesConfig().ShowDialog();
         }
 
         private void aF5157ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -702,6 +694,11 @@ namespace AccountingSystem.Views.Dashboard
         private void aF58BurialPermitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmBurialPermit().ShowDialog();
+        }
+
+        private void aF53CattleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmCattleOwnership().ShowDialog();
         }
     }
 }

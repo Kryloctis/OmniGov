@@ -74,10 +74,9 @@ namespace AccountingSystem.Views.Transactions.Payments
                 return;
             }
 
-            ucPayment.amountPayment = ucRptTaxDues.GetTotalTaxDue();
-            ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+            decimal totalPayment = ucRptTaxDues.GetTotalTaxDue();
             ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
-            ucPayment.OnLoad("56");
+            ucPayment.OnLoad("56", totalPayment);
             tabControl1.SelectedTab = tabPagePayment;
         }
 
@@ -229,25 +228,6 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         #region Save Payment
 
-        private PaymentCollectionsModel PaymentCollectionsModel()
-        {
-            var paymentCollectionsModel = new PaymentCollectionsModel();
-
-            var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-            bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-            paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-            paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
-            paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
-            paymentCollectionsModel.Amount = ucPayment.amountPayment;
-            paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
-            paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
-            paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
-            paymentCollectionsModel.CreatedBy = Helper.UserId;
-
-            return paymentCollectionsModel;
-        }
-
         private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, rptPaymentsModel, rptTaxDuesModels);
@@ -319,7 +299,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
+                    SaveRptPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
                 });
 
                 Invoke(methodInvoker);

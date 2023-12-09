@@ -13,5 +13,6 @@ namespace ACC.Domain.Models
         public int StartingYear { get; set; }
         public bool IsRateEditable { get; set; }
         public int CreatedBy { get; set; }
+        public int UpdatedBy { get; set; }
     }
 }

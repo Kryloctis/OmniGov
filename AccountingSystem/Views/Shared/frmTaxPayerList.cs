@@ -4,6 +4,7 @@ using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.Payments;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -220,6 +221,18 @@ namespace AccountingSystem.Views.Shared
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
         }
 
+        private void InitializeOwnerDetails(frmCattleOwnership frmCattleOwnership)
+        {
+            int rowIndex = dataGridView1.CurrentRow.Index;
+
+            var taxpayerId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["taxpayers_id"].Value);
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            var taxpayer = dictTaxpayer["taxpayers_name"].ToString();
+            var taxpayerBarangay = dictTaxpayer["taxpayers_barangay"].ToString();
+            var taxpayerMunicipality = dictTaxpayer["taxpayers_municipality"].ToString();
+            var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
+        }
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             try
@@ -251,6 +264,10 @@ namespace AccountingSystem.Views.Shared
 
                 case frmRptPayments:
                     InitializeNewOwnerDetails((frmRptPayments)refForm);
+                    break;
+
+                case frmCattleOwnership:
+                    InitializeOwnerDetails((frmCattleOwnership)refForm);
                     break;
 
                 default:

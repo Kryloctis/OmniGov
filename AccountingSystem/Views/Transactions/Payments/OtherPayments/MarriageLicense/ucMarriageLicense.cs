@@ -8,13 +8,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 {
     public partial class ucMarriageLicense : UserControl
     {
-        internal ucOtherCharges ucOtherCharges;
+        internal ucPaymentFeesCharges ucOtherCharges;
 
         public ucMarriageLicense()
         {
             InitializeComponent();
             ucOtherCharges = ucOtherCharges1;
-            ucOtherCharges.accountableForm = "54";
+            //ucOtherCharges.accountableForm = "54";
         }
 
         internal string GetFormErrors()

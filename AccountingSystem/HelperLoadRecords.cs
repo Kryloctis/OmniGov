@@ -2648,5 +2648,29 @@ namespace AccountingSystem
         }
 
         #endregion CustomFunctions
+
+        #region Fees and Charges
+
+        internal static void PaymentFeesCharges(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["fees_charges_id"].Visible = false;
+            dataGridView.Columns["classification"].HeaderText = "Classification";
+            dataGridView.Columns["description"].HeaderText = "Description";
+            dataGridView.Columns["is_rate_editable"].HeaderText = "Editable";
+            dataGridView.Columns["is_rate_editable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["amount"].HeaderText = "Amount";
+            dataGridView.Columns["amount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["unit"].HeaderText = "Unit";
+            dataGridView.Columns["sub_total"].HeaderText = "Sub Total";
+            dataGridView.Columns["sub_total"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["classification"].ReadOnly = true;
+            dataGridView.Columns["description"].ReadOnly = true;
+            dataGridView.Columns["sub_total"].ReadOnly = true;
+            dataGridView.Columns["is_rate_editable"].ReadOnly = true;
+        }
+
+        #endregion Fees and Charges
     }
 }

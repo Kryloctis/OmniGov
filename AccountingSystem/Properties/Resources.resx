@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1063,78 +1063,6 @@
   <data name="local_finance_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\local_finance_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heirarchy1@12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy1@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy1@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy1@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy1@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy1@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy1@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy2@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy2@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy3@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy3@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heirarchy4@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\heirarchy4@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="arrow_left_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow-left-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1188,5 +1116,77 @@
   </data>
   <data name="link_cancel_2_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\link-cancel-2-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_document_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-document-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disabled_folder_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disabled-folder-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
