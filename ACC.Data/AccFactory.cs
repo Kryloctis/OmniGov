@@ -108,7 +108,7 @@ namespace ACC.Data
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), CattleTransferOfOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 

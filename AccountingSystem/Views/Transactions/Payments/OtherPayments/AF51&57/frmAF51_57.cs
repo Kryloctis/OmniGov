@@ -11,7 +11,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
 {
     public partial class frmAF51_57 : Form
     {
-        private readonly ucPaymentRegistry ucPaymentRegistry;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucPayment ucPayment;
 
@@ -20,17 +19,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.ucPaymentFeesCharges = ucPaymentFeesCharges1;
-            this.ucPaymentRegistry = ucPaymentRegistry1;
             this.ucPayment = ucPayment1;
         }
 
         #region Private Methods
-
-        private void LoadPayeeTab()
-        {
-            radPayee.Checked = true;
-            btnNextMain.Text = "Next";
-        }
 
         private void LoadFeesAndChargesTab()
         {
@@ -64,14 +56,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         {
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPagePayee":
-                    if (!ucPaymentRegistry.FormValidated("payee"))
-                    {
-                        Helper.MessageBoxError(ucPaymentRegistry.GetFormErrors());
-                        return false;
-                    }
-                    break;
-
                 case "tabPageFeesCharges":
 
                     if (!ucPaymentFeesCharges.ValidateChildren())
@@ -99,7 +83,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         private void OnLoad()
         {
             LoadTabContents();
-            ucPaymentRegistry.LoadRegistry();
         }
 
         #endregion Private Methods
@@ -115,10 +98,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
 
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPagePayee":
-                    LoadPayeeTab();
-                    break;
-
                 case "tabPageFeesCharges":
                     LoadFeesAndChargesTab();
                     break;

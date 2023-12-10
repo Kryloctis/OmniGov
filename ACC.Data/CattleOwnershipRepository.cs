@@ -64,22 +64,16 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public bool InsertWithCattleOwnershipPayment(CattleOwnershipModel cattleOwnershipModel)
+        public bool InsertWithCattleOwnershipPayment(CattleOwnershipModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@owner_id", DbType.Int32, cattleOwnershipModel.OwnerID},
-                new object[] { "@tag", DbType.Int32, cattleOwnershipModel.Tag},
-                new object[] { "@owner_name", DbType.String, cattleOwnershipModel.OwnerName},
-                new object[] { "@owner_barangay", DbType.String, cattleOwnershipModel.OwnerBarangay},
-                new object[] { "@owner_municipality", DbType.String, cattleOwnershipModel.OwnerMunicipality},
-                new object[] { "@owner_province", DbType.String, cattleOwnershipModel.OwnerProvince},
-                new object[] { "@cattle_type", DbType.String, cattleOwnershipModel.CattleType},
-                new object[] { "@cattle_sex", DbType.String, cattleOwnershipModel.CattleSex},
-                new object[] { "@cattle_age", DbType.String, cattleOwnershipModel.CattleAge},
-                new object[] { "@description", DbType.String, cattleOwnershipModel.Description},
-                new object[] { "@created_at", DbType.DateTime, cattleOwnershipModel.CreatedAt},
-                new object[] { "@created_by", DbType.Int32, cattleOwnershipModel.CreatedBy},
+                new object[] {"@payment_collections_id", DbType.Int32, entity.PaymentCollections.Id},
+                new object[] {"@owner_registry_id", DbType.Int32, entity.Id},
+                new object[] {"@cattle_name", DbType.String, entity.CattleName},
+                new object[] {"@cattle_sex", DbType.String, entity.CattleSex},
+                new object[] {"@cattle_age", DbType.Int32, entity.CattleAge},
+                new object[] {"@description", DbType.String, entity.Description},
             };
 
             string query = $"INSERT INTO {tableName} (owner_id, tag, owner_name, owner_barangay, owner_municipality, owner_province, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@owner_id, @tag, @owner_name, @owner_barangay, @owner_municipality, @owner_province, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
