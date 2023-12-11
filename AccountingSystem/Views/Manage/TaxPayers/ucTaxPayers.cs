@@ -49,6 +49,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             taxPayerId = 0;
         }
 
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadTaxPayersType();
+            }
+        }
+
         private void ucTaxPayers_Load(object sender, EventArgs e)
         {
             try
@@ -56,14 +64,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadTaxPayersType();
-            }
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)

@@ -52,8 +52,6 @@ namespace ACC.Data
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-            // Assuming ExecuteQuery returns a DataTable with the result of the query.
-
             if (dataTable.Rows.Count > 0)
             {
                 DataRow row = dataTable.Rows[0];
