@@ -1,4 +1,6 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
@@ -20,11 +22,6 @@ namespace AccountingSystem.Views.Manage.Registry
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-        }
-
-        private bool DeleteRegistry()
-        {
-            return false;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -83,7 +80,6 @@ namespace AccountingSystem.Views.Manage.Registry
                 int totalProgressCount = dtRegistry.Rows.Count;
 
                 if (dtRegistry.Rows.Count < 1) { e.Result = dataTable; backgroundWorker1.ReportProgress(100); return; }
-
 
                 foreach (DataRow row in dtRegistry.Rows)
                 {
@@ -151,6 +147,34 @@ namespace AccountingSystem.Views.Manage.Registry
             try
             {
                 OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
+        {
+            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+            {
+                var registryModels = new List<RegistryModel>();
+
+                foreach (DataGridViewRow row in selectedRows)
+                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
+
+                return AccFactory.RegistryRepository().Delete(registryModels);
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedRows = dataGridView1.SelectedRows;
+                if (DeleteRegistry(selectedRows))
+                {
+                    Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
+                    LoadRegistryList();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
