@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using DocumentFormat.OpenXml.Office2010.PowerPoint;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace AccountingSystem.Views.Manage.Registry
 {
     public partial class ucRegistry : UserControl
     {
+        private int registryId;
+
         public ucRegistry()
         {
             InitializeComponent();
@@ -35,7 +38,7 @@ namespace AccountingSystem.Views.Manage.Registry
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private void ResetFields()
+        internal void ResetFields()
         {
             txtFirstName.Clear();
             txtMiddleName.Clear();
@@ -43,6 +46,7 @@ namespace AccountingSystem.Views.Manage.Registry
             radMale.Checked = true;
             txtNationality.Clear();
             txtContactInfo.Clear();
+            dtBirthDate.Value = Helper.GetCurrentDate();
             txtStreet.Clear();
             txtBarangay.Clear();
             txtMunicipality.Clear();
@@ -50,8 +54,34 @@ namespace AccountingSystem.Views.Manage.Registry
             txtCountry.Clear();
         }
 
-        internal void OnLoad(bool isEdit)
+        internal RegistryModel RegistryModel()
         {
+            return new RegistryModel()
+            {
+                FirstName = txtFirstName.Text.Trim(),
+                MiddleName = txtMiddleName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
+                Nationality = txtNationality.Text.Trim(),
+                Sex = radMale.Checked ? "Male" : "Female",
+                Street = txtNationality.Text.Trim(),
+                BirthDate = dtBirthDate.Value,
+                Barangay = txtBarangay.Text.Trim(),
+                Municipality = txtMunicipality.Text.Trim(),
+                Province = txtProvince.Text.Trim(),
+                Country = txtCountry.Text.Trim(),
+                ContactInfo = txtContactInfo.Text.Trim(),
+            };
+        }
+
+        internal void OnLoad(bool isEdit, int registryId = 0)
+        {
+            if (isEdit)
+            {
+                this.registryId = registryId;
+            }
+            else
+            {
+            }
         }
 
         #region Validations

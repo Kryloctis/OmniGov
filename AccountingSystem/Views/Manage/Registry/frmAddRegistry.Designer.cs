@@ -44,7 +44,7 @@
             flowLayoutPanel1.Controls.Add(btnAdd);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 417);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 441);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(378, 30);
             flowLayoutPanel1.TabIndex = 0;
@@ -66,6 +66,7 @@
             btnAdd.TabIndex = 0;
             btnAdd.Text = "Save";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // panel1
             // 
@@ -74,7 +75,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(378, 417);
+            panel1.Size = new System.Drawing.Size(378, 441);
             panel1.TabIndex = 1;
             // 
             // ucRegistry1
@@ -82,7 +83,7 @@
             ucRegistry1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRegistry1.Location = new System.Drawing.Point(4, 4);
             ucRegistry1.Name = "ucRegistry1";
-            ucRegistry1.Size = new System.Drawing.Size(370, 409);
+            ucRegistry1.Size = new System.Drawing.Size(370, 433);
             ucRegistry1.TabIndex = 0;
             // 
             // frmAddRegistry
@@ -92,7 +93,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(378, 447);
+            ClientSize = new System.Drawing.Size(378, 471);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -102,6 +103,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Registry";
+            Load += frmAddRegistry_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

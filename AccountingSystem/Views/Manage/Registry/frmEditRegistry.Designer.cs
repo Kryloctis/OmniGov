@@ -42,7 +42,7 @@
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 417);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 434);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(378, 30);
             flowLayoutPanel1.TabIndex = 1;
@@ -70,7 +70,7 @@
             ucRegistry1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRegistry1.Location = new System.Drawing.Point(0, 0);
             ucRegistry1.Name = "ucRegistry1";
-            ucRegistry1.Size = new System.Drawing.Size(378, 417);
+            ucRegistry1.Size = new System.Drawing.Size(378, 434);
             ucRegistry1.TabIndex = 2;
             // 
             // frmEditRegistry
@@ -78,7 +78,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(378, 447);
+            ClientSize = new System.Drawing.Size(378, 464);
             Controls.Add(ucRegistry1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

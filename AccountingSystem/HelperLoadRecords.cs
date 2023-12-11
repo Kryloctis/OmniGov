@@ -2672,5 +2672,24 @@ namespace AccountingSystem
         }
 
         #endregion Fees and Charges
+
+        #region Registry
+
+        internal static void DatagridViewRegistry(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["sex"].HeaderText = "Sex";
+            dataGridView.Columns["sex"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["nationality"].HeaderText = "Nationality";
+            dataGridView.Columns["birth_date"].HeaderText = "Birth Date";
+            dataGridView.Columns["birth_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["birth_place"].HeaderText = "Birthplace";
+            dataGridView.Columns["contact_info"].HeaderText = "Contact Info.";
+        }
+
+        #endregion Registry
     }
 }

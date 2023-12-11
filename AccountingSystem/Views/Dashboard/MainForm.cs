@@ -54,6 +54,7 @@ using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountingSystem.Views.Manage.Registry;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -699,6 +700,11 @@ namespace AccountingSystem.Views.Dashboard
         private void aF53CattleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmCattleOwnership().ShowDialog();
+        }
+
+        private void registryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRegistry().ShowDialog();
         }
     }
 }

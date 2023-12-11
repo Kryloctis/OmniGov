@@ -58,6 +58,8 @@
             label11 = new System.Windows.Forms.Label();
             txtContactInfo = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            dtBirthDate = new System.Windows.Forms.DateTimePicker();
+            label12 = new System.Windows.Forms.Label();
             flowPanelSex.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -203,7 +205,7 @@
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(panel1);
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            groupBox1.Location = new System.Drawing.Point(3, 230);
+            groupBox1.Location = new System.Drawing.Point(3, 253);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new System.Drawing.Size(364, 178);
             groupBox1.TabIndex = 3;
@@ -313,13 +315,14 @@
             groupBox2.Location = new System.Drawing.Point(3, 3);
             groupBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(364, 214);
+            groupBox2.Size = new System.Drawing.Size(364, 237);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Info.";
             // 
             // panel2
             // 
+            panel2.Controls.Add(dtBirthDate);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(txtFirstName);
             panel2.Controls.Add(flowPanelSex);
@@ -327,6 +330,7 @@
             panel2.Controls.Add(txtMiddleName);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
+            panel2.Controls.Add(label12);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(txtContactInfo);
@@ -337,7 +341,7 @@
             panel2.Location = new System.Drawing.Point(3, 23);
             panel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(358, 188);
+            panel2.Size = new System.Drawing.Size(358, 211);
             panel2.TabIndex = 0;
             // 
             // label11
@@ -362,6 +366,24 @@
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // dtBirthDate
+            // 
+            dtBirthDate.CustomFormat = "MMM dd, yyyy";
+            dtBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtBirthDate.Location = new System.Drawing.Point(88, 180);
+            dtBirthDate.Name = "dtBirthDate";
+            dtBirthDate.Size = new System.Drawing.Size(250, 23);
+            dtBirthDate.TabIndex = 3;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(3, 184);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(55, 15);
+            label12.TabIndex = 0;
+            label12.Text = "Birthdate";
+            // 
             // ucRegistry
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -369,7 +391,7 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "ucRegistry";
-            Size = new System.Drawing.Size(370, 409);
+            Size = new System.Drawing.Size(370, 435);
             flowPanelSex.ResumeLayout(false);
             flowPanelSex.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -413,5 +435,7 @@
         internal System.Windows.Forms.Label label11;
         internal System.Windows.Forms.TextBox txtContactInfo;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.DateTimePicker dtBirthDate;
+        internal System.Windows.Forms.Label label12;
     }
 }

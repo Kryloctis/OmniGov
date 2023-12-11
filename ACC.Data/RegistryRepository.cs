@@ -80,7 +80,7 @@ namespace ACC.Data
                 new object[] {"@search_key", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE (first_name LIKE @search_key OR last_name LIKE @search_key)";
+            string query = $"SELECT * FROM {tableName} WHERE first_name LIKE @search_key OR last_name LIKE @search_key";
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -99,16 +99,17 @@ namespace ACC.Data
                 new object[] {"@last_name", DbType.String, entity.LastName},
                 new object[] {"@sex", DbType.String, entity.Sex},
                 new object[] {"@nationality", DbType.String, entity.Nationality},
+                new object[] {"@birth_date", DbType.Date, entity.BirthDate},
                 new object[] {"@street", DbType.String, entity.Street},
+                new object[] {"@barangay", DbType.String, entity.Barangay},
                 new object[] {"@municipality", DbType.String, entity.Municipality},
                 new object[] {"@province", DbType.String, entity.Province},
                 new object[] {"@country", DbType.String, entity.Country},
                 new object[] {"@contact_info", DbType.String, entity.ContactInfo},
                 new object[] {"@created_by", DbType.Int32, entity.CreatedBy},
-                new object[] {"@updated_by", DbType.Int32, entity.UpdatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (first_name, middle_name, last_name, sex, nationality, street, municipality, province, country, contact_info, created_by, updated_by) VALUES (@first_name, @middle_name, @last_name, @sex, @nationality, @street, @municipality, @province, @country, @contact_info, @created_by, @updated_by)";
+            string query = $"INSERT INTO {tableName} (first_name, middle_name, last_name, sex, nationality, birth_date, street, barangay, municipality, province, country, contact_info, created_by) VALUES (@first_name, @middle_name, @last_name, @sex, @nationality, @birth_date, @street, @barangay, @municipality, @province, @country, @contact_info, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
