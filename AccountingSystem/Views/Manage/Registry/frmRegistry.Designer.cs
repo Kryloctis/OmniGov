@@ -102,6 +102,7 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(24, 39);
             btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -186,6 +187,7 @@
             cmbxRowFilter.Name = "cmbxRowFilter";
             cmbxRowFilter.Size = new System.Drawing.Size(123, 23);
             cmbxRowFilter.TabIndex = 0;
+            cmbxRowFilter.SelectionChangeCommitted += cmbxRowFilter_SelectionChangeCommitted;
             // 
             // frmRegistry
             // 

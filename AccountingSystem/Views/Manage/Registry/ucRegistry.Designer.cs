@@ -55,11 +55,11 @@
             label7 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
+            dtBirthDate = new System.Windows.Forms.DateTimePicker();
+            label12 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             txtContactInfo = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            dtBirthDate = new System.Windows.Forms.DateTimePicker();
-            label12 = new System.Windows.Forms.Label();
             flowPanelSex.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -80,6 +80,7 @@
             // txtFirstName
             // 
             txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtFirstName.Location = new System.Drawing.Point(88, 6);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(250, 23);
@@ -99,6 +100,7 @@
             // txtLastName
             // 
             txtLastName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtLastName.Location = new System.Drawing.Point(88, 64);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(250, 23);
@@ -118,6 +120,7 @@
             // txtMiddleName
             // 
             txtMiddleName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtMiddleName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtMiddleName.Location = new System.Drawing.Point(88, 35);
             txtMiddleName.Name = "txtMiddleName";
             txtMiddleName.Size = new System.Drawing.Size(250, 23);
@@ -176,6 +179,7 @@
             // txtNationality
             // 
             txtNationality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtNationality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtNationality.Location = new System.Drawing.Point(88, 122);
             txtNationality.Name = "txtNationality";
             txtNationality.Size = new System.Drawing.Size(250, 23);
@@ -195,6 +199,7 @@
             // txtStreet
             // 
             txtStreet.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtStreet.Location = new System.Drawing.Point(88, 6);
             txtStreet.Name = "txtStreet";
             txtStreet.Size = new System.Drawing.Size(250, 23);
@@ -234,6 +239,7 @@
             // txtCountry
             // 
             txtCountry.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtCountry.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtCountry.Location = new System.Drawing.Point(88, 122);
             txtCountry.Name = "txtCountry";
             txtCountry.Size = new System.Drawing.Size(250, 23);
@@ -253,6 +259,7 @@
             // txtProvince
             // 
             txtProvince.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtProvince.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtProvince.Location = new System.Drawing.Point(88, 93);
             txtProvince.Name = "txtProvince";
             txtProvince.Size = new System.Drawing.Size(250, 23);
@@ -272,6 +279,7 @@
             // txtMunicipality
             // 
             txtMunicipality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtMunicipality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtMunicipality.Location = new System.Drawing.Point(88, 64);
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.Size = new System.Drawing.Size(250, 23);
@@ -291,6 +299,7 @@
             // txtBarangay
             // 
             txtBarangay.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtBarangay.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtBarangay.Location = new System.Drawing.Point(88, 35);
             txtBarangay.Name = "txtBarangay";
             txtBarangay.Size = new System.Drawing.Size(250, 23);
@@ -344,6 +353,24 @@
             panel2.Size = new System.Drawing.Size(358, 211);
             panel2.TabIndex = 0;
             // 
+            // dtBirthDate
+            // 
+            dtBirthDate.CustomFormat = "MMM dd, yyyy";
+            dtBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtBirthDate.Location = new System.Drawing.Point(88, 180);
+            dtBirthDate.Name = "dtBirthDate";
+            dtBirthDate.Size = new System.Drawing.Size(250, 23);
+            dtBirthDate.TabIndex = 3;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(3, 184);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(55, 15);
+            label12.TabIndex = 0;
+            label12.Text = "Birthdate";
+            // 
             // label11
             // 
             label11.AutoSize = true;
@@ -365,24 +392,6 @@
             // 
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
-            // 
-            // dtBirthDate
-            // 
-            dtBirthDate.CustomFormat = "MMM dd, yyyy";
-            dtBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtBirthDate.Location = new System.Drawing.Point(88, 180);
-            dtBirthDate.Name = "dtBirthDate";
-            dtBirthDate.Size = new System.Drawing.Size(250, 23);
-            dtBirthDate.TabIndex = 3;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(3, 184);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(55, 15);
-            label12.TabIndex = 0;
-            label12.Text = "Birthdate";
             // 
             // ucRegistry
             // 

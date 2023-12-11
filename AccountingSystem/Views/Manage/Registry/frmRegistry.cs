@@ -24,6 +24,55 @@ namespace AccountingSystem.Views.Manage.Registry
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
+        #region Private Methods
+
+        internal void LoadRegistryList()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync(RegistryParameters());
+            }
+        }
+
+        private void LoadRowFilter()
+        {
+            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+        }
+
+        private void OnLoad()
+        {
+            LoadRowFilter();
+            LoadRegistryList();
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+        }
+
+        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
+        {
+            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+            {
+                var registryModels = new List<RegistryModel>();
+
+                foreach (DataGridViewRow row in selectedRows)
+                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
+
+                return AccFactory.RegistryRepository().Delete(registryModels);
+            }
+            return false;
+        }
+
+        private (string searchKey, int limitCount) RegistryParameters()
+        {
+            string searchKey = txtSearch.Text.Trim();
+            int limitCount = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+
+            return (searchKey, limitCount);
+        }
+
+        #endregion Private Methods
+
+        #region Event Methods
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -43,28 +92,6 @@ namespace AccountingSystem.Views.Manage.Registry
                 _ = new frmEditRegistry(registryId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadRegistryList()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync(RegistryParameters());
-            }
-        }
-
-        private void LoadRowFilter()
-        {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
-        }
-
-        private (string searchKey, int limitCount) RegistryParameters()
-        {
-            string searchKey = txtSearch.Text.Trim();
-            int limitCount = Convert.ToInt32(cmbxRowFilter.SelectedValue);
-
-            return (searchKey, limitCount);
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -87,7 +114,8 @@ namespace AccountingSystem.Views.Manage.Registry
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
                 var dtRegistry = AccFactory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
-                int progressCount = 0;
+
+                int progressCount = 0;
                 int totalProgressCount = dtRegistry.Rows.Count;
 
                 if (dtRegistry.Rows.Count < 1) { e.Result = dataTable; backgroundWorker1.ReportProgress(100); return; }
@@ -147,13 +175,6 @@ namespace AccountingSystem.Views.Manage.Registry
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
-        {
-            LoadRowFilter();
-            LoadRegistryList();
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
         private void frmRegistry_Load(object sender, EventArgs e)
         {
             try
@@ -161,20 +182,6 @@ namespace AccountingSystem.Views.Manage.Registry
                 OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
-        {
-            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
-            {
-                var registryModels = new List<RegistryModel>();
-
-                foreach (DataGridViewRow row in selectedRows)
-                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
-
-                return AccFactory.RegistryRepository().Delete(registryModels);
-            }
-            return false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -190,5 +197,25 @@ namespace AccountingSystem.Views.Manage.Registry
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRegistryList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRegistryList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Event Methods
     }
 }
