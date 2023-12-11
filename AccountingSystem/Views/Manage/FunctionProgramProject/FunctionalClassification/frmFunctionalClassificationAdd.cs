@@ -7,15 +7,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 {
     public partial class frmFunctionalClassificationAdd : Form
     {
-        private frmFunctionProgramProject _frmFunctionProgramProject;
+        private frmFunctionProgramProject frmFunctionProgramProject;
         private ucFunctionalClassification uc;
 
         public frmFunctionalClassificationAdd(frmFunctionProgramProject frmFunctionProgramProject)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmFunctionProgramProject = frmFunctionProgramProject;
             uc = ucFunctionalClassification1;
+
+            this.frmFunctionProgramProject = frmFunctionProgramProject;
         }
 
         private bool SaveData()
@@ -44,9 +45,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Functional Classification has been saved.");
-                    _frmFunctionProgramProject.LoadFunctionalClassifications();
-                    _frmFunctionProgramProject.LoadSectorComboBox();
-                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
+                    frmFunctionProgramProject.LoadFunctionalClassifications();
+                    frmFunctionProgramProject.LoadSectorComboBox();
+                    Helper.DatagridViewRecordFinder(frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
                     uc.ResetForm();
                 }
             }

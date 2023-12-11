@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         private void InitializeComponent()
         {
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            radPayee = new System.Windows.Forms.RadioButton();
             radFeesCharges = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             btnBackMain = new System.Windows.Forms.Button();
@@ -38,9 +37,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             btnCancel = new System.Windows.Forms.Button();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             tabControlMain = new System.Windows.Forms.TabControl();
-            tabPagePayee = new System.Windows.Forms.TabPage();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            ucPaymentRegistry1 = new ucPaymentRegistry();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
@@ -48,15 +44,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
-            tabPagePayee.SuspendLayout();
-            groupBox1.SuspendLayout();
             tabPageFeesCharges.SuspendLayout();
             tabPagePayment.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.Controls.Add(radPayee);
             flowLayoutPanel2.Controls.Add(radFeesCharges);
             flowLayoutPanel2.Controls.Add(radPayment);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -68,27 +61,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 4;
             // 
-            // radPayee
-            // 
-            radPayee.Appearance = System.Windows.Forms.Appearance.Button;
-            radPayee.FlatAppearance.BorderSize = 0;
-            radPayee.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radPayee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radPayee.Location = new System.Drawing.Point(0, 0);
-            radPayee.Margin = new System.Windows.Forms.Padding(0);
-            radPayee.Name = "radPayee";
-            radPayee.Size = new System.Drawing.Size(195, 37);
-            radPayee.TabIndex = 5;
-            radPayee.Text = "Payee";
-            radPayee.UseVisualStyleBackColor = true;
-            // 
             // radFeesCharges
             // 
             radFeesCharges.Appearance = System.Windows.Forms.Appearance.Button;
             radFeesCharges.FlatAppearance.BorderSize = 0;
             radFeesCharges.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
             radFeesCharges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radFeesCharges.Location = new System.Drawing.Point(0, 37);
+            radFeesCharges.Location = new System.Drawing.Point(0, 0);
             radFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             radFeesCharges.Name = "radFeesCharges";
             radFeesCharges.Size = new System.Drawing.Size(195, 37);
@@ -102,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             radPayment.FlatAppearance.BorderSize = 0;
             radPayment.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
             radPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radPayment.Location = new System.Drawing.Point(0, 74);
+            radPayment.Location = new System.Drawing.Point(0, 37);
             radPayment.Margin = new System.Windows.Forms.Padding(0);
             radPayment.Name = "radPayment";
             radPayment.Size = new System.Drawing.Size(195, 37);
@@ -159,7 +138,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             // tabControlMain
             // 
             tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            tabControlMain.Controls.Add(tabPagePayee);
             tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -173,38 +151,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 6;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
-            // 
-            // tabPagePayee
-            // 
-            tabPagePayee.Controls.Add(groupBox1);
-            tabPagePayee.Location = new System.Drawing.Point(4, 5);
-            tabPagePayee.Margin = new System.Windows.Forms.Padding(0);
-            tabPagePayee.Name = "tabPagePayee";
-            tabPagePayee.Size = new System.Drawing.Size(824, 456);
-            tabPagePayee.TabIndex = 0;
-            tabPagePayee.Text = "tabPagePayee";
-            tabPagePayee.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(ucPaymentRegistry1);
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            groupBox1.Location = new System.Drawing.Point(0, 0);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(824, 456);
-            groupBox1.TabIndex = 1;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Payee";
-            // 
-            // ucPaymentRegistry1
-            // 
-            ucPaymentRegistry1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPaymentRegistry1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucPaymentRegistry1.Location = new System.Drawing.Point(3, 23);
-            ucPaymentRegistry1.Name = "ucPaymentRegistry1";
-            ucPaymentRegistry1.Size = new System.Drawing.Size(818, 430);
-            ucPaymentRegistry1.TabIndex = 1;
             // 
             // tabPageFeesCharges
             // 
@@ -266,8 +212,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
-            tabPagePayee.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
             tabPageFeesCharges.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             ResumeLayout(false);
@@ -275,7 +219,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
 
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.RadioButton radPayee;
         private System.Windows.Forms.RadioButton radFeesCharges;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.Button btnBackMain;
@@ -283,12 +226,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPagePayee;
         private System.Windows.Forms.TabPage tabPageFeesCharges;
         private System.Windows.Forms.TabPage tabPagePayment;
         private ucPayment ucPayment1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private ucPaymentRegistry ucPaymentRegistry1;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
     }
 }

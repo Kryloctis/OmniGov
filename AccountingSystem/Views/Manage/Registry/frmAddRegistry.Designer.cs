@@ -1,7 +1,6 @@
-﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification
+﻿namespace AccountingSystem.Views.Manage.Registry
 {
-    partial class frmFunctionalClassificationEdit
+    partial class frmAddRegistry
     {
         /// <summary>
         /// Required designer variable.
@@ -31,9 +30,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
-            btnUpdate = new System.Windows.Forms.Button();
+            btnAdd = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
-            ucFunctionalClassification1 = new ucFunctionalClassification();
+            ucRegistry1 = new ucRegistry();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -42,79 +41,71 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // 
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnUpdate);
+            flowLayoutPanel1.Controls.Add(btnAdd);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 64);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 441);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            flowLayoutPanel1.Size = new System.Drawing.Size(396, 27);
-            flowLayoutPanel1.TabIndex = 5;
+            flowLayoutPanel1.Size = new System.Drawing.Size(378, 30);
+            flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(311, 2);
-            btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnCancel.Location = new System.Drawing.Point(300, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnCancel.Size = new System.Drawing.Size(82, 22);
-            btnCancel.TabIndex = 1;
+            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnUpdate
+            // btnAdd
             // 
-            btnUpdate.Location = new System.Drawing.Point(223, 2);
-            btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnUpdate.Size = new System.Drawing.Size(82, 22);
-            btnUpdate.TabIndex = 0;
-            btnUpdate.Text = "Update";
-            btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnAdd.Location = new System.Drawing.Point(219, 3);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(75, 23);
+            btnAdd.TabIndex = 0;
+            btnAdd.Text = "Save";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(ucFunctionalClassification1);
+            panel1.Controls.Add(ucRegistry1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(396, 64);
-            panel1.TabIndex = 6;
+            panel1.Size = new System.Drawing.Size(378, 441);
+            panel1.TabIndex = 1;
             // 
-            // ucFunctionalClassification1
+            // ucRegistry1
             // 
-            ucFunctionalClassification1.AutoSize = true;
-            ucFunctionalClassification1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucFunctionalClassification1.Location = new System.Drawing.Point(4, 4);
-            ucFunctionalClassification1.Name = "ucFunctionalClassification1";
-            ucFunctionalClassification1.Size = new System.Drawing.Size(388, 56);
-            ucFunctionalClassification1.TabIndex = 7;
+            ucRegistry1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucRegistry1.Location = new System.Drawing.Point(4, 4);
+            ucRegistry1.Name = "ucRegistry1";
+            ucRegistry1.Size = new System.Drawing.Size(370, 433);
+            ucRegistry1.TabIndex = 0;
             // 
-            // frmFunctionalClassificationEdit
+            // frmAddRegistry
             // 
-            AcceptButton = btnUpdate;
+            AcceptButton = btnAdd;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(396, 91);
+            ClientSize = new System.Drawing.Size(378, 471);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmFunctionalClassificationEdit";
+            Name = "frmAddRegistry";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Edit Functional Classification";
-            Load += frmFunctionalClassificationEdit_Load;
+            Text = "Add Registry";
+            Load += frmAddRegistry_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -122,8 +113,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panel1;
-        private ucFunctionalClassification ucFunctionalClassification1;
+        private ucRegistry ucRegistry1;
     }
 }
