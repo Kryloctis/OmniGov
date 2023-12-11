@@ -85,6 +85,19 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetRecordsBySearh_Limit(string searchKey, int limitCount)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] {"@limit_count", DbType.Int32, limitCount}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE first_name LIKE @search_key OR last_name LIKE @search_key LIMIT @limit_count";
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();

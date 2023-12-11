@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -914,12 +915,16 @@ namespace AccountingSystem
 
         #endregion Funds
 
+        #region BankAccounts
+
         internal static void BankAccountsComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.ValueMember = valueMember;
             comboBox.DisplayMember = displayMember;
         }
+
+        #endregion BankAccounts
 
         #region Banks
 
@@ -2588,7 +2593,7 @@ namespace AccountingSystem
 
         #endregion OtherPayments
 
-        #region CustomFunctions
+        #region Miscellaneous
 
         internal static void SearchableComboboxParameters(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, List<string> searchSources, string searchText = "", bool isSearch = false)
         {
@@ -2647,7 +2652,36 @@ namespace AccountingSystem
             }
         }
 
-        #endregion CustomFunctions
+        internal static void RowFilterCombobox(ComboBox comboBox)
+        {
+            DataTable dataTable = new DataTable();
+
+            // Add columns to the DataTable using AddRange
+            DataColumn[] columns =
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("description", typeof(string))
+            };
+
+            dataTable.Columns.AddRange(columns);
+
+            int[] values = { 50, 100, 200, 300 };
+
+            foreach (int value in values)
+            {
+                var newRow = dataTable.NewRow();
+
+                newRow["id"] = value;
+                newRow["description"] = $"Limit to {value} rows";
+                dataTable.Rows.Add(newRow);
+            }
+
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = "id";
+            comboBox.DisplayMember = "description";
+        }
+
+        #endregion Miscellaneous
 
         #region Fees and Charges
 

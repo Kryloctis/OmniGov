@@ -51,16 +51,24 @@ namespace AccountingSystem.Views.Manage.Registry
             }
         }
 
-        private string RegistryParameters()
+        private void LoadRowFilter()
         {
-            return txtSearch.Text.Trim();
+            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+        }
+
+        private (string searchKey, int limitCount) RegistryParameters()
+        {
+            string searchKey = txtSearch.Text.Trim();
+            int limitCount = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+
+            return (searchKey, limitCount);
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                string searchKey = (string)e.Argument;
+                var parameters = ((string searchKey, int limitCount))e.Argument;
 
                 var dataColumns = new DataColumn[]
                 {
@@ -75,7 +83,7 @@ namespace AccountingSystem.Views.Manage.Registry
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                var dtRegistry = AccFactory.RegistryRepository().GetRecordsBySearch(searchKey);
+                var dtRegistry = AccFactory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
                 int progressCount = 0;
                 int totalProgressCount = dtRegistry.Rows.Count;
 
@@ -138,6 +146,7 @@ namespace AccountingSystem.Views.Manage.Registry
 
         private void OnLoad()
         {
+            LoadRowFilter();
             LoadRegistryList();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
