@@ -137,7 +137,9 @@ namespace ACC.Data
                 new object[] {"@last_name", DbType.String, entity.LastName},
                 new object[] {"@sex", DbType.String, entity.Sex},
                 new object[] {"@nationality", DbType.String, entity.Nationality},
+                new object[] {"@birth_date", DbType.Date, entity.BirthDate},
                 new object[] {"@street", DbType.String, entity.Street},
+                new object[] {"@barangay", DbType.String, entity.Barangay},
                 new object[] {"@municipality", DbType.String, entity.Municipality},
                 new object[] {"@province", DbType.String, entity.Province},
                 new object[] {"@country", DbType.String, entity.Country},
@@ -146,7 +148,7 @@ namespace ACC.Data
                 new object[] {"@updated_by", DbType.Int32, entity.UpdatedBy},
             };
 
-            string query = $"UPDATE {tableName} SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name, sex = @sex, nationality = @nationality, street = @street, municipality = @municipality, province = @province, country = @country, contact_info = @contact_info, created_by = @created_by, updated_by = @updated_by WHERE id = @id";
+            string query = $"UPDATE {tableName} SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name, sex = @sex, nationality = @nationality, birth_date = @birth_date, street = @street, barangay = @barangay, municipality = @municipality, province = @province, country = @country, contact_info = @contact_info, updated_by = @updated_by WHERE id = @id";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }

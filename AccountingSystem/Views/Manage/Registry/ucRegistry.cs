@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.Registry
                 LastName = txtLastName.Text.Trim(),
                 Nationality = txtNationality.Text.Trim(),
                 Sex = radMale.Checked ? "Male" : "Female",
-                Street = txtNationality.Text.Trim(),
+                Street = txtStreet.Text.Trim(),
                 BirthDate = dtBirthDate.Value,
                 Barangay = txtBarangay.Text.Trim(),
                 Municipality = txtMunicipality.Text.Trim(),
@@ -78,10 +78,27 @@ namespace AccountingSystem.Views.Manage.Registry
             if (isEdit)
             {
                 this.registryId = registryId;
+                LoadSelectedRecord();
             }
-            else
-            {
-            }
+        }
+
+        internal void LoadSelectedRecord()
+        {
+            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(registryId);
+
+            txtFirstName.Text = dictRegistry["first_name"];
+            txtMiddleName.Text = dictRegistry["middle_name"];
+            txtLastName.Text = dictRegistry["last_name"];
+            radMale.Checked = dictRegistry["sex"] == "Male";
+            radFemale.Checked = dictRegistry["sex"] == "Female";
+            txtNationality.Text = dictRegistry["nationality"];
+            txtContactInfo.Text = dictRegistry["contact_info"];
+            dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
+            txtStreet.Text = dictRegistry["street"];
+            txtBarangay.Text = dictRegistry["barangay"];
+            txtMunicipality.Text = dictRegistry["municipality"];
+            txtProvince.Text = dictRegistry["province"];
+            txtCountry.Text = dictRegistry["country"];
         }
 
         #region Validations

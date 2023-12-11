@@ -64,6 +64,7 @@
             btnUpdate.TabIndex = 0;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // ucRegistry1
             // 
@@ -75,9 +76,11 @@
             // 
             // frmEditRegistry
             // 
+            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            CancelButton = btnCancel;
             ClientSize = new System.Drawing.Size(378, 464);
             Controls.Add(ucRegistry1);
             Controls.Add(flowLayoutPanel1);
@@ -88,6 +91,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Registry";
+            Load += frmEditRegistry_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }

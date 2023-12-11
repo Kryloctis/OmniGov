@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.Registry
         public frmAddRegistry(frmRegistry frmRegistry)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             this.frmRegistry = frmRegistry;
             uc = ucRegistry1;
         }

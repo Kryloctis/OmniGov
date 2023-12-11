@@ -37,7 +37,10 @@ namespace AccountingSystem.Views.Manage.Registry
         {
             try
             {
-                _ = new frmEditRegistry().ShowDialog();
+                int index = dataGridView1.CurrentCell.RowIndex;
+                int registryId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
+
+                _ = new frmEditRegistry(registryId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
