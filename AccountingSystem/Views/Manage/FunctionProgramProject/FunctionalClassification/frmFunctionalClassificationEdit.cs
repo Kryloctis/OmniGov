@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 {
     public partial class frmFunctionalClassificationEdit : Form
     {
-        private frmFunctionProgramProject _frmFunctionProgramProject;
+        private frmFunctionProgramProject frmFunctionProgramProject;
         private ucFunctionalClassification uc;
 
         public frmFunctionalClassificationEdit(frmFunctionProgramProject frmFunctionProgramProject, byte functionalClassificationId)
@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             Helper.LoadFormIcon(this);
             uc = ucFunctionalClassification1;
             uc.functionalClassificationId = functionalClassificationId;
-            _frmFunctionProgramProject = frmFunctionProgramProject;
+            this.frmFunctionProgramProject = frmFunctionProgramProject;
         }
 
         private void LoadSelectedRecord()
@@ -61,9 +61,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Functional Classification has been saved.");
-                    _frmFunctionProgramProject.LoadFunctionalClassifications();
-                    _frmFunctionProgramProject.LoadSectorComboBox();
-                    Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
+                    frmFunctionProgramProject.LoadFunctionalClassifications();
+                    frmFunctionProgramProject.LoadSectorComboBox();
+                    Helper.DatagridViewRecordFinder(frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
                     Close();
                 }
             }

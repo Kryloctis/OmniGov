@@ -29,82 +29,81 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.epCode = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            txtCode = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            txtName = new System.Windows.Forms.TextBox();
+            epCode = new System.Windows.Forms.ErrorProvider(components);
+            epName = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)epCode).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epName).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Code";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 4);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(35, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Code";
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(46, 2);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCode.MaxLength = 4;
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(324, 23);
-            this.txtCode.TabIndex = 4;
-            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
-            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
+            txtCode.Location = new System.Drawing.Point(46, 2);
+            txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtCode.MaxLength = 4;
+            txtCode.Name = "txtCode";
+            txtCode.Size = new System.Drawing.Size(324, 23);
+            txtCode.TabIndex = 4;
+            txtCode.Validating += txtCode_Validating;
+            txtCode.Validated += txtCode_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Name";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 32);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(39, 15);
+            label2.TabIndex = 7;
+            label2.Text = "Name";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(46, 27);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(324, 23);
-            this.txtName.TabIndex = 5;
-            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
-            this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
+            txtName.Location = new System.Drawing.Point(46, 29);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(324, 23);
+            txtName.TabIndex = 5;
+            txtName.Validating += txtName_Validating;
+            txtName.Validated += txtName_Validated;
             // 
             // epCode
             // 
-            this.epCode.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.epCode.ContainerControl = this;
+            epCode.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            epCode.ContainerControl = this;
             // 
             // epName
             // 
-            this.epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.epName.ContainerControl = this;
+            epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            epName.ContainerControl = this;
             // 
             // ucFunctionalClassification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtCode);
-            this.Name = "ucFunctionalClassification";
-            this.Size = new System.Drawing.Size(391, 52);
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+            Controls.Add(label2);
+            Controls.Add(txtName);
+            Controls.Add(label1);
+            Controls.Add(txtCode);
+            Name = "ucFunctionalClassification";
+            Size = new System.Drawing.Size(391, 57);
+            ((System.ComponentModel.ISupportInitialize)epCode).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epName).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
