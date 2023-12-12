@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             components = new System.ComponentModel.Container();
             cmbxTaxPayerType = new System.Windows.Forms.ComboBox();
             txtTIN = new System.Windows.Forms.TextBox();
-            label10 = new System.Windows.Forms.Label();
             txtContact = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -41,60 +40,48 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             label1 = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             chckIsActive = new System.Windows.Forms.CheckBox();
-            txtStreet = new System.Windows.Forms.TextBox();
+            txtAddress = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
-            txtBarangay = new System.Windows.Forms.TextBox();
             txtMunicipality = new System.Windows.Forms.TextBox();
-            txtProvince = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
+            txtProvince = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
+            chckRepresentative = new System.Windows.Forms.CheckBox();
+            cmbxRepresentative = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // cmbxTaxPayerType
             // 
-            cmbxTaxPayerType.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxTaxPayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxTaxPayerType.FormattingEnabled = true;
-            cmbxTaxPayerType.Location = new System.Drawing.Point(97, 86);
+            cmbxTaxPayerType.Location = new System.Drawing.Point(98, 88);
             cmbxTaxPayerType.Name = "cmbxTaxPayerType";
-            cmbxTaxPayerType.Size = new System.Drawing.Size(250, 23);
+            cmbxTaxPayerType.Size = new System.Drawing.Size(313, 23);
             cmbxTaxPayerType.TabIndex = 2;
             // 
             // txtTIN
             // 
-            txtTIN.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtTIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtTIN.Cursor = System.Windows.Forms.Cursors.IBeam;
-            txtTIN.Location = new System.Drawing.Point(97, 28);
+            txtTIN.Location = new System.Drawing.Point(98, 30);
             txtTIN.Name = "txtTIN";
-            txtTIN.Size = new System.Drawing.Size(250, 23);
+            txtTIN.Size = new System.Drawing.Size(313, 23);
             txtTIN.TabIndex = 0;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(4, 148);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(56, 15);
-            label10.TabIndex = 1;
-            label10.Text = "Barangay";
             // 
             // txtContact
             // 
-            txtContact.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtContact.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtContact.Cursor = System.Windows.Forms.Cursors.IBeam;
-            txtContact.Location = new System.Drawing.Point(97, 231);
+            txtContact.Location = new System.Drawing.Point(98, 204);
             txtContact.MaxLength = 13;
             txtContact.Name = "txtContact";
-            txtContact.Size = new System.Drawing.Size(250, 23);
+            txtContact.Size = new System.Drawing.Size(313, 23);
             txtContact.TabIndex = 3;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(4, 235);
+            label8.Location = new System.Drawing.Point(5, 206);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(76, 15);
             label8.TabIndex = 1;
@@ -103,7 +90,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(4, 90);
+            label7.Location = new System.Drawing.Point(5, 90);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(31, 15);
             label7.TabIndex = 1;
@@ -111,13 +98,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtName
             // 
-            txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            txtName.Location = new System.Drawing.Point(97, 57);
+            txtName.Location = new System.Drawing.Point(98, 59);
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(250, 23);
+            txtName.Size = new System.Drawing.Size(313, 23);
             txtName.TabIndex = 1;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -125,16 +110,16 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(4, 61);
+            label2.Location = new System.Drawing.Point(5, 61);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(39, 15);
+            label2.Size = new System.Drawing.Size(44, 15);
             label2.TabIndex = 1;
-            label2.Text = "Name";
+            label2.Text = "Name*";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(4, 32);
+            label1.Location = new System.Drawing.Point(5, 32);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(25, 15);
             label1.TabIndex = 1;
@@ -147,105 +132,121 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // chckIsActive
             // 
-            chckIsActive.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chckIsActive.AutoSize = true;
             chckIsActive.Checked = true;
             chckIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            chckIsActive.Location = new System.Drawing.Point(288, 3);
+            chckIsActive.Location = new System.Drawing.Point(352, 5);
             chckIsActive.Name = "chckIsActive";
             chckIsActive.Size = new System.Drawing.Size(59, 19);
             chckIsActive.TabIndex = 5;
             chckIsActive.Text = "Active";
             chckIsActive.UseVisualStyleBackColor = true;
             // 
-            // txtStreet
+            // txtAddress
             // 
-            txtStreet.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtStreet.Location = new System.Drawing.Point(97, 115);
-            txtStreet.Name = "txtStreet";
-            txtStreet.Size = new System.Drawing.Size(250, 23);
-            txtStreet.TabIndex = 6;
+            txtAddress.Location = new System.Drawing.Point(98, 117);
+            txtAddress.Name = "txtAddress";
+            txtAddress.Size = new System.Drawing.Size(313, 23);
+            txtAddress.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(4, 119);
+            label3.Location = new System.Drawing.Point(5, 119);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(84, 15);
+            label3.Size = new System.Drawing.Size(49, 15);
             label3.TabIndex = 1;
-            label3.Text = "Street/Address";
-            // 
-            // txtBarangay
-            // 
-            txtBarangay.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtBarangay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtBarangay.Location = new System.Drawing.Point(97, 144);
-            txtBarangay.Name = "txtBarangay";
-            txtBarangay.Size = new System.Drawing.Size(250, 23);
-            txtBarangay.TabIndex = 7;
+            label3.Text = "Address";
             // 
             // txtMunicipality
             // 
-            txtMunicipality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtMunicipality.Location = new System.Drawing.Point(97, 173);
+            txtMunicipality.Location = new System.Drawing.Point(98, 146);
             txtMunicipality.Name = "txtMunicipality";
-            txtMunicipality.Size = new System.Drawing.Size(250, 23);
+            txtMunicipality.Size = new System.Drawing.Size(313, 23);
             txtMunicipality.TabIndex = 7;
             // 
-            // txtProvince
+            // label6
             // 
-            txtProvince.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtProvince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtProvince.Location = new System.Drawing.Point(97, 202);
-            txtProvince.Name = "txtProvince";
-            txtProvince.Size = new System.Drawing.Size(250, 23);
-            txtProvince.TabIndex = 7;
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(5, 240);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(84, 15);
+            label6.TabIndex = 1;
+            label6.Text = "Representative";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(4, 177);
+            label4.Location = new System.Drawing.Point(5, 146);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(73, 15);
+            label4.Size = new System.Drawing.Size(28, 15);
             label4.TabIndex = 1;
-            label4.Text = "Municipality";
+            label4.Text = "City";
+            // 
+            // txtProvince
+            // 
+            txtProvince.Location = new System.Drawing.Point(98, 175);
+            txtProvince.Name = "txtProvince";
+            txtProvince.Size = new System.Drawing.Size(313, 23);
+            txtProvince.TabIndex = 7;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(4, 206);
+            label5.Location = new System.Drawing.Point(5, 175);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(53, 15);
             label5.TabIndex = 1;
             label5.Text = "Province";
             // 
+            // chckRepresentative
+            // 
+            chckRepresentative.AutoSize = true;
+            chckRepresentative.Location = new System.Drawing.Point(98, 240);
+            chckRepresentative.Name = "chckRepresentative";
+            chckRepresentative.Size = new System.Drawing.Size(55, 19);
+            chckRepresentative.TabIndex = 11;
+            chckRepresentative.Text = "None";
+            chckRepresentative.UseVisualStyleBackColor = true;
+            chckRepresentative.CheckedChanged += chckRepresentative_CheckedChanged;
+            // 
+            // cmbxRepresentative
+            // 
+            cmbxRepresentative.FormattingEnabled = true;
+            cmbxRepresentative.Location = new System.Drawing.Point(98, 265);
+            cmbxRepresentative.Name = "cmbxRepresentative";
+            cmbxRepresentative.Size = new System.Drawing.Size(313, 23);
+            cmbxRepresentative.TabIndex = 12;
+            cmbxRepresentative.KeyPress += cmbxRepresentative_KeyPress;
+            cmbxRepresentative.PreviewKeyDown += cmbxRepresentative_PreviewKeyDown;
+            // 
             // ucTaxPayers
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            Controls.Add(txtProvince);
-            Controls.Add(txtMunicipality);
-            Controls.Add(txtBarangay);
-            Controls.Add(txtStreet);
-            Controls.Add(chckIsActive);
-            Controls.Add(cmbxTaxPayerType);
+            Controls.Add(cmbxRepresentative);
+            Controls.Add(chckRepresentative);
             Controls.Add(txtTIN);
-            Controls.Add(label1);
+            Controls.Add(label7);
+            Controls.Add(txtContact);
+            Controls.Add(label2);
+            Controls.Add(chckIsActive);
+            Controls.Add(txtName);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(label10);
-            Controls.Add(label2);
-            Controls.Add(txtContact);
-            Controls.Add(txtName);
-            Controls.Add(label8);
             Controls.Add(label3);
-            Controls.Add(label7);
+            Controls.Add(txtAddress);
+            Controls.Add(label1);
+            Controls.Add(txtProvince);
+            Controls.Add(txtMunicipality);
+            Controls.Add(label6);
+            Controls.Add(label8);
+            Controls.Add(cmbxTaxPayerType);
             Name = "ucTaxPayers";
-            Size = new System.Drawing.Size(372, 262);
-            Load += ucTaxPayers_Load;
+            Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+            Size = new System.Drawing.Size(430, 291);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -254,7 +255,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         #endregion
         internal System.Windows.Forms.ComboBox cmbxTaxPayerType;
         internal System.Windows.Forms.TextBox txtTIN;
-        internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.TextBox txtContact;
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.Label label7;
@@ -262,13 +262,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox txtStreet;
+        internal System.Windows.Forms.TextBox txtAddress;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.CheckBox chckIsActive;
+        internal System.Windows.Forms.TextBox txtMunicipality;
+        internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtProvince;
-        internal System.Windows.Forms.TextBox txtMunicipality;
-        internal System.Windows.Forms.TextBox txtBarangay;
+        private System.Windows.Forms.CheckBox chckRepresentative;
+        private System.Windows.Forms.ComboBox cmbxRepresentative;
     }
 }

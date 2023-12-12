@@ -213,13 +213,14 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["taxpayers_id"].Visible = false;
-            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Type";
-            dataGridView.Columns["taxpayer_type_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["taxpayer_type_code"].MinimumWidth = 30;
+            dataGridView.Columns["taxpayer_type"].HeaderText = "Type";
+            dataGridView.Columns["taxpayer_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["taxpayer_type"].MinimumWidth = 30;
             dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
             dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
             dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
+            dataGridView.Columns["representative_name"].HeaderText = "Representative";
             dataGridView.Columns["is_active"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_active"].HeaderText = "Active";
             dataGridView.Columns["created_at"].Visible = false;
@@ -2649,6 +2650,29 @@ namespace AccountingSystem
             {
                 comboBox.DroppedDown = false;
                 comboBox.SelectedIndex = -1;
+            }
+        }
+
+        public static void SearchableCombobox2(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            var filteredDtbl = dataTable.Clone();
+            string searchKey = comboBox.Text.Trim();
+
+            filteredDtbl.Rows.Clear();
+
+            DataRow[] filteredRows = dataTable.Select($"{displayMember} LIKE '%{searchKey}%'");
+            foreach (DataRow row in filteredRows)
+                filteredDtbl.ImportRow(row);
+
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+
+            if (filteredDtbl.Rows.Count < 1)
+                comboBox.DataSource = dataTable;
+            else
+            {
+                comboBox.DataSource = filteredDtbl;
+
             }
         }
 

@@ -111,8 +111,6 @@ namespace ACC.Data
                 new object[] {"@sex", DbType.String, entity.Sex},
                 new object[] {"@nationality", DbType.String, entity.Nationality},
                 new object[] {"@birth_date", DbType.Date, entity.BirthDate},
-                new object[] {"@street", DbType.String, entity.Street},
-                new object[] {"@barangay", DbType.String, entity.Barangay},
                 new object[] {"@municipality", DbType.String, entity.Municipality},
                 new object[] {"@province", DbType.String, entity.Province},
                 new object[] {"@country", DbType.String, entity.Country},
@@ -120,7 +118,7 @@ namespace ACC.Data
                 new object[] {"@created_by", DbType.Int32, entity.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (first_name, middle_name, last_name, sex, nationality, birth_date, street, barangay, municipality, province, country, contact_info, created_by) VALUES (@first_name, @middle_name, @last_name, @sex, @nationality, @birth_date, @street, @barangay, @municipality, @province, @country, @contact_info, @created_by)";
+            string query = $"INSERT INTO {tableName} (first_name, middle_name, last_name, sex, nationality, birth_date, municipality, province, country, contact_info, created_by) VALUES (@first_name, @middle_name, @last_name, @sex, @nationality, @birth_date, @municipality, @province, @country, @contact_info, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -136,8 +134,6 @@ namespace ACC.Data
                 new object[] {"@sex", DbType.String, entity.Sex},
                 new object[] {"@nationality", DbType.String, entity.Nationality},
                 new object[] {"@birth_date", DbType.Date, entity.BirthDate},
-                new object[] {"@street", DbType.String, entity.Street},
-                new object[] {"@barangay", DbType.String, entity.Barangay},
                 new object[] {"@municipality", DbType.String, entity.Municipality},
                 new object[] {"@province", DbType.String, entity.Province},
                 new object[] {"@country", DbType.String, entity.Country},
@@ -146,7 +142,7 @@ namespace ACC.Data
                 new object[] {"@updated_by", DbType.Int32, entity.UpdatedBy},
             };
 
-            string query = $"UPDATE {tableName} SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name, sex = @sex, nationality = @nationality, birth_date = @birth_date, street = @street, barangay = @barangay, municipality = @municipality, province = @province, country = @country, contact_info = @contact_info, updated_by = @updated_by WHERE id = @id";
+            string query = $"UPDATE {tableName} SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name, sex = @sex, nationality = @nationality, birth_date = @birth_date, municipality = @municipality, province = @province, country = @country, contact_info = @contact_info, updated_by = @updated_by WHERE id = @id";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }

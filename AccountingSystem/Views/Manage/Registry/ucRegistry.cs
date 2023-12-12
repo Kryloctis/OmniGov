@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.Registry
                 errorProvider1.GetError(txtFirstName),
                 errorProvider1.GetError(txtLastName),
                 errorProvider1.GetError(txtNationality),
-                errorProvider1.GetError(txtBarangay),
                 errorProvider1.GetError(txtMunicipality),
                 errorProvider1.GetError(txtProvince),
                 errorProvider1.GetError(txtCountry)
@@ -47,8 +46,6 @@ namespace AccountingSystem.Views.Manage.Registry
             txtNationality.Clear();
             txtContactInfo.Clear();
             dtBirthDate.Value = Helper.GetCurrentDate();
-            txtStreet.Clear();
-            txtBarangay.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
             txtCountry.Clear();
@@ -63,9 +60,7 @@ namespace AccountingSystem.Views.Manage.Registry
                 LastName = txtLastName.Text.Trim(),
                 Nationality = txtNationality.Text.Trim(),
                 Sex = radMale.Checked ? "Male" : "Female",
-                Street = txtStreet.Text.Trim(),
                 BirthDate = dtBirthDate.Value,
-                Barangay = txtBarangay.Text.Trim(),
                 Municipality = txtMunicipality.Text.Trim(),
                 Province = txtProvince.Text.Trim(),
                 Country = txtCountry.Text.Trim(),
@@ -94,8 +89,6 @@ namespace AccountingSystem.Views.Manage.Registry
             txtNationality.Text = dictRegistry["nationality"];
             txtContactInfo.Text = dictRegistry["contact_info"];
             dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
-            txtStreet.Text = dictRegistry["street"];
-            txtBarangay.Text = dictRegistry["barangay"];
             txtMunicipality.Text = dictRegistry["municipality"];
             txtProvince.Text = dictRegistry["province"];
             txtCountry.Text = dictRegistry["country"];
@@ -131,16 +124,6 @@ namespace AccountingSystem.Views.Manage.Registry
         private void txtNationality_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtNationality);
-        }
-
-        private void txtBarangay_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBarangay, "Barangay");
-        }
-
-        private void txtBarangay_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtBarangay);
         }
 
         private void txtMunicipality_Validating(object sender, CancelEventArgs e)

@@ -145,8 +145,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     {
                         Name = realTaxpayerName,
                         Tin = realTaxpayerTin,
-                        Street = realTaxpayerStreet,
-                        Barangay = realTaxpayerBarangay,
+                        Address = realTaxpayerStreet,
                         Municipality = realTaxpayerMunicipality,
                         Province = realTaxpayerProvince,
                         ContactInfo = realTaxpayerContactInfo,
