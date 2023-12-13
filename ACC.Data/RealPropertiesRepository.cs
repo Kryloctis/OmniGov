@@ -10,7 +10,7 @@ namespace ACC.Data
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
-        private AccGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands mySqlGenericCommandsLFS;
         private readonly string tableName = "real_properties";
         private readonly string viewTableName = "view_real_properties";
         private IProvinces _provinces;
@@ -24,7 +24,7 @@ namespace ACC.Data
 
         public RealPropertiesRepository(AccGenericCommands mySqlGenericCommandsLFS, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository, IActualUseCodes actualUseCodes, IClassificationCodes classificationCodes, ITaxpayerTypeRepository taxpayerTypeRepository, ITaxpayersRepository taxpayersRepository, IRptPreviousAssessment rptPreviousAssessment)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _provinces = provinces;
             _municipalities = municipalities;
             _barangayRepository = barangayRepository;
@@ -52,7 +52,7 @@ namespace ACC.Data
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -62,37 +62,24 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var dict = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
 
             string query = $"SELECT complete_arp_no, property_pin, real_properties_barangays_id, real_properties_barangays_name, classification_codes_id, actual_use_codes_id, property_kind, effectivity_quarter, effectivity_year, assessed_value, gr_year, other_improvements, area, lot_no FROM {viewTableName} WHERE real_properties_id = @id";
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return dict;
+                DataRow row = dataTable.Rows[0];
 
-                foreach (DataRow row in reader.Rows)
-                {
-                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
-                    dict.Add("property_pin", row["property_pin"].ToString());
-                    dict.Add("real_properties_barangays_id", row["real_properties_barangays_id"].ToString());
-                    dict.Add("real_properties_barangays_name", row["real_properties_barangays_name"].ToString());
-                    dict.Add("classification_codes_id", row["classification_codes_id"].ToString());
-                    dict.Add("actual_use_codes_id", row["actual_use_codes_id"].ToString());
-                    dict.Add("property_kind", row["property_kind"].ToString());
-                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
-                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
-                    dict.Add("assessed_value", row["assessed_value"].ToString());
-                    dict.Add("gr_year", row["gr_year"].ToString());
-                    dict.Add("other_improvements", row["other_improvements"].ToString());
-                    dict.Add("area", row["area"].ToString());
-                    dict.Add("lot_no", row["lot_no"].ToString());
-                }
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
 
-                return dict;
+                return recordDictionary;
             }
+            return recordDictionary;
         }
 
         public DataTable GetCancelledRecordsBySearch(string searchText)
@@ -100,14 +87,14 @@ namespace ACC.Data
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text AND is_cancelled = 1";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -115,7 +102,7 @@ namespace ACC.Data
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -154,7 +141,7 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@real_taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @property_identifier, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by)";
 
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RealPropertiesModel entity)
@@ -190,7 +177,7 @@ namespace ACC.Data
 
             string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by, updated_at = @updated_at WHERE id = @id";
 
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool CompleteArpNoExist(string completeArpNo)
@@ -201,7 +188,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -217,7 +204,7 @@ namespace ACC.Data
              };
 
             string query = $"SELECT id FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND id <> @id";
-            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -227,7 +214,7 @@ namespace ACC.Data
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
@@ -250,53 +237,27 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR taxpayer_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
 
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetRecordByCompleteArpNo(string completeArpNo)
         {
-            var dict = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeArpNo } };
-            string query = $"SELECT id, real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, property_identifier, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_at, created_by, updated_at, updated_by FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return dict;
+                DataRow row = dataTable.Rows[0];
 
-                foreach (DataRow row in reader.Rows)
-                {
-                    dict.Add("id", row["id"].ToString());
-                    dict.Add("real_taxpayers_id", row["real_taxpayers_id"].ToString());
-                    dict.Add("barangays_id", row["barangays_id"].ToString());
-                    dict.Add("classification_codes_id", row["classification_codes_id"].ToString());
-                    dict.Add("actual_use_codes_id", row["actual_use_codes_id"].ToString());
-                    dict.Add("property_identifier", row["property_identifier"].ToString());
-                    dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
-                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
-                    dict.Add("taxpayer_contact_info", row["taxpayer_contact_info"].ToString());
-                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
-                    dict.Add("street", row["street"].ToString());
-                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
-                    dict.Add("property_pin", row["property_pin"].ToString());
-                    dict.Add("property_kind", row["property_kind"].ToString());
-                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
-                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
-                    dict.Add("other_improvements", row["other_improvements"].ToString());
-                    dict.Add("assessed_value", row["assessed_value"].ToString());
-                    dict.Add("area", row["area"].ToString());
-                    dict.Add("lot_no", row["lot_no"].ToString());
-                    dict.Add("gr_year", row["gr_year"].ToString());
-                    dict.Add("is_taxable", row["is_taxable"].ToString());
-                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
-                    dict.Add("created_at", row["created_at"].ToString());
-                    dict.Add("created_by", row["created_by"].ToString());
-                    dict.Add("updated_at", row["updated_at"].ToString());
-                    dict.Add("updated_by", row["updated_by"].ToString());
-                }
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
 
-                return dict;
+                return recordDictionary;
             }
+            return recordDictionary;
         }
 
         public bool Synchronize(RealPropertiesModel realPropertiesModel)
@@ -468,25 +429,30 @@ namespace ACC.Data
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeARPNo } };
             string query = $"SELECT real_properties_id, complete_arp_no FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetCancelledProperties()
         {
             string query = $"SELECT * FROM {viewTableName} WHERE is_cancelled = 1";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
         }
 
-        public DataTable GetRecordsBySearch(string searchText, bool isCancelled = false)
+        public DataTable GetRecordsBySearch(string searchText, int rowFilter, bool showCancelled)
         {
-            var parameters = new object[][] {
-                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
-                new object[] { "@is_cancelled", DbType.Boolean, isCancelled},
+            var parameters = new object[][]
+            {
+                new object[] {"@search_text", DbType.String, $"%{searchText}%"},
+                new object[] {"@is_cancelled", DbType.Boolean, showCancelled},
+                new object[] {"@row_filter", DbType.Int32, rowFilter},
             };
-            string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text AND is_cancelled = @is_cancelled";
+
+            string subQuery = showCancelled ? string.Empty : "AND is_cancelled = @is_cancelled";
+            string query = $"SELECT * FROM {viewTableName} WHERE (real_taxpayers_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
+
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

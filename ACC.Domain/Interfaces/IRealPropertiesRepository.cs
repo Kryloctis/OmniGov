@@ -20,7 +20,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetCancelledRecordsBySearch(string searchText);
 
-        DataTable GetRecordsBySearch(string searchText, bool isCancelled = false);
+        DataTable GetRecordsBySearch(string searchText, int rowFilter, bool showCancelled);
 
         int GetLastInsertedId();
 
