@@ -81,6 +81,30 @@ namespace AccountingSystem
 
         #endregion Business Addons
 
+        #region ActualUse
+
+        public static void ActualUseCombobox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        #endregion ActualUse
+
+        public static void ClassificationCombobox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
         #region BusinessCategories
 
         internal static void BusinessCategoriesDataGridView(DataGridView dataGridView, DataTable dataTable)
@@ -114,7 +138,7 @@ namespace AccountingSystem
         {
             datagridView.DataSource = dataTable;
 
-            datagridView.Columns["real_properties_id"].Visible = false;
+            datagridView.Columns["id"].Visible = false;
             datagridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             datagridView.Columns["complete_arp_no"].MinimumWidth = 100;
             datagridView.Columns["property_pin"].HeaderText = "PIN";
@@ -125,20 +149,20 @@ namespace AccountingSystem
             datagridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["property_kind"].HeaderText = "Kind";
-            datagridView.Columns["classification_codes"].HeaderText = "Classification";
-            datagridView.Columns["classification_codes"].Width = 80;
-            datagridView.Columns["classification_codes"].MinimumWidth = 80;
-            datagridView.Columns["classification_codes"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["classification_codes"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["actual_use_codes"].HeaderText = "Actual Use";
-            datagridView.Columns["actual_use_codes"].Width = 70;
-            datagridView.Columns["actual_use_codes"].MinimumWidth = 70;
-            datagridView.Columns["actual_use_codes"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["actual_use_codes"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["classification_code"].HeaderText = "Classification";
+            datagridView.Columns["classification_code"].Width = 80;
+            datagridView.Columns["classification_code"].MinimumWidth = 80;
+            datagridView.Columns["classification_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["classification_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["actual_use_code"].HeaderText = "Actual Use";
+            datagridView.Columns["actual_use_code"].Width = 70;
+            datagridView.Columns["actual_use_code"].MinimumWidth = 70;
+            datagridView.Columns["actual_use_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["actual_use_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["effectivity_quarter_and_year"].HeaderText = "Effectivity";
             datagridView.Columns["effectivity_quarter_and_year"].MinimumWidth = 100;
-            datagridView.Columns["taxpayer_name"].HeaderText = "Taxpayer";
-            datagridView.Columns["taxpayer_name"].MinimumWidth = 150;
+            datagridView.Columns["taxpayers_name"].HeaderText = "Taxpayer";
+            datagridView.Columns["taxpayers_name"].MinimumWidth = 150;
             datagridView.Columns["representative_name"].HeaderText = "Representative";
             datagridView.Columns["representative_name"].MinimumWidth = 150;
             datagridView.Columns["is_taxable"].HeaderText = "Taxable";
@@ -2614,6 +2638,7 @@ namespace AccountingSystem
         {
             var filteredDtbl = dataTable.Clone();
             string searchKey = comboBox.Text.Trim();
+            comboBox.DropDownHeight = 200;
 
             filteredDtbl.Rows.Clear();
 

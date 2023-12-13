@@ -63,10 +63,9 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var recordDictionary = new Dictionary<string, string>();
-
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
 
-            string query = $"SELECT complete_arp_no, property_pin, real_properties_barangays_id, real_properties_barangays_name, classification_codes_id, actual_use_codes_id, property_kind, effectivity_quarter, effectivity_year, assessed_value, gr_year, other_improvements, area, lot_no FROM {viewTableName} WHERE real_properties_id = @id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -114,14 +113,10 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@real_taxpayers_id", DbType.Int32, entity.RealTaxpayersId },
-                new object[] { "@barangays_id", DbType.Int32, entity.BarangaysId },
-                new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesId },
-                new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesId },
-                new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin},
-                new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName},
-                new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo},
-                new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress},
+                new object[] { "@taxpayers_id", DbType.Int32, entity.TaxpayersModel.Id },
+                new object[] { "@barangays_id", DbType.Int32, entity.BarangayModel.Id },
+                new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesModel.Id },
+                new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesModel.Id },
                 new object[] { "@street", DbType.String, entity.Street },
                 new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
@@ -139,7 +134,7 @@ namespace ACC.Data
                 new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@real_taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @property_identifier, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by)";
+            string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @street, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by);";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -149,14 +144,10 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@real_taxpayers_id", DbType.Int32, entity.RealTaxpayersId },
-                new object[] { "@barangays_id", DbType.Int32, entity.BarangaysId },
-                new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesId },
-                new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesId },
-                new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin},
-                new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName},
-                new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo},
-                new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress},
+                new object[] { "@taxpayers_id", DbType.Int32, entity.TaxpayersModel.Id },
+                new object[] { "@barangays_id", DbType.Int32, entity.BarangayModel.Id },
+                new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesModel.Id },
+                new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesModel.Id },
                 new object[] { "@street", DbType.String, entity.Street },
                 new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
@@ -171,11 +162,10 @@ namespace ACC.Data
                 new object[] { "@gr_year", DbType.Int32, entity.GrYear },
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
-                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy},
                 new object[] { "@updated_at", DbType.DateTime, entity.UpdatedAt}
             };
 
-            string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by, updated_at = @updated_at WHERE id = @id";
+            string query = $"UPDATE {tableName} SET  taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, street = @street, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled WHERE id = @id";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -222,7 +212,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@effectivity_year", DbType.Int32, effectivityYear},
-                new object[] { "@barangay_name", DbType.String, barangay},
+                new object[] { "@barangays_name", DbType.String, barangay},
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"}
             };
 
@@ -231,7 +221,7 @@ namespace ACC.Data
                 if (barangay == "All")
                     return string.Empty;
                 else
-                    return "AND real_properties_barangays_name = @barangay_name";
+                    return "AND barangays_name = @barangays_name";
             }
 
             string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR taxpayer_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
@@ -373,10 +363,10 @@ namespace ACC.Data
                     var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
                     realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? string.Empty : dictRealProperty["id"];
                     realPropertiesModel.Id = realPropertiesId;
-                    realPropertiesModel.ActualUseCodesId = actualUseId;
-                    realPropertiesModel.BarangaysId = barangayId;
-                    realPropertiesModel.ClassificationCodesId = classificationId;
-                    realPropertiesModel.RealTaxpayersId = taxpayerId;
+                    realPropertiesModel.ActualUseCodesModel.Id = actualUseId;
+                    realPropertiesModel.BarangayModel.Id = barangayId;
+                    realPropertiesModel.ClassificationCodesModel.Id = classificationId;
+                    realPropertiesModel.TaxpayersModel.Id = taxpayerId;
                     realPropertiesModel.UpdatedAt = DateTime.Now;
                     Update(realPropertiesModel);
 
@@ -388,10 +378,10 @@ namespace ACC.Data
                 }
                 else
                 {
-                    realPropertiesModel.ActualUseCodesId = actualUseId;
-                    realPropertiesModel.BarangaysId = barangayId;
-                    realPropertiesModel.ClassificationCodesId = classificationId;
-                    realPropertiesModel.RealTaxpayersId = taxpayerId;
+                    realPropertiesModel.ActualUseCodesModel.Id = actualUseId;
+                    realPropertiesModel.BarangayModel.Id = barangayId;
+                    realPropertiesModel.ClassificationCodesModel.Id = classificationId;
+                    realPropertiesModel.TaxpayersModel.Id = taxpayerId;
                     Insert(realPropertiesModel);
                     realPropertiesId = GetLastInsertedId();
 
@@ -427,7 +417,7 @@ namespace ACC.Data
         public DataTable GetRecordsByCompleteARP(string completeARPNo)
         {
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeARPNo } };
-            string query = $"SELECT real_properties_id, complete_arp_no FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
+            string query = $"SELECT id, complete_arp_no FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -449,7 +439,7 @@ namespace ACC.Data
             };
 
             string subQuery = showCancelled ? string.Empty : "AND is_cancelled = @is_cancelled";
-            string query = $"SELECT * FROM {viewTableName} WHERE (real_taxpayers_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
 
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);

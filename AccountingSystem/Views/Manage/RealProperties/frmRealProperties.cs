@@ -64,14 +64,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private DataColumn[] RealPropertiesColumns()
         {
             var dataColumns = new DataColumn[] {
-                new DataColumn("real_properties_id", typeof(int)),
+                new DataColumn("id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
                 new DataColumn("property_kind", typeof(string)),
-                new DataColumn("taxpayer_name", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
                 new DataColumn("representative_name", typeof(string)),
-                new DataColumn("classification_codes", typeof(string)),
-                new DataColumn("actual_use_codes", typeof(string)),
+                new DataColumn("classification_code", typeof(string)),
+                new DataColumn("actual_use_code", typeof(string)),
                 new DataColumn("effectivity_quarter_and_year", typeof(string)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("is_cancelled", typeof(bool)),
@@ -111,17 +111,17 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 foreach (DataRow row in dtRealPropertiesFromDB.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string location = $"{row["real_properties_street"]} {row["real_properties_barangays_name"]} {row["real_properties_municipalities_name"]} {row["real_properties_provinces_name"]}";
+                    string location = $"{row["street"]} {row["barangays_name"]} {row["municipalities_name"]} {row["provinces_name"]}";
                     string effectivityQuarterAndYear = $"{Helper.AddOrdinalSuffix((int)row["effectivity_quarter"])} Quarter - {row["effectivity_year"]}";
 
-                    newRow["real_properties_id"] = row["real_properties_id"];
+                    newRow["id"] = row["id"];
                     newRow["complete_arp_no"] = row["complete_arp_no"];
                     newRow["property_pin"] = row["property_pin"];
                     newRow["property_kind"] = row["property_kind"];
-                    newRow["taxpayer_name"] = row["taxpayer_name"];
+                    newRow["taxpayers_name"] = row["taxpayers_name"];
                     newRow["representative_name"] = row["representative_name"];
-                    newRow["classification_codes"] = row["classification_codes"];
-                    newRow["actual_use_codes"] = row["actual_use_codes"];
+                    newRow["classification_code"] = row["classification_code"];
+                    newRow["actual_use_code"] = row["actual_use_code"];
                     newRow["effectivity_quarter_and_year"] = effectivityQuarterAndYear;
                     newRow["is_taxable"] = row["is_taxable"];
                     newRow["is_cancelled"] = row["is_cancelled"];
@@ -211,8 +211,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             try
             {
                 int rowIndex = dgRealProperties.CurrentCell.RowIndex;
-                var realPropertiesID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_properties_id"].Value);
-                _ = new frmEditRealProperties(this).ShowDialog();
+                var rptId = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["id"].Value);
+                _ = new frmEditRealProperties(this, rptId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

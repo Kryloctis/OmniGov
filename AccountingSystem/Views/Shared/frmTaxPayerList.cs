@@ -185,30 +185,6 @@ namespace AccountingSystem.Views.Shared
             frmListOfRealPropertyTaxDelinquenciesReport.backgroundWorker1.RunWorkerAsync();
         }
 
-        private void InitializeRealProperties(frmAddRealProperties frmAddRealProperties)
-        {
-            int rowIndex = dataGridView1.CurrentRow.Index;
-
-            var taxpayerID = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["taxpayers_id"].Value);
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerID);
-            var taxpayer = dictTaxpayer["taxpayers_name"].ToString();
-            var taxpayerType = dictTaxpayer["taxpayer_type"].ToString();
-            var taxpayerTIN = dictTaxpayer["taxpayers_tin"].ToString();
-            var taxpayerContact = dictTaxpayer["taxpayers_contact_info"].ToString();
-            var taxpayerBarangay = dictTaxpayer["taxpayers_barangay"].ToString();
-            var taxpayerMunicipality = dictTaxpayer["taxpayers_municipality"].ToString();
-            var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
-
-            var address = $"{taxpayerBarangay}, {taxpayerMunicipality}, {taxpayerProvince}";
-
-            frmAddRealProperties.uc.taxpayerID = taxpayerID;
-            frmAddRealProperties.uc.txtTaxpayers.Text = taxpayer;
-            frmAddRealProperties.uc.txtTaxpayerType.Text = taxpayerType;
-            frmAddRealProperties.uc.txtTaxpayerTIN.Text = taxpayerTIN;
-            frmAddRealProperties.uc.txtTaxpayerContact.Text = taxpayerContact;
-            frmAddRealProperties.uc.txtTaxpayerAddress.Text = address;
-        }
-
         private void InitializeNewOwnerDetails(frmRptPayments frmPayments)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
@@ -256,10 +232,6 @@ namespace AccountingSystem.Views.Shared
 
                 case frmListOfRealPropertyTaxDelinquenciesReport:
                     InitializeListOfDeliquentAccountsReport((frmListOfRealPropertyTaxDelinquenciesReport)refForm);
-                    break;
-
-                case frmAddRealProperties:
-                    InitializeRealProperties((frmAddRealProperties)refForm);
                     break;
 
                 case frmRptPayments:

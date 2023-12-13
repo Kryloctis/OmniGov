@@ -1,6 +1,8 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
+using DocumentFormat.OpenXml.Drawing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,51 +13,110 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class ucRealProperties : UserControl
     {
-        internal bool isEdit = false;
-        internal int realPropertiesId = 0;
-        internal int taxpayerID;
-        internal string propertyIdentifier = "0";
-        internal Form _form;
+        private bool isEdit;
+        private int rptId;
 
         public ucRealProperties()
         {
             InitializeComponent();
         }
 
+        #region Private Methods
+
+        internal void OnLoad(bool isEdit, int rptId = 0)
+        {
+            this.isEdit = isEdit;
+            this.rptId = isEdit ? rptId : 0;
+            if (isEdit)
+                LoadSelectedRecord();
+
+            LoadPropertyKind();
+            LoadClassifications();
+            LoadActualUseCodes();
+            LoadBarangay();
+            LoadTaxpayers();
+        }
+
+        private void LoadSelectedRecord()
+        {
+            var dictRpt = AccFactory.RealPropertiesRepository().GetRecordByID(rptId);
+
+            chckTaxable.Checked = bool.TryParse(dictRpt["is_taxable"], out bool isTaxable) ? isTaxable : false;
+            chckCancelled.Checked = bool.TryParse(dictRpt["is_cancelled"], out bool isCancelled) ? isCancelled : false;
+            txtArpNo.Text = dictRpt["complete_arp_no"];
+            txtPropertyPin.Text = dictRpt["property_pin"];
+            cmbxPropertyKind.SelectedText = dictRpt["property_kind"];
+            cmbxBarangays.SelectedValue = dictRpt["barangays_id"];
+            cmbxClassification.SelectedValue = dictRpt["classification_codes_id"];
+            cmbxActualUse.SelectedValue = dictRpt["actual_use_codes_id"];
+            nudEffectivityQuarter.Text = dictRpt["effectivity_quarter"];
+            nudEffectivityYear.Text = dictRpt["effectivity_year"];
+            nudAssessedValue.Value = Convert.ToDecimal(dictRpt["assessed_value"]);
+            nudGrYear.Text = dictRpt["gr_year"];
+            nudOtherImprv.Text = dictRpt["other_improvements"];
+            nudArea.Text = dictRpt["area"];
+            txtLotNo.Text = dictRpt["lot_no"];
+            cmbxTaxpayer.SelectedValue = int.TryParse(dictRpt["taxpayers_id"], out int taxpayerId) ? taxpayerId : DBNull.Value;
+        }
+
+        internal RealPropertiesModel RealPropertiesModel()
+        {
+            return new RealPropertiesModel()
+            {
+                IsTaxable = chckTaxable.Checked,
+                IsCancelled = chckCancelled.Checked,
+                CompleteArpNo = txtArpNo.Text.Trim(),
+                PropertyPin = txtPropertyPin.Text.Trim(),
+                BarangayModel = new BarangayModel() { Id = Convert.ToInt32(cmbxBarangays.SelectedValue) },
+                ClassificationCodesModel = new ClassificationCodesModel() { Id = Convert.ToInt32(cmbxClassification.SelectedValue) },
+                ActualUseCodesModel = new ActualUseCodesModel() { Id = Convert.ToInt32(cmbxActualUse.SelectedValue) },
+                EffectivityQuarter = (int)nudEffectivityQuarter.Value,
+                EffectivityYear = (int)nudEffectivityYear.Value,
+                AssessedValue = (int)nudAssessedValue.Value,
+                GrYear = (int)nudGrYear.Value,
+                OtherImprovements = (int)nudOtherImprv.Value,
+                Area = (int)nudArea.Value,
+                LotNo = txtLotNo.Text.Trim(),
+                TaxpayersModel = new TaxpayersModel() { Id = (int)cmbxTaxpayer.SelectedValue }
+            };
+        }
+
         internal string GetFormError()
         {
-            var errorArray = new string[9];
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtArpNo),
+                errorProvider1.GetError(cmbxBarangays),
+                errorProvider1.GetError(cmbxPropertyKind),
+                errorProvider1.GetError(cmbxActualUse),
+                errorProvider1.GetError(cmbxClassification),
+                errorProvider1.GetError(nudEffectivityQuarter),
+                errorProvider1.GetError(nudEffectivityYear),
+                errorProvider1.GetError(nudAssessedValue),
+                errorProvider1.GetError(nudGrYear),
+                errorProvider1.GetError(nudArea),
+                errorProvider1.GetError(cmbxTaxpayer)
+            };
 
-            errorArray[0] = errorProvider1.GetError(txtArpNo);
-            errorArray[1] = errorProvider1.GetError(cmbxBarangays);
-            errorArray[2] = errorProvider1.GetError(cmbxPropertyKind);
-            errorArray[3] = errorProvider1.GetError(cmbxActualUse);
-            errorArray[4] = errorProvider1.GetError(nudEffectivityYear);
-            errorArray[5] = errorProvider1.GetError(nudAssessedValue);
-            errorArray[6] = errorProvider1.GetError(nudGrYear);
-            errorArray[7] = errorProvider1.GetError(nudArea);
-            errorArray[8] = errorProvider1.GetError(txtLotNo);
-
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
         {
-            if (isEdit)
-                realPropertiesId = 0;
-
             txtArpNo.Clear();
             txtPropertyPin.Clear();
-            txtLotNo.Clear();
+            LoadPropertyKind();
+            LoadBarangay();
+            LoadClassifications();
+            LoadActualUseCodes();
             nudEffectivityQuarter.Value = 1;
             nudEffectivityYear.Value = Helper.GetCurrentDate().Year;
             nudAssessedValue.Value = 0;
             nudGrYear.Value = 0;
             nudOtherImprv.Value = 0;
             nudArea.Value = 0;
-            cmbxPropertyKind.SelectedIndex = 0;
-            chckTaxable.Checked = false;
+            txtLotNo.Clear();
+            chckTaxable.Checked = true;
             chckCancelled.Checked = false;
         }
 
@@ -70,129 +131,142 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxPropertyKind.DataSource = new BindingSource(dict.Values, null);
         }
 
-        private void LoadPropertiesPreviousARPNumber()
-        {
-            try
-            {
-                var dt = AccFactory.RealPropertiesRepository().GetCancelledProperties();
-
-                cmbxCompletePreviousARPNumber.DataSource = dt;
-                cmbxCompletePreviousARPNumber.DisplayMember = "complete_arp_no";
-                cmbxCompletePreviousARPNumber.ValueMember = "real_properties_id";
-                cmbxCompletePreviousARPNumber.DropDownHeight = 200;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private DataTable DatatableAccounts()
-        {
-            if (string.IsNullOrEmpty(cmbxCompletePreviousARPNumber.Text))
-                return AccFactory.RealPropertiesRepository().GetRecords();
-            else
-                return AccFactory.RealPropertiesRepository().GetRecordsByCompleteARP(cmbxCompletePreviousARPNumber.Text);
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadPropertyKind();
-                LoadClassificationCodes();
-                LoadActualUseCodes();
-                LoadBarangay();
-                LoadPropertiesPreviousARPNumber();
-            }
-        }
-
-        private void ucRealProperties_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-                cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void LoadBarangay()
         {
-            var dt = AccFactory.BarangayRepository().GetRecords();
-
-            cmbxBarangays.DataSource = dt;
-            cmbxBarangays.ValueMember = "id";
-            cmbxBarangays.DisplayMember = "name";
+            var dtBarangay = AccFactory.BarangayRepository().GetRecords();
+            HelperLoadRecords.BarangaysCombobox(dtBarangay, cmbxBarangays, "name", "id");
         }
 
         private void LoadActualUseCodes()
         {
-            var dt = AccFactory.ActualUseCodesRepository().GetRecords();
-
-            cmbxActualUse.DataSource = dt;
-            cmbxActualUse.ValueMember = "id";
-            cmbxActualUse.DisplayMember = "name";
+            var dtActualUse = AccFactory.ActualUseCodesRepository().GetRecords();
+            HelperLoadRecords.ActualUseCombobox(dtActualUse, cmbxActualUse, "id", "name");
         }
 
-        private void LoadClassificationCodes()
+        private void LoadClassifications()
         {
-            var dt = AccFactory.ClassificationCodesRepository().GetRecords();
-
-            cmbxClassification.DataSource = dt;
-            cmbxClassification.ValueMember = "id";
-            cmbxClassification.DisplayMember = "name";
+            var dtClassfications = AccFactory.ClassificationCodesRepository().GetRecords();
+            HelperLoadRecords.ClassificationCombobox(dtClassfications, cmbxClassification, "id", "name");
         }
+
+        private void LoadTaxpayers()
+        {
+            var registryColumn = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "name", typeof(string))
+            };
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(registryColumn);
+
+            var dtRegistry = AccFactory.TaxpayersRepository().GetRecords();
+
+            foreach (DataRow row in dtRegistry.Rows)
+            {
+                var newRow = dataTable.NewRow();
+
+                int Id = Convert.ToInt32(row["id"]);
+
+                newRow["id"] = Id;
+                newRow["name"] = row["name"];
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxTaxpayer, "id", "name");
+        }
+
+        private void LoadSelectedTaxpayer(int taxpayerId)
+        {
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            txtRepresentative.Text = dictTaxpayer["representative_name"];
+        }
+
+        private bool ArpNoValidated(bool isEdit, string arpNo, int rptId)
+        {
+            bool arpNoExist = isEdit ? AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo, rptId) : AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No."))
+                return false;
+            else if (arpNoExist)
+            {
+                errorProvider1.SetError(txtArpNo, "ARP No. already exist.");
+                return false;
+            }
+            else
+                return true;
+        }
+
+        #endregion Private Methods
+
+        #region Event Methods
 
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
         {
-            string propertyKind = cmbxPropertyKind.Text;
-
-            switch (propertyKind)
+            try
             {
-                case "Land":
-                    nudOtherImprv.Enabled = true;
-                    txtLotNo.Enabled = true;
-                    nudArea.Enabled = true;
-                    break;
+                string propertyKind = cmbxPropertyKind.Text;
 
-                case "Building":
-                    nudOtherImprv.Enabled = false;
-                    txtLotNo.Enabled = false;
-                    nudArea.Enabled = true;
-                    break;
+                switch (propertyKind)
+                {
+                    case "Land":
+                        nudOtherImprv.Enabled = true;
+                        txtLotNo.Enabled = true;
+                        nudArea.Enabled = true;
+                        break;
 
-                default:
-                    nudOtherImprv.Enabled = false;
-                    txtLotNo.Enabled = false;
-                    nudArea.Enabled = false;
-                    break;
+                    case "Building":
+                        nudOtherImprv.Enabled = false;
+                        txtLotNo.Enabled = false;
+                        nudArea.Enabled = true;
+                        break;
+
+                    default:
+                        nudOtherImprv.Enabled = false;
+                        txtLotNo.Enabled = false;
+                        nudArea.Enabled = false;
+                        break;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSelectTaxpayer_Click(object sender, EventArgs e)
+        private void cmbxTaxpayer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            _ = new frmTaxPayerList(_form).ShowDialog();
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                    e.IsInputKey = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)
+        private void cmbxTaxpayer_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //LoadPropertiesPreviousARPNumber();
+            try
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    LoadTaxpayers();
+                    cmbxTaxpayer.DroppedDown = cmbxTaxpayer.DroppedDown ? false : true;
+                    cmbxTaxpayer.DroppedDown = true;
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbxTaxpayer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbxCompletePreviousARPNumber.Items.Count == 0)
-                return;
+            try
+            {
+                if (cmbxTaxpayer.SelectedValue is not int taxpayerId)
+                    return;
 
-            string completeARPNo = cmbxCompletePreviousARPNumber.Text;
-            var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
-
-            propertyIdentifier = previousAssessmentDict["property_identifier"];
-            txtPreviousPin.Text = previousAssessmentDict["property_pin"];
-            txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
-            txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
-            txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
+                LoadSelectedTaxpayer(taxpayerId);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         #region Validations
@@ -202,28 +276,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 string arpNo = txtArpNo.Text.Trim();
-                bool arpNoExist;
-
-                if (isEdit)
-                    arpNoExist = AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo, realPropertiesId);
-                else
-                    arpNoExist = AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
-
-                if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No."))
-                    return;
-                else if (arpNoExist)
-                {
-                    errorProvider1.SetError(txtArpNo, "ARP No. already exist.");
-                    return;
-                }
-                else
-                    return;
+                e.Cancel = !ArpNoValidated(isEdit, arpNo, rptId);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtArpNo_Validated(object sender, EventArgs e)
@@ -283,23 +338,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtLotNo);
         }
 
-        private void txtPreviousCompleteARP_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxCompletePreviousARPNumber, "Previous ARP Number.");
-
-            string completeARPNumber = cmbxCompletePreviousARPNumber.Text;
-            if (!AccFactory.RealPropertiesRepository().CompleteArpNoExist(completeARPNumber))
-            {
-                errorProvider1.SetError(cmbxCompletePreviousARPNumber, "Previous ARP Number doesnt exist.");
-                e.Cancel = true; return;
-            }
-        }
-
-        private void txtPreviousCompleteARP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxCompletePreviousARPNumber);
-        }
-
         private void cmbxBarangays_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBarangays, "Barangay");
@@ -330,22 +368,35 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorComboBox(errorProvider1, cmbxActualUse);
         }
 
-        private void cmbxCompletePreviousARPNumber_Validating(object sender, CancelEventArgs e)
+        private bool TaxpayerValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
+            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Taxpayer"))
+                return false;
+            else if (comboBox.SelectedIndex < 0)
+            {
+                errorProvider.SetError(comboBox, "Taxpayer");
+                return false;
+            }
+
+            return true;
         }
 
-        private void cmbxCompletePreviousARPNumber_Validated(object sender, EventArgs e)
+        private void cmbxTaxpayer_Validating(object sender, CancelEventArgs e)
         {
+            try
+            {
+                e.Cancel = TaxpayerValidated(errorProvider1, cmbxTaxpayer);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtTaxpayers_Validating(object sender, CancelEventArgs e)
+        private void cmbxTaxpayer_Validated(object sender, EventArgs e)
         {
-        }
-
-        private void txtTaxpayers_Validated(object sender, EventArgs e)
-        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxTaxpayer);
         }
 
         #endregion Validations
+
+        #endregion Event Methods
     }
 }

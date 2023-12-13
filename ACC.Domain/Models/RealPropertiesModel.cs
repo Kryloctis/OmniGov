@@ -5,15 +5,6 @@ namespace ACC.Domain.Models
     public class RealPropertiesModel
     {
         public int Id { get; set; }
-        public int RealTaxpayersId { get; set; }
-        public int BarangaysId { get; set; }
-        public int ClassificationCodesId { get; set; }
-        public int ActualUseCodesId { get; set; }
-        public int TaxpayerID { get; set; }
-        public string TaxpayerTin { get; set; }
-        public string TaxpayerName { get; set; }
-        public string TaxpayerContactInfo { get; set; }
-        public string TaxpayerAddress { get; set; }
         public string Street { get; set; }
         public string PropertyIdentifier { get; set; }
         public string CompleteArpNo { get; set; }
@@ -33,8 +24,9 @@ namespace ACC.Domain.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        public TaxpayerTypeModel TaxpayerTypeModel { get; set; }
         public TaxpayersModel TaxpayersModel { get; set; }
+        public TaxpayerTypeModel TaxpayerTypeModel { get; set; }
+
         public ProvincesModel ProvincesModel { get; set; }
         public MunicipalitiesModel MunicipalitiesModel { get; set; }
         public BarangayModel BarangayModel { get; set; }
