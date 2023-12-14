@@ -9,7 +9,7 @@ namespace ACC.Domain.Models
         public string PropertyIdentifier { get; set; }
         public string CompleteArpNo { get; set; }
         public string PropertyPin { get; set; }
-        public string PropertyKind { get; set; }
+        public char PropertyKind { get; set; }
         public int EffectivityQuarter { get; set; }
         public int EffectivityYear { get; set; }
         public decimal OtherImprovements { get; set; }

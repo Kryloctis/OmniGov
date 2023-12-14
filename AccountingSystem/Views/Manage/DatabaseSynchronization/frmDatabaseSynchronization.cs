@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string completeArpNo = row["complete_arp_no"].ToString();
                     decimal propertyLandArea = Convert.ToDecimal(row["land_area"]);
                     decimal propertyAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-                    string propertyKind = row["property_kind"].ToString();
+                    char propertyKind = row["property_kind"].ToString()[0];
                     string propertyLotNo = row["land_lot_no"].ToString();
                     string propertyPin = row["pin"].ToString();
                     string propertyStreet = row["street"].ToString();

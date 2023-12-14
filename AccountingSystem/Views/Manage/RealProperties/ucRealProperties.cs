@@ -3,10 +3,12 @@ using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
 using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Packaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -46,10 +48,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             chckCancelled.Checked = bool.TryParse(dictRpt["is_cancelled"], out bool isCancelled) ? isCancelled : false;
             txtArpNo.Text = dictRpt["complete_arp_no"];
             txtPropertyPin.Text = dictRpt["property_pin"];
-            cmbxPropertyKind.SelectedText = dictRpt["property_kind"];
+            cmbxPropertyKind.SelectedValue = dictRpt["property_kind"];
             cmbxBarangays.SelectedValue = dictRpt["barangays_id"];
             cmbxClassification.SelectedValue = dictRpt["classification_codes_id"];
-            cmbxActualUse.SelectedValue = Convert.ToInt32(dictRpt["actual_use_codes_id"]);
+            cmbxActualUse.SelectedValue = dictRpt["actual_use_codes_id"];
             nudEffectivityQuarter.Text = dictRpt["effectivity_quarter"];
             nudEffectivityYear.Text = dictRpt["effectivity_year"];
             nudAssessedValue.Value = Convert.ToDecimal(dictRpt["assessed_value"]);
@@ -68,6 +70,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 IsCancelled = chckCancelled.Checked,
                 CompleteArpNo = txtArpNo.Text.Trim(),
                 PropertyPin = txtPropertyPin.Text.Trim(),
+                PropertyKind = cmbxPropertyKind.Text.ToUpper()[0],
                 BarangayModel = new BarangayModel() { Id = Convert.ToInt32(cmbxBarangays.SelectedValue) },
                 ClassificationCodesModel = new ClassificationCodesModel() { Id = Convert.ToInt32(cmbxClassification.SelectedValue) },
                 ActualUseCodesModel = new ActualUseCodesModel() { Id = Convert.ToInt32(cmbxActualUse.SelectedValue) },
@@ -123,13 +126,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadPropertyKind()
         {
-            var dict = new Dictionary<string, string>();
+            var dataTable = new DataTable();
 
-            dict.Add("1", "Land");
-            dict.Add("2", "Building");
-            dict.Add("3", "Machinery");
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "code", typeof(string)),
+                new DataColumn(Name = "name", typeof(string)),
+            };
 
-            cmbxPropertyKind.DataSource = new BindingSource(dict.Values, null);
+            dataTable.Columns.AddRange(dataColumns);
+
+            dataTable.Rows.Add("L", "Land");
+            dataTable.Rows.Add("B", "Building");
+            dataTable.Rows.Add("M", "Machinery");
+
+
+            cmbxPropertyKind.DataSource = dataTable;
+            cmbxPropertyKind.ValueMember = "code";
+            cmbxPropertyKind.DisplayMember = "name";
         }
 
         private void LoadBarangay()
