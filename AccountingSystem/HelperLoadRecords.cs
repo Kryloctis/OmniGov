@@ -149,6 +149,8 @@ namespace AccountingSystem
             datagridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["property_kind"].HeaderText = "Kind";
+            datagridView.Columns["property_location"].HeaderText = "Location";
+            datagridView.Columns["property_location"].MinimumWidth = 100;
             datagridView.Columns["classification_code"].HeaderText = "Classification";
             datagridView.Columns["classification_code"].Width = 80;
             datagridView.Columns["classification_code"].MinimumWidth = 80;
@@ -165,6 +167,12 @@ namespace AccountingSystem
             datagridView.Columns["taxpayers_name"].MinimumWidth = 150;
             datagridView.Columns["representative_name"].HeaderText = "Representative";
             datagridView.Columns["representative_name"].MinimumWidth = 150;
+            datagridView.Columns["other_improvements"].HeaderText = "Other Imp.";
+            datagridView.Columns["other_improvements"].DefaultCellStyle.Format = "N2";
+            datagridView.Columns["other_improvements"].MinimumWidth = 100;
+            datagridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            datagridView.Columns["assessed_value"].MinimumWidth = 100;
+            datagridView.Columns["assessed_value"].HeaderText = "Assessed Value";
             datagridView.Columns["is_taxable"].HeaderText = "Taxable";
             datagridView.Columns["is_taxable"].Width = 50;
             datagridView.Columns["is_taxable"].MinimumWidth = 50;

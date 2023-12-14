@@ -68,11 +68,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
                 new DataColumn("property_kind", typeof(string)),
+                new DataColumn("property_location", typeof(string)),
                 new DataColumn("taxpayers_name", typeof(string)),
                 new DataColumn("representative_name", typeof(string)),
                 new DataColumn("classification_code", typeof(string)),
                 new DataColumn("actual_use_code", typeof(string)),
                 new DataColumn("effectivity_quarter_and_year", typeof(string)),
+                new DataColumn("other_improvements", typeof(decimal)),
+                new DataColumn("assessed_value", typeof(decimal)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("is_cancelled", typeof(bool)),
                 new DataColumn("created_at", typeof(string)),
@@ -118,11 +121,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     newRow["complete_arp_no"] = row["complete_arp_no"];
                     newRow["property_pin"] = row["property_pin"];
                     newRow["property_kind"] = row["property_kind"];
+                    newRow["property_location"] = location;
                     newRow["taxpayers_name"] = row["taxpayers_name"];
                     newRow["representative_name"] = row["representative_name"];
                     newRow["classification_code"] = row["classification_code"];
                     newRow["actual_use_code"] = row["actual_use_code"];
                     newRow["effectivity_quarter_and_year"] = effectivityQuarterAndYear;
+                    newRow["other_improvements"] = row["other_improvements"];
+                    newRow["assessed_value"] = row["assessed_value"];
                     newRow["is_taxable"] = row["is_taxable"];
                     newRow["is_cancelled"] = row["is_cancelled"];
                     newRow["created_at"] = row["created_at"];

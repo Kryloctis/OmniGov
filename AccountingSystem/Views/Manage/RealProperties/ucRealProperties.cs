@@ -25,16 +25,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void OnLoad(bool isEdit, int rptId = 0)
         {
-            this.isEdit = isEdit;
-            this.rptId = isEdit ? rptId : 0;
-            if (isEdit)
-                LoadSelectedRecord();
-
             LoadPropertyKind();
             LoadClassifications();
             LoadActualUseCodes();
             LoadBarangay();
             LoadTaxpayers();
+
+
+            this.isEdit = isEdit;
+            this.rptId = isEdit? rptId : 0;
+            if (isEdit)
+                LoadSelectedRecord();
         }
 
         private void LoadSelectedRecord()
@@ -48,7 +49,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxPropertyKind.SelectedText = dictRpt["property_kind"];
             cmbxBarangays.SelectedValue = dictRpt["barangays_id"];
             cmbxClassification.SelectedValue = dictRpt["classification_codes_id"];
-            cmbxActualUse.SelectedValue = dictRpt["actual_use_codes_id"];
+            cmbxActualUse.SelectedValue = Convert.ToInt32(dictRpt["actual_use_codes_id"]);
             nudEffectivityQuarter.Text = dictRpt["effectivity_quarter"];
             nudEffectivityYear.Text = dictRpt["effectivity_year"];
             nudAssessedValue.Value = Convert.ToDecimal(dictRpt["assessed_value"]);
