@@ -33,9 +33,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             LoadBarangay();
             LoadTaxpayers();
 
-
             this.isEdit = isEdit;
-            this.rptId = isEdit? rptId : 0;
+            this.rptId = isEdit ? rptId : 0;
             if (isEdit)
                 LoadSelectedRecord();
         }
@@ -44,8 +43,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dictRpt = AccFactory.RealPropertiesRepository().GetRecordByID(rptId);
 
-            chckTaxable.Checked = bool.TryParse(dictRpt["is_taxable"], out bool isTaxable) ? isTaxable : false;
-            chckCancelled.Checked = bool.TryParse(dictRpt["is_cancelled"], out bool isCancelled) ? isCancelled : false;
+            chckTaxable.Checked = (dictRpt["is_taxable"] == "1");
+            chckCancelled.Checked = (dictRpt["is_cancelled"] == "1");
             txtArpNo.Text = dictRpt["complete_arp_no"];
             txtPropertyPin.Text = dictRpt["property_pin"];
             cmbxPropertyKind.SelectedValue = dictRpt["property_kind"];
@@ -59,7 +58,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             nudOtherImprv.Text = dictRpt["other_improvements"];
             nudArea.Text = dictRpt["area"];
             txtLotNo.Text = dictRpt["lot_no"];
-            cmbxTaxpayer.SelectedValue = int.TryParse(dictRpt["taxpayers_id"], out int taxpayerId) ? taxpayerId : DBNull.Value;
+            cmbxTaxpayer.SelectedValue = dictRpt["taxpayers_id"];
         }
 
         internal RealPropertiesModel RealPropertiesModel()
@@ -139,7 +138,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dataTable.Rows.Add("L", "Land");
             dataTable.Rows.Add("B", "Building");
             dataTable.Rows.Add("M", "Machinery");
-
 
             cmbxPropertyKind.DataSource = dataTable;
             cmbxPropertyKind.ValueMember = "code";
