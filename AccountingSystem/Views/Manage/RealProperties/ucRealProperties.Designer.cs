@@ -66,6 +66,8 @@
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageDetails = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
+            txtStreet = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
             tabPagePreviousAsssessments = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -73,8 +75,6 @@
             btnAddPrevRpt = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             btnDeletePrevRpt = new System.Windows.Forms.ToolStripButton();
-            txtStreet = new System.Windows.Forms.TextBox();
-            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityQuarter).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityYear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAssessedValue).BeginInit();
@@ -205,7 +205,7 @@
             // nudGrYear
             // 
             nudGrYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            nudGrYear.Location = new System.Drawing.Point(102, 323);
+            nudGrYear.Location = new System.Drawing.Point(102, 352);
             nudGrYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudGrYear.Name = "nudGrYear";
             nudGrYear.Size = new System.Drawing.Size(250, 23);
@@ -216,7 +216,7 @@
             // nudOtherImprv
             // 
             nudOtherImprv.DecimalPlaces = 2;
-            nudOtherImprv.Location = new System.Drawing.Point(102, 352);
+            nudOtherImprv.Location = new System.Drawing.Point(102, 323);
             nudOtherImprv.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudOtherImprv.Name = "nudOtherImprv";
             nudOtherImprv.Size = new System.Drawing.Size(250, 23);
@@ -297,7 +297,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(10, 354);
+            label14.Location = new System.Drawing.Point(10, 325);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(74, 15);
             label14.TabIndex = 6;
@@ -324,7 +324,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(10, 325);
+            label17.Location = new System.Drawing.Point(10, 354);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(47, 15);
             label17.TabIndex = 5;
@@ -476,6 +476,22 @@
             panel1.Size = new System.Drawing.Size(373, 499);
             panel1.TabIndex = 0;
             // 
+            // txtStreet
+            // 
+            txtStreet.Location = new System.Drawing.Point(102, 120);
+            txtStreet.Name = "txtStreet";
+            txtStreet.Size = new System.Drawing.Size(250, 23);
+            txtStreet.TabIndex = 29;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(10, 123);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(37, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Street";
+            // 
             // tabPagePreviousAsssessments
             // 
             tabPagePreviousAsssessments.Controls.Add(dataGridView1);
@@ -483,7 +499,7 @@
             tabPagePreviousAsssessments.Location = new System.Drawing.Point(4, 24);
             tabPagePreviousAsssessments.Name = "tabPagePreviousAsssessments";
             tabPagePreviousAsssessments.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePreviousAsssessments.Size = new System.Drawing.Size(379, 477);
+            tabPagePreviousAsssessments.Size = new System.Drawing.Size(379, 505);
             tabPagePreviousAsssessments.TabIndex = 1;
             tabPagePreviousAsssessments.Text = "Previous Assessments";
             tabPagePreviousAsssessments.UseVisualStyleBackColor = true;
@@ -495,7 +511,7 @@
             dataGridView1.Location = new System.Drawing.Point(3, 34);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(373, 440);
+            dataGridView1.Size = new System.Drawing.Size(373, 468);
             dataGridView1.TabIndex = 1;
             // 
             // toolStrip1
@@ -540,22 +556,6 @@
             btnDeletePrevRpt.Size = new System.Drawing.Size(23, 20);
             btnDeletePrevRpt.Text = "Delete";
             btnDeletePrevRpt.Click += btnDeleteRptPrev_Click;
-            // 
-            // txtStreet
-            // 
-            txtStreet.Location = new System.Drawing.Point(102, 120);
-            txtStreet.Name = "txtStreet";
-            txtStreet.Size = new System.Drawing.Size(250, 23);
-            txtStreet.TabIndex = 29;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(10, 123);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(37, 15);
-            label5.TabIndex = 1;
-            label5.Text = "Street";
             // 
             // ucRealProperties
             // 
