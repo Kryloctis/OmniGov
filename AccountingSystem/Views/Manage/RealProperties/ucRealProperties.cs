@@ -39,13 +39,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             LoadBarangay();
             LoadTaxpayers();
             LoadPreviousAssessments();
+            LoadRealProperties();
 
             this.isEdit = isEdit;
             this.rptId = isEdit ? rptId : 0;
             if (isEdit)
                 LoadSelectedRecord();
-
-            LoadRealProperties();
         }
 
         private void LoadSelectedRecord()
@@ -73,16 +72,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dtPrevRpt = (DataTable)dataGridView1.DataSource;
             foreach (DataRow row in dtPrevRptDb.Rows)
             {
-
                 var newRow = dtPrevRpt.NewRow();
 
                 int prevRptId = Convert.ToInt32(row["prev_real_properties_id"]);
                 var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
-                newRow["real_property_id"] = dictPrevRpt["real_property_id"];
+                newRow["real_property_id"] = Convert.ToInt32(dictPrevRpt["real_property_id"]);
                 newRow["complete_arp_no"] = dictPrevRpt["complete_arp_no"];
 
                 dtPrevRpt.Rows.Add(newRow);
             }
+
+            HelperLoadRecords.RptPreviousDatagridView(dataGridView1, dtPrevRpt);
         }
 
         internal RealPropertiesModel RealPropertiesModel()
