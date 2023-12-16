@@ -42,7 +42,7 @@
             ucRealProperties1.Location = new System.Drawing.Point(0, 0);
             ucRealProperties1.Margin = new System.Windows.Forms.Padding(0);
             ucRealProperties1.Name = "ucRealProperties1";
-            ucRealProperties1.Size = new System.Drawing.Size(385, 503);
+            ucRealProperties1.Size = new System.Drawing.Size(383, 531);
             ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -52,14 +52,14 @@
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 503);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 531);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(385, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(383, 29);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(307, 3);
+            btnCancel.Location = new System.Drawing.Point(305, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 0;
@@ -69,7 +69,7 @@
             // btnUpdate
             // 
             btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnUpdate.Location = new System.Drawing.Point(226, 3);
+            btnUpdate.Location = new System.Drawing.Point(224, 3);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(75, 23);
             btnUpdate.TabIndex = 0;
@@ -83,7 +83,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(385, 532);
+            ClientSize = new System.Drawing.Size(383, 560);
             Controls.Add(ucRealProperties1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
