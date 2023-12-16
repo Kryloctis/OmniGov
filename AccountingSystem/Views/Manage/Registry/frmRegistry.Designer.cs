@@ -59,7 +59,7 @@
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(970, 50);
+            toolStrip1.Size = new System.Drawing.Size(934, 50);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -114,9 +114,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount });
-            statusStrip1.Location = new System.Drawing.Point(0, 479);
+            statusStrip1.Location = new System.Drawing.Point(0, 489);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(970, 22);
+            statusStrip1.Size = new System.Drawing.Size(934, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -139,7 +139,7 @@
             panel1.Location = new System.Drawing.Point(0, 85);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(970, 394);
+            panel1.Size = new System.Drawing.Size(934, 404);
             panel1.TabIndex = 2;
             // 
             // dataGridView1
@@ -149,7 +149,7 @@
             dataGridView1.Location = new System.Drawing.Point(4, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(962, 386);
+            dataGridView1.Size = new System.Drawing.Size(926, 396);
             dataGridView1.TabIndex = 0;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
@@ -158,7 +158,7 @@
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(0, 80);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(970, 5);
+            progressBar1.Size = new System.Drawing.Size(934, 5);
             progressBar1.TabIndex = 3;
             // 
             // backgroundWorker1
@@ -175,7 +175,7 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 50);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(970, 30);
+            panel2.Size = new System.Drawing.Size(934, 30);
             panel2.TabIndex = 4;
             // 
             // cmbxRowFilter
@@ -185,7 +185,7 @@
             cmbxRowFilter.FormattingEnabled = true;
             cmbxRowFilter.Location = new System.Drawing.Point(4, 3);
             cmbxRowFilter.Name = "cmbxRowFilter";
-            cmbxRowFilter.Size = new System.Drawing.Size(123, 23);
+            cmbxRowFilter.Size = new System.Drawing.Size(120, 23);
             cmbxRowFilter.TabIndex = 0;
             cmbxRowFilter.SelectionChangeCommitted += cmbxRowFilter_SelectionChangeCommitted;
             // 
@@ -193,7 +193,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(970, 501);
+            ClientSize = new System.Drawing.Size(934, 511);
             Controls.Add(panel1);
             Controls.Add(progressBar1);
             Controls.Add(panel2);

@@ -44,14 +44,14 @@
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 272);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 306);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(419, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(435, 29);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(341, 3);
+            btnCancel.Location = new System.Drawing.Point(357, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 0;
@@ -60,7 +60,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(260, 3);
+            btnSave.Location = new System.Drawing.Point(276, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 23);
             btnSave.TabIndex = 0;
@@ -74,8 +74,8 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            panel1.Size = new System.Drawing.Size(419, 272);
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(435, 306);
             panel1.TabIndex = 4;
             // 
             // ucTaxPayers1
@@ -83,18 +83,21 @@
             ucTaxPayers1.AutoSize = true;
             ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucTaxPayers1.Location = new System.Drawing.Point(10, 4);
+            ucTaxPayers1.Location = new System.Drawing.Point(4, 4);
             ucTaxPayers1.Name = "ucTaxPayers1";
-            ucTaxPayers1.Size = new System.Drawing.Size(405, 264);
-            ucTaxPayers1.TabIndex = 1;
+            ucTaxPayers1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+            ucTaxPayers1.Size = new System.Drawing.Size(427, 298);
+            ucTaxPayers1.TabIndex = 0;
             // 
             // frmAddTaxpayers
             // 
             AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(419, 301);
+            ClientSize = new System.Drawing.Size(435, 335);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -106,6 +109,7 @@
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Taxpayers";
+            Load += frmAddTaxpayers_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

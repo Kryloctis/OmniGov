@@ -671,6 +671,24 @@ namespace AccountingSystem
             }
         }
 
+        public static string AddOrdinalSuffix(int number)
+        {
+            if (number < 0)
+                return number.ToString();
+
+            if (number % 100 >= 11 && number % 100 <= 13)
+                return number + "th";
+
+            // Handle the general case
+            switch (number % 10)
+            {
+                case 1: return number + "st";
+                case 2: return number + "nd";
+                case 3: return number + "rd";
+                default: return number + "th";
+            }
+        }
+
         #endregion Miscellaneous
 
         #region Get User Data

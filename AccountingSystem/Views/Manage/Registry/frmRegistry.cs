@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Manage.Registry
                     string name = $"{row["first_name"]} {row["middle_name"].ToString().Substring(0)} {row["last_name"]}";
                     string sex = $"{row["sex"]}";
                     string nationality = $"{row["nationality"]}";
-                    string birthPlace = $"{row["street"]}, {row["barangay"]}, {row["municipality"]}, {row["province"]}, {row["country"]}";
+                    string birthPlace = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
                     var birthDate = Convert.ToDateTime(row["birth_date"]);
                     string contactInfo = $"{row["contact_info"]}";
 
