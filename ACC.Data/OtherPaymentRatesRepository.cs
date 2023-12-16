@@ -9,11 +9,11 @@ namespace ACC.Data
     internal class OtherPaymentRatesRepository : IOtherPaymentRatesRepository
     {
         private readonly string tableName = "other_payment_rates";
-        private AccGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
         public OtherPaymentRatesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
@@ -33,7 +33,7 @@ namespace ACC.Data
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -49,7 +49,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -71,7 +71,7 @@ namespace ACC.Data
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -83,36 +83,22 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {tableName} WHERE description LIKE @search_text";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public Dictionary<string, string> GetRecordsByTaxTypeID(int taxTypeID)
+        public DataTable GetRecordsByTaxTypeID(int taxTypeID)
         {
             var record = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                    new object[] { "@tax_type_id", DbType.Int32, taxTypeID},
+                new object[] { "@tax_type_id", DbType.Int32, taxTypeID},
             };
 
             string query = $"SELECT * FROM {tableName} WHERE tax_type_id = @tax_type_id";
+            var dataTable = new DataTable();
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-            {
-                if (reader.Rows.Count < 1)
-                    return record;
-
-                record.Add("id", reader.Rows[0]["id"].ToString());
-                record.Add("description", reader.Rows[0]["description"].ToString());
-                record.Add("amount", reader.Rows[0]["amount"].ToString());
-                record.Add("is_rate_editable", reader.Rows[0]["is_rate_editable"].ToString());
-                record.Add("created_by", reader.Rows[0]["created_by"].ToString());
-                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
-                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-            }
-
-            return record;
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -133,7 +119,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO {tableName} (tax_type_id, description, amount, starting_year, is_rate_editable, created_by) VALUES (@tax_type_id, @description, @amount, @starting_year, @is_rate_editable, @created_by)";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(OtherPaymentRatesModel entity)
@@ -151,7 +137,7 @@ namespace ACC.Data
 
             string query = $"UPDATE {tableName} SET tax_type_id = @tax_type_id, description = @description, amount = @amount, starting_year = @starting_year, is_rate_editable = @is_rate_editable WHERE id = @id";
 
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

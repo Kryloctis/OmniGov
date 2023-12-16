@@ -1,19 +1,18 @@
 ﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
 {
     public partial class frmRealProperties : Form
     {
-        internal int realPropertiesID;
-        internal int taxpayerID;
-
         public frmRealProperties()
         {
             InitializeComponent();
@@ -21,16 +20,15 @@ namespace AccountingSystem.Views.Manage.RealProperties
             Helper.DatagridFullRowSelectStyle(dgRealProperties);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        #region Private Methods
+
+        private void OnLoad()
         {
-            try
-            {
-                _ = new frmAddRealProperties(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            LoadProperties();
         }
 
-        private bool Delete()
+        private bool DeleteRpt()
         {
             if (Helper.MessageBoxConfirmDelete(dgRealProperties.SelectedRows.Count))
             {
@@ -51,84 +49,47 @@ namespace AccountingSystem.Views.Manage.RealProperties
             return false;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        internal void LoadProperties()
         {
-            try
+            if (!backgroundWorker1.IsBusy)
             {
-                if (Delete())
-                {
-                    LoadProperties();
-                    Helper.MessageBoxSuccess("Real properties has been deleted.");
-                }
+                string searchKey = txtSearch.Text.Trim();
+                int rowFilter = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+                bool showCancelled = chckShowCancelled.Checked;
+
+                pbLoadRecords.Value = 0;
+                backgroundWorker1.RunWorkerAsync((searchKey, showCancelled, rowFilter));
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int rowIndex = dgRealProperties.CurrentCell.RowIndex;
-                realPropertiesID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_properties_id"].Value);
-                taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
-                _ = new frmEditRealProperties(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private DataColumn[] RealPropertiesColumn()
+        private DataColumn[] RealPropertiesColumns()
         {
             var dataColumns = new DataColumn[] {
-                new DataColumn("real_properties_id", typeof(int)),
-                new DataColumn("property_identifier", typeof(string)),
+                new DataColumn("real_property_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
-                new DataColumn("real_taxpayers_id", typeof(int)),
-                new DataColumn("real_taxpayers_tin", typeof(string)),
-                new DataColumn("real_taxpayers_name", typeof(string)),
-                new DataColumn("real_taxpayers_contact_info", typeof(string)),
-                new DataColumn("real_taxpayers_street", typeof(string)),
-                new DataColumn("real_taxpayers_is_active", typeof(bool)),
-                new DataColumn("taxpayer_tin", typeof(string)),
-                new DataColumn("taxpayer_name", typeof(string)),
-                new DataColumn("taxpayer_contact_info", typeof(string)),
-                new DataColumn("taxpayer_address", typeof(string)),
-                new DataColumn("real_properties_street", typeof(string)),
-                new DataColumn("real_properties_barangays_id", typeof(int)),
-                new DataColumn("real_properties_barangays_code", typeof(string)),
-                new DataColumn("real_properties_barangays_name", typeof(string)),
-                new DataColumn("real_properties_municipalities_id", typeof(int)),
-                new DataColumn("real_properties_municipalities_code", typeof(string)),
-                new DataColumn("real_properties_municipalities_name", typeof(string)),
-                new DataColumn("real_properties_provinces_id", typeof(int)),
-                new DataColumn("real_properties_provinces_code", typeof(string)),
-                new DataColumn("real_properties_provinces_name", typeof(string)),
-                new DataColumn("real_properties_location", typeof(string)),
-                new DataColumn("classification_codes_id", typeof(int)),
-                new DataColumn("classification_codes", typeof(string)),
-                new DataColumn("classification_codes_name", typeof(string)),
-                new DataColumn("classification_codes_is_special", typeof(string)),
-                new DataColumn("actual_use_codes_id", typeof(int)),
-                new DataColumn("actual_use_codes", typeof(string)),
-                new DataColumn("actual_use_codes_name", typeof(string)),
-                new DataColumn("actual_use_codes_is_government", typeof(bool)),
                 new DataColumn("property_kind", typeof(string)),
-                new DataColumn("effectivity_quarter", typeof(int)),
-                new DataColumn("effectivity_year", typeof(int)),
+                new DataColumn("property_location", typeof(string)),
+                new DataColumn("taxpayer_name", typeof(string)),
+                new DataColumn("representative_name", typeof(string)),
+                new DataColumn("classification_code", typeof(string)),
+                new DataColumn("actual_use_code", typeof(string)),
                 new DataColumn("effectivity_quarter_and_year", typeof(string)),
                 new DataColumn("other_improvements", typeof(decimal)),
                 new DataColumn("assessed_value", typeof(decimal)),
-                new DataColumn("area", typeof(decimal)),
-                new DataColumn("lot_no", typeof(string)),
-                new DataColumn("gr_year", typeof(int)),
+                new DataColumn("prev_assessments", typeof(string)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("is_cancelled", typeof(bool)),
-                new DataColumn("created_at", typeof(string)),
-                new DataColumn("updated_at", typeof(string)),
+                new DataColumn("real_property_created_at", typeof(string)),
+                new DataColumn("real_property_updated_at", typeof(string)),
             };
 
             return dataColumns;
         }
+
+        #endregion Private Methods
+
+        #region Event Methods
 
         private void frmRealProperties_Load(object sender, EventArgs e)
         {
@@ -139,86 +100,97 @@ namespace AccountingSystem.Views.Manage.RealProperties
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((string searchKey, bool showCancelled, int rowFilter))e.Argument;
+
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(RealPropertiesColumns());
+
+                var dtRealPropertiesFromDB = AccFactory.RealPropertiesRepository().GetRecordsBySearch(parameters.searchKey, parameters.rowFilter, parameters.showCancelled);
+                int totalProgressCount = dtRealPropertiesFromDB.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow row in dtRealPropertiesFromDB.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    string location = $"{row["street"]} {row["barangay_name"]} {row["municipality_name"]} {row["province_name"]}";
+                    string effectivityQuarterAndYear = $"{Helper.AddOrdinalSuffix((int)row["effectivity_quarter"])} Quarter - {row["effectivity_year"]}";
+                    int rptId = Convert.ToInt32(row["real_property_id"]);
+                    var dtPrevRpt = AccFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
+
+                    newRow["real_property_id"] = rptId;
+                    newRow["complete_arp_no"] = row["complete_arp_no"];
+                    newRow["property_pin"] = row["property_pin"];
+                    newRow["property_kind"] = row["property_kind"];
+                    newRow["property_location"] = location;
+                    newRow["taxpayer_name"] = row["taxpayer_name"];
+                    newRow["representative_name"] = row["representative_name"];
+                    newRow["classification_code"] = row["classification_code"];
+                    newRow["actual_use_code"] = row["actual_use_code"];
+                    newRow["effectivity_quarter_and_year"] = effectivityQuarterAndYear;
+                    newRow["other_improvements"] = row["other_improvements"];
+                    newRow["assessed_value"] = row["assessed_value"];
+                    newRow["is_taxable"] = row["is_taxable"];
+                    newRow["is_cancelled"] = row["is_cancelled"];
+                    newRow["real_property_created_at"] = row["real_property_created_at"];
+                    newRow["real_property_updated_at"] = row["real_property_updated_at"];
+
+                    var sb = new StringBuilder();
+
+                    foreach (DataRow rowPrevRpt in dtPrevRpt.Rows)
+                    {
+                        if (sb.Length < 1)
+                            sb.Append($"{rowPrevRpt["arp_no"]}");
+                        else
+                            sb.Append($", {rowPrevRpt["arp_no"]}");
+                    }
+
+                    newRow["prev_assessments"] = sb.ToString();
+
+                    progressCount++;
+                    dataTable.Rows.Add(newRow);
+
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbLoadRecords.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dataTable);
+
+            dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
+            toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
+        }
+
+        private void cbxShowCanclled_CheckedChanged(object sender, EventArgs e)
         {
             LoadProperties();
         }
 
-        private DataTable DataTableRealProperties()
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string searchValue = txtSearch.Text.Trim();
-            bool showCancelled = cbxShowCanclled.Checked;
-
-            var dtRealProperties = new DataTable();
-            dtRealProperties.Columns.AddRange(RealPropertiesColumn());
-
-            DataTable dtRealPropertiesFromDB = AccFactory.RealPropertiesRepository().GetRecordsBySearch(searchValue, showCancelled);
-            int recordsCount = dtRealPropertiesFromDB.Rows.Count;
-            int rowCount = 0;
-
-            foreach (DataRow row in dtRealPropertiesFromDB.Rows)
+            try
             {
-                var newRow = dtRealProperties.NewRow();
-
-                string location = $"{row["real_properties_street"]} {row["real_properties_barangays_name"]} {row["real_properties_municipalities_name"]} {row["real_properties_provinces_name"]}";
-                string effectivityQuarterAndYear = $"{row["effectivity_quarter"]} / {row["effectivity_year"]}";
-
-                dtRealProperties.Rows.Add(new object[]
-                {
-                    row["real_properties_id"],
-                    row["property_identifier"],
-                    row["complete_arp_no"],
-                    row["property_pin"],
-                    row["real_taxpayers_id"],
-                    row["real_taxpayers_tin"],
-                    row["real_taxpayers_name"],
-                    row["real_taxpayers_contact_info"],
-                    row["real_taxpayers_street"],
-                    row["real_taxpayers_is_active"],
-                    row["taxpayer_tin"],
-                    row["taxpayer_name"],
-                    row["taxpayer_contact_info"],
-                    row["taxpayer_address"],
-                    row["real_properties_street"],
-                    row["real_properties_barangays_id"],
-                    row["real_properties_barangays_code"],
-                    row["real_properties_barangays_name"],
-                    row["real_properties_municipalities_id"],
-                    row["real_properties_municipalities_code"],
-                    row["real_properties_municipalities_name"],
-                    row["real_properties_provinces_id"],
-                    row["real_properties_provinces_code"],
-                    row["real_properties_provinces_name"],
-                    location,
-                    row["classification_codes_id"],
-                    row["classification_codes"],
-                    row["classification_codes_name"],
-                    row["classification_codes_is_special"],
-                    row["actual_use_codes_id"],
-                    row["actual_use_codes"],
-                    row["actual_use_codes_name"],
-                    row["actual_use_codes_is_government"],
-                    row["property_kind"],
-                    row["effectivity_quarter"],
-                    row["effectivity_year"],
-                    effectivityQuarterAndYear,
-                    row["other_improvements"],
-                    row["assessed_value"],
-                    row["area"],
-                    row["lot_no"],
-                    row["gr_year"],
-                    row["is_taxable"],
-                    row["is_cancelled"],
-                    row["created_at"],
-                    row["updated_at"],
-                });
-
-                rowCount++;
-                int progressBarPercentage = (rowCount * 100) / recordsCount;
-                backgroundWorker1.ReportProgress(progressBarPercentage);
+                LoadProperties();
             }
-
-            return dtRealProperties;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
@@ -228,8 +200,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 if (dgRealProperties.Columns.Count < 1)
                     return;
 
-                byte createdByIndex = (byte)dgRealProperties.Columns["created_at"].Index;
-                byte updatedByIndex = (byte)dgRealProperties.Columns["updated_at"].Index;
+                byte createdByIndex = (byte)dgRealProperties.Columns["real_property_created_at"].Index;
+                byte updatedByIndex = (byte)dgRealProperties.Columns["real_property_updated_at"].Index;
 
                 var indexes = new byte[] { createdByIndex, updatedByIndex };
                 Helper.EnableDisableToolStripMenuItems(dgRealProperties, btnEdit, btnDelete);
@@ -247,37 +219,39 @@ namespace AccountingSystem.Views.Manage.RealProperties
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, DataTableRealProperties());
-            });
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            pbLoadRecords.Value = e.ProgressPercentage;
-        }
-
-        private void cbxShowCanclled_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        internal void LoadProperties()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                _ = new frmAddRealProperties(this).ShowDialog();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
-            toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
+            try
+            {
+                int rowIndex = dgRealProperties.CurrentCell.RowIndex;
+                var rptId = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_property_id"].Value);
+                _ = new frmEditRealProperties(this, rptId).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DeleteRpt())
+                {
+                    LoadProperties();
+                    Helper.MessageBoxSuccess("Real properties has been deleted.");
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Event Methods
     }
 }

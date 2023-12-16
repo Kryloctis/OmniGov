@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(AssessmentPostsDataColumns());
-            HelperLoadRecords.RealPropertiesSearchDatagridView(dataTable, dgProperties);
+            HelperLoadRecords.RptAssessmentDatagridView(dataTable, dgProperties);
         }
 
         //Actual Loading of Datagrid View's Records.
@@ -288,7 +288,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 progressBarLoadRecords.Value = 0;
             }
 
-            HelperLoadRecords.RealPropertiesSearchDatagridView(assessmentPostsDataTable, dgProperties);
+            HelperLoadRecords.RptAssessmentDatagridView(assessmentPostsDataTable, dgProperties);
             lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
             SetCheckListReadOnlyByStatus(dgProperties);
 

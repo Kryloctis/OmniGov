@@ -11,5 +11,7 @@ namespace ACC.Domain.Interfaces
         bool CodeExist(string code, int id);
 
         Dictionary<string, string> GetRecordByAccFormNo(string accFormNo);
+
+        DataTable GetRecordsByAccFormNo(string accFormNo);
     }
 }

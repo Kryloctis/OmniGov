@@ -16,7 +16,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords();
 
-        DataTable GetViewRecordsBySearch(string searchText, bool showInactiveTaxpayers);
+        DataTable GetViewRecordsByParameters(string searchText, bool showInactiveTaxpayers, int rowFilter);
 
         DataTable GetViewRecordsBySearch(string searchText);
 

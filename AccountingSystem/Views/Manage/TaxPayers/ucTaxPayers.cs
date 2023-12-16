@@ -1,26 +1,34 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Registry;
+using Org.BouncyCastle.Crypto;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class ucTaxPayers : UserControl
     {
-        internal int taxPayerId;
-        internal bool isEdit;
+        private int taxPayerId;
 
         public ucTaxPayers()
         {
             InitializeComponent();
         }
 
+        #region Private Methods
+
         internal string GetFormErrors()
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(txtName)
+                errorProvider1.GetError(txtName),
+                errorProvider1.GetError(cmbxRepresentative),
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -39,30 +47,129 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             txtTIN.Clear();
             txtName.Clear();
-            txtContact.Clear();
-            txtStreet.Clear();
-            txtBarangay.Clear();
+            txtAddress.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
+            txtContact.Clear();
+            LoadTaxPayersType();
             chckIsActive.Checked = true;
-            isEdit = false;
-            taxPayerId = 0;
         }
 
-        private void ucTaxPayers_Load(object sender, EventArgs e)
+        internal TaxpayersModel TaxpayersModel()
+        {
+            return new TaxpayersModel()
+            {
+                Tin = txtTIN.Text.Trim(),
+                Name = txtName.Text.Trim(),
+                Address = txtAddress.Text.Trim(),
+                Municipality = txtMunicipality.Text.Trim(),
+                Province = txtProvince.Text.Trim(),
+                ContactInfo = txtContact.Text.Trim(),
+                IsActive = chckIsActive.Checked,
+                TaxpayerTypeId = Convert.ToInt32(cmbxTaxPayerType.SelectedValue),
+                RepresentativeRegistryId = cmbxRepresentative.SelectedValue as int?
+            };
+        }
+
+        private void LoadRegistry()
+        {
+            var registryColumn = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "name", typeof(string))
+            };
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(registryColumn);
+
+            var dtRegistry = AccFactory.RegistryRepository().GetRecords();
+
+            foreach (DataRow row in dtRegistry.Rows)
+            {
+                var newRow = dataTable.NewRow();
+
+                int Id = Convert.ToInt32(row["id"]);
+                string name = $"{row["first_name"]} {row["middle_name"].ToString().Substring(0)}, {row["last_name"]}";
+
+                newRow["id"] = Id;
+                newRow["name"] = name;
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxRepresentative, "id", "name");
+        }
+
+        private void LoadSelectedRecord(int taxpayerId)
+        {
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+
+            txtTIN.Text = dictTaxpayer["tin"];
+            txtName.Text = dictTaxpayer["name"];
+            txtAddress.Text = dictTaxpayer["address"];
+            txtMunicipality.Text = dictTaxpayer["municipality"];
+            txtProvince.Text = dictTaxpayer["province"];
+            cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
+            txtContact.Text = dictTaxpayer["contact_info"];
+            chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
+
+            var representativeId = dictTaxpayer["representative_registry_id"];
+            chckRepresentative.Checked = string.IsNullOrWhiteSpace(representativeId) ? true : false;
+            if (!string.IsNullOrWhiteSpace(representativeId)) cmbxRepresentative.SelectedValue = representativeId;
+        }
+
+        internal void OnLoad(bool isEdit, int taxpayerId = 0)
+        {
+            LoadRegistry();
+            LoadTaxPayersType();
+            ToggleRepresentative();
+
+            if (isEdit)
+            {
+                this.taxPayerId = taxpayerId;
+                LoadSelectedRecord(taxpayerId);
+            }
+        }
+
+        private void ToggleRepresentative()
+        {
+            if (chckRepresentative.Checked)
+            {
+                cmbxRepresentative.Enabled = false;
+                cmbxRepresentative.SelectedIndex = -1;
+                cmbxRepresentative.Text = string.Empty;
+            }
+            else
+                cmbxRepresentative.Enabled = true;
+        }
+
+        #endregion Private Methods
+
+        #region Event Methods
+
+        private void chckRepresentative_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                ToggleRepresentative();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        private void cmbxRepresentative_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (!DesignMode)
+            if (e.KeyCode == Keys.Enter)
+                e.IsInputKey = true;
+        }
+
+        private void cmbxRepresentative_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                LoadTaxPayersType();
+                LoadRegistry();
+                cmbxRepresentative.DroppedDown = cmbxRepresentative.DroppedDown ? false : true;
+                cmbxRepresentative.DroppedDown = true;
+                e.Handled = true;
             }
         }
 
@@ -79,5 +186,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
+
+        #endregion Event Methods
     }
 }

@@ -14,18 +14,20 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);
 
-        DataTable GetRecordsByCompleteARP(string completeARPNo);
+        DataTable GetRecordNotExistedPreviousRpt(int rptId);
 
-        DataTable GetCancelledProperties();
+        DataTable GetRecordNotExistedPreviousRpt();
 
-        DataTable GetCancelledRecordsBySearch(string searchText);
+        DataTable GetRecordsBySearch(string searchText, int rowFilter, bool showCancelled);
 
-        DataTable GetRecordsBySearch(string searchText, bool isCancelled = false);
+        Dictionary<string, string> GetViewRecordById(int Id);
 
-        int GetLastInsertedId();
+        int GetLastInsertedId(int userId);
 
         bool Synchronize(RealPropertiesModel realPropertiesModel);
 
-        bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel);
+        bool InsertWithPreviousAssessments(RealPropertiesModel realPropertiesModel);
+
+        bool UpdateWithPreviousAssessements(RealPropertiesModel realPropertiesModel);
     }
 }
