@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -76,6 +77,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 new DataColumn("effectivity_quarter_and_year", typeof(string)),
                 new DataColumn("other_improvements", typeof(decimal)),
                 new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("prev_assessments", typeof(string)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("is_cancelled", typeof(bool)),
                 new DataColumn("real_property_created_at", typeof(string)),
@@ -116,8 +118,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     var newRow = dataTable.NewRow();
                     string location = $"{row["street"]} {row["barangay_name"]} {row["municipality_name"]} {row["province_name"]}";
                     string effectivityQuarterAndYear = $"{Helper.AddOrdinalSuffix((int)row["effectivity_quarter"])} Quarter - {row["effectivity_year"]}";
+                    int rptId = Convert.ToInt32(row["real_property_id"]);
+                    var dtPrevRpt = AccFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
 
-                    newRow["real_property_id"] = row["real_property_id"];
+                    newRow["real_property_id"] = rptId;
                     newRow["complete_arp_no"] = row["complete_arp_no"];
                     newRow["property_pin"] = row["property_pin"];
                     newRow["property_kind"] = row["property_kind"];
@@ -133,6 +137,18 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     newRow["is_cancelled"] = row["is_cancelled"];
                     newRow["real_property_created_at"] = row["real_property_created_at"];
                     newRow["real_property_updated_at"] = row["real_property_updated_at"];
+
+                    var sb = new StringBuilder();
+
+                    foreach (DataRow rowPrevRpt in dtPrevRpt.Rows)
+                    {
+                        if (sb.Length < 1)
+                            sb.Append($"{rowPrevRpt["arp_no"]}");
+                        else
+                            sb.Append($", {rowPrevRpt["arp_no"]}");
+                    }
+
+                    newRow["prev_assessments"] = sb.ToString();
 
                     progressCount++;
                     dataTable.Rows.Add(newRow);

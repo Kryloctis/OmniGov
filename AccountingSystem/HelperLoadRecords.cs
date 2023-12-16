@@ -1334,6 +1334,7 @@ namespace AccountingSystem
             datagridView.Columns["is_cancelled"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridView.Columns["real_property_created_at"].Visible = false;
             datagridView.Columns["real_property_updated_at"].Visible = false;
+            datagridView.Columns["prev_assessments"].HeaderText = "Previous Assessments";
         }
 
         public static void RptPreviousDatagridView(DataGridView dataGridView, DataTable dataTable)
