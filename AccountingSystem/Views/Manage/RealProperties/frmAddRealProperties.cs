@@ -53,5 +53,22 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void frmAddRealProperties_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveRpt())
+                    {
+                        Helper.MessageBoxSuccess("Real property has been saved.");
+                        frmRealProperties.LoadProperties();
+                        uc.ResetForm();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

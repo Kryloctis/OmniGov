@@ -59,9 +59,9 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(305, 3);
+            btnCancel.Location = new System.Drawing.Point(255, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(125, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -69,17 +69,16 @@
             // btnUpdate
             // 
             btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnUpdate.Location = new System.Drawing.Point(224, 3);
+            btnUpdate.Location = new System.Drawing.Point(124, 3);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new System.Drawing.Size(75, 23);
+            btnUpdate.Size = new System.Drawing.Size(125, 23);
             btnUpdate.TabIndex = 0;
-            btnUpdate.Text = "Update";
+            btnUpdate.Text = "Update (Ctrl + S)";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
             // frmEditRealProperties
             // 
-            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
@@ -87,6 +86,7 @@
             Controls.Add(ucRealProperties1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditRealProperties";
@@ -94,6 +94,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Real Property";
             Load += frmEditRealProperties_Load;
+            KeyDown += frmEditRealProperties_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }

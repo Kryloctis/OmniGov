@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.RealProperties;
 using System;
+using System.Threading.Channels;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -58,6 +59,23 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     Helper.MessageBoxSuccess("Real property has been updated");
                     frmRealProperties.LoadProperties();
                     Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmEditRealProperties_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateRpt())
+                    {
+                        Helper.MessageBoxSuccess("Real property has been updated.");
+                        frmRealProperties.LoadProperties();
+                        Close();
+                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

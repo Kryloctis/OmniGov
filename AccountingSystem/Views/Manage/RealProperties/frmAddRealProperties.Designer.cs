@@ -59,9 +59,9 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(305, 3);
+            btnCancel.Location = new System.Drawing.Point(255, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(125, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -69,11 +69,11 @@
             // btnSave
             // 
             btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSave.Location = new System.Drawing.Point(224, 3);
+            btnSave.Location = new System.Drawing.Point(124, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(75, 23);
+            btnSave.Size = new System.Drawing.Size(125, 23);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save  (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -93,6 +93,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Real Property";
             Load += frmAddRealProperties_Load;
+            KeyDown += frmAddRealProperties_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
