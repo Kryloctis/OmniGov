@@ -134,59 +134,6 @@ namespace AccountingSystem
 
         #region Taxpayers
 
-        public static void RealPropertiesDatagridView(DataGridView datagridView, DataTable dataTable)
-        {
-            datagridView.DataSource = dataTable;
-
-            datagridView.Columns["id"].Visible = false;
-            datagridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            datagridView.Columns["complete_arp_no"].MinimumWidth = 100;
-            datagridView.Columns["property_pin"].HeaderText = "PIN";
-            datagridView.Columns["property_pin"].MinimumWidth = 100;
-            datagridView.Columns["property_kind"].HeaderText = "Kind";
-            datagridView.Columns["property_kind"].Width = 40;
-            datagridView.Columns["property_kind"].MinimumWidth = 40;
-            datagridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["property_kind"].HeaderText = "Kind";
-            datagridView.Columns["property_location"].HeaderText = "Location";
-            datagridView.Columns["property_location"].MinimumWidth = 100;
-            datagridView.Columns["classification_code"].HeaderText = "Classification";
-            datagridView.Columns["classification_code"].Width = 80;
-            datagridView.Columns["classification_code"].MinimumWidth = 80;
-            datagridView.Columns["classification_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["classification_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["actual_use_code"].HeaderText = "Actual Use";
-            datagridView.Columns["actual_use_code"].Width = 70;
-            datagridView.Columns["actual_use_code"].MinimumWidth = 70;
-            datagridView.Columns["actual_use_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["actual_use_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["effectivity_quarter_and_year"].HeaderText = "Effectivity";
-            datagridView.Columns["effectivity_quarter_and_year"].MinimumWidth = 100;
-            datagridView.Columns["taxpayers_name"].HeaderText = "Taxpayer";
-            datagridView.Columns["taxpayers_name"].MinimumWidth = 150;
-            datagridView.Columns["representative_name"].HeaderText = "Representative";
-            datagridView.Columns["representative_name"].MinimumWidth = 150;
-            datagridView.Columns["other_improvements"].HeaderText = "Other Imp.";
-            datagridView.Columns["other_improvements"].DefaultCellStyle.Format = "N2";
-            datagridView.Columns["other_improvements"].MinimumWidth = 100;
-            datagridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-            datagridView.Columns["assessed_value"].MinimumWidth = 100;
-            datagridView.Columns["assessed_value"].HeaderText = "Assessed Value";
-            datagridView.Columns["is_taxable"].HeaderText = "Taxable";
-            datagridView.Columns["is_taxable"].Width = 50;
-            datagridView.Columns["is_taxable"].MinimumWidth = 50;
-            datagridView.Columns["is_taxable"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["is_taxable"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            datagridView.Columns["is_cancelled"].Width = 80;
-            datagridView.Columns["is_cancelled"].MinimumWidth = 80;
-            datagridView.Columns["is_cancelled"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["is_cancelled"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagridView.Columns["created_at"].Visible = false;
-            datagridView.Columns["updated_at"].Visible = false;
-        }
-
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
@@ -1336,64 +1283,64 @@ namespace AccountingSystem
 
         #region Real Property Tax View
 
-        public static void PropertiesDatagridView(DataTable dataTable, DataGridView datagrid)
+        public static void RealPropertiesDatagridView(DataGridView datagridView, DataTable dataTable)
         {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
+            datagridView.DataSource = dataTable;
 
-            datagrid.Columns.Add("property_kind", "Property Kind");
-            datagrid.Columns.Add("complete_arp_no", "Complete ARP No.");
-            datagrid.Columns.Add("pin", "PIN");
-            datagrid.Columns.Add("owner_name", "Owner Name");
-            datagrid.Columns.Add("owner_address", "Owner Address");
-            datagrid.Columns.Add("market_value", "Market Value");
-            datagrid.Columns.Add("assessed_value", "Assessment Value");
+            datagridView.Columns["real_property_id"].Visible = false;
+            datagridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            datagridView.Columns["complete_arp_no"].MinimumWidth = 100;
+            datagridView.Columns["property_pin"].HeaderText = "PIN";
+            datagridView.Columns["property_pin"].MinimumWidth = 100;
+            datagridView.Columns["property_kind"].HeaderText = "Kind";
+            datagridView.Columns["property_kind"].Width = 40;
+            datagridView.Columns["property_kind"].MinimumWidth = 40;
+            datagridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["property_kind"].HeaderText = "Kind";
+            datagridView.Columns["property_location"].HeaderText = "Location";
+            datagridView.Columns["property_location"].MinimumWidth = 100;
+            datagridView.Columns["classification_code"].HeaderText = "Classification";
+            datagridView.Columns["classification_code"].Width = 80;
+            datagridView.Columns["classification_code"].MinimumWidth = 80;
+            datagridView.Columns["classification_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["classification_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["actual_use_code"].HeaderText = "Actual Use";
+            datagridView.Columns["actual_use_code"].Width = 70;
+            datagridView.Columns["actual_use_code"].MinimumWidth = 70;
+            datagridView.Columns["actual_use_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["actual_use_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["effectivity_quarter_and_year"].HeaderText = "Effectivity";
+            datagridView.Columns["effectivity_quarter_and_year"].MinimumWidth = 100;
+            datagridView.Columns["taxpayer_name"].HeaderText = "Taxpayer";
+            datagridView.Columns["taxpayer_name"].MinimumWidth = 150;
+            datagridView.Columns["representative_name"].HeaderText = "Representative";
+            datagridView.Columns["representative_name"].MinimumWidth = 150;
+            datagridView.Columns["other_improvements"].HeaderText = "Other Imp.";
+            datagridView.Columns["other_improvements"].DefaultCellStyle.Format = "N2";
+            datagridView.Columns["other_improvements"].MinimumWidth = 100;
+            datagridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            datagridView.Columns["assessed_value"].MinimumWidth = 100;
+            datagridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            datagridView.Columns["is_taxable"].HeaderText = "Taxable";
+            datagridView.Columns["is_taxable"].Width = 50;
+            datagridView.Columns["is_taxable"].MinimumWidth = 50;
+            datagridView.Columns["is_taxable"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["is_taxable"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            datagridView.Columns["is_cancelled"].Width = 80;
+            datagridView.Columns["is_cancelled"].MinimumWidth = 80;
+            datagridView.Columns["is_cancelled"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["is_cancelled"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagridView.Columns["real_property_created_at"].Visible = false;
+            datagridView.Columns["real_property_updated_at"].Visible = false;
+        }
 
-            datagrid.Columns["property_kind"].Width = 80;
-            datagrid.Columns["property_kind"].MinimumWidth = 80;
-
-            datagrid.Columns["complete_arp_no"].Width = 80;
-            datagrid.Columns["complete_arp_no"].MinimumWidth = 80;
-
-            datagrid.Columns["pin"].Width = 80;
-            datagrid.Columns["pin"].MinimumWidth = 80;
-
-            datagrid.Columns["owner_address"].Width = 200;
-            datagrid.Columns["owner_address"].MinimumWidth = 200;
-
-            datagrid.Columns["market_value"].Width = 120;
-            datagrid.Columns["market_value"].MinimumWidth = 120;
-            datagrid.Columns["market_value"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["market_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["assessed_value"].Width = 120;
-            datagrid.Columns["assessed_value"].MinimumWidth = 120;
-            datagrid.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    row["property_kind"],
-                    row["complete_arp_no"],
-                    row["pin"],
-                    row["owner_name"],
-                    row["owner_address"],
-                    row["market_value"],
-                    row["assessed_value"]
-                });
-            }
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
-            //datagrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            datagrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-            datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
+        public static void RptPreviousDatagridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["real_property_id"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
         }
 
         #endregion Real Property Tax View

@@ -1,12 +1,15 @@
 ﻿using ACC.Domain.Models;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
     public interface IRptPreviousAssessment : IAccRepository<RptPreviousAssessmentModel>
     {
+        string tableName { get; }
+
         bool DeleteByRealPropertyId(int realPropertyId);
 
-        Dictionary<string, string> GetRecordsByARPNo(string ARPNo);
+        DataTable GetRecordsByRptId(int rptId);
     }
 }

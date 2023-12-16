@@ -69,8 +69,12 @@
             tabPagePreviousAsssessments = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            cmbxPreviousRpt = new System.Windows.Forms.ToolStripComboBox();
+            btnAddPrevRpt = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            btnDeletePrevRpt = new System.Windows.Forms.ToolStripButton();
+            txtStreet = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityQuarter).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityYear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAssessedValue).BeginInit();
@@ -125,7 +129,7 @@
             // cmbxBarangays
             // 
             cmbxBarangays.FormattingEnabled = true;
-            cmbxBarangays.Location = new System.Drawing.Point(102, 120);
+            cmbxBarangays.Location = new System.Drawing.Point(102, 149);
             cmbxBarangays.Name = "cmbxBarangays";
             cmbxBarangays.Size = new System.Drawing.Size(250, 23);
             cmbxBarangays.TabIndex = 2;
@@ -135,7 +139,7 @@
             // cmbxClassification
             // 
             cmbxClassification.FormattingEnabled = true;
-            cmbxClassification.Location = new System.Drawing.Point(102, 149);
+            cmbxClassification.Location = new System.Drawing.Point(102, 178);
             cmbxClassification.Name = "cmbxClassification";
             cmbxClassification.Size = new System.Drawing.Size(250, 23);
             cmbxClassification.TabIndex = 3;
@@ -145,7 +149,7 @@
             // cmbxActualUse
             // 
             cmbxActualUse.FormattingEnabled = true;
-            cmbxActualUse.Location = new System.Drawing.Point(102, 178);
+            cmbxActualUse.Location = new System.Drawing.Point(102, 207);
             cmbxActualUse.Name = "cmbxActualUse";
             cmbxActualUse.Size = new System.Drawing.Size(250, 23);
             cmbxActualUse.TabIndex = 4;
@@ -165,7 +169,7 @@
             // nudEffectivityQuarter
             // 
             nudEffectivityQuarter.BackColor = System.Drawing.SystemColors.Window;
-            nudEffectivityQuarter.Location = new System.Drawing.Point(102, 207);
+            nudEffectivityQuarter.Location = new System.Drawing.Point(102, 236);
             nudEffectivityQuarter.Maximum = new decimal(new int[] { 4, 0, 0, 0 });
             nudEffectivityQuarter.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudEffectivityQuarter.Name = "nudEffectivityQuarter";
@@ -176,7 +180,7 @@
             // 
             // nudEffectivityYear
             // 
-            nudEffectivityYear.Location = new System.Drawing.Point(102, 236);
+            nudEffectivityYear.Location = new System.Drawing.Point(102, 265);
             nudEffectivityYear.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
             nudEffectivityYear.Minimum = new decimal(new int[] { 1930, 0, 0, 0 });
             nudEffectivityYear.Name = "nudEffectivityYear";
@@ -189,7 +193,7 @@
             // nudAssessedValue
             // 
             nudAssessedValue.DecimalPlaces = 2;
-            nudAssessedValue.Location = new System.Drawing.Point(102, 265);
+            nudAssessedValue.Location = new System.Drawing.Point(102, 294);
             nudAssessedValue.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudAssessedValue.Name = "nudAssessedValue";
             nudAssessedValue.Size = new System.Drawing.Size(250, 23);
@@ -201,7 +205,7 @@
             // nudGrYear
             // 
             nudGrYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            nudGrYear.Location = new System.Drawing.Point(102, 294);
+            nudGrYear.Location = new System.Drawing.Point(102, 323);
             nudGrYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudGrYear.Name = "nudGrYear";
             nudGrYear.Size = new System.Drawing.Size(250, 23);
@@ -212,7 +216,7 @@
             // nudOtherImprv
             // 
             nudOtherImprv.DecimalPlaces = 2;
-            nudOtherImprv.Location = new System.Drawing.Point(102, 323);
+            nudOtherImprv.Location = new System.Drawing.Point(102, 352);
             nudOtherImprv.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudOtherImprv.Name = "nudOtherImprv";
             nudOtherImprv.Size = new System.Drawing.Size(250, 23);
@@ -222,7 +226,7 @@
             // nudArea
             // 
             nudArea.DecimalPlaces = 2;
-            nudArea.Location = new System.Drawing.Point(102, 352);
+            nudArea.Location = new System.Drawing.Point(102, 381);
             nudArea.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudArea.Name = "nudArea";
             nudArea.Size = new System.Drawing.Size(250, 23);
@@ -234,7 +238,7 @@
             // txtLotNo
             // 
             txtLotNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtLotNo.Location = new System.Drawing.Point(102, 381);
+            txtLotNo.Location = new System.Drawing.Point(102, 410);
             txtLotNo.Name = "txtLotNo";
             txtLotNo.Size = new System.Drawing.Size(250, 23);
             txtLotNo.TabIndex = 12;
@@ -266,7 +270,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(10, 209);
+            label11.Location = new System.Drawing.Point(10, 238);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(86, 15);
             label11.TabIndex = 2;
@@ -275,7 +279,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(10, 238);
+            label12.Location = new System.Drawing.Point(10, 267);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(84, 15);
             label12.TabIndex = 3;
@@ -284,7 +288,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(10, 267);
+            label13.Location = new System.Drawing.Point(10, 296);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(85, 15);
             label13.TabIndex = 4;
@@ -293,7 +297,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(10, 325);
+            label14.Location = new System.Drawing.Point(10, 354);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(74, 15);
             label14.TabIndex = 6;
@@ -302,7 +306,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(10, 354);
+            label15.Location = new System.Drawing.Point(10, 383);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(31, 15);
             label15.TabIndex = 8;
@@ -311,7 +315,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(10, 383);
+            label16.Location = new System.Drawing.Point(10, 412);
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(43, 15);
             label16.TabIndex = 7;
@@ -320,7 +324,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(10, 296);
+            label17.Location = new System.Drawing.Point(10, 325);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(47, 15);
             label17.TabIndex = 5;
@@ -338,7 +342,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(10, 181);
+            label9.Location = new System.Drawing.Point(10, 210);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(63, 15);
             label9.TabIndex = 0;
@@ -347,7 +351,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(10, 152);
+            label8.Location = new System.Drawing.Point(10, 181);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(77, 15);
             label8.TabIndex = 27;
@@ -356,7 +360,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(10, 123);
+            label7.Location = new System.Drawing.Point(10, 152);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(56, 15);
             label7.TabIndex = 26;
@@ -370,7 +374,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(10, 412);
+            label4.Location = new System.Drawing.Point(10, 441);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(53, 15);
             label4.TabIndex = 1;
@@ -379,7 +383,7 @@
             // cmbxTaxpayer
             // 
             cmbxTaxpayer.FormattingEnabled = true;
-            cmbxTaxpayer.Location = new System.Drawing.Point(102, 410);
+            cmbxTaxpayer.Location = new System.Drawing.Point(102, 439);
             cmbxTaxpayer.Name = "cmbxTaxpayer";
             cmbxTaxpayer.Size = new System.Drawing.Size(250, 23);
             cmbxTaxpayer.TabIndex = 21;
@@ -392,7 +396,7 @@
             // txtRepresentative
             // 
             txtRepresentative.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtRepresentative.Location = new System.Drawing.Point(102, 439);
+            txtRepresentative.Location = new System.Drawing.Point(102, 468);
             txtRepresentative.Name = "txtRepresentative";
             txtRepresentative.ReadOnly = true;
             txtRepresentative.Size = new System.Drawing.Size(250, 23);
@@ -401,7 +405,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(10, 441);
+            label3.Location = new System.Drawing.Point(10, 470);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(84, 15);
             label3.TabIndex = 1;
@@ -411,10 +415,11 @@
             // 
             tabControl1.Controls.Add(tabPageDetails);
             tabControl1.Controls.Add(tabPagePreviousAsssessments);
-            tabControl1.Location = new System.Drawing.Point(3, 3);
+            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(387, 511);
+            tabControl1.Size = new System.Drawing.Size(387, 533);
             tabControl1.TabIndex = 29;
             // 
             // tabPageDetails
@@ -423,13 +428,14 @@
             tabPageDetails.Location = new System.Drawing.Point(4, 24);
             tabPageDetails.Name = "tabPageDetails";
             tabPageDetails.Padding = new System.Windows.Forms.Padding(3);
-            tabPageDetails.Size = new System.Drawing.Size(379, 483);
+            tabPageDetails.Size = new System.Drawing.Size(379, 505);
             tabPageDetails.TabIndex = 0;
             tabPageDetails.Text = "Details";
             tabPageDetails.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
+            panel1.Controls.Add(txtStreet);
             panel1.Controls.Add(txtArpNo);
             panel1.Controls.Add(chckCancelled);
             panel1.Controls.Add(txtLotNo);
@@ -454,6 +460,7 @@
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label15);
             panel1.Controls.Add(cmbxTaxpayer);
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(label9);
             panel1.Controls.Add(label3);
@@ -466,7 +473,7 @@
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(373, 477);
+            panel1.Size = new System.Drawing.Size(373, 499);
             panel1.TabIndex = 0;
             // 
             // tabPagePreviousAsssessments
@@ -476,7 +483,7 @@
             tabPagePreviousAsssessments.Location = new System.Drawing.Point(4, 24);
             tabPagePreviousAsssessments.Name = "tabPagePreviousAsssessments";
             tabPagePreviousAsssessments.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePreviousAsssessments.Size = new System.Drawing.Size(379, 483);
+            tabPagePreviousAsssessments.Size = new System.Drawing.Size(379, 477);
             tabPagePreviousAsssessments.TabIndex = 1;
             tabPagePreviousAsssessments.Text = "Previous Assessments";
             tabPagePreviousAsssessments.UseVisualStyleBackColor = true;
@@ -485,39 +492,70 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(3, 28);
+            dataGridView1.Location = new System.Drawing.Point(3, 34);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(373, 452);
+            dataGridView1.Size = new System.Drawing.Size(373, 440);
             dataGridView1.TabIndex = 1;
             // 
             // toolStrip1
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { cmbxPreviousRpt, btnAddPrevRpt, toolStripSeparator1, btnDeletePrevRpt });
             toolStrip1.Location = new System.Drawing.Point(3, 3);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(373, 25);
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(373, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // cmbxPreviousRpt
             // 
-            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = Properties.Resources.symbol_add_20px;
-            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            toolStripButton1.Text = "Add...";
+            cmbxPreviousRpt.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            cmbxPreviousRpt.Name = "cmbxPreviousRpt";
+            cmbxPreviousRpt.Size = new System.Drawing.Size(150, 23);
+            cmbxPreviousRpt.KeyPress += cmbxPreviousRpt_KeyPress;
             // 
-            // toolStripButton2
+            // btnAddPrevRpt
             // 
-            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = Properties.Resources.waste_bin_filled_20px;
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            toolStripButton2.Text = "Delete";
+            btnAddPrevRpt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnAddPrevRpt.Image = Properties.Resources.symbol_add_20px;
+            btnAddPrevRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAddPrevRpt.Name = "btnAddPrevRpt";
+            btnAddPrevRpt.Size = new System.Drawing.Size(23, 20);
+            btnAddPrevRpt.Text = "Apply";
+            btnAddPrevRpt.Click += btnAddPrevRpt_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
+            // 
+            // btnDeletePrevRpt
+            // 
+            btnDeletePrevRpt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnDeletePrevRpt.Image = Properties.Resources.waste_bin_filled_20px;
+            btnDeletePrevRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDeletePrevRpt.Name = "btnDeletePrevRpt";
+            btnDeletePrevRpt.Size = new System.Drawing.Size(23, 20);
+            btnDeletePrevRpt.Text = "Delete";
+            btnDeletePrevRpt.Click += btnDeleteRptPrev_Click;
+            // 
+            // txtStreet
+            // 
+            txtStreet.Location = new System.Drawing.Point(102, 120);
+            txtStreet.Name = "txtStreet";
+            txtStreet.Size = new System.Drawing.Size(250, 23);
+            txtStreet.TabIndex = 29;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(10, 123);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(37, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Street";
             // 
             // ucRealProperties
             // 
@@ -526,7 +564,7 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(tabControl1);
             Name = "ucRealProperties";
-            Size = new System.Drawing.Size(392, 513);
+            Size = new System.Drawing.Size(387, 533);
             ((System.ComponentModel.ISupportInitialize)nudEffectivityQuarter).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityYear).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAssessedValue).EndInit();
@@ -588,8 +626,12 @@
         private System.Windows.Forms.TabPage tabPagePreviousAsssessments;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton btnDeletePrevRpt;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripComboBox cmbxPreviousRpt;
+        private System.Windows.Forms.ToolStripButton btnAddPrevRpt;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.TextBox txtStreet;
+        internal System.Windows.Forms.Label label5;
     }
 }

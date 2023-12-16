@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             var rptModel = uc.RealPropertiesModel();
             rptModel.CreatedBy = Helper.UserId;
 
-            return AccFactory.RealPropertiesRepository().Insert(rptModel);
+            return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

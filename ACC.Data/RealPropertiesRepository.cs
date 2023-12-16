@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,26 +14,26 @@ namespace ACC.Data
         private AccGenericCommands mySqlGenericCommandsLFS;
         private readonly string tableName = "real_properties";
         private readonly string viewTableName = "view_real_properties";
-        private IProvinces _provinces;
-        private IMunicipalities _municipalities;
-        private IBarangayRepository _barangayRepository;
-        private IActualUseCodes _actualUseCodes;
-        private IClassificationCodes _classificationCodes;
-        private ITaxpayerTypeRepository _taxpayerTypeRepository;
-        private ITaxpayersRepository _taxpayersRepository;
-        private IRptPreviousAssessment _rptPreviousAssessment;
+        private IProvinces provinces;
+        private IMunicipalities municipalities;
+        private IBarangayRepository barangayRepository;
+        private IActualUseCodes actualUseCodes;
+        private IClassificationCodes classificationCodes;
+        private ITaxpayerTypeRepository taxpayerTypeRepository;
+        private ITaxpayersRepository taxpayersRepository;
+        private IRptPreviousAssessment rptPreviousAssessment;
 
         public RealPropertiesRepository(AccGenericCommands mySqlGenericCommandsLFS, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository, IActualUseCodes actualUseCodes, IClassificationCodes classificationCodes, ITaxpayerTypeRepository taxpayerTypeRepository, ITaxpayersRepository taxpayersRepository, IRptPreviousAssessment rptPreviousAssessment)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
-            _provinces = provinces;
-            _municipalities = municipalities;
-            _barangayRepository = barangayRepository;
-            _actualUseCodes = actualUseCodes;
-            _classificationCodes = classificationCodes;
-            _taxpayerTypeRepository = taxpayerTypeRepository;
-            _taxpayersRepository = taxpayersRepository;
-            _rptPreviousAssessment = rptPreviousAssessment;
+            this.provinces = provinces;
+            this.municipalities = municipalities;
+            this.barangayRepository = barangayRepository;
+            this.actualUseCodes = actualUseCodes;
+            this.classificationCodes = classificationCodes;
+            this.taxpayerTypeRepository = taxpayerTypeRepository;
+            this.taxpayersRepository = taxpayersRepository;
+            this.rptPreviousAssessment = rptPreviousAssessment;
         }
 
         public int CountRecords()
@@ -63,9 +64,9 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var recordDictionary = new Dictionary<string, string>();
-            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+            var parameters = new object[][] { new object[] { "@real_property_id", DbType.Int32, Id } };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE real_property_id = @real_property_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -81,17 +82,9 @@ namespace ACC.Data
             return recordDictionary;
         }
 
-        public DataTable GetCancelledRecordsBySearch(string searchText)
-        {
-            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
-            string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text AND is_cancelled = 1";
-            var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
-        }
-
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {viewTableName}";
+            string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -99,7 +92,7 @@ namespace ACC.Data
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
-            string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
+            string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -118,7 +111,6 @@ namespace ACC.Data
                 new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesModel.Id },
                 new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesModel.Id },
                 new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
                 new object[] { "@property_kind", DbType.String, entity.PropertyKind },
@@ -134,7 +126,7 @@ namespace ACC.Data
                 new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @street, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by);";
+            string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @street, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -149,7 +141,6 @@ namespace ACC.Data
                 new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesModel.Id },
                 new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesModel.Id },
                 new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
                 new object[] { "@property_kind", DbType.String, entity.PropertyKind },
@@ -162,10 +153,10 @@ namespace ACC.Data
                 new object[] { "@gr_year", DbType.Int32, entity.GrYear },
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
-                new object[] { "@updated_at", DbType.DateTime, entity.UpdatedAt}
+                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy}
             };
 
-            string query = $"UPDATE {tableName} SET  taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, street = @street, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled WHERE id = @id";
+            string query = $"UPDATE {tableName} SET taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, street = @street, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -201,10 +192,15 @@ namespace ACC.Data
             return false;
         }
 
-        public int GetLastInsertedId()
+        public int GetLastInsertedId(int userId)
         {
-            string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            var parameters = new object[][]
+            {
+                new object[] {"@created_by", DbType.Int32, userId }
+            };
+
+            string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
@@ -224,7 +220,7 @@ namespace ACC.Data
                     return "AND barangays_name = @barangays_name";
             }
 
-            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR taxpayer_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
 
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
@@ -270,7 +266,7 @@ namespace ACC.Data
                 TaxpayersModel taxpayersModel = realPropertiesModel.TaxpayersModel;
                 ActualUseCodesModel actualUseModel = realPropertiesModel.ActualUseCodesModel;
                 ClassificationCodesModel classificationModel = realPropertiesModel.ClassificationCodesModel;
-                RptPreviousAssessmentModel rptPreviousAssessmentModel = realPropertiesModel.RptPreviousAssessmentModel;
+                //RptPreviousAssessmentModel rptPreviousAssessmentModel = realPropertiesModel.RptPreviousAssessmentModels;
 
                 string provinceName = provinceModel.Name;
                 string municipallityName = municipalityModel.Name;
@@ -282,86 +278,85 @@ namespace ACC.Data
                 string completeArpNo = realPropertiesModel.CompleteArpNo;
 
                 //Actual Use
-                if (_actualUseCodes.NameExist(actualUseName))
-                    actualUseId = _actualUseCodes.GetIdByName(actualUseName);
+                if (actualUseCodes.NameExist(actualUseName))
+                    actualUseId = actualUseCodes.GetIdByName(actualUseName);
                 else
                 {
-                    _ = _actualUseCodes.Insert(actualUseModel);
-                    actualUseId = _actualUseCodes.GetLastInsertedId();
+                    _ = actualUseCodes.Insert(actualUseModel);
+                    actualUseId = actualUseCodes.GetLastInsertedId();
                 }
 
                 //Classification
-                if (_classificationCodes.NameExist(classificationName))
-                    classificationId = _classificationCodes.GetIdByName(classificationName);
+                if (classificationCodes.NameExist(classificationName))
+                    classificationId = classificationCodes.GetIdByName(classificationName);
                 else
                 {
-                    _ = _classificationCodes.Insert(classificationModel);
-                    classificationId = _classificationCodes.GetLastInsertedId();
+                    _ = classificationCodes.Insert(classificationModel);
+                    classificationId = classificationCodes.GetLastInsertedId();
                 }
 
                 //Taxpayer Type
-                if (_taxpayerTypeRepository.NameExist(taxpayerType))
-                    taxpayerTypeId = _taxpayerTypeRepository.GetIdByName(taxpayerType);
+                if (taxpayerTypeRepository.NameExist(taxpayerType))
+                    taxpayerTypeId = taxpayerTypeRepository.GetIdByName(taxpayerType);
                 else
                 {
-                    _ = _taxpayerTypeRepository.Insert(taxpayerTypeModel);
-                    taxpayerTypeId = _taxpayerTypeRepository.GetLastInsertedId();
+                    _ = taxpayerTypeRepository.Insert(taxpayerTypeModel);
+                    taxpayerTypeId = taxpayerTypeRepository.GetLastInsertedId();
                 }
 
                 //Province
-                if (_provinces.NameExist(provinceName))
-                    provinceId = _provinces.GetIdByName(provinceName);
+                if (provinces.NameExist(provinceName))
+                    provinceId = provinces.GetIdByName(provinceName);
                 else
                 {
-                    _ = _provinces.Insert(provinceModel);
-                    provinceId = _provinces.GetLastInsertedId();
+                    _ = provinces.Insert(provinceModel);
+                    provinceId = provinces.GetLastInsertedId();
                 }
 
                 //Municipality
-                if (_municipalities.NameExistByProvinceName(municipallityName, provinceName))
-                    municipalityId = _municipalities.GetIdByNameProvinceName(municipallityName, provinceName);
+                if (municipalities.NameExistByProvinceName(municipallityName, provinceName))
+                    municipalityId = municipalities.GetIdByNameProvinceName(municipallityName, provinceName);
                 else
                 {
                     municipalityModel.ProvincesId = provinceId;
-                    _ = _municipalities.Insert(municipalityModel);
-                    municipalityId = _municipalities.GetLastInsertedId();
+                    _ = municipalities.Insert(municipalityModel);
+                    municipalityId = municipalities.GetLastInsertedId();
                 }
 
                 //Barangay
-                if (_barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName))
-                    barangayId = _barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
+                if (barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName))
+                    barangayId = barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
                 else
                 {
                     barangayModel.MunicipalityID = municipalityId;
-                    _ = _barangayRepository.Insert(barangayModel);
-                    barangayId = _barangayRepository.GetLastInsertedId();
+                    _ = barangayRepository.Insert(barangayModel);
+                    barangayId = barangayRepository.GetLastInsertedId();
                 }
 
                 //Taxpayers
-                if (_taxpayersRepository.TaxpayerNameExist(taxpayerName))
+                if (taxpayersRepository.TaxpayerNameExist(taxpayerName))
                 {
-                    taxpayerId = _taxpayersRepository.GetIdByName(taxpayerName);
+                    taxpayerId = taxpayersRepository.GetIdByName(taxpayerName);
                     var dictTaxpayers = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
                     taxpayersModel.Id = taxpayerId;
                     taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
                     taxpayersModel.IsActive = Convert.ToBoolean(Convert.ToByte(dictTaxpayers["is_active"]));
-                    _taxpayersRepository.Update(taxpayersModel);
+                    taxpayersRepository.Update(taxpayersModel);
                 }
                 else
                 {
                     taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
                     taxpayersModel.IsActive = true;
-                    _ = _taxpayersRepository.Insert(taxpayersModel);
-                    taxpayerId = _taxpayersRepository.GetLastInsertedId();
+                    _ = taxpayersRepository.Insert(taxpayersModel);
+                    taxpayerId = taxpayersRepository.GetLastInsertedId();
                 }
 
                 //Real Properties
                 if (CompleteArpNoExist(completeArpNo))
                 {
                     realPropertiesId = Convert.ToInt32(GetRecordByCompleteArpNo(completeArpNo)["id"]);
-                    rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
-                    var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
-                    realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? string.Empty : dictRealProperty["id"];
+                    //rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
+
                     realPropertiesModel.Id = realPropertiesId;
                     realPropertiesModel.ActualUseCodesModel.Id = actualUseId;
                     realPropertiesModel.BarangayModel.Id = barangayId;
@@ -371,10 +366,10 @@ namespace ACC.Data
                     Update(realPropertiesModel);
 
                     //Delete RPT previous assessment
-                    _rptPreviousAssessment.DeleteByRealPropertyId(realPropertiesId);
+                    rptPreviousAssessment.DeleteByRealPropertyId(realPropertiesId);
 
                     //Insert RPT previous assessment
-                    _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                    //rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
                 }
                 else
                 {
@@ -383,50 +378,22 @@ namespace ACC.Data
                     realPropertiesModel.ClassificationCodesModel.Id = classificationId;
                     realPropertiesModel.TaxpayersModel.Id = taxpayerId;
                     Insert(realPropertiesModel);
-                    realPropertiesId = GetLastInsertedId();
+                    realPropertiesId = GetLastInsertedId(0);
 
                     //Update property identifier
-                    var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
                     realPropertiesModel.Id = realPropertiesId;
-                    realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? realPropertiesId.ToString() : dictRealProperty["id"];
                     realPropertiesModel.UpdatedBy = null;
                     realPropertiesModel.UpdatedAt = null;
                     Update(realPropertiesModel);
 
                     //Insert RPT previous assessment
-                    rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
-                    _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                    //rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
+                    //rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
                 }
 
                 scope.Complete();
                 return true;
             }
-        }
-
-        public bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                Insert(realPropertiesModel);
-                _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public DataTable GetRecordsByCompleteARP(string completeARPNo)
-        {
-            var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeARPNo } };
-            string query = $"SELECT id, complete_arp_no FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
-            var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable GetCancelledProperties()
-        {
-            string query = $"SELECT * FROM {viewTableName} WHERE is_cancelled = 1";
-            var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText, int rowFilter, bool showCancelled)
@@ -439,10 +406,89 @@ namespace ACC.Data
             };
 
             string subQuery = showCancelled ? string.Empty : "AND is_cancelled = @is_cancelled";
-            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
 
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetRecordNotExistedPreviousRpt(int rptId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@real_property_id", DbType.Int32, rptId}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE  NOT EXISTS(SELECT {rptPreviousAssessment.tableName}.real_properties_id FROM {rptPreviousAssessment.tableName} WHERE {rptPreviousAssessment.tableName}.real_properties_id = {viewTableName}.real_property_id) AND real_property_id <> @real_property_id";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetRecordNotExistedPreviousRpt()
+        {
+            string query = $"SELECT * FROM {viewTableName} WHERE NOT EXISTS(SELECT {rptPreviousAssessment.tableName}.real_properties_id FROM {rptPreviousAssessment.tableName} WHERE {rptPreviousAssessment.tableName}.real_properties_id = {viewTableName}.real_property_id)";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable); ;
+        }
+
+        public Dictionary<string, string> GetViewRecordById(int Id)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+            var parameters = new object[][] { new object[] { "@real_property_id", DbType.Int32, Id } };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE real_property_id = @real_property_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
+        public bool InsertWithPreviousAssessments(RealPropertiesModel realPropertiesModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                Insert(realPropertiesModel);
+
+                var rptId = GetLastInsertedId(realPropertiesModel.CreatedBy);
+
+                foreach (var model in realPropertiesModel.RptPreviousAssessmentModels)
+                {
+                    model.RealPropertiesId = rptId;
+                    _ = rptPreviousAssessment.Insert(model);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateWithPreviousAssessements(RealPropertiesModel realPropertiesModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                Update(realPropertiesModel);
+                _ = rptPreviousAssessment.DeleteByRealPropertyId(realPropertiesModel.Id);
+
+                foreach (var model in realPropertiesModel.RptPreviousAssessmentModels)
+                {
+                    model.RealPropertiesId = realPropertiesModel.Id;
+                    _ = rptPreviousAssessment.Insert(model);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }

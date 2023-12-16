@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using RPT.Data;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -171,19 +172,18 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         Name = provinceName,
                     };
 
-                    var rptPreviousAssessmentModel = new RptPreviousAssessmentModel()
+                    var rptPreviousAssessmentModel = new List<RptPreviousAssessmentModel>()
                     {
-                        CompleteArpNo = prevAssessmentCompleteArpNo,
-                        PropertyPin = prevAssessmentPin,
-                        PreviousOwner = prevAssessmentOwner,
-                        EffectivityAssessment = prevAssessmentEffectivity,
-                        AssessedValue = prevAssessmentAssessedValue,
-                        DateRecorded = string.IsNullOrEmpty(prevAssessmentDateRecorded) ? null : DateTime.Parse(prevAssessmentDateRecorded)
+                        //CompleteArpNo = prevAssessmentCompleteArpNo,
+                        //PropertyPin = prevAssessmentPin,
+                        //PreviousOwner = prevAssessmentOwner,
+                        //EffectivityAssessment = prevAssessmentEffectivity,
+                        //AssessedValue = prevAssessmentAssessedValue,
+                        //DateRecorded = string.IsNullOrEmpty(prevAssessmentDateRecorded) ? null : DateTime.Parse(prevAssessmentDateRecorded)
                     };
 
                     var realPropertiesModel = new RealPropertiesModel()
                     {
-                        PropertyIdentifier = propertyIdentifierCompleteArpNo,
                         CompleteArpNo = completeArpNo,
                         PropertyPin = propertyPin,
                         Street = propertyStreet,
@@ -206,7 +206,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         BarangayModel = barangayModel,
                         ActualUseCodesModel = actualUseCodesModel,
                         ClassificationCodesModel = classificationCodesModel,
-                        RptPreviousAssessmentModel = rptPreviousAssessmentModel
+                        RptPreviousAssessmentModels = rptPreviousAssessmentModel
                     };
 
                     AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModel);

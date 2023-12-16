@@ -64,12 +64,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private DataColumn[] RealPropertiesColumns()
         {
             var dataColumns = new DataColumn[] {
-                new DataColumn("id", typeof(int)),
+                new DataColumn("real_property_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
                 new DataColumn("property_kind", typeof(string)),
                 new DataColumn("property_location", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("taxpayer_name", typeof(string)),
                 new DataColumn("representative_name", typeof(string)),
                 new DataColumn("classification_code", typeof(string)),
                 new DataColumn("actual_use_code", typeof(string)),
@@ -78,8 +78,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 new DataColumn("assessed_value", typeof(decimal)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("is_cancelled", typeof(bool)),
-                new DataColumn("created_at", typeof(string)),
-                new DataColumn("updated_at", typeof(string)),
+                new DataColumn("real_property_created_at", typeof(string)),
+                new DataColumn("real_property_updated_at", typeof(string)),
             };
 
             return dataColumns;
@@ -114,15 +114,15 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 foreach (DataRow row in dtRealPropertiesFromDB.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string location = $"{row["street"]} {row["barangays_name"]} {row["municipalities_name"]} {row["provinces_name"]}";
+                    string location = $"{row["street"]} {row["barangay_name"]} {row["municipality_name"]} {row["province_name"]}";
                     string effectivityQuarterAndYear = $"{Helper.AddOrdinalSuffix((int)row["effectivity_quarter"])} Quarter - {row["effectivity_year"]}";
 
-                    newRow["id"] = row["id"];
+                    newRow["real_property_id"] = row["real_property_id"];
                     newRow["complete_arp_no"] = row["complete_arp_no"];
                     newRow["property_pin"] = row["property_pin"];
                     newRow["property_kind"] = row["property_kind"];
                     newRow["property_location"] = location;
-                    newRow["taxpayers_name"] = row["taxpayers_name"];
+                    newRow["taxpayer_name"] = row["taxpayer_name"];
                     newRow["representative_name"] = row["representative_name"];
                     newRow["classification_code"] = row["classification_code"];
                     newRow["actual_use_code"] = row["actual_use_code"];
@@ -131,8 +131,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     newRow["assessed_value"] = row["assessed_value"];
                     newRow["is_taxable"] = row["is_taxable"];
                     newRow["is_cancelled"] = row["is_cancelled"];
-                    newRow["created_at"] = row["created_at"];
-                    newRow["updated_at"] = row["updated_at"];
+                    newRow["real_property_created_at"] = row["real_property_created_at"];
+                    newRow["real_property_updated_at"] = row["real_property_updated_at"];
 
                     progressCount++;
                     dataTable.Rows.Add(newRow);
@@ -184,8 +184,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 if (dgRealProperties.Columns.Count < 1)
                     return;
 
-                byte createdByIndex = (byte)dgRealProperties.Columns["created_at"].Index;
-                byte updatedByIndex = (byte)dgRealProperties.Columns["updated_at"].Index;
+                byte createdByIndex = (byte)dgRealProperties.Columns["real_property_created_at"].Index;
+                byte updatedByIndex = (byte)dgRealProperties.Columns["real_property_updated_at"].Index;
 
                 var indexes = new byte[] { createdByIndex, updatedByIndex };
                 Helper.EnableDisableToolStripMenuItems(dgRealProperties, btnEdit, btnDelete);
@@ -217,7 +217,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             try
             {
                 int rowIndex = dgRealProperties.CurrentCell.RowIndex;
-                var rptId = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["id"].Value);
+                var rptId = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_property_id"].Value);
                 _ = new frmEditRealProperties(this, rptId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

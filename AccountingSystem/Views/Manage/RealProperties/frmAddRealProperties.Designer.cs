@@ -40,9 +40,9 @@
             ucRealProperties1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRealProperties1.Location = new System.Drawing.Point(0, 0);
+            ucRealProperties1.Margin = new System.Windows.Forms.Padding(0);
             ucRealProperties1.Name = "ucRealProperties1";
-            ucRealProperties1.Padding = new System.Windows.Forms.Padding(4);
-            ucRealProperties1.Size = new System.Drawing.Size(391, 515);
+            ucRealProperties1.Size = new System.Drawing.Size(385, 503);
             ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -52,14 +52,14 @@
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 515);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 503);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(391, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(385, 29);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(313, 3);
+            btnCancel.Location = new System.Drawing.Point(307, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 0;
@@ -69,7 +69,7 @@
             // btnSave
             // 
             btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSave.Location = new System.Drawing.Point(232, 3);
+            btnSave.Location = new System.Drawing.Point(226, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 23);
             btnSave.TabIndex = 0;
@@ -79,11 +79,10 @@
             // 
             // frmAddRealProperties
             // 
-            AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(391, 544);
+            ClientSize = new System.Drawing.Size(385, 532);
             Controls.Add(ucRealProperties1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

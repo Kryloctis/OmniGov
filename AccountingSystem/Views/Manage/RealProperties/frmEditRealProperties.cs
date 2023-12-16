@@ -34,10 +34,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
 
             var rptModel = uc.RealPropertiesModel();
-            rptModel.TaxpayersModel.Id = rptId;
+            rptModel.Id = rptId;
             rptModel.UpdatedBy = Helper.UserId;
 
-            return AccFactory.RealPropertiesRepository().Update(rptModel);
+            return AccFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
         }
 
         private void frmEditRealProperties_Load(object sender, EventArgs e)
@@ -49,13 +49,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
                 if (UpdateRpt())
                 {
-                    Helper.MessageBoxSuccess("Real property has been updated.");
+                    Helper.MessageBoxSuccess("Real property has been updated");
                     frmRealProperties.LoadProperties();
                     Close();
                 }

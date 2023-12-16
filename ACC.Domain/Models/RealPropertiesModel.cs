@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ACC.Domain.Models
 {
@@ -6,7 +7,6 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public string Street { get; set; }
-        public string PropertyIdentifier { get; set; }
         public string CompleteArpNo { get; set; }
         public string PropertyPin { get; set; }
         public char PropertyKind { get; set; }
@@ -19,19 +19,17 @@ namespace ACC.Domain.Models
         public int GrYear { get; set; }
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
+        public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
-
         public DateTime? UpdatedAt { get; set; }
-
         public TaxpayersModel TaxpayersModel { get; set; }
         public TaxpayerTypeModel TaxpayerTypeModel { get; set; }
-
         public ProvincesModel ProvincesModel { get; set; }
         public MunicipalitiesModel MunicipalitiesModel { get; set; }
         public BarangayModel BarangayModel { get; set; }
         public ActualUseCodesModel ActualUseCodesModel { get; set; }
         public ClassificationCodesModel ClassificationCodesModel { get; set; }
-        public RptPreviousAssessmentModel RptPreviousAssessmentModel { get; set; }
+        public List<RptPreviousAssessmentModel> RptPreviousAssessmentModels { get; set; }
     }
 }
