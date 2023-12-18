@@ -14,14 +14,16 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 {
-    public partial class ucRptTaxDues : UserControl
+    public partial class ucPaymentRptTaxDues : UserControl
     {
-        internal int taxpayersId;
+        private int taxpayerId;
         internal DateTime paymentDate = Helper.GetCurrentDate();
 
-        public ucRptTaxDues()
+        public ucPaymentRptTaxDues()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgProperties, false, false);
+            Helper.DatagridFullRowSelectStyle(dgTaxDues, false, false);
         }
 
         internal List<RptTaxDuesModel> RptTaxDuesModelList()
@@ -58,22 +60,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return AccFactory.CreateErrors(errorStrings).GenerateErrorMessage();
         }
 
-        private void OnLoad()
+        internal void OnLoad(int taxpayerId)
         {
-            Helper.DatagridFullRowSelectStyle(dgProperties, false, false);
-            Helper.DatagridFullRowSelectStyle(dgTaxDues, false, false);
+            this.taxpayerId = taxpayerId;
+            LoadPostedProperties();
         }
-
-        private void ucRptTaxDues_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        //Properties DatagridView
 
         private DataColumn[] DataColumnsPostedProperties()
         {
@@ -81,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             {
                 new DataColumn("is_selected", typeof(bool)),
                 new DataColumn("id", typeof(int)),
-                 new DataColumn("kind", typeof(string)),
+                new DataColumn("kind", typeof(string)),
                 new DataColumn("real_taxpayers_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
@@ -92,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         private DataTable DataTablePostedProperties()
         {
             bool showCancelled = chckBxCancelled.Checked;
-            var dtAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(taxpayersId, showCancelled);
+            var dtAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(taxpayerId, showCancelled);
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsPostedProperties());
 
@@ -112,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return dataTable;
         }
 
-        internal void LoadPostedProperties()
+        private void LoadPostedProperties()
         {
             try
             {
@@ -163,8 +154,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         {
             LoadPostedProperties();
         }
-
-        #region Validations
 
         private bool TaxDuesValidated()
         {
@@ -238,8 +227,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             dgTaxDues.Tag = string.Empty;
             return true;
         }
-
-        #endregion Validations
 
         private DataColumn[] DataColumnsTaxDues()
         {
@@ -364,22 +351,18 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void LoadTaxDues(DataGridView dataGridView)
         {
-            try
+            List<string> completeArpNoList = new List<string>();
+
+            foreach (DataGridViewRow row in dgProperties.Rows)
             {
-                List<string> completeArpNoList = new List<string>();
-
-                foreach (DataGridViewRow row in dgProperties.Rows)
-                {
-                    if (Convert.ToBoolean(row.Cells["is_selected"].Value))
-                        completeArpNoList.Add(row.Cells["complete_arp_no"].Value.ToString());
-                }
-
-                HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayersId, completeArpNoList));
-                LoadColorStatus(dgTaxDues);
-                chckBxTaxDues.Checked = false;
-                txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
+                if (Convert.ToBoolean(row.Cells["is_selected"].Value))
+                    completeArpNoList.Add(row.Cells["complete_arp_no"].Value.ToString());
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayerId, completeArpNoList));
+            LoadColorStatus(dgTaxDues);
+            chckBxTaxDues.Checked = false;
+            txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
         }
 
         internal decimal GetTotalTaxDue()

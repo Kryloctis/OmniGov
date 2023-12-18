@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.Payments
 {
-    partial class frmRptPayments
+    partial class frmPaymentRpt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             panel1 = new System.Windows.Forms.Panel();
-            tabControl1 = new System.Windows.Forms.TabControl();
+            tabControlMain = new System.Windows.Forms.TabControl();
             tabPageTaxpayer = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
-            dgTaxpayers = new System.Windows.Forms.DataGridView();
-            flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            txtTaxpayerSearch = new System.Windows.Forms.TextBox();
+            ucPaymentTaxpayers1 = new RealProperty.ucPaymentTaxpayers();
             tabPageTaxDues = new System.Windows.Forms.TabPage();
+            ucPaymentRptTaxDues1 = new RealProperty.ucPaymentRptTaxDues();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnNext = new System.Windows.Forms.Button();
-            btnBack = new System.Windows.Forms.Button();
+            btnBackMain = new System.Windows.Forms.Button();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radTaxpayer = new System.Windows.Forms.RadioButton();
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            ucRptTaxDues1 = new RealProperty.ucRptTaxDues();
             panel1.SuspendLayout();
-            tabControl1.SuspendLayout();
+            tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgTaxpayers).BeginInit();
-            flowLayoutPanel4.SuspendLayout();
             tabPageTaxDues.SuspendLayout();
             tabPagePayment.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -65,34 +58,35 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(tabControl1);
+            panel1.Controls.Add(tabControlMain);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(flowLayoutPanel2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(1062, 557);
+            panel1.Size = new System.Drawing.Size(1027, 496);
             panel1.TabIndex = 1;
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            tabControl1.Controls.Add(tabPageTaxpayer);
-            tabControl1.Controls.Add(tabPageTaxDues);
-            tabControl1.Controls.Add(tabPagePayment);
-            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            tabControl1.Location = new System.Drawing.Point(195, 0);
-            tabControl1.Margin = new System.Windows.Forms.Padding(0);
-            tabControl1.Multiline = true;
-            tabControl1.Name = "tabControl1";
-            tabControl1.Padding = new System.Drawing.Point(0, 0);
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(867, 526);
-            tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            tabControl1.TabIndex = 0;
+            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            tabControlMain.Controls.Add(tabPageTaxpayer);
+            tabControlMain.Controls.Add(tabPageTaxDues);
+            tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
+            tabControlMain.Location = new System.Drawing.Point(195, 0);
+            tabControlMain.Margin = new System.Windows.Forms.Padding(0);
+            tabControlMain.Multiline = true;
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.Padding = new System.Drawing.Point(0, 0);
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new System.Drawing.Size(832, 465);
+            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            tabControlMain.TabIndex = 0;
+            tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageTaxpayer
             // 
@@ -102,91 +96,49 @@
             tabPageTaxpayer.Location = new System.Drawing.Point(4, 5);
             tabPageTaxpayer.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxpayer.Name = "tabPageTaxpayer";
-            tabPageTaxpayer.Size = new System.Drawing.Size(859, 517);
+            tabPageTaxpayer.Size = new System.Drawing.Size(824, 456);
             tabPageTaxpayer.TabIndex = 0;
             tabPageTaxpayer.Text = "Taxpayer";
-            tabPageTaxpayer.Enter += tabPageTaxpayer_Enter;
             // 
             // panel2
             // 
-            panel2.Controls.Add(dgTaxpayers);
-            panel2.Controls.Add(flowLayoutPanel4);
+            panel2.Controls.Add(ucPaymentTaxpayers1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel2.Size = new System.Drawing.Size(859, 517);
+            panel2.Size = new System.Drawing.Size(824, 456);
             panel2.TabIndex = 0;
             // 
-            // dgTaxpayers
+            // ucPaymentTaxpayers1
             // 
-            dgTaxpayers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle2;
-            dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgTaxpayers.Location = new System.Drawing.Point(4, 36);
-            dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dgTaxpayers.Name = "dgTaxpayers";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgTaxpayers.RowTemplate.Height = 25;
-            dgTaxpayers.Size = new System.Drawing.Size(851, 478);
-            dgTaxpayers.TabIndex = 2;
-            dgTaxpayers.SelectionChanged += dataGridView1_SelectionChanged;
-            // 
-            // flowLayoutPanel4
-            // 
-            flowLayoutPanel4.Controls.Add(txtTaxpayerSearch);
-            flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel4.Location = new System.Drawing.Point(4, 3);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new System.Drawing.Size(851, 33);
-            flowLayoutPanel4.TabIndex = 0;
-            // 
-            // txtTaxpayerSearch
-            // 
-            txtTaxpayerSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtTaxpayerSearch.Location = new System.Drawing.Point(648, 3);
-            txtTaxpayerSearch.Name = "txtTaxpayerSearch";
-            txtTaxpayerSearch.Size = new System.Drawing.Size(200, 23);
-            txtTaxpayerSearch.TabIndex = 1;
-            txtTaxpayerSearch.TextChanged += txtTaxpayerSearch_TextChanged;
+            ucPaymentTaxpayers1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentTaxpayers1.Location = new System.Drawing.Point(4, 3);
+            ucPaymentTaxpayers1.Margin = new System.Windows.Forms.Padding(0);
+            ucPaymentTaxpayers1.Name = "ucPaymentTaxpayers1";
+            ucPaymentTaxpayers1.Size = new System.Drawing.Size(816, 450);
+            ucPaymentTaxpayers1.TabIndex = 0;
             // 
             // tabPageTaxDues
             // 
-            tabPageTaxDues.Controls.Add(ucRptTaxDues1);
+            tabPageTaxDues.Controls.Add(ucPaymentRptTaxDues1);
             tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabPageTaxDues.Location = new System.Drawing.Point(4, 5);
             tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxDues.Name = "tabPageTaxDues";
-            tabPageTaxDues.Size = new System.Drawing.Size(859, 517);
+            tabPageTaxDues.Size = new System.Drawing.Size(824, 456);
             tabPageTaxDues.TabIndex = 1;
             tabPageTaxDues.Text = "Get Tax Due";
             tabPageTaxDues.UseVisualStyleBackColor = true;
-            tabPageTaxDues.Enter += tabPageTaxDues_Enter;
+            // 
+            // ucPaymentRptTaxDues1
+            // 
+            ucPaymentRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentRptTaxDues1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentRptTaxDues1.Name = "ucPaymentRptTaxDues1";
+            ucPaymentRptTaxDues1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentRptTaxDues1.TabIndex = 0;
             // 
             // tabPagePayment
             // 
@@ -196,11 +148,10 @@
             tabPagePayment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPagePayment.Size = new System.Drawing.Size(859, 517);
+            tabPagePayment.Size = new System.Drawing.Size(824, 456);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = " ";
             tabPagePayment.UseVisualStyleBackColor = true;
-            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // ucPayment1
             // 
@@ -208,7 +159,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(4, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(851, 511);
+            ucPayment1.Size = new System.Drawing.Size(816, 450);
             ucPayment1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -216,18 +167,18 @@
             flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnNext);
-            flowLayoutPanel1.Controls.Add(btnBack);
+            flowLayoutPanel1.Controls.Add(btnBackMain);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(195, 526);
+            flowLayoutPanel1.Location = new System.Drawing.Point(195, 465);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(867, 31);
+            flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(729, 3);
+            btnCancel.Location = new System.Drawing.Point(694, 3);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(134, 23);
@@ -237,7 +188,7 @@
             // 
             // btnNext
             // 
-            btnNext.Location = new System.Drawing.Point(587, 3);
+            btnNext.Location = new System.Drawing.Point(552, 3);
             btnNext.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnNext.Name = "btnNext";
             btnNext.Size = new System.Drawing.Size(134, 23);
@@ -246,16 +197,16 @@
             btnNext.UseVisualStyleBackColor = true;
             btnNext.Click += btnNext_Click;
             // 
-            // btnBack
+            // btnBackMain
             // 
-            btnBack.Location = new System.Drawing.Point(445, 3);
-            btnBack.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new System.Drawing.Size(134, 23);
-            btnBack.TabIndex = 0;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = true;
-            btnBack.Click += btnBack_Click;
+            btnBackMain.Location = new System.Drawing.Point(410, 3);
+            btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnBackMain.Name = "btnBackMain";
+            btnBackMain.Size = new System.Drawing.Size(134, 23);
+            btnBackMain.TabIndex = 0;
+            btnBackMain.Text = "Back";
+            btnBackMain.UseVisualStyleBackColor = true;
+            btnBackMain.Click += btnBack_Click;
             // 
             // flowLayoutPanel2
             // 
@@ -268,13 +219,12 @@
             flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(195, 557);
+            flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 3;
             // 
             // radTaxpayer
             // 
             radTaxpayer.Appearance = System.Windows.Forms.Appearance.Button;
-            radTaxpayer.Checked = true;
             radTaxpayer.FlatAppearance.BorderSize = 0;
             radTaxpayer.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
             radTaxpayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -283,7 +233,6 @@
             radTaxpayer.Name = "radTaxpayer";
             radTaxpayer.Size = new System.Drawing.Size(195, 37);
             radTaxpayer.TabIndex = 5;
-            radTaxpayer.TabStop = true;
             radTaxpayer.Text = "Taxpayer";
             radTaxpayer.UseVisualStyleBackColor = true;
             // 
@@ -323,14 +272,6 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // ucRptTaxDues1
-            // 
-            ucRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucRptTaxDues1.Location = new System.Drawing.Point(0, 0);
-            ucRptTaxDues1.Name = "ucRptTaxDues1";
-            ucRptTaxDues1.Size = new System.Drawing.Size(859, 517);
-            ucRptTaxDues1.TabIndex = 1;
-            // 
             // frmRptPayments
             // 
             AcceptButton = btnNext;
@@ -339,24 +280,20 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             BackColor = System.Drawing.Color.White;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(1062, 557);
+            ClientSize = new System.Drawing.Size(1027, 496);
             Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(1078, 596);
             Name = "frmRptPayments";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transaction > Payments";
-            Load += newFormPayments_Load;
+            Text = "Payments > AF 56 - Real Property Tax Receipts";
+            Load += frmRptPayments_Load;
             panel1.ResumeLayout(false);
-            tabControl1.ResumeLayout(false);
+            tabControlMain.ResumeLayout(false);
             tabPageTaxpayer.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgTaxpayers).EndInit();
-            flowLayoutPanel4.ResumeLayout(false);
-            flowLayoutPanel4.PerformLayout();
             tabPageTaxDues.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
@@ -366,7 +303,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageTaxpayer;
         private System.Windows.Forms.TabPage tabPageTaxDues;
         private System.Windows.Forms.TabPage tabPagePayment;
@@ -376,14 +313,12 @@
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnBackMain;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgTaxpayers;
         private ucPayment ucPayment1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.TextBox txtTaxpayerSearch;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private RealProperty.ucRptTaxDues ucRptTaxDues1;
+        private RealProperty.ucPaymentTaxpayers ucPaymentTaxpayers1;
+        private RealProperty.ucPaymentRptTaxDues ucPaymentRptTaxDues1;
     }
 }

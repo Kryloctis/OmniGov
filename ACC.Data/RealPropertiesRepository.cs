@@ -203,24 +203,17 @@ namespace ACC.Data
             return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
-        public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
+        public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText, int rowFilter)
         {
             var parameters = new object[][]
             {
                 new object[] { "@effectivity_year", DbType.Int32, effectivityYear},
-                new object[] { "@barangays_name", DbType.String, barangay},
-                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
+                new object[] { "@barangay_name", DbType.String, barangay},
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+                new object[] { "@row_filter", DbType.Int32, rowFilter}
             };
 
-            string BarangayQuery()
-            {
-                if (barangay == "All")
-                    return string.Empty;
-                else
-                    return "AND barangays_name = @barangays_name";
-            }
-
-            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE barangay_name = @barangay_name AND (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year ORDER BY taxpayer_name ASC LIMIT @row_filter";
 
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);

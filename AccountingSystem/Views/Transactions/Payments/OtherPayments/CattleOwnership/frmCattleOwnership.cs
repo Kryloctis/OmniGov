@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private void OnLoad()
         {
             LoadTabContents();
-            ucPaymentRegistry.LoadRegistry();
         }
 
         private void ConfirmPayment()
@@ -167,6 +166,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             radOwner.Checked = true;
             btnNextMain.Text = "Next";
+            ucPaymentRegistry.LoadRegistry();
         }
 
         private void LoadCattleDetailsTab()
