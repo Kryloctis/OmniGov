@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using Org.BouncyCastle.Utilities.Zlib;
 using RPT.Domain.Models;
@@ -24,9 +25,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void OnLoad()
         {
+            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
             LoadBarangays();
             nudYear.Value = Helper.GetCurrentDate().Year;
             ToogleButtons(dgProperties, btnPost);
+            LoadProperties();
         }
 
         private void FrmAssessmentPosting_Load(object sender, EventArgs e)
@@ -48,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private string GetPenalty(string description, string parameters)
+        private string GetPenaltyRate(string description, string parameters)
         {
             var dictPenaltyRecord = AccFactory.RptPenaltiesRepository().GetRecordByDescription(description);
 
@@ -60,37 +63,19 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void ToogleButtons(DataGridView dataGridView, ToolStripButton post)
         {
-            try
-            {
-                int postedCount = 0;
-                int unpostedCount = 0;
+            var dataTable = (DataTable)dataGridView.DataSource;
 
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
-                    string postingStatus = row.Cells["posting_status"].Value.ToString();
+            if (dataTable is null)
+                return;
 
-                    if (!isChecked)
-                        continue;
+            int countCheckedRows = dataTable.AsEnumerable().Count(row => Convert.ToBoolean(row["is_checked"]) && row.Field<string>("posting_status") != "Posted");
 
-                    if (postingStatus == "Posted")
-                        postedCount += 1;
-                    else
-                        unpostedCount += 1;
-                }
+            btnPost.Text = $"Post ({countCheckedRows})";
 
-                if (unpostedCount > 0)
-                {
-                    post.Enabled = true;
-                    post.Text = $"Post({unpostedCount})";
-                }
-                else
-                {
-                    post.Enabled = false;
-                    post.Text = $"Post({0})";
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (countCheckedRows < 1)
+                post.Enabled = false;
+            else
+                post.Enabled = true;
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -154,7 +139,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string barangayName = cmbxBarangays.Text;
                 txtBarangay.Text = barangayName;
                 string searchKey = txtSearch.Text.Trim();
-                bgwLoadAsessmentPosts.RunWorkerAsync((year, barangayName, searchKey));
+                int rowFilter = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+                bgwLoadAsessmentPosts.RunWorkerAsync((year, barangayName, searchKey, rowFilter));
             }
         }
 
@@ -162,12 +148,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             try
             {
-                var parameters = ((int year, string barangayName, string searchKey))e.Argument;
+                var parameters = ((int year, string barangayName, string searchKey, int rowFilter))e.Argument;
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(AssessmentPostsDataColumns());
 
-                var dtViewRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(parameters.year, parameters.barangayName, parameters.searchKey);
+                var dtViewRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(parameters.year, parameters.barangayName, parameters.searchKey, parameters.rowFilter);
                 int totalProgressCount = dtViewRealProperties.Rows.Count;
                 int progressCount = 0;
 
@@ -277,9 +263,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 //Get Penalty and Tax Rates
                 var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
 
-                //decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate")) ? 0 :
-                //                                           Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
-                //string penaltyFrequency = GetPenaltyRecord("RPT monthly penalty", "frequency");
+                decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRate("RPT monthly penalty", "rate")) ? 0 : Convert.ToDecimal(GetPenaltyRate("RPT monthly penalty", "rate"));
+                string penaltyFrequency = GetPenaltyRate("RPT monthly penalty", "frequency");
 
                 var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(row["real_property_id"]));
 
@@ -310,10 +295,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     GrYear = Convert.ToInt32(dictRpt["gr_year"]),
                     IsTaxable = dictRpt["is_taxable"] == "1" ? true : false,
                     IsCancelled = dictRpt["is_cancelled"] == "1" ? true : false,
-                    PenaltyRate = 0,
-                    PenaltyFrequency = string.Empty,
+                    PenaltyRate = penaltyRate,
+                    PenaltyFrequency = penaltyFrequency,
                     BasicRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Basic"),
-                    SefRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Sef"),
+                    SefRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Special Educational Fund"),
                     PostedBy = Helper.UserId,
                     DueYear = Convert.ToInt32(txtYear.Text)
                 };
@@ -428,8 +413,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 var parameters = ((bool isCheckAll, DataTable dataTable))e.Argument;
 
-                int totalCountUnchecked = parameters.dataTable.AsEnumerable().Count(row => !Convert.ToBoolean(row["is_checked"]));
-                int totalCountChecked = parameters.dataTable.AsEnumerable().Count(row => Convert.ToBoolean(row["is_checked"]));
+                int totalCountUnchecked = parameters.dataTable.AsEnumerable().Count(row => !Convert.ToBoolean(row["is_checked"]) && row.Field<string>("posting_status") != "Posted");
+                int totalCountChecked = parameters.dataTable.AsEnumerable().Count(row => Convert.ToBoolean(row["is_checked"]) && row.Field<string>("posting_status") != "Posted");
 
                 int progressCount = 0;
                 string targetStatus = "posted";
@@ -453,6 +438,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void BgwAssessmentSelection_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void bgwAssessmentSelection_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            ToogleButtons(dgProperties, btnPost);
         }
 
         #endregion Seletion Methods

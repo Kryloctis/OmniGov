@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Shared
             frmListOfRealPropertyTaxDelinquenciesReport.backgroundWorker1.RunWorkerAsync();
         }
 
-        private void InitializeNewOwnerDetails(frmRptPayments frmPayments)
+        private void InitializeNewOwnerDetails(frmPaymentRpt frmPayments)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
 
@@ -234,8 +234,8 @@ namespace AccountingSystem.Views.Shared
                     InitializeListOfDeliquentAccountsReport((frmListOfRealPropertyTaxDelinquenciesReport)refForm);
                     break;
 
-                case frmRptPayments:
-                    InitializeNewOwnerDetails((frmRptPayments)refForm);
+                case frmPaymentRpt:
+                    InitializeNewOwnerDetails((frmPaymentRpt)refForm);
                     break;
 
                 case frmCattleOwnership:

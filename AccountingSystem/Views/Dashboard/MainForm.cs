@@ -684,7 +684,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void rPTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptPayments().ShowDialog();
+            _ = new frmPaymentRpt().ShowDialog();
         }
 
         private void aF54ToolStripMenuItem_Click(object sender, EventArgs e)

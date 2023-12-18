@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel12 = new System.Windows.Forms.ToolStripStatusLabel();
             panel1 = new System.Windows.Forms.Panel();
+            cmbxRowFilter = new System.Windows.Forms.ComboBox();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgProperties).BeginInit();
@@ -107,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // nudYear
             // 
-            nudYear.Location = new System.Drawing.Point(175, 3);
+            nudYear.Location = new System.Drawing.Point(302, 3);
             nudYear.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             nudYear.Minimum = new decimal(new int[] { 1500, 0, 0, 0 });
             nudYear.Name = "nudYear";
@@ -131,7 +132,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // btnPost
             // 
-            btnPost.Enabled = false;
             btnPost.Image = Properties.Resources.task_list_pin_20px;
             btnPost.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnPost.Name = "btnPost";
@@ -230,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             cmbxBarangays.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             cmbxBarangays.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             cmbxBarangays.FormattingEnabled = true;
-            cmbxBarangays.Location = new System.Drawing.Point(3, 3);
+            cmbxBarangays.Location = new System.Drawing.Point(130, 3);
             cmbxBarangays.Name = "cmbxBarangays";
             cmbxBarangays.Size = new System.Drawing.Size(166, 23);
             cmbxBarangays.TabIndex = 16;
@@ -247,6 +247,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             bgwAssessmentSelection.WorkerReportsProgress = true;
             bgwAssessmentSelection.DoWork += BgwAssessmentSelection_DoWork;
             bgwAssessmentSelection.ProgressChanged += BgwAssessmentSelection_ProgressChanged;
+            bgwAssessmentSelection.RunWorkerCompleted += bgwAssessmentSelection_RunWorkerCompleted;
             // 
             // statusStrip2
             // 
@@ -297,6 +298,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // panel1
             // 
+            panel1.Controls.Add(cmbxRowFilter);
             panel1.Controls.Add(nudYear);
             panel1.Controls.Add(cmbxBarangays);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -304,6 +306,15 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(1016, 30);
             panel1.TabIndex = 19;
+            // 
+            // cmbxRowFilter
+            // 
+            cmbxRowFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxRowFilter.FormattingEnabled = true;
+            cmbxRowFilter.Location = new System.Drawing.Point(3, 3);
+            cmbxRowFilter.Name = "cmbxRowFilter";
+            cmbxRowFilter.Size = new System.Drawing.Size(121, 23);
+            cmbxRowFilter.TabIndex = 17;
             // 
             // progressBar1
             // 
@@ -377,5 +388,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel12;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ComboBox cmbxRowFilter;
     }
 }
