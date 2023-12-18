@@ -19,16 +19,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private readonly ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
-        private readonly ucPaymentRegistry ucPaymentRegistry;
-        private readonly ucCattleDetails ucCattleDetails;
+        private readonly ucCattleOwnership ucCattleOwnership;
 
         public frmCattleOwnership()
         {
             InitializeComponent();
             ucPayment = ucPayment1;
             this.ucPaymentFeesCharges = ucPaymentFeesCharges1;
-            ucCattleDetails = ucCattleDetails1;
-            ucPaymentRegistry = ucPaymentRegistry1;
+            ucCattleOwnership = ucCattleOwnership1;
         }
 
         #region Private Methods
@@ -36,6 +34,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         private void OnLoad()
         {
             LoadTabContents();
+            ucCattleOwnership.OnLoad();
         }
 
         private void ConfirmPayment()
@@ -66,18 +65,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPageOwner":
-                    if (!ucPaymentRegistry.FormValidated("owner"))
+                case "tabPageCattleOwnership":
+                    if (!ucCattleOwnership.ValidateChildren())
                     {
-                        Helper.MessageBoxError(ucPaymentRegistry.GetFormErrors());
-                        return false;
-                    }
-                    break;
-
-                case "tabPageCattleDetails":
-                    if (!ucCattleDetails.ValidateChildren())
-                    {
-                        Helper.MessageBoxError(ucCattleDetails.GetFormErrors());
+                        Helper.MessageBoxError(ucCattleOwnership.GetFormErrors());
                         return false;
                     }
                     break;
@@ -142,10 +133,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPageOwner":
-                    LoadOwner();
-                    break;
-
                 case "tabPageCattleDetails":
                     LoadCattleDetailsTab();
                     break;
@@ -160,13 +147,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
                     //ConfirmPayment();
                     break;
             }
-        }
-
-        private void LoadOwner()
-        {
-            radOwner.Checked = true;
-            btnNextMain.Text = "Next";
-            ucPaymentRegistry.LoadRegistry();
         }
 
         private void LoadCattleDetailsTab()

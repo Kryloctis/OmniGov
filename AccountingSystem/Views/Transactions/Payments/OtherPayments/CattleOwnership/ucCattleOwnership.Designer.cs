@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
 {
-    partial class ucCattleDetails
+    partial class ucCattleOwnership
     {
         /// <summary> 
         /// Required designer variable.
@@ -42,6 +42,8 @@
             cmbxType = new System.Windows.Forms.ComboBox();
             label9 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
+            cmbxOwner = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             flwPanelCattleSex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
@@ -58,9 +60,9 @@
             flwPanelCattleSex.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             flwPanelCattleSex.Controls.Add(radCattleMale);
             flwPanelCattleSex.Controls.Add(radCattleFemale);
-            flwPanelCattleSex.Location = new System.Drawing.Point(75, 61);
+            flwPanelCattleSex.Location = new System.Drawing.Point(74, 90);
             flwPanelCattleSex.Name = "flwPanelCattleSex";
-            flwPanelCattleSex.Size = new System.Drawing.Size(394, 27);
+            flwPanelCattleSex.Size = new System.Drawing.Size(250, 23);
             flwPanelCattleSex.TabIndex = 17;
             // 
             // radCattleMale
@@ -87,7 +89,7 @@
             // 
             // nudAge
             // 
-            nudAge.Location = new System.Drawing.Point(75, 32);
+            nudAge.Location = new System.Drawing.Point(74, 61);
             nudAge.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
@@ -98,10 +100,10 @@
             // txtDescription
             // 
             txtDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDescription.Location = new System.Drawing.Point(75, 94);
+            txtDescription.Location = new System.Drawing.Point(74, 123);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new System.Drawing.Size(394, 23);
+            txtDescription.Size = new System.Drawing.Size(250, 23);
             txtDescription.TabIndex = 13;
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
@@ -110,10 +112,10 @@
             // 
             nudPrice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudPrice.DecimalPlaces = 2;
-            nudPrice.Location = new System.Drawing.Point(75, 123);
+            nudPrice.Location = new System.Drawing.Point(74, 152);
             nudPrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudPrice.Name = "nudPrice";
-            nudPrice.Size = new System.Drawing.Size(394, 23);
+            nudPrice.Size = new System.Drawing.Size(250, 23);
             nudPrice.TabIndex = 16;
             nudPrice.Validating += nudPrice_Validating;
             nudPrice.Validated += nudPrice_Validated;
@@ -121,7 +123,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(2, 97);
+            label10.Location = new System.Drawing.Point(1, 126);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(67, 15);
             label10.TabIndex = 8;
@@ -130,7 +132,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(2, 35);
+            label8.Location = new System.Drawing.Point(1, 64);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(28, 15);
             label8.TabIndex = 9;
@@ -139,7 +141,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(2, 6);
+            label6.Location = new System.Drawing.Point(1, 35);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(31, 15);
             label6.TabIndex = 10;
@@ -149,9 +151,9 @@
             // 
             cmbxType.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxType.FormattingEnabled = true;
-            cmbxType.Location = new System.Drawing.Point(75, 3);
+            cmbxType.Location = new System.Drawing.Point(74, 32);
             cmbxType.Name = "cmbxType";
-            cmbxType.Size = new System.Drawing.Size(394, 23);
+            cmbxType.Size = new System.Drawing.Size(250, 23);
             cmbxType.TabIndex = 14;
             cmbxType.Validating += cmbxType_Validating;
             cmbxType.Validated += cmbxType_Validated;
@@ -159,7 +161,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(2, 126);
+            label9.Location = new System.Drawing.Point(1, 155);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(33, 15);
             label9.TabIndex = 11;
@@ -168,30 +170,52 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(2, 66);
+            label7.Location = new System.Drawing.Point(1, 95);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(25, 15);
             label7.TabIndex = 12;
             label7.Text = "Sex";
             // 
-            // ucCattleDetails
+            // cmbxOwner
+            // 
+            cmbxOwner.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxOwner.FormattingEnabled = true;
+            cmbxOwner.Location = new System.Drawing.Point(74, 3);
+            cmbxOwner.Name = "cmbxOwner";
+            cmbxOwner.Size = new System.Drawing.Size(250, 23);
+            cmbxOwner.TabIndex = 18;
+            cmbxOwner.KeyPress += cmbxOwner_KeyPress;
+            cmbxOwner.Validating += cmbxOwner_Validating;
+            cmbxOwner.Validated += cmbxOwner_Validated;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(1, 6);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(42, 15);
+            label1.TabIndex = 10;
+            label1.Text = "Owner";
+            // 
+            // ucCattleOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(cmbxOwner);
             Controls.Add(flwPanelCattleSex);
             Controls.Add(nudAge);
             Controls.Add(txtDescription);
             Controls.Add(nudPrice);
             Controls.Add(label10);
             Controls.Add(label8);
+            Controls.Add(label1);
             Controls.Add(label6);
             Controls.Add(cmbxType);
             Controls.Add(label9);
             Controls.Add(label7);
-            Name = "ucCattleDetails";
-            Size = new System.Drawing.Size(487, 149);
-            Load += ucCattleOwnership_Load;
+            Name = "ucCattleOwnership";
+            Size = new System.Drawing.Size(343, 186);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             flwPanelCattleSex.ResumeLayout(false);
             flwPanelCattleSex.PerformLayout();
@@ -216,5 +240,7 @@
         internal System.Windows.Forms.ComboBox cmbxType;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbxOwner;
+        internal System.Windows.Forms.Label label1;
     }
 }
