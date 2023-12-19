@@ -67,7 +67,7 @@
             txtCountry.Name = "txtCountry";
             txtCountry.PlaceholderText = "Country";
             txtCountry.Size = new System.Drawing.Size(243, 23);
-            txtCountry.TabIndex = 12;
+            txtCountry.TabIndex = 10;
             txtCountry.Validating += txtCountry_Validating;
             txtCountry.Validated += txtCountry_Validated;
             // 
@@ -78,7 +78,7 @@
             dtBirthDate.Location = new System.Drawing.Point(88, 148);
             dtBirthDate.Name = "dtBirthDate";
             dtBirthDate.Size = new System.Drawing.Size(243, 23);
-            dtBirthDate.TabIndex = 21;
+            dtBirthDate.TabIndex = 7;
             // 
             // label1
             // 
@@ -97,7 +97,7 @@
             txtProvince.Name = "txtProvince";
             txtProvince.PlaceholderText = "Province";
             txtProvince.Size = new System.Drawing.Size(243, 23);
-            txtProvince.TabIndex = 17;
+            txtProvince.TabIndex = 9;
             txtProvince.Validating += txtProvince_Validating;
             txtProvince.Validated += txtProvince_Validated;
             // 
@@ -107,7 +107,7 @@
             txtFirstName.Location = new System.Drawing.Point(88, 3);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(243, 23);
-            txtFirstName.TabIndex = 16;
+            txtFirstName.TabIndex = 0;
             txtFirstName.Validating += txtFirstName_Validating;
             txtFirstName.Validated += txtFirstName_Validated;
             // 
@@ -127,7 +127,7 @@
             radMale.Location = new System.Drawing.Point(3, 3);
             radMale.Name = "radMale";
             radMale.Size = new System.Drawing.Size(51, 19);
-            radMale.TabIndex = 0;
+            radMale.TabIndex = 4;
             radMale.TabStop = true;
             radMale.Text = "Male";
             radMale.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             radFemale.Location = new System.Drawing.Point(60, 3);
             radFemale.Name = "radFemale";
             radFemale.Size = new System.Drawing.Size(63, 19);
-            radFemale.TabIndex = 0;
+            radFemale.TabIndex = 5;
             radFemale.Text = "Female";
             radFemale.UseVisualStyleBackColor = true;
             // 
@@ -150,7 +150,7 @@
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.PlaceholderText = "City";
             txtMunicipality.Size = new System.Drawing.Size(243, 23);
-            txtMunicipality.TabIndex = 15;
+            txtMunicipality.TabIndex = 8;
             txtMunicipality.Validating += txtMunicipality_Validating;
             txtMunicipality.Validated += txtMunicipality_Validated;
             // 
@@ -169,7 +169,7 @@
             txtMiddleName.Location = new System.Drawing.Point(88, 32);
             txtMiddleName.Name = "txtMiddleName";
             txtMiddleName.Size = new System.Drawing.Size(243, 23);
-            txtMiddleName.TabIndex = 14;
+            txtMiddleName.TabIndex = 1;
             // 
             // label4
             // 
@@ -230,7 +230,7 @@
             txtContactInfo.Location = new System.Drawing.Point(88, 264);
             txtContactInfo.Name = "txtContactInfo";
             txtContactInfo.Size = new System.Drawing.Size(243, 23);
-            txtContactInfo.TabIndex = 13;
+            txtContactInfo.TabIndex = 11;
             // 
             // txtNationality
             // 
@@ -238,7 +238,7 @@
             txtNationality.Location = new System.Drawing.Point(88, 119);
             txtNationality.Name = "txtNationality";
             txtNationality.Size = new System.Drawing.Size(243, 23);
-            txtNationality.TabIndex = 18;
+            txtNationality.TabIndex = 6;
             txtNationality.Validating += txtNationality_Validating;
             txtNationality.Validated += txtNationality_Validated;
             // 
@@ -248,7 +248,7 @@
             txtLastName.Location = new System.Drawing.Point(88, 61);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(243, 23);
-            txtLastName.TabIndex = 19;
+            txtLastName.TabIndex = 2;
             txtLastName.Validating += txtLastName_Validating;
             txtLastName.Validated += txtLastName_Validated;
             // 

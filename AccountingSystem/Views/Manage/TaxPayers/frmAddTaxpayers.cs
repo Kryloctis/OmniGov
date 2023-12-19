@@ -48,6 +48,23 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 uc.OnLoad(false);
+                ActiveControl = uc;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddTaxpayers_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveTaxpayer())
+                    {
+                        Helper.MessageBoxSuccess("Taxpayer has been saved.");
+                        uc.ResetForm();
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

@@ -21,11 +21,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             uc = ucRealProperties1;
         }
 
-        private void OnLoad()
-        {
-            uc.OnLoad(true, rptId);
-        }
-
         private bool UpdateRpt()
         {
             if (!uc.ValidateChildren())
@@ -45,7 +40,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                OnLoad();
+                uc.OnLoad(true, rptId);
+                ActiveControl = uc;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

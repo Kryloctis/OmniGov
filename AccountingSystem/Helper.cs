@@ -459,7 +459,7 @@ namespace AccountingSystem
 
         #region Check Box Column Utility Datagrid
 
-        public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, System.Windows.Forms.CheckBox checkBox)
+        public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
         {
             if (dataGridView.Rows.Count < 1)
                 return;

@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class RptTaxRatesRepository : IRptTaxRatesRepository
     {
-        private AccGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_tax_rates";
 
         public RptTaxRatesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
@@ -34,7 +34,7 @@ namespace ACC.Data
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +53,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var items = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var items = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (items.Rows.Count < 1)
                     return dict;
@@ -73,7 +73,7 @@ namespace ACC.Data
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -85,7 +85,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @searchText OR description LIKE @searchText";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -103,7 +103,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO {tableName} (code, description, rate) VALUES (@code, @description, @rate)";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptTaxRatesModel entity)
@@ -117,35 +117,19 @@ namespace ACC.Data
              };
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public Dictionary<string, string> GetRecordByDescription(string description)
+        public decimal GetTaxRateByDescription(string description)
         {
-            var dict = new Dictionary<string, string>();
-
             var parameters = new object[][]
             {
                 new object[] { "@description", DbType.String, description}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE description = @description";
-
-            using (var items = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-            {
-                if (items.Rows.Count < 1)
-                    return dict;
-
-                foreach (DataRow item in items.Rows)
-                {
-                    dict.Add("id", item["id"].ToString());
-                    dict.Add("code", item["code"].ToString());
-                    dict.Add("description", item["description"].ToString());
-                    dict.Add("rate", item["rate"].ToString());
-                }
-
-                return dict;
-            }
+            string query = $"SELECT rate FROM {tableName} WHERE description = @description";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return string.IsNullOrWhiteSpace(result) ? 0 : Convert.ToDecimal(result);
         }
     }
 }

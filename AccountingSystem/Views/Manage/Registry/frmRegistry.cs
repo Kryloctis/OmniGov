@@ -24,8 +24,6 @@ namespace AccountingSystem.Views.Manage.Registry
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        #region Private Methods
-
         internal void LoadRegistryList()
         {
             if (!backgroundWorker1.IsBusy)
@@ -68,10 +66,6 @@ namespace AccountingSystem.Views.Manage.Registry
 
             return (searchKey, limitCount);
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -124,7 +118,8 @@ namespace AccountingSystem.Views.Manage.Registry
                 {
                     var newRow = dataTable.NewRow();
                     int Id = Convert.ToInt32(row["id"]);
-                    string name = $"{row["first_name"]} {row["middle_name"].ToString().Substring(0)} {row["last_name"]}";
+                    string middleName = row["middle_name"].ToString();
+                    string fullName = $"{row["first_name"]} {(!string.IsNullOrEmpty(middleName) ? $"{middleName.Substring(0, 1)}." : "")} {row["last_name"]}";
                     string sex = $"{row["sex"]}";
                     string nationality = $"{row["nationality"]}";
                     string birthPlace = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
@@ -132,7 +127,7 @@ namespace AccountingSystem.Views.Manage.Registry
                     string contactInfo = $"{row["contact_info"]}";
 
                     newRow["id"] = Id;
-                    newRow["name"] = name;
+                    newRow["name"] = fullName;
                     newRow["sex"] = sex;
                     newRow["nationality"] = nationality;
                     newRow["birth_place"] = birthPlace;
@@ -215,7 +210,5 @@ namespace AccountingSystem.Views.Manage.Registry
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Event Methods
     }
 }

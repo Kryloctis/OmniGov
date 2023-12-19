@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Manage.Registry
             try
             {
                 uc.OnLoad(true, registryId);
+                ActiveControl = uc;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -60,6 +61,23 @@ namespace AccountingSystem.Views.Manage.Registry
                     frmRegistry.LoadRegistryList();
                     Close();
                 };
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmEditRegistry_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateRegistry())
+                    {
+                        Helper.MessageBoxSuccess("Registry has been updated");
+                        frmRegistry.LoadRegistryList();
+                        Close();
+                    };
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

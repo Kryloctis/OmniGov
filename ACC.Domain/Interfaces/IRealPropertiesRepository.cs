@@ -12,7 +12,7 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByCompleteArpNo(string completeArpNo);
 
-        DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);
+        DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText, int rowFilter);
 
         DataTable GetRecordNotExistedPreviousRpt(int rptId);
 
