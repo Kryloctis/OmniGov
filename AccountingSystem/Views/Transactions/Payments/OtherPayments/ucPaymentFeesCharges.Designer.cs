@@ -37,17 +37,19 @@
             panel4 = new System.Windows.Forms.Panel();
             btnDelete = new System.Windows.Forms.Button();
             btnAdd = new System.Windows.Forms.Button();
-            dgPaymentFeesCharges = new System.Windows.Forms.DataGridView();
             panel1 = new System.Windows.Forms.Panel();
             treeViewFeesCharges = new System.Windows.Forms.TreeView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            panel3 = new System.Windows.Forms.Panel();
+            dgPaymentFeesCharges = new System.Windows.Forms.DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).BeginInit();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -58,7 +60,7 @@
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            groupBox1.Padding = new System.Windows.Forms.Padding(2);
             groupBox1.Size = new System.Drawing.Size(751, 322);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
@@ -69,10 +71,10 @@
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            panel2.Location = new System.Drawing.Point(4, 24);
+            panel2.Location = new System.Drawing.Point(2, 22);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(743, 294);
+            panel2.Size = new System.Drawing.Size(747, 298);
             panel2.TabIndex = 9;
             // 
             // tableLayoutPanel1
@@ -82,14 +84,14 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(panel4, 1, 0);
-            tableLayoutPanel1.Controls.Add(dgPaymentFeesCharges, 2, 0);
             tableLayoutPanel1.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel3, 2, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(735, 286);
+            tableLayoutPanel1.Size = new System.Drawing.Size(739, 290);
             tableLayoutPanel1.TabIndex = 12;
             // 
             // panel4
@@ -100,13 +102,13 @@
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             panel4.Location = new System.Drawing.Point(260, 3);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(38, 280);
+            panel4.Size = new System.Drawing.Size(38, 284);
             panel4.TabIndex = 4;
             // 
             // btnDelete
             // 
             btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btnDelete.Location = new System.Drawing.Point(3, 136);
+            btnDelete.Location = new System.Drawing.Point(3, 138);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(31, 23);
             btnDelete.TabIndex = 7;
@@ -118,13 +120,51 @@
             // 
             btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F);
-            btnAdd.Location = new System.Drawing.Point(3, 107);
+            btnAdd.Location = new System.Drawing.Point(3, 109);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(31, 23);
             btnAdd.TabIndex = 6;
             btnAdd.Text = ">";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(treeViewFeesCharges);
+            panel1.Controls.Add(progressBar1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(257, 290);
+            panel1.TabIndex = 13;
+            // 
+            // treeViewFeesCharges
+            // 
+            treeViewFeesCharges.Dock = System.Windows.Forms.DockStyle.Fill;
+            treeViewFeesCharges.Location = new System.Drawing.Point(0, 5);
+            treeViewFeesCharges.Name = "treeViewFeesCharges";
+            treeViewFeesCharges.Size = new System.Drawing.Size(257, 285);
+            treeViewFeesCharges.TabIndex = 1;
+            treeViewFeesCharges.AfterSelect += treeViewFeesCharges_AfterSelect;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 0);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(257, 5);
+            progressBar1.TabIndex = 13;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(dgPaymentFeesCharges);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(301, 0);
+            panel3.Margin = new System.Windows.Forms.Padding(0);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(438, 290);
+            panel3.TabIndex = 14;
             // 
             // dgPaymentFeesCharges
             // 
@@ -146,7 +186,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             dgPaymentFeesCharges.DefaultCellStyle = dataGridViewCellStyle2;
             dgPaymentFeesCharges.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgPaymentFeesCharges.Location = new System.Drawing.Point(304, 3);
+            dgPaymentFeesCharges.Location = new System.Drawing.Point(0, 0);
             dgPaymentFeesCharges.Name = "dgPaymentFeesCharges";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -157,42 +197,14 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgPaymentFeesCharges.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgPaymentFeesCharges.RowTemplate.Height = 25;
-            dgPaymentFeesCharges.Size = new System.Drawing.Size(428, 280);
-            dgPaymentFeesCharges.TabIndex = 11;
+            dgPaymentFeesCharges.Size = new System.Drawing.Size(438, 290);
+            dgPaymentFeesCharges.TabIndex = 12;
             dgPaymentFeesCharges.CellValueChanged += dgPaymentFeesCharges_CellValueChanged;
             dgPaymentFeesCharges.EditingControlShowing += dgPaymentFeesCharges_EditingControlShowing;
             dgPaymentFeesCharges.RowsAdded += dgPaymentFeesCharges_RowsAdded;
             dgPaymentFeesCharges.SelectionChanged += dgPaymentFeesCharges_SelectionChanged;
-            dgPaymentFeesCharges.KeyPress += dgPaymentFeesCharges_KeyPress;
             dgPaymentFeesCharges.Validating += dgPaymentFeesCharges_Validating;
             dgPaymentFeesCharges.Validated += dgPaymentFeesCharges_Validated;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(treeViewFeesCharges);
-            panel1.Controls.Add(progressBar1);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(251, 280);
-            panel1.TabIndex = 13;
-            // 
-            // treeViewFeesCharges
-            // 
-            treeViewFeesCharges.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeViewFeesCharges.Location = new System.Drawing.Point(0, 5);
-            treeViewFeesCharges.Name = "treeViewFeesCharges";
-            treeViewFeesCharges.Size = new System.Drawing.Size(251, 275);
-            treeViewFeesCharges.TabIndex = 1;
-            treeViewFeesCharges.AfterSelect += treeViewFeesCharges_AfterSelect;
-            // 
-            // progressBar1
-            // 
-            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 0);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(251, 5);
-            progressBar1.TabIndex = 13;
             // 
             // backgroundWorker1
             // 
@@ -207,14 +219,16 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(groupBox1);
+            Margin = new System.Windows.Forms.Padding(0);
             Name = "ucPaymentFeesCharges";
             Size = new System.Drawing.Size(751, 322);
             groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).EndInit();
             panel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).EndInit();
             ResumeLayout(false);
         }
 
@@ -225,10 +239,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView dgPaymentFeesCharges;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TreeView treeViewFeesCharges;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgPaymentFeesCharges;
     }
 }
