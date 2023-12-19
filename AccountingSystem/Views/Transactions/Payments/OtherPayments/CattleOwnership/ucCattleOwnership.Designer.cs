@@ -72,7 +72,7 @@
             radCattleMale.Location = new System.Drawing.Point(3, 3);
             radCattleMale.Name = "radCattleMale";
             radCattleMale.Size = new System.Drawing.Size(51, 19);
-            radCattleMale.TabIndex = 6;
+            radCattleMale.TabIndex = 3;
             radCattleMale.TabStop = true;
             radCattleMale.Text = "Male";
             radCattleMale.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             radCattleFemale.Location = new System.Drawing.Point(60, 3);
             radCattleFemale.Name = "radCattleFemale";
             radCattleFemale.Size = new System.Drawing.Size(63, 19);
-            radCattleFemale.TabIndex = 6;
+            radCattleFemale.TabIndex = 4;
             radCattleFemale.Text = "Female";
             radCattleFemale.UseVisualStyleBackColor = true;
             // 
@@ -94,7 +94,7 @@
             nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
             nudAge.Size = new System.Drawing.Size(80, 23);
-            nudAge.TabIndex = 15;
+            nudAge.TabIndex = 2;
             nudAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtDescription
@@ -104,7 +104,7 @@
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(250, 23);
-            txtDescription.TabIndex = 13;
+            txtDescription.TabIndex = 5;
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
             // 
@@ -116,7 +116,7 @@
             nudPrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudPrice.Name = "nudPrice";
             nudPrice.Size = new System.Drawing.Size(250, 23);
-            nudPrice.TabIndex = 16;
+            nudPrice.TabIndex = 6;
             nudPrice.Validating += nudPrice_Validating;
             nudPrice.Validated += nudPrice_Validated;
             // 
@@ -154,7 +154,7 @@
             cmbxType.Location = new System.Drawing.Point(74, 32);
             cmbxType.Name = "cmbxType";
             cmbxType.Size = new System.Drawing.Size(250, 23);
-            cmbxType.TabIndex = 14;
+            cmbxType.TabIndex = 1;
             cmbxType.Validating += cmbxType_Validating;
             cmbxType.Validated += cmbxType_Validated;
             // 
@@ -183,7 +183,7 @@
             cmbxOwner.Location = new System.Drawing.Point(74, 3);
             cmbxOwner.Name = "cmbxOwner";
             cmbxOwner.Size = new System.Drawing.Size(250, 23);
-            cmbxOwner.TabIndex = 18;
+            cmbxOwner.TabIndex = 0;
             cmbxOwner.KeyPress += cmbxOwner_KeyPress;
             cmbxOwner.Validating += cmbxOwner_Validating;
             cmbxOwner.Validated += cmbxOwner_Validated;

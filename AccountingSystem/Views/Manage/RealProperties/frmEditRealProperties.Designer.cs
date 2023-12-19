@@ -42,7 +42,7 @@
             ucRealProperties1.Location = new System.Drawing.Point(0, 0);
             ucRealProperties1.Margin = new System.Windows.Forms.Padding(0);
             ucRealProperties1.Name = "ucRealProperties1";
-            ucRealProperties1.Size = new System.Drawing.Size(383, 531);
+            ucRealProperties1.Size = new System.Drawing.Size(385, 531);
             ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -54,25 +54,25 @@
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 531);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(383, 29);
-            flowLayoutPanel1.TabIndex = 3;
+            flowLayoutPanel1.Size = new System.Drawing.Size(385, 29);
+            flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(255, 3);
+            btnCancel.Location = new System.Drawing.Point(249, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(125, 23);
-            btnCancel.TabIndex = 0;
+            btnCancel.Size = new System.Drawing.Size(133, 23);
+            btnCancel.TabIndex = 3;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
             btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnUpdate.Location = new System.Drawing.Point(124, 3);
+            btnUpdate.Location = new System.Drawing.Point(110, 3);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new System.Drawing.Size(125, 23);
-            btnUpdate.TabIndex = 0;
+            btnUpdate.Size = new System.Drawing.Size(133, 23);
+            btnUpdate.TabIndex = 2;
             btnUpdate.Text = "Update (Ctrl + S)";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
@@ -82,7 +82,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(383, 560);
+            ClientSize = new System.Drawing.Size(385, 560);
             Controls.Add(ucRealProperties1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

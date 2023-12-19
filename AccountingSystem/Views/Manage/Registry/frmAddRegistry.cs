@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.Registry
             try
             {
                 uc.OnLoad(false);
+                ActiveControl = uc;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -57,6 +58,23 @@ namespace AccountingSystem.Views.Manage.Registry
                     uc.ResetFields();
                     frmRegistry.LoadRegistryList();
                     Helper.MessageBoxSuccess("Registry has been saved.");
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddRegistry_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveRegistry())
+                    {
+                        uc.ResetFields();
+                        frmRegistry.LoadRegistryList();
+                        Helper.MessageBoxSuccess("Registry has been saved.");
+                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

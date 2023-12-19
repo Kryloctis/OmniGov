@@ -53,6 +53,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 uc.OnLoad(true, taxpayerId);
+                ActiveControl = uc;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmEditTaxpayers_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateTaxpayer())
+                    {
+                        Helper.MessageBoxSuccess("Taxpayer has been updated.");
+                        frmTaxpayers.LoadTaxpayers();
+                        Close();
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

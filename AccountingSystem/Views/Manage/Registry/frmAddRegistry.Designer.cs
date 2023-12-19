@@ -51,20 +51,20 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(277, 3);
+            btnCancel.Location = new System.Drawing.Point(219, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(133, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new System.Drawing.Point(196, 3);
+            btnAdd.Location = new System.Drawing.Point(80, 3);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(75, 23);
+            btnAdd.Size = new System.Drawing.Size(133, 23);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "Save";
+            btnAdd.Text = "Save (Ctrl + S)";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
@@ -88,7 +88,6 @@
             // 
             // frmAddRegistry
             // 
-            AcceptButton = btnAdd;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
@@ -97,6 +96,7 @@
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAddRegistry";
@@ -104,6 +104,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Registry";
             Load += frmAddRegistry_Load;
+            KeyDown += frmAddRegistry_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

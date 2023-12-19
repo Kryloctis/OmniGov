@@ -27,6 +27,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            ActiveControl = txtArpNo;
         }
 
         #region Private Methods

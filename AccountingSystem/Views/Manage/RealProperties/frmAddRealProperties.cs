@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             try
             {
                 uc.OnLoad(false);
+                ActiveControl = uc;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

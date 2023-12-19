@@ -17,8 +17,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
         }
 
-        #region Private Methods
-
         private void OnLoad()
         {
             HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
@@ -85,10 +83,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 new DataColumn("updated_at", typeof(string))
             };
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -167,7 +161,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                var indexes = new byte[] { 7, 8 };
+                var indexes = new byte[] { 8, 9 };
                 Helper.EnableDisableToolStripButtons(dgTaxpayers, btnEdit, btnDelete);
                 Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
@@ -242,7 +236,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Event Methods
     }
 }

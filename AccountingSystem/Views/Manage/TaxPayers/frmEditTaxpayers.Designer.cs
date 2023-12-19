@@ -51,20 +51,20 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(357, 3);
+            btnCancel.Location = new System.Drawing.Point(299, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(133, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new System.Drawing.Point(276, 3);
+            btnUpdate.Location = new System.Drawing.Point(160, 3);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new System.Drawing.Size(75, 23);
+            btnUpdate.Size = new System.Drawing.Size(133, 23);
             btnUpdate.TabIndex = 0;
-            btnUpdate.Text = "Update";
+            btnUpdate.Text = "Update (Ctrl + S)";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
@@ -91,7 +91,6 @@
             // 
             // frmEditTaxpayers
             // 
-            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
@@ -101,6 +100,7 @@
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditTaxpayers";
@@ -109,6 +109,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Taxpayers";
             Load += frmEditTaxpayers_Load;
+            KeyDown += frmEditTaxpayers_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

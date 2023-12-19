@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.Registry
         public ucRegistry()
         {
             InitializeComponent();
+            ActiveControl = txtFirstName;
         }
 
         internal string GetFormErrors()

@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxTaxPayerType.Location = new System.Drawing.Point(98, 88);
             cmbxTaxPayerType.Name = "cmbxTaxPayerType";
             cmbxTaxPayerType.Size = new System.Drawing.Size(313, 23);
-            cmbxTaxPayerType.TabIndex = 2;
+            cmbxTaxPayerType.TabIndex = 3;
             // 
             // txtTIN
             // 
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtContact.MaxLength = 13;
             txtContact.Name = "txtContact";
             txtContact.Size = new System.Drawing.Size(313, 23);
-            txtContact.TabIndex = 3;
+            txtContact.TabIndex = 7;
             // 
             // label8
             // 
@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtName.Location = new System.Drawing.Point(98, 59);
             txtName.Name = "txtName";
             txtName.Size = new System.Drawing.Size(313, 23);
-            txtName.TabIndex = 1;
+            txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
             // 
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             chckIsActive.Location = new System.Drawing.Point(352, 5);
             chckIsActive.Name = "chckIsActive";
             chckIsActive.Size = new System.Drawing.Size(59, 19);
-            chckIsActive.TabIndex = 5;
+            chckIsActive.TabIndex = 1;
             chckIsActive.Text = "Active";
             chckIsActive.UseVisualStyleBackColor = true;
             // 
@@ -147,7 +147,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtAddress.Location = new System.Drawing.Point(98, 117);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new System.Drawing.Size(313, 23);
-            txtAddress.TabIndex = 6;
+            txtAddress.TabIndex = 4;
             // 
             // label3
             // 
@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtMunicipality.Location = new System.Drawing.Point(98, 146);
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.Size = new System.Drawing.Size(313, 23);
-            txtMunicipality.TabIndex = 7;
+            txtMunicipality.TabIndex = 5;
             // 
             // label6
             // 
@@ -188,7 +188,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtProvince.Location = new System.Drawing.Point(98, 175);
             txtProvince.Name = "txtProvince";
             txtProvince.Size = new System.Drawing.Size(313, 23);
-            txtProvince.TabIndex = 7;
+            txtProvince.TabIndex = 6;
             // 
             // label5
             // 
@@ -205,7 +205,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             chckRepresentative.Location = new System.Drawing.Point(98, 240);
             chckRepresentative.Name = "chckRepresentative";
             chckRepresentative.Size = new System.Drawing.Size(55, 19);
-            chckRepresentative.TabIndex = 11;
+            chckRepresentative.TabIndex = 8;
             chckRepresentative.Text = "None";
             chckRepresentative.UseVisualStyleBackColor = true;
             chckRepresentative.CheckedChanged += chckRepresentative_CheckedChanged;
@@ -216,7 +216,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxRepresentative.Location = new System.Drawing.Point(98, 265);
             cmbxRepresentative.Name = "cmbxRepresentative";
             cmbxRepresentative.Size = new System.Drawing.Size(313, 23);
-            cmbxRepresentative.TabIndex = 12;
+            cmbxRepresentative.TabIndex = 9;
             cmbxRepresentative.KeyPress += cmbxRepresentative_KeyPress;
             cmbxRepresentative.PreviewKeyDown += cmbxRepresentative_PreviewKeyDown;
             // 
