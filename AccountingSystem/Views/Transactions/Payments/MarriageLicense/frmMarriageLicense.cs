@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense
+namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 {
     public partial class frmMarriageLicense : Form
     {

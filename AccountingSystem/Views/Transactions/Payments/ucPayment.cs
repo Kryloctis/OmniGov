@@ -39,8 +39,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             return paymentCollectionsModel;
         }
 
-        #region Private Methods
-
         internal string GetFormErrors()
         {
             var errors = new string[]
@@ -182,10 +180,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        #endregion Private Methods
-
-        #region Cheque Details
-
         private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
         {
             return new DataGridViewColumn[]
@@ -211,10 +205,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Cheque Details
-
-        #region Event Methods
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
@@ -259,10 +249,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             LoadReceipts();
         }
-
-        #endregion Event Methods
-
-        #region Validations
 
         private bool CollectorValidated(ErrorProvider errorProvider, TextBox textBox)
         {
@@ -396,7 +382,5 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             dgCheques.Tag = string.Empty;
         }
-
-        #endregion Validations
     }
 }

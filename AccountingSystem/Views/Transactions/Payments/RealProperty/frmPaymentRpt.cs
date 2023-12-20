@@ -1,13 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 

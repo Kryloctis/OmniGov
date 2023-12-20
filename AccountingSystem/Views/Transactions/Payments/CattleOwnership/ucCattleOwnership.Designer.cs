@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
+﻿namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 {
     partial class ucCattleOwnership
     {

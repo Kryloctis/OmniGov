@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
+﻿namespace AccountingSystem.Views.Transactions.Payments
 {
     partial class ucPaymentRegistry
     {

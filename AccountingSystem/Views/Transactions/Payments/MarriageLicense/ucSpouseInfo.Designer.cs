@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense
+﻿namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 {
     partial class ucSpouseInfo
     {

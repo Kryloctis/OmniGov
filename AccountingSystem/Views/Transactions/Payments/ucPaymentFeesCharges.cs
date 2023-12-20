@@ -1,14 +1,11 @@
 ﻿using ACC.Data;
-using DocumentFormat.OpenXml.Office2013.Excel;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
+namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class ucPaymentFeesCharges : UserControl
     {

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
+namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class ucPaymentRegistry : UserControl
     {
@@ -18,8 +18,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             ucTaxPayers = ucTaxPayers1;
             Helper.DatagridFullRowSelectStyle(dgRegistry, true);
         }
-
-        #region Private Methods
 
         internal string GetFormErrors()
         {
@@ -83,10 +81,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
                 new DataColumn("taxpayers_contact_info", typeof(string)),
             };
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -176,7 +170,5 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         {
             tabControlRegistry.SelectedTab = tabRegistryList;
         }
-
-        #endregion Event Methods
     }
 }

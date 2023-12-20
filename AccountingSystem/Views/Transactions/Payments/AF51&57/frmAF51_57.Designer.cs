@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57
+namespace AccountingSystem.Views.Transactions.Payments.AF51_57
 {
     partial class frmAF51_57
     {

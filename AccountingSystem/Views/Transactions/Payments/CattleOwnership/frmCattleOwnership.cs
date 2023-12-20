@@ -1,18 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
-using AccountingSystem.Views.Manage.RptPenalties;
-using AccountingSystem.Views.Manage.TaxPayers;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
+namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 {
     public partial class frmCattleOwnership : Form
     {

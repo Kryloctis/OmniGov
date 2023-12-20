@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
+﻿namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 {
     partial class frmCattleOwnership
     {
@@ -42,9 +42,9 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             ucCattleOwnership1 = new ucCattleOwnership();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
-            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radCattleDetails = new System.Windows.Forms.RadioButton();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -218,14 +218,6 @@
             tabPageFeesCharges.Text = "tabPageFeesCharges";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
             // 
-            // ucPaymentFeesCharges1
-            // 
-            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
-            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
-            ucPaymentFeesCharges1.TabIndex = 0;
-            // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
@@ -254,6 +246,15 @@
             radCattleDetails.TabIndex = 7;
             radCattleDetails.Text = "Cattle Ownership Info.";
             radCattleDetails.UseVisualStyleBackColor = true;
+            // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // frmCattleOwnership
             // 

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership
+namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 {
     public partial class ucCattleOwnership : UserControl
     {
