@@ -18,16 +18,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         private readonly ucBurialPermit ucBurialPermit;
         private readonly ucPaymentFeesCharges ucOtherCharges;
         private dialogPayment dialog = new dialogPayment();
-        private bool isNewPayee = false;
 
         public frmBurialPermit()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgPayees, true);
-            ucTaxPayers = ucTaxPayers1;
             ucPayment = ucPayment1;
-            ucBurialPermit = ucBurialPermit1;
             ucOtherCharges = ucBurialPermit.ucOtherCharges1;
             //ucOtherCharges.accountableForm = "58";
         }
@@ -43,91 +39,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
         private void OnLoad()
         {
-            string searchText = txtSearch.Text;
-            LoadPayees(searchText);
             ucTaxPayers.chckIsActive.Enabled = false;
             ucOtherCharges.OnLoad();
-        }
-
-        private DataColumn[] PayeesColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayer_type_code", typeof(string)),
-                new DataColumn("taxpayers_tin", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
-                new DataColumn("taxpayers_address", typeof(string)),
-                new DataColumn("taxpayers_contact_info", typeof(string)),
-            };
-        }
-
-        private DataTable DataTablePayees(string searchText)
-        {
-            var dtPayees = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText.Trim());
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(PayeesColumns());
-
-            int progressCount = 0;
-            int totalProgressCount = dtPayees.Rows.Count;
-
-            foreach (DataRow row in dtPayees.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
-                string taxpayerTin = row["taxpayers_tin"].ToString();
-                string taxpayerName = row["taxpayers_name"].ToString();
-                string taxpayerTypeCode = row["taxpayer_type"].ToString();
-                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
-                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
-                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
-                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
-                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
-                string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
-
-                newRow["taxpayers_id"] = taxpayerId;
-                newRow["taxpayer_type_code"] = taxpayerTypeCode;
-                newRow["taxpayers_tin"] = taxpayerTin;
-                newRow["taxpayers_name"] = taxpayerName;
-                newRow["taxpayers_address"] = taxpayerAddress;
-                newRow["taxpayers_contact_info"] = taxpayerContactInfo;
-
-                progressCount++;
-                Helper.ProgressCounter(bgwPayee, totalProgressCount, progressCount);
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
-        }
-
-        private void LoadPayees(string searchText)
-        {
-            if (!bgwPayee.IsBusy)
-            {
-                bgwPayee.RunWorkerAsync(searchText);
-            }
-        }
-
-        private void bgwPayee_DoWork(object sender, DoWorkEventArgs e)
-        {
-            string searchText = e.Argument.ToString();
-            var dataTable = DataTablePayees(searchText);
-
-            Invoke((MethodInvoker)delegate
-            {
-                HelperLoadRecords.DatagridViewPayees(dgPayees, dataTable);
-            });
-        }
-
-        private void bgwPayee_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void bgwPayee_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            dgPayees.CurrentCell = dgPayees.FirstDisplayedCell;
         }
 
         private void ConfirmPayment()
@@ -158,18 +71,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         {
             var selectedTab = tabControlMain.SelectedTab;
 
-            if (selectedTab == tabPagePayee)
-            {
-                if (isNewPayee)
-                {
-                    if (!ucTaxPayers.ValidateChildren())
-                    {
-                        Helper.MessageBoxError(ucTaxPayers.GetFormErrors());
-                        return false;
-                    }
-                }
-            }
-            else if (selectedTab == tabPageFees)
+            if (selectedTab == tabPageFeesCharges)
             {
                 if (!ucBurialPermit.ValidateChildren())
                 {
@@ -193,9 +95,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         {
             var selectedTab = tabControlMain.SelectedTab;
 
-            if (selectedTab == tabPagePayee)
-                tabControlMain.SelectedTab = tabPageFees;
-            else if (selectedTab == tabPageFees)
+            if (selectedTab == tabPageFeesCharges)
                 tabControlMain.SelectedTab = tabPagePayment;
             else if (selectedTab == tabPagePayment)
                 ConfirmPayment();
@@ -213,20 +113,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            tabControlPayee.SelectedTab = tabNewPayee;
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            if (Helper.MessageBoxConfirmCancel("Your input won't be stored."))
-            {
-                tabControlPayee.SelectedTab = tabPayeeList;
-                ucTaxPayers.ResetForm();
-            }
-        }
-
         private void btnBackMain_Click(object sender, EventArgs e)
         {
             try
@@ -238,8 +124,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Payment
 
         private bool SaveBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
         {
@@ -350,34 +234,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
                 dialog.label1.Text = "Payment Process Complete!";
                 dialog.btnClose.Enabled = true;
                 btnNextMain.Text = "Finish";
-                btnBack.Enabled = false;
                 ucPayment.Enabled = false;
                 return;
             }
-        }
-
-        #endregion Payment
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string searchText = txtSearch.Text;
-                LoadPayees(searchText);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private Dictionary<string, string> GetTaxPayerData()
-        {
-            var dict = new Dictionary<string, string>();
-            int rowIndex = dgPayees.CurrentRow.Index;
-            int taxpayerId = Convert.ToInt32(dgPayees.Rows[rowIndex].Cells["taxpayers_id"].Value);
-            string taxpayerName = dgPayees.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
-
-            dict.Add("taxpayers_id", taxpayerId.ToString());
-            dict.Add("taxpayer_name", taxpayerName);
-            return dict;
         }
 
         private void LoadFeesAndChargesTab()
@@ -395,11 +254,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
             decimal totalAmountPayable = 0;
             ucPayment.OnLoad("58", totalAmountPayable);
-
-            if (isNewPayee)
-                ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
-            else
-                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
         }
 
         private void tabPagePayment_Enter(object sender, EventArgs e)
@@ -420,29 +274,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void tabPagePayee_Enter(object sender, EventArgs e)
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadPayee();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadPayee()
-        {
-            btnBackMain.Enabled = false;
-            radPayee.Checked = true;
-        }
-
-        private void tabNewPayee_Enter(object sender, EventArgs e)
-        {
-            isNewPayee = true;
-        }
-
-        private void tabPayeeList_Enter(object sender, EventArgs e)
-        {
-            isNewPayee = false;
         }
     }
 }
