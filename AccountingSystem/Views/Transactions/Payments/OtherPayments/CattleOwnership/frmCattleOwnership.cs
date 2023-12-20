@@ -29,8 +29,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             ucCattleOwnership = ucCattleOwnership1;
         }
 
-        #region Private Methods
-
         private void OnLoad()
         {
             LoadTabContents();
@@ -178,10 +176,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
         }
 
-        #endregion Private Methods
-
-        #region Event Handlers
-
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -308,7 +302,5 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Event Handlers
     }
 }
