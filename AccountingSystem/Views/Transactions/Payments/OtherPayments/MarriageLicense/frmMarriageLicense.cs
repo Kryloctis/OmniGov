@@ -1,10 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
-using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,6 +12,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
     public partial class frmMarriageLicense : Form
     {
         private readonly ucMarriageDetails ucMarriageDetails;
+
+        private readonly ucSpouseInfo ucSpouseInfoGroom;
+        private readonly ucSpouseInfo ucSpouseInfoBride;
+        private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucPayment ucPayment;
 
         private dialogPayment dialog = new dialogPayment();
@@ -22,14 +25,17 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             InitializeComponent();
             Helper.LoadFormIcon(this);
             ucPayment = ucPayment1;
+            ucPaymentFeesCharges = ucPaymentFeesCharges1;
             ucMarriageDetails = ucMarriageDetails1;
+            ucSpouseInfoGroom = ucSpouseInfoGroom1;
+            ucSpouseInfoBride = ucSpouseInfoBride1;
         }
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
         {
             try
             {
-                ucTaxPayers.chckIsActive.Enabled = false;
+                LoadTabContents();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -38,9 +44,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             try
             {
-                if (!FormValidations())
-                    return;
-
                 if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
                     return;
 
@@ -60,6 +63,39 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
         private void LoadMarriageDetailsTab()
         {
+            ucMarriageDetails.OnLoad();
+            radMarriageDetails.Checked = true;
+        }
+
+        private void LoadGroomInfoTab()
+        {
+            ucSpouseInfoGroom.OnLoad();
+            radGroomInfo.Checked = true;
+        }
+
+        private void LoadBrideInfoTab()
+        {
+            btnNextMain.Text = "Next";
+            ucSpouseInfoBride.OnLoad();
+            radBrideInfo.Checked = true;
+        }
+
+        private void LoadFeesAndChargesTab()
+        {
+            ucPaymentFeesCharges.OnLoad();
+            btnBackMain.Enabled = true;
+            btnNextMain.Text = "Proceed to Payment";
+            radFeesCharges.Checked = true;
+        }
+
+        private void LoadPaymentTab()
+        {
+            btnNextMain.Text = "Confirm Payment";
+            btnBackMain.Enabled = true;
+            radPayment.Checked = true;
+
+            decimal totalPayment = ucPaymentFeesCharges.ComputeTotalAmountPayable();
+            ucPayment.OnLoad("54", totalPayment);
         }
 
         private void LoadTabContents()
@@ -71,8 +107,16 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPageMarriageDetailsw":
+                case "tabPageMarriageDetails":
                     LoadMarriageDetailsTab();
+                    break;
+
+                case "tabPageGroomInfo":
+                    LoadGroomInfoTab();
+                    break;
+
+                case "tabPageBrideInfo":
+                    LoadBrideInfoTab();
                     break;
 
                 case "tabPageFeesCharges":
@@ -87,17 +131,53 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             }
         }
 
-        private bool FormValidations()
+        private bool TabValidated()
         {
-            var selectedTab = tabControlMain.SelectedTab;
-
-            if (selectedTab == tabPagePayment)
+            switch (tabControlMain.SelectedTab.Name)
             {
-                if (!ucPayment.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucPayment.GetFormErrors());
-                    return false;
-                }
+                case "tabPageMarriageDetails":
+                    if (!ucMarriageDetails.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucMarriageDetails.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageGroomInfo":
+
+                    if (!ucSpouseInfoGroom.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucSpouseInfoGroom.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageBrideInfo":
+                    if (!ucSpouseInfoBride.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucSpouseInfoBride.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageFeesCharges":
+                    if (!ucPaymentFeesCharges.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPaymentFeesCharges.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPagePayment":
+                    if (!ucPayment.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPayment.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                default:
+                    return true;
             }
 
             return true;
@@ -107,10 +187,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             try
             {
-                if (!FormValidations())
+                if (!TabValidated())
                     return;
 
-                ChangeTabs();
+                tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -119,59 +199,20 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             try
             {
-                if (tabControlMain.SelectedIndex < 0)
-                    return;
-
-                tabControlMain.SelectedIndex = tabControlMain.SelectedIndex - 1;
+                tabControlMain.SelectedIndex--;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadFeesAndChargesTab()
-        {
-            btnBackMain.Enabled = true;
-            btnNextMain.Text = "Proceed to Payment";
-            radFees.Checked = true;
-        }
-
-        private void LoadPaymentTab()
-        {
-            btnNextMain.Text = "Confirm Payment";
-            btnBackMain.Enabled = true;
-            radPayment.Checked = true;
-
-            decimal totalPayment = 0;
-            ucPayment.OnLoad("54", totalPayment);
-            ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
-        }
-
-        private void tabPageFees_Enter(object sender, EventArgs e)
+        private void bgwSavingPayment_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                LoadFeesAndChargesTab();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+                var chequesModels = new List<ChequesModel>();
+                int totalProgressCount = ucPayment.dgCheques.Rows.Count;
+                int progressCount = 0;
+                var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
 
-        private void tabPagePayment_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadPaymentTab();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            int totalProgress = ucPayment.dgCheques.Rows.Count;
-            int progressCount = 0;
-            var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
-
-            var chequesModels = new List<ChequesModel>();
-            try
-            {
                 foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
                 {
                     string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
@@ -187,14 +228,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
 
                     if (!bankAccountExist)
                     {
-                        //banks model
                         var banksModel = new BanksModel()
                         {
                             BankName = bankName,
                             BankBranch = bankBranch
                         };
 
-                        //bank accounts model
                         var bankAccountModel = new BankAccountsModel()
                         {
                             AccountNumber = bankAccountNo,
@@ -215,9 +254,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                         BankAccountsId = bankAccountId
                     };
 
-                    progressCount += 1;
-                    bgwSavingPayment.ReportProgress((progressCount * 100) / totalProgress);
+                    progressCount++;
                     chequesModels.Add(model);
+                    Helper.ProgressCounter(bgwSavingPayment, totalProgressCount, progressCount);
                 }
 
                 paymentCollectionHasChequesModel.ChequesModels = chequesModels;
@@ -227,13 +266,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void bgwSavingPayment_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void bgwSavingPayment_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             dialog.label1.Text = e.ProgressPercentage.ToString();
             dialog.btnClose.Enabled = false;
         }
 
-        private void bgwSavingPayment_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void bgwSavingPayment_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result.ToString() == "complete")
             {
@@ -243,6 +282,15 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
                 ucPayment.Enabled = false;
                 return;
             }
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadTabContents();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

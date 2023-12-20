@@ -32,31 +32,31 @@
             btnCancel = new System.Windows.Forms.Button();
             btnNextMain = new System.Windows.Forms.Button();
             btnBackMain = new System.Windows.Forms.Button();
-            radFees = new System.Windows.Forms.RadioButton();
+            radFeesCharges = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            radioButton1 = new System.Windows.Forms.RadioButton();
-            radioButton2 = new System.Windows.Forms.RadioButton();
-            radioButton3 = new System.Windows.Forms.RadioButton();
+            radMarriageDetails = new System.Windows.Forms.RadioButton();
+            radGroomInfo = new System.Windows.Forms.RadioButton();
+            radBrideInfo = new System.Windows.Forms.RadioButton();
             bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
-            tabPageFees = new System.Windows.Forms.TabPage();
+            tabPageFeesCharges = new System.Windows.Forms.TabPage();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPageMarriageDetails = new System.Windows.Forms.TabPage();
             groupBox1 = new System.Windows.Forms.GroupBox();
             ucMarriageDetails1 = new ucMarriageDetails();
             tabPageGroomInfo = new System.Windows.Forms.TabPage();
             groupBox2 = new System.Windows.Forms.GroupBox();
-            ucSpouseInfo1 = new ucSpouseInfo();
+            ucSpouseInfoGroom1 = new ucSpouseInfo();
             tabPageBrideInfo = new System.Windows.Forms.TabPage();
             groupBox3 = new System.Windows.Forms.GroupBox();
-            ucSpouseInfo2 = new ucSpouseInfo();
-            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
+            ucSpouseInfoBride1 = new ucSpouseInfo();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             tabPagePayment.SuspendLayout();
-            tabPageFees.SuspendLayout();
+            tabPageFeesCharges.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageMarriageDetails.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -112,19 +112,19 @@
             btnBackMain.UseVisualStyleBackColor = true;
             btnBackMain.Click += btnBackMain_Click;
             // 
-            // radFees
+            // radFeesCharges
             // 
-            radFees.Appearance = System.Windows.Forms.Appearance.Button;
-            radFees.FlatAppearance.BorderSize = 0;
-            radFees.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radFees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radFees.Location = new System.Drawing.Point(0, 111);
-            radFees.Margin = new System.Windows.Forms.Padding(0);
-            radFees.Name = "radFees";
-            radFees.Size = new System.Drawing.Size(195, 37);
-            radFees.TabIndex = 5;
-            radFees.Text = "Fees && Charges";
-            radFees.UseVisualStyleBackColor = true;
+            radFeesCharges.Appearance = System.Windows.Forms.Appearance.Button;
+            radFeesCharges.FlatAppearance.BorderSize = 0;
+            radFeesCharges.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radFeesCharges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radFeesCharges.Location = new System.Drawing.Point(0, 111);
+            radFeesCharges.Margin = new System.Windows.Forms.Padding(0);
+            radFeesCharges.Name = "radFeesCharges";
+            radFeesCharges.Size = new System.Drawing.Size(195, 37);
+            radFeesCharges.TabIndex = 5;
+            radFeesCharges.Text = "Fees && Charges";
+            radFeesCharges.UseVisualStyleBackColor = true;
             // 
             // radPayment
             // 
@@ -143,10 +143,10 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
-            flowLayoutPanel2.Controls.Add(radioButton1);
-            flowLayoutPanel2.Controls.Add(radioButton2);
-            flowLayoutPanel2.Controls.Add(radioButton3);
-            flowLayoutPanel2.Controls.Add(radFees);
+            flowLayoutPanel2.Controls.Add(radMarriageDetails);
+            flowLayoutPanel2.Controls.Add(radGroomInfo);
+            flowLayoutPanel2.Controls.Add(radBrideInfo);
+            flowLayoutPanel2.Controls.Add(radFeesCharges);
             flowLayoutPanel2.Controls.Add(radPayment);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             flowLayoutPanel2.Enabled = false;
@@ -157,53 +157,53 @@
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 515);
             flowLayoutPanel2.TabIndex = 7;
             // 
-            // radioButton1
+            // radMarriageDetails
             // 
-            radioButton1.Appearance = System.Windows.Forms.Appearance.Button;
-            radioButton1.FlatAppearance.BorderSize = 0;
-            radioButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radioButton1.Location = new System.Drawing.Point(0, 0);
-            radioButton1.Margin = new System.Windows.Forms.Padding(0);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new System.Drawing.Size(195, 37);
-            radioButton1.TabIndex = 5;
-            radioButton1.Text = "Marriage Details";
-            radioButton1.UseVisualStyleBackColor = true;
+            radMarriageDetails.Appearance = System.Windows.Forms.Appearance.Button;
+            radMarriageDetails.FlatAppearance.BorderSize = 0;
+            radMarriageDetails.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radMarriageDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radMarriageDetails.Location = new System.Drawing.Point(0, 0);
+            radMarriageDetails.Margin = new System.Windows.Forms.Padding(0);
+            radMarriageDetails.Name = "radMarriageDetails";
+            radMarriageDetails.Size = new System.Drawing.Size(195, 37);
+            radMarriageDetails.TabIndex = 5;
+            radMarriageDetails.Text = "Marriage Details";
+            radMarriageDetails.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radGroomInfo
             // 
-            radioButton2.Appearance = System.Windows.Forms.Appearance.Button;
-            radioButton2.FlatAppearance.BorderSize = 0;
-            radioButton2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radioButton2.Location = new System.Drawing.Point(0, 37);
-            radioButton2.Margin = new System.Windows.Forms.Padding(0);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new System.Drawing.Size(195, 37);
-            radioButton2.TabIndex = 2;
-            radioButton2.Text = "Groom Info.";
-            radioButton2.UseVisualStyleBackColor = true;
+            radGroomInfo.Appearance = System.Windows.Forms.Appearance.Button;
+            radGroomInfo.FlatAppearance.BorderSize = 0;
+            radGroomInfo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radGroomInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radGroomInfo.Location = new System.Drawing.Point(0, 37);
+            radGroomInfo.Margin = new System.Windows.Forms.Padding(0);
+            radGroomInfo.Name = "radGroomInfo";
+            radGroomInfo.Size = new System.Drawing.Size(195, 37);
+            radGroomInfo.TabIndex = 2;
+            radGroomInfo.Text = "Groom Info.";
+            radGroomInfo.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // radBrideInfo
             // 
-            radioButton3.Appearance = System.Windows.Forms.Appearance.Button;
-            radioButton3.FlatAppearance.BorderSize = 0;
-            radioButton3.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radioButton3.Location = new System.Drawing.Point(0, 74);
-            radioButton3.Margin = new System.Windows.Forms.Padding(0);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new System.Drawing.Size(195, 37);
-            radioButton3.TabIndex = 2;
-            radioButton3.Text = "Bride Info.";
-            radioButton3.UseVisualStyleBackColor = true;
+            radBrideInfo.Appearance = System.Windows.Forms.Appearance.Button;
+            radBrideInfo.FlatAppearance.BorderSize = 0;
+            radBrideInfo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radBrideInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radBrideInfo.Location = new System.Drawing.Point(0, 74);
+            radBrideInfo.Margin = new System.Windows.Forms.Padding(0);
+            radBrideInfo.Name = "radBrideInfo";
+            radBrideInfo.Size = new System.Drawing.Size(195, 37);
+            radBrideInfo.TabIndex = 2;
+            radBrideInfo.Text = "Bride Info.";
+            radBrideInfo.UseVisualStyleBackColor = true;
             // 
             // bgwSavingPayment
             // 
             bgwSavingPayment.WorkerReportsProgress = true;
             bgwSavingPayment.WorkerSupportsCancellation = true;
-            bgwSavingPayment.DoWork += backgroundWorker1_DoWork;
+            bgwSavingPayment.DoWork += bgwSavingPayment_DoWork;
             bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
             bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
             // 
@@ -217,7 +217,6 @@
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
-            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // ucPayment1
             // 
@@ -228,17 +227,25 @@
             ucPayment1.Size = new System.Drawing.Size(740, 469);
             ucPayment1.TabIndex = 0;
             // 
-            // tabPageFees
+            // tabPageFeesCharges
             // 
-            tabPageFees.Controls.Add(ucPaymentFeesCharges1);
-            tabPageFees.Location = new System.Drawing.Point(4, 5);
-            tabPageFees.Margin = new System.Windows.Forms.Padding(0);
-            tabPageFees.Name = "tabPageFees";
-            tabPageFees.Size = new System.Drawing.Size(746, 475);
-            tabPageFees.TabIndex = 1;
-            tabPageFees.Text = "tabPageFees";
-            tabPageFees.UseVisualStyleBackColor = true;
-            tabPageFees.Enter += tabPageFees_Enter;
+            tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
+            tabPageFeesCharges.Name = "tabPageFeesCharges";
+            tabPageFeesCharges.Size = new System.Drawing.Size(746, 475);
+            tabPageFeesCharges.TabIndex = 1;
+            tabPageFeesCharges.Text = "tabPageFees";
+            tabPageFeesCharges.UseVisualStyleBackColor = true;
+            // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(746, 475);
+            ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabControlMain
             // 
@@ -246,7 +253,7 @@
             tabControlMain.Controls.Add(tabPageMarriageDetails);
             tabControlMain.Controls.Add(tabPageGroomInfo);
             tabControlMain.Controls.Add(tabPageBrideInfo);
-            tabControlMain.Controls.Add(tabPageFees);
+            tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
@@ -258,6 +265,7 @@
             tabControlMain.Size = new System.Drawing.Size(754, 484);
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
+            tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageMarriageDetails
             // 
@@ -303,7 +311,7 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(ucSpouseInfo1);
+            groupBox2.Controls.Add(ucSpouseInfoGroom1);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -314,14 +322,14 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Groom Info.";
             // 
-            // ucSpouseInfo1
+            // ucSpouseInfoGroom1
             // 
-            ucSpouseInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSpouseInfo1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucSpouseInfo1.Location = new System.Drawing.Point(4, 24);
-            ucSpouseInfo1.Name = "ucSpouseInfo1";
-            ucSpouseInfo1.Size = new System.Drawing.Size(738, 447);
-            ucSpouseInfo1.TabIndex = 0;
+            ucSpouseInfoGroom1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSpouseInfoGroom1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucSpouseInfoGroom1.Location = new System.Drawing.Point(4, 24);
+            ucSpouseInfoGroom1.Name = "ucSpouseInfoGroom1";
+            ucSpouseInfoGroom1.Size = new System.Drawing.Size(738, 447);
+            ucSpouseInfoGroom1.TabIndex = 0;
             // 
             // tabPageBrideInfo
             // 
@@ -335,7 +343,7 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(ucSpouseInfo2);
+            groupBox3.Controls.Add(ucSpouseInfoBride1);
             groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox3.Location = new System.Drawing.Point(0, 0);
@@ -346,23 +354,14 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Bride Info.";
             // 
-            // ucSpouseInfo2
+            // ucSpouseInfoBride1
             // 
-            ucSpouseInfo2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSpouseInfo2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucSpouseInfo2.Location = new System.Drawing.Point(4, 24);
-            ucSpouseInfo2.Name = "ucSpouseInfo2";
-            ucSpouseInfo2.Size = new System.Drawing.Size(738, 447);
-            ucSpouseInfo2.TabIndex = 0;
-            // 
-            // ucPaymentFeesCharges1
-            // 
-            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
-            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
-            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(746, 475);
-            ucPaymentFeesCharges1.TabIndex = 0;
+            ucSpouseInfoBride1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSpouseInfoBride1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucSpouseInfoBride1.Location = new System.Drawing.Point(4, 24);
+            ucSpouseInfoBride1.Name = "ucSpouseInfoBride1";
+            ucSpouseInfoBride1.Size = new System.Drawing.Size(738, 447);
+            ucSpouseInfoBride1.TabIndex = 0;
             // 
             // frmMarriageLicense
             // 
@@ -383,7 +382,7 @@
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
-            tabPageFees.ResumeLayout(false);
+            tabPageFeesCharges.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
             tabPageMarriageDetails.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
@@ -399,26 +398,26 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnNextMain;
         private System.Windows.Forms.Button btnBackMain;
-        private System.Windows.Forms.RadioButton radFees;
+        private System.Windows.Forms.RadioButton radFeesCharges;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         internal System.ComponentModel.BackgroundWorker bgwSavingPayment;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radMarriageDetails;
         private System.Windows.Forms.TabPage tabPagePayment;
         private ucPayment ucPayment1;
-        private System.Windows.Forms.TabPage tabPageFees;
+        private System.Windows.Forms.TabPage tabPageFeesCharges;
         private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radGroomInfo;
+        private System.Windows.Forms.RadioButton radBrideInfo;
         private System.Windows.Forms.TabPage tabPageMarriageDetails;
         private System.Windows.Forms.TabPage tabPageGroomInfo;
         private System.Windows.Forms.TabPage tabPageBrideInfo;
         private System.Windows.Forms.GroupBox groupBox1;
         private ucMarriageDetails ucMarriageDetails1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private ucSpouseInfo ucSpouseInfo1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private ucSpouseInfo ucSpouseInfo2;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
+        private ucSpouseInfo ucSpouseInfoGroom1;
+        private ucSpouseInfo ucSpouseInfoBride1;
     }
 }

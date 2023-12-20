@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cmbxRegistry = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             txtCountry = new System.Windows.Forms.TextBox();
             dtBirthDate = new System.Windows.Forms.DateTimePicker();
@@ -52,28 +52,31 @@
             txtNationality = new System.Windows.Forms.TextBox();
             txtLastName = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtCurrenResidence = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            txtReligion = new System.Windows.Forms.TextBox();
+            nudAge = new System.Windows.Forms.NumericUpDown();
+            nudMonths = new System.Windows.Forms.NumericUpDown();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             flowPanelSex.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudMonths).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // comboBox1
+            // cmbxRegistry
             // 
-            comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(121, 3);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(243, 23);
-            comboBox1.TabIndex = 0;
+            cmbxRegistry.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxRegistry.FormattingEnabled = true;
+            cmbxRegistry.Location = new System.Drawing.Point(121, 3);
+            cmbxRegistry.Name = "cmbxRegistry";
+            cmbxRegistry.Size = new System.Drawing.Size(243, 23);
+            cmbxRegistry.TabIndex = 0;
+            cmbxRegistry.KeyPress += cmbxRegistry_KeyPress;
+            cmbxRegistry.Validating += cmbxRegistry_Validating;
+            cmbxRegistry.Validated += cmbxRegistry_Validated;
             // 
             // label1
             // 
@@ -302,13 +305,15 @@
             label2.TabIndex = 27;
             label2.Text = "Current Residence*";
             // 
-            // textBox1
+            // txtCurrenResidence
             // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.Location = new System.Drawing.Point(121, 409);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(243, 23);
-            textBox1.TabIndex = 39;
+            txtCurrenResidence.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtCurrenResidence.Location = new System.Drawing.Point(121, 409);
+            txtCurrenResidence.Name = "txtCurrenResidence";
+            txtCurrenResidence.Size = new System.Drawing.Size(243, 23);
+            txtCurrenResidence.TabIndex = 39;
+            txtCurrenResidence.Validating += txtCurrenResidence_Validating;
+            txtCurrenResidence.Validated += txtCurrenResidence_Validated;
             // 
             // label3
             // 
@@ -319,29 +324,35 @@
             label3.TabIndex = 27;
             label3.Text = "Religion*";
             // 
-            // textBox2
+            // txtReligion
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Location = new System.Drawing.Point(121, 380);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(243, 23);
-            textBox2.TabIndex = 39;
+            txtReligion.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtReligion.Location = new System.Drawing.Point(121, 380);
+            txtReligion.Name = "txtReligion";
+            txtReligion.Size = new System.Drawing.Size(243, 23);
+            txtReligion.TabIndex = 39;
+            txtReligion.Validating += txtReligion_Validating;
+            txtReligion.Validated += txtReligion_Validated;
             // 
-            // numericUpDown1
+            // nudAge
             // 
-            numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown1.Location = new System.Drawing.Point(121, 322);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(243, 23);
-            numericUpDown1.TabIndex = 40;
+            nudAge.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudAge.Location = new System.Drawing.Point(121, 322);
+            nudAge.Name = "nudAge";
+            nudAge.Size = new System.Drawing.Size(243, 23);
+            nudAge.TabIndex = 40;
+            nudAge.Validating += nudAge_Validating;
+            nudAge.Validated += nudAge_Validated;
             // 
-            // numericUpDown2
+            // nudMonths
             // 
-            numericUpDown2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown2.Location = new System.Drawing.Point(121, 351);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new System.Drawing.Size(243, 23);
-            numericUpDown2.TabIndex = 40;
+            nudMonths.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudMonths.Location = new System.Drawing.Point(121, 351);
+            nudMonths.Name = "nudMonths";
+            nudMonths.Size = new System.Drawing.Size(243, 23);
+            nudMonths.TabIndex = 40;
+            nudMonths.Validating += nudMonths_Validating;
+            nudMonths.Validated += nudMonths_Validated;
             // 
             // label4
             // 
@@ -369,10 +380,10 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(numericUpDown2);
-            Controls.Add(numericUpDown1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(nudMonths);
+            Controls.Add(nudAge);
+            Controls.Add(txtReligion);
+            Controls.Add(txtCurrenResidence);
             Controls.Add(txtCountry);
             Controls.Add(dtBirthDate);
             Controls.Add(label7);
@@ -396,14 +407,13 @@
             Controls.Add(txtNationality);
             Controls.Add(txtLastName);
             Controls.Add(label1);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbxRegistry);
             Name = "ucSpouseInfo";
             Size = new System.Drawing.Size(387, 438);
-            Load += ucGroomInfo_Load;
             flowPanelSex.ResumeLayout(false);
             flowPanelSex.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudMonths).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -411,7 +421,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxRegistry;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.DateTimePicker dtBirthDate;
@@ -434,11 +444,11 @@
         internal System.Windows.Forms.TextBox txtNationality;
         internal System.Windows.Forms.TextBox txtLastName;
         internal System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCurrenResidence;
         internal System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.TextBox txtReligion;
+        private System.Windows.Forms.NumericUpDown nudAge;
+        private System.Windows.Forms.NumericUpDown nudMonths;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label5;
         private System.Windows.Forms.ErrorProvider errorProvider1;

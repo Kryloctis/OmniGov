@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dtpIssuedDate = new System.Windows.Forms.DateTimePicker();
             dtpPublishedDate = new System.Windows.Forms.DateTimePicker();
             txtRegistrationNumber = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // dtpIssuedDate
@@ -64,6 +67,8 @@
             txtRegistrationNumber.Name = "txtRegistrationNumber";
             txtRegistrationNumber.Size = new System.Drawing.Size(250, 23);
             txtRegistrationNumber.TabIndex = 6;
+            txtRegistrationNumber.Validating += TxtRegistrationNumber_Validating;
+            txtRegistrationNumber.Validated += TxtRegistrationNumber_Validated;
             // 
             // label5
             // 
@@ -92,6 +97,10 @@
             label1.TabIndex = 11;
             label1.Text = "Registration No. *";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // ucMarriageDetails
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -104,6 +113,7 @@
             Controls.Add(label1);
             Name = "ucMarriageDetails";
             Size = new System.Drawing.Size(378, 88);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,5 +126,6 @@
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -218,7 +218,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxRepresentative.Size = new System.Drawing.Size(313, 23);
             cmbxRepresentative.TabIndex = 9;
             cmbxRepresentative.KeyPress += cmbxRepresentative_KeyPress;
-            cmbxRepresentative.PreviewKeyDown += cmbxRepresentative_PreviewKeyDown;
             // 
             // ucTaxPayers
             // 
