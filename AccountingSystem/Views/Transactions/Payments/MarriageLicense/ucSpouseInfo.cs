@@ -118,11 +118,15 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
         private bool RegistryValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
-            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Groom's Registry"))
+            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Registry  not found"))
+            {
+                ResetForm();
                 return false;
+            }
             else if (comboBox.SelectedIndex < 0)
             {
-                errorProvider.SetError(comboBox, "Groom's Registry");
+                errorProvider.SetError(comboBox, "Registry not found");
+                ResetForm();
                 return false;
             }
 
@@ -137,6 +141,50 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         private void cmbxRegistry_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxRegistry);
+        }
+
+        internal void ResetForm()
+        {
+            txtFirstName.Clear();
+            txtMiddleName.Clear();
+            txtLastName.Clear();
+            radMale.Checked = true;
+            txtNationality.Clear();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
+            txtCountry.Clear();
+            txtContactInfo.Clear();
+        }
+
+        private void LoadSelectedRegistryInfo()
+        {
+            int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
+            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(registryId);
+
+            txtFirstName.Text = dictRegistry["first_name"];
+            txtMiddleName.Text = dictRegistry["middle_name"];
+            txtLastName.Text = dictRegistry["last_name"];
+            radMale.Checked = dictRegistry["sex"].ToLower() == "male";
+            radFemale.Checked = dictRegistry["sex"].ToLower() ==
+                "female";
+            dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
+            txtNationality.Text = dictRegistry["nationality"];
+            txtMunicipality.Text = dictRegistry["municipality"];
+            txtProvince.Text = dictRegistry["province"];
+            txtCountry.Text = dictRegistry["country"];
+            txtContactInfo.Text = dictRegistry["contact_info"];
+            nudAge.Value = Math.Max(0, (int)((Helper.GetCurrentDate() - dtBirthDate.Value).TotalDays / 365));
+        }
+
+        private void cmbxRegistry_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbxRegistry.SelectedValue is null)
+                    return;
+                LoadSelectedRegistryInfo();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

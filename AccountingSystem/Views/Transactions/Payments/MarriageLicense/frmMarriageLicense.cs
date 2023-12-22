@@ -12,7 +12,6 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
     public partial class frmMarriageLicense : Form
     {
         private readonly ucMarriageDetails ucMarriageDetails;
-
         private readonly ucSpouseInfo ucSpouseInfoGroom;
         private readonly ucSpouseInfo ucSpouseInfoBride;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;

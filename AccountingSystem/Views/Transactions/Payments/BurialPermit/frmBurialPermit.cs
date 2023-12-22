@@ -2,6 +2,8 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +11,14 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit
+namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 {
     public partial class frmBurialPermit : Form
     {
-        private readonly ucTaxPayers ucTaxPayers;
         private readonly ucPayment ucPayment;
-        private readonly ucBurialPermit ucBurialPermit;
-        private readonly ucPaymentFeesCharges ucOtherCharges;
+        private readonly ucBurialDetails ucBurialDetails;
+        private readonly ucRemainsInfo ucRemainsInfo;
+        private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private dialogPayment dialog = new dialogPayment();
 
         public frmBurialPermit()
@@ -24,8 +26,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             InitializeComponent();
             Helper.LoadFormIcon(this);
             ucPayment = ucPayment1;
-            ucOtherCharges = ucBurialPermit.ucOtherCharges1;
-            //ucOtherCharges.accountableForm = "58";
+            ucBurialDetails = ucBurialDetails1;
+            ucRemainsInfo = ucRemainsInfo1;
+            ucPaymentFeesCharges = ucPaymentFeesCharges1;
         }
 
         private void frmBurialPermit_Load(object sender, EventArgs e)
@@ -39,8 +42,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
         private void OnLoad()
         {
-            ucTaxPayers.chckIsActive.Enabled = false;
-            ucOtherCharges.OnLoad();
+            LoadTabContents();
+            ucBurialDetails.OnLoad();
         }
 
         private void ConfirmPayment()
@@ -70,16 +73,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         private bool FormValidations()
         {
             var selectedTab = tabControlMain.SelectedTab;
-
-            if (selectedTab == tabPageFeesCharges)
-            {
-                if (!ucBurialPermit.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucBurialPermit.GetFormErrors());
-                    return false;
-                }
-            }
-            else if (selectedTab == tabPagePayment)
+            if (selectedTab == tabPagePayment)
             {
                 if (!ucPayment.ValidateChildren())
                 {
@@ -91,24 +85,125 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
             return true;
         }
 
-        private void ChangeTabs()
+        private bool TabValidated()
         {
-            var selectedTab = tabControlMain.SelectedTab;
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageBurialDetails":
+                    if (!ucBurialDetails.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucBurialDetails.GetFormErrors());
+                        return false;
+                    }
+                    break;
 
-            if (selectedTab == tabPageFeesCharges)
-                tabControlMain.SelectedTab = tabPagePayment;
-            else if (selectedTab == tabPagePayment)
-                ConfirmPayment();
+                case "tabPageRemainsInfo":
+                    if (!ucRemainsInfo.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucRemainsInfo.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageFeesCharges":
+                    if (!ucPaymentFeesCharges.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPaymentFeesCharges.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPagePayment":
+                    if (!ucPayment.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPayment.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                default:
+                    return true;
+            }
+
+            return true;
+        }
+
+        private void LoadBurialDetailsTab()
+        {
+            radBurialDetails.Checked = true;
+            btnNextMain.Text = "Next";
+        }
+
+        private void LoadRemainsInfoTab()
+        {
+            radRemainsInfo.Checked = true;
+            btnNextMain.Text = "Next";
+            ucRemainsInfo.deathDate = ucBurialDetails.dtDeathDate.Value;
+            ucRemainsInfo.OnLoad();
+        }
+
+        private void LoadFeesAndChargesTab()
+        {
+            btnNextMain.Text = "Proceed to Payment";
+            radFees.Checked = true;
+            ucPaymentFeesCharges.OnLoad();
+        }
+
+        private void LoadPaymentTab()
+        {
+            btnNextMain.Text = "Confirm Payment";
+            radPayment.Checked = true;
+
+            decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
+            ucPayment.OnLoad("58", totalAmountPayable);
+        }
+
+        private void LoadTabContents()
+        {
+            if (tabControlMain.SelectedIndex == 0)
+                btnBackMain.Enabled = false;
+            else
+                btnBackMain.Enabled = true;
+
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageBurialDetails":
+                    LoadBurialDetailsTab();
+                    break;
+
+                case "tabPageRemainsInfo":
+                    LoadRemainsInfoTab();
+                    break;
+
+                case "tabPageFeesCharges":
+                    LoadFeesAndChargesTab();
+                    break;
+
+                case "tabPagePayment":
+                    radPayment.Checked = true;
+                    LoadPaymentTab();
+                    //ConfirmPayment();
+                    break;
+            }
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadTabContents();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!FormValidations())
+                if (!TabValidated())
                     return;
 
-                ChangeTabs();
+                tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -117,40 +212,9 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         {
             try
             {
-                if (tabControlMain.SelectedIndex < 0)
-                    return;
-
-                tabControlMain.SelectedIndex = tabControlMain.SelectedIndex - 1;
+                tabControlMain.SelectedIndex--;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private bool SaveBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
-        {
-            return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
-        }
-
-        private BurialPermitModel BurialPermitModel()
-        {
-            var burialPermitModel = new BurialPermitModel();
-
-            var collectingOfficerData = ucPayment.GetCollectingOfficerData();
-            bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
-
-            burialPermitModel.RemainsName = ucBurialPermit.txtRemainsName.Text;
-            burialPermitModel.RemainsNationality = ucBurialPermit.txtRemainsNationality.Text;
-            burialPermitModel.RemainsAge = Convert.ToInt32(ucBurialPermit.nudRemainsAge.Value);
-            burialPermitModel.RemainsSex = ucBurialPermit.radMale.Checked ? "Male" : "Female";
-            burialPermitModel.DeathDate = ucBurialPermit.dtpDeathDate.Value;
-            burialPermitModel.CauseOfDeath = ucBurialPermit.txtCauseOfDeath.Text;
-            burialPermitModel.Cemetery = ucBurialPermit.txtCemetery.Text;
-            burialPermitModel.Disinterment = ucBurialPermit.txtDisinterment.Text;
-            burialPermitModel.IsInfectious = ucBurialPermit.radInfectiousYes.Checked;
-            burialPermitModel.IsEmbalmed = ucBurialPermit.radEmbalmedYes.Checked;
-            burialPermitModel.Disposition = ucBurialPermit.txtDisposition.Text;
-            burialPermitModel.CreatedBy = Helper.UserId;
-
-            return burialPermitModel;
         }
 
         private void bgwSavingPayment_DoWork(object sender, DoWorkEventArgs e)
@@ -213,7 +277,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
                 paymentCollectionHasChequesModel.ChequesModels = chequesModels;
 
-                e.Result = SaveBurialPermitPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), BurialPermitModel());
+                //e.Result = SaveBurialPermitPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), BurialPermitModel());
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -237,45 +301,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
                 ucPayment.Enabled = false;
                 return;
             }
-        }
-
-        private void LoadFeesAndChargesTab()
-        {
-            btnBackMain.Enabled = true;
-            btnNextMain.Text = "Proceed to Payment";
-            radFees.Checked = true;
-        }
-
-        private void LoadPaymentTab()
-        {
-            btnNextMain.Text = "Confirm Payment";
-            btnBackMain.Enabled = true;
-            radPayment.Checked = true;
-
-            decimal totalAmountPayable = 0;
-            ucPayment.OnLoad("58", totalAmountPayable);
-        }
-
-        private void tabPagePayment_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadPaymentTab();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tabPageFees_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadFeesAndChargesTab();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
         }
     }
 }

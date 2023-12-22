@@ -103,7 +103,7 @@
             txtDescription.Location = new System.Drawing.Point(74, 123);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new System.Drawing.Size(250, 23);
+            txtDescription.Size = new System.Drawing.Size(250, 75);
             txtDescription.TabIndex = 5;
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
@@ -112,7 +112,7 @@
             // 
             nudPrice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudPrice.DecimalPlaces = 2;
-            nudPrice.Location = new System.Drawing.Point(74, 152);
+            nudPrice.Location = new System.Drawing.Point(74, 204);
             nudPrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudPrice.Name = "nudPrice";
             nudPrice.Size = new System.Drawing.Size(250, 23);
@@ -161,7 +161,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(1, 155);
+            label9.Location = new System.Drawing.Point(1, 207);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(33, 15);
             label9.TabIndex = 11;
@@ -215,7 +215,7 @@
             Controls.Add(label9);
             Controls.Add(label7);
             Name = "ucCattleOwnership";
-            Size = new System.Drawing.Size(343, 186);
+            Size = new System.Drawing.Size(343, 231);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             flwPanelCattleSex.ResumeLayout(false);
             flwPanelCattleSex.PerformLayout();

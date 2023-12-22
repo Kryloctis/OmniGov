@@ -55,6 +55,7 @@
             // 
             // dtDeathDate
             // 
+            dtDeathDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dtDeathDate.Location = new System.Drawing.Point(101, 65);
             dtDeathDate.Name = "dtDeathDate";
             dtDeathDate.Size = new System.Drawing.Size(250, 23);
@@ -80,6 +81,7 @@
             // 
             // txtCauseOfDeath
             // 
+            txtCauseOfDeath.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCauseOfDeath.Location = new System.Drawing.Point(101, 94);
             txtCauseOfDeath.Multiline = true;
             txtCauseOfDeath.Name = "txtCauseOfDeath";
@@ -99,6 +101,7 @@
             // 
             // txtCemetery
             // 
+            txtCemetery.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCemetery.Location = new System.Drawing.Point(101, 204);
             txtCemetery.Name = "txtCemetery";
             txtCemetery.Size = new System.Drawing.Size(250, 23);
@@ -117,6 +120,7 @@
             // 
             // txtDisinterment
             // 
+            txtDisinterment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtDisinterment.Location = new System.Drawing.Point(101, 233);
             txtDisinterment.Name = "txtDisinterment";
             txtDisinterment.Size = new System.Drawing.Size(250, 23);
@@ -155,6 +159,7 @@
             // 
             // panelInfectious
             // 
+            panelInfectious.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelInfectious.Controls.Add(radInfectiousYes);
             panelInfectious.Controls.Add(radInfectiousNo);
             panelInfectious.Location = new System.Drawing.Point(101, 3);
@@ -173,6 +178,7 @@
             // 
             // panelEmbalmed
             // 
+            panelEmbalmed.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelEmbalmed.Controls.Add(radEmbalmedYes);
             panelEmbalmed.Controls.Add(radEmbalmedNo);
             panelEmbalmed.Location = new System.Drawing.Point(101, 34);
@@ -213,6 +219,7 @@
             // 
             // txtDisposition
             // 
+            txtDisposition.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtDisposition.Location = new System.Drawing.Point(101, 262);
             txtDisposition.Name = "txtDisposition";
             txtDisposition.Size = new System.Drawing.Size(250, 23);
@@ -242,7 +249,7 @@
             Controls.Add(label1);
             Controls.Add(dtDeathDate);
             Name = "ucBurialDetails";
-            Size = new System.Drawing.Size(375, 291);
+            Size = new System.Drawing.Size(373, 291);
             panelInfectious.ResumeLayout(false);
             panelInfectious.PerformLayout();
             panelEmbalmed.ResumeLayout(false);
@@ -253,8 +260,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dtDeathDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCauseOfDeath;
@@ -273,5 +278,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDisposition;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.DateTimePicker dtDeathDate;
     }
 }

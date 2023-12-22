@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit
+﻿namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 {
     partial class frmBurialPermit
     {
@@ -32,6 +32,12 @@
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabControlMain = new System.Windows.Forms.TabControl();
+            tabPageBurialDetails = new System.Windows.Forms.TabPage();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            ucBurialDetails1 = new ucBurialDetails();
+            tabPageRemainsInfo = new System.Windows.Forms.TabPage();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            ucRemainsInfo1 = new ucRemainsInfo();
             tabPagePayment = new System.Windows.Forms.TabPage();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
@@ -43,10 +49,12 @@
             radBurialDetails = new System.Windows.Forms.RadioButton();
             radRemainsInfo = new System.Windows.Forms.RadioButton();
             bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
-            tabPageBurialDetails = new System.Windows.Forms.TabPage();
-            tabPageRemainsInfo = new System.Windows.Forms.TabPage();
             tabPageFeesCharges.SuspendLayout();
             tabControlMain.SuspendLayout();
+            tabPageBurialDetails.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tabPageRemainsInfo.SuspendLayout();
+            groupBox2.SuspendLayout();
             tabPagePayment.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -58,7 +66,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(853, 511);
+            ucPayment1.Size = new System.Drawing.Size(818, 450);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageFeesCharges
@@ -67,11 +75,10 @@
             tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
             tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Size = new System.Drawing.Size(859, 517);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
-            tabPageFeesCharges.Enter += tabPageFees_Enter;
             // 
             // ucPaymentFeesCharges1
             // 
@@ -79,7 +86,7 @@
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(859, 517);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabControlMain
@@ -96,9 +103,72 @@
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(867, 526);
+            tabControlMain.Size = new System.Drawing.Size(832, 465);
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
+            tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
+            // 
+            // tabPageBurialDetails
+            // 
+            tabPageBurialDetails.Controls.Add(groupBox1);
+            tabPageBurialDetails.Location = new System.Drawing.Point(4, 5);
+            tabPageBurialDetails.Name = "tabPageBurialDetails";
+            tabPageBurialDetails.Size = new System.Drawing.Size(824, 456);
+            tabPageBurialDetails.TabIndex = 3;
+            tabPageBurialDetails.Text = "tabPageBurialDetails";
+            tabPageBurialDetails.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(ucBurialDetails1);
+            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            groupBox1.Location = new System.Drawing.Point(0, 0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(824, 456);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Burial Details";
+            // 
+            // ucBurialDetails1
+            // 
+            ucBurialDetails1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucBurialDetails1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucBurialDetails1.Location = new System.Drawing.Point(3, 23);
+            ucBurialDetails1.Name = "ucBurialDetails1";
+            ucBurialDetails1.Size = new System.Drawing.Size(818, 430);
+            ucBurialDetails1.TabIndex = 1;
+            // 
+            // tabPageRemainsInfo
+            // 
+            tabPageRemainsInfo.Controls.Add(groupBox2);
+            tabPageRemainsInfo.Location = new System.Drawing.Point(4, 5);
+            tabPageRemainsInfo.Name = "tabPageRemainsInfo";
+            tabPageRemainsInfo.Size = new System.Drawing.Size(824, 456);
+            tabPageRemainsInfo.TabIndex = 4;
+            tabPageRemainsInfo.Text = "tabPageRemainsInfo";
+            tabPageRemainsInfo.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(ucRemainsInfo1);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            groupBox2.Location = new System.Drawing.Point(0, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(824, 456);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Remains Info.";
+            // 
+            // ucRemainsInfo1
+            // 
+            ucRemainsInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucRemainsInfo1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucRemainsInfo1.Location = new System.Drawing.Point(3, 23);
+            ucRemainsInfo1.Name = "ucRemainsInfo1";
+            ucRemainsInfo1.Size = new System.Drawing.Size(818, 430);
+            ucRemainsInfo1.TabIndex = 1;
             // 
             // tabPagePayment
             // 
@@ -106,11 +176,10 @@
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(859, 517);
+            tabPagePayment.Size = new System.Drawing.Size(824, 456);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
-            tabPagePayment.Enter += tabPagePayment_Enter;
             // 
             // flowLayoutPanel1
             // 
@@ -120,15 +189,15 @@
             flowLayoutPanel1.Controls.Add(btnBackMain);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(195, 526);
+            flowLayoutPanel1.Location = new System.Drawing.Point(195, 465);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(867, 31);
+            flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(729, 3);
+            btnCancel.Location = new System.Drawing.Point(694, 3);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(134, 23);
@@ -138,7 +207,7 @@
             // 
             // btnNextMain
             // 
-            btnNextMain.Location = new System.Drawing.Point(587, 3);
+            btnNextMain.Location = new System.Drawing.Point(552, 3);
             btnNextMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnNextMain.Name = "btnNextMain";
             btnNextMain.Size = new System.Drawing.Size(134, 23);
@@ -149,7 +218,7 @@
             // 
             // btnBackMain
             // 
-            btnBackMain.Location = new System.Drawing.Point(445, 3);
+            btnBackMain.Location = new System.Drawing.Point(410, 3);
             btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnBackMain.Name = "btnBackMain";
             btnBackMain.Size = new System.Drawing.Size(134, 23);
@@ -199,7 +268,7 @@
             flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(195, 557);
+            flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 7;
             // 
             // radBurialDetails
@@ -229,7 +298,6 @@
             radRemainsInfo.TabIndex = 2;
             radRemainsInfo.Text = "Remains Info.";
             radRemainsInfo.UseVisualStyleBackColor = true;
-            radRemainsInfo.CheckedChanged += radioButton2_CheckedChanged;
             // 
             // bgwSavingPayment
             // 
@@ -239,31 +307,13 @@
             bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
             bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
             // 
-            // tabPageBurialDetails
-            // 
-            tabPageBurialDetails.Location = new System.Drawing.Point(4, 5);
-            tabPageBurialDetails.Name = "tabPageBurialDetails";
-            tabPageBurialDetails.Size = new System.Drawing.Size(859, 517);
-            tabPageBurialDetails.TabIndex = 3;
-            tabPageBurialDetails.Text = "tabPageBurialDetails";
-            tabPageBurialDetails.UseVisualStyleBackColor = true;
-            // 
-            // tabPageRemainsInfo
-            // 
-            tabPageRemainsInfo.Location = new System.Drawing.Point(4, 5);
-            tabPageRemainsInfo.Name = "tabPageRemainsInfo";
-            tabPageRemainsInfo.Size = new System.Drawing.Size(859, 517);
-            tabPageRemainsInfo.TabIndex = 4;
-            tabPageRemainsInfo.Text = "tabPageRemainsInfo";
-            tabPageRemainsInfo.UseVisualStyleBackColor = true;
-            // 
             // frmBurialPermit
             // 
-            AcceptButton = btnNextMain;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(1062, 557);
+            ClientSize = new System.Drawing.Size(1027, 496);
             Controls.Add(tabControlMain);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel2);
@@ -277,6 +327,10 @@
             Load += frmBurialPermit_Load;
             tabPageFeesCharges.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
+            tabPageBurialDetails.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            tabPageRemainsInfo.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
@@ -302,5 +356,9 @@
         private System.Windows.Forms.RadioButton radRemainsInfo;
         private System.Windows.Forms.TabPage tabPageBurialDetails;
         private System.Windows.Forms.TabPage tabPageRemainsInfo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private Payments.BurialPermit.ucBurialDetails ucBurialDetails1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private Payments.BurialPermit.ucRemainsInfo ucRemainsInfo1;
     }
 }

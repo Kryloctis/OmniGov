@@ -45,7 +45,7 @@ using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
 using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
 using AccountingSystem.Views.Transactions.RCI;

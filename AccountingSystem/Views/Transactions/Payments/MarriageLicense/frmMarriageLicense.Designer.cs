@@ -74,15 +74,15 @@
             flowLayoutPanel1.Controls.Add(btnBackMain);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(195, 484);
+            flowLayoutPanel1.Location = new System.Drawing.Point(195, 465);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(754, 31);
+            flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(616, 3);
+            btnCancel.Location = new System.Drawing.Point(694, 3);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(134, 23);
@@ -92,7 +92,7 @@
             // 
             // btnNextMain
             // 
-            btnNextMain.Location = new System.Drawing.Point(474, 3);
+            btnNextMain.Location = new System.Drawing.Point(552, 3);
             btnNextMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnNextMain.Name = "btnNextMain";
             btnNextMain.Size = new System.Drawing.Size(134, 23);
@@ -103,7 +103,7 @@
             // 
             // btnBackMain
             // 
-            btnBackMain.Location = new System.Drawing.Point(332, 3);
+            btnBackMain.Location = new System.Drawing.Point(410, 3);
             btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnBackMain.Name = "btnBackMain";
             btnBackMain.Size = new System.Drawing.Size(134, 23);
@@ -154,7 +154,7 @@
             flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(195, 515);
+            flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 7;
             // 
             // radMarriageDetails
@@ -262,7 +262,7 @@
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(754, 484);
+            tabControlMain.Size = new System.Drawing.Size(832, 465);
             tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
@@ -272,7 +272,7 @@
             tabPageMarriageDetails.Controls.Add(groupBox1);
             tabPageMarriageDetails.Location = new System.Drawing.Point(4, 5);
             tabPageMarriageDetails.Name = "tabPageMarriageDetails";
-            tabPageMarriageDetails.Size = new System.Drawing.Size(746, 475);
+            tabPageMarriageDetails.Size = new System.Drawing.Size(824, 456);
             tabPageMarriageDetails.TabIndex = 3;
             tabPageMarriageDetails.Text = "tabPageMarriageDetails";
             tabPageMarriageDetails.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            groupBox1.Size = new System.Drawing.Size(746, 475);
+            groupBox1.Size = new System.Drawing.Size(824, 456);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Marriage Details";
@@ -296,7 +296,7 @@
             ucMarriageDetails1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucMarriageDetails1.Location = new System.Drawing.Point(4, 24);
             ucMarriageDetails1.Name = "ucMarriageDetails1";
-            ucMarriageDetails1.Size = new System.Drawing.Size(738, 447);
+            ucMarriageDetails1.Size = new System.Drawing.Size(816, 428);
             ucMarriageDetails1.TabIndex = 1;
             // 
             // tabPageGroomInfo
@@ -304,7 +304,7 @@
             tabPageGroomInfo.Controls.Add(groupBox2);
             tabPageGroomInfo.Location = new System.Drawing.Point(4, 5);
             tabPageGroomInfo.Name = "tabPageGroomInfo";
-            tabPageGroomInfo.Size = new System.Drawing.Size(746, 475);
+            tabPageGroomInfo.Size = new System.Drawing.Size(824, 456);
             tabPageGroomInfo.TabIndex = 4;
             tabPageGroomInfo.Text = "tabPageGroomInfo";
             tabPageGroomInfo.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            groupBox2.Size = new System.Drawing.Size(746, 475);
+            groupBox2.Size = new System.Drawing.Size(824, 456);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Groom Info.";
@@ -328,7 +328,7 @@
             ucSpouseInfoGroom1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucSpouseInfoGroom1.Location = new System.Drawing.Point(4, 24);
             ucSpouseInfoGroom1.Name = "ucSpouseInfoGroom1";
-            ucSpouseInfoGroom1.Size = new System.Drawing.Size(738, 447);
+            ucSpouseInfoGroom1.Size = new System.Drawing.Size(816, 428);
             ucSpouseInfoGroom1.TabIndex = 0;
             // 
             // tabPageBrideInfo
@@ -336,7 +336,7 @@
             tabPageBrideInfo.Controls.Add(groupBox3);
             tabPageBrideInfo.Location = new System.Drawing.Point(4, 5);
             tabPageBrideInfo.Name = "tabPageBrideInfo";
-            tabPageBrideInfo.Size = new System.Drawing.Size(746, 475);
+            tabPageBrideInfo.Size = new System.Drawing.Size(824, 456);
             tabPageBrideInfo.TabIndex = 5;
             tabPageBrideInfo.Text = "tabPageBrideInfo";
             tabPageBrideInfo.UseVisualStyleBackColor = true;
@@ -349,7 +349,7 @@
             groupBox3.Location = new System.Drawing.Point(0, 0);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            groupBox3.Size = new System.Drawing.Size(746, 475);
+            groupBox3.Size = new System.Drawing.Size(824, 456);
             groupBox3.TabIndex = 1;
             groupBox3.TabStop = false;
             groupBox3.Text = "Bride Info.";
@@ -360,15 +360,16 @@
             ucSpouseInfoBride1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucSpouseInfoBride1.Location = new System.Drawing.Point(4, 24);
             ucSpouseInfoBride1.Name = "ucSpouseInfoBride1";
-            ucSpouseInfoBride1.Size = new System.Drawing.Size(738, 447);
+            ucSpouseInfoBride1.Size = new System.Drawing.Size(816, 428);
             ucSpouseInfoBride1.TabIndex = 0;
             // 
             // frmMarriageLicense
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(949, 515);
+            ClientSize = new System.Drawing.Size(1027, 496);
             Controls.Add(tabControlMain);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel2);

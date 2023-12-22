@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             return true;
         }
 
-        internal void LoadFeesCharges()
+        private void LoadFeesCharges()
         {
             if (!backgroundWorker1.IsBusy)
             {
