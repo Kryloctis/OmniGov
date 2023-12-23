@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetCollectorsWithReceiptsIssuedByReceiptId(int rid);
 
         int CollectingOfficerJOCount(int collectingOfficerId);
+
+        bool IsUserCollectingOfficer(int userId);
     }
 }

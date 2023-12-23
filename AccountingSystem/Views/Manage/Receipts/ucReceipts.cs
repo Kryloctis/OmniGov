@@ -31,31 +31,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtRemark.Clear();
         }
 
-        private DataColumn[] DataColumnAccountableForms()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("accountableForm", typeof(string))
-            };
-        }
-
-        private DataTable DataTableAccountableForm()
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnAccountableForms());
-
-            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
-            foreach (DataRow row in dtAccoutnableForm.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                newRow["id"] = row["id"];
-                newRow["accountableForm"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                dataTable.Rows.Add(newRow);
-            }
-            return dataTable;
-        }
-
         private void SetFieldsForCashTickets()
         {
             isCashTicket = true;
@@ -97,7 +72,26 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void LoadAccountableForms()
         {
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
+
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("accountable_form", typeof(string))
+            };
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(dataColumns);
+
+            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
+            foreach (DataRow row in dtAccoutnableForm.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                newRow["id"] = row["id"];
+                newRow["accountable_form"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                dataTable.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dataTable, "id", "accountable_form");
         }
 
         private void ucReceipts_Load(object sender, EventArgs e)

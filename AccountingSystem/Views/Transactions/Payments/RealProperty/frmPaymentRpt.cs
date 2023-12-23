@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             radPayment.Checked = true;
             btnNext.Text = "Confirm Payment";
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
-            ucPayment.OnLoad("56", totalPayment);
+            ucPayment.OnLoad(Helper.UserId, "56", totalPayment);
         }
 
         private bool TabValidated()

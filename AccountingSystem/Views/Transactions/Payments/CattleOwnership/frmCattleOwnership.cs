@@ -163,12 +163,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad("53", totalAmountPayable);
-
-            //if (isNewPayee)
-            //    ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
-            //else
-            //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+            ucPayment.OnLoad(Helper.UserId, "53", totalAmountPayable);
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)

@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 return false;
             }
 
-            var accModel = new AccountableModel()
+            var accModel = new AccountableFormsModel()
             {
                 Id = uc.accountableFormId,
                 AccFormNo = uc.txtFormNo.Text.Trim(),

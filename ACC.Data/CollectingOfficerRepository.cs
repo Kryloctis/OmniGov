@@ -230,5 +230,16 @@ namespace ACC.Data
 
             return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }
+
+        public bool IsUserCollectingOfficer(int userId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@users_id", DbType.Int32, userId}
+            };
+
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE users_id = @users_id";
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters)) > 0;
+        }
     }
 }

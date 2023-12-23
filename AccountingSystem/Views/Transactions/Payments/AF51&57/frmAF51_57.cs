@@ -31,12 +31,7 @@ public partial class frmAF51_57 : Form
         radPayment.Checked = true;
 
         decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-        ucPayment1.OnLoad(string.Empty, totalAmountPayable);
-
-        //if (isNewPayee)
-        //    ucPayment.txtPayee.Text = ucTaxPayers.txtName.Text;
-        //else
-        //ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+        ucPayment1.OnLoad(Helper.UserId, string.Empty, totalAmountPayable);
     }
 
     private void ConfirmPayment()

@@ -352,7 +352,6 @@ namespace AccountingSystem
             dataGridView.Columns["posted_at"].Visible = false;
             dataGridView.Columns["posted_by"].Visible = false;
 
-
             dataGridView.Columns["is_checked"].ReadOnly = false;
             dataGridView.Columns["posting_status"].ReadOnly = true;
             dataGridView.Columns["real_property_id"].ReadOnly = true;
@@ -845,11 +844,11 @@ namespace AccountingSystem
 
         #region Accountable Forms
 
-        internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable)
+        internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable, string valueMember, string displayMember)
         {
             combobox.DataSource = dataTable;
-            combobox.ValueMember = "id";
-            combobox.DisplayMember = "accountableForm";
+            combobox.ValueMember = valueMember;
+            combobox.DisplayMember = displayMember;
         }
 
         #endregion Accountable Forms

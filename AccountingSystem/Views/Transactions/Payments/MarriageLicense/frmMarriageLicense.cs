@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             radPayment.Checked = true;
 
             decimal totalPayment = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad("54", totalPayment);
+            ucPayment.OnLoad(Helper.UserId, "54", totalPayment);
         }
 
         private void LoadTabContents()

@@ -15,5 +15,7 @@ namespace ACC.Domain.Interfaces
         int GetCollectingOfficerIDByJobOrderId(int? collectingOfficerId);
 
         Dictionary<string, string> GetViewRecordByJobOrderUserId(int jobOrderUserId);
+
+        bool IsJobOrderCollector(int jobOrderId);
     }
 }

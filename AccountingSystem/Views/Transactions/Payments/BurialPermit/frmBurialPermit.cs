@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad("58", totalAmountPayable);
+            ucPayment.OnLoad(Helper.UserId, "58", totalAmountPayable);
         }
 
         private void LoadTabContents()

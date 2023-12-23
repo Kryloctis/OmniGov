@@ -59,11 +59,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
             if (Helper.MessageBoxConfirmDelete(selectedrowscount))
             {
-                var accModelList = new List<AccountableModel>();
+                var accModelList = new List<AccountableFormsModel>();
                 foreach (DataGridViewRow row in dgAccountableForm.SelectedRows)
                 {
                     int rowId = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    accModelList.Add(new AccountableModel() { Id = rowId });
+                    accModelList.Add(new AccountableFormsModel() { Id = rowId });
                 }
 
                 return AccFactory.AccountableFormsRepository().Delete(accModelList);
