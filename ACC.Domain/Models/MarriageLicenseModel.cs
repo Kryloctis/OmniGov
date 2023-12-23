@@ -4,25 +4,23 @@ namespace ACC.Domain.Models
 {
     public class MarriageLicenseModel
     {
-        public int ID { get; set; }
-        public DateTime IssuedOn { get; set; }
-        public string RegisterNo { get; set; }
-        public DateTime PublishedOn { get; set; }
-        public string HusbandName { get; set; }
-        public int HusbandAge { get; set; }
-        public int HusbandMonth { get; set; }
-        public string HusbandStreet { get; set; }
-        public string HusbandBarangay { get; set; }
-        public string HusbandMunipality { get; set; }
-        public string HusbandProvince { get; set; }
-        public string WifeName { get; set; }
-        public int WifeAge { get; set; }
-        public int WifeMonth { get; set; }
-        public string WifeStreet { get; set; }
-        public string WifeBarangay { get; set; }
-        public string WifeMunicipality { get; set; }
-        public string WifeProvince { get; set; }
+        public int Id { get; set; }
+        public PaymentCollectionsModel PaymentCollectionsModel { get; set; }
+        public string RegistryNo { get; set; }
+        public string MarriageLicenseNo { get; set; }
+        public DateTime DateIssued { get; set; }
+        public DateTime DatePublished { get; set; }
+        public RegistryModel GroomRegistry { get; set; }
+        public int GroomAge { get; set; }
+        public int GroomMonths { get; set; }
+        public string GroomReligion { get; set; }
+        public string GroomResidence { get; set; }
+        public RegistryModel BrideRegistry { get; set; }
+        public int BrideAge { get; set; }
+        public int BrideMonths { get; set; }
+        public string BrideReligion { get; set; }
+        public string BrideResidence { get; set; }
         public int CreatedBy { get; set; }
-
+        public int UpdatedBy { get; set; }
     }
 }

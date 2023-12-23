@@ -442,7 +442,7 @@ namespace ACC.Data
 
                 int paymentCollectionId = GetLastInsertedID();
                 paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                marriageLicenseRepository.InsertWithMarriageLicensePayment(marriageLicenseModel);
+                marriageLicenseRepository.Insert(marriageLicenseModel);
                 paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
