@@ -179,28 +179,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
-        {
-            return new DataGridViewColumn[]
-            {
-                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
-                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
-                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
-                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
-                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
-                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
-                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
-            };
-        }
-
-        private void LoadCheques()
-        {
-            dgCheques.Columns.Clear();
-            dgCheques.Rows.Clear();
-            dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
-            dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
-        }
-
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             dgCheques.Rows.Add();
@@ -335,6 +313,29 @@ namespace AccountingSystem.Views.Transactions.Payments
         }
 
         //List of cheque details
+
+        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
+        {
+            return new DataGridViewColumn[]
+            {
+                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
+                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
+                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
+                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
+                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
+                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
+                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
+            };
+        }
+
+        private void LoadCheques()
+        {
+            dgCheques.Columns.Clear();
+            dgCheques.Rows.Clear();
+            dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
+            dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
+        }
+
         private bool ChequesValidated()
         {
             if (dgCheques.Rows.Count < 1)
