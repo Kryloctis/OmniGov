@@ -390,8 +390,9 @@ namespace ACC.Data
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                burialPermitModel.PaymentCollections.Id = paymentCollectionId;
                 paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                burialPermitRepository.InsertWithBurialPermitPayment(burialPermitModel);
+                burialPermitRepository.Insert(burialPermitModel);
                 paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
