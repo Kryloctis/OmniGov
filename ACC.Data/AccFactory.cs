@@ -211,5 +211,7 @@ namespace ACC.Data
         public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsLFS);
 
         public static IRegistry RegistryRepository() => new RegistryRepository(mySqlGenericCommandsLFS);
+
+        public static IPaymentFeesCharges PaymentFeesCharges() => new PaymentFeesChargesRepository(mySqlGenericCommandsLFS);
     }
 }
