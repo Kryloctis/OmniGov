@@ -1,9 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Crypto.Prng;
 using System.Collections.Generic;
 using System.Data;
-using System.Net.Http.Headers;
 using System.Transactions;
 
 namespace ACC.Data
