@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,16 @@ namespace AccountingSystem.Views.Transactions.Payments
             return tableFeesCharges;
         }
 
-        internal List<>
+        internal List<PaymentFeesChargesModel> paymentFeesCharges()
+        {
+            var paymentFeesChargesModels = new List<PaymentFeesChargesModel>();
+            var dtSelectedFeesCharges = (DataTable)dgPaymentFeesCharges.DataSource;
+
+            foreach (DataRow row in dtSelectedFeesCharges.Rows)
+                paymentFeesChargesModels.Add(new PaymentFeesChargesModel() { Id = Convert.ToInt32(row["fees_charges_id"]) });
+
+            return paymentFeesChargesModels;
+        }
 
         private void LoadPaymentFeesCharges()
         {
