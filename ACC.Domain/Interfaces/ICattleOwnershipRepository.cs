@@ -9,6 +9,5 @@ namespace ACC.Domain.Interfaces
     public interface ICattleOwnershipRepository : IAccRepository<CattleOwnershipModel>
     {
         DataTable GetRecordsByIDAndSearch(int oldOwnerID, string keySearch);
-        bool InsertWithCattleOwnershipPayment(CattleOwnershipModel cattleOwnershipModel);
     }
 }

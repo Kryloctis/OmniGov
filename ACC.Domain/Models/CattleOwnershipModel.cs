@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class CattleOwnershipModel
     {
         public int Id { get; set; }
-        public PaymentCollectionsModel PaymentCollections { get; set; }
-        public RegistryModel Registry { get; set; }
+        public PaymentCollectionsModel PaymentCollectionsModel { get; set; }
+        public TaxpayersModel TaxpayersModel { get; set; }
         public string CattleName { get; set; }
         public string CattleSex { get; set; }
         public string CattleAge { get; set; }

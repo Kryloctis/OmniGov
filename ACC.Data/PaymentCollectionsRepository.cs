@@ -322,23 +322,6 @@ namespace ACC.Data
             return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
 
-        public bool InsertWithRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Insert(paymentCollectionsModel);
-                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
-                rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-
-                rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
         public List<int> GetRecordsReceiptsByAccFormId(int accountableFormId)
         {
             var receiptNos = new List<int>();
@@ -366,6 +349,41 @@ namespace ACC.Data
             string query = $"SELECT COUNT(id) FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND accountable_forms_id = @accountable_forms_id";
 
             return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter));
+        }
+
+        public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormID },
+                new object[] { "@receipt_no", DbType.Int64, receiptNumberFrom },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
+
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
+        }
+
+        public bool InsertWithRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
+                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+
+                rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
+                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool InsertWithMarriageLicensePayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, MarriageLicenseModel marriageLicenseModel)
@@ -407,30 +425,13 @@ namespace ACC.Data
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                cattleOwnershipRepository.InsertWithCattleOwnershipPayment(cattleOwnershipModel);
+                cattleOwnershipModel.PaymentCollectionsModel.Id = paymentCollectionId;
+                cattleOwnershipRepository.Insert(cattleOwnershipModel);
                 paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
             }
-        }
-
-        public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormID },
-                new object[] { "@receipt_no", DbType.Int64, receiptNumberFrom },
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult))
-                return true;
-
-            return false;
         }
     }
 }
