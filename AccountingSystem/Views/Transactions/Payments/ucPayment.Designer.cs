@@ -407,7 +407,7 @@
             // 
             // txtReceipts
             // 
-            txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             txtReceipts.Location = new System.Drawing.Point(120, 92);
             txtReceipts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

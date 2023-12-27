@@ -150,9 +150,9 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             //Added for Autocomplete Source Collection
             var autoCompleteCollection = new AutoCompleteStringCollection();
-            GetReceiptsList().ForEach(x => autoCompleteCollection.Add(x.ToString("#######")));
+            GetReceiptsList().ForEach(x => autoCompleteCollection.Add(x.ToString("D7")));
             txtReceipts.AutoCompleteCustomSource = autoCompleteCollection;
-            string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1 ? string.Empty : GetReceiptsList()[0].ToString();
+            string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1 ? string.Empty : GetReceiptsList()[0].ToString("D7");
         }
 
         private string PaymentMethods()
