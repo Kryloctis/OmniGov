@@ -24,6 +24,25 @@ namespace AccountingSystem.Views.Transactions.Payments
             ToggleDatagridViewButtons(dgPaymentFeesCharges);
         }
 
+
+        internal List<PaymentFeesChargesModel> PaymentFeesChargesModels()
+        {
+            var paymentFeesChargesModels = new List<PaymentFeesChargesModel>();
+            var dtSelectedFeesCharges = (DataTable)dgPaymentFeesCharges.DataSource;
+
+            foreach (DataRow row in dtSelectedFeesCharges.Rows)
+            {
+                var model = new PaymentFeesChargesModel()
+                {
+                    OtherPaymentRatesId = Convert.ToInt32(row["fees_charges_id"]),
+                    Unit = Convert.ToInt32(row["unit"]),
+                    SubTotal = Convert.ToDecimal(row["sub_total"])
+                };
+                paymentFeesChargesModels.Add(model);
+            }
+
+            return paymentFeesChargesModels;
+        }
         private DataTable DataTablePaymentFeesCharges()
         {
             var dataColumns = new DataColumn[]
@@ -41,17 +60,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             tableFeesCharges.Columns.AddRange(dataColumns);
 
             return tableFeesCharges;
-        }
-
-        internal List<PaymentFeesChargesModel> paymentFeesCharges()
-        {
-            var paymentFeesChargesModels = new List<PaymentFeesChargesModel>();
-            var dtSelectedFeesCharges = (DataTable)dgPaymentFeesCharges.DataSource;
-
-            foreach (DataRow row in dtSelectedFeesCharges.Rows)
-                paymentFeesChargesModels.Add(new PaymentFeesChargesModel() { Id = Convert.ToInt32(row["fees_charges_id"]) });
-
-            return paymentFeesChargesModels;
         }
 
         private void LoadPaymentFeesCharges()

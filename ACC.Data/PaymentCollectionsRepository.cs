@@ -109,9 +109,9 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerModel.Id},
-                new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderModel.Id},
-                new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormsModel.Id},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
                 new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
                 new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
@@ -129,17 +129,19 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int16, entity.Id},
-                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerModel.Id},
-                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormsModel.Id},
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
                 new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
                 new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
                 new object[] { "@amount", DbType.Decimal, entity.Amount},
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
                 new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
             };
 
-            string query = $"UPDATE {tableName} SET funds_id = @funds_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, updated_by = @updated_by WHERE id = @id";
+            string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -359,7 +361,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool InsertWithRptPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithRptPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -369,7 +371,6 @@ namespace ACC.Data
                 paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
 
                 rptPaymentRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
                 paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
@@ -434,9 +435,10 @@ namespace ACC.Data
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
                 paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

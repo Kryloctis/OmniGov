@@ -90,9 +90,9 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             return true;
         }
 
-        private bool SaveCattleOwnership(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
+        private bool SaveCattleOwnership(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesCharges)
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
+            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionsModel, paymentCollectionHasChequesModel, cattleOwnershipModel, paymentFeesCharges);
         }
 
         private CattleOwnershipModel CattleOwnershipModel()
@@ -257,7 +257,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    SaveCattleOwnership(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), CattleOwnershipModel());
+                    SaveCattleOwnership(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
                 });
 
                 Invoke(methodInvoker);

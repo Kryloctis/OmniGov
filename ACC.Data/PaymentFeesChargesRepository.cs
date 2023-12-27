@@ -72,10 +72,10 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@payment_collections_id", DbType.String, entity},
-                new object[] { "@other_payment_rates_id", DbType.String, entity},
-                new object[] { "@unit", DbType.String, entity},
-                new object[] { "@sub_total", DbType.String, entity }
+                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId},
+                new object[] { "@other_payment_rates_id", DbType.Int32, entity.OtherPaymentRatesId},
+                new object[] { "@unit", DbType.Int32, entity.Unit},
+                new object[] { "@sub_total", DbType.Decimal, entity.SubTotal }
             };
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, other_payment_rates_id, unit, sub_total ) VALUES (@payment_collections_id, @other_payment_rates_id, @unit, @sub_total)";
@@ -99,8 +99,8 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsModel.Id},
-                new object[] { "@other_payment_rates_id", DbType.Int32, entity.OtherPaymentRatesModel.Id},
+                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId},
+                new object[] { "@other_payment_rates_id", DbType.Int32, entity.OtherPaymentRatesId},
                 new object[] { "@unit", DbType.Int32, entity.Unit},
                 new object[] { "@sub_total", DbType.Decimal, entity.SubTotal }
             };

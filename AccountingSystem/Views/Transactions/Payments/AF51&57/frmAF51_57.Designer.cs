@@ -166,6 +166,7 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             // 
             ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
             ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
             ucPaymentFeesCharges1.TabIndex = 0;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.AF51_57;
@@ -34,9 +35,12 @@ public partial class frmAF51_57 : Form
         ucPayment1.OnLoad(Helper.UserId, string.Empty, totalAmountPayable);
     }
 
-    private void ConfirmPayment()
+    private bool ConfirmPayment()
     {
-        Helper.MessageBoxConfirmCancel("Confirm Payment?");
+        if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+            return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
+
+        return false;
     }
 
     private bool TabValidated()
@@ -88,7 +92,6 @@ public partial class frmAF51_57 : Form
             case "tabPagePayment":
                 radPayment.Checked = true;
                 LoadPaymentTab();
-                //ConfirmPayment();
                 break;
         }
     }
@@ -99,6 +102,12 @@ public partial class frmAF51_57 : Form
         {
             if (!TabValidated())
                 return;
+
+            if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+            {
+                if (ConfirmPayment())
+                    Helper.MessageBoxSuccess("Payment has been saved");
+            }
 
             tabControlMain.SelectedIndex++;
         }

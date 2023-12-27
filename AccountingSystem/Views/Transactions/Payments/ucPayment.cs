@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -27,11 +28,10 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             var paymentCollectionsModel = new PaymentCollectionsModel();
             int accFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
-            var accFormsModel = new AccountableFormsModel() { Id = accFormId };
 
-            paymentCollectionsModel.CollectingOfficerModel = CollectorModels().CollectingOfficerModel;
-            paymentCollectionsModel.JobOrderModel = CollectorModels().JobOrderModel;
-            paymentCollectionsModel.AccountableFormsModel = accFormsModel;
+            paymentCollectionsModel.CollectingOfficerId = CollectorIds().CollectingOfficerId;
+            paymentCollectionsModel.JobOrderId = CollectorIds().JobOrderId;
+            paymentCollectionsModel.AccountableFormId = accFormId;
             paymentCollectionsModel.Amount = totalPaymentAmount;
             paymentCollectionsModel.Payee = txtPayee.Text;
             paymentCollectionsModel.ReceiptNo = txtReceipts.Text.Trim();
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             return paymentCollectionsModel;
         }
 
-        private (JobOrderModel JobOrderModel, CollectingOfficerModel CollectingOfficerModel) CollectorModels()
+        private (int? JobOrderId, int CollectingOfficerId, bool isCollector) CollectorIds()
         {
             bool isUserCollectingOfficer = AccFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
             bool isUserJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(userId);
@@ -52,22 +52,17 @@ namespace AccountingSystem.Views.Transactions.Payments
                 if (int.TryParse(dictJobOrder.GetValueOrDefault("id"), out int jobOrderId))
                 {
                     var collectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(jobOrderId);
-                    var jobOrderModel = new JobOrderModel() { Id = jobOrderId };
-                    var collectingOfficerModel = new CollectingOfficerModel() { Id = collectingOfficerId };
-                    return (jobOrderModel, collectingOfficerModel);
+                    return (jobOrderId, collectingOfficerId, true);
                 }
             }
             else if (isUserCollectingOfficer)
             {
                 var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
                 if (int.TryParse(dictCollectingOfficer.GetValueOrDefault("id"), out int collectingOfficerId))
-                {
-                    var collectingOfficerModel = new CollectingOfficerModel() { Id = collectingOfficerId };
-                    return (null, collectingOfficerModel);
-                }
+                    return (null, collectingOfficerId, true);
             }
 
-            return (null, null);
+            return (null, 0, false);
         }
 
         internal string GetFormErrors()
@@ -124,12 +119,12 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             var list = new List<int>();
 
-            if (CollectorModels().CollectingOfficerModel is null)
+            if (!CollectorIds().isCollector)
                 return list;
 
             int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
-            var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(CollectorModels().CollectingOfficerModel.Id, accountableFormId);
+            var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(CollectorIds().CollectingOfficerId, accountableFormId);
 
             var receiptNos = new List<int>();
 
@@ -237,7 +232,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (isJobOrderCollector)
                 {
-                    textBox.Text = Helper.GenerateFullName(dictJobOrder["prefix"], dictJobOrder["first_name"], dictJobOrder["middle_name"], dictJobOrder["last_name"], dictJobOrder["suffix"]);
+                    textBox.Text = Helper.GenerateFullName(dictJobOrder["prefix"], dictJobOrder["first_name"], dictJobOrder["mid_initial"], dictJobOrder["last_name"], dictJobOrder["suffix"]);
 
                     return true;
                 }
@@ -245,7 +240,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             else if (isUserCollectingOfficer)
             {
                 var dictCO = AccFactory.CollectingOfficerRepository().GetRecordByID(userId);
-                textBox.Text = Helper.GenerateFullName(dictCO["prefix"], dictCO["first_name"], dictCO["middle_name"], dictCO["last_name"], dictCO["suffix"]);
+                textBox.Text = Helper.GenerateFullName(dictCO["prefix"], dictCO["first_name"], dictCO["mid_initial"], dictCO["last_name"], dictCO["suffix"]);
                 return true;
             }
 
@@ -283,7 +278,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             Helper.ClearErrorTextBox(errorProvider1, txtCollectingOfficer);
         }
 
-        private void txtCollectingOfficer_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtCollectingOfficer_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = !CollectorValidated(errorProvider1, txtCollectingOfficer);
         }
@@ -293,7 +288,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
-        private void txtPayee_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
         }
@@ -303,7 +298,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             Helper.ClearErrorTextBox(errorProvider1, txtReceipts);
         }
 
-        private void txtReceipts_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtReceipts_Validating(object sender, CancelEventArgs e)
         {
             try
             {
@@ -381,7 +376,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             return !isValidated.Contains(false);
         }
 
-        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void dgCheques_Validating(object sender, CancelEventArgs e)
         {
             try
             {

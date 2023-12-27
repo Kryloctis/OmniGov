@@ -47,35 +47,27 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, Id},
+                new object[] { "@users_id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE users_id = @users_id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return record;
+                DataRow row = dataTable.Rows[0];
 
-                foreach (DataRow item in reader.Rows)
-                {
-                    record.Add("prefix", item["prefix"].ToString());
-                    record.Add("first_name", item["first_name"].ToString());
-                    record.Add("mid_initial", item["mid_initial"].ToString());
-                    record.Add("last_name", item["last_name"].ToString());
-                    record.Add("suffix", item["suffix"].ToString());
-                    record.Add("job_title", item["job_title"].ToString());
-                    record.Add("created_at", item["created_at"].ToString());
-                    record.Add("updated_at", item["updated_at"].ToString());
-                    record.Add("users_id", item["users_id"].ToString());
-                }
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-
-            return record;
+            return recordDictionary;
         }
 
         public Dictionary<string, string> GetRecordByUserID(int Id)
