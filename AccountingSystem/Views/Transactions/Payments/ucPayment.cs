@@ -1,12 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
@@ -29,8 +26,8 @@ namespace AccountingSystem.Views.Transactions.Payments
             var paymentCollectionsModel = new PaymentCollectionsModel();
             int accFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
-            paymentCollectionsModel.CollectingOfficerId = CollectorIds().CollectingOfficerId;
-            paymentCollectionsModel.JobOrderId = CollectorIds().JobOrderId;
+            paymentCollectionsModel.CollectingOfficerId = GetCollectorInfo().CollectingOfficerId;
+            paymentCollectionsModel.JobOrderId = GetCollectorInfo().JobOrderId;
             paymentCollectionsModel.AccountableFormId = accFormId;
             paymentCollectionsModel.Amount = totalPaymentAmount;
             paymentCollectionsModel.Payee = txtPayee.Text;
@@ -41,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             return paymentCollectionsModel;
         }
 
-        private (int? JobOrderId, int CollectingOfficerId, bool isCollector) CollectorIds()
+        private (int? JobOrderId, int CollectingOfficerId, bool isCollector) GetCollectorInfo()
         {
             bool isUserCollectingOfficer = AccFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
             bool isUserJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(userId);
@@ -119,12 +116,12 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             var list = new List<int>();
 
-            if (!CollectorIds().isCollector)
+            if (!GetCollectorInfo().isCollector)
                 return list;
 
             int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
-            var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(CollectorIds().CollectingOfficerId, accountableFormId);
+            var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(GetCollectorInfo().CollectingOfficerId, accountableFormId);
 
             var receiptNos = new List<int>();
 
@@ -137,7 +134,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                     receiptNos.Add(i);
             }
 
-            //Sorting Receipt No.s In Order
             receiptNos.Sort((a, b) => a.CompareTo(b));
 
             var paymentCollectionReceiptsList = AccFactory.PaymentCollectionsRepository().GetRecordsReceiptsByAccFormId(accountableFormId);
@@ -174,40 +170,31 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private void toolStripButtonAdd_Click(object sender, EventArgs e)
-        {
-            dgCheques.Rows.Add();
-        }
-
-        private void dgCheques_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            dgCheques.Rows[e.RowIndex].Cells["cheque_date"].Value = "mm/dd/yyyy";
-            dgCheques.Rows[e.RowIndex].Cells["cheque_amount"].Value = "0.00";
-        }
-
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                foreach (DataGridViewRow row in dgCheques.SelectedRows)
-                    dgCheques.Rows.Remove(row);
+                PaymentMethods();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
-        {
-            PaymentMethods();
-        }
-
         private void radPaymentCashCheque_CheckedChanged(object sender, EventArgs e)
         {
-            PaymentMethods();
+            try
+            {
+                PaymentMethods();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radPaymentCheque_CheckedChanged(object sender, EventArgs e)
         {
-            PaymentMethods();
+            try
+            {
+                PaymentMethods();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
@@ -233,7 +220,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 if (isJobOrderCollector)
                 {
                     textBox.Text = Helper.GenerateFullName(dictJobOrder["prefix"], dictJobOrder["first_name"], dictJobOrder["mid_initial"], dictJobOrder["last_name"], dictJobOrder["suffix"]);
-
                     return true;
                 }
             }
@@ -247,6 +233,16 @@ namespace AccountingSystem.Views.Transactions.Payments
             errorProvider.SetError(textBox, "User account ineligible for collecting officer role.");
             textBox.Clear();
             return false;
+        }
+
+        private void txtCollectingOfficer_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCollectingOfficer);
+        }
+
+        private void txtCollectingOfficer_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !CollectorValidated(errorProvider1, txtCollectingOfficer);
         }
 
         private bool ReceiptNoValidated(ErrorProvider errorProvider, TextBox textBox)
@@ -273,16 +269,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private void txtCollectingOfficer_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtCollectingOfficer);
-        }
-
-        private void txtCollectingOfficer_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = !CollectorValidated(errorProvider1, txtCollectingOfficer);
-        }
-
         private void txtPayee_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
@@ -307,27 +293,54 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        //List of cheque details
-
-        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
+        private void BtnAddCheque_Click(object sender, EventArgs e)
         {
-            return new DataGridViewColumn[]
+            try
             {
-                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
-                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
-                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
-                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
-                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
-                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
-                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
-            };
+                var dataTable = (DataTable)dgCheques.DataSource;
+                dataTable.Rows.Add();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void DgCheques_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+        }
+
+        private void BtnDeleteCheque_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedRows = dgCheques.SelectedRows;
+                if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+                {
+                    var dataTable = (DataTable)dgCheques.DataSource;
+
+                    foreach (DataGridViewRow row in selectedRows)
+                        dataTable.Rows.RemoveAt(row.Index);
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadCheques()
         {
-            dgCheques.Columns.Clear();
-            dgCheques.Rows.Clear();
-            dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
+            var dataTable = new DataTable();
+
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "cheque_no", typeof(string)),
+                new DataColumn(Name = "cheque_date", typeof(DateTime)),
+                new DataColumn(Name = "cheque_amount", typeof(decimal)),
+                new DataColumn(Name = "bank_account_no",typeof(string)),
+                new DataColumn(Name = "bank_branch", typeof(string)),
+                new DataColumn(Name = "bank_name", typeof(string)),
+            };
+
+            dataTable.Columns.AddRange(dataColumns);
+
+            HelperLoadRecords.DatagridViewPaymentCheques(dataTable, dgCheques);
             dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
         }
 
@@ -391,6 +404,19 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void dgCheques_Validated(object sender, EventArgs e)
         {
             dgCheques.Tag = string.Empty;
+        }
+
+        private void dgCheques_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            try
+            {
+                if (e.Exception is FormatException)
+                {
+                    // Handle format-related errors (e.g., invalid format in a cell)
+                    MessageBox.Show($"Invalid {dgCheques.Columns[e.ColumnIndex].HeaderText} at row {e.RowIndex + 1}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

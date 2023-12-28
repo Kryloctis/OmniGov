@@ -41,8 +41,8 @@
             panel9 = new System.Windows.Forms.Panel();
             dgCheques = new System.Windows.Forms.DataGridView();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            btnDeleteCheque = new System.Windows.Forms.ToolStripButton();
+            btnAddCheque = new System.Windows.Forms.ToolStripButton();
             groupBox2 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             radPaymentCashCheque = new System.Windows.Forms.RadioButton();
@@ -210,7 +210,8 @@
             dgCheques.Size = new System.Drawing.Size(374, 245);
             dgCheques.TabIndex = 11;
             dgCheques.Tag = "\"\"";
-            dgCheques.RowsAdded += dgCheques_RowsAdded;
+            dgCheques.DataError += dgCheques_DataError;
+            dgCheques.RowsAdded += DgCheques_RowsAdded;
             dgCheques.Validating += dgCheques_Validating;
             dgCheques.Validated += dgCheques_Validated;
             // 
@@ -218,36 +219,36 @@
             // 
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButtonDelete, toolStripButtonAdd });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnDeleteCheque, btnAddCheque });
             toolStrip1.Location = new System.Drawing.Point(4, 3);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(374, 25);
             toolStrip1.TabIndex = 10;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButtonDelete
+            // btnDeleteCheque
             // 
-            toolStripButtonDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButtonDelete.Image = Properties.Resources.waste_bin_filled_14px;
-            toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonDelete.Name = "toolStripButtonDelete";
-            toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
-            toolStripButtonDelete.Text = "Delete";
-            toolStripButtonDelete.Click += toolStripButtonDelete_Click;
+            btnDeleteCheque.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnDeleteCheque.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnDeleteCheque.Image = Properties.Resources.waste_bin_filled_14px;
+            btnDeleteCheque.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDeleteCheque.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDeleteCheque.Name = "btnDeleteCheque";
+            btnDeleteCheque.Size = new System.Drawing.Size(23, 22);
+            btnDeleteCheque.Text = "Delete";
+            btnDeleteCheque.Click += BtnDeleteCheque_Click;
             // 
-            // toolStripButtonAdd
+            // btnAddCheque
             // 
-            toolStripButtonAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButtonAdd.Image = Properties.Resources.symbol_add_14px;
-            toolStripButtonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonAdd.Name = "toolStripButtonAdd";
-            toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
-            toolStripButtonAdd.Text = "Add";
-            toolStripButtonAdd.Click += toolStripButtonAdd_Click;
+            btnAddCheque.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnAddCheque.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnAddCheque.Image = Properties.Resources.symbol_add_14px;
+            btnAddCheque.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnAddCheque.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAddCheque.Name = "btnAddCheque";
+            btnAddCheque.Size = new System.Drawing.Size(23, 22);
+            btnAddCheque.Text = "Add";
+            btnAddCheque.Click += BtnAddCheque_Click;
             // 
             // groupBox2
             // 
@@ -516,8 +517,8 @@
         internal System.Windows.Forms.Panel panel9;
         internal System.Windows.Forms.DataGridView dgCheques;
         internal System.Windows.Forms.ToolStrip toolStrip1;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        internal System.Windows.Forms.ToolStripButton btnDeleteCheque;
+        internal System.Windows.Forms.ToolStripButton btnAddCheque;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         internal System.Windows.Forms.RadioButton radPaymentCashCheque;

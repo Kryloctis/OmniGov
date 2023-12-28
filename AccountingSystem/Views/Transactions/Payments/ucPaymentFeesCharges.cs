@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void LoadPaymentFeesCharges()
         {
             if (dgPaymentFeesCharges.DataSource is null)
-                HelperLoadRecords.PaymentFeesCharges(DataTablePaymentFeesCharges(), dgPaymentFeesCharges);
+                HelperLoadRecords.DataGridViewPaymentFeesCharges(DataTablePaymentFeesCharges(), dgPaymentFeesCharges);
         }
 
         private void RemovedOtherPaymentCharge(DataGridView dataGridView)

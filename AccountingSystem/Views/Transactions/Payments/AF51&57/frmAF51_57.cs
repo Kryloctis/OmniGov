@@ -20,7 +20,7 @@ public partial class frmAF51_57 : Form
     private void LoadFeesAndChargesTab()
     {
         btnNextMain.Text = "Proceed to Payment";
-        btnBackMain.Enabled = true;
+        btnBackMain.Enabled = false;
         radFeesCharges.Checked = true;
         ucPaymentFeesCharges.OnLoad();
     }
