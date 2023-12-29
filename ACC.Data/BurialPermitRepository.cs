@@ -47,20 +47,20 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "payment_collections_id", DbType.Int32, entity.PaymentCollections.Id},
-                new object[] { "remains_registry_id", DbType.Int32, entity.RemainsRegistry.Id},
-                new object[] { "remains_age", DbType.Int32, entity.RemainsAge},
-                new object[] { "death_date", DbType.DateTime, entity.DeathDate},
-                new object[] { "cause_of_death", DbType.String, entity.CauseOfDeath},
-                new object[] { "cemetery", DbType.String, entity.Cemetery},
-                new object[] { "disinterment", DbType.Boolean, entity.Disinterment},
-                new object[] { "is_infectious", DbType.Boolean, entity.IsInfectious},
-                new object[] { "is_embalmed", DbType.Boolean, entity.IsEmbalmed},
-                new object[] { "disposition", DbType.String, entity.Disposition},
-                new object[] { "created_by", DbType.Int32, entity.CreatedBy }
+                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId},
+                new object[] { "@remains_registry_id", DbType.Int32, entity.RemainsRegistryId},
+                new object[] { "@remains_age", DbType.Int32, entity.RemainsAge},
+                new object[] { "@death_date", DbType.DateTime, entity.DeathDate},
+                new object[] { "@cause_of_death", DbType.String, entity.CauseOfDeath},
+                new object[] { "@cemetery", DbType.String, entity.Cemetery},
+                new object[] { "@disinterment", DbType.String, entity.Disinterment},
+                new object[] { "@is_infectious", DbType.Boolean, entity.IsInfectious},
+                new object[] { "@is_embalmed", DbType.Boolean, entity.IsEmbalmed},
+                new object[] { "@disposition", DbType.String, entity.Disposition},
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy }
             };
 
-            string query = $"INSERT INTO {tableName} (payment_collections_id, remains_registry_id, permission, remains_age, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_by, VALUES @payment_collections_id, @remains_registry_id, @permission, @remains_age, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_by";
+            string query = $"INSERT INTO {tableName} (payment_collections_id, remains_registry_id, remains_age, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_by) VALUES (@payment_collections_id, @remains_registry_id, @remains_age, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_by)";
 
             return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -70,8 +70,8 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollections.Id},
-                new object[] { "@remains_registry_id", DbType.Int32, entity.RemainsRegistry.Id},
+                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId},
+                new object[] { "@remains_registry_id", DbType.Int32, entity.RemainsRegistryId},
                 new object[] { "@remains_age", DbType.Int32, entity.RemainsAge},
                 new object[] { "@death_date", DbType.DateTime, entity.DeathDate},
                 new object[] { "@cause_of_death", DbType.String, entity.CauseOfDeath},

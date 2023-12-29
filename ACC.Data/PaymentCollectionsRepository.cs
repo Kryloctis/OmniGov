@@ -401,11 +401,12 @@ namespace ACC.Data
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
-                burialPermitModel.PaymentCollections.Id = paymentCollectionId;
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                burialPermitModel.PaymentCollectionsId = paymentCollectionId;
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
                 burialPermitRepository.Insert(burialPermitModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
                 paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

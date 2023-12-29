@@ -80,6 +80,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             txtContactInfo.Clear();
         }
 
+        internal (int remainRegistryId, int remainAge) GetRemainsInfo() 
+        {
+            return (Convert.ToInt32(cmbxRegistry.SelectedValue), (int)nudAge.Value);
+        }
+
         private void ClearRemainsInfo()
         {
             txtFirstName.Clear();

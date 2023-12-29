@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 {
@@ -37,6 +38,19 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             txtDisinterment.Clear();
             radInfectiousNo.Checked = true;
             radEmbalmedYes.Checked = true;
+        }
+
+        internal (bool isInfectious, bool isEmbalmed, DateTime deathDate, string causeOfDeath, string cemetery, string disinterment, string disposition) GetBurialDetails()
+        {
+            var infectious = radInfectiousYes.Checked;
+            var embalmed = radEmbalmedYes.Checked;
+            var deathDate = dtDeathDate.Value;
+            var causeOfDeath = txtCauseOfDeath.Text.Trim();
+            var cemetery = txtCemetery.Text.Trim();
+            var disinterment = txtDisinterment.Text.Trim();
+            var disposition = txtDisposition.Text.Trim();
+
+            return (infectious, embalmed, deathDate, causeOfDeath, cemetery, disinterment, disposition);
         }
 
         private void txtCauseOfDeath_Validating(object sender, CancelEventArgs e)

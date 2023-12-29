@@ -270,6 +270,7 @@
             flowLayoutPanel6.Controls.Add(radPaymentCheque);
             flowLayoutPanel6.Controls.Add(radPaymentCash);
             flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel6.Enabled = false;
             flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             flowLayoutPanel6.Location = new System.Drawing.Point(4, 23);

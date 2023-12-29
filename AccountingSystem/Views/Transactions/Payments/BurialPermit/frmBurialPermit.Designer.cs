@@ -48,7 +48,6 @@
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radBurialDetails = new System.Windows.Forms.RadioButton();
             radRemainsInfo = new System.Windows.Forms.RadioButton();
-            bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             tabPageFeesCharges.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBurialDetails.SuspendLayout();
@@ -299,14 +298,6 @@
             radRemainsInfo.Text = "Remains Info.";
             radRemainsInfo.UseVisualStyleBackColor = true;
             // 
-            // bgwSavingPayment
-            // 
-            bgwSavingPayment.WorkerReportsProgress = true;
-            bgwSavingPayment.WorkerSupportsCancellation = true;
-            bgwSavingPayment.DoWork += bgwSavingPayment_DoWork;
-            bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
-            bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
-            // 
             // frmBurialPermit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -350,7 +341,6 @@
         private System.Windows.Forms.RadioButton radFees;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.ComponentModel.BackgroundWorker bgwSavingPayment;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
         private System.Windows.Forms.RadioButton radBurialDetails;
         private System.Windows.Forms.RadioButton radRemainsInfo;

@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         private readonly ucBurialDetails ucBurialDetails;
         private readonly ucRemainsInfo ucRemainsInfo;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
-        private dialogPayment dialog = new dialogPayment();
 
         public frmBurialPermit()
         {
@@ -46,43 +45,21 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             ucBurialDetails.OnLoad();
         }
 
-        private void ConfirmPayment()
+        internal BurialPermitModel BurialPermitModel()
         {
-            try
+            return new BurialPermitModel()
             {
-                if (!FormValidations())
-                    return;
-
-                if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
-                    return;
-
-                bgwSavingPayment.RunWorkerAsync();
-                dialog.ShowDialog();
-                dialog.Text = "Processing Payment...";
-                dialog.label1.Text = "Processing Payment...";
-            }
-            catch (Exception ex)
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Transaction cancelled");
-                sb.AppendLine(ex.Message);
-                Helper.MessageBoxError(sb.ToString());
-            }
-        }
-
-        private bool FormValidations()
-        {
-            var selectedTab = tabControlMain.SelectedTab;
-            if (selectedTab == tabPagePayment)
-            {
-                if (!ucPayment.ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucPayment.GetFormErrors());
-                    return false;
-                }
-            }
-
-            return true;
+                RemainsRegistryId = Convert.ToInt32(ucRemainsInfo.GetRemainsInfo().remainRegistryId),
+                IsInfectious = ucBurialDetails.GetBurialDetails().isInfectious,
+                IsEmbalmed = ucBurialDetails.GetBurialDetails().isEmbalmed,
+                CauseOfDeath = ucBurialDetails.GetBurialDetails().causeOfDeath,
+                Cemetery = ucBurialDetails.GetBurialDetails().cemetery,
+                Disinterment = ucBurialDetails.GetBurialDetails().disinterment,
+                Disposition = ucBurialDetails.GetBurialDetails().disposition,
+                DeathDate = ucBurialDetails.GetBurialDetails().deathDate,
+                RemainsAge = ucRemainsInfo.GetRemainsInfo().remainAge,
+                CreatedBy = Helper.UserId,
+            };
         }
 
         private bool TabValidated()
@@ -196,12 +173,25 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private bool ConfirmPayment()
+        {
+            if (!TabValidated())
+                return false;
+
+            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return false;
+        }
+
         private void btnNextMain_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!TabValidated())
-                    return;
+                if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+                {
+                    if (ConfirmPayment())
+                        Helper.MessageBoxSuccess("Payment has been saved");
+                }
 
                 tabControlMain.SelectedIndex++;
             }
@@ -215,92 +205,6 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 tabControlMain.SelectedIndex--;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bgwSavingPayment_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                int totalProgressCount = ucPayment.dgCheques.Rows.Count;
-                int progressCount = 0;
-                var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
-
-                var chequesModels = new List<ChequesModel>();
-
-                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
-                {
-                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
-                    string bankName = row.Cells["bank_name"].Value.ToString();
-                    var rowBankBranch = row.Cells["bank_branch"].Value;
-                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
-                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
-                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
-                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
-                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
-
-                    int bankAccountId;
-
-                    if (!bankAccountExist)
-                    {
-                        //banks model
-                        var banksModel = new BanksModel()
-                        {
-                            BankName = bankName,
-                            BankBranch = bankBranch
-                        };
-
-                        //bank accounts model
-                        var bankAccountModel = new BankAccountsModel()
-                        {
-                            AccountNumber = bankAccountNo,
-                            banksModel = banksModel
-                        };
-
-                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
-                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
-                    }
-                    else
-                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
-
-                    var model = new ChequesModel()
-                    {
-                        Amount = chequeAmount,
-                        ChequeDate = chequeDate,
-                        ChequeNo = chequeNo,
-                        BankAccountsId = bankAccountId
-                    };
-
-                    progressCount++;
-                    chequesModels.Add(model);
-                    Helper.ProgressCounter(bgwSavingPayment, totalProgressCount, progressCount);
-                }
-
-                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
-
-                //e.Result = SaveBurialPermitPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), BurialPermitModel());
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bgwSavingPayment_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            dialog.label1.Text = e.ProgressPercentage.ToString();
-            dialog.btnClose.Enabled = false;
-        }
-
-        private void bgwSavingPayment_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result is not bool isPaymentSave)
-                return;
-
-            if (isPaymentSave)
-            {
-                dialog.label1.Text = "Payment Process Complete!";
-                dialog.btnClose.Enabled = true;
-                btnNextMain.Text = "Finish";
-                ucPayment.Enabled = false;
-                return;
-            }
         }
     }
 }

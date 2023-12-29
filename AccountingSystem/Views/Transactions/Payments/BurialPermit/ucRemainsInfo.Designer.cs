@@ -353,7 +353,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbxRegistry;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.DateTimePicker dtBirthDate;
@@ -377,5 +376,6 @@
         internal System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nudAge;
         internal System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbxRegistry;
     }
 }

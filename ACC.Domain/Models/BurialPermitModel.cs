@@ -5,12 +5,11 @@ namespace ACC.Domain.Models
     public class BurialPermitModel
     {
         public int Id { get; set; }
-        public PaymentCollectionsModel PaymentCollections { get; set; }
-        public RegistryModel RemainsRegistry { get; set; }
+        public int PaymentCollectionsId { get; set; }
+        public int RemainsRegistryId { get; set; }
         public string Permission { get; set; }
         public int RemainsAge { get; set; }
         public DateTime DeathDate { get; set; }
-        public string RemainsName { get; set; }
         public string CauseOfDeath { get; set; }
         public string Cemetery { get; set; }
         public string Disinterment { get; set; }
