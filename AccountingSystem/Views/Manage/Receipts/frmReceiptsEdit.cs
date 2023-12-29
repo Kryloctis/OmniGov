@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void OnLoad()
         {
+            uc.OnLoad();
             LoadSelectedValue();
             SetUpdateRestrictions();
         }

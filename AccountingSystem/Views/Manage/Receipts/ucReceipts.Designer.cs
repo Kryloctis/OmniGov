@@ -195,7 +195,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucReceipts";
             Size = new System.Drawing.Size(540, 207);
-            Load += ucReceipts_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

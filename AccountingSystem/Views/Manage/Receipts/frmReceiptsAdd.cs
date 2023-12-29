@@ -63,5 +63,14 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void frmReceiptsAdd_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

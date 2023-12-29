@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
             if (item == null) return;
 
-            string accountableForm = item["accountableForm"].ToString();
+            string accountableForm = item["accountable_form"].ToString();
             if (accountableForm.Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
                 SetFieldsForCashTickets();
             else
@@ -72,7 +72,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void LoadAccountableForms()
         {
-
             var dataColumns = new DataColumn[]
             {
                 new DataColumn("id", typeof(int)),
@@ -94,21 +93,9 @@ namespace AccountingSystem.Views.Manage.Receipts
             HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dataTable, "id", "accountable_form");
         }
 
-        private void ucReceipts_Load(object sender, EventArgs e)
+        internal void OnLoad()
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadAccountableForms();
-            }
+            LoadAccountableForms();
         }
 
         #region Validations

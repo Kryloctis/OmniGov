@@ -124,7 +124,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 var dataTable = new DataTable();
                 DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
-
                 dataTable.Columns.AddRange(ReceiptsColumns());
 
                 if (dtReceiptsDb.Rows.Count < 1)
