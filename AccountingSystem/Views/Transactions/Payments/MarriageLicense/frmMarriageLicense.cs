@@ -39,25 +39,37 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ConfirmPayment()
+        private MarriageLicenseModel MarriageLicenseModel()
         {
-            try
+            return new MarriageLicenseModel()
             {
-                if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
-                    return;
+                MarriageLicenseNo = ucMarriageDetails.GetMarriageDetails().licenseNo,
+                RegistryNo = ucMarriageDetails.GetMarriageDetails().registryNo,
+                DatePublished = ucMarriageDetails.GetMarriageDetails().publishedOn,
+                DateIssued = ucMarriageDetails.GetMarriageDetails().issuedOn,
+                GroomRegistryId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId,
+                GroomAge = ucSpouseInfoGroom.GetSpouseInfo().age,
+                GroomMonths = ucSpouseInfoGroom.GetSpouseInfo().months,
+                GroomReligion = ucSpouseInfoGroom.GetSpouseInfo().religion,
+                GroomResidence = ucSpouseInfoGroom.GetSpouseInfo().currentResidence,
+                BrideRegistryId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId,
+                BrideAge = ucSpouseInfoBride.GetSpouseInfo().age,
+                BrideMonths = ucSpouseInfoBride.GetSpouseInfo().months,
+                BrideReligion = ucSpouseInfoBride.GetSpouseInfo().religion,
+                BrideResidence = ucSpouseInfoBride.GetSpouseInfo().currentResidence,
+                CreatedBy = Helper.UserId
+            };
+        }
 
-                bgwSavingPayment.RunWorkerAsync();
-                dialog.ShowDialog();
-                dialog.Text = "Processing Payment...";
-                dialog.label1.Text = "Processing Payment...";
-            }
-            catch (Exception ex)
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Transaction cancelled");
-                sb.AppendLine(ex.Message);
-                Helper.MessageBoxError(sb.ToString());
-            }
+        private bool ConfirmPayment()
+        {
+            if (!TabValidated())
+                return false;
+
+            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+
+            return false;
         }
 
         private void LoadMarriageDetailsTab()
@@ -188,6 +200,12 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             {
                 if (!TabValidated())
                     return;
+
+                if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+                {
+                    if (ConfirmPayment())
+                        Helper.MessageBoxSuccess("Payment has been saved");
+                }
 
                 tabControlMain.SelectedIndex++;
             }

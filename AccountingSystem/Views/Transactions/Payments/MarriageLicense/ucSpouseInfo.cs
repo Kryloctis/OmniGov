@@ -61,6 +61,17 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             LoadRegistry();
         }
 
+        internal (int SpouseRegistryId, int age, int months, string religion, string currentResidence) GetSpouseInfo()
+        {
+            int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
+            int age = (int)nudAge.Value;
+            int months = (int)nudMonths.Value;
+            string religion = txtReligion.Text.Trim();
+            string currentResidence = txtCurrenResidence.Text.Trim();
+
+            return (registryId, age, months, religion, currentResidence);
+        }
+
         private void cmbxRegistry_KeyPress(object sender, KeyPressEventArgs e)
         {
             try

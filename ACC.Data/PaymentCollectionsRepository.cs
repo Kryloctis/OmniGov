@@ -384,11 +384,12 @@ namespace ACC.Data
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                marriageLicenseModel.PaymentCollectionsModel.Id = paymentCollectionId;
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                marriageLicenseModel.PaymentCollectionsId = paymentCollectionId;
                 marriageLicenseRepository.Insert(marriageLicenseModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
                 paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

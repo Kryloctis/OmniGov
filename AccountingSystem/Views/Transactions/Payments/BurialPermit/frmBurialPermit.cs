@@ -175,9 +175,6 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
         private bool ConfirmPayment()
         {
-            if (!TabValidated())
-                return false;
-
             if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
                 return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
             return false;
@@ -187,6 +184,9 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         {
             try
             {
+                if (!TabValidated())
+                    return;
+
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())

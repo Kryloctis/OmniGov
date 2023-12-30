@@ -22,28 +22,29 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         {
             var errors = new string[]
             {
+                errorProvider1.GetError(txtLicenseNo),
                 errorProvider1.GetError(txtRegistrationNumber)
             };
 
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private bool RegistrationNumberValidated(ErrorProvider errorProvider, TextBox textBox)
+        internal (string licenseNo, string registryNo, DateTime publishedOn, DateTime issuedOn) GetMarriageDetails()
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
-            {
-                errorProvider.SetError(textBox, Helper.ErrorMessage("registration no."));
-                return false;
-            }
+            string licenseNumber = txtLicenseNo.Text.Trim();
+            string registrationNumber = txtRegistrationNumber.Text.Trim();
+            DateTime publishedDate = dtpPublishedDate.Value;
+            DateTime issuedDate = dtpIssuedDate.Value;
 
-            return true;
+            return (licenseNumber, registrationNumber, publishedDate, issuedDate);
         }
 
-        private void TxtRegistrationNumber_Validating(object sender, CancelEventArgs e) => e.Cancel = !RegistrationNumberValidated(errorProvider1, txtRegistrationNumber);
+        private void TxtRegistrationNumber_Validating(object sender, CancelEventArgs e) => e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRegistrationNumber, "registration no.");
 
-        private void TxtRegistrationNumber_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
-        }
+        private void TxtRegistrationNumber_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
+
+        private void txtLicenseNo_Validating(object sender, CancelEventArgs e) => e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLicenseNo, "license no.");
+
+        private void txtLicenseNo_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtLicenseNo);
     }
 }

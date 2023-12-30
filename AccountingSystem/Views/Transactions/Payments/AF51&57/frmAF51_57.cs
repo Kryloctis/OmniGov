@@ -37,9 +37,6 @@ public partial class frmAF51_57 : Form
 
     private bool ConfirmPayment()
     {
-        if (!TabValidated())
-            return false;
-
         if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
             return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
 
@@ -103,6 +100,9 @@ public partial class frmAF51_57 : Form
     {
         try
         {
+            if (!TabValidated())
+                return;
+
             if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
                 if (ConfirmPayment())
