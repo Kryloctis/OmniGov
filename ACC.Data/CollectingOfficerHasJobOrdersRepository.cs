@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -173,11 +174,19 @@ namespace ACC.Data
                 new object[] { "@job_orders_id", DbType.Int32, entity.JobOrdersId}
             };
 
-            string query = $"INSERT INTO " +
-                            $"{tableName} " +
-                            $"VALUES (@collecting_officers_id, @job_orders_id)";
-
+            string query = $"INSERT INTO {tableName} VALUES (@collecting_officers_id, @job_orders_id)";
             return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool IsJobOrderCollector(int jobOrderId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@job_orders_id", DbType.Int32,  jobOrderId},
+            };
+
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE job_orders_id = @job_orders_id";
+            return mySqlGenericCommands.ExecuteScalar(query, parameters) == "0";
         }
 
         public bool Update(CollectingOfficerHasJobOrdersModel entity)

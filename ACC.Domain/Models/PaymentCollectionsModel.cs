@@ -5,9 +5,8 @@ namespace ACC.Domain.Models
     public class PaymentCollectionsModel
     {
         public int Id { get; set; }
-        public int? CollectingOfficerId { get; set; }
+        public int CollectingOfficerId { get; set; }
         public int? JobOrderId { get; set; }
-        public int? FundId { get; set; }
         public int AccountableFormId { get; set; }
         public string Payee { get; set; }
         public string ReceiptNo { get; set; }

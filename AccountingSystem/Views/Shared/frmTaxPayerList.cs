@@ -1,10 +1,9 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.Payments;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
+using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
 using System;
 using System.ComponentModel;
 using System.Data;

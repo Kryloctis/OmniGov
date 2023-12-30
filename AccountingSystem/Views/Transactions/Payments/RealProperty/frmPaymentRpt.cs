@@ -1,13 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 
@@ -77,7 +74,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             radPayment.Checked = true;
             btnNext.Text = "Confirm Payment";
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
-            ucPayment.OnLoad("56", totalPayment);
+            ucPayment.OnLoad(Helper.UserId, "56", totalPayment);
         }
 
         private bool TabValidated()
@@ -166,12 +163,12 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        private bool SaveRptPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, rptPaymentsModel, rptTaxDuesModels);
+            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionsModel, paymentCollectionHasChequesModel, rptPaymentsModel, rptTaxDuesModels);
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             int totalProgress = ucPayment.dgCheques.Rows.Count;
             int progressCount = 0;
@@ -237,7 +234,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    SaveRptPayment(paymentCollectionHasChequesModel, ucPayment.PaymentCollectionsModel(), rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
+                    SaveRptPayment(ucPayment.PaymentCollectionsModel(), paymentCollectionHasChequesModel, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
                 });
 
                 Invoke(methodInvoker);
@@ -246,13 +243,13 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             dialog.label1.Text = e.ProgressPercentage.ToString();
             dialog.btnClose.Enabled = false;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result.ToString() == "complete")
             {

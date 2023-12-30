@@ -113,17 +113,13 @@ namespace ACC.Data
 
         public bool IsUserJobOrder(int userId)
         {
-            var parameter = new object[][] {
+            var parameter = new object[][]
+            {
                 new object[]{"@users_id", DbType.Int32, userId}
             };
 
-            string query = $"SELECT users_id FROM {tableName} WHERE users_id = @users_id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameter);
-
-            if (!string.IsNullOrEmpty(queryResult))
-                return true;
-
-            return false;
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE users_id = @users_id";
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter)) > 0;
         }
 
         public bool Update(JobOrderModel entity)

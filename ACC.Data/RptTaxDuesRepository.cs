@@ -3,18 +3,19 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
     public class RptTaxDuesRepository : IRptTaxDuesRepository
     {
-        private AccGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_tax_dues";
         private readonly string viewTableName = "view_rpt_tax_dues";
 
         public RptTaxDuesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
@@ -58,7 +59,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO  {tableName}  (rpt_assessment_posts_id ,  rpt_payments_id ,  discount_rate ,  is_advance ) VALUES (@rpt_assessment_posts_id, @rpt_payments_id, @discount_rate, @is_advance)";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptTaxDuesModel entity)
@@ -75,7 +76,19 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_payments_id = @rpt_payments_id";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public bool BulkInsert(List<RptTaxDuesModel> entityList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (RptTaxDuesModel rptTaxDuesModel in entityList)
+                    _ = Insert(rptTaxDuesModel);
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }

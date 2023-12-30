@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             groupBox6 = new System.Windows.Forms.GroupBox();
             panel5 = new System.Windows.Forms.Panel();
             lblTotalPayment = new System.Windows.Forms.Label();
@@ -41,8 +41,8 @@
             panel9 = new System.Windows.Forms.Panel();
             dgCheques = new System.Windows.Forms.DataGridView();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            btnDeleteCheque = new System.Windows.Forms.ToolStripButton();
+            btnAddCheque = new System.Windows.Forms.ToolStripButton();
             groupBox2 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             radPaymentCashCheque = new System.Windows.Forms.RadioButton();
@@ -177,40 +177,41 @@
             // 
             // dgCheques
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgCheques.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgCheques.DefaultCellStyle = dataGridViewCellStyle2;
             dgCheques.Dock = System.Windows.Forms.DockStyle.Fill;
             dgCheques.Location = new System.Drawing.Point(4, 28);
             dgCheques.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dgCheques.Name = "dgCheques";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgCheques.RowTemplate.Height = 25;
             dgCheques.Size = new System.Drawing.Size(374, 245);
             dgCheques.TabIndex = 11;
             dgCheques.Tag = "\"\"";
-            dgCheques.RowsAdded += dgCheques_RowsAdded;
+            dgCheques.DataError += dgCheques_DataError;
+            dgCheques.RowsAdded += DgCheques_RowsAdded;
             dgCheques.Validating += dgCheques_Validating;
             dgCheques.Validated += dgCheques_Validated;
             // 
@@ -218,36 +219,36 @@
             // 
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButtonDelete, toolStripButtonAdd });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnDeleteCheque, btnAddCheque });
             toolStrip1.Location = new System.Drawing.Point(4, 3);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(374, 25);
             toolStrip1.TabIndex = 10;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButtonDelete
+            // btnDeleteCheque
             // 
-            toolStripButtonDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButtonDelete.Image = Properties.Resources.waste_bin_filled_14px;
-            toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonDelete.Name = "toolStripButtonDelete";
-            toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
-            toolStripButtonDelete.Text = "Delete";
-            toolStripButtonDelete.Click += toolStripButtonDelete_Click;
+            btnDeleteCheque.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnDeleteCheque.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnDeleteCheque.Image = Properties.Resources.waste_bin_filled_14px;
+            btnDeleteCheque.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDeleteCheque.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDeleteCheque.Name = "btnDeleteCheque";
+            btnDeleteCheque.Size = new System.Drawing.Size(23, 22);
+            btnDeleteCheque.Text = "Delete";
+            btnDeleteCheque.Click += BtnDeleteCheque_Click;
             // 
-            // toolStripButtonAdd
+            // btnAddCheque
             // 
-            toolStripButtonAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButtonAdd.Image = Properties.Resources.symbol_add_14px;
-            toolStripButtonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonAdd.Name = "toolStripButtonAdd";
-            toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
-            toolStripButtonAdd.Text = "Add";
-            toolStripButtonAdd.Click += toolStripButtonAdd_Click;
+            btnAddCheque.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnAddCheque.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnAddCheque.Image = Properties.Resources.symbol_add_14px;
+            btnAddCheque.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnAddCheque.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAddCheque.Name = "btnAddCheque";
+            btnAddCheque.Size = new System.Drawing.Size(23, 22);
+            btnAddCheque.Text = "Add";
+            btnAddCheque.Click += BtnAddCheque_Click;
             // 
             // groupBox2
             // 
@@ -269,6 +270,7 @@
             flowLayoutPanel6.Controls.Add(radPaymentCheque);
             flowLayoutPanel6.Controls.Add(radPaymentCash);
             flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel6.Enabled = false;
             flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             flowLayoutPanel6.Location = new System.Drawing.Point(4, 23);
@@ -407,7 +409,7 @@
             // 
             // txtReceipts
             // 
-            txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             txtReceipts.Location = new System.Drawing.Point(120, 92);
             txtReceipts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -516,8 +518,8 @@
         internal System.Windows.Forms.Panel panel9;
         internal System.Windows.Forms.DataGridView dgCheques;
         internal System.Windows.Forms.ToolStrip toolStrip1;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        internal System.Windows.Forms.ToolStripButton btnDeleteCheque;
+        internal System.Windows.Forms.ToolStripButton btnAddCheque;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         internal System.Windows.Forms.RadioButton radPaymentCashCheque;

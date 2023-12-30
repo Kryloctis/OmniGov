@@ -5,8 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IMarriageLicenseRepository:IAccRepository<MarriageLicenseModel>
+    public interface IMarriageLicenseRepository : IAccRepository<MarriageLicenseModel>
     {
-        bool InsertWithMarriageLicensePayment(MarriageLicenseModel marriageLicenseModel);
     }
 }

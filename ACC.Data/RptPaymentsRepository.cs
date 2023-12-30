@@ -9,15 +9,15 @@ namespace ACC.Data
 {
     public class RptPaymentsRepository : IRptPaymentRepository
     {
-        private AccGenericCommands _mySqlGenericCommandsLFS;
-        private IRptTaxDuesRepository _rptTaxDuesRepository;
+        private AccGenericCommands mySqlGenericCommandsLFS;
+        private IRptTaxDuesRepository rptTaxDuesRepository;
         private readonly string tableName = "rpt_payments";
         private readonly string viewTableName = "view_rpt_payments";
 
         public RptPaymentsRepository(AccGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
-            _rptTaxDuesRepository = rptTaxDuesRepository;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.rptTaxDuesRepository = rptTaxDuesRepository;
         }
 
         public int CountRecords()
@@ -59,7 +59,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO  {tableName}  (payment_collections_id, posted_by ) VALUES (@payment_collections_id, @posted_by)";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptPaymentsModel entity)
@@ -67,10 +67,10 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public int GetLastInsertedID()
+        public int GetLastInsertedID(int createdBy)
         {
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName}";
-            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool InsertWithRptTaxDues(RptPaymentsModel rptPaymentModel, List<RptTaxDuesModel> rptTaxDuesModels)
@@ -78,12 +78,9 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Insert(rptPaymentModel);
-
-                foreach (RptTaxDuesModel rptTaxDuesModel in rptTaxDuesModels)
-                {
-                    rptTaxDuesModel.RptPaymentsId = GetLastInsertedID();
-                    _ = _rptTaxDuesRepository.Insert(rptTaxDuesModel);
-                }
+                foreach (var model in rptTaxDuesModels)
+                    model.RptPaymentsId = GetLastInsertedID(rptPaymentModel.PostedBy);
+                _ = rptTaxDuesRepository.BulkInsert(rptTaxDuesModels);
 
                 scope.Complete();
                 return true;
@@ -108,12 +105,12 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name = @taxpayer_name {filter}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
         {
-            var dict = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
@@ -122,38 +119,18 @@ namespace ACC.Data
 
             string query = $"SELECT rpt_payment_posts_id, taxpayer_name, taxpayer_tin, taxpayer_address, taxpayer_contact, rpt_payment_posts_posted_at, rpt_payment_posts_posted_by, payment_collections_id, payment_collections_collecting_officers_id, payment_collections_job_orders_id, payment_collections_funds_id, payment_collections_accountable_forms_id, payment_collections_payee, payment_collections_receipt_no, payment_collections_payment_date, payment_collections_amount, payment_collections_is_cancelled, payment_collections_created_at, payment_collections_created_by, payment_collections_updated_at, payment_collections_updated_by FROM {viewTableName} WHERE rpt_payment_posts_id = @rpt_payment_posts_id";
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return dict;
+                DataRow row = dataTable.Rows[0];
 
-                foreach (DataRow row in reader.Rows)
-                {
-                    dict.Add("rpt_payment_posts_id", row["rpt_payment_posts_id"].ToString());
-                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
-                    dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
-                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
-                    dict.Add("taxpayer_contact", row["taxpayer_contact"].ToString());
-                    dict.Add("rpt_payment_posts_posted_at", row["rpt_payment_posts_posted_at"].ToString());
-                    dict.Add("rpt_payment_posts_posted_by", row["rpt_payment_posts_posted_by"].ToString());
-                    dict.Add("payment_collections_id", row["payment_collections_id"].ToString());
-                    dict.Add("payment_collections_collecting_officers_id", row["payment_collections_collecting_officers_id"].ToString());
-                    dict.Add("payment_collections_job_orders_id", row["payment_collections_job_orders_id"].ToString());
-                    dict.Add("payment_collections_funds_id", row["payment_collections_funds_id"].ToString());
-                    dict.Add("payment_collections_accountable_forms_id", row["payment_collections_accountable_forms_id"].ToString());
-                    dict.Add("payment_collections_payee", row["payment_collections_payee"].ToString());
-                    dict.Add("payment_collections_receipt_no", row["payment_collections_receipt_no"].ToString());
-                    dict.Add("payment_collections_payment_date", row["payment_collections_payment_date"].ToString());
-                    dict.Add("payment_collections_amount", row["payment_collections_amount"].ToString());
-                    dict.Add("payment_collections_is_cancelled", row["payment_collections_is_cancelled"].ToString());
-                    dict.Add("payment_collections_created_at", row["payment_collections_created_at"].ToString());
-                    dict.Add("payment_collections_created_by", row["payment_collections_created_by"].ToString());
-                    dict.Add("payment_collections_updated_at", row["payment_collections_updated_at"].ToString());
-                    dict.Add("payment_collections_updated_by", row["payment_collections_updated_by"].ToString());
-                }
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
 
-                return dict;
+                return recordDictionary;
             }
+            return recordDictionary;
         }
     }
 }

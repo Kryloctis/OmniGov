@@ -21,8 +21,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             InitializeComponent();
         }
 
-        #region Private Methods
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -143,10 +141,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 cmbxRepresentative.Enabled = true;
         }
 
-        #endregion Private Methods
-
-        #region Event Methods
-
         private void chckRepresentative_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -156,15 +150,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxRepresentative_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                e.IsInputKey = true;
-        }
-
         private void cmbxRepresentative_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
             {
                 LoadRegistry();
                 cmbxRepresentative.DroppedDown = cmbxRepresentative.DroppedDown ? false : true;
@@ -186,7 +174,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
-
-        #endregion Event Methods
     }
 }

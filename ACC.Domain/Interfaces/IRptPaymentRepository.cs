@@ -13,6 +13,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordById(int Id);
 
-        int GetLastInsertedID();
+        int GetLastInsertedID(int createdBy);
     }
 }

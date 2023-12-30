@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 return false;
             }
 
-            var accModel = new AccountableModel()
+            var accModel = new AccountableFormsModel()
             {
                 AccFormNo = uc.txtFormNo.Text.Trim(),
                 AccFormDesc = uc.txtFormDescription.Text.Trim()

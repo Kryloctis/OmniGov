@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Receipts";
+            Load += frmReceiptsAdd_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }

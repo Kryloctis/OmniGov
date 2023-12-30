@@ -30,8 +30,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             ActiveControl = txtArpNo;
         }
 
-        #region Private Methods
-
         internal void OnLoad(bool isEdit, int rptId = 0)
         {
             LoadPropertyKind();
@@ -323,10 +321,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             return duplicateRows.Any();
         }
 
-        #endregion Private Methods
-
-        #region Event Methods
-
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -445,8 +439,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Validations
 
         private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
@@ -572,8 +564,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorComboBox(errorProvider1, cmbxTaxpayer);
         }
 
-        #endregion Validations
-
-        #endregion Event Methods
     }
 }

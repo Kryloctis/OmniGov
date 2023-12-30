@@ -100,7 +100,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             DataTable dtFromDataSource = new dsLFS.dtAccountabilityForAccountableFormsDataTable();
             string collectorId = GetCollectorIdByReportNumber(_reportNumber);
 
-            DataTable dt = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
+            DataTable dt = AccFactory.ReceiptsIssuedRepository().GettAccFormByCOid(collectorId);
 
             if (dt.Rows.Count == 0)
                 return dt;

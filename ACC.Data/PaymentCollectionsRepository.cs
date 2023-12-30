@@ -11,65 +11,48 @@ namespace ACC.Data
     {
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        private AccGenericCommands _mySqlGenericCommandsLFS;
-        private IGeneralPaymentsRepository _generalPaymentsRepository;
-        private IRptPaymentRepository _rptPaymentPostsRepository;
-        private IMarriageLicenseRepository _marriageLicenseRepository;
-        private ICattleOwnershipRepository _cattleOwnershipRepository;
-        private IBurialPermitRepository _burialPermitRepository;
+        private AccGenericCommands mySqlGenericCommandsLFS;
+        private IRptPaymentRepository rptPaymentRepository;
+        private IMarriageLicenseRepository marriageLicenseRepository;
+        private ICattleOwnershipRepository cattleOwnershipRepository;
+        private IBurialPermitRepository burialPermitRepository;
+        private IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository;
+        private IPaymentFeesCharges paymentFeesCharges;
 
-        private IPaymentCollectionHasChequesRepository _paymentCollectionHasChequesRepository;
-
-        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFS,
-                                            IGeneralPaymentsRepository generalPaymentsRepository,
-                                            IRptPaymentRepository rptPaymentPostsRepository,
-                                            IMarriageLicenseRepository marriageLicenseRepository,
-                                            ICattleOwnershipRepository cattleOwnershipRepository,
-                                            IBurialPermitRepository burialPermitRepository,
-                                            IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository)
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
-            _generalPaymentsRepository = generalPaymentsRepository;
-            _rptPaymentPostsRepository = rptPaymentPostsRepository;
-            _marriageLicenseRepository = marriageLicenseRepository;
-            _cattleOwnershipRepository = cattleOwnershipRepository;
-            _burialPermitRepository = burialPermitRepository;
-            _paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
+            this.rptPaymentRepository = rptPaymentRepository;
+            this.marriageLicenseRepository = marriageLicenseRepository;
+            this.cattleOwnershipRepository = cattleOwnershipRepository;
+            this.burialPermitRepository = burialPermitRepository;
+            this.paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
+            this.paymentFeesCharges = paymentFeesCharges;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
-                    record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
-                    record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("payee", reader.Rows[0]["payee"].ToString());
-                    record.Add("receipt_no", reader.Rows[0]["receipt_no"].ToString());
-                    record.Add("payment_date", reader.Rows[0]["payment_date"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
-                }
-            }
-            catch (Exception)
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
-            }
+                DataRow row = dataTable.Rows[0];
 
-            return record;
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public DataTable GetRecordsByCollectingOfficerId(int collectorId)
@@ -78,26 +61,10 @@ namespace ACC.Data
                 new object[] {"@collectorId", DbType.Int32, collectorId}
             };
 
-            string query = $"SELECT " +
-                            $"id, " +
-                            $"funds_id, " +
-                            $"fund_name, " +
-                            $"accountable_form_id, " +
-                            $"accountable_forms, " +
-                            $"account_code, " +
-                            $"general_ledger_accounts_id, " +
-                            $"ledger_name, " +
-                            $"payee, " +
-                            $"receipt_no, " +
-                            $"quantity, " +
-                            $"payment_date, " +
-                            $"amount " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE collecting_officer_id = @collectorId " +
-                            $"ORDER BY accountable_form_id";
+            string query = $"SELECT id, funds_id, fund_name, accountable_form_id, accountable_forms, account_code, general_ledger_accounts_id, ledger_name, payee, receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE collecting_officer_id = @collectorId ORDER BY accountable_form_id";
 
-            var dt = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecords()
@@ -105,7 +72,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName}";
 
             var dtPaymentCollection = new DataTable();
-            return _mySqlGenericCommandsLFS.Fill(query, dtPaymentCollection);
+            return mySqlGenericCommandsLFS.Fill(query, dtPaymentCollection);
         }
 
         public DataTable GetRecordsByDate(string date)
@@ -118,7 +85,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
 
             var dtPaymentCollection = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
         public DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey)
@@ -135,88 +102,48 @@ namespace ACC.Data
             string query = $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date ORDER BY accountable_forms_id";
 
             var dtPaymentCollection = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
         public bool Insert(PaymentCollectionsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                using (var scope = new TransactionScope())
-                {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
-                        new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                        new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                        new object[] { "@payee", DbType.String, entity.Payee},
-                        new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
-                        new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
-                        new object[] { "@amount", DbType.Decimal, entity.Amount},
-                        new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
-                        new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
-                    };
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
+                new object[] { "@payee", DbType.String, entity.Payee},
+                new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
+                new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
+                new object[] { "@amount", DbType.Decimal, entity.Amount},
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
+            };
 
-                    string query = $"INSERT INTO {tableName} " +
-                               $"(collecting_officers_id, " +
-                               $"job_orders_id," +
-                               $"funds_id, " +
-                               $"accountable_forms_id, " +
-                               $"payee, " +
-                               $"receipt_no,  " +
-                               $"payment_date, " +
-                               $"amount, " +
-                               $"is_cancelled, " +
-                               $"created_by) " +
-                               $"VALUES " +
-                               $"(@collecting_officers_id, " +
-                               $"@job_orders_id, " +
-                               $"@funds_id, " +
-                               $"@accountable_forms_id, " +
-                               $"@payee, " +
-                               $"@receipt_no, " +
-                               $"@payment_date, " +
-                               $"@amount, " +
-                               $"@is_cancelled, " +
-                               $"@created_by)";
+            string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
-                    _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(PaymentCollectionsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                    new object[] { "@payee", DbType.String, entity.Payee},
-                    new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
-                    new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
-                    new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
+                new object[] { "@payee", DbType.String, entity.Payee},
+                new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
+                new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
+                new object[] { "@amount", DbType.Decimal, entity.Amount},
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
+            };
 
-                string query = $"UPDATE {tableName} SET funds_id = @funds_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, updated_by = @updated_by WHERE id = @id";
+            string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
-                return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<PaymentCollectionsModel> entityList)
@@ -233,7 +160,7 @@ namespace ACC.Data
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     }
 
                     scope.Complete();
@@ -252,7 +179,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -268,7 +195,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -285,7 +212,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -304,7 +231,7 @@ namespace ACC.Data
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @payment_collection_id AND receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -321,7 +248,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
             var dtpc = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
         }
 
         public DataTable GetRecordByLedger(object[] parameter)
@@ -339,7 +266,7 @@ namespace ACC.Data
             string query = $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dtPaymentCollection = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
         }
 
         public DataTable GetRecordsByUserId(int userId)
@@ -352,7 +279,7 @@ namespace ACC.Data
 
             var dt = new DataTable();
 
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
         }
 
         public DataTable GetCollectionsPerCollector()
@@ -360,111 +287,36 @@ namespace ACC.Data
             string query = $"SELECT collecting_officer_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY job_orders_id";
 
             var dt = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dt);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dt);
         }
 
-        public int GetLastInsertedID()
+        public int GetLastInsertedID(int createdById)
         {
-            try
+            var parameters = new object[][]
             {
-                string query = $"SELECT COALESCE(MAX(id)) FROM {tableName}";
-                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+                new object[] { "@created_by", DbType.Int32, createdById}
+            };
 
-        public bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@collecting_officers_id", DbType.Int32, paymentCollectionModel.CollectingOfficerId},
-                    new object[] { "@job_orders_id", DbType.Int32, paymentCollectionModel.JobOrderId},
-                    new object[] { "@funds_id", DbType.Int16, paymentCollectionModel.FundId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionModel.AccountableFormId},
-                    new object[] { "@payee", DbType.String, paymentCollectionModel.Payee},
-                    new object[] { "@receipt_no", DbType.String, paymentCollectionModel.ReceiptNo},
-                    new object[] { "@payment_date", DbType.DateTime, paymentCollectionModel.PaymentDate},
-                    new object[] { "@amount", DbType.Decimal, paymentCollectionModel.Amount},
-                    new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionModel.IsCancelled},
-                    new object[] { "@created_by", DbType.Int16, paymentCollectionModel.CreatedBy}
-                };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
-
-                _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                generalPaymentModel.PaymentCollectionId = GetLastInsertedID();
-                generalPaymentModel.GeneralLedgerAccountsId = paymentCollectionModel.AccountableFormId;
-
-                _generalPaymentsRepository.Insert(generalPaymentModel);
-
-                scope.Complete();
-                return true;
-            }
+            string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID)
         {
-            try
+            var parameter = new object[][]
             {
-                var parameter = new object[][] {
-                    new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerID},
-                    new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
-                };
+                new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerID},
+                new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
+            };
 
-                string query = $"SELECT COALESCE(MAX(receipt_no), 0) FROM payment_collections WHERE collecting_officers_id = @collecting_officers_id AND accountable_forms_id = @accountable_forms_id AND is_cancelled <> 1";
+            string query = $"SELECT COALESCE(MAX(receipt_no), 0) FROM payment_collections WHERE collecting_officers_id = @collecting_officers_id AND accountable_forms_id = @accountable_forms_id AND is_cancelled <> 1";
 
-                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool InsertWithRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                   {
-                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
-                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
-                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
-                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
-                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
-                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
-                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
-                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
-                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
-                   };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
-
-                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                int paymentCollectionId = GetLastInsertedID();
-                rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-
-                _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-                scope.Complete();
-                return true;
-            }
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }
 
         public List<int> GetRecordsReceiptsByAccFormId(int accountableFormId)
         {
             var receiptNos = new List<int>();
-
             var parameters = new object[][]
             {
                 new object[] { "@accountable_forms_id", DbType.Int32, accountableFormId}
@@ -472,7 +324,7 @@ namespace ACC.Data
 
             string query = $"SELECT receipt_no FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id";
 
-            foreach (DataRow row in _mySqlGenericCommandsLFS.ExecuteReader(query, parameters).Rows)
+            foreach (DataRow row in mySqlGenericCommandsLFS.ExecuteReader(query, parameters).Rows)
                 receiptNos.Add(Convert.ToInt32(row["receipt_no"]));
 
             return receiptNos;
@@ -480,117 +332,15 @@ namespace ACC.Data
 
         public int GetTotalUsedAccountableFormByCollectingOfficerID(int collectingOfficerID, int accountableFormID)
         {
-            try
+            var parameter = new object[][]
             {
-                var parameter = new object[][] {
-                    new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID},
-                    new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
-                };
+                new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID},
+                new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
+            };
 
-                string query = $"SELECT COUNT(id) FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND accountable_forms_id = @accountable_forms_id";
+            string query = $"SELECT COUNT(id) FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND accountable_forms_id = @accountable_forms_id";
 
-                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool InsertWithMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                   {
-                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
-                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
-                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
-                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
-                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
-                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
-                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
-                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
-                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
-                   };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
-
-                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                int paymentCollectionId = GetLastInsertedID();
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                _marriageLicenseRepository.InsertWithMarriageLicensePayment(marriageLicenseModel);
-                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                   {
-                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
-                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
-                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
-                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
-                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
-                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
-                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
-                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
-                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
-                   };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
-
-                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                int paymentCollectionId = GetLastInsertedID();
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                _burialPermitRepository.InsertWithBurialPermitPayment(burialPermitModel);
-                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithCattleOwnershipPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                   {
-                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
-                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
-                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
-                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
-                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
-                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
-                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
-                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
-                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
-                   };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
-
-                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                int paymentCollectionId = GetLastInsertedID();
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                _cattleOwnershipRepository.InsertWithCattleOwnershipPayment(cattleOwnershipModel);
-                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-                scope.Complete();
-                return true;
-            }
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }
 
         public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
@@ -603,12 +353,99 @@ namespace ACC.Data
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
 
             return false;
+        }
+
+        public bool InsertWithRptPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
+                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+
+                rptPaymentRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
+                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertWithMarriageLicensePayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, MarriageLicenseModel marriageLicenseModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                marriageLicenseModel.PaymentCollectionsId = paymentCollectionId;
+                marriageLicenseRepository.Insert(marriageLicenseModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertWithBurialPermitPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, BurialPermitModel burialPermitModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                burialPermitModel.PaymentCollectionsId = paymentCollectionId;
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                burialPermitRepository.Insert(burialPermitModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertWithCattleOwnershipPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                cattleOwnershipModel.PaymentCollectionId = paymentCollectionId;
+                cattleOwnershipRepository.Insert(cattleOwnershipModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertWithFeesCharges(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
+            };
         }
     }
 }

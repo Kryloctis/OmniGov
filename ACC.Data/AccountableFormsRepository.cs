@@ -52,7 +52,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
-        public bool Insert(AccountableModel entity)
+        public bool Insert(AccountableFormsModel entity)
         {
             var parameters = new object[][]
             {
@@ -64,7 +64,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(AccountableModel entity)
+        public bool Update(AccountableFormsModel entity)
         {
             var parameters = new object[][]
             {
@@ -77,7 +77,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Delete(List<AccountableModel> entityList)
+        public bool Delete(List<AccountableFormsModel> entityList)
         {
             using (var scope = new TransactionScope())
             {

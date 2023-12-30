@@ -7,6 +7,5 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBurialPermitRepository : IAccRepository<BurialPermitModel>
     {
-        bool InsertWithBurialPermitPayment(BurialPermitModel burialPermitModel);
     }
 }

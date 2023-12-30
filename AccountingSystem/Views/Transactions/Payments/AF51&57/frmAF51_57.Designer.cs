@@ -1,0 +1,235 @@
+﻿
+namespace AccountingSystem.Views.Transactions.Payments.AF51_57
+{
+    partial class frmAF51_57
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            radFeesCharges = new System.Windows.Forms.RadioButton();
+            radPayment = new System.Windows.Forms.RadioButton();
+            btnBackMain = new System.Windows.Forms.Button();
+            btnNextMain = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            tabControlMain = new System.Windows.Forms.TabControl();
+            tabPageFeesCharges = new System.Windows.Forms.TabPage();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
+            tabPagePayment = new System.Windows.Forms.TabPage();
+            ucPayment1 = new ucPayment();
+            flowLayoutPanel2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            tabControlMain.SuspendLayout();
+            tabPageFeesCharges.SuspendLayout();
+            tabPagePayment.SuspendLayout();
+            SuspendLayout();
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Controls.Add(radFeesCharges);
+            flowLayoutPanel2.Controls.Add(radPayment);
+            flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            flowLayoutPanel2.Enabled = false;
+            flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
+            flowLayoutPanel2.TabIndex = 4;
+            // 
+            // radFeesCharges
+            // 
+            radFeesCharges.Appearance = System.Windows.Forms.Appearance.Button;
+            radFeesCharges.FlatAppearance.BorderSize = 0;
+            radFeesCharges.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radFeesCharges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radFeesCharges.Location = new System.Drawing.Point(0, 0);
+            radFeesCharges.Margin = new System.Windows.Forms.Padding(0);
+            radFeesCharges.Name = "radFeesCharges";
+            radFeesCharges.Size = new System.Drawing.Size(195, 37);
+            radFeesCharges.TabIndex = 5;
+            radFeesCharges.Text = "Fees && Charges";
+            radFeesCharges.UseVisualStyleBackColor = true;
+            // 
+            // radPayment
+            // 
+            radPayment.Appearance = System.Windows.Forms.Appearance.Button;
+            radPayment.FlatAppearance.BorderSize = 0;
+            radPayment.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radPayment.Location = new System.Drawing.Point(0, 37);
+            radPayment.Margin = new System.Windows.Forms.Padding(0);
+            radPayment.Name = "radPayment";
+            radPayment.Size = new System.Drawing.Size(195, 37);
+            radPayment.TabIndex = 2;
+            radPayment.Text = "Payment";
+            radPayment.UseVisualStyleBackColor = true;
+            // 
+            // btnBackMain
+            // 
+            btnBackMain.Location = new System.Drawing.Point(410, 3);
+            btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnBackMain.Name = "btnBackMain";
+            btnBackMain.Size = new System.Drawing.Size(134, 23);
+            btnBackMain.TabIndex = 2;
+            btnBackMain.Text = "Back";
+            btnBackMain.UseVisualStyleBackColor = true;
+            btnBackMain.Click += btnBackMain_Click;
+            // 
+            // btnNextMain
+            // 
+            btnNextMain.Location = new System.Drawing.Point(552, 3);
+            btnNextMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnNextMain.Name = "btnNextMain";
+            btnNextMain.Size = new System.Drawing.Size(134, 23);
+            btnNextMain.TabIndex = 0;
+            btnNextMain.Text = "Next";
+            btnNextMain.UseVisualStyleBackColor = true;
+            btnNextMain.Click += btnNextMain_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new System.Drawing.Point(694, 3);
+            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(134, 23);
+            btnCancel.TabIndex = 3;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnNextMain);
+            flowLayoutPanel1.Controls.Add(btnBackMain);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(195, 465);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
+            flowLayoutPanel1.TabIndex = 5;
+            // 
+            // tabControlMain
+            // 
+            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            tabControlMain.Controls.Add(tabPageFeesCharges);
+            tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
+            tabControlMain.Location = new System.Drawing.Point(195, 0);
+            tabControlMain.Margin = new System.Windows.Forms.Padding(0);
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.Padding = new System.Drawing.Point(0, 0);
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new System.Drawing.Size(832, 465);
+            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            tabControlMain.TabIndex = 6;
+            tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
+            // 
+            // tabPageFeesCharges
+            // 
+            tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Name = "tabPageFeesCharges";
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
+            tabPageFeesCharges.TabIndex = 1;
+            tabPageFeesCharges.Text = "tabPageFees";
+            tabPageFeesCharges.UseVisualStyleBackColor = true;
+            // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.TabIndex = 0;
+            // 
+            // tabPagePayment
+            // 
+            tabPagePayment.Controls.Add(ucPayment1);
+            tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            tabPagePayment.Name = "tabPagePayment";
+            tabPagePayment.Size = new System.Drawing.Size(824, 456);
+            tabPagePayment.TabIndex = 2;
+            tabPagePayment.Text = "tabPagePayment";
+            tabPagePayment.UseVisualStyleBackColor = true;
+            // 
+            // ucPayment1
+            // 
+            ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPayment1.Location = new System.Drawing.Point(0, 0);
+            ucPayment1.Name = "ucPayment1";
+            ucPayment1.Size = new System.Drawing.Size(824, 456);
+            ucPayment1.TabIndex = 0;
+            // 
+            // frmAF51_57
+            // 
+            AcceptButton = btnNextMain;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            BackColor = System.Drawing.Color.White;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(1027, 496);
+            Controls.Add(tabControlMain);
+            Controls.Add(flowLayoutPanel1);
+            Controls.Add(flowLayoutPanel2);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmAF51_57";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Payments > AF51 & 57";
+            Load += frmAF51_57_Load;
+            flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            tabControlMain.ResumeLayout(false);
+            tabPageFeesCharges.ResumeLayout(false);
+            tabPagePayment.ResumeLayout(false);
+            ResumeLayout(false);
+        }
+
+        #endregion
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.RadioButton radFeesCharges;
+        private System.Windows.Forms.RadioButton radPayment;
+        private System.Windows.Forms.Button btnBackMain;
+        private System.Windows.Forms.Button btnNextMain;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabPage tabPageFeesCharges;
+        private System.Windows.Forms.TabPage tabPagePayment;
+        private ucPayment ucPayment1;
+        private ucPaymentFeesCharges ucPaymentFeesCharges1;
+    }
+}
