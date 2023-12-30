@@ -17,8 +17,6 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucPayment ucPayment;
 
-        private dialogPayment dialog = new dialogPayment();
-
         public frmMarriageLicense()
         {
             InitializeComponent();
@@ -63,9 +61,6 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
         private bool ConfirmPayment()
         {
-            if (!TabValidated())
-                return false;
-
             if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
                 return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
 
@@ -219,86 +214,6 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 tabControlMain.SelectedIndex--;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bgwSavingPayment_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                var chequesModels = new List<ChequesModel>();
-                int totalProgressCount = ucPayment.dgCheques.Rows.Count;
-                int progressCount = 0;
-                var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
-
-                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
-                {
-                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
-                    string bankName = row.Cells["bank_name"].Value.ToString();
-                    var rowBankBranch = row.Cells["bank_branch"].Value;
-                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
-                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
-                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
-                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
-                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
-
-                    int bankAccountId;
-
-                    if (!bankAccountExist)
-                    {
-                        var banksModel = new BanksModel()
-                        {
-                            BankName = bankName,
-                            BankBranch = bankBranch
-                        };
-
-                        var bankAccountModel = new BankAccountsModel()
-                        {
-                            AccountNumber = bankAccountNo,
-                            banksModel = banksModel
-                        };
-
-                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
-                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
-                    }
-                    else
-                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
-
-                    var model = new ChequesModel()
-                    {
-                        Amount = chequeAmount,
-                        ChequeDate = chequeDate,
-                        ChequeNo = chequeNo,
-                        BankAccountsId = bankAccountId
-                    };
-
-                    progressCount++;
-                    chequesModels.Add(model);
-                    Helper.ProgressCounter(bgwSavingPayment, totalProgressCount, progressCount);
-                }
-
-                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
-
-                e.Result = "complete";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bgwSavingPayment_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            dialog.label1.Text = e.ProgressPercentage.ToString();
-            dialog.btnClose.Enabled = false;
-        }
-
-        private void bgwSavingPayment_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result.ToString() == "complete")
-            {
-                dialog.label1.Text = "Payment Process Complete!";
-                dialog.btnClose.Enabled = true;
-                btnNextMain.Text = "Finish";
-                ucPayment.Enabled = false;
-                return;
-            }
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)

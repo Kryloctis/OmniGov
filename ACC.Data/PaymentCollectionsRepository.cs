@@ -420,11 +420,12 @@ namespace ACC.Data
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                cattleOwnershipModel.PaymentCollectionsModel.Id = paymentCollectionId;
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                cattleOwnershipModel.PaymentCollectionId = paymentCollectionId;
                 cattleOwnershipRepository.Insert(cattleOwnershipModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
                 paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

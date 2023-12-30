@@ -125,27 +125,27 @@
             label10.AutoSize = true;
             label10.Location = new System.Drawing.Point(1, 126);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(67, 15);
+            label10.Size = new System.Drawing.Size(72, 15);
             label10.TabIndex = 8;
-            label10.Text = "Description";
+            label10.Text = "Description*";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(1, 64);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(28, 15);
+            label8.Size = new System.Drawing.Size(33, 15);
             label8.TabIndex = 9;
-            label8.Text = "Age";
+            label8.Text = "Age*";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Location = new System.Drawing.Point(1, 35);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(31, 15);
+            label6.Size = new System.Drawing.Size(36, 15);
             label6.TabIndex = 10;
-            label6.Text = "Type";
+            label6.Text = "Type*";
             // 
             // cmbxType
             // 
@@ -163,18 +163,18 @@
             label9.AutoSize = true;
             label9.Location = new System.Drawing.Point(1, 207);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(33, 15);
+            label9.Size = new System.Drawing.Size(38, 15);
             label9.TabIndex = 11;
-            label9.Text = "Price";
+            label9.Text = "Price*";
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Location = new System.Drawing.Point(1, 95);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(25, 15);
+            label7.Size = new System.Drawing.Size(30, 15);
             label7.TabIndex = 12;
-            label7.Text = "Sex";
+            label7.Text = "Sex*";
             // 
             // cmbxOwner
             // 
@@ -193,9 +193,9 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(1, 6);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(42, 15);
+            label1.Size = new System.Drawing.Size(47, 15);
             label1.TabIndex = 10;
-            label1.Text = "Owner";
+            label1.Text = "Owner*";
             // 
             // ucCattleOwnership
             // 

@@ -114,6 +114,7 @@
             // 
             // txtLicenseNo
             // 
+            txtLicenseNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtLicenseNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtLicenseNo.Location = new System.Drawing.Point(106, 3);
             txtLicenseNo.Name = "txtLicenseNo";

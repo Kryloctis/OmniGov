@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
 using System;
 using System.ComponentModel;
@@ -17,6 +18,21 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
         internal void OnLoad()
         {
             LoadOwners();
+            LoadCattle();
+        }
+
+        internal CattleOwnershipModel CattleOwnershipModel()
+        {
+            return new CattleOwnershipModel()
+            {
+                TaxpayerId = Convert.ToInt32(cmbxOwner.SelectedValue),
+                CattleAge = (int)nudAge.Value,
+                CattleName = cmbxType.Text.Trim(),
+                CattleSex = radCattleMale.Checked ? "Male" : "Female",
+                CattlePrice = nudPrice.Value,
+                Description = txtDescription.Text.Trim(),
+                CreatedBy = Helper.UserId,
+            };
         }
 
         internal string GetFormErrors()
@@ -34,31 +50,14 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
         private void LoadOwners()
         {
-            var registryColumn = new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "name", typeof(string))
-            };
+            var dtRegistry = AccFactory.TaxpayersRepository().GetRecords();
+            HelperLoadRecords.SearchableCombobox2(dtRegistry, cmbxOwner, "id", "name");
+        }
 
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(registryColumn);
-
-            var dtRegistry = AccFactory.RegistryRepository().GetRecords();
-
-            foreach (DataRow row in dtRegistry.Rows)
-            {
-                var newRow = dataTable.NewRow();
-
-                int Id = Convert.ToInt32(row["id"]);
-                string name = $"{row["first_name"]} {row["middle_name"].ToString().Substring(0)}, {row["last_name"]}";
-
-                newRow["id"] = Id;
-                newRow["name"] = name;
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxOwner, "id", "name");
+        private void LoadCattle()
+        {
+            var dataTable = AccFactory.CattleOwnershipRepository().GetRecords();
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxType, "id", "cattle_name");
         }
 
         private void cmbxType_Validating(object sender, CancelEventArgs e)

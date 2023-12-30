@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             radFeesCharges = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             btnCancel = new System.Windows.Forms.Button();
@@ -42,9 +41,9 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             ucCattleOwnership1 = new ucCattleOwnership();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
+            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radCattleDetails = new System.Windows.Forms.RadioButton();
-            ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -53,14 +52,6 @@
             tabPageFeesCharges.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // bgwSavingPayment
-            // 
-            bgwSavingPayment.WorkerReportsProgress = true;
-            bgwSavingPayment.WorkerSupportsCancellation = true;
-            bgwSavingPayment.DoWork += bgwSavingPayment_DoWork;
-            bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
-            bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
             // 
             // radFeesCharges
             // 
@@ -218,6 +209,15 @@
             tabPageFeesCharges.Text = "tabPageFeesCharges";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
             // 
+            // ucPaymentFeesCharges1
+            // 
+            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
+            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
+            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.TabIndex = 0;
+            // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
@@ -247,15 +247,6 @@
             radCattleDetails.Text = "Cattle Ownership Info.";
             radCattleDetails.UseVisualStyleBackColor = true;
             // 
-            // ucPaymentFeesCharges1
-            // 
-            ucPaymentFeesCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
-            ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
-            ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
-            ucPaymentFeesCharges1.TabIndex = 0;
-            // 
             // frmCattleOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -284,8 +275,6 @@
         }
 
         #endregion
-
-        private System.ComponentModel.BackgroundWorker bgwSavingPayment;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnNextMain;

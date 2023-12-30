@@ -77,8 +77,8 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] {"@payment_collections_id" ,DbType.Int32, entity.PaymentCollectionsModel.Id},
-                new object[] {"@taxpayers_id" ,DbType.Int32, entity.TaxpayersModel.Id},
+                new object[] {"@payment_collections_id" ,DbType.Int32, entity.PaymentCollectionId},
+                new object[] {"@taxpayers_id" ,DbType.Int32, entity.TaxpayerId},
                 new object[] {"@cattle_name" ,DbType.String, entity.CattleName},
                 new object[] {"@cattle_sex" ,DbType.String, entity.CattleSex},
                 new object[] {"@cattle_age" ,DbType.Int32, entity.CattleAge},
@@ -97,8 +97,8 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id },
-                new object[] { "@payment_collections_id" ,DbType.Int32, entity.PaymentCollectionsModel.Id },
-                new object[] { "@taxpayers_id" ,DbType.Int32, entity.TaxpayersModel.Id },
+                new object[] { "@payment_collections_id" ,DbType.Int32, entity.PaymentCollectionId },
+                new object[] { "@taxpayers_id" ,DbType.Int32, entity.TaxpayerId },
                 new object[] { "@cattle_name" ,DbType.String, entity.CattleName },
                 new object[] { "@cattle_sex" ,DbType.String, entity.CattleSex },
                 new object[] { "@cattle_age" ,DbType.Int32, entity.CattleAge },

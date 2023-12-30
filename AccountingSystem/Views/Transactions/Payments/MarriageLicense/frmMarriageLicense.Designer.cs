@@ -38,7 +38,6 @@
             radMarriageDetails = new System.Windows.Forms.RadioButton();
             radGroomInfo = new System.Windows.Forms.RadioButton();
             radBrideInfo = new System.Windows.Forms.RadioButton();
-            bgwSavingPayment = new System.ComponentModel.BackgroundWorker();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
@@ -199,21 +198,13 @@
             radBrideInfo.Text = "Bride Info.";
             radBrideInfo.UseVisualStyleBackColor = true;
             // 
-            // bgwSavingPayment
-            // 
-            bgwSavingPayment.WorkerReportsProgress = true;
-            bgwSavingPayment.WorkerSupportsCancellation = true;
-            bgwSavingPayment.DoWork += bgwSavingPayment_DoWork;
-            bgwSavingPayment.ProgressChanged += bgwSavingPayment_ProgressChanged;
-            bgwSavingPayment.RunWorkerCompleted += bgwSavingPayment_RunWorkerCompleted;
-            // 
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(746, 475);
+            tabPagePayment.Size = new System.Drawing.Size(824, 456);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -224,7 +215,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(740, 469);
+            ucPayment1.Size = new System.Drawing.Size(818, 450);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageFeesCharges
@@ -233,7 +224,7 @@
             tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
             tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Size = new System.Drawing.Size(746, 475);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
@@ -244,7 +235,7 @@
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(746, 475);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabControlMain
@@ -402,7 +393,6 @@
         private System.Windows.Forms.RadioButton radFeesCharges;
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        internal System.ComponentModel.BackgroundWorker bgwSavingPayment;
         private System.Windows.Forms.RadioButton radMarriageDetails;
         private System.Windows.Forms.TabPage tabPagePayment;
         private ucPayment ucPayment1;
