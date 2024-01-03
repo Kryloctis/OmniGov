@@ -30,6 +30,15 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
         }
 
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucPaymentFeesCharges.ResetForm();
+            ucBurialDetails.ResetForm();
+            ucRemainsInfo.ResetForm();
+            tabControlMain.SelectedIndex = 0;
+        }
+
         private void frmBurialPermit_Load(object sender, EventArgs e)
         {
             try
@@ -190,7 +199,12 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())
+                    {
                         Helper.MessageBoxSuccess("Payment has been saved");
+                        ResetForm();
+                        return;
+                    }
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;
