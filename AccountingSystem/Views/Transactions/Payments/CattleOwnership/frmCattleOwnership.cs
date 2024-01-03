@@ -20,6 +20,13 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             ucCattleOwnership = ucCattleOwnership1;
         }
 
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucPaymentFeesCharges.ResetForm();
+            ucCattleOwnership.ResetForm();
+        }
+
         private void OnLoad()
         {
             LoadTabContents();
@@ -138,7 +145,13 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())
+                    {
                         Helper.MessageBoxSuccess("Payment has been saved");
+                        ResetForm();
+                        return;
+                    }
+
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;
