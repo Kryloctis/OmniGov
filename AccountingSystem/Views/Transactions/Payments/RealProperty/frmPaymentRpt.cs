@@ -21,6 +21,14 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucPayment = ucPayment1;
         }
 
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucPaymentTaxpayers.ResetForm();
+            ucPaymentRptTaxDues.ResetForm();
+            tabControlMain.SelectedIndex = 0;
+        }
+
         private void LoadTabContents()
         {
             if (tabControlMain.SelectedIndex == 0)
@@ -120,7 +128,12 @@ namespace AccountingSystem.Views.Transactions.Payments
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())
+                    {
                         Helper.MessageBoxSuccess("Payment has been saved");
+                        ResetForm();
+                        return;
+                    }
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;

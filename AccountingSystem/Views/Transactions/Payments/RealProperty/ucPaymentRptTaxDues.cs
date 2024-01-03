@@ -24,6 +24,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             Helper.DatagridFullRowSelectStyle(dgTaxDues, false, false);
         }
 
+        internal void ResetForm()
+        {
+            LoadPostedProperties();
+        }
+
         internal List<RptTaxDuesModel> RptTaxDuesModelList()
         {
             var rptTaxDuesModelList = new List<RptTaxDuesModel>();
