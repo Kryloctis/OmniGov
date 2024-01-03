@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,15 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgCheques, false, false, true);
+        }
+
+        internal void ResetForm()
+        {
+            txtPayee.Clear();
+            totalPaymentAmount = 0;
+            radPaymentCash.Checked = true;
+            ((DataTable)dgCheques.DataSource)?.Rows.Clear();
+            dgCheques.Refresh();
         }
 
         internal PaymentCollectionsModel PaymentCollectionsModel()
