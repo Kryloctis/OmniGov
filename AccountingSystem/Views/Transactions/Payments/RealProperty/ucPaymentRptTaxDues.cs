@@ -1,14 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
-using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
                 int rptAssessmentPostId = Convert.ToInt32(dgRow.Cells["assessment_posts_id"].Value);
                 var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordByID(rptAssessmentPostId);
-                Dictionary<string, string> dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(dictAssessmentPost["complete_arp_no"], Convert.ToInt32(dictAssessmentPost["year"]));
+                var dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(dictAssessmentPost["complete_arp_no"], Convert.ToInt32(dictAssessmentPost["year"]));
                 bool isAdvance = false;
                 var model = new RptTaxDuesModel()
                 {
@@ -317,36 +315,32 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void LoadColorStatus(DataGridView dataGridView)
         {
-            try
+            foreach (DataGridViewRow row in dataGridView.Rows)
             {
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                var status = row.Cells["status"].Value;
+                var datagridStatusCell = row.Cells["status"];
+                var datagridIsSelectedCell = row.Cells["is_selected"];
+
+                switch (status)
                 {
-                    var status = row.Cells["status"].Value;
-                    var datagridStatusCell = row.Cells["status"];
-                    var datagridIsSelectedCell = row.Cells["is_selected"];
+                    case "Unpaid":
+                        var unpaidColor = Color.IndianRed;
+                        datagridStatusCell.Style.ForeColor = unpaidColor;
+                        datagridStatusCell.Style.SelectionForeColor = unpaidColor;
+                        datagridIsSelectedCell.ReadOnly = false;
+                        break;
 
-                    switch (status)
-                    {
-                        case "Unpaid":
-                            var unpaidColor = Color.IndianRed;
-                            datagridStatusCell.Style.ForeColor = unpaidColor;
-                            datagridStatusCell.Style.SelectionForeColor = unpaidColor;
-                            datagridIsSelectedCell.ReadOnly = false;
-                            break;
+                    case "Paid":
+                        var paidColor = Color.Green;
+                        datagridStatusCell.Style.ForeColor = paidColor;
+                        datagridStatusCell.Style.SelectionForeColor = paidColor;
+                        datagridIsSelectedCell.ReadOnly = true;
+                        break;
 
-                        case "Paid":
-                            var paidColor = Color.Green;
-                            datagridStatusCell.Style.ForeColor = paidColor;
-                            datagridStatusCell.Style.SelectionForeColor = paidColor;
-                            datagridIsSelectedCell.ReadOnly = true;
-                            break;
-
-                        default:
-                            break;
-                    }
+                    default:
+                        break;
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadTaxDues(DataGridView dataGridView)

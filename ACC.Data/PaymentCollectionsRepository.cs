@@ -368,10 +368,9 @@ namespace ACC.Data
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
-                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
                 rptPaymentRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
