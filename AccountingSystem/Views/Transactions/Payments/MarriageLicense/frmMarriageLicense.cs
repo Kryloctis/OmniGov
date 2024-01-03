@@ -24,6 +24,16 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             ucSpouseInfoBride = ucSpouseInfoBride1;
         }
 
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucMarriageDetails.ResetForm();
+            ucPaymentFeesCharges.ResetForm();
+            ucSpouseInfoBride.ResetForm();
+            ucSpouseInfoGroom.ResetForm();
+            tabControlMain.SelectedIndex = 0;
+        }
+
         private void frmMarriageLicense_Load(object sender, EventArgs e)
         {
             try
@@ -195,7 +205,12 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())
+                    {
                         Helper.MessageBoxSuccess("Payment has been saved");
+                        ResetForm();
+                        return;
+                    }
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;
