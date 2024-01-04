@@ -12,6 +12,14 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             InitializeComponent();
         }
 
+        internal void ResetForm()
+        {
+            txtLicenseNo.Clear();
+            txtRegistrationNumber.Clear();
+            dtpPublishedDate.Value = Helper.GetCurrentDate();
+            dtpIssuedDate.Value = Helper.GetCurrentDate();
+        }
+
         internal void OnLoad()
         {
             dtpIssuedDate.Value = Helper.GetCurrentDate();

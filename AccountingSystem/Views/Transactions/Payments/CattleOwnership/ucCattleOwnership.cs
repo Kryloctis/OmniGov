@@ -21,6 +21,16 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             LoadCattle();
         }
 
+        internal void ResetForm()
+        {
+            LoadOwners();
+            LoadCattle();
+            nudAge.Value = 0;
+            radCattleMale.Checked = true;
+            txtDescription.Clear();
+            nudPrice.Value = 0;
+        }
+
         internal CattleOwnershipModel CattleOwnershipModel()
         {
             return new CattleOwnershipModel()

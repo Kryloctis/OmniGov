@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -24,7 +25,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             ToggleDatagridViewButtons(dgPaymentFeesCharges);
         }
 
-
         internal List<PaymentFeesChargesModel> PaymentFeesChargesModels()
         {
             var paymentFeesChargesModels = new List<PaymentFeesChargesModel>();
@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             return paymentFeesChargesModels;
         }
+
         private DataTable DataTablePaymentFeesCharges()
         {
             var dataColumns = new DataColumn[]
@@ -60,6 +61,14 @@ namespace AccountingSystem.Views.Transactions.Payments
             tableFeesCharges.Columns.AddRange(dataColumns);
 
             return tableFeesCharges;
+        }
+
+        internal void ResetForm()
+        {
+            ((DataTable)dgPaymentFeesCharges.DataSource)?.Rows.Clear();
+            LoadFeesCharges();
+
+            dgPaymentFeesCharges.Refresh();
         }
 
         private void LoadPaymentFeesCharges()

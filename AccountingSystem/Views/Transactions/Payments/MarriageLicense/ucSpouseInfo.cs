@@ -13,6 +13,15 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             InitializeComponent();
         }
 
+        internal void ResetForm()
+        {
+            LoadRegistry();
+            nudAge.Value = 0;
+            nudMonths.Value = 0;
+            txtReligion.Clear();
+            txtCurrenResidence.Clear();
+        }
+
         internal string GetFormErrors()
         {
             var errors = new string[]
@@ -131,13 +140,13 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         {
             if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Registry  not found"))
             {
-                ResetForm();
+                ClearSpouseInfo();
                 return false;
             }
             else if (comboBox.SelectedIndex < 0)
             {
                 errorProvider.SetError(comboBox, "Registry not found");
-                ResetForm();
+                ClearSpouseInfo();
                 return false;
             }
 
@@ -154,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             Helper.ClearErrorComboBox(errorProvider1, cmbxRegistry);
         }
 
-        internal void ResetForm()
+        private void ClearSpouseInfo()
         {
             txtFirstName.Clear();
             txtMiddleName.Clear();

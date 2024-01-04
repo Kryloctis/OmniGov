@@ -1,10 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
@@ -26,6 +22,16 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             ucMarriageDetails = ucMarriageDetails1;
             ucSpouseInfoGroom = ucSpouseInfoGroom1;
             ucSpouseInfoBride = ucSpouseInfoBride1;
+        }
+
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucMarriageDetails.ResetForm();
+            ucPaymentFeesCharges.ResetForm();
+            ucSpouseInfoBride.ResetForm();
+            ucSpouseInfoGroom.ResetForm();
+            tabControlMain.SelectedIndex = 0;
         }
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
@@ -199,7 +205,12 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
                     if (ConfirmPayment())
+                    {
                         Helper.MessageBoxSuccess("Payment has been saved");
+                        ResetForm();
+                        return;
+                    }
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;

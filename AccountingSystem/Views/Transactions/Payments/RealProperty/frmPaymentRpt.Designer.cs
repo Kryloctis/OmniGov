@@ -45,7 +45,6 @@
             radTaxpayer = new System.Windows.Forms.RadioButton();
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
@@ -264,15 +263,7 @@
             radPayment.Text = "Payment";
             radPayment.UseVisualStyleBackColor = true;
             // 
-            // backgroundWorker1
-            // 
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
-            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
-            // frmRptPayments
+            // frmPaymentRpt
             // 
             AcceptButton = btnNext;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -284,7 +275,7 @@
             Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             MinimizeBox = false;
-            Name = "frmRptPayments";
+            Name = "frmPaymentRpt";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -317,7 +308,6 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Panel panel2;
         private ucPayment ucPayment1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private RealProperty.ucPaymentTaxpayers ucPaymentTaxpayers1;
         private RealProperty.ucPaymentRptTaxDues ucPaymentRptTaxDues1;
     }

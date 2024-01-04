@@ -17,6 +17,13 @@ public partial class frmAF51_57 : Form
         this.ucPayment = ucPayment1;
     }
 
+    private void ResetForm()
+    {
+        ucPaymentFeesCharges.ResetForm();
+        ucPayment.ResetForm();
+        tabControlMain.SelectedTab = tabPageFeesCharges;
+    }
+
     private void LoadFeesAndChargesTab()
     {
         btnNextMain.Text = "Proceed to Payment";
@@ -106,7 +113,12 @@ public partial class frmAF51_57 : Form
             if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
                 if (ConfirmPayment())
+                {
                     Helper.MessageBoxSuccess("Payment has been saved");
+                    ResetForm();
+                    return;
+                }
+                return;
             }
 
             tabControlMain.SelectedIndex++;

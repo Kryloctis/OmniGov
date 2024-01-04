@@ -19,6 +19,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
+        internal void ResetForm()
+        {
+            txtSearch.Clear();
+            LoadTaxpayers();
+        }
+
         internal void OnLoad()
         {
             HelperLoadRecords.RowFilterCombobox(cmbxRowFilter.ComboBox);
