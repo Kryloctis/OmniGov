@@ -51,20 +51,20 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(282, 3);
+            btnCancel.Location = new System.Drawing.Point(242, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(115, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(201, 3);
+            btnSave.Location = new System.Drawing.Point(121, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(75, 23);
+            btnSave.Size = new System.Drawing.Size(115, 23);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -88,7 +88,6 @@
             // 
             // frmEditFeesCharges
             // 
-            AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
@@ -97,6 +96,7 @@
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditFeesCharges";
@@ -105,6 +105,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Modify Fees & Charges";
             Load += frmEditFeesCharges_Load;
+            KeyDown += frmEditFeesCharges_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

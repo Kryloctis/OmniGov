@@ -1,13 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
@@ -26,8 +19,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
             this.frmFeesChargesClassification = frmFeesChargesClassification;
             this.feesChargesClassificationId = feesChargesClassificationId;
         }
-
-        #region Private Methods
 
         private bool Save()
         {
@@ -49,10 +40,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
 
             return AccFactory.TaxTypesRepository().Update(feesChargesClassificationModel);
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void frmEditFeesChargesClassification_Load(object sender, EventArgs e)
         {
@@ -77,6 +64,21 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion Event Methods
+        private void frmEditFeesChargesClassification_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (Save())
+                    {
+                        frmFeesChargesClassification.LoadFeesCharges();
+                        Close();
+                        Helper.MessageBoxSuccess("Fees & Charges classification has been updated.");
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

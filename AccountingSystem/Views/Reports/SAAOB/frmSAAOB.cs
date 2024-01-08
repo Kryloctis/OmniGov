@@ -126,12 +126,8 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
         private void FilterReport(int filterLevel, LocalReport report)
         {
-            var parameters = new[] {
-                    new ReportParameter("paramFilterLevel",filterLevel.ToString())
-                };
-
+            var parameters = new[] { new ReportParameter("paramFilterLevel", filterLevel.ToString()) };
             report.SetParameters(parameters);
-
             reportViewer.RefreshReport();
         }
 

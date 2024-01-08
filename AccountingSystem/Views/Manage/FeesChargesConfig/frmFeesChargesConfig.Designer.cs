@@ -173,7 +173,7 @@
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Fees & Charges Config.";
+            Text = "Manage > Fees & Charges Config.";
             Load += frmFeesChargesConfig_Load;
             panel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
