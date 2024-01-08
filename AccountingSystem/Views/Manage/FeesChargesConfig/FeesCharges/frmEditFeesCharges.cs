@@ -29,8 +29,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
             this.frmFeesChargesClassification = frmFeesChargesClassification;
         }
 
-        #region Private Methods
-
         private bool Save()
         {
             if (!uc.ValidateChildren())
@@ -52,10 +50,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
 
             return AccFactory.OtherPaymentRatesRepository().Update(feesChargesModel);
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void frmEditFeesCharges_Load(object sender, EventArgs e)
         {
@@ -80,6 +74,21 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion Event Methods
+        private void frmEditFeesCharges_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (Save())
+                    {
+                        this.frmFeesChargesClassification.LoadFeesCharges();
+                        Helper.MessageBoxSuccess("Fees & Charges has been updated");
+                        Close();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

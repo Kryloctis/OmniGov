@@ -27,8 +27,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             this.frmFeesChargesClassification = frmFeesChargesClassification;
         }
 
-        #region Private Methods
-
         private bool Save()
         {
             if (!uc.ValidateChildren())
@@ -49,10 +47,6 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
             return AccFactory.TaxTypesRepository().Insert(feesChargesClassificationModel);
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void frmAddFeesChargesClassification_Load(object sender, EventArgs e)
         {
@@ -77,6 +71,21 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion Event Methods
+        private void frmAddFeesChargesClassification_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (Save())
+                    {
+                        this.frmFeesChargesClassification.LoadFeesCharges();
+                        Close();
+                        Helper.MessageBoxSuccess("Fees & Charges classification has been saved.");
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }
