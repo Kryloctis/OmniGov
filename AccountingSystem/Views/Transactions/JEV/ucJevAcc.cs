@@ -88,7 +88,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSubsidiaryLedger_Click(object sender, EventArgs e)
         {
-            ShowSubsidiaryLedger();
+            try
+            {
+                ShowSubsidiaryLedger();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ValidatePermissions()
@@ -115,8 +119,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
             }
         }
-
-        #region FPP
 
         private DataTable DataTableFPP()
         {
@@ -161,27 +163,31 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbFPP.Text))
+            try
             {
-                cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                LoadFPP();
-                cmbFPP.SelectedIndex = -1;
-                cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+                if (string.IsNullOrEmpty(cmbFPP.Text))
+                {
+                    cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+                    LoadFPP();
+                    cmbFPP.SelectedIndex = -1;
+                    cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
+            try
             {
-                LoadFPP();
-                cmbFPP.DroppedDown = true;
+                if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
+                {
+                    LoadFPP();
+                    cmbFPP.DroppedDown = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion FPP
-
-        #region General Ledger Accounts
 
         private DataTable DatatableAccounts()
         {
@@ -223,32 +229,40 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void CmbxAccout_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            try
             {
-                cmbxAccount.TextChanged -= new EventHandler(CmbxAccout_TextChanged);
-                LoadAccounts();
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
+                if (string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    cmbxAccount.TextChanged -= new EventHandler(CmbxAccout_TextChanged);
+                    LoadAccounts();
+                    cmbxAccount.SelectedIndex = -1;
+                    cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmxbAccount_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadSubsidiary();
+            try
+            {
+                LoadSubsidiary();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbxAccount.Text) && cmbxAccount.Focused)
+            try
             {
-                LoadAccounts();
-                cmbxAccount.DroppedDown = true;
+                if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbxAccount.Text) && cmbxAccount.Focused)
+                {
+                    LoadAccounts();
+                    cmbxAccount.DroppedDown = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion General Ledger Accounts
-
-        #region Validations
 
         private bool FPPNameNotExist()
         {
@@ -275,20 +289,24 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "account");
-
-            if (!string.IsNullOrWhiteSpace(cmbxAccount.Text))
+            try
             {
-                int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "account");
 
-                var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
-
-                if (!idExist)
+                if (!string.IsNullOrWhiteSpace(cmbxAccount.Text))
                 {
-                    errorProvider1.SetError(cmbxAccount, "Account does not exist.");
-                    e.Cancel = true;
+                    int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                    var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
+
+                    if (!idExist)
+                    {
+                        errorProvider1.SetError(cmbxAccount, "Account does not exist.");
+                        e.Cancel = true;
+                    }
                 }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -298,15 +316,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount");
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
-
-        #endregion Validations
     }
 }

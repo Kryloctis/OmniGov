@@ -85,7 +85,7 @@
             tabPageAccounting = new System.Windows.Forms.TabPage();
             tabControlAccounting = new System.Windows.Forms.TabControl();
             tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
-            ucjevDashboard1 = new ucJEVDashboard();
+            ucjevDashboard1 = new ucJevDashboard();
             tabPageJournals = new System.Windows.Forms.TabPage();
             ucJournalsDashboard1 = new AccountingDashboard.ucJournalsDashboard();
             tabPageLedgers = new System.Windows.Forms.TabPage();
@@ -1481,7 +1481,7 @@
         private System.Windows.Forms.TabPage tabPageSFPerformance;
         private System.Windows.Forms.TabPage tabPageSCNAE;
         private System.Windows.Forms.TabPage tabPageSCF;
-        private Views.Dashboard.ucJEVDashboard ucjevDashboard1;
+        private Views.Dashboard.ucJevDashboard ucjevDashboard1;
         private Views.Dashboard.AccountingDashboard.ucJournalsDashboard ucJournalsDashboard1;
         private Views.Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Views.Reports.Ledgers.ucSubsidiaryLedger ucSubsidiaryLedger1;

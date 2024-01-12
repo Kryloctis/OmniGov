@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Dashboard;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,36 +9,37 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class frmJEVList : Form
+    public partial class frmJevList : Form
     {
-        private string _journalName;
-        private string _fundName;
-        private byte _month;
-        private short _year;
-        internal ucJEVDashboard _ucJEVDashboard;
+        private string journalName;
+        private string fundName;
+        private byte month;
+        private short year;
+        internal ucJevDashboard ucJevDashboard;
 
-        public frmJEVList(string journalName, string fundName, byte month, short year, ucJEVDashboard ucJEVDashboard)
+        public frmJevList(string journalName, string fundName, byte month, short year, ucJevDashboard ucJevDashboard)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _journalName = journalName;
-            _fundName = fundName;
-            _month = month;
-            _year = year;
-            _ucJEVDashboard = ucJEVDashboard;
+            this.journalName = journalName;
+            this.fundName = fundName;
+            this.month = month;
+            this.year = year;
+            this.ucJevDashboard = ucJevDashboard;
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
         }
 
         private void frmJEVList_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
                 LoadJournals();
                 LoadMonths();
                 LoadJEVList();
                 LoadFunds();
-                nudYear.Value = _year == 0 ? DateTime.Now.Year : _year;
+                nudYear.Value = year == 0 ? DateTime.Now.Year : year;
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private DataTable DatatableJournals()
@@ -46,19 +48,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             dataTable.Columns.Add("id");
             dataTable.Columns.Add("journal_name");
 
-            try
-            {
-                var dtJournals = AccFactory.JournalsRepository().GetRecords();
-                dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
-                DataRow dr = dataTable.NewRow();
-                dr["id"] = "0";
-                dr["journal_name"] = "All";
-                dataTable.Rows.InsertAt(dr, 0);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtJournals = AccFactory.JournalsRepository().GetRecords();
+            dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
+            DataRow dr = dataTable.NewRow();
+            dr["id"] = "0";
+            dr["journal_name"] = "All";
+            dataTable.Rows.InsertAt(dr, 0);
+
             return dataTable;
         }
 
@@ -72,16 +68,16 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
 
-            int index = cmbxFunds.FindString(_fundName);
+            int index = cmbxFunds.FindString(fundName);
             cmbxFunds.SelectedIndex = index;
         }
 
         private void LoadJournals()
         {
             HelperLoadRecords.ComboboxJournals(DatatableJournals(), cmbxJournals, "id", "journal_name");
-            if (_journalName != string.Empty)
+            if (journalName != string.Empty)
             {
-                int index = cmbxJournals.FindString(_journalName);
+                int index = cmbxJournals.FindString(journalName);
                 cmbxJournals.SelectedIndex = index;
             }
         }
@@ -94,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
             int createdById = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["created_by_id"].Value);
 
-            var frmJev = new frmJEV(true, this, _ucJEVDashboard);
+            var frmJev = new frmJev(true, this, ucJevDashboard);
             var ucFrmJev = frmJev.ucjev1;
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
@@ -105,19 +101,27 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            LoadSelected();
+            try
+            {
+                LoadSelected();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadMonths()
         {
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = _month == 0 ? DateTime.Now.Month - 1 : _month;
+            cbMonth.SelectedIndex = month == 0 ? DateTime.Now.Month - 1 : month;
         }
 
         private void EnableDisableButtons()
@@ -160,32 +164,56 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons();
+            try
+            {
+                EnableDisableButtons();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxJevStatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cbMonth_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
-            LoadJEVList();
+            try
+            {
+                LoadJEVList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgJEV_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -222,10 +250,10 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             dictParameters.Add("jev_status", jevStatus);
             dictParameters.Add("search_key", searchKey);
-            dictParameters.Add("journal", _journalName);
-            dictParameters.Add("fund", _fundName);
-            dictParameters.Add("month", _month.ToString());
-            dictParameters.Add("year", _year.ToString());
+            dictParameters.Add("journal", journalName);
+            dictParameters.Add("fund", fundName);
+            dictParameters.Add("month", month.ToString());
+            dictParameters.Add("year", year.ToString());
 
             return dictParameters;
         }
@@ -361,10 +389,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             dgJEV.CurrentCell = dgJEV.FirstDisplayedCell;
             LoadStatusColors();
             EnableDisableButtons();
-        }
-
-        private void frmJEVList_FormClosing(object sender, FormClosingEventArgs e)
-        {
         }
 
         private void frmJEVList_FormClosed(object sender, FormClosedEventArgs e)

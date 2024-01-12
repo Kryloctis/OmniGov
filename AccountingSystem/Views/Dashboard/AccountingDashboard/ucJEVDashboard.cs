@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
 {
-    public partial class ucJEVDashboard : UserControl
+    public partial class ucJevDashboard : UserControl
     {
-        public ucJEVDashboard()
+        public ucJevDashboard()
         {
             InitializeComponent();
         }
@@ -31,19 +31,13 @@ namespace AccountingSystem.Views.Dashboard
             dataTable.Columns.Add("id");
             dataTable.Columns.Add("journal_name");
 
-            try
-            {
-                var dtJournals = AccFactory.JournalsRepository().GetRecords();
-                dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
-                DataRow dr = dataTable.NewRow();
-                dr["id"] = "0";
-                dr["journal_name"] = "All";
-                dataTable.Rows.InsertAt(dr, 0);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtJournals = AccFactory.JournalsRepository().GetRecords();
+            dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
+            DataRow dr = dataTable.NewRow();
+            dr["id"] = "0";
+            dr["journal_name"] = "All";
+            dataTable.Rows.InsertAt(dr, 0);
+
             return dataTable;
         }
 
@@ -65,17 +59,16 @@ namespace AccountingSystem.Views.Dashboard
 
         private void LoadMonths()
         {
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
-            Dock = DockStyle.Fill;
+            cmbxMonth.DataSource = new BindingSource(Helper.MonthsDatasource(), null);
+            cmbxMonth.ValueMember = "Key";
+            cmbxMonth.DisplayMember = "Value";
         }
 
         internal void LoadJEVCounter()
         {
             string journalName = cmbxJournals.Text.Trim();
             string fundName = cmbxFunds.Text.Trim();
-            short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
+            short month = Convert.ToInt16(cmbxMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
             var jevCount = AccFactory.JEVRepository().GetJEVCount(string.Empty, journalName, fundName, month, year);
@@ -93,16 +86,20 @@ namespace AccountingSystem.Views.Dashboard
 
         private void btnRefreshCounter_Click(object sender, EventArgs e)
         {
-            LoadJEVCounter();
+            try
+            {
+                LoadJEVCounter();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadJEVList(string jevStatus)
         {
             string journalName = cmbxJournals.Text.Trim();
             string fundName = cmbxFunds.Text.Trim();
-            byte month = Convert.ToByte(cbMonth.SelectedIndex);
+            byte month = Convert.ToByte(cmbxMonth.SelectedValue);
             short year = (short)nudYear.Value;
-            var _frmJEVList = new frmJEVList(journalName, fundName, month, year, this);
+            var _frmJEVList = new frmJevList(journalName, fundName, month, year, this);
 
             switch (jevStatus)
             {
@@ -136,52 +133,92 @@ namespace AccountingSystem.Views.Dashboard
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList("pending");
+            try
+            {
+                LoadJEVList("pending");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList("approved");
+            try
+            {
+                LoadJEVList("approved");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void linkDisapproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList("disapproved");
+            try
+            {
+                LoadJEVList("disapproved");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkCancelled_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList("cancelled");
+            try
+            {
+                LoadJEVList("cancelled");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList("all");
+            try
+            {
+                LoadJEVList("all");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadJEVCounter();
+            try
+            {
+                LoadJEVCounter();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
-            LoadJEVCounter();
+            try
+            {
+                LoadJEVCounter();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV(false, null, this).ShowDialog();
+            try
+            {
+                _ = new frmJev(false, null, this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVCounter();
+            try
+            {
+                LoadJEVCounter();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadJEVCounter();
+            try
+            {
+                LoadJEVCounter();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
