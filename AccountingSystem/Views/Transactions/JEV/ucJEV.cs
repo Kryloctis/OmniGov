@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class ucJEV : UserControl
+    public partial class ucJev : UserControl
     {
         internal bool isEdit = false;
         internal int jevId = 0;
@@ -20,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte oldJournalId = 0;
         internal string journalName;
 
-        public ucJEV()
+        public ucJev()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgAccounts, true);
@@ -198,8 +196,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficer(), cmbCollectingDisbursingOfficer, "full_name", "id");
         }
 
-        #region Disbursing Officer
-
         private DataColumn[] DataColumnDisbursingOfficer()
         {
             return new DataColumn[]
@@ -253,8 +249,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             HelperLoadRecords.DisbursingOfficerComboBox(DataTableDisbursingOfficer(), cmbCollectingDisbursingOfficer, "full_name", "id");
         }
 
-        #endregion Disbursing Officer
-
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -288,18 +282,24 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void radioFunds_Click(object sender, EventArgs e)
         {
-            var radFund = sender as RadioButton;
-            fundId = Convert.ToByte(radFund.Tag);
+            try
+            {
+                var radFund = sender as RadioButton;
+                fundId = Convert.ToByte(radFund.Tag);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radioFunds_CheckedChanged(object sender, EventArgs e)
         {
-            var radFund = sender as RadioButton;
-            ShowCheckIcon(radFund);
-            btnAddAccount.Enabled = true;
+            try
+            {
+                var radFund = sender as RadioButton;
+                ShowCheckIcon(radFund);
+                btnAddAccount.Enabled = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Set Fields
 
         private void SetJournalFields(string journalName)
         {
@@ -486,8 +486,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
-        #endregion Set Fields
-
         private void radioJournals_Click(object sender, EventArgs e)
         {
             try
@@ -534,9 +532,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            var frmJevAccountAdd = new frmJEVAccountAdd(this);
-            frmJevAccountAdd.ucJEVAccount.journalName = journalName;
-            frmJevAccountAdd.ShowDialog();
+            try
+            {
+                var frmJevAccountAdd = new frmJevAccAdd(this);
+                frmJevAccountAdd.ucJEVAccount.journalName = journalName;
+                frmJevAccountAdd.ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
@@ -564,17 +566,25 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
+            try
+            {
+                EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var grid = (DataGridView)sender;
-            if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
+            try
             {
-                e.Value = (bool)e.Value ? "Deposit" : "Collection";
-                e.FormattingApplied = true;
+                var grid = (DataGridView)sender;
+                if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
+                {
+                    e.Value = (bool)e.Value ? "Deposit" : "Collection";
+                    e.FormattingApplied = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void SumDebitCredit()
@@ -616,14 +626,22 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnRemoveAccount_Click(object sender, EventArgs e)
         {
-            RemoveRow();
+            try
+            {
+                RemoveRow();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)
         {
-            var frmJevAccountEdit = new frmJEVAccountEdit(this);
-            frmJevAccountEdit.ucJEVAccount.journalName = journalName;
-            frmJevAccountEdit.ShowDialog();
+            try
+            {
+                var frmJevAccountEdit = new frmJevAccEdit(this);
+                frmJevAccountEdit.ucJEVAccount.journalName = journalName;
+                frmJevAccountEdit.ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void ClearErrors()
@@ -633,8 +651,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
             Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
         }
-
-        #region Validations
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
@@ -687,7 +703,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
         }
-
-        #endregion Validations
     }
 }

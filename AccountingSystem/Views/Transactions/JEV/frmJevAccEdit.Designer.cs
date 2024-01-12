@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class frmJEVAccountAdd
+    partial class frmJevAccEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 186);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(595, 29);
-            flowLayoutPanel1.TabIndex = 3;
+            flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -76,8 +76,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(595, 215);
-            panel1.TabIndex = 4;
+            panel1.Size = new System.Drawing.Size(595, 186);
+            panel1.TabIndex = 2;
             // 
             // ucjevAccount1
             // 
@@ -86,24 +86,25 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucjevAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucjevAccount1.Location = new System.Drawing.Point(4, 4);
             ucjevAccount1.Name = "ucjevAccount1";
-            ucjevAccount1.Size = new System.Drawing.Size(587, 207);
+            ucjevAccount1.Size = new System.Drawing.Size(587, 178);
             ucjevAccount1.TabIndex = 1;
             // 
-            // frmJEVAccountAdd
+            // frmJEVAccountEdit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(595, 215);
-            Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
+            Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
-            Name = "frmJEVAccountAdd";
+            MinimizeBox = false;
+            Name = "frmJEVAccountEdit";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Add Account";
-            Load += frmJEVAccountAdd_Load;
+            Text = "Edit Account";
+            Load += frmJEVAccountEdit_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -111,7 +112,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;

@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class ucJEV
+    partial class ucJev
     {
         /// <summary> 
         /// Required designer variable.

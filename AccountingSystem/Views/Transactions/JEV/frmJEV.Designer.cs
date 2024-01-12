@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class frmJEV
+    partial class frmJev
     {
         /// <summary>
         /// Required designer variable.
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             panel1 = new System.Windows.Forms.Panel();
-            ucjev1 = new ucJEV();
+            ucjev1 = new ucJev();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             statusStrip2.SuspendLayout();
@@ -171,7 +171,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // toolStripStatusLabel2
             // 
-            toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
             toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
@@ -180,7 +180,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // lblJevStatus
             // 
             lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
             lblJevStatus.Name = "lblJevStatus";
             lblJevStatus.Size = new System.Drawing.Size(18, 22);
@@ -255,7 +255,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucjev1.Size = new System.Drawing.Size(1081, 552);
             ucjev1.TabIndex = 12;
             // 
-            // frmJEV
+            // frmJev
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -267,7 +267,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Controls.Add(toolStrip1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            Name = "frmJEV";
+            Name = "frmJev";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Journal Entry Voucher";
@@ -305,6 +305,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
         internal System.Windows.Forms.ToolStripStatusLabel lblIsEdited;
         private System.Windows.Forms.Panel panel1;
-        internal ucJEV ucjev1;
+        internal ucJev ucjev1;
     }
 }

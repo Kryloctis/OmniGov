@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class frmJEVList
+    partial class frmJevList
     {
         /// <summary>
         /// Required designer variable.
@@ -359,7 +359,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of JEVs";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmJEVList_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmJEVList_FormClosed);
             this.Load += new System.EventHandler(this.frmJEVList_Load);
             this.panel1.ResumeLayout(false);

@@ -13,21 +13,21 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class frmJEV : Form
+    public partial class frmJev : Form
     {
-        internal ucJEV uc;
-        internal frmJEVList _frmJEVList;
-        internal ucJEVDashboard _ucJEVDashboard;
+        internal ucJev uc;
+        internal frmJevList frmJEVList;
+        internal ucJevDashboard ucJEVDashboard;
         internal int createdById;
         private Dictionary<string, dynamic> userDict;
 
-        public frmJEV(bool isEdit, frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
+        public frmJev(bool isEdit, frmJevList frmJEVList, ucJevDashboard ucJEVDashboard)
         {
             InitializeComponent();
             uc = ucjev1;
             uc.isEdit = isEdit;
-            _frmJEVList = frmJEVList;
-            _ucJEVDashboard = ucJEVDashboard;
+            this.frmJEVList = frmJEVList;
+            this.ucJEVDashboard = ucJEVDashboard;
             userDict = Helper.LoggedInUserData();
             Helper.LoadFormIcon(this);
         }
@@ -39,16 +39,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void OnLoad()
         {
-            try
-            {
-                if (uc.isEdit)
-                    LoadSelectedJEV(uc.jevId);
+            if (uc.isEdit)
+                LoadSelectedJEV(uc.jevId);
 
-                lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
-                uc.SumDebitCredit();
-                VerifyPermissions();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            uc.SumDebitCredit();
+            VerifyPermissions();
         }
 
         private void VerifyPermissions()
@@ -521,7 +517,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     {
                         Helper.MessageBoxSuccess("JEV has been saved");
                         ucjev1.ResetForm();
-                        _ucJEVDashboard.LoadJEVCounter();
+                        ucJEVDashboard.LoadJEVCounter();
                     }
                     else
                     {
@@ -529,8 +525,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         Helper.MessageBoxSuccess("JEV has been updated");
                         GetJevStatus(jevId);
                         VerifyPermissions();
-                        _frmJEVList.LoadJEVList();
-                        _ucJEVDashboard.LoadJEVCounter();
+                        frmJEVList.LoadJEVList();
+                        ucJEVDashboard.LoadJEVCounter();
                         Close();
                     }
                 }
@@ -540,8 +536,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void TransferJournalToNewJournal()
         {
-            var userId = Helper.UserId;
-
             switch (uc.journalId)
             {
                 case 1:
@@ -612,7 +606,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (DeleteData())
                 {
                     Helper.MessageBoxSuccess("JEV has been deleted.");
-                    _frmJEVList.LoadJEVList();
+                    frmJEVList.LoadJEVList();
                     Close();
                 }
             }
@@ -621,8 +615,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            frmJEVReport _frmJEVReport = new frmJEVReport(uc.jevId, uc.journalId);
-            _frmJEVReport.ShowDialog();
+            try
+            {
+                frmJEVReport _frmJEVReport = new frmJEVReport(uc.jevId, uc.journalId);
+                _frmJEVReport.ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void GetJevStatus(int jevId)
@@ -694,8 +692,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         GetJevStatus(uc.jevId);
                         uc.txtFundsJevNo.Text = uc.GenerateJevTemplateNo();
                         uc.txtJEVNo.Text = uc.GetJEVSeriesNo();
-                        _frmJEVList.LoadJEVList();
-                        _ucJEVDashboard.LoadJEVCounter();
+                        frmJEVList.LoadJEVList();
+                        ucJEVDashboard.LoadJEVCounter();
                     }
                 }
             }
@@ -704,25 +702,33 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            if (uc.jevId != 0)
+            try
             {
-                var frmRemarks = new frmJEVDisapproval(this);
-                frmRemarks.btnDisapprove.Visible = true;
-                frmRemarks.btnAccept.Visible = false;
-                frmRemarks.btnSaveMessage.Visible = false;
-                frmRemarks.ShowDialog();
+                if (uc.jevId != 0)
+                {
+                    var frmRemarks = new frmJevDisapproval(this);
+                    frmRemarks.btnDisapprove.Visible = true;
+                    frmRemarks.btnAccept.Visible = false;
+                    frmRemarks.btnSaveMessage.Visible = false;
+                    frmRemarks.ShowDialog();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lblShowMessage_Click(object sender, EventArgs e)
         {
-            if (uc.jevId != 0)
+            try
             {
-                var frmRemarks = new frmJEVDisapproval(this);
-                frmRemarks.btnDisapprove.Visible = false;
-                frmRemarks.btnCancel.Text = "Close";
-                frmRemarks.ShowDialog();
+                if (uc.jevId != 0)
+                {
+                    var frmRemarks = new frmJevDisapproval(this);
+                    frmRemarks.btnDisapprove.Visible = false;
+                    frmRemarks.btnCancel.Text = "Close";
+                    frmRemarks.ShowDialog();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnCancelJEV_Click(object sender, EventArgs e)
@@ -737,8 +743,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         {
                             Helper.MessageBoxSuccess("JEV has been cancelled.");
                             GetJevStatus(uc.jevId);
-                            _frmJEVList.LoadJEVList();
-                            _ucJEVDashboard.LoadJEVCounter();
+                            frmJEVList.LoadJEVList();
+                            ucJEVDashboard.LoadJEVCounter();
                         }
                         return;
                     }

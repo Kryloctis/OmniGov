@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class frmJEVAccountEdit : Form
+    public partial class frmJevAccEdit : Form
     {
-        private readonly ucJEV ucJEV;
+        private readonly ucJev ucJEV;
         internal readonly ucJEVAccount ucJEVAccount;
 
-        public frmJEVAccountEdit(ucJEV ucJEV)
+        public frmJevAccEdit(ucJev ucJEV)
         {
             Helper.LoadFormIcon(this);
             InitializeComponent();
