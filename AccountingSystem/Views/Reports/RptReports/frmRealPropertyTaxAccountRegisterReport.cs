@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
+namespace AccountingSystem.Views.Reports.RptReports
 {
     public partial class frmRealPropertyTaxAccountRegisterReport : Form
     {
@@ -45,9 +45,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
             int previousAssessmentCount = 0;
-            int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
+            //int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
 
-            return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
+            return RealPropertyTaxComputations.GetPenalty(penaltyRate, 0, taxDueAmount);
         }
 
         private bool LoadReport()

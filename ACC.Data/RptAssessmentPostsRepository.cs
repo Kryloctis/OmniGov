@@ -290,9 +290,9 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable Get_Grouped_Barangay_Records()
+        public DataTable GetBarangayRecords()
         {
-            string query = $"SELECT barangay_name FROM {tableName} GROUP BY barangay_name";
+            string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
             var dataTable = new DataTable();
             return mySqlGenericCommands.Fill(query, dataTable);
         }
@@ -304,7 +304,7 @@ namespace ACC.Data
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate)
+        public DataTable GetViewCertRptDelinquencesBy_BarangayName_AsOfDate(string barangayName, DateTime asOfDate)
         {
             var parameters = new object[][]
             {
@@ -312,7 +312,7 @@ namespace ACC.Data
                 new object[] { "@posted_at", DbType.Date, asOfDate.Date}
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3)";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @posted_at AND rpt_payments_id IS NULL";
             var dataTable = new DataTable();
 
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -347,14 +347,14 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public Dictionary<string, string> GetViewPreviousAssessmentPostRecord(string completeArpNo, int assessmentPostYear)
+        public Dictionary<string, string> GetViewRecentAssessmentRecord(string arpNo, int assessmentYear)
         {
             var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@year", DbType.Int32, assessmentPostYear}
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@year", DbType.Int32, assessmentYear}
             };
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND year < @year ORDER BY year DESC";

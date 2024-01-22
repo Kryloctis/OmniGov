@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies
+namespace AccountingSystem.Views.Reports.RptReports
 {
     partial class frmListOfRealPropertyTaxDelinquenciesReport
     {

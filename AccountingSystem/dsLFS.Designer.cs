@@ -90,7 +90,7 @@ namespace AccountingSystem {
         
         private dtTaxesDuesAndPaymentsDataTable tabledtTaxesDuesAndPayments;
         
-        private dtCertListOfAllRptDelinquencesDataTable tabledtCertListOfAllRptDelinquences;
+        private dtCertfiedRptDelinquenciesDataTable tabledtCertfiedRptDelinquencies;
         
         private dtRPTStamentOfAccountsDataTable tabledtRPTStamentOfAccounts;
         
@@ -229,8 +229,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtTaxesDuesAndPayments"] != null)) {
                     base.Tables.Add(new dtTaxesDuesAndPaymentsDataTable(ds.Tables["dtTaxesDuesAndPayments"]));
                 }
-                if ((ds.Tables["dtCertListOfAllRptDelinquences"] != null)) {
-                    base.Tables.Add(new dtCertListOfAllRptDelinquencesDataTable(ds.Tables["dtCertListOfAllRptDelinquences"]));
+                if ((ds.Tables["dtCertfiedRptDelinquencies"] != null)) {
+                    base.Tables.Add(new dtCertfiedRptDelinquenciesDataTable(ds.Tables["dtCertfiedRptDelinquencies"]));
                 }
                 if ((ds.Tables["dtRPTStamentOfAccounts"] != null)) {
                     base.Tables.Add(new dtRPTStamentOfAccountsDataTable(ds.Tables["dtRPTStamentOfAccounts"]));
@@ -599,9 +599,9 @@ namespace AccountingSystem {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtCertListOfAllRptDelinquencesDataTable dtCertListOfAllRptDelinquences {
+        public dtCertfiedRptDelinquenciesDataTable dtCertfiedRptDelinquencies {
             get {
-                return this.tabledtCertListOfAllRptDelinquences;
+                return this.tabledtCertfiedRptDelinquencies;
             }
         }
         
@@ -821,8 +821,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtTaxesDuesAndPayments"] != null)) {
                     base.Tables.Add(new dtTaxesDuesAndPaymentsDataTable(ds.Tables["dtTaxesDuesAndPayments"]));
                 }
-                if ((ds.Tables["dtCertListOfAllRptDelinquences"] != null)) {
-                    base.Tables.Add(new dtCertListOfAllRptDelinquencesDataTable(ds.Tables["dtCertListOfAllRptDelinquences"]));
+                if ((ds.Tables["dtCertfiedRptDelinquencies"] != null)) {
+                    base.Tables.Add(new dtCertfiedRptDelinquenciesDataTable(ds.Tables["dtCertfiedRptDelinquencies"]));
                 }
                 if ((ds.Tables["dtRPTStamentOfAccounts"] != null)) {
                     base.Tables.Add(new dtRPTStamentOfAccountsDataTable(ds.Tables["dtRPTStamentOfAccounts"]));
@@ -1070,10 +1070,10 @@ namespace AccountingSystem {
                     this.tabledtTaxesDuesAndPayments.InitVars();
                 }
             }
-            this.tabledtCertListOfAllRptDelinquences = ((dtCertListOfAllRptDelinquencesDataTable)(base.Tables["dtCertListOfAllRptDelinquences"]));
+            this.tabledtCertfiedRptDelinquencies = ((dtCertfiedRptDelinquenciesDataTable)(base.Tables["dtCertfiedRptDelinquencies"]));
             if ((initTable == true)) {
-                if ((this.tabledtCertListOfAllRptDelinquences != null)) {
-                    this.tabledtCertListOfAllRptDelinquences.InitVars();
+                if ((this.tabledtCertfiedRptDelinquencies != null)) {
+                    this.tabledtCertfiedRptDelinquencies.InitVars();
                 }
             }
             this.tabledtRPTStamentOfAccounts = ((dtRPTStamentOfAccountsDataTable)(base.Tables["dtRPTStamentOfAccounts"]));
@@ -1182,8 +1182,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtListOfRealPropertyTaxDelinquencies);
             this.tabledtTaxesDuesAndPayments = new dtTaxesDuesAndPaymentsDataTable();
             base.Tables.Add(this.tabledtTaxesDuesAndPayments);
-            this.tabledtCertListOfAllRptDelinquences = new dtCertListOfAllRptDelinquencesDataTable();
-            base.Tables.Add(this.tabledtCertListOfAllRptDelinquences);
+            this.tabledtCertfiedRptDelinquencies = new dtCertfiedRptDelinquenciesDataTable();
+            base.Tables.Add(this.tabledtCertfiedRptDelinquencies);
             this.tabledtRPTStamentOfAccounts = new dtRPTStamentOfAccountsDataTable();
             base.Tables.Add(this.tabledtRPTStamentOfAccounts);
             this.tabledtRCINew = new dtRCINewDataTable();
@@ -1396,7 +1396,7 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializedtCertListOfAllRptDelinquences() {
+        private bool ShouldSerializedtCertfiedRptDelinquencies() {
             return false;
         }
         
@@ -1585,7 +1585,7 @@ namespace AccountingSystem {
         public delegate void dtTaxesDuesAndPaymentsRowChangeEventHandler(object sender, dtTaxesDuesAndPaymentsRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void dtCertListOfAllRptDelinquencesRowChangeEventHandler(object sender, dtCertListOfAllRptDelinquencesRowChangeEvent e);
+        public delegate void dtCertfiedRptDelinquenciesRowChangeEventHandler(object sender, dtCertfiedRptDelinquenciesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtRPTStamentOfAccountsRowChangeEventHandler(object sender, dtRPTStamentOfAccountsRowChangeEvent e);
@@ -14838,7 +14838,7 @@ namespace AccountingSystem {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtCertListOfAllRptDelinquencesDataTable : global::System.Data.TypedTableBase<dtCertListOfAllRptDelinquencesRow> {
+        public partial class dtCertfiedRptDelinquenciesDataTable : global::System.Data.TypedTableBase<dtCertfiedRptDelinquenciesRow> {
             
             private global::System.Data.DataColumn columnarp_no;
             
@@ -14850,7 +14850,7 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnland_assessed_value;
             
-            private global::System.Data.DataColumn columnother_improvement_assessed_value;
+            private global::System.Data.DataColumn columnbuilding_assessed_value;
             
             private global::System.Data.DataColumn columnmachinery_assessed_value;
             
@@ -14862,13 +14862,13 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnbasic_penalty;
             
-            private global::System.Data.DataColumn columnbasic_total;
+            private global::System.Data.DataColumn columnbasic_sub_total;
             
             private global::System.Data.DataColumn columnsef_tax;
             
             private global::System.Data.DataColumn columnsef_penalty;
             
-            private global::System.Data.DataColumn columnsef_total;
+            private global::System.Data.DataColumn columnsef_sub_total;
             
             private global::System.Data.DataColumn columngrand_total;
             
@@ -14876,8 +14876,8 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesDataTable() {
-                this.TableName = "dtCertListOfAllRptDelinquences";
+            public dtCertfiedRptDelinquenciesDataTable() {
+                this.TableName = "dtCertfiedRptDelinquencies";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -14885,7 +14885,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtCertListOfAllRptDelinquencesDataTable(global::System.Data.DataTable table) {
+            internal dtCertfiedRptDelinquenciesDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -14902,7 +14902,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected dtCertListOfAllRptDelinquencesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtCertfiedRptDelinquenciesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -14949,9 +14949,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn other_improvement_assessed_valueColumn {
+            public global::System.Data.DataColumn building_assessed_valueColumn {
                 get {
-                    return this.columnother_improvement_assessed_value;
+                    return this.columnbuilding_assessed_value;
                 }
             }
             
@@ -14997,9 +14997,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn basic_totalColumn {
+            public global::System.Data.DataColumn basic_sub_totalColumn {
                 get {
-                    return this.columnbasic_total;
+                    return this.columnbasic_sub_total;
                 }
             }
             
@@ -15021,9 +15021,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn sef_totalColumn {
+            public global::System.Data.DataColumn sef_sub_totalColumn {
                 get {
-                    return this.columnsef_total;
+                    return this.columnsef_sub_total;
                 }
             }
             
@@ -15054,78 +15054,78 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesRow this[int index] {
+            public dtCertfiedRptDelinquenciesRow this[int index] {
                 get {
-                    return ((dtCertListOfAllRptDelinquencesRow)(this.Rows[index]));
+                    return ((dtCertfiedRptDelinquenciesRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtCertListOfAllRptDelinquencesRowChangeEventHandler dtCertListOfAllRptDelinquencesRowChanging;
+            public event dtCertfiedRptDelinquenciesRowChangeEventHandler dtCertfiedRptDelinquenciesRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtCertListOfAllRptDelinquencesRowChangeEventHandler dtCertListOfAllRptDelinquencesRowChanged;
+            public event dtCertfiedRptDelinquenciesRowChangeEventHandler dtCertfiedRptDelinquenciesRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtCertListOfAllRptDelinquencesRowChangeEventHandler dtCertListOfAllRptDelinquencesRowDeleting;
+            public event dtCertfiedRptDelinquenciesRowChangeEventHandler dtCertfiedRptDelinquenciesRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtCertListOfAllRptDelinquencesRowChangeEventHandler dtCertListOfAllRptDelinquencesRowDeleted;
+            public event dtCertfiedRptDelinquenciesRowChangeEventHandler dtCertfiedRptDelinquenciesRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AdddtCertListOfAllRptDelinquencesRow(dtCertListOfAllRptDelinquencesRow row) {
+            public void AdddtCertfiedRptDelinquenciesRow(dtCertfiedRptDelinquenciesRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesRow AdddtCertListOfAllRptDelinquencesRow(
+            public dtCertfiedRptDelinquenciesRow AdddtCertfiedRptDelinquenciesRow(
                         string arp_no, 
                         string owner_name, 
                         string owner_address, 
                         string classification, 
                         decimal land_assessed_value, 
-                        decimal other_improvement_assessed_value, 
+                        decimal building_assessed_value, 
                         decimal machinery_assessed_value, 
                         decimal annual_tax, 
                         int year, 
                         decimal basic_tax, 
                         decimal basic_penalty, 
-                        decimal basic_total, 
+                        decimal basic_sub_total, 
                         decimal sef_tax, 
                         decimal sef_penalty, 
-                        decimal sef_total, 
+                        decimal sef_sub_total, 
                         decimal grand_total, 
                         string remarks) {
-                dtCertListOfAllRptDelinquencesRow rowdtCertListOfAllRptDelinquencesRow = ((dtCertListOfAllRptDelinquencesRow)(this.NewRow()));
+                dtCertfiedRptDelinquenciesRow rowdtCertfiedRptDelinquenciesRow = ((dtCertfiedRptDelinquenciesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         arp_no,
                         owner_name,
                         owner_address,
                         classification,
                         land_assessed_value,
-                        other_improvement_assessed_value,
+                        building_assessed_value,
                         machinery_assessed_value,
                         annual_tax,
                         year,
                         basic_tax,
                         basic_penalty,
-                        basic_total,
+                        basic_sub_total,
                         sef_tax,
                         sef_penalty,
-                        sef_total,
+                        sef_sub_total,
                         grand_total,
                         remarks};
-                rowdtCertListOfAllRptDelinquencesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtCertListOfAllRptDelinquencesRow);
-                return rowdtCertListOfAllRptDelinquencesRow;
+                rowdtCertfiedRptDelinquenciesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtCertfiedRptDelinquenciesRow);
+                return rowdtCertfiedRptDelinquenciesRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtCertListOfAllRptDelinquencesDataTable cln = ((dtCertListOfAllRptDelinquencesDataTable)(base.Clone()));
+                dtCertfiedRptDelinquenciesDataTable cln = ((dtCertfiedRptDelinquenciesDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -15133,7 +15133,7 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtCertListOfAllRptDelinquencesDataTable();
+                return new dtCertfiedRptDelinquenciesDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15144,16 +15144,16 @@ namespace AccountingSystem {
                 this.columnowner_address = base.Columns["owner_address"];
                 this.columnclassification = base.Columns["classification"];
                 this.columnland_assessed_value = base.Columns["land_assessed_value"];
-                this.columnother_improvement_assessed_value = base.Columns["other_improvement_assessed_value"];
+                this.columnbuilding_assessed_value = base.Columns["building_assessed_value"];
                 this.columnmachinery_assessed_value = base.Columns["machinery_assessed_value"];
                 this.columnannual_tax = base.Columns["annual_tax"];
                 this.columnyear = base.Columns["year"];
                 this.columnbasic_tax = base.Columns["basic_tax"];
                 this.columnbasic_penalty = base.Columns["basic_penalty"];
-                this.columnbasic_total = base.Columns["basic_total"];
+                this.columnbasic_sub_total = base.Columns["basic_sub_total"];
                 this.columnsef_tax = base.Columns["sef_tax"];
                 this.columnsef_penalty = base.Columns["sef_penalty"];
-                this.columnsef_total = base.Columns["sef_total"];
+                this.columnsef_sub_total = base.Columns["sef_sub_total"];
                 this.columngrand_total = base.Columns["grand_total"];
                 this.columnremarks = base.Columns["remarks"];
             }
@@ -15171,8 +15171,8 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnclassification);
                 this.columnland_assessed_value = new global::System.Data.DataColumn("land_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnland_assessed_value);
-                this.columnother_improvement_assessed_value = new global::System.Data.DataColumn("other_improvement_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnother_improvement_assessed_value);
+                this.columnbuilding_assessed_value = new global::System.Data.DataColumn("building_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbuilding_assessed_value);
                 this.columnmachinery_assessed_value = new global::System.Data.DataColumn("machinery_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmachinery_assessed_value);
                 this.columnannual_tax = new global::System.Data.DataColumn("annual_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -15183,14 +15183,14 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnbasic_tax);
                 this.columnbasic_penalty = new global::System.Data.DataColumn("basic_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasic_penalty);
-                this.columnbasic_total = new global::System.Data.DataColumn("basic_total", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbasic_total);
+                this.columnbasic_sub_total = new global::System.Data.DataColumn("basic_sub_total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbasic_sub_total);
                 this.columnsef_tax = new global::System.Data.DataColumn("sef_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_tax);
                 this.columnsef_penalty = new global::System.Data.DataColumn("sef_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_penalty);
-                this.columnsef_total = new global::System.Data.DataColumn("sef_total", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsef_total);
+                this.columnsef_sub_total = new global::System.Data.DataColumn("sef_sub_total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsef_sub_total);
                 this.columngrand_total = new global::System.Data.DataColumn("grand_total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngrand_total);
                 this.columnremarks = new global::System.Data.DataColumn("remarks", typeof(string), null, global::System.Data.MappingType.Element);
@@ -15199,28 +15199,28 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesRow NewdtCertListOfAllRptDelinquencesRow() {
-                return ((dtCertListOfAllRptDelinquencesRow)(this.NewRow()));
+            public dtCertfiedRptDelinquenciesRow NewdtCertfiedRptDelinquenciesRow() {
+                return ((dtCertfiedRptDelinquenciesRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtCertListOfAllRptDelinquencesRow(builder);
+                return new dtCertfiedRptDelinquenciesRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtCertListOfAllRptDelinquencesRow);
+                return typeof(dtCertfiedRptDelinquenciesRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtCertListOfAllRptDelinquencesRowChanged != null)) {
-                    this.dtCertListOfAllRptDelinquencesRowChanged(this, new dtCertListOfAllRptDelinquencesRowChangeEvent(((dtCertListOfAllRptDelinquencesRow)(e.Row)), e.Action));
+                if ((this.dtCertfiedRptDelinquenciesRowChanged != null)) {
+                    this.dtCertfiedRptDelinquenciesRowChanged(this, new dtCertfiedRptDelinquenciesRowChangeEvent(((dtCertfiedRptDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -15228,8 +15228,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtCertListOfAllRptDelinquencesRowChanging != null)) {
-                    this.dtCertListOfAllRptDelinquencesRowChanging(this, new dtCertListOfAllRptDelinquencesRowChangeEvent(((dtCertListOfAllRptDelinquencesRow)(e.Row)), e.Action));
+                if ((this.dtCertfiedRptDelinquenciesRowChanging != null)) {
+                    this.dtCertfiedRptDelinquenciesRowChanging(this, new dtCertfiedRptDelinquenciesRowChangeEvent(((dtCertfiedRptDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -15237,8 +15237,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtCertListOfAllRptDelinquencesRowDeleted != null)) {
-                    this.dtCertListOfAllRptDelinquencesRowDeleted(this, new dtCertListOfAllRptDelinquencesRowChangeEvent(((dtCertListOfAllRptDelinquencesRow)(e.Row)), e.Action));
+                if ((this.dtCertfiedRptDelinquenciesRowDeleted != null)) {
+                    this.dtCertfiedRptDelinquenciesRowDeleted(this, new dtCertfiedRptDelinquenciesRowChangeEvent(((dtCertfiedRptDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -15246,14 +15246,14 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtCertListOfAllRptDelinquencesRowDeleting != null)) {
-                    this.dtCertListOfAllRptDelinquencesRowDeleting(this, new dtCertListOfAllRptDelinquencesRowChangeEvent(((dtCertListOfAllRptDelinquencesRow)(e.Row)), e.Action));
+                if ((this.dtCertfiedRptDelinquenciesRowDeleting != null)) {
+                    this.dtCertfiedRptDelinquenciesRowDeleting(this, new dtCertfiedRptDelinquenciesRowChangeEvent(((dtCertfiedRptDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovedtCertListOfAllRptDelinquencesRow(dtCertListOfAllRptDelinquencesRow row) {
+            public void RemovedtCertfiedRptDelinquenciesRow(dtCertfiedRptDelinquenciesRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -15280,7 +15280,7 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtCertListOfAllRptDelinquencesDataTable";
+                attribute2.FixedValue = "dtCertfiedRptDelinquenciesDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -28680,15 +28680,15 @@ namespace AccountingSystem {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtCertListOfAllRptDelinquencesRow : global::System.Data.DataRow {
+        public partial class dtCertfiedRptDelinquenciesRow : global::System.Data.DataRow {
             
-            private dtCertListOfAllRptDelinquencesDataTable tabledtCertListOfAllRptDelinquences;
+            private dtCertfiedRptDelinquenciesDataTable tabledtCertfiedRptDelinquencies;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtCertListOfAllRptDelinquencesRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtCertfiedRptDelinquenciesRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtCertListOfAllRptDelinquences = ((dtCertListOfAllRptDelinquencesDataTable)(this.Table));
+                this.tabledtCertfiedRptDelinquencies = ((dtCertfiedRptDelinquenciesDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -28696,15 +28696,14 @@ namespace AccountingSystem {
             public string arp_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.arp_noColumn]));
+                        return ((string)(this[this.tabledtCertfiedRptDelinquencies.arp_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'arp_no\' in table \'dtCertListOfAllRptDelinquences\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'arp_no\' in table \'dtCertfiedRptDelinquencies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.arp_noColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.arp_noColumn] = value;
                 }
             }
             
@@ -28713,15 +28712,15 @@ namespace AccountingSystem {
             public string owner_name {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.owner_nameColumn]));
+                        return ((string)(this[this.tabledtCertfiedRptDelinquencies.owner_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'owner_name\' in table \'dtCertListOfAllRptDelinquences\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'owner_name\' in table \'dtCertfiedRptDelinquencies\' is DBNull" +
+                                ".", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.owner_nameColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.owner_nameColumn] = value;
                 }
             }
             
@@ -28730,15 +28729,15 @@ namespace AccountingSystem {
             public string owner_address {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.owner_addressColumn]));
+                        return ((string)(this[this.tabledtCertfiedRptDelinquencies.owner_addressColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'owner_address\' in table \'dtCertListOfAllRptDelinquences\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'owner_address\' in table \'dtCertfiedRptDelinquencies\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.owner_addressColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.owner_addressColumn] = value;
                 }
             }
             
@@ -28747,15 +28746,15 @@ namespace AccountingSystem {
             public string classification {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.classificationColumn]));
+                        return ((string)(this[this.tabledtCertfiedRptDelinquencies.classificationColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'classification\' in table \'dtCertListOfAllRptDelinquences\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'classification\' in table \'dtCertfiedRptDelinquencies\' is DB" +
+                                "Null.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.classificationColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.classificationColumn] = value;
                 }
             }
             
@@ -28764,32 +28763,32 @@ namespace AccountingSystem {
             public decimal land_assessed_value {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.land_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'land_assessed_value\' in table \'dtCertListOfAllRptDelinquenc" +
-                                "es\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'land_assessed_value\' in table \'dtCertfiedRptDelinquencies\' " +
+                                "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.land_assessed_valueColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal other_improvement_assessed_value {
+            public decimal building_assessed_value {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.building_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'other_improvement_assessed_value\' in table \'dtCertListOfAll" +
-                                "RptDelinquences\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'building_assessed_value\' in table \'dtCertfiedRptDelinquenci" +
+                                "es\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.building_assessed_valueColumn] = value;
                 }
             }
             
@@ -28798,15 +28797,15 @@ namespace AccountingSystem {
             public decimal machinery_assessed_value {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.machinery_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'machinery_assessed_value\' in table \'dtCertListOfAllRptDelin" +
-                                "quences\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'machinery_assessed_value\' in table \'dtCertfiedRptDelinquenc" +
+                                "ies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.machinery_assessed_valueColumn] = value;
                 }
             }
             
@@ -28815,15 +28814,15 @@ namespace AccountingSystem {
             public decimal annual_tax {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.annual_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.annual_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'annual_tax\' in table \'dtCertListOfAllRptDelinquences\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'annual_tax\' in table \'dtCertfiedRptDelinquencies\' is DBNull" +
+                                ".", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.annual_taxColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.annual_taxColumn] = value;
                 }
             }
             
@@ -28832,14 +28831,14 @@ namespace AccountingSystem {
             public int year {
                 get {
                     try {
-                        return ((int)(this[this.tabledtCertListOfAllRptDelinquences.yearColumn]));
+                        return ((int)(this[this.tabledtCertfiedRptDelinquencies.yearColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'year\' in table \'dtCertListOfAllRptDelinquences\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'year\' in table \'dtCertfiedRptDelinquencies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.yearColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.yearColumn] = value;
                 }
             }
             
@@ -28848,15 +28847,15 @@ namespace AccountingSystem {
             public decimal basic_tax {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.basic_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtCertListOfAllRptDelinquences\' is DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtCertfiedRptDelinquencies\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.basic_taxColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.basic_taxColumn] = value;
                 }
             }
             
@@ -28865,32 +28864,32 @@ namespace AccountingSystem {
             public decimal basic_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.basic_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtCertListOfAllRptDelinquences\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtCertfiedRptDelinquencies\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.basic_penaltyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal basic_total {
+            public decimal basic_sub_total {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.basic_sub_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_total\' in table \'dtCertListOfAllRptDelinquences\' is D" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_sub_total\' in table \'dtCertfiedRptDelinquencies\' is D" +
                                 "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.basic_totalColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.basic_sub_totalColumn] = value;
                 }
             }
             
@@ -28899,15 +28898,14 @@ namespace AccountingSystem {
             public decimal sef_tax {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.sef_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtCertListOfAllRptDelinquences\' is DBNul" +
-                                "l.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtCertfiedRptDelinquencies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.sef_taxColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.sef_taxColumn] = value;
                 }
             }
             
@@ -28916,32 +28914,32 @@ namespace AccountingSystem {
             public decimal sef_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.sef_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtCertListOfAllRptDelinquences\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtCertfiedRptDelinquencies\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.sef_penaltyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal sef_total {
+            public decimal sef_sub_total {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.sef_sub_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_total\' in table \'dtCertListOfAllRptDelinquences\' is DBN" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_sub_total\' in table \'dtCertfiedRptDelinquencies\' is DBN" +
                                 "ull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.sef_totalColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.sef_sub_totalColumn] = value;
                 }
             }
             
@@ -28950,15 +28948,15 @@ namespace AccountingSystem {
             public decimal grand_total {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.grand_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertfiedRptDelinquencies.grand_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'grand_total\' in table \'dtCertListOfAllRptDelinquences\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'grand_total\' in table \'dtCertfiedRptDelinquencies\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.grand_totalColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.grand_totalColumn] = value;
                 }
             }
             
@@ -28967,220 +28965,219 @@ namespace AccountingSystem {
             public string remarks {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.remarksColumn]));
+                        return ((string)(this[this.tabledtCertfiedRptDelinquencies.remarksColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'remarks\' in table \'dtCertListOfAllRptDelinquences\' is DBNul" +
-                                "l.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'remarks\' in table \'dtCertfiedRptDelinquencies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtCertListOfAllRptDelinquences.remarksColumn] = value;
+                    this[this.tabledtCertfiedRptDelinquencies.remarksColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isarp_noNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.arp_noColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.arp_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setarp_noNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.arp_noColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.arp_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isowner_nameNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.owner_nameColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.owner_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setowner_nameNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.owner_nameColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.owner_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isowner_addressNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.owner_addressColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.owner_addressColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setowner_addressNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.owner_addressColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.owner_addressColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsclassificationNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.classificationColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.classificationColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetclassificationNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.classificationColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.classificationColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Island_assessed_valueNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.land_assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setland_assessed_valueNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.land_assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isother_improvement_assessed_valueNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn);
+            public bool Isbuilding_assessed_valueNull() {
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.building_assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setother_improvement_assessed_valueNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn] = global::System.Convert.DBNull;
+            public void Setbuilding_assessed_valueNull() {
+                this[this.tabledtCertfiedRptDelinquencies.building_assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Ismachinery_assessed_valueNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.machinery_assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setmachinery_assessed_valueNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.machinery_assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isannual_taxNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.annual_taxColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.annual_taxColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setannual_taxNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.annual_taxColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.annual_taxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsyearNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.yearColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.yearColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetyearNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.yearColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.yearColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isbasic_taxNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.basic_taxColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.basic_taxColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setbasic_taxNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.basic_taxColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.basic_taxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isbasic_penaltyNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.basic_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setbasic_penaltyNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.basic_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isbasic_totalNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.basic_totalColumn);
+            public bool Isbasic_sub_totalNull() {
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.basic_sub_totalColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setbasic_totalNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.basic_totalColumn] = global::System.Convert.DBNull;
+            public void Setbasic_sub_totalNull() {
+                this[this.tabledtCertfiedRptDelinquencies.basic_sub_totalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Issef_taxNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.sef_taxColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.sef_taxColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setsef_taxNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.sef_taxColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.sef_taxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Issef_penaltyNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.sef_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setsef_penaltyNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.sef_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Issef_totalNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.sef_totalColumn);
+            public bool Issef_sub_totalNull() {
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.sef_sub_totalColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setsef_totalNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.sef_totalColumn] = global::System.Convert.DBNull;
+            public void Setsef_sub_totalNull() {
+                this[this.tabledtCertfiedRptDelinquencies.sef_sub_totalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isgrand_totalNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.grand_totalColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.grand_totalColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setgrand_totalNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.grand_totalColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.grand_totalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsremarksNull() {
-                return this.IsNull(this.tabledtCertListOfAllRptDelinquences.remarksColumn);
+                return this.IsNull(this.tabledtCertfiedRptDelinquencies.remarksColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetremarksNull() {
-                this[this.tabledtCertListOfAllRptDelinquences.remarksColumn] = global::System.Convert.DBNull;
+                this[this.tabledtCertfiedRptDelinquencies.remarksColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -31892,22 +31889,22 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class dtCertListOfAllRptDelinquencesRowChangeEvent : global::System.EventArgs {
+        public class dtCertfiedRptDelinquenciesRowChangeEvent : global::System.EventArgs {
             
-            private dtCertListOfAllRptDelinquencesRow eventRow;
+            private dtCertfiedRptDelinquenciesRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesRowChangeEvent(dtCertListOfAllRptDelinquencesRow row, global::System.Data.DataRowAction action) {
+            public dtCertfiedRptDelinquenciesRowChangeEvent(dtCertfiedRptDelinquenciesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtCertListOfAllRptDelinquencesRow Row {
+            public dtCertfiedRptDelinquenciesRow Row {
                 get {
                     return this.eventRow;
                 }

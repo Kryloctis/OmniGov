@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount
+namespace AccountingSystem.Views.Reports.RptReports
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {

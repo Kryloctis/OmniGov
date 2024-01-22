@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
+namespace AccountingSystem.Views.Reports.RptReports
 {
     partial class frmRealPropertyTaxAccountRegisterReport
     {

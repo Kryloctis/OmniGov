@@ -10,7 +10,7 @@ namespace RPT.Domain.Interfaces
     {
         bool IsPropertyPosted(string arpNo);
 
-        Dictionary<string, string> GetViewPreviousAssessmentPostRecord(string completeArpNo, int assessmentPostYear);
+        Dictionary<string, string> GetViewRecentAssessmentRecord(string completeArpNo, int assessmentYear);
 
         int GetMinAssessmentPostYear(string completeArpNo);
 
@@ -30,9 +30,9 @@ namespace RPT.Domain.Interfaces
 
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear);
 
-        DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate);
+        DataTable GetViewCertRptDelinquencesBy_BarangayName_AsOfDate(string barangayName, DateTime asOfDate);
 
-        DataTable Get_Grouped_Barangay_Records();
+        DataTable GetBarangayRecords();
 
         DataTable Get_Grouped_Municipality_Records();
 

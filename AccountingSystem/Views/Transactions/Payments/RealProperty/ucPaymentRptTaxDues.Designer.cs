@@ -263,7 +263,6 @@
             dgTaxDues.CellValueChanged += dgTaxDues_CellValueChanged;
             dgTaxDues.ColumnAdded += dgTaxDues_ColumnAdded;
             dgTaxDues.CurrentCellDirtyStateChanged += dgTaxDues_CurrentCellDirtyStateChanged;
-            dgTaxDues.RowsAdded += dgTaxDues_RowsAdded;
             dgTaxDues.Validating += dgTaxDues_Validating;
             // 
             // flowLayoutPanel5
@@ -319,7 +318,6 @@
             txtTotalDue.Size = new System.Drawing.Size(208, 23);
             txtTotalDue.TabIndex = 0;
             txtTotalDue.Text = "0.00";
-            txtTotalDue.Validating += txtTotalDue_Validating;
             // 
             // ucPaymentRptTaxDues
             // 

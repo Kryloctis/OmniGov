@@ -34,7 +34,7 @@
     <None Remove="Reports\cash-disbursement-journal.rdlc" />
     <None Remove="Reports\cash-receipts-journal.rdlc" />
     <None Remove="Reports\cashbook.rdlc" />
-    <None Remove="Reports\certified-list-of-all-real-property-tax-delinquences-report.rdlc" />
+    <None Remove="Reports\CertifiedListRptDelinquences.rdlc" />
     <None Remove="Reports\check-disbursements-journal.rdlc" />
     <None Remove="Reports\check-issued.rdlc" />
     <None Remove="Reports\consolidated-receipts.rdlc" />
@@ -78,7 +78,7 @@
     <Content Include="Reports\cashbook.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\certified-list-of-all-real-property-tax-delinquences-report.rdlc">
+    <Content Include="Reports\CertifiedListRptDelinquences.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\check-disbursements-journal.rdlc">

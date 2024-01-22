@@ -1,13 +1,11 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.RptReports;
 
 namespace AccountingSystem.Views.Shared
 {

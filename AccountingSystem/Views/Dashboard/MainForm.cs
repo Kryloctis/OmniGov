@@ -33,10 +33,6 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -55,6 +51,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Registry;
+using AccountingSystem.Views.Reports.RptReports;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -228,7 +225,7 @@ namespace AccountingSystem.Views.Dashboard
                 realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
-                consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
+                certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
                 releasedChequesToolStripMenuItem.Enabled = false;
@@ -570,9 +567,13 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
         }
 
-        private void consolidatedRealPropertyTaxDeliquencesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
+            try
+            {
+                _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void returnedReceiptsToolStripMenuItem_Click(object sender, EventArgs e)

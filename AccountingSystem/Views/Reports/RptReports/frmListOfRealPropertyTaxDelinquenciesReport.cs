@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies
+namespace AccountingSystem.Views.Reports.RptReports
 {
     public partial class frmListOfRealPropertyTaxDelinquenciesReport : Form
     {
@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void LoadBarangays()
         {
-            var dtBarangays = AccFactory.RptAssessmentPostsRepository().Get_Grouped_Barangay_Records();
+            var dtBarangays = AccFactory.RptAssessmentPostsRepository().GetBarangayRecords();
             cmbxBarangay.DataSource = dtBarangays;
             cmbxBarangay.DisplayMember = "barangay_name";
         }
@@ -167,9 +167,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
             int previousAssessmentCount = 0;
-            int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
+            //int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
 
-            return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
+            return RealPropertyTaxComputations.GetPenalty(penaltyRate, 0, taxDueAmount);
         }
 
         private void LoadReports()
