@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using AccountingSystem.DataSets;
 using AccountingSystem.Views.Shared;
 using DocumentFormat.OpenXml.InkML;
 using Microsoft.Reporting.WinForms;
@@ -85,7 +86,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             {
                 var parameters = ((string barangayName, DateTime asOf))e.Argument;
 
-                var dataTable = new dsLFS.dtCertfiedRptDelinquenciesDataTable();
+                var dataTable = new dsTreasury.dtCertfiedRptDelinquenciesDataTable();
                 var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewCertRptDelinquencesBy_BarangayName_AsOfDate(parameters.barangayName, parameters.asOf);
 
                 int totalProgressCount = dbDataTable.Rows.Count;
@@ -113,7 +114,6 @@ namespace AccountingSystem.Views.Reports.RptReports
                     decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
                     decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
-                    //If there's a payment
                     var assmntParameters = (rowAssmntYear, rowCompleteArpNo, rowEffectivityQuarter, rowEffectivityYear);
                     var penalties = GetPenalties(parameters.asOf, assmntParameters, rowPenaltyRate, basicTaxDue, sefTaxDue);
 

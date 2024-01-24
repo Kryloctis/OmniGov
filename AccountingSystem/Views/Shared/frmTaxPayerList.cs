@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Shared
         {
             switch (refForm)
             {
-                case frmRealPropertyTaxAccountRegisterReport:
+                case frmRptTaxDuesPayments:
                     InitializeRealPropertyTaxAccountngRegisterReport();
                     break;
 

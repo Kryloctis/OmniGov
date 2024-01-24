@@ -559,7 +559,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
+            _ = new frmRptTaxDuesPayments().ShowDialog();
         }
 
         private void realPropertyTaxStatementOfAccountToolStripMenuItem_Click(object sender, EventArgs e)
@@ -706,6 +706,15 @@ namespace AccountingSystem.Views.Dashboard
         private void registryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRegistry().ShowDialog();
+        }
+
+        private void realPropertTaxDuesAndPaymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptTaxDuesPayments().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

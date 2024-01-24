@@ -160,6 +160,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
+            realPropertTaxDuesAndPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1220,7 +1221,6 @@
             // 
             // realPropertyTaxAccountRegisterRPTARToolStripMenuItem
             // 
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
             realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Name = "realPropertyTaxAccountRegisterRPTARToolStripMenuItem";
             realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Text = "Real Property Tax Account Register (RPTAR)";
@@ -1253,7 +1253,7 @@
             // 
             // realPropertiesToolStripMenuItem
             // 
-            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem });
+            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, realPropertTaxDuesAndPaymentsToolStripMenuItem });
             realPropertiesToolStripMenuItem.Name = "realPropertiesToolStripMenuItem";
             realPropertiesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             realPropertiesToolStripMenuItem.Text = "Real Properties";
@@ -1317,6 +1317,13 @@
             imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // realPropertTaxDuesAndPaymentsToolStripMenuItem
+            // 
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Name = "realPropertTaxDuesAndPaymentsToolStripMenuItem";
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Text = "Real Property Tax Dues and Payments";
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Click += realPropertTaxDuesAndPaymentsToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1518,5 +1525,6 @@
         private System.Windows.Forms.ToolStripMenuItem realPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem realPropertTaxDuesAndPaymentsToolStripMenuItem;
     }
 }

@@ -87,8 +87,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
         <rd:TableName>dtCertfiedRptDelinquencies</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

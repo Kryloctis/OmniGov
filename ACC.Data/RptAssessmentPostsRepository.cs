@@ -221,16 +221,16 @@ namespace ACC.Data
             return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
-        public DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo)
+        public DataTable GetViewRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
         {
             var parameters = new object[][]
             {
                 new object[] { "@taxpayer_name", DbType.String, ownerName},
-                new object[] { "@year_from", DbType.Int32, yearFrom},
-                new object[] { "@year_to", DbType.Int32, yearTo}
+                new object[] { "@periodFrom", DbType.DateTime, periodFrom},
+                new object[] { "@periodTo", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND (year >= @year_to AND year <= @year_from) ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
