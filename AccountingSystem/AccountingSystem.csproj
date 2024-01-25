@@ -43,7 +43,7 @@
     <None Remove="Reports\general-ledger.rdlc" />
     <None Remove="Reports\journal-entry-voucher.rdlc" />
     <None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
-    <None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
+    <None Remove="Reports\ListRptDelinquencies.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
     <None Remove="Reports\procurements-received-journal.rdlc" />
@@ -105,7 +105,7 @@
     <Content Include="Reports\Ledgers\summary-subsidiary-ledger.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\list_of_real-property-tax-delinquencies.rdlc">
+    <Content Include="Reports\ListRptDelinquencies.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">

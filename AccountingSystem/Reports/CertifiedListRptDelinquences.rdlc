@@ -2405,7 +2405,7 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Parameters!paramAsOf.Value</Value>
+                      <Value>=Parameters!paramDatePeriod.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>11pt</FontSize>
@@ -2549,9 +2549,10 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramAsOf">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="paramDatePeriod">
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramBarangay">
@@ -2574,7 +2575,7 @@
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramAsOf</ParameterName>
+          <ParameterName>paramDatePeriod</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>

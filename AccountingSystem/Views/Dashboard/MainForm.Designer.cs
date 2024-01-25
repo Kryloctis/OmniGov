@@ -145,13 +145,12 @@
             reportOfCollectionsDepositsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             realPropertyTaxStatementOfAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            listOfDelinquentAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             realPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            realPropertTaxDuesAndPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             reportOfCheckIssuedRCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             releasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,7 +159,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            realPropertTaxDuesAndPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            listOfRealPropertyDelinquenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1193,7 +1192,7 @@
             // 
             // collectionPaymentToolStripMenuItem1
             // 
-            collectionPaymentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRCDToolStripMenuItem, abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator14, realPropertyTaxAccountRegisterRPTARToolStripMenuItem, realPropertyTaxStatementOfAccountToolStripMenuItem, toolStripSeparator15, listOfDelinquentAccountsToolStripMenuItem });
+            collectionPaymentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRCDToolStripMenuItem, abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator14, realPropertyTaxStatementOfAccountToolStripMenuItem, toolStripSeparator15 });
             collectionPaymentToolStripMenuItem1.Name = "collectionPaymentToolStripMenuItem1";
             collectionPaymentToolStripMenuItem1.Size = new System.Drawing.Size(400, 22);
             collectionPaymentToolStripMenuItem1.Text = "Collection/Payment";
@@ -1202,7 +1201,7 @@
             // 
             reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
             reportOfCollectionsDepositsRCDToolStripMenuItem.Name = "reportOfCollectionsDepositsRCDToolStripMenuItem";
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            reportOfCollectionsDepositsRCDToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             reportOfCollectionsDepositsRCDToolStripMenuItem.Text = "Report of Collections Deposits (RCD)";
             reportOfCollectionsDepositsRCDToolStripMenuItem.Click += reportOfCollectionsDepositsRCDToolStripMenuItem_Click;
             // 
@@ -1210,41 +1209,27 @@
             // 
             abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
             abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
-            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections";
             abstractOfGeneralCollectionsToolStripMenuItem.Click += abstractOfGeneralCollectionsToolStripMenuItem_Click;
             // 
             // toolStripSeparator14
             // 
             toolStripSeparator14.Name = "toolStripSeparator14";
-            toolStripSeparator14.Size = new System.Drawing.Size(299, 6);
-            // 
-            // realPropertyTaxAccountRegisterRPTARToolStripMenuItem
-            // 
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Name = "realPropertyTaxAccountRegisterRPTARToolStripMenuItem";
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Text = "Real Property Tax Account Register (RPTAR)";
-            realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Click += realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click;
+            toolStripSeparator14.Size = new System.Drawing.Size(280, 6);
             // 
             // realPropertyTaxStatementOfAccountToolStripMenuItem
             // 
             realPropertyTaxStatementOfAccountToolStripMenuItem.Enabled = false;
             realPropertyTaxStatementOfAccountToolStripMenuItem.Name = "realPropertyTaxStatementOfAccountToolStripMenuItem";
-            realPropertyTaxStatementOfAccountToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            realPropertyTaxStatementOfAccountToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             realPropertyTaxStatementOfAccountToolStripMenuItem.Text = "Real Property Tax Statement of Account";
             realPropertyTaxStatementOfAccountToolStripMenuItem.Click += realPropertyTaxStatementOfAccountToolStripMenuItem_Click;
             // 
             // toolStripSeparator15
             // 
             toolStripSeparator15.Name = "toolStripSeparator15";
-            toolStripSeparator15.Size = new System.Drawing.Size(299, 6);
-            // 
-            // listOfDelinquentAccountsToolStripMenuItem
-            // 
-            listOfDelinquentAccountsToolStripMenuItem.Name = "listOfDelinquentAccountsToolStripMenuItem";
-            listOfDelinquentAccountsToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            listOfDelinquentAccountsToolStripMenuItem.Text = "List of Delinquent Accounts";
-            listOfDelinquentAccountsToolStripMenuItem.Click += toolStripMenuItemListOfDelinquentAccounts_Click;
+            toolStripSeparator15.Size = new System.Drawing.Size(280, 6);
             // 
             // toolStripSeparator13
             // 
@@ -1253,7 +1238,7 @@
             // 
             // realPropertiesToolStripMenuItem
             // 
-            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, realPropertTaxDuesAndPaymentsToolStripMenuItem });
+            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, realPropertTaxDuesAndPaymentsToolStripMenuItem, listOfRealPropertyDelinquenciesToolStripMenuItem });
             realPropertiesToolStripMenuItem.Name = "realPropertiesToolStripMenuItem";
             realPropertiesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             realPropertiesToolStripMenuItem.Text = "Real Properties";
@@ -1264,6 +1249,13 @@
             certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Text = "Certified List of Real Property Tax Deliquencies";
             certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Click += certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem_Click;
+            // 
+            // realPropertTaxDuesAndPaymentsToolStripMenuItem
+            // 
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Name = "realPropertTaxDuesAndPaymentsToolStripMenuItem";
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Text = "Real Property Tax Dues and Payments";
+            realPropertTaxDuesAndPaymentsToolStripMenuItem.Click += realPropertTaxDuesAndPaymentsToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
@@ -1318,12 +1310,12 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // realPropertTaxDuesAndPaymentsToolStripMenuItem
+            // listOfRealPropertyDelinquenciesToolStripMenuItem
             // 
-            realPropertTaxDuesAndPaymentsToolStripMenuItem.Name = "realPropertTaxDuesAndPaymentsToolStripMenuItem";
-            realPropertTaxDuesAndPaymentsToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
-            realPropertTaxDuesAndPaymentsToolStripMenuItem.Text = "Real Property Tax Dues and Payments";
-            realPropertTaxDuesAndPaymentsToolStripMenuItem.Click += realPropertTaxDuesAndPaymentsToolStripMenuItem_Click;
+            listOfRealPropertyDelinquenciesToolStripMenuItem.Name = "listOfRealPropertyDelinquenciesToolStripMenuItem";
+            listOfRealPropertyDelinquenciesToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            listOfRealPropertyDelinquenciesToolStripMenuItem.Text = "List of Real Property Delinquencies";
+            listOfRealPropertyDelinquenciesToolStripMenuItem.Click += listOfRealPropertyDelinquenciesToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1462,10 +1454,8 @@
         private System.Windows.Forms.ToolStripMenuItem dailyCashPositionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripMenuItem realPropertyTaxAccountRegisterRPTARToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxStatementOfAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripMenuItem listOfDelinquentAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem issueRecieptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem businessToolStripMenuItem;
@@ -1526,5 +1516,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertTaxDuesAndPaymentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listOfRealPropertyDelinquenciesToolStripMenuItem;
     }
 }

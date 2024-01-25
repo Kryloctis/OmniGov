@@ -34,7 +34,8 @@ namespace AccountingSystem.Views.Reports.RptReports
             try
             {
                 LoadBarangays();
-                dtAsOf.Value = Helper.GetCurrentDate();
+                dtFrom.Value = Helper.GetCurrentDate();
+                dtTo.Value = Helper.GetCurrentDate();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -72,11 +73,12 @@ namespace AccountingSystem.Views.Reports.RptReports
         {
             if (!backgroundWorker1.IsBusy)
             {
-                DateTime asOf = dtAsOf.Value;
+                DateTime periodFrom = dtFrom.Value;
+                DateTime periodTo = dtTo.Value;
                 string barangayName = cmbxBarangays.Text;
                 pbLoadRecords.Value = 0;
 
-                backgroundWorker1.RunWorkerAsync((barangayName, asOf));
+                backgroundWorker1.RunWorkerAsync((barangayName, periodFrom, periodTo));
             }
         }
 
@@ -84,10 +86,10 @@ namespace AccountingSystem.Views.Reports.RptReports
         {
             try
             {
-                var parameters = ((string barangayName, DateTime asOf))e.Argument;
+                var parameters = ((string barangayName, DateTime periodFrom, DateTime periodTo))e.Argument;
 
                 var dataTable = new dsTreasury.dtCertfiedRptDelinquenciesDataTable();
-                var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewCertRptDelinquencesBy_BarangayName_AsOfDate(parameters.barangayName, parameters.asOf);
+                var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByBarangayNamePeriod(parameters.barangayName, parameters.periodFrom, parameters.periodTo);
 
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;
@@ -115,7 +117,7 @@ namespace AccountingSystem.Views.Reports.RptReports
                     decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
                     var assmntParameters = (rowAssmntYear, rowCompleteArpNo, rowEffectivityQuarter, rowEffectivityYear);
-                    var penalties = GetPenalties(parameters.asOf, assmntParameters, rowPenaltyRate, basicTaxDue, sefTaxDue);
+                    var penalties = GetPenalties(parameters.periodTo, assmntParameters, rowPenaltyRate, basicTaxDue, sefTaxDue);
 
                     if (penalties.basicPenalty == 0 && penalties.sefPenalty == 0)
                     {
@@ -153,7 +155,7 @@ namespace AccountingSystem.Views.Reports.RptReports
 
                 e.Result = dataTable;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -163,36 +165,40 @@ namespace AccountingSystem.Views.Reports.RptReports
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
-
-            if (dataTable.Rows.Count < 1)
-                pbLoadRecords.Value = 100;
-
-            string lguName = Helper.LGUDetails()["lgu_name"];
-            string barangayName = cmbxBarangays.Text.Trim();
-            var asOfDate = dtAsOf.Value;
-
-            var reportParameters = new ReportParameter[]
+            try
             {
-                new ReportParameter("paramLGUName", lguName),
-                new ReportParameter("paramAsOf", asOfDate.ToString()),
-                new ReportParameter("paramBarangay", barangayName)
-            };
+                if (e.Cancelled)
+                    return;
+                if (e.Result is not DataTable dataTable)
+                    return;
 
-            reportViewer.LocalReport.ReportPath = $"{Application.StartupPath}\\Reports\\CertifiedListRptDelinquences.rdlc";
-            reportViewer.LocalReport.SetParameters(reportParameters);
+                if (dataTable.Rows.Count < 1)
+                    pbLoadRecords.Value = 100;
 
-            reportViewer.LocalReport.DataSources.Clear();
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dtCertfiedRptDelinquencies", dataTable));
+                string lguName = Helper.LGUDetails()["lgu_name"];
+                string barangayName = cmbxBarangays.Text.Trim();
+                string datePeriod = $"{dtFrom.Value.ToString("MMM dd, yyyy")} - {dtTo.Value.ToString("MMM dd, yyyy")}";
 
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.ZoomPercent = 100;
+                var reportParameters = new ReportParameter[]
+                {
+                    new ReportParameter("paramLGUName", lguName),
+                    new ReportParameter("paramDatePeriod", datePeriod),
+                    new ReportParameter("paramBarangay", barangayName)
+                };
 
-            reportViewer.RefreshReport();
+                reportViewer.LocalReport.ReportPath = $"{Application.StartupPath}\\Reports\\CertifiedListRptDelinquences.rdlc";
+                reportViewer.LocalReport.SetParameters(reportParameters);
+
+                reportViewer.LocalReport.DataSources.Clear();
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dtCertfiedRptDelinquencies", dataTable));
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
     }
 }

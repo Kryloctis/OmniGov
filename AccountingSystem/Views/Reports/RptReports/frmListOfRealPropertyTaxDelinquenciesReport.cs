@@ -22,83 +22,34 @@ namespace AccountingSystem.Views.Reports.RptReports
             panel2.Controls.Add(reportViewer);
             reportViewer.Dock = DockStyle.Fill;
             cmbxLoadBy.SelectedIndex = 0;
-            nudTaxYear.Value = Helper.GetCurrentDate().Year;
         }
 
         private void LoadBarangays()
         {
             var dtBarangays = AccFactory.RptAssessmentPostsRepository().GetBarangayRecords();
-            cmbxBarangay.DataSource = dtBarangays;
-            cmbxBarangay.DisplayMember = "barangay_name";
+            cmbxLoadBy.DataSource = dtBarangays;
+            cmbxLoadBy.ValueMember = "id";
+            cmbxLoadBy.DisplayMember = "barangay_name";
         }
 
-        private void LoadMunicipalities()
+        private void LoadTaxpayers()
         {
-            var dtMunicipalities = AccFactory.RptAssessmentPostsRepository().Get_Grouped_Municipality_Records();
-            cmbxMunicipality.DataSource = dtMunicipalities;
-            cmbxMunicipality.DisplayMember = "municipality_name";
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+            cmbxLoadBy.DataSource = dtTaxpayers;
+            cmbxLoadBy.ValueMember = "id";
+            cmbxLoadBy.DisplayMember = "name";
         }
-
-        private void ShowHideButtons()
-        {
-            string selectedLoadBy = cmbxLoadBy.Text.Trim();
-
-            switch (selectedLoadBy)
-            {
-                case "Taxpayer":
-                    btnFindTaxPayer.Visible = true;
-                    cmbxBarangay.Visible = false;
-                    cmbxMunicipality.Visible = false;
-                    taxpayerNamePanel.Visible = true;
-                    _ownerName = string.Empty;
-                    break;
-
-                case "Municipality":
-                    cmbxMunicipality.Visible = true;
-                    cmbxBarangay.Visible = false;
-                    btnFindTaxPayer.Visible = false;
-                    taxpayerNamePanel.Visible = false;
-                    _ownerName = string.Empty;
-                    LoadMunicipalities();
-                    break;
-
-                case "Barangay":
-                    cmbxBarangay.Visible = true;
-                    btnFindTaxPayer.Visible = false;
-                    cmbxMunicipality.Visible = false;
-                    taxpayerNamePanel.Visible = false;
-                    _ownerName = string.Empty;
-                    LoadBarangays();
-                    break;
-
-                default:
-                    btnFindTaxPayer.Visible = false;
-                    cmbxBarangay.Visible = false;
-                    cmbxMunicipality.Visible = false;
-                    taxpayerNamePanel.Visible = false;
-                    _ownerName = string.Empty;
-                    break;
-            }
-        }
-
-        private void chkbxTaxYear_CheckedChanged(object sender, EventArgs e) => nudTaxYear.Enabled = chkbxTaxYear.Checked;
-
-        private void cmbxLoadBy_SelectedValueChanged(object sender, EventArgs e) => ShowHideButtons();
 
         private void frmListOfRealPropertyTaxDelinquenciesReport_Load(object sender, EventArgs e)
         {
-            nudTaxYear.Enabled = chkbxTaxYear.Checked;
         }
-
-        #region LoadReport
 
         private bool LoadReport(LocalReport localReport)
         {
             try
             {
-                txtTaxpayerName.Text = _ownerName;
                 string lguName = Helper.LGUDetails()["lgu_name"];
-                DateTime asOfDate = dtAsOf.Value.Date;
+                DateTime asOfDate = dtTo.Value.Date;
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -127,42 +78,6 @@ namespace AccountingSystem.Views.Reports.RptReports
             return false;
         }
 
-        private DataTable ReferenceDataTable()
-        {
-            DataTable dataTable = new DataTable();
-
-            string selectedLoadBy = cmbxLoadBy.Text.Trim();
-            string barangayName = cmbxBarangay.Text.Trim();
-            string municipalityName = cmbxMunicipality.Text.Trim();
-            int? taxYear = nudTaxYear.Enabled ? (int)nudTaxYear.Value : null;
-            DateTime asOfDate = dtAsOf.Value;
-
-            var dtViewListOfRealPropertyTaxDelinquencesByTaxpayer = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(_ownerName, asOfDate, taxYear);
-            var dtViewListOfRealPropertyTaxDelinquencesByBarangayName = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(barangayName, asOfDate, taxYear);
-            var dtViewListOfRealPropertyTaxDelinquencesByMunicipality = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(municipalityName, asOfDate, taxYear);
-
-            switch (selectedLoadBy)
-            {
-                case "Taxpayer":
-                    dataTable = dtViewListOfRealPropertyTaxDelinquencesByTaxpayer;
-                    break;
-
-                case "Municipality":
-                    dataTable = dtViewListOfRealPropertyTaxDelinquencesByMunicipality;
-                    break;
-
-                case "Barangay":
-                    dataTable = dtViewListOfRealPropertyTaxDelinquencesByBarangayName;
-                    break;
-
-                default:
-                    dataTable = null;
-                    break;
-            }
-
-            return dataTable;
-        }
-
         private decimal GetPenalty(string completeArpNo, int assessmentYear, DateTime assessmentPostedAt, DateTime paymentPostedAt, int effectivityYear, decimal penaltyRate, decimal taxDueAmount)
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
@@ -176,13 +91,12 @@ namespace AccountingSystem.Views.Reports.RptReports
         {
             var dataSet = new dsLFS.dtListOfRealPropertyTaxDelinquenciesDataTable();
 
-            DataTable referenceDatTable = new DataTable();
-            Invoke((MethodInvoker)delegate { referenceDatTable = ReferenceDataTable(); });
+            var dataTable = new DataTable();
 
-            int recordCount = referenceDatTable.Rows.Count;
+            int recordCount = dataTable.Rows.Count;
             int rowsCount = 0;
 
-            foreach (DataRow row in referenceDatTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
                 var newRow = dataSet.NewRow();
                 string rowOwnerName = row["taxpayer_name"].ToString();
@@ -200,14 +114,10 @@ namespace AccountingSystem.Views.Reports.RptReports
 
                 string rowClassificationCode = row["classification_code"].ToString();
 
-                #region Tax Due
-
                 decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
                 decimal rowSefRate = Convert.ToDecimal(row["sef_rate"]);
                 decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
                 decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
-
-                #endregion Tax Due
 
                 decimal total = basicTaxDueAmount + sefTaxDueAmount + basicPenalty + sefPenalty;
 
@@ -216,12 +126,8 @@ namespace AccountingSystem.Views.Reports.RptReports
                 {
                     var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payments_posted_at"]);
 
-                    #region Penalty
-
                     basicPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                     sefPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
-
-                    #endregion Penalty
                 }
 
                 newRow["declarant"] = rowOwnerName;
@@ -266,8 +172,6 @@ namespace AccountingSystem.Views.Reports.RptReports
             LoadReport(reportViewer.LocalReport);
         }
 
-        #endregion LoadReport
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             try
@@ -283,17 +187,6 @@ namespace AccountingSystem.Views.Reports.RptReports
 
         private void dtAsOf_ValueChanged(object sender, EventArgs e)
         {
-            nudTaxYear.Maximum = dtAsOf.Value.Year;
-            nudTaxYear.Value = dtAsOf.Value.Year;
-        }
-
-        private void btnFindTaxPayer_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmTaxPayerList(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -198,7 +198,7 @@ namespace AccountingSystem.Views.Dashboard
 
             //Reports
             if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
-                listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+                listOfRealPropertyDelinquenciesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Report of Checks Issued"))
                 reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
@@ -222,7 +222,7 @@ namespace AccountingSystem.Views.Dashboard
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
-                realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
+                realPropertTaxDuesAndPaymentsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
                 certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Enabled = false;
@@ -552,16 +552,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmDailyCash().ShowDialog();
         }
 
-        private void toolStripMenuItemListOfDelinquentAccounts_Click(object sender, EventArgs e)
-        {
-            _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
-        }
-
-        private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRptTaxDuesPayments().ShowDialog();
-        }
-
         private void realPropertyTaxStatementOfAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
@@ -713,6 +703,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 _ = new frmRptTaxDuesPayments().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void listOfRealPropertyDelinquenciesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

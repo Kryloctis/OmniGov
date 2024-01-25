@@ -29,66 +29,26 @@ namespace AccountingSystem.Views.Reports.RptReports
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             label3 = new System.Windows.Forms.Label();
-            cmbxLoadBy = new System.Windows.Forms.ComboBox();
-            btnFindTaxPayer = new System.Windows.Forms.Button();
-            cmbxMunicipality = new System.Windows.Forms.ComboBox();
-            cmbxBarangay = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
-            dtAsOf = new System.Windows.Forms.DateTimePicker();
-            label2 = new System.Windows.Forms.Label();
-            nudTaxYear = new System.Windows.Forms.NumericUpDown();
-            chkbxTaxYear = new System.Windows.Forms.CheckBox();
+            dtTo = new System.Windows.Forms.DateTimePicker();
             btnRetrieve = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            taxpayerNamePanel = new System.Windows.Forms.Panel();
-            txtTaxpayerName = new System.Windows.Forms.TextBox();
-            label4 = new System.Windows.Forms.Label();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
-            groupBox1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudTaxYear).BeginInit();
-            flowLayoutPanel2.SuspendLayout();
-            taxpayerNamePanel.SuspendLayout();
+            radOwner = new System.Windows.Forms.RadioButton();
+            radBarangay = new System.Windows.Forms.RadioButton();
+            panel1 = new System.Windows.Forms.Panel();
+            cmbxLoadBy = new System.Windows.Forms.ComboBox();
+            dtFrom = new System.Windows.Forms.DateTimePicker();
+            label5 = new System.Windows.Forms.Label();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            groupBox1.Location = new System.Drawing.Point(3, 3);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(1134, 55);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Filter";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(label3);
-            flowLayoutPanel1.Controls.Add(cmbxLoadBy);
-            flowLayoutPanel1.Controls.Add(btnFindTaxPayer);
-            flowLayoutPanel1.Controls.Add(cmbxMunicipality);
-            flowLayoutPanel1.Controls.Add(cmbxBarangay);
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(dtAsOf);
-            flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(nudTaxYear);
-            flowLayoutPanel1.Controls.Add(chkbxTaxYear);
-            flowLayoutPanel1.Controls.Add(btnRetrieve);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            flowLayoutPanel1.Location = new System.Drawing.Point(3, 19);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(1128, 33);
-            flowLayoutPanel1.TabIndex = 0;
             // 
             // label3
             // 
-            label3.Location = new System.Drawing.Point(3, 3);
+            label3.Location = new System.Drawing.Point(12, 7);
             label3.Margin = new System.Windows.Forms.Padding(3);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(49, 23);
@@ -96,110 +56,49 @@ namespace AccountingSystem.Views.Reports.RptReports
             label3.Text = "Load By";
             label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // cmbxLoadBy
-            // 
-            cmbxLoadBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxLoadBy.FormattingEnabled = true;
-            cmbxLoadBy.Items.AddRange(new object[] { "Taxpayer", "Municipality", "Barangay" });
-            cmbxLoadBy.Location = new System.Drawing.Point(58, 3);
-            cmbxLoadBy.Name = "cmbxLoadBy";
-            cmbxLoadBy.Size = new System.Drawing.Size(137, 23);
-            cmbxLoadBy.TabIndex = 13;
-            cmbxLoadBy.SelectedValueChanged += cmbxLoadBy_SelectedValueChanged;
-            // 
-            // btnFindTaxPayer
-            // 
-            btnFindTaxPayer.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnFindTaxPayer.Image = Properties.Resources.user_browse_14px;
-            btnFindTaxPayer.Location = new System.Drawing.Point(201, 3);
-            btnFindTaxPayer.Name = "btnFindTaxPayer";
-            btnFindTaxPayer.Size = new System.Drawing.Size(39, 23);
-            btnFindTaxPayer.TabIndex = 15;
-            btnFindTaxPayer.UseVisualStyleBackColor = true;
-            btnFindTaxPayer.Visible = false;
-            btnFindTaxPayer.Click += btnFindTaxPayer_Click;
-            // 
-            // cmbxMunicipality
-            // 
-            cmbxMunicipality.FormattingEnabled = true;
-            cmbxMunicipality.Location = new System.Drawing.Point(246, 3);
-            cmbxMunicipality.Name = "cmbxMunicipality";
-            cmbxMunicipality.Size = new System.Drawing.Size(146, 23);
-            cmbxMunicipality.TabIndex = 16;
-            cmbxMunicipality.Visible = false;
-            // 
-            // cmbxBarangay
-            // 
-            cmbxBarangay.FormattingEnabled = true;
-            cmbxBarangay.Location = new System.Drawing.Point(398, 3);
-            cmbxBarangay.Name = "cmbxBarangay";
-            cmbxBarangay.Size = new System.Drawing.Size(137, 23);
-            cmbxBarangay.TabIndex = 16;
-            cmbxBarangay.Visible = false;
-            // 
             // label1
             // 
-            label1.Location = new System.Drawing.Point(541, 0);
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(634, 11);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(34, 26);
+            label1.Size = new System.Drawing.Size(15, 15);
             label1.TabIndex = 9;
-            label1.Text = "As of";
+            label1.Text = ">";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dtAsOf
+            // dtTo
             // 
-            dtAsOf.CustomFormat = "MMM dd, yyyy";
-            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtAsOf.Location = new System.Drawing.Point(581, 3);
-            dtAsOf.Name = "dtAsOf";
-            dtAsOf.Size = new System.Drawing.Size(120, 23);
-            dtAsOf.TabIndex = 7;
-            dtAsOf.ValueChanged += dtAsOf_ValueChanged;
-            // 
-            // label2
-            // 
-            label2.Location = new System.Drawing.Point(707, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(49, 26);
-            label2.TabIndex = 10;
-            label2.Text = "Tax Year";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nudTaxYear
-            // 
-            nudTaxYear.Location = new System.Drawing.Point(762, 3);
-            nudTaxYear.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
-            nudTaxYear.Name = "nudTaxYear";
-            nudTaxYear.Size = new System.Drawing.Size(120, 23);
-            nudTaxYear.TabIndex = 11;
-            // 
-            // chkbxTaxYear
-            // 
-            chkbxTaxYear.Location = new System.Drawing.Point(888, 3);
-            chkbxTaxYear.Name = "chkbxTaxYear";
-            chkbxTaxYear.Size = new System.Drawing.Size(15, 23);
-            chkbxTaxYear.TabIndex = 12;
-            chkbxTaxYear.UseVisualStyleBackColor = true;
-            chkbxTaxYear.CheckedChanged += chkbxTaxYear_CheckedChanged;
+            dtTo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtTo.CustomFormat = "MMM dd, yyyy";
+            dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtTo.Location = new System.Drawing.Point(655, 7);
+            dtTo.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            dtTo.Name = "dtTo";
+            dtTo.Size = new System.Drawing.Size(120, 23);
+            dtTo.TabIndex = 7;
+            dtTo.ValueChanged += dtAsOf_ValueChanged;
             // 
             // btnRetrieve
             // 
+            btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnRetrieve.Location = new System.Drawing.Point(909, 3);
+            btnRetrieve.Location = new System.Drawing.Point(788, 7);
             btnRetrieve.Name = "btnRetrieve";
-            btnRetrieve.Size = new System.Drawing.Size(86, 23);
+            btnRetrieve.Size = new System.Drawing.Size(100, 23);
             btnRetrieve.TabIndex = 14;
-            btnRetrieve.Text = "Retrieve";
+            btnRetrieve.Text = "Run Report";
             btnRetrieve.UseVisualStyleBackColor = true;
             btnRetrieve.Click += btnRetrieve_Click;
             // 
             // panel2
             // 
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 101);
+            panel2.Location = new System.Drawing.Point(0, 42);
+            panel2.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(1141, 538);
+            panel2.Size = new System.Drawing.Size(895, 437);
             panel2.TabIndex = 1;
             // 
             // backgroundWorker1
@@ -209,73 +108,110 @@ namespace AccountingSystem.Views.Reports.RptReports
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.Controls.Add(groupBox1);
-            flowLayoutPanel2.Controls.Add(taxpayerNamePanel);
-            flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(1141, 96);
-            flowLayoutPanel2.TabIndex = 0;
-            // 
-            // taxpayerNamePanel
-            // 
-            taxpayerNamePanel.Controls.Add(txtTaxpayerName);
-            taxpayerNamePanel.Controls.Add(label4);
-            taxpayerNamePanel.Location = new System.Drawing.Point(3, 64);
-            taxpayerNamePanel.Name = "taxpayerNamePanel";
-            taxpayerNamePanel.Size = new System.Drawing.Size(246, 29);
-            taxpayerNamePanel.TabIndex = 2;
-            // 
-            // txtTaxpayerName
-            // 
-            txtTaxpayerName.Location = new System.Drawing.Point(61, 3);
-            txtTaxpayerName.Name = "txtTaxpayerName";
-            txtTaxpayerName.ReadOnly = true;
-            txtTaxpayerName.Size = new System.Drawing.Size(182, 23);
-            txtTaxpayerName.TabIndex = 1;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(5, 6);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(39, 15);
-            label4.TabIndex = 0;
-            label4.Text = "Name";
-            // 
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 96);
+            pbLoadRecords.Location = new System.Drawing.Point(0, 37);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(1141, 5);
+            pbLoadRecords.Size = new System.Drawing.Size(895, 5);
             pbLoadRecords.TabIndex = 21;
+            // 
+            // radOwner
+            // 
+            radOwner.AutoSize = true;
+            radOwner.Checked = true;
+            radOwner.Location = new System.Drawing.Point(67, 9);
+            radOwner.Name = "radOwner";
+            radOwner.Size = new System.Drawing.Size(60, 19);
+            radOwner.TabIndex = 0;
+            radOwner.TabStop = true;
+            radOwner.Text = "Owner";
+            radOwner.UseVisualStyleBackColor = true;
+            // 
+            // radBarangay
+            // 
+            radBarangay.AutoSize = true;
+            radBarangay.Location = new System.Drawing.Point(133, 9);
+            radBarangay.Name = "radBarangay";
+            radBarangay.Size = new System.Drawing.Size(74, 19);
+            radBarangay.TabIndex = 0;
+            radBarangay.Text = "Barangay";
+            radBarangay.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(dtTo);
+            panel1.Controls.Add(cmbxLoadBy);
+            panel1.Controls.Add(dtFrom);
+            panel1.Controls.Add(btnRetrieve);
+            panel1.Controls.Add(radOwner);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(radBarangay);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label5);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(895, 37);
+            panel1.TabIndex = 23;
+            // 
+            // cmbxLoadBy
+            // 
+            cmbxLoadBy.FormattingEnabled = true;
+            cmbxLoadBy.Location = new System.Drawing.Point(213, 7);
+            cmbxLoadBy.Name = "cmbxLoadBy";
+            cmbxLoadBy.Size = new System.Drawing.Size(200, 23);
+            cmbxLoadBy.TabIndex = 9;
+            // 
+            // dtFrom
+            // 
+            dtFrom.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtFrom.CustomFormat = "MMM dd, yyyy";
+            dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtFrom.Location = new System.Drawing.Point(508, 7);
+            dtFrom.Name = "dtFrom";
+            dtFrom.Size = new System.Drawing.Size(120, 23);
+            dtFrom.TabIndex = 7;
+            dtFrom.ValueChanged += dtAsOf_ValueChanged;
+            // 
+            // label5
+            // 
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(461, 11);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(41, 15);
+            label5.TabIndex = 9;
+            label5.Text = "Period";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 479);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(895, 22);
+            statusStrip1.TabIndex = 24;
+            statusStrip1.Text = "statusStrip1";
             // 
             // frmListOfRealPropertyTaxDelinquenciesReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.White;
-            ClientSize = new System.Drawing.Size(1141, 639);
+            BackColor = System.Drawing.SystemColors.Control;
+            ClientSize = new System.Drawing.Size(895, 501);
             Controls.Add(panel2);
+            Controls.Add(statusStrip1);
             Controls.Add(pbLoadRecords);
-            Controls.Add(flowLayoutPanel2);
+            Controls.Add(panel1);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(1157, 678);
             Name = "frmListOfRealPropertyTaxDelinquenciesReport";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Report > Collection/Payment > List of Real Property Tax Delinquencies";
+            Text = "Report > Real Properties > List of Real Property Tax Delinquencies";
             Load += frmListOfRealPropertyTaxDelinquenciesReport_Load;
-            groupBox1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)nudTaxYear).EndInit();
-            flowLayoutPanel2.ResumeLayout(false);
-            taxpayerNamePanel.ResumeLayout(false);
-            taxpayerNamePanel.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -283,24 +219,18 @@ namespace AccountingSystem.Views.Reports.RptReports
         #endregion
         private System.Windows.Forms.Panel panel2;
         internal System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbxLoadBy;
-        private System.Windows.Forms.Button btnFindTaxPayer;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown nudTaxYear;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtAsOf;
-        private System.Windows.Forms.CheckBox chkbxTaxYear;
+        private System.Windows.Forms.DateTimePicker dtTo;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.ComboBox cmbxMunicipality;
-        private System.Windows.Forms.ComboBox cmbxBarangay;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtTaxpayerName;
-        private System.Windows.Forms.Panel taxpayerNamePanel;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.RadioButton radOwner;
+        private System.Windows.Forms.RadioButton radBarangay;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cmbxLoadBy;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dtFrom;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
