@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RptReports
 {
-    public partial class frmCertifiedListOfTaxDelinquences : Form
+    public partial class frmCertifiedListRptDelinquences : Form
     {
         private ReportViewer reportViewer;
 
-        public frmCertifiedListOfTaxDelinquences()
+        public frmCertifiedListRptDelinquences()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Reports.RptReports
                 var parameters = ((string barangayName, DateTime periodFrom, DateTime periodTo))e.Argument;
 
                 var dataTable = new dsTreasury.dtCertfiedRptDelinquenciesDataTable();
-                var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByBarangayNamePeriod(parameters.barangayName, parameters.periodFrom, parameters.periodTo);
+                var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByBarangayNamePeriod(parameters.barangayName, parameters.periodFrom, parameters.periodTo);
 
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;

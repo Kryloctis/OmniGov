@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RptReports
 {
-    partial class frmCertifiedListOfTaxDelinquences
+    partial class frmCertifiedListRptDelinquences
     {
         /// <summary>
         /// Required designer variable.

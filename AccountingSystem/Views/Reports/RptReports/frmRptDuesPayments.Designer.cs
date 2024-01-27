@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RptReports
 {
-    partial class frmRptTaxDuesPayments
+    partial class frmRptDuesPayments
     {
         /// <summary>
         /// Required designer variable.
@@ -33,15 +33,15 @@ namespace AccountingSystem.Views.Reports.RptReports
             btnRunReport = new System.Windows.Forms.Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1 = new System.Windows.Forms.Panel();
+            dtFrom = new System.Windows.Forms.DateTimePicker();
             dtTo = new System.Windows.Forms.DateTimePicker();
             cmbxOwners = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             panel2 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            dtFrom = new System.Windows.Forms.DateTimePicker();
-            label3 = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -91,6 +91,16 @@ namespace AccountingSystem.Views.Reports.RptReports
             panel1.Size = new System.Drawing.Size(895, 38);
             panel1.TabIndex = 4;
             // 
+            // dtFrom
+            // 
+            dtFrom.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtFrom.CustomFormat = "MMM dd, yyyy";
+            dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtFrom.Location = new System.Drawing.Point(494, 7);
+            dtFrom.Name = "dtFrom";
+            dtFrom.Size = new System.Drawing.Size(118, 23);
+            dtFrom.TabIndex = 4;
+            // 
             // dtTo
             // 
             dtTo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
@@ -122,6 +132,17 @@ namespace AccountingSystem.Views.Reports.RptReports
             label2.Size = new System.Drawing.Size(15, 15);
             label2.TabIndex = 3;
             label2.Text = ">";
+            // 
+            // label3
+            // 
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.BackColor = System.Drawing.Color.Transparent;
+            label3.Location = new System.Drawing.Point(447, 11);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(41, 15);
+            label3.TabIndex = 3;
+            label3.Text = "Period";
             // 
             // statusStrip1
             // 
@@ -156,28 +177,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // dtFrom
-            // 
-            dtFrom.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            dtFrom.CustomFormat = "MMM dd, yyyy";
-            dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtFrom.Location = new System.Drawing.Point(494, 7);
-            dtFrom.Name = "dtFrom";
-            dtFrom.Size = new System.Drawing.Size(118, 23);
-            dtFrom.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.BackColor = System.Drawing.Color.Transparent;
-            label3.Location = new System.Drawing.Point(447, 11);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(41, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Period";
-            // 
-            // frmRptTaxDuesPayments
+            // frmRptDuesPayments
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -187,10 +187,10 @@ namespace AccountingSystem.Views.Reports.RptReports
             Controls.Add(statusStrip1);
             Controls.Add(panel1);
             MinimizeBox = false;
-            Name = "frmRptTaxDuesPayments";
+            Name = "frmRptDuesPayments";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Report > Real Properties > RPT Tax Dues and  Payments";
+            Text = "Report > Real Properties > Real Property  Tax Dues and  Payments";
             Load += frmRealPropertyTaxAccountRegisterReport_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

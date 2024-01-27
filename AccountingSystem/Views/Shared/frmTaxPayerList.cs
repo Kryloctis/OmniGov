@@ -175,13 +175,6 @@ namespace AccountingSystem.Views.Shared
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void InitializeListOfDeliquentAccountsReport(frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport)
-        {
-            int rowIndex = dataGridView1.CurrentRow.Index;
-            frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
-            frmListOfRealPropertyTaxDelinquenciesReport.backgroundWorker1.RunWorkerAsync();
-        }
-
         private void InitializeNewOwnerDetails(frmPaymentRpt frmPayments)
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
@@ -219,16 +212,12 @@ namespace AccountingSystem.Views.Shared
         {
             switch (refForm)
             {
-                case frmRptTaxDuesPayments:
+                case frmRptDuesPayments:
                     InitializeRealPropertyTaxAccountngRegisterReport();
                     break;
 
                 case frmRealPropertyTaxStatementOfAccount:
                     InitializeRealPropertyTaxStatementOfAccountReport((frmRealPropertyTaxStatementOfAccount)refForm);
-                    break;
-
-                case frmListOfRealPropertyTaxDelinquenciesReport:
-                    InitializeListOfDeliquentAccountsReport((frmListOfRealPropertyTaxDelinquenciesReport)refForm);
                     break;
 
                 case frmPaymentRpt:

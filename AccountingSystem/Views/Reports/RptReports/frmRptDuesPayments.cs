@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RptReports
 {
-    public partial class frmRptTaxDuesPayments : Form
+    public partial class frmRptDuesPayments : Form
     {
-        public frmRptTaxDuesPayments()
+        public frmRptDuesPayments()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RptReports
 {
-    partial class frmListOfRealPropertyTaxDelinquenciesReport
+    partial class frmListRptDelinquencies
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             btnRetrieve = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
             radOwner = new System.Windows.Forms.RadioButton();
             radBarangay = new System.Windows.Forms.RadioButton();
             panel1 = new System.Windows.Forms.Panel();
@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             dtFrom = new System.Windows.Forms.DateTimePicker();
             label5 = new System.Windows.Forms.Label();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,7 +78,6 @@ namespace AccountingSystem.Views.Reports.RptReports
             dtTo.Name = "dtTo";
             dtTo.Size = new System.Drawing.Size(120, 23);
             dtTo.TabIndex = 7;
-            dtTo.ValueChanged += dtAsOf_ValueChanged;
             // 
             // btnRetrieve
             // 
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             btnRetrieve.TabIndex = 14;
             btnRetrieve.Text = "Run Report";
             btnRetrieve.UseVisualStyleBackColor = true;
-            btnRetrieve.Click += btnRetrieve_Click;
+            btnRetrieve.Click += btnRunReport_Click;
             // 
             // panel2
             // 
@@ -108,13 +108,13 @@ namespace AccountingSystem.Views.Reports.RptReports
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // pbLoadRecords
+            // progressBar1
             // 
-            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 37);
-            pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(895, 5);
-            pbLoadRecords.TabIndex = 21;
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 37);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(895, 5);
+            progressBar1.TabIndex = 21;
             // 
             // radOwner
             // 
@@ -127,6 +127,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             radOwner.TabStop = true;
             radOwner.Text = "Owner";
             radOwner.UseVisualStyleBackColor = true;
+            radOwner.CheckedChanged += radOwner_CheckedChanged;
             // 
             // radBarangay
             // 
@@ -137,6 +138,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             radBarangay.TabIndex = 0;
             radBarangay.Text = "Barangay";
             radBarangay.UseVisualStyleBackColor = true;
+            radBarangay.CheckedChanged += radBarangay_CheckedChanged;
             // 
             // panel1
             // 
@@ -173,7 +175,6 @@ namespace AccountingSystem.Views.Reports.RptReports
             dtFrom.Name = "dtFrom";
             dtFrom.Size = new System.Drawing.Size(120, 23);
             dtFrom.TabIndex = 7;
-            dtFrom.ValueChanged += dtAsOf_ValueChanged;
             // 
             // label5
             // 
@@ -194,6 +195,14 @@ namespace AccountingSystem.Views.Reports.RptReports
             statusStrip1.TabIndex = 24;
             statusStrip1.Text = "statusStrip1";
             // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
             // frmListOfRealPropertyTaxDelinquenciesReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -202,7 +211,7 @@ namespace AccountingSystem.Views.Reports.RptReports
             ClientSize = new System.Drawing.Size(895, 501);
             Controls.Add(panel2);
             Controls.Add(statusStrip1);
-            Controls.Add(pbLoadRecords);
+            Controls.Add(progressBar1);
             Controls.Add(panel1);
             MinimizeBox = false;
             Name = "frmListOfRealPropertyTaxDelinquenciesReport";
@@ -224,7 +233,6 @@ namespace AccountingSystem.Views.Reports.RptReports
         private System.Windows.Forms.DateTimePicker dtTo;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.RadioButton radOwner;
         private System.Windows.Forms.RadioButton radBarangay;
         private System.Windows.Forms.Panel panel1;
@@ -232,5 +240,6 @@ namespace AccountingSystem.Views.Reports.RptReports
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtFrom;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

@@ -236,7 +236,7 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo)
+        public DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo)
         {
             var parameters = new object[][]
             {
@@ -245,7 +245,22 @@ namespace ACC.Data
                 new object[] { "@periodTo", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayer_name", DbType.String, ownerName},
+                new object[] { "@periodFrom", DbType.DateTime, periodFrom},
+                new object[] { "@periodTo", DbType.DateTime, periodTo},
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
 
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);

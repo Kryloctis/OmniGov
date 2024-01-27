@@ -561,7 +561,7 @@ namespace AccountingSystem.Views.Dashboard
         {
             try
             {
-                _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
+                _ = new frmCertifiedListRptDelinquences().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -702,7 +702,7 @@ namespace AccountingSystem.Views.Dashboard
         {
             try
             {
-                _ = new frmRptTaxDuesPayments().ShowDialog();
+                _ = new frmRptDuesPayments().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -711,7 +711,7 @@ namespace AccountingSystem.Views.Dashboard
         {
             try
             {
-                _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
+                _ = new frmListRptDelinquencies().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

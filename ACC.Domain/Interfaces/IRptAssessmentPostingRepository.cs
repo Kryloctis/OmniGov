@@ -24,7 +24,9 @@ namespace RPT.Domain.Interfaces
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
-        DataTable GetViewRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo);
+        DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo);
+
+        DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo);
 
         DataTable GetBarangayRecords();
 
