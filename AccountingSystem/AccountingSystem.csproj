@@ -50,9 +50,9 @@
     <None Remove="Reports\rcd.rdlc" />
     <None Remove="Reports\real-property-payment-receipt.rdlc" />
     <None Remove="Reports\real-property-tax-due-bill.rdlc" />
-    <None Remove="Reports\real-property-tax-statement-of-accounts.rdlc" />
     <None Remove="Reports\RealPropertyTaxDuesAndPayments.rdlc" />
     <None Remove="Reports\report_of_general_collection.rdlc" />
+    <None Remove="Reports\RptStatementOfAccounts.rdlc" />
     <None Remove="Reports\schedule-of-unreleased-cheques.rdlc" />
     <None Remove="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc" />
     <None Remove="Reports\statement-of-changes-in-net-assets-equity.rdlc" />
@@ -129,7 +129,7 @@
     <Content Include="Reports\real-property-tax-due-bill.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\real-property-tax-statement-of-accounts.rdlc">
+    <Content Include="Reports\RptStatementOfAccounts.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\RealPropertyTaxDuesAndPayments.rdlc">

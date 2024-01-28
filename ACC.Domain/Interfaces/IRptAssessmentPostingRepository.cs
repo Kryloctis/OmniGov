@@ -20,7 +20,7 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetViewRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo);
 
-        DataTable GetRecordsByArpNo(string arpNo);
+        DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo);
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
@@ -30,10 +30,10 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetBarangayRecords();
 
-        DataTable Get_Grouped_Municipality_Records();
-
-        DataTable GetViewRecords(int realTaxpayersId, string completeArpNo, bool showPaidAssessments);
+        DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments);
 
         DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
+
+        DataTable GetViewRecordsByOwnerId(int taxpayerId);
     }
 }

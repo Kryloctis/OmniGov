@@ -552,11 +552,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmDailyCash().ShowDialog();
         }
 
-        private void realPropertyTaxStatementOfAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
-        }
-
         private void certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -712,6 +707,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 _ = new frmListRptDelinquencies().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void realPropertyTaxStatementOfAccountToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

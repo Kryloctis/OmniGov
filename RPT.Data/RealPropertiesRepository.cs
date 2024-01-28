@@ -166,17 +166,6 @@ namespace RPT.Data
             return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
         }
 
-        public decimal GetAssessedValueByARPNo(string completeArpNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo}
-            };
-
-            string query = $"SELECT COALESCE(assessed_value, 0) FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @complete_arp_no";
-            return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
-        }
-
         public Dictionary<string, string> GetViewRealPropertiesById(int Id)
         {
             var dict = new Dictionary<string, string>();
@@ -256,7 +245,6 @@ namespace RPT.Data
             return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
 
-        //LFS View
         public DataTable GetViewLFSRealPropertiesRecords()
         {
             string query = $"SELECT * FROM {viewLfsRealProperties}";

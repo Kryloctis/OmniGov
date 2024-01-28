@@ -21,14 +21,6 @@ namespace AccountingSystem.Views.Shared
             refForm = form;
         }
 
-        private DataTable DataTableAssessmentPost(string searchText)
-        {
-            var columns = new string[] { "id", "taxpayer_tin", "taxpayer_name", "barangay_name", "municipality_name", "province_name", "owner_address" };
-            var dtAssessmentPostin = AccFactory.RptAssessmentPostsRepository().GetRecordsBySearch(searchText);
-            var dtView = new DataView(dtAssessmentPostin);
-            return dtView.ToTable(false, columns);
-        }
-
         private DataColumn[] TaxpayersColumns()
         {
             return new DataColumn[]
@@ -145,23 +137,6 @@ namespace AccountingSystem.Views.Shared
             EnableDisableSelectButton();
         }
 
-        private void InitializeRealPropertyTaxAccountngRegisterReport()
-        {
-        }
-
-        private void InitializeRealPropertyTaxStatementOfAccountReport(frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount)
-        {
-            int rowIndex = dataGridView1.CurrentRow.Index;
-            string ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayer_name"].Value.ToString();
-            string completeARPNumber = string.Empty;
-            string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
-
-            frmRealPropertyTaxStatementOfAccount.completeARPNumber = completeARPNumber;
-            frmRealPropertyTaxStatementOfAccount.OwnerName = ownerName;
-            frmRealPropertyTaxStatementOfAccount.OwnerAddress = ownerAddress;
-            frmRealPropertyTaxStatementOfAccount.backgroundWorker1.RunWorkerAsync();
-        }
-
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -199,27 +174,10 @@ namespace AccountingSystem.Views.Shared
             var taxpayerProvince = dictTaxpayer["taxpayers_province"].ToString();
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadMethods();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void LoadMethods()
         {
             switch (refForm)
             {
-                case frmRptDuesPayments:
-                    InitializeRealPropertyTaxAccountngRegisterReport();
-                    break;
-
-                case frmRealPropertyTaxStatementOfAccount:
-                    InitializeRealPropertyTaxStatementOfAccountReport((frmRealPropertyTaxStatementOfAccount)refForm);
-                    break;
-
                 case frmPaymentRpt:
                     InitializeNewOwnerDetails((frmPaymentRpt)refForm);
                     break;

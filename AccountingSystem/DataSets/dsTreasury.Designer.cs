@@ -30,6 +30,8 @@ namespace AccountingSystem.DataSets {
         
         private dtRptDelinquenciesDataTable tabledtRptDelinquencies;
         
+        private dtRptStamentOfAccountsDataTable tabledtRptStamentOfAccounts;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace AccountingSystem.DataSets {
                 }
                 if ((ds.Tables["dtRptDelinquencies"] != null)) {
                     base.Tables.Add(new dtRptDelinquenciesDataTable(ds.Tables["dtRptDelinquencies"]));
+                }
+                if ((ds.Tables["dtRptStamentOfAccounts"] != null)) {
+                    base.Tables.Add(new dtRptStamentOfAccountsDataTable(ds.Tables["dtRptStamentOfAccounts"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace AccountingSystem.DataSets {
         public dtRptDelinquenciesDataTable dtRptDelinquencies {
             get {
                 return this.tabledtRptDelinquencies;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtRptStamentOfAccountsDataTable dtRptStamentOfAccounts {
+            get {
+                return this.tabledtRptStamentOfAccounts;
             }
         }
         
@@ -191,6 +206,9 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtRptDelinquencies"] != null)) {
                     base.Tables.Add(new dtRptDelinquenciesDataTable(ds.Tables["dtRptDelinquencies"]));
                 }
+                if ((ds.Tables["dtRptStamentOfAccounts"] != null)) {
+                    base.Tables.Add(new dtRptStamentOfAccountsDataTable(ds.Tables["dtRptStamentOfAccounts"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace AccountingSystem.DataSets {
                     this.tabledtRptDelinquencies.InitVars();
                 }
             }
+            this.tabledtRptStamentOfAccounts = ((dtRptStamentOfAccountsDataTable)(base.Tables["dtRptStamentOfAccounts"]));
+            if ((initTable == true)) {
+                if ((this.tabledtRptStamentOfAccounts != null)) {
+                    this.tabledtRptStamentOfAccounts.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace AccountingSystem.DataSets {
             base.Tables.Add(this.tabledtCertfiedRptDelinquencies);
             this.tabledtRptDelinquencies = new dtRptDelinquenciesDataTable();
             base.Tables.Add(this.tabledtRptDelinquencies);
+            this.tabledtRptStamentOfAccounts = new dtRptStamentOfAccountsDataTable();
+            base.Tables.Add(this.tabledtRptStamentOfAccounts);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace AccountingSystem.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializedtRptDelinquencies() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializedtRptStamentOfAccounts() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace AccountingSystem.DataSets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtRptDelinquenciesRowChangeEventHandler(object sender, dtRptDelinquenciesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void dtRptStamentOfAccountsRowChangeEventHandler(object sender, dtRptStamentOfAccountsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1710,6 +1745,393 @@ namespace AccountingSystem.DataSets {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "dtRptDelinquenciesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtRptStamentOfAccountsDataTable : global::System.Data.TypedTableBase<dtRptStamentOfAccountsRow> {
+            
+            private global::System.Data.DataColumn columnprev_assessment_year;
+            
+            private global::System.Data.DataColumn columnassessment_year;
+            
+            private global::System.Data.DataColumn columnpercentage;
+            
+            private global::System.Data.DataColumn columnpenalty_discount_basic;
+            
+            private global::System.Data.DataColumn columntotal_basic;
+            
+            private global::System.Data.DataColumn columnpenalty_discount_sef;
+            
+            private global::System.Data.DataColumn columntotal_sef;
+            
+            private global::System.Data.DataColumn columntotal_paid;
+            
+            private global::System.Data.DataColumn columnunpaid_balance;
+            
+            private global::System.Data.DataColumn columnbasic_taxdue;
+            
+            private global::System.Data.DataColumn columnsef_taxdue;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsDataTable() {
+                this.TableName = "dtRptStamentOfAccounts";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtRptStamentOfAccountsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected dtRptStamentOfAccountsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn prev_assessment_yearColumn {
+                get {
+                    return this.columnprev_assessment_year;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn assessment_yearColumn {
+                get {
+                    return this.columnassessment_year;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn percentageColumn {
+                get {
+                    return this.columnpercentage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn penalty_discount_basicColumn {
+                get {
+                    return this.columnpenalty_discount_basic;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn total_basicColumn {
+                get {
+                    return this.columntotal_basic;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn penalty_discount_sefColumn {
+                get {
+                    return this.columnpenalty_discount_sef;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn total_sefColumn {
+                get {
+                    return this.columntotal_sef;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn total_paidColumn {
+                get {
+                    return this.columntotal_paid;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn unpaid_balanceColumn {
+                get {
+                    return this.columnunpaid_balance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn basic_taxdueColumn {
+                get {
+                    return this.columnbasic_taxdue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sef_taxdueColumn {
+                get {
+                    return this.columnsef_taxdue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsRow this[int index] {
+                get {
+                    return ((dtRptStamentOfAccountsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtRptStamentOfAccountsRowChangeEventHandler dtRptStamentOfAccountsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtRptStamentOfAccountsRowChangeEventHandler dtRptStamentOfAccountsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtRptStamentOfAccountsRowChangeEventHandler dtRptStamentOfAccountsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtRptStamentOfAccountsRowChangeEventHandler dtRptStamentOfAccountsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AdddtRptStamentOfAccountsRow(dtRptStamentOfAccountsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsRow AdddtRptStamentOfAccountsRow(string prev_assessment_year, string assessment_year, decimal percentage, decimal penalty_discount_basic, decimal total_basic, decimal penalty_discount_sef, decimal total_sef, decimal total_paid, decimal unpaid_balance, decimal basic_taxdue, decimal sef_taxdue) {
+                dtRptStamentOfAccountsRow rowdtRptStamentOfAccountsRow = ((dtRptStamentOfAccountsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        prev_assessment_year,
+                        assessment_year,
+                        percentage,
+                        penalty_discount_basic,
+                        total_basic,
+                        penalty_discount_sef,
+                        total_sef,
+                        total_paid,
+                        unpaid_balance,
+                        basic_taxdue,
+                        sef_taxdue};
+                rowdtRptStamentOfAccountsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtRptStamentOfAccountsRow);
+                return rowdtRptStamentOfAccountsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtRptStamentOfAccountsDataTable cln = ((dtRptStamentOfAccountsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtRptStamentOfAccountsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnprev_assessment_year = base.Columns["prev_assessment_year"];
+                this.columnassessment_year = base.Columns["assessment_year"];
+                this.columnpercentage = base.Columns["percentage"];
+                this.columnpenalty_discount_basic = base.Columns["penalty_discount_basic"];
+                this.columntotal_basic = base.Columns["total_basic"];
+                this.columnpenalty_discount_sef = base.Columns["penalty_discount_sef"];
+                this.columntotal_sef = base.Columns["total_sef"];
+                this.columntotal_paid = base.Columns["total_paid"];
+                this.columnunpaid_balance = base.Columns["unpaid_balance"];
+                this.columnbasic_taxdue = base.Columns["basic_taxdue"];
+                this.columnsef_taxdue = base.Columns["sef_taxdue"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnprev_assessment_year = new global::System.Data.DataColumn("prev_assessment_year", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprev_assessment_year);
+                this.columnassessment_year = new global::System.Data.DataColumn("assessment_year", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnassessment_year);
+                this.columnpercentage = new global::System.Data.DataColumn("percentage", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpercentage);
+                this.columnpenalty_discount_basic = new global::System.Data.DataColumn("penalty_discount_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpenalty_discount_basic);
+                this.columntotal_basic = new global::System.Data.DataColumn("total_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_basic);
+                this.columnpenalty_discount_sef = new global::System.Data.DataColumn("penalty_discount_sef", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpenalty_discount_sef);
+                this.columntotal_sef = new global::System.Data.DataColumn("total_sef", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_sef);
+                this.columntotal_paid = new global::System.Data.DataColumn("total_paid", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_paid);
+                this.columnunpaid_balance = new global::System.Data.DataColumn("unpaid_balance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunpaid_balance);
+                this.columnbasic_taxdue = new global::System.Data.DataColumn("basic_taxdue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbasic_taxdue);
+                this.columnsef_taxdue = new global::System.Data.DataColumn("sef_taxdue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsef_taxdue);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsRow NewdtRptStamentOfAccountsRow() {
+                return ((dtRptStamentOfAccountsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtRptStamentOfAccountsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtRptStamentOfAccountsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtRptStamentOfAccountsRowChanged != null)) {
+                    this.dtRptStamentOfAccountsRowChanged(this, new dtRptStamentOfAccountsRowChangeEvent(((dtRptStamentOfAccountsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtRptStamentOfAccountsRowChanging != null)) {
+                    this.dtRptStamentOfAccountsRowChanging(this, new dtRptStamentOfAccountsRowChangeEvent(((dtRptStamentOfAccountsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtRptStamentOfAccountsRowDeleted != null)) {
+                    this.dtRptStamentOfAccountsRowDeleted(this, new dtRptStamentOfAccountsRowChangeEvent(((dtRptStamentOfAccountsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtRptStamentOfAccountsRowDeleting != null)) {
+                    this.dtRptStamentOfAccountsRowDeleting(this, new dtRptStamentOfAccountsRowChangeEvent(((dtRptStamentOfAccountsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovedtRptStamentOfAccountsRow(dtRptStamentOfAccountsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsTreasury ds = new dsTreasury();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtRptStamentOfAccountsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3161,6 +3583,334 @@ namespace AccountingSystem.DataSets {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtRptStamentOfAccountsRow : global::System.Data.DataRow {
+            
+            private dtRptStamentOfAccountsDataTable tabledtRptStamentOfAccounts;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtRptStamentOfAccountsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtRptStamentOfAccounts = ((dtRptStamentOfAccountsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string prev_assessment_year {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRptStamentOfAccounts.prev_assessment_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'prev_assessment_year\' in table \'dtRptStamentOfAccounts\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.prev_assessment_yearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string assessment_year {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRptStamentOfAccounts.assessment_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'assessment_year\' in table \'dtRptStamentOfAccounts\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.assessment_yearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal percentage {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.percentageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'percentage\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.percentageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal penalty_discount_basic {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.penalty_discount_basicColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'penalty_discount_basic\' in table \'dtRptStamentOfAccounts\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.penalty_discount_basicColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal total_basic {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.total_basicColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_basic\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.total_basicColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal penalty_discount_sef {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.penalty_discount_sefColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'penalty_discount_sef\' in table \'dtRptStamentOfAccounts\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.penalty_discount_sefColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal total_sef {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.total_sefColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_sef\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.total_sefColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal total_paid {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.total_paidColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_paid\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.total_paidColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal unpaid_balance {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.unpaid_balanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'unpaid_balance\' in table \'dtRptStamentOfAccounts\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.unpaid_balanceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal basic_taxdue {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.basic_taxdueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_taxdue\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.basic_taxdueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal sef_taxdue {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtRptStamentOfAccounts.sef_taxdueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_taxdue\' in table \'dtRptStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRptStamentOfAccounts.sef_taxdueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isprev_assessment_yearNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.prev_assessment_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setprev_assessment_yearNull() {
+                this[this.tabledtRptStamentOfAccounts.prev_assessment_yearColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isassessment_yearNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.assessment_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setassessment_yearNull() {
+                this[this.tabledtRptStamentOfAccounts.assessment_yearColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IspercentageNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.percentageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetpercentageNull() {
+                this[this.tabledtRptStamentOfAccounts.percentageColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ispenalty_discount_basicNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.penalty_discount_basicColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setpenalty_discount_basicNull() {
+                this[this.tabledtRptStamentOfAccounts.penalty_discount_basicColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istotal_basicNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.total_basicColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settotal_basicNull() {
+                this[this.tabledtRptStamentOfAccounts.total_basicColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ispenalty_discount_sefNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.penalty_discount_sefColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setpenalty_discount_sefNull() {
+                this[this.tabledtRptStamentOfAccounts.penalty_discount_sefColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istotal_sefNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.total_sefColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settotal_sefNull() {
+                this[this.tabledtRptStamentOfAccounts.total_sefColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istotal_paidNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.total_paidColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settotal_paidNull() {
+                this[this.tabledtRptStamentOfAccounts.total_paidColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isunpaid_balanceNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.unpaid_balanceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setunpaid_balanceNull() {
+                this[this.tabledtRptStamentOfAccounts.unpaid_balanceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isbasic_taxdueNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.basic_taxdueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setbasic_taxdueNull() {
+                this[this.tabledtRptStamentOfAccounts.basic_taxdueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Issef_taxdueNull() {
+                return this.IsNull(this.tabledtRptStamentOfAccounts.sef_taxdueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setsef_taxdueNull() {
+                this[this.tabledtRptStamentOfAccounts.sef_taxdueColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -3248,6 +3998,40 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtRptDelinquenciesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class dtRptStamentOfAccountsRowChangeEvent : global::System.EventArgs {
+            
+            private dtRptStamentOfAccountsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsRowChangeEvent(dtRptStamentOfAccountsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtRptStamentOfAccountsRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -3,6 +3,7 @@ using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
 
 namespace ACC.Data
@@ -99,14 +100,16 @@ namespace ACC.Data
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable GetRecordsByArpNo(string arpNo)
+        public DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo)
         {
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, arpNo}
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@period_from", DbType.DateTime, periodFrom},
+                new object[] { "@period_to", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE NOT EXISTS(SELECT * FROM {rptTaxDues} WHERE {tableName}.id = {rptTaxDues}.rpt_assessment_posts_id) AND complete_arp_no = @complete_arp_no ORDER BY year DESC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @period_to AND posted_at >= @period_from ";
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -266,6 +269,20 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetViewRecordsByArpNoDate(string arpNo, DateTime postedAt)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@posted_at", DbType.DateTime, postedAt},
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @periodTo ORDER BY complete_arp_no ASC";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
         public DataTable GetBarangayRecords()
         {
             string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
@@ -273,14 +290,7 @@ namespace ACC.Data
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable Get_Grouped_Municipality_Records()
-        {
-            string query = $"SELECT municipality_name FROM {tableName} GROUP BY municipality_name";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
-        }
-
-        public DataTable GetViewRecords(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
+        public DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
         {
             var parameters = new object[][]
             {
@@ -333,6 +343,18 @@ namespace ACC.Data
                 return recordDictionary;
             }
             return recordDictionary;
+        }
+
+        public DataTable GetViewRecordsByOwnerId(int taxpayerId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_taxpayers_id", DbType.Int32, taxpayerId }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id GROUP BY complete_arp_no";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

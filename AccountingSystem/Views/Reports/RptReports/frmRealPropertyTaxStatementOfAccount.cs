@@ -1,5 +1,10 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using ACC.Data;
+using AccountingSystem.DataSets;
+using AccountingSystem.Views.Manage.RealProperties;
+using AccountingSystem.Views.Shared;
+using DocumentFormat.OpenXml.Office.Word;
 using Microsoft.Reporting.WinForms;
+using MySqlX.XDevAPI.Common;
 using RPT.Data;
 using System;
 using System.ComponentModel;
@@ -10,274 +15,221 @@ namespace AccountingSystem.Views.Reports.RptReports
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {
-        public string completeARPNumber { get; set; }
-        public string OwnerName { get; set; }
-        public string OwnerAddress { get; set; }
-
-        private DataTable dtRealPropertyTaxStatementOfAccounts;
-        internal ReportViewer reportViewer;
-
         public frmRealPropertyTaxStatementOfAccount()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer = new ReportViewer();
-            panel1.Controls.Add(reportViewer);
-            reportViewer.Dock = DockStyle.Fill;
-            //lblReportStatus.Text = string.Empty;
-        }
-
-        private void btnFindOwner_Click(object sender, EventArgs e)
-        {
-            //_ = new frmRptTaxPayerList(null, this, null, null, null).ShowDialog();
+            panel1.Controls.Add(reportViewer1);
+            reportViewer1.Dock = DockStyle.Fill;
         }
 
         private void frmRealPropertyTaxStatementOfAccount_Load(object sender, EventArgs e)
         {
-        }
-
-        private DataColumn[] Sample()
-        {
-            return new DataColumn[]
+            try
             {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("amount", typeof(decimal)),
-                new DataColumn("tax_type", typeof(string)),
-            };
-        }
-
-        private DataTable GetRPTStatementOfAccountsDt()
-        {
-            dtRealPropertyTaxStatementOfAccounts = new dsLFS.dtRPTStamentOfAccountsDataTable();
-
-            var dataTable = new DataTable();
-            //dataTable.Columns.AddRange(Sample());
-            var dtAssessmentPost = new DataTable();
-
-            foreach (DataRow row in dtAssessmentPost.Rows)
-            {
-                var newRowBasic = dtRealPropertyTaxStatementOfAccounts.NewRow();
-                var newRowSEF = dtRealPropertyTaxStatementOfAccounts.NewRow();
-
-                decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
-
-                decimal discountRate = Convert.ToDecimal(row["discount_rate"]);
-                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-
-                decimal basicTaxRate = Convert.ToDecimal(row["basic_rate"]);
-                decimal sefTaxRate = Convert.ToDecimal(row["sef_rate"]);
-                decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(basicTaxRate, assessedValue);
-                decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefTaxRate, assessedValue);
-
-                string year = row["year"].ToString();
-
-                #region Discount
-
-                decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
-                decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
-
-                #endregion Discount
-
-                #region Basic
-
-                newRowBasic["tax_type"] = "Basic";
-                newRowBasic["previous_year"] = "2010";
-                newRowBasic["next_year"] = year;
-
-                newRowBasic["total_tax_due_basic"] = basicTaxDueAmount;
-
-                #endregion Basic
-
-                #region SEF
-
-                newRowSEF["tax_type"] = "SEF";
-
-                newRowSEF["total_tax_due_sef"] = sefTaxDueAmount;
-
-                #endregion SEF
-
-                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
-                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
+                LoadOwners();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
-            return dtRealPropertyTaxStatementOfAccounts;
+        private void LoadProperties(int ownerId)
+        {
+            var dataTable = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerId(ownerId);
+            cmbxProperty.DataSource = dataTable;
+            cmbxProperty.ValueMember = "rpt_assessment_posts_id";
+            cmbxProperty.DisplayMember = "complete_arp_no";
+            cmbxProperty.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbxProperty.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void LoadOwners()
+        {
+            var dataTable = AccFactory.TaxpayersRepository().GetRecords();
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxOwner, "id", "name");
+        }
+
+        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate,
+                                                                  (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters,
+                                                                  decimal penaltyRate,
+                                                                  decimal basicTaxDue,
+                                                                  decimal sefTaxDue)
+        {
+            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+
+            int? prevAssmntYear = null;
+
+            if (dictPrevAssmnt.Count > 1)
+                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
+
+            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+            return (basicPenalty, sefPenalty);
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            dtRealPropertyTaxStatementOfAccounts = new dsLFS.dtRPTStamentOfAccountsDataTable();
+            var parameters = ((string completeArpNo, DateTime periodFrom, DateTime periodTo))e.Argument;
 
-            //var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(OwnerName, yearFrom, yearTo);
+            DataTable dataTable = new dsTreasury.dtRptStamentOfAccountsDataTable();
+            var dtSourceDb = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByArpNoPeriod(parameters.completeArpNo, parameters.periodFrom, parameters.periodTo);
 
-            //foreach (DataRow row in dtAssessmentPosting.Rows)
-            //{
-            //    var basicNewRow = dtRealPropertyTaxAccountRegister.NewRow();
-            //    var sefRow = dtRealPropertyTaxAccountRegister.NewRow();
+            int totalProgressCount = dtSourceDb.Rows.Count;
+            int progressCount = 0;
+            decimal propertyAssessedValue = 0;
 
-            //    string rowCompleteArpNo = row["complete_arp_no"].ToString();
-            //    int rowYear = Convert.ToInt32(row["year"]);
-            //    string rowPin = row["property_pin"].ToString();
-            //    string rowBarangay = row["barangay_name"].ToString();
-            //    string rowMunicipality = row["municipality_name"].ToString();
-            //    string rowProvince = row["province_name"].ToString();
-            //    string rowPropertyKind = row["property_kind"].ToString();
-            //    string rowRptPaymentPostId = row["rpt_payment_posts_id"].ToString();
-            //    decimal rowOtherImprovements = Convert.ToDecimal(row["other_improvements"]);
-            //    decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-            //    string rowReceiptNo = row["payment_collections_receipt_no"].ToString();
-            //    string rowPayee = row["payment_collections_payee"].ToString();
+            foreach (DataRow row in dtSourceDb.Rows)
+            {
+                var newRow = dataTable.NewRow();
 
-            //    decimal landAssessdValue = rowPropertyKind == "L" ? (rowAssessedValue - rowOtherImprovements) : 0;
-            //    decimal totalAssessedValue = rowAssessedValue;
-            //    string paymentPeriod = "AN";
-            //    decimal rowDiscountRate = Convert.ToDecimal(row["discount_rate"]);
-            //    decimal rowPenaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-            //    DateTime rowPostedAt = Convert.ToDateTime(row["posted_at"]);
-            //    int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
-            //    bool rowIsCancelled = Convert.ToBoolean(Convert.ToByte(row["is_cancelled"]));
-            //    decimal basicPenalty = 0;
-            //    decimal sefPenalty = 0;
+                string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                int rowAssessmntYear = Convert.ToInt32(row["year"]);
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
+                decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
+                decimal rowSefRate = Convert.ToDecimal(row["sef_rate"]);
+                decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
+                decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+                decimal rowDiscountRate = Convert.ToDecimal(row["discount_rate"]);
+                decimal rowPenaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+                DateTime rowPostedAt = Convert.ToDateTime(row["posted_at"]);
+                int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
+                int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                decimal paymentAmount = Convert.ToDecimal(row["payment_collections_amount"]);
 
-            //    #region Tax Due
+                object datePaidRaw = row["payment_collections_created_at"];
+                bool isPaid = !string.IsNullOrWhiteSpace(datePaidRaw.ToString());
+                string datePaid = isPaid ? Convert.ToDateTime(datePaidRaw).ToShortDateString() : string.Empty;
+                string rowRptPaymentsId = row["rpt_payments_id"].ToString();
+                DateTime transactionDate = isPaid ? Convert.ToDateTime(datePaidRaw) : dtPeriodTo.Value;
 
-            //    decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
-            //    decimal rowSefRate = Convert.ToDecimal(row["sef_rate"]);
-            //    decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
-            //    decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+                //Get discount rate
+                var discountParameters = (rowPostedAt, rowAssessmntYear);
+                decimal discountRate = isPaid ? rowDiscountRate : RealPropertyTaxComputations.GetDiscountRate(Helper.GetCurrentDate(), discountParameters);
 
-            //    #endregion Tax Due
+                //Get penalties
+                var penaltyParameters = (rowAssessmntYear, rowCompleteArpNo, rowEffectivityQuarter, rowEffectivityYear);
+                var penalties = GetPenalties(transactionDate, penaltyParameters, rowPenaltyRate, basicTaxDue, sefTaxDue);
 
-            //    #region Discount
+                //Get discount
+                decimal basicDiscount = penalties.basicPenalty > 0 ? 0 : RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDue);
+                decimal sefDiscount = penalties.sefPenalty > 0 ? 0 : RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDue);
 
-            //    decimal basicDiscount = taxDueComputations.GetDiscount(rowDiscountRate, basicTaxDueAmount);
-            //    decimal sefDiscount = taxDueComputations.GetDiscount(rowDiscountRate, sefTaxDueAmount);
+                decimal basicPenaltyDiscount = penalties.basicPenalty > 0 ? penalties.basicPenalty : -basicDiscount;
+                decimal sefPenaltyDiscount = penalties.sefPenalty > 1 ? penalties.sefPenalty : -sefDiscount;
 
-            //    #endregion Discount
+                //Previous Year
+                int previousYear;
+                var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(rowCompleteArpNo, rowAssessmntYear);
+                if (dictPrevAssmnt.Count < 1)
+                    previousYear = rowEffectivityYear;
+                else
+                    previousYear = Convert.ToInt32(dictPrevAssmnt["year"]);
 
-            //    //If there's a payment
-            //    if (!string.IsNullOrEmpty(rowRptPaymentPostId))
-            //    {
-            //        var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
+                //Basic
+                newRow["basic_taxdue"] = basicTaxDue;
+                newRow["penalty_discount_basic"] = basicPenaltyDiscount;
+                newRow["total_basic"] = basicTaxDue + basicPenaltyDiscount;
 
-            //        #region Penalty
+                //SEF
+                newRow["sef_taxdue"] = sefTaxDue;
+                newRow["penalty_discount_sef"] = sefPenaltyDiscount;
+                newRow["total_sef"] = sefTaxDue + sefPenaltyDiscount;
 
-            //        basicPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
-            //        sefPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
+                //Common
+                newRow["prev_assessment_year"] = previousYear;
+                newRow["assessment_year"] = rowAssessmntYear;
+                newRow["percentage"] = rowBasicRate;
+                newRow["total_paid"] = paymentAmount;
 
-            //        #endregion Penalty
+                progressCount++;
+                dataTable.Rows.Add(newRow);
+                propertyAssessedValue = rowAssessedValue;
 
-            //        //collection date
-            //        var collectionDate = Convert.ToDateTime(row["payment_collections_payment_date"]);
-            //        basicNewRow["date"] = collectionDate;
-            //        sefRow["date"] = DBNull.Value;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+            }
 
-            //        //BASIC
-            //        basicNewRow["regular_tax_collected"] = basicTaxDueAmount;
-            //        basicNewRow["discount_tax_collected"] = basicDiscount;
-            //        basicNewRow["penalty_tax_collected"] = basicPenalty;
-
-            //        //SEF
-            //        sefRow["regular_tax_collected"] = sefTaxDueAmount;
-            //        sefRow["discount_tax_collected"] = sefDiscount;
-            //        sefRow["penalty_tax_collected"] = sefPenalty;
-            //    }
-
-            //    //BASIC
-            //    basicNewRow["arp_no"] = rowCompleteArpNo;
-            //    basicNewRow["pin"] = rowPin;
-            //    basicNewRow["barangay"] = rowBarangay;
-            //    basicNewRow["municipality"] = rowMunicipality;
-            //    basicNewRow["province"] = rowProvince;
-            //    basicNewRow["tax_year"] = rowYear;
-            //    basicNewRow["land_assessed_value"] = landAssessdValue;
-            //    basicNewRow["other_improvements"] = rowOtherImprovements;
-            //    basicNewRow["total_assessed_value"] = totalAssessedValue;
-            //    basicNewRow["payment_period"] = paymentPeriod;
-            //    basicNewRow["tax_type"] = "Basic";
-            //    basicNewRow["regular_tax_due"] = basicTaxDueAmount;
-            //    basicNewRow["discount_tax_due"] = basicDiscount;
-            //    basicNewRow["penalty_tax_due"] = basicPenalty;
-            //    basicNewRow["or_number"] = rowReceiptNo;
-            //    basicNewRow["payee"] = rowPayee;
-            //    basicNewRow["is_cancelled"] = rowIsCancelled;
-
-            //    //SEF
-            //    sefRow["arp_no"] = rowCompleteArpNo;
-            //    sefRow["pin"] = rowPin;
-            //    sefRow["barangay"] = rowBarangay;
-            //    sefRow["municipality"] = rowMunicipality;
-            //    sefRow["province"] = rowProvince;
-            //    sefRow["tax_year"] = rowYear;
-            //    sefRow["land_assessed_value"] = landAssessdValue;
-            //    sefRow["other_improvements"] = rowOtherImprovements;
-            //    sefRow["total_assessed_value"] = totalAssessedValue;
-            //    sefRow["payment_period"] = paymentPeriod;
-            //    sefRow["tax_type"] = "SEF";
-            //    sefRow["regular_tax_due"] = sefTaxDueAmount;
-            //    sefRow["discount_tax_due"] = sefDiscount;
-            //    sefRow["penalty_tax_due"] = sefPenalty;
-            //    sefRow["or_number"] = string.Empty;
-            //    sefRow["payee"] = string.Empty;
-            //    sefRow["is_cancelled"] = rowIsCancelled;
-
-            //    dtRealPropertyTaxAccountRegister.Rows.Add(basicNewRow);
-            //    dtRealPropertyTaxAccountRegister.Rows.Add(sefRow);
-            //}
+            var result = (dataTable, parameters.completeArpNo, propertyAssessedValue);
+            e.Result = result;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //lblReportStatus.Text = "Loading...";
+            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            LoadReport();
-            //if (LoadReport())
-            //    lblReportStatus.Text = "Done.";
-            //else
-            //    lblReportStatus.Text = "Failed to load";
-        }
-
-        private bool LoadReport()
-        {
             try
             {
-                var localReport = reportViewer.LocalReport;
-                var lguDetails = Helper.LGUDetails();
+                var result = ((DataTable dataTable, string completeArpNo, decimal propertyAssessedValue))e.Result;
 
-                var assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeARPNumber).ToString("N2");
+                if (e.Cancelled)
+                    return;
+                if (result.dataTable is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(Convert.ToInt32(cmbxOwner.SelectedValue));
+                var taxpayerAddress = Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty, dictTaxpayer["municipality"], dictTaxpayer["province"]);
 
                 var parameter = new ReportParameter[]
                 {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramAssessedValue", assessedValue),
-                new ReportParameter("paramARPNo", completeARPNumber),
-                new ReportParameter("paramOwner", OwnerName),
-                new ReportParameter("paramOwnerAddress", OwnerAddress),
-                new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
+                    new ReportParameter("paramLGUName", Helper.LGUDetails()["lgu_name"]),
+                    new ReportParameter("paramAssessedValue", result.propertyAssessedValue.ToString("N2")),
+                    new ReportParameter("paramARPNo", result.completeArpNo),
+                    new ReportParameter("paramOwner", dictTaxpayer["name"]),
+                    new ReportParameter("paramOwnerAddress", taxpayerAddress),
+                    new ReportParameter("paramDate", $"{dtPeriodFrom.Value.ToString("MMM dd, yyyy")} - {dtPeriodTo.Value.ToString("MMM dd, yyyy")}"),
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
+                reportViewer1.LocalReport.ReportPath = $"{Application.StartupPath}\\Reports\\RptStatementOfAccounts.rdlc";
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dtRptStamentOfAccounts", dataTable));
 
-                localReport.DataSources.Clear();
-                localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", GetRPTStatementOfAccountsDt()));
+                reportViewer1.LocalReport.SetParameters(parameter);
 
-                localReport.SetParameters(parameter);
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                reportViewer1.ZoomPercent = 100;
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
-                reportViewer.ZoomPercent = 100;
-
-                reportViewer.RefreshReport();
-
-                return true;
+                reportViewer1.RefreshReport();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxOwner_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
             {
-                Helper.MessageBoxError(ex.Message);
+                if (cmbxOwner.SelectedValue is int taxpayerId)
+                    LoadProperties(taxpayerId);
             }
-            return false;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReport()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                string arpNo = cmbxProperty.Text;
+                DateTime periodFrom = dtPeriodFrom.Value;
+                DateTime periodTo = dtPeriodTo.Value;
+
+                backgroundWorker1.RunWorkerAsync((arpNo, periodFrom, periodTo));
+            }
+        }
+
+        private void btnRunReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReport();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
