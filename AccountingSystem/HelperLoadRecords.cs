@@ -123,17 +123,6 @@ namespace AccountingSystem
             dataGridView.Columns["updated_at"].Visible = false;
         }
 
-        public static void DatagridViewTaxPayerList(DataGridView dataGridView, DataTable dataTable)
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["taxpayers_id"].Visible = false;
-            dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
-            dataGridView.Columns["taxpayer_type_code"].Visible = false;
-            dataGridView.Columns["taxpayers_contact_info"].Visible = false;
-            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
-            dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
-        }
-
         public static void DatagridViewPaymentTaxpayerTaxDues(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
@@ -774,46 +763,6 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
         }
 
-        internal static void BanksDepositsSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("banks_id", "Bank ID");
-            datagrid.Columns.Add("account_number", "Account No.");
-            datagrid.Columns.Add("bank_name", "Bank Name");
-            datagrid.Columns.Add("amount", "Amount");
-
-            datagrid.Columns["banks_id"].Visible = false;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["account_number"].Width = 130;
-            datagrid.Columns["account_number"].MinimumWidth = 130;
-            datagrid.Columns["bank_name"].Width = 170;
-            datagrid.Columns["bank_name"].MinimumWidth = 170;
-            datagrid.Columns["amount"].Width = 80;
-            datagrid.Columns["amount"].MinimumWidth = 80;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    row["banks_id"],
-                    row["account_no"],
-                    row["bank_name"],
-                    row["amount"],
-                });
-            }
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
-        }
-
         internal static void BanksDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1047,28 +996,6 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        internal static void GeneralCollectionDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Columns.Clear();
-            datagrid.Rows.Clear();
-
-            datagrid.DataSource = dataTable;
-
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "RCD Number";
-            datagrid.Columns[2].HeaderText = "Date";
-            datagrid.Columns[3].HeaderText = "Liquidating Officer";
-            datagrid.Columns[4].HeaderText = "Total Amount";
-            datagrid.Columns[4].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[5].Visible = false;
-            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
-            datagrid.Columns.Add(chk);
-            chk.HeaderText = "Print";
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
         internal static void RCIObligationDatagridview(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1233,45 +1160,6 @@ namespace AccountingSystem
 
             comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-        }
-
-        public static void PaymentSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("collecting_officer_id", "ID");
-            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
-            datagrid.Columns.Add("amount", "Amount");
-
-            datagrid.Columns["collecting_officer_id"].Visible = false;
-            datagrid.Columns["collecting_officer"].Width = 300;
-            datagrid.Columns["collecting_officer"].MinimumWidth = 300;
-
-            datagrid.Columns["amount"].Width = 80;
-            datagrid.Columns["amount"].MinimumWidth = 80;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var regularCollector = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
-                var jobOrderCollector = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
-                var collectingOfficer = string.IsNullOrEmpty(row["job_orders_id"].ToString()) ? regularCollector : jobOrderCollector;
-
-                datagrid.Rows.Add(new object[]
-                {
-                    row["collecting_officer_id"],
-                    collectingOfficer,
-                    row["amount"]
-                });
-            }
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
-            datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
 
         internal static void PaymentCollectionReportDatagrid(DataTable dataTable, DataGridView datagrid)
@@ -1514,23 +1402,6 @@ namespace AccountingSystem
 
             if (comboBox.Items.Count == 0)
                 comboBox.DropDownHeight = 106;
-        }
-
-        internal static void RegularAndJOCollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            }
         }
 
         internal static void JobOrdersDatagridView(DataTable dataTable, DataGridView datagrid)

@@ -52,6 +52,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Registry;
 using AccountingSystem.Views.Reports.RptReports;
+using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -716,6 +717,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void paymentHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmPaymentHistory().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

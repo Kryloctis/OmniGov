@@ -8,25 +8,13 @@ namespace ACC.Domain.Interfaces
     {
         List<int> GetRecordsReceiptsByAccFormId(int accountableFormId);
 
-        DataTable GetRecordsByCollectingOfficerId(int collectorId);
-
-        DataTable GetRecordsByUserId(int userId);
-
         DataTable GetRecordByLedger(object[] parameter);
 
-        DataTable GetRecordsByDate(string date);
-
-        DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey);
-
         DataTable GetCollectionsPerCollector();
-
-        int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID);
 
         int GetTotalUsedAccountableFormByCollectingOfficerID(int collectingOfficerID, int accountableFormID);
 
         bool ReceiptExist(int receipt, int formid);
-
-        bool ReceiptExist(int paymentCollectionId, int receipt, int formid);
 
         bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom);
 

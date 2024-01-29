@@ -55,61 +55,19 @@ namespace ACC.Data
             return recordDictionary;
         }
 
-        public DataTable GetRecordsByCollectingOfficerId(int collectorId)
-        {
-            var parameter = new object[][] {
-                new object[] {"@collectorId", DbType.Int32, collectorId}
-            };
-
-            string query = $"SELECT id, funds_id, fund_name, accountable_form_id, accountable_forms, account_code, general_ledger_accounts_id, ledger_name, payee, receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE collecting_officer_id = @collectorId ORDER BY accountable_form_id";
-
-            var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
-        }
-
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
 
-            var dtPaymentCollection = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dtPaymentCollection);
-        }
-
-        public DataTable GetRecordsByDate(string date)
-        {
-            var parameter = new object[][]
-            {
-                new object[]{"@date", DbType.DateTime2, date}
-            };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
-
-            var dtPaymentCollection = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
-        }
-
-        public DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey)
-        {
-            var parameter = new object[][]
-            {
-                new object[]{ "@payment_date", DbType.DateTime2, date},
-                new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID },
-                new object[]{ "@search_key", DbType.String, $"%{searchKey}%" }
-            };
-
-            string columnFilter = collectingOfficerJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
-
-            string query = $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date ORDER BY accountable_forms_id";
-
-            var dtPaymentCollection = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public bool Insert(PaymentCollectionsModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@collecting_officer_id", DbType.Int32, entity.CollectingOfficerId},
                 new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
                 new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
@@ -120,7 +78,7 @@ namespace ACC.Data
                 new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
+            string query = $"INSERT INTO {tableName} (collecting_officer_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officer_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -130,7 +88,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@collecting_officer_id", DbType.Int32, entity.CollectingOfficerId},
                 new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
                 new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
@@ -141,50 +99,35 @@ namespace ACC.Data
                 new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
             };
 
-            string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
+            string query = $"UPDATE {tableName} SET collecting_officer_id = @collecting_officer_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<PaymentCollectionsModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
                             new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public int CountRecords()
         {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT COUNT(*) FROM {tableName}";
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)
@@ -220,35 +163,17 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ReceiptExist(int paymentCollectionId, int receipt, int accountableFormId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@payment_collection_id", DbType.Int64, paymentCollectionId },
-                new object[] { "@receipt_no", DbType.Int32, receipt },
-                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormId },
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @payment_collection_id AND receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult))
-                return true;
-
-            return false;
-        }
-
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameter = new object[][] {
+            var parameter = new object[][]
+            {
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
+            string query = $"SELECT * FROM {viewTableName}  WHERE acc_form_desc LIKE @searchText || acc_form_no LIKE @searchText";
 
-            var dtpc = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecordByLedger(object[] parameter)
@@ -261,33 +186,20 @@ namespace ACC.Data
                 new object[] { "@collection_to", DbType.Date, parameter[3] }
             };
 
-            string columnFilter = Convert.ToBoolean(parameter[4]) ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
+            string columnFilter = Convert.ToBoolean(parameter[4]) ? "jo_id" : "ISNULL(jo_id) AND co_id";
 
-            string query = $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date BETWEEN @collection_from AND @collection_to ";
+            string query = $"SELECT * FROM {viewTableName} WHERE {columnFilter} = @co_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
-            var dtPaymentCollection = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
-        }
-
-        public DataTable GetRecordsByUserId(int userId)
-        {
-            var parameter = new object[][] {
-                new object[] {"@userId", DbType.Int32, userId }
-            };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @userId";
-
-            var dt = new DataTable();
-
-            return mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetCollectionsPerCollector()
         {
-            string query = $"SELECT collecting_officer_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY job_orders_id";
+            string query = $"SELECT co_id, co_first_name, co_mid_initial, co_last_name, jo_id, jo_first_name, jo_mid_initial, jo_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY jo_id";
 
-            var dt = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dt);
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
         }
 
         public int GetLastInsertedID(int createdById)
@@ -299,19 +211,6 @@ namespace ACC.Data
 
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
             return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
-        }
-
-        public int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID)
-        {
-            var parameter = new object[][]
-            {
-                new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerID},
-                new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
-            };
-
-            string query = $"SELECT COALESCE(MAX(receipt_no), 0) FROM payment_collections WHERE collecting_officers_id = @collecting_officers_id AND accountable_forms_id = @accountable_forms_id AND is_cancelled <> 1";
-
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }
 
         public List<int> GetRecordsReceiptsByAccFormId(int accountableFormId)
@@ -334,11 +233,11 @@ namespace ACC.Data
         {
             var parameter = new object[][]
             {
-                new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID},
-                new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
+                new object[]{ "@co_id", DbType.Int32, collectingOfficerID},
+                new object[]{ "@acc_form_id", DbType.Int32, accountableFormID},
             };
 
-            string query = $"SELECT COUNT(id) FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND accountable_forms_id = @accountable_forms_id";
+            string query = $"SELECT COALESCE(COUNT(id), 0) FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id";
 
             return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
         }

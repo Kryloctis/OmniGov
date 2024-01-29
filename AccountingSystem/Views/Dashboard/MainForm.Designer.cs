@@ -117,7 +117,6 @@
             tabPageSCBAA = new System.Windows.Forms.TabPage();
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
-            ucrcdSummary1 = new TreasuryDashboard.ucRCDSummary();
             ToolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,6 +157,7 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
+            paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -996,7 +996,6 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(ucrcdSummary1);
             panel1.Controls.Add(ToolStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -1004,14 +1003,7 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(1221, 617);
             panel1.TabIndex = 0;
-            // 
-            // ucrcdSummary1
-            // 
-            ucrcdSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucrcdSummary1.Location = new System.Drawing.Point(0, 31);
-            ucrcdSummary1.Name = "ucrcdSummary1";
-            ucrcdSummary1.Size = new System.Drawing.Size(1221, 586);
-            ucrcdSummary1.TabIndex = 10;
+   
             // 
             // ToolStrip2
             // 
@@ -1071,7 +1063,7 @@
             // 
             // toolStripSplitButton3
             // 
-            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem });
+            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, paymentHistoryToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem });
             toolStripSplitButton3.Image = Properties.Resources.money_2_24px;
             toolStripSplitButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1304,6 +1296,13 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // paymentHistoryToolStripMenuItem
+            // 
+            paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
+            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            paymentHistoryToolStripMenuItem.Text = "Payment History";
+            paymentHistoryToolStripMenuItem.Click += paymentHistoryToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1398,7 +1397,6 @@
         internal System.Windows.Forms.TabPage tabPageAccounting;
         private System.Windows.Forms.ToolStripMenuItem amortiaztionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem signatoriesToolStripMenuItem;
-        private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem discountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem penaltiesToolStripMenuItem;
@@ -1502,5 +1500,6 @@
         private System.Windows.Forms.ToolStripMenuItem realPropertTaxDuesAndPaymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listOfRealPropertyDelinquenciesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxStatementOfAccountToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem paymentHistoryToolStripMenuItem;
     }
 }
