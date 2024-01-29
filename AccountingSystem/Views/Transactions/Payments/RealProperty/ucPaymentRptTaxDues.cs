@@ -73,9 +73,10 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 new DataColumn("kind", typeof(string)),
                 new DataColumn("real_taxpayers_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("effectivity", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
                 new DataColumn("full_address", typeof(string)),
-                new DataColumn("effectivity", typeof(string)),
             };
         }
 
@@ -94,10 +95,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 newRow["id"] = row["id"];
                 newRow["real_taxpayers_id"] = row["real_taxpayers_id"];
                 newRow["complete_arp_no"] = row["complete_arp_no"];
+                newRow["effectivity"] = $"{Helper.AddOrdinalSuffix(Convert.ToInt32(row["effectivity_quarterly"]))} Qtr. - {row["effectivity_year"]}";
                 newRow["property_pin"] = row["property_pin"];
                 newRow["full_address"] = Helper.GenerateFullAddress(row["street"].ToString(), row["barangay_name"].ToString(), row["municipality_name"].ToString(), row["province_name"].ToString());
                 newRow["kind"] = row["property_kind"];
-                newRow["effectivity"] = $"{row["effectivity_quarterly"]} - {row["effectivity_year"]}";
+                newRow["assessed_value"] = Convert.ToDecimal(row["assessed_value"]);
 
                 dataTable.Rows.Add(newRow);
             }
@@ -263,7 +265,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 new DataColumn("penalty_discount", typeof(string)),
                 new DataColumn("total_payment", typeof(string)),
                 new DataColumn("total_payment_consolidated", typeof(string)),
-                new DataColumn("discount_rate", typeof(decimal)),
             };
         }
 
@@ -321,7 +322,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                         $"{sefPenaltyDiscount.ToString("C").Replace("$", string.Empty)}";
                     newRow["total_payment"] = $"{totalBasicPayment.ToString("N2")}\n{totalSefPayment.ToString("N2")}";
                     newRow["total_payment_consolidated"] = totalBasicPayment + totalSefPayment;
-                    newRow["discount_rate"] = discountRate;
                     dataTable.Rows.Add(newRow);
                 }
             }

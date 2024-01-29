@@ -168,12 +168,16 @@ namespace AccountingSystem
             dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["real_taxpayers_id"].Visible = false;
-            dataGridView.Columns["complete_arp_no"].HeaderText = "APR No.";
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             dataGridView.Columns["property_pin"].HeaderText = "PIN";
             dataGridView.Columns["full_address"].HeaderText = "Address";
             dataGridView.Columns["kind"].HeaderText = "Kind";
-            dataGridView.Columns["kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["effectivity"].HeaderText = "Effectivity";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
         }
 
         public static void TaxRatesDatagridView(DataGridView dataGridView, DataTable dataTable)
