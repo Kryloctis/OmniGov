@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerList(_frmPayments).ShowDialog();
+            //_ = new frmTaxPayerList(_frmPayments).ShowDialog();
         }
 
         private void linkSearch_Click(object sender, EventArgs e)
