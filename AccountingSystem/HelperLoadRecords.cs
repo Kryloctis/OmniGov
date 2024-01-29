@@ -2212,5 +2212,22 @@ namespace AccountingSystem
             dataGridView.Columns["bank_branch"].HeaderText = "Bank Branch";
             dataGridView.Columns["bank_name"].HeaderText = "Bank Name";
         }
+
+        internal static void DatagridViewPaymentHistory(DataTable dataTable, DataGridView datagridView)
+        {
+            datagridView.DataSource = dataTable;
+
+            datagridView.Columns["id"].Visible = false;
+            datagridView.Columns["receipt_no"].HeaderText = "Receipt No.";
+            datagridView.Columns["payee"].HeaderText = "Payee";
+            datagridView.Columns["payment_date"].HeaderText = "Payment Date";
+            datagridView.Columns["amount"].HeaderText = "Amount";
+            datagridView.Columns["is_cancelled"].HeaderText = "Void";
+
+            datagridView.Columns["payee"].MinimumWidth = 200;
+            datagridView.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagridView.Columns["payment_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+        }
     }
 }

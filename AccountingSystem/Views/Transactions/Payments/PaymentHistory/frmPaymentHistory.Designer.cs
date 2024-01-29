@@ -34,16 +34,16 @@
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnSearch = new System.Windows.Forms.ToolStripButton();
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            cmbxAccForm = new System.Windows.Forms.ToolStripComboBox();
+            toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            cmbxCollector = new System.Windows.Forms.ToolStripComboBox();
+            toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
             dataGridView1 = new System.Windows.Forms.DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2 = new System.Windows.Forms.Panel();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
-            cmbxCollector = new System.Windows.Forms.ToolStripComboBox();
-            toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            cmbxAccForm = new System.Windows.Forms.ToolStripComboBox();
-            toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -94,6 +94,8 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(24, 24);
             btnSearch.Text = "toolStripButton1";
+            btnSearch.ToolTipText = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -101,6 +103,36 @@
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 27);
+            // 
+            // cmbxAccForm
+            // 
+            cmbxAccForm.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            cmbxAccForm.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            cmbxAccForm.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            cmbxAccForm.Name = "cmbxAccForm";
+            cmbxAccForm.Size = new System.Drawing.Size(200, 27);
+            // 
+            // toolStripLabel2
+            // 
+            toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new System.Drawing.Size(61, 24);
+            toolStripLabel2.Text = "Acc. Form";
+            // 
+            // cmbxCollector
+            // 
+            cmbxCollector.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            cmbxCollector.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            cmbxCollector.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            cmbxCollector.Name = "cmbxCollector";
+            cmbxCollector.Size = new System.Drawing.Size(200, 27);
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new System.Drawing.Size(55, 24);
+            toolStripLabel1.Text = "Collector";
             // 
             // progressBar1
             // 
@@ -155,38 +187,7 @@
             cmbxRowFilter.Name = "cmbxRowFilter";
             cmbxRowFilter.Size = new System.Drawing.Size(120, 23);
             cmbxRowFilter.TabIndex = 2;
-            // 
-            // cmbxCollector
-            // 
-            cmbxCollector.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            cmbxCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxCollector.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            cmbxCollector.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            cmbxCollector.Name = "cmbxCollector";
-            cmbxCollector.Size = new System.Drawing.Size(150, 27);
-            // 
-            // toolStripLabel1
-            // 
-            toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new System.Drawing.Size(55, 24);
-            toolStripLabel1.Text = "Collector";
-            // 
-            // cmbxAccForm
-            // 
-            cmbxAccForm.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            cmbxAccForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxAccForm.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            cmbxAccForm.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            cmbxAccForm.Name = "cmbxAccForm";
-            cmbxAccForm.Size = new System.Drawing.Size(150, 27);
-            // 
-            // toolStripLabel2
-            // 
-            toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new System.Drawing.Size(61, 24);
-            toolStripLabel2.Text = "Acc. Form";
+            cmbxRowFilter.SelectionChangeCommitted += cmbxRowFilter_SelectionChangeCommitted;
             // 
             // frmPaymentHistory
             // 

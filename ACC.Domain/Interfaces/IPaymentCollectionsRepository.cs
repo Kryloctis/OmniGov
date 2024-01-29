@@ -6,6 +6,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface IPaymentCollectionsRepository : IAccRepository<PaymentCollectionsModel>
     {
+        DataTable GerViewRecordsByCoIdAccFormId(int coId, int accFormId, string searchKey, int rowFilter);
+
+        DataTable GerViewRecordsByJoIdAccFormId(int joId, int accFormId, string searchKey, int rowFilter);
+
         List<int> GetRecordsReceiptsByAccFormId(int accountableFormId);
 
         DataTable GetRecordByLedger(object[] parameter);

@@ -345,5 +345,35 @@ namespace ACC.Data
                 return true;
             };
         }
+
+        public DataTable GerViewRecordsByCoIdAccFormId(int coId, int accFormId, string searchKey, int rowFilter)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@co_id", DbType.Int32, coId},
+                new object[] { "@acc_form_id", DbType.Int32, accFormId},
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@row_filter", DbType.Int32, rowFilter},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GerViewRecordsByJoIdAccFormId(int joId, int accFormId, string searchKey, int rowFilter)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@jo_id", DbType.Int32, joId},
+                new object[] { "@acc_form_id", DbType.Int32, accFormId},
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@row_filter", DbType.Int32, rowFilter},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE jo_id = @jo_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
     }
 }

@@ -130,6 +130,7 @@
             aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF58BurialPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF53CattleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -157,7 +158,6 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
@@ -1003,7 +1003,6 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(1221, 617);
             panel1.TabIndex = 0;
-   
             // 
             // ToolStrip2
             // 
@@ -1113,6 +1112,13 @@
             aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Cattle Ownership ";
             aF53CattleToolStripMenuItem.Click += aF53CattleToolStripMenuItem_Click;
             // 
+            // paymentHistoryToolStripMenuItem
+            // 
+            paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
+            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            paymentHistoryToolStripMenuItem.Text = "Payment History";
+            paymentHistoryToolStripMenuItem.Click += paymentHistoryToolStripMenuItem_Click;
+            // 
             // toolStripSeparator10
             // 
             toolStripSeparator10.Name = "toolStripSeparator10";
@@ -1185,7 +1191,7 @@
             collectionPaymentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRCDToolStripMenuItem, abstractOfGeneralCollectionsToolStripMenuItem });
             collectionPaymentToolStripMenuItem1.Name = "collectionPaymentToolStripMenuItem1";
             collectionPaymentToolStripMenuItem1.Size = new System.Drawing.Size(400, 22);
-            collectionPaymentToolStripMenuItem1.Text = "Collection/Payment";
+            collectionPaymentToolStripMenuItem1.Text = "Collection && Deposits";
             // 
             // reportOfCollectionsDepositsRCDToolStripMenuItem
             // 
@@ -1295,13 +1301,6 @@
             imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // paymentHistoryToolStripMenuItem
-            // 
-            paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
-            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            paymentHistoryToolStripMenuItem.Text = "Payment History";
-            paymentHistoryToolStripMenuItem.Click += paymentHistoryToolStripMenuItem_Click;
             // 
             // MainForm
             // 

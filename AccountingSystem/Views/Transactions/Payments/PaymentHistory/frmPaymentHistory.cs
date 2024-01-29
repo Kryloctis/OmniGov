@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
         private void LoadCollectors()
@@ -75,6 +76,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
             HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
             LoadCollectors();
             LoadAccountableForms();
+            LoadRecords();
         }
 
         private void frmPaymentHistory_Load(object sender, EventArgs e)
@@ -86,10 +88,79 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                string searchKey = txtSearch.Text.Trim();
+                string collectorName = cmbxCollector.Text;
+                var collectorId = cmbxCollector.ComboBox.SelectedValue;
+                var accFormId = cmbxAccForm.ComboBox.SelectedValue;
+                int rowFilter = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+                progressBar1.Value = 0;
+
+                if (collectorId is null || accFormId is null)
+                {
+                    ((DataTable)dataGridView1.DataSource).Rows.Clear();
+                    dataGridView1.Refresh();
+                    progressBar1.Value = 100;
+                    return;
+                }
+
+                DataTable dtSourceDb;
+
+                if (collectorName.Contains("(Job Order)"))
+                    dtSourceDb = AccFactory.PaymentCollectionsRepository().GerViewRecordsByJoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
+                else
+                    dtSourceDb = AccFactory.PaymentCollectionsRepository().GerViewRecordsByCoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
+
+                backgroundWorker1.RunWorkerAsync(dtSourceDb);
+            }
+        }
+
+        private DataColumn[] DataColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "receipt_no", typeof(string)),
+                new DataColumn(Name = "payee", typeof(string)),
+                new DataColumn(Name = "payment_date", typeof(DateTime)),
+                new DataColumn(Name = "amount", typeof(decimal)),
+                new DataColumn(Name = "is_cancelled", typeof(bool)),
+            };
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
+                var dataTable = new DataTable();
+                dataTable.Columns.AddRange(DataColumns());
+
+                if (e.Argument is not DataTable dtSourceDb)
+                    return;
+
+                int totalProgress = dtSourceDb.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow row in dtSourceDb.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+
+                    newRow["id"] = row["id"];
+                    newRow["receipt_no"] = row["receipt_no"];
+                    newRow["payee"] = row["payee"];
+                    newRow["payment_date"] = row["payment_date"];
+                    newRow["amount"] = row["amount"];
+                    newRow["is_cancelled"] = row["is_cancelled"];
+
+                    progressCount++;
+                    dataTable.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalProgress, progressCount);
+                }
+
+                e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -110,6 +181,27 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
 
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
+
+                lblRecordCount.Text = dataTable.Rows.Count.ToString();
+                HelperLoadRecords.DatagridViewPaymentHistory(dataTable, dataGridView1);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
