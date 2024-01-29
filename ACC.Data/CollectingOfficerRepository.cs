@@ -51,10 +51,10 @@ namespace ACC.Data
 
             var parameters = new object[][]
             {
-                new object[] { "@users_id", DbType.Int32, Id},
+                new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE users_id = @users_id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
