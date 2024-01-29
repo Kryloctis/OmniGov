@@ -52,7 +52,6 @@
             menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             bankAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
-            menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             businessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             businessAddOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,6 +118,7 @@
             panel1 = new System.Windows.Forms.Panel();
             ToolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            receiptsInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             RptToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -229,7 +229,7 @@
             // 
             // menuManage
             // 
-            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, menuReceipts, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, menuTaxPayers, registryToolStripMenuItem, feesChargesConfigToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
+            menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuUsers, barangaysToolStripMenuItem, signatoriesToolStripMenuItem, menuFunds, toolStripSeparator2, menuJournals, menuFunctionProgramProject, menuChartOfAccounts, menuAllotmentClasses, amortiaztionToolStripMenuItem, toolStripSeparator3, menuCollectingOfficer, menuDisbursingOfficer, menuBanks, bankAccountsToolStripMenuItem, menuAccForm, businessToolStripMenuItem, toolStripSeparator1, discountsToolStripMenuItem, penaltiesToolStripMenuItem, taxRatesToolStripMenuItem, menuTaxPayers, registryToolStripMenuItem, feesChargesConfigToolStripMenuItem, toolStripSeparator9, databaseSynchronizationToolStripMenuItem });
             menuManage.Name = "menuManage";
             menuManage.Size = new System.Drawing.Size(62, 24);
             menuManage.Text = "Manage";
@@ -356,13 +356,6 @@
             menuAccForm.Size = new System.Drawing.Size(223, 22);
             menuAccForm.Text = "Accountable Form...";
             menuAccForm.Click += menuAccForm_Click;
-            // 
-            // menuReceipts
-            // 
-            menuReceipts.Name = "menuReceipts";
-            menuReceipts.Size = new System.Drawing.Size(223, 22);
-            menuReceipts.Text = "Receipts...";
-            menuReceipts.Click += menureceipts_Click;
             // 
             // businessToolStripMenuItem
             // 
@@ -1018,7 +1011,7 @@
             // 
             // toolStripSplitButton2
             // 
-            toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { issueRecieptsToolStripMenuItem, returnedReceiptsToolStripMenuItem });
+            toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { receiptsInventoryToolStripMenuItem, issueRecieptsToolStripMenuItem, returnedReceiptsToolStripMenuItem });
             toolStripSplitButton2.Image = Properties.Resources.document_delivery_receipt_signed_24px;
             toolStripSplitButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1026,17 +1019,24 @@
             toolStripSplitButton2.Size = new System.Drawing.Size(91, 28);
             toolStripSplitButton2.Text = "Reciepts";
             // 
+            // receiptsInventoryToolStripMenuItem
+            // 
+            receiptsInventoryToolStripMenuItem.Name = "receiptsInventoryToolStripMenuItem";
+            receiptsInventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            receiptsInventoryToolStripMenuItem.Text = "Inventory";
+            receiptsInventoryToolStripMenuItem.Click += receiptsInventoryToolStripMenuItem_Click;
+            // 
             // issueRecieptsToolStripMenuItem
             // 
             issueRecieptsToolStripMenuItem.Name = "issueRecieptsToolStripMenuItem";
-            issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            issueRecieptsToolStripMenuItem.Text = "Issue Reciepts";
+            issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            issueRecieptsToolStripMenuItem.Text = "Issuance";
             issueRecieptsToolStripMenuItem.Click += issueRecieptsToolStripMenuItem_Click;
             // 
             // returnedReceiptsToolStripMenuItem
             // 
             returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             returnedReceiptsToolStripMenuItem.Click += returnedReceiptsToolStripMenuItem_Click;
             // 
@@ -1045,8 +1045,8 @@
             RptToolStripButton.Image = Properties.Resources.building_9_archive_24px;
             RptToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             RptToolStripButton.Name = "RptToolStripButton";
-            RptToolStripButton.Size = new System.Drawing.Size(55, 28);
-            RptToolStripButton.Text = "RPT";
+            RptToolStripButton.Size = new System.Drawing.Size(113, 28);
+            RptToolStripButton.Text = "Real Properties";
             RptToolStripButton.Click += toolStripButtonRpt_Click;
             // 
             // toolStripButtonBpl
@@ -1057,8 +1057,8 @@
             toolStripButtonBpl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripButtonBpl.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripButtonBpl.Name = "toolStripButtonBpl";
-            toolStripButtonBpl.Size = new System.Drawing.Size(51, 28);
-            toolStripButtonBpl.Text = "BPL";
+            toolStripButtonBpl.Size = new System.Drawing.Size(167, 28);
+            toolStripButtonBpl.Text = "Business Permit Licensure";
             // 
             // toolStripSplitButton3
             // 
@@ -1391,7 +1391,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
         private System.Windows.Forms.ToolStripMenuItem menuExitApp;
-        private System.Windows.Forms.ToolStripMenuItem menuReceipts;
         private System.Windows.Forms.TabControl tabControlDashboard;
         internal System.Windows.Forms.TabPage tabPageAccounting;
         private System.Windows.Forms.ToolStripMenuItem amortiaztionToolStripMenuItem;
@@ -1500,5 +1499,6 @@
         private System.Windows.Forms.ToolStripMenuItem listOfRealPropertyDelinquenciesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxStatementOfAccountToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem paymentHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receiptsInventoryToolStripMenuItem;
     }
 }

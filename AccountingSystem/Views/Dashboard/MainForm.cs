@@ -276,7 +276,7 @@ namespace AccountingSystem.Views.Dashboard
                 menuRoles.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Receipts"))
-                menuReceipts.Enabled = false;
+                receiptsInventoryToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
@@ -515,7 +515,6 @@ namespace AccountingSystem.Views.Dashboard
 
         private void menureceipts_Click(object sender, EventArgs e)
         {
-            _ = new frmReceipts().ShowDialog();
         }
 
         private void issueRecieptsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -726,6 +725,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 _ = new frmPaymentHistory().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void receiptsInventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmReceipts().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
