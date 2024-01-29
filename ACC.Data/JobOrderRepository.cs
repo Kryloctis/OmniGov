@@ -78,17 +78,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(JobOrderModel entity)
@@ -104,9 +104,7 @@ namespace ACC.Data
                 new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
             };
 
-            string query = $"INSERT INTO " +
-                            $"{tableName} (users_id, prefix, first_name, mid_initial, last_name, suffix, job_title)" +
-                            $"VALUES (@users_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title)";
+            string query = $"INSERT INTO {tableName} (users_id, prefix, first_name, mid_initial, last_name, suffix, job_title) VALUES (@users_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title)";
 
             return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -124,7 +122,7 @@ namespace ACC.Data
 
         public bool Update(JobOrderModel entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetJobOrderIdByUserId(int userId)

@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dataColumns);
             var dtCoCollectors = AccFactory.CollectingOfficerRepository().GetRecords();
-            var dtJoCollectors = AccFactory.JobOrderRepository().GetRecords();
+            var dtJoCollectors = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
 
             foreach (DataRow coRow in dtCoCollectors.Rows)
             {
