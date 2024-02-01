@@ -10,7 +10,7 @@ namespace RPT.Domain.Interfaces
     {
         bool IsPropertyPosted(string arpNo);
 
-        Dictionary<string, string> GetViewPreviousAssessmentPostRecord(string completeArpNo, int assessmentPostYear);
+        Dictionary<string, string> GetViewRecentAssessmentRecord(string completeArpNo, int assessmentYear);
 
         int GetMinAssessmentPostYear(string completeArpNo);
 
@@ -18,26 +18,22 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled);
 
-        DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo);
+        DataTable GetViewRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo);
 
-        DataTable GetRecordsByArpNo(string arpNo);
+        DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo);
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
-        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear);
+        DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo);
 
-        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear);
+        DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo);
 
-        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear);
+        DataTable GetBarangayRecords();
 
-        DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate);
-
-        DataTable Get_Grouped_Barangay_Records();
-
-        DataTable Get_Grouped_Municipality_Records();
-
-        DataTable GetViewRecords(int realTaxpayersId, string completeArpNo, bool showPaidAssessments);
+        DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments);
 
         DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
+
+        DataTable GetViewRecordsByOwnerId(int taxpayerId);
     }
 }

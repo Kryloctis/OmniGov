@@ -9,11 +9,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>df270509-6371-4f1b-a88f-5f7067e0589e</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="dsTreasury">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>88136d99-2e75-4f94-bf64-804c03260b78</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtListOfRealPropertyTaxDelinquencies">
+    <DataSet Name="dtRptDelinquencies">
       <Query>
-        <DataSourceName>dsLFS</DataSourceName>
+        <DataSourceName>dsTreasury</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -63,9 +70,9 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>D:\Janrey Files\Projects\Repos\Local Finance System\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
-        <rd:TableName>dtListOfRealPropertyTaxDelinquencies</rd:TableName>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
+        <rd:TableName>dtRptDelinquencies</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -378,7 +385,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Penalty /(Discount)</Value>
+                                  <Value>Penalty</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -452,7 +459,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Penalty/ (Discount)</Value>
+                                  <Value>Penalty</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -997,7 +1004,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!assessed_value.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!assessed_value.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1070,7 +1077,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!basic_tax_due.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!basic_tax_due.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1107,7 +1114,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!basic_penalty.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!basic_penalty.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1144,7 +1151,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!sef_tax_due.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!sef_tax_due.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1181,7 +1188,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!sef_penalty.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!sef_penalty.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1207,7 +1214,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1219,7 +1225,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!total.Value, "dtListOfRealPropertyTaxDelinquencies")</Value>
+                                  <Value>=Sum(Fields!total.Value, "dtRptDelinquencies")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1320,7 +1326,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
-            <DataSetName>dtListOfRealPropertyTaxDelinquencies</DataSetName>
+            <DataSetName>dtRptDelinquencies</DataSetName>
             <Top>0.14993cm</Top>
             <Left>0.10609cm</Left>
             <Height>2.04666cm</Height>
@@ -1574,8 +1580,9 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramAsOf">
-      <DataType>DateTime</DataType>
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtCertListOfAllRptDelinquences">
+    <DataSet Name="dtCertfiedRptDelinquencies">
       <Query>
         <DataSourceName>dsLFS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -35,51 +35,51 @@
         </Field>
         <Field Name="land_assessed_value">
           <DataField>land_assessed_value</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="other_improvement_assessed_value">
-          <DataField>other_improvement_assessed_value</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="building_assessed_value">
+          <DataField>building_assessed_value</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="machinery_assessed_value">
           <DataField>machinery_assessed_value</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="annual_tax">
           <DataField>annual_tax</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="year">
           <DataField>year</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="basic_tax">
           <DataField>basic_tax</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="basic_penalty">
           <DataField>basic_penalty</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="basic_total">
-          <DataField>basic_total</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="basic_sub_total">
+          <DataField>basic_sub_total</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="sef_tax">
           <DataField>sef_tax</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="sef_penalty">
           <DataField>sef_penalty</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="sef_total">
-          <DataField>sef_total</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="sef_sub_total">
+          <DataField>sef_sub_total</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="grand_total">
           <DataField>grand_total</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="remarks">
           <DataField>remarks</DataField>
@@ -87,9 +87,9 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>D:\Janrey Files\Projects\Repos\Local Finance System\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
-        <rd:TableName>dtCertListOfAllRptDelinquences</rd:TableName>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
+        <rd:TableName>dtCertfiedRptDelinquencies</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -421,7 +421,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Imp.</Value>
+                                      <Value>Building</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -457,7 +457,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Mach.</Value>
+                                      <Value>Machinery</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -1772,14 +1772,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="other_improvement_assessed_value">
+                        <Textbox Name="building_assessed_value">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!other_improvement_assessed_value.Value</Value>
+                                  <Value>=Fields!building_assessed_value.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1792,7 +1792,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>other_improvement_assessed_value</rd:DefaultName>
+                          <rd:DefaultName>building_assessed_value</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1987,14 +1987,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="basic_total">
+                        <Textbox Name="basic_sub_total">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!basic_total.Value</Value>
+                                  <Value>=Fields!basic_sub_total.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2007,7 +2007,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>basic_total</rd:DefaultName>
+                          <rd:DefaultName>basic_sub_total</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2095,14 +2095,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="sef_total">
+                        <Textbox Name="sef_sub_total">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!sef_total.Value</Value>
+                                  <Value>=Fields!sef_sub_total.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2115,7 +2115,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>sef_total</rd:DefaultName>
+                          <rd:DefaultName>sef_sub_total</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -2244,7 +2244,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dtCertListOfAllRptDelinquences</DataSetName>
+            <DataSetName>dtCertfiedRptDelinquencies</DataSetName>
             <Top>0.0682in</Top>
             <Left>0.03855in</Left>
             <Height>1.32728in</Height>
@@ -2405,7 +2405,7 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Parameters!paramAsOf.Value</Value>
+                      <Value>=Parameters!paramDatePeriod.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>11pt</FontSize>
@@ -2456,14 +2456,14 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value> of </Value>
+                      <Value> of  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Globals!OverallTotalPages</Value>
+                      <Value>=Globals!TotalPages</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
@@ -2549,9 +2549,10 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramAsOf">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="paramDatePeriod">
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramBarangay">
@@ -2574,7 +2575,7 @@
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramAsOf</ParameterName>
+          <ParameterName>paramDatePeriod</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>

@@ -24,19 +24,19 @@ namespace ACC.Data
             command.Parameters.Add(dbParameter);
         }
 
-        public DataTable Fill(string query, DataTable dtOffice)
+        public DataTable Fill(string query, DataTable dataTable)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
                 var adapter = new MySqlDataAdapter();
                 adapter.SelectCommand = new MySqlCommand(query, connection);
-                adapter.Fill(dtOffice);
+                adapter.Fill(dataTable);
             }
 
-            return dtOffice;
+            return dataTable;
         }
 
-        public DataTable FillBySearch(string query, DataTable dtOffice, params object[][] parameters)
+        public DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -46,11 +46,11 @@ namespace ACC.Data
                     foreach (var param in parameters)
                         AddDbParameter(adapter.SelectCommand, param);
 
-                    adapter.Fill(dtOffice);
+                    adapter.Fill(dataTable);
                 }
             }
 
-            return dtOffice;
+            return dataTable;
         }
 
         public bool ExecuteNonQuery(string query, params object[][] parameters)

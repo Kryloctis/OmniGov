@@ -220,30 +220,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadTaxpayers()
         {
-            var registryColumn = new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "name", typeof(string))
-            };
-
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(registryColumn);
-
-            var dtRegistry = AccFactory.TaxpayersRepository().GetRecords();
-
-            foreach (DataRow row in dtRegistry.Rows)
-            {
-                var newRow = dataTable.NewRow();
-
-                int Id = Convert.ToInt32(row["id"]);
-
-                newRow["id"] = Id;
-                newRow["name"] = row["name"];
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxTaxpayer, "id", "name");
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+            HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxTaxpayer, "id", "name");
         }
 
         private void LoadSelectedTaxpayer(int taxpayerId)
@@ -563,6 +541,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxTaxpayer);
         }
-
     }
 }

@@ -33,10 +33,6 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -55,6 +51,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Registry;
+using AccountingSystem.Views.Reports.RptReports;
+using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -201,7 +199,7 @@ namespace AccountingSystem.Views.Dashboard
 
             //Reports
             if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
-                listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+                listOfRealPropertyDelinquenciesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Report of Checks Issued"))
                 reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
@@ -225,10 +223,10 @@ namespace AccountingSystem.Views.Dashboard
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
-                realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
+                realPropertTaxDuesAndPaymentsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
-                consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
+                certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
                 releasedChequesToolStripMenuItem.Enabled = false;
@@ -278,7 +276,7 @@ namespace AccountingSystem.Views.Dashboard
                 menuRoles.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Receipts"))
-                menuReceipts.Enabled = false;
+                receiptsInventoryToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
@@ -517,7 +515,6 @@ namespace AccountingSystem.Views.Dashboard
 
         private void menureceipts_Click(object sender, EventArgs e)
         {
-            _ = new frmReceipts().ShowDialog();
         }
 
         private void issueRecieptsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -555,24 +552,13 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmDailyCash().ShowDialog();
         }
 
-        private void toolStripMenuItemListOfDelinquentAccounts_Click(object sender, EventArgs e)
+        private void certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
-        }
-
-        private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
-        }
-
-        private void realPropertyTaxStatementOfAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
-        }
-
-        private void consolidatedRealPropertyTaxDeliquencesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
+            try
+            {
+                _ = new frmCertifiedListRptDelinquences().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void returnedReceiptsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -705,6 +691,51 @@ namespace AccountingSystem.Views.Dashboard
         private void registryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRegistry().ShowDialog();
+        }
+
+        private void realPropertTaxDuesAndPaymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptDuesPayments().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void listOfRealPropertyDelinquenciesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmListRptDelinquencies().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void realPropertyTaxStatementOfAccountToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void paymentHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmPaymentHistory().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void receiptsInventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmReceipts().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

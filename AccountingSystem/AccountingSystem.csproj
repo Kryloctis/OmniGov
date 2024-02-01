@@ -34,7 +34,7 @@
     <None Remove="Reports\cash-disbursement-journal.rdlc" />
     <None Remove="Reports\cash-receipts-journal.rdlc" />
     <None Remove="Reports\cashbook.rdlc" />
-    <None Remove="Reports\certified-list-of-all-real-property-tax-delinquences-report.rdlc" />
+    <None Remove="Reports\CertifiedListRptDelinquences.rdlc" />
     <None Remove="Reports\check-disbursements-journal.rdlc" />
     <None Remove="Reports\check-issued.rdlc" />
     <None Remove="Reports\consolidated-receipts.rdlc" />
@@ -43,16 +43,16 @@
     <None Remove="Reports\general-ledger.rdlc" />
     <None Remove="Reports\journal-entry-voucher.rdlc" />
     <None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
-    <None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
+    <None Remove="Reports\ListRptDelinquencies.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
     <None Remove="Reports\procurements-received-journal.rdlc" />
     <None Remove="Reports\rcd.rdlc" />
     <None Remove="Reports\real-property-payment-receipt.rdlc" />
     <None Remove="Reports\real-property-tax-due-bill.rdlc" />
-    <None Remove="Reports\real-property-tax-statement-of-accounts.rdlc" />
-    <None Remove="Reports\RealPropertyTaxDuesAndPayment.rdlc" />
+    <None Remove="Reports\RealPropertyTaxDuesAndPayments.rdlc" />
     <None Remove="Reports\report_of_general_collection.rdlc" />
+    <None Remove="Reports\RptStatementOfAccounts.rdlc" />
     <None Remove="Reports\schedule-of-unreleased-cheques.rdlc" />
     <None Remove="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc" />
     <None Remove="Reports\statement-of-changes-in-net-assets-equity.rdlc" />
@@ -78,7 +78,7 @@
     <Content Include="Reports\cashbook.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\certified-list-of-all-real-property-tax-delinquences-report.rdlc">
+    <Content Include="Reports\CertifiedListRptDelinquences.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\check-disbursements-journal.rdlc">
@@ -105,7 +105,7 @@
     <Content Include="Reports\Ledgers\summary-subsidiary-ledger.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\list_of_real-property-tax-delinquencies.rdlc">
+    <Content Include="Reports\ListRptDelinquencies.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">
@@ -129,10 +129,10 @@
     <Content Include="Reports\real-property-tax-due-bill.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\real-property-tax-statement-of-accounts.rdlc">
+    <Content Include="Reports\RptStatementOfAccounts.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\RealPropertyTaxDuesAndPayment.rdlc">
+    <Content Include="Reports\RealPropertyTaxDuesAndPayments.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\report_of_general_collection.rdlc">
@@ -183,6 +183,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="DataSets\dsTreasury.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsTreasury.xsd</DependentUpon>
+    </Compile>
     <Compile Update="dsLFS.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -218,6 +223,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Update="DataSets\dsTreasury.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTreasury.Designer.cs</LastGenOutput>
+    </None>
     <None Update="dsLFS.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsLFS.Designer.cs</LastGenOutput>
@@ -229,5 +238,8 @@
     <None Update="Reports\payment-collection.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Dashboard\TreasuryDashboard\" />
   </ItemGroup>
 </Project>

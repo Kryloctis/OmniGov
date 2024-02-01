@@ -3,6 +3,7 @@ using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
 
 namespace ACC.Data
@@ -99,14 +100,16 @@ namespace ACC.Data
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable GetRecordsByArpNo(string arpNo)
+        public DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo)
         {
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, arpNo}
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@period_from", DbType.DateTime, periodFrom},
+                new object[] { "@period_to", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE NOT EXISTS(SELECT * FROM {rptTaxDues} WHERE {tableName}.id = {rptTaxDues}.rpt_assessment_posts_id) AND complete_arp_no = @complete_arp_no ORDER BY year DESC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @period_to AND posted_at >= @period_from ";
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -221,104 +224,73 @@ namespace ACC.Data
             return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
-        public DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo)
+        public DataTable GetViewRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
         {
             var parameters = new object[][]
             {
                 new object[] { "@taxpayer_name", DbType.String, ownerName},
-                new object[] { "@year_from", DbType.Int32, yearFrom},
-                new object[] { "@year_to", DbType.Int32, yearTo}
+                new object[] { "@periodFrom", DbType.DateTime, periodFrom},
+                new object[] { "@periodTo", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND (year >= @year_to AND year <= @year_from) ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear)
+        public DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo)
         {
-            string taxYearQuery;
+            var parameters = new object[][]
+            {
+                new object[] { "@barangay_name", DbType.String, barangayName},
+                new object[] { "@periodFrom", DbType.DateTime, periodFrom},
+                new object[] { "@periodTo", DbType.DateTime, periodTo},
+            };
 
-            if (taxYear == null) taxYearQuery = string.Empty;
-            else taxYearQuery = $"AND year = {taxYear}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
+            var dataTable = new DataTable();
 
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
+        {
             var parameters = new object[][]
             {
                 new object[] { "@taxpayer_name", DbType.String, ownerName},
-                new object[] { "@posted_at", DbType.Date, asOfDate}
+                new object[] { "@periodFrom", DbType.DateTime, periodFrom},
+                new object[] { "@periodTo", DbType.DateTime, periodTo},
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
+
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear)
+        public DataTable GetViewRecordsByArpNoDate(string arpNo, DateTime postedAt)
         {
-            string taxYearQuery;
-
-            if (taxYear == null) taxYearQuery = string.Empty;
-            else taxYearQuery = $"AND year = {taxYear}";
-
             var parameters = new object[][]
             {
-                new object[] { "@barangay_name", DbType.String, barangayName},
-                new object[] { "@posted_at", DbType.Date, asOfDate.Date }
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@posted_at", DbType.DateTime, postedAt},
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @periodTo ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
+
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear)
+        public DataTable GetBarangayRecords()
         {
-            string taxYearQuery;
-
-            if (taxYear == null) taxYearQuery = string.Empty;
-            else taxYearQuery = $"AND year = {taxYear}";
-
-            var parameters = new object[][]
-            {
-                new object[] { "@municipality_name", DbType.String, municipalityName},
-                new object[] { "@posted_at", DbType.Date, asOfDate.Date }
-            };
-
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE municipality_name = @municipality_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable Get_Grouped_Barangay_Records()
-        {
-            string query = $"SELECT barangay_name FROM {tableName} GROUP BY barangay_name";
+            string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
             var dataTable = new DataTable();
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable Get_Grouped_Municipality_Records()
-        {
-            string query = $"SELECT municipality_name FROM {tableName} GROUP BY municipality_name";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
-        }
-
-        public DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@barangay_name", DbType.String, barangayName},
-                new object[] { "@posted_at", DbType.Date, asOfDate.Date}
-            };
-
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3)";
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable GetViewRecords(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
+        public DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
         {
             var parameters = new object[][]
             {
@@ -347,14 +319,14 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public Dictionary<string, string> GetViewPreviousAssessmentPostRecord(string completeArpNo, int assessmentPostYear)
+        public Dictionary<string, string> GetViewRecentAssessmentRecord(string arpNo, int assessmentYear)
         {
             var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@year", DbType.Int32, assessmentPostYear}
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+                new object[] { "@year", DbType.Int32, assessmentYear}
             };
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND year < @year ORDER BY year DESC";
@@ -371,6 +343,18 @@ namespace ACC.Data
                 return recordDictionary;
             }
             return recordDictionary;
+        }
+
+        public DataTable GetViewRecordsByOwnerId(int taxpayerId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_taxpayers_id", DbType.Int32, taxpayerId }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id GROUP BY complete_arp_no";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

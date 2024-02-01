@@ -15,7 +15,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
     public partial class ucPaymentRptTaxDues : UserControl
     {
         private int taxpayerId;
-        internal DateTime paymentDate = Helper.GetCurrentDate();
 
         public ucPaymentRptTaxDues()
         {
@@ -31,25 +30,21 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         internal List<RptTaxDuesModel> RptTaxDuesModelList()
         {
+            var dtTaxDues = (DataTable)dgTaxDues.DataSource;
             var rptTaxDuesModelList = new List<RptTaxDuesModel>();
+            var selectedRows = dtTaxDues.AsEnumerable().Where(row => Convert.ToBoolean(row["is_selected"]));
 
-            foreach (DataGridViewRow dgRow in dgTaxDues.Rows)
+            foreach (DataRow row in selectedRows)
             {
-                if (!Convert.ToBoolean(dgRow.Cells["is_selected"].Value))
-                    continue;
-
-                int rptAssessmentPostId = Convert.ToInt32(dgRow.Cells["assessment_posts_id"].Value);
-                var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordByID(rptAssessmentPostId);
-                var dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(dictAssessmentPost["complete_arp_no"], Convert.ToInt32(dictAssessmentPost["year"]));
-                bool isAdvance = false;
                 var model = new RptTaxDuesModel()
                 {
-                    RptAssessmentPostId = rptAssessmentPostId,
-                    DiscountRate = RealPropertyTaxComputations.GetDiscountRate(dictAssessmentPost, dictPreviousAssessmentPost, paymentDate, ref isAdvance),
-                    IsAdvance = isAdvance,
+                    RptAssessmentPostId = Convert.ToInt32(row["assessment_posts_id"]),
+                    DiscountRate = Convert.ToDecimal(row["discount_rate"]),
                 };
+
                 rptTaxDuesModelList.Add(model);
             }
+
             return rptTaxDuesModelList;
         }
 
@@ -78,8 +73,10 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 new DataColumn("kind", typeof(string)),
                 new DataColumn("real_taxpayers_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("effectivity", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
-                new DataColumn("full_address", typeof(string))
+                new DataColumn("full_address", typeof(string)),
             };
         }
 
@@ -98,9 +95,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 newRow["id"] = row["id"];
                 newRow["real_taxpayers_id"] = row["real_taxpayers_id"];
                 newRow["complete_arp_no"] = row["complete_arp_no"];
+                newRow["effectivity"] = $"{Helper.AddOrdinalSuffix(Convert.ToInt32(row["effectivity_quarterly"]))} Qtr. - {row["effectivity_year"]}";
                 newRow["property_pin"] = row["property_pin"];
                 newRow["full_address"] = Helper.GenerateFullAddress(row["street"].ToString(), row["barangay_name"].ToString(), row["municipality_name"].ToString(), row["province_name"].ToString());
                 newRow["kind"] = row["property_kind"];
+                newRow["assessed_value"] = Convert.ToDecimal(row["assessed_value"]);
+
                 dataTable.Rows.Add(newRow);
             }
             return dataTable;
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
                 LoadTaxDues(dgTaxDues);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -231,6 +231,26 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return true;
         }
 
+        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate,
+                                                                        (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters,
+                                                                        decimal penaltyRate,
+                                                                        decimal basicTaxDue,
+                                                                        decimal sefTaxDue)
+        {
+            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+
+            int? prevAssmntYear = null;
+
+            if (dictPrevAssmnt.Count > 1)
+                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
+
+            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+            return (basicPenalty, sefPenalty);
+        }
+
         private DataColumn[] DataColumnsTaxDues()
         {
             return new DataColumn[]
@@ -244,7 +264,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 new DataColumn("tax_due_amount", typeof(string)),
                 new DataColumn("penalty_discount", typeof(string)),
                 new DataColumn("total_payment", typeof(string)),
-                new DataColumn("total_payment_consolidated", typeof(string))
+                new DataColumn("total_payment_consolidated", typeof(string)),
             };
         }
 
@@ -255,7 +275,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
             foreach (string completeArpNo in completeArpNoList)
             {
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecords(taxPayersId, completeArpNo, chckShowPaidUnpaid.Checked);
+                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, completeArpNo, chckShowPaidUnpaid.Checked);
                 foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
                     decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
@@ -263,40 +283,30 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
                     decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
                     DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
-                    int assessmentPostYear = Convert.ToInt32(row["year"]);
+                    int assessmentYear = Convert.ToInt32(row["year"]);
+                    int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
                     int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
                     string rptPaymentId = row["rpt_payments_id"].ToString();
-                    bool discountIsAdvance = false;
 
-                    //TaxDues
                     decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
                     decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
-                    //TaxDues
 
-                    //Apply Penalties
-                    Dictionary<string, string> dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(completeArpNo, assessmentPostYear);
-
-                    Dictionary<string, string> dictAssessmentPost = new Dictionary<string, string>();
-                    dictAssessmentPost.Add("posted_at", postedAt.ToString());
-                    dictAssessmentPost.Add("effectivity_year", effectivityYear.ToString());
-                    dictAssessmentPost.Add("year", assessmentPostYear.ToString());
-
-                    int monthsDelinquent = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(dictAssessmentPost, paymentDate, dictPreviousAssessmentPost);
-                    decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
-                    decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+                    var penaltyParameters = (assessmentYear, completeArpNo, effectivityQuarter, effectivityYear);
+                    var penalties = GetPenalties(Helper.GetCurrentDate(), penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
 
                     //Get discount rate
-                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(dictAssessmentPost, dictPreviousAssessmentPost, paymentDate, ref discountIsAdvance);
+                    var discountParameters = (postedAt, assessmentYear);
+                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(Helper.GetCurrentDate(), discountParameters);
 
                     //Apply Discounts
                     decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDue);
                     decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDue);
 
-                    decimal basicPenaltyDiscount = basicDiscount < 1 ? basicPenalty : -basicDiscount;
-                    decimal sefPenaltyDiscount = sefDiscount < 1 ? sefPenalty : -sefDiscount;
+                    decimal basicPenaltyDiscount = penalties.basicPenalty > 0 ? penalties.basicPenalty : -basicDiscount;
+                    decimal sefPenaltyDiscount = penalties.sefPenalty > 1 ? penalties.sefPenalty : -sefDiscount;
 
-                    decimal totalBasicPayment = (basicTaxDue + basicPenalty) - basicDiscount;
-                    decimal totalSefPayment = (sefTaxDue + sefPenalty) - sefDiscount;
+                    decimal totalBasicPayment = basicTaxDue + basicPenaltyDiscount;
+                    decimal totalSefPayment = sefTaxDue + sefPenaltyDiscount;
 
                     var newRow = dataTable.NewRow();
                     newRow["is_selected"] = false;
@@ -307,9 +317,9 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     newRow["status"] = string.IsNullOrEmpty(rptPaymentId) ? "Unpaid" : "Paid";
                     newRow["tax_due_amount"] = $"{basicTaxDue.ToString("N2")}\n{sefTaxDue.ToString("N2")}";
                     newRow["penalty_discount"] =
-                        $"{(basicPenaltyDiscount < 1 ? $"({Math.Abs(basicPenaltyDiscount).ToString("N2")})" : basicPenaltyDiscount.ToString("N2"))}" +
+                        $"{basicPenaltyDiscount.ToString("C").Replace("$", string.Empty)}" +
                         $"\n" +
-                        $"{(sefPenaltyDiscount < 1 ? $"({Math.Abs(sefPenaltyDiscount).ToString("N2")})" : sefPenaltyDiscount.ToString("N2"))}";
+                        $"{sefPenaltyDiscount.ToString("C").Replace("$", string.Empty)}";
                     newRow["total_payment"] = $"{totalBasicPayment.ToString("N2")}\n{totalSefPayment.ToString("N2")}";
                     newRow["total_payment_consolidated"] = totalBasicPayment + totalSefPayment;
                     dataTable.Rows.Add(newRow);
@@ -439,14 +449,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 e.Cancel = !TaxDuesValidated();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void txtTotalDue_Validating(object sender, CancelEventArgs e)
-        {
-        }
-
-        private void dgTaxDues_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
         }
 
         private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)

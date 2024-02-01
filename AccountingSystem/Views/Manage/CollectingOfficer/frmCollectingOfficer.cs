@@ -125,15 +125,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private Dictionary<string, string> RecordParameters()
-        {
-            var dictParameters = new Dictionary<string, string>();
-            string searchKey = txtSearch.Text.Trim();
-
-            dictParameters.Add("search_key", searchKey);
-            return dictParameters;
-        }
-
         private DataColumn[] DataColumnsCollectingOfficers()
         {
             return new DataColumn[]
@@ -152,7 +143,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync(RecordParameters());
+                string searchKey = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchKey);
             }
         }
 
@@ -160,19 +152,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             try
             {
-                if (e.Argument is not Dictionary<string, string> dictParameters)
+                if (e.Argument is not string searchKey)
                     return;
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-                DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(dictParameters["search_key"]);
-
-                if (dtCollectingOfficers.Rows.Count < 1)
-                {
-                    backgroundWorker1.ReportProgress(100);
-                    e.Result = dataTable;
-                    return;
-                }
+                DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(searchKey);
 
                 int totalProgressCount = dtCollectingOfficers.Rows.Count;
                 int progressCount = 0;
@@ -207,7 +192,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
                     progressCount++;
                     dataTable.Rows.Add(newRow);
-
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
@@ -223,14 +207,20 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
+            try
+            {
+                if (e.Cancelled)
+                    return;
+                if (e.Result is not DataTable dataTable)
+                    return;
+                if (dataTable.Rows.Count < 1)
+                    pbLoadRecords.Value = 100;
 
-            HelperLoadRecords.CollectingOfficerDatagridView(dataTable, dgCollectingOfficer);
-            dgCollectingOfficer.CurrentCell = dgCollectingOfficer.FirstDisplayedCell;
-            lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
+                HelperLoadRecords.CollectingOfficerDatagridView(dataTable, dgCollectingOfficer);
+                dgCollectingOfficer.CurrentCell = dgCollectingOfficer.FirstDisplayedCell;
+                lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
