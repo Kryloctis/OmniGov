@@ -27,6 +27,7 @@
     <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Documents\updateLog.txt" />
     <None Remove="Reports\1.rdlc" />
     <None Remove="Reports\abstract-of-general-collection.rdlc" />
     <None Remove="Reports\authority-to-debit-account-disbursements.rdlc" />
@@ -66,6 +67,9 @@
     <None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documents\updateLog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Reports\abstract-of-general-collection.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -168,9 +172,9 @@
     <Content Include="Resources\accounting.ico" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
     <PackageReference Include="SpreadsheetLight" Version="3.5.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup>

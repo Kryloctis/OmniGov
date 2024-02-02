@@ -32,15 +32,8 @@ namespace AccountingSystem.Views.Manage.JobOrders
                     _uc.ResetForm();
                 }
             }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2601)
-                {
-                    Helper.MessageBoxError("Record already added.");
-                }
-                else
-                    Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
