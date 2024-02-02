@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Properties;
 using AccountingSystem.Views.Dashboard;
+using AccountingSystem.Views.Help;
 using AccountingSystem.Views.SignIn;
 using RPT.Data;
 using System;
@@ -81,6 +82,16 @@ namespace AccountingSystem
             ScanAvailableServers();
             txtUsername.Tag = string.Empty;
             txtPassword.Tag = string.Empty;
+            txtVersion.Text = Helper.GetVersionLog().Split('\n')[1];
+            if (Settings.Default.showAbout)
+                ShowAboutRptMgmtApp();
+        }
+
+        private static void ShowAboutRptMgmtApp()
+        {
+            var frmUpdatess = new frmAbout();
+            frmUpdatess.Show();
+            frmUpdatess.TopMost = true;
         }
 
         private void ScanAvailableServers()
@@ -211,7 +222,11 @@ namespace AccountingSystem
 
         private void Username_Password_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !Server_Validated() || !Username_Password_Validated();
+            try
+            {
+                e.Cancel = !Server_Validated() || !Username_Password_Validated();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         #endregion Validations

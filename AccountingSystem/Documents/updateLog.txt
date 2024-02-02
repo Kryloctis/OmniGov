@@ -1,0 +1,36 @@
+﻿Local Finance System
+Version 1.0.0.3
+
+Updates:
+
+> Overall
+	~ Fixed and enhanced UI and record load of Collecting Officers, Banks, Bank Accounts, Accountable Form, 
+	  Discounts, Penalties, TaxRates, Taxpayers, Fees & Charges.
+	
+	~ Added new module 'Registry'.
+
+> Treasury
+	~ Can generates reports: 
+		Certified List of Real Property Tax Deliquencies (Consolidated Real Property Tax Delinquencies)
+		Real Property Tax Dues and Payments (Tax Due Bill Report)
+		List of Real Property Delinquencies (List of Delinquent Accounts.)
+		Real Property Tax Statement of Account
+	
+	~ Added payment history module
+
+	~ Implemented payment modules:
+		AF 56 - Real Property Tax
+		AF 51 & 57 OR and Slaughter Permit Fee
+		AF 54 Marriage License
+		AF 58 Burial Permit & Fee
+		AF 53 Certificate of Cattle Ownership
+
+	~ Printable AF 56 - Real Property Tax Receipt
+
+	~ Fixed and enhanced for more optimal use of posting of assessments.
+
+
+> Help > About Real Property Management App
+	~ Added version indicator and about the app module.
+
+		

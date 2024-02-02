@@ -128,10 +128,14 @@ namespace AccountingSystem.Views.SignIn
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Invoke((MethodInvoker)delegate
+            try
             {
-                LoadServers();
-            });
+                Invoke((MethodInvoker)delegate
+                    {
+                        LoadServers();
+                    });
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -53,6 +53,7 @@ using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Registry;
 using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
+using AccountingSystem.Views.Help;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -85,6 +86,7 @@ namespace AccountingSystem.Views.Dashboard
             {
                 LoadLoggedInUser();
                 ValidatePermissions();
+                lblVersion.Text = Helper.GetVersionLog().Split('\n')[1];
             }
         }
 
@@ -736,6 +738,22 @@ namespace AccountingSystem.Views.Dashboard
                 _ = new frmReceipts().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void aboutLocalFinanceSystemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowAboutRptMgmtApp();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private static void ShowAboutRptMgmtApp()
+        {
+            var frmUpdatess = new frmAbout();
+            frmUpdatess.Show();
+            frmUpdatess.TopMost = true;
         }
     }
 }

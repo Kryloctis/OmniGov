@@ -64,9 +64,6 @@
             feesChargesConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
-            lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
-            lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             tabControlDashboard = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             tabControlBudget = new System.Windows.Forms.TabControl();
@@ -158,8 +155,15 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
+            helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aboutLocalFinanceSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
             tabControlBudget.SuspendLayout();
@@ -189,6 +193,7 @@
             tabPageTreasury.SuspendLayout();
             panel1.SuspendLayout();
             ToolStrip2.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -197,7 +202,7 @@
             menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             menuStrip1.ImageScalingSize = new System.Drawing.Size(0, 0);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuFile, menuManage });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuFile, menuManage, helpToolStripMenuItem });
             menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -216,14 +221,14 @@
             // menuLogout
             // 
             menuLogout.Name = "menuLogout";
-            menuLogout.Size = new System.Drawing.Size(112, 22);
+            menuLogout.Size = new System.Drawing.Size(180, 22);
             menuLogout.Text = "Logout";
             menuLogout.Click += menuLogout_Click;
             // 
             // menuExitApp
             // 
             menuExitApp.Name = "menuExitApp";
-            menuExitApp.Size = new System.Drawing.Size(112, 22);
+            menuExitApp.Size = new System.Drawing.Size(180, 22);
             menuExitApp.Text = "Exit";
             menuExitApp.Click += menuExitApp_Click;
             // 
@@ -438,30 +443,6 @@
             databaseSynchronizationToolStripMenuItem.Text = "Database Synchronization...";
             databaseSynchronizationToolStripMenuItem.Click += menuDatabaseSynchronization_Click;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblUserFullName, lblUserRole });
-            statusStrip1.Location = new System.Drawing.Point(0, 684);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 11, 0);
-            statusStrip1.Size = new System.Drawing.Size(1229, 24);
-            statusStrip1.TabIndex = 6;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // lblUserFullName
-            // 
-            lblUserFullName.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            lblUserFullName.Name = "lblUserFullName";
-            lblUserFullName.Size = new System.Drawing.Size(82, 19);
-            lblUserFullName.Text = "lblUserDetails";
-            // 
-            // lblUserRole
-            // 
-            lblUserRole.Name = "lblUserRole";
-            lblUserRole.Size = new System.Drawing.Size(118, 19);
-            lblUserRole.Text = "toolStripStatusLabel2";
-            // 
             // tabControlDashboard
             // 
             tabControlDashboard.Controls.Add(tabPageBudget);
@@ -476,7 +457,7 @@
             tabControlDashboard.Name = "tabControlDashboard";
             tabControlDashboard.Padding = new System.Drawing.Point(30, 3);
             tabControlDashboard.SelectedIndex = 0;
-            tabControlDashboard.Size = new System.Drawing.Size(1229, 660);
+            tabControlDashboard.Size = new System.Drawing.Size(1229, 662);
             tabControlDashboard.TabIndex = 9;
             // 
             // tabPageBudget
@@ -487,7 +468,7 @@
             tabPageBudget.Location = new System.Drawing.Point(4, 34);
             tabPageBudget.Name = "tabPageBudget";
             tabPageBudget.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            tabPageBudget.Size = new System.Drawing.Size(1221, 622);
+            tabPageBudget.Size = new System.Drawing.Size(1221, 624);
             tabPageBudget.TabIndex = 3;
             tabPageBudget.Text = "Budget";
             tabPageBudget.UseVisualStyleBackColor = true;
@@ -502,7 +483,7 @@
             tabControlBudget.Multiline = true;
             tabControlBudget.Name = "tabControlBudget";
             tabControlBudget.SelectedIndex = 0;
-            tabControlBudget.Size = new System.Drawing.Size(1215, 579);
+            tabControlBudget.Size = new System.Drawing.Size(1215, 581);
             tabControlBudget.TabIndex = 12;
             // 
             // tabPageBudgetSummary
@@ -512,7 +493,7 @@
             tabPageBudgetSummary.Margin = new System.Windows.Forms.Padding(0);
             tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageBudgetSummary.Size = new System.Drawing.Size(1207, 551);
+            tabPageBudgetSummary.Size = new System.Drawing.Size(1207, 553);
             tabPageBudgetSummary.TabIndex = 0;
             tabPageBudgetSummary.Text = "Summary";
             tabPageBudgetSummary.UseVisualStyleBackColor = true;
@@ -523,7 +504,7 @@
             ucBudgetSummary1.Location = new System.Drawing.Point(0, 5);
             ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
             ucBudgetSummary1.Name = "ucBudgetSummary1";
-            ucBudgetSummary1.Size = new System.Drawing.Size(1207, 546);
+            ucBudgetSummary1.Size = new System.Drawing.Size(1207, 548);
             ucBudgetSummary1.TabIndex = 0;
             // 
             // tabPageBudgetDetailed
@@ -1022,21 +1003,21 @@
             // receiptsInventoryToolStripMenuItem
             // 
             receiptsInventoryToolStripMenuItem.Name = "receiptsInventoryToolStripMenuItem";
-            receiptsInventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            receiptsInventoryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             receiptsInventoryToolStripMenuItem.Text = "Inventory";
             receiptsInventoryToolStripMenuItem.Click += receiptsInventoryToolStripMenuItem_Click;
             // 
             // issueRecieptsToolStripMenuItem
             // 
             issueRecieptsToolStripMenuItem.Name = "issueRecieptsToolStripMenuItem";
-            issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             issueRecieptsToolStripMenuItem.Text = "Issuance";
             issueRecieptsToolStripMenuItem.Click += issueRecieptsToolStripMenuItem_Click;
             // 
             // returnedReceiptsToolStripMenuItem
             // 
             returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             returnedReceiptsToolStripMenuItem.Click += returnedReceiptsToolStripMenuItem_Click;
             // 
@@ -1302,6 +1283,61 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutLocalFinanceSystemToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutLocalFinanceSystemToolStripMenuItem
+            // 
+            aboutLocalFinanceSystemToolStripMenuItem.Name = "aboutLocalFinanceSystemToolStripMenuItem";
+            aboutLocalFinanceSystemToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            aboutLocalFinanceSystemToolStripMenuItem.Text = "About Local Finance System...";
+            aboutLocalFinanceSystemToolStripMenuItem.Click += aboutLocalFinanceSystemToolStripMenuItem_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblUserFullName, toolStripStatusLabel2, lblUserRole, toolStripStatusLabel4, lblVersion });
+            statusStrip1.Location = new System.Drawing.Point(0, 686);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1229, 22);
+            statusStrip1.TabIndex = 11;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // lblUserFullName
+            // 
+            lblUserFullName.Name = "lblUserFullName";
+            lblUserFullName.Size = new System.Drawing.Size(94, 17);
+            lblUserFullName.Text = "lblUserFullName";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel2.Text = "|";
+            toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblUserRole
+            // 
+            lblUserRole.Name = "lblUserRole";
+            lblUserRole.Size = new System.Drawing.Size(66, 17);
+            lblUserRole.Text = "lblUserRole";
+            // 
+            // toolStripStatusLabel4
+            // 
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(941, 17);
+            toolStripStatusLabel4.Spring = true;
+            // 
+            // lblVersion
+            // 
+            lblVersion.Name = "lblVersion";
+            lblVersion.Size = new System.Drawing.Size(72, 17);
+            lblVersion.Text = "Version 0.0.0";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1310,8 +1346,8 @@
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             ClientSize = new System.Drawing.Size(1229, 708);
             Controls.Add(tabControlDashboard);
-            Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
+            Controls.Add(statusStrip1);
             DoubleBuffered = true;
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(2);
@@ -1323,8 +1359,6 @@
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             tabControlDashboard.ResumeLayout(false);
             tabPageBudget.ResumeLayout(false);
             tabPageBudget.PerformLayout();
@@ -1360,6 +1394,8 @@
             panel1.PerformLayout();
             ToolStrip2.ResumeLayout(false);
             ToolStrip2.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1384,9 +1420,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
-        private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
         private System.Windows.Forms.ToolStripMenuItem menuBanks;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
@@ -1500,5 +1533,13 @@
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxStatementOfAccountToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem paymentHistoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptsInventoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutLocalFinanceSystemToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel lblVersion;
     }
 }

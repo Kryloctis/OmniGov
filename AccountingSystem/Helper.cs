@@ -62,6 +62,20 @@ namespace AccountingSystem
             form.Icon = Properties.Resources.accounting;
         }
 
+        #region Version Control
+
+        public static string GetVersionLog()
+        {
+            string filePath = $"{Application.StartupPath}\\Documents\\updateLog.txt";
+            // Read all text from the file
+            string fileContent = File.ReadAllText(filePath);
+
+            // Display the content
+            return fileContent;
+        }
+
+        #endregion Version Control
+
         #region Print RDLC
 
         private static int m_currentPageIndex;
