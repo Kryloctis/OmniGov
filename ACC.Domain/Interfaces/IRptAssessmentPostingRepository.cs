@@ -30,7 +30,7 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetBarangayRecords();
 
-        DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments);
+        DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, int calendarYear, string completeArpNo, bool showPaidAssessments);
 
         DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
 

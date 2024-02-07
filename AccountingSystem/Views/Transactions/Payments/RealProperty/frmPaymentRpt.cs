@@ -1,7 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.DataSets;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Data;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -49,7 +54,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 case "tabPagePayment":
                     radPayment.Checked = true;
                     LoadPaymentTab();
-                    //ConfirmPayment();
                     break;
             }
         }
@@ -127,12 +131,31 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
+                    var frmPreviewReceipt = new frmPreviewReceipt();
+
+                    var receiptParameters = new frmPreviewReceipt.ReceiptPreviewParameters()
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        ResetForm();
-                        return;
-                    }
+                        TransactionDate = ucPayment.dtPaymentDate.Value,
+                        ReceivedFrom = ucPayment.txtPayee.Text.Trim(),
+                        SumAmountPaid = totalPayment,
+                        SumAmountPaidWords = new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2")),
+                        CalendarYear = (int)ucPaymentRptTaxDues.nudCalendarYear.Value,
+                        TotalPayment = totalPayment,
+                        PaidCash = totalPayment,
+                        Municipality = Helper.selectedServerModel.MunicipalityName,
+                        TotalPaid = totalPayment,
+                    };
+
+                    frmPreviewReceipt.OnLoad(receiptParameters, ucPaymentRptTaxDues.GetReceiptTaxDues());
+                    frmPreviewReceipt.ShowDialog();
+
+                    //if (ConfirmPayment())
+                    //{
+                    //    Helper.MessageBoxSuccess("Payment has been saved");
+                    //    ResetForm();
+                    //    return;
+                    //}
                     return;
                 }
 

@@ -236,7 +236,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             else if (isUserCollectingOfficer)
             {
-                var dictCO = AccFactory.CollectingOfficerRepository().GetRecordByID(userId);
+                var dictCO = AccFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
                 textBox.Text = Helper.GenerateFullName(dictCO["prefix"], dictCO["first_name"], dictCO["mid_initial"], dictCO["last_name"], dictCO["suffix"]);
                 return true;
             }
