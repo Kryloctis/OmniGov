@@ -1,6 +1,7 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments
+﻿using AccountingSystem.Views.Transactions.Payments;
+namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 {
-    partial class frmPreviewReceipt
+    partial class frmRealPropertyReceipt
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +31,11 @@
         {
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            btnPrint = new System.Windows.Forms.ToolStripButton();
             panel1 = new System.Windows.Forms.Panel();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            bgwAf56 = new System.ComponentModel.BackgroundWorker();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,9 +53,10 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnPrint });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -59,37 +64,65 @@
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btnPrint
             // 
-            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = Properties.Resources.printer_filled_20px;
-            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            toolStripButton1.Text = "Print";
+            btnPrint.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnPrint.Image = Properties.Resources.printer_filled_20px;
+            btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new System.Drawing.Size(56, 24);
+            btnPrint.Text = "Print";
+            btnPrint.Click += btnPrint_Click;
             // 
             // panel1
             // 
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 35);
+            panel1.Location = new System.Drawing.Point(0, 40);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(887, 515);
+            panel1.Size = new System.Drawing.Size(887, 488);
             panel1.TabIndex = 1;
             // 
-            // frmPreviewReceipt
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 528);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(887, 22);
+            statusStrip1.TabIndex = 2;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 35);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(887, 5);
+            progressBar1.TabIndex = 0;
+            // 
+            // bgwAf56
+            // 
+            bgwAf56.WorkerReportsProgress = true;
+            bgwAf56.WorkerSupportsCancellation = true;
+            bgwAf56.DoWork += bgwAf56_DoWork;
+            bgwAf56.ProgressChanged += bgwAf56_ProgressChanged;
+            bgwAf56.RunWorkerCompleted += bgwAf56_RunWorkerCompleted;
+            // 
+            // frmRealPropertyReceipt
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(887, 550);
             Controls.Add(panel1);
+            Controls.Add(progressBar1);
+            Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
-            Name = "frmPreviewReceipt";
+            Name = "frmRealPropertyReceipt";
             ShowInTaskbar = false;
-            Text = "Preview Receipt";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Print Receipt";
             Load += frmPreviewReceipt_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -101,7 +134,10 @@
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        internal System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker bgwAf56;
     }
 }

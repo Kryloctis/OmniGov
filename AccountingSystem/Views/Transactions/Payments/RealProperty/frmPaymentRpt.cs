@@ -1,12 +1,8 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;
-using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -95,9 +91,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                         return false;
                     }
 
-                    int index = ucPaymentTaxpayers.dataGridView1.CurrentRow.Index;
-                    int taxpayerId = Convert.ToInt32(ucPaymentTaxpayers.dataGridView1.Rows[index].Cells["taxpayers_id"].Value);
-                    ucPaymentRptTaxDues.OnLoad(taxpayerId);
+                    ucPaymentRptTaxDues.OnLoad(ucPaymentTaxpayers.GetSelectedTaxpayerId());
 
                     return true;
 
@@ -131,29 +125,14 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
-                    var frmPreviewReceipt = new frmPreviewReceipt();
-
-                    var receiptParameters = new frmPreviewReceipt.ReceiptPreviewParameters()
-                    {
-                        TransactionDate = ucPayment.dtPaymentDate.Value,
-                        ReceivedFrom = ucPayment.txtPayee.Text.Trim(),
-                        SumAmountPaid = totalPayment,
-                        SumAmountPaidWords = new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2")),
-                        CalendarYear = (int)ucPaymentRptTaxDues.nudCalendarYear.Value,
-                        TotalPayment = totalPayment,
-                        PaidCash = totalPayment,
-                        Municipality = Helper.selectedServerModel.MunicipalityName,
-                        TotalPaid = totalPayment,
-                    };
-
-                    frmPreviewReceipt.OnLoad(receiptParameters, ucPaymentRptTaxDues.GetReceiptTaxDues());
-                    frmPreviewReceipt.ShowDialog();
+                    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                    LoadReceipt();
 
                     //if (ConfirmPayment())
                     //{
-                    //    Helper.MessageBoxSuccess("Payment has been saved");
-                    //    ResetForm();
+                    //    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                    //    LoadReceipt();
+                    ResetForm();
                     //    return;
                     //}
                     return;
@@ -172,6 +151,30 @@ namespace AccountingSystem.Views.Transactions.Payments
                 return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
 
             return false;
+        }
+
+        private void LoadReceipt()
+        {
+            decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
+            var frmPreviewReceipt = new frmRealPropertyReceipt();
+
+            var receiptParameters = new frmRealPropertyReceipt.AF56Parameters()
+            {
+                TaxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId(),
+                TransactionDate = ucPayment.dtPaymentDate.Value,
+                ReceivedFrom = ucPayment.txtPayee.Text.Trim(),
+                SumAmountPaid = totalPayment,
+                SumAmountPaidWords = new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2")),
+                CalendarYear = (int)ucPaymentRptTaxDues.nudCalendarYear.Value,
+                TotalPayment = totalPayment,
+                PaidCash = totalPayment,
+                Municipality = Helper.selectedServerModel.MunicipalityName,
+                TotalPaid = totalPayment,
+                DataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource
+            };
+
+            frmPreviewReceipt.OnLoad(receiptParameters);
+            frmPreviewReceipt.ShowDialog();
         }
 
         private void btnBack_Click(object sender, EventArgs e)

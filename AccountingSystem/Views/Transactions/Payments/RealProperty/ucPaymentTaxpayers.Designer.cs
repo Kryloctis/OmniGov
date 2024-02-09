@@ -49,7 +49,8 @@
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSearch, txtSearch, cmbxRowFilter });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(699, 27);
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(699, 35);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -82,9 +83,9 @@
             // 
             panel1.Controls.Add(dataGridView1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 32);
+            panel1.Location = new System.Drawing.Point(0, 40);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(699, 398);
+            panel1.Size = new System.Drawing.Size(699, 390);
             panel1.TabIndex = 1;
             // 
             // dataGridView1
@@ -94,13 +95,13 @@
             dataGridView1.Location = new System.Drawing.Point(0, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(699, 398);
+            dataGridView1.Size = new System.Drawing.Size(699, 390);
             dataGridView1.TabIndex = 0;
             // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 27);
+            progressBar1.Location = new System.Drawing.Point(0, 35);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new System.Drawing.Size(699, 5);
             progressBar1.TabIndex = 2;

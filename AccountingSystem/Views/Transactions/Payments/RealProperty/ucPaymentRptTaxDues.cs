@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.RealProperty
@@ -47,32 +48,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             }
 
             return rptTaxDuesModelList;
-        }
-
-        internal DataTable GetReceiptTaxDues()
-        {
-            var dataTable = new dsTreasury.dtAF56DataTable();
-            var dtRptTaxDues = (DataTable)dgTaxDues.DataSource;
-            var filteredRows = dtRptTaxDues.AsEnumerable().Where(row => row.Field<bool>("is_selected")).CopyToDataTable();
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
-
-            foreach (DataRow row in filteredRows.Rows)
-            {
-                var newRow = dataTable.NewRow();
-
-                newRow["owner"] = dictTaxpayer["name"];
-                newRow["location"] = "sample";
-                newRow["block_lot_no"] = "sample";
-                newRow["tax_dec_no"] = row["complete_arp_no"];
-                newRow["assessed_value"] = 100;
-                newRow["type"] = row["type"];
-                newRow["tax_due"] = row["tax_due_amount"];
-                newRow["penalt_discount"] = row["penalty_discount"];
-                newRow["total"] = row["total_payment"];
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
         }
 
         internal string GetFormErrors()

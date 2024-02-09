@@ -50,6 +50,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return true;
         }
 
+        internal int GetSelectedTaxpayerId()
+        {
+            int index = dataGridView1.CurrentRow.Index;
+            return Convert.ToInt32(dataGridView1.Rows[index].Cells["taxpayers_id"].Value);
+        }
+
         private void LoadTaxpayers()
         {
             if (!backgroundWorker1.IsBusy)

@@ -1,11 +1,9 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
