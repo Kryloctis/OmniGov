@@ -125,16 +125,14 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                    LoadReceipt();
+                    if (ConfirmPayment())
+                    {
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
+                        ResetForm();
+                        return;
+                    }
 
-                    //if (ConfirmPayment())
-                    //{
-                    //    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                    //    LoadReceipt();
-                    ResetForm();
-                    //    return;
-                    //}
                     return;
                 }
 

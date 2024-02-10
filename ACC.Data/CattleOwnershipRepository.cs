@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
@@ -18,7 +19,7 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Delete(List<CattleOwnershipModel> entityList)
@@ -39,7 +40,38 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, Id}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
+        public DataTable GetRecordByTaxpayerId(int taxpayerId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayers_id", DbType.Int32, taxpayerId}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE taxpayers_id = @taxpayers_id";
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecords()
@@ -57,7 +89,7 @@ namespace ACC.Data
                 new object[] { "@searchKey", DbType.String, $"%{searchKey}%" },
             };
 
-            string query = $"SELECT id, cattle_type, cattle_sex, cattle_age, description FROM {tableName} WHERE owner_id = @owner_id AND description LIKE @searchKey AND cattle_type LIKE @searchKey";
+            string query = $"SELECT * FROM {tableName} WHERE owner_id = @owner_id AND description LIKE @searchKey AND cattle_type LIKE @searchKey";
 
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
@@ -65,12 +97,12 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(CattleOwnershipModel entity)
@@ -82,12 +114,12 @@ namespace ACC.Data
                 new object[] {"@cattle_name" ,DbType.String, entity.CattleName},
                 new object[] {"@cattle_sex" ,DbType.String, entity.CattleSex},
                 new object[] {"@cattle_age" ,DbType.Int32, entity.CattleAge},
+                new object[] {"@cattle_years", DbType.Int32, entity.CattleYears},
                 new object[] {"@description" ,DbType.String, entity.Description},
-                new object[] {"@cattle_price" ,DbType.Decimal, entity.CattlePrice},
                 new object[] {"@created_by" ,DbType.Int32, entity.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (payment_collections_id, taxpayers_id, cattle_name, cattle_sex, cattle_age, description, cattle_price, created_by) VALUES (@payment_collections_id, @taxpayers_id, @cattle_name, @cattle_sex, @cattle_age, @description, @cattle_price, @created_by)";
+            string query = $"INSERT INTO {tableName} (payment_collections_id, taxpayers_id, cattle_name, cattle_sex, cattle_age, cattle_years, description, created_by) VALUES (@payment_collections_id, @taxpayers_id, @cattle_name, @cattle_sex, @cattle_age, @cattle_years, @description, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -102,12 +134,12 @@ namespace ACC.Data
                 new object[] { "@cattle_name" ,DbType.String, entity.CattleName },
                 new object[] { "@cattle_sex" ,DbType.String, entity.CattleSex },
                 new object[] { "@cattle_age" ,DbType.Int32, entity.CattleAge },
+                new object[] { "@cattle_years", DbType.Int32, entity.CattleYears },
                 new object[] { "@description" ,DbType.String, entity.Description },
-                new object[] { "@cattle_price" ,DbType.Decimal, entity.CattlePrice },
                 new object[] { "@updated_by" ,DbType.String, entity.UpdatedBy },
             };
 
-            string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, taxpayers_id = @taxpayers_id, cattle_name = @cattle_name, cattle_sex = @cattle_sex, cattle_age = @cattle_age, description = @description, cattle_price = @cattle_price, updated_by = @updated_by WHERE id = @id;";
+            string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, taxpayers_id = @taxpayers_id, cattle_name = @cattle_name, cattle_sex = @cattle_sex, cattle_age = @cattle_age, cattle_years = @cattle_years, description = @description, updated_by = @updated_by WHERE id = @id;";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }

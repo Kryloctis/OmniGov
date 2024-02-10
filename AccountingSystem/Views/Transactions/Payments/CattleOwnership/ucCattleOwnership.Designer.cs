@@ -35,7 +35,7 @@
             radCattleFemale = new System.Windows.Forms.RadioButton();
             nudAge = new System.Windows.Forms.NumericUpDown();
             txtDescription = new System.Windows.Forms.TextBox();
-            nudPrice = new System.Windows.Forms.NumericUpDown();
+            nudYears = new System.Windows.Forms.NumericUpDown();
             label10 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
@@ -47,7 +47,7 @@
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             flwPanelCattleSex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudYears).BeginInit();
             SuspendLayout();
             // 
             // errorProvider1
@@ -60,7 +60,7 @@
             flwPanelCattleSex.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             flwPanelCattleSex.Controls.Add(radCattleMale);
             flwPanelCattleSex.Controls.Add(radCattleFemale);
-            flwPanelCattleSex.Location = new System.Drawing.Point(74, 90);
+            flwPanelCattleSex.Location = new System.Drawing.Point(79, 119);
             flwPanelCattleSex.Name = "flwPanelCattleSex";
             flwPanelCattleSex.Size = new System.Drawing.Size(250, 23);
             flwPanelCattleSex.TabIndex = 17;
@@ -89,7 +89,7 @@
             // 
             // nudAge
             // 
-            nudAge.Location = new System.Drawing.Point(74, 61);
+            nudAge.Location = new System.Drawing.Point(79, 61);
             nudAge.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
@@ -100,7 +100,8 @@
             // txtDescription
             // 
             txtDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDescription.Location = new System.Drawing.Point(74, 123);
+            txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtDescription.Location = new System.Drawing.Point(79, 152);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(250, 75);
@@ -108,22 +109,21 @@
             txtDescription.Validating += txtDescription_Validating;
             txtDescription.Validated += txtDescription_Validated;
             // 
-            // nudPrice
+            // nudYears
             // 
-            nudPrice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudPrice.DecimalPlaces = 2;
-            nudPrice.Location = new System.Drawing.Point(74, 204);
-            nudPrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
-            nudPrice.Name = "nudPrice";
-            nudPrice.Size = new System.Drawing.Size(250, 23);
-            nudPrice.TabIndex = 6;
-            nudPrice.Validating += nudPrice_Validating;
-            nudPrice.Validated += nudPrice_Validated;
+            nudYears.Location = new System.Drawing.Point(79, 90);
+            nudYears.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+            nudYears.Name = "nudYears";
+            nudYears.Size = new System.Drawing.Size(80, 23);
+            nudYears.TabIndex = 6;
+            nudYears.Value = new decimal(new int[] { 2024, 0, 0, 0 });
+            nudYears.Validating += nudYears_Validating;
+            nudYears.Validated += nudYears_Validated;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(1, 126);
+            label10.Location = new System.Drawing.Point(1, 155);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(72, 15);
             label10.TabIndex = 8;
@@ -151,7 +151,7 @@
             // 
             cmbxType.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxType.FormattingEnabled = true;
-            cmbxType.Location = new System.Drawing.Point(74, 32);
+            cmbxType.Location = new System.Drawing.Point(79, 32);
             cmbxType.Name = "cmbxType";
             cmbxType.Size = new System.Drawing.Size(250, 23);
             cmbxType.TabIndex = 1;
@@ -161,16 +161,16 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(1, 207);
+            label9.Location = new System.Drawing.Point(1, 93);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(38, 15);
+            label9.Size = new System.Drawing.Size(39, 15);
             label9.TabIndex = 11;
-            label9.Text = "Price*";
+            label9.Text = "Years*";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(1, 95);
+            label7.Location = new System.Drawing.Point(1, 124);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(30, 15);
             label7.TabIndex = 12;
@@ -180,7 +180,7 @@
             // 
             cmbxOwner.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxOwner.FormattingEnabled = true;
-            cmbxOwner.Location = new System.Drawing.Point(74, 3);
+            cmbxOwner.Location = new System.Drawing.Point(79, 3);
             cmbxOwner.Name = "cmbxOwner";
             cmbxOwner.Size = new System.Drawing.Size(250, 23);
             cmbxOwner.TabIndex = 0;
@@ -206,7 +206,7 @@
             Controls.Add(flwPanelCattleSex);
             Controls.Add(nudAge);
             Controls.Add(txtDescription);
-            Controls.Add(nudPrice);
+            Controls.Add(nudYears);
             Controls.Add(label10);
             Controls.Add(label8);
             Controls.Add(label1);
@@ -215,12 +215,12 @@
             Controls.Add(label9);
             Controls.Add(label7);
             Name = "ucCattleOwnership";
-            Size = new System.Drawing.Size(343, 231);
+            Size = new System.Drawing.Size(349, 234);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             flwPanelCattleSex.ResumeLayout(false);
             flwPanelCattleSex.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudYears).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,7 +233,7 @@
         internal System.Windows.Forms.RadioButton radCattleFemale;
         internal System.Windows.Forms.NumericUpDown nudAge;
         internal System.Windows.Forms.TextBox txtDescription;
-        internal System.Windows.Forms.NumericUpDown nudPrice;
+        internal System.Windows.Forms.NumericUpDown nudYears;
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.Label label6;

@@ -67,7 +67,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@collecting_officer_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
                 new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
                 new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
@@ -78,7 +78,7 @@ namespace ACC.Data
                 new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (collecting_officer_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officer_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
+            string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -88,7 +88,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@collecting_officer_id", DbType.Int32, entity.CollectingOfficerId},
+                new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
                 new object[] { "@job_orders_id", DbType.Object, entity.JobOrderId},
                 new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@payee", DbType.String, entity.Payee},
@@ -99,7 +99,7 @@ namespace ACC.Data
                 new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
             };
 
-            string query = $"UPDATE {tableName} SET collecting_officer_id = @collecting_officer_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
+            string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -180,7 +180,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@collecting_officer_id", DbType.UInt16, parameter[0] },
+                new object[] { "@collecting_officers_id", DbType.UInt16, parameter[0] },
                 new object[] { "@funds_id", DbType.UInt16, parameter[1] },
                 new object[] { "@collection_from", DbType.Date, parameter[2] },
                 new object[] { "@collection_to", DbType.Date, parameter[3] }
