@@ -153,6 +153,16 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AF51 {
+            get {
+                object obj = ResourceManager.GetObject("AF51", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap archive_box_add_filled_14px {
             get {
                 object obj = ResourceManager.GetObject("archive-box-add-filled@14px", resourceCulture);
