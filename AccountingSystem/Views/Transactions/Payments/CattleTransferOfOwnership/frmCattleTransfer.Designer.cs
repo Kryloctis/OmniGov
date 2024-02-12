@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            radCattleDetails = new System.Windows.Forms.RadioButton();
+            radCattleTransfer = new System.Windows.Forms.RadioButton();
             radFeesCharges = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -56,7 +56,7 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
-            flowLayoutPanel2.Controls.Add(radCattleDetails);
+            flowLayoutPanel2.Controls.Add(radCattleTransfer);
             flowLayoutPanel2.Controls.Add(radFeesCharges);
             flowLayoutPanel2.Controls.Add(radPayment);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -68,19 +68,19 @@
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 11;
             // 
-            // radCattleDetails
+            // radCattleTransfer
             // 
-            radCattleDetails.Appearance = System.Windows.Forms.Appearance.Button;
-            radCattleDetails.FlatAppearance.BorderSize = 0;
-            radCattleDetails.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radCattleDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radCattleDetails.Location = new System.Drawing.Point(0, 0);
-            radCattleDetails.Margin = new System.Windows.Forms.Padding(0);
-            radCattleDetails.Name = "radCattleDetails";
-            radCattleDetails.Size = new System.Drawing.Size(195, 37);
-            radCattleDetails.TabIndex = 7;
-            radCattleDetails.Text = "Cattle Transfer";
-            radCattleDetails.UseVisualStyleBackColor = true;
+            radCattleTransfer.Appearance = System.Windows.Forms.Appearance.Button;
+            radCattleTransfer.FlatAppearance.BorderSize = 0;
+            radCattleTransfer.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radCattleTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radCattleTransfer.Location = new System.Drawing.Point(0, 0);
+            radCattleTransfer.Margin = new System.Windows.Forms.Padding(0);
+            radCattleTransfer.Name = "radCattleTransfer";
+            radCattleTransfer.Size = new System.Drawing.Size(195, 37);
+            radCattleTransfer.TabIndex = 7;
+            radCattleTransfer.Text = "Cattle Transfer";
+            radCattleTransfer.UseVisualStyleBackColor = true;
             // 
             // radFeesCharges
             // 
@@ -291,5 +291,6 @@
         private ucPayment ucPayment1;
         private System.Windows.Forms.GroupBox groupBox1;
         private OtherPayments.CattleTransferOfOwnership.ucCattleTransfer ucCattleTransfer1;
+        private System.Windows.Forms.RadioButton radCattleTransfer;
     }
 }

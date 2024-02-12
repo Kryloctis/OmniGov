@@ -35,7 +35,12 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
             switch (tabControlMain.SelectedTab.Name)
             {
+                case "tabPageCattleTransfer":
+                    LoadCattleTransferTab();
+                    break;
+
                 case "tabPageFeesCharges":
+                    radFeesCharges.Checked = true;
                     LoadFeesAndChargesTab();
                     break;
 
@@ -44,6 +49,11 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                     LoadPaymentTab();
                     break;
             }
+        }
+        private void LoadCattleTransferTab()
+        {
+            btnNextMain.Text = "Next";
+            radCattleTransfer.Checked = true;
         }
 
         private void LoadFeesAndChargesTab()

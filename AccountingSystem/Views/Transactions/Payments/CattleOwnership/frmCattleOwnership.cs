@@ -84,13 +84,13 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                     break;
 
                 case "tabPageFeesCharges":
+                    radFeesCharges.Checked = true;
                     LoadFeesAndChargesTab();
                     break;
 
                 case "tabPagePayment":
                     radPayment.Checked = true;
                     LoadPaymentTab();
-                    //ConfirmPayment();
                     break;
             }
         }
