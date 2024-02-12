@@ -43,7 +43,7 @@
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            radCattleDetails = new System.Windows.Forms.RadioButton();
+            radCattleOwnershipInfo = new System.Windows.Forms.RadioButton();
             flowLayoutPanel1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -221,7 +221,7 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
-            flowLayoutPanel2.Controls.Add(radCattleDetails);
+            flowLayoutPanel2.Controls.Add(radCattleOwnershipInfo);
             flowLayoutPanel2.Controls.Add(radFeesCharges);
             flowLayoutPanel2.Controls.Add(radPayment);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -233,19 +233,19 @@
             flowLayoutPanel2.Size = new System.Drawing.Size(195, 496);
             flowLayoutPanel2.TabIndex = 10;
             // 
-            // radCattleDetails
+            // radCattleOwnershipInfo
             // 
-            radCattleDetails.Appearance = System.Windows.Forms.Appearance.Button;
-            radCattleDetails.FlatAppearance.BorderSize = 0;
-            radCattleDetails.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radCattleDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radCattleDetails.Location = new System.Drawing.Point(0, 0);
-            radCattleDetails.Margin = new System.Windows.Forms.Padding(0);
-            radCattleDetails.Name = "radCattleDetails";
-            radCattleDetails.Size = new System.Drawing.Size(195, 37);
-            radCattleDetails.TabIndex = 7;
-            radCattleDetails.Text = "Cattle Ownership Info.";
-            radCattleDetails.UseVisualStyleBackColor = true;
+            radCattleOwnershipInfo.Appearance = System.Windows.Forms.Appearance.Button;
+            radCattleOwnershipInfo.FlatAppearance.BorderSize = 0;
+            radCattleOwnershipInfo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radCattleOwnershipInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radCattleOwnershipInfo.Location = new System.Drawing.Point(0, 0);
+            radCattleOwnershipInfo.Margin = new System.Windows.Forms.Padding(0);
+            radCattleOwnershipInfo.Name = "radCattleOwnershipInfo";
+            radCattleOwnershipInfo.Size = new System.Drawing.Size(195, 37);
+            radCattleOwnershipInfo.TabIndex = 7;
+            radCattleOwnershipInfo.Text = "Cattle Ownership Info.";
+            radCattleOwnershipInfo.UseVisualStyleBackColor = true;
             // 
             // frmCattleOwnership
             // 
@@ -287,7 +287,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.TabPage tabPageCattleOwnership;
         private System.Windows.Forms.RadioButton radFeesCharges;
-        private System.Windows.Forms.RadioButton radCattleDetails;
+        private System.Windows.Forms.RadioButton radCattleOwnershipInfo;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
         private System.Windows.Forms.GroupBox groupBox1;
         private ucCattleOwnership ucCattleOwnership1;

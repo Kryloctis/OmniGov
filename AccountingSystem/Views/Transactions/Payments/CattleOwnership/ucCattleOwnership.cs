@@ -80,16 +80,6 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             Helper.ClearErrorComboBox(errorProvider1, cmbxType);
         }
 
-        private void txtDescription_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
-        }
-
-        private void txtDescription_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
-        }
-
         private void nudYears_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYears, "Price");

@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPageCattleDetails":
+                case "tabPageCattleOwnership":
                     LoadCattleDetailsTab();
                     break;
 
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
         private void LoadCattleDetailsTab()
         {
             btnNextMain.Text = "Next";
-            radCattleDetails.Checked = true;
+            radCattleOwnershipInfo.Checked = true;
         }
 
         private void LoadFeesAndChargesTab()

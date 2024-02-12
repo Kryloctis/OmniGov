@@ -106,8 +106,6 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(250, 75);
             txtDescription.TabIndex = 5;
-            txtDescription.Validating += txtDescription_Validating;
-            txtDescription.Validated += txtDescription_Validated;
             // 
             // nudYears
             // 
