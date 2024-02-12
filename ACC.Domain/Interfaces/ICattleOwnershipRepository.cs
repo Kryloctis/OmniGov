@@ -1,8 +1,5 @@
 ﻿using ACC.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
@@ -11,5 +8,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByIDAndSearch(int oldOwnerID, string keySearch);
 
         DataTable GetRecordByTaxpayerId(int taxpayerId);
+
+        int GetLastInsertedId(int createdBy);
     }
 }

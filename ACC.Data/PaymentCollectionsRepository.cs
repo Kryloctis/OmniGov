@@ -15,16 +15,18 @@ namespace ACC.Data
         private IRptPaymentRepository rptPaymentRepository;
         private IMarriageLicenseRepository marriageLicenseRepository;
         private ICattleOwnershipRepository cattleOwnershipRepository;
+        private IPrevCattleOwnership prevCattleOwnershipRepository;
         private IBurialPermitRepository burialPermitRepository;
         private IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository;
         private IPaymentFeesCharges paymentFeesCharges;
 
-        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges)
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
             this.rptPaymentRepository = rptPaymentRepository;
             this.marriageLicenseRepository = marriageLicenseRepository;
             this.cattleOwnershipRepository = cattleOwnershipRepository;
+            this.prevCattleOwnershipRepository = prevCattleOwnership;
             this.burialPermitRepository = burialPermitRepository;
             this.paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
             this.paymentFeesCharges = paymentFeesCharges;
@@ -374,6 +376,26 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE jo_id = @jo_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
             var dataTable = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int lastPaymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+
+                cattleOwnershipModel.PaymentCollectionId = lastPaymentCollectionId;
+                cattleOwnershipRepository.Insert(cattleOwnershipModel);
+                int lastCattleOwnershipId = cattleOwnershipRepository.GetLastInsertedId(cattleOwnershipModel.CreatedBy);
+                prevCattleOwnershipModel.CattleOwnershipId = lastCattleOwnershipId;
+                prevCattleOwnershipRepository.Insert(prevCattleOwnershipModel);
+                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = lastPaymentCollectionId);
+                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }

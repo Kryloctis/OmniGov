@@ -4,9 +4,10 @@ namespace ACC.Domain.Models
 {
     public class PrevCattleOwnershipModel
     {
-        private int Id { get; set; }
-        private int PreviousCattleOwnershipId { get; set; }
-        private decimal CattlePrice { get; set; }
-        private DateTime TransferDate { get; set; }
+        public int Id { get; set; }
+        public int CattleOwnershipId { get; set; }
+        public int PreviousCattleOwnershipId { get; set; }
+        public decimal CattlePrice { get; set; }
+        public DateTime TransferDate { get; set; }
     }
 }

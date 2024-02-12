@@ -47,6 +47,8 @@
             nudCattleYears = new System.Windows.Forms.NumericUpDown();
             cmbxCattle = new System.Windows.Forms.ComboBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            label9 = new System.Windows.Forms.Label();
+            txtDescription = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)nudAmountOfPurchase).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCattleYears).BeginInit();
@@ -57,7 +59,7 @@
             // 
             cmbxNewOwner.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxNewOwner.FormattingEnabled = true;
-            cmbxNewOwner.Location = new System.Drawing.Point(134, 143);
+            cmbxNewOwner.Location = new System.Drawing.Point(134, 206);
             cmbxNewOwner.Name = "cmbxNewOwner";
             cmbxNewOwner.Size = new System.Drawing.Size(200, 23);
             cmbxNewOwner.TabIndex = 0;
@@ -68,7 +70,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(7, 147);
+            label1.Location = new System.Drawing.Point(7, 210);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(74, 15);
             label1.TabIndex = 1;
@@ -77,7 +79,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(7, 178);
+            label2.Location = new System.Drawing.Point(7, 241);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(94, 15);
             label2.TabIndex = 1;
@@ -88,7 +90,7 @@
             dtTransfer.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dtTransfer.CustomFormat = "MMM dd,yyyy";
             dtTransfer.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtTransfer.Location = new System.Drawing.Point(134, 172);
+            dtTransfer.Location = new System.Drawing.Point(134, 235);
             dtTransfer.Name = "dtTransfer";
             dtTransfer.Size = new System.Drawing.Size(200, 23);
             dtTransfer.TabIndex = 2;
@@ -96,7 +98,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(7, 203);
+            label3.Location = new System.Drawing.Point(7, 266);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(121, 15);
             label3.TabIndex = 1;
@@ -106,7 +108,7 @@
             // 
             nudAmountOfPurchase.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudAmountOfPurchase.DecimalPlaces = 2;
-            nudAmountOfPurchase.Location = new System.Drawing.Point(134, 201);
+            nudAmountOfPurchase.Location = new System.Drawing.Point(134, 264);
             nudAmountOfPurchase.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             nudAmountOfPurchase.Name = "nudAmountOfPurchase";
             nudAmountOfPurchase.Size = new System.Drawing.Size(200, 23);
@@ -237,10 +239,30 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(7, 148);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(67, 15);
+            label9.TabIndex = 1;
+            label9.Text = "Description";
+            // 
+            // txtDescription
+            // 
+            txtDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtDescription.Location = new System.Drawing.Point(134, 143);
+            txtDescription.Multiline = true;
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new System.Drawing.Size(200, 57);
+            txtDescription.TabIndex = 5;
+            // 
             // ucCattleTransfer
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(txtDescription);
             Controls.Add(cmbxNewOwner);
             Controls.Add(label1);
             Controls.Add(nudAmountOfPurchase);
@@ -248,6 +270,7 @@
             Controls.Add(label2);
             Controls.Add(cmbxOldOwner);
             Controls.Add(dtTransfer);
+            Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label3);
             Controls.Add(label4);
@@ -259,7 +282,7 @@
             Controls.Add(label6);
             Controls.Add(nudCattleAge);
             Name = "ucCattleTransfer";
-            Size = new System.Drawing.Size(353, 232);
+            Size = new System.Drawing.Size(353, 293);
             Load += ucCattleTransferOfOwnership_Load;
             ((System.ComponentModel.ISupportInitialize)nudAmountOfPurchase).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).EndInit();
@@ -289,5 +312,7 @@
         private System.Windows.Forms.NumericUpDown nudCattleYears;
         private System.Windows.Forms.ComboBox cmbxCattle;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtDescription;
     }
 }

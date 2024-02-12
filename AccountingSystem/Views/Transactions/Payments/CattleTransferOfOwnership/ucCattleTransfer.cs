@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -12,6 +13,34 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             InitializeComponent();
         }
 
+        internal CattleOwnershipModel GetCattleOwnershipModel()
+        {
+            int cattleOwnerId = Convert.ToInt32(cmbxNewOwner.SelectedValue);
+
+            return new CattleOwnershipModel()
+            {
+                TaxpayerId = cattleOwnerId,
+                CreatedBy = Helper.UserId,
+                CattleAge = (int)nudCattleAge.Value,
+                CattleYears = (int)nudCattleYears.Value,
+                Description = txtDescription.Text.Trim(),
+                CattleSex = radIsCattleMale.Checked == true ? "Male" : "Female",
+                CattleName = cmbxCattle.Text,
+            };
+        }
+
+        internal PrevCattleOwnershipModel GetPrevCattleOwnershipModel()
+        {
+            int prevCattleId = Convert.ToInt32(cmbxCattle.SelectedValue);
+
+            return new PrevCattleOwnershipModel()
+            {
+                PreviousCattleOwnershipId = prevCattleId,
+                CattlePrice = nudAmountOfPurchase.Value,
+                TransferDate = dtTransfer.Value,
+            };
+        }
+
         internal void OnLoad()
         {
             LoadOwners(cmbxOldOwner);
@@ -20,6 +49,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         internal void ResetForm()
         {
+            cmbxOldOwner.Text = string.Empty;
+            cmbxNewOwner.Text = string.Empty;
             LoadOwners(cmbxOldOwner);
             LoadOwners(cmbxNewOwner);
             nudAmountOfPurchase.Value = 0;
@@ -27,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             radIsCattleMale.Checked = true;
             nudCattleAge.Value = 0;
             nudCattleYears.Value = 0;
+            txtDescription.Clear();
         }
 
         internal string GetFormErrors()

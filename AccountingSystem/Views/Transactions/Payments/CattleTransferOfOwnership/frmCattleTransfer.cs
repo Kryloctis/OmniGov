@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
+﻿using ACC.Data;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
 using System.Windows.Forms;
 
@@ -82,8 +83,8 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
         private bool ConfirmPayment()
         {
-            //if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-            //    return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
 
             return false;
         }
