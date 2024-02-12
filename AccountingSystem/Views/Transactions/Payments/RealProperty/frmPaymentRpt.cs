@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -49,7 +50,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 case "tabPagePayment":
                     radPayment.Checked = true;
                     LoadPaymentTab();
-                    //ConfirmPayment();
                     break;
             }
         }
@@ -91,9 +91,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                         return false;
                     }
 
-                    int index = ucPaymentTaxpayers.dataGridView1.CurrentRow.Index;
-                    int taxpayerId = Convert.ToInt32(ucPaymentTaxpayers.dataGridView1.Rows[index].Cells["taxpayers_id"].Value);
-                    ucPaymentRptTaxDues.OnLoad(taxpayerId);
+                    ucPaymentRptTaxDues.OnLoad(ucPaymentTaxpayers.GetSelectedTaxpayerId());
 
                     return true;
 
@@ -129,10 +127,12 @@ namespace AccountingSystem.Views.Transactions.Payments
                 {
                     if (ConfirmPayment())
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
                         ResetForm();
                         return;
                     }
+
                     return;
                 }
 
@@ -149,6 +149,30 @@ namespace AccountingSystem.Views.Transactions.Payments
                 return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
 
             return false;
+        }
+
+        private void LoadReceipt()
+        {
+            decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
+            var frmPreviewReceipt = new frmRealPropertyReceipt();
+
+            var receiptParameters = new frmRealPropertyReceipt.AF56Parameters()
+            {
+                TaxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId(),
+                TransactionDate = ucPayment.dtPaymentDate.Value,
+                ReceivedFrom = ucPayment.txtPayee.Text.Trim(),
+                SumAmountPaid = totalPayment,
+                SumAmountPaidWords = new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2")),
+                CalendarYear = (int)ucPaymentRptTaxDues.nudCalendarYear.Value,
+                TotalPayment = totalPayment,
+                PaidCash = totalPayment,
+                Municipality = Helper.selectedServerModel.MunicipalityName,
+                TotalPaid = totalPayment,
+                DataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource
+            };
+
+            frmPreviewReceipt.OnLoad(receiptParameters);
+            frmPreviewReceipt.ShowDialog();
         }
 
         private void btnBack_Click(object sender, EventArgs e)

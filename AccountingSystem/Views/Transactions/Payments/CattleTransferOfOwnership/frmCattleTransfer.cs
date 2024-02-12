@@ -1,47 +1,112 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
+namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 {
-    public partial class frmCattleOwnership : Form
+    public partial class frmCattleTransfer : Form
     {
         private readonly ucPayment ucPayment;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
-        private readonly ucCattleOwnership ucCattleOwnership;
+        private readonly ucCattleTransfer ucCattleTransfer;
 
-        public frmCattleOwnership()
+        public frmCattleTransfer()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             ucPayment = ucPayment1;
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
-            ucCattleOwnership = ucCattleOwnership1;
+            ucCattleTransfer = ucCattleTransfer1;
+        }
+
+        private void OnLoad()
+        {
+            LoadTabContents();
+            ucCattleTransfer.OnLoad();
+        }
+
+        private void LoadTabContents()
+        {
+            if (tabControlMain.SelectedIndex == 0)
+                btnBackMain.Enabled = false;
+            else
+                btnBackMain.Enabled = true;
+
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageCattleTransfer":
+                    LoadCattleTransferTab();
+                    break;
+
+                case "tabPageFeesCharges":
+                    radFeesCharges.Checked = true;
+                    LoadFeesAndChargesTab();
+                    break;
+
+                case "tabPagePayment":
+                    radPayment.Checked = true;
+                    LoadPaymentTab();
+                    break;
+            }
+        }
+        private void LoadCattleTransferTab()
+        {
+            btnNextMain.Text = "Next";
+            radCattleTransfer.Checked = true;
+        }
+
+        private void LoadFeesAndChargesTab()
+        {
+            btnNextMain.Text = "Proceed to Payment";
+            btnBackMain.Enabled = true;
+            radFeesCharges.Checked = true;
+            ucPaymentFeesCharges.OnLoad();
+        }
+
+        private void LoadPaymentTab()
+        {
+            btnNextMain.Text = "Confirm Payment";
+            btnBackMain.Enabled = true;
+            radPayment.Checked = true;
+
+            decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
+            ucPayment.OnLoad(Helper.UserId, "52", totalAmountPayable);
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadTabContents();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ResetForm()
         {
             ucPayment.ResetForm();
             ucPaymentFeesCharges.ResetForm();
-            ucCattleOwnership.ResetForm();
+            ucCattleTransfer.ResetForm();
             tabControlMain.SelectedIndex = 0;
         }
 
-        private void OnLoad()
+        private bool ConfirmPayment()
         {
-            LoadTabContents();
-            ucCattleOwnership.OnLoad();
+            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+
+            return false;
         }
 
         private bool TabValidated()
         {
             switch (tabControlMain.SelectedTab.Name)
             {
-                case "tabPageCattleOwnership":
-                    if (!ucCattleOwnership.ValidateChildren())
+                case "tabPageCattleTransfer":
+                    if (!ucCattleTransfer.ValidateChildren())
                     {
-                        Helper.MessageBoxError(ucCattleOwnership.GetFormErrors());
+                        Helper.MessageBoxError(ucCattleTransfer.GetFormErrors());
                         return false;
                     }
                     break;
@@ -68,72 +133,6 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             }
 
             return true;
-        }
-
-        private void LoadTabContents()
-        {
-            if (tabControlMain.SelectedIndex == 0)
-                btnBackMain.Enabled = false;
-            else
-                btnBackMain.Enabled = true;
-
-            switch (tabControlMain.SelectedTab.Name)
-            {
-                case "tabPageCattleOwnership":
-                    LoadCattleDetailsTab();
-                    break;
-
-                case "tabPageFeesCharges":
-                    radFeesCharges.Checked = true;
-                    LoadFeesAndChargesTab();
-                    break;
-
-                case "tabPagePayment":
-                    radPayment.Checked = true;
-                    LoadPaymentTab();
-                    break;
-            }
-        }
-
-        private void LoadCattleDetailsTab()
-        {
-            btnNextMain.Text = "Next";
-            radCattleOwnershipInfo.Checked = true;
-        }
-
-        private void LoadFeesAndChargesTab()
-        {
-            btnNextMain.Text = "Proceed to Payment";
-            btnBackMain.Enabled = true;
-            radFeesCharges.Checked = true;
-            ucPaymentFeesCharges.OnLoad();
-        }
-
-        private void LoadPaymentTab()
-        {
-            btnNextMain.Text = "Confirm Payment";
-            btnBackMain.Enabled = true;
-            radPayment.Checked = true;
-
-            decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.UserId, "53", totalAmountPayable);
-        }
-
-        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadTabContents();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private bool ConfirmPayment()
-        {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-            return false;
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -169,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmCattleOwnership_Load(object sender, EventArgs e)
+        private void frmCattleTransfer_Load(object sender, EventArgs e)
         {
             try
             {

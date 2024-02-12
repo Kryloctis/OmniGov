@@ -290,17 +290,18 @@ namespace ACC.Data
             return mySqlGenericCommands.Fill(query, dataTable);
         }
 
-        public DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
+        public DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, int calendarYear, string completeArpNo, bool showPaidAssessments)
         {
             var parameters = new object[][]
             {
                 new object[] { "@real_taxpayers_id", DbType.Int32, realTaxpayersId },
+                new object[] { "@year", DbType.Int32, calendarYear},
                 new object[] { "@complete_arp_no", DbType.String, completeArpNo }
             };
 
             string subQuery = showPaidAssessments ? string.Empty : "(rpt_payments_id IS NULL OR rpt_payments_id = '') AND";
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE {subQuery} real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE {subQuery} year = @year AND real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);

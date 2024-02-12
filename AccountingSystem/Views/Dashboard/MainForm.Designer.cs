@@ -64,6 +64,8 @@
             feesChargesConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             databaseSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aboutLocalFinanceSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tabControlDashboard = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             tabControlBudget = new System.Windows.Forms.TabControl();
@@ -155,14 +157,13 @@
             consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageList1 = new System.Windows.Forms.ImageList(components);
-            helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            aboutLocalFinanceSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            aF52CattleTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -221,14 +222,14 @@
             // menuLogout
             // 
             menuLogout.Name = "menuLogout";
-            menuLogout.Size = new System.Drawing.Size(180, 22);
+            menuLogout.Size = new System.Drawing.Size(112, 22);
             menuLogout.Text = "Logout";
             menuLogout.Click += menuLogout_Click;
             // 
             // menuExitApp
             // 
             menuExitApp.Name = "menuExitApp";
-            menuExitApp.Size = new System.Drawing.Size(180, 22);
+            menuExitApp.Size = new System.Drawing.Size(112, 22);
             menuExitApp.Text = "Exit";
             menuExitApp.Click += menuExitApp_Click;
             // 
@@ -443,6 +444,20 @@
             databaseSynchronizationToolStripMenuItem.Text = "Database Synchronization...";
             databaseSynchronizationToolStripMenuItem.Click += menuDatabaseSynchronization_Click;
             // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutLocalFinanceSystemToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutLocalFinanceSystemToolStripMenuItem
+            // 
+            aboutLocalFinanceSystemToolStripMenuItem.Name = "aboutLocalFinanceSystemToolStripMenuItem";
+            aboutLocalFinanceSystemToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            aboutLocalFinanceSystemToolStripMenuItem.Text = "About Local Finance System...";
+            aboutLocalFinanceSystemToolStripMenuItem.Click += aboutLocalFinanceSystemToolStripMenuItem_Click;
+            // 
             // tabControlDashboard
             // 
             tabControlDashboard.Controls.Add(tabPageBudget);
@@ -514,7 +529,7 @@
             tabPageBudgetDetailed.Margin = new System.Windows.Forms.Padding(0);
             tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageBudgetDetailed.Size = new System.Drawing.Size(1207, 551);
+            tabPageBudgetDetailed.Size = new System.Drawing.Size(1207, 553);
             tabPageBudgetDetailed.TabIndex = 1;
             tabPageBudgetDetailed.Text = "Details";
             tabPageBudgetDetailed.UseVisualStyleBackColor = true;
@@ -524,7 +539,7 @@
             ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBudgetDetailed1.Location = new System.Drawing.Point(0, 5);
             ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            ucBudgetDetailed1.Size = new System.Drawing.Size(1207, 546);
+            ucBudgetDetailed1.Size = new System.Drawing.Size(1207, 548);
             ucBudgetDetailed1.TabIndex = 0;
             // 
             // toolStrip1
@@ -606,7 +621,7 @@
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(0);
             tabPageAccounting.Name = "tabPageAccounting";
             tabPageAccounting.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageAccounting.Size = new System.Drawing.Size(1221, 622);
+            tabPageAccounting.Size = new System.Drawing.Size(1221, 624);
             tabPageAccounting.TabIndex = 1;
             tabPageAccounting.Text = "Accounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -624,7 +639,7 @@
             tabControlAccounting.Name = "tabControlAccounting";
             tabControlAccounting.Padding = new System.Drawing.Point(10, 3);
             tabControlAccounting.SelectedIndex = 0;
-            tabControlAccounting.Size = new System.Drawing.Size(1221, 617);
+            tabControlAccounting.Size = new System.Drawing.Size(1221, 619);
             tabControlAccounting.TabIndex = 0;
             // 
             // tabPageJournalEntryVoucher
@@ -634,7 +649,7 @@
             tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
             tabPageJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1213, 589);
+            tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1213, 591);
             tabPageJournalEntryVoucher.TabIndex = 0;
             tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
             tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
@@ -647,7 +662,7 @@
             ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
             ucjevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
             ucjevDashboard1.Name = "ucjevDashboard1";
-            ucjevDashboard1.Size = new System.Drawing.Size(1213, 584);
+            ucjevDashboard1.Size = new System.Drawing.Size(1213, 586);
             ucjevDashboard1.TabIndex = 0;
             // 
             // tabPageJournals
@@ -963,7 +978,7 @@
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(0);
             tabPageTreasury.Name = "tabPageTreasury";
             tabPageTreasury.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageTreasury.Size = new System.Drawing.Size(1221, 622);
+            tabPageTreasury.Size = new System.Drawing.Size(1221, 624);
             tabPageTreasury.TabIndex = 2;
             tabPageTreasury.Text = "Treasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -975,7 +990,7 @@
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel1.Location = new System.Drawing.Point(0, 5);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(1221, 617);
+            panel1.Size = new System.Drawing.Size(1221, 619);
             panel1.TabIndex = 0;
             // 
             // ToolStrip2
@@ -1053,7 +1068,7 @@
             // 
             // paymentsToolStripMenuItem
             // 
-            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58BurialPermitToolStripMenuItem, aF53CattleToolStripMenuItem });
+            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58BurialPermitToolStripMenuItem, aF53CattleToolStripMenuItem, aF52CattleTransferToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             paymentsToolStripMenuItem.Text = "Payments";
@@ -1061,36 +1076,36 @@
             // rPTToolStripMenuItem
             // 
             rPTToolStripMenuItem.Name = "rPTToolStripMenuItem";
-            rPTToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            rPTToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
             rPTToolStripMenuItem.Text = "AF 56 - Real Property Tax";
             rPTToolStripMenuItem.Click += rPTToolStripMenuItem_Click;
             // 
             // aF5157ToolStripMenuItem
             // 
             aF5157ToolStripMenuItem.Name = "aF5157ToolStripMenuItem";
-            aF5157ToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF5157ToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
             aF5157ToolStripMenuItem.Text = "AF 51 && 57 OR and  Slaughter Permit && Fee";
             aF5157ToolStripMenuItem.Click += aF5157ToolStripMenuItem_Click;
             // 
             // aF54ToolStripMenuItem
             // 
             aF54ToolStripMenuItem.Name = "aF54ToolStripMenuItem";
-            aF54ToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF54ToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
             aF54ToolStripMenuItem.Text = "AF 54 - Marriage License";
             aF54ToolStripMenuItem.Click += aF54ToolStripMenuItem_Click;
             // 
             // aF58BurialPermitToolStripMenuItem
             // 
             aF58BurialPermitToolStripMenuItem.Name = "aF58BurialPermitToolStripMenuItem";
-            aF58BurialPermitToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            aF58BurialPermitToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
             aF58BurialPermitToolStripMenuItem.Text = "AF 58 - Burial Permit && Fee ";
             aF58BurialPermitToolStripMenuItem.Click += aF58BurialPermitToolStripMenuItem_Click;
             // 
             // aF53CattleToolStripMenuItem
             // 
             aF53CattleToolStripMenuItem.Name = "aF53CattleToolStripMenuItem";
-            aF53CattleToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Cattle Ownership ";
+            aF53CattleToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
+            aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Ownership of Large Cattle";
             aF53CattleToolStripMenuItem.Click += aF53CattleToolStripMenuItem_Click;
             // 
             // paymentHistoryToolStripMenuItem
@@ -1283,20 +1298,6 @@
             imageList1.ImageSize = new System.Drawing.Size(16, 16);
             imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // helpToolStripMenuItem
-            // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutLocalFinanceSystemToolStripMenuItem });
-            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutLocalFinanceSystemToolStripMenuItem
-            // 
-            aboutLocalFinanceSystemToolStripMenuItem.Name = "aboutLocalFinanceSystemToolStripMenuItem";
-            aboutLocalFinanceSystemToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            aboutLocalFinanceSystemToolStripMenuItem.Text = "About Local Finance System...";
-            aboutLocalFinanceSystemToolStripMenuItem.Click += aboutLocalFinanceSystemToolStripMenuItem_Click;
-            // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblUserFullName, toolStripStatusLabel2, lblUserRole, toolStripStatusLabel4, lblVersion });
@@ -1329,7 +1330,7 @@
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(941, 17);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(972, 17);
             toolStripStatusLabel4.Spring = true;
             // 
             // lblVersion
@@ -1337,6 +1338,13 @@
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new System.Drawing.Size(72, 17);
             lblVersion.Text = "Version 0.0.0";
+            // 
+            // aF52CattleTransferToolStripMenuItem
+            // 
+            aF52CattleTransferToolStripMenuItem.Name = "aF52CattleTransferToolStripMenuItem";
+            aF52CattleTransferToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
+            aF52CattleTransferToolStripMenuItem.Text = "AF 52 - Certificate of Record of Transfer of Large Cattle";
+            aF52CattleTransferToolStripMenuItem.Click += aF52CattleTransferToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1541,5 +1549,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
+        private System.Windows.Forms.ToolStripMenuItem aF52CattleTransferToolStripMenuItem;
     }
 }

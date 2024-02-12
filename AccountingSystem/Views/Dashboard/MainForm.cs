@@ -54,6 +54,7 @@ using AccountingSystem.Views.Manage.Registry;
 using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 using AccountingSystem.Views.Help;
+using AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -515,10 +516,6 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmDisbursingOfficer().ShowDialog();
         }
 
-        private void menureceipts_Click(object sender, EventArgs e)
-        {
-        }
-
         private void issueRecieptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmReceiptsIssued().ShowDialog();
@@ -754,6 +751,15 @@ namespace AccountingSystem.Views.Dashboard
             var frmUpdatess = new frmAbout();
             frmUpdatess.Show();
             frmUpdatess.TopMost = true;
+        }
+
+        private void aF52CattleTransferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCattleTransfer().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

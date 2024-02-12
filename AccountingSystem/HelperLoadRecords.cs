@@ -2118,6 +2118,7 @@ namespace AccountingSystem
             string searchKey = comboBox.Text.Trim();
             comboBox.DropDownHeight = 200;
 
+            comboBox.DataSource = null;
             filteredDtbl.Rows.Clear();
 
             DataRow[] filteredRows = dataTable.Select($"{displayMember} LIKE '%{searchKey}%'");

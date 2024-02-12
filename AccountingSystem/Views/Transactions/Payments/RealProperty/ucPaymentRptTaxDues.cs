@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.DataSets;
 using AccountingSystem.Views.Shared;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.RealProperty
@@ -268,14 +270,14 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             };
         }
 
-        private DataTable DataTableTaxDues(int taxPayersId, List<string> completeArpNoList)
+        private DataTable DataTableTaxDues(int taxPayersId, int calendarYear, List<string> completeArpNoList)
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsTaxDues());
 
             foreach (string completeArpNo in completeArpNoList)
             {
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, completeArpNo, chckShowPaidUnpaid.Checked);
+                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, calendarYear, completeArpNo, chckShowPaidUnpaid.Checked);
                 foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
                     decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
@@ -368,7 +370,8 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     completeArpNoList.Add(row.Cells["complete_arp_no"].Value.ToString());
             }
 
-            HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayerId, completeArpNoList));
+            int calendarYear = (int)nudCalendarYear.Value;
+            HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayerId, calendarYear, completeArpNoList));
             LoadColorStatus(dgTaxDues);
             chckBxTaxDues.Checked = false;
             txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
@@ -453,7 +456,20 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)
         {
-            LoadTaxDues(dgTaxDues);
+            try
+            {
+                LoadTaxDues(dgTaxDues);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void nudCalendarYear_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadTaxDues(dgTaxDues);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -45,8 +45,10 @@
             panel4 = new System.Windows.Forms.Panel();
             chckBxTaxDues = new System.Windows.Forms.CheckBox();
             dgTaxDues = new System.Windows.Forms.DataGridView();
-            flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            panel2 = new System.Windows.Forms.Panel();
             chckShowPaidUnpaid = new System.Windows.Forms.CheckBox();
+            nudCalendarYear = new System.Windows.Forms.NumericUpDown();
+            label2 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
             label1 = new System.Windows.Forms.Label();
             txtTotalDue = new System.Windows.Forms.TextBox();
@@ -61,7 +63,8 @@
             groupBox3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgTaxDues).BeginInit();
-            flowLayoutPanel5.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudCalendarYear).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -205,7 +208,7 @@
             // 
             panel4.Controls.Add(chckBxTaxDues);
             panel4.Controls.Add(dgTaxDues);
-            panel4.Controls.Add(flowLayoutPanel5);
+            panel4.Controls.Add(panel2);
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             panel4.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel4.Location = new System.Drawing.Point(2, 22);
@@ -265,28 +268,47 @@
             dgTaxDues.CurrentCellDirtyStateChanged += dgTaxDues_CurrentCellDirtyStateChanged;
             dgTaxDues.Validating += dgTaxDues_Validating;
             // 
-            // flowLayoutPanel5
+            // panel2
             // 
-            flowLayoutPanel5.Controls.Add(chckShowPaidUnpaid);
-            flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new System.Drawing.Size(591, 30);
-            flowLayoutPanel5.TabIndex = 1;
+            panel2.Controls.Add(chckShowPaidUnpaid);
+            panel2.Controls.Add(nudCalendarYear);
+            panel2.Controls.Add(label2);
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(591, 30);
+            panel2.TabIndex = 4;
             // 
             // chckShowPaidUnpaid
             // 
+            chckShowPaidUnpaid.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chckShowPaidUnpaid.AutoSize = true;
-            chckShowPaidUnpaid.Location = new System.Drawing.Point(477, 5);
+            chckShowPaidUnpaid.Location = new System.Drawing.Point(477, 6);
             chckShowPaidUnpaid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 3);
             chckShowPaidUnpaid.Name = "chckShowPaidUnpaid";
             chckShowPaidUnpaid.Size = new System.Drawing.Size(110, 19);
-            chckShowPaidUnpaid.TabIndex = 3;
+            chckShowPaidUnpaid.TabIndex = 6;
             chckShowPaidUnpaid.Text = "Show Paid Dues";
             chckShowPaidUnpaid.UseVisualStyleBackColor = true;
-            chckShowPaidUnpaid.CheckedChanged += chckShowPaidUnpaid_CheckedChanged;
+            // 
+            // nudCalendarYear
+            // 
+            nudCalendarYear.Location = new System.Drawing.Point(39, 4);
+            nudCalendarYear.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            nudCalendarYear.Name = "nudCalendarYear";
+            nudCalendarYear.Size = new System.Drawing.Size(78, 23);
+            nudCalendarYear.TabIndex = 7;
+            nudCalendarYear.Value = new decimal(new int[] { 2024, 0, 0, 0 });
+            nudCalendarYear.ValueChanged += nudCalendarYear_ValueChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(4, 7);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(29, 15);
+            label2.TabIndex = 8;
+            label2.Text = "Year";
             // 
             // panel1
             // 
@@ -340,8 +362,9 @@
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgTaxDues).EndInit();
-            flowLayoutPanel5.ResumeLayout(false);
-            flowLayoutPanel5.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudCalendarYear).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -358,12 +381,14 @@
         internal System.Windows.Forms.Panel panel4;
         internal System.Windows.Forms.CheckBox chckBxTaxDues;
         internal System.Windows.Forms.DataGridView dgTaxDues;
-        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtTotalDue;
-        private System.Windows.Forms.CheckBox chckShowPaidUnpaid;
         internal System.Windows.Forms.CheckBox chckBoxProperties;
         internal System.Windows.Forms.DataGridView dgProperties;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox chckShowPaidUnpaid;
+        private System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.NumericUpDown nudCalendarYear;
     }
 }

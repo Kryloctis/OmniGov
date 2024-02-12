@@ -45,6 +45,7 @@
             radTaxpayer = new System.Windows.Forms.RadioButton();
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
@@ -263,6 +264,14 @@
             radPayment.Text = "Payment";
             radPayment.UseVisualStyleBackColor = true;
             // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
             // frmPaymentRpt
             // 
             AcceptButton = btnNext;
@@ -310,5 +319,6 @@
         private ucPayment ucPayment1;
         private RealProperty.ucPaymentTaxpayers ucPaymentTaxpayers1;
         private RealProperty.ucPaymentRptTaxDues ucPaymentRptTaxDues1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

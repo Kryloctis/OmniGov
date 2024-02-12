@@ -25,10 +25,10 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
         {
             LoadOwners();
             LoadCattle();
-            nudAge.Value = 0;
+            nudAge.Value = nudAge.Minimum;
+            nudYears.Value = nudYears.Minimum;
             radCattleMale.Checked = true;
             txtDescription.Clear();
-            nudPrice.Value = 0;
         }
 
         internal CattleOwnershipModel CattleOwnershipModel()
@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                 CattleAge = (int)nudAge.Value,
                 CattleName = cmbxType.Text.Trim(),
                 CattleSex = radCattleMale.Checked ? "Male" : "Female",
-                CattlePrice = nudPrice.Value,
+                CattleYears = (int)nudAge.Value,
                 Description = txtDescription.Text.Trim(),
                 CreatedBy = Helper.UserId,
             };
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             {
                 errorProvider1.GetError(cmbxType),
                 errorProvider1.GetError(txtDescription),
-                errorProvider1.GetError(nudPrice),
+                errorProvider1.GetError(nudYears),
                 errorProvider1.GetError(cmbxOwner),
             };
 
@@ -80,24 +80,14 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             Helper.ClearErrorComboBox(errorProvider1, cmbxType);
         }
 
-        private void txtDescription_Validating(object sender, CancelEventArgs e)
+        private void nudYears_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYears, "Price");
         }
 
-        private void txtDescription_Validated(object sender, EventArgs e)
+        private void nudYears_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
-        }
-
-        private void nudPrice_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudPrice, "Price") || Helper.ShowErrorNumericUpDownZero(errorProvider1, nudPrice, "Price");
-        }
-
-        private void nudPrice_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudPrice);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudYears);
         }
 
         private bool OwnerValidated(ErrorProvider errorProvider, ComboBox comboBox)

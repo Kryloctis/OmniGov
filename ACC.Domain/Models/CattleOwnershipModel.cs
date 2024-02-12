@@ -8,8 +8,8 @@
         public string CattleName { get; set; }
         public string CattleSex { get; set; }
         public int CattleAge { get; set; }
+        public int CattleYears { get; set; }
         public string Description { get; set; }
-        public decimal CattlePrice { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
     }
