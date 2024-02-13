@@ -577,7 +577,7 @@
               <BackgroundColor>=IIF(Parameters!paramIsCash.Value = true, "Black", "Transparent")</BackgroundColor>
             </Style>
           </Rectangle>
-          <Rectangle Name="chckbxCash2">
+          <Rectangle Name="chckbxCheck">
             <KeepTogether>true</KeepTogether>
             <Top>6.63807in</Top>
             <Left>0.25921in</Left>
@@ -591,7 +591,7 @@
               <BackgroundColor>=IIF(Parameters!paramIsCheck.Value = true, "Black", "Transparent")</BackgroundColor>
             </Style>
           </Rectangle>
-          <Rectangle Name="chckbxCash3">
+          <Rectangle Name="chckbxMoneyOrder">
             <KeepTogether>true</KeepTogether>
             <Top>6.85613in</Top>
             <Left>0.2566in</Left>
@@ -633,8 +633,9 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramTransactionDate">
-      <DataType>DateTime</DataType>
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramAgency">
