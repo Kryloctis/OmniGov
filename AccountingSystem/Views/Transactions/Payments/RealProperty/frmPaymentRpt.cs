@@ -155,7 +155,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
             var frmPreviewReceipt = new frmRealPropertyReceipt();
-
             var receiptParameters = new frmRealPropertyReceipt.AF56Parameters()
             {
                 TaxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId(),
