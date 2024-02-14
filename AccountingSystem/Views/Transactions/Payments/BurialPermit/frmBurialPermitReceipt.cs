@@ -14,6 +14,9 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             Helper.LoadFormIcon(this);
             panel1.Controls.Add(reportViewer1);
             reportViewer1.Dock = DockStyle.Fill;
+            reportViewer1.ZoomPercent = 100;
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ShowPrintButton = false;
         }
 
         internal class AF58Parameters
@@ -80,8 +83,6 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             });
 
             reportViewer1.RefreshReport();
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         internal async void OnLoad(AF58Parameters parameters)

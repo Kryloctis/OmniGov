@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Documents\updateLog.txt" />
+    <None Remove="Receipts\AF54.rdlc" />
     <None Remove="Receipts\AF56.rdlc" />
     <None Remove="Receipts\AF58.rdlc" />
     <None Remove="Reports\1.rdlc" />
@@ -253,5 +254,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Dashboard\TreasuryDashboard\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Receipts\AF54.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

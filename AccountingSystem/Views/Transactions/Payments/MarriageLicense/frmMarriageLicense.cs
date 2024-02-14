@@ -204,18 +204,50 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
-                    {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        ResetForm();
-                        return;
-                    }
+                    //if (ConfirmPayment())
+                    //{
+                    Helper.MessageBoxSuccess("Payment has been saved");
+                    LoadReceipt();
+                    ResetForm();
                     return;
+                    //}
+                    //return;
                 }
 
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReceipt()
+        {
+            int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
+            int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
+
+            var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
+            var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
+
+            string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
+
+            string brideName = Helper.GenerateFullName(string.Empty, dictBrideInfo["first_name"], dictBrideInfo["middle_name"], dictBrideInfo["last_name"], string.Empty);
+
+            var af54ReceiptParameters = new frmMarriageLicenseReceipt.AF54Parameters()
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
+                RegistryNo = ucMarriageDetails.GetMarriageDetails().registryNo,
+                DateIssued = ucMarriageDetails.GetMarriageDetails().issuedOn,
+                GroomName = groomName,
+                GroomAge = ucSpouseInfoGroom.GetSpouseInfo().age.ToString(),
+                GroomMonths = ucSpouseInfoGroom.GetSpouseInfo().months.ToString(),
+                BrideName = brideName,
+                BrideAge = ucSpouseInfoBride.GetSpouseInfo().age.ToString(),
+                BrideMonths = ucSpouseInfoBride.GetSpouseInfo().months.ToString()
+            };
+
+            var frmAF54Receipt = new frmMarriageLicenseReceipt();
+            frmAF54Receipt.OnLoad(af54ReceiptParameters);
+            frmAF54Receipt.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

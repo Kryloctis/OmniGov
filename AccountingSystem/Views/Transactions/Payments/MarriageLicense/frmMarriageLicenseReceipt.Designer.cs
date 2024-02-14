@@ -1,6 +1,6 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
+﻿namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 {
-    partial class frmBurialPermitReceipt
+    partial class frmMarriageLicenseReceipt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            btnPrint = new System.Windows.Forms.ToolStripButton();
             panel1 = new System.Windows.Forms.Panel();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnPrint = new System.Windows.Forms.ToolStripButton();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             toolStrip1.SuspendLayout();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 35);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(534, 554);
+            panel1.TabIndex = 7;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 589);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(534, 22);
+            statusStrip1.TabIndex = 8;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStrip1
             // 
@@ -46,7 +63,7 @@
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
             toolStrip1.Size = new System.Drawing.Size(534, 35);
-            toolStrip1.TabIndex = 1;
+            toolStrip1.TabIndex = 6;
             toolStrip1.Text = "toolStrip1";
             // 
             // btnPrint
@@ -59,23 +76,6 @@
             btnPrint.Text = "Print";
             btnPrint.Click += btnPrint_Click;
             // 
-            // panel1
-            // 
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 35);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(534, 554);
-            panel1.TabIndex = 4;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 589);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(534, 22);
-            statusStrip1.TabIndex = 5;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // reportViewer1
             // 
             reportViewer1.Location = new System.Drawing.Point(0, 0);
@@ -84,11 +84,10 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // frmBurialPermitReceipt
+            // frmMarriageLicenseReceipt
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(534, 611);
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
@@ -96,10 +95,10 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmBurialPermitReceipt";
+            Name = "frmMarriageLicenseReceipt";
             ShowIcon = false;
             ShowInTaskbar = false;
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Print Receipt";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -109,10 +108,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnPrint;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }
