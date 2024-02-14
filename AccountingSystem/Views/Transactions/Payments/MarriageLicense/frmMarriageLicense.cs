@@ -204,14 +204,14 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    //if (ConfirmPayment())
-                    //{
-                    Helper.MessageBoxSuccess("Payment has been saved");
-                    LoadReceipt();
-                    ResetForm();
+                    if (ConfirmPayment())
+                    {
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
+                        ResetForm();
+                        return;
+                    }
                     return;
-                    //}
-                    //return;
                 }
 
                 tabControlMain.SelectedIndex++;

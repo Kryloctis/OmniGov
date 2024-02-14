@@ -192,7 +192,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 {
                     if (ConfirmPayment())
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
                         LoadReceipt();
                         ResetForm();
                         return;

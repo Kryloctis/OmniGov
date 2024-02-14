@@ -15,6 +15,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         public frmRealPropertyReceipt()
         {
             InitializeComponent();
+            reportViewer1.ShowFindControls = false;
+            reportViewer1.ShowExportButton = false;
+            reportViewer1.ShowPrintButton = false;
+            reportViewer1.ShowDocumentMapButton = false;
+            reportViewer1.ShowStopButton = false;
             reportViewer1.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer1);
         }

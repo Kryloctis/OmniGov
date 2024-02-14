@@ -12,11 +12,13 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            panel1.Controls.Add(reportViewer1);
-            reportViewer1.Dock = DockStyle.Fill;
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ShowFindControls = false;
+            reportViewer1.ShowExportButton = false;
             reportViewer1.ShowPrintButton = false;
+            reportViewer1.ShowDocumentMapButton = false;
+            reportViewer1.ShowStopButton = false;
+            reportViewer1.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer1);
         }
 
         internal class AF54Parameters
@@ -66,6 +68,8 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             });
 
             reportViewer1.RefreshReport();
+            reportViewer1.ZoomPercent = 100;
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

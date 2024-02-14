@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Windows.Forms;
 
@@ -147,7 +148,8 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                 {
                     if (ConfirmPayment())
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
                         ResetForm();
                         return;
                     }
@@ -158,6 +160,32 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReceipt()
+        {
+            var frmAF53Receipt = new frmCattleOwnershipReceipt();
+            var taxpayerId = ucCattleOwnership.CattleOwnershipModel().TaxpayerId;
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+
+            var reportParameters = new frmCattleOwnershipReceipt.AF53Parameters
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
+                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
+                OwnerName = dictTaxpayer["taxpayers_name"],
+                OwnerMunicipality = dictTaxpayer["taxpayers_municipality"],
+                OwnerProvince = dictTaxpayer["taxpayers_province"],
+                CattleName = ucCattleOwnership.CattleOwnershipModel().CattleName,
+                CattleAge = ucCattleOwnership.CattleOwnershipModel().CattleAge,
+                CattleSex = ucCattleOwnership.CattleOwnershipModel().CattleSex,
+                MunicipalTreasurerName = string.Empty,
+                MunicipalSecretaryName = string.Empty,
+                MunicipalMayor = string.Empty,
+            };
+
+            frmAF53Receipt.OnLoad(reportParameters);
+            frmAF53Receipt.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

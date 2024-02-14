@@ -18,7 +18,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -31,10 +33,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox3">
@@ -50,7 +48,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -64,10 +64,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox4">
@@ -83,7 +79,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -97,10 +95,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox5">
@@ -117,7 +111,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -131,10 +127,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox6">
@@ -151,7 +143,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -165,10 +159,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox7">
@@ -184,7 +174,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -198,10 +190,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox8">
@@ -261,10 +249,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox9">
@@ -296,10 +280,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox10">
@@ -315,7 +295,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -329,10 +311,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox11">
@@ -348,7 +326,9 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -362,10 +342,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox14">
@@ -397,10 +373,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox15">
@@ -432,10 +404,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox16">
@@ -467,10 +435,6 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
-              <PaddingLeft>1pt</PaddingLeft>
-              <PaddingRight>1pt</PaddingRight>
-              <PaddingTop>1pt</PaddingTop>
-              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
@@ -487,10 +451,8 @@
       </Body>
       <Width>6.39in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>9.76in</PageHeight>
+        <PageWidth>6.39in</PageWidth>
         <Style />
       </Page>
     </ReportSection>
