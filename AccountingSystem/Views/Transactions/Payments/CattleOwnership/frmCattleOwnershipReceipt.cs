@@ -51,18 +51,18 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramMunicipality", aF53Parameters.Municipality),
-                    new ReportParameter("paramProvince", aF53Parameters.Province),
-                    new ReportParameter("paramTransactionDate", aF53Parameters.TransactionDate.ToString()),
-                    new ReportParameter("paramOwnerName", aF53Parameters.OwnerName),
-                    new ReportParameter("paramOwnerMunicipality", aF53Parameters.OwnerMunicipality),
-                    new ReportParameter("paramOwnerProvince", aF53Parameters.OwnerProvince),
-                    new ReportParameter("paramCattleName", aF53Parameters.CattleName),
-                    new ReportParameter("paramCattleSex", aF53Parameters.CattleSex),
-                    new ReportParameter("paramCattleAge", aF53Parameters.CattleAge.ToString()),
-                    new ReportParameter("paramMunicipalTreasurerName", aF53Parameters.MunicipalTreasurerName),
-                    new ReportParameter("paramMunicipalSecretaryName", aF53Parameters.MunicipalSecretaryName),
-                    new ReportParameter("paramMunicipalMayor", aF53Parameters.MunicipalMayor)
+                        new ReportParameter("paramMunicipality", aF53Parameters.Municipality),
+                        new ReportParameter("paramProvince", aF53Parameters.Province),
+                        new ReportParameter("paramTransactionDate", aF53Parameters.TransactionDate.ToString()),
+                        new ReportParameter("paramOwnerName", aF53Parameters.OwnerName),
+                        new ReportParameter("paramOwnerMunicipality", aF53Parameters.OwnerMunicipality),
+                        new ReportParameter("paramOwnerProvince", aF53Parameters.OwnerProvince),
+                        new ReportParameter("paramCattleName", aF53Parameters.CattleName),
+                        new ReportParameter("paramCattleSex", aF53Parameters.CattleSex),
+                        new ReportParameter("paramCattleAge", aF53Parameters.CattleAge.ToString()),
+                        new ReportParameter("paramMunicipalTreasurerName", aF53Parameters.MunicipalTreasurerName),
+                        new ReportParameter("paramMunicipalSecretaryName", aF53Parameters.MunicipalSecretaryName),
+                        new ReportParameter("paramMunicipalMayor", aF53Parameters.MunicipalMayor)
                 };
 
                 localReport.ReportPath = $"{Application.StartupPath}\\Receipts\\AF53.rdlc";

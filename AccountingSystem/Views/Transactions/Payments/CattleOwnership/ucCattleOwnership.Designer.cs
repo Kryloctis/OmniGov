@@ -123,9 +123,9 @@
             label10.AutoSize = true;
             label10.Location = new System.Drawing.Point(1, 155);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(72, 15);
+            label10.Size = new System.Drawing.Size(67, 15);
             label10.TabIndex = 8;
-            label10.Text = "Description*";
+            label10.Text = "Description";
             // 
             // label8
             // 

@@ -41,6 +41,42 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             };
         }
 
+        internal (string oldOwnerName,
+                string oldOwnerAddress,
+                string oldOwnerMunicipality,
+                string oldOwnerProvince,
+                string newOwnerName,
+                string newOwnerAddress,
+                string newOwnerMunicipality,
+                string newOwnerProvince,
+                string cattleName,
+                string cattleSex,
+                int cattleAge,
+                int cattleYears,
+                string cattleDescripion,
+                DateTime dateTransfer,
+                decimal amountPurchase) GetCattleTransferReceiptContent()
+        {
+            var dictOldOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxOldOwner.SelectedValue));
+            var dictNewOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxNewOwner.SelectedValue));
+
+            return (oldOwnerName: dictOldOwner["taxpayers_name"],
+                    oldOwnerAddress: dictOldOwner["taxpayers_address"],
+                    oldOwnerMunicipality: dictOldOwner["taxpayers_municipality"],
+                    oldOwnerProvince: dictOldOwner["taxpayers_province"],
+                    newOwnerName: dictNewOwner["taxpayers_name"],
+                    newOwnerAddress: dictNewOwner["taxpayers_address"],
+                    newOwnerMunicipality: dictNewOwner["taxpayers_municipality"],
+                    newOwnerProvince: dictNewOwner["taxpayers_province"],
+                    cattleName: cmbxCattle.Text.Trim(),
+                    cattleSex: radIsCattleMale.Checked ? "Male" : "Female",
+                    cattleAge: (int)nudCattleAge.Value,
+                    cattleYears: (int)nudCattleYears.Value,
+                    cattleDescripion: txtDescription.Text.Trim(),
+                    dateTransfer: dtTransfer.Value,
+                    amountPurchase: nudAmountOfPurchase.Value);
+        }
+
         internal void OnLoad()
         {
             LoadOwners(cmbxOldOwner);

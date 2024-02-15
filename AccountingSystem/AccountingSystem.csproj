@@ -28,6 +28,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Documents\updateLog.txt" />
+    <None Remove="Receipts\AF51.rdlc" />
+    <None Remove="Receipts\AF52.rdlc" />
     <None Remove="Receipts\AF53.rdlc" />
     <None Remove="Receipts\AF54.rdlc" />
     <None Remove="Receipts\AF56.rdlc" />
@@ -72,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\updateLog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Receipts\AF51.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Receipts\AF52.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Receipts\AF53.rdlc">
