@@ -228,18 +228,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\Manage\RealProperties\ucRealProperties.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsAdd.cs" />
+    <Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsEdit.cs" />
+    <Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs" />
+    <Compile Update="Views\Manage\RealProperties\ucRealProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             Controls.Add(progressBar1);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "frmRealPropertyReceipt";
