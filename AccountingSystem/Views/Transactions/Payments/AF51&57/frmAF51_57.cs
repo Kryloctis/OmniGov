@@ -118,7 +118,7 @@ public partial class frmAF51_57 : Form
             {
                 //if (ConfirmPayment())
                 //{
-                Helper.MessageBoxSuccess("Payment has been saved");
+                Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
                 LoadReceipt();
                 ResetForm();
                 return;

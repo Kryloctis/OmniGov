@@ -1177,8 +1177,9 @@
             <Style>None</Style>
           </Border>
           <BackgroundImage>
-            <Source>Embedded</Source>
-            <Value>AF56</Value>
+            <Source>Database</Source>
+            <Value>=Parameters!paramBackground.Value</Value>
+            <MIMEType>image/jpeg</MIMEType>
           </BackgroundImage>
         </Style>
       </Body>
@@ -1275,6 +1276,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramBackground">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1350,6 +1357,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>paramBankDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramBackground</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

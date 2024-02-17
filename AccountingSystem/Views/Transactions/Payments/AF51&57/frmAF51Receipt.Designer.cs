@@ -74,6 +74,7 @@
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new System.Drawing.Size(56, 24);
             btnPrint.Text = "Print";
+            btnPrint.Click += btnPrint_Click;
             // 
             // reportViewer1
             // 
