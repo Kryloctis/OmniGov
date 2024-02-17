@@ -1,6 +1,8 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using AccountingSystem.Properties;
+using Microsoft.Reporting.WinForms;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,17 +10,23 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 {
     public partial class frmBurialPermitReceipt : Form
     {
+        private ReportViewer reportViewerReceipt;
+
         public frmBurialPermitReceipt()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer1.ShowFindControls = false;
-            reportViewer1.ShowExportButton = false;
-            reportViewer1.ShowPrintButton = false;
-            reportViewer1.ShowDocumentMapButton = false;
-            reportViewer1.ShowStopButton = false;
-            reportViewer1.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer1);
+            reportViewerPreview.ShowFindControls = false;
+            reportViewerPreview.ShowExportButton = false;
+            reportViewerPreview.ShowPrintButton = false;
+            reportViewerPreview.ShowDocumentMapButton = false;
+            reportViewerPreview.ShowStopButton = false;
+            reportViewerPreview.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerPreview);
+
+            reportViewerReceipt = new ReportViewer();
+            reportViewerReceipt.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerReceipt);
         }
 
         internal class AF58Parameters
@@ -50,12 +58,14 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         {
             await Task.Run(() =>
             {
-                var localReport = reportViewer1.LocalReport;
-                localReport.EnableExternalImages = true;
+                var localReportPreview = reportViewerPreview.LocalReport;
+                var localReportReceipt = reportViewerReceipt.LocalReport;
+                localReportPreview.EnableExternalImages = true;
                 string isInfectious = parameters.IsInfectious ? "Infectious" : "Non-Infectious";
                 string isEmbalmed = parameters.IsEmbalmed ? "Embalmed" : "None";
+                var backgroundImage = new Bitmap(Resources.AF58);
 
-                var reportParameters = new ReportParameter[]
+                var reportParameters = new List<ReportParameter>
                 {
                     new ReportParameter("paramMunicipality", parameters.Municipality),
                     new ReportParameter("paramTransactionDate", parameters.TransactionDate.ToString()),
@@ -77,16 +87,25 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                     new ReportParameter("paramMunicipalFeeNo", parameters.MunicipalFeeNo),
                     new ReportParameter("paramMunicipalFeeDate", parameters.MunicipalFeeDate),
                     new ReportParameter("paramMunicipalFeeAmount", parameters.MunicipalFeeAmount),
-                    new ReportParameter("paramCollectingOfficerName", parameters.CollectingOfficerName)
+                    new ReportParameter("paramCollectingOfficerName", parameters.CollectingOfficerName),
+                    new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Receipts\\AF58.rdlc";
-                localReport.SetParameters(reportParameters);
+                localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF58.rdlc";
+                localReportPreview.SetParameters(reportParameters);
+
+                localReportReceipt.ReportPath = $"{Application.StartupPath}\\Receipts\\AF58.rdlc";
+                reportParameters.RemoveAll(param => param.Name == "paramBackground");
+                localReportReceipt.SetParameters(reportParameters);
             });
 
-            reportViewer1.RefreshReport();
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewerPreview.RefreshReport();
+            reportViewerPreview.ZoomPercent = 100;
+            reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
+
+            reportViewerReceipt.RefreshReport();
+            reportViewerReceipt.ZoomPercent = 100;
+            reportViewerReceipt.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         internal async void OnLoad(AF58Parameters parameters)
@@ -98,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         {
             try
             {
-                reportViewer1.PrintDialog();
+                reportViewerReceipt.PrintDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

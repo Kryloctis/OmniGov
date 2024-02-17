@@ -32,7 +32,7 @@
             btnPrint = new System.Windows.Forms.ToolStripButton();
             panel1 = new System.Windows.Forms.Panel();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            reportViewerPreview = new Microsoft.Reporting.WinForms.ReportViewer();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,11 +78,11 @@
             // 
             // reportViewer1
             // 
-            reportViewer1.Location = new System.Drawing.Point(0, 0);
-            reportViewer1.Name = "ReportViewer";
-            reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.Size = new System.Drawing.Size(396, 246);
-            reportViewer1.TabIndex = 0;
+            reportViewerPreview.Location = new System.Drawing.Point(0, 0);
+            reportViewerPreview.Name = "ReportViewer";
+            reportViewerPreview.ServerReport.BearerToken = null;
+            reportViewerPreview.Size = new System.Drawing.Size(396, 246);
+            reportViewerPreview.TabIndex = 0;
             // 
             // frmBurialPermitReceipt
             // 
@@ -113,6 +113,6 @@
         private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerPreview;
     }
 }
