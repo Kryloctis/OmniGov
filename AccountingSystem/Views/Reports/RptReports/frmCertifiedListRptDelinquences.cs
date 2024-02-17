@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Reports.RptReports
 
                 e.Result = dataTable;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -198,7 +198,7 @@ namespace AccountingSystem.Views.Reports.RptReports
 
                 reportViewer.RefreshReport();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

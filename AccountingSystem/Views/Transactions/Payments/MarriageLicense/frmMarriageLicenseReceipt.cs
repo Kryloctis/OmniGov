@@ -1,5 +1,8 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using AccountingSystem.Properties;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static AccountingSystem.Views.Transactions.Payments.BurialPermit.frmBurialPermitReceipt;
@@ -8,17 +11,23 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 {
     public partial class frmMarriageLicenseReceipt : Form
     {
+        private ReportViewer reportViewerReceipt;
+
         public frmMarriageLicenseReceipt()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer1.ShowFindControls = false;
-            reportViewer1.ShowExportButton = false;
-            reportViewer1.ShowPrintButton = false;
-            reportViewer1.ShowDocumentMapButton = false;
-            reportViewer1.ShowStopButton = false;
-            reportViewer1.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer1);
+            reportViewerPreview.ShowFindControls = false;
+            reportViewerPreview.ShowExportButton = false;
+            reportViewerPreview.ShowPrintButton = false;
+            reportViewerPreview.ShowDocumentMapButton = false;
+            reportViewerPreview.ShowStopButton = false;
+            reportViewerPreview.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerPreview);
+
+            reportViewerReceipt = new ReportViewer();
+            reportViewerReceipt.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerReceipt);
         }
 
         internal class AF54Parameters
@@ -45,10 +54,12 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         {
             await Task.Run(() =>
             {
-                var localReport = reportViewer1.LocalReport;
-                localReport.EnableExternalImages = true;
+                var localReportPreview = reportViewerPreview.LocalReport;
+                var localReportReceipt = reportViewerReceipt.LocalReport;
+                localReportPreview.EnableExternalImages = true;
+                var backgroundImage = new Bitmap(Resources.AF54);
 
-                var reportParameters = new ReportParameter[]
+                var reportParameters = new List<ReportParameter>
                 {
                     new ReportParameter("paramMunicipality", parameters.Municipality),
                     new ReportParameter("paramProvince", parameters.Province),
@@ -60,23 +71,32 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                     new ReportParameter("paramBrideMonths", parameters.BrideMonths),
                     new ReportParameter("paramDateIssued", parameters.DateIssued.ToString()),
                     new ReportParameter("paramRegistryNo", parameters.RegistryNo),
-                    new ReportParameter("paramGroomResidence", parameters.GroomResidence)
+                    new ReportParameter("paramGroomResidence", parameters.GroomResidence),
+                    new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Receipts\\AF54.rdlc";
-                localReport.SetParameters(reportParameters);
+                localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF54.rdlc";
+                localReportPreview.SetParameters(reportParameters);
+
+                localReportReceipt.ReportPath = $"{Application.StartupPath}\\Receipts\\AF54.rdlc";
+                reportParameters.RemoveAll(param => param.Name == "paramBackground");
+                localReportReceipt.SetParameters(reportParameters);
             });
 
-            reportViewer1.RefreshReport();
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewerPreview.RefreshReport();
+            reportViewerPreview.ZoomPercent = 100;
+            reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
+
+            reportViewerReceipt.RefreshReport();
+            reportViewerReceipt.ZoomPercent = 100;
+            reportViewerReceipt.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try
             {
-                reportViewer1.PrintDialog();
+                reportViewerReceipt.PrintDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
