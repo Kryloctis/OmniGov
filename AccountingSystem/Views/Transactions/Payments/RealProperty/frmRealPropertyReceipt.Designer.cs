@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         /// </summary>
         private void InitializeComponent()
         {
-            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            reportViewerPreview = new Microsoft.Reporting.WinForms.ReportViewer();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnPrint = new System.Windows.Forms.ToolStripButton();
             panel1 = new System.Windows.Forms.Panel();
@@ -41,15 +41,15 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             // 
             // reportViewer1
             // 
-            reportViewer1.Location = new System.Drawing.Point(0, 0);
-            reportViewer1.Name = "ReportViewer";
-            reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.ShowExportButton = false;
-            reportViewer1.ShowFindControls = false;
-            reportViewer1.ShowPrintButton = false;
-            reportViewer1.ShowStopButton = false;
-            reportViewer1.Size = new System.Drawing.Size(396, 246);
-            reportViewer1.TabIndex = 0;
+            reportViewerPreview.Location = new System.Drawing.Point(0, 0);
+            reportViewerPreview.Name = "ReportViewer";
+            reportViewerPreview.ServerReport.BearerToken = null;
+            reportViewerPreview.ShowExportButton = false;
+            reportViewerPreview.ShowFindControls = false;
+            reportViewerPreview.ShowPrintButton = false;
+            reportViewerPreview.ShowStopButton = false;
+            reportViewerPreview.Size = new System.Drawing.Size(396, 246);
+            reportViewerPreview.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -123,7 +123,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Print Receipt";
-            Load += frmPreviewReceipt_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -132,7 +131,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerPreview;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.Panel panel1;

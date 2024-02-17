@@ -116,14 +116,14 @@ public partial class frmAF51_57 : Form
 
             if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
-                //if (ConfirmPayment())
-                //{
-                Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                LoadReceipt();
-                ResetForm();
+                if (ConfirmPayment())
+                {
+                    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                    LoadReceipt();
+                    ResetForm();
+                    return;
+                }
                 return;
-                //}
-                //return;
             }
 
             tabControlMain.SelectedIndex++;

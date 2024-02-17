@@ -12,22 +12,22 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
 {
     public partial class frmAF51Receipt : Form
     {
-        private ReportViewer reportViewer2;
+        private ReportViewer reportViewerReceipt;
 
         public frmAF51Receipt()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer1.ShowFindControls = false;
-            reportViewer1.ShowExportButton = false;
-            reportViewer1.ShowPrintButton = false;
-            reportViewer1.ShowDocumentMapButton = false;
-            reportViewer1.ShowStopButton = false;
-            reportViewer1.Dock = DockStyle.Fill;
-            reportViewer2 = new ReportViewer();
-            reportViewer2.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer1);
-            panel1.Controls.Add(reportViewer2);
+            reportViewerPreview.ShowFindControls = false;
+            reportViewerPreview.ShowExportButton = false;
+            reportViewerPreview.ShowPrintButton = false;
+            reportViewerPreview.ShowDocumentMapButton = false;
+            reportViewerPreview.ShowStopButton = false;
+            reportViewerPreview.Dock = DockStyle.Fill;
+            reportViewerReceipt = new ReportViewer();
+            reportViewerReceipt.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerPreview);
+            panel1.Controls.Add(reportViewerReceipt);
         }
 
         internal class AF51Parameters
@@ -58,10 +58,10 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
         {
             await Task.Run(() =>
             {
-                var localReportPreview = reportViewer1.LocalReport;
-                var localReportPrint = reportViewer2.LocalReport;
+                var localReportPreview = reportViewerPreview.LocalReport;
+                var localReportPrint = reportViewerReceipt.LocalReport;
                 localReportPreview.EnableExternalImages = true;
-                var bg = new Bitmap(Resources.AF51);
+                var backgroundImage = new Bitmap(Resources.AF51);
 
                 var reportParameters = new List<ReportParameter>
                 {
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
                     new ReportParameter("paramIsCash", aF51Parameters.IsCash.ToString()),
                     new ReportParameter("paramIsCheck", aF51Parameters.IsCheck.ToString()),
                     new ReportParameter("paramIsMoneyOrder", aF51Parameters.IsMoneyOrder.ToString()),
-                    new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(bg)))
+                    new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
                 };
 
                 localReportPreview.DataSources.Clear();
@@ -94,21 +94,20 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
                 localReportPrint.SetParameters(reportParameters);
             });
 
-            reportViewer1.RefreshReport();
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewerPreview.RefreshReport();
+            reportViewerPreview.ZoomPercent = 100;
+            reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
 
-
-            reportViewer2.RefreshReport();
-            reportViewer2.ZoomPercent = 100;
-            reportViewer2.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewerReceipt.RefreshReport();
+            reportViewerReceipt.ZoomPercent = 100;
+            reportViewerReceipt.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try
             {
-                reportViewer2.PrintDialog();
+                reportViewerReceipt.PrintDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
