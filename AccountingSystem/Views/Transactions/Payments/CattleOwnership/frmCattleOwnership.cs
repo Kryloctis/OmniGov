@@ -146,15 +146,15 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
-                    {
+                    //if (ConfirmPayment())
+                    //{
                         Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
                         LoadReceipt();
                         ResetForm();
                         return;
-                    }
+                    //}
 
-                    return;
+                    //return;
                 }
 
                 tabControlMain.SelectedIndex++;
