@@ -88,6 +88,10 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             reportViewerPreview.RefreshReport();
             reportViewerPreview.ZoomPercent = 100;
             reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
+
+            reportViewerPrint.RefreshReport();
+            reportViewerPrint.ZoomPercent = 100;
+            reportViewerPrint.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

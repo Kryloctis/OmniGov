@@ -131,10 +131,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -146,15 +143,17 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    //if (ConfirmPayment())
-                    //{
-                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                        LoadReceipt();
-                        ResetForm();
-                        return;
-                    //}
-
-                    //return;
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
+                    {
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
+                    }
+                    return;
                 }
 
                 tabControlMain.SelectedIndex++;

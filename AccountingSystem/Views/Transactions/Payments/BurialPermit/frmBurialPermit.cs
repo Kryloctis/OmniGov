@@ -176,9 +176,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -190,12 +188,15 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                        LoadReceipt();
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
                     return;
                 }

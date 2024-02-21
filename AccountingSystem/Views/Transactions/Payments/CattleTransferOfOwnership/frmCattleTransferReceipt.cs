@@ -1,5 +1,8 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using AccountingSystem.Properties;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,17 +10,23 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 {
     public partial class frmCattleTransferReceipt : Form
     {
+        private ReportViewer reportViewerPrint;
+
         public frmCattleTransferReceipt()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer1.ShowFindControls = false;
-            reportViewer1.ShowExportButton = false;
-            reportViewer1.ShowPrintButton = false;
-            reportViewer1.ShowDocumentMapButton = false;
-            reportViewer1.ShowStopButton = false;
-            reportViewer1.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer1);
+            reportViewerPreview.ShowFindControls = false;
+            reportViewerPreview.ShowExportButton = false;
+            reportViewerPreview.ShowPrintButton = false;
+            reportViewerPreview.ShowDocumentMapButton = false;
+            reportViewerPreview.ShowStopButton = false;
+            reportViewerPreview.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerPreview);
+
+            reportViewerPrint = new ReportViewer();
+            reportViewerPrint.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewerPrint);
         }
 
         internal class AF52Parameters
@@ -53,10 +62,13 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
         {
             await Task.Run(() =>
             {
-                var localReport = reportViewer1.LocalReport;
-                localReport.EnableExternalImages = true;
+                var localReportPreview = reportViewerPreview.LocalReport;
+                var localReportPrint = reportViewerPrint.LocalReport;
 
-                var reportParameters = new ReportParameter[]
+                localReportPreview.EnableExternalImages = true;
+                var backgroundImage = new Bitmap(Resources.AF52);
+
+                var reportParameters = new List<ReportParameter>
                 {
                     new ReportParameter("paramMunicipal", aF52Parameters.Municipality),
                     new ReportParameter("paramProvince", aF52Parameters.Province),
@@ -77,23 +89,32 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                     new ReportParameter("paramCattleYears", aF52Parameters.CattleYears.ToString()),
                     new ReportParameter("paramMunicipalMayorName", aF52Parameters.MunicipalMayor),
                     new ReportParameter("paramMunicipalSecretaryName", aF52Parameters.MunicipalSecretaryName),
-                    new ReportParameter("paramCurrentDate", aF52Parameters.CurrentDate.ToString())
+                    new ReportParameter("paramCurrentDate", aF52Parameters.CurrentDate.ToString()),
+                    new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
-                localReport.SetParameters(reportParameters);
+                localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
+                localReportPreview.SetParameters(reportParameters);
+
+                localReportPrint.ReportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
+                reportParameters.RemoveAll(param => param.Name == "paramBackground");
+                localReportPrint.SetParameters(reportParameters);
             });
 
-            reportViewer1.RefreshReport();
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewerPreview.RefreshReport();
+            reportViewerPreview.ZoomPercent = 100;
+            reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
+
+            reportViewerPrint.RefreshReport();
+            reportViewerPrint.ZoomPercent = 100;
+            reportViewerPrint.SetDisplayMode(DisplayMode.PrintLayout);
         }
 
         private void btnPrint_Click(object sender, System.EventArgs e)
         {
             try
             {
-                reportViewer1.PrintDialog();
+                reportViewerPrint.PrintDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

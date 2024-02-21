@@ -95,10 +95,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void LoadReceipt()
@@ -179,12 +176,15 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        LoadReceipt();
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
 
                     return;

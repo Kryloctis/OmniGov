@@ -67,10 +67,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void LoadMarriageDetailsTab()
@@ -204,12 +201,15 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                        LoadReceipt();
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
                     return;
                 }

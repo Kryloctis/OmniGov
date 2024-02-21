@@ -48,10 +48,7 @@ public partial class frmAF51_57 : Form
 
     private bool ConfirmPayment()
     {
-        if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-            return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-        return false;
+        return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
     }
 
     private bool TabValidated()
@@ -116,14 +113,17 @@ public partial class frmAF51_57 : Form
 
             if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
-                //if (ConfirmPayment())
-                //{
-                    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                    LoadReceipt();
-                    ResetForm();
-                    return;
-                //}
-                //return;
+                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
+                {
+                    if (ConfirmPayment())
+                    {
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
+                        ResetForm();
+                        return;
+                    }
+                }
+                return;
             }
 
             tabControlMain.SelectedIndex++;

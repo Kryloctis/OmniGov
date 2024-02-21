@@ -125,14 +125,16 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                        LoadReceipt();
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
-
                     return;
                 }
 
@@ -145,10 +147,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId, };
 
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
-
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
         }
 
         private void LoadReceipt()
