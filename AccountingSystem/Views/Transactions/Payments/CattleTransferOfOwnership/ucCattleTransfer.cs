@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
@@ -39,6 +40,42 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
                 CattlePrice = nudAmountOfPurchase.Value,
                 TransferDate = dtTransfer.Value,
             };
+        }
+
+        internal (string oldOwnerName,
+                string oldOwnerAddress,
+                string oldOwnerMunicipality,
+                string oldOwnerProvince,
+                string newOwnerName,
+                string newOwnerAddress,
+                string newOwnerMunicipality,
+                string newOwnerProvince,
+                string cattleName,
+                string cattleSex,
+                int cattleAge,
+                int cattleYears,
+                string cattleDescripion,
+                DateTime dateTransfer,
+                decimal amountPurchase) GetCattleTransferReceiptContent()
+        {
+            var dictOldOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxOldOwner.SelectedValue));
+            var dictNewOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxNewOwner.SelectedValue));
+
+            return (oldOwnerName: dictOldOwner["taxpayers_name"],
+                    oldOwnerAddress: dictOldOwner["taxpayers_address"],
+                    oldOwnerMunicipality: dictOldOwner["taxpayers_municipality"],
+                    oldOwnerProvince: dictOldOwner["taxpayers_province"],
+                    newOwnerName: dictNewOwner["taxpayers_name"],
+                    newOwnerAddress: dictNewOwner["taxpayers_address"],
+                    newOwnerMunicipality: dictNewOwner["taxpayers_municipality"],
+                    newOwnerProvince: dictNewOwner["taxpayers_province"],
+                    cattleName: cmbxCattle.Text.Trim(),
+                    cattleSex: radIsCattleMale.Checked ? "Male" : "Female",
+                    cattleAge: (int)nudCattleAge.Value,
+                    cattleYears: (int)nudCattleYears.Value,
+                    cattleDescripion: txtDescription.Text.Trim(),
+                    dateTransfer: dtTransfer.Value,
+                    amountPurchase: nudAmountOfPurchase.Value);
         }
 
         internal void OnLoad()
@@ -86,10 +123,6 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             return true;
         }
 
-        private void ucCattleTransferOfOwnership_Load(object sender, EventArgs e)
-        {
-        }
-
         private void LoadOwners(ComboBox comboBox)
         {
             var dtOwners = AccFactory.TaxpayersRepository().GetRecords();
@@ -135,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             {
                 e.Cancel = !ComboboxValueValidated(errorProvider1, cmbxCattle, "Cattle");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"cattle {ex.Message}"); }
         }
 
         private void cmbxCattle_Validated(object sender, EventArgs e)
@@ -145,7 +178,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         private void nudCattleAge_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudCattleAge, "Cattle Age");
+            try
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudCattleAge, "Cattle Age");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudCattleAge_Validated(object sender, EventArgs e)
@@ -155,7 +192,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         private void nudCattleYears_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudCattleYears, "Cattle Year");
+            try
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudCattleYears, "Cattle Year");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudCattleYears_Validated(object sender, EventArgs e)
@@ -179,7 +220,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         private void nudAmountOfPurchase_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmountOfPurchase, "Amount of Purchase");
+            try
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmountOfPurchase, "Amount of Purchase");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudAmountOfPurchase_Validated(object sender, EventArgs e)
@@ -225,8 +270,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         {
             try
             {
-                if (cmbxCattle.SelectedValue is int cattleId)
-                    LoadCattleDetails(cattleId);
+                if (cmbxCattle.SelectedValue is not int cattleId)
+                    return;
+
+                LoadCattleDetails(cattleId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

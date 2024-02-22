@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.SignIn
 
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmSignIn = frmSignIn;
         }
 

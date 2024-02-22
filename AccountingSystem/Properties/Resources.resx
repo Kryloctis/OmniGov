@@ -1189,4 +1189,22 @@
   <data name="disabled_folder_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\disabled-folder-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AF51" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF51.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AF54" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF54.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AF56" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF56.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AF58" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF58.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AF53" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF53.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AF52" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AF52.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

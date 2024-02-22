@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
@@ -50,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                     break;
             }
         }
+
         private void LoadCattleTransferTab()
         {
             btnNextMain.Text = "Next";
@@ -93,10 +95,40 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+        }
 
-            return false;
+        private void LoadReceipt()
+        {
+            var frmReceipt = new frmCattleTransferReceipt();
+            var cattleTransferDetails = ucCattleTransfer.GetCattleTransferReceiptContent();
+
+            var receiptParameters = new frmCattleTransferReceipt.AF52Parameters()
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
+                OldOwnerName = cattleTransferDetails.oldOwnerName,
+                OldOwnerAddress = cattleTransferDetails.oldOwnerAddress,
+                OldOwnerMunicipality = cattleTransferDetails.oldOwnerMunicipality,
+                OldOwnerProvince = cattleTransferDetails.oldOwnerProvince,
+                NewOwnerName = cattleTransferDetails.newOwnerName,
+                NewOwnerAddress = cattleTransferDetails.newOwnerAddress,
+                NewOwnerMunicipality = cattleTransferDetails.newOwnerMunicipality,
+                NewOwnerProvince = cattleTransferDetails.newOwnerProvince,
+                CattleName = cattleTransferDetails.cattleName,
+                CattleAge = cattleTransferDetails.cattleAge,
+                CattlePrice = cattleTransferDetails.amountPurchase,
+                CattlePriceWords = new Helper.AmountToWords().ConvertAmountToWords(cattleTransferDetails.amountPurchase.ToString("N2")),
+                CattleSex = cattleTransferDetails.cattleSex,
+                CattleYears = cattleTransferDetails.cattleYears,
+                CurrentDate = Helper.GetCurrentDate(),
+                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
+                MunicipalMayor = string.Empty,
+                MunicipalSecretaryName = string.Empty
+            };
+
+            frmReceipt.OnLoad(receiptParameters);
+            frmReceipt.ShowDialog();
         }
 
         private bool TabValidated()
@@ -144,11 +176,15 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
 
                     return;

@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Windows.Forms;
 
@@ -130,10 +131,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -145,19 +143,48 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
-
                     return;
                 }
 
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReceipt()
+        {
+            var frmAF53Receipt = new frmCattleOwnershipReceipt();
+            var taxpayerId = ucCattleOwnership.CattleOwnershipModel().TaxpayerId;
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+
+            var reportParameters = new frmCattleOwnershipReceipt.AF53Parameters
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
+                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
+                OwnerName = dictTaxpayer["taxpayers_name"],
+                OwnerMunicipality = dictTaxpayer["taxpayers_municipality"],
+                OwnerProvince = dictTaxpayer["taxpayers_province"],
+                CattleName = ucCattleOwnership.CattleOwnershipModel().CattleName,
+                CattleAge = ucCattleOwnership.CattleOwnershipModel().CattleAge,
+                CattleSex = ucCattleOwnership.CattleOwnershipModel().CattleSex,
+                MunicipalTreasurerName = string.Empty,
+                MunicipalSecretaryName = string.Empty,
+                MunicipalMayor = string.Empty,
+            };
+
+            frmAF53Receipt.OnLoad(reportParameters);
+            frmAF53Receipt.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

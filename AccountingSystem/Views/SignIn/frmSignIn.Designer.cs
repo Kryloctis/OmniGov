@@ -34,6 +34,7 @@ namespace AccountingSystem
             label2 = new System.Windows.Forms.Label();
             txtPassword = new System.Windows.Forms.TextBox();
             panel1 = new System.Windows.Forms.Panel();
+            txtVersion = new System.Windows.Forms.Label();
             pcBoxEmblem = new System.Windows.Forms.PictureBox();
             label3 = new System.Windows.Forms.Label();
             btnLogin = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@ namespace AccountingSystem
             label4 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            txtVersion = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcBoxEmblem).BeginInit();
             SuspendLayout();
@@ -105,6 +105,16 @@ namespace AccountingSystem
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(219, 218);
             panel1.TabIndex = 4;
+            // 
+            // txtVersion
+            // 
+            txtVersion.ForeColor = System.Drawing.Color.White;
+            txtVersion.Location = new System.Drawing.Point(-1, 194);
+            txtVersion.Name = "txtVersion";
+            txtVersion.Size = new System.Drawing.Size(219, 23);
+            txtVersion.TabIndex = 12;
+            txtVersion.Text = "Version 0.0.0";
+            txtVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pcBoxEmblem
             // 
@@ -197,16 +207,6 @@ namespace AccountingSystem
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // txtVersion
-            // 
-            txtVersion.ForeColor = System.Drawing.Color.White;
-            txtVersion.Location = new System.Drawing.Point(-1, 194);
-            txtVersion.Name = "txtVersion";
-            txtVersion.Size = new System.Drawing.Size(219, 23);
-            txtVersion.TabIndex = 12;
-            txtVersion.Text = "Version 0.0.0";
-            txtVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmSignIn
             // 
             AcceptButton = btnLogin;
@@ -230,7 +230,6 @@ namespace AccountingSystem
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmSignIn";
-            ShowIcon = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Sign In";
             Load += SignInForm_Load;

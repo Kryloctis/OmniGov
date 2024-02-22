@@ -283,7 +283,6 @@
             Controls.Add(nudCattleAge);
             Name = "ucCattleTransfer";
             Size = new System.Drawing.Size(353, 293);
-            Load += ucCattleTransferOfOwnership_Load;
             ((System.ComponentModel.ISupportInitialize)nudAmountOfPurchase).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCattleYears).EndInit();

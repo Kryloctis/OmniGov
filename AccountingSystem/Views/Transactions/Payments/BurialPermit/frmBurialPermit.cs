@@ -1,14 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Dialogs;
-using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
-using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
@@ -184,9 +176,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
         private bool ConfirmPayment()
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-            return false;
+            return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
@@ -198,11 +188,15 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (ConfirmPayment())
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        Helper.MessageBoxSuccess("Payment has been saved");
-                        ResetForm();
-                        return;
+                        if (ConfirmPayment())
+                        {
+                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                            LoadReceipt();
+                            ResetForm();
+                            return;
+                        }
                     }
                     return;
                 }
@@ -210,6 +204,43 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadReceipt()
+        {
+            var af58Parameters = new frmBurialPermitReceipt();
+            var burialDetails = ucBurialDetails.GetBurialDetails();
+            var remainDetails = ucRemainsInfo.GetRemainsInfo();
+            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
+            var remainName = dictRegistry["first_name"];
+
+            var receiptParameters = new frmBurialPermitReceipt.AF58Parameters()
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                CauseOfDeath = burialDetails.causeOfDeath,
+                Cemetery = burialDetails.cemetery,
+                DeathDate = burialDetails.deathDate,
+                Disinterment = burialDetails.disinterment,
+                Disposition = burialDetails.disposition,
+                IsInfectious = burialDetails.isInfectious,
+                IsEmbalmed = burialDetails.isEmbalmed,
+                IsDisinter = false,
+                IsInter = true,
+                IsRemove = false,
+                MunicipalFeeAmount = string.Empty,
+                MunicipalFeeDate = string.Empty,
+                MunicipalFeeNo = string.Empty,
+                RemainAge = remainDetails.remainAge,
+                RemainName = remainName,
+                RemainNationality = dictRegistry["nationality"],
+                RemainSex = dictRegistry["sex"],
+                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
+                CollectingOfficerName = ucPayment.txtCollectingOfficer.Text,
+                TotalPayment = ucPayment.PaymentCollectionsModel().Amount
+            };
+
+            af58Parameters.OnLoad(receiptParameters);
+            af58Parameters.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

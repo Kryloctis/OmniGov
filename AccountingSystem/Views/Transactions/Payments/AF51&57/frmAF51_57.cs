@@ -1,5 +1,9 @@
 ﻿using ACC.Data;
+using AccountingSystem.DataSets;
+using AccountingSystem.Views.Manage.TaxPayers;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.AF51_57;
@@ -44,10 +48,7 @@ public partial class frmAF51_57 : Form
 
     private bool ConfirmPayment()
     {
-        if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-            return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
-
-        return false;
+        return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
     }
 
     private bool TabValidated()
@@ -112,11 +113,15 @@ public partial class frmAF51_57 : Form
 
             if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
-                if (ConfirmPayment())
+                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                 {
-                    Helper.MessageBoxSuccess("Payment has been saved");
-                    ResetForm();
-                    return;
+                    if (ConfirmPayment())
+                    {
+                        Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                        LoadReceipt();
+                        ResetForm();
+                        return;
+                    }
                 }
                 return;
             }
@@ -124,6 +129,43 @@ public partial class frmAF51_57 : Form
             tabControlMain.SelectedIndex++;
         }
         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+    }
+
+    private void LoadReceipt()
+    {
+        var frmReceipt = new frmAF51Receipt();
+        var dataTable = new dsTreasury.dtAF51DataTable();
+
+        foreach (var model in ucPaymentFeesCharges.PaymentFeesChargesModels())
+        {
+            var newRow = dataTable.NewRow();
+            var dictOtherPaymentRate = AccFactory.OtherPaymentRatesRepository().GetRecordByID(model.OtherPaymentRatesId);
+            newRow["nature_of_collection"] = $"{dictOtherPaymentRate["description"]} x{model.Unit}";
+            newRow["amount"] = model.SubTotal;
+            dataTable.Rows.Add(newRow);
+        }
+
+        var receiptParameters = new frmAF51Receipt.AF51Parameters()
+        {
+            Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+            TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
+            TotalPayment = ucPayment.PaymentCollectionsModel().Amount,
+            TotalPaymentWords = new Helper.AmountToWords().ConvertAmountToWords(ucPayment.PaymentCollectionsModel().Amount.ToString()),
+            Payee = ucPayment.PaymentCollectionsModel().Payee,
+            IsCash = ucPayment.radPaymentCash.Checked,
+            IsCheck = ucPayment.radPaymentCheque.Checked,
+            IsMoneyOrder = false,
+            Agency = string.Empty,
+            ChequeBank = string.Empty,
+            ChequeDate = string.Empty,
+            ChequeNo = string.Empty,
+            CollectingOfficerName = ucPayment.txtCollectingOfficer.Text.Trim(),
+            Fund = string.Empty,
+            dtAF51DataTable = dataTable
+        };
+
+        frmReceipt.OnLoad(receiptParameters);
+        frmReceipt.ShowDialog();
     }
 
     private void btnBackMain_Click(object sender, EventArgs e)
