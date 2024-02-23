@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
+                //HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
                 _uc.TotalCollections();
                 Close();
             }

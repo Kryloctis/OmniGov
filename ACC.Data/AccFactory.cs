@@ -158,8 +158,6 @@ namespace ACC.Data
 
         public static IRptAssessmentPostingRepository RptAssessmentPostsRepository() => new RptAssessmentPostsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralPaymentsRepository GeneralPaymentRepository() => new GeneralPaymentsRepository(mySqlGenericCommandsLFS);
-
         public static IRptTaxDuesRepository RptTaxDuesRepository() => new RptTaxDuesRepository(mySqlGenericCommandsLFS);
 
         public static IRptPaymentRepository RptPaymentepository() => new RptPaymentsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());

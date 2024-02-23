@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             }
 
             var collectionOfPaymentReportDt = AccFactory.CollectorReportPaymentsRepository().GetRecordsByReportNo(reportNo);
-            HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
+            //HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
         }
 
         internal void CheckRCDStatus(string reportNo)
