@@ -1,7 +1,10 @@
 ﻿Local Finance System
-Version 1.0.0.3
+Version 1.2.0
 
 Updates:
+
+> Implemented Payment and Receipt Printing Modules:
+
 
 > Overall
 	~ Fixed and enhanced UI and record load of Collecting Officers, Banks, Bank Accounts, Accountable Form, 
@@ -18,14 +21,13 @@ Updates:
 	
 	~ Added payment history module
 
-	~ Implemented payment modules:
-		AF 56 - Real Property Tax
-		AF 51 & 57 OR and Slaughter Permit Fee
-		AF 54 Marriage License
-		AF 58 Burial Permit & Fee
-		AF 53 Certificate of Cattle Ownership
-
-	~ Printable AF 56 - Real Property Tax Receipt
+	~ Implemented payment and printing receipt module:
+		AF 56 - Real Property Tax Receipt
+		AF51 & 57
+		AF52 Certificate of Cattle Transfer of Cattle Ownership
+		AF53 Certificate of Cattle Ownership
+		AF54 Marriage License
+		AF58 Burial Permit
 
 	~ Fixed and enhanced for more optimal use of posting of assessments.
 
