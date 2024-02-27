@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.Registry
             }
 
             var registryModel = uc.RegistryModel();
-            registryModel.CreatedBy = Helper.UserId;
+            registryModel.CreatedBy = Helper.userId;
 
             return AccFactory.RegistryRepository().Insert(registryModel);
         }

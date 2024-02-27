@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 Code = code,
                 Description = description,
                 IsAppliedEachBusiness = appliedEachBusiness,
-                CreatedBy = Helper.UserId
+                CreatedBy = Helper.userId
             };
 
             return AccFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);

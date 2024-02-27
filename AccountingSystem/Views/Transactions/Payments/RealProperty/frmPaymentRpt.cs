@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             radPayment.Checked = true;
             btnNext.Text = "Confirm Payment";
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
-            ucPayment.OnLoad(Helper.UserId, "56", totalPayment);
+            ucPayment.OnLoad(Helper.userId, "56", totalPayment);
         }
 
         private bool TabValidated()
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private bool ConfirmPayment()
         {
-            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId, };
+            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.userId, };
 
             return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
         }

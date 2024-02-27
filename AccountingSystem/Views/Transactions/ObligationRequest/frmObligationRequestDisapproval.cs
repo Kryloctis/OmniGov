@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             int obligationRequestCreatedById = Convert.ToInt32(dictObligationRequest["created_by_id"]);
 
-            if (obligationRequestCreatedById != Helper.UserId)
+            if (obligationRequestCreatedById != Helper.userId)
                 btnAccept.Enabled = false;
         }
 

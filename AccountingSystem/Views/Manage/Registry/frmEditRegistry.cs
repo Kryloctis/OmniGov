@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Manage.Registry
 
             var registryModel = uc.RegistryModel();
             registryModel.Id = registryId;
-            registryModel.UpdatedBy = Helper.UserId;
+            registryModel.UpdatedBy = Helper.userId;
 
             return AccFactory.RegistryRepository().Update(registryModel);
         }

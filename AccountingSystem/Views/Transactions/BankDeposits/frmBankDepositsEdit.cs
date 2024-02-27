@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             _bankDepositID = bankDepositID;
 
             uc = ucBankDeposit1;
-            uc.userid = Helper.UserId;
+            uc.userid = Helper.userId;
         }
 
         private void OnLoad()

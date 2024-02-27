@@ -150,8 +150,8 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         Municipality = realTaxpayerMunicipality,
                         Province = realTaxpayerProvince,
                         ContactInfo = realTaxpayerContactInfo,
-                        CreatedBy = Helper.UserId,
-                        UpdatedBy = Helper.UserId
+                        CreatedBy = Helper.userId,
+                        UpdatedBy = Helper.userId
                     };
 
                     var barangayModel = new BarangayModel()
@@ -197,8 +197,8 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         GrYear = propertyGrYear,
                         IsCancelled = propertyIsCancelled,
                         IsTaxable = propertyIsTaxable,
-                        CreatedBy = Helper.UserId,
-                        UpdatedBy = Helper.UserId,
+                        CreatedBy = Helper.userId,
+                        UpdatedBy = Helper.userId,
                         TaxpayerTypeModel = taxpayerTypeModel,
                         TaxpayersModel = taxpayersModel,
                         ProvincesModel = provincesModel,

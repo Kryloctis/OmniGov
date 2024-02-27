@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             var rptModel = uc.RealPropertiesModel();
             rptModel.Id = rptId;
-            rptModel.UpdatedBy = Helper.UserId;
+            rptModel.UpdatedBy = Helper.userId;
 
             return AccFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
         }

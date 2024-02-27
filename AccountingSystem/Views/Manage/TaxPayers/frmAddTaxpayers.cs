@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
 
             var taxpayersModel = uc.TaxpayersModel();
-            taxpayersModel.CreatedBy = Helper.UserId;
+            taxpayersModel.CreatedBy = Helper.userId;
 
             return AccFactory.TaxpayersRepository().Insert(taxpayersModel);
         }

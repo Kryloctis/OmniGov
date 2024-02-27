@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void PermissionVerification()
         {
-            if (_frmJEV.createdById != Helper.UserId)
+            if (_frmJEV.createdById != Helper.userId)
                 btnAccept.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > JEV Approval"))

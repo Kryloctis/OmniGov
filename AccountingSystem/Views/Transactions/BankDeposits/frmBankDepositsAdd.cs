@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             _amount = amount;
 
             uc = ucBankDeposit1;
-            uc.userid = Helper.UserId;
+            uc.userid = Helper.userId;
         }
 
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)

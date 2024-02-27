@@ -8,8 +8,6 @@ namespace ACC.Data
     {
         internal static AccGenericCommands mySqlGenericCommandsLFS;
 
-        public static byte UserId = 1;
-
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -111,14 +109,6 @@ namespace ACC.Data
         public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
-
-        #region RCD
-
-        public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(mySqlGenericCommandsLFS, CollectorReportPaymentsRepository());
-
-        public static ICollectorReportPaymentsRepository CollectorReportPaymentsRepository() => new CollectorReportPaymentsRepository(mySqlGenericCommandsLFS);
-
-        #endregion RCD
 
         public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(mySqlGenericCommandsLFS);
 

@@ -147,7 +147,7 @@ namespace AccountingSystem
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-            Helper.UserId = AccFactory.UsersRepository().ValidateLogin(username, password);
+            Helper.userId = AccFactory.UsersRepository().ValidateLogin(username, password);
             var mainForm = new MainForm(this);
             txtUsername.SelectAll();
             txtUsername.Focus();

@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 GetObligationStatus();
                 ClearAllErrors();
 
-                if (createById == Helper.UserId)
+                if (createById == Helper.userId)
                 {
                     uc.SetFieldsReadOnly(false);
                     btnSave.Enabled = true;
@@ -284,7 +284,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
                     DateRequested = uc.dtDateRequest.Value,
-                    CreatedBy = Helper.UserId
+                    CreatedBy = Helper.userId
                 };
 
                 if (Helper.HasPermission("Transaction > Obligation Request Approved"))
@@ -327,7 +327,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         Explanation = uc.txtExplanation.Text,
                         ReferenceNo = uc.txtReferenceNo.Text,
                         DateRequested = uc.dtDateRequest.Value,
-                        UpdatedBy = Helper.UserId
+                        UpdatedBy = Helper.userId
                     };
 
                     string ObligationRequestStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);

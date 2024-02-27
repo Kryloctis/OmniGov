@@ -51,18 +51,6 @@ namespace AccountingSystem.Views.Reports.RCD
         }
 
         //Questionable Code
-        internal void LoadSelectedReport(string reportNo)
-        {
-            var rcdData = AccFactory.CollectorReportRepository().GetRecordByID(reportNo);
-
-            collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
-            fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
-            reportNo = rcdData["report_no"];
-            date = Convert.ToDateTime(rcdData["date"]);
-
-            var dataTable = AccFactory.CollectorReportRepository().FilterRecords(fundId, collectorId, reportNo);
-            HelperLoadRecords.RCDDatagridView(dataTable, dgListOfApprovedReport);
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
