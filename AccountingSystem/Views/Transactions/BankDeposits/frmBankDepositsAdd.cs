@@ -7,32 +7,35 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class frmBankDepositsAdd : Form
     {
-        private frmBankDeposits _frmBankDeposits;
+        private frmBankDeposits frmBankDeposits;
         private ucBankDeposits uc;
-        public int generalCollectionId = 0;
-        public decimal generalCollectionAmount = 0;
-        internal string _referenceNumber;
-        internal decimal _amount;
+        private int rcdId;
+        private decimal generalCollectionAmount;
+        private string referenceNumber;
+        private decimal amount;
 
         public frmBankDepositsAdd(frmBankDeposits frmBankDeposits, int rcdId, string referenceNumber, decimal amount)
         {
             InitializeComponent();
-            generalCollectionId = rcdId;
-            _frmBankDeposits = frmBankDeposits;
-            _referenceNumber = referenceNumber;
-            _amount = amount;
-
+            this.rcdId = rcdId;
+            this.frmBankDeposits = frmBankDeposits;
+            this.referenceNumber = referenceNumber;
+            this.amount = amount;
             uc = ucBankDeposit1;
             uc.userid = Helper.userId;
         }
 
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
-            if (generalCollectionId > 0)
-                uc.nudAmount.Value = generalCollectionAmount;
+            try
+            {
+                if (rcdId > 0)
+                    uc.nudAmount.Value = generalCollectionAmount;
 
-            uc.txtReferenceNumber.Text = _referenceNumber;
-            uc.nudAmount.Value = _amount;
+                uc.txtReferenceNumber.Text = referenceNumber;
+                uc.nudAmount.Value = amount;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
@@ -63,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 if (SaveData())
                 {
-                    if (generalCollectionId > 0)
+                    if (rcdId > 0)
                     {
                         Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
                         this.DialogResult = DialogResult.OK;
@@ -72,8 +75,25 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     else
                     {
                         Helper.MessageBoxSuccess("Bank Deposit has been saved.");
-                        _frmBankDeposits.LoadRecords();
+                        frmBankDeposits.LoadRecords();
                         ucBankDeposit1.ResetForm();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmBankDepositsAdd_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Bank deposit has been saved.");
+                        frmBankDeposits.LoadRecords();
+                        uc.ResetForm();
                     }
                 }
             }

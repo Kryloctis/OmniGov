@@ -20,8 +20,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             Helper.DatagridFullRowSelectStyle(dgRealProperties);
         }
 
-        #region Private Methods
-
         private void OnLoad()
         {
             HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
@@ -86,10 +84,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
             return dataColumns;
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
 
         private void frmRealProperties_Load(object sender, EventArgs e)
         {
@@ -251,7 +245,5 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Event Methods
     }
 }
