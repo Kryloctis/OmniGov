@@ -70,7 +70,7 @@
             tabPageBudget = new System.Windows.Forms.TabPage();
             tabControlBudget = new System.Windows.Forms.TabControl();
             tabPageBudgetSummary = new System.Windows.Forms.TabPage();
-            ucBudgetSummary1 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            ucBudgetSummary2 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
             tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
             ucBudgetDetailed1 = new BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -83,35 +83,25 @@
             tabPageAccounting = new System.Windows.Forms.TabPage();
             tabControlAccounting = new System.Windows.Forms.TabControl();
             tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
-            ucjevDashboard1 = new ucJevDashboard();
+            ucJevDashboard1 = new ucJevDashboard();
             tabPageJournals = new System.Windows.Forms.TabPage();
             ucJournalsDashboard1 = new AccountingDashboard.ucJournalsDashboard();
             tabPageLedgers = new System.Windows.Forms.TabPage();
             tabControlLedgers = new System.Windows.Forms.TabControl();
             tabPageGeneralLedger = new System.Windows.Forms.TabPage();
-            ucGeneralLedger1 = new Reports.Ledgers.ucGeneralLedger();
             tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
-            ucSubsidiaryLedger1 = new Reports.Ledgers.ucSubsidiaryLedger();
             tabPageSummarySL = new System.Windows.Forms.TabPage();
-            ucSummarySubsidiaryLedger1 = new Reports.Ledgers.ucSummarySubsidiaryLedger();
             tabPageTransactionLog = new System.Windows.Forms.TabPage();
-            ucTransactionLog1 = new Reports.Ledgers.ucTransactionLog();
             tabPageTrialBalance = new System.Windows.Forms.TabPage();
             tabControlTrialBalance = new System.Windows.Forms.TabControl();
             tabPagePreTrial = new System.Windows.Forms.TabPage();
-            ucPreClosingTrialBalance1 = new Reports.TrialBalance.ucPreClosingTrialBalance();
             tabPagePostTrial = new System.Windows.Forms.TabPage();
-            ucPostClosingTrialBalance1 = new Reports.TrialBalance.ucPostClosingTrialBalance();
             tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             tabControlFinancialStatements = new System.Windows.Forms.TabControl();
             tabPageSFPosition = new System.Windows.Forms.TabPage();
-            ucStatementOfFinancialPosition1 = new Reports.Financial_Statements.ucStatementOfFinancialPosition();
             tabPageSFPerformance = new System.Windows.Forms.TabPage();
-            ucStatementOfFinancialPerformance1 = new Reports.Financial_Statements.ucStatementOfFinancialPerformance();
             tabPageSCNAE = new System.Windows.Forms.TabPage();
-            ucStatementOfChangesInNetAssetsEquity1 = new Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
             tabPageSCF = new System.Windows.Forms.TabPage();
-            ucStatementOfCashFlows1 = new Reports.Financial_Statements.ucStatementOfCashFlows();
             tabPageSCBAA = new System.Windows.Forms.TabPage();
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
@@ -129,6 +119,7 @@
             aF54ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF58BurialPermitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aF53CattleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF52CattleTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,11 +128,8 @@
             releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
-            collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             collectionPaymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            reportOfCollectionsDepositsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            reportOfCollectionsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             realPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -163,7 +151,16 @@
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            aF52CattleTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ucGeneralLedger2 = new Reports.Ledgers.ucGeneralLedger();
+            ucSubsidiaryLedger1 = new Reports.Ledgers.ucSubsidiaryLedger();
+            ucSummarySubsidiaryLedger1 = new Reports.Ledgers.ucSummarySubsidiaryLedger();
+            ucTransactionLog1 = new Reports.Ledgers.ucTransactionLog();
+            ucPostClosingTrialBalance1 = new Reports.TrialBalance.ucPostClosingTrialBalance();
+            ucPreClosingTrialBalance1 = new Reports.TrialBalance.ucPreClosingTrialBalance();
+            ucStatementOfFinancialPosition1 = new Reports.Financial_Statements.ucStatementOfFinancialPosition();
+            ucStatementOfFinancialPerformance1 = new Reports.Financial_Statements.ucStatementOfFinancialPerformance();
+            ucStatementOfChangesInNetAssetsEquity1 = new Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
+            ucStatementOfCashFlows1 = new Reports.Financial_Statements.ucStatementOfCashFlows();
             menuStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -503,7 +500,7 @@
             // 
             // tabPageBudgetSummary
             // 
-            tabPageBudgetSummary.Controls.Add(ucBudgetSummary1);
+            tabPageBudgetSummary.Controls.Add(ucBudgetSummary2);
             tabPageBudgetSummary.Location = new System.Drawing.Point(4, 24);
             tabPageBudgetSummary.Margin = new System.Windows.Forms.Padding(0);
             tabPageBudgetSummary.Name = "tabPageBudgetSummary";
@@ -513,14 +510,14 @@
             tabPageBudgetSummary.Text = "Summary";
             tabPageBudgetSummary.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetSummary1
+            // ucBudgetSummary2
             // 
-            ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBudgetSummary1.Location = new System.Drawing.Point(0, 5);
-            ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
-            ucBudgetSummary1.Name = "ucBudgetSummary1";
-            ucBudgetSummary1.Size = new System.Drawing.Size(1207, 548);
-            ucBudgetSummary1.TabIndex = 0;
+            ucBudgetSummary2.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucBudgetSummary2.Location = new System.Drawing.Point(0, 5);
+            ucBudgetSummary2.Margin = new System.Windows.Forms.Padding(0);
+            ucBudgetSummary2.Name = "ucBudgetSummary2";
+            ucBudgetSummary2.Size = new System.Drawing.Size(1207, 548);
+            ucBudgetSummary2.TabIndex = 0;
             // 
             // tabPageBudgetDetailed
             // 
@@ -644,7 +641,7 @@
             // 
             // tabPageJournalEntryVoucher
             // 
-            tabPageJournalEntryVoucher.Controls.Add(ucjevDashboard1);
+            tabPageJournalEntryVoucher.Controls.Add(ucJevDashboard1);
             tabPageJournalEntryVoucher.Location = new System.Drawing.Point(4, 24);
             tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
@@ -654,16 +651,16 @@
             tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
             tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
             // 
-            // ucjevDashboard1
+            // ucJevDashboard1
             // 
-            ucjevDashboard1.AutoSize = true;
-            ucjevDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucjevDashboard1.Location = new System.Drawing.Point(0, 5);
-            ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
-            ucjevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
-            ucjevDashboard1.Name = "ucjevDashboard1";
-            ucjevDashboard1.Size = new System.Drawing.Size(1213, 586);
-            ucjevDashboard1.TabIndex = 0;
+            ucJevDashboard1.AutoSize = true;
+            ucJevDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucJevDashboard1.Location = new System.Drawing.Point(0, 5);
+            ucJevDashboard1.Margin = new System.Windows.Forms.Padding(0);
+            ucJevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
+            ucJevDashboard1.Name = "ucJevDashboard1";
+            ucJevDashboard1.Size = new System.Drawing.Size(1213, 586);
+            ucJevDashboard1.TabIndex = 0;
             // 
             // tabPageJournals
             // 
@@ -672,7 +669,7 @@
             tabPageJournals.Margin = new System.Windows.Forms.Padding(0);
             tabPageJournals.Name = "tabPageJournals";
             tabPageJournals.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageJournals.Size = new System.Drawing.Size(1213, 589);
+            tabPageJournals.Size = new System.Drawing.Size(1213, 591);
             tabPageJournals.TabIndex = 1;
             tabPageJournals.Text = "Journals";
             tabPageJournals.UseVisualStyleBackColor = true;
@@ -685,7 +682,7 @@
             ucJournalsDashboard1.Location = new System.Drawing.Point(0, 5);
             ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
             ucJournalsDashboard1.Name = "ucJournalsDashboard1";
-            ucJournalsDashboard1.Size = new System.Drawing.Size(1213, 584);
+            ucJournalsDashboard1.Size = new System.Drawing.Size(1213, 586);
             ucJournalsDashboard1.TabIndex = 0;
             // 
             // tabPageLedgers
@@ -695,7 +692,7 @@
             tabPageLedgers.Margin = new System.Windows.Forms.Padding(0);
             tabPageLedgers.Name = "tabPageLedgers";
             tabPageLedgers.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageLedgers.Size = new System.Drawing.Size(1213, 589);
+            tabPageLedgers.Size = new System.Drawing.Size(1213, 591);
             tabPageLedgers.TabIndex = 2;
             tabPageLedgers.Text = "Ledgers";
             tabPageLedgers.UseVisualStyleBackColor = true;
@@ -713,27 +710,19 @@
             tabControlLedgers.Name = "tabControlLedgers";
             tabControlLedgers.Padding = new System.Drawing.Point(20, 3);
             tabControlLedgers.SelectedIndex = 0;
-            tabControlLedgers.Size = new System.Drawing.Size(1213, 584);
+            tabControlLedgers.Size = new System.Drawing.Size(1213, 586);
             tabControlLedgers.TabIndex = 0;
             // 
             // tabPageGeneralLedger
             // 
-            tabPageGeneralLedger.Controls.Add(ucGeneralLedger1);
+            tabPageGeneralLedger.Controls.Add(ucGeneralLedger2);
             tabPageGeneralLedger.Location = new System.Drawing.Point(4, 24);
             tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
             tabPageGeneralLedger.Name = "tabPageGeneralLedger";
-            tabPageGeneralLedger.Size = new System.Drawing.Size(1205, 556);
+            tabPageGeneralLedger.Size = new System.Drawing.Size(1205, 558);
             tabPageGeneralLedger.TabIndex = 0;
             tabPageGeneralLedger.Text = "General Ledger";
             tabPageGeneralLedger.UseVisualStyleBackColor = true;
-            // 
-            // ucGeneralLedger1
-            // 
-            ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucGeneralLedger1.Location = new System.Drawing.Point(0, 0);
-            ucGeneralLedger1.Name = "ucGeneralLedger1";
-            ucGeneralLedger1.Size = new System.Drawing.Size(1205, 556);
-            ucGeneralLedger1.TabIndex = 0;
             // 
             // tabPageSubsidiaryLedger
             // 
@@ -741,18 +730,10 @@
             tabPageSubsidiaryLedger.Location = new System.Drawing.Point(4, 24);
             tabPageSubsidiaryLedger.Margin = new System.Windows.Forms.Padding(0);
             tabPageSubsidiaryLedger.Name = "tabPageSubsidiaryLedger";
-            tabPageSubsidiaryLedger.Size = new System.Drawing.Size(1205, 556);
+            tabPageSubsidiaryLedger.Size = new System.Drawing.Size(1205, 558);
             tabPageSubsidiaryLedger.TabIndex = 1;
             tabPageSubsidiaryLedger.Text = "Subsidiary Ledger";
             tabPageSubsidiaryLedger.UseVisualStyleBackColor = true;
-            // 
-            // ucSubsidiaryLedger1
-            // 
-            ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
-            ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
-            ucSubsidiaryLedger1.Size = new System.Drawing.Size(1205, 556);
-            ucSubsidiaryLedger1.TabIndex = 0;
             // 
             // tabPageSummarySL
             // 
@@ -760,18 +741,10 @@
             tabPageSummarySL.Location = new System.Drawing.Point(4, 24);
             tabPageSummarySL.Margin = new System.Windows.Forms.Padding(0);
             tabPageSummarySL.Name = "tabPageSummarySL";
-            tabPageSummarySL.Size = new System.Drawing.Size(1205, 556);
+            tabPageSummarySL.Size = new System.Drawing.Size(1205, 558);
             tabPageSummarySL.TabIndex = 2;
             tabPageSummarySL.Text = "Summary Subsidiary Ledger";
             tabPageSummarySL.UseVisualStyleBackColor = true;
-            // 
-            // ucSummarySubsidiaryLedger1
-            // 
-            ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
-            ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
-            ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(1205, 556);
-            ucSummarySubsidiaryLedger1.TabIndex = 0;
             // 
             // tabPageTransactionLog
             // 
@@ -779,18 +752,10 @@
             tabPageTransactionLog.Location = new System.Drawing.Point(4, 24);
             tabPageTransactionLog.Margin = new System.Windows.Forms.Padding(0);
             tabPageTransactionLog.Name = "tabPageTransactionLog";
-            tabPageTransactionLog.Size = new System.Drawing.Size(1205, 556);
+            tabPageTransactionLog.Size = new System.Drawing.Size(1205, 558);
             tabPageTransactionLog.TabIndex = 3;
             tabPageTransactionLog.Text = "Transaction Log";
             tabPageTransactionLog.UseVisualStyleBackColor = true;
-            // 
-            // ucTransactionLog1
-            // 
-            ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
-            ucTransactionLog1.Name = "ucTransactionLog1";
-            ucTransactionLog1.Size = new System.Drawing.Size(1205, 556);
-            ucTransactionLog1.TabIndex = 0;
             // 
             // tabPageTrialBalance
             // 
@@ -799,7 +764,7 @@
             tabPageTrialBalance.Margin = new System.Windows.Forms.Padding(0);
             tabPageTrialBalance.Name = "tabPageTrialBalance";
             tabPageTrialBalance.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageTrialBalance.Size = new System.Drawing.Size(1213, 589);
+            tabPageTrialBalance.Size = new System.Drawing.Size(1213, 591);
             tabPageTrialBalance.TabIndex = 3;
             tabPageTrialBalance.Text = "Trial Balance";
             tabPageTrialBalance.UseVisualStyleBackColor = true;
@@ -813,7 +778,7 @@
             tabControlTrialBalance.Name = "tabControlTrialBalance";
             tabControlTrialBalance.Padding = new System.Drawing.Point(10, 3);
             tabControlTrialBalance.SelectedIndex = 0;
-            tabControlTrialBalance.Size = new System.Drawing.Size(1213, 584);
+            tabControlTrialBalance.Size = new System.Drawing.Size(1213, 586);
             tabControlTrialBalance.TabIndex = 0;
             // 
             // tabPagePreTrial
@@ -822,18 +787,10 @@
             tabPagePreTrial.Location = new System.Drawing.Point(4, 24);
             tabPagePreTrial.Name = "tabPagePreTrial";
             tabPagePreTrial.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePreTrial.Size = new System.Drawing.Size(1205, 556);
+            tabPagePreTrial.Size = new System.Drawing.Size(1205, 558);
             tabPagePreTrial.TabIndex = 0;
             tabPagePreTrial.Text = "Pre-Closing Trial Balance";
             tabPagePreTrial.UseVisualStyleBackColor = true;
-            // 
-            // ucPreClosingTrialBalance1
-            // 
-            ucPreClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPreClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
-            ucPreClosingTrialBalance1.Name = "ucPreClosingTrialBalance1";
-            ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1199, 550);
-            ucPreClosingTrialBalance1.TabIndex = 0;
             // 
             // tabPagePostTrial
             // 
@@ -841,18 +798,10 @@
             tabPagePostTrial.Location = new System.Drawing.Point(4, 24);
             tabPagePostTrial.Name = "tabPagePostTrial";
             tabPagePostTrial.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePostTrial.Size = new System.Drawing.Size(1205, 556);
+            tabPagePostTrial.Size = new System.Drawing.Size(1205, 558);
             tabPagePostTrial.TabIndex = 1;
             tabPagePostTrial.Text = "Post-Closing Trial Balance";
             tabPagePostTrial.UseVisualStyleBackColor = true;
-            // 
-            // ucPostClosingTrialBalance1
-            // 
-            ucPostClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPostClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
-            ucPostClosingTrialBalance1.Name = "ucPostClosingTrialBalance1";
-            ucPostClosingTrialBalance1.Size = new System.Drawing.Size(1199, 550);
-            ucPostClosingTrialBalance1.TabIndex = 0;
             // 
             // tabPageFinancialStatements
             // 
@@ -861,7 +810,7 @@
             tabPageFinancialStatements.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
             tabPageFinancialStatements.Name = "tabPageFinancialStatements";
             tabPageFinancialStatements.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            tabPageFinancialStatements.Size = new System.Drawing.Size(1213, 589);
+            tabPageFinancialStatements.Size = new System.Drawing.Size(1213, 591);
             tabPageFinancialStatements.TabIndex = 4;
             tabPageFinancialStatements.Text = "Financial Statements";
             tabPageFinancialStatements.UseVisualStyleBackColor = true;
@@ -879,7 +828,7 @@
             tabControlFinancialStatements.Name = "tabControlFinancialStatements";
             tabControlFinancialStatements.Padding = new System.Drawing.Point(10, 3);
             tabControlFinancialStatements.SelectedIndex = 0;
-            tabControlFinancialStatements.Size = new System.Drawing.Size(1213, 584);
+            tabControlFinancialStatements.Size = new System.Drawing.Size(1213, 586);
             tabControlFinancialStatements.TabIndex = 0;
             // 
             // tabPageSFPosition
@@ -888,19 +837,10 @@
             tabPageSFPosition.Location = new System.Drawing.Point(4, 24);
             tabPageSFPosition.Margin = new System.Windows.Forms.Padding(0);
             tabPageSFPosition.Name = "tabPageSFPosition";
-            tabPageSFPosition.Size = new System.Drawing.Size(1205, 556);
+            tabPageSFPosition.Size = new System.Drawing.Size(1205, 558);
             tabPageSFPosition.TabIndex = 0;
             tabPageSFPosition.Text = "Statement of Financial Position";
             tabPageSFPosition.UseVisualStyleBackColor = true;
-            // 
-            // ucStatementOfFinancialPosition1
-            // 
-            ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
-            ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 0);
-            ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
-            ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1205, 556);
-            ucStatementOfFinancialPosition1.TabIndex = 0;
             // 
             // tabPageSFPerformance
             // 
@@ -908,19 +848,10 @@
             tabPageSFPerformance.Location = new System.Drawing.Point(4, 24);
             tabPageSFPerformance.Margin = new System.Windows.Forms.Padding(0);
             tabPageSFPerformance.Name = "tabPageSFPerformance";
-            tabPageSFPerformance.Size = new System.Drawing.Size(1205, 556);
+            tabPageSFPerformance.Size = new System.Drawing.Size(1205, 558);
             tabPageSFPerformance.TabIndex = 1;
             tabPageSFPerformance.Text = "Statement of Financial Performance";
             tabPageSFPerformance.UseVisualStyleBackColor = true;
-            // 
-            // ucStatementOfFinancialPerformance1
-            // 
-            ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
-            ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 0);
-            ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
-            ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1205, 556);
-            ucStatementOfFinancialPerformance1.TabIndex = 0;
             // 
             // tabPageSCNAE
             // 
@@ -928,19 +859,10 @@
             tabPageSCNAE.Location = new System.Drawing.Point(4, 24);
             tabPageSCNAE.Margin = new System.Windows.Forms.Padding(0);
             tabPageSCNAE.Name = "tabPageSCNAE";
-            tabPageSCNAE.Size = new System.Drawing.Size(1205, 556);
+            tabPageSCNAE.Size = new System.Drawing.Size(1205, 558);
             tabPageSCNAE.TabIndex = 2;
             tabPageSCNAE.Text = "Statement of Changes in Net Assets/Equity";
             tabPageSCNAE.UseVisualStyleBackColor = true;
-            // 
-            // ucStatementOfChangesInNetAssetsEquity1
-            // 
-            ucStatementOfChangesInNetAssetsEquity1.BackColor = System.Drawing.Color.Transparent;
-            ucStatementOfChangesInNetAssetsEquity1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucStatementOfChangesInNetAssetsEquity1.Location = new System.Drawing.Point(0, 0);
-            ucStatementOfChangesInNetAssetsEquity1.Name = "ucStatementOfChangesInNetAssetsEquity1";
-            ucStatementOfChangesInNetAssetsEquity1.Size = new System.Drawing.Size(1205, 556);
-            ucStatementOfChangesInNetAssetsEquity1.TabIndex = 0;
             // 
             // tabPageSCF
             // 
@@ -948,25 +870,17 @@
             tabPageSCF.Location = new System.Drawing.Point(4, 24);
             tabPageSCF.Margin = new System.Windows.Forms.Padding(0);
             tabPageSCF.Name = "tabPageSCF";
-            tabPageSCF.Size = new System.Drawing.Size(1205, 556);
+            tabPageSCF.Size = new System.Drawing.Size(1205, 558);
             tabPageSCF.TabIndex = 3;
             tabPageSCF.Text = "Statement of Cash Flows";
             tabPageSCF.UseVisualStyleBackColor = true;
-            // 
-            // ucStatementOfCashFlows1
-            // 
-            ucStatementOfCashFlows1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucStatementOfCashFlows1.Location = new System.Drawing.Point(0, 0);
-            ucStatementOfCashFlows1.Name = "ucStatementOfCashFlows1";
-            ucStatementOfCashFlows1.Size = new System.Drawing.Size(1205, 556);
-            ucStatementOfCashFlows1.TabIndex = 0;
             // 
             // tabPageSCBAA
             // 
             tabPageSCBAA.Location = new System.Drawing.Point(4, 24);
             tabPageSCBAA.Margin = new System.Windows.Forms.Padding(0);
             tabPageSCBAA.Name = "tabPageSCBAA";
-            tabPageSCBAA.Size = new System.Drawing.Size(1205, 556);
+            tabPageSCBAA.Size = new System.Drawing.Size(1205, 558);
             tabPageSCBAA.TabIndex = 4;
             tabPageSCBAA.Text = "Statement of Comparison of Budget and Actual Amounts";
             tabPageSCBAA.UseVisualStyleBackColor = true;
@@ -1108,6 +1022,13 @@
             aF53CattleToolStripMenuItem.Text = "AF 53 - Certificate of Ownership of Large Cattle";
             aF53CattleToolStripMenuItem.Click += aF53CattleToolStripMenuItem_Click;
             // 
+            // aF52CattleTransferToolStripMenuItem
+            // 
+            aF52CattleTransferToolStripMenuItem.Name = "aF52CattleTransferToolStripMenuItem";
+            aF52CattleTransferToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
+            aF52CattleTransferToolStripMenuItem.Text = "AF 52 - Certificate of Record of Transfer of Large Cattle";
+            aF52CattleTransferToolStripMenuItem.Click += aF52CattleTransferToolStripMenuItem_Click;
+            // 
             // paymentHistoryToolStripMenuItem
             // 
             paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
@@ -1155,7 +1076,7 @@
             // 
             // toolStripSplitButton4
             // 
-            toolStripSplitButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { collectorsRCDToolStripMenuItem, liquidatorsRCDToolStripMenuItem, toolStripSeparator12, collectionPaymentToolStripMenuItem1, toolStripSeparator13, realPropertiesToolStripMenuItem, toolStripSeparator4, reportOfCheckIssuedRCIToolStripMenuItem, releasedChequesToolStripMenuItem, unreleasedChequesToolStripMenuItem, bankCashbookToolStripMenuItem, consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem, dailyCashPositionsToolStripMenuItem });
+            toolStripSplitButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { collectionPaymentToolStripMenuItem1, toolStripSeparator13, realPropertiesToolStripMenuItem, toolStripSeparator4, reportOfCheckIssuedRCIToolStripMenuItem, releasedChequesToolStripMenuItem, unreleasedChequesToolStripMenuItem, bankCashbookToolStripMenuItem, consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem, dailyCashPositionsToolStripMenuItem });
             toolStripSplitButton4.Image = Properties.Resources.documents_3_20px;
             toolStripSplitButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripSplitButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1163,39 +1084,20 @@
             toolStripSplitButton4.Size = new System.Drawing.Size(83, 28);
             toolStripSplitButton4.Text = "Reports";
             // 
-            // collectorsRCDToolStripMenuItem
-            // 
-            collectorsRCDToolStripMenuItem.Name = "collectorsRCDToolStripMenuItem";
-            collectorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
-            collectorsRCDToolStripMenuItem.Text = "Collector's RCD";
-            collectorsRCDToolStripMenuItem.Click += collectorsRCDToolStripMenuItem_Click;
-            // 
-            // liquidatorsRCDToolStripMenuItem
-            // 
-            liquidatorsRCDToolStripMenuItem.Name = "liquidatorsRCDToolStripMenuItem";
-            liquidatorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
-            liquidatorsRCDToolStripMenuItem.Text = "Liquidator's RCD";
-            liquidatorsRCDToolStripMenuItem.Click += liquidatorsRCDToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator12
-            // 
-            toolStripSeparator12.Name = "toolStripSeparator12";
-            toolStripSeparator12.Size = new System.Drawing.Size(397, 6);
-            // 
             // collectionPaymentToolStripMenuItem1
             // 
-            collectionPaymentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRCDToolStripMenuItem, abstractOfGeneralCollectionsToolStripMenuItem });
+            collectionPaymentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsRCDToolStripMenuItem, abstractOfGeneralCollectionsToolStripMenuItem });
             collectionPaymentToolStripMenuItem1.Name = "collectionPaymentToolStripMenuItem1";
             collectionPaymentToolStripMenuItem1.Size = new System.Drawing.Size(400, 22);
             collectionPaymentToolStripMenuItem1.Text = "Collection && Deposits";
             // 
-            // reportOfCollectionsDepositsRCDToolStripMenuItem
+            // reportOfCollectionsRCDToolStripMenuItem
             // 
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Name = "reportOfCollectionsDepositsRCDToolStripMenuItem";
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Text = "Report of Collections Deposits (RCD)";
-            reportOfCollectionsDepositsRCDToolStripMenuItem.Click += reportOfCollectionsDepositsRCDToolStripMenuItem_Click;
+            reportOfCollectionsRCDToolStripMenuItem.Enabled = false;
+            reportOfCollectionsRCDToolStripMenuItem.Name = "reportOfCollectionsRCDToolStripMenuItem";
+            reportOfCollectionsRCDToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            reportOfCollectionsRCDToolStripMenuItem.Text = "Report of Collections Deposits (RCD)";
+            reportOfCollectionsRCDToolStripMenuItem.Click += reportOfCollectionsRCDToolStripMenuItem_Click;
             // 
             // abstractOfGeneralCollectionsToolStripMenuItem
             // 
@@ -1339,12 +1241,88 @@
             lblVersion.Size = new System.Drawing.Size(72, 17);
             lblVersion.Text = "Version 0.0.0";
             // 
-            // aF52CattleTransferToolStripMenuItem
+            // ucGeneralLedger2
             // 
-            aF52CattleTransferToolStripMenuItem.Name = "aF52CattleTransferToolStripMenuItem";
-            aF52CattleTransferToolStripMenuItem.Size = new System.Drawing.Size(360, 22);
-            aF52CattleTransferToolStripMenuItem.Text = "AF 52 - Certificate of Record of Transfer of Large Cattle";
-            aF52CattleTransferToolStripMenuItem.Click += aF52CattleTransferToolStripMenuItem_Click;
+            ucGeneralLedger2.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucGeneralLedger2.Location = new System.Drawing.Point(0, 0);
+            ucGeneralLedger2.Name = "ucGeneralLedger2";
+            ucGeneralLedger2.Size = new System.Drawing.Size(1205, 558);
+            ucGeneralLedger2.TabIndex = 0;
+            // 
+            // ucSubsidiaryLedger1
+            // 
+            ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
+            ucSubsidiaryLedger1.Size = new System.Drawing.Size(1205, 558);
+            ucSubsidiaryLedger1.TabIndex = 0;
+            // 
+            // ucSummarySubsidiaryLedger1
+            // 
+            ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
+            ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(1205, 558);
+            ucSummarySubsidiaryLedger1.TabIndex = 0;
+            // 
+            // ucTransactionLog1
+            // 
+            ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
+            ucTransactionLog1.Name = "ucTransactionLog1";
+            ucTransactionLog1.Size = new System.Drawing.Size(1205, 558);
+            ucTransactionLog1.TabIndex = 0;
+            // 
+            // ucPostClosingTrialBalance1
+            // 
+            ucPostClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPostClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
+            ucPostClosingTrialBalance1.Name = "ucPostClosingTrialBalance1";
+            ucPostClosingTrialBalance1.Size = new System.Drawing.Size(1199, 552);
+            ucPostClosingTrialBalance1.TabIndex = 1;
+            // 
+            // ucPreClosingTrialBalance1
+            // 
+            ucPreClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPreClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
+            ucPreClosingTrialBalance1.Name = "ucPreClosingTrialBalance1";
+            ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1199, 552);
+            ucPreClosingTrialBalance1.TabIndex = 0;
+            // 
+            // ucStatementOfFinancialPosition1
+            // 
+            ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
+            ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 0);
+            ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
+            ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1205, 558);
+            ucStatementOfFinancialPosition1.TabIndex = 0;
+            // 
+            // ucStatementOfFinancialPerformance1
+            // 
+            ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
+            ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 0);
+            ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
+            ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1205, 558);
+            ucStatementOfFinancialPerformance1.TabIndex = 0;
+            // 
+            // ucStatementOfChangesInNetAssetsEquity1
+            // 
+            ucStatementOfChangesInNetAssetsEquity1.BackColor = System.Drawing.Color.Transparent;
+            ucStatementOfChangesInNetAssetsEquity1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucStatementOfChangesInNetAssetsEquity1.Location = new System.Drawing.Point(0, 0);
+            ucStatementOfChangesInNetAssetsEquity1.Name = "ucStatementOfChangesInNetAssetsEquity1";
+            ucStatementOfChangesInNetAssetsEquity1.Size = new System.Drawing.Size(1205, 558);
+            ucStatementOfChangesInNetAssetsEquity1.TabIndex = 0;
+            // 
+            // ucStatementOfCashFlows1
+            // 
+            ucStatementOfCashFlows1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucStatementOfCashFlows1.Location = new System.Drawing.Point(0, 0);
+            ucStatementOfCashFlows1.Name = "ucStatementOfCashFlows1";
+            ucStatementOfCashFlows1.Size = new System.Drawing.Size(1205, 558);
+            ucStatementOfCashFlows1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -1466,11 +1444,8 @@
         private System.Windows.Forms.ToolStripMenuItem checkIssuanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankDepositToolStripMenuItem;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton4;
-        private System.Windows.Forms.ToolStripMenuItem collectorsRCDToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem liquidatorsRCDToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem collectionPaymentToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem reportOfCollectionsDepositsRCDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportOfCollectionsRCDToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem reportOfCheckIssuedRCIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankCashbookToolStripMenuItem;
@@ -1519,7 +1494,6 @@
         private Views.Reports.Ledgers.ucSummarySubsidiaryLedger ucSummarySubsidiaryLedger1;
         private Views.Reports.Ledgers.ucTransactionLog ucTransactionLog1;
         private Views.Reports.TrialBalance.ucPreClosingTrialBalance ucPreClosingTrialBalance1;
-        private Views.Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
         private Views.Reports.Financial_Statements.ucStatementOfFinancialPosition ucStatementOfFinancialPosition1;
         private Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance ucStatementOfFinancialPerformance1;
         private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsEquity1;
@@ -1550,5 +1524,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.ToolStripMenuItem aF52CattleTransferToolStripMenuItem;
+        private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary2;
+        private ucJevDashboard ucJevDashboard1;
+        private Reports.Ledgers.ucGeneralLedger ucGeneralLedger2;
+        private Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
     }
 }

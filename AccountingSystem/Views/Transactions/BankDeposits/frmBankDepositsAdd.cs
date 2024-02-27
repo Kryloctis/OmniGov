@@ -54,32 +54,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 CreatedBy = uc.userid,
             };
 
-            var bankDepositRepo = AccFactory.BankDepositsRepository();
-
-            if (generalCollectionId > 0)
-            {
-                int insertId = bankDepositRepo.Deposits(bankDepositModel);
-
-                if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
-                {
-                    var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
-                    {
-                        BankDepositId = insertId,
-                        GeneralCollectionId = generalCollectionId
-                    };
-
-                    if (!AccFactory.GeneralCollectionsDepositsRepository().IdExist(generalCollectionId))
-
-                        return AccFactory.GeneralCollectionsDepositsRepository().Insert(generalCollectionDepositModel);
-                    else
-                        Helper.MessageBoxSuccess("General Collection has already been deposited!");
-                }
-            }
-            else
-
-                return bankDepositRepo.Insert(bankDepositModel);
-
-            return false;
+            return AccFactory.BankDepositsRepository().Insert(bankDepositModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

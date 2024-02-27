@@ -19,46 +19,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             panel1.Controls.Add(reportViewer);
         }
 
-        private DataTable DataTableAbstractOfGeneralCollection(string from, string to)
-        {
-            var dtPC = new dsLFS.dtPCDataTable();
-            var dt = AccFactory.GeneralCollectionsRepository().GetRecordOfGeneralCollectionByDateRange(from, to);
-
-            foreach (DataRow item in dt.Rows)
-            {
-                DataRow row = dtPC.NewRow();
-                row["rcdid"] = string.Empty;
-                row["rcdno"] = string.Empty;
-                row["reportno"] = string.Empty;
-                row["account_code"] = string.Empty;
-                row["subsidiary"] = string.Empty;
-                row["payee"] = string.Empty;
-                row["acc_form_desc"] = string.Empty;
-                row["ledger_name"] = string.Empty;
-                row["payment_date"] = string.Empty;
-                row["receipt_no"] = string.Empty;
-                row["amount"] = string.Empty;
-                row["collector"] = string.Empty;
-
-                //row["rcdid"] = item["id"];
-                //row["rcdno"] = item["rcd_no"];
-                //row["reportno"] = item["report_no"];
-                //row["account_code"] = item["account_code"];
-                //row["subsidiary"] = item["subsidiary"];
-                //row["payee"] = item["payee"];
-                //row["acc_form_desc"] = item["accform"];
-                //row["ledger_name"] = item["ledger_name"];
-                //row["payment_date"] = item["payment_date"];
-                //row["receipt_no"] = item["receipt_no"];
-                //row["amount"] = item["amount"];
-                //row["collector"] = item["collector"];
-
-                dtPC.Rows.Add(row);
-            }
-
-            return dtPC;
-        }
-
         private void LoadReport(LocalReport report)
         {
             Cursor = Cursors.WaitCursor;
@@ -99,7 +59,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
 
             report.ReportPath = $"{Application.StartupPath}Reports\\abstract-of-general-collection.rdlc";
             report.DataSources.Clear();
-            report.DataSources.Add(new ReportDataSource("dtPC", DataTableAbstractOfGeneralCollection(collectionFrom, collectionTo)));
             report.SetParameters(parameters);
             report.Refresh();
 

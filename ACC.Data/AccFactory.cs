@@ -114,10 +114,6 @@ namespace ACC.Data
 
         #region RCD
 
-        public static IGeneralCollectionsRepository GeneralCollectionsRepository() => new GeneralCollectionsRepository(mySqlGenericCommandsLFS);
-
-        public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(mySqlGenericCommandsLFS);
-
         public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(mySqlGenericCommandsLFS, CollectorReportPaymentsRepository());
 
         public static ICollectorReportPaymentsRepository CollectorReportPaymentsRepository() => new CollectorReportPaymentsRepository(mySqlGenericCommandsLFS);
