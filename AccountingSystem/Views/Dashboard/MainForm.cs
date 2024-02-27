@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.AccountableForm;
+﻿using AccountingSystem.Views.Help;
+using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
@@ -12,28 +13,29 @@ using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DatabaseSynchronization;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
+using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.Registry;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
 using AccountingSystem.Views.Manage.RptDiscount;
 using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
-using AccountingSystem.Views.Reports.CollectorsRCD;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
+using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
@@ -43,18 +45,15 @@ using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
+using AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership;
 using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
+using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccountingSystem.Views.Manage.Registry;
-using AccountingSystem.Views.Reports.RptReports;
-using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
-using AccountingSystem.Views.Help;
-using AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -176,9 +175,6 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Transaction > Issue Check"))
                 checkIssuanceToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction > Generate RCD"))
-                liquidatorsRCDToolStripMenuItem.Enabled = false;
-
             if (!Helper.HasPermission("Transaction > Issue Check"))
                 checkIssuanceToolStripMenuItem.Enabled = false;
 
@@ -187,9 +183,6 @@ namespace AccountingSystem.Views.Dashboard
 
             if (!Helper.HasPermission("Transaction > Issue Receipt"))
                 issueRecieptsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > RCD Approval"))
-                liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > Payments"))
                 paymentsToolStripMenuItem.Enabled = false;
@@ -208,7 +201,7 @@ namespace AccountingSystem.Views.Dashboard
                 reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
-                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
+                reportOfCollectionsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Abstract of General Collections"))
                 abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
@@ -222,8 +215,14 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Report > Daily Cash Position"))
                 dailyCashPositionsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Collector's RCD"))
-                collectorsRCDToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Transaction > Generate RCD"))
+            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Transaction > RCD Approval"))
+            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Report > Collector's RCD"))
+            //    //collectorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
                 realPropertTaxDuesAndPaymentsToolStripMenuItem.Enabled = false;
@@ -526,9 +525,9 @@ namespace AccountingSystem.Views.Dashboard
             _ = new frmRCIReport().ShowDialog();
         }
 
-        private void reportOfCollectionsDepositsRCDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void reportOfCollectionsRCDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmSearch(new frmRCD()).ShowDialog();
+            _ = new frmRCD().ShowDialog();
         }
 
         private void abstractOfGeneralCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -588,16 +587,6 @@ namespace AccountingSystem.Views.Dashboard
         private void bankDepositToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmBankDeposits().ShowDialog();
-        }
-
-        private void collectorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmCollectorsRCD().ShowDialog();
-        }
-
-        private void liquidatorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCD().ShowDialog();
         }
 
         private void assessmentPostingToolStripMenuItem_Click(object sender, EventArgs e)

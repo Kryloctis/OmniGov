@@ -7,18 +7,17 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class frmBankDepositsEdit : Form
     {
-        private frmBankDeposits _frmBankDeposits;
-        private int _bankDepositID;
+        private frmBankDeposits frmBankDeposits;
+        private int bankDepositId;
         private readonly ucBankDeposits uc;
 
-        public frmBankDepositsEdit(frmBankDeposits frmBankDeposits, int bankDepositID)
+        public frmBankDepositsEdit(frmBankDeposits frmBankDeposits, int bankDepositId)
         {
             InitializeComponent();
-            _frmBankDeposits = frmBankDeposits;
-            _bankDepositID = bankDepositID;
-
+            this.frmBankDeposits = frmBankDeposits;
+            this.bankDepositId = bankDepositId;
             uc = ucBankDeposit1;
-            uc.userid = Helper.UserId;
+            uc.userid = Helper.userId;
         }
 
         private void OnLoad()
@@ -38,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void LoadSelectedValue()
         {
             var bdRepository = AccFactory.BankDepositsRepository();
-            var bdData = bdRepository.GetRecordByID(_bankDepositID);
+            var bdData = bdRepository.GetRecordByID(bankDepositId);
 
             uc.cmbBank.SelectedValue = bdData["banks_id"];
             uc.cmbFund.SelectedValue = bdData["funds_id"];
@@ -58,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
             var bankDepositModel = new BankDepositsModel()
             {
-                Id = _bankDepositID,
+                Id = bankDepositId,
                 BankAccountsID = Convert.ToInt16(uc.cmbBankAccounts.SelectedValue),
                 fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),
                 Reference = uc.txtReferenceNumber.Text.Trim(),
@@ -77,7 +76,25 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Bank Deposit has been updated.");
-                    _frmBankDeposits.LoadRecords();
+                    frmBankDeposits.LoadRecords();
+                    Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmBankDepositsEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Bank deposit has been updated.");
+                        frmBankDeposits.LoadRecords();
+                        Close();
+                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

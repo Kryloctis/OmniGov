@@ -71,11 +71,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnPrint.Enabled = false;
 
             //4. Verify logged in user if able to access dissaproval message
-            if (createdById != Helper.UserId && !Helper.HasPermission("Transaction > JEV Approval"))
+            if (createdById != Helper.userId && !Helper.HasPermission("Transaction > JEV Approval"))
                 lblShowMessage.Enabled = false;
 
             //5. Verify logged in user if user is the same who create the JEV for edit purposes only
-            if (uc.isEdit && Helper.UserId != createdById)
+            if (uc.isEdit && Helper.userId != createdById)
             {
                 string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
@@ -145,9 +145,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             if (!uc.isEdit)
-                jevModel.CreatedBy = Helper.UserId;
+                jevModel.CreatedBy = Helper.userId;
             else
-                jevModel.UpdatedBy = Helper.UserId;
+                jevModel.UpdatedBy = Helper.userId;
 
             return jevModel;
         }

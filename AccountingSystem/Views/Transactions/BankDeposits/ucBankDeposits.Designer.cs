@@ -29,209 +29,190 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.epBank = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtReferenceNumber = new System.Windows.Forms.TextBox();
-            this.dtDate = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.cmbBank = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbFund = new System.Windows.Forms.ComboBox();
-            this.epFund = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epReferenceNumber = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.epBank)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFund)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReferenceNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            txtReferenceNumber = new System.Windows.Forms.TextBox();
+            dtDate = new System.Windows.Forms.DateTimePicker();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            cmbBank = new System.Windows.Forms.ComboBox();
+            label5 = new System.Windows.Forms.Label();
+            cmbFund = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            cmbBankAccounts = new System.Windows.Forms.ComboBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Bank";
-            // 
-            // epBank
-            // 
-            this.epBank.ContainerControl = this;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 4);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(33, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Bank";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Reference";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 86);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(59, 15);
+            label2.TabIndex = 20;
+            label2.Text = "Reference";
             // 
             // txtReferenceNumber
             // 
-            this.txtReferenceNumber.Location = new System.Drawing.Point(109, 91);
-            this.txtReferenceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReferenceNumber.MaxLength = 99;
-            this.txtReferenceNumber.Name = "txtReferenceNumber";
-            this.txtReferenceNumber.Size = new System.Drawing.Size(369, 23);
-            this.txtReferenceNumber.TabIndex = 2;
-            this.txtReferenceNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtreference_Validating);
-            this.txtReferenceNumber.Validated += new System.EventHandler(this.txtreference_Validated);
+            txtReferenceNumber.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtReferenceNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtReferenceNumber.Location = new System.Drawing.Point(95, 83);
+            txtReferenceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtReferenceNumber.MaxLength = 99;
+            txtReferenceNumber.Name = "txtReferenceNumber";
+            txtReferenceNumber.Size = new System.Drawing.Size(250, 23);
+            txtReferenceNumber.TabIndex = 2;
+            txtReferenceNumber.Validating += txtreference_Validating;
+            txtReferenceNumber.Validated += txtreference_Validated;
             // 
             // dtDate
             // 
-            this.dtDate.Location = new System.Drawing.Point(109, 118);
-            this.dtDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtDate.Name = "dtDate";
-            this.dtDate.Size = new System.Drawing.Size(369, 23);
-            this.dtDate.TabIndex = 3;
+            dtDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtDate.Location = new System.Drawing.Point(95, 110);
+            dtDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dtDate.Name = "dtDate";
+            dtDate.Size = new System.Drawing.Size(250, 23);
+            dtDate.TabIndex = 3;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 124);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 15);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Date";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(3, 116);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(31, 15);
+            label3.TabIndex = 23;
+            label3.Text = "Date";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 15);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Amount";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(3, 139);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(51, 15);
+            label4.TabIndex = 24;
+            label4.Text = "Amount";
             // 
             // nudAmount
             // 
-            this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(109, 145);
-            this.nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(369, 23);
-            this.nudAmount.TabIndex = 4;
-            this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
-            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
+            nudAmount.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudAmount.DecimalPlaces = 2;
+            nudAmount.Location = new System.Drawing.Point(95, 137);
+            nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            nudAmount.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudAmount.Name = "nudAmount";
+            nudAmount.Size = new System.Drawing.Size(250, 23);
+            nudAmount.TabIndex = 4;
+            nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudAmount.ThousandsSeparator = true;
+            nudAmount.Validating += nudAmount_Validating;
+            nudAmount.Validated += nudAmount_Validated;
             // 
             // cmbBank
             // 
-            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(109, 10);
-            this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(369, 23);
-            this.cmbBank.TabIndex = 1;
-            this.cmbBank.SelectionChangeCommitted += new System.EventHandler(this.cmbBank_SelectionChangeCommitted);
-            this.cmbBank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
-            this.cmbBank.Validated += new System.EventHandler(this.cmbbanks_Validated);
+            cmbBank.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbBank.FormattingEnabled = true;
+            cmbBank.Location = new System.Drawing.Point(95, 2);
+            cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbBank.Name = "cmbBank";
+            cmbBank.Size = new System.Drawing.Size(250, 23);
+            cmbBank.TabIndex = 1;
+            cmbBank.SelectionChangeCommitted += cmbBank_SelectionChangeCommitted;
+            cmbBank.Validating += cmbbanks_Validating;
+            cmbBank.Validated += cmbbanks_Validated;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 67);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 15);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "Fund";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(3, 59);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(34, 15);
+            label5.TabIndex = 25;
+            label5.Text = "Fund";
             // 
             // cmbFund
             // 
-            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(109, 64);
-            this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(369, 23);
-            this.cmbFund.TabIndex = 26;
-            this.cmbFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfunds_Validating);
-            this.cmbFund.Validated += new System.EventHandler(this.cmbfunds_Validated);
-            // 
-            // epFund
-            // 
-            this.epFund.ContainerControl = this;
-            // 
-            // epReferenceNumber
-            // 
-            this.epReferenceNumber.ContainerControl = this;
-            // 
-            // epAmount
-            // 
-            this.epAmount.ContainerControl = this;
+            cmbFund.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbFund.FormattingEnabled = true;
+            cmbFund.Location = new System.Drawing.Point(95, 56);
+            cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbFund.Name = "cmbFund";
+            cmbFund.Size = new System.Drawing.Size(250, 23);
+            cmbFund.TabIndex = 26;
+            cmbFund.Validating += cmbfunds_Validating;
+            cmbFund.Validated += cmbfunds_Validated;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 40);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Bank Accounts";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(3, 32);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(86, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Bank Accounts";
             // 
             // cmbBankAccounts
             // 
-            this.cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBankAccounts.FormattingEnabled = true;
-            this.cmbBankAccounts.Location = new System.Drawing.Point(109, 37);
-            this.cmbBankAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbBankAccounts.Name = "cmbBankAccounts";
-            this.cmbBankAccounts.Size = new System.Drawing.Size(369, 23);
-            this.cmbBankAccounts.TabIndex = 1;
-            this.cmbBankAccounts.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
-            this.cmbBankAccounts.Validated += new System.EventHandler(this.cmbbanks_Validated);
+            cmbBankAccounts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbBankAccounts.FormattingEnabled = true;
+            cmbBankAccounts.Location = new System.Drawing.Point(95, 29);
+            cmbBankAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbBankAccounts.Name = "cmbBankAccounts";
+            cmbBankAccounts.Size = new System.Drawing.Size(250, 23);
+            cmbBankAccounts.TabIndex = 1;
+            cmbBankAccounts.Validating += cmbbanks_Validating;
+            cmbBankAccounts.Validated += cmbbanks_Validated;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucBankDeposits
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.cmbFund);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmbBankAccounts);
-            this.Controls.Add(this.cmbBank);
-            this.Controls.Add(this.nudAmount);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dtDate);
-            this.Controls.Add(this.txtReferenceNumber);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucBankDeposits";
-            this.Size = new System.Drawing.Size(503, 177);
-            this.Load += new System.EventHandler(this.ucBD_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epBank)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFund)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epReferenceNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(cmbFund);
+            Controls.Add(label5);
+            Controls.Add(cmbBankAccounts);
+            Controls.Add(cmbBank);
+            Controls.Add(nudAmount);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(dtDate);
+            Controls.Add(txtReferenceNumber);
+            Controls.Add(label2);
+            Controls.Add(label6);
+            Controls.Add(label1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Name = "ucBankDeposits";
+            Size = new System.Drawing.Size(366, 165);
+            Load += ucBankDeposit_Load;
+            ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ErrorProvider epBank;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -241,10 +222,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         internal System.Windows.Forms.ComboBox cmbBank;
         internal System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ErrorProvider epFund;
-        private System.Windows.Forms.ErrorProvider epReferenceNumber;
-        private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.ComboBox cmbBankAccounts;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

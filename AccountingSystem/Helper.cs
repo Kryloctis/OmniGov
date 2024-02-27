@@ -14,7 +14,7 @@ namespace AccountingSystem
 {
     public static class Helper
     {
-        internal static byte UserId = AccFactory.UserId;
+        internal static byte userId;
         internal static LguServerModel selectedServerModel;
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
@@ -43,7 +43,7 @@ namespace AccountingSystem
         {
             try
             {
-                return AccFactory.UsersRepository().HasPermission(UserId, permissionName);
+                return AccFactory.UsersRepository().HasPermission(userId, permissionName);
             }
             catch (Exception ex)
             {
@@ -635,7 +635,7 @@ namespace AccountingSystem
             var dictUser = new Dictionary<string, dynamic>();
             try
             {
-                dictUser = AccFactory.UsersRepository().GetViewRecordById(UserId);
+                dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
 

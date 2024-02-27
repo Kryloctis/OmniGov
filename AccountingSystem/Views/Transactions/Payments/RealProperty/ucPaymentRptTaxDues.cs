@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
                 LoadTaxDues(dgTaxDues);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

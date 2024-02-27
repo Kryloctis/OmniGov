@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
             radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.UserId, "52", totalAmountPayable);
+            ucPayment.OnLoad(Helper.userId, "52", totalAmountPayable);
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)

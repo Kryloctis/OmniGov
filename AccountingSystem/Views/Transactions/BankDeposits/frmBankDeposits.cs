@@ -17,7 +17,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void frmBankDeposits_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadRecords()
@@ -47,25 +51,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     _ = bdRepository.Delete(bdModelList);
                     LoadRecords();
                 }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtsearch.Text.Length == 0)
-                {
-                    LoadRecords();
-                    return;
-                }
-
-                string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
-
-                lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -126,6 +111,25 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 int bankDepositID = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
                 _ = new frmBankDepositsEdit(this, bankDepositID).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchkey = txtSearch.Text.Trim();
+
+                if (searchkey.Length < 1)
+                {
+                    LoadRecords();
+                    return;
+                }
+
+                var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
+                lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

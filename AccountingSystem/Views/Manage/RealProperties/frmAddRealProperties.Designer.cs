@@ -86,6 +86,7 @@
             Controls.Add(ucRealProperties1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAddRealProperties";

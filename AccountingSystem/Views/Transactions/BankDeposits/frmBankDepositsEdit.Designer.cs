@@ -29,91 +29,102 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucBankDeposit1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBankDeposits();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // ucBankDeposit1
-            // 
-            this.ucBankDeposit1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucBankDeposit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBankDeposit1.Location = new System.Drawing.Point(0, 0);
-            this.ucBankDeposit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucBankDeposit1.Name = "ucBankDeposit1";
-            this.ucBankDeposit1.Size = new System.Drawing.Size(504, 196);
-            this.ucBankDeposit1.TabIndex = 0;
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            ucBankDeposit1 = new ucBankDeposits();
+            flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 169);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(504, 27);
-            this.flowLayoutPanel1.TabIndex = 7;
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 171);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            flowLayoutPanel1.Size = new System.Drawing.Size(407, 27);
+            flowLayoutPanel1.TabIndex = 7;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(419, 2);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(82, 22);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Location = new System.Drawing.Point(254, 2);
+            btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnCancel.Name = "btnCancel";
+            btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            btnCancel.Size = new System.Drawing.Size(150, 22);
+            btnCancel.TabIndex = 1;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(331, 2);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(82, 22);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Location = new System.Drawing.Point(98, 2);
+            btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnSave.Name = "btnSave";
+            btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            btnSave.Size = new System.Drawing.Size(150, 22);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucBankDeposit1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(407, 171);
+            panel1.TabIndex = 8;
+            // 
+            // ucBankDeposit1
+            // 
+            ucBankDeposit1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucBankDeposit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucBankDeposit1.Location = new System.Drawing.Point(4, 4);
+            ucBankDeposit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            ucBankDeposit1.Name = "ucBankDeposit1";
+            ucBankDeposit1.Size = new System.Drawing.Size(399, 163);
+            ucBankDeposit1.TabIndex = 1;
             // 
             // frmBankDepositsEdit
             // 
-            this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(504, 196);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucBankDeposit1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmBankDepositsEdit";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Bank Deposit";
-            this.Load += new System.EventHandler(this.frmBankDepositsEdit_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(407, 198);
+            Controls.Add(panel1);
+            Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmBankDepositsEdit";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Edit Bank Deposit";
+            Load += frmBankDepositsEdit_Load;
+            KeyDown += frmBankDepositsEdit_KeyDown;
+            flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private ucBankDeposits ucBankDeposit1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel1;
+        private ucBankDeposits ucBankDeposit1;
     }
 }

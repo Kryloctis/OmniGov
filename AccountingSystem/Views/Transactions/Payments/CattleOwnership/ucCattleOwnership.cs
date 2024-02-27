@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                 CattleSex = radCattleMale.Checked ? "Male" : "Female",
                 CattleYears = (int)nudAge.Value,
                 Description = txtDescription.Text.Trim(),
-                CreatedBy = Helper.UserId,
+                CreatedBy = Helper.userId,
             };
         }
 

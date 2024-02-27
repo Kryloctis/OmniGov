@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             return new CattleOwnershipModel()
             {
                 TaxpayerId = cattleOwnerId,
-                CreatedBy = Helper.UserId,
+                CreatedBy = Helper.userId,
                 CattleAge = (int)nudCattleAge.Value,
                 CattleYears = (int)nudCattleYears.Value,
                 Description = txtDescription.Text.Trim(),

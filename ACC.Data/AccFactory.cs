@@ -8,8 +8,6 @@ namespace ACC.Data
     {
         internal static AccGenericCommands mySqlGenericCommandsLFS;
 
-        public static byte UserId = 1;
-
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -112,16 +110,6 @@ namespace ACC.Data
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 
-        public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(mySqlGenericCommandsLFS, CollectorReportPaymentsRepository());
-
-        public static ICollectorReportPaymentsRepository CollectorReportPaymentsRepository() => new CollectorReportPaymentsRepository(mySqlGenericCommandsLFS);
-
-        public static IGeneralCollectionsRepository GeneralCollectionsRepository() => new GeneralCollectionsRepository(mySqlGenericCommandsLFS);
-
-        public static IGeneralCollectionsPaymentsRepository GeneralCollectionsPaymentsRepository() => new GeneralCollectionsPaymentsRepository(mySqlGenericCommandsLFS);
-
-        public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(mySqlGenericCommandsLFS);
-
         public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(mySqlGenericCommandsLFS);
 
         public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(mySqlGenericCommandsLFS);
@@ -153,8 +141,6 @@ namespace ACC.Data
         public static IRptTaxRatesRepository RptTaxRatesRepository() => new RptTaxRatesRepository(mySqlGenericCommandsLFS);
 
         public static IRptAssessmentPostingRepository RptAssessmentPostsRepository() => new RptAssessmentPostsRepository(mySqlGenericCommandsLFS);
-
-        public static IGeneralPaymentsRepository GeneralPaymentRepository() => new GeneralPaymentsRepository(mySqlGenericCommandsLFS);
 
         public static IRptTaxDuesRepository RptTaxDuesRepository() => new RptTaxDuesRepository(mySqlGenericCommandsLFS);
 

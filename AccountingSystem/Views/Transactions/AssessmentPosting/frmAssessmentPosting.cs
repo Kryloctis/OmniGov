@@ -299,7 +299,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     PenaltyFrequency = penaltyFrequency,
                     BasicRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Basic"),
                     SefRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Special Educational Fund"),
-                    PostedBy = Helper.UserId,
+                    PostedBy = Helper.userId,
                     DueYear = Convert.ToInt32(txtYear.Text)
                 };
 

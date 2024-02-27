@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 Disposition = ucBurialDetails.GetBurialDetails().disposition,
                 DeathDate = ucBurialDetails.GetBurialDetails().deathDate,
                 RemainsAge = ucRemainsInfo.GetRemainsInfo().remainAge,
-                CreatedBy = Helper.UserId,
+                CreatedBy = Helper.userId,
             };
         }
 
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.UserId, "58", totalAmountPayable);
+            ucPayment.OnLoad(Helper.userId, "58", totalAmountPayable);
         }
 
         private void LoadTabContents()

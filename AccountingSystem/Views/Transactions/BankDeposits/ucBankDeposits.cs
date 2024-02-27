@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -9,10 +8,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class ucBankDeposits : UserControl
     {
-        internal int Id = 0;
-        internal int bankId = 0;
-        internal int fundId = 0;
-        internal int userid = 0;
+        internal int Id;
+        internal int bankId;
+        internal int fundId;
+        internal int userid;
 
         public ucBankDeposits()
         {
@@ -23,10 +22,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             var errorArray = new string[]
             {
-                epBank.GetError(cmbBank),
-                epFund.GetError(cmbFund),
-                epReferenceNumber.GetError(txtReferenceNumber),
-                epAmount.GetError(nudAmount)
+                errorProvider1.GetError(cmbBank),
+                errorProvider1.GetError(cmbFund),
+                errorProvider1.GetError(txtReferenceNumber),
+                errorProvider1.GetError(nudAmount)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -42,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
         }
 
-        private void ucBD_Load(object sender, EventArgs e)
+        private void ucBankDeposit_Load(object sender, EventArgs e)
         {
             try
             {
@@ -79,49 +78,45 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             HelperLoadRecords.FundsComboBox(dtfunds, cmbFund, "fund_name", "id");
         }
 
-        #region Validations
-
         private void cmbbanks_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbBank, "Banks.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Banks.");
         }
 
         private void cmbbanks_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epBank, cmbBank);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBank);
         }
 
         private void cmbfunds_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbFund, "Fund.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
         }
 
         private void cmbfunds_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epFund, cmbFund);
+            Helper.ClearErrorComboBox(errorProvider1, cmbFund);
         }
 
         private void txtreference_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNumber, txtReferenceNumber, "Reference.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReferenceNumber, "Reference.");
         }
 
         private void txtreference_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epReferenceNumber, txtReferenceNumber);
+            Helper.ClearErrorTextBox(errorProvider1, txtReferenceNumber);
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount.");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount.");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
-
-        #endregion Validations
 
         private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
         {

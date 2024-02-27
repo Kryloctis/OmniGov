@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.Barangay
             {
                 Code = barangayCode,
                 Name = barangayName,
-                MunicipalityID = 1
+                MunicipalityID = Helper.selectedServerModel.LguId
             };
 
             return AccFactory.BarangayRepository().Insert(barangayModel);

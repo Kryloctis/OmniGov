@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             InitializeComponent();
 
             _frmReceipts = frmReceipts;
-            userId = Helper.UserId;
+            userId = Helper.userId;
             uc = ucReceipts;
         }
 

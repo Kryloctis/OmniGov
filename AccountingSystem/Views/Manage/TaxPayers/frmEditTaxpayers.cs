@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             var taxpayersModel = uc.TaxpayersModel();
             taxpayersModel.Id = taxpayerId;
-            taxpayersModel.UpdatedBy = Helper.UserId;
+            taxpayersModel.UpdatedBy = Helper.userId;
 
             return AccFactory.TaxpayersRepository().Update(taxpayersModel);
         }

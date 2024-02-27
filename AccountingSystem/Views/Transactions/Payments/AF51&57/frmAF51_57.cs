@@ -43,7 +43,7 @@ public partial class frmAF51_57 : Form
         radPayment.Checked = true;
 
         decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-        ucPayment1.OnLoad(Helper.UserId, string.Empty, totalAmountPayable);
+        ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
     }
 
     private bool ConfirmPayment()

@@ -109,16 +109,6 @@ namespace AccountingSystem.Views.Reports.RCD
             string status = "approved";
             byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
             string keySearch = txtsearch.Text;
-
-            var colectorRepository = AccFactory.CollectorReportRepository();
-
-            var dtrcd = new DataTable();
-            if (cmbCollector.Text == "All")
-                dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
-            else
-                dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
-
-            HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
         }
 
         private void LoadFunds()

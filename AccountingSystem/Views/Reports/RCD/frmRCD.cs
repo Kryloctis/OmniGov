@@ -1,10 +1,7 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
-using System.Data;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -32,7 +29,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmSearch(this).ShowDialog();
         }
 
         private void frmRCD_Load(object sender, EventArgs e)
@@ -54,63 +50,10 @@ namespace AccountingSystem.Views.Reports.RCD
             cmbfunds.DisplayMember = "fund_name";
         }
 
-        internal void LoadSelectedRCD(string rcdNo)
-        {
-            var dtRCD = AccFactory.GeneralCollectionsPaymentsRepository().GetRecordsByRCDNO(rcdNo);
-
-            string reportId;
-            string collectingOfficer;
-            string reportNo;
-            string amount;
-
-            foreach (DataRow row in dtRCD.Rows)
-            {
-                reportId = row["collectors_report_id"].ToString();
-                collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]} ";
-
-                if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
-                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]} ";
-
-                reportNo = row["report_no"].ToString();
-                amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
-
-                object[] reportRow = new object[]
-                {
-                        reportId,
-                        collectingOfficer,
-                        reportNo,
-                        amount
-                };
-
-                dgListOfApprovedReport.Rows.Add(reportRow);
-            }
-        }
-
         //Questionable Code
-        internal void LoadSelectedReport(string reportNo)
-        {
-            var rcdData = AccFactory.CollectorReportRepository().GetRecordByID(reportNo);
-
-            collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
-            fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
-            reportNo = rcdData["report_no"];
-            date = Convert.ToDateTime(rcdData["date"]);
-
-            var dataTable = AccFactory.CollectorReportRepository().FilterRecords(fundId, collectorId, reportNo);
-            HelperLoadRecords.RCDDatagridView(dataTable, dgListOfApprovedReport);
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("RCD has been created.");
-                    ResetForm();
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ResetForm()
@@ -128,62 +71,22 @@ namespace AccountingSystem.Views.Reports.RCD
             dgListOfApprovedReport.Rows.Clear();
         }
 
-        private bool SaveData()
-        {
-            if (!ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-                return false;
-            }
-
-            if (MessageBox.Show("Create RCD?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                using (var scope = new TransactionScope())
-                {
-                    var generalCollectionModel = new GeneralCollectionsModel()
-                    {
-                        RcdNo = txtRCDNo.Text,
-                        Rcddate = Convert.ToDateTime(dtpDate.Value),
-                        FundId = Convert.ToInt32(cmbfunds.SelectedValue),
-                        Userid = Helper.UserId
-                    };
-
-                    bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
-                    if (!rcdSaveSuccess)
-                        return false;
-
-                    InsertGeneralCollectionsPayment();
-                    scope.Complete();
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         private void InsertGeneralCollectionsPayment()
         {
-            var generalCollectionsId = GetGeneralCollectionsId();
+            //var generalCollectionsId = GetGeneralCollectionsId();
 
-            foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
-            {
-                ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
+            //foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
+            //{
+            //    ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
 
-                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
-                {
-                    CollectorsReportId = collectionsReportId,
-                    GeneralCollectionsId = generalCollectionsId
-                };
+            //    var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+            //    {
+            //        CollectorsReportId = collectionsReportId,
+            //        GeneralCollectionsId = generalCollectionsId
+            //    };
 
-                AccFactory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
-            }
-        }
-
-        private int GetGeneralCollectionsId()
-        {
-            var rcdNo = txtRCDNo.Text;
-            int generalCollectionId = AccFactory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
-            return generalCollectionId;
+            //    AccFactory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+            //}
         }
 
         private void btnDeposit_Click(object sender, EventArgs e)
@@ -201,12 +104,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string reportNo = txtRCDNo.Text.Trim();
-                _ = new frmLiquidatingRCD(reportNo).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
