@@ -137,6 +137,8 @@
             checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            realPropertyTaxDelinquencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             collectionPaymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             reportOfCollectionsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,8 +163,6 @@
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            realPropertyTaxDelinquencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -1159,6 +1159,18 @@
             bankDepositToolStripMenuItem.Text = "Bank Deposit";
             bankDepositToolStripMenuItem.Click += bankDepositToolStripMenuItem_Click;
             // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
+            // 
+            // realPropertyTaxDelinquencyToolStripMenuItem
+            // 
+            realPropertyTaxDelinquencyToolStripMenuItem.Name = "realPropertyTaxDelinquencyToolStripMenuItem";
+            realPropertyTaxDelinquencyToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            realPropertyTaxDelinquencyToolStripMenuItem.Text = "Real Property Tax Delinquency";
+            realPropertyTaxDelinquencyToolStripMenuItem.Click += realPropertyTaxDelinquencyToolStripMenuItem_Click;
+            // 
             // toolStripSplitButton4
             // 
             toolStripSplitButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { collectionPaymentToolStripMenuItem1, toolStripSeparator13, realPropertiesToolStripMenuItem, toolStripSeparator4, reportOfCheckIssuedRCIToolStripMenuItem, releasedChequesToolStripMenuItem, unreleasedChequesToolStripMenuItem, bankCashbookToolStripMenuItem, consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem, dailyCashPositionsToolStripMenuItem });
@@ -1325,17 +1337,6 @@
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new System.Drawing.Size(72, 17);
             lblVersion.Text = "Version 0.0.0";
-            // 
-            // realPropertyTaxDelinquencyToolStripMenuItem
-            // 
-            realPropertyTaxDelinquencyToolStripMenuItem.Name = "realPropertyTaxDelinquencyToolStripMenuItem";
-            realPropertyTaxDelinquencyToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            realPropertyTaxDelinquencyToolStripMenuItem.Text = "Real Property Tax Delinquency";
-            // 
-            // toolStripSeparator5
-            // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
             // 
             // MainForm
             // 
