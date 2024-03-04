@@ -15,8 +15,8 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
         public frmEditRptDelinquencies(int delinquencyId, frmRptDelinquencies frmRptDelinquencies)
         {
             InitializeComponent();
-            this.frmRptDelinquencies = frmRptDelinquencies;
             this.delinquencyId = delinquencyId;
+            this.frmRptDelinquencies = frmRptDelinquencies;
             uc = ucRptDelinquency1;
 
         }
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
                 Id = delinquencyId,
                 RptAssessmentPostId = rptAssessmentPostId,
                 DelinquenciesStatus = delinquencyStatus,
-                CreatedBy = Helper.UserId
+                CreatedBy = Helper.userId
             };
 
 

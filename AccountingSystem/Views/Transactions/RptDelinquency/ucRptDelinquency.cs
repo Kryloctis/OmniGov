@@ -30,10 +30,9 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
 
         internal void ResetForm()
         {
-            cmbxDelinquentPropertiesArpNo.SelectedIndex = 0;
-            cmbxDelinquentStatus.SelectedIndex = 0;
+            cmbxDelinquentPropertiesArpNo.SelectedIndex = -1;
+            cmbxDelinquentStatus.SelectedIndex = -1;
         }
-
 
         internal void OnLoad(bool isEdit, int delinquencyId = 0)
         {
@@ -74,7 +73,6 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
             dictDelinquencyStatus.Add("First Notice Sent", 1);
             dictDelinquencyStatus.Add("Second Notice Sent", 2);
             dictDelinquencyStatus.Add("Third Notice Sent", 3);
-
 
             if (isEdit)
             {

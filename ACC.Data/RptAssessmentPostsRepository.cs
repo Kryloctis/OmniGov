@@ -3,7 +3,6 @@ using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
 
 namespace ACC.Data
@@ -356,6 +355,14 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id GROUP BY complete_arp_no";
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewDeliquentRecords()
+        {
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE posted_at <= CURDATE() AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
     }
 }

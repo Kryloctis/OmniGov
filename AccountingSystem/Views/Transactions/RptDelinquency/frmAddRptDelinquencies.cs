@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
             {
                 RptAssessmentPostId = rptAssessmentPostId,
                 DelinquenciesStatus = delinquencyStatus,
-                CreatedBy = Helper.UserId
+                CreatedBy = Helper.userId
             };
 
 

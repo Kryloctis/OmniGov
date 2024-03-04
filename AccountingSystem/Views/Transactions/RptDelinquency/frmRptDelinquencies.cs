@@ -99,9 +99,12 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
                     progressCount++;
                     dataTable.Rows.Add(newRow);
                     Helper.ProgressCounter(bgwRealPropertyTaxDeliquencies, totalProgressCount, progressCount);
+
+
                     e.Result = dataTable;
                 }
 
+                lblRecordCount.Text = dataTable.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -231,7 +234,6 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
                 _ = new frmEditRptDelinquencies(delinquencyId, this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void dgDeliquentProperties_SelectionChanged(object sender, EventArgs e)

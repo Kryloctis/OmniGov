@@ -35,5 +35,7 @@ namespace RPT.Domain.Interfaces
         DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
 
         DataTable GetViewRecordsByOwnerId(int taxpayerId);
+
+        DataTable GetViewDeliquentRecords();
     }
 }
