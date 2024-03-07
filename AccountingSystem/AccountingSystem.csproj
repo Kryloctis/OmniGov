@@ -134,7 +134,7 @@
     <Content Include="Reports\ListRptDelinquencies.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\LTOMs\notice-delinquency-in-the-payment-of-rpt.rdlc">
+    <Content Include="Reports\LTOM\ltom16.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">

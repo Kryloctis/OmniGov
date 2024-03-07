@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
 {
-    partial class frmNoticeOfDelinquencyInThePaymentOfRPT
+    partial class frmLtom16
     {
         /// <summary>
         /// Required designer variable.
