@@ -750,5 +750,11 @@ namespace AccountingSystem.Views.Dashboard
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
+        }
+
     }
 }
