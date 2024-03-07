@@ -2,18 +2,18 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="dsLTOM">
+    <DataSource Name="dsTreasury">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>c6e49a91-432a-44d8-9aa4-12117d761719</rd:DataSourceID>
+      <rd:DataSourceID>6663dfe1-0864-4ca5-aedd-65efe4e6ecb8</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsNoticeOfRealPropertyTaxDelinquence">
+    <DataSet Name="dtLtom16">
       <Query>
-        <DataSourceName>dsLTOM</DataSourceName>
+        <DataSourceName>dsTreasury</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -47,9 +47,9 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsLTOM</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Home\OneDrive\Desktop\Archie LFS\AccountingSystem\dsLTOM.xsd</rd:SchemaPath>
-        <rd:TableName>dtNoticeOfDelinquenceInThePaymentOfRPT</rd:TableName>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
+        <rd:TableName>dtLtom16</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -722,7 +722,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dsNoticeOfRealPropertyTaxDelinquence</DataSetName>
+            <DataSetName>dtLtom16</DataSetName>
             <Top>2.17696cm</Top>
             <Left>0.02582cm</Left>
             <Height>1.94084cm</Height>

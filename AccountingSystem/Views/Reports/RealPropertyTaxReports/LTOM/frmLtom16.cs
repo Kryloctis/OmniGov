@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using AccountingSystem.DataSets;
 using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -80,49 +81,42 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
 
         private void LoadReports()
         {
-            try
+            dataTable = new dsTreasury.dtLtom16DataTable();
+
+            DataTable referenceDataTable = new DataTable();
+            Invoke((MethodInvoker)delegate { referenceDataTable = ReferenceDataTable(); });
+
+            int recordCount = referenceDataTable.Rows.Count;
+            int rowsCount = 0;
+
+            foreach (DataRow row in referenceDataTable.Rows)
             {
-                dataTable = new dsLTOM.dtNoticeOfDelinquenceInThePaymentOfRPTDataTable();
+                var newRow = dataTable.NewRow();
 
-                DataTable referenceDataTable = new DataTable();
-                Invoke((MethodInvoker)delegate { referenceDataTable = ReferenceDataTable(); });
+                string rowOwnerName = row["taxpayer_name"].ToString();
+                string rowARPNo = row["complete_arp_no"].ToString();
+                string rowPropertyStreet = row["street"].ToString();
+                string rowPropertyBarangay = row["barangay_name"].ToString();
+                string rowPropertyMunicipality = row["municipality_name"].ToString();
+                string rowPropertyProvince = row["province_name"].ToString();
+                string rowPropertyLocation = $"{rowPropertyStreet} {rowPropertyBarangay}, {rowPropertyMunicipality}, {rowPropertyProvince}";
+                string rowKindOfProperty = row["property_kind"].ToString();
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
+                int yearsDelinquent = 0;
 
-                int recordCount = referenceDataTable.Rows.Count;
-                int rowsCount = 0;
+                newRow["declared_owner"] = rowOwnerName;
+                newRow["tax_declaration_number"] = rowARPNo;
+                newRow["location_of_property"] = rowPropertyLocation;
+                newRow["kind_of_property"] = rowKindOfProperty;
+                newRow["total_assessed_value"] = rowAssessedValue;
+                newRow["tax_due"] = Convert.ToDecimal(GetTaxDue(row, ref yearsDelinquent));
+                newRow["years_of_delinquence"] = yearsDelinquent;
 
-                foreach (DataRow row in referenceDataTable.Rows)
-                {
-                    var newRow = dataTable.NewRow();
+                rowsCount++;
+                int progressBarPercentage = (rowsCount * 100) / recordCount;
+                backgroundWorker1.ReportProgress(progressBarPercentage);
 
-                    string rowOwnerName = row["taxpayer_name"].ToString();
-                    string rowARPNo = row["complete_arp_no"].ToString();
-                    string rowPropertyStreet = row["street"].ToString();
-                    string rowPropertyBarangay = row["barangay_name"].ToString();
-                    string rowPropertyMunicipality = row["municipality_name"].ToString();
-                    string rowPropertyProvince = row["province_name"].ToString();
-                    string rowPropertyLocation = $"{rowPropertyStreet} {rowPropertyBarangay}, {rowPropertyMunicipality}, {rowPropertyProvince}";
-                    string rowKindOfProperty = row["property_kind"].ToString();
-                    decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-                    int yearsDelinquent = 0;
-
-                    newRow["declared_owner"] = rowOwnerName;
-                    newRow["tax_declaration_number"] = rowARPNo;
-                    newRow["location_of_property"] = rowPropertyLocation;
-                    newRow["kind_of_property"] = rowKindOfProperty;
-                    newRow["total_assessed_value"] = rowAssessedValue;
-                    newRow["tax_due"] = Convert.ToDecimal(GetTaxDue(row, ref yearsDelinquent));
-                    newRow["years_of_delinquence"] = yearsDelinquent;
-
-                    rowsCount++;
-                    int progressBarPercentage = (rowsCount * 100) / recordCount;
-                    backgroundWorker1.ReportProgress(progressBarPercentage);
-
-                    dataTable.Rows.Add(newRow);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                dataTable.Rows.Add(newRow);
             }
         }
 
