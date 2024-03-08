@@ -19,10 +19,13 @@
     <AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Reports\LTOMs\**" />
     <Compile Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <Compile Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <EmbeddedResource Remove="Reports\LTOMs\**" />
     <EmbeddedResource Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <None Remove="Reports\LTOMs\**" />
     <None Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
   </ItemGroup>
@@ -51,6 +54,8 @@
     <None Remove="Reports\journal-entry-voucher.rdlc" />
     <None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
     <None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
+    <None Remove="Reports\LTOM\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc" />
+    <None Remove="Reports\LTOM\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc" />
     <None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
     <None Remove="Reports\post-trial-balance.rdlc" />
     <None Remove="Reports\pre-trial-balance.rdlc" />
@@ -134,7 +139,10 @@
     <Content Include="Reports\ListRptDelinquencies.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\LTOM\ltom16.rdlc">
+    <Content Include="Reports\LTOM\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\LTOM\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\post-trial-balance.rdlc">
