@@ -41,6 +41,23 @@ namespace ACC.Data
             }
         }
 
+        public bool DuplicatedNotificationStatus(int rptAssessmentPostId, string status)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_assessment_posts_id", DbType.Int32, rptAssessmentPostId },
+                new object[] { "@delinquency_status", DbType.String, status },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE rpt_assessment_posts_id = @rpt_assessment_posts_id AND delinquency_status = @delinquency_status";
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            return false;
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var recordDictionary = new Dictionary<string, string>();
@@ -74,7 +91,7 @@ namespace ACC.Data
 
         public DataTable GetViewRptDelinquencies()
         {
-            string query = $"SELECT * FROM {viewRptDelinquencies}";
+            string query = $"SELECT * FROM {viewRptDelinquencies} WHERE id IN (SELECT MAX(id) FROM {viewRptDelinquencies} GROUP BY rpt_assessment_posts_id)";
             var dataTable = new DataTable();
 
             return mySqlGenericCommands.Fill(query, dataTable);

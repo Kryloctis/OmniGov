@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
                 new DataColumn("property_pin", typeof(string)),
                 new DataColumn("tax_due", typeof(decimal)),
                 new DataColumn("delinquency_status", typeof(string)),
-                new DataColumn("created_at", typeof(string)),
+                new DataColumn("created_at", typeof(DateTime)),
                 new DataColumn("created_by", typeof(int)),
                 new DataColumn("updated_at", typeof(string)),
                 new DataColumn("updated_by", typeof(string)),
@@ -76,6 +76,7 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
                 var dtViewDelinquentRealProperties = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquencies();
                 int totalProgressCount = dtViewDelinquentRealProperties.Rows.Count;
                 int progressCount = 0;
+                bool showAll = false;
 
                 if (totalProgressCount < 1) { e.Result = dataTable; bgwRealPropertyTaxDeliquencies.ReportProgress(100); return; }
 

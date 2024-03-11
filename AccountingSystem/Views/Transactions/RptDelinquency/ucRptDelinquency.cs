@@ -116,9 +116,25 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
             Helper.ClearErrorComboBox(errorProvider1, cmbxDelinquentPropertiesArpNo);
         }
 
+        private bool ValidateDelinquencyStatus()
+        {
+            int deliquencyId = Convert.ToInt32(cmbxDelinquentPropertiesArpNo.SelectedValue);
+            string deliquencyStatus = cmbxDelinquentStatus.Text;
+
+            bool duplicateNotifStatus = AccFactory.RptDelinquenciesRepository().DuplicatedNotificationStatus(deliquencyId, deliquencyStatus);
+
+            return duplicateNotifStatus;
+        }
+
         private void cmbxDelinquentStatus_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxDelinquentStatus, "Delinquency Status.");
+
+            if (ValidateDelinquencyStatus())
+            {
+                errorProvider1.SetError(cmbxDelinquentStatus, "Selected deliquency status is already added.");
+                e.Cancel = true;
+            }
         }
 
         private void cmbxDelinquentStatus_Validated(object sender, EventArgs e)

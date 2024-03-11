@@ -2190,7 +2190,13 @@ namespace AccountingSystem
             dataGridView.Columns["delinquency_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["delinquency_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_at"].HeaderText = "Date";
+            dataGridView.Columns["created_at"].MinimumWidth = 100;
+            dataGridView.Columns["created_at"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["created_at"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["created_at"].DefaultCellStyle.Format = "MM-dd-yyyy";
+
+            dataGridView.Columns["created_at"].Visible = true;
             dataGridView.Columns["created_by"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
             dataGridView.Columns["updated_by"].Visible = false;
