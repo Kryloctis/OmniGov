@@ -70,7 +70,7 @@
             tabPageBudget = new System.Windows.Forms.TabPage();
             tabControlBudget = new System.Windows.Forms.TabControl();
             tabPageBudgetSummary = new System.Windows.Forms.TabPage();
-            ucBudgetSummary2 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            ucBudgetSummary1 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
             tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
             ucBudgetDetailed1 = new BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -89,7 +89,7 @@
             tabPageLedgers = new System.Windows.Forms.TabPage();
             tabControlLedgers = new System.Windows.Forms.TabControl();
             tabPageGeneralLedger = new System.Windows.Forms.TabPage();
-            ucGeneralLedger2 = new Reports.Ledgers.ucGeneralLedger();
+            ucGeneralLedger1 = new Reports.Ledgers.ucGeneralLedger();
             tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
             ucSubsidiaryLedger1 = new Reports.Ledgers.ucSubsidiaryLedger();
             tabPageSummarySL = new System.Windows.Forms.TabPage();
@@ -502,7 +502,7 @@
             // 
             // tabPageBudgetSummary
             // 
-            tabPageBudgetSummary.Controls.Add(ucBudgetSummary2);
+            tabPageBudgetSummary.Controls.Add(ucBudgetSummary1);
             tabPageBudgetSummary.Location = new System.Drawing.Point(4, 24);
             tabPageBudgetSummary.Margin = new System.Windows.Forms.Padding(0);
             tabPageBudgetSummary.Name = "tabPageBudgetSummary";
@@ -512,14 +512,14 @@
             tabPageBudgetSummary.Text = "Summary";
             tabPageBudgetSummary.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetSummary2
+            // ucBudgetSummary1
             // 
-            ucBudgetSummary2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBudgetSummary2.Location = new System.Drawing.Point(0, 5);
-            ucBudgetSummary2.Margin = new System.Windows.Forms.Padding(0);
-            ucBudgetSummary2.Name = "ucBudgetSummary2";
-            ucBudgetSummary2.Size = new System.Drawing.Size(1207, 548);
-            ucBudgetSummary2.TabIndex = 0;
+            ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucBudgetSummary1.Location = new System.Drawing.Point(0, 5);
+            ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            ucBudgetSummary1.Name = "ucBudgetSummary1";
+            ucBudgetSummary1.Size = new System.Drawing.Size(1207, 548);
+            ucBudgetSummary1.TabIndex = 0;
             // 
             // tabPageBudgetDetailed
             // 
@@ -717,7 +717,7 @@
             // 
             // tabPageGeneralLedger
             // 
-            tabPageGeneralLedger.Controls.Add(ucGeneralLedger2);
+            tabPageGeneralLedger.Controls.Add(ucGeneralLedger1);
             tabPageGeneralLedger.Location = new System.Drawing.Point(4, 24);
             tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
             tabPageGeneralLedger.Name = "tabPageGeneralLedger";
@@ -726,13 +726,13 @@
             tabPageGeneralLedger.Text = "General Ledger";
             tabPageGeneralLedger.UseVisualStyleBackColor = true;
             // 
-            // ucGeneralLedger2
+            // ucGeneralLedger1
             // 
-            ucGeneralLedger2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucGeneralLedger2.Location = new System.Drawing.Point(0, 0);
-            ucGeneralLedger2.Name = "ucGeneralLedger2";
-            ucGeneralLedger2.Size = new System.Drawing.Size(1205, 558);
-            ucGeneralLedger2.TabIndex = 0;
+            ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucGeneralLedger1.Location = new System.Drawing.Point(0, 0);
+            ucGeneralLedger1.Name = "ucGeneralLedger1";
+            ucGeneralLedger1.Size = new System.Drawing.Size(1205, 558);
+            ucGeneralLedger1.TabIndex = 0;
             // 
             // tabPageSubsidiaryLedger
             // 
@@ -1501,9 +1501,7 @@
         private System.Windows.Forms.TabPage tabPageSFPerformance;
         private System.Windows.Forms.TabPage tabPageSCNAE;
         private System.Windows.Forms.TabPage tabPageSCF;
-        private Views.Dashboard.ucJevDashboard ucjevDashboard1;
         private Views.Dashboard.AccountingDashboard.ucJournalsDashboard ucJournalsDashboard1;
-        private Views.Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Views.Reports.Ledgers.ucSubsidiaryLedger ucSubsidiaryLedger1;
         private Views.Reports.Ledgers.ucSummarySubsidiaryLedger ucSummarySubsidiaryLedger1;
         private Views.Reports.Ledgers.ucTransactionLog ucTransactionLog1;
@@ -1513,7 +1511,6 @@
         private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsEquity1;
         private Views.Reports.Financial_Statements.ucStatementOfCashFlows ucStatementOfCashFlows1;
         private System.Windows.Forms.TabPage tabPageSCBAA;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
@@ -1538,9 +1535,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.ToolStripMenuItem aF52CattleTransferToolStripMenuItem;
-        private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary2;
+        private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private ucJevDashboard ucJevDashboard1;
-        private Reports.Ledgers.ucGeneralLedger ucGeneralLedger2;
+        private Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxDelinquencyToolStripMenuItem;

@@ -268,20 +268,6 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRecordsByArpNoDate(string arpNo, DateTime postedAt)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@complete_arp_no", DbType.String, arpNo},
-                new object[] { "@posted_at", DbType.DateTime, postedAt},
-            };
-
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @periodTo ORDER BY complete_arp_no ASC";
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-        }
-
         public DataTable GetBarangayRecords()
         {
             string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
