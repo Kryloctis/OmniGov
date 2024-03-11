@@ -35,6 +35,8 @@
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             statusStrip = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -42,20 +44,24 @@
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            panel3 = new System.Windows.Forms.Panel();
+            label1 = new System.Windows.Forms.Label();
+            cmbxDelinquentStatus = new System.Windows.Forms.ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgDeliquentProperties).BeginInit();
             toolStrip2.SuspendLayout();
             statusStrip.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.Controls.Add(dgDeliquentProperties);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 55);
+            panel2.Location = new System.Drawing.Point(0, 86);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(895, 424);
+            panel2.Size = new System.Drawing.Size(895, 393);
             panel2.TabIndex = 25;
             // 
             // dgDeliquentProperties
@@ -65,7 +71,7 @@
             dgDeliquentProperties.Location = new System.Drawing.Point(4, 4);
             dgDeliquentProperties.Name = "dgDeliquentProperties";
             dgDeliquentProperties.RowTemplate.Height = 25;
-            dgDeliquentProperties.Size = new System.Drawing.Size(887, 416);
+            dgDeliquentProperties.Size = new System.Drawing.Size(887, 385);
             dgDeliquentProperties.TabIndex = 0;
             dgDeliquentProperties.SelectionChanged += dgDeliquentProperties_SelectionChanged;
             // 
@@ -82,7 +88,7 @@
             toolStrip2.BackColor = System.Drawing.Color.Transparent;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
@@ -120,10 +126,28 @@
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
+            // btnSearch
+            // 
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(24, 39);
+            btnSearch.Text = "toolStripButton1";
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 42);
+            // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 50);
+            progressBar1.Location = new System.Drawing.Point(0, 81);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new System.Drawing.Size(895, 5);
             progressBar1.TabIndex = 35;
@@ -167,14 +191,45 @@
             lblUpdatedAt.Name = "lblUpdatedAt";
             lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(cmbxDelinquentStatus);
+            panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            panel3.Location = new System.Drawing.Point(0, 50);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(4);
+            panel3.Size = new System.Drawing.Size(895, 31);
+            panel3.TabIndex = 38;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(4, 7);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(104, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Deliquency Status ";
+            // 
+            // cmbxDelinquentStatus
+            // 
+            cmbxDelinquentStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxDelinquentStatus.FormattingEnabled = true;
+            cmbxDelinquentStatus.Location = new System.Drawing.Point(108, 3);
+            cmbxDelinquentStatus.Name = "cmbxDelinquentStatus";
+            cmbxDelinquentStatus.Size = new System.Drawing.Size(139, 23);
+            cmbxDelinquentStatus.TabIndex = 4;
+            cmbxDelinquentStatus.SelectedIndexChanged += cmbxDelinquentStatus_SelectedIndexChanged;
+            // 
             // frmRptDelinquencies
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(895, 501);
             Controls.Add(panel2);
-            Controls.Add(statusStrip);
             Controls.Add(progressBar1);
+            Controls.Add(panel3);
+            Controls.Add(statusStrip);
             Controls.Add(toolStrip2);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(911, 540);
@@ -190,6 +245,8 @@
             toolStrip2.PerformLayout();
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -211,5 +268,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        internal System.Windows.Forms.ComboBox cmbxDelinquentStatus;
+        private System.Windows.Forms.Label label1;
     }
 }

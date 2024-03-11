@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -67,12 +66,7 @@ namespace AccountingSystem.Views.Reports.RptDelinquency
 
         private void DelinquentStatus(bool isEdit)
         {
-            Dictionary<string, int> dictDelinquencyStatus = new Dictionary<string, int>();
-
-            dictDelinquencyStatus.Add("Notified", 0);
-            dictDelinquencyStatus.Add("First Notice Sent", 1);
-            dictDelinquencyStatus.Add("Second Notice Sent", 2);
-            dictDelinquencyStatus.Add("Third Notice Sent", 3);
+            var dictDelinquencyStatus = Helper.DelinquencyStatus();
 
             if (isEdit)
             {

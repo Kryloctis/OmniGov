@@ -2160,7 +2160,7 @@ namespace AccountingSystem
             dataGridView.Columns["rpt_assessment_posts_id"].Visible = false;
 
             dataGridView.Columns["complete_arp_no"].HeaderText = "Complete Arp No.";
-            dataGridView.Columns["complete_arp_no"].MinimumWidth = 150;
+            dataGridView.Columns["complete_arp_no"].MinimumWidth = 120;
             dataGridView.Columns["complete_arp_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -2170,17 +2170,17 @@ namespace AccountingSystem
             dataGridView.Columns["taxpayer_name"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
-            dataGridView.Columns["property_kind"].MinimumWidth = 100;
+            dataGridView.Columns["property_kind"].MinimumWidth = 80;
             dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dataGridView.Columns["property_pin"].HeaderText = "Property Pin";
-            dataGridView.Columns["property_pin"].MinimumWidth = 100;
+            dataGridView.Columns["property_pin"].MinimumWidth = 80;
             dataGridView.Columns["property_pin"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["property_pin"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
-            dataGridView.Columns["tax_due"].MinimumWidth = 150;
+            dataGridView.Columns["tax_due"].MinimumWidth = 100;
             dataGridView.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["tax_due"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";

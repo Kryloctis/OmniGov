@@ -89,12 +89,19 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public DataTable GetViewRptDelinquencies()
+        public DataTable GetViewRptDelinquencies(string status, string searchText)
         {
-            string query = $"SELECT * FROM {viewRptDelinquencies} WHERE id IN (SELECT MAX(id) FROM {viewRptDelinquencies} GROUP BY rpt_assessment_posts_id)";
+            var parameters = new object[][]
+            {
+                new object[] {  "@delinquency_status", DbType.String, status },
+                new object[] {  "@search_text", DbType.String, $"%{searchText}%" }
+
+            };
+
+            string query = $"SELECT * FROM {viewRptDelinquencies} WHERE delinquency_status = @delinquency_status AND (complete_arp_no LIKE @search_text OR taxpayer_name LIKE @search_text)";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)

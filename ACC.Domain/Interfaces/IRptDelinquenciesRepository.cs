@@ -5,7 +5,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRptDelinquenciesRepository : IAccRepository<RptDelinquenciesModel>
     {
-        DataTable GetViewRptDelinquencies();
+        DataTable GetViewRptDelinquencies(string status, string searchText);
 
         bool DuplicatedNotificationStatus(int rptAssessmentPostId, string status);
     }

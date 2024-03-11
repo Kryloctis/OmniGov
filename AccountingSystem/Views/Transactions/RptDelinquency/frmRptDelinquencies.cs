@@ -5,12 +5,14 @@ using AccountingSystem.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RptDeliquency
 {
     public partial class frmRptDelinquencies : Form
     {
+        private string status;
         public frmRptDelinquencies()
         {
             InitializeComponent();
@@ -20,6 +22,11 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
 
         private void OnLoad()
         {
+
+            cmbxDelinquentStatus.DataSource = Helper.DelinquencyStatus().ToList();
+            cmbxDelinquentStatus.DisplayMember = "Key";
+            cmbxDelinquentStatus.ValueMember = "Value";
+
             LoadDeliquentProperties();
             Helper.EnableDisableToolStripButtons(dgDeliquentProperties, btnEdit, btnDelete);
         }
@@ -72,11 +79,10 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
             {
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(RptDelinquenciesColumns());
-
-                var dtViewDelinquentRealProperties = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquencies();
+                string searchText = txtSearch.Text.Trim();
+                var dtViewDelinquentRealProperties = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquencies(status, searchText);
                 int totalProgressCount = dtViewDelinquentRealProperties.Rows.Count;
                 int progressCount = 0;
-                bool showAll = false;
 
                 if (totalProgressCount < 1) { e.Result = dataTable; bgwRealPropertyTaxDeliquencies.ReportProgress(100); return; }
 
@@ -125,7 +131,6 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
 
             HelperLoadRecords.RptDelinquenciesDatagridView(dataTable, dgDeliquentProperties);
         }
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -244,6 +249,16 @@ namespace AccountingSystem.Views.Reports.RptDeliquency
                 Helper.EnableDisableToolStripButtons(dgDeliquentProperties, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadDeliquentProperties();
+        }
+
+        private void cmbxDelinquentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            status = cmbxDelinquentStatus.Text.Trim();
         }
     }
 }
