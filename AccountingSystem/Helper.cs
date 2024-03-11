@@ -998,5 +998,18 @@ namespace AccountingSystem
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
         }
+
+        public static Dictionary<string, int> DelinquencyStatus()
+        {
+            Dictionary<string, int> dictDelinquencyStatus = new Dictionary<string, int>();
+
+            dictDelinquencyStatus.Add("Notified", 0);
+            dictDelinquencyStatus.Add("First Notice Sent", 1);
+            dictDelinquencyStatus.Add("Second Notice Sent", 2);
+            dictDelinquencyStatus.Add("Final Notice Sent", 3);
+
+            return dictDelinquencyStatus;
+        }
+
     }
 }
