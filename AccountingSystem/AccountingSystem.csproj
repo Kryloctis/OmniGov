@@ -208,6 +208,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="DataSets\dsLTOM.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsLTOM.xsd</DependentUpon>
+    </Compile>
     <Compile Update="DataSets\dsTreasury.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -240,6 +245,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Update="DataSets\dsLTOM.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLTOM.Designer.cs</LastGenOutput>
+    </None>
     <None Update="DataSets\dsTreasury.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsTreasury.Designer.cs</LastGenOutput>
