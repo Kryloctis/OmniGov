@@ -163,6 +163,11 @@
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            lTOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            lTOM16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            lTOM17ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            lTOM18ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            lTOM19ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -1211,7 +1216,7 @@
             // 
             // realPropertiesToolStripMenuItem
             // 
-            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, realPropertTaxDuesAndPaymentsToolStripMenuItem, listOfRealPropertyDelinquenciesToolStripMenuItem, realPropertyTaxStatementOfAccountToolStripMenuItem1 });
+            realPropertiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, realPropertTaxDuesAndPaymentsToolStripMenuItem, listOfRealPropertyDelinquenciesToolStripMenuItem, realPropertyTaxStatementOfAccountToolStripMenuItem1, lTOMToolStripMenuItem });
             realPropertiesToolStripMenuItem.Name = "realPropertiesToolStripMenuItem";
             realPropertiesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             realPropertiesToolStripMenuItem.Text = "Real Properties";
@@ -1337,6 +1342,37 @@
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new System.Drawing.Size(72, 17);
             lblVersion.Text = "Version 0.0.0";
+            // 
+            // lTOMToolStripMenuItem
+            // 
+            lTOMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM16ToolStripMenuItem, lTOM17ToolStripMenuItem, lTOM18ToolStripMenuItem, lTOM19ToolStripMenuItem });
+            lTOMToolStripMenuItem.Name = "lTOMToolStripMenuItem";
+            lTOMToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            lTOMToolStripMenuItem.Text = "LTOM";
+            // 
+            // lTOM16ToolStripMenuItem
+            // 
+            lTOM16ToolStripMenuItem.Name = "lTOM16ToolStripMenuItem";
+            lTOM16ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM16ToolStripMenuItem.Text = "LTOM 16";
+            // 
+            // lTOM17ToolStripMenuItem
+            // 
+            lTOM17ToolStripMenuItem.Name = "lTOM17ToolStripMenuItem";
+            lTOM17ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM17ToolStripMenuItem.Text = "LTOM 17";
+            // 
+            // lTOM18ToolStripMenuItem
+            // 
+            lTOM18ToolStripMenuItem.Name = "lTOM18ToolStripMenuItem";
+            lTOM18ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM18ToolStripMenuItem.Text = "LTOM 18";
+            // 
+            // lTOM19ToolStripMenuItem
+            // 
+            lTOM19ToolStripMenuItem.Name = "lTOM19ToolStripMenuItem";
+            lTOM19ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM19ToolStripMenuItem.Text = "LTOM 19";
             // 
             // MainForm
             // 
@@ -1544,5 +1580,10 @@
         private Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxDelinquencyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOM16ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOM17ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOM18ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lTOM19ToolStripMenuItem;
     }
 }
