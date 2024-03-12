@@ -34,6 +34,7 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptDeliquency;
 using AccountingSystem.Views.Reports.RptReports;
@@ -755,6 +756,26 @@ namespace AccountingSystem.Views.Dashboard
         private void realPropertyTaxDelinquencyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRptDelinquencies().ShowDialog();
+        }
+
+        private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
+        }
+
+        private void lTOM17ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("First Notice").ShowDialog();
+        }
+
+        private void lTOM18ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Second Notice").ShowDialog();
+        }
+
+        private void lTOM19ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Final Notice").ShowDialog();
         }
 
     }
