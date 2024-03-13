@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         private char kindOfProperty;
         private decimal assessedValue;
         private string rdlcFile;
+        private string reportDataSource;
 
         public frmNoticeOfRealPropertyTaxDelinquency(string notice)
         {
@@ -42,14 +43,17 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
             {
                 case "First Notice":
                     rdlcFile = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
+                    reportDataSource = "dsNoticeOfRealPropertyTaxDelinquencyFirstNotice";
                     break;
 
                 case "Second Notice":
                     rdlcFile = "ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc";
+                    reportDataSource = "dsNoticeOfRealPropertyTaxDelinquencySecondNotice";
                     break;
 
                 case "Final Notice":
                     rdlcFile = "ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc";
+                    reportDataSource = "dsNoticeOfRealPropertyTaxDelinquencyFinalNotice";
                     break;
 
                 default:
@@ -84,17 +88,15 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
 
         private bool LoadReport(LocalReport localReport)
         {
-            try
+            string lguName = Helper.LGUDetails()["lgu_name"];
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "Notice of Delinquency in the Payment of Real Property Tax");
+
+            string signatoryName = string.Empty;
+            string signatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref signatoryName, ref signatoryTitle);
+
+            var reportParameters = new ReportParameter[]
             {
-                string lguName = Helper.LGUDetails()["lgu_name"];
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "Notice of Delinquency in the Payment of Real Property Tax");
-
-                string signatoryName = string.Empty;
-                string signatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref signatoryName, ref signatoryTitle);
-
-                var reportParameters = new ReportParameter[]
-                {
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramSignatory", signatoryName),
                     new ReportParameter("paramSignatoryTitle", signatoryTitle),
@@ -106,20 +108,24 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     new ReportParameter("paramLocationOfProperty", locationOfProperty),
                     new ReportParameter("paramKindOfProperty", kindOfProperty.ToString()),
                     new ReportParameter("paramAssessedValue", assessedValue.ToString("N"))
-                };
+            };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOM\\{rdlcFile}";
-                localReport.SetParameters(reportParameters);
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOM\\{rdlcFile}";
+            localReport.SetParameters(reportParameters);
 
-                localReport.DataSources.Clear();
-                localReport.DataSources.Add(new ReportDataSource("dsNoticeOfRealPropertyTaxDelinquencyFirstNotice", dataTable));
+            localReport.DataSources.Clear();
+            localReport.DataSources.Add(new ReportDataSource(reportDataSource, dataTable));
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
 
-                return true;
+            return true;
+
+            try
+            {
+
             }
             catch (Exception ex)
             {
