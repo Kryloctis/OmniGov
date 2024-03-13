@@ -25,6 +25,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         private string rdlcFile;
         private string reportDataSource;
 
+        private string delinquencyStatus;
+
         public frmNoticeOfRealPropertyTaxDelinquency(string notice)
         {
             InitializeComponent();
@@ -32,8 +34,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
             reportViewer = new ReportViewer();
             panel2.Controls.Add(reportViewer);
             reportViewer.Dock = DockStyle.Fill;
+            delinquencyStatus = notice;
+            notice = notice.Replace(" Sent", string.Empty);
             this.Text = $"{this.Text} ({notice})";
-
             ReportIdentifier(notice);
         }
 
@@ -41,6 +44,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         {
             switch (notice)
             {
+
                 case "First Notice":
                     rdlcFile = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
                     reportDataSource = "dsNoticeOfRealPropertyTaxDelinquencyFirstNotice";
@@ -88,15 +92,17 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
 
         private bool LoadReport(LocalReport localReport)
         {
-            string lguName = Helper.LGUDetails()["lgu_name"];
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "Notice of Delinquency in the Payment of Real Property Tax");
-
-            string signatoryName = string.Empty;
-            string signatoryTitle = string.Empty;
-            ParseSignatory(dictSignatory, ref signatoryName, ref signatoryTitle);
-
-            var reportParameters = new ReportParameter[]
+            try
             {
+                string lguName = Helper.LGUDetails()["lgu_name"];
+                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "Notice of Delinquency in the Payment of Real Property Tax");
+
+                string signatoryName = string.Empty;
+                string signatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref signatoryName, ref signatoryTitle);
+
+                var reportParameters = new ReportParameter[]
+                {
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramSignatory", signatoryName),
                     new ReportParameter("paramSignatoryTitle", signatoryTitle),
@@ -108,24 +114,20 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     new ReportParameter("paramLocationOfProperty", locationOfProperty),
                     new ReportParameter("paramKindOfProperty", kindOfProperty.ToString()),
                     new ReportParameter("paramAssessedValue", assessedValue.ToString("N"))
-            };
+                };
 
-            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOM\\{rdlcFile}";
-            localReport.SetParameters(reportParameters);
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\LTOM\\{rdlcFile}";
+                localReport.SetParameters(reportParameters);
 
-            localReport.DataSources.Clear();
-            localReport.DataSources.Add(new ReportDataSource(reportDataSource, dataTable));
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource(reportDataSource, dataTable));
 
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
 
-            return true;
-
-            try
-            {
-
+                return true;
             }
             catch (Exception ex)
             {
@@ -164,9 +166,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         }
 
 
-        internal void LoadDelinquentProperties(int taxpayerId)
+        internal void LoadDelinquentProperties(string delinquencyStatus, int taxpayerId)
         {
-            var dataTable = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerId(taxpayerId);
+            var dataTable = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquenciesByStatusAndTaxpayerId(delinquencyStatus, taxpayerId);
             cmbxDelinquentProperties.DataSource = dataTable;
             cmbxDelinquentProperties.ValueMember = "rpt_assessment_posts_id";
             cmbxDelinquentProperties.DisplayMember = "complete_arp_no";
@@ -181,9 +183,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
             try
             {
                 int taxpayerId = Convert.ToInt32(cmbxTaxpayer.SelectedValue);
-                var dtViewListOfRealPropertyTaxDelinquences = AccFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(taxpayerId, false);
 
-                dataTable = dtViewListOfRealPropertyTaxDelinquences;
+                dataTable = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquenciesByStatusAndTaxpayerId(delinquencyStatus, taxpayerId);
 
                 return dataTable;
             }
@@ -314,14 +315,27 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
             LoadTaxpayers();
         }
 
+
         private void cmbxTaxpayer_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
                 if (cmbxTaxpayer.SelectedValue is int taxpayerId)
-                    LoadDelinquentProperties(taxpayerId);
+                    LoadDelinquentProperties(delinquencyStatus, taxpayerId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void cmbxDelinquentStatus_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbxTaxpayer.SelectedValue is int taxpayerId)
+                    LoadDelinquentProperties(delinquencyStatus, taxpayerId);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
     }
 }

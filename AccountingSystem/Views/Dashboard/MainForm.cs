@@ -765,17 +765,17 @@ namespace AccountingSystem.Views.Dashboard
 
         private void lTOM17ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("First Notice").ShowDialog();
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("First Notice Sent").ShowDialog();
         }
 
         private void lTOM18ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("Second Notice").ShowDialog();
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Second Notice Sent").ShowDialog();
         }
 
         private void lTOM19ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("Final Notice").ShowDialog();
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Final Notice Sent").ShowDialog();
         }
 
     }

@@ -82,13 +82,13 @@
             cmbxTaxpayer.FormattingEnabled = true;
             cmbxTaxpayer.Location = new System.Drawing.Point(72, 3);
             cmbxTaxpayer.Name = "cmbxTaxpayer";
-            cmbxTaxpayer.Size = new System.Drawing.Size(269, 23);
+            cmbxTaxpayer.Size = new System.Drawing.Size(245, 23);
             cmbxTaxpayer.TabIndex = 20;
             cmbxTaxpayer.SelectedValueChanged += cmbxTaxpayer_SelectedValueChanged;
             // 
             // label1
             // 
-            label1.Location = new System.Drawing.Point(347, 3);
+            label1.Location = new System.Drawing.Point(323, 3);
             label1.Margin = new System.Windows.Forms.Padding(3);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(63, 23);
@@ -98,17 +98,17 @@
             // 
             // cmbxDelinquentProperties
             // 
-            cmbxDelinquentProperties.DropDownWidth = 200;
+            cmbxDelinquentProperties.DropDownWidth = 142;
             cmbxDelinquentProperties.FormattingEnabled = true;
-            cmbxDelinquentProperties.Location = new System.Drawing.Point(416, 3);
+            cmbxDelinquentProperties.Location = new System.Drawing.Point(392, 3);
             cmbxDelinquentProperties.Name = "cmbxDelinquentProperties";
-            cmbxDelinquentProperties.Size = new System.Drawing.Size(200, 23);
+            cmbxDelinquentProperties.Size = new System.Drawing.Size(142, 23);
             cmbxDelinquentProperties.TabIndex = 18;
             // 
             // btnRetrieve
             // 
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnRetrieve.Location = new System.Drawing.Point(622, 3);
+            btnRetrieve.Location = new System.Drawing.Point(540, 3);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(86, 23);
             btnRetrieve.TabIndex = 14;
