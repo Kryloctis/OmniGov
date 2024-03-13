@@ -169,11 +169,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         internal void LoadDelinquentProperties(string delinquencyStatus, int taxpayerId)
         {
             var dataTable = AccFactory.RptDelinquenciesRepository().GetViewRptDelinquenciesByStatusAndTaxpayerId(delinquencyStatus, taxpayerId);
+
             cmbxDelinquentProperties.DataSource = dataTable;
             cmbxDelinquentProperties.ValueMember = "rpt_assessment_posts_id";
             cmbxDelinquentProperties.DisplayMember = "complete_arp_no";
             cmbxDelinquentProperties.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbxDelinquentProperties.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
 
         private DataTable ReferenceDataTable()

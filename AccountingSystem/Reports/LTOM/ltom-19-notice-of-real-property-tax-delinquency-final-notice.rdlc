@@ -709,10 +709,11 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramTotalTaxDues.Value</Value>
+                    <Value>=Sum(CDec(Fields!total_amount.Value), "dsNoticeOfRealPropertyTaxDelinquencyFinalNotice")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>

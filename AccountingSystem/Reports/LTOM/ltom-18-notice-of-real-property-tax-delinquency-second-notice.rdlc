@@ -266,7 +266,7 @@
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>1.13949in</Top>
             <Left>1.45212in</Left>
-            <Height>0.5625in</Height>
+            <Height>0.47917in</Height>
             <Width>5.98646in</Width>
             <ZIndex>5</ZIndex>
             <Style>
@@ -711,10 +711,11 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramTaxDue.Value</Value>
+                    <Value>=Sum(Fields!total_amount.Value, "dsNoticeOfRealPropertyTaxDelinquencySecondNotice")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
