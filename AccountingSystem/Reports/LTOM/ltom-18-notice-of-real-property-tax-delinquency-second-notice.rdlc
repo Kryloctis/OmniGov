@@ -239,21 +239,22 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Records show that you have failed to settle your real property tax delinquency as provided in our letter date (</Value>
+                    <Value>Records show that you have failed to settle your real property tax delinquency as provided in our letter dated </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramDateOfFirstNotice.Value</Value>
+                    <Value>=Parameters!paramDateOfPreviousNotice.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>) and computed as follows:</Value>
+                    <Value> and computed as follows:</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -1419,7 +1420,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
-                                    <Format>0.00;(0.00)</Format>
+                                    <Format>n2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1801,7 +1802,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDateOfFirstNotice">
+    <ReportParameter Name="paramDateOfPreviousNotice">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1882,7 +1883,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramDateOfFirstNotice</ParameterName>
+          <ParameterName>paramDateOfPreviousNotice</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>

@@ -24,8 +24,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
         private decimal assessedValue;
         private string rdlcFile;
         private string reportDataSource;
-
         private string delinquencyStatus;
+        private DateTime dateOfPreviousNotice;
+
 
         public frmNoticeOfRealPropertyTaxDelinquency(string notice)
         {
@@ -106,6 +107,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramSignatory", signatoryName),
                     new ReportParameter("paramSignatoryTitle", signatoryTitle),
+                    new ReportParameter("paramDateOfPreviousNotice", dateOfPreviousNotice.ToString("MM-dd-yyyy")),
                     new ReportParameter("paramDeclaredOwner", declaredOwners),
                     new ReportParameter("paramCompleteAddress", declaredOwnerAddress),
                     new ReportParameter("paramDeclaredOwners", declaredOwners),
@@ -229,6 +231,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                     int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
                     int assessmentPostYear = Convert.ToInt32(row["year"]);
+                    DateTime dateOfPreviousNotice = Convert.ToDateTime(row["created_at"]);
 
                     decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
                     int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
@@ -266,6 +269,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM
                     locationOfProperty = rowPropertyLocation;
                     kindOfProperty = Convert.ToChar(rowKindOfProperty);
                     assessedValue = rowAssessedValue;
+                    this.dateOfPreviousNotice = dateOfPreviousNotice;
                     decimal totalAmount = sefTaxDue + basicTaxDue + basicPenalty + sefPenalty;
 
                     newRow["tax_year"] = rowTaxYear;
