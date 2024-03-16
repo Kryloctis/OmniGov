@@ -34,6 +34,7 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Reports.SAAOB;
@@ -310,7 +311,7 @@ namespace AccountingSystem.Views.Dashboard
             #region Journal Entry Voucher
 
             if (!Helper.HasPermission("Transaction > JEV"))
-                ucjevDashboard1.btnAddJEV.Enabled = false;
+                ucJevDashboard1.btnAddJEV.Enabled = false;
 
             if (Helper.HasPermission("Transaction > JEV") || Helper.HasPermission("Report > JEVs"))
                 tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);

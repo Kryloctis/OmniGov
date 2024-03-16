@@ -6,7 +6,7 @@ using System.Data;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface IRptAssessmentPostingRepository : IAccRepository<RptAssessmentPostsModel>
+    public interface IRptAssessmentPostsRepository : IAccRepository<RptAssessmentPostsModel>
     {
         bool IsPropertyPosted(string arpNo);
 
@@ -25,6 +25,10 @@ namespace RPT.Domain.Interfaces
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
         DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo);
+
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(int taxpayerID);
+
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID);
 
         DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo);
 

@@ -3,12 +3,11 @@ using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptAssessmentPostsRepository : IRptAssessmentPostingRepository
+    public class RptAssessmentPostsRepository : IRptAssessmentPostsRepository
     {
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
@@ -269,20 +268,6 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRecordsByArpNoDate(string arpNo, DateTime postedAt)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@complete_arp_no", DbType.String, arpNo},
-                new object[] { "@posted_at", DbType.DateTime, postedAt},
-            };
-
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @periodTo ORDER BY complete_arp_no ASC";
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-        }
-
         public DataTable GetBarangayRecords()
         {
             string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
@@ -356,6 +341,32 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id GROUP BY complete_arp_no";
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@real_property_id", DbType.Int32, realPropertyID }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND rpt_assessment_posts_id = @real_property_id ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+        }
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(int taxPayerID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@real_taxpayers_id", DbType.Int32, taxPayerID }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND real_taxpayers_id = @real_taxpayers_id  GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
         }
     }
 }
