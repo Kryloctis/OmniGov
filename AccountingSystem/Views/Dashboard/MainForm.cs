@@ -312,7 +312,7 @@ namespace AccountingSystem.Views.Dashboard
             #region Journal Entry Voucher
 
             if (!Helper.HasPermission("Transaction > JEV"))
-                ucjevDashboard1.btnAddJEV.Enabled = false;
+                ucJevDashboard1.btnAddJEV.Enabled = false;
 
             if (Helper.HasPermission("Transaction > JEV") || Helper.HasPermission("Report > JEVs"))
                 tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
