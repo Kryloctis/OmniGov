@@ -38,7 +38,7 @@ namespace AccountingSystem.DataSets {
         
         private dtLtom16DataTable tabledtLtom16;
         
-        private dtLtom17DataTable tabledtLtom17;
+        private dtLtom17_19DataTable tabledtLtom17_19;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -89,8 +89,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtLtom16"] != null)) {
                     base.Tables.Add(new dtLtom16DataTable(ds.Tables["dtLtom16"]));
                 }
-                if ((ds.Tables["dtLtom17"] != null)) {
-                    base.Tables.Add(new dtLtom17DataTable(ds.Tables["dtLtom17"]));
+                if ((ds.Tables["dtLtom17_19"] != null)) {
+                    base.Tables.Add(new dtLtom17_19DataTable(ds.Tables["dtLtom17_19"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -184,9 +184,9 @@ namespace AccountingSystem.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtLtom17DataTable dtLtom17 {
+        public dtLtom17_19DataTable dtLtom17_19 {
             get {
-                return this.tabledtLtom17;
+                return this.tabledtLtom17_19;
             }
         }
         
@@ -278,8 +278,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtLtom16"] != null)) {
                     base.Tables.Add(new dtLtom16DataTable(ds.Tables["dtLtom16"]));
                 }
-                if ((ds.Tables["dtLtom17"] != null)) {
-                    base.Tables.Add(new dtLtom17DataTable(ds.Tables["dtLtom17"]));
+                if ((ds.Tables["dtLtom17_19"] != null)) {
+                    base.Tables.Add(new dtLtom17_19DataTable(ds.Tables["dtLtom17_19"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -356,10 +356,10 @@ namespace AccountingSystem.DataSets {
                     this.tabledtLtom16.InitVars();
                 }
             }
-            this.tabledtLtom17 = ((dtLtom17DataTable)(base.Tables["dtLtom17"]));
+            this.tabledtLtom17_19 = ((dtLtom17_19DataTable)(base.Tables["dtLtom17_19"]));
             if ((initTable == true)) {
-                if ((this.tabledtLtom17 != null)) {
-                    this.tabledtLtom17.InitVars();
+                if ((this.tabledtLtom17_19 != null)) {
+                    this.tabledtLtom17_19.InitVars();
                 }
             }
         }
@@ -386,8 +386,8 @@ namespace AccountingSystem.DataSets {
             base.Tables.Add(this.tabledtAF51);
             this.tabledtLtom16 = new dtLtom16DataTable();
             base.Tables.Add(this.tabledtLtom16);
-            this.tabledtLtom17 = new dtLtom17DataTable();
-            base.Tables.Add(this.tabledtLtom17);
+            this.tabledtLtom17_19 = new dtLtom17_19DataTable();
+            base.Tables.Add(this.tabledtLtom17_19);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -434,7 +434,7 @@ namespace AccountingSystem.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializedtLtom17() {
+        private bool ShouldSerializedtLtom17_19() {
             return false;
         }
         
@@ -515,7 +515,7 @@ namespace AccountingSystem.DataSets {
         public delegate void dtLtom16RowChangeEventHandler(object sender, dtLtom16RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void dtLtom17RowChangeEventHandler(object sender, dtLtom17RowChangeEvent e);
+        public delegate void dtLtom17_19RowChangeEventHandler(object sender, dtLtom17_19RowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -3282,7 +3282,7 @@ namespace AccountingSystem.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtLtom17DataTable : global::System.Data.TypedTableBase<dtLtom17Row> {
+        public partial class dtLtom17_19DataTable : global::System.Data.TypedTableBase<dtLtom17_19Row> {
             
             private global::System.Data.DataColumn columntax_year;
             
@@ -3298,8 +3298,8 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17DataTable() {
-                this.TableName = "dtLtom17";
+            public dtLtom17_19DataTable() {
+                this.TableName = "dtLtom17_19";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -3307,7 +3307,7 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtLtom17DataTable(global::System.Data.DataTable table) {
+            internal dtLtom17_19DataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -3324,7 +3324,7 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected dtLtom17DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtLtom17_19DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -3388,34 +3388,34 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17Row this[int index] {
+            public dtLtom17_19Row this[int index] {
                 get {
-                    return ((dtLtom17Row)(this.Rows[index]));
+                    return ((dtLtom17_19Row)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom17RowChangeEventHandler dtLtom17RowChanging;
+            public event dtLtom17_19RowChangeEventHandler dtLtom17_19RowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom17RowChangeEventHandler dtLtom17RowChanged;
+            public event dtLtom17_19RowChangeEventHandler dtLtom17_19RowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom17RowChangeEventHandler dtLtom17RowDeleting;
+            public event dtLtom17_19RowChangeEventHandler dtLtom17_19RowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom17RowChangeEventHandler dtLtom17RowDeleted;
+            public event dtLtom17_19RowChangeEventHandler dtLtom17_19RowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AdddtLtom17Row(dtLtom17Row row) {
+            public void AdddtLtom17_19Row(dtLtom17_19Row row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17Row AdddtLtom17Row(int tax_year, decimal basic_tax, decimal basic_penalty, decimal sef_tax, decimal sef_penalty, decimal total_amount) {
-                dtLtom17Row rowdtLtom17Row = ((dtLtom17Row)(this.NewRow()));
+            public dtLtom17_19Row AdddtLtom17_19Row(int tax_year, decimal basic_tax, decimal basic_penalty, decimal sef_tax, decimal sef_penalty, decimal total_amount) {
+                dtLtom17_19Row rowdtLtom17_19Row = ((dtLtom17_19Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         tax_year,
                         basic_tax,
@@ -3423,15 +3423,15 @@ namespace AccountingSystem.DataSets {
                         sef_tax,
                         sef_penalty,
                         total_amount};
-                rowdtLtom17Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtLtom17Row);
-                return rowdtLtom17Row;
+                rowdtLtom17_19Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtLtom17_19Row);
+                return rowdtLtom17_19Row;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtLtom17DataTable cln = ((dtLtom17DataTable)(base.Clone()));
+                dtLtom17_19DataTable cln = ((dtLtom17_19DataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -3439,7 +3439,7 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtLtom17DataTable();
+                return new dtLtom17_19DataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3472,28 +3472,28 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17Row NewdtLtom17Row() {
-                return ((dtLtom17Row)(this.NewRow()));
+            public dtLtom17_19Row NewdtLtom17_19Row() {
+                return ((dtLtom17_19Row)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtLtom17Row(builder);
+                return new dtLtom17_19Row(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtLtom17Row);
+                return typeof(dtLtom17_19Row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtLtom17RowChanged != null)) {
-                    this.dtLtom17RowChanged(this, new dtLtom17RowChangeEvent(((dtLtom17Row)(e.Row)), e.Action));
+                if ((this.dtLtom17_19RowChanged != null)) {
+                    this.dtLtom17_19RowChanged(this, new dtLtom17_19RowChangeEvent(((dtLtom17_19Row)(e.Row)), e.Action));
                 }
             }
             
@@ -3501,8 +3501,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtLtom17RowChanging != null)) {
-                    this.dtLtom17RowChanging(this, new dtLtom17RowChangeEvent(((dtLtom17Row)(e.Row)), e.Action));
+                if ((this.dtLtom17_19RowChanging != null)) {
+                    this.dtLtom17_19RowChanging(this, new dtLtom17_19RowChangeEvent(((dtLtom17_19Row)(e.Row)), e.Action));
                 }
             }
             
@@ -3510,8 +3510,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtLtom17RowDeleted != null)) {
-                    this.dtLtom17RowDeleted(this, new dtLtom17RowChangeEvent(((dtLtom17Row)(e.Row)), e.Action));
+                if ((this.dtLtom17_19RowDeleted != null)) {
+                    this.dtLtom17_19RowDeleted(this, new dtLtom17_19RowChangeEvent(((dtLtom17_19Row)(e.Row)), e.Action));
                 }
             }
             
@@ -3519,14 +3519,14 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtLtom17RowDeleting != null)) {
-                    this.dtLtom17RowDeleting(this, new dtLtom17RowChangeEvent(((dtLtom17Row)(e.Row)), e.Action));
+                if ((this.dtLtom17_19RowDeleting != null)) {
+                    this.dtLtom17_19RowDeleting(this, new dtLtom17_19RowChangeEvent(((dtLtom17_19Row)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovedtLtom17Row(dtLtom17Row row) {
+            public void RemovedtLtom17_19Row(dtLtom17_19Row row) {
                 this.Rows.Remove(row);
             }
             
@@ -3553,7 +3553,7 @@ namespace AccountingSystem.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtLtom17DataTable";
+                attribute2.FixedValue = "dtLtom17_19DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5912,15 +5912,15 @@ namespace AccountingSystem.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtLtom17Row : global::System.Data.DataRow {
+        public partial class dtLtom17_19Row : global::System.Data.DataRow {
             
-            private dtLtom17DataTable tabledtLtom17;
+            private dtLtom17_19DataTable tabledtLtom17_19;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtLtom17Row(global::System.Data.DataRowBuilder rb) : 
+            internal dtLtom17_19Row(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtLtom17 = ((dtLtom17DataTable)(this.Table));
+                this.tabledtLtom17_19 = ((dtLtom17_19DataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5928,14 +5928,14 @@ namespace AccountingSystem.DataSets {
             public int tax_year {
                 get {
                     try {
-                        return ((int)(this[this.tabledtLtom17.tax_yearColumn]));
+                        return ((int)(this[this.tabledtLtom17_19.tax_yearColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'tax_year\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_year\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.tax_yearColumn] = value;
+                    this[this.tabledtLtom17_19.tax_yearColumn] = value;
                 }
             }
             
@@ -5944,14 +5944,14 @@ namespace AccountingSystem.DataSets {
             public decimal basic_tax {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom17.basic_taxColumn]));
+                        return ((decimal)(this[this.tabledtLtom17_19.basic_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.basic_taxColumn] = value;
+                    this[this.tabledtLtom17_19.basic_taxColumn] = value;
                 }
             }
             
@@ -5960,14 +5960,14 @@ namespace AccountingSystem.DataSets {
             public decimal basic_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom17.basic_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtLtom17_19.basic_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.basic_penaltyColumn] = value;
+                    this[this.tabledtLtom17_19.basic_penaltyColumn] = value;
                 }
             }
             
@@ -5976,14 +5976,14 @@ namespace AccountingSystem.DataSets {
             public decimal sef_tax {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom17.sef_taxColumn]));
+                        return ((decimal)(this[this.tabledtLtom17_19.sef_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.sef_taxColumn] = value;
+                    this[this.tabledtLtom17_19.sef_taxColumn] = value;
                 }
             }
             
@@ -5992,14 +5992,14 @@ namespace AccountingSystem.DataSets {
             public decimal sef_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom17.sef_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtLtom17_19.sef_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.sef_penaltyColumn] = value;
+                    this[this.tabledtLtom17_19.sef_penaltyColumn] = value;
                 }
             }
             
@@ -6008,87 +6008,87 @@ namespace AccountingSystem.DataSets {
             public decimal total_amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom17.total_amountColumn]));
+                        return ((decimal)(this[this.tabledtLtom17_19.total_amountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_amount\' in table \'dtLtom17\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_amount\' in table \'dtLtom17_19\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom17.total_amountColumn] = value;
+                    this[this.tabledtLtom17_19.total_amountColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Istax_yearNull() {
-                return this.IsNull(this.tabledtLtom17.tax_yearColumn);
+                return this.IsNull(this.tabledtLtom17_19.tax_yearColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Settax_yearNull() {
-                this[this.tabledtLtom17.tax_yearColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.tax_yearColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isbasic_taxNull() {
-                return this.IsNull(this.tabledtLtom17.basic_taxColumn);
+                return this.IsNull(this.tabledtLtom17_19.basic_taxColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setbasic_taxNull() {
-                this[this.tabledtLtom17.basic_taxColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.basic_taxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isbasic_penaltyNull() {
-                return this.IsNull(this.tabledtLtom17.basic_penaltyColumn);
+                return this.IsNull(this.tabledtLtom17_19.basic_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setbasic_penaltyNull() {
-                this[this.tabledtLtom17.basic_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.basic_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Issef_taxNull() {
-                return this.IsNull(this.tabledtLtom17.sef_taxColumn);
+                return this.IsNull(this.tabledtLtom17_19.sef_taxColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setsef_taxNull() {
-                this[this.tabledtLtom17.sef_taxColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.sef_taxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Issef_penaltyNull() {
-                return this.IsNull(this.tabledtLtom17.sef_penaltyColumn);
+                return this.IsNull(this.tabledtLtom17_19.sef_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setsef_penaltyNull() {
-                this[this.tabledtLtom17.sef_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.sef_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Istotal_amountNull() {
-                return this.IsNull(this.tabledtLtom17.total_amountColumn);
+                return this.IsNull(this.tabledtLtom17_19.total_amountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Settotal_amountNull() {
-                this[this.tabledtLtom17.total_amountColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom17_19.total_amountColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6334,22 +6334,22 @@ namespace AccountingSystem.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class dtLtom17RowChangeEvent : global::System.EventArgs {
+        public class dtLtom17_19RowChangeEvent : global::System.EventArgs {
             
-            private dtLtom17Row eventRow;
+            private dtLtom17_19Row eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17RowChangeEvent(dtLtom17Row row, global::System.Data.DataRowAction action) {
+            public dtLtom17_19RowChangeEvent(dtLtom17_19Row row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom17Row Row {
+            public dtLtom17_19Row Row {
                 get {
                     return this.eventRow;
                 }
