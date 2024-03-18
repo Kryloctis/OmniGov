@@ -48,6 +48,8 @@ namespace AccountingSystem.DataSets {
         
         private dtLtom29DataTable tabledtLtom29;
         
+        private dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable tabledtDeliquentPropertyWithIssuedWarrantOfLevy;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -111,6 +113,9 @@ namespace AccountingSystem.DataSets {
                 }
                 if ((ds.Tables["dtLtom29"] != null)) {
                     base.Tables.Add(new dtLtom29DataTable(ds.Tables["dtLtom29"]));
+                }
+                if ((ds.Tables["dtDeliquentPropertyWithIssuedWarrantOfLevy"] != null)) {
+                    base.Tables.Add(new dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable(ds.Tables["dtDeliquentPropertyWithIssuedWarrantOfLevy"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -252,6 +257,16 @@ namespace AccountingSystem.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable dtDeliquentPropertyWithIssuedWarrantOfLevy {
+            get {
+                return this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -352,6 +367,9 @@ namespace AccountingSystem.DataSets {
                 }
                 if ((ds.Tables["dtLtom29"] != null)) {
                     base.Tables.Add(new dtLtom29DataTable(ds.Tables["dtLtom29"]));
+                }
+                if ((ds.Tables["dtDeliquentPropertyWithIssuedWarrantOfLevy"] != null)) {
+                    base.Tables.Add(new dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable(ds.Tables["dtDeliquentPropertyWithIssuedWarrantOfLevy"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -458,6 +476,12 @@ namespace AccountingSystem.DataSets {
                     this.tabledtLtom29.InitVars();
                 }
             }
+            this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy = ((dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable)(base.Tables["dtDeliquentPropertyWithIssuedWarrantOfLevy"]));
+            if ((initTable == true)) {
+                if ((this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy != null)) {
+                    this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -492,6 +516,8 @@ namespace AccountingSystem.DataSets {
             base.Tables.Add(this.tabledtLtom26_27);
             this.tabledtLtom29 = new dtLtom29DataTable();
             base.Tables.Add(this.tabledtLtom29);
+            this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy = new dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable();
+            base.Tables.Add(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -563,6 +589,12 @@ namespace AccountingSystem.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializedtLtom29() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializedtDeliquentPropertyWithIssuedWarrantOfLevy() {
             return false;
         }
         
@@ -656,6 +688,9 @@ namespace AccountingSystem.DataSets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtLtom29RowChangeEventHandler(object sender, dtLtom29RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEventHandler(object sender, dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5059,6 +5094,309 @@ namespace AccountingSystem.DataSets {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable : global::System.Data.TypedTableBase<dtDeliquentPropertyWithIssuedWarrantOfLevyRow> {
+            
+            private global::System.Data.DataColumn columndeclared_owner;
+            
+            private global::System.Data.DataColumn columntax_declaration_no;
+            
+            private global::System.Data.DataColumn columnlocation_of_property;
+            
+            private global::System.Data.DataColumn columnkind_of_property;
+            
+            private global::System.Data.DataColumn columnassessed_value;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable() {
+                this.TableName = "dtDeliquentPropertyWithIssuedWarrantOfLevy";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn declared_ownerColumn {
+                get {
+                    return this.columndeclared_owner;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn tax_declaration_noColumn {
+                get {
+                    return this.columntax_declaration_no;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn location_of_propertyColumn {
+                get {
+                    return this.columnlocation_of_property;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn kind_of_propertyColumn {
+                get {
+                    return this.columnkind_of_property;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn assessed_valueColumn {
+                get {
+                    return this.columnassessed_value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyRow this[int index] {
+                get {
+                    return ((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEventHandler dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEventHandler dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEventHandler dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEventHandler dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AdddtDeliquentPropertyWithIssuedWarrantOfLevyRow(dtDeliquentPropertyWithIssuedWarrantOfLevyRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyRow AdddtDeliquentPropertyWithIssuedWarrantOfLevyRow(string declared_owner, string tax_declaration_no, string location_of_property, string kind_of_property, decimal assessed_value) {
+                dtDeliquentPropertyWithIssuedWarrantOfLevyRow rowdtDeliquentPropertyWithIssuedWarrantOfLevyRow = ((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        declared_owner,
+                        tax_declaration_no,
+                        location_of_property,
+                        kind_of_property,
+                        assessed_value};
+                rowdtDeliquentPropertyWithIssuedWarrantOfLevyRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtDeliquentPropertyWithIssuedWarrantOfLevyRow);
+                return rowdtDeliquentPropertyWithIssuedWarrantOfLevyRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable cln = ((dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columndeclared_owner = base.Columns["declared_owner"];
+                this.columntax_declaration_no = base.Columns["tax_declaration_no"];
+                this.columnlocation_of_property = base.Columns["location_of_property"];
+                this.columnkind_of_property = base.Columns["kind_of_property"];
+                this.columnassessed_value = base.Columns["assessed_value"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columndeclared_owner = new global::System.Data.DataColumn("declared_owner", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeclared_owner);
+                this.columntax_declaration_no = new global::System.Data.DataColumn("tax_declaration_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_declaration_no);
+                this.columnlocation_of_property = new global::System.Data.DataColumn("location_of_property", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlocation_of_property);
+                this.columnkind_of_property = new global::System.Data.DataColumn("kind_of_property", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnkind_of_property);
+                this.columnassessed_value = new global::System.Data.DataColumn("assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnassessed_value);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyRow NewdtDeliquentPropertyWithIssuedWarrantOfLevyRow() {
+                return ((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtDeliquentPropertyWithIssuedWarrantOfLevyRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtDeliquentPropertyWithIssuedWarrantOfLevyRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanged != null)) {
+                    this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanged(this, new dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent(((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanging != null)) {
+                    this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowChanging(this, new dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent(((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleted != null)) {
+                    this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleted(this, new dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent(((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleting != null)) {
+                    this.dtDeliquentPropertyWithIssuedWarrantOfLevyRowDeleting(this, new dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent(((dtDeliquentPropertyWithIssuedWarrantOfLevyRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovedtDeliquentPropertyWithIssuedWarrantOfLevyRow(dtDeliquentPropertyWithIssuedWarrantOfLevyRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsTreasury ds = new dsTreasury();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtRptTaxDuesPaymentsRow : global::System.Data.DataRow {
@@ -8403,6 +8741,166 @@ namespace AccountingSystem.DataSets {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtDeliquentPropertyWithIssuedWarrantOfLevyRow : global::System.Data.DataRow {
+            
+            private dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable tabledtDeliquentPropertyWithIssuedWarrantOfLevy;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtDeliquentPropertyWithIssuedWarrantOfLevyRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy = ((dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string declared_owner {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.declared_ownerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'declared_owner\' in table \'dtDeliquentPropertyWithIssuedWarr" +
+                                "antOfLevy\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.declared_ownerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string tax_declaration_no {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.tax_declaration_noColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_declaration_no\' in table \'dtDeliquentPropertyWithIssued" +
+                                "WarrantOfLevy\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.tax_declaration_noColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string location_of_property {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.location_of_propertyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'location_of_property\' in table \'dtDeliquentPropertyWithIssu" +
+                                "edWarrantOfLevy\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.location_of_propertyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string kind_of_property {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.kind_of_propertyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'kind_of_property\' in table \'dtDeliquentPropertyWithIssuedWa" +
+                                "rrantOfLevy\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.kind_of_propertyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal assessed_value {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.assessed_valueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'assessed_value\' in table \'dtDeliquentPropertyWithIssuedWarr" +
+                                "antOfLevy\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.assessed_valueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isdeclared_ownerNull() {
+                return this.IsNull(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.declared_ownerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setdeclared_ownerNull() {
+                this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.declared_ownerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istax_declaration_noNull() {
+                return this.IsNull(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.tax_declaration_noColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settax_declaration_noNull() {
+                this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.tax_declaration_noColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Islocation_of_propertyNull() {
+                return this.IsNull(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.location_of_propertyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setlocation_of_propertyNull() {
+                this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.location_of_propertyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iskind_of_propertyNull() {
+                return this.IsNull(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.kind_of_propertyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setkind_of_propertyNull() {
+                this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.kind_of_propertyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isassessed_valueNull() {
+                return this.IsNull(this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.assessed_valueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setassessed_valueNull() {
+                this[this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy.assessed_valueColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -8796,6 +9294,40 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtLtom29Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent : global::System.EventArgs {
+            
+            private dtDeliquentPropertyWithIssuedWarrantOfLevyRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyRowChangeEvent(dtDeliquentPropertyWithIssuedWarrantOfLevyRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtDeliquentPropertyWithIssuedWarrantOfLevyRow Row {
                 get {
                     return this.eventRow;
                 }
