@@ -67,6 +67,7 @@
 		<None Remove="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc" />
 		<None Remove="Reports\LTOM\ltom-29-certificate-of-sale.rdlc" />
 		<None Remove="Reports\LTOM\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc" />
+		<None Remove="Reports\LTOM\ltom-32-certificate-of-redemption.rdlc" />
 		<None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\post-trial-balance.rdlc" />
 		<None Remove="Reports\pre-trial-balance.rdlc" />
@@ -189,6 +190,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\LTOM\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Reports\LTOM\ltom-32-certificate-of-redemption.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\post-trial-balance.rdlc">
