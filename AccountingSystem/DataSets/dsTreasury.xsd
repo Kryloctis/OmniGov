@@ -171,7 +171,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="dtLtom26" msprop:Generator_RowEvHandlerName="dtLtom26RowChangeEventHandler" msprop:Generator_RowDeletedName="dtLtom26RowDeleted" msprop:Generator_RowDeletingName="dtLtom26RowDeleting" msprop:Generator_RowEvArgName="dtLtom26RowChangeEvent" msprop:Generator_TablePropName="dtLtom26" msprop:Generator_RowChangedName="dtLtom26RowChanged" msprop:Generator_RowChangingName="dtLtom26RowChanging" msprop:Generator_TableClassName="dtLtom26DataTable" msprop:Generator_RowClassName="dtLtom26Row" msprop:Generator_TableVarName="tabledtLtom26" msprop:Generator_UserTableName="dtLtom26">
+        <xs:element name="dtLtom26_27" msprop:Generator_RowEvHandlerName="dtLtom26_27RowChangeEventHandler" msprop:Generator_RowDeletedName="dtLtom26_27RowDeleted" msprop:Generator_RowDeletingName="dtLtom26_27RowDeleting" msprop:Generator_RowEvArgName="dtLtom26_27RowChangeEvent" msprop:Generator_TablePropName="dtLtom26_27" msprop:Generator_RowChangedName="dtLtom26_27RowChanged" msprop:Generator_RowChangingName="dtLtom26_27RowChanging" msprop:Generator_TableClassName="dtLtom26_27DataTable" msprop:Generator_RowClassName="dtLtom26_27Row" msprop:Generator_TableVarName="tabledtLtom26_27" msprop:Generator_UserTableName="dtLtom26_27">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="assigned_bidders_no" msprop:Generator_ColumnPropNameInRow="assigned_bidders_no" msprop:Generator_ColumnPropNameInTable="assigned_bidders_noColumn" msprop:Generator_ColumnVarNameInTable="columnassigned_bidders_no" msprop:Generator_UserColumnName="assigned_bidders_no" type="xs:string" minOccurs="0" />

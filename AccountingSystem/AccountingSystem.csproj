@@ -63,6 +63,8 @@
 		<None Remove="Reports\LTOM\ltom-22-report-of-levy.rdlc" />
 		<None Remove="Reports\LTOM\ltom-24-notice-of-sale.rdlc" />
 		<None Remove="Reports\LTOM\ltom-25-public-auction-registration-form.rdlc" />
+		<None Remove="Reports\LTOM\ltom-26-list-of-registered-bidders.rdlc" />
+		<None Remove="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc" />
 		<None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\post-trial-balance.rdlc" />
 		<None Remove="Reports\pre-trial-balance.rdlc" />
@@ -84,6 +86,11 @@
 		<None Remove="Reports\transaction_log.rdlc" />
 		<None Remove="Views\Dashboard\BudgetDashboard\ucBudgetSummary.resx~RF15fbe303.TMP" />
 		<None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Reports\LTOM\ltom-26-list-of-registered-bidders.rdlc">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Documents\updateLog.txt">
@@ -171,6 +178,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\LTOM\ltom-25-public-auction-registration-form.rdlc">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\post-trial-balance.rdlc">
