@@ -36,6 +36,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
+using AccountingSystem.Views.Reports.RptDeliquency;
 using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -748,6 +749,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 _ = new frmCattleTransfer().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void realPropertyTaxDelinquencyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptDelinquencies().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

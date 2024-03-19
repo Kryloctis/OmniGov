@@ -2152,5 +2152,59 @@ namespace AccountingSystem
             datagridView.Columns["payment_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
             datagridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
+
+        internal static void RptDelinquenciesDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["rpt_assessment_posts_id"].Visible = false;
+
+            dataGridView.Columns["complete_arp_no"].HeaderText = "Complete Arp No.";
+            dataGridView.Columns["complete_arp_no"].MinimumWidth = 120;
+            dataGridView.Columns["complete_arp_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["complete_arp_no"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView.Columns["taxpayer_name"].HeaderText = "Tax Payer";
+            dataGridView.Columns["taxpayer_name"].MinimumWidth = 200;
+            dataGridView.Columns["taxpayer_name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["taxpayer_name"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].MinimumWidth = 80;
+            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView.Columns["property_pin"].HeaderText = "Property Pin";
+            dataGridView.Columns["property_pin"].MinimumWidth = 80;
+            dataGridView.Columns["property_pin"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["property_pin"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
+            dataGridView.Columns["tax_due"].MinimumWidth = 100;
+            dataGridView.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["tax_due"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
+
+            dataGridView.Columns["delinquency_status"].HeaderText = "Delinquency Status";
+            dataGridView.Columns["delinquency_status"].MinimumWidth = 200;
+            dataGridView.Columns["delinquency_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["delinquency_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView.Columns["created_at"].HeaderText = "Date";
+            dataGridView.Columns["created_at"].MinimumWidth = 100;
+            dataGridView.Columns["created_at"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["created_at"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["created_at"].DefaultCellStyle.Format = "MM-dd-yyyy";
+
+            dataGridView.Columns["created_at"].Visible = true;
+            dataGridView.Columns["created_by"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["updated_by"].Visible = false;
+
+            dataGridView.Columns["complete_arp_no"].ReadOnly = false;
+            dataGridView.Columns["taxpayer_name"].ReadOnly = false;
+            dataGridView.Columns["property_kind"].ReadOnly = false;
+            dataGridView.Columns["delinquency_status"].ReadOnly = false;
+        }
     }
 }

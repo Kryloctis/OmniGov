@@ -201,5 +201,8 @@ namespace ACC.Data
         public static IPaymentFeesCharges PaymentFeesChargesRepository() => new PaymentFeesChargesRepository(mySqlGenericCommandsLFS);
 
         public static IPrevCattleOwnership PrevCattleOwnershipRepository() => new PrevCattleOwnershipRepository(mySqlGenericCommandsLFS);
+
+        public static IRptDelinquenciesRepository RptDelinquenciesRepository() => new RptDelinquenciesRepository(mySqlGenericCommandsLFS);
+
     }
 }
