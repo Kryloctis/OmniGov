@@ -104,6 +104,21 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetViewRptDelinquenciesByStatusAndTaxpayerId(string status, int taxpayerId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@delinquency_status", DbType.String, status },
+                new object[] { "@real_taxpayers_id", DbType.Int32, taxpayerId }
+
+            };
+
+            string query = $"SELECT * FROM {viewRptDelinquencies} WHERE delinquency_status = @delinquency_status AND real_taxpayers_id = @real_taxpayers_id";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();
