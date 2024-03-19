@@ -761,5 +761,25 @@ namespace AccountingSystem.Views.Dashboard
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
+        }
+
+        private void lTOM17ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("First Notice Sent").ShowDialog();
+        }
+
+        private void lTOM18ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Second Notice Sent").ShowDialog();
+        }
+
+        private void lTOM19ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmNoticeOfRealPropertyTaxDelinquency("Final Notice Sent").ShowDialog();
+        }
     }
 }
