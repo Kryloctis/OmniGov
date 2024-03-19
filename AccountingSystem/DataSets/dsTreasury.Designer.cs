@@ -44,7 +44,7 @@ namespace AccountingSystem.DataSets {
         
         private dtLtom24DataTable tabledtLtom24;
         
-        private dtLtom26_27DataTable tabledtLtom26_27;
+        private dtLtom26_27_28DataTable tabledtLtom26_27_28;
         
         private dtLtom29DataTable tabledtLtom29;
         
@@ -108,8 +108,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtLtom24"] != null)) {
                     base.Tables.Add(new dtLtom24DataTable(ds.Tables["dtLtom24"]));
                 }
-                if ((ds.Tables["dtLtom26_27"] != null)) {
-                    base.Tables.Add(new dtLtom26_27DataTable(ds.Tables["dtLtom26_27"]));
+                if ((ds.Tables["dtLtom26_27_28"] != null)) {
+                    base.Tables.Add(new dtLtom26_27_28DataTable(ds.Tables["dtLtom26_27_28"]));
                 }
                 if ((ds.Tables["dtLtom29"] != null)) {
                     base.Tables.Add(new dtLtom29DataTable(ds.Tables["dtLtom29"]));
@@ -239,9 +239,9 @@ namespace AccountingSystem.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtLtom26_27DataTable dtLtom26_27 {
+        public dtLtom26_27_28DataTable dtLtom26_27_28 {
             get {
-                return this.tabledtLtom26_27;
+                return this.tabledtLtom26_27_28;
             }
         }
         
@@ -362,8 +362,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtLtom24"] != null)) {
                     base.Tables.Add(new dtLtom24DataTable(ds.Tables["dtLtom24"]));
                 }
-                if ((ds.Tables["dtLtom26_27"] != null)) {
-                    base.Tables.Add(new dtLtom26_27DataTable(ds.Tables["dtLtom26_27"]));
+                if ((ds.Tables["dtLtom26_27_28"] != null)) {
+                    base.Tables.Add(new dtLtom26_27_28DataTable(ds.Tables["dtLtom26_27_28"]));
                 }
                 if ((ds.Tables["dtLtom29"] != null)) {
                     base.Tables.Add(new dtLtom29DataTable(ds.Tables["dtLtom29"]));
@@ -464,10 +464,10 @@ namespace AccountingSystem.DataSets {
                     this.tabledtLtom24.InitVars();
                 }
             }
-            this.tabledtLtom26_27 = ((dtLtom26_27DataTable)(base.Tables["dtLtom26_27"]));
+            this.tabledtLtom26_27_28 = ((dtLtom26_27_28DataTable)(base.Tables["dtLtom26_27_28"]));
             if ((initTable == true)) {
-                if ((this.tabledtLtom26_27 != null)) {
-                    this.tabledtLtom26_27.InitVars();
+                if ((this.tabledtLtom26_27_28 != null)) {
+                    this.tabledtLtom26_27_28.InitVars();
                 }
             }
             this.tabledtLtom29 = ((dtLtom29DataTable)(base.Tables["dtLtom29"]));
@@ -512,8 +512,8 @@ namespace AccountingSystem.DataSets {
             base.Tables.Add(this.tabledtLtom23);
             this.tabledtLtom24 = new dtLtom24DataTable();
             base.Tables.Add(this.tabledtLtom24);
-            this.tabledtLtom26_27 = new dtLtom26_27DataTable();
-            base.Tables.Add(this.tabledtLtom26_27);
+            this.tabledtLtom26_27_28 = new dtLtom26_27_28DataTable();
+            base.Tables.Add(this.tabledtLtom26_27_28);
             this.tabledtLtom29 = new dtLtom29DataTable();
             base.Tables.Add(this.tabledtLtom29);
             this.tabledtDeliquentPropertyWithIssuedWarrantOfLevy = new dtDeliquentPropertyWithIssuedWarrantOfLevyDataTable();
@@ -582,7 +582,7 @@ namespace AccountingSystem.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializedtLtom26_27() {
+        private bool ShouldSerializedtLtom26_27_28() {
             return false;
         }
         
@@ -684,7 +684,7 @@ namespace AccountingSystem.DataSets {
         public delegate void dtLtom24RowChangeEventHandler(object sender, dtLtom24RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void dtLtom26_27RowChangeEventHandler(object sender, dtLtom26_27RowChangeEvent e);
+        public delegate void dtLtom26_27_28RowChangeEventHandler(object sender, dtLtom26_27_28RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtLtom29RowChangeEventHandler(object sender, dtLtom29RowChangeEvent e);
@@ -4450,7 +4450,7 @@ namespace AccountingSystem.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtLtom26_27DataTable : global::System.Data.TypedTableBase<dtLtom26_27Row> {
+        public partial class dtLtom26_27_28DataTable : global::System.Data.TypedTableBase<dtLtom26_27_28Row> {
             
             private global::System.Data.DataColumn columnassigned_bidders_no;
             
@@ -4464,8 +4464,8 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27DataTable() {
-                this.TableName = "dtLtom26_27";
+            public dtLtom26_27_28DataTable() {
+                this.TableName = "dtLtom26_27_28";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -4473,7 +4473,7 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtLtom26_27DataTable(global::System.Data.DataTable table) {
+            internal dtLtom26_27_28DataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -4490,7 +4490,7 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected dtLtom26_27DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtLtom26_27_28DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -4546,49 +4546,49 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27Row this[int index] {
+            public dtLtom26_27_28Row this[int index] {
                 get {
-                    return ((dtLtom26_27Row)(this.Rows[index]));
+                    return ((dtLtom26_27_28Row)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom26_27RowChangeEventHandler dtLtom26_27RowChanging;
+            public event dtLtom26_27_28RowChangeEventHandler dtLtom26_27_28RowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom26_27RowChangeEventHandler dtLtom26_27RowChanged;
+            public event dtLtom26_27_28RowChangeEventHandler dtLtom26_27_28RowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom26_27RowChangeEventHandler dtLtom26_27RowDeleting;
+            public event dtLtom26_27_28RowChangeEventHandler dtLtom26_27_28RowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtLtom26_27RowChangeEventHandler dtLtom26_27RowDeleted;
+            public event dtLtom26_27_28RowChangeEventHandler dtLtom26_27_28RowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AdddtLtom26_27Row(dtLtom26_27Row row) {
+            public void AdddtLtom26_27_28Row(dtLtom26_27_28Row row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27Row AdddtLtom26_27Row(string assigned_bidders_no, string name_of_bidders_or_representative, string complete_address_or_business_address, string contact_no, string official_receipts_no) {
-                dtLtom26_27Row rowdtLtom26_27Row = ((dtLtom26_27Row)(this.NewRow()));
+            public dtLtom26_27_28Row AdddtLtom26_27_28Row(string assigned_bidders_no, string name_of_bidders_or_representative, string complete_address_or_business_address, string contact_no, string official_receipts_no) {
+                dtLtom26_27_28Row rowdtLtom26_27_28Row = ((dtLtom26_27_28Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         assigned_bidders_no,
                         name_of_bidders_or_representative,
                         complete_address_or_business_address,
                         contact_no,
                         official_receipts_no};
-                rowdtLtom26_27Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtLtom26_27Row);
-                return rowdtLtom26_27Row;
+                rowdtLtom26_27_28Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtLtom26_27_28Row);
+                return rowdtLtom26_27_28Row;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtLtom26_27DataTable cln = ((dtLtom26_27DataTable)(base.Clone()));
+                dtLtom26_27_28DataTable cln = ((dtLtom26_27_28DataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -4596,7 +4596,7 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtLtom26_27DataTable();
+                return new dtLtom26_27_28DataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4626,28 +4626,28 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27Row NewdtLtom26_27Row() {
-                return ((dtLtom26_27Row)(this.NewRow()));
+            public dtLtom26_27_28Row NewdtLtom26_27_28Row() {
+                return ((dtLtom26_27_28Row)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtLtom26_27Row(builder);
+                return new dtLtom26_27_28Row(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtLtom26_27Row);
+                return typeof(dtLtom26_27_28Row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtLtom26_27RowChanged != null)) {
-                    this.dtLtom26_27RowChanged(this, new dtLtom26_27RowChangeEvent(((dtLtom26_27Row)(e.Row)), e.Action));
+                if ((this.dtLtom26_27_28RowChanged != null)) {
+                    this.dtLtom26_27_28RowChanged(this, new dtLtom26_27_28RowChangeEvent(((dtLtom26_27_28Row)(e.Row)), e.Action));
                 }
             }
             
@@ -4655,8 +4655,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtLtom26_27RowChanging != null)) {
-                    this.dtLtom26_27RowChanging(this, new dtLtom26_27RowChangeEvent(((dtLtom26_27Row)(e.Row)), e.Action));
+                if ((this.dtLtom26_27_28RowChanging != null)) {
+                    this.dtLtom26_27_28RowChanging(this, new dtLtom26_27_28RowChangeEvent(((dtLtom26_27_28Row)(e.Row)), e.Action));
                 }
             }
             
@@ -4664,8 +4664,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtLtom26_27RowDeleted != null)) {
-                    this.dtLtom26_27RowDeleted(this, new dtLtom26_27RowChangeEvent(((dtLtom26_27Row)(e.Row)), e.Action));
+                if ((this.dtLtom26_27_28RowDeleted != null)) {
+                    this.dtLtom26_27_28RowDeleted(this, new dtLtom26_27_28RowChangeEvent(((dtLtom26_27_28Row)(e.Row)), e.Action));
                 }
             }
             
@@ -4673,14 +4673,14 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtLtom26_27RowDeleting != null)) {
-                    this.dtLtom26_27RowDeleting(this, new dtLtom26_27RowChangeEvent(((dtLtom26_27Row)(e.Row)), e.Action));
+                if ((this.dtLtom26_27_28RowDeleting != null)) {
+                    this.dtLtom26_27_28RowDeleting(this, new dtLtom26_27_28RowChangeEvent(((dtLtom26_27_28Row)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovedtLtom26_27Row(dtLtom26_27Row row) {
+            public void RemovedtLtom26_27_28Row(dtLtom26_27_28Row row) {
                 this.Rows.Remove(row);
             }
             
@@ -4707,7 +4707,7 @@ namespace AccountingSystem.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtLtom26_27DataTable";
+                attribute2.FixedValue = "dtLtom26_27_28DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -8347,15 +8347,15 @@ namespace AccountingSystem.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtLtom26_27Row : global::System.Data.DataRow {
+        public partial class dtLtom26_27_28Row : global::System.Data.DataRow {
             
-            private dtLtom26_27DataTable tabledtLtom26_27;
+            private dtLtom26_27_28DataTable tabledtLtom26_27_28;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtLtom26_27Row(global::System.Data.DataRowBuilder rb) : 
+            internal dtLtom26_27_28Row(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtLtom26_27 = ((dtLtom26_27DataTable)(this.Table));
+                this.tabledtLtom26_27_28 = ((dtLtom26_27_28DataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8363,14 +8363,14 @@ namespace AccountingSystem.DataSets {
             public string assigned_bidders_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom26_27.assigned_bidders_noColumn]));
+                        return ((string)(this[this.tabledtLtom26_27_28.assigned_bidders_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'assigned_bidders_no\' in table \'dtLtom26_27\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'assigned_bidders_no\' in table \'dtLtom26_27_28\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom26_27.assigned_bidders_noColumn] = value;
+                    this[this.tabledtLtom26_27_28.assigned_bidders_noColumn] = value;
                 }
             }
             
@@ -8379,15 +8379,15 @@ namespace AccountingSystem.DataSets {
             public string name_of_bidders_or_representative {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom26_27.name_of_bidders_or_representativeColumn]));
+                        return ((string)(this[this.tabledtLtom26_27_28.name_of_bidders_or_representativeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'name_of_bidders_or_representative\' in table \'dtLtom26_27\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'name_of_bidders_or_representative\' in table \'dtLtom26_27_28" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom26_27.name_of_bidders_or_representativeColumn] = value;
+                    this[this.tabledtLtom26_27_28.name_of_bidders_or_representativeColumn] = value;
                 }
             }
             
@@ -8396,15 +8396,15 @@ namespace AccountingSystem.DataSets {
             public string complete_address_or_business_address {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom26_27.complete_address_or_business_addressColumn]));
+                        return ((string)(this[this.tabledtLtom26_27_28.complete_address_or_business_addressColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'complete_address_or_business_address\' in table \'dtLtom26_27" +
-                                "\' is DBNull.", e);
+                                "_28\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom26_27.complete_address_or_business_addressColumn] = value;
+                    this[this.tabledtLtom26_27_28.complete_address_or_business_addressColumn] = value;
                 }
             }
             
@@ -8413,14 +8413,14 @@ namespace AccountingSystem.DataSets {
             public string contact_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom26_27.contact_noColumn]));
+                        return ((string)(this[this.tabledtLtom26_27_28.contact_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'contact_no\' in table \'dtLtom26_27\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'contact_no\' in table \'dtLtom26_27_28\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom26_27.contact_noColumn] = value;
+                    this[this.tabledtLtom26_27_28.contact_noColumn] = value;
                 }
             }
             
@@ -8429,75 +8429,75 @@ namespace AccountingSystem.DataSets {
             public string official_receipts_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom26_27.official_receipts_noColumn]));
+                        return ((string)(this[this.tabledtLtom26_27_28.official_receipts_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'official_receipts_no\' in table \'dtLtom26_27\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'official_receipts_no\' in table \'dtLtom26_27_28\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom26_27.official_receipts_noColumn] = value;
+                    this[this.tabledtLtom26_27_28.official_receipts_noColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isassigned_bidders_noNull() {
-                return this.IsNull(this.tabledtLtom26_27.assigned_bidders_noColumn);
+                return this.IsNull(this.tabledtLtom26_27_28.assigned_bidders_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setassigned_bidders_noNull() {
-                this[this.tabledtLtom26_27.assigned_bidders_noColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom26_27_28.assigned_bidders_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isname_of_bidders_or_representativeNull() {
-                return this.IsNull(this.tabledtLtom26_27.name_of_bidders_or_representativeColumn);
+                return this.IsNull(this.tabledtLtom26_27_28.name_of_bidders_or_representativeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setname_of_bidders_or_representativeNull() {
-                this[this.tabledtLtom26_27.name_of_bidders_or_representativeColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom26_27_28.name_of_bidders_or_representativeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Iscomplete_address_or_business_addressNull() {
-                return this.IsNull(this.tabledtLtom26_27.complete_address_or_business_addressColumn);
+                return this.IsNull(this.tabledtLtom26_27_28.complete_address_or_business_addressColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setcomplete_address_or_business_addressNull() {
-                this[this.tabledtLtom26_27.complete_address_or_business_addressColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom26_27_28.complete_address_or_business_addressColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Iscontact_noNull() {
-                return this.IsNull(this.tabledtLtom26_27.contact_noColumn);
+                return this.IsNull(this.tabledtLtom26_27_28.contact_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setcontact_noNull() {
-                this[this.tabledtLtom26_27.contact_noColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom26_27_28.contact_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isofficial_receipts_noNull() {
-                return this.IsNull(this.tabledtLtom26_27.official_receipts_noColumn);
+                return this.IsNull(this.tabledtLtom26_27_28.official_receipts_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setofficial_receipts_noNull() {
-                this[this.tabledtLtom26_27.official_receipts_noColumn] = global::System.Convert.DBNull;
+                this[this.tabledtLtom26_27_28.official_receipts_noColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -9244,22 +9244,22 @@ namespace AccountingSystem.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class dtLtom26_27RowChangeEvent : global::System.EventArgs {
+        public class dtLtom26_27_28RowChangeEvent : global::System.EventArgs {
             
-            private dtLtom26_27Row eventRow;
+            private dtLtom26_27_28Row eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27RowChangeEvent(dtLtom26_27Row row, global::System.Data.DataRowAction action) {
+            public dtLtom26_27_28RowChangeEvent(dtLtom26_27_28Row row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom26_27Row Row {
+            public dtLtom26_27_28Row Row {
                 get {
                     return this.eventRow;
                 }

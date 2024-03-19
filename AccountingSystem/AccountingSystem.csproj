@@ -66,6 +66,7 @@
 		<None Remove="Reports\LTOM\ltom-25-public-auction-registration-form.rdlc" />
 		<None Remove="Reports\LTOM\ltom-26-list-of-registered-bidders.rdlc" />
 		<None Remove="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc" />
+		<None Remove="Reports\LTOM\ltom-28-rules-and-regulation-of-public-auction.rdlc" />
 		<None Remove="Reports\LTOM\ltom-29-certificate-of-sale.rdlc" />
 		<None Remove="Reports\LTOM\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc" />
 		<None Remove="Reports\LTOM\ltom-32-certificate-of-redemption.rdlc" />
@@ -189,6 +190,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Reports\LTOM\ltom-28-rules-and-regulation-of-public-auction.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\LTOM\ltom-29-certificate-of-sale.rdlc">
