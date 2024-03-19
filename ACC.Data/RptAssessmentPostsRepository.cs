@@ -343,6 +343,7 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
+
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID)
         {
             var parameter = new object[][]
@@ -367,6 +368,14 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+        }
+
+        public DataTable GetViewDeliquentRecords()
+        {
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE posted_at <= CURDATE() AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
     }
 }

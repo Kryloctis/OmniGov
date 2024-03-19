@@ -137,6 +137,8 @@
             checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            realPropertyTaxDelinquencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             collectionPaymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             reportOfCollectionsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1055,7 +1057,7 @@
             // 
             // toolStripSplitButton3
             // 
-            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, paymentHistoryToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem });
+            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, paymentHistoryToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem, toolStripSeparator5, realPropertyTaxDelinquencyToolStripMenuItem });
             toolStripSplitButton3.Image = Properties.Resources.money_2_24px;
             toolStripSplitButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1067,7 +1069,7 @@
             // 
             paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rPTToolStripMenuItem, aF5157ToolStripMenuItem, aF54ToolStripMenuItem, aF58BurialPermitToolStripMenuItem, aF53CattleToolStripMenuItem, aF52CattleTransferToolStripMenuItem });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            paymentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            paymentsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             paymentsToolStripMenuItem.Text = "Payments";
             // 
             // rPTToolStripMenuItem
@@ -1115,47 +1117,59 @@
             // paymentHistoryToolStripMenuItem
             // 
             paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
-            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             paymentHistoryToolStripMenuItem.Text = "Payment History";
             paymentHistoryToolStripMenuItem.Click += paymentHistoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator10
             // 
             toolStripSeparator10.Name = "toolStripSeparator10";
-            toolStripSeparator10.Size = new System.Drawing.Size(214, 6);
+            toolStripSeparator10.Size = new System.Drawing.Size(230, 6);
             // 
             // assessmentPostingToolStripMenuItem
             // 
             assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
-            assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
             assessmentPostingToolStripMenuItem.Click += assessmentPostingToolStripMenuItem_Click;
             // 
             // toolStripSeparator11
             // 
             toolStripSeparator11.Name = "toolStripSeparator11";
-            toolStripSeparator11.Size = new System.Drawing.Size(214, 6);
+            toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
             // 
             // checkIssuanceToolStripMenuItem
             // 
             checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
-            checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             checkIssuanceToolStripMenuItem.Click += CheckIssuanceToolStripMenuItem_Click;
             // 
             // releasedAndUnreleaseChecksToolStripMenu
             // 
             releasedAndUnreleaseChecksToolStripMenu.Name = "releasedAndUnreleaseChecksToolStripMenu";
-            releasedAndUnreleaseChecksToolStripMenu.Size = new System.Drawing.Size(217, 22);
+            releasedAndUnreleaseChecksToolStripMenu.Size = new System.Drawing.Size(233, 22);
             releasedAndUnreleaseChecksToolStripMenu.Text = "Release/Unreleased Checks";
             releasedAndUnreleaseChecksToolStripMenu.Click += releasedAndUnreleaseChecksToolStripMenu_Click;
             // 
             // bankDepositToolStripMenuItem
             // 
             bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            bankDepositToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            bankDepositToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             bankDepositToolStripMenuItem.Text = "Bank Deposit";
             bankDepositToolStripMenuItem.Click += bankDepositToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
+            // 
+            // realPropertyTaxDelinquencyToolStripMenuItem
+            // 
+            realPropertyTaxDelinquencyToolStripMenuItem.Name = "realPropertyTaxDelinquencyToolStripMenuItem";
+            realPropertyTaxDelinquencyToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            realPropertyTaxDelinquencyToolStripMenuItem.Text = "Real Property Tax Delinquency";
+            realPropertyTaxDelinquencyToolStripMenuItem.Click += realPropertyTaxDelinquencyToolStripMenuItem_Click;
             // 
             // toolStripSplitButton4
             // 
@@ -1525,5 +1539,7 @@
         private ucJevDashboard ucJevDashboard1;
         private Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem realPropertyTaxDelinquencyToolStripMenuItem;
     }
 }
