@@ -160,8 +160,6 @@ namespace AccountingSystem
             txtPassword.PasswordChar = '•';
         }
 
-        #region Validations
-
         private bool Server_Validated()
         {
             string errorMessage;
@@ -193,10 +191,10 @@ namespace AccountingSystem
 
         private bool Username_Password_Validated()
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text.Trim();
-            int userId = AccFactory.UsersRepository().ValidateLogin(username, password);
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
 
+            int userId = AccFactory.UsersRepository().ValidateLogin(username, password);
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 string errorMessage = "Please enter username and password.";
@@ -220,7 +218,7 @@ namespace AccountingSystem
             txtPassword.Tag = string.Empty;
         }
 
-        private void Username_Password_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Username_Password_Validating(object sender, CancelEventArgs e)
         {
             try
             {
@@ -228,7 +226,5 @@ namespace AccountingSystem
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Validations
     }
 }
