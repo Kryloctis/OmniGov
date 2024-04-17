@@ -529,7 +529,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void reportOfCollectionsRCDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRCD().ShowDialog();
+            _ = new frmRcd().ShowDialog();
         }
 
         private void abstractOfGeneralCollectionsToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1195,7 +1195,6 @@
             // 
             // reportOfCollectionsRCDToolStripMenuItem
             // 
-            reportOfCollectionsRCDToolStripMenuItem.Enabled = false;
             reportOfCollectionsRCDToolStripMenuItem.Name = "reportOfCollectionsRCDToolStripMenuItem";
             reportOfCollectionsRCDToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             reportOfCollectionsRCDToolStripMenuItem.Text = "Report of Collections Deposits (RCD)";
@@ -1259,28 +1258,28 @@
             // lTOM16ToolStripMenuItem
             // 
             lTOM16ToolStripMenuItem.Name = "lTOM16ToolStripMenuItem";
-            lTOM16ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM16ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             lTOM16ToolStripMenuItem.Text = "LTOM 16";
             lTOM16ToolStripMenuItem.Click += lTOM16ToolStripMenuItem_Click;
             // 
             // lTOM17ToolStripMenuItem
             // 
             lTOM17ToolStripMenuItem.Name = "lTOM17ToolStripMenuItem";
-            lTOM17ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM17ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             lTOM17ToolStripMenuItem.Text = "LTOM 17";
             lTOM17ToolStripMenuItem.Click += lTOM17ToolStripMenuItem_Click;
             // 
             // lTOM18ToolStripMenuItem
             // 
             lTOM18ToolStripMenuItem.Name = "lTOM18ToolStripMenuItem";
-            lTOM18ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM18ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             lTOM18ToolStripMenuItem.Text = "LTOM 18";
             lTOM18ToolStripMenuItem.Click += lTOM18ToolStripMenuItem_Click;
             // 
             // lTOM19ToolStripMenuItem
             // 
             lTOM19ToolStripMenuItem.Name = "lTOM19ToolStripMenuItem";
-            lTOM19ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            lTOM19ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             lTOM19ToolStripMenuItem.Text = "LTOM 19";
             lTOM19ToolStripMenuItem.Click += lTOM19ToolStripMenuItem_Click;
             // 
