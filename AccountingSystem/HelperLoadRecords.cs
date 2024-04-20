@@ -2057,6 +2057,7 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["report_no"].HeaderText = "Report No.";
             dataGridView.Columns["date"].HeaderText = "Date";
+            dataGridView.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
             dataGridView.Columns["created_by_name"].HeaderText = "Accountable Officer";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["created_by_id"].Visible = false;

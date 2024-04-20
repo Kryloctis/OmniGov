@@ -87,7 +87,7 @@ namespace ACC.Data
                 new object[] { "@row_filter", DbType.Int32, rowFilter},
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE (report_no LIKE @search_key OR first_name LIKE @search_key OR last_name LIKE @search_key) AND date < @date LIMIT @row_filter";
+            string query = $"SELECT * FROM {viewTableName} WHERE (report_no LIKE @search_key OR first_name LIKE @search_key OR last_name LIKE @search_key) AND (DATE(date) <= @date) LIMIT @row_filter";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
@@ -100,7 +100,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@funds_id", DbType.Int32, entity.FundsModel.Id},
+                new object[] { "@funds_id", DbType.Object, entity.FundsModel == null? null : entity.FundsModel.Id},
                 new object[] { "@report_no", DbType.String, entity.ReportNo},
                 new object[] { "@date", DbType.DateTime, entity.Date},
                 new object[] { "@created_by", DbType.Int32, entity.CreatedBy.Id}

@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Org.BouncyCastle.Asn1.BC;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -214,6 +215,18 @@ namespace AccountingSystem.Views.Reports.RCD
             if (isEdit) model.Id = rcdId.Value;
 
             return model;
+        }
+
+        internal List<RcdCollectionsModel> RcdCollectionsModels()
+        {
+            var models = new List<RcdCollectionsModel>();
+            return models;
+        }
+
+        internal List<RcdDepositsModel> RcdDepositsModels()
+        {
+            var models = new List<RcdDepositsModel>();
+            return models;
         }
     }
 }

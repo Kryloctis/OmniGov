@@ -124,6 +124,8 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
                 var dtDb = AccFactory.RcdRepository().GetViewRecords(parameters.searchKey, parameters.date, parameters.rowFilter);
+                int totalProgressCount = dtDb.Rows.Count;
+                int progressCount = 0;
                 var dataTable = new DataTable();
                 var dataColumns = new List<DataColumn>()
                 {
@@ -150,6 +152,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     newRow["created_at"] = row["created_at"];
 
                     dataTable.Rows.Add(newRow);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
                 e.Result = dataTable;
@@ -180,6 +184,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 }
 
                 HelperLoadRecords.DgvRcd(dataGridView1, dataTable);
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -210,7 +215,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 return false;
             }
 
-            return true;
+            return AccFactory.RcdRepository().InsertWithCollectionsDeposits(ucRcd.RcdModel(), ucRcd.RcdCollectionsModels(), ucRcd.RcdDepositsModels());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
