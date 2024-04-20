@@ -840,162 +840,6 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        internal static void RCDSearchDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "Id");
-            datagrid.Columns.Add("rcd_no", "RCD No. ");
-            datagrid.Columns.Add("date", "Date");
-            datagrid.Columns.Add("report_no", "Date");
-            datagrid.Columns.Add("users_id", "User Id");
-            datagrid.Columns.Add("user", "Liquidating Officer");
-            datagrid.Columns.Add("amount", "Total Amount");
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["users_id"].Visible = false;
-            datagrid.Columns["report_no"].Visible = false;
-
-            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 100;
-            datagrid.Columns["amount"].MinimumWidth = 100;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
-            foreach (DataRow drRCD in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    drRCD["id"],
-                    drRCD["rcd_no"],
-                    drRCD["rcd_date"],
-                    drRCD["report_no"],
-                    drRCD["users_id"],
-                    drRCD["user"],
-                    drRCD["amount"]
-                });
-            }
-
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "Id");
-            datagrid.Columns.Add("collecting_officers_id", "Collector Id");
-            datagrid.Columns.Add("collecting_officer", "Collector");
-            datagrid.Columns.Add("report_no", "Report No.");
-            datagrid.Columns.Add("amount", "Amount");
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["collecting_officers_id"].Visible = false;
-
-            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 100;
-            datagrid.Columns["amount"].MinimumWidth = 100;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            foreach (DataRow drRCD in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    drRCD["id"],
-                    drRCD["collecting_officers_id"],
-                    drRCD["collecting_officer"],
-                    drRCD["report_no"],
-                    drRCD["amount"]
-                });
-            }
-
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            datagrid.Columns.Add("id", "Id");
-            datagrid.Columns.Add("report_no", "Report No. ");
-            datagrid.Columns.Add("collecting_officers_id", "Collecting Officer Id");
-            datagrid.Columns.Add("collector_officer", "Collecting Officer");
-            datagrid.Columns.Add("fund_id", "Fund Id");
-            datagrid.Columns.Add("fund_name", "Fund");
-            datagrid.Columns.Add("date", "Date");
-            datagrid.Columns.Add("is_approved", "is_approved");
-            datagrid.Columns.Add("is_disapproved", "is_disapproved");
-            datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("status", "Status");
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["collecting_officers_id"].Visible = false;
-            datagrid.Columns["collector_officer"].Visible = false;
-            datagrid.Columns["fund_id"].Visible = false;
-            datagrid.Columns["is_approved"].Visible = false;
-            datagrid.Columns["is_disapproved"].Visible = false;
-
-            datagrid.Columns["status"].Width = 90;
-            datagrid.Columns["status"].MinimumWidth = 90;
-            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 80;
-            datagrid.Columns["amount"].MinimumWidth = 80;
-            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var status = Convert.ToInt16(row["is_approved"].ToString()) == 1 ? " Approved" :
-                             Convert.ToInt16(row["is_disapproved"].ToString()) == 1 ? " Disapproved" : " Pending";
-
-                string collectingOfficerId;
-                string collectingOfficer;
-                if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
-                {
-                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
-                    collectingOfficerId = row["collecting_officers_id"].ToString();
-                }
-                else
-                {
-                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
-                    collectingOfficerId = row["job_orders_id"].ToString();
-                }
-
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["report_no"],
-                    collectingOfficerId,
-                    collectingOfficer,
-                    row["fund_id"],
-                    row["fund_name"],
-                    row["date"],
-                    row["is_approved"],
-                    row["is_disapproved"],
-                    row["amount"],
-                    status
-                });
-            }
-
-            float fontSize = 8.5f;
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
         internal static void RCIObligationDatagridview(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -2205,6 +2049,17 @@ namespace AccountingSystem
             dataGridView.Columns["taxpayer_name"].ReadOnly = false;
             dataGridView.Columns["property_kind"].ReadOnly = false;
             dataGridView.Columns["delinquency_status"].ReadOnly = false;
+        }
+
+        internal static void DgvRcd(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["report_no"].HeaderText = "Report No.";
+            dataGridView.Columns["date"].HeaderText = "Date";
+            dataGridView.Columns["created_by_name"].HeaderText = "Accountable Officer";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_by_id"].Visible = false;
         }
     }
 }

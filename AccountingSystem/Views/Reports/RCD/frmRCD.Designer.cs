@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            panel2 = new System.Windows.Forms.Panel();
+            cmbxRowFilter = new System.Windows.Forms.ComboBox();
+            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -45,26 +48,26 @@
             tabPageForm = new System.Windows.Forms.TabPage();
             ucRcd1 = new ucRcd();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
-            btnBack = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            btnSave = new System.Windows.Forms.ToolStripButton();
             tabPagePrint = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            panel2 = new System.Windows.Forms.Panel();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            btnBack = new System.Windows.Forms.ToolStripButton();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnSave = new System.Windows.Forms.Button();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePrint.SuspendLayout();
             toolStrip3.SuspendLayout();
-            panel2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -81,7 +84,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(1115, 571);
+            tabControl1.Size = new System.Drawing.Size(719, 598);
             tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl1.TabIndex = 8;
             // 
@@ -94,37 +97,38 @@
             tabPageList.Location = new System.Drawing.Point(4, 5);
             tabPageList.Margin = new System.Windows.Forms.Padding(0);
             tabPageList.Name = "tabPageList";
-            tabPageList.Size = new System.Drawing.Size(1107, 562);
+            tabPageList.Size = new System.Drawing.Size(711, 589);
             tabPageList.TabIndex = 0;
             tabPageList.Text = "List";
             tabPageList.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(0, 70);
             dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(1107, 492);
+            dataGridView1.Size = new System.Drawing.Size(711, 519);
             dataGridView1.TabIndex = 1;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // progressBar1
             // 
@@ -132,8 +136,38 @@
             progressBar1.Location = new System.Drawing.Point(0, 65);
             progressBar1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(1107, 5);
+            progressBar1.Size = new System.Drawing.Size(711, 5);
             progressBar1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(cmbxRowFilter);
+            panel2.Controls.Add(dateTimePicker1);
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Location = new System.Drawing.Point(0, 35);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(711, 30);
+            panel2.TabIndex = 3;
+            // 
+            // cmbxRowFilter
+            // 
+            cmbxRowFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxRowFilter.FormattingEnabled = true;
+            cmbxRowFilter.Location = new System.Drawing.Point(3, 3);
+            cmbxRowFilter.Name = "cmbxRowFilter";
+            cmbxRowFilter.Size = new System.Drawing.Size(121, 23);
+            cmbxRowFilter.TabIndex = 1;
+            cmbxRowFilter.SelectionChangeCommitted += cmbxRowFilter_SelectionChangeCommitted;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
+            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new System.Drawing.Point(130, 3);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new System.Drawing.Size(116, 23);
+            dateTimePicker1.TabIndex = 0;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // toolStrip1
             // 
@@ -144,7 +178,7 @@
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(1107, 35);
+            toolStrip1.Size = new System.Drawing.Size(711, 35);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -182,6 +216,7 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -207,11 +242,12 @@
             // tabPageForm
             // 
             tabPageForm.Controls.Add(ucRcd1);
+            tabPageForm.Controls.Add(flowLayoutPanel1);
             tabPageForm.Controls.Add(toolStrip2);
             tabPageForm.Location = new System.Drawing.Point(4, 5);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageForm.Name = "tabPageForm";
-            tabPageForm.Size = new System.Drawing.Size(1107, 562);
+            tabPageForm.Size = new System.Drawing.Size(711, 589);
             tabPageForm.TabIndex = 1;
             tabPageForm.Text = "Form";
             tabPageForm.UseVisualStyleBackColor = true;
@@ -221,9 +257,9 @@
             ucRcd1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucRcd1.Location = new System.Drawing.Point(0, 35);
-            ucRcd1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ucRcd1.Margin = new System.Windows.Forms.Padding(0);
             ucRcd1.Name = "ucRcd1";
-            ucRcd1.Size = new System.Drawing.Size(1107, 527);
+            ucRcd1.Size = new System.Drawing.Size(711, 524);
             ucRcd1.TabIndex = 11;
             // 
             // toolStrip2
@@ -232,35 +268,13 @@
             toolStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnBack, toolStripSeparator2, btnSave });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnBack });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(1107, 35);
+            toolStrip2.Size = new System.Drawing.Size(711, 35);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
-            // 
-            // btnBack
-            // 
-            btnBack.Image = Properties.Resources.arrow_left_20px;
-            btnBack.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnBack.Name = "btnBack";
-            btnBack.Size = new System.Drawing.Size(56, 24);
-            btnBack.Text = "Back";
-            btnBack.Click += btnBack_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // btnSave
-            // 
-            btnSave.Image = Properties.Resources.save_filled_20px;
-            btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(55, 24);
-            btnSave.Text = "Save";
             // 
             // tabPagePrint
             // 
@@ -269,7 +283,7 @@
             tabPagePrint.Location = new System.Drawing.Point(4, 5);
             tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
             tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(1107, 562);
+            tabPagePrint.Size = new System.Drawing.Size(711, 589);
             tabPagePrint.TabIndex = 2;
             tabPagePrint.Text = "tabPagePrint";
             tabPagePrint.UseVisualStyleBackColor = true;
@@ -280,7 +294,7 @@
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1107, 527);
+            panel1.Size = new System.Drawing.Size(711, 554);
             panel1.TabIndex = 1;
             // 
             // toolStrip3
@@ -292,7 +306,7 @@
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(1107, 35);
+            toolStrip3.Size = new System.Drawing.Size(711, 35);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
             // 
@@ -307,9 +321,9 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 571);
+            statusStrip1.Location = new System.Drawing.Point(0, 598);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(1115, 22);
+            statusStrip1.Size = new System.Drawing.Size(719, 22);
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -322,43 +336,64 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // panel2
+            // backgroundWorker1
             // 
-            panel2.Controls.Add(dateTimePicker1);
-            panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            panel2.Location = new System.Drawing.Point(0, 35);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(1107, 30);
-            panel2.TabIndex = 3;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // dateTimePicker1
+            // btnBack
             // 
-            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(3, 3);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(116, 23);
-            dateTimePicker1.TabIndex = 0;
+            btnBack.Image = Properties.Resources.arrow_left_20px;
+            btnBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnBack.Name = "btnBack";
+            btnBack.Size = new System.Drawing.Size(56, 24);
+            btnBack.Text = "Back";
+            btnBack.Click += btnBack_Click;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 559);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(711, 30);
+            flowLayoutPanel1.TabIndex = 12;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new System.Drawing.Point(558, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // frmRcd
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(1115, 593);
+            ClientSize = new System.Drawing.Size(719, 620);
             Controls.Add(tabControl1);
             Controls.Add(statusStrip1);
             Font = new System.Drawing.Font("Segoe UI", 9F);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MinimumSize = new System.Drawing.Size(1131, 632);
             Name = "frmRcd";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Reports > Report of Collections and Deposits";
+            Load += frmRcd_Load;
             tabControl1.ResumeLayout(false);
             tabPageList.ResumeLayout(false);
             tabPageList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel2.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
@@ -369,7 +404,7 @@
             tabPagePrint.PerformLayout();
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
-            panel2.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -388,12 +423,9 @@
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnPrint;
         private ucRcd ucRcd1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.TabPage tabPagePrint;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
@@ -401,5 +433,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ComboBox cmbxRowFilter;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ToolStripButton btnBack;
     }
 }

@@ -1,20 +1,219 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Org.BouncyCastle.Asn1.BC;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class ucRcd : UserControl
     {
+        private int? rcdId;
+        private bool isEdit;
+
         public ucRcd()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            Helper.DatagridFullRowSelectStyle(dataGridView2, true);
+        }
+
+        internal void ResetForm()
+        {
+            rcdId = null;
+            txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
+            dtDate.Value = Helper.GetCurrentDate();
+            txtReportNo.Clear();
+            LoadFunds();
+        }
+
+        internal void OnLoad(bool isEdit, int? rcdId)
+        {
+            this.rcdId = rcdId;
+            this.isEdit = isEdit;
+            dtDate.Value = Helper.GetCurrentDate();
+            txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
+            LoadFunds();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtReportNo),
+                errorProvider1.GetError(checkBox1),
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        private void LoadFunds()
+        {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+        }
+
+        private void LoadCollections(DateTime dateFrom, DateTime dateTo)
+        {
+        }
+
+        private void LoadDeposits(DateTime dateFrom, DateTime dateTo)
+        {
+        }
+
+        private void dtCollectionsFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtCollectionsFrom.Value;
+                var dateTo = dtCollectionsTo.Value;
+                LoadCollections(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtCollectionsTo_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtCollectionsFrom.Value;
+                var dateTo = dtCollectionsTo.Value;
+                LoadCollections(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtDepositsFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtDepositsFrom.Value;
+                var dateTo = dtDepositsTo.Value;
+                LoadDeposits(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtDepositsTo_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtDepositsFrom.Value;
+                var dateTo = dtDepositsTo.Value;
+                LoadDeposits(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRefreshCollections_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtCollectionsFrom.Value;
+                var dateTo = dtCollectionsTo.Value;
+                LoadCollections(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRefreshDeposits_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dateFrom = dtDepositsFrom.Value;
+                var dateTo = dtDepositsTo.Value;
+                LoadDeposits(dateFrom, dateTo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool ReportNoValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            bool isValidated;
+            bool reportNoExist = isEdit ? AccFactory.RcdRepository().reportNoExist(textBox.Text.Trim(), rcdId.Value) : AccFactory.RcdRepository().reportNoExist(textBox.Text.Trim());
+
+            isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Report No.") && !reportNoExist;
+            errorProvider.SetError(textBox, reportNoExist ? "Report No. exist." : errorProvider.GetError(textBox));
+
+            return isValidated;
+        }
+
+        private void txtReportNo_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ReportNoValidated(errorProvider1, txtReportNo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtReportNo_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.ClearErrorTextBox(errorProvider1, txtReportNo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleFunds(ComboBox comboBox, bool isToggled)
+        {
+            comboBox.Enabled = isToggled;
+            if (!isToggled) comboBox.SelectedIndex = -1; else LoadFunds();
+        }
+
+        private bool FundValidated(ErrorProvider errorProvider, ComboBox comboBox, CheckBox checkBox)
+        {
+            if (string.IsNullOrWhiteSpace(comboBox.Text.Trim()) && checkBox.Checked)
+            {
+                errorProvider.SetError(checkBox, "Funds");
+                return false;
+            }
+            return true;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleFunds(cmbxFunds, checkBox1.Checked);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFunds_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !FundValidated(errorProvider1, cmbxFunds, checkBox1);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxFunds);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal RcdModel RcdModel()
+        {
+            var model = new RcdModel()
+            {
+                ReportNo = txtReportNo.Text.Trim(),
+                FundsModel = checkBox1.Checked ? new FundsModel() { Id = Convert.ToInt32(cmbxFunds.SelectedValue) } : null,
+                CreatedBy = new UsersModel() { Id = Helper.userId },
+                Date = dtDate.Value,
+            };
+
+            if (isEdit) model.Id = rcdId.Value;
+
+            return model;
         }
     }
 }

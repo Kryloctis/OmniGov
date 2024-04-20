@@ -34,24 +34,27 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             label1 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            txtReportNo = new System.Windows.Forms.TextBox();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            dtDate = new System.Windows.Forms.DateTimePicker();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtAccountableOfficer = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
-            dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            dtCollectionsFrom = new System.Windows.Forms.DateTimePicker();
             label6 = new System.Windows.Forms.Label();
-            dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            dtCollectionsTo = new System.Windows.Forms.DateTimePicker();
             dataGridView1 = new System.Windows.Forms.DataGridView();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
+            dtDepositsFrom = new System.Windows.Forms.DateTimePicker();
+            dtDepositsTo = new System.Windows.Forms.DateTimePicker();
             dataGridView2 = new System.Windows.Forms.DataGridView();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            btnRefreshCollections = new System.Windows.Forms.Button();
+            btnRefreshDeposits = new System.Windows.Forms.Button();
+            checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -69,26 +72,31 @@
             label1.TabIndex = 0;
             label1.Text = "Report No.*";
             // 
-            // textBox1
+            // txtReportNo
             // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            textBox1.Location = new System.Drawing.Point(125, 31);
-            textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(271, 23);
-            textBox1.TabIndex = 1;
+            txtReportNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtReportNo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            txtReportNo.Location = new System.Drawing.Point(125, 31);
+            txtReportNo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtReportNo.Name = "txtReportNo";
+            txtReportNo.Size = new System.Drawing.Size(376, 23);
+            txtReportNo.TabIndex = 1;
+            txtReportNo.Validating += txtReportNo_Validating;
+            txtReportNo.Validated += txtReportNo_Validated;
             // 
-            // comboBox1
+            // cmbxFunds
             // 
-            comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(125, 60);
-            comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(271, 23);
-            comboBox1.TabIndex = 2;
+            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.Font = new System.Drawing.Font("Segoe UI", 9F);
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(125, 60);
+            cmbxFunds.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(354, 23);
+            cmbxFunds.TabIndex = 2;
+            cmbxFunds.Validating += cmbxFunds_Validating;
+            cmbxFunds.Validated += cmbxFunds_Validated;
             // 
             // label2
             // 
@@ -102,18 +110,18 @@
             label2.TabIndex = 0;
             label2.Text = "Fund";
             // 
-            // dateTimePicker1
+            // dtDate
             // 
-            dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(125, 89);
-            dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(271, 23);
-            dateTimePicker1.TabIndex = 3;
+            dtDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtDate.CustomFormat = "MMM dd, yyyy";
+            dtDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            dtDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtDate.Location = new System.Drawing.Point(125, 89);
+            dtDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dtDate.Name = "dtDate";
+            dtDate.Size = new System.Drawing.Size(376, 23);
+            dtDate.TabIndex = 3;
             // 
             // label3
             // 
@@ -139,17 +147,17 @@
             label4.TabIndex = 0;
             label4.Text = "Accountable Officer";
             // 
-            // textBox2
+            // txtAccountableOfficer
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            textBox2.Location = new System.Drawing.Point(125, 3);
-            textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new System.Drawing.Size(272, 23);
-            textBox2.TabIndex = 1;
+            txtAccountableOfficer.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtAccountableOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtAccountableOfficer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            txtAccountableOfficer.Location = new System.Drawing.Point(125, 3);
+            txtAccountableOfficer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtAccountableOfficer.Name = "txtAccountableOfficer";
+            txtAccountableOfficer.ReadOnly = true;
+            txtAccountableOfficer.Size = new System.Drawing.Size(377, 23);
+            txtAccountableOfficer.TabIndex = 1;
             // 
             // label5
             // 
@@ -163,17 +171,17 @@
             label5.TabIndex = 0;
             label5.Text = "Collections";
             // 
-            // dateTimePicker2
+            // dtCollectionsFrom
             // 
-            dateTimePicker2.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker2.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            dateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker2.Location = new System.Drawing.Point(125, 137);
-            dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new System.Drawing.Size(123, 23);
-            dateTimePicker2.TabIndex = 3;
+            dtCollectionsFrom.CustomFormat = "MMM dd, yyyy";
+            dtCollectionsFrom.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dtCollectionsFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtCollectionsFrom.Location = new System.Drawing.Point(125, 137);
+            dtCollectionsFrom.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
+            dtCollectionsFrom.Name = "dtCollectionsFrom";
+            dtCollectionsFrom.Size = new System.Drawing.Size(123, 23);
+            dtCollectionsFrom.TabIndex = 3;
+            dtCollectionsFrom.ValueChanged += dtCollectionsFrom_ValueChanged;
             // 
             // label6
             // 
@@ -187,17 +195,17 @@
             label6.TabIndex = 0;
             label6.Text = ">";
             // 
-            // dateTimePicker3
+            // dtCollectionsTo
             // 
-            dateTimePicker3.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker3.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            dateTimePicker3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker3.Location = new System.Drawing.Point(273, 137);
-            dateTimePicker3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new System.Drawing.Size(123, 23);
-            dateTimePicker3.TabIndex = 3;
+            dtCollectionsTo.CustomFormat = "MMM dd, yyyy";
+            dtCollectionsTo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dtCollectionsTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtCollectionsTo.Location = new System.Drawing.Point(273, 137);
+            dtCollectionsTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dtCollectionsTo.Name = "dtCollectionsTo";
+            dtCollectionsTo.Size = new System.Drawing.Size(123, 23);
+            dtCollectionsTo.TabIndex = 3;
+            dtCollectionsTo.ValueChanged += dtCollectionsTo_ValueChanged;
             // 
             // dataGridView1
             // 
@@ -223,7 +231,7 @@
             dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(271, 147);
+            dataGridView1.Size = new System.Drawing.Size(376, 147);
             dataGridView1.TabIndex = 4;
             // 
             // label7
@@ -250,29 +258,29 @@
             label8.TabIndex = 0;
             label8.Text = ">";
             // 
-            // dateTimePicker4
+            // dtDepositsFrom
             // 
-            dateTimePicker4.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker4.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            dateTimePicker4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker4.Location = new System.Drawing.Point(125, 337);
-            dateTimePicker4.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
-            dateTimePicker4.Name = "dateTimePicker4";
-            dateTimePicker4.Size = new System.Drawing.Size(123, 23);
-            dateTimePicker4.TabIndex = 3;
+            dtDepositsFrom.CustomFormat = "MMM dd, yyyy";
+            dtDepositsFrom.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dtDepositsFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtDepositsFrom.Location = new System.Drawing.Point(125, 337);
+            dtDepositsFrom.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
+            dtDepositsFrom.Name = "dtDepositsFrom";
+            dtDepositsFrom.Size = new System.Drawing.Size(123, 23);
+            dtDepositsFrom.TabIndex = 3;
+            dtDepositsFrom.ValueChanged += dtDepositsFrom_ValueChanged;
             // 
-            // dateTimePicker5
+            // dtDepositsTo
             // 
-            dateTimePicker5.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker5.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            dateTimePicker5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker5.Location = new System.Drawing.Point(273, 337);
-            dateTimePicker5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dateTimePicker5.Name = "dateTimePicker5";
-            dateTimePicker5.Size = new System.Drawing.Size(123, 23);
-            dateTimePicker5.TabIndex = 3;
+            dtDepositsTo.CustomFormat = "MMM dd, yyyy";
+            dtDepositsTo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dtDepositsTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtDepositsTo.Location = new System.Drawing.Point(273, 337);
+            dtDepositsTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dtDepositsTo.Name = "dtDepositsTo";
+            dtDepositsTo.Size = new System.Drawing.Size(123, 23);
+            dtDepositsTo.TabIndex = 3;
+            dtDepositsTo.ValueChanged += dtDepositsTo_ValueChanged;
             // 
             // dataGridView2
             // 
@@ -298,27 +306,70 @@
             dataGridView2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new System.Drawing.Size(271, 147);
+            dataGridView2.Size = new System.Drawing.Size(376, 147);
             dataGridView2.TabIndex = 4;
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
+            // 
+            // btnRefreshCollections
+            // 
+            btnRefreshCollections.Image = Properties.Resources.symbol_refresh_14px;
+            btnRefreshCollections.Location = new System.Drawing.Point(403, 137);
+            btnRefreshCollections.Name = "btnRefreshCollections";
+            btnRefreshCollections.Size = new System.Drawing.Size(100, 23);
+            btnRefreshCollections.TabIndex = 5;
+            btnRefreshCollections.Text = "Refresh";
+            btnRefreshCollections.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRefreshCollections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRefreshCollections.UseVisualStyleBackColor = true;
+            btnRefreshCollections.Click += btnRefreshCollections_Click;
+            // 
+            // btnRefreshDeposits
+            // 
+            btnRefreshDeposits.Image = Properties.Resources.symbol_refresh_14px;
+            btnRefreshDeposits.Location = new System.Drawing.Point(403, 337);
+            btnRefreshDeposits.Name = "btnRefreshDeposits";
+            btnRefreshDeposits.Size = new System.Drawing.Size(100, 23);
+            btnRefreshDeposits.TabIndex = 5;
+            btnRefreshDeposits.Text = "Refresh";
+            btnRefreshDeposits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRefreshDeposits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRefreshDeposits.UseVisualStyleBackColor = true;
+            btnRefreshDeposits.Click += btnRefreshDeposits_Click;
+            // 
+            // checkBox1
+            // 
+            checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            checkBox1.AutoSize = true;
+            checkBox1.Checked = true;
+            checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBox1.Location = new System.Drawing.Point(486, 64);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new System.Drawing.Size(15, 14);
+            checkBox1.TabIndex = 6;
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // ucRcd
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(checkBox1);
+            Controls.Add(btnRefreshDeposits);
+            Controls.Add(btnRefreshCollections);
             Controls.Add(dataGridView2);
             Controls.Add(dataGridView1);
-            Controls.Add(dateTimePicker5);
-            Controls.Add(dateTimePicker3);
-            Controls.Add(dateTimePicker4);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(dtDepositsTo);
+            Controls.Add(dtCollectionsTo);
+            Controls.Add(dtDepositsFrom);
+            Controls.Add(dtCollectionsFrom);
+            Controls.Add(dtDate);
+            Controls.Add(cmbxFunds);
+            Controls.Add(txtAccountableOfficer);
+            Controls.Add(txtReportNo);
             Controls.Add(label8);
             Controls.Add(label4);
             Controls.Add(label6);
@@ -330,7 +381,7 @@
             Font = new System.Drawing.Font("Segoe UI", 9F);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "ucRcd";
-            Size = new System.Drawing.Size(414, 524);
+            Size = new System.Drawing.Size(519, 524);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
@@ -341,23 +392,26 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtReportNo;
+        private System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtDate;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtAccountableOfficer;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtCollectionsFrom;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dtCollectionsTo;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker5;
+        private System.Windows.Forms.DateTimePicker dtDepositsFrom;
+        private System.Windows.Forms.DateTimePicker dtDepositsTo;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnRefreshCollections;
+        private System.Windows.Forms.Button btnRefreshDeposits;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

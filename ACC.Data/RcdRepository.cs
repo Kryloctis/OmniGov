@@ -10,11 +10,17 @@ namespace ACC.Data
     public class RcdRepository : IRcd
     {
         private readonly string tableName = "rcd";
+        private readonly string viewTableName = "view_rcd";
         private AccGenericCommands mySqlGenericCommandsLFS;
+        private IRcdCollections rcdCollections;
+        private IRcdDeposits rcdDeposits;
 
-        public RcdRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public RcdRepository(AccGenericCommands mySqlGenericCommandsLFS, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
+
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.rcdCollections = rcdCollections;
+            this.rcdDeposits = rcdDeposits;
         }
 
         public int CountRecords()
@@ -72,6 +78,19 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
+        public DataTable GetViewRecords(string searchKey, DateTime date, int rowFilter)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@date", DbType.DateTime, date},
+                new object[] { "@row_filter", DbType.Int32, rowFilter},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (report_no LIKE @search_key OR first_name LIKE @search_key OR last_name LIKE @search_key) AND date < @date LIMIT @row_filter";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -89,6 +108,23 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (funds_id, report_no, date, created_by) VALUES (@funds_id, @report_no, @date, @created_by)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool InsertWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(rcdModel);
+
+                foreach (RcdCollectionsModel rcdCollectionsModel in rcdCollectionsModels)
+                    _ = rcdCollections.Insert(rcdCollectionsModel);
+
+                foreach (RcdDepositsModel rcdDepositsModel in rcdDepositsModels)
+                    _ = rcdDeposits.Insert(rcdDepositsModel);
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool reportNoExist(string reportNo)
@@ -120,7 +156,6 @@ namespace ACC.Data
                 new object[] { "@funds_id", DbType.Int32, entity.FundsModel.Id},
                 new object[] { "@report_no", DbType.String, entity.ReportNo},
                 new object[] { "@date", DbType.DateTime, entity.Date},
-                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy.Id}
             };
 
             string query = $"UPDATE {tableName} SET  report_no = @report_no, funds_id = @funds_id, date = @date, updated_by = @updated_by WHERE id = @id;";
