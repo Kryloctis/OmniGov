@@ -1,0 +1,130 @@
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Transactions;
+
+namespace ACC.Data
+{
+    public class RcdRepository : IRcd
+    {
+        private readonly string tableName = "rcd";
+        private AccGenericCommands mySqlGenericCommandsLFS;
+
+        public RcdRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        {
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<RcdModel> entityList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id } };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
+        public DataTable GetRecords()
+        {
+            string query = $"SELECT * FROM {tableName}";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][] { new object[] { "@search_key", DbType.String, $"%{searchText}%" } };
+            string query = $"SELECT * FROM {tableName} WHERE report_no LIKE @search_key";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(RcdModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, entity.FundsModel.Id},
+                new object[] { "@report_no", DbType.String, entity.ReportNo},
+                new object[] { "@date", DbType.DateTime, entity.Date},
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy.Id}
+            };
+
+            string query = $"INSERT INTO {tableName} (funds_id, report_no, date, created_by) VALUES (@funds_id, @report_no, @date, @created_by)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool reportNoExist(string reportNo)
+        {
+            var parameters = new object[][] { new object[] { "@report_no", DbType.String, reportNo } };
+            string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrWhiteSpace(result);
+        }
+
+        public bool reportNoExist(string reportNo, int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id},
+                new object[] { "@report_no", DbType.String, reportNo }
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no AND id <> @id";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrWhiteSpace(result);
+        }
+
+        public bool Update(RcdModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@funds_id", DbType.Int32, entity.FundsModel.Id},
+                new object[] { "@report_no", DbType.String, entity.ReportNo},
+                new object[] { "@date", DbType.DateTime, entity.Date},
+                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy.Id}
+            };
+
+            string query = $"UPDATE {tableName} SET  report_no = @report_no, funds_id = @funds_id, date = @date, updated_by = @updated_by WHERE id = @id;";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+    }
+}

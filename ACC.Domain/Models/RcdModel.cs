@@ -2,13 +2,13 @@
 
 namespace ACC.Domain.Models
 {
-    internal class RcdModel
+    public class RcdModel
     {
-        internal int Id { get; set; }
-        internal FundsModel FundsModel { get; set; }
-        internal string ReportNo { get; set; }
-        internal DateTime Date { get; set; }
-        internal UsersModel CreatedBy { get; set; }
-        internal UsersModel UpdatedBy { get; set; }
+        public int Id { get; set; }
+        public FundsModel FundsModel { get; set; }
+        public string ReportNo { get; set; }
+        public DateTime Date { get; set; }
+        public UsersModel CreatedBy { get; set; }
+        public UsersModel UpdatedBy { get; set; }
     }
 }

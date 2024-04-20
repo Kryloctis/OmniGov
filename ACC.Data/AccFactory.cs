@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using Org.BouncyCastle.Asn1.Mozilla;
 using RPT.Domain.Interfaces;
 using System;
 
@@ -204,5 +205,10 @@ namespace ACC.Data
 
         public static IRptDelinquenciesRepository RptDelinquenciesRepository() => new RptDelinquenciesRepository(mySqlGenericCommandsLFS);
 
+        public static IRcd RcdRepository() => new RcdRepository(mySqlGenericCommandsLFS);
+
+        public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(mySqlGenericCommandsLFS);
+
+        public static IRcdDeposits RcdDepositsRepository() => new RcdDepositsRepository(mySqlGenericCommandsLFS);
     }
 }

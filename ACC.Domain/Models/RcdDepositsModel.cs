@@ -1,9 +1,9 @@
 ﻿namespace ACC.Domain.Models
 {
-    internal class RcdDepositsModel
+    public class RcdDepositsModel
     {
-        internal int Id { get; set; }
-        internal RcdModel RcdModel { get; set; }
-        internal BankDepositsModel BankDepositsModel { get; set; }
+        public int Id { get; set; }
+        public RcdModel RcdModel { get; set; }
+        public BankDepositsModel BankDepositsModel { get; set; }
     }
 }
