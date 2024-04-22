@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 int rcdId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
                 ucRcd.OnLoad(true, rcdId);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -102,9 +103,9 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-                LoadRcd();
                 LoadRowFilter();
+                LoadRcd();
+                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -176,6 +177,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     return;
                 }
 
+                lblRowCount.Text = dataTable.Rows.Count.ToString();
+
                 if (dataTable.Rows.Count < 1)
                 {
                     progressBar1.Value = 100;
@@ -185,6 +188,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 HelperLoadRecords.DgvRcd(dataGridView1, dataTable);
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+                lblRowCount.Text = dataTable.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -207,27 +211,50 @@ namespace AccountingSystem.Views.Reports.RCD
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool Save()
-        {
-            if (!ucRcd.ValidateChildren())
-            {
-                Helper.MessageBoxError(ucRcd.GetFormErrors());
-                return false;
-            }
-
-            return AccFactory.RcdRepository().InsertWithCollectionsDeposits(ucRcd.RcdModel(), ucRcd.RcdCollectionsModels(), ucRcd.RcdDepositsModels());
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Save())
+                bool isEdit = false;
+
+                if (ucRcd.Save(ref isEdit))
                 {
-                    Helper.MessageBoxSuccess("RCD has been saved.");
+                    Helper.MessageBoxSuccess($"RCD has been {(isEdit ? "updated" : "saved")}.");
                     ucRcd.ResetForm();
                     LoadRcd();
-                    tabControl1.SelectedTab = tabPageList;
+                    _ = isEdit ? tabControl1.SelectedTab = tabPageList : null;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteRecords(DataGridView dataGridView)
+        {
+            var models = new List<RcdModel>();
+            var selectedRow = dataGridView.SelectedRows;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRow.Count))
+            {
+                foreach (DataGridViewRow rowItem in selectedRow)
+                {
+                    var model = new RcdModel() { Id = Convert.ToInt32(rowItem.Cells["id"].Value) };
+                    models.Add(model);
+                }
+
+                return AccFactory.RcdRepository().Delete(models);
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowCount = dataGridView1.SelectedRows.Count;
+                if (DeleteRecords(dataGridView1))
+                {
+                    Helper.MessageBoxSuccess($"{selectedRowCount} records has been deleted.");
+                    LoadRcd();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

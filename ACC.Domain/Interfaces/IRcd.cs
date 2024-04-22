@@ -14,5 +14,10 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords(string searchKey, DateTime date, int rowFilter);
 
         bool InsertWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels);
+
+        bool UpdateWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels);
+
+        Dictionary<string, string> GetViewRecord(int id);
+
     }
 }

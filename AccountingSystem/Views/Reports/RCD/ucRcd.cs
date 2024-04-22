@@ -30,6 +30,24 @@ namespace AccountingSystem.Views.Reports.RCD
             LoadFunds();
         }
 
+        private void LoadSelectedRecord(int rcdId)
+        {
+            var dictRcd = AccFactory.RcdRepository().GetViewRecord(rcdId);
+            txtReportNo.Text = dictRcd["report_no"];
+            if (string.IsNullOrWhiteSpace(dictRcd["fund_id"]))
+            {
+                checkBox1.Checked = false;
+                cmbxFunds.SelectedIndex = -1;
+            }
+            else
+            {
+                checkBox1.Checked = true;
+                cmbxFunds.SelectedValue = Convert.ToInt32(dictRcd["fund_id"]);
+            }
+
+            dtDate.Value = Convert.ToDateTime(dictRcd["date"]);
+        }
+
         internal void OnLoad(bool isEdit, int? rcdId)
         {
             this.rcdId = rcdId;
@@ -37,6 +55,7 @@ namespace AccountingSystem.Views.Reports.RCD
             dtDate.Value = Helper.GetCurrentDate();
             txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
             LoadFunds();
+            if (isEdit) LoadSelectedRecord(rcdId.Value); else ResetForm();
         }
 
         internal string GetFormErrors()
@@ -48,12 +67,6 @@ namespace AccountingSystem.Views.Reports.RCD
             };
 
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
-        }
-
-        private void LoadFunds()
-        {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadCollections(DateTime dateFrom, DateTime dateTo)
@@ -159,10 +172,20 @@ namespace AccountingSystem.Views.Reports.RCD
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ToggleFunds(ComboBox comboBox, bool isToggled)
+        private void LoadFunds()
         {
-            comboBox.Enabled = isToggled;
-            if (!isToggled) comboBox.SelectedIndex = -1; else LoadFunds();
+            bool isToggled = checkBox1.Checked;
+            if (isToggled)
+            {
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                cmbxFunds.Enabled = true;
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            else
+            {
+                cmbxFunds.Enabled = false;
+                cmbxFunds.SelectedIndex = -1;
+            }
         }
 
         private bool FundValidated(ErrorProvider errorProvider, ComboBox comboBox, CheckBox checkBox)
@@ -179,7 +202,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                ToggleFunds(cmbxFunds, checkBox1.Checked);
+                LoadFunds();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -227,6 +250,18 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             var models = new List<RcdDepositsModel>();
             return models;
+        }
+
+        internal bool Save(ref bool isEdit)
+        {
+            isEdit = this.isEdit;
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            return this.isEdit ? AccFactory.RcdRepository().UpdateWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels()) : AccFactory.RcdRepository().InsertWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels());
         }
     }
 }

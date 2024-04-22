@@ -47,27 +47,30 @@
             btnPrint = new System.Windows.Forms.ToolStripButton();
             tabPageForm = new System.Windows.Forms.TabPage();
             ucRcd1 = new ucRcd();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnSave = new System.Windows.Forms.Button();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
+            btnBack = new System.Windows.Forms.ToolStripButton();
             tabPagePrint = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            btnBack = new System.Windows.Forms.ToolStripButton();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnSave = new System.Windows.Forms.Button();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePrint.SuspendLayout();
             toolStrip3.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -84,20 +87,21 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(719, 598);
+            tabControl1.Size = new System.Drawing.Size(719, 620);
             tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl1.TabIndex = 8;
             // 
             // tabPageList
             // 
             tabPageList.Controls.Add(dataGridView1);
+            tabPageList.Controls.Add(statusStrip1);
             tabPageList.Controls.Add(progressBar1);
             tabPageList.Controls.Add(panel2);
             tabPageList.Controls.Add(toolStrip1);
             tabPageList.Location = new System.Drawing.Point(4, 5);
             tabPageList.Margin = new System.Windows.Forms.Padding(0);
             tabPageList.Name = "tabPageList";
-            tabPageList.Size = new System.Drawing.Size(711, 589);
+            tabPageList.Size = new System.Drawing.Size(711, 611);
             tabPageList.TabIndex = 0;
             tabPageList.Text = "List";
             tabPageList.UseVisualStyleBackColor = true;
@@ -207,6 +211,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSearch
             // 
@@ -247,7 +252,7 @@
             tabPageForm.Location = new System.Drawing.Point(4, 5);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageForm.Name = "tabPageForm";
-            tabPageForm.Size = new System.Drawing.Size(711, 589);
+            tabPageForm.Size = new System.Drawing.Size(711, 611);
             tabPageForm.TabIndex = 1;
             tabPageForm.Text = "Form";
             tabPageForm.UseVisualStyleBackColor = true;
@@ -259,8 +264,29 @@
             ucRcd1.Location = new System.Drawing.Point(0, 35);
             ucRcd1.Margin = new System.Windows.Forms.Padding(0);
             ucRcd1.Name = "ucRcd1";
-            ucRcd1.Size = new System.Drawing.Size(711, 524);
+            ucRcd1.Size = new System.Drawing.Size(711, 546);
             ucRcd1.TabIndex = 11;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 581);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(711, 30);
+            flowLayoutPanel1.TabIndex = 12;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new System.Drawing.Point(558, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // toolStrip2
             // 
@@ -275,6 +301,15 @@
             toolStrip2.Size = new System.Drawing.Size(711, 35);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
+            // 
+            // btnBack
+            // 
+            btnBack.Image = Properties.Resources.arrow_left_20px;
+            btnBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnBack.Name = "btnBack";
+            btnBack.Size = new System.Drawing.Size(56, 24);
+            btnBack.Text = "Back";
+            btnBack.Click += btnBack_Click;
             // 
             // tabPagePrint
             // 
@@ -319,14 +354,6 @@
             toolStripButton8.Text = "Back";
             toolStripButton8.Click += toolStripButton8_Click;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 598);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(719, 22);
-            statusStrip1.TabIndex = 9;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // reportViewer1
             // 
             reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -344,35 +371,26 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // btnBack
+            // statusStrip1
             // 
-            btnBack.Image = Properties.Resources.arrow_left_20px;
-            btnBack.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnBack.Name = "btnBack";
-            btnBack.Size = new System.Drawing.Size(56, 24);
-            btnBack.Text = "Back";
-            btnBack.Click += btnBack_Click;
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRowCount });
+            statusStrip1.Location = new System.Drawing.Point(0, 589);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(711, 22);
+            statusStrip1.TabIndex = 10;
+            statusStrip1.Text = "statusStrip1";
             // 
-            // flowLayoutPanel1
+            // toolStripStatusLabel1
             // 
-            flowLayoutPanel1.Controls.Add(btnSave);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 559);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(711, 30);
-            flowLayoutPanel1.TabIndex = 12;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Records:";
             // 
-            // btnSave
+            // lblRowCount
             // 
-            btnSave.Location = new System.Drawing.Point(558, 3);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(150, 23);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
+            lblRowCount.Name = "lblRowCount";
+            lblRowCount.Size = new System.Drawing.Size(13, 17);
+            lblRowCount.Text = "0";
             // 
             // frmRcd
             // 
@@ -381,7 +399,6 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(719, 620);
             Controls.Add(tabControl1);
-            Controls.Add(statusStrip1);
             Font = new System.Drawing.Font("Segoe UI", 9F);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "frmRcd";
@@ -398,15 +415,16 @@
             toolStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             tabPagePrint.ResumeLayout(false);
             tabPagePrint.PerformLayout();
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -421,7 +439,6 @@
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSearch;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnPrint;
@@ -438,5 +455,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStripButton btnBack;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblRowCount;
     }
 }
