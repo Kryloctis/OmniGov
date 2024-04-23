@@ -19,8 +19,10 @@ namespace ACC.Data
         private IBurialPermitRepository burialPermitRepository;
         private IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository;
         private IPaymentFeesCharges paymentFeesCharges;
+        private IRcdCollections rcdCollectionsRepository;
+        private IRcdDeposits rcdDepositsRepository;
 
-        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges)
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
             this.rptPaymentRepository = rptPaymentRepository;
@@ -30,6 +32,8 @@ namespace ACC.Data
             this.burialPermitRepository = burialPermitRepository;
             this.paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
             this.paymentFeesCharges = paymentFeesCharges;
+            this.rcdCollectionsRepository = rcdCollections;
+            this.rcdDepositsRepository = rcdDeposits;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -396,6 +400,30 @@ namespace ACC.Data
                 scope.Complete();
                 return true;
             }
+        }
+
+        public DataTable GetViewDetailedRecord(DateTime dateFrom, DateTime dateTo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@date_from", DbType.DateTime, dateFrom},
+                new object[] { "@date_to", DbType.DateTime, dateTo},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(payment_date) > @date_from AND DATE(payment_date) < @date_to AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public DataTable GetViewConsolidatedRecord(DateTime dateFrom, DateTime dateTo)
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@date_from", DbType.DateTime, dateFrom},
+                new object[] { "@date_to", DbType.DateTime, dateTo},
+           };
+
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE DATE(payment_date) > @date_from AND DATE(payment_date) < @date_to AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

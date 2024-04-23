@@ -2062,5 +2062,26 @@ namespace AccountingSystem
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["created_by_id"].Visible = false;
         }
+
+        internal static void DgvRcdCollections(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.ShowCellToolTips = false;
+            dataGridView.Columns["acc_form_id"].Visible = false;
+            dataGridView.Columns["acc_form"].HeaderText = "Form";
+            dataGridView.Columns["receipt_no"].HeaderText = "Receipt No. (From > To)";
+            dataGridView.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["receipt_no"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["total_amount"].HeaderText = "Total Amount";
+            dataGridView.Columns["total_amount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["total_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        }
+
+        internal static void DgvRcdDeposits(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+        }
     }
 }

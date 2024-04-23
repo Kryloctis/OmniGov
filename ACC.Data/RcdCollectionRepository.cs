@@ -65,6 +65,11 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public string GetTableName()
+        {
+            return tableName;
+        }
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();

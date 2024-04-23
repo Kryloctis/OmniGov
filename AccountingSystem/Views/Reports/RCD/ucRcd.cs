@@ -5,6 +5,7 @@ using Org.BouncyCastle.Asn1.BC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
@@ -17,8 +18,8 @@ namespace AccountingSystem.Views.Reports.RCD
         public ucRcd()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-            Helper.DatagridFullRowSelectStyle(dataGridView2, true);
+            Helper.DatagridFullRowSelectStyle(dgvCollections, true);
+            Helper.DatagridFullRowSelectStyle(dgvDeposits, true);
         }
 
         internal void ResetForm()
@@ -71,10 +72,43 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void LoadCollections(DateTime dateFrom, DateTime dateTo)
         {
+            var dtPaymentCollections = AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRecord(dateFrom, dateTo);
+            var dataTable = new DataTable();
+            var dataColumns = new List<DataColumn>
+            {
+                new DataColumn ("acc_form_id", typeof(int)),
+                new DataColumn ("acc_form",typeof(string)),
+                new DataColumn ("receipt_no", typeof(string)),
+                new DataColumn ("total_amount", typeof(decimal)),
+            };
+
+            dataTable.Columns.AddRange(dataColumns.ToArray());
+
+            foreach (DataRow dataRow in dtPaymentCollections.Rows)
+            {
+                var newRow = dataTable.NewRow();
+
+                int accFormId = Convert.ToInt32(dataRow["acc_form_id"]);
+                string accFormNo = dataRow["acc_form_no"].ToString();
+                string accFormDesc = dataRow["acc_form_desc"].ToString();
+                string receiptFrom = Convert.ToInt32(dataRow["receipt_from"]).ToString("D7");
+                string receipTo = Convert.ToInt32(dataRow["receipt_to"]).ToString("D7");
+                decimal totalAmount = Convert.ToInt32(dataRow["total_amount"]);
+
+                newRow["acc_form_id"] = accFormId;
+                newRow["acc_form"] = $"{accFormNo}-{accFormDesc}";
+                newRow["receipt_no"] = $"{receiptFrom} > {receipTo}";
+                newRow["total_amount"] = totalAmount;
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.DgvRcdCollections(dgvCollections, dataTable);
         }
 
         private void LoadDeposits(DateTime dateFrom, DateTime dateTo)
         {
+
         }
 
         private void dtCollectionsFrom_ValueChanged(object sender, EventArgs e)
