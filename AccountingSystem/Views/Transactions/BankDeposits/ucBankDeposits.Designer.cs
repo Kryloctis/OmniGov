@@ -52,18 +52,18 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(3, 4);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(33, 15);
+            label1.Size = new System.Drawing.Size(38, 15);
             label1.TabIndex = 0;
-            label1.Text = "Bank";
+            label1.Text = "Bank*";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(3, 86);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(59, 15);
+            label2.Size = new System.Drawing.Size(64, 15);
             label2.TabIndex = 20;
-            label2.Text = "Reference";
+            label2.Text = "Reference*";
             // 
             // txtReferenceNumber
             // 
@@ -92,18 +92,18 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             label3.AutoSize = true;
             label3.Location = new System.Drawing.Point(3, 116);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(31, 15);
+            label3.Size = new System.Drawing.Size(36, 15);
             label3.TabIndex = 23;
-            label3.Text = "Date";
+            label3.Text = "Date*";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Location = new System.Drawing.Point(3, 139);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(51, 15);
+            label4.Size = new System.Drawing.Size(56, 15);
             label4.TabIndex = 24;
-            label4.Text = "Amount";
+            label4.Text = "Amount*";
             // 
             // nudAmount
             // 
@@ -139,9 +139,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             label5.AutoSize = true;
             label5.Location = new System.Drawing.Point(3, 59);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(34, 15);
+            label5.Size = new System.Drawing.Size(39, 15);
             label5.TabIndex = 25;
-            label5.Text = "Fund";
+            label5.Text = "Fund*";
             // 
             // cmbFund
             // 
@@ -161,9 +161,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             label6.AutoSize = true;
             label6.Location = new System.Drawing.Point(3, 32);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(86, 15);
+            label6.Size = new System.Drawing.Size(91, 15);
             label6.TabIndex = 0;
-            label6.Text = "Bank Accounts";
+            label6.Text = "Bank Accounts*";
             // 
             // cmbBankAccounts
             // 

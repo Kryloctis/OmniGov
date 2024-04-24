@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRcdRecord(DateTime date, UsersModel createdBy);
 
         DataTable GetViewRcdRecord(RcdDepositsModel rcdDepositsModel);
+
+        DataTable GetViewRecordBySearch(string searchKey, DateTime date, int filterRow);
     }
 }

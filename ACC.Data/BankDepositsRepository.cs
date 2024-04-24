@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -178,6 +179,19 @@ namespace ACC.Data
                 new object[] { "@rcd_id", DbType.Int32, rcdDepositsModel.RcdModel.Id},
             };
             string query = $"SELECT * FROM {viewTableName} WHERE  id NOT IN (SELECT id FROM {rcdDeposits.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY date ASC";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public DataTable GetViewRecordBySearch(string searchKey, DateTime date, int filterRow)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@date", DbType.DateTime, date},
+                new object[] { "@filter_row", DbType.Int32, filterRow},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(date) <= DATE(@date) AND (account_no LIKE @search_key OR bank_code LIKE @search_key OR bank_code LIKE @search_key OR reference LIKE @search_key) LIMIT @filter_row";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
