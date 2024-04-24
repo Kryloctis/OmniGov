@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             label1 = new System.Windows.Forms.Label();
             txtReportNo = new System.Windows.Forms.TextBox();
             cmbxFunds = new System.Windows.Forms.ComboBox();
@@ -42,18 +42,10 @@
             label4 = new System.Windows.Forms.Label();
             txtAccountableOfficer = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
-            dtCollectionsFrom = new System.Windows.Forms.DateTimePicker();
-            label6 = new System.Windows.Forms.Label();
-            dtCollectionsTo = new System.Windows.Forms.DateTimePicker();
             dgvCollections = new System.Windows.Forms.DataGridView();
             label7 = new System.Windows.Forms.Label();
-            label8 = new System.Windows.Forms.Label();
-            dtDepositsFrom = new System.Windows.Forms.DateTimePicker();
-            dtDepositsTo = new System.Windows.Forms.DateTimePicker();
             dgvDeposits = new System.Windows.Forms.DataGridView();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            btnRefreshCollections = new System.Windows.Forms.Button();
-            btnRefreshDeposits = new System.Windows.Forms.Button();
             checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgvCollections).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).BeginInit();
@@ -122,6 +114,7 @@
             dtDate.Name = "dtDate";
             dtDate.Size = new System.Drawing.Size(376, 23);
             dtDate.TabIndex = 3;
+            dtDate.ValueChanged += dtDate_ValueChanged;
             // 
             // label3
             // 
@@ -156,7 +149,7 @@
             txtAccountableOfficer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtAccountableOfficer.Name = "txtAccountableOfficer";
             txtAccountableOfficer.ReadOnly = true;
-            txtAccountableOfficer.Size = new System.Drawing.Size(377, 23);
+            txtAccountableOfficer.Size = new System.Drawing.Size(376, 23);
             txtAccountableOfficer.TabIndex = 1;
             // 
             // label5
@@ -164,71 +157,35 @@
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Segoe UI", 9F);
             label5.ForeColor = System.Drawing.Color.Black;
-            label5.Location = new System.Drawing.Point(4, 141);
+            label5.Location = new System.Drawing.Point(4, 135);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(66, 15);
             label5.TabIndex = 0;
             label5.Text = "Collections";
             // 
-            // dtCollectionsFrom
-            // 
-            dtCollectionsFrom.CustomFormat = "MMM dd, yyyy";
-            dtCollectionsFrom.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dtCollectionsFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtCollectionsFrom.Location = new System.Drawing.Point(125, 137);
-            dtCollectionsFrom.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
-            dtCollectionsFrom.Name = "dtCollectionsFrom";
-            dtCollectionsFrom.Size = new System.Drawing.Size(123, 23);
-            dtCollectionsFrom.TabIndex = 3;
-            dtCollectionsFrom.ValueChanged += dtCollectionsFrom_ValueChanged;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label6.ForeColor = System.Drawing.Color.Black;
-            label6.Location = new System.Drawing.Point(253, 141);
-            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(15, 15);
-            label6.TabIndex = 0;
-            label6.Text = ">";
-            // 
-            // dtCollectionsTo
-            // 
-            dtCollectionsTo.CustomFormat = "MMM dd, yyyy";
-            dtCollectionsTo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dtCollectionsTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtCollectionsTo.Location = new System.Drawing.Point(273, 137);
-            dtCollectionsTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dtCollectionsTo.Name = "dtCollectionsTo";
-            dtCollectionsTo.Size = new System.Drawing.Size(123, 23);
-            dtCollectionsTo.TabIndex = 3;
-            dtCollectionsTo.ValueChanged += dtCollectionsTo_ValueChanged;
-            // 
             // dgvCollections
             // 
             dgvCollections.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgvCollections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgvCollections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCollections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgvCollections.DefaultCellStyle = dataGridViewCellStyle6;
-            dgvCollections.Location = new System.Drawing.Point(125, 165);
-            dgvCollections.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgvCollections.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvCollections.Location = new System.Drawing.Point(125, 135);
+            dgvCollections.Margin = new System.Windows.Forms.Padding(4, 20, 4, 3);
             dgvCollections.Name = "dgvCollections";
             dgvCollections.RowTemplate.Height = 25;
             dgvCollections.Size = new System.Drawing.Size(376, 147);
@@ -239,71 +196,35 @@
             label7.AutoSize = true;
             label7.Font = new System.Drawing.Font("Segoe UI", 9F);
             label7.ForeColor = System.Drawing.Color.Black;
-            label7.Location = new System.Drawing.Point(4, 343);
+            label7.Location = new System.Drawing.Point(4, 305);
             label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(52, 15);
             label7.TabIndex = 0;
             label7.Text = "Deposits";
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label8.ForeColor = System.Drawing.Color.Black;
-            label8.Location = new System.Drawing.Point(253, 341);
-            label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(15, 15);
-            label8.TabIndex = 0;
-            label8.Text = ">";
-            // 
-            // dtDepositsFrom
-            // 
-            dtDepositsFrom.CustomFormat = "MMM dd, yyyy";
-            dtDepositsFrom.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dtDepositsFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtDepositsFrom.Location = new System.Drawing.Point(125, 337);
-            dtDepositsFrom.Margin = new System.Windows.Forms.Padding(4, 21, 4, 3);
-            dtDepositsFrom.Name = "dtDepositsFrom";
-            dtDepositsFrom.Size = new System.Drawing.Size(123, 23);
-            dtDepositsFrom.TabIndex = 3;
-            dtDepositsFrom.ValueChanged += dtDepositsFrom_ValueChanged;
-            // 
-            // dtDepositsTo
-            // 
-            dtDepositsTo.CustomFormat = "MMM dd, yyyy";
-            dtDepositsTo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dtDepositsTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtDepositsTo.Location = new System.Drawing.Point(273, 337);
-            dtDepositsTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dtDepositsTo.Name = "dtDepositsTo";
-            dtDepositsTo.Size = new System.Drawing.Size(123, 23);
-            dtDepositsTo.TabIndex = 3;
-            dtDepositsTo.ValueChanged += dtDepositsTo_ValueChanged;
-            // 
             // dgvDeposits
             // 
             dgvDeposits.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgvDeposits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgvDeposits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvDeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgvDeposits.DefaultCellStyle = dataGridViewCellStyle8;
-            dgvDeposits.Location = new System.Drawing.Point(125, 365);
-            dgvDeposits.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgvDeposits.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvDeposits.Location = new System.Drawing.Point(125, 305);
+            dgvDeposits.Margin = new System.Windows.Forms.Padding(4, 20, 4, 3);
             dgvDeposits.Name = "dgvDeposits";
             dgvDeposits.RowTemplate.Height = 25;
             dgvDeposits.Size = new System.Drawing.Size(376, 147);
@@ -313,28 +234,6 @@
             // 
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
-            // 
-            // btnRefreshCollections
-            // 
-            btnRefreshCollections.Location = new System.Drawing.Point(403, 137);
-            btnRefreshCollections.Name = "btnRefreshCollections";
-            btnRefreshCollections.Size = new System.Drawing.Size(100, 23);
-            btnRefreshCollections.TabIndex = 5;
-            btnRefreshCollections.Text = "Retrieve";
-            btnRefreshCollections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnRefreshCollections.UseVisualStyleBackColor = true;
-            btnRefreshCollections.Click += btnRefreshCollections_Click;
-            // 
-            // btnRefreshDeposits
-            // 
-            btnRefreshDeposits.Location = new System.Drawing.Point(403, 337);
-            btnRefreshDeposits.Name = "btnRefreshDeposits";
-            btnRefreshDeposits.Size = new System.Drawing.Size(100, 23);
-            btnRefreshDeposits.TabIndex = 5;
-            btnRefreshDeposits.Text = "Retrieve";
-            btnRefreshDeposits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnRefreshDeposits.UseVisualStyleBackColor = true;
-            btnRefreshDeposits.Click += btnRefreshDeposits_Click;
             // 
             // checkBox1
             // 
@@ -354,21 +253,13 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(checkBox1);
-            Controls.Add(btnRefreshDeposits);
-            Controls.Add(btnRefreshCollections);
             Controls.Add(dgvDeposits);
             Controls.Add(dgvCollections);
-            Controls.Add(dtDepositsTo);
-            Controls.Add(dtCollectionsTo);
-            Controls.Add(dtDepositsFrom);
-            Controls.Add(dtCollectionsFrom);
             Controls.Add(dtDate);
             Controls.Add(cmbxFunds);
             Controls.Add(txtAccountableOfficer);
             Controls.Add(txtReportNo);
-            Controls.Add(label8);
             Controls.Add(label4);
-            Controls.Add(label6);
             Controls.Add(label7);
             Controls.Add(label5);
             Controls.Add(label3);
@@ -377,7 +268,7 @@
             Font = new System.Drawing.Font("Segoe UI", 9F);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "ucRcd";
-            Size = new System.Drawing.Size(519, 524);
+            Size = new System.Drawing.Size(519, 461);
             ((System.ComponentModel.ISupportInitialize)dgvCollections).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDeposits).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
@@ -396,18 +287,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtAccountableOfficer;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtCollectionsFrom;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dtCollectionsTo;
         private System.Windows.Forms.DataGridView dgvCollections;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dtDepositsFrom;
-        private System.Windows.Forms.DateTimePicker dtDepositsTo;
         private System.Windows.Forms.DataGridView dgvDeposits;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Button btnRefreshCollections;
-        private System.Windows.Forms.Button btnRefreshDeposits;
         private System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Org.BouncyCastle.Asn1.BC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +26,7 @@ namespace AccountingSystem.Views.Reports.RCD
             txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
             dtDate.Value = Helper.GetCurrentDate();
             txtReportNo.Clear();
+            checkBox1.Checked = false;
             LoadFunds();
         }
 
@@ -56,6 +55,9 @@ namespace AccountingSystem.Views.Reports.RCD
             dtDate.Value = Helper.GetCurrentDate();
             txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
             LoadFunds();
+
+            LoadCollections();
+            LoadDeposits();
             if (isEdit) LoadSelectedRecord(rcdId.Value); else ResetForm();
         }
 
@@ -70,9 +72,24 @@ namespace AccountingSystem.Views.Reports.RCD
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private void LoadCollections(DateTime dateFrom, DateTime dateTo)
+        private DataTable RcdCollectionsDataTable(bool isEdit)
         {
-            var dtPaymentCollections = AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRecord(dateFrom, dateTo);
+            if (isEdit)
+            {
+                var rcdModel = new RcdModel() { Id = rcdId.Value };
+                var rcdCollectionsModel = new RcdCollectionsModel() { RcdModel = rcdModel };
+                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecord(rcdCollectionsModel);
+            }
+            else
+            {
+                var date = dtDate.Value;
+                var userModel = new UsersModel() { Id = Helper.userId };
+                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecord(date, userModel);
+            }
+        }
+
+        private void LoadCollections()
+        {
             var dataTable = new DataTable();
             var dataColumns = new List<DataColumn>
             {
@@ -84,7 +101,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
             dataTable.Columns.AddRange(dataColumns.ToArray());
 
-            foreach (DataRow dataRow in dtPaymentCollections.Rows)
+            foreach (DataRow dataRow in RcdCollectionsDataTable(isEdit).Rows)
             {
                 var newRow = dataTable.NewRow();
 
@@ -106,75 +123,58 @@ namespace AccountingSystem.Views.Reports.RCD
             HelperLoadRecords.DgvRcdCollections(dgvCollections, dataTable);
         }
 
-        private void LoadDeposits(DateTime dateFrom, DateTime dateTo)
+        private DataTable RcdDepositsDataTable(bool isEdit)
         {
-
+            if (isEdit)
+            {
+                var rcdModel = new RcdModel() { Id = rcdId.Value };
+                var rcdDepositsModel = new RcdDepositsModel() { RcdModel = rcdModel };
+                return AccFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
+            }
+            else
+            {
+                var date = dtDate.Value;
+                var userModel = new UsersModel() { Id = Helper.userId };
+                return AccFactory.BankDepositsRepository().GetViewRcdRecord(date, userModel);
+            }
         }
 
-        private void dtCollectionsFrom_ValueChanged(object sender, EventArgs e)
+        private void LoadDeposits()
         {
-            try
+            var dataTable = new DataTable();
+            var dataColumns = new List<DataColumn>()
             {
-                var dateFrom = dtCollectionsFrom.Value;
-                var dateTo = dtCollectionsTo.Value;
-                LoadCollections(dateFrom, dateTo);
+                new DataColumn("id", typeof(int)),
+                new DataColumn("account_no", typeof(int)),
+                new DataColumn("bank_name", typeof(string)),
+                new DataColumn("reference",typeof(string)),
+                new DataColumn("amount", typeof(decimal))
+            };
+            dataTable.Columns.AddRange(dataColumns.ToArray());
+
+            foreach (DataRow dataRow in RcdDepositsDataTable(isEdit).Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int id = Convert.ToInt32(dataRow["id"]);
+                string bankAccNo = dataRow["account_no"].ToString();
+                string bankName = dataRow["bank_name"].ToString();
+                string reference = dataRow["reference"].ToString();
+                decimal amount = Convert.ToDecimal(dataRow["amount"]);
+
+                newRow["id"] = id;
+                newRow["account_no"] = bankAccNo;
+                newRow["bank_name"] = bankName;
+                newRow["reference"] = reference;
+                newRow["amount"] = amount;
+                dataTable.Rows.Add(newRow);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.DgvRcdDeposits(dgvDeposits, dataTable);
         }
 
-        private void dtCollectionsTo_ValueChanged(object sender, EventArgs e)
+        private void SetDateBounds(DateTimePicker dateFrom, DateTimePicker dateTo)
         {
-            try
-            {
-                var dateFrom = dtCollectionsFrom.Value;
-                var dateTo = dtCollectionsTo.Value;
-                LoadCollections(dateFrom, dateTo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dtDepositsFrom_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var dateFrom = dtDepositsFrom.Value;
-                var dateTo = dtDepositsTo.Value;
-                LoadDeposits(dateFrom, dateTo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dtDepositsTo_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var dateFrom = dtDepositsFrom.Value;
-                var dateTo = dtDepositsTo.Value;
-                LoadDeposits(dateFrom, dateTo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnRefreshCollections_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var dateFrom = dtCollectionsFrom.Value;
-                var dateTo = dtCollectionsTo.Value;
-                LoadCollections(dateFrom, dateTo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnRefreshDeposits_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var dateFrom = dtDepositsFrom.Value;
-                var dateTo = dtDepositsTo.Value;
-                LoadDeposits(dateFrom, dateTo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            dateFrom.MaxDate = dateTo.Value;
+            dateTo.MinDate = dateFrom.Value;
         }
 
         private bool ReportNoValidated(ErrorProvider errorProvider, TextBox textBox)
@@ -296,6 +296,16 @@ namespace AccountingSystem.Views.Reports.RCD
             }
 
             return this.isEdit ? AccFactory.RcdRepository().UpdateWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels()) : AccFactory.RcdRepository().InsertWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels());
+        }
+
+        private void dtDate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadCollections();
+                LoadDeposits();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

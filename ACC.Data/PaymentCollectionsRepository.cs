@@ -402,27 +402,26 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewDetailedRecord(DateTime dateFrom, DateTime dateTo)
+        public DataTable GetViewConsolidatedRcdRecord(DateTime date, UsersModel createdBy)
         {
             var parameters = new object[][]
             {
-                new object[] { "@date_from", DbType.DateTime, dateFrom},
-                new object[] { "@date_to", DbType.DateTime, dateTo},
+                new object[] { "@date", DbType.DateTime, date},
+                new object[] { "@created_by", DbType.Int32, createdBy.Id}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE DATE(payment_date) > @date_from AND DATE(payment_date) < @date_to AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC";
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public DataTable GetViewConsolidatedRecord(DateTime dateFrom, DateTime dateTo)
+        public DataTable GetViewConsolidatedRcdRecord(RcdCollectionsModel rcdCollectionsModel)
         {
             var parameters = new object[][]
-           {
-                new object[] { "@date_from", DbType.DateTime, dateFrom},
-                new object[] { "@date_to", DbType.DateTime, dateTo},
-           };
+            {
+                new object[] { "@rcd_id", DbType.Int32, rcdCollectionsModel.RcdModel.Id},
+            };
 
-            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE DATE(payment_date) > @date_from AND DATE(payment_date) < @date_to AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }

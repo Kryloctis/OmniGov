@@ -2076,12 +2076,20 @@ namespace AccountingSystem
             dataGridView.Columns["total_amount"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["total_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-
         }
 
-        internal static void DgvRcdDeposits(DataGridView dataGridView, DataTable dataTable) 
+        internal static void DgvRcdDeposits(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["account_no"].HeaderText = "Account No.";
+            dataGridView.Columns["bank_name"].HeaderText = "Accountable Officer/Bank";
+            dataGridView.Columns["bank_name"].MinimumWidth = 200;
+            dataGridView.Columns["reference"].HeaderText = "Reference";
+            dataGridView.Columns["amount"].HeaderText = "Amount";
+            dataGridView.Columns["amount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
     }
 }

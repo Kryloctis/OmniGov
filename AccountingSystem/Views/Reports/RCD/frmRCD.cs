@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 int rcdId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
                 ucRcd.OnLoad(true, rcdId);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
