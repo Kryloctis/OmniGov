@@ -4,7 +4,9 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO.MemoryMappedFiles;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ObjectiveC;
 using System.Transactions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -59,7 +61,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@bank_accounts_id", DbType.Int32, entity.BankAccountsID},
-                new object[] { "@funds_id", DbType.Int32, entity.fundId},
+                new object[] { "@funds_id", DbType.Int32, entity.FundId},
                 new object[] { "@reference", DbType.String, entity.Reference},
                 new object[] { "@date", DbType.Date, entity.Date},
                 new object[] { "@amount", DbType.Decimal, entity.Amount},
@@ -70,29 +72,13 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public int Deposits(BankDepositsModel entity)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@banks_id", DbType.Int16, entity.BankID},
-                new object[] { "@reference", DbType.String, entity.Reference},
-                new object[] { "@date", DbType.Date, entity.Date},
-                new object[] { "@amount", DbType.Decimal, entity.Amount},
-                new object[] { "@created_by", DbType.Int16, entity.CreatedBy},
-                new object[] { "@funds_id", DbType.Int16, entity.fundId},
-            };
-
-            string query = $"INSERT INTO {tableName} (banks_id, reference, date, amount, created_by, funds_id) VALUES (@banks_id, @reference, @date, @amount, @created_by, @funds_id)";
-            return mySqlGenericCommandsLFS.ExecuteNonQueryId(query, parameters);
-        }
-
         public bool Update(BankDepositsModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@bank_accounts_id", DbType.Int32, entity.BankAccountsID},
-                new object[] { "@funds_id", DbType.Int32, entity.fundId},
+                new object[] { "@funds_id", DbType.Int32, entity.FundId},
                 new object[] { "@reference", DbType.String, entity.Reference},
                 new object[] { "@date", DbType.Date, entity.Date},
                 new object[] { "@amount", DbType.Decimal, entity.Amount},
@@ -109,8 +95,8 @@ namespace ACC.Data
             {
                 foreach (var entity in entityList)
                 {
-                    var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
-                    string query = $"DELETE FROM {tableName} WHERE bank_accounts_id = @id";
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id }, };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
@@ -121,8 +107,7 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            string query = $"SELECT COUNT(*) FROM {tableName}";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
@@ -193,6 +178,31 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(date) <= DATE(@date) AND (account_no LIKE @search_key OR bank_code LIKE @search_key OR bank_code LIKE @search_key OR reference LIKE @search_key) LIMIT @filter_row";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public Dictionary<string, string> GetViewRecordById(int id)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
     }
 }

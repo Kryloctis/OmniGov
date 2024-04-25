@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,14 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class frmBankDeposits : Form
     {
+        private ucBankDeposits uc;
+
         public frmBankDeposits()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgbankdeposits, true);
+            uc = ucBankDeposits1;
         }
 
         private void frmBankDeposits_Load(object sender, EventArgs e)
@@ -52,7 +56,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             try
             {
                 if (DeleteRecords())
+                {
+                    Helper.MessageBoxSuccess($"{dgbankdeposits.SelectedRows.Count} has been deleted.");
                     LoadRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -61,7 +68,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                _ = new frmBankDepositsAdd(this, 0, string.Empty, 0).ShowDialog();
+                uc.OnLoad(false, null);
+                uc.ResetForm();
+                tabControl1.SelectedTab = tabPageForm;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -70,8 +79,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                int bankDepositID = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
-                _ = new frmBankDepositsEdit(this, bankDepositID).ShowDialog();
+                int rowIndex = dgbankdeposits.CurrentRow.Index;
+                int id = Convert.ToInt32(dgbankdeposits.Rows[rowIndex].Cells["id"].Value);
+                uc.OnLoad(true, id);
+                tabControl1.SelectedTab = tabPageForm;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -80,17 +91,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                string searchkey = txtSearch.Text.Trim();
-
-                if (searchkey.Length < 1)
-                {
-                    LoadRecords();
-                    return;
-                }
-
-                var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
-                lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -222,6 +223,43 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             try
             {
                 Helper.EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControl1.SelectedTab = tabPageList;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmBankDeposits_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control && tabControl1.SelectedTab == tabPageForm)
+                {
+                    bool isEdit = false;
+
+                    if (uc.Save(ref isEdit))
+                    {
+                        if (isEdit)
+                        {
+                            Helper.MessageBoxSuccess("Bank deposit has been updated.");
+                            LoadRecords();
+                            tabControl1.SelectedTab = tabPageList;
+                        }
+                        else
+                        {
+                            Helper.MessageBoxSuccess("Bank deposit has been saved.");
+                            LoadRecords();
+                            uc.ResetForm();
+                        }
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

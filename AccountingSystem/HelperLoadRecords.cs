@@ -828,6 +828,8 @@ namespace AccountingSystem
             datagridView.Columns["bank_name"].HeaderText = "Bank";
             datagridView.Columns["reference"].HeaderText = "Reference";
             datagridView.Columns["amount"].HeaderText = "Amount";
+            datagridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagridView.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagridView.Columns["created_at"].Visible = false;
             datagridView.Columns["updated_at"].Visible = false;
         }

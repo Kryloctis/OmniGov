@@ -47,12 +47,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             tabPageForm = new System.Windows.Forms.TabPage();
+            panel1 = new System.Windows.Forms.Panel();
+            btnSave = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             ucBankDeposits1 = new ucBankDeposits();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            panel1 = new System.Windows.Forms.Panel();
-            button1 = new System.Windows.Forms.Button();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgbankdeposits).BeginInit();
@@ -60,9 +60,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             toolStrip.SuspendLayout();
             statusStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
+            panel1.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // backgroundWorker1
@@ -75,14 +75,19 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // tabControl1
             // 
+            tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             tabControl1.Controls.Add(tabPageList);
             tabControl1.Controls.Add(tabPageForm);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Margin = new System.Windows.Forms.Padding(0);
             tabControl1.Name = "tabControl1";
+            tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new System.Drawing.Size(838, 526);
+            tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl1.TabIndex = 0;
             // 
             // tabPageList
@@ -92,10 +97,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             tabPageList.Controls.Add(panel3);
             tabPageList.Controls.Add(toolStrip);
             tabPageList.Controls.Add(statusStrip1);
-            tabPageList.Location = new System.Drawing.Point(4, 24);
+            tabPageList.Location = new System.Drawing.Point(4, 5);
+            tabPageList.Margin = new System.Windows.Forms.Padding(0);
             tabPageList.Name = "tabPageList";
-            tabPageList.Padding = new System.Windows.Forms.Padding(3);
-            tabPageList.Size = new System.Drawing.Size(830, 498);
+            tabPageList.Size = new System.Drawing.Size(830, 517);
             tabPageList.TabIndex = 0;
             tabPageList.Text = "tabPageList";
             tabPageList.UseVisualStyleBackColor = true;
@@ -104,21 +109,21 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             dgbankdeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgbankdeposits.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgbankdeposits.Location = new System.Drawing.Point(3, 73);
+            dgbankdeposits.Location = new System.Drawing.Point(0, 70);
             dgbankdeposits.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgbankdeposits.Name = "dgbankdeposits";
             dgbankdeposits.RowHeadersWidth = 51;
             dgbankdeposits.RowTemplate.Height = 29;
-            dgbankdeposits.Size = new System.Drawing.Size(824, 400);
+            dgbankdeposits.Size = new System.Drawing.Size(830, 425);
             dgbankdeposits.TabIndex = 20;
             dgbankdeposits.SelectionChanged += dgbankdeposits_SelectionChanged;
             // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(3, 68);
+            progressBar1.Location = new System.Drawing.Point(0, 65);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(824, 5);
+            progressBar1.Size = new System.Drawing.Size(830, 5);
             progressBar1.TabIndex = 18;
             // 
             // panel3
@@ -126,9 +131,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             panel3.Controls.Add(dtDate);
             panel3.Controls.Add(cmbxRowFilter);
             panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            panel3.Location = new System.Drawing.Point(3, 38);
+            panel3.Location = new System.Drawing.Point(0, 35);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(824, 30);
+            panel3.Size = new System.Drawing.Size(830, 30);
             panel3.TabIndex = 21;
             // 
             // dtDate
@@ -156,10 +161,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch });
-            toolStrip.Location = new System.Drawing.Point(3, 3);
+            toolStrip.Location = new System.Drawing.Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip.Size = new System.Drawing.Size(824, 35);
+            toolStrip.Size = new System.Drawing.Size(830, 35);
             toolStrip.TabIndex = 16;
             toolStrip.Text = "toolStrip1";
             // 
@@ -212,10 +217,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // statusStrip1
             // 
+            statusStrip1.BackColor = System.Drawing.Color.Transparent;
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount });
-            statusStrip1.Location = new System.Drawing.Point(3, 473);
+            statusStrip1.Location = new System.Drawing.Point(0, 495);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(824, 22);
+            statusStrip1.Size = new System.Drawing.Size(830, 22);
             statusStrip1.TabIndex = 19;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -233,25 +239,44 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // tabPageForm
             // 
+            tabPageForm.Controls.Add(panel1);
             tabPageForm.Controls.Add(panel2);
             tabPageForm.Controls.Add(toolStrip1);
-            tabPageForm.Controls.Add(panel1);
-            tabPageForm.Location = new System.Drawing.Point(4, 24);
+            tabPageForm.Location = new System.Drawing.Point(4, 5);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageForm.Name = "tabPageForm";
-            tabPageForm.Size = new System.Drawing.Size(830, 498);
+            tabPageForm.Size = new System.Drawing.Size(830, 517);
             tabPageForm.TabIndex = 1;
             tabPageForm.Text = "tabPageForm";
             tabPageForm.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(btnSave);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 243);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(830, 29);
+            panel1.TabIndex = 0;
+            // 
+            // btnSave
+            // 
+            btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSave.Location = new System.Drawing.Point(655, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             panel2.Controls.Add(ucBankDeposits1);
-            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(830, 434);
+            panel2.Size = new System.Drawing.Size(830, 208);
             panel2.TabIndex = 2;
             // 
             // ucBankDeposits1
@@ -261,8 +286,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             ucBankDeposits1.Location = new System.Drawing.Point(4, 4);
             ucBankDeposits1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucBankDeposits1.Name = "ucBankDeposits1";
-            ucBankDeposits1.Size = new System.Drawing.Size(822, 426);
-            ucBankDeposits1.TabIndex = 4;
+            ucBankDeposits1.Size = new System.Drawing.Size(822, 200);
+            ucBankDeposits1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -284,25 +309,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new System.Drawing.Size(56, 24);
             toolStripButton1.Text = "Back";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(button1);
-            panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panel1.Location = new System.Drawing.Point(0, 469);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(830, 29);
-            panel1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(677, 3);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(150, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // frmBankDeposits
             // 
@@ -312,6 +319,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             ClientSize = new System.Drawing.Size(838, 526);
             Controls.Add(tabControl1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimizeBox = false;
             Name = "frmBankDeposits";
@@ -319,6 +327,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Bank Deposits";
             Load += frmBankDeposits_Load;
+            KeyDown += frmBankDeposits_KeyDown;
             tabControl1.ResumeLayout(false);
             tabPageList.ResumeLayout(false);
             tabPageList.PerformLayout();
@@ -330,10 +339,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             statusStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
+            panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -354,13 +363,13 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.TabPage tabPageForm;
         private System.Windows.Forms.DataGridView dgbankdeposits;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Panel panel2;
-        private ucBankDeposits ucBankDeposits1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox cmbxRowFilter;
         private System.Windows.Forms.DateTimePicker dtDate;
+        private ucBankDeposits ucBankDeposits1;
     }
 }
