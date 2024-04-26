@@ -36,9 +36,9 @@ namespace ACC.Data
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     _ = rcdCollections.DeleteByRcdId(entity);
                     _ = rcdDeposits.DeleteByRcdId(entity);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -153,11 +153,18 @@ namespace ACC.Data
             {
                 _ = Insert(rcdModel);
 
+                int lastInsertedId = GetLastInsertedId(rcdModel.CreatedBy);
                 foreach (RcdCollectionsModel rcdCollectionsModel in rcdCollectionsModels)
+                {
+                    rcdCollectionsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
                     _ = rcdCollections.Insert(rcdCollectionsModel);
+                }
 
                 foreach (RcdDepositsModel rcdDepositsModel in rcdDepositsModels)
+                {
+                    rcdDepositsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
                     _ = rcdDeposits.Insert(rcdDepositsModel);
+                }
 
                 scope.Complete();
                 return true;
@@ -200,6 +207,13 @@ namespace ACC.Data
                 return recordDictionary;
             }
             return recordDictionary;
+        }
+
+        public int GetLastInsertedId(UsersModel usersModel)
+        {
+            var parameters = new object[][] { new object[] { "@created_by", DbType.Int32, usersModel.Id } };
+            string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
     }
 }

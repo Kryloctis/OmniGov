@@ -37,8 +37,12 @@ namespace ACC.Domain.Interfaces
 
         bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels);
 
-        DataTable GetViewConsolidatedRcdRecord(DateTime date, UsersModel createdBy);
+        public DataTable GetViewConsolidatedRcdRecords(DateTime date, UsersModel createdBy);
 
-        DataTable GetViewConsolidatedRcdRecord(RcdCollectionsModel rcdCollectionsModel);
+        public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel);
+
+        List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy);
+
+        List<RcdCollectionsModel> GetRcdCollections(RcdModel rcdModel);
     }
 }

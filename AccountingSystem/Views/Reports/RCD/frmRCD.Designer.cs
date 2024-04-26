@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel2 = new System.Windows.Forms.Panel();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
@@ -47,7 +50,6 @@
             btnPrint = new System.Windows.Forms.ToolStripButton();
             tabPageForm = new System.Windows.Forms.TabPage();
             ucRcd1 = new ucRcd();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnSave = new System.Windows.Forms.Button();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
@@ -57,20 +59,18 @@
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblRowCount = new System.Windows.Forms.ToolStripStatusLabel();
+            panel3 = new System.Windows.Forms.Panel();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            statusStrip1.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePrint.SuspendLayout();
             toolStrip3.SuspendLayout();
-            statusStrip1.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -108,23 +108,23 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(0, 70);
             dataGridView1.Margin = new System.Windows.Forms.Padding(0);
@@ -133,6 +133,27 @@
             dataGridView1.Size = new System.Drawing.Size(711, 519);
             dataGridView1.TabIndex = 1;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRowCount });
+            statusStrip1.Location = new System.Drawing.Point(0, 589);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(711, 22);
+            statusStrip1.TabIndex = 10;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Records:";
+            // 
+            // lblRowCount
+            // 
+            lblRowCount.Name = "lblRowCount";
+            lblRowCount.Size = new System.Drawing.Size(13, 17);
+            lblRowCount.Text = "0";
             // 
             // progressBar1
             // 
@@ -246,8 +267,8 @@
             // 
             // tabPageForm
             // 
+            tabPageForm.Controls.Add(panel3);
             tabPageForm.Controls.Add(ucRcd1);
-            tabPageForm.Controls.Add(flowLayoutPanel1);
             tabPageForm.Controls.Add(toolStrip2);
             tabPageForm.Location = new System.Drawing.Point(4, 5);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
@@ -259,32 +280,21 @@
             // 
             // ucRcd1
             // 
-            ucRcd1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucRcd1.Dock = System.Windows.Forms.DockStyle.Top;
             ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucRcd1.Location = new System.Drawing.Point(0, 35);
             ucRcd1.Margin = new System.Windows.Forms.Padding(0);
             ucRcd1.Name = "ucRcd1";
-            ucRcd1.Size = new System.Drawing.Size(711, 546);
+            ucRcd1.Size = new System.Drawing.Size(711, 468);
             ucRcd1.TabIndex = 11;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(btnSave);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 581);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(711, 30);
-            flowLayoutPanel1.TabIndex = 12;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(558, 3);
+            btnSave.Location = new System.Drawing.Point(543, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -318,7 +328,7 @@
             tabPagePrint.Location = new System.Drawing.Point(4, 5);
             tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
             tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(711, 589);
+            tabPagePrint.Size = new System.Drawing.Size(711, 611);
             tabPagePrint.TabIndex = 2;
             tabPagePrint.Text = "tabPagePrint";
             tabPagePrint.UseVisualStyleBackColor = true;
@@ -329,7 +339,7 @@
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(711, 554);
+            panel1.Size = new System.Drawing.Size(711, 576);
             panel1.TabIndex = 1;
             // 
             // toolStrip3
@@ -371,26 +381,14 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // statusStrip1
+            // panel3
             // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRowCount });
-            statusStrip1.Location = new System.Drawing.Point(0, 589);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(711, 22);
-            statusStrip1.TabIndex = 10;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            toolStripStatusLabel1.Text = "Records:";
-            // 
-            // lblRowCount
-            // 
-            lblRowCount.Name = "lblRowCount";
-            lblRowCount.Size = new System.Drawing.Size(13, 17);
-            lblRowCount.Text = "0";
+            panel3.Controls.Add(btnSave);
+            panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            panel3.Location = new System.Drawing.Point(0, 503);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(711, 30);
+            panel3.TabIndex = 13;
             // 
             // frmRcd
             // 
@@ -400,30 +398,32 @@
             ClientSize = new System.Drawing.Size(719, 620);
             Controls.Add(tabControl1);
             Font = new System.Drawing.Font("Segoe UI", 9F);
+            KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "frmRcd";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Reports > Report of Collections and Deposits";
             Load += frmRcd_Load;
+            KeyDown += frmRcd_KeyDown;
             tabControl1.ResumeLayout(false);
             tabPageList.ResumeLayout(false);
             tabPageList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             tabPagePrint.ResumeLayout(false);
             tabPagePrint.PerformLayout();
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -452,11 +452,11 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox cmbxRowFilter;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRowCount;
+        private System.Windows.Forms.Panel panel3;
     }
 }

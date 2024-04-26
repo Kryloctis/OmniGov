@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRcd : IAccRepository<RcdModel>
     {
+        int GetLastInsertedId(UsersModel usersModel);
+
         bool reportNoExist(string reportNo);
 
         bool reportNoExist(string reportNo, int id);
@@ -18,6 +20,5 @@ namespace ACC.Domain.Interfaces
         bool UpdateWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels);
 
         Dictionary<string, string> GetViewRecord(int id);
-
     }
 }

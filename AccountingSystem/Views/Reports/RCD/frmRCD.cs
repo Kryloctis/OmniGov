@@ -10,14 +10,14 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRcd : Form
     {
-        private ucRcd ucRcd;
+        private ucRcd uc;
 
         public frmRcd()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-            ucRcd = ucRcd1;
+            uc = ucRcd1;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 tabControl1.SelectedTab = tabPageForm;
-                ucRcd.OnLoad(false, null);
+                uc.OnLoad(false, null);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 tabControl1.SelectedTab = tabPageForm;
                 int index = dataGridView1.CurrentCell.RowIndex;
                 int rcdId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
-                ucRcd.OnLoad(true, rcdId);
+                uc.OnLoad(true, rcdId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -211,23 +211,6 @@ namespace AccountingSystem.Views.Reports.RCD
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                bool isEdit = false;
-
-                if (ucRcd.Save(ref isEdit))
-                {
-                    Helper.MessageBoxSuccess($"RCD has been {(isEdit ? "updated" : "saved")}.");
-                    ucRcd.ResetForm();
-                    LoadRcd();
-                    _ = isEdit ? tabControl1.SelectedTab = tabPageList : null;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private bool DeleteRecords(DataGridView dataGridView)
         {
             var models = new List<RcdModel>();
@@ -255,6 +238,59 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     Helper.MessageBoxSuccess($"{selectedRowCount} records has been deleted.");
                     LoadRcd();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isEdit = false;
+
+                if (uc.Save(ref isEdit))
+                {
+                    if (isEdit)
+                    {
+                        Helper.MessageBoxSuccess("RCD has been updated.");
+                        LoadRcd();
+                        tabControl1.SelectedTab = tabPageList;
+                    }
+                    else
+                    {
+                        Helper.MessageBoxSuccess("RCD has been saved.");
+                        LoadRcd();
+                        uc.ResetForm();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmRcd_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control && tabControl1.SelectedTab == tabPageForm)
+                {
+                    bool isEdit = false;
+
+                    if (uc.Save(ref isEdit))
+                    {
+                        if (isEdit)
+                        {
+                            Helper.MessageBoxSuccess("RCD has been updated.");
+                            LoadRcd();
+                            tabControl1.SelectedTab = tabPageList;
+                        }
+                        else
+                        {
+                            Helper.MessageBoxSuccess("RCD has been saved.");
+                            LoadRcd();
+                            uc.ResetForm();
+                        }
+                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

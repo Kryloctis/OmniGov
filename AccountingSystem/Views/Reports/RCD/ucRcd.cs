@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,10 +56,10 @@ namespace AccountingSystem.Views.Reports.RCD
             dtDate.Value = Helper.GetCurrentDate();
             txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
             LoadFunds();
-
             LoadCollections();
             LoadDeposits();
             if (isEdit) LoadSelectedRecord(rcdId.Value); else ResetForm();
+            errorProvider1.Clear();
         }
 
         internal string GetFormErrors()
@@ -78,13 +79,13 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 var rcdModel = new RcdModel() { Id = rcdId.Value };
                 var rcdCollectionsModel = new RcdCollectionsModel() { RcdModel = rcdModel };
-                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecord(rcdCollectionsModel);
+                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
             }
             else
             {
                 var date = dtDate.Value;
                 var userModel = new UsersModel() { Id = Helper.userId };
-                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecord(date, userModel);
+                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(date, userModel);
             }
         }
 
@@ -169,12 +170,6 @@ namespace AccountingSystem.Views.Reports.RCD
                 dataTable.Rows.Add(newRow);
             }
             HelperLoadRecords.DgvRcdDeposits(dgvDeposits, dataTable);
-        }
-
-        private void SetDateBounds(DateTimePicker dateFrom, DateTimePicker dateTo)
-        {
-            dateFrom.MaxDate = dateTo.Value;
-            dateTo.MinDate = dateFrom.Value;
         }
 
         private bool ReportNoValidated(ErrorProvider errorProvider, TextBox textBox)
@@ -276,14 +271,31 @@ namespace AccountingSystem.Views.Reports.RCD
 
         internal List<RcdCollectionsModel> RcdCollectionsModels()
         {
-            var models = new List<RcdCollectionsModel>();
-            return models;
+            if (isEdit)
+            {
+                var rcdModel = new RcdModel() { Id = rcdId.Value };
+                return AccFactory.PaymentCollectionsRepository().GetRcdCollections(rcdModel);
+            }
+            else
+            {
+                var date = dtDate.Value;
+                var userModel = new UsersModel() { Id = Helper.userId };
+                return AccFactory.PaymentCollectionsRepository().GetRcdCollections(date, userModel);
+            }
         }
 
         internal List<RcdDepositsModel> RcdDepositsModels()
         {
-            var models = new List<RcdDepositsModel>();
-            return models;
+            var rcdDepositModels = new List<RcdDepositsModel>();
+            var dtRcdDeposit = (DataTable)dgvDeposits.DataSource;
+
+            foreach (DataRow dataRow in dtRcdDeposit.Rows)
+            {
+                var rcdDepositModel = new RcdDepositsModel() { BankDepositsModel = new BankDepositsModel() { Id = Convert.ToInt32(dataRow["id"]) } };
+                rcdDepositModels.Add(rcdDepositModel);
+            }
+
+            return rcdDepositModels;
         }
 
         internal bool Save(ref bool isEdit)

@@ -153,7 +153,7 @@ namespace ACC.Data
                 new object[] { "@date", DbType.DateTime, date},
                 new object[] { "@created_by", DbType.Int32, createdBy.Id},
             };
-            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(date) < DATE(@date) AND id NOT IN (SELECT id FROM {rcdDeposits.GetTableName()}) ORDER BY date ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(date) < DATE(@date) AND id NOT IN (SELECT bank_deposits_id FROM {rcdDeposits.GetTableName()}) ORDER BY date ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
@@ -163,7 +163,7 @@ namespace ACC.Data
             {
                 new object[] { "@rcd_id", DbType.Int32, rcdDepositsModel.RcdModel.Id},
             };
-            string query = $"SELECT * FROM {viewTableName} WHERE  id NOT IN (SELECT id FROM {rcdDeposits.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY date ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE id IN (SELECT bank_deposits_id FROM {rcdDeposits.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY date ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 

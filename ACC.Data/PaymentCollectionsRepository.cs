@@ -402,7 +402,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewConsolidatedRcdRecord(DateTime date, UsersModel createdBy)
+        public DataTable GetViewConsolidatedRcdRecords(DateTime date, UsersModel createdBy)
         {
             var parameters = new object[][]
             {
@@ -414,7 +414,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public DataTable GetViewConsolidatedRcdRecord(RcdCollectionsModel rcdCollectionsModel)
+        public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel)
         {
             var parameters = new object[][]
             {
@@ -423,6 +423,61 @@ namespace ACC.Data
 
             string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy)
+        {
+            var rcdCollectionsModels = new List<RcdCollectionsModel>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@date", DbType.DateTime, date},
+                new object[] { "@created_by", DbType.Int32, createdBy.Id}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC ";
+
+            using (DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    var rcdCollectionModel = new RcdCollectionsModel()
+                    {
+                        PaymentCollectionsModel = new PaymentCollectionsModel() { Id = Convert.ToInt32(dataRow["id"]) },
+                    };
+
+                    rcdCollectionsModels.Add(rcdCollectionModel);
+                }
+            }
+
+            return rcdCollectionsModels;
+        }
+
+        public List<RcdCollectionsModel> GetRcdCollections(RcdModel rcdModel)
+        {
+            var rcdCollectionsModels = new List<RcdCollectionsModel>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@rcd_id", DbType.Int32, rcdModel.Id},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY acc_form_no ASC ";
+
+            using (DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    var rcdCollectionModel = new RcdCollectionsModel()
+                    {
+                        PaymentCollectionsModel = new PaymentCollectionsModel() { Id = Convert.ToInt32(dataRow["id"]) },
+                    };
+
+                    rcdCollectionsModels.Add(rcdCollectionModel);
+                }
+            }
+
+            return rcdCollectionsModels;
         }
     }
 }
