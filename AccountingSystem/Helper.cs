@@ -1010,6 +1010,5 @@ namespace AccountingSystem
 
             return dictDelinquencyStatus;
         }
-
     }
 }

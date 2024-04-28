@@ -76,7 +76,6 @@
 		<None Remove="Reports\pre-trial-balance.rdlc" />
 		<None Remove="Reports\procurements-received-journal.rdlc" />
 		<None Remove="Reports\rcd.rdlc" />
-		<None Remove="Reports\real-property-payment-receipt.rdlc" />
 		<None Remove="Reports\real-property-tax-due-bill.rdlc" />
 		<None Remove="Reports\RealPropertyTaxDuesAndPayments.rdlc" />
 		<None Remove="Reports\report_of_general_collection.rdlc" />
@@ -221,9 +220,6 @@
 		</Content>
 		<Content Include="Reports\schedule-of-released-cheques.rdlc">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Reports\real-property-payment-receipt.rdlc">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\real-property-tax-due-bill.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

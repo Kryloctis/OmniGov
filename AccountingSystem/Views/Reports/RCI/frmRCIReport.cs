@@ -3,6 +3,7 @@ using ACC.Domain.Interfaces;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -198,7 +199,7 @@ namespace AccountingSystem.Views.Reports.RCI
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void cmbBanks_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBankAccounts, "Bank Account");
         }

@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -35,5 +36,13 @@ namespace ACC.Domain.Interfaces
         bool InsertWithCattleOwnershipPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels);
 
         bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels);
+
+        public DataTable GetViewConsolidatedRcdRecords(DateTime date, UsersModel createdBy);
+
+        public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel);
+
+        List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy);
+
+        List<RcdCollectionsModel> GetRcdCollections(RcdModel rcdModel);
     }
 }

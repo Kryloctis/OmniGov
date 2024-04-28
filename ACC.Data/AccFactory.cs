@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using Org.BouncyCastle.Asn1.Mozilla;
 using RPT.Domain.Interfaces;
 using System;
 
@@ -106,9 +107,9 @@ namespace ACC.Data
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository(), RcdCollectionsRepository(), RcdDepositsRepository());
 
-        public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
+        public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS, RcdDepositsRepository());
 
         public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(mySqlGenericCommandsLFS);
 
@@ -204,5 +205,10 @@ namespace ACC.Data
 
         public static IRptDelinquenciesRepository RptDelinquenciesRepository() => new RptDelinquenciesRepository(mySqlGenericCommandsLFS);
 
+        public static IRcd RcdRepository() => new RcdRepository(mySqlGenericCommandsLFS, RcdCollectionsRepository(), RcdDepositsRepository());
+
+        public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(mySqlGenericCommandsLFS);
+
+        public static IRcdDeposits RcdDepositsRepository() => new RcdDepositsRepository(mySqlGenericCommandsLFS);
     }
 }
