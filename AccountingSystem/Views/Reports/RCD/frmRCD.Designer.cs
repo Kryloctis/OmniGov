@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -49,17 +49,18 @@
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             btnPrint = new System.Windows.Forms.ToolStripButton();
             tabPageForm = new System.Windows.Forms.TabPage();
-            ucRcd1 = new ucRcd();
+            panel3 = new System.Windows.Forms.Panel();
             btnSave = new System.Windows.Forms.Button();
+            ucRcd1 = new ucRcd();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
             tabPagePrint = new System.Windows.Forms.TabPage();
             panel1 = new System.Windows.Forms.Panel();
+            ucRcdReport1 = new ucRcdReport();
+            statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            panel3 = new System.Windows.Forms.Panel();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -67,10 +68,11 @@
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
+            panel3.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePrint.SuspendLayout();
+            panel1.SuspendLayout();
             toolStrip3.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -108,23 +110,23 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(0, 70);
             dataGridView1.Margin = new System.Windows.Forms.Padding(0);
@@ -278,15 +280,14 @@
             tabPageForm.Text = "Form";
             tabPageForm.UseVisualStyleBackColor = true;
             // 
-            // ucRcd1
+            // panel3
             // 
-            ucRcd1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucRcd1.Location = new System.Drawing.Point(0, 35);
-            ucRcd1.Margin = new System.Windows.Forms.Padding(0);
-            ucRcd1.Name = "ucRcd1";
-            ucRcd1.Size = new System.Drawing.Size(711, 468);
-            ucRcd1.TabIndex = 11;
+            panel3.Controls.Add(btnSave);
+            panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            panel3.Location = new System.Drawing.Point(0, 503);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(711, 30);
+            panel3.TabIndex = 13;
             // 
             // btnSave
             // 
@@ -297,6 +298,16 @@
             btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
+            // 
+            // ucRcd1
+            // 
+            ucRcd1.Dock = System.Windows.Forms.DockStyle.Top;
+            ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucRcd1.Location = new System.Drawing.Point(0, 35);
+            ucRcd1.Margin = new System.Windows.Forms.Padding(0);
+            ucRcd1.Name = "ucRcd1";
+            ucRcd1.Size = new System.Drawing.Size(711, 468);
+            ucRcd1.TabIndex = 11;
             // 
             // toolStrip2
             // 
@@ -335,12 +346,30 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(ucRcdReport1);
+            panel1.Controls.Add(statusStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 35);
+            panel1.Margin = new System.Windows.Forms.Padding(0);
             panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
             panel1.Size = new System.Drawing.Size(711, 576);
             panel1.TabIndex = 1;
+            // 
+            // ucRcdReport1
+            // 
+            ucRcdReport1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucRcdReport1.Location = new System.Drawing.Point(0, 0);
+            ucRcdReport1.Name = "ucRcdReport1";
+            ucRcdReport1.Size = new System.Drawing.Size(711, 554);
+            ucRcdReport1.TabIndex = 3;
+            // 
+            // statusStrip2
+            // 
+            statusStrip2.Location = new System.Drawing.Point(0, 554);
+            statusStrip2.Name = "statusStrip2";
+            statusStrip2.Size = new System.Drawing.Size(711, 22);
+            statusStrip2.TabIndex = 2;
+            statusStrip2.Text = "statusStrip2";
             // 
             // toolStrip3
             // 
@@ -364,15 +393,6 @@
             toolStripButton8.Text = "Back";
             toolStripButton8.Click += toolStripButton8_Click;
             // 
-            // reportViewer1
-            // 
-            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportViewer1.Location = new System.Drawing.Point(0, 0);
-            reportViewer1.Name = "ReportViewer";
-            reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.Size = new System.Drawing.Size(396, 246);
-            reportViewer1.TabIndex = 0;
-            // 
             // backgroundWorker1
             // 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -380,15 +400,6 @@
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(btnSave);
-            panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            panel3.Location = new System.Drawing.Point(0, 503);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(711, 30);
-            panel3.TabIndex = 13;
             // 
             // frmRcd
             // 
@@ -417,13 +428,15 @@
             toolStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
+            panel3.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             tabPagePrint.ResumeLayout(false);
             tabPagePrint.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
-            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -446,7 +459,6 @@
         private System.Windows.Forms.TabPage tabPagePrint;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -458,5 +470,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRowCount;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private ucRcdReport ucRcdReport1;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.DataSets;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +13,7 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmRcd : Form
     {
         private ucRcd uc;
+        private ucRcdReport ucReport;
 
         public frmRcd()
         {
@@ -18,6 +21,7 @@ namespace AccountingSystem.Views.Reports.RCD
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
             uc = ucRcd1;
+            ucReport = ucRcdReport1;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -55,9 +59,12 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
+                int index = dataGridView1.CurrentCell.RowIndex;
+                int rcdId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
+                ucReport.OnLoad(rcdId);
                 tabControl1.SelectedTab = tabPagePrint;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void toolStripButton8_Click(object sender, EventArgs e)
