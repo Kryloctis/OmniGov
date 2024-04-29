@@ -180,10 +180,16 @@ namespace ACC.Data
                 _ = rcdDeposits.DeleteByRcdId(rcdModel);
 
                 foreach (RcdCollectionsModel rcdCollectionsModel in rcdCollectionsModels)
+                {
+                    rcdCollectionsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
                     _ = rcdCollections.Insert(rcdCollectionsModel);
+                }
 
                 foreach (RcdDepositsModel rcdDepositsModel in rcdDepositsModels)
+                {
+                    rcdDepositsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
                     _ = rcdDeposits.Insert(rcdDepositsModel);
+                }
 
                 scope.Complete();
                 return true;

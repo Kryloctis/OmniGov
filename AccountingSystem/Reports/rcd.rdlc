@@ -751,7 +751,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox18">
+                        <Textbox Name="txtTotalCollections">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -771,7 +771,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1159,7 +1158,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox33">
+                        <Textbox Name="txtTotalDeposits">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1177,7 +1176,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox33</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1848,7 +1846,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value />
+                        <Value>=ReportItems!txtTotalCollections.Value + ReportItems!txtTotalDeposits.Value</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -2057,7 +2055,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value />
+                        <Value>=ReportItems!txtTotalCollections.Value + ReportItems!txtTotalDeposits.Value</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -2116,7 +2114,6 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <ListLevel>1</ListLevel>
                     <Style />
                   </Paragraph>
                   <Paragraph>
@@ -2173,7 +2170,6 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <ListLevel>1</ListLevel>
                     <Style />
                   </Paragraph>
                   <Paragraph>
@@ -2191,7 +2187,23 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>receipt of </Value>
+                        <Value>receipt of  (P </Value>
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>=ReportItems!txtTotalCollections.Value + ReportItems!txtTotalDeposits.Value</Value>
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>9pt</FontSize>
+                          <Format>n2</Format>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>)</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -2472,11 +2484,11 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value />
+                        <Value>=Globals!ExecutionTime</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontWeight>Bold</FontWeight>
-                          <Format>dd/MM/yyyy</Format>
+                          <Format>d</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2486,7 +2498,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
-                <Top>1.34202in</Top>
+                <Top>1.35591in</Top>
                 <Left>2.42184in</Left>
                 <Height>0.20833in</Height>
                 <Width>0.77197in</Width>
@@ -2513,11 +2525,11 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value />
+                        <Value>=Globals!ExecutionTime</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontWeight>Bold</FontWeight>
-                          <Format>dd/MM/yyyy</Format>
+                          <Format>d</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -5174,6 +5186,7 @@
                     <Value>=Parameters!paramDate.Value</Value>
                     <Style>
                       <FontFamily>Calibri</FontFamily>
+                      <Format>d</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -5387,9 +5400,8 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramDate">
-      <DataType>String</DataType>
+      <DataType>DateTime</DataType>
       <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramAccOfficer">
