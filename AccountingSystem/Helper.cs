@@ -556,11 +556,6 @@ namespace AccountingSystem
             return DateTime.Now;
         }
 
-        public static int GetDatagridViewRecordCount(DataGridView dataGridView)
-        {
-            return dataGridView.Rows.Count;
-        }
-
         public static Color StatusColor(string status)
         {
             switch (status)

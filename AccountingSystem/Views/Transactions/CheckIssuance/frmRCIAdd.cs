@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("RCI has been saved.");
-                    _frmRCI.LoadRCI();
+                    _frmRCI.LoadRci();
                     uc.ResetForm();
                 }
             }
