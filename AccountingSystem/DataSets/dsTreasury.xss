@@ -21,9 +21,9 @@
     <Shape ID="DesignTable:dtRcdDeposits" ZOrder="5" X="886" Y="154" Height="86" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="82" />
     <Shape ID="DesignTable:dtRcdCollections" ZOrder="4" X="891" Y="270" Height="105" Width="163" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
     <Shape ID="DesignTable:dtAF51" ZOrder="6" X="699" Y="7" Height="86" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="82" />
-    <Shape ID="DesignTable:dtRcdSummary" ZOrder="3" X="891" Y="387" Height="48" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="44" />
-    <Shape ID="DesignTable:dtRcdAccEntries" ZOrder="2" X="888" Y="454" Height="48" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="44" />
-    <Shape ID="DesignTable:dtRcdChecks" ZOrder="1" X="885" Y="516" Height="48" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="44" />
+    <Shape ID="DesignTable:dtRcdAccForms" ZOrder="3" X="891" Y="387" Height="162" Width="156" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
+    <Shape ID="DesignTable:dtRcdAccEntries" ZOrder="2" X="894" Y="555" Height="48" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="44" />
+    <Shape ID="DesignTable:dtRcdChecks" ZOrder="1" X="891" Y="617" Height="48" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="44" />
   </Shapes>
   <Connectors />
 </DiagramLayout>
