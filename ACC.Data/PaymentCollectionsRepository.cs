@@ -421,7 +421,7 @@ namespace ACC.Data
                 new object[] { "@rcd_id", DbType.Int32, rcdCollectionsModel.RcdModel.Id},
             };
 
-            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount, created_by FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 

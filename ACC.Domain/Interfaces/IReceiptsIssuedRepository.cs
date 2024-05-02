@@ -38,5 +38,7 @@ namespace ACC.Domain.Interfaces
         bool ReceiptNumberInRange(int receiptId, int receiptNumber, int receiptIssuedId);
 
         Dictionary<string, string> GetViewRecordReceiptId(int receiptID);
+
+        Dictionary<string, string> GetViewRcdRecord(AccountableFormsModel accountableFormsModel, UsersModel usersModel);
     }
 }

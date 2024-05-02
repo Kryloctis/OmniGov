@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.DataSets;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -43,44 +44,53 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdCollectionsModel = new RcdCollectionsModel() { RcdModel = rcdModel };
                 var rcdDepositsModel = new RcdDepositsModel() { RcdModel = rcdModel };
 
+                //Collections
                 var dbRcdCollections = AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
-                var dtRcdCollections = new DataTable();
-                var rcdCollectionsColumns = new DataColumn[]
-                {
-                    new DataColumn("acc_form", typeof(string)),
-                    new DataColumn("receipt_from", typeof(string)),
-                    new DataColumn("receipt_to", typeof(string)),
-                    new DataColumn("amount", typeof(decimal)),
-                };
-                dtRcdCollections.Columns.AddRange(rcdCollectionsColumns);
+                var dtRcdCollections = new dsTreasury.dtRcdCollectionsDataTable();
 
+                //Deposits
                 var dbRcdDeposits = AccFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
-                var dtRcdDeposits = new DataTable();
-                var rcdDepositsColumns = new DataColumn[]
-                {
-                    new DataColumn("acc_bank", typeof(string)),
-                    new DataColumn("reference", typeof(string)),
-                    new DataColumn("amount", typeof(decimal)),
-                };
-                dtRcdDeposits.Columns.AddRange(rcdDepositsColumns);
+                var dtRcdDeposits = new dsTreasury.dtRcdDepositsDataTable();
+
+                var dtRcdAccForms = new dsTreasury.dtRcdAccFormsDataTable();
 
                 int totalProgressCount = dbRcdCollections.Rows.Count + dbRcdDeposits.Rows.Count;
                 int progressCount = 0;
 
+                //Collections
                 foreach (DataRow dataRow in dbRcdCollections.Rows)
                 {
-                    var newRow = dtRcdCollections.NewRow();
+                    var rcdCollectionsNewRow = dtRcdCollections.NewRow();
+                    var rcdAccFormsNewRow = dtRcdAccForms.NewRow();
+                    string accForm = $"{dataRow["acc_form_no"]} - {dataRow["acc_form_desc"]}";
+                    decimal collectedReceiptFrom = Convert.ToInt32(dataRow["receipt_from"]);
+                    decimal collectedReceiptTo = Convert.ToInt32(dataRow["receipt_to"]);
+                    decimal totalCollection = Convert.ToDecimal(dataRow["total_amount"]);
 
-                    newRow["acc_form"] = $"{dataRow["acc_form_no"]}- {dataRow["acc_form_desc"]}";
-                    newRow["receipt_from"] = dataRow["receipt_from"];
-                    newRow["receipt_to"] = dataRow["receipt_to"];
-                    newRow["amount"] = dataRow["total_amount"];
+                    rcdCollectionsNewRow["acc_form"] = accForm;
+                    rcdCollectionsNewRow["receipt_from"] = collectedReceiptFrom;
+                    rcdCollectionsNewRow["receipt_to"] = collectedReceiptTo;
+                    rcdCollectionsNewRow["amount"] = totalCollection;
 
-                    dtRcdCollections.Rows.Add(newRow);
+                    var accFormsModel = new AccountableFormsModel() { Id = Convert.ToInt32(dataRow["acc_form_id"]) };
+                    var usersModel = new UsersModel() { Id = Convert.ToInt32(dataRow["created_by"]) };
+                    var dictRcdAccForms = AccFactory.ReceiptsIssuedRepository().GetViewRcdRecord(accFormsModel, usersModel);
+
+                    rcdAccFormsNewRow["acc_form"] = accForm;
+                    rcdAccFormsNewRow["beg_from"] = dictRcdAccForms["receipt_issued_from"];
+                    rcdAccFormsNewRow["beg_to"] = dictRcdAccForms["receipt_issued_to"];
+                    rcdAccFormsNewRow["issued_from"] = collectedReceiptFrom;
+                    rcdAccFormsNewRow["issued_to"] = collectedReceiptTo;
+                    rcdAccFormsNewRow["end_from"] = collectedReceiptTo + 1;
+                    rcdAccFormsNewRow["end_to"] = dictRcdAccForms["receipt_issued_to"];
+
+                    dtRcdCollections.Rows.Add(rcdCollectionsNewRow);
+                    dtRcdAccForms.Rows.Add(rcdAccFormsNewRow);
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
+                //Deposits
                 foreach (DataRow dataRow in dbRcdDeposits.Rows)
                 {
                     var newRow = dtRcdDeposits.NewRow();
@@ -94,7 +104,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
-                e.Result = (dtRcdCollections, dtRcdDeposits);
+                e.Result = (dtRcdCollections, dtRcdDeposits, dtRcdAccForms);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -108,13 +118,13 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                if (e.Result is not (DataTable dtRcdCollections, DataTable dtRcdDeposits))
+                if (e.Result is not (DataTable dtRcdCollections, DataTable dtRcdDeposits, DataTable dtRcdAccForms))
                 {
                     progressBar1.Value = 100;
                     return;
                 }
 
-                if (dtRcdCollections.Rows.Count < 1 && dtRcdDeposits.Rows.Count < 1)
+                if (dtRcdCollections.Rows.Count < 1 && dtRcdDeposits.Rows.Count < 1 && dtRcdAccForms.Rows.Count < 1)
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
@@ -135,7 +145,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 report.DataSources.Add(new ReportDataSource("dtRcdCollections", dtRcdCollections));
                 report.DataSources.Add(new ReportDataSource("dtRcdDeposits", dtRcdDeposits));
-                report.DataSources.Add(new ReportDataSource("dtRcdSummary", new DataTable()));
+                report.DataSources.Add(new ReportDataSource("dtRcdAccForms", dtRcdAccForms));
                 report.DataSources.Add(new ReportDataSource("dtRcdAccEntries", new DataTable()));
                 report.DataSources.Add(new ReportDataSource("dtRcdChecks", new DataTable()));
                 report.SetParameters(reportParameters);

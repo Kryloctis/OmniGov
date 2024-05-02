@@ -179,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 UpdateRCIObligation();
                 UpdateRCIDeductions();
                 Helper.MessageBoxSuccess("RCI has been updated.");
-                _frmRCI.LoadRCI();
+                _frmRCI.LoadRci();
                 Close();
             }
         }

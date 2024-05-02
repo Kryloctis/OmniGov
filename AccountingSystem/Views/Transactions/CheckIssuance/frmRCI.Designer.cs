@@ -43,8 +43,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
-            btnSearch = new System.Windows.Forms.Button();
-            txtSearch = new System.Windows.Forms.TextBox();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             statusStrip.SuspendLayout();
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             statusStrip.Location = new System.Drawing.Point(0, 406);
             statusStrip.Name = "statusStrip";
             statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            statusStrip.Size = new System.Drawing.Size(874, 22);
+            statusStrip.Size = new System.Drawing.Size(787, 22);
             statusStrip.TabIndex = 8;
             statusStrip.Text = "statusStrip1";
             // 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(577, 17);
             toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             dgRCI.Name = "dgRCI";
             dgRCI.RowHeadersWidth = 51;
             dgRCI.RowTemplate.Height = 29;
-            dgRCI.Size = new System.Drawing.Size(866, 343);
+            dgRCI.Size = new System.Drawing.Size(779, 358);
             dgRCI.TabIndex = 9;
             dgRCI.SelectionChanged += dgRCI_SelectionChanged;
             // 
@@ -121,10 +121,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             panel1.Controls.Add(dgRCI);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 55);
+            panel1.Location = new System.Drawing.Point(0, 40);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(874, 351);
+            panel1.Size = new System.Drawing.Size(787, 366);
             panel1.TabIndex = 11;
             // 
             // toolStrip1
@@ -132,12 +132,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Margin = new System.Windows.Forms.Padding(4);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(874, 50);
+            toolStrip1.Size = new System.Drawing.Size(787, 35);
             toolStrip1.TabIndex = 12;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -147,9 +147,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(39, 39);
+            btnAdd.Size = new System.Drawing.Size(59, 24);
             btnAdd.Text = "Add..";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
@@ -159,9 +158,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(37, 39);
+            btnEdit.Size = new System.Drawing.Size(57, 24);
             btnEdit.Text = "Edit..";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
@@ -171,31 +169,26 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
             // btnSearch
             // 
-            btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSearch.Location = new System.Drawing.Point(795, 14);
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(75, 23);
-            btnSearch.TabIndex = 40;
+            btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
-            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Location = new System.Drawing.Point(590, 14);
-            txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 23);
-            txtSearch.TabIndex = 41;
+            txtSearch.Size = new System.Drawing.Size(150, 27);
             // 
             // backgroundWorker1
             // 
@@ -208,20 +201,18 @@ namespace AccountingSystem.Views.Transactions.RCI
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 50);
+            pbLoadRecords.Location = new System.Drawing.Point(0, 35);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(874, 5);
+            pbLoadRecords.Size = new System.Drawing.Size(787, 5);
             pbLoadRecords.TabIndex = 42;
             // 
             // frmRCI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(874, 428);
+            ClientSize = new System.Drawing.Size(787, 428);
             Controls.Add(panel1);
             Controls.Add(pbLoadRecords);
-            Controls.Add(txtSearch);
-            Controls.Add(btnSearch);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -231,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             Name = "frmRCI";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transaction > Issue Check";
+            Text = "Transaction > Check Issuance";
             Load += frmRCI_Load;
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
@@ -258,9 +249,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
     }
 }

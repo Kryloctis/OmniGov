@@ -54,7 +54,7 @@ namespace AccountingSystem.DataSets {
         
         private dtAF51DataTable tabledtAF51;
         
-        private dtRcdSummaryDataTable tabledtRcdSummary;
+        private dtRcdAccFormsDataTable tabledtRcdAccForms;
         
         private dtRcdAccEntriesDataTable tabledtRcdAccEntries;
         
@@ -133,8 +133,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtAF51"] != null)) {
                     base.Tables.Add(new dtAF51DataTable(ds.Tables["dtAF51"]));
                 }
-                if ((ds.Tables["dtRcdSummary"] != null)) {
-                    base.Tables.Add(new dtRcdSummaryDataTable(ds.Tables["dtRcdSummary"]));
+                if ((ds.Tables["dtRcdAccForms"] != null)) {
+                    base.Tables.Add(new dtRcdAccFormsDataTable(ds.Tables["dtRcdAccForms"]));
                 }
                 if ((ds.Tables["dtRcdAccEntries"] != null)) {
                     base.Tables.Add(new dtRcdAccEntriesDataTable(ds.Tables["dtRcdAccEntries"]));
@@ -314,9 +314,9 @@ namespace AccountingSystem.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtRcdSummaryDataTable dtRcdSummary {
+        public dtRcdAccFormsDataTable dtRcdAccForms {
             get {
-                return this.tabledtRcdSummary;
+                return this.tabledtRcdAccForms;
             }
         }
         
@@ -452,8 +452,8 @@ namespace AccountingSystem.DataSets {
                 if ((ds.Tables["dtAF51"] != null)) {
                     base.Tables.Add(new dtAF51DataTable(ds.Tables["dtAF51"]));
                 }
-                if ((ds.Tables["dtRcdSummary"] != null)) {
-                    base.Tables.Add(new dtRcdSummaryDataTable(ds.Tables["dtRcdSummary"]));
+                if ((ds.Tables["dtRcdAccForms"] != null)) {
+                    base.Tables.Add(new dtRcdAccFormsDataTable(ds.Tables["dtRcdAccForms"]));
                 }
                 if ((ds.Tables["dtRcdAccEntries"] != null)) {
                     base.Tables.Add(new dtRcdAccEntriesDataTable(ds.Tables["dtRcdAccEntries"]));
@@ -584,10 +584,10 @@ namespace AccountingSystem.DataSets {
                     this.tabledtAF51.InitVars();
                 }
             }
-            this.tabledtRcdSummary = ((dtRcdSummaryDataTable)(base.Tables["dtRcdSummary"]));
+            this.tabledtRcdAccForms = ((dtRcdAccFormsDataTable)(base.Tables["dtRcdAccForms"]));
             if ((initTable == true)) {
-                if ((this.tabledtRcdSummary != null)) {
-                    this.tabledtRcdSummary.InitVars();
+                if ((this.tabledtRcdAccForms != null)) {
+                    this.tabledtRcdAccForms.InitVars();
                 }
             }
             this.tabledtRcdAccEntries = ((dtRcdAccEntriesDataTable)(base.Tables["dtRcdAccEntries"]));
@@ -642,8 +642,8 @@ namespace AccountingSystem.DataSets {
             base.Tables.Add(this.tabledtRcdCollections);
             this.tabledtAF51 = new dtAF51DataTable();
             base.Tables.Add(this.tabledtAF51);
-            this.tabledtRcdSummary = new dtRcdSummaryDataTable();
-            base.Tables.Add(this.tabledtRcdSummary);
+            this.tabledtRcdAccForms = new dtRcdAccFormsDataTable();
+            base.Tables.Add(this.tabledtRcdAccForms);
             this.tabledtRcdAccEntries = new dtRcdAccEntriesDataTable();
             base.Tables.Add(this.tabledtRcdAccEntries);
             this.tabledtRcdChecks = new dtRcdChecksDataTable();
@@ -742,7 +742,7 @@ namespace AccountingSystem.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializedtRcdSummary() {
+        private bool ShouldSerializedtRcdAccForms() {
             return false;
         }
         
@@ -859,7 +859,7 @@ namespace AccountingSystem.DataSets {
         public delegate void dtAF51RowChangeEventHandler(object sender, dtAF51RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void dtRcdSummaryRowChangeEventHandler(object sender, dtRcdSummaryRowChangeEvent e);
+        public delegate void dtRcdAccFormsRowChangeEventHandler(object sender, dtRcdAccFormsRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtRcdAccEntriesRowChangeEventHandler(object sender, dtRcdAccEntriesRowChangeEvent e);
@@ -6140,12 +6140,26 @@ namespace AccountingSystem.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtRcdSummaryDataTable : global::System.Data.TypedTableBase<dtRcdSummaryRow> {
+        public partial class dtRcdAccFormsDataTable : global::System.Data.TypedTableBase<dtRcdAccFormsRow> {
+            
+            private global::System.Data.DataColumn columnacc_form;
+            
+            private global::System.Data.DataColumn columnbeg_from;
+            
+            private global::System.Data.DataColumn columnbeg_to;
+            
+            private global::System.Data.DataColumn columnissued_from;
+            
+            private global::System.Data.DataColumn columnissued_to;
+            
+            private global::System.Data.DataColumn columnend_from;
+            
+            private global::System.Data.DataColumn columnend_to;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryDataTable() {
-                this.TableName = "dtRcdSummary";
+            public dtRcdAccFormsDataTable() {
+                this.TableName = "dtRcdAccForms";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -6153,7 +6167,7 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtRcdSummaryDataTable(global::System.Data.DataTable table) {
+            internal dtRcdAccFormsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -6170,9 +6184,65 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected dtRcdSummaryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtRcdAccFormsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn acc_formColumn {
+                get {
+                    return this.columnacc_form;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn beg_fromColumn {
+                get {
+                    return this.columnbeg_from;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn beg_toColumn {
+                get {
+                    return this.columnbeg_to;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn issued_fromColumn {
+                get {
+                    return this.columnissued_from;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn issued_toColumn {
+                get {
+                    return this.columnissued_to;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn end_fromColumn {
+                get {
+                    return this.columnend_from;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn end_toColumn {
+                get {
+                    return this.columnend_to;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6186,44 +6256,51 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryRow this[int index] {
+            public dtRcdAccFormsRow this[int index] {
                 get {
-                    return ((dtRcdSummaryRow)(this.Rows[index]));
+                    return ((dtRcdAccFormsRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtRcdSummaryRowChangeEventHandler dtRcdSummaryRowChanging;
+            public event dtRcdAccFormsRowChangeEventHandler dtRcdAccFormsRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtRcdSummaryRowChangeEventHandler dtRcdSummaryRowChanged;
+            public event dtRcdAccFormsRowChangeEventHandler dtRcdAccFormsRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtRcdSummaryRowChangeEventHandler dtRcdSummaryRowDeleting;
+            public event dtRcdAccFormsRowChangeEventHandler dtRcdAccFormsRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event dtRcdSummaryRowChangeEventHandler dtRcdSummaryRowDeleted;
+            public event dtRcdAccFormsRowChangeEventHandler dtRcdAccFormsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AdddtRcdSummaryRow(dtRcdSummaryRow row) {
+            public void AdddtRcdAccFormsRow(dtRcdAccFormsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryRow AdddtRcdSummaryRow() {
-                dtRcdSummaryRow rowdtRcdSummaryRow = ((dtRcdSummaryRow)(this.NewRow()));
-                object[] columnValuesArray = new object[0];
-                rowdtRcdSummaryRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtRcdSummaryRow);
-                return rowdtRcdSummaryRow;
+            public dtRcdAccFormsRow AdddtRcdAccFormsRow(string acc_form, int beg_from, int beg_to, int issued_from, int issued_to, int end_from, int end_to) {
+                dtRcdAccFormsRow rowdtRcdAccFormsRow = ((dtRcdAccFormsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        acc_form,
+                        beg_from,
+                        beg_to,
+                        issued_from,
+                        issued_to,
+                        end_from,
+                        end_to};
+                rowdtRcdAccFormsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtRcdAccFormsRow);
+                return rowdtRcdAccFormsRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtRcdSummaryDataTable cln = ((dtRcdSummaryDataTable)(base.Clone()));
+                dtRcdAccFormsDataTable cln = ((dtRcdAccFormsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -6231,43 +6308,64 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtRcdSummaryDataTable();
+                return new dtRcdAccFormsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
+                this.columnacc_form = base.Columns["acc_form"];
+                this.columnbeg_from = base.Columns["beg_from"];
+                this.columnbeg_to = base.Columns["beg_to"];
+                this.columnissued_from = base.Columns["issued_from"];
+                this.columnissued_to = base.Columns["issued_to"];
+                this.columnend_from = base.Columns["end_from"];
+                this.columnend_to = base.Columns["end_to"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
+                this.columnacc_form = new global::System.Data.DataColumn("acc_form", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnacc_form);
+                this.columnbeg_from = new global::System.Data.DataColumn("beg_from", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbeg_from);
+                this.columnbeg_to = new global::System.Data.DataColumn("beg_to", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbeg_to);
+                this.columnissued_from = new global::System.Data.DataColumn("issued_from", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnissued_from);
+                this.columnissued_to = new global::System.Data.DataColumn("issued_to", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnissued_to);
+                this.columnend_from = new global::System.Data.DataColumn("end_from", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnend_from);
+                this.columnend_to = new global::System.Data.DataColumn("end_to", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnend_to);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryRow NewdtRcdSummaryRow() {
-                return ((dtRcdSummaryRow)(this.NewRow()));
+            public dtRcdAccFormsRow NewdtRcdAccFormsRow() {
+                return ((dtRcdAccFormsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtRcdSummaryRow(builder);
+                return new dtRcdAccFormsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtRcdSummaryRow);
+                return typeof(dtRcdAccFormsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtRcdSummaryRowChanged != null)) {
-                    this.dtRcdSummaryRowChanged(this, new dtRcdSummaryRowChangeEvent(((dtRcdSummaryRow)(e.Row)), e.Action));
+                if ((this.dtRcdAccFormsRowChanged != null)) {
+                    this.dtRcdAccFormsRowChanged(this, new dtRcdAccFormsRowChangeEvent(((dtRcdAccFormsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -6275,8 +6373,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtRcdSummaryRowChanging != null)) {
-                    this.dtRcdSummaryRowChanging(this, new dtRcdSummaryRowChangeEvent(((dtRcdSummaryRow)(e.Row)), e.Action));
+                if ((this.dtRcdAccFormsRowChanging != null)) {
+                    this.dtRcdAccFormsRowChanging(this, new dtRcdAccFormsRowChangeEvent(((dtRcdAccFormsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -6284,8 +6382,8 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtRcdSummaryRowDeleted != null)) {
-                    this.dtRcdSummaryRowDeleted(this, new dtRcdSummaryRowChangeEvent(((dtRcdSummaryRow)(e.Row)), e.Action));
+                if ((this.dtRcdAccFormsRowDeleted != null)) {
+                    this.dtRcdAccFormsRowDeleted(this, new dtRcdAccFormsRowChangeEvent(((dtRcdAccFormsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -6293,14 +6391,14 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtRcdSummaryRowDeleting != null)) {
-                    this.dtRcdSummaryRowDeleting(this, new dtRcdSummaryRowChangeEvent(((dtRcdSummaryRow)(e.Row)), e.Action));
+                if ((this.dtRcdAccFormsRowDeleting != null)) {
+                    this.dtRcdAccFormsRowDeleting(this, new dtRcdAccFormsRowChangeEvent(((dtRcdAccFormsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovedtRcdSummaryRow(dtRcdSummaryRow row) {
+            public void RemovedtRcdAccFormsRow(dtRcdAccFormsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -6327,7 +6425,7 @@ namespace AccountingSystem.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtRcdSummaryDataTable";
+                attribute2.FixedValue = "dtRcdAccFormsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -10567,15 +10665,211 @@ namespace AccountingSystem.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtRcdSummaryRow : global::System.Data.DataRow {
+        public partial class dtRcdAccFormsRow : global::System.Data.DataRow {
             
-            private dtRcdSummaryDataTable tabledtRcdSummary;
+            private dtRcdAccFormsDataTable tabledtRcdAccForms;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal dtRcdSummaryRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtRcdAccFormsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtRcdSummary = ((dtRcdSummaryDataTable)(this.Table));
+                this.tabledtRcdAccForms = ((dtRcdAccFormsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string acc_form {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRcdAccForms.acc_formColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'acc_form\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.acc_formColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int beg_from {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.beg_fromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'beg_from\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.beg_fromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int beg_to {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.beg_toColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'beg_to\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.beg_toColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int issued_from {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.issued_fromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'issued_from\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.issued_fromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int issued_to {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.issued_toColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'issued_to\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.issued_toColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int end_from {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.end_fromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'end_from\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.end_fromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int end_to {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtRcdAccForms.end_toColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'end_to\' in table \'dtRcdAccForms\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRcdAccForms.end_toColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isacc_formNull() {
+                return this.IsNull(this.tabledtRcdAccForms.acc_formColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setacc_formNull() {
+                this[this.tabledtRcdAccForms.acc_formColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isbeg_fromNull() {
+                return this.IsNull(this.tabledtRcdAccForms.beg_fromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setbeg_fromNull() {
+                this[this.tabledtRcdAccForms.beg_fromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isbeg_toNull() {
+                return this.IsNull(this.tabledtRcdAccForms.beg_toColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setbeg_toNull() {
+                this[this.tabledtRcdAccForms.beg_toColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isissued_fromNull() {
+                return this.IsNull(this.tabledtRcdAccForms.issued_fromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setissued_fromNull() {
+                this[this.tabledtRcdAccForms.issued_fromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isissued_toNull() {
+                return this.IsNull(this.tabledtRcdAccForms.issued_toColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setissued_toNull() {
+                this[this.tabledtRcdAccForms.issued_toColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isend_fromNull() {
+                return this.IsNull(this.tabledtRcdAccForms.end_fromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setend_fromNull() {
+                this[this.tabledtRcdAccForms.end_fromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isend_toNull() {
+                return this.IsNull(this.tabledtRcdAccForms.end_toColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setend_toNull() {
+                this[this.tabledtRcdAccForms.end_toColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11123,22 +11417,22 @@ namespace AccountingSystem.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class dtRcdSummaryRowChangeEvent : global::System.EventArgs {
+        public class dtRcdAccFormsRowChangeEvent : global::System.EventArgs {
             
-            private dtRcdSummaryRow eventRow;
+            private dtRcdAccFormsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryRowChangeEvent(dtRcdSummaryRow row, global::System.Data.DataRowAction action) {
+            public dtRcdAccFormsRowChangeEvent(dtRcdAccFormsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRcdSummaryRow Row {
+            public dtRcdAccFormsRow Row {
                 get {
                     return this.eventRow;
                 }

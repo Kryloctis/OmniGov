@@ -367,5 +367,31 @@ namespace ACC.Data
             }
             return recordDictionary;
         }
+
+        public Dictionary<string, string> GetViewRcdRecord(AccountableFormsModel accountableFormsModel, UsersModel usersModel)
+        {   
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@accountable_form_id", DbType.Int32, accountableFormsModel.Id },
+                new object[] { "@users_id", DbType.Int32, usersModel.Id }
+            };
+
+            string query = $"SELECT collecting_officer_id, MIN(receipt_issued_from) AS receipt_issued_from, MAX(receipt_issued_to) AS receipt_issued_to FROM {viewTableName} WHERE accountable_form_id = @accountable_form_id AND co_users_id = @users_id GROUP BY accountable_form_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
     }
 }
