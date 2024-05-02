@@ -137,8 +137,6 @@
             checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            realPropertyTaxDelinquencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             collectionPaymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             reportOfCollectionsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,6 +166,8 @@
             lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            auctionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            biddingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tabControlDashboard.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -605,7 +605,7 @@
             // 
             sAAOBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBToolStripMenuItem.Name = "sAAOBToolStripMenuItem";
-            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             sAAOBToolStripMenuItem.Text = "SAAOB";
             sAAOBToolStripMenuItem.Click += sAAOBToolStripMenuItem_Click;
             // 
@@ -613,7 +613,7 @@
             // 
             sAAOBBToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             sAAOBBToolStripMenuItem.Name = "sAAOBBToolStripMenuItem";
-            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             sAAOBBToolStripMenuItem.Text = "SAAOBB";
             sAAOBBToolStripMenuItem.Click += sAAOBBToolStripMenuItem_Click;
             // 
@@ -1062,7 +1062,7 @@
             // 
             // toolStripSplitButton3
             // 
-            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, paymentHistoryToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem, toolStripSeparator5, realPropertyTaxDelinquencyToolStripMenuItem });
+            toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, paymentHistoryToolStripMenuItem, toolStripSeparator10, assessmentPostingToolStripMenuItem, auctionToolStripMenuItem, biddingToolStripMenuItem, toolStripSeparator11, checkIssuanceToolStripMenuItem, releasedAndUnreleaseChecksToolStripMenu, bankDepositToolStripMenuItem });
             toolStripSplitButton3.Image = Properties.Resources.money_2_24px;
             toolStripSplitButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1163,18 +1163,6 @@
             bankDepositToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             bankDepositToolStripMenuItem.Text = "Bank Deposit";
             bankDepositToolStripMenuItem.Click += bankDepositToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator5
-            // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
-            // 
-            // realPropertyTaxDelinquencyToolStripMenuItem
-            // 
-            realPropertyTaxDelinquencyToolStripMenuItem.Name = "realPropertyTaxDelinquencyToolStripMenuItem";
-            realPropertyTaxDelinquencyToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            realPropertyTaxDelinquencyToolStripMenuItem.Text = "Real Property Tax Delinquency";
-            realPropertyTaxDelinquencyToolStripMenuItem.Click += realPropertyTaxDelinquencyToolStripMenuItem_Click;
             // 
             // toolStripSplitButton4
             // 
@@ -1377,6 +1365,18 @@
             lblVersion.Size = new System.Drawing.Size(72, 17);
             lblVersion.Text = "Version 0.0.0";
             // 
+            // auctionToolStripMenuItem
+            // 
+            auctionToolStripMenuItem.Name = "auctionToolStripMenuItem";
+            auctionToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            auctionToolStripMenuItem.Text = "Auction";
+            // 
+            // biddingToolStripMenuItem
+            // 
+            biddingToolStripMenuItem.Name = "biddingToolStripMenuItem";
+            biddingToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            biddingToolStripMenuItem.Text = "Bidding";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1578,12 +1578,12 @@
         private ucJevDashboard ucJevDashboard1;
         private Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem realPropertyTaxDelinquencyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM16ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM17ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM18ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lTOM19ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem auctionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem biddingToolStripMenuItem;
     }
 }
