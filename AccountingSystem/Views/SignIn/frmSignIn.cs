@@ -148,12 +148,11 @@ namespace AccountingSystem
             string password = txtPassword.Text;
 
             Helper.userId = AccFactory.UsersRepository().ValidateLogin(username, password);
-            var mainForm = new MainForm(this);
             txtUsername.SelectAll();
             txtUsername.Focus();
             txtPassword.Clear();
 
-            mainForm.Show();
+            new frmMain(this).Show();
             Hide();
 
             btnVisibility.Image = visibleImage;

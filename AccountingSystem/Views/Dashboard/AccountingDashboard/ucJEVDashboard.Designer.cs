@@ -48,7 +48,6 @@ namespace AccountingSystem.Views.Dashboard
             lnkCancelled = new System.Windows.Forms.LinkLabel();
             lblCancelledJEVCounter = new System.Windows.Forms.Label();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnAddJEV = new System.Windows.Forms.Button();
             cmbxJournals = new System.Windows.Forms.ComboBox();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             cmbxMonth = new System.Windows.Forms.ComboBox();
@@ -68,7 +67,7 @@ namespace AccountingSystem.Views.Dashboard
             btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             btnRefreshCounter.Image = (System.Drawing.Image)resources.GetObject("btnRefreshCounter.Image");
             btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRefreshCounter.Location = new System.Drawing.Point(861, 3);
+            btnRefreshCounter.Location = new System.Drawing.Point(763, 3);
             btnRefreshCounter.Name = "btnRefreshCounter";
             btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
             btnRefreshCounter.TabIndex = 13;
@@ -323,7 +322,6 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(btnAddJEV);
             flowLayoutPanel1.Controls.Add(cmbxJournals);
             flowLayoutPanel1.Controls.Add(cmbxFunds);
             flowLayoutPanel1.Controls.Add(cmbxMonth);
@@ -335,24 +333,11 @@ namespace AccountingSystem.Views.Dashboard
             flowLayoutPanel1.Size = new System.Drawing.Size(1166, 29);
             flowLayoutPanel1.TabIndex = 15;
             // 
-            // btnAddJEV
-            // 
-            btnAddJEV.Image = Properties.Resources.symbol_add_14px;
-            btnAddJEV.Location = new System.Drawing.Point(3, 3);
-            btnAddJEV.Name = "btnAddJEV";
-            btnAddJEV.Size = new System.Drawing.Size(92, 23);
-            btnAddJEV.TabIndex = 31;
-            btnAddJEV.Text = "Add";
-            btnAddJEV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnAddJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnAddJEV.UseVisualStyleBackColor = true;
-            btnAddJEV.Click += btnAddJEV_Click;
-            // 
             // cmbxJournals
             // 
             cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxJournals.FormattingEnabled = true;
-            cmbxJournals.Location = new System.Drawing.Point(101, 3);
+            cmbxJournals.Location = new System.Drawing.Point(3, 3);
             cmbxJournals.Name = "cmbxJournals";
             cmbxJournals.Size = new System.Drawing.Size(299, 23);
             cmbxJournals.TabIndex = 30;
@@ -362,7 +347,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(406, 3);
+            cmbxFunds.Location = new System.Drawing.Point(308, 3);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(189, 23);
             cmbxFunds.TabIndex = 32;
@@ -372,7 +357,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             cmbxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxMonth.FormattingEnabled = true;
-            cmbxMonth.Location = new System.Drawing.Point(601, 3);
+            cmbxMonth.Location = new System.Drawing.Point(503, 3);
             cmbxMonth.Name = "cmbxMonth";
             cmbxMonth.Size = new System.Drawing.Size(139, 23);
             cmbxMonth.TabIndex = 28;
@@ -382,7 +367,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             nudYear.BackColor = System.Drawing.Color.White;
-            nudYear.Location = new System.Drawing.Point(746, 3);
+            nudYear.Location = new System.Drawing.Point(648, 3);
             nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
             nudYear.Name = "nudYear";
@@ -433,7 +418,6 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Label lblApprovedJEVCounter;
         private System.Windows.Forms.Panel pnlJEV;
         internal System.Windows.Forms.Label lblJEVCounter;
-        internal System.Windows.Forms.Button btnAddJEV;
         internal System.Windows.Forms.LinkLabel linkDisapproved;
         internal System.Windows.Forms.LinkLabel lnkPending;
         internal System.Windows.Forms.LinkLabel lnkApproved;

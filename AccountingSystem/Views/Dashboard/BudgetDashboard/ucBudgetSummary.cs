@@ -81,25 +81,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             LoadBudgetDashboardContents();
         }
 
-        #region COMBOBOXES
-
         internal void LoadFunds()
         {
             cmbxFunds.DataSource = AccFactory.FundsRepository().GetRecords();
             cmbxFunds.DisplayMember = "fund_name";
             cmbxFunds.ValueMember = "id";
-        }
-
-        private DataTable DataTableFPP()
-        {
-            DataTable dtFPP;
-
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
-            else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
-
-            return dtFPP;
         }
 
         private DataTable DataTableSubFPP()
@@ -114,78 +100,58 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
 
         internal void LoadFPP(bool isSearch)
         {
-            try
+            cmbxFPP.DroppedDown = false;
+            cmbxFPP.SelectedValueChanged -= new EventHandler(CmbxFPP_SelectedValueChanged);
+            Cursor.Current = Cursors.Default;
+
+            var dataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var fppDict = new Dictionary<string, string>();
+
+            if (!isSearch) fppDict.Add("all", "All");
+            foreach (DataRow item in dataTable.Rows)
             {
-                cmbxFPP.DroppedDown = false;
-                cmbxFPP.SelectedValueChanged -= new EventHandler(CmbxFPP_SelectedValueChanged);
-                Cursor.Current = Cursors.Default;
+                string fppId = item["id"].ToString();
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
 
-                if (DataTableFPP().Rows.Count == 0)
-                {
-                    cmbxFPP.DataSource = null;
-                    cmbxFPP.DropDownHeight = 100;
-                    return;
-                };
-
-                var fppDict = new Dictionary<string, string>();
-
-                if (!isSearch) fppDict.Add("all", "All");
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    string fppId = item["id"].ToString();
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbxFPP.DataSource = new BindingSource(fppDict, null);
-                cmbxFPP.DisplayMember = "value";
-                cmbxFPP.ValueMember = "key";
-                cmbxFPP.DropDownHeight = 400;
-                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+                fppDict.Add(fppId, fppName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbxFPP.DataSource = new BindingSource(fppDict, null);
+            cmbxFPP.DisplayMember = "value";
+            cmbxFPP.ValueMember = "key";
+            cmbxFPP.DropDownHeight = 400;
+            cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
         }
 
         internal void LoadSubFPP()
         {
-            try
+            cmbSubFPP.DroppedDown = false;
+            Cursor.Current = Cursors.Default;
+
+            if (cmbxFPP.DataSource == null || cmbxFPP.SelectedValue.ToString() == "all" || DataTableSubFPP().Rows.Count == 0)
             {
-                cmbSubFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
-
-                if (cmbxFPP.DataSource == null || cmbxFPP.SelectedValue.ToString() == "all" || DataTableSubFPP().Rows.Count == 0)
-                {
-                    cmbSubFPP.DataSource = null;
-                    cmbSubFPP.Enabled = false;
-                    return;
-                }
-
-                var subFPPDict = new Dictionary<string, string>();
-
-                subFPPDict.Add("all", "All");
-                foreach (DataRow item in DataTableSubFPP().Rows)
-                {
-                    string subFPPId = item["id"].ToString();
-                    string subFPPName = $"{item["others_fpp_code"]} - {item["name"]}";
-
-                    subFPPDict.Add(subFPPId, subFPPName);
-                }
-
-                cmbSubFPP.DataSource = new BindingSource(subFPPDict, null);
-                cmbSubFPP.Enabled = true;
-                cmbSubFPP.DisplayMember = "value";
-                cmbSubFPP.ValueMember = "key";
-                cmbSubFPP.SelectedIndex = -1;
-                cmbSubFPP.DropDownHeight = 400;
+                cmbSubFPP.DataSource = null;
+                cmbSubFPP.Enabled = false;
+                return;
             }
-            catch (Exception ex)
+
+            var subFPPDict = new Dictionary<string, string>();
+
+            subFPPDict.Add("all", "All");
+            foreach (DataRow item in DataTableSubFPP().Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                string subFPPId = item["id"].ToString();
+                string subFPPName = $"{item["others_fpp_code"]} - {item["name"]}";
+
+                subFPPDict.Add(subFPPId, subFPPName);
             }
+
+            cmbSubFPP.DataSource = new BindingSource(subFPPDict, null);
+            cmbSubFPP.Enabled = true;
+            cmbSubFPP.DisplayMember = "value";
+            cmbSubFPP.ValueMember = "key";
+            cmbSubFPP.SelectedIndex = -1;
+            cmbSubFPP.DropDownHeight = 400;
         }
 
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
@@ -201,10 +167,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
                 cmbxFPP.DroppedDown = true;
             }
         }
-
-        #endregion COMBOBOXES
-
-        #region DASHBOARD BUDGET SUMMARY
 
         private decimal GetAppropriations(int allotmentClassId, byte isContinuing)
         {
@@ -356,27 +318,22 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             lblGrandTotalAllotmentBalance.Text = (GetGrandTotalAllotments() - GetGrandTotalObligations()).ToString("N2");
         }
 
-        #endregion DASHBOARD BUDGET SUMMARY
-
         private void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                LoadFPP(false);
-                cmbxFPP.Text = string.Empty;
-                cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-            }
+            //if (string.IsNullOrEmpty(cmbxFPP.Text))
+            //{
+            //    cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+            //    LoadFPP(false);
+            //    cmbxFPP.Text = string.Empty;
+            //    cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+            //}
         }
 
-        private void ucBudgetSummary_Load(object sender, EventArgs e)
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadBudgetDashboardComboboxes();
-                LoadBudgetDashboardContents();
-                cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-            }
+            LoadBudgetDashboardComboboxes();
+            LoadBudgetDashboardContents();
+            cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
