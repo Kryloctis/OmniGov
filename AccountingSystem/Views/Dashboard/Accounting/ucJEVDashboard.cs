@@ -13,16 +13,13 @@ namespace AccountingSystem.Views.Dashboard
             InitializeComponent();
         }
 
-        private void UcAccountingDashboard_Load(object sender, EventArgs e)
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadMonths();
-                LoadJournals();
-                LoadJEVCounter();
-                LoadFunds();
-                nudYear.Value = DateTime.Now.Year;
-            }
+            LoadMonths();
+            LoadJournals();
+            LoadJEVCounter();
+            LoadFunds();
+            nudYear.Value = DateTime.Now.Year;
         }
 
         private DataTable DatatableJournals()

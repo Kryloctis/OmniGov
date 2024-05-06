@@ -1,20 +1,26 @@
 ﻿using AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
 {
     public partial class frmMain : Form
     {
-        private ucBudgetSummary ucBudgetSummary;
         private frmSignIn frmSignIn;
 
         public frmMain(frmSignIn frmSignIn)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            ucBudgetSummary = ucBudgetSummary1;
             this.frmSignIn = frmSignIn;
+
+            //Removes tabs to tabcontrol
+            tabControl1.Padding = new Point(0, 0);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
         private void radBudget_CheckedChanged(object sender, EventArgs e)
@@ -30,7 +36,6 @@ namespace AccountingSystem.Views.Dashboard
         {
             try
             {
-                ucBudgetSummary.OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -72,11 +77,11 @@ namespace AccountingSystem.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void radHome_CheckedChanged(object sender, EventArgs e)
+        private void radSettings_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                tabControl1.SelectedTab = tabPageHome;
+                tabControl1.SelectedTab = tabPageSettings;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

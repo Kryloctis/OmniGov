@@ -388,7 +388,6 @@ namespace AccountingSystem.Views.Dashboard
             MinimumSize = new System.Drawing.Size(782, 160);
             Name = "ucJevDashboard";
             Size = new System.Drawing.Size(1166, 160);
-            Load += UcAccountingDashboard_Load;
             tableLayoutPanel1.ResumeLayout(false);
             pnlPendingJEV.ResumeLayout(false);
             pnlApprovedJEV.ResumeLayout(false);
