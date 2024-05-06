@@ -65,7 +65,7 @@
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new System.Drawing.Size(922, 260);
@@ -103,6 +103,7 @@
             btnBankAccs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnBankAccs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnBankAccs.UseVisualStyleBackColor = true;
+            btnBankAccs.Click += btnBankAccs_Click;
             // 
             // btnBanks
             // 
@@ -119,6 +120,7 @@
             btnBanks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnBanks.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnBanks.UseVisualStyleBackColor = true;
+            btnBanks.Click += btnBanks_Click;
             // 
             // btnRegistry
             // 
@@ -135,6 +137,7 @@
             btnRegistry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRegistry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnRegistry.UseVisualStyleBackColor = true;
+            btnRegistry.Click += btnRegistry_Click;
             // 
             // btnDocSignatories
             // 
@@ -151,6 +154,7 @@
             btnDocSignatories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnDocSignatories.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnDocSignatories.UseVisualStyleBackColor = true;
+            btnDocSignatories.Click += btnDocSignatories_Click;
             // 
             // btnBarangays
             // 
@@ -167,6 +171,7 @@
             btnBarangays.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnBarangays.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnBarangays.UseVisualStyleBackColor = true;
+            btnBarangays.Click += btnBarangays_Click;
             // 
             // btnFpp
             // 
@@ -183,6 +188,7 @@
             btnFpp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnFpp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnFpp.UseVisualStyleBackColor = true;
+            btnFpp.Click += btnFpp_Click;
             // 
             // label8
             // 
@@ -224,6 +230,7 @@
             btnRoles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRoles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnRoles.UseVisualStyleBackColor = true;
+            btnRoles.Click += btnRoles_Click;
             // 
             // btnUsers
             // 
@@ -240,6 +247,7 @@
             btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnUsers.UseVisualStyleBackColor = true;
+            btnUsers.Click += btnUsers_Click;
             // 
             // label7
             // 
@@ -282,6 +290,7 @@
             btnAllotmentClasses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnAllotmentClasses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnAllotmentClasses.UseVisualStyleBackColor = true;
+            btnAllotmentClasses.Click += btnAllotmentClasses_Click;
             // 
             // btnAccForms
             // 
@@ -298,6 +307,7 @@
             btnAccForms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnAccForms.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnAccForms.UseVisualStyleBackColor = true;
+            btnAccForms.Click += btnAccForms_Click;
             // 
             // btnFunds
             // 
@@ -314,6 +324,7 @@
             btnFunds.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnFunds.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnFunds.UseVisualStyleBackColor = true;
+            btnFunds.Click += btnFunds_Click;
             // 
             // label10
             // 
