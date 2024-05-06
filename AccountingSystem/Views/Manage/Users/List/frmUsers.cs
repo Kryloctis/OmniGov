@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private DataTable UsersDataTable()
         {
-            string searchkey = txtSearch.Text.Trim();
+            string searchkey = searchTstrpTxt.Text.Trim();
             string userOffice = Helper.LoggedInUserData()["office"];
             DataTable dataTable;
 
@@ -71,9 +71,13 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 11, 12 };
-            Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
+            try
+            {
+                byte[] columnIndexTimestamp = { 11, 12 };
+                Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -123,7 +127,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void searchTstrpBtn_Click(object sender, EventArgs e)
         {
             try
             {

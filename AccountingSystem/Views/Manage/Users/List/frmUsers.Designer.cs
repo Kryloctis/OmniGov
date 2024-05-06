@@ -33,7 +33,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            searchTstrpBtn = new System.Windows.Forms.ToolStripButton();
+            searchTstrpTxt = new System.Windows.Forms.ToolStripTextBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,55 +56,57 @@ namespace AccountingSystem.Views.Manage.Users.List
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, txtSearch });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, searchTstrpBtn, searchTstrpTxt });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(911, 50);
+            toolStrip1.Size = new System.Drawing.Size(911, 35);
             toolStrip1.TabIndex = 7;
             toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
             btnAdd.Image = Properties.Resources.button_rounded_add_20px;
-            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(42, 39);
+            btnAdd.Size = new System.Drawing.Size(62, 24);
             btnAdd.Text = "Add...";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
             btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(40, 39);
+            btnEdit.Size = new System.Drawing.Size(60, 24);
             btnEdit.Text = "Edit...";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
             btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
-            // txtSearch
+            // searchTstrpBtn
             // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
-            txtSearch.TextChanged += txtSearch_TextChanged;
+            searchTstrpBtn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            searchTstrpBtn.Image = Properties.Resources.find_20px;
+            searchTstrpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            searchTstrpBtn.Name = "searchTstrpBtn";
+            searchTstrpBtn.Size = new System.Drawing.Size(66, 24);
+            searchTstrpBtn.Text = "Search";
+            searchTstrpBtn.Click += searchTstrpBtn_Click;
+            // 
+            // searchTstrpTxt
+            // 
+            searchTstrpTxt.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            searchTstrpTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            searchTstrpTxt.Name = "searchTstrpTxt";
+            searchTstrpTxt.Size = new System.Drawing.Size(150, 27);
             // 
             // statusStrip1
             // 
@@ -160,10 +163,10 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             panel1.Controls.Add(dgUsers);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(911, 390);
+            panel1.Size = new System.Drawing.Size(911, 405);
             panel1.TabIndex = 9;
             // 
             // dgUsers
@@ -176,7 +179,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             dgUsers.RowHeadersWidth = 51;
             dgUsers.RowTemplate.Height = 29;
             dgUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgUsers.Size = new System.Drawing.Size(903, 382);
+            dgUsers.Size = new System.Drawing.Size(903, 397);
             dgUsers.TabIndex = 7;
             dgUsers.SelectionChanged += dgUsers_SelectionChanged;
             // 
@@ -196,7 +199,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             Name = "frmUsers";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Manage > Users ";
+            Text = "Settings > Users ";
             Load += frmUsers_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -222,8 +225,9 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgUsers;
+        private System.Windows.Forms.ToolStripButton searchTstrpBtn;
+        private System.Windows.Forms.ToolStripTextBox searchTstrpTxt;
     }
 }
