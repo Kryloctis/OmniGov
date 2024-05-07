@@ -54,7 +54,7 @@
             bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             reportsTstrpDrpDwnMnu = new System.Windows.Forms.ToolStripDropDownButton();
-            toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            rcdTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             realPropertyTaxStatementOfAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -232,7 +232,7 @@
             // reportsTstrpDrpDwnMnu
             // 
             reportsTstrpDrpDwnMnu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItem4, toolStripSeparator1, toolStripMenuItem7, realPropertyTaxStatementOfAccountToolStripMenuItem, listOfRealPropertyDelinquenciesToolStripMenuItem, realPropertyTaxDuesAndPaymentsToolStripMenuItem, certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, toolStripSeparator3, toolStripMenuItem6, bankCashbookToolStripMenuItem, consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem, dailyCashPositionsToolStripMenuItem });
+            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rcdTstrpMnuItm, toolStripSeparator1, toolStripMenuItem7, realPropertyTaxStatementOfAccountToolStripMenuItem, listOfRealPropertyDelinquenciesToolStripMenuItem, realPropertyTaxDuesAndPaymentsToolStripMenuItem, certifiedListOfRealPropertyTaxDeliquenciesToolStripMenuItem, toolStripSeparator3, toolStripMenuItem6, bankCashbookToolStripMenuItem, consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem, dailyCashPositionsToolStripMenuItem });
             reportsTstrpDrpDwnMnu.Image = (System.Drawing.Image)resources.GetObject("reportsTstrpDrpDwnMnu.Image");
             reportsTstrpDrpDwnMnu.ImageTransparentColor = System.Drawing.Color.Magenta;
             reportsTstrpDrpDwnMnu.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
@@ -240,11 +240,12 @@
             reportsTstrpDrpDwnMnu.Size = new System.Drawing.Size(70, 19);
             reportsTstrpDrpDwnMnu.Text = "● Reports";
             // 
-            // toolStripMenuItem4
+            // rcdTstrpMnuItm
             // 
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new System.Drawing.Size(409, 22);
-            toolStripMenuItem4.Text = "Report of Collections Deposits (RCD)...";
+            rcdTstrpMnuItm.Name = "rcdTstrpMnuItm";
+            rcdTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
+            rcdTstrpMnuItm.Text = "Report of Collections Deposits (RCD)...";
+            rcdTstrpMnuItm.Click += rcdTstrpMnuItm_Click;
             // 
             // toolStripSeparator1
             // 
@@ -350,7 +351,7 @@
         private System.Windows.Forms.ToolStripMenuItem bankDepositToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripDropDownButton reportsTstrpDrpDwnMnu;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem rcdTstrpMnuItm;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem realPropertyTaxStatementOfAccountToolStripMenuItem;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.List
@@ -15,6 +16,14 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+
+            //Removes tabs to tabcontrol
+            tabControl1.Padding = new Point(0, 0);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
         }
 

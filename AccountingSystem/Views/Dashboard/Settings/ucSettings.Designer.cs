@@ -194,7 +194,7 @@
             // 
             label8.Dock = System.Windows.Forms.DockStyle.Top;
             label8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            label8.ForeColor = System.Drawing.Color.Black;
+            label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label8.Location = new System.Drawing.Point(0, 0);
             label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label8.Name = "label8";
@@ -222,7 +222,6 @@
             btnRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnRoles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRoles.Location = new System.Drawing.Point(0, 63);
-            btnRoles.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnRoles.Name = "btnRoles";
             btnRoles.Size = new System.Drawing.Size(296, 33);
             btnRoles.TabIndex = 17;
@@ -239,7 +238,6 @@
             btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnUsers.Location = new System.Drawing.Point(0, 30);
-            btnUsers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnUsers.Name = "btnUsers";
             btnUsers.Size = new System.Drawing.Size(296, 33);
             btnUsers.TabIndex = 16;
@@ -253,7 +251,7 @@
             // 
             label7.Dock = System.Windows.Forms.DockStyle.Top;
             label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            label7.ForeColor = System.Drawing.Color.Black;
+            label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label7.Location = new System.Drawing.Point(0, 0);
             label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label7.Name = "label7";
@@ -330,7 +328,7 @@
             // 
             label10.Dock = System.Windows.Forms.DockStyle.Top;
             label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            label10.ForeColor = System.Drawing.Color.Black;
+            label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label10.Location = new System.Drawing.Point(0, 0);
             label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label10.Name = "label10";
