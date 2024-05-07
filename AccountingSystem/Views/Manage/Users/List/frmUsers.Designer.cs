@@ -45,10 +45,15 @@ namespace AccountingSystem.Views.Manage.Users.List
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             panel1 = new System.Windows.Forms.Panel();
             dgUsers = new System.Windows.Forms.DataGridView();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            cmbxFilter = new System.Windows.Forms.ComboBox();
+            panel2 = new System.Windows.Forms.Panel();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgUsers).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -163,10 +168,10 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             panel1.Controls.Add(dgUsers);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 35);
+            panel1.Location = new System.Drawing.Point(0, 70);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(911, 405);
+            panel1.Size = new System.Drawing.Size(911, 370);
             panel1.TabIndex = 9;
             // 
             // dgUsers
@@ -179,9 +184,43 @@ namespace AccountingSystem.Views.Manage.Users.List
             dgUsers.RowHeadersWidth = 51;
             dgUsers.RowTemplate.Height = 29;
             dgUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgUsers.Size = new System.Drawing.Size(903, 397);
+            dgUsers.Size = new System.Drawing.Size(903, 362);
             dgUsers.TabIndex = 7;
             dgUsers.SelectionChanged += dgUsers_SelectionChanged;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 65);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(911, 5);
+            progressBar1.TabIndex = 10;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // cmbxFilter
+            // 
+            cmbxFilter.FormattingEnabled = true;
+            cmbxFilter.Location = new System.Drawing.Point(3, 3);
+            cmbxFilter.Name = "cmbxFilter";
+            cmbxFilter.Size = new System.Drawing.Size(121, 23);
+            cmbxFilter.TabIndex = 0;
+            cmbxFilter.SelectionChangeCommitted += cmbxFilter_SelectionChangeCommitted;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(cmbxFilter);
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Location = new System.Drawing.Point(0, 35);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(911, 30);
+            panel2.TabIndex = 11;
             // 
             // frmUsers
             // 
@@ -190,9 +229,11 @@ namespace AccountingSystem.Views.Manage.Users.List
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(911, 462);
             Controls.Add(panel1);
+            Controls.Add(progressBar1);
+            Controls.Add(panel2);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -207,6 +248,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             statusStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgUsers).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -229,5 +271,9 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.DataGridView dgUsers;
         private System.Windows.Forms.ToolStripButton searchTstrpBtn;
         private System.Windows.Forms.ToolStripTextBox searchTstrpTxt;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ComboBox cmbxFilter;
+        private System.Windows.Forms.Panel panel2;
     }
 }

@@ -21,27 +21,13 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private bool SaveData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to insert
-            var userModel = new UsersModel()
-            {
-                RoleId = ((byte)uc.cmbRoles.SelectedValue),
-                Prefix = uc.txtPrefix.Text.Trim(),
-                FirstName = uc.txtFirstname.Text.Trim(),
-                MidInitial = uc.txtMiddleInitial.Text.Trim(),
-                LastName = uc.txtLastname.Text.Trim(),
-                Suffix = uc.txtSuffix.Text.Trim(),
-                UserName = uc.txtUsername.Text.Trim(),
-                Password = uc.txtPassword.Text.Trim(),
-            };
-
-            return AccFactory.UsersRepository().Insert(userModel);
+            return AccFactory.UsersRepository().Insert(uc.UsersModel());
         }
 
         private void frmUsersAdd_Load(object sender, EventArgs e)

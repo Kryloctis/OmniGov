@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -15,35 +16,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
-        }
-
-        private DataTable UsersDataTable()
-        {
-            string searchkey = searchTstrpTxt.Text.Trim();
-            string userOffice = Helper.LoggedInUserData()["office"];
-            DataTable dataTable;
-
-            if (string.IsNullOrEmpty(searchkey))
-                dataTable = AccFactory.UsersRepository().GetViewRecordsByOffice(userOffice);
-            else
-                dataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
-
-            dataTable.Columns.Add("user_full_name").SetOrdinal(7);
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                int userId = Convert.ToInt32(row["id"]);
-                var dictUser = Helper.GetUserDataById(userId);
-                row["user_full_name"] = dictUser["user_full_name"];
-            }
-
-            return dataTable;
-        }
-
-        internal void LoadRecords()
-        {
-            HelperLoadRecords.UsersDatagridView(UsersDataTable(), dgUsers);
-            lblRecordCount.Text = dgUsers.Rows.Count.ToString();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -66,6 +38,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void OnLoad()
         {
+            HelperLoadRecords.RowFilterCombobox(cmbxFilter);
             LoadRecords();
         }
 
@@ -73,7 +46,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             try
             {
-                byte[] columnIndexTimestamp = { 11, 12 };
+                byte[] columnIndexTimestamp = { 3, 4 };
                 Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
             }
@@ -128,6 +101,92 @@ namespace AccountingSystem.Views.Manage.Users.List
         }
 
         private void searchTstrpBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                int rowLimit = int.Parse(cmbxFilter.SelectedValue.ToString());
+                string userOffice = Helper.LoggedInUserData()["office"];
+                string searchKey = searchTstrpTxt.Text.Trim();
+                backgroundWorker1.RunWorkerAsync((rowLimit, userOffice, searchKey));
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int rowLimit, string userOffice, string searchKey))e.Argument;
+                var dbDataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.userOffice, parameters.searchKey);
+                var dataTable = new DataTable();
+                var dataColumns = new DataColumn[]
+                {
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("full_name", typeof(string)),
+                    new DataColumn("role", typeof(string)),
+                    new DataColumn("office", typeof(string)),
+                    new DataColumn("created_at", typeof(string)),
+                    new DataColumn("updated_at", typeof(string))
+                };
+                dataTable.Columns.AddRange(dataColumns);
+                int totalProgressCount = dbDataTable.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dataRow in dbDataTable.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    int userId = Convert.ToInt32(dataRow["id"]);
+                    string userFullName = Helper.GenerateFullName(dataRow["prefix"].ToString(), dataRow["first_name"].ToString(), dataRow["mid_initial"].ToString(), dataRow["last_name"].ToString(), dataRow["suffix"].ToString());
+                    string role = dataRow["role_name"].ToString();
+
+                    newRow["id"] = dataRow["id"];
+                    newRow["full_name"] = userFullName;
+                    newRow["office"] = dataRow["office"];
+                    newRow["role"] = role;
+                    newRow["created_at"] = string.IsNullOrWhiteSpace(dataRow["created_at"].ToString()) ? string.Empty : DateTime.Parse(dataRow["created_at"].ToString()).ToShortDateString();
+                    newRow["updated_at"] = string.IsNullOrWhiteSpace(dataRow["updated_at"].ToString()) ? string.Empty : DateTime.Parse(dataRow["updated_at"].ToString()).ToShortDateString();
+
+                    dataTable.Rows.Add(newRow);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                HelperLoadRecords.UsersDatagridView(dataTable, dgUsers);
+                dgUsers.CurrentCell = dgUsers.FirstDisplayedCell;
+                lblRecordCount.Text = dgUsers.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {

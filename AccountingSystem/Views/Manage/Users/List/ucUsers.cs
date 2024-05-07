@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +29,21 @@ namespace AccountingSystem.Views.Manage.Users.List
                 this.userId = userId.Value;
                 LoadSelectedRecord(userId.Value);
             }
+        }
+
+        internal UsersModel UsersModel()
+        {
+            return new UsersModel()
+            {
+                UserName = txtUsername.Text.Trim(),
+                Password = txtPassword.Text.Trim(),
+                Prefix = txtPrefix.Text.Trim(),
+                FirstName = txtFirstname.Text.Trim(),
+                MidInitial = txtMiddleInitial.Text.Trim(),
+                LastName = txtLastname.Text.Trim(),
+                Suffix = txtSuffix.Text.Trim(),
+                RoleId = (byte)cmbRoles.SelectedValue,
+            };
         }
 
         private void LoadSelectedRecord(int userId)

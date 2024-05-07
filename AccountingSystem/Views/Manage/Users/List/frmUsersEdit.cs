@@ -22,26 +22,14 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private bool SaveData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to update
-            var userModel = new UsersModel()
-            {
-                Id = userId,
-                UserName = uc.txtUsername.Text.Trim(),
-                Password = uc.txtPassword.Text.Trim(),
-                Prefix = uc.txtPrefix.Text.Trim(),
-                FirstName = uc.txtFirstname.Text.Trim(),
-                MidInitial = uc.txtMiddleInitial.Text.Trim(),
-                LastName = uc.txtLastname.Text.Trim(),
-                Suffix = uc.txtSuffix.Text.Trim(),
-                RoleId = (byte)uc.cmbRoles.SelectedValue,
-            };
+            var userModel = uc.UsersModel();
+            userModel.Id = userId;
 
             if (string.IsNullOrWhiteSpace(uc.txtPassword.Text))
                 return AccFactory.UsersRepository().Update(userModel);
