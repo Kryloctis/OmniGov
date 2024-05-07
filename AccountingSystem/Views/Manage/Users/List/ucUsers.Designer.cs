@@ -29,371 +29,328 @@ namespace AccountingSystem.Views.Manage.Users.List
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFirstname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtMiddleInitial = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLastname = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.epRole = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epFirstName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epMiddleInitial = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epLastName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epUserName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epPassword = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbRoles = new System.Windows.Forms.ComboBox();
-            this.epConfirmPassword = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnConfirmPasswordVisibility = new System.Windows.Forms.Button();
-            this.btnPasswordVisibility = new System.Windows.Forms.Button();
-            this.lblConfirmPassword = new System.Windows.Forms.Label();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbOffice = new System.Windows.Forms.ComboBox();
-            this.txtPrefix = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSuffix = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.epRole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epUserName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPassword)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epConfirmPassword)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            txtFirstname = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            txtMiddleInitial = new System.Windows.Forms.TextBox();
+            label3 = new System.Windows.Forms.Label();
+            txtLastname = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
+            cmbRoles = new System.Windows.Forms.ComboBox();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            panel1 = new System.Windows.Forms.Panel();
+            btnConfirmPasswordVisibility = new System.Windows.Forms.Button();
+            btnPasswordVisibility = new System.Windows.Forms.Button();
+            lblConfirmPassword = new System.Windows.Forms.Label();
+            txtConfirmPassword = new System.Windows.Forms.TextBox();
+            lblPassword = new System.Windows.Forms.Label();
+            txtPassword = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
+            txtUsername = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            cmbOffice = new System.Windows.Forms.ComboBox();
+            txtPrefix = new System.Windows.Forms.TextBox();
+            label7 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            txtSuffix = new System.Windows.Forms.TextBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Prefix";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(9, 61);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(37, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Prefix";
             // 
             // txtFirstname
             // 
-            this.txtFirstname.Location = new System.Drawing.Point(119, 85);
-            this.txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtFirstname.MaxLength = 45;
-            this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(350, 23);
-            this.txtFirstname.TabIndex = 3;
-            this.txtFirstname.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstname_Validating);
-            this.txtFirstname.Validated += new System.EventHandler(this.txtFirstname_Validated);
+            txtFirstname.Location = new System.Drawing.Point(119, 85);
+            txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtFirstname.MaxLength = 45;
+            txtFirstname.Name = "txtFirstname";
+            txtFirstname.Size = new System.Drawing.Size(250, 23);
+            txtFirstname.TabIndex = 3;
+            txtFirstname.Validating += txtFirstname_Validating;
+            txtFirstname.Validated += txtFirstname_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Middle Initial";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(9, 114);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(76, 15);
+            label2.TabIndex = 7;
+            label2.Text = "Middle Initial";
             // 
             // txtMiddleInitial
             // 
-            this.txtMiddleInitial.Location = new System.Drawing.Point(119, 112);
-            this.txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMiddleInitial.MaxLength = 1;
-            this.txtMiddleInitial.Name = "txtMiddleInitial";
-            this.txtMiddleInitial.Size = new System.Drawing.Size(350, 23);
-            this.txtMiddleInitial.TabIndex = 4;
-            this.txtMiddleInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMiddleInitial_Validating);
-            this.txtMiddleInitial.Validated += new System.EventHandler(this.txtMiddleInitial_Validated);
+            txtMiddleInitial.Location = new System.Drawing.Point(119, 112);
+            txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtMiddleInitial.MaxLength = 1;
+            txtMiddleInitial.Name = "txtMiddleInitial";
+            txtMiddleInitial.Size = new System.Drawing.Size(250, 23);
+            txtMiddleInitial.TabIndex = 4;
+            txtMiddleInitial.Validating += txtMiddleInitial_Validating;
+            txtMiddleInitial.Validated += txtMiddleInitial_Validated;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 141);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 15);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Last Name";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(9, 141);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(63, 15);
+            label3.TabIndex = 9;
+            label3.Text = "Last Name";
             // 
             // txtLastname
             // 
-            this.txtLastname.Location = new System.Drawing.Point(119, 139);
-            this.txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtLastname.MaxLength = 45;
-            this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(350, 23);
-            this.txtLastname.TabIndex = 5;
-            this.txtLastname.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastname_Validating);
-            this.txtLastname.Validated += new System.EventHandler(this.txtLastname_Validated);
+            txtLastname.Location = new System.Drawing.Point(119, 139);
+            txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtLastname.MaxLength = 45;
+            txtLastname.Name = "txtLastname";
+            txtLastname.Size = new System.Drawing.Size(250, 23);
+            txtLastname.TabIndex = 5;
+            txtLastname.Validating += txtLastname_Validating;
+            txtLastname.Validated += txtLastname_Validated;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(30, 15);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Role";
-            // 
-            // epRole
-            // 
-            this.epRole.ContainerControl = this;
-            // 
-            // epFirstName
-            // 
-            this.epFirstName.ContainerControl = this;
-            // 
-            // epMiddleInitial
-            // 
-            this.epMiddleInitial.ContainerControl = this;
-            // 
-            // epLastName
-            // 
-            this.epLastName.ContainerControl = this;
-            // 
-            // epUserName
-            // 
-            this.epUserName.ContainerControl = this;
-            // 
-            // epPassword
-            // 
-            this.epPassword.ContainerControl = this;
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(9, 33);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(30, 15);
+            label6.TabIndex = 15;
+            label6.Text = "Role";
             // 
             // cmbRoles
             // 
-            this.cmbRoles.FormattingEnabled = true;
-            this.cmbRoles.Location = new System.Drawing.Point(119, 31);
-            this.cmbRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbRoles.Name = "cmbRoles";
-            this.cmbRoles.Size = new System.Drawing.Size(350, 23);
-            this.cmbRoles.TabIndex = 1;
-            this.cmbRoles.Validating += new System.ComponentModel.CancelEventHandler(this.cmbRoles_Validating);
-            this.cmbRoles.Validated += new System.EventHandler(this.cmbRoles_Validated);
-            // 
-            // epConfirmPassword
-            // 
-            this.epConfirmPassword.ContainerControl = this;
+            cmbRoles.FormattingEnabled = true;
+            cmbRoles.Location = new System.Drawing.Point(119, 31);
+            cmbRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbRoles.Name = "cmbRoles";
+            cmbRoles.Size = new System.Drawing.Size(250, 23);
+            cmbRoles.TabIndex = 1;
+            cmbRoles.Validating += cmbRoles_Validating;
+            cmbRoles.Validated += cmbRoles_Validated;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 201);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(498, 121);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Login Details";
+            groupBox1.Controls.Add(panel1);
+            groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            groupBox1.Location = new System.Drawing.Point(3, 201);
+            groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(400, 121);
+            groupBox1.TabIndex = 17;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Login Details";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnConfirmPasswordVisibility);
-            this.panel1.Controls.Add(this.btnPasswordVisibility);
-            this.panel1.Controls.Add(this.lblConfirmPassword);
-            this.panel1.Controls.Add(this.txtConfirmPassword);
-            this.panel1.Controls.Add(this.lblPassword);
-            this.panel1.Controls.Add(this.txtPassword);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txtUsername);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel1.Location = new System.Drawing.Point(3, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(492, 99);
-            this.panel1.TabIndex = 0;
+            panel1.Controls.Add(btnConfirmPasswordVisibility);
+            panel1.Controls.Add(btnPasswordVisibility);
+            panel1.Controls.Add(lblConfirmPassword);
+            panel1.Controls.Add(txtConfirmPassword);
+            panel1.Controls.Add(lblPassword);
+            panel1.Controls.Add(txtPassword);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(txtUsername);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel1.Location = new System.Drawing.Point(3, 19);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(394, 99);
+            panel1.TabIndex = 0;
             // 
             // btnConfirmPasswordVisibility
             // 
-            this.btnConfirmPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfirmPasswordVisibility.FlatAppearance.BorderSize = 0;
-            this.btnConfirmPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirmPasswordVisibility.Image = global::AccountingSystem.Properties.Resources.visible_16px;
-            this.btnConfirmPasswordVisibility.Location = new System.Drawing.Point(466, 61);
-            this.btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
-            this.btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
-            this.btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
-            this.btnConfirmPasswordVisibility.TabIndex = 10;
-            this.btnConfirmPasswordVisibility.UseVisualStyleBackColor = true;
-            this.btnConfirmPasswordVisibility.Click += new System.EventHandler(this.btnConfirmPasswordVisibility_Click);
+            btnConfirmPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnConfirmPasswordVisibility.FlatAppearance.BorderSize = 0;
+            btnConfirmPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnConfirmPasswordVisibility.Image = Properties.Resources.visible_16px;
+            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(366, 62);
+            btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
+            btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
+            btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnConfirmPasswordVisibility.TabIndex = 10;
+            btnConfirmPasswordVisibility.UseVisualStyleBackColor = true;
+            btnConfirmPasswordVisibility.Click += btnConfirmPasswordVisibility_Click;
             // 
             // btnPasswordVisibility
             // 
-            this.btnPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPasswordVisibility.FlatAppearance.BorderSize = 0;
-            this.btnPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPasswordVisibility.Image = global::AccountingSystem.Properties.Resources.visible_16px;
-            this.btnPasswordVisibility.Location = new System.Drawing.Point(466, 33);
-            this.btnPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPasswordVisibility.Name = "btnPasswordVisibility";
-            this.btnPasswordVisibility.Size = new System.Drawing.Size(23, 23);
-            this.btnPasswordVisibility.TabIndex = 10;
-            this.btnPasswordVisibility.UseVisualStyleBackColor = true;
-            this.btnPasswordVisibility.Click += new System.EventHandler(this.btnPasswordVisibility_Click);
+            btnPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnPasswordVisibility.FlatAppearance.BorderSize = 0;
+            btnPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            btnPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            btnPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnPasswordVisibility.Image = Properties.Resources.visible_16px;
+            btnPasswordVisibility.Location = new System.Drawing.Point(366, 34);
+            btnPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
+            btnPasswordVisibility.Name = "btnPasswordVisibility";
+            btnPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnPasswordVisibility.TabIndex = 10;
+            btnPasswordVisibility.UseVisualStyleBackColor = true;
+            btnPasswordVisibility.Click += btnPasswordVisibility_Click;
             // 
             // lblConfirmPassword
             // 
-            this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(3, 64);
-            this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(104, 15);
-            this.lblConfirmPassword.TabIndex = 31;
-            this.lblConfirmPassword.Text = "Confirm Password";
+            lblConfirmPassword.AutoSize = true;
+            lblConfirmPassword.Location = new System.Drawing.Point(3, 64);
+            lblConfirmPassword.Name = "lblConfirmPassword";
+            lblConfirmPassword.Size = new System.Drawing.Size(104, 15);
+            lblConfirmPassword.TabIndex = 31;
+            lblConfirmPassword.Text = "Confirm Password";
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(113, 61);
-            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtConfirmPassword.MaxLength = 60;
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.Size = new System.Drawing.Size(350, 23);
-            this.txtConfirmPassword.TabIndex = 9;
-            this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
-            this.txtConfirmPassword.Validated += new System.EventHandler(this.txtConfirmPassword_Validated);
+            txtConfirmPassword.Location = new System.Drawing.Point(113, 61);
+            txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtConfirmPassword.MaxLength = 60;
+            txtConfirmPassword.Name = "txtConfirmPassword";
+            txtConfirmPassword.PasswordChar = '*';
+            txtConfirmPassword.Size = new System.Drawing.Size(250, 23);
+            txtConfirmPassword.TabIndex = 9;
+            txtConfirmPassword.Validating += txtConfirmPassword_Validating;
+            txtConfirmPassword.Validated += txtConfirmPassword_Validated;
             // 
             // lblPassword
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(3, 37);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(57, 15);
-            this.lblPassword.TabIndex = 29;
-            this.lblPassword.Text = "Password";
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new System.Drawing.Point(3, 37);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new System.Drawing.Size(57, 15);
+            lblPassword.TabIndex = 29;
+            lblPassword.Text = "Password";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(113, 34);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPassword.MaxLength = 60;
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(350, 23);
-            this.txtPassword.TabIndex = 8;
-            this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
-            this.txtPassword.Validated += new System.EventHandler(this.txtPassword_Validated);
+            txtPassword.Location = new System.Drawing.Point(113, 34);
+            txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtPassword.MaxLength = 60;
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new System.Drawing.Size(250, 23);
+            txtPassword.TabIndex = 8;
+            txtPassword.Validating += txtPassword_Validating;
+            txtPassword.Validated += txtPassword_Validated;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 15);
-            this.label4.TabIndex = 28;
-            this.label4.Text = "Username";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(3, 10);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(60, 15);
+            label4.TabIndex = 28;
+            label4.Text = "Username";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(113, 7);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtUsername.MaxLength = 45;
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(350, 23);
-            this.txtUsername.TabIndex = 7;
-            this.txtUsername.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsername_Validating);
-            this.txtUsername.Validated += new System.EventHandler(this.txtUsername_Validated);
+            txtUsername.Location = new System.Drawing.Point(113, 7);
+            txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtUsername.MaxLength = 45;
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new System.Drawing.Size(250, 23);
+            txtUsername.TabIndex = 7;
+            txtUsername.Validating += txtUsername_Validating;
+            txtUsername.Validated += txtUsername_Validated;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 15);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Office";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(9, 6);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(39, 15);
+            label5.TabIndex = 15;
+            label5.Text = "Office";
             // 
             // cmbOffice
             // 
-            this.cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOffice.FormattingEnabled = true;
-            this.cmbOffice.Location = new System.Drawing.Point(119, 3);
-            this.cmbOffice.Name = "cmbOffice";
-            this.cmbOffice.Size = new System.Drawing.Size(350, 23);
-            this.cmbOffice.TabIndex = 0;
+            cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbOffice.FormattingEnabled = true;
+            cmbOffice.Location = new System.Drawing.Point(119, 3);
+            cmbOffice.Name = "cmbOffice";
+            cmbOffice.Size = new System.Drawing.Size(250, 23);
+            cmbOffice.TabIndex = 0;
+            cmbOffice.SelectedValueChanged += cmbOffice_SelectedValueChanged;
             // 
             // txtPrefix
             // 
-            this.txtPrefix.Location = new System.Drawing.Point(119, 58);
-            this.txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPrefix.MaxLength = 45;
-            this.txtPrefix.Name = "txtPrefix";
-            this.txtPrefix.Size = new System.Drawing.Size(350, 23);
-            this.txtPrefix.TabIndex = 2;
+            txtPrefix.Location = new System.Drawing.Point(119, 58);
+            txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtPrefix.MaxLength = 45;
+            txtPrefix.Name = "txtPrefix";
+            txtPrefix.Size = new System.Drawing.Size(250, 23);
+            txtPrefix.TabIndex = 2;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 88);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 15);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "First Name";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(11, 88);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(64, 15);
+            label7.TabIndex = 5;
+            label7.Text = "First Name";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 169);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 15);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Suffix";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(9, 169);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(37, 15);
+            label8.TabIndex = 5;
+            label8.Text = "Suffix";
             // 
             // txtSuffix
             // 
-            this.txtSuffix.Location = new System.Drawing.Point(119, 166);
-            this.txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSuffix.MaxLength = 45;
-            this.txtSuffix.Name = "txtSuffix";
-            this.txtSuffix.Size = new System.Drawing.Size(350, 23);
-            this.txtSuffix.TabIndex = 6;
+            txtSuffix.Location = new System.Drawing.Point(119, 166);
+            txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtSuffix.MaxLength = 45;
+            txtSuffix.Name = "txtSuffix";
+            txtSuffix.Size = new System.Drawing.Size(250, 23);
+            txtSuffix.TabIndex = 6;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucUsers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.Controls.Add(this.txtSuffix);
-            this.Controls.Add(this.txtPrefix);
-            this.Controls.Add(this.cmbOffice);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.cmbRoles);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtLastname);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtMiddleInitial);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtFirstname);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucUsers";
-            this.Size = new System.Drawing.Size(504, 325);
-            this.Load += new System.EventHandler(this.ucUsers_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epRole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epUserName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPassword)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epConfirmPassword)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(txtSuffix);
+            Controls.Add(txtPrefix);
+            Controls.Add(cmbOffice);
+            Controls.Add(groupBox1);
+            Controls.Add(cmbRoles);
+            Controls.Add(label5);
+            Controls.Add(label6);
+            Controls.Add(label3);
+            Controls.Add(txtLastname);
+            Controls.Add(label2);
+            Controls.Add(txtMiddleInitial);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label1);
+            Controls.Add(txtFirstname);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Name = "ucUsers";
+            Size = new System.Drawing.Size(409, 326);
+            groupBox1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -405,14 +362,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtLastname;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ErrorProvider epRole;
-        private System.Windows.Forms.ErrorProvider epFirstName;
-        private System.Windows.Forms.ErrorProvider epMiddleInitial;
-        private System.Windows.Forms.ErrorProvider epLastName;
-        private System.Windows.Forms.ErrorProvider epUserName;
-        private System.Windows.Forms.ErrorProvider epPassword;
         internal System.Windows.Forms.ComboBox cmbRoles;
-        private System.Windows.Forms.ErrorProvider epConfirmPassword;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Label lblConfirmPassword;
@@ -429,5 +379,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtSuffix;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
