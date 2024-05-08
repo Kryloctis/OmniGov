@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
-        private void LoadPermissionsByRoleId(byte roleId)
+        private void LoadRoleAccess(byte roleId)
         {
             lstboxAuthorize.DataSource = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
             lstboxAuthorize.DisplayMember = "permission_name";
@@ -42,11 +42,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             try
             {
                 if (dgRoles.SelectedRows.Count == 1)
-                    LoadPermissionsByRoleId(Convert.ToByte(dgRoles.SelectedCells[0].Value));
+                {
+                    var rowIndex = dgRoles.CurrentRow.Index;
+                    LoadRoleAccess(Convert.ToByte(dgRoles.Rows[rowIndex].Cells["id"].Value));
+                }
                 else
                 {
-                    lstboxAuthorize.DataSource = null;
-                    lstboxAuthorize.Items.Clear();
+                    var dataTable = (DataTable)lstboxAuthorize.DataSource;
+                    dataTable.Rows.Clear();
+                    lstboxAuthorize.Refresh();
                 }
 
                 byte[] columnIndexTimestamp = { 3, 4 };

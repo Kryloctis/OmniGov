@@ -35,33 +35,36 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             btnDelete = new System.Windows.Forms.ToolStripButton();
             searchTstripBtn = new System.Windows.Forms.ToolStripButton();
             searchTstripTxtbx = new System.Windows.Forms.ToolStripTextBox();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            groupBox2 = new System.Windows.Forms.GroupBox();
+            panel2 = new System.Windows.Forms.Panel();
             dgRoles = new System.Windows.Forms.DataGridView();
-            groupBox1 = new System.Windows.Forms.GroupBox();
+            label2 = new System.Windows.Forms.Label();
+            panel3 = new System.Windows.Forms.Panel();
             lstboxAuthorize = new System.Windows.Forms.ListBox();
+            label1 = new System.Windows.Forms.Label();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
             cmbxRowLimit = new System.Windows.Forms.ComboBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             toolStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgRoles).BeginInit();
-            groupBox1.SuspendLayout();
+            panel3.SuspendLayout();
             panel1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -73,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(911, 35);
+            toolStrip1.Size = new System.Drawing.Size(696, 35);
             toolStrip1.TabIndex = 4;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -121,58 +124,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             searchTstripTxtbx.Name = "searchTstripTxtbx";
             searchTstripTxtbx.Size = new System.Drawing.Size(200, 27);
             // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel3, lblUpdatedAt });
-            statusStrip1.Location = new System.Drawing.Point(0, 440);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            statusStrip1.Size = new System.Drawing.Size(911, 22);
-            statusStrip1.SizingGrip = false;
-            statusStrip1.TabIndex = 5;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            toolStripStatusLabel1.Text = "Records:";
-            // 
-            // lblRecordCount
-            // 
-            lblRecordCount.Name = "lblRecordCount";
-            lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            lblRecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel4
-            // 
-            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(703, 17);
-            toolStripStatusLabel4.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            toolStripStatusLabel2.Text = "Created at:";
-            // 
-            // lblCreatedAt
-            // 
-            lblCreatedAt.Name = "lblCreatedAt";
-            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel3
-            // 
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            toolStripStatusLabel3.Text = "Updated at:";
-            // 
-            // lblUpdatedAt
-            // 
-            lblUpdatedAt.Name = "lblUpdatedAt";
-            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
             // splitContainer1
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,70 +132,95 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(groupBox2);
-            splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
+            splitContainer1.Panel1.Controls.Add(panel2);
+            splitContainer1.Panel1.Controls.Add(label2);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(groupBox1);
-            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            splitContainer1.Size = new System.Drawing.Size(911, 370);
-            splitContainer1.SplitterDistance = 594;
+            splitContainer1.Panel2.Controls.Add(panel3);
+            splitContainer1.Panel2.Controls.Add(label1);
+            splitContainer1.Size = new System.Drawing.Size(696, 286);
+            splitContainer1.SplitterDistance = 442;
             splitContainer1.TabIndex = 8;
             // 
-            // groupBox2
+            // panel2
             // 
-            groupBox2.Controls.Add(dgRoles);
-            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Location = new System.Drawing.Point(4, 4);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(586, 362);
-            groupBox2.TabIndex = 0;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "List";
+            panel2.Controls.Add(dgRoles);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 33);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(442, 253);
+            panel2.TabIndex = 1;
             // 
             // dgRoles
             // 
             dgRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgRoles.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgRoles.Location = new System.Drawing.Point(3, 19);
-            dgRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dgRoles.Location = new System.Drawing.Point(4, 4);
             dgRoles.Name = "dgRoles";
             dgRoles.RowHeadersWidth = 51;
             dgRoles.RowTemplate.Height = 29;
             dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgRoles.Size = new System.Drawing.Size(580, 340);
-            dgRoles.TabIndex = 5;
+            dgRoles.Size = new System.Drawing.Size(434, 245);
+            dgRoles.TabIndex = 7;
             dgRoles.SelectionChanged += dgRoles_SelectionChanged;
             // 
-            // groupBox1
+            // label2
             // 
-            groupBox1.Controls.Add(lstboxAuthorize);
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.Location = new System.Drawing.Point(4, 4);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(305, 362);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Access:";
+            label2.Dock = System.Windows.Forms.DockStyle.Top;
+            label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label2.Location = new System.Drawing.Point(0, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(442, 33);
+            label2.TabIndex = 0;
+            label2.Text = "Roles";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(lstboxAuthorize);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 33);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(4);
+            panel3.Size = new System.Drawing.Size(250, 253);
+            panel3.TabIndex = 1;
             // 
             // lstboxAuthorize
             // 
+            lstboxAuthorize.BackColor = System.Drawing.SystemColors.Control;
+            lstboxAuthorize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             lstboxAuthorize.Dock = System.Windows.Forms.DockStyle.Fill;
             lstboxAuthorize.FormattingEnabled = true;
+            lstboxAuthorize.HorizontalScrollbar = true;
+            lstboxAuthorize.IntegralHeight = false;
             lstboxAuthorize.ItemHeight = 15;
-            lstboxAuthorize.Location = new System.Drawing.Point(3, 19);
-            lstboxAuthorize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            lstboxAuthorize.Location = new System.Drawing.Point(4, 4);
             lstboxAuthorize.Name = "lstboxAuthorize";
-            lstboxAuthorize.Size = new System.Drawing.Size(299, 340);
-            lstboxAuthorize.TabIndex = 7;
+            lstboxAuthorize.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            lstboxAuthorize.Size = new System.Drawing.Size(242, 245);
+            lstboxAuthorize.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.Dock = System.Windows.Forms.DockStyle.Top;
+            label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label1.Location = new System.Drawing.Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(250, 33);
+            label1.TabIndex = 0;
+            label1.Text = "Access";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(0, 65);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(911, 5);
+            progressBar1.Size = new System.Drawing.Size(696, 5);
             progressBar1.TabIndex = 9;
             // 
             // panel1
@@ -253,7 +229,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(911, 30);
+            panel1.Size = new System.Drawing.Size(696, 30);
             panel1.TabIndex = 10;
             // 
             // cmbxRowLimit
@@ -274,22 +250,79 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel3, toolStripStatusLabel4, lblCreatedAt, toolStripStatusLabel6, toolStripStatusLabel7, lblUpdatedAt });
+            statusStrip1.Location = new System.Drawing.Point(0, 356);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(696, 22);
+            statusStrip1.TabIndex = 11;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Records:";
+            // 
+            // lblRecordCount
+            // 
+            lblRecordCount.Name = "lblRecordCount";
+            lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            lblRecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(440, 17);
+            toolStripStatusLabel3.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(64, 17);
+            toolStripStatusLabel4.Text = "Created at:";
+            // 
+            // lblCreatedAt
+            // 
+            lblCreatedAt.Name = "lblCreatedAt";
+            lblCreatedAt.Size = new System.Drawing.Size(17, 17);
+            lblCreatedAt.Text = "--";
+            // 
+            // toolStripStatusLabel6
+            // 
+            toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel6.Text = "|";
+            toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // toolStripStatusLabel7
+            // 
+            toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            toolStripStatusLabel7.Size = new System.Drawing.Size(68, 17);
+            toolStripStatusLabel7.Text = "Updated at:";
+            // 
+            // lblUpdatedAt
+            // 
+            lblUpdatedAt.Name = "lblUpdatedAt";
+            lblUpdatedAt.Size = new System.Drawing.Size(17, 17);
+            lblUpdatedAt.Text = "--";
+            // 
             // frmRoles
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(911, 462);
+            ClientSize = new System.Drawing.Size(696, 378);
             Controls.Add(splitContainer1);
             Controls.Add(progressBar1);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            MaximizeBox = false;
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(927, 501);
+            MinimumSize = new System.Drawing.Size(603, 400);
             Name = "frmRoles";
             ShowIcon = false;
             ShowInTaskbar = false;
@@ -298,16 +331,16 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             Load += frmRoles_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgRoles).EndInit();
-            groupBox1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -318,24 +351,27 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgRoles;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox lstboxAuthorize;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cmbxRowLimit;
         private System.Windows.Forms.ToolStripButton searchTstripBtn;
         private System.Windows.Forms.ToolStripTextBox searchTstripTxtbx;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dgRoles;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ListBox lstboxAuthorize;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
+        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }

@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             try
             {
-                byte[] columnIndexTimestamp = { 3, 4 };
+                byte[] columnIndexTimestamp = { 4, 5 };
                 Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
             }
