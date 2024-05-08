@@ -1,8 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Spreadsheet;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -16,28 +19,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             Helper.DatagridFullRowSelectStyle(dgRoles, true);
         }
 
-        internal void LoadRoles()
-        {
-            var dictUserLoggedIn = Helper.LoggedInUserData();
-            var dtRoles = AccFactory.RolesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
-            HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
-
-            lblRecordCount.Text = dgRoles.Rows.Count.ToString();
-        }
-
         private void frmRoles_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
+                LoadRoles();
+                Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            LoadRoles();
-            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void LoadPermissionsByRoleId(byte roleId)
@@ -118,6 +108,81 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                         Helper.MessageBoxError("Can't delete role, The role was referenced to a user.");
                         break;
                 }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void searchTstripBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRoles();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRoles();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadRoles()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
+                string searchKey = searchTstripTxtbx.Text.Trim();
+
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int rowLimit, string searchKey))e.Argument;
+                var dbDataTable = AccFactory.RolesRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
+                int totalProgressCount = dbDataTable.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dataRow in dbDataTable.Rows)
+                {
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dbDataTable;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                progressBar1.Value = e.ProgressPercentage;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                HelperLoadRecords.RolesDatagridView(dataTable, dgRoles);
+                dgRoles.CurrentCell = dgRoles.FirstDisplayedCell;
+                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

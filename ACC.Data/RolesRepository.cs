@@ -9,46 +9,36 @@ namespace ACC.Data
 {
     public class RolesRepository : IRolesRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public RolesRepository(
-            IAccGenericCommands dbGenericCommands,
-            IRoleHasPermissionsRepository _roleHasPermissionsRepository
-            )
+        public RolesRepository(AccGenericCommands mySqlGenericCommandsLFS, IRoleHasPermissionsRepository roleHasPermissionsRepository)
         {
-            _dbGenericCommands = dbGenericCommands;
-            roleHasPermissionsRepository = _roleHasPermissionsRepository;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.roleHasPermissionsRepository = roleHasPermissionsRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Int32, Id},
-                };
+            };
 
-                string query = $"SELECT office, role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT office, role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("office", reader.Rows[0]["office"].ToString());
-                    record.Add("role_name", reader.Rows[0]["role_name"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("office", reader.Rows[0]["office"].ToString());
+                record.Add("role_name", reader.Rows[0]["role_name"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
             }
 
             return record;
@@ -56,265 +46,180 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator'";
-
-                var dtRoles = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRoles);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator'";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsByOffice(string office)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@office", DbType.String, $"%{office}%"}
-                };
+                new object[] { "@office", DbType.String, $"%{office}%"}
+            };
 
-                string Filter()
-                {
-                    if (office == "SysAdmin")
-                        return string.Empty;
-                    else
-                        return "AND office LIKE @office";
-                }
-
-                string query = $"SELECT * FROM {tableName} WHERE office <> 'SysAdmin' {Filter()}";
-
-                var dtRoles = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtRoles, parameters);
-            }
-            catch (Exception)
+            string Filter()
             {
-                throw;
+                if (office == "SysAdmin")
+                    return string.Empty;
+                else
+                    return "AND office LIKE @office";
             }
+
+            string query = $"SELECT * FROM {tableName} WHERE office <> 'SysAdmin' {Filter()}";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@search_text", DbType.String, $"%{searchText}%"},
-                };
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
 
-                var srchtxt = searchText;
+            var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND role_name  LIKE @search_text";
+            string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND role_name  LIKE @search_text";
 
-                var dtUsers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtUsers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtUsers = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
         }
 
         public byte GetLastInsertedID()
         {
-            try
-            {
-                string query = $"SELECT MAX(id) FROM {tableName}";
-                return byte.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return byte.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool Insert(RolesModel entity)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@office", DbType.String, entity.Office},
-                        new object[] { "@role_name", DbType.String, entity.RoleName},
-                    };
+                    new object[] { "@office", DbType.String, entity.Office},
+                    new object[] { "@role_name", DbType.String, entity.RoleName},
+                };
 
-                    string query = $"INSERT INTO {tableName} (office, role_name) VALUES (@office, @role_name)";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                string query = $"INSERT INTO {tableName} (office, role_name) VALUES (@office, @role_name)";
+                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
-                    // insert selected permissions
-                    var roleHasPermissionModel = new RoleHasPermissionsModel();
-                    foreach (var permissionsModel in entity.PermissionsModels)
-                    {
-                        roleHasPermissionModel.RolesId = GetLastInsertedID();
-                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
-                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
-                    }
-
-                    scope.Complete();
-                    return true;
+                var roleHasPermissionModel = new RoleHasPermissionsModel();
+                foreach (var permissionsModel in entity.PermissionsModels)
+                {
+                    roleHasPermissionModel.RolesId = GetLastInsertedID();
+                    roleHasPermissionModel.PermissionsId = permissionsModel.Id;
+                    roleHasPermissionsRepository.Insert(roleHasPermissionModel);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public bool Update(RolesModel entity)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Byte, entity.Id},
-                        new object[] { "@office", DbType.String, entity.Office},
-                        new object[] { "@role_name", DbType.String, entity.RoleName},
-                    };
+                    new object[] { "@id", DbType.Byte, entity.Id},
+                    new object[] { "@office", DbType.String, entity.Office},
+                    new object[] { "@role_name", DbType.String, entity.RoleName},
+                };
 
-                    string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-
-                    // delete all permission by role id
-                    roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
-
-                    // insert selected permissions
-                    var roleHasPermissionModel = new RoleHasPermissionsModel();
-                    foreach (var permissionsModel in entity.PermissionsModels)
-                    {
-                        roleHasPermissionModel.RolesId = entity.Id;
-                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
-                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
-                    }
-
-                    scope.Complete();
-                    return true;
+                string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
+                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
+                var roleHasPermissionModel = new RoleHasPermissionsModel();
+                foreach (var permissionsModel in entity.PermissionsModels)
+                {
+                    roleHasPermissionModel.RolesId = entity.Id;
+                    roleHasPermissionModel.PermissionsId = permissionsModel.Id;
+                    roleHasPermissionsRepository.Insert(roleHasPermissionModel);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public bool Delete(List<RolesModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int32, entity.Id},
-                        };
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public int CountRecords()
         {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int32, id },
             };
 
-            return false;
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool NameExist(string roleName, string office)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@role_name", DbType.String, roleName },
-                    new object[] { "@office", DbType.String, office}
-                };
-
-                string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name AND office = @office";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@role_name", DbType.String, roleName },
+                new object[] { "@office", DbType.String, office}
             };
 
-            return false;
+            string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name AND office = @office";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool NameExist(string roleName, string office, int roleId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, roleId },
-                    new object[] { "@office", DbType.String, office},
-                    new object[] { "@role_name", DbType.String, roleName },
-                };
-
-                string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name AND office = @office";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int16, roleId },
+                new object[] { "@office", DbType.String, office},
+                new object[] { "@role_name", DbType.String, roleName },
             };
 
-            return false;
+            string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name AND office = @office";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            return !string.IsNullOrEmpty(result);
+        }
+
+        public DataTable GetRecords(int rowLimit, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
+                new object[] { "@search_key", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE office <> 'SysAdmin' AND (office LIKE @search_key OR role_name LIKE @search_key) LIMIT @row_limit";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
