@@ -344,7 +344,7 @@ namespace AccountingSystem
             dgv.BackgroundColor = Color.White;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
-            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.BorderStyle = BorderStyle.Fixed3D;
             dgv.ReadOnly = isReadOnly;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToResizeRows = false;

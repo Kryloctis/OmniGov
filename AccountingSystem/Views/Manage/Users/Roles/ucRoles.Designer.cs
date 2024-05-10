@@ -29,200 +29,99 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbOffice = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnDenyPermission = new System.Windows.Forms.Button();
-            this.btnGrantPermission = new System.Windows.Forms.Button();
-            this.btnDenyAllPermissions = new System.Windows.Forms.Button();
-            this.btnGrantAllPermissions = new System.Windows.Forms.Button();
-            this.dgPermissionGranted = new System.Windows.Forms.DataGridView();
-            this.dgPermissions = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgPermissionGranted)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgPermissions)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            txtName = new System.Windows.Forms.TextBox();
+            epName = new System.Windows.Forms.ErrorProvider(components);
+            cmbxOffice = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            dgPermissions = new System.Windows.Forms.DataGridView();
+            label3 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)epName).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgPermissions).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Name";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(1, 2);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(44, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Name*";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(45, 32);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtName.MaxLength = 99;
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(721, 23);
-            this.txtName.TabIndex = 2;
-            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
-            this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
+            txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtName.Location = new System.Drawing.Point(82, 2);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtName.MaxLength = 99;
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(250, 23);
+            txtName.TabIndex = 2;
+            txtName.Validating += txtName_Validating;
+            txtName.Validated += txtName_Validated;
             // 
             // epName
             // 
-            this.epName.ContainerControl = this;
+            epName.ContainerControl = this;
             // 
-            // cmbOffice
+            // cmbxOffice
             // 
-            this.cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOffice.FormattingEnabled = true;
-            this.cmbOffice.Location = new System.Drawing.Point(45, 4);
-            this.cmbOffice.Name = "cmbOffice";
-            this.cmbOffice.Size = new System.Drawing.Size(721, 23);
-            this.cmbOffice.TabIndex = 4;
+            cmbxOffice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxOffice.FormattingEnabled = true;
+            cmbxOffice.Location = new System.Drawing.Point(82, 30);
+            cmbxOffice.Name = "cmbxOffice";
+            cmbxOffice.Size = new System.Drawing.Size(250, 23);
+            cmbxOffice.TabIndex = 4;
+            cmbxOffice.SelectedValueChanged += CmbxOffice_SelectedValueChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Office";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 67);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(763, 361);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Permissions";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.btnDenyPermission);
-            this.panel1.Controls.Add(this.btnGrantPermission);
-            this.panel1.Controls.Add(this.btnDenyAllPermissions);
-            this.panel1.Controls.Add(this.btnGrantAllPermissions);
-            this.panel1.Controls.Add(this.dgPermissionGranted);
-            this.panel1.Controls.Add(this.dgPermissions);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel1.Location = new System.Drawing.Point(3, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(757, 339);
-            this.panel1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 15);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "List:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(407, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 15);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Authorize to access:";
-            // 
-            // btnDenyPermission
-            // 
-            this.btnDenyPermission.Location = new System.Drawing.Point(344, 174);
-            this.btnDenyPermission.Name = "btnDenyPermission";
-            this.btnDenyPermission.Size = new System.Drawing.Size(57, 23);
-            this.btnDenyPermission.TabIndex = 19;
-            this.btnDenyPermission.Text = "<";
-            this.btnDenyPermission.UseVisualStyleBackColor = true;
-            this.btnDenyPermission.Click += new System.EventHandler(this.btnDenyPermission_Click);
-            // 
-            // btnGrantPermission
-            // 
-            this.btnGrantPermission.Location = new System.Drawing.Point(344, 145);
-            this.btnGrantPermission.Name = "btnGrantPermission";
-            this.btnGrantPermission.Size = new System.Drawing.Size(57, 23);
-            this.btnGrantPermission.TabIndex = 18;
-            this.btnGrantPermission.Text = ">";
-            this.btnGrantPermission.UseVisualStyleBackColor = true;
-            this.btnGrantPermission.Click += new System.EventHandler(this.btnGrantPermission_Click);
-            // 
-            // btnDenyAllPermissions
-            // 
-            this.btnDenyAllPermissions.Location = new System.Drawing.Point(344, 203);
-            this.btnDenyAllPermissions.Name = "btnDenyAllPermissions";
-            this.btnDenyAllPermissions.Size = new System.Drawing.Size(57, 23);
-            this.btnDenyAllPermissions.TabIndex = 17;
-            this.btnDenyAllPermissions.Text = "<<";
-            this.btnDenyAllPermissions.UseVisualStyleBackColor = true;
-            this.btnDenyAllPermissions.Click += new System.EventHandler(this.btnDenyAllPermissions_Click);
-            // 
-            // btnGrantAllPermissions
-            // 
-            this.btnGrantAllPermissions.Location = new System.Drawing.Point(344, 116);
-            this.btnGrantAllPermissions.Name = "btnGrantAllPermissions";
-            this.btnGrantAllPermissions.Size = new System.Drawing.Size(57, 23);
-            this.btnGrantAllPermissions.TabIndex = 16;
-            this.btnGrantAllPermissions.Text = ">>";
-            this.btnGrantAllPermissions.UseVisualStyleBackColor = true;
-            this.btnGrantAllPermissions.Click += new System.EventHandler(this.btnGrantAllPermissions_Click);
-            // 
-            // dgPermissionGranted
-            // 
-            this.dgPermissionGranted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPermissionGranted.Location = new System.Drawing.Point(407, 18);
-            this.dgPermissionGranted.Name = "dgPermissionGranted";
-            this.dgPermissionGranted.RowTemplate.Height = 25;
-            this.dgPermissionGranted.Size = new System.Drawing.Size(335, 318);
-            this.dgPermissionGranted.TabIndex = 15;
-            this.dgPermissionGranted.SelectionChanged += new System.EventHandler(this.dgPermissionGranted_SelectionChanged);
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(1, 33);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(44, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Office*";
             // 
             // dgPermissions
             // 
-            this.dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPermissions.Location = new System.Drawing.Point(3, 18);
-            this.dgPermissions.Name = "dgPermissions";
-            this.dgPermissions.RowTemplate.Height = 25;
-            this.dgPermissions.Size = new System.Drawing.Size(335, 318);
-            this.dgPermissions.TabIndex = 13;
-            this.dgPermissions.SelectionChanged += new System.EventHandler(this.dgPermissions_SelectionChanged);
+            dgPermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgPermissions.Location = new System.Drawing.Point(82, 59);
+            dgPermissions.Name = "dgPermissions";
+            dgPermissions.RowTemplate.Height = 25;
+            dgPermissions.Size = new System.Drawing.Size(250, 198);
+            dgPermissions.TabIndex = 14;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(1, 59);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(75, 15);
+            label3.TabIndex = 3;
+            label3.Text = "Permissions*";
             // 
             // ucRoles
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbOffice);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtName);
-            this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ucRoles";
-            this.Size = new System.Drawing.Size(785, 432);
-            this.Load += new System.EventHandler(this.ucRoles_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgPermissionGranted)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgPermissions)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(dgPermissions);
+            Controls.Add(label2);
+            Controls.Add(cmbxOffice);
+            Controls.Add(label3);
+            Controls.Add(label1);
+            Controls.Add(txtName);
+            Margin = new System.Windows.Forms.Padding(0);
+            Name = "ucRoles";
+            Size = new System.Drawing.Size(353, 267);
+            ((System.ComponentModel.ISupportInitialize)epName).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgPermissions).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -231,16 +130,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         internal System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ErrorProvider epName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnDenyPermission;
-        private System.Windows.Forms.Button btnGrantPermission;
-        private System.Windows.Forms.Button btnDenyAllPermissions;
-        private System.Windows.Forms.Button btnGrantAllPermissions;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.ComboBox cmbOffice;
-        internal System.Windows.Forms.DataGridView dgPermissionGranted;
+        internal System.Windows.Forms.ComboBox cmbxOffice;
         internal System.Windows.Forms.DataGridView dgPermissions;
+        private System.Windows.Forms.Label label3;
     }
 }

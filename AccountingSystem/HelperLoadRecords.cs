@@ -393,6 +393,18 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static void RolesPermissionsDataGridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.ColumnHeadersVisible = false;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["permission_name"].HeaderText = "Permissions";
+            dataGridView.Columns["permission_name"].ReadOnly = true;
+            dataGridView.Columns["is_checked"].HeaderText = "";
+            dataGridView.Columns["is_checked"].MinimumWidth = 30;
+            dataGridView.Columns["is_checked"].Width = 30;
+        }
+
         internal static void RoleNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
