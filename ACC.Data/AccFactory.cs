@@ -203,8 +203,6 @@ namespace ACC.Data
 
         public static IPrevCattleOwnership PrevCattleOwnershipRepository() => new PrevCattleOwnershipRepository(mySqlGenericCommandsLFS);
 
-        public static IRptDelinquenciesRepository RptDelinquenciesRepository() => new RptDelinquenciesRepository(mySqlGenericCommandsLFS);
-
         public static IRcd RcdRepository() => new RcdRepository(mySqlGenericCommandsLFS, RcdCollectionsRepository(), RcdDepositsRepository());
 
         public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(mySqlGenericCommandsLFS);
