@@ -52,15 +52,29 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             txtName.Text = roleDict["role_name"];
         }
 
+        private bool ToogleRolePermissions(int permissionId, string office)
+        {
+            if (isEdit)
+            {
+                var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
+                return office != roleDict["office"] ? false : AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId).AsEnumerable().Any(row => Convert.ToInt32(row.Field<byte>("permissions_id")) == permissionId);
+            }
+            return false;
+        }
+
         internal void OnLoad(bool isEdit, byte? roleId)
         {
             this.isEdit = isEdit;
-            LoadOffice();
 
             if (isEdit)
             {
                 this.roleId = roleId.Value;
+                LoadOffice();
                 LoadSelectedRole();
+            }
+            else
+            {
+                LoadOffice();
             }
         }
 
@@ -84,15 +98,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             };
             dataTable.Columns.AddRange(dataColumns);
 
-            if (isEdit)
-            {
-                var dtRolePermissions = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
-            }
-
             foreach (DataRow dataRow in dtPermissions.Rows)
             {
                 var newRow = dataTable.NewRow();
-                newRow["is_checked"] = dtPermissions.AsEnumerable().Any(row => Convert.ToInt32(row.Field<byte>("permissions_id")) == Convert.ToInt32(dataRow["id"]));
+                newRow["is_checked"] = ToogleRolePermissions(Convert.ToInt32(dataRow["id"]), office);
                 newRow["id"] = dataRow["id"];
                 newRow["permission_name"] = dataRow["permission_name"];
                 dataTable.Rows.Add(newRow);

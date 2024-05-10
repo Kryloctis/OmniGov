@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByRoleId(byte roleId);
 
+        DataTable GetViewRecordsByRoleId(byte roleId, string office);
+
         bool DeleteByRoleId(byte roleId);
     }
 }

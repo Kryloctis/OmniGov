@@ -149,12 +149,10 @@ namespace ACC.Data
             {
                 foreach (var entity in entityList)
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Int32, entity.Id},
-                    };
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id }, };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
                     _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 

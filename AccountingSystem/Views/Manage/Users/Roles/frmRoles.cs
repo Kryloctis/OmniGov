@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using DocumentFormat.OpenXml.Spreadsheet;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,7 +64,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 var rolesModelList = new List<RolesModel>();
                 foreach (DataGridViewRow row in dgRoles.SelectedRows)
                 {
-                    byte roleId = Convert.ToByte(row.Cells[0].Value.ToString());
+                    byte roleId = Convert.ToByte(row.Cells["id"].Value.ToString());
                     rolesModelList.Add(new RolesModel() { Id = roleId });
                 }
 
@@ -77,7 +78,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             try
             {
                 if (DeleteData())
+                {
+                    Helper.MessageBoxSuccess($"{dgRoles.SelectedRows.Count} record/s has been deleted");
                     LoadRoles();
+                }
             }
             catch (MySqlException mysqlEx)
             {
