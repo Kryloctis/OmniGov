@@ -741,11 +741,14 @@ namespace AccountingSystem
         internal static void FundsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Name";
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["fund_code"].HeaderText = "Code";
+            datagrid.Columns["fund_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            datagrid.Columns["fund_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["fund_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["fund_name"].HeaderText = "Name";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

@@ -14,5 +14,7 @@ namespace ACC.Domain.Interfaces
         bool NameExist(string name, int id);
 
         DataTable GetRecordsPrintCashposition(string date);
+
+        DataTable GetRecords(string searchText, int rowLimit);
     }
 }

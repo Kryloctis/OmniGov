@@ -38,18 +38,18 @@ namespace AccountingSystem.Views.Manage.Users.List
             searchTstrpTxt = new System.Windows.Forms.ToolStripTextBox();
             panel2 = new System.Windows.Forms.Panel();
             cmbxFilter = new System.Windows.Forms.ComboBox();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             panel1 = new System.Windows.Forms.Panel();
             dgUsers = new System.Windows.Forms.DataGridView();
-            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -140,14 +140,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             cmbxFilter.TabIndex = 0;
             cmbxFilter.SelectionChangeCommitted += cmbxFilter_SelectionChangeCommitted;
             // 
-            // progressBar1
-            // 
-            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 65);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(634, 5);
-            progressBar1.TabIndex = 18;
-            // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -174,7 +166,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(701, 17);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(380, 17);
             toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -188,6 +180,14 @@ namespace AccountingSystem.Views.Manage.Users.List
             lblCreatedAt.Name = "lblCreatedAt";
             lblCreatedAt.Size = new System.Drawing.Size(17, 17);
             lblCreatedAt.Text = "--";
+            // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel3
             // 
@@ -204,18 +204,19 @@ namespace AccountingSystem.Views.Manage.Users.List
             // panel1
             // 
             panel1.Controls.Add(dgUsers);
+            panel1.Controls.Add(progressBar1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 70);
+            panel1.Location = new System.Drawing.Point(0, 65);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(634, 319);
+            panel1.Size = new System.Drawing.Size(634, 324);
             panel1.TabIndex = 20;
             // 
             // dgUsers
             // 
             dgUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgUsers.Location = new System.Drawing.Point(4, 4);
+            dgUsers.Location = new System.Drawing.Point(4, 9);
             dgUsers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgUsers.Name = "dgUsers";
             dgUsers.RowHeadersWidth = 51;
@@ -225,13 +226,13 @@ namespace AccountingSystem.Views.Manage.Users.List
             dgUsers.TabIndex = 7;
             dgUsers.SelectionChanged += dgUsers_SelectionChanged;
             // 
-            // toolStripStatusLabel5
+            // progressBar1
             // 
-            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            toolStripStatusLabel5.Text = "|";
-            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(626, 5);
+            progressBar1.TabIndex = 19;
             // 
             // frmUsers
             // 
@@ -241,7 +242,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             ClientSize = new System.Drawing.Size(634, 411);
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
-            Controls.Add(progressBar1);
             Controls.Add(panel2);
             Controls.Add(toolStrip1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -273,7 +273,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.ToolStripTextBox searchTstrpTxt;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cmbxFilter;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
@@ -285,5 +284,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgUsers;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
