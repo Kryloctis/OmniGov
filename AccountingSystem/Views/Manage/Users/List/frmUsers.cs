@@ -16,14 +16,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-
-            //Removes tabs to tabcontrol
-            tabControl1.Padding = new Point(0, 0);
-            tabControl1.ItemSize = new Size(0, 1);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
-            tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
-
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
         }
 
@@ -64,8 +56,13 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int userId = int.Parse(dgUsers.SelectedCells[0].Value.ToString());
-            _ = new frmUsersEdit(this, userId).ShowDialog();
+            try
+            {
+                int rowIndex = dgUsers.CurrentRow.Index;
+                int userId = Convert.ToInt32(dgUsers.Rows[rowIndex].Cells["id"].Value);
+                _ = new frmUsersEdit(this, userId).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteData()
@@ -79,12 +76,10 @@ namespace AccountingSystem.Views.Manage.Users.List
                     var usersModelList = new List<UsersModel>();
                     foreach (DataGridViewRow row in dgUsers.SelectedRows)
                     {
-                        int userId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        int userId = Convert.ToInt16(row.Cells["id"].Value.ToString());
                         usersModelList.Add(new UsersModel() { Id = userId });
                     }
-
-                    var usersRepository = AccFactory.UsersRepository();
-                    return usersRepository.Delete(usersModelList);
+                    return AccFactory.UsersRepository().Delete(usersModelList);
                 }
             }
             return false;
@@ -95,7 +90,10 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 if (DeleteData())
+                {
+                    Helper.MessageBoxSuccess($"{dgUsers.SelectedRows.Count} record/s has beend deleted.");
                     LoadRecords();
+                }
             }
             catch (MySqlException mysqlEx)
             {
@@ -140,10 +138,10 @@ namespace AccountingSystem.Views.Manage.Users.List
                 {
                     new DataColumn("id", typeof(int)),
                     new DataColumn("full_name", typeof(string)),
-                    new DataColumn("role", typeof(string)),
-                    new DataColumn("office", typeof(string)),
+                    new DataColumn("office_role", typeof(string)),
+                    new DataColumn("is_active", typeof(bool)),
                     new DataColumn("created_at", typeof(string)),
-                    new DataColumn("updated_at", typeof(string))
+                    new DataColumn("updated_at", typeof(string)),
                 };
                 dataTable.Columns.AddRange(dataColumns);
                 int totalProgressCount = dbDataTable.Rows.Count;
@@ -157,11 +155,11 @@ namespace AccountingSystem.Views.Manage.Users.List
                     string role = dataRow["role_name"].ToString();
 
                     newRow["id"] = dataRow["id"];
+                    newRow["is_active"] = Convert.ToByte(dataRow["is_deleted"]) == 0;
                     newRow["full_name"] = userFullName;
-                    newRow["office"] = dataRow["office"];
-                    newRow["role"] = role;
-                    newRow["created_at"] = string.IsNullOrWhiteSpace(dataRow["created_at"].ToString()) ? string.Empty : DateTime.Parse(dataRow["created_at"].ToString()).ToShortDateString();
-                    newRow["updated_at"] = string.IsNullOrWhiteSpace(dataRow["updated_at"].ToString()) ? string.Empty : DateTime.Parse(dataRow["updated_at"].ToString()).ToShortDateString();
+                    newRow["office_role"] = $"{dataRow["office"]} > {role}";
+                    newRow["created_at"] = dataRow["created_at"];
+                    newRow["updated_at"] = dataRow["updated_at"];
 
                     dataTable.Rows.Add(newRow);
                     progressCount++;

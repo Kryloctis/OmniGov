@@ -74,9 +74,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel3, toolStripStatusLabel4, lblCreatedAt, toolStripStatusLabel6, toolStripStatusLabel7, lblUpdatedAt });
-            statusStrip1.Location = new System.Drawing.Point(0, 390);
+            statusStrip1.Location = new System.Drawing.Point(0, 389);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(644, 22);
+            statusStrip1.Size = new System.Drawing.Size(634, 22);
             statusStrip1.TabIndex = 11;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // toolStripStatusLabel3
             // 
             toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(388, 17);
+            toolStripStatusLabel3.Size = new System.Drawing.Size(378, 17);
             toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // splitContainer1
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.Location = new System.Drawing.Point(0, 70);
+            splitContainer1.Location = new System.Drawing.Point(0, 65);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -147,8 +147,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             splitContainer1.Panel2.Controls.Add(rchTxtRolePermissions);
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            splitContainer1.Size = new System.Drawing.Size(644, 320);
-            splitContainer1.SplitterDistance = 343;
+            splitContainer1.Size = new System.Drawing.Size(634, 324);
+            splitContainer1.SplitterDistance = 337;
             splitContainer1.TabIndex = 12;
             // 
             // dgRoles
@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             dgRoles.RowHeadersWidth = 51;
             dgRoles.RowTemplate.Height = 29;
             dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgRoles.Size = new System.Drawing.Size(335, 307);
+            dgRoles.Size = new System.Drawing.Size(329, 311);
             dgRoles.TabIndex = 8;
             dgRoles.SelectionChanged += dgRoles_SelectionChanged;
             // 
@@ -169,7 +169,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(4, 4);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(335, 5);
+            progressBar1.Size = new System.Drawing.Size(329, 5);
             progressBar1.TabIndex = 10;
             // 
             // rchTxtRolePermissions
@@ -180,7 +180,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             rchTxtRolePermissions.Location = new System.Drawing.Point(4, 35);
             rchTxtRolePermissions.Name = "rchTxtRolePermissions";
             rchTxtRolePermissions.ReadOnly = true;
-            rchTxtRolePermissions.Size = new System.Drawing.Size(289, 281);
+            rchTxtRolePermissions.Size = new System.Drawing.Size(285, 285);
             rchTxtRolePermissions.TabIndex = 0;
             rchTxtRolePermissions.Text = "";
             rchTxtRolePermissions.WordWrap = false;
@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             label1.Location = new System.Drawing.Point(4, 4);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(289, 31);
+            label1.Size = new System.Drawing.Size(285, 31);
             label1.TabIndex = 1;
             label1.Text = "▾Access Permissions";
             // 
@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(644, 35);
+            toolStrip1.Size = new System.Drawing.Size(634, 35);
             toolStrip1.TabIndex = 13;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -259,7 +259,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(644, 35);
+            panel1.Size = new System.Drawing.Size(634, 30);
             panel1.TabIndex = 16;
             // 
             // btnShowSidePanel
@@ -267,9 +267,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             btnShowSidePanel.Dock = System.Windows.Forms.DockStyle.Right;
             btnShowSidePanel.FlatAppearance.BorderSize = 0;
             btnShowSidePanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnShowSidePanel.Location = new System.Drawing.Point(614, 0);
+            btnShowSidePanel.Location = new System.Drawing.Point(604, 0);
             btnShowSidePanel.Name = "btnShowSidePanel";
-            btnShowSidePanel.Size = new System.Drawing.Size(30, 35);
+            btnShowSidePanel.Size = new System.Drawing.Size(30, 30);
             btnShowSidePanel.TabIndex = 1;
             btnShowSidePanel.Text = "✕";
             btnShowSidePanel.UseVisualStyleBackColor = true;
@@ -279,7 +279,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             cmbxRowLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxRowLimit.FormattingEnabled = true;
-            cmbxRowLimit.Location = new System.Drawing.Point(3, 6);
+            cmbxRowLimit.Location = new System.Drawing.Point(3, 3);
             cmbxRowLimit.Name = "cmbxRowLimit";
             cmbxRowLimit.Size = new System.Drawing.Size(120, 23);
             cmbxRowLimit.TabIndex = 0;
@@ -290,14 +290,14 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(644, 412);
+            ClientSize = new System.Drawing.Size(634, 411);
             Controls.Add(splitContainer1);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(603, 400);
+            MinimumSize = new System.Drawing.Size(650, 450);
             Name = "frmRoles";
             ShowIcon = false;
             ShowInTaskbar = false;

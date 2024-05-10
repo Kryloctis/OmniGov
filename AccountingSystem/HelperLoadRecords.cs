@@ -1219,10 +1219,11 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["full_name"].HeaderText = "Name";
-            dataGridView.Columns["role"].HeaderText = "Role";
-            dataGridView.Columns["office"].HeaderText = "Office";
+            dataGridView.Columns["office_role"].HeaderText = "Office > Role";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["is_active"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["is_active"].HeaderText = "Active";
         }
 
         internal static void UsersComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
