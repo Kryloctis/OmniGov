@@ -389,7 +389,6 @@ namespace AccountingSystem
             datagrid.Columns["role_name"].HeaderText = "Role Name";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 

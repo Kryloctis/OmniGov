@@ -1,11 +1,15 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using DocumentFormat.OpenXml.Spreadsheet;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -26,36 +30,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
                 LoadRoles();
                 Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
-        }
-
-        private void LoadRoleAccess(byte roleId)
-        {
-            lstboxAuthorize.DataSource = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
-            lstboxAuthorize.DisplayMember = "permission_name";
-            lstboxAuthorize.ValueMember = "permissions_id";
-        }
-
-        private void dgRoles_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgRoles.SelectedRows.Count == 1)
-                {
-                    var rowIndex = dgRoles.CurrentRow.Index;
-                    LoadRoleAccess(Convert.ToByte(dgRoles.Rows[rowIndex].Cells["id"].Value));
-                }
-                else
-                {
-                    var dataTable = (DataTable)lstboxAuthorize.DataSource;
-                    dataTable.Rows.Clear();
-                    lstboxAuthorize.Refresh();
-                }
-
-                byte[] columnIndexTimestamp = { 3, 4 };
-                Helper.ShowRecordTimestamp(dgRoles, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
+                TogglePreviewPermissions();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -116,15 +91,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void searchTstripBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRoles();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
@@ -139,7 +105,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             if (!backgroundWorker1.IsBusy)
             {
                 int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
-                string searchKey = searchTstripTxtbx.Text.Trim();
+                string searchKey = txtSearch.Text.Trim();
 
                 backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
             }
@@ -154,13 +120,34 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;
 
+                var dataTable = new DataTable();
+                var dataColumns = new DataColumn[]
+                {
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("office", typeof(string)),
+                    new DataColumn("role_name", typeof(string)),
+                    new DataColumn("created_at", typeof(string)),
+                    new DataColumn("updated_at", typeof(string))
+                };
+                dataTable.Columns.AddRange(dataColumns);
+
                 foreach (DataRow dataRow in dbDataTable.Rows)
                 {
+                    var newRow = dataTable.NewRow();
+
+                    byte roleId = Convert.ToByte(dataRow["id"]);
+                    newRow["id"] = roleId;
+                    newRow["office"] = dataRow["office"];
+                    newRow["role_name"] = dataRow["role_name"];
+                    newRow["created_at"] = dataRow["created_at"];
+                    newRow["updated_at"] = dataRow["updated_at"];
+
+                    dataTable.Rows.Add(newRow);
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
-                e.Result = dbDataTable;
+                e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -187,6 +174,63 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 HelperLoadRecords.RolesDatagridView(dataTable, dgRoles);
                 dgRoles.CurrentCell = dgRoles.FirstDisplayedCell;
                 lblRecordCount.Text = dgRoles.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgRoles_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgRoles.SelectedRows.Count == 1)
+                {
+                    int rowIndex = dgRoles.CurrentRow.Index;
+                    byte roleId = Convert.ToByte(dgRoles.Rows[rowIndex].Cells["id"].Value);
+
+                    rchTxtRolePermissions.Text = string.Join("\n", AccFactory.RoleHasPermissionsRepository()
+                                                                            .GetRecordsByRoleId(roleId)
+                                                                            .AsEnumerable()
+                                                                            .Select(dtRowPermissions => $" {dtRowPermissions["permission_name"]}")
+                                                                            .ToList());
+                }
+
+                byte[] columnIndexTimestamp = { 3, 4 };
+                Helper.ShowRecordTimestamp(dgRoles, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void TogglePreviewPermissions()
+        {
+            switch (splitContainer1.Panel2Collapsed)
+            {
+                case true:
+                    splitContainer1.Panel2Collapsed = false;
+                    btnShowSidePanel.Text = "✕";
+                    break;
+
+                case false:
+                    splitContainer1.Panel2Collapsed = true;
+                    btnShowSidePanel.Text = "☰";
+                    break;
+            }
+        }
+
+        private void btnShowSidePanel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TogglePreviewPermissions();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRoles();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

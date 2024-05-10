@@ -959,15 +959,17 @@ namespace AccountingSystem
 
         public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
+            string placeHolder = "--";
+
             if (dataGridView.SelectedRows.Count == 1)
             {
                 lblCreatedAt.Text = Convert.ToDateTime(dataGridView.SelectedCells[index[0]].Value).ToShortDateString();
-                lblUpdatedAt.Text = dataGridView.SelectedCells[index[1]].Value is not DateTime ? string.Empty : Convert.ToDateTime(dataGridView.SelectedCells[index[1]].Value).ToShortDateString();
+                lblUpdatedAt.Text = string.IsNullOrWhiteSpace(dataGridView.SelectedCells[index[1]].Value.ToString()) ? placeHolder : Convert.ToDateTime(dataGridView.SelectedCells[index[1]].Value).ToShortDateString();
             }
             else
             {
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
+                lblCreatedAt.Text = placeHolder;
+                lblUpdatedAt.Text = placeHolder;
             }
         }
 
