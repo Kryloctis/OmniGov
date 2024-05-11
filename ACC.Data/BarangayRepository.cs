@@ -110,7 +110,7 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[]{"@barangay_code", DbType.String, entity.Code},
                 new object[]{"@barangay_name", DbType.String, entity.Name},
-                new object[]{"@municipalities_id", DbType.Int32, entity.MunicipalityID}
+                new object[]{"@municipalities_id", DbType.Int32, entity.MunicipalityId}
             };
 
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
