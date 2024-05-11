@@ -9,8 +9,15 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 {
     public partial class ucAllotmentClasses : UserControl
     {
-        internal int allotmentClassesId;
-        internal bool isEdit;
+        private int allotmentClassId;
+        private bool isEdit;
+
+        private void LoadSelectedRecord()
+        {
+            var allotmentData = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            txtName.Text = allotmentData["allotment_name"];
+            txtCode.Text = allotmentData["allotment_code"];
+        }
 
         public ucAllotmentClasses()
         {
@@ -24,6 +31,17 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                 AllotmentCode = txtCode.Text.Trim(),
                 AllotmentName = txtName.Text.Trim(),
             };
+        }
+
+        internal void OnLoad(bool isEdit, int? allotmentClassId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.allotmentClassId = allotmentClassId.Value;
+                LoadSelectedRecord();
+            }
         }
 
         internal string GetFormErrors()
@@ -49,7 +67,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                 return false;
 
             string allotmentName = txtName.Text.Trim();
-            bool allotmentNameExist = isEdit ? AccFactory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassesId) : AccFactory.AllotmentClassesRepository().NameExist(allotmentName);
+            bool allotmentNameExist = isEdit ? AccFactory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassId) : AccFactory.AllotmentClassesRepository().NameExist(allotmentName);
 
             if (allotmentNameExist)
             {
@@ -80,7 +98,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                 return false;
 
             string allotmentCode = txtCode.Text.Trim();
-            bool allotmentCodeExist = isEdit ? AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode, allotmentClassesId) : AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode);
+            bool allotmentCodeExist = isEdit ? AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode, allotmentClassId) : AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode);
 
             if (allotmentCodeExist)
             {

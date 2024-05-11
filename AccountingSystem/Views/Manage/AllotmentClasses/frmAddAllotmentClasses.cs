@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,7 +6,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 {
     public partial class frmAddAllotmentClasses : Form
     {
-        private frmAllotmentClasses _frmAllotmentClasses;
+        private frmAllotmentClasses frmAllotmentClasses;
         private ucAllotmentClasses uc;
 
         public frmAddAllotmentClasses(frmAllotmentClasses frmAllotmentClasses)
@@ -15,7 +14,27 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucAllotmentClasses1;
-            _frmAllotmentClasses = frmAllotmentClasses;
+            this.frmAllotmentClasses = frmAllotmentClasses;
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            return AccFactory.AllotmentClassesRepository().Insert(uc.AllotmentClassesModel());
+        }
+
+        private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad(false, null);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -23,33 +42,26 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Allotment class has been saved.");
-                _frmAllotmentClasses.LoadRecords();
+                frmAllotmentClasses.LoadRecords();
                 uc.ResetForm();
             }
         }
 
-        private bool SaveData()
+        private void frmAddAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
         {
-            // if error occurs, show messagebox error
-            if (!uc.ValidateChildren())
+            try
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Allotment class has been saved.");
+                        frmAllotmentClasses.LoadRecords();
+                        uc.ResetForm();
+                    }
+                }
             }
-
-            // proceed to insert
-            var allotmentModel = new AllotmentClassesModel()
-            {
-                AllotmentName = uc.txtName.Text.Trim(),
-                AllotmentCode = uc.txtCode.Text.Trim(),
-            };
-
-            return AccFactory.AllotmentClassesRepository().Insert(allotmentModel);
-        }
-
-        private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
-        {
-            uc.isEdit = false;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
