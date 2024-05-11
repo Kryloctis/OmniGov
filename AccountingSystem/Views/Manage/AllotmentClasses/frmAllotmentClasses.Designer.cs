@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             panel2 = new System.Windows.Forms.Panel();
             cmbxRowLimit = new System.Windows.Forms.ComboBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -117,7 +118,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel3, lblUpdatedAt });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel5, toolStripStatusLabel3, lblUpdatedAt });
             statusStrip1.Location = new System.Drawing.Point(0, 389);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -141,7 +142,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(424, 17);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(383, 17);
             toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -153,7 +154,8 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // lblCreatedAt
             // 
             lblCreatedAt.Name = "lblCreatedAt";
-            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            lblCreatedAt.Size = new System.Drawing.Size(17, 17);
+            lblCreatedAt.Text = "--";
             // 
             // toolStripStatusLabel3
             // 
@@ -164,7 +166,8 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // lblUpdatedAt
             // 
             lblUpdatedAt.Name = "lblUpdatedAt";
-            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            lblUpdatedAt.Size = new System.Drawing.Size(17, 17);
+            lblUpdatedAt.Text = "--";
             // 
             // panel1
             // 
@@ -225,6 +228,14 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // frmAllotmentClasses
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -242,7 +253,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Setings > Allotment Classes";
+            Text = "Settings > Allotment Classes";
             Load += frmAllotmentClasses_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -277,5 +288,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         private System.Windows.Forms.ComboBox cmbxRowLimit;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }

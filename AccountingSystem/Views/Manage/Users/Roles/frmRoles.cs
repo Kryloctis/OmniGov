@@ -110,6 +110,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             {
                 int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
+                progressBar1.Value = 0;
 
                 backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
             }

@@ -24,6 +24,6 @@ namespace ACC.Domain.Interfaces
 
         int GetIdByName_MunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName);
 
-        DataTable GetRecordsBySearch(string searchText, int municipalityId);
+        DataTable GetRecordsBySearch(int rowLimit, string searchText, int municipalityId);
     }
 }

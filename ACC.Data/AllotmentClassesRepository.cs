@@ -26,7 +26,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT * updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -55,7 +55,7 @@ namespace ACC.Data
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT id, allotment_code, allotment_name, created_at, updated_at FROM {tableName} WHERE allotment_code LIKE @search_text OR allotment_name LIKE @search_text";
+            string query = $"SELECT * FROM {tableName} WHERE allotment_code LIKE @search_text OR allotment_name LIKE @search_text";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }

@@ -117,6 +117,7 @@ namespace AccountingSystem.Views.Manage.Funds
             {
                 string searchKey = txtSearch.Text.Trim();
                 int rowLimit = Convert.ToInt32(cmbxFilter.SelectedValue);
+                progressBar1.Value = 0;
 
                 backgroundWorker1.RunWorkerAsync((searchKey, rowLimit));
             }

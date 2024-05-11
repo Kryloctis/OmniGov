@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             {
                 string searchText = txtSearch.Text.Trim();
                 int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
-
+                progressBar1.Value = 0;
                 backgroundWorker1.RunWorkerAsync((rowLimit, searchText));
             }
         }

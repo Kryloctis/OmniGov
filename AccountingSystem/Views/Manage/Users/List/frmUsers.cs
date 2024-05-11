@@ -123,6 +123,7 @@ namespace AccountingSystem.Views.Manage.Users.List
                 int rowLimit = int.Parse(cmbxFilter.SelectedValue.ToString());
                 string userOffice = Helper.LoggedInUserData()["office"];
                 string searchKey = searchTstrpTxt.Text.Trim();
+                progressBar1.Value = 0;
                 backgroundWorker1.RunWorkerAsync((rowLimit, userOffice, searchKey));
             }
         }

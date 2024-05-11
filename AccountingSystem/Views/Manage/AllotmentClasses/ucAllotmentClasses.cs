@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             try
             {
-                e.Cancel = CodeValidated();
+                e.Cancel = !CodeValidated();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
