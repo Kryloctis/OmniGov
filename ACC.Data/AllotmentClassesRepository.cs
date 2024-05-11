@@ -19,60 +19,50 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT allotment_code, allotment_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * updated_at FROM {tableName} WHERE id = @id";
 
-                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-                    record.Add("allotment_code", reader.Rows[0][0].ToString());
-                    record.Add("allotment_name", reader.Rows[0][1].ToString());
-                    record.Add("created_at", reader.Rows[0][2].ToString());
-                    record.Add("updated_at", reader.Rows[0][3].ToString());
-                }
-            }
-            catch (Exception)
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
-            }
+                DataRow row = dataTable.Rows[0];
 
-            return record;
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT id, allotment_code, allotment_name, created_at, updated_at FROM {tableName}";
-
-            DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"}
             };
 
             string query = $"SELECT id, allotment_code, allotment_name, created_at, updated_at FROM {tableName} WHERE allotment_code LIKE @search_text OR allotment_name LIKE @search_text";
 
-            DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool Insert(AllotmentClassesModel entity)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@allotment_name", DbType.String, entity.AllotmentName},
                 new object[] { "@allotment_code", DbType.String, entity.AllotmentCode}
@@ -84,7 +74,7 @@ namespace ACC.Data
 
         public bool Update(AllotmentClassesModel entity)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int16, entity.Id},
                 new object[] { "@allotment_name", DbType.String, entity.AllotmentName},
@@ -101,7 +91,7 @@ namespace ACC.Data
             {
                 foreach (AllotmentClassesModel entity in entityList)
                 {
-                    object[][] parameters = new object[][]
+                    var parameters = new object[][]
                     {
                         new object[] { "@id", DbType.Int16, entity.Id},
                     };
@@ -122,7 +112,7 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, id },
             };
@@ -130,9 +120,7 @@ namespace ACC.Data
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-            return false;
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool CodeExist(string allotmentCode)
@@ -145,15 +133,12 @@ namespace ACC.Data
             string query = $"SELECT allotment_code FROM {tableName} WHERE allotment_code = @allotment_code";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool CodeExist(string allotmentCode, int allotmentId)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int16, allotmentId },
                 new object[] { "@allotment_code", DbType.String, allotmentCode },
@@ -162,15 +147,12 @@ namespace ACC.Data
             string query = $"SELECT allotment_code FROM {tableName} WHERE id <> @id AND allotment_code = @allotment_code";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool NameExist(string allotmentName)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@allotment_name", DbType.String, allotmentName },
             };
@@ -178,15 +160,12 @@ namespace ACC.Data
             string query = $"SELECT allotment_name FROM {tableName} WHERE allotment_name = @allotment_name";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool NameExist(string allotmentName, int allotmentId)
         {
-            object[][] parameters = new object[][]
+            var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int16, allotmentId },
                 new object[] { "@allotment_name", DbType.String, allotmentName },
@@ -195,10 +174,7 @@ namespace ACC.Data
             string query = $"SELECT allotment_name FROM {tableName} WHERE id <> @id AND allotment_name = @allotment_name";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            return !string.IsNullOrEmpty(queryResult);
         }
     }
 }
