@@ -176,5 +176,17 @@ namespace ACC.Data
 
             return !string.IsNullOrEmpty(queryResult);
         }
+
+        public DataTable GetRecordsBySearch(int rowLimit, string searchKey)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE (allotment_code LIKE @search_key OR allotment_name LIKE @search_key) LIMIT @row_limit";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }

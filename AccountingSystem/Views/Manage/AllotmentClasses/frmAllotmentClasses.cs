@@ -1,8 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
@@ -18,22 +21,22 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
         internal void LoadRecords()
         {
-            string searchText = txtSearch.Text.Trim();
-            DataTable dataTable;
+            if (!backgroundWorker1.IsBusy)
+            {
+                string searchText = txtSearch.Text.Trim();
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
 
-            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
-                dataTable = AccFactory.AllotmentClassesRepository().GetRecords();
-            else
-                dataTable = AccFactory.AllotmentClassesRepository().GetRecordsBySearch(searchText);
-
-            HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
-
-            lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchText));
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddAllotmentClasses(this).ShowDialog();
+            try
+            {
+                _ = new frmAddAllotmentClasses(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -41,17 +44,24 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             try
             {
                 if (DeleteData())
+                {
+                    Helper.MessageBoxError($"{dgAllotmentClasses.Rows.Count} record/s has been deleted.");
                     LoadRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rowIndex = dgAllotmentClasses.CurrentRow.Index;
-            int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
+            try
+            {
+                int rowIndex = dgAllotmentClasses.CurrentRow.Index;
+                int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
+                _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteData()
@@ -86,20 +96,62 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             try
             {
+                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
                 LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int rowLimit, string searchKey))e.Argument;
+
+                var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+                int totalProgressCount = dtAllotmentClasses.Rows.Count;
+                int progressCount = 0;
+
+                dtAllotmentClasses.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
+
+                e.Result = dtAllotmentClasses;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                progressBar1.Value = e.ProgressPercentage;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                {
+                    progressBar1.Value = 100;
+                }
+
+                HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
+                dgAllotmentClasses.CurrentCell = dgAllotmentClasses.FirstDisplayedCell;
+                lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
