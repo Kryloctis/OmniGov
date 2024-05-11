@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,37 +6,35 @@ namespace AccountingSystem.Views.Manage.Funds
 {
     public partial class frmFundAdd : Form
     {
-        private frmFunds _frmFunds;
+        private frmFunds frmFunds;
         private ucFunds uc;
 
         public frmFundAdd(frmFunds frmFunds)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             uc = ucFunds1;
-            _frmFunds = frmFunds;
+            this.frmFunds = frmFunds;
         }
 
         private bool SaveData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to insert
-            var fundModel = new FundsModel()
-            {
-                FundCode = uc.txtCode.Text.Trim(),
-                FundName = uc.txtName.Text.Trim()
-            };
-
-            return AccFactory.FundsRepository().Insert(fundModel);
+            return AccFactory.FundsRepository().Insert(uc.FundsModel());
         }
 
         private void frmFundAdd_Load(object sender, EventArgs e)
         {
+            try
+            {
+                uc.OnLoad(false, null);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -47,7 +44,21 @@ namespace AccountingSystem.Views.Manage.Funds
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Fund has been saved.");
-                    _frmFunds.LoadRecords();
+                    frmFunds.LoadRecords();
+                    uc.ResetForm();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmFundAdd_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Fund has been saved.");
+                    frmFunds.LoadRecords();
                     uc.ResetForm();
                 }
             }

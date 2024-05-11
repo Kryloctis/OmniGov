@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -15,6 +16,22 @@ namespace AccountingSystem.Views.Manage.Funds
             InitializeComponent();
         }
 
+        private void LoadSelectedRecord()
+        {
+            var fundData = AccFactory.FundsRepository().GetRecordByID(1);
+            txtCode.Text = fundData["fund_code"];
+            txtName.Text = fundData["fund_name"];
+        }
+
+        internal FundsModel FundsModel()
+        {
+            return new FundsModel()
+            {
+                FundCode = txtCode.Text.Trim(),
+                FundName = txtName.Text.Trim(),
+            };
+        }
+
         internal void OnLoad(bool isEdit, int? fundId)
         {
             this.isEdit = isEdit;
@@ -22,6 +39,7 @@ namespace AccountingSystem.Views.Manage.Funds
             if (isEdit)
             {
                 this.fundId = fundId.Value;
+                LoadSelectedRecord();
             }
         }
 
@@ -50,7 +68,6 @@ namespace AccountingSystem.Views.Manage.Funds
                 return false;
 
             bool fundNameExist = isEdit ? AccFactory.FundsRepository().NameExist(fundName, fundId) : AccFactory.FundsRepository().NameExist(fundName);
-
             if (fundNameExist)
             {
                 errorProvider.SetError(textBox, "Fund name already exist.");
@@ -71,10 +88,6 @@ namespace AccountingSystem.Views.Manage.Funds
         private void txtName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
-        }
-
-        private void ucFunds_Load(object sender, EventArgs e)
-        {
         }
 
         private bool FundCodeValidated(ErrorProvider errorProvider, TextBox textBox)

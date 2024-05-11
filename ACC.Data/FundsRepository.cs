@@ -150,10 +150,10 @@ namespace ACC.Data
                 new object[] { "@fund_name", DbType.String, fundName },
             };
 
-            string query = $"SELECT fund_name FROM {tableName} WHERE id <> @id AND fund_name = @fund_name";
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND fund_name = @fund_name";
             string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            return string.IsNullOrEmpty(queryResult);
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool CodeExist(string fundCode)

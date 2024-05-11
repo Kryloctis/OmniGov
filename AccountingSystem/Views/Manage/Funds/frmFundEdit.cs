@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Users.List;
 using System;
 using System.Windows.Forms;
 
@@ -7,7 +8,8 @@ namespace AccountingSystem.Views.Manage.Funds
 {
     public partial class frmFundEdit : Form
     {
-        private frmFunds _frmFunds;
+        private frmFunds frmFunds;
+        private int fundId;
         private ucFunds uc;
 
         public frmFundEdit(frmFunds frmFunds, int fundId)
@@ -15,34 +17,21 @@ namespace AccountingSystem.Views.Manage.Funds
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            _frmFunds = frmFunds;
+            this.frmFunds = frmFunds;
+            this.fundId = fundId;
             uc = ucFunds1;
-            uc.fundId = fundId;
-        }
-
-        private void LoadSelectedRecord()
-        {
-            var fundData = AccFactory.FundsRepository().GetRecordByID(uc.fundId);
-            uc.txtCode.Text = fundData["fund_code"];
-            uc.txtName.Text = fundData["fund_name"];
         }
 
         private bool SaveData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to update
-            var fundModel = new FundsModel()
-            {
-                Id = uc.fundId,
-                FundCode = uc.txtCode.Text.Trim(),
-                FundName = uc.txtName.Text.Trim()
-            };
+            var fundModel = uc.FundsModel();
+            fundModel.Id = fundId;
 
             return AccFactory.FundsRepository().Update(fundModel);
         }
@@ -53,8 +42,8 @@ namespace AccountingSystem.Views.Manage.Funds
             {
                 if (SaveData())
                 {
-                    Helper.MessageBoxSuccess("Fund has been saved.");
-                    _frmFunds.LoadRecords();
+                    Helper.MessageBoxSuccess("Fund has been updated.");
+                    frmFunds.LoadRecords();
                     Close();
                 }
             }
@@ -65,14 +54,26 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             try
             {
-                OnLoad();
+                uc.OnLoad(true, fundId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        private void frmFundEdit_KeyDown(object sender, KeyEventArgs e)
         {
-            LoadSelectedRecord();
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Fund has been updated.");
+                        frmFunds.LoadRecords();
+                        Close();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
