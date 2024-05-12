@@ -1,5 +1,5 @@
 ﻿using ACC.Domain.Models;
-using System.Collections.Generic;
+using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
@@ -14,5 +14,7 @@ namespace ACC.Domain.Interfaces
         int GetIdByNameBranch(string name, string branch);
 
         int GetLastInsertedId();
+
+        DataTable GetRecords(int rowLimit, string searchKey);
     }
 }

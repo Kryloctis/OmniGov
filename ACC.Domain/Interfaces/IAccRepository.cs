@@ -13,8 +13,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByID(int Id);
 
-        int CountRecords();
-
         bool Insert(T entity);
 
         bool Update(T entity);

@@ -9,45 +9,43 @@ namespace ACC.Data
 {
     public class BanksRepository : IBanksRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "banks";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public BanksRepository(IAccGenericCommands dbGenericCommands)
+        public BanksRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT bank_code, bank_name, bank_branch FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return record;
+                DataRow row = dataTable.Rows[0];
 
-                record.Add("bank_code", reader.Rows[0]["bank_code"].ToString());
-                record.Add("bank_name", reader.Rows[0]["bank_name"].ToString());
-                record.Add("bank_branch", reader.Rows[0]["bank_branch"].ToString());
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-
-            return record;
+            return recordDictionary;
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-
-            var dtBanks = new DataTable();
-            return _dbGenericCommands.Fill(query, dtBanks);
-
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public bool Insert(BanksModel entity)
@@ -60,7 +58,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO {tableName} (bank_code, bank_name, bank_branch) VALUES (@bank_code, @bank_name, @bank_branch)";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BanksModel entity)
@@ -74,71 +72,35 @@ namespace ACC.Data
             };
 
             string query = $"UPDATE {tableName} SET bank_code = @bank_code, bank_name = @bank_name, bank_branch = @bank_branch WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<BanksModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
-
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
-        public int CountRecords()
-        {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
+                scope.Complete();
+                return true;
             }
         }
 
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int32, id },
             };
 
-            return false;
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool CodeExist(string accountCode)
@@ -149,11 +111,8 @@ namespace ACC.Data
             };
 
             string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-            return false;
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool CodeExist(string accountCode, int bankId)
@@ -165,27 +124,25 @@ namespace ACC.Data
             };
 
             string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-            return false;
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%" }
+            };
 
             string query = $"SELECT * FROM {tableName} WHERE bank_code LIKE @search_text OR bank_name LIKE @search_text OR bank_branch LIKE @search_text";
-
-            var dtBanks = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtBanks, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public bool BankExistByNameBranch(string name, string branch)
@@ -197,9 +154,8 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE @bank_name = bank_name AND @bank_branch = bank_branch";
-            string result = _dbGenericCommands.ExecuteScalar(query, parameters);
-            if (!string.IsNullOrEmpty(result)) return true;
-            return false;
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public int GetIdByNameBranch(string name, string branch)
@@ -211,7 +167,19 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE bank_name = @bank_name AND bank_branch = @bank_branch";
-            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
+
+        public DataTable GetRecords(int rowLimit, string searchKey)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE (bank_code LIKE @search_key OR bank_name LIKE @search_key OR bank_branch LIKE @search_key) LIMIT @row_limit";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

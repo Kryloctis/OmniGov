@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,41 +48,34 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (DeleteData(out deletedRecordCount))
-            {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private bool DeleteData(out int deletedCount)
-        {
             try
             {
-                var barangayModelList = new List<BarangayModel>();
-                int rowCount = dgBarangay.SelectedRows.Count;
-
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+                if (DeleteData())
                 {
-                    foreach (DataGridViewRow row in dgBarangay.SelectedRows)
-                    {
-                        int barangayId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new BarangayModel() { Id = barangayId };
-                        barangayModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.BarangayRepository().Delete(barangayModelList);
+                    Helper.MessageBoxSuccess($"{dgBarangay.SelectedRows.Count} record/s has been deleted.");
+                    LoadRecords();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteData()
+        {
+            var barangayModelList = new List<BarangayModel>();
+            int rowCount = dgBarangay.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(rowCount))
             {
-                Helper.MessageBoxError(ex.Message);
+                foreach (DataGridViewRow row in dgBarangay.SelectedRows)
+                {
+                    int barangayId = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new BarangayModel() { Id = barangayId };
+                    barangayModelList.Add(model);
+                }
+
+                return AccFactory.BarangayRepository().Delete(barangayModelList);
             }
 
-            deletedCount = 0;
             return false;
         }
 
