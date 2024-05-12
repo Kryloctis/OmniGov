@@ -47,27 +47,27 @@ namespace AccountingSystem.Views.Manage.Banks
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 89);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(366, 29);
+            flowLayoutPanel1.Size = new System.Drawing.Size(332, 29);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(288, 3);
+            btnCancel.Location = new System.Drawing.Point(179, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(150, 23);
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(207, 3);
+            btnSave.Location = new System.Drawing.Point(23, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(75, 23);
+            btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 1;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += new System.EventHandler(btnSave_Click);
+            btnSave.Click += btnSave_Click;
             // 
             // panel1
             // 
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Banks
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(366, 89);
+            panel1.Size = new System.Drawing.Size(332, 89);
             panel1.TabIndex = 1;
             // 
             // ucBanks1
@@ -86,27 +86,30 @@ namespace AccountingSystem.Views.Manage.Banks
             ucBanks1.Location = new System.Drawing.Point(4, 4);
             ucBanks1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucBanks1.Name = "ucBanks1";
-            ucBanks1.Size = new System.Drawing.Size(358, 81);
+            ucBanks1.Size = new System.Drawing.Size(324, 81);
             ucBanks1.TabIndex = 0;
             // 
             // frmAddBanks
             // 
-            AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(366, 118);
+            ClientSize = new System.Drawing.Size(332, 118);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAddBanks";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Bank";
+            Load += frmAddBanks_Load;
+            KeyDown += frmAddBanks_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

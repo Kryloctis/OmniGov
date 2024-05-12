@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Windows.Forms;
 
@@ -27,14 +25,7 @@ namespace AccountingSystem.Views.Manage.Banks
                 return false;
             }
 
-            BanksModel banksModel = new BanksModel()
-            {
-                BankCode = uc.txtBankCode.Text.Trim(),
-                BankName = uc.txtBankName.Text.Trim(),
-                BankBranch = uc.txtBankBranch.Text.Trim(),
-            };
-
-            return AccFactory.BanksRepository().Insert(banksModel);
+            return AccFactory.BanksRepository().Insert(uc.BanksModel());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -47,6 +38,32 @@ namespace AccountingSystem.Views.Manage.Banks
                     frmBanks.LoadRecords();
                     ucBanks1.ResetForm();
                 }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddBanks_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Bank has been saved.");
+                        frmBanks.LoadRecords();
+                        ucBanks1.ResetForm();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddBanks_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad(false, null);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

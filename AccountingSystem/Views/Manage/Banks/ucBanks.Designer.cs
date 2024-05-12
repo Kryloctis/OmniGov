@@ -29,107 +29,104 @@ namespace AccountingSystem.Views.Manage.Banks
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBankBranch = new System.Windows.Forms.TextBox();
-            this.txtBankName = new System.Windows.Forms.TextBox();
-            this.epProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtBankCode = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.epProvider1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            txtBankBranch = new System.Windows.Forms.TextBox();
+            txtBankName = new System.Windows.Forms.TextBox();
+            label3 = new System.Windows.Forms.Label();
+            txtBankCode = new System.Windows.Forms.TextBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Branch";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 59);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(44, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Branch";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Name";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 32);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(44, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Name*";
             // 
             // txtBankBranch
             // 
-            this.txtBankBranch.Location = new System.Drawing.Point(77, 56);
-            this.txtBankBranch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBankBranch.MaxLength = 45;
-            this.txtBankBranch.Name = "txtBankBranch";
-            this.txtBankBranch.Size = new System.Drawing.Size(262, 23);
-            this.txtBankBranch.TabIndex = 2;
+            txtBankBranch.Location = new System.Drawing.Point(58, 56);
+            txtBankBranch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtBankBranch.MaxLength = 45;
+            txtBankBranch.Name = "txtBankBranch";
+            txtBankBranch.Size = new System.Drawing.Size(250, 23);
+            txtBankBranch.TabIndex = 2;
             // 
             // txtBankName
             // 
-            this.txtBankName.Location = new System.Drawing.Point(77, 29);
-            this.txtBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBankName.MaxLength = 99;
-            this.txtBankName.Name = "txtBankName";
-            this.txtBankName.Size = new System.Drawing.Size(262, 23);
-            this.txtBankName.TabIndex = 1;
-            this.txtBankName.Validating += new System.ComponentModel.CancelEventHandler(this.txtbankname_Validating);
-            this.txtBankName.Validated += new System.EventHandler(this.txtbankname_Validated);
-            // 
-            // epProvider1
-            // 
-            this.epProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.epProvider1.ContainerControl = this;
+            txtBankName.Location = new System.Drawing.Point(58, 29);
+            txtBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtBankName.MaxLength = 99;
+            txtBankName.Name = "txtBankName";
+            txtBankName.Size = new System.Drawing.Size(250, 23);
+            txtBankName.TabIndex = 1;
+            txtBankName.Validating += txtbankname_Validating;
+            txtBankName.Validated += txtbankname_Validated;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Code";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(3, 5);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(35, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Code";
             // 
             // txtBankCode
             // 
-            this.txtBankCode.Location = new System.Drawing.Point(77, 2);
-            this.txtBankCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBankCode.MaxLength = 99;
-            this.txtBankCode.Name = "txtBankCode";
-            this.txtBankCode.Size = new System.Drawing.Size(262, 23);
-            this.txtBankCode.TabIndex = 0;
+            txtBankCode.Location = new System.Drawing.Point(58, 2);
+            txtBankCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtBankCode.MaxLength = 99;
+            txtBankCode.Name = "txtBankCode";
+            txtBankCode.Size = new System.Drawing.Size(250, 23);
+            txtBankCode.TabIndex = 0;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucBanks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.txtBankCode);
-            this.Controls.Add(this.txtBankName);
-            this.Controls.Add(this.txtBankBranch);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucBanks";
-            this.Size = new System.Drawing.Size(358, 81);
-            this.Load += new System.EventHandler(this.ucBanks_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epProvider1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(txtBankCode);
+            Controls.Add(txtBankName);
+            Controls.Add(txtBankBranch);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Name = "ucBanks";
+            Size = new System.Drawing.Size(328, 85);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ErrorProvider epProvider1;
         internal System.Windows.Forms.TextBox txtBankBranch;
         internal System.Windows.Forms.TextBox txtBankName;
         internal System.Windows.Forms.TextBox txtBankCode;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

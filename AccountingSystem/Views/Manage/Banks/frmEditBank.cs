@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +6,7 @@ namespace AccountingSystem.Views.Manage.Banks
 {
     public partial class frmEditBank : Form
     {
+        private int bankId;
         private readonly frmBanks frmBanks;
         private readonly ucBanks uc;
 
@@ -15,23 +15,15 @@ namespace AccountingSystem.Views.Manage.Banks
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.frmBanks = frmBanks;
+            this.bankId = bankId;
             uc = ucBanks1;
-            uc.bankId = bankId;
-        }
-
-        private void LoadSelectedRecord()
-        {
-            var dictBank = AccFactory.BanksRepository().GetRecordByID(uc.bankId);
-            uc.txtBankCode.Text = dictBank["bank_code"];
-            uc.txtBankName.Text = dictBank["bank_name"];
-            uc.txtBankBranch.Text = dictBank["bank_branch"];
         }
 
         private void frmBankEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadSelectedRecord();
+                uc.OnLoad(true, bankId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -44,13 +36,8 @@ namespace AccountingSystem.Views.Manage.Banks
                 return false;
             }
 
-            BanksModel banksModel = new BanksModel()
-            {
-                Id = uc.bankId,
-                BankCode = uc.txtBankCode.Text.Trim(),
-                BankName = uc.txtBankName.Text.Trim(),
-                BankBranch = uc.txtBankBranch.Text.Trim(),
-            };
+            var banksModel = uc.BanksModel();
+            banksModel.Id = bankId;
 
             return AccFactory.BanksRepository().Update(banksModel);
         }
@@ -65,6 +52,24 @@ namespace AccountingSystem.Views.Manage.Banks
                     frmBanks.LoadRecords();
                     uc.ResetForm();
                     Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmEditBank_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateData())
+                    {
+                        Helper.MessageBoxSuccess("Bank has been updated.");
+                        frmBanks.LoadRecords();
+                        uc.ResetForm();
+                        Close();
+                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

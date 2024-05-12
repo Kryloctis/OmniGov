@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -7,15 +8,41 @@ namespace AccountingSystem.Views.Manage.Banks
 {
     public partial class ucBanks : UserControl
     {
-        internal int bankId;
+        private int bankId;
+        private bool isEdit;
 
         public ucBanks()
         {
             InitializeComponent();
         }
 
-        private void ucBanks_Load(object sender, EventArgs e)
+        private void LoadSelectedRecord(int bankId)
         {
+            var dictBank = AccFactory.BanksRepository().GetRecordByID(bankId);
+            txtBankCode.Text = dictBank["bank_code"];
+            txtBankName.Text = dictBank["bank_name"];
+            txtBankBranch.Text = dictBank["bank_branch"];
+        }
+
+        internal BanksModel BanksModel()
+        {
+            return new BanksModel()
+            {
+                BankCode = txtBankCode.Text.Trim(),
+                BankName = txtBankName.Text.Trim(),
+                BankBranch = txtBankBranch.Text.Trim(),
+            };
+        }
+
+        internal void OnLoad(bool isEdit, int? bankId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.bankId = bankId.Value;
+                LoadSelectedRecord(this.bankId);
+            }
         }
 
         internal void ResetForm()
@@ -30,19 +57,23 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             var errorArray = new string[]
             {
-                epProvider1.GetError(txtBankName)
+                errorProvider1.GetError(txtBankName)
             };
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epProvider1, txtBankName, "bank name.");
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBankName, "bank name.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epProvider1, txtBankName);
+            Helper.ClearErrorTextBox(errorProvider1, txtBankName);
         }
     }
 }
