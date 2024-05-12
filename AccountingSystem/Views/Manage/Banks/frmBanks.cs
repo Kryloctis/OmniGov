@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

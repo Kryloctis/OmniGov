@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void LoadRowFilter()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
         }
 
         internal void LoadRecords()

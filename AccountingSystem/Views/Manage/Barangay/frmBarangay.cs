@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.Barangay
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

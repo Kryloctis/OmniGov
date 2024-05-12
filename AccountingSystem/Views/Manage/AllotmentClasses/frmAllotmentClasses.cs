@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

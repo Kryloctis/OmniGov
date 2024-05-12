@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.Registry
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
                 LoadRecords();
                 Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
             }

@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadTaxpayers();
             Helper.EnableDisableToolStripButtons(dgTaxpayers, btnEdit, btnDelete);
         }

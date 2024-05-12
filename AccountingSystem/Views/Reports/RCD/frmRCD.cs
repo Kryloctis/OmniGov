@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void LoadRowFilter()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
         }
 
         private void frmRcd_Load(object sender, EventArgs e)

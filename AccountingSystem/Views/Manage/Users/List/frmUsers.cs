@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
             LoadRecords();
         }
 

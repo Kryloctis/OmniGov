@@ -8,236 +8,159 @@ namespace ACC.Data
 {
     public class SignatoriesHasReferencesRepository : ISignatoriesHasReferences
     {
-        private AccGenericCommands mySqlGenericCommands;
-        private const string tableName = "signatories_has_document_references";
-        private const string viewTableName = "view_signatories_has_document_references";
+        private AccGenericCommands mySqlGenericCommandsLFS;
+        private readonly string tableName = "signatories_has_document_references";
+        private readonly string viewTableName = "view_signatories_has_document_references";
 
-        public SignatoriesHasReferencesRepository(AccGenericCommands mySqlGenericCommands)
+        public SignatoriesHasReferencesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new System.NotImplementedException();
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public bool Delete(List<SignatoriesHasReferencesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(SignatoriesHasReferencesModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@signatories_id", DbType.Int32, entity.SignatoriesId },
-                    new object[] { "@document_references_id", DbType.Int32, entity.DocumentReferencesId}
-                };
+                new object[] { "@signatories_id", DbType.Int32, entity.SignatoriesId },
+                new object[] { "@document_references_id", DbType.Int32, entity.DocumentReferencesId}
+            };
 
-                string query = $"INSERT INTO {tableName} (signatories_id, document_references_id) VALUES (@signatories_id, @document_references_id)";
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (signatories_id, document_references_id) VALUES (@signatories_id, @document_references_id)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SignatoriesHasReferencesModel entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySignatoryId(int signatoyId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@signatories_id", DbType.Int32, signatoyId}
-                };
+                new object[] { "@signatories_id", DbType.Int32, signatoyId}
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE signatories_id = @signatories_id";
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {tableName} WHERE signatories_id = @signatories_id";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool DeleteBySignatoryId(int signatoryId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@signatories_id", DbType.Int32, signatoryId }
-                };
+                new object[] { "@signatories_id", DbType.Int32, signatoryId }
+            };
 
-                string query = $"DELETE FROM {tableName} WHERE signatories_id = @signatories_id";
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"DELETE FROM {tableName} WHERE signatories_id = @signatories_id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsReferencedBySignatory(int documentReferenceId, int signatories_id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@document_references_id", DbType.Int16, documentReferenceId },
-                    new object[] { "@signatories_id", DbType.String, signatories_id },
-                };
-
-                string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id AND signatories_id = @signatories_id";
-                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@document_references_id", DbType.Int16, documentReferenceId },
+                new object[] { "@signatories_id", DbType.String, signatories_id },
             };
 
-            return false;
+            string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id AND signatories_id = @signatories_id";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool ReferenceIdExist(int documentReferenceId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@document_references_id", DbType.Int32, documentReferenceId }
-                };
-
-                string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id";
-                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@document_references_id", DbType.Int32, documentReferenceId }
             };
 
-            return false;
+            string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool ReferenceIdExist(int documentReferenceId, int signatories_id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@document_references_id", DbType.Int32, documentReferenceId },
-                    new object[] { "@signatories_id", DbType.Int32, signatories_id }
-                };
-
-                string query = $"SELECT document_references_id FROM {tableName} WHERE signatories_id <> @signatories_id AND  document_references_id = @document_references_id";
-                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@document_references_id", DbType.Int32, documentReferenceId },
+                new object[] { "@signatories_id", DbType.Int32, signatories_id }
             };
 
-            return false;
+            string query = $"SELECT document_references_id FROM {tableName} WHERE signatories_id <> @signatories_id AND  document_references_id = @document_references_id";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public DataTable GetDocumentRecordsBySignatoryId(int signatoryId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@signatories_id", DbType.Int32, signatoryId}
-                };
+                new object[] { "@signatories_id", DbType.Int32, signatoryId}
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE signatories_id = @signatories_id GROUP BY documents_id";
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {viewTableName} WHERE signatories_id = @signatories_id GROUP BY documents_id";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetSignatoryBy_Reference_DocumentName(string reference, string documentName)
         {
-            try
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
             {
-                var record = new Dictionary<string, string>();
+                new object[] { "@document_references_name", DbType.String, reference},
+                new object[] { "@documents_name", DbType.String, documentName }
+            };
 
-                var parameters = new object[][]
-                {
-                    new object[] { "@document_references_name", DbType.String, reference},
-                    new object[] { "@documents_name", DbType.String, documentName }
-                };
+            string query = $"SELECT * FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
 
-                string query = $"SELECT signatories_prefix, signatories_first_name, signatories_middle_initial, signatories_last_name, signatories_suffix, signatories_title FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("signatories_prefix", reader.Rows[0]["signatories_prefix"].ToString());
-                    record.Add("signatories_first_name", reader.Rows[0]["signatories_first_name"].ToString());
-                    record.Add("signatories_middle_initial", reader.Rows[0]["signatories_middle_initial"].ToString());
-                    record.Add("signatories_last_name", reader.Rows[0]["signatories_last_name"].ToString());
-                    record.Add("signatories_suffix", reader.Rows[0]["signatories_suffix"].ToString());
-                    record.Add("signatories_title", reader.Rows[0]["signatories_title"].ToString());
-                }
-
-                return record;
-            }
-            catch (Exception)
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
+            return recordDictionary;
         }
 
-        public DataTable GetRecordsByOffice(string office)
+        public DataTable GetViewRecordsByOffice(string office)
         {
-            var parameters = new dynamic[][]
+            var parameters = new object[][]
             {
-                new dynamic[] { "@office", DbType.String, $"%{office}%"}
+                new object[] { "@office", DbType.String, $"%{office}%"}
             };
 
             string Filter()
@@ -249,8 +172,7 @@ namespace ACC.Data
             }
 
             string query = $"SELECT * FROM {viewTableName} {Filter()} GROUP BY signatories_id";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

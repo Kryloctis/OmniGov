@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxRowLimit);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRoles();
                 Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
                 TogglePreviewPermissions();

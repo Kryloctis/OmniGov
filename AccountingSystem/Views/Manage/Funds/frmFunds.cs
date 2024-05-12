@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             try
             {
-                HelperLoadRecords.RowFilterCombobox(cmbxFilter);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

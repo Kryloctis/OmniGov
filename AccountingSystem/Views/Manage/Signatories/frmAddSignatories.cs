@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 {
                     Helper.MessageBoxSuccess("Signatory has been saved");
                     uc.ResetForm();
-                    _frmSignatories.LoadSignatories();
+                    _frmSignatories.LoadRecords();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

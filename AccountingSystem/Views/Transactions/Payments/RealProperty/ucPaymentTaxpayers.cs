@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         internal void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter.ComboBox);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter.ComboBox);
             cmbxRowFilter.ComboBox.SelectionChangeCommitted += new EventHandler(CmbxRowFiter_SelectionChangeCommitted);
             LoadTaxpayers();
         }

@@ -1898,7 +1898,7 @@ namespace AccountingSystem
             }
         }
 
-        internal static void RowFilterCombobox(ComboBox comboBox)
+        internal static void ComboboxRowLimitFilter(ComboBox comboBox)
         {
             DataTable dataTable = new DataTable();
 

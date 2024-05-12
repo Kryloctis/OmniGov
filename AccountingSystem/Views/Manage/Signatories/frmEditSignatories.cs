@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Signatory has been updated.");
-                    _frmSignatories.LoadSignatories();
+                    _frmSignatories.LoadRecords();
                     Close();
                 }
             }
