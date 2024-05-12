@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Bank account has been updated.");
-                    frmBankAccounts.LoadBankAccounts();
+                    frmBankAccounts.LoadRecords();
                     Close();
                 }
             }

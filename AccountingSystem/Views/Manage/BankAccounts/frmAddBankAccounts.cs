@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Account has been saved.");
-                    frmBankAccounts.LoadBankAccounts();
+                    frmBankAccounts.LoadRecords();
                     uc.ResetForm();
                 }
             }

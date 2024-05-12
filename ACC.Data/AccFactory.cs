@@ -97,7 +97,7 @@ namespace ACC.Data
 
         public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
-        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS, BanksRepository());
+        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS);
 
         public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
