@@ -1,20 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Office2010.PowerPoint;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Registry
 {
     public partial class ucRegistry : UserControl
     {
+        private bool isEdit;
         private int registryId;
 
         public ucRegistry()
@@ -69,11 +63,13 @@ namespace AccountingSystem.Views.Manage.Registry
             };
         }
 
-        internal void OnLoad(bool isEdit, int registryId = 0)
+        internal void OnLoad(bool isEdit, int? registryId)
         {
+            this.isEdit = isEdit;
+
             if (isEdit)
             {
-                this.registryId = registryId;
+                this.registryId = registryId.Value;
                 LoadSelectedRecord();
             }
         }
@@ -94,8 +90,6 @@ namespace AccountingSystem.Views.Manage.Registry
             txtProvince.Text = dictRegistry["province"];
             txtCountry.Text = dictRegistry["country"];
         }
-
-        #region Validations
 
         private void txtFirstName_Validating(object sender, CancelEventArgs e)
         {
@@ -156,7 +150,5 @@ namespace AccountingSystem.Views.Manage.Registry
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCountry);
         }
-
-        #endregion Validations
     }
 }

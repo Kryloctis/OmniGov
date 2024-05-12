@@ -1,12 +1,5 @@
 ﻿using ACC.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Registry
@@ -58,7 +51,7 @@ namespace AccountingSystem.Views.Manage.Registry
                 if (UpdateRegistry())
                 {
                     Helper.MessageBoxSuccess("Registry has been updated");
-                    frmRegistry.LoadRegistryList();
+                    frmRegistry.LoadRecords();
                     Close();
                 };
             }
@@ -74,7 +67,7 @@ namespace AccountingSystem.Views.Manage.Registry
                     if (UpdateRegistry())
                     {
                         Helper.MessageBoxSuccess("Registry has been updated");
-                        frmRegistry.LoadRegistryList();
+                        frmRegistry.LoadRecords();
                         Close();
                     };
                 }

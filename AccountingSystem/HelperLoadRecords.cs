@@ -1960,6 +1960,8 @@ namespace AccountingSystem
             dataGridView.Columns["birth_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
             dataGridView.Columns["birth_place"].HeaderText = "Birthplace";
             dataGridView.Columns["contact_info"].HeaderText = "Contact Info.";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
         }
 
         internal static void DatagridViewPaymentCheques(DataTable dataTable, DataGridView dataGridView)

@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.Banks
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(150, 23);
             btnUpdate.TabIndex = 1;
-            btnUpdate.Text = "Save (Ctrl + S)";
+            btnUpdate.Text = "Update (Ctrl + S)";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 

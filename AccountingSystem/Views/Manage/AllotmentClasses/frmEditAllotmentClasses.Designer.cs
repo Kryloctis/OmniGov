@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.Text = "Update (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
