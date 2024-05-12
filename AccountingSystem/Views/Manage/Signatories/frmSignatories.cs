@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 var stampIndex = new byte[] { 3, 4 };
                 Helper.ShowRecordTimestamp(dgSignatories, stampIndex, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgSignatories, btnEdit, btnDelete);
-                LoadReferencedDocuments(dgSignatories, rchTxtDocuments);
+                if (dgSignatories.SelectedRows.Count == 1) LoadReferencedDocuments(dgSignatories, rchTxtDocuments);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

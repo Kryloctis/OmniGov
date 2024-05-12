@@ -150,7 +150,7 @@
             btnDocSignatories.Name = "btnDocSignatories";
             btnDocSignatories.Size = new System.Drawing.Size(298, 33);
             btnDocSignatories.TabIndex = 26;
-            btnDocSignatories.Text = "Document Signatories";
+            btnDocSignatories.Text = "Signatories";
             btnDocSignatories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnDocSignatories.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnDocSignatories.UseVisualStyleBackColor = true;
