@@ -42,18 +42,18 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(3, 6);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(68, 15);
+            label1.Size = new System.Drawing.Size(73, 15);
             label1.TabIndex = 0;
-            label1.Text = "Bank Name";
+            label1.Text = "Bank Name*";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(3, 34);
+            label2.Location = new System.Drawing.Point(3, 35);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(74, 15);
+            label2.Size = new System.Drawing.Size(79, 15);
             label2.TabIndex = 0;
-            label2.Text = "Account No.";
+            label2.Text = "Account No.*";
             // 
             // errorProvider1
             // 
@@ -64,18 +64,16 @@
             // 
             cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxBank.FormattingEnabled = true;
-            cmbxBank.Location = new System.Drawing.Point(82, 3);
+            cmbxBank.Location = new System.Drawing.Point(88, 3);
             cmbxBank.Name = "cmbxBank";
-            cmbxBank.Size = new System.Drawing.Size(259, 23);
+            cmbxBank.Size = new System.Drawing.Size(250, 23);
             cmbxBank.TabIndex = 1;
-            cmbxBank.Validating += cmbxBank_Validating;
-            cmbxBank.Validated += cmbxBank_Validated;
             // 
             // txtAccountNo
             // 
-            txtAccountNo.Location = new System.Drawing.Point(82, 32);
+            txtAccountNo.Location = new System.Drawing.Point(88, 32);
             txtAccountNo.Name = "txtAccountNo";
-            txtAccountNo.Size = new System.Drawing.Size(260, 23);
+            txtAccountNo.Size = new System.Drawing.Size(250, 23);
             txtAccountNo.TabIndex = 0;
             txtAccountNo.Validating += txtAccountNo_Validating;
             txtAccountNo.Validated += txtAccountNo_Validated;
@@ -90,7 +88,6 @@
             Controls.Add(label1);
             Name = "ucBankAccounts";
             Size = new System.Drawing.Size(362, 59);
-            Load += ucBankAccounts_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

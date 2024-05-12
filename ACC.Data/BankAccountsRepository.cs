@@ -24,7 +24,7 @@ namespace ACC.Data
             {
                 foreach (var entity in entityList)
                 {
-                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.ID } };
+                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.Id } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
@@ -104,7 +104,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] {"@banks_id", DbType.String, entity.BankID},
+                new object[] {"@banks_id", DbType.String, entity.BanksModel.Id},
                 new object[] {"@account_no", DbType.String, entity.AccountNumber},
             };
 
@@ -114,9 +114,10 @@ namespace ACC.Data
 
         public bool Update(BankAccountsModel entity)
         {
-            var parameters = new object[][] {
-                new object[]{"@id", DbType.Int32, entity.ID},
-                new object[]{"@banks_id", DbType.Int32, entity.BankID},
+            var parameters = new object[][]
+            {
+                new object[]{"@id", DbType.Int32, entity.Id},
+                new object[]{"@banks_id", DbType.Int32, entity.BanksModel.Id},
                 new object[]{"@account_no", DbType.String, entity.AccountNumber},
             };
 

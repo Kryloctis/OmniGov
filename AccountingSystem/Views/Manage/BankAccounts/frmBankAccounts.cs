@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
                 {
                     int bankAccountID = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    bankAccountsModelList.Add(new BankAccountsModel() { ID = bankAccountID });
+                    bankAccountsModelList.Add(new BankAccountsModel() { Id = bankAccountID });
                 }
 
                 return AccFactory.BankAccountsRepository().Delete(bankAccountsModelList);

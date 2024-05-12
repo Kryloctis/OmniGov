@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -14,8 +13,17 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            uc = ucBankAccounts1;
             this.frmBankAccounts = frmBankAccounts;
+            uc = ucBankAccounts1;
+        }
+
+        private void frmAddBankAccounts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad(false, null);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -40,13 +48,24 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 return false;
             }
 
-            BankAccountsModel bankAccountsModel = new BankAccountsModel()
-            {
-                BankID = Convert.ToInt32(uc.cmbxBank.SelectedValue),
-                AccountNumber = uc.txtAccountNo.Text
-            };
+            return AccFactory.BankAccountsRepository().Insert(uc.BankAccountsModel());
+        }
 
-            return AccFactory.BankAccountsRepository().Insert(bankAccountsModel);
+        private void frmAddBankAccounts_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Bank account has been saved.");
+                        frmBankAccounts.LoadRecords();
+                        uc.ResetForm();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
