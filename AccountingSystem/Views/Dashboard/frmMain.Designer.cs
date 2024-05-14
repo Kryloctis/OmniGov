@@ -50,12 +50,8 @@
             tabPageSettings = new System.Windows.Forms.TabPage();
             ucSettings1 = new Settings.ucSettings();
             label5 = new System.Windows.Forms.Label();
-            realPropertyToolStripMenuItem = new System.Windows.Forms.ToolStripDropDownMenu();
-            penaltyRatesToolStripMenuItem = new System.Windows.Forms.ToolStripDropDownMenu();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripDropDownMenu();
-            toolStripMenuItem5 = new System.Windows.Forms.ToolStripDropDownMenu();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -78,8 +74,9 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Left;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(133, 666);
+            panel1.Size = new System.Drawing.Size(142, 666);
             panel1.TabIndex = 1;
             // 
             // radSettings
@@ -95,8 +92,8 @@
             radSettings.Location = new System.Drawing.Point(0, 600);
             radSettings.Margin = new System.Windows.Forms.Padding(0);
             radSettings.Name = "radSettings";
-            radSettings.Padding = new System.Windows.Forms.Padding(4);
-            radSettings.Size = new System.Drawing.Size(133, 33);
+            radSettings.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radSettings.Size = new System.Drawing.Size(142, 33);
             radSettings.TabIndex = 9;
             radSettings.Text = "Settings";
             radSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -110,9 +107,10 @@
             btnLogout.Image = Properties.Resources.logout_16px;
             btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLogout.Location = new System.Drawing.Point(0, 633);
+            btnLogout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnLogout.Name = "btnLogout";
-            btnLogout.Padding = new System.Windows.Forms.Padding(4);
-            btnLogout.Size = new System.Drawing.Size(133, 33);
+            btnLogout.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            btnLogout.Size = new System.Drawing.Size(142, 33);
             btnLogout.TabIndex = 8;
             btnLogout.Text = "Logout";
             btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -131,8 +129,8 @@
             radTreasury.Location = new System.Drawing.Point(0, 66);
             radTreasury.Margin = new System.Windows.Forms.Padding(0);
             radTreasury.Name = "radTreasury";
-            radTreasury.Padding = new System.Windows.Forms.Padding(4);
-            radTreasury.Size = new System.Drawing.Size(133, 33);
+            radTreasury.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radTreasury.Size = new System.Drawing.Size(142, 33);
             radTreasury.TabIndex = 5;
             radTreasury.Text = "Treasury";
             radTreasury.UseVisualStyleBackColor = true;
@@ -149,8 +147,8 @@
             radAccounting.Location = new System.Drawing.Point(0, 33);
             radAccounting.Margin = new System.Windows.Forms.Padding(0);
             radAccounting.Name = "radAccounting";
-            radAccounting.Padding = new System.Windows.Forms.Padding(4);
-            radAccounting.Size = new System.Drawing.Size(133, 33);
+            radAccounting.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radAccounting.Size = new System.Drawing.Size(142, 33);
             radAccounting.TabIndex = 4;
             radAccounting.Text = "Accounting";
             radAccounting.UseVisualStyleBackColor = true;
@@ -167,8 +165,8 @@
             radBudget.Location = new System.Drawing.Point(0, 0);
             radBudget.Margin = new System.Windows.Forms.Padding(0);
             radBudget.Name = "radBudget";
-            radBudget.Padding = new System.Windows.Forms.Padding(4);
-            radBudget.Size = new System.Drawing.Size(133, 33);
+            radBudget.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radBudget.Size = new System.Drawing.Size(142, 33);
             radBudget.TabIndex = 3;
             radBudget.Text = "Budget";
             radBudget.UseVisualStyleBackColor = true;
@@ -181,10 +179,12 @@
             tabControl1.Controls.Add(tabPageTreasury);
             tabControl1.Controls.Add(tabPageSettings);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.Location = new System.Drawing.Point(133, 0);
+            tabControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tabControl1.Location = new System.Drawing.Point(142, 0);
+            tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(960, 666);
+            tabControl1.Size = new System.Drawing.Size(1133, 666);
             tabControl1.TabIndex = 2;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -193,8 +193,9 @@
             tabPageBudget.Controls.Add(panel2);
             tabPageBudget.Controls.Add(label4);
             tabPageBudget.Location = new System.Drawing.Point(4, 24);
+            tabPageBudget.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageBudget.Name = "tabPageBudget";
-            tabPageBudget.Size = new System.Drawing.Size(952, 638);
+            tabPageBudget.Size = new System.Drawing.Size(1125, 638);
             tabPageBudget.TabIndex = 1;
             tabPageBudget.Text = "tabPageBudget";
             tabPageBudget.UseVisualStyleBackColor = true;
@@ -204,19 +205,20 @@
             panel2.Controls.Add(ucBudget1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(0, 80);
+            panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
-            panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(952, 558);
+            panel2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            panel2.Size = new System.Drawing.Size(1125, 558);
             panel2.TabIndex = 4;
             // 
             // ucBudget1
             // 
             ucBudget1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBudget1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucBudget1.Location = new System.Drawing.Point(4, 4);
+            ucBudget1.Location = new System.Drawing.Point(5, 4);
             ucBudget1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucBudget1.Name = "ucBudget1";
-            ucBudget1.Size = new System.Drawing.Size(944, 550);
+            ucBudget1.Size = new System.Drawing.Size(1115, 550);
             ucBudget1.TabIndex = 0;
             // 
             // label4
@@ -224,9 +226,10 @@
             label4.Dock = System.Windows.Forms.DockStyle.Top;
             label4.Font = new System.Drawing.Font("Segoe UI Light", 20F);
             label4.Location = new System.Drawing.Point(0, 0);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Padding = new System.Windows.Forms.Padding(4);
-            label4.Size = new System.Drawing.Size(952, 80);
+            label4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label4.Size = new System.Drawing.Size(1125, 80);
             label4.TabIndex = 5;
             label4.Text = "Budget";
             // 
@@ -235,8 +238,9 @@
             tabPageAccounting.Controls.Add(panel3);
             tabPageAccounting.Controls.Add(label2);
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
+            tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(952, 638);
+            tabPageAccounting.Size = new System.Drawing.Size(1125, 638);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -246,17 +250,19 @@
             panel3.Controls.Add(ucAccounting1);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(0, 80);
+            panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
-            panel3.Padding = new System.Windows.Forms.Padding(4);
-            panel3.Size = new System.Drawing.Size(952, 558);
+            panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            panel3.Size = new System.Drawing.Size(1125, 558);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
             // 
             ucAccounting1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucAccounting1.Location = new System.Drawing.Point(4, 4);
+            ucAccounting1.Location = new System.Drawing.Point(5, 4);
+            ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(944, 550);
+            ucAccounting1.Size = new System.Drawing.Size(1115, 550);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -264,9 +270,10 @@
             label2.Dock = System.Windows.Forms.DockStyle.Top;
             label2.Font = new System.Drawing.Font("Segoe UI Light", 20F);
             label2.Location = new System.Drawing.Point(0, 0);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Padding = new System.Windows.Forms.Padding(4);
-            label2.Size = new System.Drawing.Size(952, 80);
+            label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label2.Size = new System.Drawing.Size(1125, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -275,8 +282,9 @@
             tabPageTreasury.Controls.Add(panel4);
             tabPageTreasury.Controls.Add(label3);
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
+            tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(952, 638);
+            tabPageTreasury.Size = new System.Drawing.Size(1125, 638);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -286,17 +294,19 @@
             panel4.Controls.Add(ucTreasury1);
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             panel4.Location = new System.Drawing.Point(0, 80);
+            panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
-            panel4.Padding = new System.Windows.Forms.Padding(4);
-            panel4.Size = new System.Drawing.Size(952, 558);
+            panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            panel4.Size = new System.Drawing.Size(1125, 558);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
             // 
             ucTreasury1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucTreasury1.Location = new System.Drawing.Point(4, 4);
+            ucTreasury1.Location = new System.Drawing.Point(5, 4);
+            ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(944, 550);
+            ucTreasury1.Size = new System.Drawing.Size(1115, 550);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -304,9 +314,10 @@
             label3.Dock = System.Windows.Forms.DockStyle.Top;
             label3.Font = new System.Drawing.Font("Segoe UI Light", 20F);
             label3.Location = new System.Drawing.Point(0, 0);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Padding = new System.Windows.Forms.Padding(4);
-            label3.Size = new System.Drawing.Size(952, 80);
+            label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label3.Size = new System.Drawing.Size(1125, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 
@@ -315,8 +326,9 @@
             tabPageSettings.Controls.Add(ucSettings1);
             tabPageSettings.Controls.Add(label5);
             tabPageSettings.Location = new System.Drawing.Point(4, 24);
+            tabPageSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageSettings.Name = "tabPageSettings";
-            tabPageSettings.Size = new System.Drawing.Size(952, 638);
+            tabPageSettings.Size = new System.Drawing.Size(1125, 638);
             tabPageSettings.TabIndex = 4;
             tabPageSettings.Text = "tabPageSettings";
             tabPageSettings.UseVisualStyleBackColor = true;
@@ -328,7 +340,7 @@
             ucSettings1.Location = new System.Drawing.Point(0, 80);
             ucSettings1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucSettings1.Name = "ucSettings1";
-            ucSettings1.Size = new System.Drawing.Size(952, 558);
+            ucSettings1.Size = new System.Drawing.Size(1125, 558);
             ucSettings1.TabIndex = 6;
             // 
             // label5
@@ -336,23 +348,12 @@
             label5.Dock = System.Windows.Forms.DockStyle.Top;
             label5.Font = new System.Drawing.Font("Segoe UI Light", 20F);
             label5.Location = new System.Drawing.Point(0, 0);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Padding = new System.Windows.Forms.Padding(4);
-            label5.Size = new System.Drawing.Size(952, 80);
+            label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label5.Size = new System.Drawing.Size(1125, 80);
             label5.TabIndex = 5;
             label5.Text = "Settings";
-            // 
-            // realPropertyToolStripMenuItem
-            // 
-            realPropertyToolStripMenuItem.AutoClose = false;
-            realPropertyToolStripMenuItem.Name = "realPropertyToolStripMenuItem";
-            realPropertyToolStripMenuItem.Size = new System.Drawing.Size(61, 4);
-            // 
-            // penaltyRatesToolStripMenuItem
-            // 
-            penaltyRatesToolStripMenuItem.AutoClose = false;
-            penaltyRatesToolStripMenuItem.Name = "penaltyRatesToolStripMenuItem";
-            penaltyRatesToolStripMenuItem.Size = new System.Drawing.Size(61, 4);
             // 
             // taxRatesToolStripMenuItem
             // 
@@ -366,27 +367,16 @@
             discountRatesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             discountRatesToolStripMenuItem.Text = "Discount Rates...";
             // 
-            // paymentHistoryToolStripMenuItem
-            // 
-            paymentHistoryToolStripMenuItem.AutoClose = false;
-            paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
-            paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(61, 4);
-            // 
-            // toolStripMenuItem5
-            // 
-            toolStripMenuItem5.AutoClose = false;
-            toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new System.Drawing.Size(61, 4);
-            // 
             // frmMain
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1093, 666);
+            ClientSize = new System.Drawing.Size(1275, 666);
             Controls.Add(tabControl1);
             Controls.Add(panel1);
-            Font = new System.Drawing.Font("Segoe UI Light", 9F);
-            MinimumSize = new System.Drawing.Size(1109, 705);
+            Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MinimumSize = new System.Drawing.Size(1291, 705);
             Name = "frmMain";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Local Finance System";
@@ -425,12 +415,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripDropDownMenu realPropertyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownMenu penaltyRatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxRatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discountRatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownMenu paymentHistoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownMenu toolStripMenuItem5;
         private Budget.ucBudget ucBudget1;
         private Accounting.ucAccounting ucAccounting1;
         private Treasury.ucTreasury ucTreasury1;

@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Dashboard
                     break;
 
                 case "tabPageAccounting":
+                    ucAccounting.OnLoad();
                     radAccounting.Checked = true;
                     break;
 

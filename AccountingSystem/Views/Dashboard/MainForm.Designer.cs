@@ -72,7 +72,6 @@
             tabPageBudgetSummary = new System.Windows.Forms.TabPage();
             ucBudgetSummary1 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
             tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
-            ucBudgetDetailed1 = new BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             toolStripButtonBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             toolStripButtonAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -528,7 +527,6 @@
             // 
             // tabPageBudgetDetailed
             // 
-            tabPageBudgetDetailed.Controls.Add(ucBudgetDetailed1);
             tabPageBudgetDetailed.Location = new System.Drawing.Point(4, 24);
             tabPageBudgetDetailed.Margin = new System.Windows.Forms.Padding(0);
             tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
@@ -537,14 +535,7 @@
             tabPageBudgetDetailed.TabIndex = 1;
             tabPageBudgetDetailed.Text = "Details";
             tabPageBudgetDetailed.UseVisualStyleBackColor = true;
-            // 
-            // ucBudgetDetailed1
-            // 
-            ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBudgetDetailed1.Location = new System.Drawing.Point(0, 5);
-            ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            ucBudgetDetailed1.Size = new System.Drawing.Size(1207, 548);
-            ucBudgetDetailed1.TabIndex = 0;
+           
             // 
             // toolStrip1
             // 
@@ -1542,7 +1533,6 @@
         private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsEquity1;
         private Views.Reports.Financial_Statements.ucStatementOfCashFlows ucStatementOfCashFlows1;
         private System.Windows.Forms.TabPage tabPageSCBAA;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.ToolStripMenuItem aF5157ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rPTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aF54ToolStripMenuItem;

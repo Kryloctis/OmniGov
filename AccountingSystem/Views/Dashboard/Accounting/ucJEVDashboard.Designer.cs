@@ -29,8 +29,7 @@ namespace AccountingSystem.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucJevDashboard));
-            btnRefreshCounter = new System.Windows.Forms.Button();
+            btnRefresh = new System.Windows.Forms.Button();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pnlPendingJEV = new System.Windows.Forms.Panel();
             lnkPending = new System.Windows.Forms.LinkLabel();
@@ -47,34 +46,34 @@ namespace AccountingSystem.Views.Dashboard
             pnlCancelled = new System.Windows.Forms.Panel();
             lnkCancelled = new System.Windows.Forms.LinkLabel();
             lblCancelledJEVCounter = new System.Windows.Forms.Label();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             cmbxJournals = new System.Windows.Forms.ComboBox();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             cmbxMonth = new System.Windows.Forms.ComboBox();
             nudYear = new System.Windows.Forms.NumericUpDown();
+            panel1 = new System.Windows.Forms.Panel();
             tableLayoutPanel1.SuspendLayout();
             pnlPendingJEV.SuspendLayout();
             pnlApprovedJEV.SuspendLayout();
             pnlJEV.SuspendLayout();
             pnlDisapproved.SuspendLayout();
             pnlCancelled.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnRefreshCounter
+            // btnRefresh
             // 
-            btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            btnRefreshCounter.Image = (System.Drawing.Image)resources.GetObject("btnRefreshCounter.Image");
-            btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRefreshCounter.Location = new System.Drawing.Point(763, 3);
-            btnRefreshCounter.Name = "btnRefreshCounter";
-            btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
-            btnRefreshCounter.TabIndex = 13;
-            btnRefreshCounter.Text = "Refresh";
-            btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnRefreshCounter.UseVisualStyleBackColor = true;
-            btnRefreshCounter.Click += btnRefreshCounter_Click;
+            btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRefresh.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRefresh.Location = new System.Drawing.Point(1009, 7);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new System.Drawing.Size(150, 23);
+            btnRefresh.TabIndex = 13;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefreshCounter_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -90,7 +89,7 @@ namespace AccountingSystem.Views.Dashboard
             tableLayoutPanel1.Controls.Add(pnlDisapproved, 3, 0);
             tableLayoutPanel1.Controls.Add(pnlCancelled, 4, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 39);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -320,34 +319,23 @@ namespace AccountingSystem.Views.Dashboard
             lblCancelledJEVCounter.Text = "0";
             lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(cmbxJournals);
-            flowLayoutPanel1.Controls.Add(cmbxFunds);
-            flowLayoutPanel1.Controls.Add(cmbxMonth);
-            flowLayoutPanel1.Controls.Add(nudYear);
-            flowLayoutPanel1.Controls.Add(btnRefreshCounter);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(1166, 29);
-            flowLayoutPanel1.TabIndex = 15;
-            // 
             // cmbxJournals
             // 
+            cmbxJournals.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxJournals.FormattingEnabled = true;
-            cmbxJournals.Location = new System.Drawing.Point(3, 3);
+            cmbxJournals.Location = new System.Drawing.Point(348, 7);
             cmbxJournals.Name = "cmbxJournals";
-            cmbxJournals.Size = new System.Drawing.Size(299, 23);
+            cmbxJournals.Size = new System.Drawing.Size(200, 23);
             cmbxJournals.TabIndex = 30;
             cmbxJournals.SelectionChangeCommitted += cmbxJournals_SelectionChangeCommitted;
             // 
             // cmbxFunds
             // 
+            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(308, 3);
+            cmbxFunds.Location = new System.Drawing.Point(554, 7);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(189, 23);
             cmbxFunds.TabIndex = 32;
@@ -355,9 +343,10 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // cmbxMonth
             // 
+            cmbxMonth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxMonth.FormattingEnabled = true;
-            cmbxMonth.Location = new System.Drawing.Point(503, 3);
+            cmbxMonth.Location = new System.Drawing.Point(749, 7);
             cmbxMonth.Name = "cmbxMonth";
             cmbxMonth.Size = new System.Drawing.Size(139, 23);
             cmbxMonth.TabIndex = 28;
@@ -367,7 +356,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             nudYear.BackColor = System.Drawing.Color.White;
-            nudYear.Location = new System.Drawing.Point(648, 3);
+            nudYear.Location = new System.Drawing.Point(894, 7);
             nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
             nudYear.Name = "nudYear";
@@ -377,34 +366,47 @@ namespace AccountingSystem.Views.Dashboard
             nudYear.Value = new decimal(new int[] { 2021, 0, 0, 0 });
             nudYear.ValueChanged += nudYear_ValueChanged;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(cmbxJournals);
+            panel1.Controls.Add(cmbxFunds);
+            panel1.Controls.Add(btnRefresh);
+            panel1.Controls.Add(cmbxMonth);
+            panel1.Controls.Add(nudYear);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(1166, 39);
+            panel1.TabIndex = 16;
+            // 
             // ucJevDashboard
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(0);
             MinimumSize = new System.Drawing.Size(782, 160);
             Name = "ucJevDashboard";
-            Size = new System.Drawing.Size(1166, 160);
+            Size = new System.Drawing.Size(1166, 192);
             tableLayoutPanel1.ResumeLayout(false);
             pnlPendingJEV.ResumeLayout(false);
             pnlApprovedJEV.ResumeLayout(false);
             pnlJEV.ResumeLayout(false);
             pnlDisapproved.ResumeLayout(false);
             pnlCancelled.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRefreshCounter;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlDisapproved;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ComboBox cmbxMonth;
         private System.Windows.Forms.ComboBox cmbxJournals;
@@ -422,5 +424,6 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkApproved;
         internal System.Windows.Forms.LinkLabel lnkJEV;
         internal System.Windows.Forms.ComboBox cmbxFunds;
+        private System.Windows.Forms.Panel panel1;
     }
 }

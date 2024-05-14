@@ -38,13 +38,14 @@ namespace AccountingSystem.Views.Dashboard
             return dataTable;
         }
 
-        internal void LoadFunds()
+        private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            DataRow dr = dtFunds.NewRow();
-            dr["id"] = 0;
-            dr["fund_name"] = "All";
-            dtFunds.Rows.InsertAt(dr, 0);
+
+            var newRow = dtFunds.NewRow();
+            newRow["id"] = 0;
+            newRow["fund_name"] = "All";
+            dtFunds.Rows.InsertAt(newRow, 0);
 
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
@@ -96,36 +97,36 @@ namespace AccountingSystem.Views.Dashboard
             string fundName = cmbxFunds.Text.Trim();
             byte month = Convert.ToByte(cmbxMonth.SelectedValue);
             short year = (short)nudYear.Value;
-            var _frmJEVList = new frmJevList(journalName, fundName, month, year, this);
+            var frmJEVList = new frmJevList(journalName, fundName, month, year, this);
 
             switch (jevStatus)
             {
                 case "all":
-                    _frmJEVList.cmbxJevStatus.SelectedIndex = 0;
+                    frmJEVList.cmbxJevStatus.SelectedIndex = 0;
                     break;
 
                 case "pending":
-                    _frmJEVList.cmbxJevStatus.SelectedIndex = 1;
+                    frmJEVList.cmbxJevStatus.SelectedIndex = 1;
                     break;
 
                 case "approved":
-                    _frmJEVList.cmbxJevStatus.SelectedIndex = 2;
+                    frmJEVList.cmbxJevStatus.SelectedIndex = 2;
                     break;
 
                 case "disapproved":
-                    _frmJEVList.cmbxJevStatus.SelectedIndex = 3;
+                    frmJEVList.cmbxJevStatus.SelectedIndex = 3;
                     break;
 
                 case "cancelled":
-                    _frmJEVList.cmbxJevStatus.SelectedIndex = 4;
+                    frmJEVList.cmbxJevStatus.SelectedIndex = 4;
                     break;
             }
 
-            _frmJEVList.cmbxJournals.Enabled = false;
-            _frmJEVList.cmbxJevStatus.Enabled = false;
-            _frmJEVList.cbMonth.Enabled = false;
-            _frmJEVList.nudYear.Enabled = false;
-            _frmJEVList.ShowDialog();
+            frmJEVList.cmbxJournals.Enabled = false;
+            frmJEVList.cmbxJevStatus.Enabled = false;
+            frmJEVList.cbMonth.Enabled = false;
+            frmJEVList.nudYear.Enabled = false;
+            frmJEVList.ShowDialog();
         }
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
