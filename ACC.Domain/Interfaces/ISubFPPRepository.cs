@@ -13,7 +13,7 @@ namespace ACC.Domain.Interfaces
 
         bool CodeExist(int id, string otherFPPCode);
 
-        DataTable GetRecordsByFPPId(int id);
+        DataTable GetRecordsByFppId(int id);
 
         DataTable GetRecordsByFPPIdCodeName(int fppId, string searchTxt);
 

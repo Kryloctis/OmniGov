@@ -186,6 +186,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new System.Drawing.Size(960, 666);
             tabControl1.TabIndex = 2;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPageBudget
             // 

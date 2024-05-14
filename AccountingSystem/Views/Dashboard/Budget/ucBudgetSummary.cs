@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -8,11 +7,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
 {
     public partial class ucBudgetSummary : UserControl
     {
-        internal string fppId;
-        internal string subFPPId;
-        internal int fundId;
-        internal DateTime DateAsOf;
-
         public ucBudgetSummary()
         {
             InitializeComponent();
@@ -22,323 +16,314 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             var errorArray = new string[1];
 
-            errorArray[0] = cmbxFPP.Tag.ToString();
+            errorArray[0] = cmbxFpp.Tag.ToString();
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private bool isValidated()
-        {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                cmbxFPP.Tag = "No FPP selected.";
-                return false;
-            }
-            return true;
-        }
-
-        internal void LoadInformation()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            LoadSummary();
-            Cursor.Current = Cursors.Default;
-        }
+       
 
         internal void LoadBudgetDashboardContents()
         {
-            try
-            {
-                if (!isValidated())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return;
-                }
+            string fppId = cmbxFpp.SelectedValue.ToString();
+            string subFpp = cmbSubFPP.SelectedValue.ToString();
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            var dateAsOf = dtAsOf.Value;
 
-                fppId = cmbxFPP.SelectedValue.ToString();
-                subFPPId = string.IsNullOrEmpty(cmbSubFPP.Text) ? string.Empty : cmbSubFPP.SelectedValue.ToString();
-                fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                DateAsOf = dtAsOf.Value;
-
-                LoadInformation();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            LoadGrandTotalAmounts(fppId, subFpp, fundId, dateAsOf);
+            LoadCurrentYearAmounts(fppId, subFpp, fundId, dateAsOf);
+            LoadContinuingAmounts(fppId, subFpp, fundId, dateAsOf);
         }
 
-        private void LoadSummary()
-        {
-            LoadGrandTotalAmounts();
-            LoadCurrentYearAmounts();
-            LoadContinuingAmounts();
-        }
-
-        internal void LoadBudgetDashboardComboboxes()
-        {
-            LoadFPP(false);
-            LoadSubFPP();
-            LoadFunds();
-            LoadBudgetDashboardContents();
-        }
 
         internal void LoadFunds()
         {
-            cmbxFunds.DataSource = AccFactory.FundsRepository().GetRecords();
-            cmbxFunds.DisplayMember = "fund_name";
-            cmbxFunds.ValueMember = "id";
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
-        private DataTable DataTableSubFPP()
+        internal void LoadFPP()
         {
-            DataTable dtSubFPP;
-            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-
-            dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId);
-
-            return dtSubFPP;
-        }
-
-        internal void LoadFPP(bool isSearch)
-        {
-            cmbxFPP.DroppedDown = false;
-            cmbxFPP.SelectedValueChanged -= new EventHandler(CmbxFPP_SelectedValueChanged);
-            Cursor.Current = Cursors.Default;
-
-            var dataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
-            var fppDict = new Dictionary<string, string>();
-
-            if (!isSearch) fppDict.Add("all", "All");
-            foreach (DataRow item in dataTable.Rows)
+            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dataTable = new DataTable();
+            var dataColumns = new DataColumn[]
             {
-                string fppId = item["id"].ToString();
-                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+                new DataColumn("id", typeof(string)),
+                new DataColumn("name", typeof(string)),
+            };
+            dataTable.Columns.AddRange(dataColumns);
 
-                fppDict.Add(fppId, fppName);
+            var defaultRow = dataTable.NewRow();
+            defaultRow["id"] = "all";
+            defaultRow["name"] = "All";
+            dataTable.Rows.Add(defaultRow);
+
+            foreach (DataRow dataRow in dtFpp.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                newRow["id"] = dataRow["id"].ToString();
+                newRow["name"] = $"{dataRow["fpp_code"]} - {dataRow["fpp_name"]}";
+
+                dataTable.Rows.Add(newRow);
             }
 
-            cmbxFPP.DataSource = new BindingSource(fppDict, null);
-            cmbxFPP.DisplayMember = "value";
-            cmbxFPP.ValueMember = "key";
-            cmbxFPP.DropDownHeight = 400;
-            cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+            cmbxFpp.DataSource = dataTable;
+            cmbxFpp.DisplayMember = "name";
+            cmbxFpp.ValueMember = "id";
+            cmbxFpp.DropDownHeight = 200;
         }
 
-        internal void LoadSubFPP()
+        internal void LoadSubFPP(string fppId)
         {
-            cmbSubFPP.DroppedDown = false;
-            Cursor.Current = Cursors.Default;
-
-            if (cmbxFPP.DataSource == null || cmbxFPP.SelectedValue.ToString() == "all" || DataTableSubFPP().Rows.Count == 0)
+            var dataTable = new DataTable();
+            var dataColumns = new DataColumn[]
             {
-                cmbSubFPP.DataSource = null;
-                cmbSubFPP.Enabled = false;
-                return;
+                new DataColumn("id", typeof(string)),
+                new DataColumn("name", typeof(string)),
+            };
+            dataTable.Columns.AddRange(dataColumns);
+
+            var defaultRow = dataTable.NewRow();
+            defaultRow["id"] = "all";
+            defaultRow["name"] = "All";
+            dataTable.Rows.Add(defaultRow);
+
+            if (int.TryParse(fppId, out int result))
+            {
+                var dtSubFpp = AccFactory.SubFPPRepository().GetRecordsByFppId(Convert.ToInt32(result));
+                foreach (DataRow dataRow in dtSubFpp.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    newRow["id"] = dataRow["id"].ToString();
+                    newRow["name"] = $"{dataRow["others_fpp_code"]} - {dataRow["name"]}";
+
+                    dataTable.Rows.Add(newRow);
+                }
             }
 
-            var subFPPDict = new Dictionary<string, string>();
-
-            subFPPDict.Add("all", "All");
-            foreach (DataRow item in DataTableSubFPP().Rows)
-            {
-                string subFPPId = item["id"].ToString();
-                string subFPPName = $"{item["others_fpp_code"]} - {item["name"]}";
-
-                subFPPDict.Add(subFPPId, subFPPName);
-            }
-
-            cmbSubFPP.DataSource = new BindingSource(subFPPDict, null);
-            cmbSubFPP.Enabled = true;
-            cmbSubFPP.DisplayMember = "value";
-            cmbSubFPP.ValueMember = "key";
-            cmbSubFPP.SelectedIndex = -1;
-            cmbSubFPP.DropDownHeight = 400;
+            cmbSubFPP.DataSource = dataTable;
+            cmbSubFPP.DisplayMember = "name";
+            cmbSubFPP.ValueMember = "id";
+            cmbSubFPP.DropDownHeight = 200;
         }
 
-        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        private void CmbxFpp_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadSubFPP();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(cmbxFpp.SelectedValue.ToString()))
+                    LoadSubFPP(cmbxFpp.SelectedValue.ToString());
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                LoadFPP(true);
-                cmbxFPP.DroppedDown = true;
-            }
         }
 
-        private decimal GetAppropriations(int allotmentClassId, byte isContinuing)
+        private decimal GetAppropriations(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            try
-            {
-                decimal appropriations = AccFactory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+            decimal appropriations = AccFactory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
-                decimal supplementalAppropriations = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+            decimal supplementalAppropriations = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
-                decimal totalAppropriations = appropriations + supplementalAppropriations;
+            decimal totalAppropriations = appropriations + supplementalAppropriations;
 
-                return totalAppropriations;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return 0;
+            return totalAppropriations;
         }
 
-        private decimal GetGrandTotalAppropriations()
+        private decimal GetGrandTotalAppropriations(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            decimal cyAppropriations = GetAppropriations(1, 0) + GetAppropriations(2, 0) + GetAppropriations(3, 0) + GetAppropriations(4, 0);
-            decimal conAppropriations = GetAppropriations(1, 1) + GetAppropriations(2, 1) + GetAppropriations(3, 1) + GetAppropriations(4, 1);
+            decimal cyAppropriations = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0);
+
+            decimal conAppropriations = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1) +
+                                        GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1);
+
             decimal grandTotalAppropriations = cyAppropriations + conAppropriations;
             return grandTotalAppropriations;
         }
 
-        private decimal GetAllotments(int allotmentClassId, byte isContinuing)
+        private decimal GetAllotments(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            try
-            {
-                decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+            decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
-                return allotments;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return 0;
+            return allotments;
         }
 
-        private decimal GetGrandTotalAllotments()
+        private decimal GetGrandTotalAllotments(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            decimal cyAllotments = GetAllotments(1, 0) + GetAllotments(2, 0) + GetAllotments(3, 0) + GetAllotments(4, 0);
-            decimal conAllotments = GetAllotments(1, 1) + GetAllotments(2, 1) + GetAllotments(3, 1) + GetAllotments(4, 1);
+            decimal cyAllotments = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 0) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 0) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 0) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 0);
+
+            decimal conAllotments = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 1) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 1) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 1) +
+                                    GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 1);
+
             decimal grandTotalAllotments = cyAllotments + conAllotments;
             return grandTotalAllotments;
         }
 
-        private decimal GetSumObligations(int allotmentClassId, byte isContinuing)
+        private decimal GetSumObligations(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            try
-            {
-                decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+            decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
-                return obligations;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return 0;
+            return obligations;
         }
 
-        private decimal GetGrandTotalObligations()
+        private decimal GetGrandTotalObligations(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            decimal cyObligations = GetSumObligations(1, 0) + GetSumObligations(2, 0) + GetSumObligations(3, 0) + GetSumObligations(4, 0);
-            decimal conObligations = GetSumObligations(1, 1) + GetSumObligations(2, 1) + GetSumObligations(3, 1) + GetSumObligations(4, 1);
+            decimal cyObligations = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0);
+
+            decimal conObligations = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1) +
+                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1);
+
             decimal grandTotalObligations = cyObligations + conObligations;
             return grandTotalObligations;
         }
 
-        private void LoadCurrentYearAmounts()
+        private void LoadCurrentYearAmounts(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            try
-            {
-                lblCYAppropriationsPS.Text = GetAppropriations(1, 0).ToString("N2");
-                lblCYAllotmentsPS.Text = GetAllotments(1, 0).ToString("N2");
-                lblCYObligationsPS.Text = GetSumObligations(1, 0).ToString("N2");
-                lblCYAppropriationBalancePS.Text = (GetAppropriations(1, 0) - GetSumObligations(1, 0)).ToString("N2");
-                lblCYAllotmentBalancePS.Text = (GetAllotments(1, 0) - GetSumObligations(1, 0)).ToString("N2");
+            lblCYAppropriationsPS.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0).ToString("N2");
 
-                lblCYAppropriationsMOOE.Text = GetAppropriations(2, 0).ToString("N2");
-                lblCYAllotmentsMOOE.Text = GetAllotments(2, 0).ToString("N2");
-                lblCYObligationsMOOE.Text = GetSumObligations(2, 0).ToString("N2");
-                lblCYAppropriationBalanceMOOE.Text = (GetAppropriations(2, 0) - GetSumObligations(2, 0)).ToString("N2");
-                lblCYAllotmentBalanceMOOE.Text = (GetAllotments(2, 0) - GetSumObligations(2, 0)).ToString("N2");
+            lblCYAllotmentsPS.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 0).ToString("N2");
 
-                lblCYAppropriationsFE.Text = GetAppropriations(3, 0).ToString("N2");
-                lblCYAllotmentsFE.Text = GetAllotments(3, 0).ToString("N2");
-                lblCYObligationsFE.Text = GetSumObligations(3, 0).ToString("N2");
-                lblCYAppropriationBalanceFE.Text = (GetAppropriations(3, 0) - GetSumObligations(3, 0)).ToString("N2");
-                lblCYAllotmentBalanceFE.Text = (GetAllotments(3, 0) - GetSumObligations(3, 0)).ToString("N2");
+            lblCYObligationsPS.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0).ToString("N2");
 
-                lblCYAppropriationsCO.Text = GetAppropriations(4, 0).ToString("N2");
-                lblCYAllotmentsCO.Text = GetAllotments(4, 0).ToString("N2");
-                lblCYObligationsCO.Text = GetSumObligations(4, 0).ToString("N2");
-                lblCYAppropriationBalanceCO.Text = (GetAppropriations(4, 0) - GetSumObligations(4, 0)).ToString("N2");
-                lblCYAllotmentBalanceCO.Text = (GetAllotments(4, 0) - GetSumObligations(4, 0)).ToString("N2");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            lblCYAppropriationBalancePS.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0)).ToString("N2");
+
+            lblCYAllotmentBalancePS.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 0) -
+                                            GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 0)).ToString("N2");
+
+            lblCYAppropriationsMOOE.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0).ToString("N2");
+
+            lblCYAllotmentsMOOE.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 0).ToString("N2");
+
+            lblCYObligationsMOOE.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0).ToString("N2");
+
+            lblCYAppropriationBalanceMOOE.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0) -
+                                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0)).ToString("N2");
+
+            lblCYAllotmentBalanceMOOE.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 0) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 0)).ToString("N2");
+
+            lblCYAppropriationsFE.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0).ToString("N2");
+
+            lblCYAllotmentsFE.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 0).ToString("N2");
+
+            lblCYObligationsFE.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0).ToString("N2");
+
+            lblCYAppropriationBalanceFE.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0)).ToString("N2");
+
+            lblCYAllotmentBalanceFE.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 0) -
+                                            GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 0)).ToString("N2");
+
+            lblCYAppropriationsCO.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0).ToString("N2");
+
+            lblCYAllotmentsCO.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 0).ToString("N2");
+
+            lblCYObligationsCO.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0).ToString("N2");
+
+            lblCYAppropriationBalanceCO.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0)).ToString("N2");
+
+            lblCYAllotmentBalanceCO.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 0) -
+                                            GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 0)).ToString("N2");
         }
 
-        private void LoadContinuingAmounts()
+        private void LoadContinuingAmounts(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            try
-            {
-                lblCONAppropriationsPS.Text = GetAppropriations(1, 1).ToString("N2");
-                lblCONAllotmentsPS.Text = GetAllotments(1, 1).ToString("N2");
-                lblCONObligationsPS.Text = GetSumObligations(1, 1).ToString("N2");
-                lblCONAppropriationBalancePS.Text = (GetAppropriations(1, 1) - GetSumObligations(1, 1)).ToString("N2");
-                lblCONAllotmentBalancePS.Text = (GetAllotments(1, 1) - GetSumObligations(1, 1)).ToString("N2");
+            lblCONAppropriationsPS.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1).ToString("N2");
 
-                lblCONAppropriationsMOOE.Text = GetAppropriations(2, 1).ToString("N2");
-                lblCONAllotmentsMOOE.Text = GetAllotments(2, 1).ToString("N2");
-                lblCONObligationsMOOE.Text = GetSumObligations(2, 1).ToString("N2");
-                lblCONAppropriationBalanceMOOE.Text = (GetAppropriations(2, 1) - GetSumObligations(2, 1)).ToString("N2");
-                lblCONAllotmentBalanceMOOE.Text = (GetAllotments(2, 1) - GetSumObligations(2, 1)).ToString("N2");
+            lblCONAllotmentsPS.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 1).ToString("N2");
 
-                lblCONAppropriationsFE.Text = GetAppropriations(3, 1).ToString("N2");
-                lblCONAllotmentsFE.Text = GetAllotments(3, 1).ToString("N2");
-                lblCONObligationsFE.Text = GetSumObligations(3, 1).ToString("N2");
-                lblCONAppropriationBalanceFE.Text = (GetAppropriations(3, 1) - GetSumObligations(3, 1)).ToString("N2");
-                lblCONAllotmentBalanceFE.Text = (GetAllotments(3, 1) - GetSumObligations(3, 1)).ToString("N2");
+            lblCONObligationsPS.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1).ToString("N2");
 
-                lblCONAppropriationsCO.Text = GetAppropriations(4, 1).ToString("N2");
-                lblCONAllotmentsCO.Text = GetAllotments(4, 1).ToString("N2");
-                lblCONObligationsCO.Text = GetSumObligations(4, 1).ToString("N2");
-                lbCONAppropriationBalanceCO.Text = (GetAppropriations(4, 1) - GetSumObligations(4, 1)).ToString("N2");
-                lblCONAllotmentBalanceCO.Text = (GetAllotments(4, 1) - GetSumObligations(4, 1)).ToString("N2");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            lblCONAppropriationBalancePS.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1) -
+                                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1)).ToString("N2");
+
+            lblCONAllotmentBalancePS.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 1, 1) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 1, 1)).ToString("N2");
+
+            lblCONAppropriationsMOOE.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1).ToString("N2");
+
+            lblCONAllotmentsMOOE.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 1).ToString("N2");
+
+            lblCONObligationsMOOE.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1).ToString("N2");
+
+            lblCONAppropriationBalanceMOOE.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1) -
+                                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1)).ToString("N2");
+
+            lblCONAllotmentBalanceMOOE.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 2, 1) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 2, 1)).ToString("N2");
+
+            lblCONAppropriationsFE.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1).ToString("N2");
+
+            lblCONAllotmentsFE.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 1).ToString("N2");
+
+            lblCONObligationsFE.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1).ToString("N2");
+
+            lblCONAppropriationBalanceFE.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1)).ToString("N2");
+
+            lblCONAllotmentBalanceFE.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 3, 1) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 3, 1)).ToString("N2");
+
+            lblCONAppropriationsCO.Text = GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1).ToString("N2");
+
+            lblCONAllotmentsCO.Text = GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 1).ToString("N2");
+
+            lblCONObligationsCO.Text = GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1).ToString("N2");
+
+            lbCONAppropriationBalanceCO.Text = (GetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1) -
+                                                    GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1)).ToString("N2");
+
+            lblCONAllotmentBalanceCO.Text = (GetAllotments(fppId, subFppId, fundId, dateAsOf.Date, 4, 1) -
+                                                GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, 4, 1)).ToString("N2");
         }
 
-        private void LoadGrandTotalAmounts()
+        private void LoadGrandTotalAmounts(string fppId, string subFppId, int fundId, DateTime dateAsOf)
         {
-            lblGrandTotalAppropriations.Text = GetGrandTotalAppropriations().ToString("N2");
-            lblGrandTotalAllotments.Text = GetGrandTotalAllotments().ToString("N2");
-            lblGrandTotalObligations.Text = GetGrandTotalObligations().ToString("N2");
-            lblGrandTotalAppropriationBalance.Text = (GetGrandTotalAppropriations() - GetGrandTotalObligations()).ToString("N2");
-            lblGrandTotalAllotmentBalance.Text = (GetGrandTotalAllotments() - GetGrandTotalObligations()).ToString("N2");
-        }
+            lblGrandTotalAppropriations.Text = GetGrandTotalAppropriations(fppId, subFppId, fundId, dateAsOf.Date).ToString("N2");
 
-        private void cmbxFPP_TextChanged(object sender, EventArgs e)
-        {
-            //if (string.IsNullOrEmpty(cmbxFPP.Text))
-            //{
-            //    cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-            //    LoadFPP(false);
-            //    cmbxFPP.Text = string.Empty;
-            //    cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-            //}
+            lblGrandTotalAllotments.Text = GetGrandTotalAllotments(fppId, subFppId, fundId, dateAsOf.Date).ToString("N2");
+
+            lblGrandTotalObligations.Text = GetGrandTotalObligations(fppId, subFppId, fundId, dateAsOf.Date).ToString("N2");
+
+            lblGrandTotalAppropriationBalance.Text = (GetGrandTotalAppropriations(fppId, subFppId, fundId, dateAsOf.Date) -
+                                                        GetGrandTotalObligations(fppId, subFppId, fundId, dateAsOf.Date)).ToString("N2");
+
+            lblGrandTotalAllotmentBalance.Text = (GetGrandTotalAllotments(fppId, subFppId, fundId, dateAsOf.Date) -
+                                                    GetGrandTotalObligations(fppId, subFppId, fundId, dateAsOf.Date)).ToString("N2");
         }
 
         internal void OnLoad()
         {
-            LoadBudgetDashboardComboboxes();
-            LoadBudgetDashboardContents();
-            cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+            LoadFPP();
+            LoadFunds();
+            dtAsOf.Value = Helper.GetCurrentDate();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadBudgetDashboardContents();
+            try
+            {
+                LoadBudgetDashboardContents();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

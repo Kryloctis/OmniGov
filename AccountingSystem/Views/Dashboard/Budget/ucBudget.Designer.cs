@@ -35,7 +35,9 @@
             appropriationsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             allotmentReleaseTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             obligationsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            tlStrpBtnReports = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnReports = new System.Windows.Forms.ToolStripDropDownButton();
+            sAAOBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            sAAOBBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,28 +79,46 @@
             appropriationsTStrpMnuItm.Name = "appropriationsTStrpMnuItm";
             appropriationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             appropriationsTStrpMnuItm.Text = "Appropriations...";
+            appropriationsTStrpMnuItm.Click += appropriationsTStrpMnuItm_Click;
             // 
             // allotmentReleaseTStrpMnuItm
             // 
             allotmentReleaseTStrpMnuItm.Name = "allotmentReleaseTStrpMnuItm";
             allotmentReleaseTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             allotmentReleaseTStrpMnuItm.Text = "Allotment Release...";
+            allotmentReleaseTStrpMnuItm.Click += allotmentReleaseTStrpMnuItm_Click;
             // 
             // obligationsTStrpMnuItm
             // 
             obligationsTStrpMnuItm.Name = "obligationsTStrpMnuItm";
             obligationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             obligationsTStrpMnuItm.Text = "Obligations...";
+            obligationsTStrpMnuItm.Click += obligationsTStrpMnuItm_Click;
             // 
             // tlStrpBtnReports
             // 
             tlStrpBtnReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            tlStrpBtnReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { sAAOBToolStripMenuItem, sAAOBBToolStripMenuItem });
             tlStrpBtnReports.Image = (System.Drawing.Image)resources.GetObject("tlStrpBtnReports.Image");
             tlStrpBtnReports.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnReports.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             tlStrpBtnReports.Name = "tlStrpBtnReports";
-            tlStrpBtnReports.Size = new System.Drawing.Size(61, 19);
+            tlStrpBtnReports.Size = new System.Drawing.Size(70, 19);
             tlStrpBtnReports.Text = "● Reports";
+            // 
+            // sAAOBToolStripMenuItem
+            // 
+            sAAOBToolStripMenuItem.Name = "sAAOBToolStripMenuItem";
+            sAAOBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            sAAOBToolStripMenuItem.Text = "SAAOB";
+            sAAOBToolStripMenuItem.Click += sAAOBToolStripMenuItem_Click;
+            // 
+            // sAAOBBToolStripMenuItem
+            // 
+            sAAOBBToolStripMenuItem.Name = "sAAOBBToolStripMenuItem";
+            sAAOBBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            sAAOBBToolStripMenuItem.Text = "SAAOBB";
+            sAAOBBToolStripMenuItem.Click += sAAOBBToolStripMenuItem_Click;
             // 
             // ucBudget
             // 
@@ -120,10 +140,12 @@
 
         private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnReports;
         private System.Windows.Forms.ToolStripDropDownButton transactionsTstrpDrpDwnBtn;
         private System.Windows.Forms.ToolStripMenuItem appropriationsTStrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem allotmentReleaseTStrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem obligationsTStrpMnuItm;
+        private System.Windows.Forms.ToolStripDropDownButton tlStrpBtnReports;
+        private System.Windows.Forms.ToolStripMenuItem sAAOBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sAAOBBToolStripMenuItem;
     }
 }

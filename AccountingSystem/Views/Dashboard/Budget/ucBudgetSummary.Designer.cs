@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             dtAsOf = new System.Windows.Forms.DateTimePicker();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             cmbSubFPP = new System.Windows.Forms.ComboBox();
-            cmbxFPP = new System.Windows.Forms.ComboBox();
+            cmbxFpp = new System.Windows.Forms.ComboBox();
             panel2 = new System.Windows.Forms.Panel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             panel12 = new System.Windows.Forms.Panel();
@@ -562,7 +562,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             flowLayoutPanel1.Controls.Add(dtAsOf);
             flowLayoutPanel1.Controls.Add(cmbxFunds);
             flowLayoutPanel1.Controls.Add(cmbSubFPP);
-            flowLayoutPanel1.Controls.Add(cmbxFPP);
+            flowLayoutPanel1.Controls.Add(cmbxFpp);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -590,9 +590,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             dtAsOf.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtAsOf.CalendarForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            dtAsOf.Location = new System.Drawing.Point(747, 3);
+            dtAsOf.CustomFormat = "MMM dd, yyyy";
+            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtAsOf.Location = new System.Drawing.Point(879, 3);
             dtAsOf.Name = "dtAsOf";
-            dtAsOf.Size = new System.Drawing.Size(246, 23);
+            dtAsOf.Size = new System.Drawing.Size(114, 23);
             dtAsOf.TabIndex = 81;
             // 
             // cmbxFunds
@@ -601,7 +603,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(581, 3);
+            cmbxFunds.Location = new System.Drawing.Point(713, 3);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(160, 23);
             cmbxFunds.TabIndex = 80;
@@ -609,23 +611,26 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // cmbSubFPP
             // 
             cmbSubFPP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbSubFPP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbSubFPP.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             cmbSubFPP.FormattingEnabled = true;
-            cmbSubFPP.Location = new System.Drawing.Point(337, 3);
+            cmbSubFPP.Location = new System.Drawing.Point(507, 3);
             cmbSubFPP.Name = "cmbSubFPP";
-            cmbSubFPP.Size = new System.Drawing.Size(238, 23);
+            cmbSubFPP.Size = new System.Drawing.Size(200, 23);
             cmbSubFPP.TabIndex = 83;
             // 
-            // cmbxFPP
+            // cmbxFpp
             // 
-            cmbxFPP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbxFPP.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            cmbxFPP.FormattingEnabled = true;
-            cmbxFPP.Location = new System.Drawing.Point(93, 3);
-            cmbxFPP.Name = "cmbxFPP";
-            cmbxFPP.Size = new System.Drawing.Size(238, 23);
-            cmbxFPP.TabIndex = 79;
-            cmbxFPP.KeyDown += cmbxFPP_KeyDown;
+            cmbxFpp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFpp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFpp.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            cmbxFpp.FormattingEnabled = true;
+            cmbxFpp.Location = new System.Drawing.Point(301, 3);
+            cmbxFpp.Name = "cmbxFpp";
+            cmbxFpp.Size = new System.Drawing.Size(200, 23);
+            cmbxFpp.TabIndex = 79;
+            cmbxFpp.SelectedValueChanged += CmbxFpp_SelectedValueChanged;
+            cmbxFpp.KeyDown += cmbxFPP_KeyDown;
             // 
             // panel2
             // 
@@ -2353,7 +2358,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.ComboBox cmbSubFPP;
-        internal System.Windows.Forms.ComboBox cmbxFPP;
+        internal System.Windows.Forms.ComboBox cmbxFpp;
         private System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         internal System.Windows.Forms.Panel panel12;

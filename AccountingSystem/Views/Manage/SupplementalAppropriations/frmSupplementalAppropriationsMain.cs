@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         internal void LoadSubFPPByFPPIdCombobox(int fppId)
         {
-            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxSubFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFppId(fppId), cmbxSubFPP, "name", "id");
             cmbxSubFPP.SelectedIndex = -1;
             cmbxSubFPP.Text = string.Empty;
             cmbxSubFPP.Enabled = true;
