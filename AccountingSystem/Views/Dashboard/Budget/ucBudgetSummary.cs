@@ -20,8 +20,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-       
-
         internal void LoadBudgetDashboardContents()
         {
             string fppId = cmbxFpp.SelectedValue.ToString();
@@ -33,7 +31,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             LoadCurrentYearAmounts(fppId, subFpp, fundId, dateAsOf);
             LoadContinuingAmounts(fppId, subFpp, fundId, dateAsOf);
         }
-
 
         internal void LoadFunds()
         {
