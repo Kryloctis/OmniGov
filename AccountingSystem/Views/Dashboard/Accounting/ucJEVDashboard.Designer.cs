@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Dashboard
             cmbxMonth = new System.Windows.Forms.ComboBox();
             nudYear = new System.Windows.Forms.NumericUpDown();
             panel1 = new System.Windows.Forms.Panel();
+            btnAdd = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             pnlPendingJEV.SuspendLayout();
             pnlApprovedJEV.SuspendLayout();
@@ -368,6 +369,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnAdd);
             panel1.Controls.Add(cmbxJournals);
             panel1.Controls.Add(cmbxFunds);
             panel1.Controls.Add(btnRefresh);
@@ -379,6 +381,17 @@ namespace AccountingSystem.Views.Dashboard
             panel1.Padding = new System.Windows.Forms.Padding(4);
             panel1.Size = new System.Drawing.Size(1166, 39);
             panel1.TabIndex = 16;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnAdd.Location = new System.Drawing.Point(192, 7);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(150, 23);
+            btnAdd.TabIndex = 33;
+            btnAdd.Text = "Add...";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // ucJevDashboard
             // 
@@ -425,5 +438,6 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkJEV;
         internal System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.Journals;
+using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Transactions.JEV;
-using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.Accounting
@@ -15,6 +17,8 @@ namespace AccountingSystem.Views.Dashboard.Accounting
         {
             InitializeComponent();
             ucJevDashboard = ucJevDashboard1;
+
+            //Removes tabs to tabcontrol
         }
 
         internal void OnLoad()
@@ -40,11 +44,11 @@ namespace AccountingSystem.Views.Dashboard.Accounting
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void journalEntryTStrpMnuItm_Click(object sender, EventArgs e)
+        private void ledgersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmJev(false, null, ucJevDashboard1).ShowDialog();
+                _ = new frmLedgers().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

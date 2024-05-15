@@ -33,9 +33,11 @@
             manageTstrpDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
             chartOfAccountsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             journalsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            transactionsTstrpDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
-            journalEntryTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            reportsTstrpBtn = new System.Windows.Forms.ToolStripButton();
+            reportsTstrpBtn = new System.Windows.Forms.ToolStripDropDownButton();
+            journalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ledgersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            financialStatementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ucJevDashboard1 = new ucJevDashboard();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -44,13 +46,13 @@
             // 
             toolStrip2.BackColor = System.Drawing.Color.Transparent;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { manageTstrpDrpDwnBtn, transactionsTstrpDrpDwnBtn, reportsTstrpBtn });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { manageTstrpDrpDwnBtn, reportsTstrpBtn });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
             toolStrip2.ShowItemToolTips = false;
             toolStrip2.Size = new System.Drawing.Size(990, 30);
-            toolStrip2.TabIndex = 5;
+            toolStrip2.TabIndex = 9;
             toolStrip2.Text = "toolStrip2";
             // 
             // manageTstrpDrpDwnBtn
@@ -78,32 +80,40 @@
             journalsTStrpMnuItm.Text = "Journals...";
             journalsTStrpMnuItm.Click += journalsTStrpMnuItm_Click;
             // 
-            // transactionsTstrpDrpDwnBtn
-            // 
-            transactionsTstrpDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            transactionsTstrpDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { journalEntryTStrpMnuItm });
-            transactionsTstrpDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("transactionsTstrpDrpDwnBtn.Image");
-            transactionsTstrpDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            transactionsTstrpDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
-            transactionsTstrpDrpDwnBtn.Name = "transactionsTstrpDrpDwnBtn";
-            transactionsTstrpDrpDwnBtn.Size = new System.Drawing.Size(95, 19);
-            transactionsTstrpDrpDwnBtn.Text = "● Transactions";
-            // 
-            // journalEntryTStrpMnuItm
-            // 
-            journalEntryTStrpMnuItm.Name = "journalEntryTStrpMnuItm";
-            journalEntryTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
-            journalEntryTStrpMnuItm.Text = "Journal Entry...";
-            journalEntryTStrpMnuItm.Click += journalEntryTStrpMnuItm_Click;
-            // 
             // reportsTstrpBtn
             // 
             reportsTstrpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            reportsTstrpBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { journalsToolStripMenuItem, ledgersToolStripMenuItem, trialBalanceToolStripMenuItem, financialStatementsToolStripMenuItem });
             reportsTstrpBtn.Image = (System.Drawing.Image)resources.GetObject("reportsTstrpBtn.Image");
             reportsTstrpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             reportsTstrpBtn.Name = "reportsTstrpBtn";
-            reportsTstrpBtn.Size = new System.Drawing.Size(61, 19);
+            reportsTstrpBtn.Size = new System.Drawing.Size(70, 19);
             reportsTstrpBtn.Text = "● Reports";
+            // 
+            // journalsToolStripMenuItem
+            // 
+            journalsToolStripMenuItem.Name = "journalsToolStripMenuItem";
+            journalsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            journalsToolStripMenuItem.Text = "Journals";
+            // 
+            // ledgersToolStripMenuItem
+            // 
+            ledgersToolStripMenuItem.Name = "ledgersToolStripMenuItem";
+            ledgersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            ledgersToolStripMenuItem.Text = "Ledgers";
+            ledgersToolStripMenuItem.Click += ledgersToolStripMenuItem_Click;
+            // 
+            // trialBalanceToolStripMenuItem
+            // 
+            trialBalanceToolStripMenuItem.Name = "trialBalanceToolStripMenuItem";
+            trialBalanceToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            trialBalanceToolStripMenuItem.Text = "Trial Balance";
+            // 
+            // financialStatementsToolStripMenuItem
+            // 
+            financialStatementsToolStripMenuItem.Name = "financialStatementsToolStripMenuItem";
+            financialStatementsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            financialStatementsToolStripMenuItem.Text = "Financial Statements";
             // 
             // ucJevDashboard1
             // 
@@ -113,8 +123,8 @@
             ucJevDashboard1.Margin = new System.Windows.Forms.Padding(0);
             ucJevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
             ucJevDashboard1.Name = "ucJevDashboard1";
-            ucJevDashboard1.Size = new System.Drawing.Size(990, 160);
-            ucJevDashboard1.TabIndex = 7;
+            ucJevDashboard1.Size = new System.Drawing.Size(990, 170);
+            ucJevDashboard1.TabIndex = 10;
             // 
             // ucAccounting
             // 
@@ -123,7 +133,7 @@
             Controls.Add(ucJevDashboard1);
             Controls.Add(toolStrip2);
             Name = "ucAccounting";
-            Size = new System.Drawing.Size(990, 578);
+            Size = new System.Drawing.Size(990, 525);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             ResumeLayout(false);
@@ -131,14 +141,15 @@
         }
 
         #endregion
-
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton reportsTstrpBtn;
-        private ucJevDashboard ucJevDashboard1;
         private System.Windows.Forms.ToolStripDropDownButton manageTstrpDrpDwnBtn;
         private System.Windows.Forms.ToolStripMenuItem chartOfAccountsTStrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem journalsTStrpMnuItm;
-        private System.Windows.Forms.ToolStripDropDownButton transactionsTstrpDrpDwnBtn;
-        private System.Windows.Forms.ToolStripMenuItem journalEntryTStrpMnuItm;
+        private ucJevDashboard ucJevDashboard1;
+        private System.Windows.Forms.ToolStripDropDownButton reportsTstrpBtn;
+        private System.Windows.Forms.ToolStripMenuItem ledgersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem journalsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trialBalanceToolStripMenuItem;
     }
 }

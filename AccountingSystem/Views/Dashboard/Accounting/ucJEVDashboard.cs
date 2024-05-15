@@ -192,7 +192,7 @@ namespace AccountingSystem.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnAddJEV_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
