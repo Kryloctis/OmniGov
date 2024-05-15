@@ -34,7 +34,7 @@
             radTreasury = new System.Windows.Forms.RadioButton();
             radAccounting = new System.Windows.Forms.RadioButton();
             radBudget = new System.Windows.Forms.RadioButton();
-            tabControl1 = new System.Windows.Forms.TabControl();
+            tabControlMain = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
             ucBudget1 = new Budget.ucBudget();
@@ -53,7 +53,7 @@
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panel1.SuspendLayout();
-            tabControl1.SuspendLayout();
+            tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
             panel2.SuspendLayout();
             tabPageAccounting.SuspendLayout();
@@ -158,6 +158,7 @@
             // 
             radBudget.Appearance = System.Windows.Forms.Appearance.Button;
             radBudget.AutoSize = true;
+            radBudget.Checked = true;
             radBudget.Dock = System.Windows.Forms.DockStyle.Top;
             radBudget.FlatAppearance.BorderSize = 0;
             radBudget.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
@@ -168,25 +169,26 @@
             radBudget.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             radBudget.Size = new System.Drawing.Size(142, 33);
             radBudget.TabIndex = 3;
+            radBudget.TabStop = true;
             radBudget.Text = "Budget";
             radBudget.UseVisualStyleBackColor = true;
             radBudget.CheckedChanged += radBudget_CheckedChanged;
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            tabControl1.Controls.Add(tabPageBudget);
-            tabControl1.Controls.Add(tabPageAccounting);
-            tabControl1.Controls.Add(tabPageTreasury);
-            tabControl1.Controls.Add(tabPageSettings);
-            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tabControl1.Location = new System.Drawing.Point(142, 0);
-            tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(1133, 666);
-            tabControl1.TabIndex = 2;
-            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+            tabControlMain.Controls.Add(tabPageBudget);
+            tabControlMain.Controls.Add(tabPageAccounting);
+            tabControlMain.Controls.Add(tabPageTreasury);
+            tabControlMain.Controls.Add(tabPageSettings);
+            tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tabControlMain.Location = new System.Drawing.Point(142, 0);
+            tabControlMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new System.Drawing.Size(1133, 666);
+            tabControlMain.TabIndex = 2;
+            tabControlMain.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPageBudget
             // 
@@ -372,7 +374,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1275, 666);
-            Controls.Add(tabControl1);
+            Controls.Add(tabControlMain);
             Controls.Add(panel1);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -384,7 +386,7 @@
             Load += Dashboard_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            tabControl1.ResumeLayout(false);
+            tabControlMain.ResumeLayout(false);
             tabPageBudget.ResumeLayout(false);
             panel2.ResumeLayout(false);
             tabPageAccounting.ResumeLayout(false);
@@ -402,7 +404,7 @@
         private System.Windows.Forms.RadioButton radTreasury;
         private System.Windows.Forms.RadioButton radAccounting;
         private System.Windows.Forms.RadioButton radBudget;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageBudget;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabPage tabPageAccounting;

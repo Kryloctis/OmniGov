@@ -41,7 +41,7 @@
             btnRoles = new System.Windows.Forms.Button();
             btnUsers = new System.Windows.Forms.Button();
             label7 = new System.Windows.Forms.Label();
-            panel9 = new System.Windows.Forms.Panel();
+            panelAdmin = new System.Windows.Forms.Panel();
             btnAllotmentClasses = new System.Windows.Forms.Button();
             btnAccForms = new System.Windows.Forms.Button();
             btnFunds = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             tableLayoutPanel1.SuspendLayout();
             panel7.SuspendLayout();
             panel5.SuspendLayout();
-            panel9.SuspendLayout();
+            panelAdmin.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -60,7 +60,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Controls.Add(panel7, 2, 0);
             tableLayoutPanel1.Controls.Add(panel5, 0, 0);
-            tableLayoutPanel1.Controls.Add(panel9, 1, 0);
+            tableLayoutPanel1.Controls.Add(panelAdmin, 1, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -259,19 +259,19 @@
             label7.TabIndex = 19;
             label7.Text = "Users && Roles";
             // 
-            // panel9
+            // panelAdmin
             // 
-            panel9.AutoSize = true;
-            panel9.Controls.Add(btnAllotmentClasses);
-            panel9.Controls.Add(btnAccForms);
-            panel9.Controls.Add(btnFunds);
-            panel9.Controls.Add(label10);
-            panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel9.Location = new System.Drawing.Point(312, 7);
-            panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel9.Name = "panel9";
-            panel9.Size = new System.Drawing.Size(296, 246);
-            panel9.TabIndex = 7;
+            panelAdmin.AutoSize = true;
+            panelAdmin.Controls.Add(btnAllotmentClasses);
+            panelAdmin.Controls.Add(btnAccForms);
+            panelAdmin.Controls.Add(btnFunds);
+            panelAdmin.Controls.Add(label10);
+            panelAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelAdmin.Location = new System.Drawing.Point(312, 7);
+            panelAdmin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelAdmin.Name = "panelAdmin";
+            panelAdmin.Size = new System.Drawing.Size(296, 246);
+            panelAdmin.TabIndex = 7;
             // 
             // btnAllotmentClasses
             // 
@@ -334,7 +334,7 @@
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(296, 30);
             label10.TabIndex = 29;
-            label10.Text = "Admin Settings";
+            label10.Text = "Admin";
             // 
             // ucSettings
             // 
@@ -349,7 +349,7 @@
             tableLayoutPanel1.PerformLayout();
             panel7.ResumeLayout(false);
             panel5.ResumeLayout(false);
-            panel9.ResumeLayout(false);
+            panelAdmin.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -373,5 +373,6 @@
         private System.Windows.Forms.Button btnAccForms;
         private System.Windows.Forms.Button btnFunds;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panelAdmin;
     }
 }

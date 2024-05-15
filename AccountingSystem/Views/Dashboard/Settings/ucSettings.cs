@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.AccountableForm;
+﻿using ACC.Data;
+using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.BankAccounts;
 using AccountingSystem.Views.Manage.Banks;
@@ -10,13 +11,6 @@ using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.Settings
@@ -26,6 +20,16 @@ namespace AccountingSystem.Views.Dashboard.Settings
         public ucSettings()
         {
             InitializeComponent();
+        }
+
+        internal void OnLoad()
+        {
+            ValidatePermissions();
+        }
+
+        private void ValidatePermissions()
+        {
+            panelAdmin.Enabled = AccFactory.UsersRepository().GetViewRecordById(Helper.userId)["office"] == "SysAdmin";
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
