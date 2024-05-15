@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         public frmLedgers()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             ucGeneralLedger = ucGeneralLedger1;
             ucSummarySubsidiaryLedger = ucSummarySubsidiaryLedger1;
             ucSubsidiaryLedger = ucSubsidiaryLedger1;

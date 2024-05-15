@@ -11,6 +11,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         public frmTrialBalance()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             ucPreClosingTrialBalance = ucPreClosingTrialBalance1;
             ucPostClosingTrialBalance = ucPostClosingTrialBalance1;
         }

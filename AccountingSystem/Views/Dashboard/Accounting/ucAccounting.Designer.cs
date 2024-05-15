@@ -115,6 +115,7 @@
             financialStatementsToolStripMenuItem.Name = "financialStatementsToolStripMenuItem";
             financialStatementsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             financialStatementsToolStripMenuItem.Text = "Financial Statements";
+            financialStatementsToolStripMenuItem.Click += financialStatementsToolStripMenuItem_Click;
             // 
             // ucJevDashboard1
             // 

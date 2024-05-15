@@ -89,7 +89,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             localReport.DataSources.Add(new ReportDataSource("dtStatementOfCashFlows", SCFDatatable()));
 
             var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-
             var parameters = new[]
             {
                 new ReportParameter("paramCertifiedCorrectSignatory", ""),
@@ -101,8 +100,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             localReport.SetParameters(parameters);
 
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
@@ -113,21 +111,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
-        }
-
-        private void ucStatementOfCashFlows_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFunds();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

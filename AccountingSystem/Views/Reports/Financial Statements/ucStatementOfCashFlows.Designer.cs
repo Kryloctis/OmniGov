@@ -29,75 +29,77 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.dtPickerDate = new System.Windows.Forms.DateTimePicker();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
+            panel2 = new System.Windows.Forms.Panel();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
+            dtPickerDate = new System.Windows.Forms.DateTimePicker();
+            btnRetrieve = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.AutoSize = true;
-            this.panel2.Controls.Add(this.cmbxFunds);
-            this.panel2.Controls.Add(this.dtPickerDate);
-            this.panel2.Controls.Add(this.btnRetrieve);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(931, 26);
-            this.panel2.TabIndex = 5;
+            panel2.Controls.Add(cmbxFunds);
+            panel2.Controls.Add(dtPickerDate);
+            panel2.Controls.Add(btnRetrieve);
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(550, 37);
+            panel2.TabIndex = 5;
             // 
             // cmbxFunds
             // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(0, 0);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(185, 23);
-            this.cmbxFunds.TabIndex = 3;
+            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(51, 7);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(200, 23);
+            cmbxFunds.TabIndex = 3;
             // 
             // dtPickerDate
             // 
-            this.dtPickerDate.Location = new System.Drawing.Point(191, 0);
-            this.dtPickerDate.Name = "dtPickerDate";
-            this.dtPickerDate.Size = new System.Drawing.Size(211, 23);
-            this.dtPickerDate.TabIndex = 4;
+            dtPickerDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtPickerDate.CustomFormat = "MMM dd, yyyy";
+            dtPickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtPickerDate.Location = new System.Drawing.Point(257, 7);
+            dtPickerDate.Name = "dtPickerDate";
+            dtPickerDate.Size = new System.Drawing.Size(130, 23);
+            dtPickerDate.TabIndex = 4;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRetrieve.Location = new System.Drawing.Point(408, 0);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(84, 23);
-            this.btnRetrieve.TabIndex = 5;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRetrieve.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRetrieve.Location = new System.Drawing.Point(393, 7);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(150, 23);
+            btnRetrieve.TabIndex = 5;
+            btnRetrieve.Text = "Run Report";
+            btnRetrieve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 26);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(931, 698);
-            this.panel1.TabIndex = 6;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 37);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(550, 297);
+            panel1.TabIndex = 6;
             // 
             // ucStatementOfCashFlows
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
-            this.Name = "ucStatementOfCashFlows";
-            this.Size = new System.Drawing.Size(931, 724);
-            this.Load += new System.EventHandler(this.ucStatementOfCashFlows_Load);
-            this.panel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(panel1);
+            Controls.Add(panel2);
+            Name = "ucStatementOfCashFlows";
+            Size = new System.Drawing.Size(550, 334);
+            panel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

@@ -102,20 +102,18 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             report.DataSources.Clear();
             report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPerformance", StatementOfFinancialPerformanceDatatable()));
 
-            var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
             var parameters = new[]
             {
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                new ReportParameter("paramFund", fundRepo["fund_name"]),
+                new ReportParameter("paramFund",  AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
                 new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
             };
 
             report.SetParameters(parameters);
 
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
@@ -131,21 +129,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             LoadReport(reportViewer.LocalReport);
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
-        }
-
-        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFunds();
         }
     }
 }
