@@ -69,14 +69,14 @@
             // chartOfAccountsTStrpMnuItm
             // 
             chartOfAccountsTStrpMnuItm.Name = "chartOfAccountsTStrpMnuItm";
-            chartOfAccountsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            chartOfAccountsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
             chartOfAccountsTStrpMnuItm.Text = "Chart of Accounts...";
             chartOfAccountsTStrpMnuItm.Click += chartOfAccountsTStrpMnuItm_Click;
             // 
             // journalsTStrpMnuItm
             // 
             journalsTStrpMnuItm.Name = "journalsTStrpMnuItm";
-            journalsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            journalsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
             journalsTStrpMnuItm.Text = "Journals...";
             journalsTStrpMnuItm.Click += journalsTStrpMnuItm_Click;
             // 
@@ -108,6 +108,7 @@
             trialBalanceToolStripMenuItem.Name = "trialBalanceToolStripMenuItem";
             trialBalanceToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             trialBalanceToolStripMenuItem.Text = "Trial Balance";
+            trialBalanceToolStripMenuItem.Click += trialBalanceToolStripMenuItem_Click;
             // 
             // financialStatementsToolStripMenuItem
             // 

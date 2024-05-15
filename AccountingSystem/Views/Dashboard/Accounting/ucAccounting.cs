@@ -1,6 +1,7 @@
 ﻿using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Reports.TrialBalance;
 using AccountingSystem.Views.Transactions.JEV;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
@@ -49,6 +50,15 @@ namespace AccountingSystem.Views.Dashboard.Accounting
             try
             {
                 _ = new frmLedgers().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void trialBalanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmTrialBalance().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

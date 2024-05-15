@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
             };
 
-            reportViewer.LocalReport.SetParameters(parameters);
+            report.SetParameters(parameters);
             reportViewer.RefreshReport();
         }
 
@@ -195,22 +195,10 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
-            }
-        }
-
-        private void ucPostClosingTrialBalance_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
         }
     }
 }

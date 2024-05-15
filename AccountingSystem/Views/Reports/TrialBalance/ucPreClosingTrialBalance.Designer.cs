@@ -29,112 +29,92 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelReport = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cbHideZeroBalance = new System.Windows.Forms.CheckBox();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.cmbFund = new System.Windows.Forms.ComboBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            panelReport = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
+            cbHideZeroBalance = new System.Windows.Forms.CheckBox();
+            dtAsOf = new System.Windows.Forms.DateTimePicker();
+            cmbFund = new System.Windows.Forms.ComboBox();
+            btnRetrieve = new System.Windows.Forms.Button();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // panelReport
             // 
-            this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelReport.Location = new System.Drawing.Point(0, 32);
-            this.panelReport.Name = "panelReport";
-            this.panelReport.Size = new System.Drawing.Size(1037, 537);
-            this.panelReport.TabIndex = 5;
+            panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelReport.Location = new System.Drawing.Point(0, 38);
+            panelReport.Name = "panelReport";
+            panelReport.Size = new System.Drawing.Size(749, 402);
+            panelReport.TabIndex = 5;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.cbHideZeroBalance);
-            this.panel1.Controls.Add(this.dtAsOf);
-            this.panel1.Controls.Add(this.cmbFund);
-            this.panel1.Controls.Add(this.btnRetrieve);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1037, 32);
-            this.panel1.TabIndex = 4;
+            panel1.BackColor = System.Drawing.Color.Transparent;
+            panel1.Controls.Add(cbHideZeroBalance);
+            panel1.Controls.Add(dtAsOf);
+            panel1.Controls.Add(cmbFund);
+            panel1.Controls.Add(btnRetrieve);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(749, 38);
+            panel1.TabIndex = 4;
             // 
             // cbHideZeroBalance
             // 
-            this.cbHideZeroBalance.AutoSize = true;
-            this.cbHideZeroBalance.Enabled = false;
-            this.cbHideZeroBalance.Location = new System.Drawing.Point(546, 8);
-            this.cbHideZeroBalance.Name = "cbHideZeroBalance";
-            this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
-            this.cbHideZeroBalance.TabIndex = 9;
-            this.cbHideZeroBalance.Text = "Hide Zero Balances";
-            this.cbHideZeroBalance.UseVisualStyleBackColor = true;
-            this.cbHideZeroBalance.CheckedChanged += new System.EventHandler(this.cbHideZeroBalance_CheckedChanged);
+            cbHideZeroBalance.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cbHideZeroBalance.AutoSize = true;
+            cbHideZeroBalance.Enabled = false;
+            cbHideZeroBalance.Location = new System.Drawing.Point(459, 10);
+            cbHideZeroBalance.Name = "cbHideZeroBalance";
+            cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
+            cbHideZeroBalance.TabIndex = 9;
+            cbHideZeroBalance.Text = "Hide Zero Balances";
+            cbHideZeroBalance.UseVisualStyleBackColor = true;
+            cbHideZeroBalance.CheckedChanged += cbHideZeroBalance_CheckedChanged;
             // 
             // dtAsOf
             // 
-            this.dtAsOf.Location = new System.Drawing.Point(315, 3);
-            this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
-            this.dtAsOf.Name = "dtAsOf";
-            this.dtAsOf.Size = new System.Drawing.Size(208, 23);
-            this.dtAsOf.TabIndex = 6;
+            dtAsOf.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtAsOf.CustomFormat = "MMM dd, yyyy";
+            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtAsOf.Location = new System.Drawing.Point(323, 8);
+            dtAsOf.Name = "dtAsOf";
+            dtAsOf.Size = new System.Drawing.Size(130, 23);
+            dtAsOf.TabIndex = 6;
             // 
             // cmbFund
             // 
-            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(43, 3);
-            this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(216, 23);
-            this.cmbFund.TabIndex = 5;
+            cmbFund.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbFund.FormattingEnabled = true;
+            cmbFund.Location = new System.Drawing.Point(117, 8);
+            cmbFund.Name = "cmbFund";
+            cmbFund.Size = new System.Drawing.Size(200, 23);
+            cmbFund.TabIndex = 5;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(696, 4);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(96, 24);
-            this.btnRetrieve.TabIndex = 4;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(275, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "As of";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Fund";
+            btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRetrieve.Location = new System.Drawing.Point(592, 7);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(150, 24);
+            btnRetrieve.TabIndex = 4;
+            btnRetrieve.Text = "Run Report";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // ucPreClosingTrialBalance
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelReport);
-            this.Controls.Add(this.panel1);
-            this.Name = "ucPreClosingTrialBalance";
-            this.Size = new System.Drawing.Size(1037, 569);
-            this.Load += new System.EventHandler(this.ucPreClosingTrialBalance_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(panelReport);
+            Controls.Add(panel1);
+            Name = "ucPreClosingTrialBalance";
+            Size = new System.Drawing.Size(749, 440);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -145,7 +125,5 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbFund;
         internal System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
     }
 }
