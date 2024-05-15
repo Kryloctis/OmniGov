@@ -79,12 +79,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkCashReceiptJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            var frmCashReceiptsJournalReport = new frmCashReceiptsJournalReport();
-            frmCashReceiptsJournalReport.fundId = fundId;
-            frmCashReceiptsJournalReport.journalName = "Cash Receipts Journal";
-            frmCashReceiptsJournalReport.date = dateTimePicker1.Value;
-            frmCashReceiptsJournalReport.ShowDialog();
         }
 
         private void lnkCheckDisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -99,11 +93,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkGeneralJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmGeneralJournalReport = new frmGeneralJournalReport();
-            frmGeneralJournalReport.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            frmGeneralJournalReport.journalName = "General Journal";
-            frmGeneralJournalReport.date = dateTimePicker1.Value;
-            frmGeneralJournalReport.ShowDialog();
         }
 
         private void lnkProcurementReceivedJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

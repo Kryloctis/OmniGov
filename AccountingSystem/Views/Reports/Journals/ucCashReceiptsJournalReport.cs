@@ -7,83 +7,30 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmCashReceiptsJournalReport : Form
+    public partial class ucCashReceiptsJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
-        internal string journalName;
-        internal int fundId;
-        internal DateTime date;
-        private byte journalId = 2;
 
-        public frmCashReceiptsJournalReport()
+        public ucCashReceiptsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
-            Helper.LoadFormIcon(this);
         }
 
-        private DataTable CashReceiptsJournalDataTable()
+        internal void OnLoad()
         {
-            var dtCashReceiptsJournal = new dsLFS.CashReceiptsJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtCashReceiptsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
-
-            int jevId;
-            string jevNo;
-
-            var cashReceiptsJournalRepository = AccFactory.CashReceiptsJournalRepository();
-            foreach (DataRow item in dtCashReceiptsFromDB.Rows)
-            {
-                jevId = Convert.ToInt32(item["jev_id"]);
-                jevNo = item["jev_no"].ToString();
-
-                var cashReceiptsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
-                DataRow row = dtCashReceiptsJournal.NewRow();
-                row["date"] = item["date_entry"];
-                row["rcd_no"] = cashReceiptsDict["rcd_no"];
-                row["collecting_officer"] = cashReceiptsDict["full_name"];
-
-                // if data is for collections columns
-                if (!Convert.ToBoolean(item["is_deposit"]))
-                {
-                    row["collections_credit_account_code"] = item["account_code"];
-                    if (Convert.ToBoolean(item["is_debit"]))
-                    {
-                        row["collections_debit_account_id"] = item["general_ledger_accounts_id"];
-                        row["collections_debit_amount"] = item["amount"];
-                    }
-                    else
-                    {
-                        row["collections_credit_account_id"] = item["general_ledger_accounts_id"];
-                        row["collections_credit_amount"] = item["amount"];
-                    }
-                }
-
-                // if data is for deposits columns
-                if (Convert.ToBoolean(item["is_deposit"]))
-                {
-                    row["deposit_debit_account_code"] = item["account_code"];
-                    if (Convert.ToBoolean(item["is_debit"]))
-                    {
-                        row["deposit_debit_account_id"] = item["general_ledger_accounts_id"];
-                        row["deposit_debit_amount"] = item["amount"];
-                    }
-                    else
-                    {
-                        row["deposit_credit_account_id"] = item["general_ledger_accounts_id"];
-                        row["deposit_credit_amount"] = item["amount"];
-                    }
-                }
-
-                dtCashReceiptsJournal.Rows.Add(row);
-            }
-
-            return dtCashReceiptsJournal;
+            LoadFunds();
         }
 
-        private Dictionary<string, string> GetDefaultAccount()
+        private void LoadFunds()
+        {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+        }
+
+        private Dictionary<string, string> GetDefaultAccount(int journalId, int fundId)
         {
             var dictionary = new Dictionary<string, string>();
             dictionary.Add("defaultAccIdDebit1", "0");
@@ -100,7 +47,6 @@ namespace AccountingSystem.Views.Reports.Journals
             dictionary.Add("defaultAccCodeCredit3", string.Empty);
 
             DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
-
             DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
             //Debit default Accounts
@@ -171,31 +117,90 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             Cursor.Current = Cursors.WaitCursor;
 
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            var date = dateTimePicker1.Value;
+            string journalName = "Cash Receipts Journal";
+            int journalId = 2;
+
+            var dtCashReceiptsJournal = new dsLFS.CashReceiptsJournalDataTable();
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtCashReceiptsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+
+            int jevId;
+            string jevNo;
+
+            var cashReceiptsJournalRepository = AccFactory.CashReceiptsJournalRepository();
+            foreach (DataRow item in dtCashReceiptsFromDB.Rows)
+            {
+                jevId = Convert.ToInt32(item["jev_id"]);
+                jevNo = item["jev_no"].ToString();
+
+                var cashReceiptsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
+                DataRow row = dtCashReceiptsJournal.NewRow();
+                row["date"] = item["date_entry"];
+                row["rcd_no"] = cashReceiptsDict["rcd_no"];
+                row["collecting_officer"] = cashReceiptsDict["full_name"];
+
+                // if data is for collections columns
+                if (!Convert.ToBoolean(item["is_deposit"]))
+                {
+                    row["collections_credit_account_code"] = item["account_code"];
+                    if (Convert.ToBoolean(item["is_debit"]))
+                    {
+                        row["collections_debit_account_id"] = item["general_ledger_accounts_id"];
+                        row["collections_debit_amount"] = item["amount"];
+                    }
+                    else
+                    {
+                        row["collections_credit_account_id"] = item["general_ledger_accounts_id"];
+                        row["collections_credit_amount"] = item["amount"];
+                    }
+                }
+
+                // if data is for deposits columns
+                if (Convert.ToBoolean(item["is_deposit"]))
+                {
+                    row["deposit_debit_account_code"] = item["account_code"];
+                    if (Convert.ToBoolean(item["is_debit"]))
+                    {
+                        row["deposit_debit_account_id"] = item["general_ledger_accounts_id"];
+                        row["deposit_debit_amount"] = item["amount"];
+                    }
+                    else
+                    {
+                        row["deposit_credit_account_id"] = item["general_ledger_accounts_id"];
+                        row["deposit_credit_amount"] = item["amount"];
+                    }
+                }
+
+                dtCashReceiptsJournal.Rows.Add(row);
+            }
+
             var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Cash Receipts Journal");
             var lguDetails = Helper.LGUDetails();
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSinatoryTitle = string.Empty;
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSinatoryTitle);
 
-            var parameters = new[] {
+            var parameters = new[]
+            {
                 new ReportParameter("paramDate", date.ToString()),
                 new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                 new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSinatoryTitle),
-                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
-                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
-                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
-                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
-                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
-                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
-                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
-                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
-                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
-                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
-                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
-                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
+                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit1"]),
+                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit2"]),
+                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit3"]),
+                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit1"]),
+                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit2"]),
+                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit3"]),
+                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit1"]),
+                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit2"]),
+                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit3"]),
+                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit1"]),
+                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit2"]),
+                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit3"]),
                 new ReportParameter("paramDefaultAccountCodeCollectionsDebit", "1-01-01-010"),
                 new ReportParameter("paramDefaultAccountIdCollectionsDebit", "1"),
                 new ReportParameter("paramDefaultAccountCodeDepositsCredit", "1-01-01-010"),
@@ -205,25 +210,19 @@ namespace AccountingSystem.Views.Reports.Journals
             report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-receipts-journal.rdlc";
             report.DataSources.Clear();
 
-            report.DataSources.Add(new ReportDataSource("CashReceiptsJournal", CashReceiptsJournalDataTable()));
+            report.DataSources.Add(new ReportDataSource("CashReceiptsJournal", dtCashReceiptsJournal.Clone()));
             report.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
 
-        private void OnLoad()
-        {
-            LoadReport(reportViewer.LocalReport);
-        }
-
-        private void frmCashReceiptsJournalReport_Load(object sender, EventArgs e)
+        private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                LoadReport(reportViewer.LocalReport);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

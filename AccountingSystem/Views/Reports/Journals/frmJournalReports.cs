@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AccountingSystem.Views.Reports.Journals
+{
+    public partial class frmJournalReports : Form
+    {
+        private ucGenJrnlReport ucGenJrnlReport;
+        private ucCashReceiptsJournalReport ucCashReceiptsJournalReport;
+
+        public frmJournalReports()
+        {
+            InitializeComponent();
+            Helper.LoadFormIcon(this);
+            ucGenJrnlReport = ucGenJrnlReport1;
+            ucCashReceiptsJournalReport = ucCashReceiptsJournalReport1;
+        }
+
+        private void frmJournalReports_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleContents(tabControlJournals);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tabControlJournals_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleContents(tabControlJournals);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleContents(TabControl tabControl)
+        {
+            switch (tabControl.SelectedTab.Name)
+            {
+                case "tabPageGenJrnl":
+                    ucGenJrnlReport.OnLoad();
+                    break;
+
+                case "tabPageCashReceiptsJrnl":
+                    ucCashReceiptsJournalReport.OnLoad();
+                    break;
+
+                case "tabPageCashDisbursementJrnl":
+                    break;
+
+                case "tabPageChckDisbursementJrnl":
+                    break;
+
+                case "tabPageProcReceivedJrnl":
+                    break;
+
+                case "tabPageAdaDisbursementJrnl":
+                    break;
+            }
+        }
+    }
+}

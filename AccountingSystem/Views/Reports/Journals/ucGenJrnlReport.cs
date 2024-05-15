@@ -7,53 +7,27 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmGeneralJournalReport : Form
+    public partial class ucGenJrnlReport : UserControl
     {
         private readonly ReportViewer reportViewer;
-        internal int fundId;
-        internal string journalName;
-        internal DateTime date;
 
-        public frmGeneralJournalReport()
+        public ucGenJrnlReport()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
         }
 
-        private DataTable DataTableGeneralJournal()
+        internal void OnLoad()
         {
-            dsLFS.dtGeneralJournalDataTable dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            DataTable dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            LoadFunds();
+        }
 
-            string jevNo;
-            string particulars;
-            int jevId;
-            byte i = 0;
-
-            foreach (DataRow item in dtGeneralJournalFromDB.Rows)
-            {
-                jevNo = item["full_jev_no"].ToString();
-                particulars = item["general_ledger_accounts_name"].ToString();
-
-                DataRow row = dtGeneralJournal.NewRow();
-                row["date_entry"] = item["date_entry"];
-                row["jev_no"] = jevNo;
-                row["account_code"] = item["account_code"];
-
-                ValidateDebitCreditRow(particulars, item, row);
-
-                dtGeneralJournal.Rows.Add(row);
-
-                i++;
-                jevId = Convert.ToInt32(item["jev_id"]);
-                AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
-            }
-
-            return dtGeneralJournal;
+        private void LoadFunds()
+        {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row)
@@ -100,17 +74,50 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void LoadReport(LocalReport report)
+        private void LoadReport(ReportViewer reportViewer)
         {
-            Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
+            var localReport = reportViewer.LocalReport;
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            string journalName = "General Journal";
+            var date = dateTimePicker1.Value;
+
+            var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+
+            string jevNo;
+            string particulars;
+            int jevId;
+            byte i = 0;
+
+            foreach (DataRow item in dtGeneralJournalFromDB.Rows)
+            {
+                jevNo = item["full_jev_no"].ToString();
+                particulars = item["general_ledger_accounts_name"].ToString();
+
+                DataRow row = dtGeneralJournal.NewRow();
+                row["date_entry"] = item["date_entry"];
+                row["jev_no"] = jevNo;
+                row["account_code"] = item["account_code"];
+
+                ValidateDebitCreditRow(particulars, item, row);
+
+                dtGeneralJournal.Rows.Add(row);
+
+                i++;
+                jevId = Convert.ToInt32(item["jev_id"]);
+                AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
+            }
+
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
             Cursor.Current = Cursors.WaitCursor;
             var lguDetails = Helper.LGUDetails();
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
-            ReportParameter[] parameters = new[] {
+            ReportParameter[] parameters = new[]
+            {
                 new ReportParameter("paramDate", date.ToString()),
                 new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                 new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
@@ -118,28 +125,22 @@ namespace AccountingSystem.Views.Reports.Journals
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
             };
 
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
-            report.DataSources.Clear();
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
+            localReport.DataSources.Clear();
 
-            report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
-            report.SetParameters(parameters);
+            localReport.DataSources.Add(new ReportDataSource("dtGeneralJournal", dtGeneralJournal.Clone()));
+            localReport.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
 
-        private void OnLoad()
-        {
-            LoadReport(reportViewer.LocalReport);
-        }
-
-        private void frmGeneralJournalReport_Load(object sender, EventArgs e)
+        private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                LoadReport(reportViewer);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

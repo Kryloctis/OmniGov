@@ -95,6 +95,7 @@
             journalsToolStripMenuItem.Name = "journalsToolStripMenuItem";
             journalsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             journalsToolStripMenuItem.Text = "Journals";
+            journalsToolStripMenuItem.Click += journalsToolStripMenuItem_Click;
             // 
             // ledgersToolStripMenuItem
             // 

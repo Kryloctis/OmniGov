@@ -1,6 +1,7 @@
 ﻿using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Reports.Financial_Statements;
+using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Reports.TrialBalance;
 using AccountingSystem.Views.Transactions.JEV;
@@ -69,6 +70,15 @@ namespace AccountingSystem.Views.Dashboard.Accounting
             try
             {
                 _ = new frmFinancialStatements().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void journalsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmJournalReports().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
