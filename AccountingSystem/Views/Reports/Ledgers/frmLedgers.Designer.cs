@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            tabControl1 = new System.Windows.Forms.TabControl();
+            tabControlLedgers = new System.Windows.Forms.TabControl();
             tabPageGeneralLedger = new System.Windows.Forms.TabPage();
-            tabPageSubLedger = new System.Windows.Forms.TabPage();
-            tabPageSumSubLedger = new System.Windows.Forms.TabPage();
-            tabPageTransactionLog = new System.Windows.Forms.TabPage();
             ucGeneralLedger1 = new ucGeneralLedger();
+            tabPageSubLedger = new System.Windows.Forms.TabPage();
             ucSubsidiaryLedger1 = new ucSubsidiaryLedger();
+            tabPageSumSubLedger = new System.Windows.Forms.TabPage();
             ucSummarySubsidiaryLedger1 = new ucSummarySubsidiaryLedger();
+            tabPageTransactionLog = new System.Windows.Forms.TabPage();
             ucTransactionLog1 = new ucTransactionLog();
-            tabControl1.SuspendLayout();
+            tabControlLedgers.SuspendLayout();
             tabPageGeneralLedger.SuspendLayout();
             tabPageSubLedger.SuspendLayout();
             tabPageSumSubLedger.SuspendLayout();
@@ -47,114 +47,117 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 466);
+            statusStrip1.Location = new System.Drawing.Point(0, 454);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(761, 22);
+            statusStrip1.Size = new System.Drawing.Size(886, 22);
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
             // 
-            // tabControl1
+            // tabControlLedgers
             // 
-            tabControl1.Controls.Add(tabPageGeneralLedger);
-            tabControl1.Controls.Add(tabPageSubLedger);
-            tabControl1.Controls.Add(tabPageSumSubLedger);
-            tabControl1.Controls.Add(tabPageTransactionLog);
-            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.Location = new System.Drawing.Point(0, 0);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(761, 466);
-            tabControl1.TabIndex = 1;
+            tabControlLedgers.Controls.Add(tabPageGeneralLedger);
+            tabControlLedgers.Controls.Add(tabPageSubLedger);
+            tabControlLedgers.Controls.Add(tabPageSumSubLedger);
+            tabControlLedgers.Controls.Add(tabPageTransactionLog);
+            tabControlLedgers.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlLedgers.Location = new System.Drawing.Point(0, 0);
+            tabControlLedgers.Name = "tabControlLedgers";
+            tabControlLedgers.SelectedIndex = 0;
+            tabControlLedgers.Size = new System.Drawing.Size(886, 454);
+            tabControlLedgers.TabIndex = 1;
+            tabControlLedgers.SelectedIndexChanged += tabControlLedgers_SelectedIndexChanged;
             // 
             // tabPageGeneralLedger
             // 
             tabPageGeneralLedger.Controls.Add(ucGeneralLedger1);
             tabPageGeneralLedger.Location = new System.Drawing.Point(4, 24);
             tabPageGeneralLedger.Name = "tabPageGeneralLedger";
-            tabPageGeneralLedger.Padding = new System.Windows.Forms.Padding(3);
-            tabPageGeneralLedger.Size = new System.Drawing.Size(753, 438);
+            tabPageGeneralLedger.Size = new System.Drawing.Size(878, 426);
             tabPageGeneralLedger.TabIndex = 0;
             tabPageGeneralLedger.Text = "General Ledger";
             tabPageGeneralLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucGeneralLedger1
+            // 
+            ucGeneralLedger1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucGeneralLedger1.Location = new System.Drawing.Point(0, 0);
+            ucGeneralLedger1.Name = "ucGeneralLedger1";
+            ucGeneralLedger1.Size = new System.Drawing.Size(878, 426);
+            ucGeneralLedger1.TabIndex = 0;
             // 
             // tabPageSubLedger
             // 
             tabPageSubLedger.Controls.Add(ucSubsidiaryLedger1);
             tabPageSubLedger.Location = new System.Drawing.Point(4, 24);
             tabPageSubLedger.Name = "tabPageSubLedger";
-            tabPageSubLedger.Padding = new System.Windows.Forms.Padding(3);
-            tabPageSubLedger.Size = new System.Drawing.Size(753, 438);
+            tabPageSubLedger.Size = new System.Drawing.Size(878, 426);
             tabPageSubLedger.TabIndex = 1;
             tabPageSubLedger.Text = "Subsidiary Ledger";
             tabPageSubLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucSubsidiaryLedger1
+            // 
+            ucSubsidiaryLedger1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
+            ucSubsidiaryLedger1.Size = new System.Drawing.Size(878, 426);
+            ucSubsidiaryLedger1.TabIndex = 0;
             // 
             // tabPageSumSubLedger
             // 
             tabPageSumSubLedger.Controls.Add(ucSummarySubsidiaryLedger1);
             tabPageSumSubLedger.Location = new System.Drawing.Point(4, 24);
             tabPageSumSubLedger.Name = "tabPageSumSubLedger";
-            tabPageSumSubLedger.Padding = new System.Windows.Forms.Padding(3);
-            tabPageSumSubLedger.Size = new System.Drawing.Size(753, 438);
+            tabPageSumSubLedger.Size = new System.Drawing.Size(878, 426);
             tabPageSumSubLedger.TabIndex = 2;
             tabPageSumSubLedger.Text = "Summary Subsidiary Ledger";
             tabPageSumSubLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucSummarySubsidiaryLedger1
+            // 
+            ucSummarySubsidiaryLedger1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
+            ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(878, 426);
+            ucSummarySubsidiaryLedger1.TabIndex = 0;
             // 
             // tabPageTransactionLog
             // 
             tabPageTransactionLog.Controls.Add(ucTransactionLog1);
             tabPageTransactionLog.Location = new System.Drawing.Point(4, 24);
             tabPageTransactionLog.Name = "tabPageTransactionLog";
-            tabPageTransactionLog.Padding = new System.Windows.Forms.Padding(3);
-            tabPageTransactionLog.Size = new System.Drawing.Size(753, 438);
+            tabPageTransactionLog.Size = new System.Drawing.Size(878, 426);
             tabPageTransactionLog.TabIndex = 3;
             tabPageTransactionLog.Text = "Transaction Log";
             tabPageTransactionLog.UseVisualStyleBackColor = true;
             // 
-            // ucGeneralLedger1
-            // 
-            ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucGeneralLedger1.Location = new System.Drawing.Point(3, 3);
-            ucGeneralLedger1.Name = "ucGeneralLedger1";
-            ucGeneralLedger1.Size = new System.Drawing.Size(747, 432);
-            ucGeneralLedger1.TabIndex = 0;
-            // 
-            // ucSubsidiaryLedger1
-            // 
-            ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSubsidiaryLedger1.Location = new System.Drawing.Point(3, 3);
-            ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
-            ucSubsidiaryLedger1.Size = new System.Drawing.Size(747, 432);
-            ucSubsidiaryLedger1.TabIndex = 0;
-            // 
-            // ucSummarySubsidiaryLedger1
-            // 
-            ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(3, 3);
-            ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
-            ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(747, 432);
-            ucSummarySubsidiaryLedger1.TabIndex = 0;
-            // 
             // ucTransactionLog1
             // 
+            ucTransactionLog1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucTransactionLog1.Location = new System.Drawing.Point(3, 3);
+            ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
             ucTransactionLog1.Name = "ucTransactionLog1";
-            ucTransactionLog1.Size = new System.Drawing.Size(747, 432);
+            ucTransactionLog1.Size = new System.Drawing.Size(878, 426);
             ucTransactionLog1.TabIndex = 0;
             // 
             // frmLedgers
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(761, 488);
-            Controls.Add(tabControl1);
+            ClientSize = new System.Drawing.Size(886, 476);
+            Controls.Add(tabControlLedgers);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
             Name = "frmLedgers";
             ShowIcon = false;
             ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Ledgers";
-            tabControl1.ResumeLayout(false);
+            Load += frmLedgers_Load;
+            tabControlLedgers.ResumeLayout(false);
             tabPageGeneralLedger.ResumeLayout(false);
             tabPageSubLedger.ResumeLayout(false);
             tabPageSumSubLedger.ResumeLayout(false);
@@ -166,7 +169,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlLedgers;
         private System.Windows.Forms.TabPage tabPageGeneralLedger;
         private System.Windows.Forms.TabPage tabPageSubLedger;
         private System.Windows.Forms.TabPage tabPageSumSubLedger;

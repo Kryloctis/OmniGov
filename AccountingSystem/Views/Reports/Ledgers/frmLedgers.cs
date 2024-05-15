@@ -1,20 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
 {
     public partial class frmLedgers : Form
     {
+        private ucGeneralLedger ucGeneralLedger;
+        private ucSummarySubsidiaryLedger ucSummarySubsidiaryLedger;
+        private ucSubsidiaryLedger ucSubsidiaryLedger;
+        private ucTransactionLog ucTransactionLog;
+
         public frmLedgers()
         {
             InitializeComponent();
+            ucGeneralLedger = ucGeneralLedger1;
+            ucSummarySubsidiaryLedger = ucSummarySubsidiaryLedger1;
+            ucSubsidiaryLedger = ucSubsidiaryLedger1;
+            ucTransactionLog = ucTransactionLog1;
+        }
+
+        private void frmLedgers_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedtTabPage = tabControlLedgers.SelectedTab;
+                ToggleReport(selectedtTabPage);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleReport(TabPage tabPage)
+        {
+            switch (tabPage.Name)
+            {
+                case "tabPageGeneralLedger":
+                    ucGeneralLedger.OnLoad();
+
+                    break;
+
+                case "tabPageSubLedger":
+                    ucSubsidiaryLedger.OnLoad();
+
+                    break;
+
+                case "tabPageSumSubLedger":
+                    ucSummarySubsidiaryLedger.OnLoad();
+
+                    break;
+
+                case "tabPageTransactionLog":
+                    ucTransactionLog.OnLoad();
+
+                    break;
+            }
+        }
+
+        private void tabControlLedgers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedtTabPage = tabControlLedgers.SelectedTab;
+                ToggleReport(selectedtTabPage);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
