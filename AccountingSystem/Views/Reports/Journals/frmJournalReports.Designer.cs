@@ -41,12 +41,14 @@
             tabPageChckDisbursementJrnl = new System.Windows.Forms.TabPage();
             ucCheckDisbursementsJrnlReport1 = new ucCheckDisbursementsJrnlReport();
             tabPageAdaDisbursementJrnl = new System.Windows.Forms.TabPage();
+            ucAdadDisbursementJrnlReport1 = new ucAdadDisbursementJrnlReport();
             tabControlJournals.SuspendLayout();
             tabPageGenJrnl.SuspendLayout();
             tabPageCashReceiptsJrnl.SuspendLayout();
             tabPageProcReceivedJrnl.SuspendLayout();
             tabPageCashDisbursementJrnl.SuspendLayout();
             tabPageChckDisbursementJrnl.SuspendLayout();
+            tabPageAdaDisbursementJrnl.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -165,12 +167,21 @@
             // 
             // tabPageAdaDisbursementJrnl
             // 
+            tabPageAdaDisbursementJrnl.Controls.Add(ucAdadDisbursementJrnlReport1);
             tabPageAdaDisbursementJrnl.Location = new System.Drawing.Point(4, 24);
             tabPageAdaDisbursementJrnl.Name = "tabPageAdaDisbursementJrnl";
             tabPageAdaDisbursementJrnl.Size = new System.Drawing.Size(792, 400);
             tabPageAdaDisbursementJrnl.TabIndex = 5;
             tabPageAdaDisbursementJrnl.Text = "ADA Disbursement Journals";
             tabPageAdaDisbursementJrnl.UseVisualStyleBackColor = true;
+            // 
+            // ucAdadDisbursementJrnlReport1
+            // 
+            ucAdadDisbursementJrnlReport1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucAdadDisbursementJrnlReport1.Location = new System.Drawing.Point(0, 0);
+            ucAdadDisbursementJrnlReport1.Name = "ucAdadDisbursementJrnlReport1";
+            ucAdadDisbursementJrnlReport1.Size = new System.Drawing.Size(792, 400);
+            ucAdadDisbursementJrnlReport1.TabIndex = 0;
             // 
             // frmJournalReports
             // 
@@ -193,6 +204,7 @@
             tabPageProcReceivedJrnl.ResumeLayout(false);
             tabPageCashDisbursementJrnl.ResumeLayout(false);
             tabPageChckDisbursementJrnl.ResumeLayout(false);
+            tabPageAdaDisbursementJrnl.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -211,5 +223,6 @@
         private ucProcurementReceivedJrnlReport ucProcurementReceivedJrnlReport1;
         private ucCashDisbursementJrnlReport ucCashDisbursementJrnlReport1;
         private ucCheckDisbursementsJrnlReport ucCheckDisbursementsJrnlReport1;
+        private ucAdadDisbursementJrnlReport ucAdadDisbursementJrnlReport1;
     }
 }
