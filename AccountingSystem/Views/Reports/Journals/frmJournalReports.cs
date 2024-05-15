@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Reports.Journals
         private ucGenJrnlReport ucGenJrnlReport;
         private ucCashReceiptsJrnlReport ucCashReceiptsJournalReport;
         private ucProcurementReceivedJrnlReport ucProcurementReceivedJrnlReport;
+        private ucCashDisbursementJrnlReport ucCashDisbursementJrnlReport;
 
         public frmJournalReports()
         {
@@ -23,6 +24,7 @@ namespace AccountingSystem.Views.Reports.Journals
             ucGenJrnlReport = ucGenJrnlReport1;
             ucCashReceiptsJournalReport = ucCashReceiptsJournalReport1;
             ucProcurementReceivedJrnlReport = ucProcurementReceivedJrnlReport1;
+            ucCashDisbursementJrnlReport = ucCashDisbursementJrnlReport1;
         }
 
         private void frmJournalReports_Load(object sender, EventArgs e)
@@ -56,6 +58,7 @@ namespace AccountingSystem.Views.Reports.Journals
                     break;
 
                 case "tabPageCashDisbursementJrnl":
+                    ucCashDisbursementJrnlReport.OnLoad();
                     break;
 
                 case "tabPageChckDisbursementJrnl":

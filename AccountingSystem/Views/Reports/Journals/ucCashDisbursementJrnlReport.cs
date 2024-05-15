@@ -7,62 +7,39 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmCashDisbursementsJournalReport : Form
+    public partial class ucCashDisbursementJrnlReport : UserControl
     {
         private readonly ReportViewer reportViewer;
-        internal string journalName;
-        internal int fundId;
-        internal DateTime date;
-        private byte journalId = 4;
 
-        public frmCashDisbursementsJournalReport()
+        public ucCashDisbursementJrnlReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
-            Helper.LoadFormIcon(this);
         }
 
-        private DataTable CashDisbursementsJournalDataTable()
+        internal void OnLoad()
         {
-            var dtCashDisbursementsJournal = new dsLFS.CashDisbursementsJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtCashDisbursementFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
-
-            string jevNo;
-            string particulars;
-
-            foreach (DataRow item in dtCashDisbursementFromDB.Rows)
-            {
-                jevNo = item["jev_no"].ToString();
-                particulars = item["explanation"].ToString();
-
-                DataRow row = dtCashDisbursementsJournal.NewRow();
-                row["date"] = item["date_entry"];
-                row["ref"] = jevNo;
-                row["particulars"] = particulars;
-
-                if (Convert.ToBoolean(item["is_debit"]))
-                {
-                    row["account_id_debit"] = item["general_ledger_accounts_id"];
-                    row["account_code_debit"] = item["account_code"];
-                    row["debit"] = item["amount"];
-                }
-                else
-                {
-                    row["account_id_credit"] = item["general_ledger_accounts_id"];
-                    row["account_code_credit"] = item["account_code"];
-                    row["credit"] = item["amount"];
-                }
-
-                dtCashDisbursementsJournal.Rows.Add(row);
-            }
-
-            return dtCashDisbursementsJournal;
+            LoadFunds();
         }
 
-        private Dictionary<string, string> GetDefaultAccount()
+        private void LoadFunds()
+        {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+        }
+
+        private void btnRunReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReport(reportViewer);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private Dictionary<string, string> GetDefaultAccount(int journalId, int fundId)
         {
             var dictionary = new Dictionary<string, string>();
             dictionary.Add("defaultAccIdDebit1", "0");
@@ -146,15 +123,53 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void LoadReport(LocalReport report)
+        private void LoadReport(ReportViewer reportViewer)
         {
             Cursor.Current = Cursors.WaitCursor;
+
+            var localReport = reportViewer.LocalReport;
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            var date = dateTimePicker1.Value;
+            string journalName = "Cash Disbursements Journal";
+            int journalId = 4;
+
+            var dtCashDisbursementsJournal = new dsLFS.CashDisbursementsJournalDataTable();
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtCashDisbursementFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+
+            string jevNo;
+            string particulars;
+
+            foreach (DataRow item in dtCashDisbursementFromDB.Rows)
+            {
+                jevNo = item["jev_no"].ToString();
+                particulars = item["explanation"].ToString();
+
+                DataRow row = dtCashDisbursementsJournal.NewRow();
+                row["date"] = item["date_entry"];
+                row["ref"] = jevNo;
+                row["particulars"] = particulars;
+
+                if (Convert.ToBoolean(item["is_debit"]))
+                {
+                    row["account_id_debit"] = item["general_ledger_accounts_id"];
+                    row["account_code_debit"] = item["account_code"];
+                    row["debit"] = item["amount"];
+                }
+                else
+                {
+                    row["account_id_credit"] = item["general_ledger_accounts_id"];
+                    row["account_code_credit"] = item["account_code"];
+                    row["credit"] = item["amount"];
+                }
+
+                dtCashDisbursementsJournal.Rows.Add(row);
+            }
 
             var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Cash Disbursements Journal");
             var lguDetails = Helper.LGUDetails();
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
             var parameters = new[]
@@ -164,44 +179,29 @@ namespace AccountingSystem.Views.Reports.Journals
                 new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
-                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
-                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
-                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
-                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
-                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
-                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
-                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
-                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
-                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
-                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
-                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
+                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit1"]),
+                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit2"]),
+                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount(journalId, fundId)["defaultAccCodeDebit3"]),
+                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit1"]),
+                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit2"]),
+                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount(journalId, fundId)["defaultAccIdDebit3"]),
+                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit1"]),
+                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit2"]),
+                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount(journalId, fundId)["defaultAccCodeCredit3"]),
+                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit1"]),
+                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit2"]),
+                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount(journalId, fundId)["defaultAccIdCredit3"]),
             };
 
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-disbursement-journal.rdlc";
-            report.DataSources.Clear();
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\cash-disbursement-journal.rdlc";
+            localReport.DataSources.Clear();
 
-            report.DataSources.Add(new ReportDataSource("CashDisbursementsJournal", CashDisbursementsJournalDataTable()));
-            report.SetParameters(parameters);
+            localReport.DataSources.Add(new ReportDataSource("CashDisbursementsJournal", dtCashDisbursementsJournal.Clone()));
+            localReport.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
-        }
-
-        private void OnLoad()
-        {
-            LoadReport(reportViewer.LocalReport);
-        }
-
-        private void frmCashDisbursementsJournalReport_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
