@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.Journals
 {
-    partial class ucProcurementReceivedJrnlReport
+    partial class ucCheckDisbursementsJrnlReport
     {
         /// <summary> 
         /// Required designer variable.
@@ -43,7 +43,7 @@
             panel1.Location = new System.Drawing.Point(0, 37);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(717, 291);
-            panel1.TabIndex = 7;
+            panel1.TabIndex = 9;
             // 
             // flowLayoutPanel1
             // 
@@ -57,7 +57,7 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel1.Size = new System.Drawing.Size(717, 37);
-            flowLayoutPanel1.TabIndex = 6;
+            flowLayoutPanel1.TabIndex = 8;
             // 
             // btnRunReport
             // 
@@ -95,13 +95,13 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // ucProcurementReceivedJrnlReport
+            // ucCheckDisbursementsJrnlReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
-            Name = "ucProcurementReceivedJrnlReport";
+            Name = "ucCheckDisbursementsJrnlReport";
             Size = new System.Drawing.Size(717, 328);
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

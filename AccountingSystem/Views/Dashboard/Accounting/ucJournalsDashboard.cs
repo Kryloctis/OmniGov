@@ -77,12 +77,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkCheckDisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            var frmCheckDisbursementJournalReport = new frmCheckDisbursementsJournalReport();
-            frmCheckDisbursementJournalReport.fundId = fundId;
-            frmCheckDisbursementJournalReport.journalName = "Check Disbursements Journal";
-            frmCheckDisbursementJournalReport.date = dateTimePicker1.Value;
-            frmCheckDisbursementJournalReport.ShowDialog();
         }
 
         private void lnkGeneralJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

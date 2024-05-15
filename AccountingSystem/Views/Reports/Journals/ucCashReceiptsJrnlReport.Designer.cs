@@ -33,6 +33,7 @@
             btnRunReport = new System.Windows.Forms.Button();
             dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             cmbxFunds = new System.Windows.Forms.ComboBox();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,13 +87,21 @@
             cmbxFunds.Size = new System.Drawing.Size(200, 23);
             cmbxFunds.TabIndex = 0;
             // 
-            // ucCashReceiptsJournalReport
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // ucCashReceiptsJrnlReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
-            Name = "ucCashReceiptsJournalReport";
+            Name = "ucCashReceiptsJrnlReport";
             Size = new System.Drawing.Size(717, 328);
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -106,5 +115,6 @@
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         internal System.Windows.Forms.ComboBox cmbxFunds;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

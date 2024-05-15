@@ -33,6 +33,7 @@
             dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             panel1 = new System.Windows.Forms.Panel();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,6 +87,14 @@
             panel1.Size = new System.Drawing.Size(717, 291);
             panel1.TabIndex = 5;
             // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
             // ucGenJrnlReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -106,5 +115,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         internal System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Panel panel1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

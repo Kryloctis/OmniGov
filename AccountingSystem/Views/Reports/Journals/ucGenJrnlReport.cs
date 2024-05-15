@@ -9,14 +9,11 @@ namespace AccountingSystem.Views.Reports.Journals
 {
     public partial class ucGenJrnlReport : UserControl
     {
-        private readonly ReportViewer reportViewer;
-
         public ucGenJrnlReport()
         {
             InitializeComponent();
-            reportViewer = new ReportViewer();
-            reportViewer.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer);
+            reportViewer1.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer1);
         }
 
         internal void OnLoad()
@@ -140,7 +137,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             try
             {
-                LoadReport(reportViewer);
+                LoadReport(reportViewer1);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

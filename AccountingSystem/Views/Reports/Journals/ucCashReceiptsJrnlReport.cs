@@ -9,14 +9,11 @@ namespace AccountingSystem.Views.Reports.Journals
 {
     public partial class ucCashReceiptsJrnlReport : UserControl
     {
-        private readonly ReportViewer reportViewer;
-
         public ucCashReceiptsJrnlReport()
         {
             InitializeComponent();
-            reportViewer = new ReportViewer();
-            reportViewer.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer);
+            reportViewer1.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer1);
         }
 
         internal void OnLoad()
@@ -113,8 +110,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void LoadReport(LocalReport report)
+        private void LoadReport(ReportViewer reportViewer)
         {
+            var localReport = reportViewer.LocalReport;
             Cursor.Current = Cursors.WaitCursor;
 
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
@@ -207,11 +205,10 @@ namespace AccountingSystem.Views.Reports.Journals
                 new ReportParameter("paramDefaultAccountIdDepositsCredit", "1"),
             };
 
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-receipts-journal.rdlc";
-            report.DataSources.Clear();
-
-            report.DataSources.Add(new ReportDataSource("CashReceiptsJournal", dtCashReceiptsJournal.Clone()));
-            report.SetParameters(parameters);
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\cash-receipts-journal.rdlc";
+            localReport.DataSources.Clear();
+            localReport.DataSources.Add(new ReportDataSource("CashReceiptsJournal", dtCashReceiptsJournal.Clone()));
+            localReport.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
@@ -222,7 +219,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                LoadReport(reportViewer1);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
