@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.Journals
 {
-    partial class ucCashReceiptsJournalReport
+    partial class ucProcurementReceivedJrnlReport
     {
         /// <summary> 
         /// Required designer variable.
@@ -86,13 +86,13 @@
             cmbxFunds.Size = new System.Drawing.Size(200, 23);
             cmbxFunds.TabIndex = 0;
             // 
-            // ucCashReceiptsJournalReport
+            // ucProcurementReceivedJrnl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
-            Name = "ucCashReceiptsJournalReport";
+            Name = "ucProcurementReceivedJrnl";
             Size = new System.Drawing.Size(717, 328);
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

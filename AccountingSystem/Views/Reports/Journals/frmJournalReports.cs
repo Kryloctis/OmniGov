@@ -13,7 +13,8 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class frmJournalReports : Form
     {
         private ucGenJrnlReport ucGenJrnlReport;
-        private ucCashReceiptsJournalReport ucCashReceiptsJournalReport;
+        private ucCashReceiptsJrnlReport ucCashReceiptsJournalReport;
+        private ucProcurementReceivedJrnlReport ucProcurementReceivedJrnlReport;
 
         public frmJournalReports()
         {
@@ -21,6 +22,7 @@ namespace AccountingSystem.Views.Reports.Journals
             Helper.LoadFormIcon(this);
             ucGenJrnlReport = ucGenJrnlReport1;
             ucCashReceiptsJournalReport = ucCashReceiptsJournalReport1;
+            ucProcurementReceivedJrnlReport = ucProcurementReceivedJrnlReport1;
         }
 
         private void frmJournalReports_Load(object sender, EventArgs e)
@@ -60,6 +62,7 @@ namespace AccountingSystem.Views.Reports.Journals
                     break;
 
                 case "tabPageProcReceivedJrnl":
+                    ucProcurementReceivedJrnlReport.OnLoad();
                     break;
 
                 case "tabPageAdaDisbursementJrnl":

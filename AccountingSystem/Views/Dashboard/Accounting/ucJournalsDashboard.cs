@@ -97,12 +97,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkProcurementReceivedJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            var frmProcurementsReceivedJournalReport = new frmProcurementsReceivedJournalReport();
-            frmProcurementsReceivedJournalReport.fundId = fundId;
-            frmProcurementsReceivedJournalReport.journalName = "Procurement Received Journal";
-            frmProcurementsReceivedJournalReport.date = dateTimePicker1.Value;
-            frmProcurementsReceivedJournalReport.ShowDialog();
         }
     }
 }

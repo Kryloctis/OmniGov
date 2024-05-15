@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucCashReceiptsJournalReport : UserControl
+    public partial class ucCashReceiptsJrnlReport : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public ucCashReceiptsJournalReport()
+        public ucCashReceiptsJrnlReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
