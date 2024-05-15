@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.SAAOBB
+namespace AccountingSystem.Views.Reports.Saaobb
 {
-    public partial class frmSAAOBB : Form
+    public partial class frmSaaobb : Form
     {
         private readonly ReportViewer reportViewer;
 
-        public frmSAAOBB()
+        public frmSaaobb()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

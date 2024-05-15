@@ -37,7 +37,6 @@ using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
-using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
@@ -55,6 +54,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.Saaob;
+using AccountingSystem.Views.Reports.Saaobb;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -494,7 +494,6 @@ namespace AccountingSystem.Views.Dashboard
 
         private void sAAOBBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmSAAOBB().ShowDialog();
         }
 
         #endregion SAAOB and SAAOBB report

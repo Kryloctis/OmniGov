@@ -1,11 +1,11 @@
 ﻿using AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using System;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.Saaob;
+using AccountingSystem.Views.Reports.Saaobb;
 
 namespace AccountingSystem.Views.Dashboard.Budget
 {
@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Dashboard.Budget
         {
             if (!DesignMode)
             {
-                ucBudgetSummary.OnLoad(); 
+                ucBudgetSummary.OnLoad();
             }
         }
 
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Dashboard.Budget
         {
             try
             {
-                _ = new frmSAAOBB().ShowDialog();
+                _ = new frmSaaobb().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
