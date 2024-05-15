@@ -1,11 +1,11 @@
 ﻿using AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using System;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.Saaob;
 
 namespace AccountingSystem.Views.Dashboard.Budget
 {
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Dashboard.Budget
         {
             try
             {
-                _ = new frmSAAOB().ShowDialog();
+                _ = new frmSaaob().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
