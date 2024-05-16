@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTreasury));
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             manageTstripDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
+            receiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            receiptInventoryTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            recieiptIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             realPropertiesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             taxpayersTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             collectingOfficersTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             disbursementOfficersTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             feesChargesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            receiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            receiptInventoryTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            recieiptIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             transactionsTstripDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
             paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             af56TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +57,7 @@
             releasedAndUnreleaseChecksTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             reportsTstrpDrpDwnMnu = new System.Windows.Forms.ToolStripDropDownButton();
-            rcdTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            reportOfCollectionsDepositsRcdTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             rptStatementOfAccTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             listOfRealPropertyDelinquenciesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +70,7 @@
             schedUnreleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,6 +97,27 @@
             manageTstripDrpDwnBtn.Name = "manageTstripDrpDwnBtn";
             manageTstripDrpDwnBtn.Size = new System.Drawing.Size(73, 19);
             manageTstripDrpDwnBtn.Text = "● Manage";
+            // 
+            // receiptsToolStripMenuItem
+            // 
+            receiptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { receiptInventoryTstrpMnuItm, recieiptIssuanceTstrpMnuItm });
+            receiptsToolStripMenuItem.Name = "receiptsToolStripMenuItem";
+            receiptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            receiptsToolStripMenuItem.Text = "Receipts";
+            // 
+            // receiptInventoryTstrpMnuItm
+            // 
+            receiptInventoryTstrpMnuItm.Name = "receiptInventoryTstrpMnuItm";
+            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
+            receiptInventoryTstrpMnuItm.Text = "Inventory";
+            receiptInventoryTstrpMnuItm.Click += receiptInventoryTstrpMnuItm_Click;
+            // 
+            // recieiptIssuanceTstrpMnuItm
+            // 
+            recieiptIssuanceTstrpMnuItm.Name = "recieiptIssuanceTstrpMnuItm";
+            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
+            recieiptIssuanceTstrpMnuItm.Text = "Issuance";
+            recieiptIssuanceTstrpMnuItm.Click += recieiptIssuanceTstrpMnuItm_Click;
             // 
             // realPropertiesTstrpMnuItm
             // 
@@ -131,27 +153,6 @@
             feesChargesTstrpMnuItm.Size = new System.Drawing.Size(204, 22);
             feesChargesTstrpMnuItm.Text = "Fees && Charges Config...";
             feesChargesTstrpMnuItm.Click += feesChargesTstrpMnuItm_Click;
-            // 
-            // receiptsToolStripMenuItem
-            // 
-            receiptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { receiptInventoryTstrpMnuItm, recieiptIssuanceTstrpMnuItm });
-            receiptsToolStripMenuItem.Name = "receiptsToolStripMenuItem";
-            receiptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            receiptsToolStripMenuItem.Text = "Receipts";
-            // 
-            // receiptInventoryTstrpMnuItm
-            // 
-            receiptInventoryTstrpMnuItm.Name = "receiptInventoryTstrpMnuItm";
-            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
-            receiptInventoryTstrpMnuItm.Text = "Inventory";
-            receiptInventoryTstrpMnuItm.Click += receiptInventoryTstrpMnuItm_Click;
-            // 
-            // recieiptIssuanceTstrpMnuItm
-            // 
-            recieiptIssuanceTstrpMnuItm.Name = "recieiptIssuanceTstrpMnuItm";
-            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
-            recieiptIssuanceTstrpMnuItm.Text = "Issuance";
-            recieiptIssuanceTstrpMnuItm.Click += recieiptIssuanceTstrpMnuItm_Click;
             // 
             // transactionsTstripDrpDwnBtn
             // 
@@ -275,7 +276,7 @@
             // reportsTstrpDrpDwnMnu
             // 
             reportsTstrpDrpDwnMnu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { rcdTstrpMnuItm, toolStripSeparator1, rptStatementOfAccTstrpMnuItm, listOfRealPropertyDelinquenciesTstrpMnuItm, rptDuesAndPymntsTstrpMnuItm, crtfdListOfRptDeliquenciesTstrpMnuItm, toolStripSeparator3, bankCashbookTstrpMnuItm, reportOfCheckIssuedRciTstrpMnuItm, schedReleasedChequesTstrpMnuItm, schedUnreleasedChequesTstrpMnuItm, consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm, dailyCashPositionsTstrpMnuItm });
+            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRcdTstrpMnuItm, abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator1, rptStatementOfAccTstrpMnuItm, listOfRealPropertyDelinquenciesTstrpMnuItm, rptDuesAndPymntsTstrpMnuItm, crtfdListOfRptDeliquenciesTstrpMnuItm, toolStripSeparator3, bankCashbookTstrpMnuItm, reportOfCheckIssuedRciTstrpMnuItm, schedReleasedChequesTstrpMnuItm, schedUnreleasedChequesTstrpMnuItm, consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm, dailyCashPositionsTstrpMnuItm });
             reportsTstrpDrpDwnMnu.Image = (System.Drawing.Image)resources.GetObject("reportsTstrpDrpDwnMnu.Image");
             reportsTstrpDrpDwnMnu.ImageTransparentColor = System.Drawing.Color.Magenta;
             reportsTstrpDrpDwnMnu.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
@@ -283,12 +284,12 @@
             reportsTstrpDrpDwnMnu.Size = new System.Drawing.Size(70, 19);
             reportsTstrpDrpDwnMnu.Text = "● Reports";
             // 
-            // rcdTstrpMnuItm
+            // reportOfCollectionsDepositsRcdTstrpMnuItm
             // 
-            rcdTstrpMnuItm.Name = "rcdTstrpMnuItm";
-            rcdTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            rcdTstrpMnuItm.Text = "Report of Collections Deposits (RCD)...";
-            rcdTstrpMnuItm.Click += rcdTstrpMnuItm_Click;
+            reportOfCollectionsDepositsRcdTstrpMnuItm.Name = "reportOfCollectionsDepositsRcdTstrpMnuItm";
+            reportOfCollectionsDepositsRcdTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
+            reportOfCollectionsDepositsRcdTstrpMnuItm.Text = "Report of Collections Deposits (RCD)...";
+            reportOfCollectionsDepositsRcdTstrpMnuItm.Click += rcdTstrpMnuItm_Click;
             // 
             // toolStripSeparator1
             // 
@@ -370,6 +371,12 @@
             dailyCashPositionsTstrpMnuItm.Text = "Daily Cash Positions...";
             dailyCashPositionsTstrpMnuItm.Click += dailyCashPositionsTstrpMnuItm_Click;
             // 
+            // abstractOfGeneralCollectionsToolStripMenuItem
+            // 
+            abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
+            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(409, 22);
+            abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections...";
+            // 
             // ucTreasury
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -409,7 +416,7 @@
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem bankDepositTstrpMnuItm;
         private System.Windows.Forms.ToolStripDropDownButton reportsTstrpDrpDwnMnu;
-        private System.Windows.Forms.ToolStripMenuItem rcdTstrpMnuItm;
+        private System.Windows.Forms.ToolStripMenuItem reportOfCollectionsDepositsRcdTstrpMnuItm;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem schedUnreleasedChequesTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem rptStatementOfAccTstrpMnuItm;
@@ -426,5 +433,6 @@
         private System.Windows.Forms.ToolStripMenuItem receiptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptInventoryTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem recieiptIssuanceTstrpMnuItm;
+        private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
     }
 }

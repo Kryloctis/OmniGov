@@ -278,8 +278,6 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Manage > Roles"))
                 menuRoles.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Receipts"))
-                receiptsInventoryToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;

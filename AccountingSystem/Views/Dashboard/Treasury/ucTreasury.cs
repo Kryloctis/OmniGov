@@ -25,6 +25,7 @@ using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Dashboard.Treasury
 {
@@ -33,6 +34,108 @@ namespace AccountingSystem.Views.Dashboard.Treasury
         public ucTreasury()
         {
             InitializeComponent();
+        }
+
+        internal void OnLoad()
+        {
+            ValidatePermissions();
+        }
+
+        private void ValidatePermissions()
+        {
+            //if (!Helper.HasPermission("Manage > Returned Receipts"))
+            //    ret.Enabled = false;
+
+            //if (!Helper.HasPermission("Manage > Database Synchronization"))
+            //    databaseSynchronizationToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Manage > Business Categories"))
+            //    businessCategoriesToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Manage > Business Add-on Charges"))
+            //    businessAddOnToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Transaction > Generate RCD"))
+            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Transaction > RCD Approval"))
+            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
+
+            //if (!Helper.HasPermission("Report > Collector's RCD"))
+            //    //collectorsRCDToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Collecting Officer"))
+                collectingOfficersTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Disbursing Officer"))
+                disbursementOfficersTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Taxpayers"))
+                taxpayersTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Fees & Charges Config."))
+                feesChargesTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Real Properties"))
+                realPropertiesTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Issue Check"))
+                checkIssuanceTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Bank Deposits"))
+                bankDepositTstrpMnuItm.Enabled = false;
+
+
+            if (!Helper.HasPermission("Manage > Receipts"))
+                receiptInventoryTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Issue Receipt"))
+                recieiptIssuanceTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Receipts") && !Helper.HasPermission("Transaction > Issue Receipt"))
+                receiptsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Payments"))
+                paymentsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Assessment Posting"))
+                assessmentPostingTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
+                releasedAndUnreleaseChecksTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
+                listOfRealPropertyDelinquenciesTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Report of Checks Issued"))
+                reportOfCheckIssuedRciTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
+                reportOfCollectionsDepositsRcdTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Abstract of General Collections"))
+                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Bank Cashbook"))
+                bankCashbookTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Consolidated Receipts"))
+                consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Daily Cash Position"))
+                dailyCashPositionsTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
+                rptDuesAndPymntsTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
+                crtfdListOfRptDeliquenciesTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
+                schedReleasedChequesTstrpMnuItm.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
+                schedUnreleasedChequesTstrpMnuItm.Enabled = false;
         }
 
         private void taxpayersTstrpMnuItm_Click(object sender, EventArgs e)

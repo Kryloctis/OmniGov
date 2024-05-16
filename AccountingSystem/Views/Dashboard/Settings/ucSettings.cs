@@ -30,6 +30,30 @@ namespace AccountingSystem.Views.Dashboard.Settings
         private void ValidatePermissions()
         {
             panelAdmin.Enabled = AccFactory.UsersRepository().GetViewRecordById(Helper.userId)["office"] == "SysAdmin";
+
+            if (!Helper.HasPermission("Manage > Banks"))
+                btnBanks.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Accountable Forms"))
+                btnAccForms.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Bank Accounts"))
+                btnBankAccs.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Signatories"))
+                btnDocSignatories.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Barangays"))
+                btnBarangays.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Function/Program/Project"))
+                btnFpp.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Users"))
+                btnUsers.Enabled = false;
+
+            if (!Helper.HasPermission("Manage > Roles"))
+                btnRoles.Enabled = false;
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
