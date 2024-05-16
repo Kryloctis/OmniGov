@@ -97,7 +97,7 @@ namespace ACC.Data
 
         public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
-        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS, BanksRepository());
+        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS);
 
         public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
@@ -202,8 +202,6 @@ namespace ACC.Data
         public static IPaymentFeesCharges PaymentFeesChargesRepository() => new PaymentFeesChargesRepository(mySqlGenericCommandsLFS);
 
         public static IPrevCattleOwnership PrevCattleOwnershipRepository() => new PrevCattleOwnershipRepository(mySqlGenericCommandsLFS);
-
-        public static IRptDelinquenciesRepository RptDelinquenciesRepository() => new RptDelinquenciesRepository(mySqlGenericCommandsLFS);
 
         public static IRcd RcdRepository() => new RcdRepository(mySqlGenericCommandsLFS, RcdCollectionsRepository(), RcdDepositsRepository());
 

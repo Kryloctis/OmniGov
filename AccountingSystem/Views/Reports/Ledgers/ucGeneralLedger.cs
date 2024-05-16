@@ -220,25 +220,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             reportViewer.RefreshReport();
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadFunds();
-                LoadAccounts();
-                LoadYear();
-                cmbxAccount.Tag = string.Empty;
-                cmbFunds.Tag = string.Empty;
-            }
-        }
-
-        private void ucGeneralLedger_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFunds();
+            LoadAccounts();
+            LoadYear();
+            cmbxAccount.Tag = string.Empty;
+            cmbFunds.Tag = string.Empty;
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -296,8 +284,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
         }
-
-        #region Validations
 
         private string GetFormErrors()
         {
@@ -361,7 +347,5 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             cmbFunds.Tag = string.Empty;
         }
-
-        #endregion Validations
     }
 }

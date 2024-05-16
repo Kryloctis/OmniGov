@@ -24,47 +24,15 @@ namespace AccountingSystem.Views.Manage.Registry
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        internal void LoadRegistryList()
+        private void frmRegistry_Load(object sender, EventArgs e)
         {
-            if (!backgroundWorker1.IsBusy)
+            try
             {
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync(RegistryParameters());
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+                LoadRecords();
+                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
             }
-        }
-
-        private void LoadRowFilter()
-        {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
-        }
-
-        private void OnLoad()
-        {
-            LoadRowFilter();
-            LoadRegistryList();
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
-        {
-            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
-            {
-                var registryModels = new List<RegistryModel>();
-
-                foreach (DataGridViewRow row in selectedRows)
-                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
-
-                return AccFactory.RegistryRepository().Delete(registryModels);
-            }
-            return false;
-        }
-
-        private (string searchKey, int limitCount) RegistryParameters()
-        {
-            string searchKey = txtSearch.Text.Trim();
-            int limitCount = Convert.ToInt32(cmbxRowFilter.SelectedValue);
-
-            return (searchKey, limitCount);
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -88,21 +56,62 @@ namespace AccountingSystem.Views.Manage.Registry
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
+        {
+            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+            {
+                var registryModels = new List<RegistryModel>();
+
+                foreach (DataGridViewRow row in selectedRows)
+                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
+
+                return AccFactory.RegistryRepository().Delete(registryModels);
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedRows = dataGridView1.SelectedRows;
+                if (DeleteRegistry(selectedRows))
+                {
+                    Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
+                    LoadRecords();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                string searchKey = txtSearch.Text.Trim();
+                int limitRow = Convert.ToInt32(cmbxRowFilter.SelectedValue);
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync((limitRow, searchKey));
+            }
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                var parameters = ((string searchKey, int limitCount))e.Argument;
+                var parameters = ((int limitCount, string searchKey))e.Argument;
 
                 var dataColumns = new DataColumn[]
                 {
-                    new DataColumn(Name = "id", typeof(int)),
-                    new DataColumn(Name = "name", typeof(string)),
-                    new DataColumn(Name = "sex", typeof(string)),
-                    new DataColumn(Name = "nationality", typeof(string)),
-                    new DataColumn(Name = "birth_date", typeof(DateTime)),
-                    new DataColumn(Name = "birth_place", typeof(string)),
-                    new DataColumn(Name = "contact_info", typeof(string))
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("name", typeof(string)),
+                    new DataColumn("sex", typeof(string)),
+                    new DataColumn("nationality", typeof(string)),
+                    new DataColumn("birth_date", typeof(DateTime)),
+                    new DataColumn("birth_place", typeof(string)),
+                    new DataColumn("contact_info", typeof(string)),
+                    new DataColumn("created_at", typeof(string)),
+                    new DataColumn("updated_at", typeof(string)),
                 };
 
                 var dataTable = new DataTable();
@@ -112,27 +121,21 @@ namespace AccountingSystem.Views.Manage.Registry
                 int progressCount = 0;
                 int totalProgressCount = dtRegistry.Rows.Count;
 
-                if (dtRegistry.Rows.Count < 1) { e.Result = dataTable; backgroundWorker1.ReportProgress(100); return; }
-
                 foreach (DataRow row in dtRegistry.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    int Id = Convert.ToInt32(row["id"]);
                     string middleName = row["middle_name"].ToString();
                     string fullName = $"{row["first_name"]} {(!string.IsNullOrEmpty(middleName) ? $"{middleName.Substring(0, 1)}." : "")} {row["last_name"]}";
-                    string sex = $"{row["sex"]}";
-                    string nationality = $"{row["nationality"]}";
-                    string birthPlace = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
-                    var birthDate = Convert.ToDateTime(row["birth_date"]);
-                    string contactInfo = $"{row["contact_info"]}";
 
-                    newRow["id"] = Id;
+                    newRow["id"] = row["id"];
                     newRow["name"] = fullName;
-                    newRow["sex"] = sex;
-                    newRow["nationality"] = nationality;
-                    newRow["birth_place"] = birthPlace;
-                    newRow["birth_date"] = birthDate;
-                    newRow["contact_info"] = contactInfo;
+                    newRow["sex"] = row["sex"];
+                    newRow["nationality"] = row["nationality"];
+                    newRow["birth_place"] = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
+                    newRow["birth_date"] = row["birth_date"];
+                    newRow["contact_info"] = row["contact_info"];
+                    newRow["created_at"] = row["created_at"];
+                    newRow["updated_at"] = row["updated_at"];
 
                     dataTable.Rows.Add(newRow);
                     progressCount++;
@@ -151,44 +154,28 @@ namespace AccountingSystem.Views.Manage.Registry
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
 
-            HelperLoadRecords.DatagridViewRegistry(dataTable, dataGridView1);
-            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
-            lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                HelperLoadRecords.DatagridViewRegistry(dataTable, dataGridView1);
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
+                var stampIndex = new byte[] { 7, 8 };
+                Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmRegistry_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var selectedRows = dataGridView1.SelectedRows;
-                if (DeleteRegistry(selectedRows))
-                {
-                    Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
-                    LoadRegistryList();
-                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -197,7 +184,7 @@ namespace AccountingSystem.Views.Manage.Registry
         {
             try
             {
-                LoadRegistryList();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -206,7 +193,7 @@ namespace AccountingSystem.Views.Manage.Registry
         {
             try
             {
-                LoadRegistryList();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

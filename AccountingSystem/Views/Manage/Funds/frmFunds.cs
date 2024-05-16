@@ -2,6 +2,9 @@
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Funds
@@ -13,31 +16,17 @@ namespace AccountingSystem.Views.Manage.Funds
             InitializeComponent();
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgFunds);
-        }
-
-        internal void LoadRecords()
-        {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
-
-            lblRecordCount.Text = dgFunds.Rows.Count.ToString();
+            Helper.DatagridFullRowSelectStyle(dgFunds, true);
         }
 
         private void frmFunds_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            Helper.DatagridFullRowSelectStyle(dgFunds, true);
-            dgFunds.ShowCellToolTips = false;
-            LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -53,11 +42,9 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             try
             {
-                if (dgFunds.Rows.Count > 0)
-                {
-                    int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
-                    _ = new frmFundEdit(this, fundId).ShowDialog();
-                }
+                int rowIndex = dgFunds.CurrentRow.Index;
+                int fundId = Convert.ToInt32(dgFunds.Rows[rowIndex].Cells["id"].Value);
+                _ = new frmFundEdit(this, fundId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -72,7 +59,7 @@ namespace AccountingSystem.Views.Manage.Funds
                     var fundsModelList = new List<FundsModel>();
                     foreach (DataGridViewRow row in dgFunds.SelectedRows)
                     {
-                        int fundId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        int fundId = Convert.ToInt16(row.Cells["id"].Value.ToString());
                         fundsModelList.Add(new FundsModel() { Id = fundId });
                     }
 
@@ -87,7 +74,10 @@ namespace AccountingSystem.Views.Manage.Funds
             try
             {
                 if (DeleteData())
+                {
+                    Helper.MessageBoxError($"{dgFunds.SelectedRows.Count} record/s has been deleted.");
                     LoadRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -103,21 +93,69 @@ namespace AccountingSystem.Views.Manage.Funds
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                string searchText = toolStripTextBoxSearch.Text.Trim();
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
-                if (searchText.Length > 0)
-                {
-                    var dtFunds = AccFactory.FundsRepository().GetRecordsBySearch(searchText);
-                    HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
+        private void cmbxFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
-                    lblRecordCount.Text = dgFunds.Rows.Count.ToString();
-                }
-                else
-                    LoadRecords();
+        internal void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                string searchKey = txtSearch.Text.Trim();
+                int rowLimit = Convert.ToInt32(cmbxFilter.SelectedValue);
+                progressBar1.Value = 0;
+
+                backgroundWorker1.RunWorkerAsync((searchKey, rowLimit));
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((string searchKey, int rowLimit))e.Argument;
+                DataTable dtFunds = AccFactory.FundsRepository().GetRecords(parameters.searchKey, parameters.rowLimit);
+                int totalProgressCount = dtFunds.Rows.Count;
+                int progressCount = 0;
+
+                dtFunds.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
+                e.Result = dtFunds;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                HelperLoadRecords.FundsDatagridView(dataTable, dgFunds);
+                dgFunds.CurrentCell = dgFunds.FirstDisplayedCell;
+                lblRecordCount.Text = dgFunds.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

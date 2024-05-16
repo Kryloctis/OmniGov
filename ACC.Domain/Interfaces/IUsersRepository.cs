@@ -24,7 +24,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetLinksJOCollectingOfficers();
 
-        DataTable GetViewRecordsBySearch(string office, string searchTxt);
+        DataTable GetViewRecordsBySearch(int rowLimit, string office, string searchTxt);
 
         DataTable GetViewRecords();
 

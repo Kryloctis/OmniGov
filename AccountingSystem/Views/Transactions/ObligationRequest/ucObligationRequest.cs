@@ -115,7 +115,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             DataTable dtSubFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId);
+                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
             else
                 dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 

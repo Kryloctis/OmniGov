@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal void LoadOthersFPPByFPPIdCombobox()
         {
             byte fppId = Convert.ToByte(cmbFPP.SelectedValue);
-            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFppId(fppId), cmbOthersFPP, "name", "id");
         }
 
         private DataTable DataTableFPP()

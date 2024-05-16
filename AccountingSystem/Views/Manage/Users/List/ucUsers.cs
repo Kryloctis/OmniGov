@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,67 @@ namespace AccountingSystem.Views.Manage.Users.List
 {
     public partial class ucUsers : UserControl
     {
-        internal int userId = 0;
+        private bool isEdit;
+        private int userId;
 
         public ucUsers()
         {
             InitializeComponent();
         }
 
+        internal void OnLoad(bool isEdit, int? userId)
+        {
+            this.isEdit = isEdit;
+            LoadOffice();
+
+            if (isEdit)
+            {
+                this.userId = userId.Value;
+                LoadSelectedRecord(userId.Value);
+            }
+        }
+
+        internal UsersModel UsersModel()
+        {
+            return new UsersModel()
+            {
+                UserName = txtUsername.Text.Trim(),
+                Password = txtPassword.Text.Trim(),
+                Prefix = txtPrefix.Text.Trim(),
+                FirstName = txtFirstname.Text.Trim(),
+                MidInitial = txtMiddleInitial.Text.Trim(),
+                LastName = txtLastname.Text.Trim(),
+                Suffix = txtSuffix.Text.Trim(),
+                RoleId = (byte)cmbRoles.SelectedValue,
+            };
+        }
+
+        private void LoadSelectedRecord(int userId)
+        {
+            var dictUser = AccFactory.UsersRepository().GetRecordByID(userId);
+            var dictRoles = AccFactory.RolesRepository().GetRecordByID(Convert.ToInt32(dictUser["roles_id"]));
+
+            cmbOffice.Text = dictRoles["office"];
+            cmbRoles.SelectedValue = dictUser["roles_id"];
+            txtPrefix.Text = dictUser["prefix"];
+            txtFirstname.Text = dictUser["first_name"];
+            txtMiddleInitial.Text = dictUser["mid_initial"];
+            txtLastname.Text = dictUser["last_name"];
+            txtSuffix.Text = dictUser["suffix"];
+            txtUsername.Text = dictUser["username"];
+        }
+
+        private void cmbOffice_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRoles();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         internal void LoadOffice()
         {
-            cmbOffice.SelectedValueChanged -= new EventHandler(CmbxOffice_SelectedValueChanged);
-
             var userDict = Helper.LoggedInUserData();
             switch (userDict["office"])
             {
@@ -32,9 +83,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                     cmbOffice.Items.Add(userDict["office"]);
                     break;
             }
-
-            cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
-            cmbOffice.SelectedIndex = 0;
         }
 
         internal void LoadRoles()
@@ -44,21 +92,15 @@ namespace AccountingSystem.Views.Manage.Users.List
             HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
         }
 
-        private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
-        {
-            cmbRoles.Text = string.Empty;
-            LoadRoles();
-        }
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
             {
-                epRole.GetError(cmbRoles),
-                epFirstName.GetError(txtFirstname),
-                epMiddleInitial.GetError(txtMiddleInitial),
-                epLastName.GetError(txtLastname),
-                epUserName.GetError(txtUsername),
+                errorProvider1.GetError(cmbRoles),
+                errorProvider1.GetError(txtFirstname),
+                errorProvider1.GetError(txtMiddleInitial),
+                errorProvider1.GetError(txtLastname),
+                errorProvider1.GetError(txtUsername),
                 txtPassword.Tag.ToString(),
                 txtConfirmPassword.Tag.ToString()
             };
@@ -68,7 +110,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         internal void ResetForm()
         {
-            cmbRoles.SelectedIndex = -1;
+            LoadRoles();
             txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
@@ -83,7 +125,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epUserName, txtUsername, "username");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtUsername, "username");
 
                 var usersRepository = AccFactory.UsersRepository();
                 string userName = txtUsername.Text.Trim();
@@ -96,7 +138,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
                 if (userNameExist)
                 {
-                    epUserName.SetError(txtUsername, "Username already exist in your records.");
+                    errorProvider1.SetError(txtUsername, "Username already exist in your records.");
                     e.Cancel = true;
                 }
             }
@@ -105,21 +147,21 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtUsername_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epUserName, txtUsername);
+            Helper.ClearErrorTextBox(errorProvider1, txtUsername);
         }
 
         private void cmbRoles_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epRole, cmbRoles, "role name");
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbRoles, "role name");
 
                 int roleId = Convert.ToByte(cmbRoles.SelectedValue);
                 bool idExist = AccFactory.RolesRepository().IdExist(roleId);
 
                 if (!idExist)
                 {
-                    epRole.SetError(cmbRoles, "Invalid role name. Please select on the list.");
+                    errorProvider1.SetError(cmbRoles, "Invalid role name. Please select on the list.");
                     e.Cancel = true;
                 }
             }
@@ -128,37 +170,37 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void cmbRoles_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epRole, cmbRoles);
+            Helper.ClearErrorComboBox(errorProvider1, cmbRoles);
         }
 
         private void txtFirstname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstname, "first name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstname, "first name");
         }
 
         private void txtFirstname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epFirstName, txtFirstname);
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstname);
         }
 
         private void txtMiddleInitial_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epMiddleInitial, txtMiddleInitial);
+            Helper.ClearErrorTextBox(errorProvider1, txtMiddleInitial);
         }
 
         private void txtMiddleInitial_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epMiddleInitial, txtMiddleInitial, "middle initial");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMiddleInitial, "middle initial");
         }
 
         private void txtLastname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastname, "last name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastname, "last name");
         }
 
         private void txtLastname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epLastName, txtLastname);
+            Helper.ClearErrorTextBox(errorProvider1, txtLastname);
         }
 
         private bool textBoxIsEmpty(TextBox textBox, string field)
@@ -182,7 +224,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtPassword_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPassword, txtPassword);
+            Helper.ClearErrorTextBox(errorProvider1, txtPassword);
         }
 
         private bool PasswordDoesNotMatch(TextBox txtBox)
@@ -214,7 +256,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtConfirmPassword_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epConfirmPassword, txtConfirmPassword);
+            Helper.ClearErrorTextBox(errorProvider1, txtConfirmPassword);
         }
 
         private void btnPasswordVisibility_Click(object sender, EventArgs e)
@@ -257,23 +299,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ucUsers_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadOffice();
-            }
         }
     }
 }

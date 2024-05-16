@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -9,22 +9,46 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class ucBankAccounts : UserControl
     {
-        internal int bankAccountID;
-        internal bool isEdit;
+        private int bankAccId;
+        private bool isEdit;
 
         public ucBankAccounts()
         {
             InitializeComponent();
         }
 
+        private void LoadSelectedRecord(int bankAccId)
+        {
+            var dictBankAccounts = AccFactory.BankAccountsRepository().GetRecordByID(bankAccId);
+            cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
+            txtAccountNo.Text = dictBankAccounts["account_no"];
+        }
+
+        internal BankAccountsModel BankAccountsModel()
+        {
+            return new BankAccountsModel()
+            {
+                BanksModel = new BanksModel() { Id = Convert.ToInt32(cmbxBank.SelectedValue) },
+                AccountNumber = txtAccountNo.Text.Trim(),
+            };
+        }
+
+        internal void OnLoad(bool isEdit, int? bankAccId)
+        {
+            this.isEdit = isEdit;
+            LoadBanks();
+
+            if (isEdit)
+            {
+                this.bankAccId = bankAccId.Value;
+                LoadSelectedRecord(this.bankAccId);
+            }
+        }
+
         internal void ResetForm()
         {
-            try
-            {
-                LoadBanks();
-                txtAccountNo.Clear();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadBanks();
+            txtAccountNo.Clear();
         }
 
         internal string GetFormErrors()
@@ -36,23 +60,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void ucBankAccounts_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadBanks();
-            }
         }
 
         private void LoadBanks()
@@ -69,14 +76,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         private void txtAccountNo_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtAccountNo);
-        }
-
-        private void cmbxBank_Validating(object sender, CancelEventArgs e)
-        {
-        }
-
-        private void cmbxBank_Validated(object sender, EventArgs e)
-        {
         }
     }
 }

@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadBarangays();
             nudYear.Value = Helper.GetCurrentDate().Year;
             ToogleButtons(dgProperties, btnPost);

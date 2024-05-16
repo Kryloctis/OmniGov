@@ -389,8 +389,19 @@ namespace AccountingSystem
             datagrid.Columns["role_name"].HeaderText = "Role Name";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        internal static void RolesPermissionsDataGridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.ColumnHeadersVisible = false;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["permission_name"].HeaderText = "Permissions";
+            dataGridView.Columns["permission_name"].ReadOnly = true;
+            dataGridView.Columns["is_checked"].HeaderText = "";
+            dataGridView.Columns["is_checked"].MinimumWidth = 30;
+            dataGridView.Columns["is_checked"].Width = 30;
         }
 
         internal static void RoleNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -730,11 +741,14 @@ namespace AccountingSystem
         internal static void FundsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Name";
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["fund_code"].HeaderText = "Code";
+            datagrid.Columns["fund_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            datagrid.Columns["fund_code"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["fund_code"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["fund_name"].HeaderText = "Name";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1203,28 +1217,16 @@ namespace AccountingSystem
             }
         }
 
-        internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void UsersDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["roles_id"].Visible = false;
-            datagrid.Columns["prefix"].Visible = false;
-            datagrid.Columns["first_name"].Visible = false;
-            datagrid.Columns["mid_initial"].Visible = false;
-            datagrid.Columns["last_name"].Visible = false;
-            datagrid.Columns["suffix"].Visible = false;
-            datagrid.Columns["user_full_name"].HeaderText = "Name";
-            datagrid.Columns["username"].HeaderText = "Username";
-            datagrid.Columns["password"].Visible = false;
-            datagrid.Columns["is_deleted"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["office"].HeaderText = "Office";
-            datagrid.Columns["role_name"].HeaderText = "Role";
-            datagrid.Columns["permission_name"].Visible = false;
-            datagrid.Columns["permission_office"].Visible = false;
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["full_name"].HeaderText = "Name";
+            dataGridView.Columns["office_role"].HeaderText = "Office > Role";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["is_active"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["is_active"].HeaderText = "Active";
         }
 
         internal static void UsersComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
@@ -1896,7 +1898,7 @@ namespace AccountingSystem
             }
         }
 
-        internal static void RowFilterCombobox(ComboBox comboBox)
+        internal static void ComboboxRowLimitFilter(ComboBox comboBox)
         {
             DataTable dataTable = new DataTable();
 
@@ -1958,6 +1960,8 @@ namespace AccountingSystem
             dataGridView.Columns["birth_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
             dataGridView.Columns["birth_place"].HeaderText = "Birthplace";
             dataGridView.Columns["contact_info"].HeaderText = "Contact Info.";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
         }
 
         internal static void DatagridViewPaymentCheques(DataTable dataTable, DataGridView dataGridView)

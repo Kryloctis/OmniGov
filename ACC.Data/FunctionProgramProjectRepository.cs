@@ -9,13 +9,13 @@ namespace ACC.Data
 {
     public class FunctionProgramProjectRepository : IFunctionProgramProjectRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "function_program_project";
         private readonly string viewTableName = "view_function_program_project";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public FunctionProgramProjectRepository(IAccGenericCommands dbGenericCommands)
+        public FunctionProgramProjectRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -31,7 +31,7 @@ namespace ACC.Data
 
                 string query = $"SELECT functional_classification_services_id, fpp_code, fpp_name, is_special, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
@@ -75,7 +75,7 @@ namespace ACC.Data
 
                 var dtFPP = new DataTable();
 
-                return _dbGenericCommands.FillBySearch(query, dtFPP, parameters);
+                return mySqlGenericCommandsLFS.FillBySearch(query, dtFPP, parameters);
             }
             catch (Exception)
             {
@@ -96,7 +96,7 @@ namespace ACC.Data
                 };
 
                 string query = $"INSERT INTO {tableName} (functional_classification_services_id, fpp_code, fpp_name, is_special) VALUES (@functional_classification_services_id,@fpp_code, @fpp_name, @is_special)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -118,7 +118,7 @@ namespace ACC.Data
                 };
 
                 string query = $"UPDATE {tableName} SET functional_classification_services_id = @functional_classification_services_id, fpp_code = @fpp_code, fpp_name = @fpp_name, is_special = @is_special WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -140,7 +140,7 @@ namespace ACC.Data
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     }
 
                     scope.Complete();
@@ -159,7 +159,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -177,7 +177,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -200,7 +200,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE fpp_code = @fpp_code";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -224,7 +224,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE id <> @id AND fpp_code = @fpp_code";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -248,7 +248,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT fpp_name FROM {tableName} WHERE fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -273,7 +273,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT fpp_name FROM {tableName} WHERE id <> @id AND fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -289,8 +289,7 @@ namespace ACC.Data
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName} ORDER BY fpp_name";
-            var dataTable = new DataTable();
-            return _dbGenericCommands.Fill(query, dataTable);
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByService_And_Search_And_IsSpecial(int serviceId, string searchText, bool isSpecial)
@@ -304,7 +303,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE functional_classification_services_id = @functional_classification_services_id AND (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
             var dataTable = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsBySearch_And_IsSpecial(string searchText, bool isSpecial)
@@ -317,7 +316,7 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
             var dataTable = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.SAAOB
+namespace AccountingSystem.Views.Reports.Saaob
 {
-    public partial class frmSAAOB : Form
+    public partial class frmSaaob : Form
     {
         private readonly ReportViewer reportViewer;
 
-        public frmSAAOB()
+        public frmSaaob()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel2.Controls.Add(reportViewer);
@@ -33,8 +34,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
         private DataTable DatatableSAAOB()
         {
-            var dataSet = new dsLFS();
-            var dtSAAOB = dataSet.dtSAAOB;
+            var dtSAAOB = new dsLFS().dtSAAOB;
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
@@ -140,10 +140,10 @@ namespace AccountingSystem.Views.Reports.SAAOB
             }
         }
 
-        private bool LoadReport(LocalReport report)
+        private bool LoadReport(ReportViewer reportViewer)
         {
             Cursor = Cursors.WaitCursor;
-
+            var localReport = reportViewer.LocalReport;
             var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOB");
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
@@ -162,15 +162,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
 
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
-            report.DataSources.Clear();
-            report.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
-            report.SetParameters(parameters);
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
+            localReport.DataSources.Clear();
+            localReport.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
+            localReport.SetParameters(parameters);
 
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor = Cursors.Default;
             return true;
@@ -180,23 +178,17 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             try
             {
-                if (LoadReport(reportViewer.LocalReport))
+                if (LoadReport(reportViewer))
                     panelConfig.Enabled = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
         }
 
         private void frmSAAOB_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                LoadFunds();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

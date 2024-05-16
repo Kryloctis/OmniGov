@@ -1207,4 +1207,58 @@
   <data name="AF52" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AF52.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gear_filled_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

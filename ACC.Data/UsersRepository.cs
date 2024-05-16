@@ -321,28 +321,17 @@ namespace ACC.Data
 
         public bool Delete(List<UsersModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
-
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -584,12 +573,13 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRecordsBySearch(string office, string searchTxt)
+        public DataTable GetViewRecordsBySearch(int rowLimit, string office, string searchTxt)
         {
-            var parameters = new dynamic[][]
+            var parameters = new object[][]
             {
-                 new dynamic[] { "@office", DbType.String, office},
-                 new dynamic[] { "@searchTxt", DbType.String, $"%{searchTxt}%"}
+                 new object[] { "@office", DbType.String, office},
+                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
+                 new object[] { "@row_limit", DbType.Int32, rowLimit}
             };
 
             string Filter()
@@ -600,7 +590,7 @@ namespace ACC.Data
                     return "AND office = @office";
             }
 
-            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} AND (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR office LIKE @searchTxt OR role_name LIKE @searchTxt) GROUP BY id";
+            string query = $"SELECT * FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} AND (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR office LIKE @searchTxt OR role_name LIKE @searchTxt) GROUP BY id LIMIT @row_limit";
 
             var dataTable = new DataTable();
 

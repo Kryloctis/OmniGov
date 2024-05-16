@@ -51,7 +51,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal void LoadSubFPPByFPPIdCombobox(int fppId)
         {
-            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFppId(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;

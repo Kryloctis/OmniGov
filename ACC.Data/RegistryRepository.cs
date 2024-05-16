@@ -21,11 +21,6 @@ namespace ACC.Data
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(List<RegistryModel> entityList)
         {
             using (var scope = new TransactionScope())

@@ -13,7 +13,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         public ucStatementOfFinancialPosition()
         {
             InitializeComponent();
-
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -143,16 +142,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             report.DataSources.Clear();
             report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPosition", StatementOfFinancialPositionReport()));
 
-            var parameters = new[] {
-                    new ReportParameter("paramFundName", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
-                    new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
-                };
+            var parameters = new[]
+            {
+                new ReportParameter("paramFundName", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
+                new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
+            };
 
             report.SetParameters(parameters);
-
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
             Cursor = Cursors.Default;
         }
@@ -166,21 +164,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
-        }
-
-        private void ucStatementOfFinancialPosition_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFunds();
         }
     }
 }

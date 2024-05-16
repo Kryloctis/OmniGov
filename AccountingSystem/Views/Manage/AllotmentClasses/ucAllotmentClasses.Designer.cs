@@ -41,19 +41,19 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(0, 30);
+            label1.Location = new System.Drawing.Point(1, 31);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(39, 15);
+            label1.Size = new System.Drawing.Size(44, 15);
             label1.TabIndex = 4;
-            label1.Text = "Name";
+            label1.Text = "Name*";
             // 
             // txtName
             // 
-            txtName.Location = new System.Drawing.Point(48, 27);
+            txtName.Location = new System.Drawing.Point(51, 29);
             txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtName.MaxLength = 50;
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(324, 23);
+            txtName.Size = new System.Drawing.Size(250, 23);
             txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -61,19 +61,19 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(0, 3);
+            label2.Location = new System.Drawing.Point(1, 4);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(35, 15);
+            label2.Size = new System.Drawing.Size(40, 15);
             label2.TabIndex = 6;
-            label2.Text = "Code";
+            label2.Text = "Code*";
             // 
             // txtCode
             // 
-            txtCode.Location = new System.Drawing.Point(48, 0);
+            txtCode.Location = new System.Drawing.Point(51, 2);
             txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtCode.MaxLength = 5;
             txtCode.Name = "txtCode";
-            txtCode.Size = new System.Drawing.Size(324, 23);
+            txtCode.Size = new System.Drawing.Size(250, 23);
             txtCode.TabIndex = 1;
             txtCode.Validating += txtCode_Validating;
             txtCode.Validated += txtCode_Validated;
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             Controls.Add(txtName);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucAllotmentClasses";
-            Size = new System.Drawing.Size(394, 53);
+            Size = new System.Drawing.Size(321, 58);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

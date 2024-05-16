@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
 
         private void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadCollectors();
             LoadAccountableForms();
             LoadRecords();

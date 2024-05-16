@@ -4,10 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
@@ -24,49 +20,20 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadAccounts();
-                LoadFunds();
-                LoadYear();
-                cmbxFunds.Tag = string.Empty;
-                cmbxAccount.Tag = string.Empty;
-                nudYear.Tag = string.Empty;
-            }
-        }
-
-        private void ucSummarySubsidiaryLedger_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadAccounts();
+            LoadFunds();
+            LoadYear();
+            cmbxFunds.Tag = string.Empty;
+            cmbxAccount.Tag = string.Empty;
+            nudYear.Tag = string.Empty;
         }
 
         private void LoadFunds()
         {
             DataTable dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-        }
-
-        private DataColumn[] DataColumnsSummarySubsidiaryLedger()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "funds_id", typeof(int)),
-                new DataColumn(Name = "fund_code", typeof(string)),
-                new DataColumn(Name = "fund_name", typeof(string)),
-                new DataColumn(Name = "general_ledger_accounts_id", typeof(int)),
-                new DataColumn(Name = "general_ledger_accounts_code", typeof(string)),
-                new DataColumn(Name = "general_ledger_accounts_name", typeof(string)),
-                new DataColumn(Name = "subsidiary_ledger_accounts_id", typeof(int)),
-                new DataColumn(Name = "subsidiary_ledger_accounts_code", typeof(string)),
-                new DataColumn(Name = "subsidiary_ledger_accounts_name", typeof(string)),
-                new DataColumn(Name = "balance", typeof(decimal))
-            };
         }
 
         private decimal GetBeginningBalance(int fundId, short year, int generalLedgerId, ushort subsidiaryLedgerId)
@@ -86,7 +53,20 @@ namespace AccountingSystem.Views.Reports.Ledgers
             short year = Convert.ToInt16(nudYear.Value);
 
             DataTable dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsSummarySubsidiaryLedger());
+            var dtColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "funds_id", typeof(int)),
+                new DataColumn(Name = "fund_code", typeof(string)),
+                new DataColumn(Name = "fund_name", typeof(string)),
+                new DataColumn(Name = "general_ledger_accounts_id", typeof(int)),
+                new DataColumn(Name = "general_ledger_accounts_code", typeof(string)),
+                new DataColumn(Name = "general_ledger_accounts_name", typeof(string)),
+                new DataColumn(Name = "subsidiary_ledger_accounts_id", typeof(int)),
+                new DataColumn(Name = "subsidiary_ledger_accounts_code", typeof(string)),
+                new DataColumn(Name = "subsidiary_ledger_accounts_name", typeof(string)),
+                new DataColumn(Name = "balance", typeof(decimal))
+            };
+            dataTable.Columns.AddRange(dtColumns);
             DataTable dtSubsidiaryLedgers = AccFactory.SubsidiaryLedgerAccountsRepository().GetViewRecordsByFundId_GenAccId(fundId, generalLedgerId);
             int totalProgressCount = dtSubsidiaryLedgers.Rows.Count;
             int runningProgressCount = 0;
@@ -166,20 +146,16 @@ namespace AccountingSystem.Views.Reports.Ledgers
             nudYear.Maximum = Helper.GetCurrentDate().Year;
         }
 
-        private DataColumn[] DataColumnsAccounts()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "account_name", typeof(string))
-            };
-        }
-
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsAccounts());
+            var dtColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+            dataTable.Columns.AddRange(dtColumns);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
@@ -258,8 +234,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
         }
 
-        #region Validations
-
         private string GetFormErrors()
         {
             var arrayErrors = new string[]
@@ -317,7 +291,5 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             cmbxAccount.Tag = string.Empty;
         }
-
-        #endregion Validations
     }
 }

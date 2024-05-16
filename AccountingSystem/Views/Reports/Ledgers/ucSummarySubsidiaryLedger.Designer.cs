@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            cmbxFunds = new System.Windows.Forms.ComboBox();
-            cmbxAccount = new System.Windows.Forms.ComboBox();
-            nudYear = new System.Windows.Forms.NumericUpDown();
             btnRetrieve = new System.Windows.Forms.Button();
+            nudYear = new System.Windows.Forms.NumericUpDown();
+            cmbxAccount = new System.Windows.Forms.ComboBox();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -43,65 +43,65 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.Controls.Add(cmbxFunds);
-            flowLayoutPanel1.Controls.Add(cmbxAccount);
-            flowLayoutPanel1.Controls.Add(nudYear);
             flowLayoutPanel1.Controls.Add(btnRetrieve);
+            flowLayoutPanel1.Controls.Add(nudYear);
+            flowLayoutPanel1.Controls.Add(cmbxAccount);
+            flowLayoutPanel1.Controls.Add(cmbxFunds);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
-            flowLayoutPanel1.Size = new System.Drawing.Size(1140, 37);
+            flowLayoutPanel1.Size = new System.Drawing.Size(699, 37);
             flowLayoutPanel1.TabIndex = 0;
+            // 
+            // btnRetrieve
+            // 
+            btnRetrieve.Location = new System.Drawing.Point(538, 7);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(150, 23);
+            btnRetrieve.TabIndex = 25;
+            btnRetrieve.Text = "Run Report";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
+            // 
+            // nudYear
+            // 
+            nudYear.Location = new System.Drawing.Point(435, 7);
+            nudYear.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.ReadOnly = true;
+            nudYear.Size = new System.Drawing.Size(97, 23);
+            nudYear.TabIndex = 2;
+            // 
+            // cmbxAccount
+            // 
+            cmbxAccount.FormattingEnabled = true;
+            cmbxAccount.Location = new System.Drawing.Point(229, 7);
+            cmbxAccount.Name = "cmbxAccount";
+            cmbxAccount.Size = new System.Drawing.Size(200, 23);
+            cmbxAccount.TabIndex = 1;
+            cmbxAccount.KeyDown += cmbxAccount_KeyDown;
+            cmbxAccount.Validating += cmbxAccount_Validating;
+            cmbxAccount.Validated += cmbxAccount_Validated;
             // 
             // cmbxFunds
             // 
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(7, 7);
+            cmbxFunds.Location = new System.Drawing.Point(73, 7);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(150, 23);
             cmbxFunds.TabIndex = 0;
             cmbxFunds.Validating += cmbxFunds_Validating;
             cmbxFunds.Validated += cmbxFunds_Validated;
             // 
-            // cmbxAccount
-            // 
-            cmbxAccount.FormattingEnabled = true;
-            cmbxAccount.Location = new System.Drawing.Point(163, 7);
-            cmbxAccount.Name = "cmbxAccount";
-            cmbxAccount.Size = new System.Drawing.Size(370, 23);
-            cmbxAccount.TabIndex = 1;
-            cmbxAccount.KeyDown += cmbxAccount_KeyDown;
-            cmbxAccount.Validating += cmbxAccount_Validating;
-            cmbxAccount.Validated += cmbxAccount_Validated;
-            // 
-            // nudYear
-            // 
-            nudYear.Location = new System.Drawing.Point(539, 7);
-            nudYear.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
-            nudYear.Name = "nudYear";
-            nudYear.ReadOnly = true;
-            nudYear.Size = new System.Drawing.Size(97, 23);
-            nudYear.TabIndex = 2;
-           
-            // 
-            // btnRetrieve
-            // 
-            btnRetrieve.Location = new System.Drawing.Point(642, 7);
-            btnRetrieve.Name = "btnRetrieve";
-            btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            btnRetrieve.TabIndex = 25;
-            btnRetrieve.Text = "Retrieve";
-            btnRetrieve.UseVisualStyleBackColor = true;
-            btnRetrieve.Click += btnRetrieve_Click;
-            // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(0, 37);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(1140, 5);
+            progressBar1.Size = new System.Drawing.Size(699, 5);
             progressBar1.TabIndex = 1;
             // 
             // panel1
@@ -109,7 +109,7 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 42);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(1140, 529);
+            panel1.Size = new System.Drawing.Size(699, 406);
             panel1.TabIndex = 2;
             // 
             // backgroundWorker1
@@ -124,12 +124,12 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(panel1);
             Controls.Add(progressBar1);
             Controls.Add(flowLayoutPanel1);
             Name = "ucSummarySubsidiaryLedger";
-            Size = new System.Drawing.Size(1140, 571);
-            Load += ucSummarySubsidiaryLedger_Load;
+            Size = new System.Drawing.Size(699, 448);
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
             ResumeLayout(false);

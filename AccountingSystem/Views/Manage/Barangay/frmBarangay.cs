@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,7 @@ namespace AccountingSystem.Views.Manage.Barangay
         {
             try
             {
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -46,41 +48,34 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int deletedRecordCount;
-
-            if (DeleteData(out deletedRecordCount))
-            {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private bool DeleteData(out int deletedCount)
-        {
             try
             {
-                var barangayModelList = new List<BarangayModel>();
-                int rowCount = dgBarangay.SelectedRows.Count;
-
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+                if (DeleteData())
                 {
-                    foreach (DataGridViewRow row in dgBarangay.SelectedRows)
-                    {
-                        int barangayId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new BarangayModel() { Id = barangayId };
-                        barangayModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.BarangayRepository().Delete(barangayModelList);
+                    Helper.MessageBoxSuccess($"{dgBarangay.SelectedRows.Count} record/s has been deleted.");
+                    LoadRecords();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteData()
+        {
+            var barangayModelList = new List<BarangayModel>();
+            int rowCount = dgBarangay.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(rowCount))
             {
-                Helper.MessageBoxError(ex.Message);
+                foreach (DataGridViewRow row in dgBarangay.SelectedRows)
+                {
+                    int barangayId = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new BarangayModel() { Id = barangayId };
+                    barangayModelList.Add(model);
+                }
+
+                return AccFactory.BarangayRepository().Delete(barangayModelList);
             }
 
-            deletedCount = 0;
             return false;
         }
 
@@ -89,56 +84,36 @@ namespace AccountingSystem.Views.Manage.Barangay
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
-                backgroundWorker1.RunWorkerAsync(searchKey);
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
             }
-        }
-
-        private DataColumn[] BarangayDataColumns()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("code", typeof(string)),
-                new DataColumn("name", typeof(string)),
-            };
-
-            return dataColumns;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                if (e.Argument is not string searchKey)
-                    return;
-
+                var parameters = ((int rowLimit, string searchKey))e.Argument;
                 var dataTable = new DataTable();
-                dataTable.Columns.AddRange(BarangayDataColumns());
-
-                DataTable dtBarangayFromDB = AccFactory.BarangayRepository().GetRecordsBySearch(searchKey, Helper.selectedServerModel.LguId);
-
-                if (dtBarangayFromDB.Rows.Count < 1)
+                var dataColumns = new DataColumn[]
                 {
-                    backgroundWorker1.ReportProgress(100);
-                    e.Result = dataTable;
-                    return;
-                }
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("code", typeof(string)),
+                    new DataColumn("name", typeof(string)),
+                };
+                dataTable.Columns.AddRange(dataColumns);
 
-                int totalProgressCount = dtBarangayFromDB.Rows.Count;
+                var dtBarangayFromDb = AccFactory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, Helper.selectedServerModel.LguId);
+                int totalProgressCount = dtBarangayFromDb.Rows.Count;
                 int progressCount = 0;
 
-                foreach (DataRow row in dtBarangayFromDB.Rows)
+                foreach (DataRow row in dtBarangayFromDb.Rows)
                 {
                     var newRow = dataTable.NewRow();
-
-                    int id = Convert.ToInt32(row["id"]);
-                    string code = row["code"].ToString();
-                    string name = row["name"].ToString();
-
-                    newRow["id"] = id;
-                    newRow["code"] = code;
-                    newRow["name"] = name;
+                    newRow["id"] = Convert.ToInt32(row["id"]);
+                    newRow["code"] = row["code"].ToString();
+                    newRow["name"] = row["name"].ToString();
 
                     progressCount++;
                     dataTable.Rows.Add(newRow);
@@ -157,19 +132,37 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
 
-            HelperLoadRecords.BarangaysDatagridView(dgBarangay, dataTable);
-            dgBarangay.CurrentCell = dgBarangay.FirstDisplayedCell;
-            lblRecordCount.Text = dgBarangay.Rows.Count.ToString();
+                if (dataTable.Rows.Count < 1)
+                    pbLoadRecords.Value = 100;
+
+                HelperLoadRecords.BarangaysDatagridView(dgBarangay, dataTable);
+                dgBarangay.CurrentCell = dgBarangay.FirstDisplayedCell;
+                lblRecordCount.Text = dgBarangay.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

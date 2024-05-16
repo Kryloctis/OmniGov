@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetDocumentRecordsBySignatoryId(int signatoryId);
 
-        DataTable GetRecordsByOffice(string office);
+        DataTable GetViewRecordsByOffice(string office);
 
         Dictionary<string, string> GetSignatoryBy_Reference_DocumentName(string reference, string documentName);
 

@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,27 +6,22 @@ namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class frmAddBarangay : Form
     {
-        internal readonly frmBarangay _frmBarangay;
+        internal readonly frmBarangay frmBarangay;
         internal readonly ucBarangay uc;
 
         public frmAddBarangay(frmBarangay frmBarangay)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmBarangay = frmBarangay;
+            this.frmBarangay = frmBarangay;
             uc = ucBarangay1;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void frmAddBarangay_Load(object sender, EventArgs e)
         {
             try
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Barangay has been saved.");
-                    _frmBarangay.LoadRecords();
-                    uc.ResetForm();
-                }
+                uc.OnLoad(false, null);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -40,24 +34,36 @@ namespace AccountingSystem.Views.Manage.Barangay
                 return false;
             }
 
-            var barangayCode = uc.txtCode.Text.Trim();
-            var barangayName = uc.txtName.Text.Trim();
-
-            var barangayModel = new BarangayModel()
-            {
-                Code = barangayCode,
-                Name = barangayName,
-                MunicipalityID = Helper.selectedServerModel.LguId
-            };
-
-            return AccFactory.BarangayRepository().Insert(barangayModel);
+            return AccFactory.BarangayRepository().Insert(uc.BarangayModel());
         }
 
-        private void frmAddBarangay_Load(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                uc.isEdit = false;
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Barangay has been saved.");
+                    frmBarangay.LoadRecords();
+                    uc.ResetForm();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddBarangay_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Barangay has been saved.");
+                        frmBarangay.LoadRecords();
+                        uc.ResetForm();
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

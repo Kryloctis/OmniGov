@@ -12,12 +12,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 {
     public partial class frmRptDiscounts : Form
     {
-        private readonly MainForm _mainForm;
-
-        public frmRptDiscounts(MainForm mainForm)
+        public frmRptDiscounts()
         {
             InitializeComponent();
-            _mainForm = mainForm;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }

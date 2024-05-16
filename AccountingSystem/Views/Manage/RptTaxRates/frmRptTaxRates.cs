@@ -11,12 +11,9 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 {
     public partial class frmRptTaxRates : Form
     {
-        private readonly MainForm _mainForm;
-
-        public frmRptTaxRates(MainForm mainForm)
+        public frmRptTaxRates()
         {
             InitializeComponent();
-            _mainForm = mainForm;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }

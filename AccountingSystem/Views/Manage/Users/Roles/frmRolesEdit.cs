@@ -1,15 +1,14 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Users.List;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
 {
     public partial class frmRolesEdit : Form
     {
-        private frmRoles _frmRoles;
+        private frmRoles frmRoles;
+        private byte roleId;
         private ucRoles uc;
 
         public frmRolesEdit(frmRoles frmRoles, byte roleId)
@@ -17,72 +16,33 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucRoles1;
-            _frmRoles = frmRoles;
-            uc.roleId = roleId;
+            this.roleId = roleId;
+            this.frmRoles = frmRoles;
         }
 
-        private void LoadSelectedRole()
+        private bool UpdateData()
         {
-            var roleDict = AccFactory.RolesRepository().GetRecordByID(uc.roleId);
-            uc.cmbOffice.Text = roleDict["office"];
-            uc.txtName.Text = roleDict["role_name"];
-        }
-
-        private void LoadPermissionsByRoleId()
-        {
-            var dtRolesHasPermissions = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(uc.roleId);
-
-            foreach (DataRow row in dtRolesHasPermissions.Rows)
-            {
-                string permissionId = row["permissions_id"].ToString();
-                string permissionName = row["permission_name"].ToString();
-                uc.dgPermissionGranted.Rows.Add(new string[] { permissionId, permissionName });
-            }
-        }
-
-        private bool SaveData()
-        {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // if no permission has been granted
-            if (uc.dgPermissionGranted.SelectedRows.Count == 0)
-            {
-                Helper.MessageBoxError("Please select at least one permission.");
-                return false;
-            }
+            var model = uc.RolesModel();
+            model.Id = roleId;
 
-            // get all the selected permissions
-            var permissionModelList = new List<PermissionsModel>();
-            foreach (DataGridViewRow row in uc.dgPermissionGranted.Rows)
-            {
-                permissionModelList.Add(new PermissionsModel() { Id = Convert.ToByte(row.Cells["id"].Value) });
-            }
-
-            // proceed to update
-            var roleModel = new RolesModel()
-            {
-                Id = uc.roleId,
-                Office = uc.cmbOffice.Text,
-                RoleName = uc.txtName.Text.Trim(),
-                PermissionsModels = permissionModelList
-            };
-
-            return AccFactory.RolesRepository().Update(roleModel);
+            return AccFactory.RolesRepository().Update(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (SaveData())
+                if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Role has been saved.");
-                    _frmRoles.LoadRoles();
+                    frmRoles.LoadRoles();
+                    Close();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -92,18 +52,26 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                OnLoad();
+                uc.OnLoad(true, roleId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        private void frmRolesEdit_KeyDown(object sender, KeyEventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            uc.LoadOffice();
-            LoadSelectedRole();
-            LoadPermissionsByRoleId();
-            uc.LoadPermissions();
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateData())
+                    {
+                        Helper.MessageBoxSuccess("Role has been saved.");
+                        frmRoles.LoadRoles();
+                        Close();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

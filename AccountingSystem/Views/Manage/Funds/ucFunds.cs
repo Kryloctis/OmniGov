@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,19 +8,47 @@ namespace AccountingSystem.Views.Manage.Funds
 {
     public partial class ucFunds : UserControl
     {
-        internal int fundId = 0;
+        private int fundId;
+        private bool isEdit;
 
         public ucFunds()
         {
             InitializeComponent();
         }
 
+        private void LoadSelectedRecord()
+        {
+            var fundData = AccFactory.FundsRepository().GetRecordByID(1);
+            txtCode.Text = fundData["fund_code"];
+            txtName.Text = fundData["fund_name"];
+        }
+
+        internal FundsModel FundsModel()
+        {
+            return new FundsModel()
+            {
+                FundCode = txtCode.Text.Trim(),
+                FundName = txtName.Text.Trim(),
+            };
+        }
+
+        internal void OnLoad(bool isEdit, int? fundId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.fundId = fundId.Value;
+                LoadSelectedRecord();
+            }
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[]
             {
-                epCode.GetError(txtCode),
-                epName.GetError(txtName)
+                errorProvider1.GetError(txtCode),
+                errorProvider1.GetError(txtName)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -32,64 +60,66 @@ namespace AccountingSystem.Views.Manage.Funds
             txtName.Clear();
         }
 
+        private bool FundNameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            string fundName = textBox.Text.Trim();
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "fund name"))
+                return false;
+
+            bool fundNameExist = isEdit ? AccFactory.FundsRepository().NameExist(fundName, fundId) : AccFactory.FundsRepository().NameExist(fundName);
+            if (fundNameExist)
+            {
+                errorProvider.SetError(textBox, "Fund name already exist.");
+                return false;
+            }
+            return true;
+        }
+
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "fund name");
-
-                string fundName = txtName.Text.Trim();
-                bool fundNameExist;
-
-                if (fundId == 0)
-                    fundNameExist = AccFactory.FundsRepository().NameExist(fundName); // add form
-                else
-                    fundNameExist = AccFactory.FundsRepository().NameExist(fundName, fundId); // edit form
-
-                if (fundNameExist)
-                {
-                    epName.SetError(txtName, "Fund name already exist in your records.");
-                    e.Cancel = true;
-                }
+                e.Cancel = !FundNameValidated(errorProvider1, txtName);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epName, txtName);
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
 
-        private void ucFunds_Load(object sender, EventArgs e)
+        private bool FundCodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
+            string fundCode = textBox.Text.Trim();
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "fund code"))
+                return false;
+
+            bool fundCodeExist = isEdit ? AccFactory.FundsRepository().CodeExist(fundCode, fundId) : AccFactory.FundsRepository().CodeExist(fundCode);
+
+            if (fundCodeExist)
+            {
+                errorProvider.SetError(txtCode, "Fund code already exist in your records.");
+                return false;
+            }
+
+            return true;
         }
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "fund code");
-
-                string fundCode = txtCode.Text.Trim();
-                bool fundCodeExist;
-
-                if (fundId == 0)
-                    fundCodeExist = AccFactory.FundsRepository().CodeExist(fundCode); // add form
-                else
-                    fundCodeExist = AccFactory.FundsRepository().CodeExist(fundCode, fundId); // edit form
-
-                if (fundCodeExist)
-                {
-                    epCode.SetError(txtCode, "Fund code already exist in your records.");
-                    e.Cancel = true;
-                }
+                e.Cancel = !FundCodeValidated(errorProvider1, txtCode);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCode, txtCode);
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void OnLoad()
         {
-            HelperLoadRecords.RowFilterCombobox(cmbxRowFilter);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadProperties();
         }
 

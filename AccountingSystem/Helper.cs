@@ -344,7 +344,7 @@ namespace AccountingSystem
             dgv.BackgroundColor = Color.White;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
-            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.BorderStyle = BorderStyle.Fixed3D;
             dgv.ReadOnly = isReadOnly;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToResizeRows = false;
@@ -959,33 +959,17 @@ namespace AccountingSystem
 
         public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                lblCreatedAt.Text = dataGridView.SelectedCells[index[0]].Value.ToString();
-                lblUpdatedAt.Text = dataGridView.SelectedCells[index[1]].Value.ToString();
-            }
-            else
-            {
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
-            }
-        }
+            string placeHolder = "--";
 
-        public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt, ToolStripStatusLabel lblCreatedBy, ToolStripStatusLabel lblUpdatedBy)
-        {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                lblCreatedAt.Text = dataGridView.SelectedCells[index[0]].Value.ToString();
-                lblUpdatedAt.Text = dataGridView.SelectedCells[index[1]].Value.ToString();
-                lblCreatedBy.Text = dataGridView.SelectedCells[index[2]].Value.ToString();
-                lblUpdatedBy.Text = dataGridView.SelectedCells[index[3]].Value.ToString();
+                lblCreatedAt.Text = Convert.ToDateTime(dataGridView.SelectedCells[index[0]].Value).ToShortDateString();
+                lblUpdatedAt.Text = string.IsNullOrWhiteSpace(dataGridView.SelectedCells[index[1]].Value.ToString()) ? placeHolder : Convert.ToDateTime(dataGridView.SelectedCells[index[1]].Value).ToShortDateString();
             }
             else
             {
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
-                lblCreatedBy.Text = string.Empty;
-                lblUpdatedBy.Text = string.Empty;
+                lblCreatedAt.Text = placeHolder;
+                lblUpdatedAt.Text = placeHolder;
             }
         }
 

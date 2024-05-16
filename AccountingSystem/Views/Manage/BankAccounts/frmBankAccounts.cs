@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
@@ -22,15 +23,22 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         {
             try
             {
-                LoadBankAccounts();
-                Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
+            try
+            {
+                var columnIndex = new byte[] { 6, 7 };
+                Helper.ShowRecordTimestamp(dgBankAccounts, columnIndex, lblCreatedAt, lblUpdatedAt);
+
+                Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteData()
@@ -43,11 +51,10 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
                 {
                     int bankAccountID = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    bankAccountsModelList.Add(new BankAccountsModel() { ID = bankAccountID });
+                    bankAccountsModelList.Add(new BankAccountsModel() { Id = bankAccountID });
                 }
 
-                var bankAccountsRepository = AccFactory.BankAccountsRepository();
-                return bankAccountsRepository.Delete(bankAccountsModelList);
+                return AccFactory.BankAccountsRepository().Delete(bankAccountsModelList);
             }
             return false;
         }
@@ -57,7 +64,10 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             try
             {
                 if (DeleteData())
-                    LoadBankAccounts();
+                {
+                    Helper.MessageBoxError($"{dgBankAccounts.SelectedRows.Count} record/s has been deleted.");
+                    LoadRecords();
+                }
             }
             catch (MySqlException ex)
             {
@@ -81,102 +91,39 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         {
             try
             {
-                int index = dgBankAccounts.CurrentRow.Index;
-                int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[index].Cells["id"].Value);
+                int rowIndex = dgBankAccounts.CurrentRow.Index;
+                int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
                 _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataColumn[] BankAccountsDataColumns()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("banks_id", typeof(string)),
-                new DataColumn("bank_name", typeof(string)),
-                new DataColumn("bank_code", typeof(string)),
-                new DataColumn("bank_branch", typeof(string)),
-                new DataColumn("account_no", typeof(string)),
-                new DataColumn("created_at", typeof(string)),
-                new DataColumn("updated_at", typeof(string)),
-            };
-
-            return dataColumns;
-        }
-
-        private Dictionary<string, string> RecordParameters()
-        {
-            var dictParameters = new Dictionary<string, string>();
-            string searchKey = txtSearch.Text.Trim();
-
-            dictParameters.Add("search_key", searchKey);
-            return dictParameters;
-        }
-
-        internal void LoadBankAccounts()
+        internal void LoadRecords()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync(RecordParameters());
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
+                string searchKey = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.Argument is not Dictionary<string, string> dictParameters)
-                return;
+            var parameters = ((int rowLimit, string searchKey))e.Argument;
 
-            DataTable dtBankAccountFromDb = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(dictParameters["search_key"]);
-
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(BankAccountsDataColumns());
-
-            if (dtBankAccountFromDb.Rows.Count < 1)
-            {
-                backgroundWorker1.ReportProgress(100);
-                e.Result = dataTable;
-                return;
-            }
-
-            int totalProgressCount = dtBankAccountFromDb.Rows.Count;
+            var dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+            int totalProgressCount = dtBankAccount.Rows.Count;
             int progressCount = 0;
 
-            foreach (DataRow row in dtBankAccountFromDb.Rows)
+            dtBankAccount.Rows.Cast<DataRow>().ToList().ForEach(x =>
             {
-                if (backgroundWorker1.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-
-                var newRow = dataTable.NewRow();
-                int id = Convert.ToInt32(row["id"]);
-                int bankID = Convert.ToInt32(row["banks_id"]);
-                string bankName = row["bank_name"].ToString();
-                string bankCode = row["bank_code"].ToString();
-                string bankBranch = row["bank_branch"].ToString();
-                string bankAccount = row["account_no"].ToString();
-                string createdAt = row["created_at"].ToString();
-                string updatedAt = row["updated_at"].ToString();
-
-                newRow["id"] = id;
-                newRow["banks_id"] = bankID;
-                newRow["bank_name"] = bankName;
-                newRow["bank_code"] = bankCode;
-                newRow["bank_branch"] = bankBranch;
-                newRow["account_no"] = bankAccount;
-                newRow["created_at"] = createdAt;
-                newRow["updated_at"] = updatedAt;
-
                 progressCount++;
-                dataTable.Rows.Add(newRow);
-
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-            }
+            });
 
-            e.Result = dataTable;
+            e.Result = dtBankAccount;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -186,23 +133,31 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-
             if (e.Result is not DataTable dataTable)
                 return;
+
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
 
             HelperLoadRecords.DatagridViewBankAccounts(dataTable, dgBankAccounts);
             dgBankAccounts.CurrentCell = dgBankAccounts.FirstDisplayedCell;
             toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
-            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                LoadBankAccounts();
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

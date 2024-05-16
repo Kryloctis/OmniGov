@@ -30,7 +30,7 @@
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
-            btnUpdate = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
             ucBankAccounts1 = new ucBankAccounts();
             flowLayoutPanel1.SuspendLayout();
@@ -41,7 +41,7 @@
             // 
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnUpdate);
+            flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 66);
@@ -51,22 +51,22 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(290, 3);
+            btnCancel.Location = new System.Drawing.Point(215, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(150, 23);
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnUpdate
+            // btnSave
             // 
-            btnUpdate.Location = new System.Drawing.Point(209, 3);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new System.Drawing.Size(75, 23);
-            btnUpdate.TabIndex = 1;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnSave.Location = new System.Drawing.Point(59, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 1;
+            btnSave.Text = "Update (Ctrl +S)";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // panel1
             // 
@@ -88,7 +88,6 @@
             // 
             // frmEditBankAccounts
             // 
-            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
@@ -97,13 +96,16 @@
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditBankAccounts";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Bank Accounts";
             Load += frmEditBankAccounts_Load;
+            KeyDown += frmEditBankAccounts_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -113,7 +115,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel1;
         private ucBankAccounts ucBankAccounts1;
     }

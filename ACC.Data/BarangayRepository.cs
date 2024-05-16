@@ -26,12 +26,8 @@ namespace ACC.Data
             };
 
             string query = $"SELECT code FROM {tableName} WHERE code = @code";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool CodeExist(string code, int id)
@@ -40,15 +36,11 @@ namespace ACC.Data
             {
                 new object[] { "@id", DbType.Int16, id },
                 new object[] { "@code", DbType.String, code },
-        };
+            };
 
             string query = $"SELECT code FROM {tableName} WHERE id <> @id AND code = @code";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
         }
 
         public int CountRecords()
@@ -75,34 +67,32 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var dict = new Dictionary<string, string>();
-
-            var parameter = new object[][] {
+            var recordDictionary = new Dictionary<string, string>();
+            var parameters = new object[][]
+            {
                 new object[]{"@barangay_id", DbType.Int32, Id}
             };
-            string query = $"SELECT name, code FROM {tableName} WHERE id = @barangay_id";
 
-            using (var items = mySqlGenericCommandsLFS.ExecuteReader(query, parameter))
+            string query = $"SELECT * FROM {tableName} WHERE id = @barangay_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (items.Rows.Count < 1)
-                    return dict;
+                DataRow row = dataTable.Rows[0];
 
-                foreach (DataRow item in items.Rows)
-                {
-                    dict.Add("code", item["code"].ToString());
-                    dict.Add("name", item["name"].ToString());
-                }
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
 
-                return dict;
+                return recordDictionary;
             }
+            return recordDictionary;
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT id, code, name FROM {tableName}";
-
-            var dtBudgetAppropriation = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dtBudgetAppropriation);
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -120,17 +110,17 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[]{"@barangay_code", DbType.String, entity.Code},
                 new object[]{"@barangay_name", DbType.String, entity.Name},
-                new object[]{"@municipalities_id", DbType.Int32, entity.MunicipalityID}
+                new object[]{"@municipalities_id", DbType.Int32, entity.MunicipalityId}
             };
 
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
-
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
         }
 
         public bool Update(BarangayModel entity)
         {
-            var parameters = new object[][] {
+            var parameters = new object[][]
+            {
                 new object[]{"@barangay_id", DbType.Int32, entity.Id},
                 new object[]{"@code", DbType.String, entity.Code},
                 new object[]{"@name", DbType.String, entity.Name }
@@ -163,9 +153,7 @@ namespace ACC.Data
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
             string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(result)) return true;
-            return false;
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName, int id)
@@ -180,9 +168,7 @@ namespace ACC.Data
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_id <> @barangays_id AND barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
             string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(result)) return true;
-            return false;
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool NameExist(string name)
@@ -194,9 +180,7 @@ namespace ACC.Data
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name";
             string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(result)) return true;
-            return false;
+            return !string.IsNullOrEmpty(result);
         }
 
         public bool NameExist(string name, int id)
@@ -209,36 +193,31 @@ namespace ACC.Data
 
             string query = $"SELECT name FROM {tableName} WHERE id <> @id AND name = @name";
             string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(result)) return true;
-            return false;
+            return !string.IsNullOrEmpty(result);
         }
 
         public Dictionary<string, string> GetViewRecordById(int id)
         {
-            var dictionary = new Dictionary<string, string>();
-            var parameters = new object[][] { new object[] { "@barangays_id", DbType.Int32, id } };
-
-            string query = $"SELECT barangays_code, barangays_name, municipalities_id, municipalities_code, municipalities_name, provinces_id, provinces_code, provinces_name FROM {viewTableName} WHERE barangays_id = @barangays_id";
-
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            var recordDictionary = new Dictionary<string, string>();
+            var parameters = new object[][]
             {
-                if (reader.Rows.Count < 1)
-                    return dictionary;
+                new object[] { "@barangays_id", DbType.Int32, id }
+            };
 
-                foreach (DataRow row in reader.Rows)
-                {
-                    dictionary.Add("barangays_code", row["barangays_code"].ToString());
-                    dictionary.Add("barangays_name", row["barangays_name"].ToString());
-                    dictionary.Add("municipalities_id", row["municipalities_id"].ToString());
-                    dictionary.Add("municipalities_code", row["municipalities_code"].ToString());
-                    dictionary.Add("municipalities_name", row["municipalities_name"].ToString());
-                    dictionary.Add("provinces_id", row["provinces_id"].ToString());
-                    dictionary.Add("provinces_code", row["provinces_code"].ToString());
-                    dictionary.Add("provinces_name", row["provinces_name"].ToString());
-                }
-                return dictionary;
+            string query = $"SELECT * FROM {viewTableName} WHERE barangays_id = @barangays_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
+            return recordDictionary;
         }
 
         public int GetLastInsertedId()
@@ -247,18 +226,17 @@ namespace ACC.Data
             return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
-        public DataTable GetRecordsBySearch(string searchText, int municipalityId)
+        public DataTable GetRecordsBySearch(int rowLimit, string searchText, int municipalityId)
         {
             var parameters = new object[][]
             {
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"},
                 new object[] { "@municipalities_id", DbType.Int32, municipalityId}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE (code LIKE @search_text OR name LIKE @search_text) AND municipalities_id = @municipalities_id";
-
-            var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            string query = $"SELECT * FROM {tableName} WHERE (code LIKE @search_text OR name LIKE @search_text) AND municipalities_id = @municipalities_id LIMIT @row_limit";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

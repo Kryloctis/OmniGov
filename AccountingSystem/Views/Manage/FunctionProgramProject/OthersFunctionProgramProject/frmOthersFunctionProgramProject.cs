@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
                 dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
             else
-                dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
+                dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFppId(functionProgramProjectID);
 
             HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
             lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();

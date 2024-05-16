@@ -22,8 +22,8 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRecords();
-                Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -41,8 +41,8 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var index = dgBanks.CurrentRow.Index;
-                int bankId = Convert.ToInt32(dgBanks.Rows[index].Cells["id"].Value);
+                int rowIndex = dgBanks.CurrentRow.Index;
+                int bankId = Convert.ToInt32(dgBanks.Rows[rowIndex].Cells["id"].Value);
                 _ = new frmEditBank(this, bankId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -51,7 +51,6 @@ namespace AccountingSystem.Views.Manage.Banks
         private bool DeleteRecords()
         {
             int selectedRowsCount = dgBanks.SelectedRows.Count;
-
             if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
             {
                 var banksModelList = new List<BanksModel>();
@@ -73,7 +72,7 @@ namespace AccountingSystem.Views.Manage.Banks
             {
                 if (DeleteRecords())
                 {
-                    Helper.MessageBoxSuccess("Bank successfully deleted.");
+                    Helper.MessageBoxSuccess($"{dgBanks.SelectedRows.Count} record/s has been deleted.");
                     LoadRecords();
                 }
             }
@@ -105,8 +104,25 @@ namespace AccountingSystem.Views.Manage.Banks
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataColumn[] BanksDataColumns()
+        internal void LoadRecords()
         {
+            if (!backgroundWorker1.IsBusy)
+            {
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
+                string searchKey = txtSearch.Text.Trim();
+                pbLoadRecords.Value = 0;
+
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var parameters = ((int rowLimit, string searchKey))e.Argument;
+
+            var dtBank = AccFactory.BanksRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
+
+            var dataTable = new DataTable();
             var dataColumns = new DataColumn[]
             {
                 new DataColumn("id", typeof(int)),
@@ -116,49 +132,12 @@ namespace AccountingSystem.Views.Manage.Banks
                 new DataColumn("created_at", typeof(string)),
                 new DataColumn("updated_at", typeof(string)),
             };
+            dataTable.Columns.AddRange(dataColumns);
 
-            return dataColumns;
-        }
-
-        private Dictionary<string, string> LoadBanksParameters()
-        {
-            var dictionary = new Dictionary<string, string>();
-
-            var searchKey = txtSearch.Text.Trim();
-            dictionary.Add("search_key", searchKey);
-
-            return dictionary;
-        }
-
-        internal void LoadRecords()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                pbLoadRecords.Value = 0;
-                backgroundWorker1.RunWorkerAsync(LoadBanksParameters());
-            }
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (e.Argument is not Dictionary<string, string> dictParameters)
-                return;
-
-            var dataTable = new DataTable();
-            DataTable dtBankFromDB = AccFactory.BanksRepository().GetRecordsBySearch(dictParameters["search_key"]);
-            dataTable.Columns.AddRange(BanksDataColumns());
-
-            if (dtBankFromDB.Rows.Count < 1)
-            {
-                backgroundWorker1.ReportProgress(100);
-                e.Result = dataTable;
-                return;
-            }
-
-            int totalProgressCount = dtBankFromDB.Rows.Count;
+            int totalProgressCount = dtBank.Rows.Count;
             int progressCount = 0;
 
-            foreach (DataRow row in dtBankFromDB.Rows)
+            foreach (DataRow row in dtBank.Rows)
             {
                 if (backgroundWorker1.CancellationPending)
                 {
@@ -197,11 +176,11 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-
             if (e.Result is not DataTable dataTable)
                 return;
+
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
 
             HelperLoadRecords.BanksDatagridView(dataTable, dgBanks);
             dgBanks.CurrentCell = dgBanks.FirstDisplayedCell;
@@ -209,11 +188,11 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
 
-        private void frmBanks_FormClosed(object sender, FormClosedEventArgs e)
+        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {
-                backgroundWorker1.CancelAsync();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

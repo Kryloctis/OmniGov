@@ -36,10 +36,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.LTOM;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
-using AccountingSystem.Views.Reports.RptDeliquency;
 using AccountingSystem.Views.Reports.RptReports;
-using AccountingSystem.Views.Reports.SAAOB;
-using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
@@ -56,6 +53,8 @@ using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.Saaob;
+using AccountingSystem.Views.Reports.Saaobb;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -261,32 +260,29 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Manage > Allotment Classes"))
                 menuAllotmentClasses.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Chart of Accounts"))
-                menuChartOfAccounts.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Chart of Accounts"))
+            //    menuChartOfAccounts.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Function/Program/Project"))
-                menuFunctionProgramProject.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Function/Program/Project"))
+            //    menuFunctionProgramProject.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Funds"))
-                menuFunds.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Funds"))
+            //    menuFunds.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Users") && !Helper.HasPermission("Manage Roles"))
-                menuUsers.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Users") && !Helper.HasPermission("Manage Roles"))
+            //    menuUsers.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Users"))
-                menuUserList.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Users"))
+            //    menuUserList.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Roles"))
-                menuRoles.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Roles"))
+            //    menuRoles.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Receipts"))
-                receiptsInventoryToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Signatories"))
+            //    signatoriesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Signatories"))
-                signatoriesToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Barangays"))
-                barangaysToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Barangays"))
+            //    barangaysToolStripMenuItem.Enabled = false;
 
             if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
             {
@@ -300,8 +296,8 @@ namespace AccountingSystem.Views.Dashboard
         {
             //Manage
 
-            if (!Helper.HasPermission("Manage > Journals"))
-                menuJournals.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Journals"))
+            //    menuJournals.Enabled = false;
 
             //Transactions
             if (!Helper.HasPermission("Transaction > Obligation Request"))
@@ -310,9 +306,6 @@ namespace AccountingSystem.Views.Dashboard
             //Reports
 
             #region Journal Entry Voucher
-
-            if (!Helper.HasPermission("Transaction > JEV"))
-                ucJevDashboard1.btnAddJEV.Enabled = false;
 
             if (Helper.HasPermission("Transaction > JEV") || Helper.HasPermission("Report > JEVs"))
                 tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
@@ -493,12 +486,11 @@ namespace AccountingSystem.Views.Dashboard
 
         private void sAAOBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmSAAOB().ShowDialog();
+            _ = new frmSaaob().ShowDialog();
         }
 
         private void sAAOBBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmSAAOBB().ShowDialog();
         }
 
         #endregion SAAOB and SAAOBB report
@@ -568,17 +560,17 @@ namespace AccountingSystem.Views.Dashboard
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptDiscounts(this).ShowDialog();
+            _ = new frmRptDiscounts().ShowDialog();
         }
 
         private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptPenalties(this).ShowDialog();
+            _ = new frmRptPenalties().ShowDialog();
         }
 
         private void taxRateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxRates(this).ShowDialog();
+            _ = new frmRptTaxRates().ShowDialog();
         }
 
         private void CheckIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -751,35 +743,6 @@ namespace AccountingSystem.Views.Dashboard
                 _ = new frmCattleTransfer().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void realPropertyTaxDelinquencyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmRptDelinquencies().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void lTOM16ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmNoticeOfDelinquencyInThePaymentOfRPT().ShowDialog();
-        }
-
-        private void lTOM17ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("First Notice Sent").ShowDialog();
-        }
-
-        private void lTOM18ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("Second Notice Sent").ShowDialog();
-        }
-
-        private void lTOM19ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmNoticeOfRealPropertyTaxDelinquency("Final Notice Sent").ShowDialog();
         }
     }
 }

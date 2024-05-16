@@ -1,55 +1,29 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class frmEditBankAccounts : Form
     {
+        private int bankAccId;
         private readonly frmBankAccounts frmBankAccounts;
-        private int bankAccountID;
         private readonly ucBankAccounts uc;
 
-        public frmEditBankAccounts(frmBankAccounts frmBankAccounts, int bankAccountID)
+        public frmEditBankAccounts(frmBankAccounts frmBankAccounts, int bankAccId)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.frmBankAccounts = frmBankAccounts;
-            this.bankAccountID = bankAccountID;
+            this.bankAccId = bankAccId;
             uc = ucBankAccounts1;
-            uc.bankAccountID = bankAccountID;
         }
 
         private void frmEditBankAccounts_Load(object sender, EventArgs e)
         {
             try
             {
-                uc.isEdit = true;
-                LoadSelectedRecord();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadSelectedRecord()
-        {
-            Dictionary<string, string> dictBankAccounts = AccFactory.BankAccountsRepository().GetRecordByID(bankAccountID);
-
-            uc.cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
-            uc.txtAccountNo.Text = dictBankAccounts["account_no"];
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (UpdateData())
-                {
-                    Helper.MessageBoxSuccess("Bank account has been updated.");
-                    frmBankAccounts.LoadBankAccounts();
-                    Close();
-                }
+                uc.OnLoad(true, bankAccId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -62,18 +36,41 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 return false;
             }
 
-            var bankAccountID = this.bankAccountID;
-            var bankID = Convert.ToInt32(uc.cmbxBank.SelectedValue);
-            var bankAccountNumber = uc.txtAccountNo.Text.Trim();
+            var bankAccModel = uc.BankAccountsModel();
+            bankAccModel.Id = bankAccId;
 
-            var bankAccountsModel = new BankAccountsModel()
+            return AccFactory.BankAccountsRepository().Update(bankAccModel);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
             {
-                ID = bankAccountID,
-                BankID = bankID,
-                AccountNumber = bankAccountNumber
-            };
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Bank account has been updated.");
+                    frmBankAccounts.LoadRecords();
+                    Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
-            return AccFactory.BankAccountsRepository().Update(bankAccountsModel);
+        private void frmEditBankAccounts_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateData())
+                    {
+                        Helper.MessageBoxSuccess("Bank account has been updated.");
+                        frmBankAccounts.LoadRecords();
+                        Close();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

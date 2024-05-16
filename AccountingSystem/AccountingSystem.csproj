@@ -20,12 +20,15 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Reports\LTOMs\**" />
+		<Compile Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<Compile Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<Compile Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
 		<EmbeddedResource Remove="Reports\LTOMs\**" />
+		<EmbeddedResource Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<EmbeddedResource Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
 		<None Remove="Reports\LTOMs\**" />
+		<None Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<None Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
 	</ItemGroup>
@@ -89,7 +92,7 @@
 		<None Remove="Reports\status-of-appropriations-allotments-and-obligation.rdlc" />
 		<None Remove="Reports\subsidiary-ledger.rdlc" />
 		<None Remove="Reports\transaction_log.rdlc" />
-		<None Remove="Views\Dashboard\BudgetDashboard\ucBudgetSummary.resx~RF15fbe303.TMP" />
+		<None Remove="Views\Dashboard\Budget\ucBudgetSummary.resx~RF15fbe303.TMP" />
 		<None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
 	</ItemGroup>
 	<ItemGroup>
@@ -325,9 +328,6 @@
 		<None Update="Reports\payment-collection.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Views\Dashboard\TreasuryDashboard\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Receipts\AF54.rdlc">

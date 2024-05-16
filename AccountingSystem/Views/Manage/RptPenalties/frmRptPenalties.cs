@@ -11,12 +11,9 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 {
     public partial class frmRptPenalties : Form
     {
-        private readonly MainForm _mainForm;
-
-        public frmRptPenalties(MainForm mainForm)
+        public frmRptPenalties()
         {
             InitializeComponent();
-            _mainForm = mainForm;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }

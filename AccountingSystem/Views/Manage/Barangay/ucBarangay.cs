@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,12 +9,40 @@ namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class ucBarangay : UserControl
     {
-        internal int barangayId;
-        internal bool isEdit;
+        private int barangayId;
+        private bool isEdit;
 
         public ucBarangay()
         {
             InitializeComponent();
+        }
+
+        private void LoadSelectedBarangay(int barangayId)
+        {
+            var dictBarangay = AccFactory.BarangayRepository().GetRecordByID(barangayId);
+            txtCode.Text = dictBarangay["code"];
+            txtName.Text = dictBarangay["name"];
+        }
+
+        internal BarangayModel BarangayModel()
+        {
+            return new BarangayModel()
+            {
+                Code = txtCode.Text.Trim(),
+                Name = txtName.Text.Trim(),
+                MunicipalityId = Helper.selectedServerModel.LguId,
+            };
+        }
+
+        internal void OnLoad(bool isEdit, int? barangayId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.barangayId = barangayId.Value;
+                LoadSelectedBarangay(this.barangayId);
+            }
         }
 
         internal string GetFormErrors()
@@ -31,50 +60,48 @@ namespace AccountingSystem.Views.Manage.Barangay
         {
             txtCode.Clear();
             txtName.Clear();
-            txtCode.Focus();
         }
 
-        private bool BarangayCodeValidated()
+        private bool BarangayCodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code"))
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Barangay Code"))
                 return false;
 
-            string barangayCode = txtCode.Text.Trim();
-            bool codeExist;
-
-            if (!isEdit)
-                codeExist = AccFactory.BarangayRepository().CodeExist(barangayCode);
-            else
-                codeExist = AccFactory.BarangayRepository().CodeExist(barangayCode, barangayId);
+            string barangayCode = textBox.Text.Trim();
+            bool codeExist = isEdit ? AccFactory.BarangayRepository().CodeExist(barangayCode, barangayId) : AccFactory.BarangayRepository().CodeExist(barangayCode);
 
             if (codeExist)
             {
-                errorProvider1.SetError(txtCode, "Code already exist in your records.");
+                errorProvider.SetError(textBox, "Code already exist.");
                 return false;
             }
 
             return true;
         }
 
-        private bool BarangayNameValidated()
+        private bool BarangayNameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Barangay Name"))
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Barangay Name"))
                 return false;
 
-            string barangayName = txtName.Text.Trim();
-            bool nameExist;
-
-            if (barangayId == 0)
-                nameExist = AccFactory.BarangayRepository().NameExist(barangayName);
-            else
-                nameExist = AccFactory.BarangayRepository().NameExist(barangayName, barangayId);
+            string barangayName = textBox.Text.Trim();
+            bool nameExist = isEdit ? AccFactory.BarangayRepository().NameExist(barangayName, barangayId) : AccFactory.BarangayRepository().NameExist(barangayName);
 
             if (nameExist)
             {
-                errorProvider1.SetError(txtName, "Name already exist in your records.");
+                errorProvider.SetError(textBox, "Name already exist.");
                 return false;
             }
             return true;
+        }
+
+        private void txtBarangay_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !BarangayNameValidated(errorProvider1, txtName);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtBarangay_Validated(object sender, EventArgs e)
@@ -82,19 +109,18 @@ namespace AccountingSystem.Views.Manage.Barangay
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
 
-        private void txtBarangay_Validating(object sender, CancelEventArgs e)
+        private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !BarangayNameValidated();
+            try
+            {
+                e.Cancel = !BarangayCodeValidated(errorProvider1, txtCode);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
-        }
-
-        private void txtCode_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = !BarangayCodeValidated();
         }
     }
 }

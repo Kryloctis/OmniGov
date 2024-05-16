@@ -51,18 +51,18 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(219, 3);
+            btnCancel.Location = new System.Drawing.Point(202, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(133, 23);
+            btnCancel.Size = new System.Drawing.Size(150, 23);
             btnCancel.TabIndex = 0;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new System.Drawing.Point(80, 3);
+            btnAdd.Location = new System.Drawing.Point(46, 3);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(133, 23);
+            btnAdd.Size = new System.Drawing.Size(150, 23);
             btnAdd.TabIndex = 0;
             btnAdd.Text = "Save (Ctrl + S)";
             btnAdd.UseVisualStyleBackColor = true;

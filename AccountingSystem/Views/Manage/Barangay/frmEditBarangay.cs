@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -8,7 +7,7 @@ namespace AccountingSystem.Views.Manage.Barangay
     public partial class frmEditBarangay : Form
     {
         private int barangayId;
-        private frmBarangay _frmBarangay;
+        private frmBarangay frmBarangay;
         private ucBarangay uc;
 
         public frmEditBarangay(int barangayId, frmBarangay frmBarangay)
@@ -16,19 +15,33 @@ namespace AccountingSystem.Views.Manage.Barangay
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucBarangay1;
-            uc.barangayId = barangayId;
             this.barangayId = barangayId;
-            _frmBarangay = frmBarangay;
+            this.barangayId = barangayId;
+            this.frmBarangay = frmBarangay;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private bool UpdateData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            var barangayModel = uc.BarangayModel();
+            barangayModel.Id = barangayId;
+
+            return AccFactory.BarangayRepository().Update(barangayModel);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (UpdateBarangay())
+                if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Barangay has been updated.");
-                    _frmBarangay.LoadRecords();
+                    frmBarangay.LoadRecords();
                     Close();
                 }
             }
@@ -39,39 +52,26 @@ namespace AccountingSystem.Views.Manage.Barangay
         {
             try
             {
-                uc.isEdit = true;
-                LoadSelectedBarangay();
+                uc.OnLoad(true, barangayId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadSelectedBarangay()
+        private void frmEditBarangay_KeyDown(object sender, KeyEventArgs e)
         {
-            var dictBarangay = AccFactory.BarangayRepository().GetRecordByID(barangayId);
-
-            uc.txtCode.Text = dictBarangay["code"];
-            uc.txtName.Text = dictBarangay["name"];
-        }
-
-        private bool UpdateBarangay()
-        {
-            if (!uc.ValidateChildren())
+            try
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                if (e.KeyCode == Keys.S && e.Control)
+                {
+                    if (UpdateData())
+                    {
+                        Helper.MessageBoxSuccess("Barangay has been updated.");
+                        frmBarangay.LoadRecords();
+                        Close();
+                    }
+                }
             }
-
-            var barangayCode = uc.txtCode.Text.Trim();
-            var barangayName = uc.txtName.Text.Trim();
-
-            var barangayModel = new BarangayModel()
-            {
-                Id = barangayId,
-                Code = barangayCode,
-                Name = barangayName
-            };
-
-            return AccFactory.BarangayRepository().Update(barangayModel);
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

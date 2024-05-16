@@ -321,7 +321,7 @@ namespace ACC.Data
                     barangayId = barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
                 else
                 {
-                    barangayModel.MunicipalityID = municipalityId;
+                    barangayModel.MunicipalityId = municipalityId;
                     _ = barangayRepository.Insert(barangayModel);
                     barangayId = barangayRepository.GetLastInsertedId();
                 }

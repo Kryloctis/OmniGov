@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Reports.SAAOBB
+namespace AccountingSystem.Views.Reports.Saaobb
 {
-    partial class frmSAAOBB
+    partial class frmSaaobb
     {
         /// <summary>
         /// Required designer variable.
@@ -29,117 +29,110 @@ namespace AccountingSystem.Views.Reports.SAAOBB
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.chkbxSpecialAccounts = new System.Windows.Forms.CheckBox();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.cmbxFund = new System.Windows.Forms.ComboBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelReport = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            chkbxSpecialAccounts = new System.Windows.Forms.CheckBox();
+            dtAsOf = new System.Windows.Forms.DateTimePicker();
+            cmbxFund = new System.Windows.Forms.ComboBox();
+            btnRetrieve = new System.Windows.Forms.Button();
+            panelReport = new System.Windows.Forms.Panel();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.chkbxSpecialAccounts);
-            this.panel1.Controls.Add(this.dtAsOf);
-            this.panel1.Controls.Add(this.cmbxFund);
-            this.panel1.Controls.Add(this.btnRetrieve);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(915, 41);
-            this.panel1.TabIndex = 1;
+            panel1.BackColor = System.Drawing.SystemColors.Control;
+            panel1.Controls.Add(chkbxSpecialAccounts);
+            panel1.Controls.Add(dtAsOf);
+            panel1.Controls.Add(cmbxFund);
+            panel1.Controls.Add(btnRetrieve);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(886, 37);
+            panel1.TabIndex = 1;
             // 
             // chkbxSpecialAccounts
             // 
-            this.chkbxSpecialAccounts.AutoSize = true;
-            this.chkbxSpecialAccounts.Location = new System.Drawing.Point(565, 14);
-            this.chkbxSpecialAccounts.Name = "chkbxSpecialAccounts";
-            this.chkbxSpecialAccounts.Size = new System.Drawing.Size(116, 19);
-            this.chkbxSpecialAccounts.TabIndex = 7;
-            this.chkbxSpecialAccounts.Text = "Special Accounts";
-            this.chkbxSpecialAccounts.UseVisualStyleBackColor = true;
+            chkbxSpecialAccounts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            chkbxSpecialAccounts.AutoSize = true;
+            chkbxSpecialAccounts.Location = new System.Drawing.Point(607, 9);
+            chkbxSpecialAccounts.Name = "chkbxSpecialAccounts";
+            chkbxSpecialAccounts.Size = new System.Drawing.Size(116, 19);
+            chkbxSpecialAccounts.TabIndex = 7;
+            chkbxSpecialAccounts.Text = "Special Accounts";
+            chkbxSpecialAccounts.UseVisualStyleBackColor = true;
             // 
             // dtAsOf
             // 
-            this.dtAsOf.Location = new System.Drawing.Point(331, 11);
-            this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
-            this.dtAsOf.Name = "dtAsOf";
-            this.dtAsOf.Size = new System.Drawing.Size(211, 23);
-            this.dtAsOf.TabIndex = 6;
+            dtAsOf.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtAsOf.CustomFormat = "MMM dd, yyyy";
+            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtAsOf.Location = new System.Drawing.Point(471, 7);
+            dtAsOf.Name = "dtAsOf";
+            dtAsOf.Size = new System.Drawing.Size(130, 23);
+            dtAsOf.TabIndex = 6;
             // 
             // cmbxFund
             // 
-            this.cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFund.FormattingEnabled = true;
-            this.cmbxFund.Location = new System.Drawing.Point(50, 12);
-            this.cmbxFund.Name = "cmbxFund";
-            this.cmbxFund.Size = new System.Drawing.Size(218, 23);
-            this.cmbxFund.TabIndex = 5;
+            cmbxFund.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFund.FormattingEnabled = true;
+            cmbxFund.Location = new System.Drawing.Point(265, 7);
+            cmbxFund.Name = "cmbxFund";
+            cmbxFund.Size = new System.Drawing.Size(200, 23);
+            cmbxFund.TabIndex = 5;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(704, 11);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
-            this.btnRetrieve.TabIndex = 4;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(291, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "As of";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Fund";
+            btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRetrieve.Location = new System.Drawing.Point(729, 7);
+            btnRetrieve.Name = "btnRetrieve";
+            btnRetrieve.Size = new System.Drawing.Size(150, 23);
+            btnRetrieve.TabIndex = 4;
+            btnRetrieve.Text = "Run Report";
+            btnRetrieve.UseVisualStyleBackColor = true;
+            btnRetrieve.Click += btnRetrieve_Click;
             // 
             // panelReport
             // 
-            this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelReport.Location = new System.Drawing.Point(0, 41);
-            this.panelReport.Name = "panelReport";
-            this.panelReport.Size = new System.Drawing.Size(915, 644);
-            this.panelReport.TabIndex = 2;
+            panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelReport.Location = new System.Drawing.Point(0, 37);
+            panelReport.Name = "panelReport";
+            panelReport.Size = new System.Drawing.Size(886, 417);
+            panelReport.TabIndex = 2;
             // 
-            // frmSAAOBB
+            // statusStrip1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(915, 685);
-            this.Controls.Add(this.panelReport);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(931, 718);
-            this.Name = "frmSAAOBB";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
-            this.Load += new System.EventHandler(this.frmSAAOBB_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-
+            statusStrip1.Location = new System.Drawing.Point(0, 454);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(886, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // frmSaaobb
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(886, 476);
+            Controls.Add(panelReport);
+            Controls.Add(statusStrip1);
+            Controls.Add(panel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(902, 515);
+            Name = "frmSaaobb";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Reports > Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
+            Load += frmSAAOBB_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -148,9 +141,8 @@ namespace AccountingSystem.Views.Reports.SAAOBB
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbxFund;
         internal System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Panel panelReport;
         private System.Windows.Forms.CheckBox chkbxSpecialAccounts;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

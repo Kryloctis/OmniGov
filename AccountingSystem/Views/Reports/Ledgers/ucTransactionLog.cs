@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using Microsoft.Reporting.WinForms;
-using Org.BouncyCastle.Cms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,25 +20,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-        private void OnLoad()
+        internal void OnLoad()
         {
-            if (!DesignMode)
-            {
-                LoadAccounts();
-                LoadFunds();
-                LoadYear();
-                cmbxFunds.Tag = string.Empty;
-                cmbxAccount.Tag = string.Empty;
-            }
-        }
-
-        private void ucTransactionLog_Load(object sender, System.EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadAccounts();
+            LoadFunds();
+            LoadYear();
+            cmbxFunds.Tag = string.Empty;
+            cmbxAccount.Tag = string.Empty;
         }
 
         private void LoadFunds()
@@ -56,20 +43,16 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         #region Accounts
 
-        private DataColumn[] DataColumnsAccounts()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "account_name", typeof(string))
-            };
-        }
-
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsAccounts());
+            var dtColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account_name", typeof(string))
+            };
+            dataTable.Columns.AddRange(dtColumns);
 
             foreach (DataRow row in dtAccounts.Rows)
             {
