@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.AssessmentPosting
+namespace AccountingSystem.Views.Transactions.Assessment
 {
     partial class frmAssessmentPosting
     {
