@@ -260,30 +260,29 @@ namespace AccountingSystem.Views.Dashboard
             if (!Helper.HasPermission("Manage > Allotment Classes"))
                 menuAllotmentClasses.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Chart of Accounts"))
-                menuChartOfAccounts.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Chart of Accounts"))
+            //    menuChartOfAccounts.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Function/Program/Project"))
-                menuFunctionProgramProject.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Function/Program/Project"))
+            //    menuFunctionProgramProject.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Funds"))
-                menuFunds.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Funds"))
+            //    menuFunds.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Users") && !Helper.HasPermission("Manage Roles"))
-                menuUsers.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Users") && !Helper.HasPermission("Manage Roles"))
+            //    menuUsers.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Users"))
-                menuUserList.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Users"))
+            //    menuUserList.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Roles"))
-                menuRoles.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Roles"))
+            //    menuRoles.Enabled = false;
 
+            //if (!Helper.HasPermission("Manage > Signatories"))
+            //    signatoriesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage > Signatories"))
-                signatoriesToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Barangays"))
-                barangaysToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Barangays"))
+            //    barangaysToolStripMenuItem.Enabled = false;
 
             if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
             {
@@ -297,8 +296,8 @@ namespace AccountingSystem.Views.Dashboard
         {
             //Manage
 
-            if (!Helper.HasPermission("Manage > Journals"))
-                menuJournals.Enabled = false;
+            //if (!Helper.HasPermission("Manage > Journals"))
+            //    menuJournals.Enabled = false;
 
             //Transactions
             if (!Helper.HasPermission("Transaction > Obligation Request"))
@@ -561,17 +560,17 @@ namespace AccountingSystem.Views.Dashboard
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptDiscounts(this).ShowDialog();
+            _ = new frmRptDiscounts().ShowDialog();
         }
 
         private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptPenalties(this).ShowDialog();
+            _ = new frmRptPenalties().ShowDialog();
         }
 
         private void taxRateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxRates(this).ShowDialog();
+            _ = new frmRptTaxRates().ShowDialog();
         }
 
         private void CheckIssuanceToolStripMenuItem_Click(object sender, EventArgs e)

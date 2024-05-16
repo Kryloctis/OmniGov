@@ -42,6 +42,9 @@
             btnUsers = new System.Windows.Forms.Button();
             label7 = new System.Windows.Forms.Label();
             panelAdmin = new System.Windows.Forms.Panel();
+            btnDiscount = new System.Windows.Forms.Button();
+            btnPenalty = new System.Windows.Forms.Button();
+            btnTaxRate = new System.Windows.Forms.Button();
             btnAllotmentClasses = new System.Windows.Forms.Button();
             btnAccForms = new System.Windows.Forms.Button();
             btnFunds = new System.Windows.Forms.Button();
@@ -262,6 +265,9 @@
             // panelAdmin
             // 
             panelAdmin.AutoSize = true;
+            panelAdmin.Controls.Add(btnDiscount);
+            panelAdmin.Controls.Add(btnPenalty);
+            panelAdmin.Controls.Add(btnTaxRate);
             panelAdmin.Controls.Add(btnAllotmentClasses);
             panelAdmin.Controls.Add(btnAccForms);
             panelAdmin.Controls.Add(btnFunds);
@@ -272,6 +278,57 @@
             panelAdmin.Name = "panelAdmin";
             panelAdmin.Size = new System.Drawing.Size(296, 246);
             panelAdmin.TabIndex = 7;
+            // 
+            // btnDiscount
+            // 
+            btnDiscount.Dock = System.Windows.Forms.DockStyle.Top;
+            btnDiscount.FlatAppearance.BorderSize = 0;
+            btnDiscount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnDiscount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDiscount.Location = new System.Drawing.Point(0, 195);
+            btnDiscount.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDiscount.Name = "btnDiscount";
+            btnDiscount.Size = new System.Drawing.Size(296, 33);
+            btnDiscount.TabIndex = 35;
+            btnDiscount.Text = "Discount";
+            btnDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDiscount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnDiscount.UseVisualStyleBackColor = true;
+            btnDiscount.Click += btnDiscount_Click;
+            // 
+            // btnPenalty
+            // 
+            btnPenalty.Dock = System.Windows.Forms.DockStyle.Top;
+            btnPenalty.FlatAppearance.BorderSize = 0;
+            btnPenalty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnPenalty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnPenalty.Location = new System.Drawing.Point(0, 162);
+            btnPenalty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnPenalty.Name = "btnPenalty";
+            btnPenalty.Size = new System.Drawing.Size(296, 33);
+            btnPenalty.TabIndex = 34;
+            btnPenalty.Text = "Penalty Rate";
+            btnPenalty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnPenalty.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnPenalty.UseVisualStyleBackColor = true;
+            btnPenalty.Click += btnPenalty_Click;
+            // 
+            // btnTaxRate
+            // 
+            btnTaxRate.Dock = System.Windows.Forms.DockStyle.Top;
+            btnTaxRate.FlatAppearance.BorderSize = 0;
+            btnTaxRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnTaxRate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnTaxRate.Location = new System.Drawing.Point(0, 129);
+            btnTaxRate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnTaxRate.Name = "btnTaxRate";
+            btnTaxRate.Size = new System.Drawing.Size(296, 33);
+            btnTaxRate.TabIndex = 33;
+            btnTaxRate.Text = "Tax Rate";
+            btnTaxRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnTaxRate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnTaxRate.UseVisualStyleBackColor = true;
+            btnTaxRate.Click += btnTaxRate_Click;
             // 
             // btnAllotmentClasses
             // 
@@ -374,5 +431,8 @@
         private System.Windows.Forms.Button btnFunds;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panelAdmin;
+        private System.Windows.Forms.Button btnDiscount;
+        private System.Windows.Forms.Button btnPenalty;
+        private System.Windows.Forms.Button btnTaxRate;
     }
 }

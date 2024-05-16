@@ -7,6 +7,9 @@ using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Registry;
+using AccountingSystem.Views.Manage.RptDiscount;
+using AccountingSystem.Views.Manage.RptPenalties;
+using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
@@ -29,7 +32,8 @@ namespace AccountingSystem.Views.Dashboard.Settings
 
         private void ValidatePermissions()
         {
-            panelAdmin.Enabled = AccFactory.UsersRepository().GetViewRecordById(Helper.userId)["office"] == "SysAdmin";
+            bool isAdmin = AccFactory.UsersRepository().GetViewRecordById(Helper.userId)["office"] == "SysAdmin";
+            panelAdmin.Enabled = isAdmin;
 
             if (!Helper.HasPermission("Manage > Banks"))
                 btnBanks.Enabled = false;
@@ -151,6 +155,33 @@ namespace AccountingSystem.Views.Dashboard.Settings
             try
             {
                 _ = new frmBankAccounts().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnTaxRate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptTaxRates().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnPenalty_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptPenalties().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnDiscount_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptDiscounts().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
