@@ -74,6 +74,7 @@
             schedUnreleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            warrantOfLevyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -231,7 +232,7 @@
             // 
             // assessmentPostingTstrpMnuItm
             // 
-            assessmentPostingTstrpMnuItm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { propertyTaxPostingToolStripMenuItem, delinquencyCenterToolStripMenuItem });
+            assessmentPostingTstrpMnuItm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { propertyTaxPostingToolStripMenuItem, delinquencyCenterToolStripMenuItem, warrantOfLevyToolStripMenuItem });
             assessmentPostingTstrpMnuItm.Name = "assessmentPostingTstrpMnuItm";
             assessmentPostingTstrpMnuItm.Size = new System.Drawing.Size(226, 22);
             assessmentPostingTstrpMnuItm.Text = "Assessment";
@@ -247,8 +248,8 @@
             // 
             delinquencyCenterToolStripMenuItem.Name = "delinquencyCenterToolStripMenuItem";
             delinquencyCenterToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            delinquencyCenterToolStripMenuItem.Text = "Delinquency Center...";
-            delinquencyCenterToolStripMenuItem.Click += delinquencyCenterToolStripMenuItem_Click;
+            delinquencyCenterToolStripMenuItem.Text = "Delinquency Notice...";
+            delinquencyCenterToolStripMenuItem.Click += delinquencyNoticeToolStripMenuItem_Click;
             // 
             // auctionTstrpMnuItm
             // 
@@ -400,6 +401,12 @@
             dailyCashPositionsTstrpMnuItm.Text = "Daily Cash Positions...";
             dailyCashPositionsTstrpMnuItm.Click += dailyCashPositionsTstrpMnuItm_Click;
             // 
+            // warrantOfLevyToolStripMenuItem
+            // 
+            warrantOfLevyToolStripMenuItem.Name = "warrantOfLevyToolStripMenuItem";
+            warrantOfLevyToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            warrantOfLevyToolStripMenuItem.Text = "Warrant of Levy...";
+            // 
             // ucTreasury
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -460,5 +467,6 @@
         private System.Windows.Forms.ToolStripMenuItem propertyTaxPostingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem delinquencyCenterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem assessmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem warrantOfLevyToolStripMenuItem;
     }
 }

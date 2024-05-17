@@ -416,10 +416,11 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void delinquencyCenterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void delinquencyNoticeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
+                _ = new frmDelinquencyNotice().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
