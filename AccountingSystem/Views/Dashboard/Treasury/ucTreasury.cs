@@ -97,8 +97,8 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             if (!Helper.HasPermission("Transaction > Payments"))
                 paymentsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction > Assessment Posting"))
-                propertyTaxPostingToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Transaction > Assessment Posting"))
+            //    propertyTaxPostingToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
                 releasedAndUnreleaseChecksTstrpMnuItm.Enabled = false;
@@ -407,20 +407,20 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void propertyTaxPostingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void propertyAssessmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmAssessmentPosting().ShowDialog();
+                _ = new frmRptDelinquencyNotices().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void delinquencyNoticeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void propertyTaxPostingToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmDelinquencyNotice().ShowDialog();
+                _ = new frmAssessmentPosting().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

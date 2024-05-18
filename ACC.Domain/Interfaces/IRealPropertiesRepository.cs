@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
 
         bool CompleteArpNoExist(string completeArpNo, int Id);
 
-        Dictionary<string, string> GetRecordByCompleteArpNo(string completeArpNo);
+        Dictionary<string, string> GetViewRecordByCompleteArpNo(string completeArpNo);
 
         DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText, int rowFilter);
 
@@ -19,6 +19,10 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordNotExistedPreviousRpt();
 
         DataTable GetRecordsBySearch(string searchText, int rowFilter, bool showCancelled);
+
+        DataTable GetViewRecords();
+
+        DataTable GetViewArpNoRecordsByKind(char propertyType);
 
         Dictionary<string, string> GetViewRecordById(int Id);
 

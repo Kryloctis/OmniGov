@@ -219,11 +219,11 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public Dictionary<string, string> GetRecordByCompleteArpNo(string completeArpNo)
+        public Dictionary<string, string> GetViewRecordByCompleteArpNo(string completeArpNo)
         {
             var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeArpNo } };
-            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -347,7 +347,7 @@ namespace ACC.Data
                 //Real Properties
                 if (CompleteArpNoExist(completeArpNo))
                 {
-                    realPropertiesId = Convert.ToInt32(GetRecordByCompleteArpNo(completeArpNo)["id"]);
+                    realPropertiesId = Convert.ToInt32(GetViewRecordByCompleteArpNo(completeArpNo)["id"]);
                     //rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
 
                     realPropertiesModel.Id = realPropertiesId;
@@ -482,6 +482,23 @@ namespace ACC.Data
                 scope.Complete();
                 return true;
             }
+        }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
+
+        public DataTable GetViewArpNoRecordsByKind(char propertyKind)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@property_kind", DbType.String, propertyKind},
+            };
+
+            string query = $"SELECT complete_arp_no FROM {viewTableName} WHERE property_kind = @property_kind";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
