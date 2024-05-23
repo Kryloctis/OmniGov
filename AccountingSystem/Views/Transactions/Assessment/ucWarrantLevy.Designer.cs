@@ -28,210 +28,365 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new System.Windows.Forms.Label();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            textBox6 = new System.Windows.Forms.TextBox();
-            label8 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
-            label7 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
-            label6 = new System.Windows.Forms.Label();
-            textBox3 = new System.Windows.Forms.TextBox();
-            label5 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
-            label4 = new System.Windows.Forms.Label();
-            label9 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            panel2 = new System.Windows.Forms.Panel();
+            dtPckrDateIssued = new System.Windows.Forms.DateTimePicker();
+            label10 = new System.Windows.Forms.Label();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            panel3 = new System.Windows.Forms.Panel();
+            dgDelinquencies = new System.Windows.Forms.DataGridView();
+            pbDelinquencies = new System.Windows.Forms.ProgressBar();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            panel1 = new System.Windows.Forms.Panel();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            label11 = new System.Windows.Forms.Label();
+            txtLocation = new System.Windows.Forms.TextBox();
+            radMachinery = new System.Windows.Forms.RadioButton();
+            label12 = new System.Windows.Forms.Label();
+            radBuilding = new System.Windows.Forms.RadioButton();
+            txtAssessedValue = new System.Windows.Forms.TextBox();
+            txtOwner = new System.Windows.Forms.TextBox();
+            radLand = new System.Windows.Forms.RadioButton();
+            label13 = new System.Windows.Forms.Label();
+            label14 = new System.Windows.Forms.Label();
+            bgwDelinquencies = new System.ComponentModel.BackgroundWorker();
+            groupBox2.SuspendLayout();
+            panel2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgDelinquencies).BeginInit();
+            groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // groupBox2
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(3, 9);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(67, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Date Issued";
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox2.Controls.Add(panel2);
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            groupBox2.Location = new System.Drawing.Point(3, 3);
+            groupBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(450, 57);
+            groupBox2.TabIndex = 37;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Warrant Details";
             // 
-            // dateTimePicker1
+            // panel2
             // 
-            dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(118, 3);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(311, 23);
-            dateTimePicker1.TabIndex = 1;
+            panel2.Controls.Add(dtPckrDateIssued);
+            panel2.Controls.Add(label10);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel2.ForeColor = System.Drawing.SystemColors.ControlText;
+            panel2.Location = new System.Drawing.Point(3, 20);
+            panel2.Name = "panel2";
+            panel2.Padding = new System.Windows.Forms.Padding(4);
+            panel2.Size = new System.Drawing.Size(444, 34);
+            panel2.TabIndex = 0;
             // 
-            // textBox6
+            // dtPckrDateIssued
             // 
-            textBox6.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox6.Location = new System.Drawing.Point(118, 148);
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new System.Drawing.Size(311, 23);
-            textBox6.TabIndex = 32;
+            dtPckrDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtPckrDateIssued.CustomFormat = "MMM dd, yyyy";
+            dtPckrDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtPckrDateIssued.Location = new System.Drawing.Point(101, 5);
+            dtPckrDateIssued.Name = "dtPckrDateIssued";
+            dtPckrDateIssued.Size = new System.Drawing.Size(322, 23);
+            dtPckrDateIssued.TabIndex = 26;
             // 
-            // label8
+            // label10
             // 
-            label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(3, 150);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(85, 15);
-            label8.TabIndex = 27;
-            label8.Text = "Assessed Value";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(3, 9);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(72, 15);
+            label10.TabIndex = 24;
+            label10.Text = "Date Issued*";
             // 
-            // textBox5
+            // groupBox3
             // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox5.Location = new System.Drawing.Point(118, 119);
-            textBox5.Name = "textBox5";
-            textBox5.ReadOnly = true;
-            textBox5.Size = new System.Drawing.Size(311, 23);
-            textBox5.TabIndex = 33;
+            groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(panel3);
+            groupBox3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            groupBox3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            groupBox3.Location = new System.Drawing.Point(0, 245);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new System.Drawing.Size(453, 235);
+            groupBox3.TabIndex = 39;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Delinquencies";
             // 
-            // label7
+            // panel3
             // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(3, 121);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(79, 15);
-            label7.TabIndex = 28;
-            label7.Text = "Property Kind";
+            panel3.Controls.Add(dgDelinquencies);
+            panel3.Controls.Add(pbDelinquencies);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel3.ForeColor = System.Drawing.SystemColors.ControlText;
+            panel3.Location = new System.Drawing.Point(3, 20);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(4);
+            panel3.Size = new System.Drawing.Size(447, 212);
+            panel3.TabIndex = 0;
             // 
-            // textBox4
+            // dgDelinquencies
             // 
-            textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox4.Location = new System.Drawing.Point(118, 90);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new System.Drawing.Size(311, 23);
-            textBox4.TabIndex = 34;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgDelinquencies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dgDelinquencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgDelinquencies.DefaultCellStyle = dataGridViewCellStyle8;
+            dgDelinquencies.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgDelinquencies.Location = new System.Drawing.Point(4, 9);
+            dgDelinquencies.Name = "dgDelinquencies";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgDelinquencies.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dgDelinquencies.RowTemplate.Height = 25;
+            dgDelinquencies.Size = new System.Drawing.Size(439, 199);
+            dgDelinquencies.TabIndex = 0;
             // 
-            // label6
+            // pbDelinquencies
             // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(3, 92);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(101, 15);
-            label6.TabIndex = 29;
-            label6.Text = "Property Location";
+            pbDelinquencies.Dock = System.Windows.Forms.DockStyle.Top;
+            pbDelinquencies.Location = new System.Drawing.Point(4, 4);
+            pbDelinquencies.Name = "pbDelinquencies";
+            pbDelinquencies.Size = new System.Drawing.Size(439, 5);
+            pbDelinquencies.TabIndex = 2;
             // 
-            // textBox3
+            // groupBox1
             // 
-            textBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox3.Location = new System.Drawing.Point(118, 61);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new System.Drawing.Size(311, 23);
-            textBox3.TabIndex = 35;
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(panel1);
+            groupBox1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            groupBox1.Location = new System.Drawing.Point(3, 63);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(450, 176);
+            groupBox1.TabIndex = 38;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Real Property";
             // 
-            // label5
+            // panel1
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(3, 63);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(109, 15);
-            label5.TabIndex = 30;
-            label5.Text = "Tax Declaration No.";
+            panel1.Controls.Add(txtRpt);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label11);
+            panel1.Controls.Add(txtLocation);
+            panel1.Controls.Add(radMachinery);
+            panel1.Controls.Add(label12);
+            panel1.Controls.Add(radBuilding);
+            panel1.Controls.Add(txtAssessedValue);
+            panel1.Controls.Add(txtOwner);
+            panel1.Controls.Add(radLand);
+            panel1.Controls.Add(label13);
+            panel1.Controls.Add(label14);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel1.ForeColor = System.Drawing.SystemColors.ControlText;
+            panel1.Location = new System.Drawing.Point(3, 20);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(444, 153);
+            panel1.TabIndex = 0;
             // 
-            // textBox2
+            // txtRpt
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox2.Location = new System.Drawing.Point(118, 32);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new System.Drawing.Size(311, 23);
-            textBox2.TabIndex = 36;
+            txtRpt.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(93, 32);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(330, 23);
+            txtRpt.TabIndex = 30;
+            txtRpt.TextChanged += txtRpt_TextChanged;
             // 
-            // label4
+            // label2
             // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(3, 34);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(101, 15);
-            label4.TabIndex = 31;
-            label4.Text = "Declared Owner/s";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 35);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(56, 15);
+            label2.TabIndex = 27;
+            label2.Text = "ARP No.*";
             // 
-            // label9
+            // label11
             // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label9.ForeColor = System.Drawing.Color.Black;
-            label9.Location = new System.Drawing.Point(197, 369);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(31, 15);
-            label9.TabIndex = 25;
-            label9.Text = "0.00";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(3, 8);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(31, 15);
+            label11.TabIndex = 1;
+            label11.Text = "Kind";
             // 
-            // label3
+            // txtLocation
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(118, 369);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(79, 15);
-            label3.TabIndex = 26;
-            label3.Text = "Total Tax Due:";
+            txtLocation.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtLocation.Location = new System.Drawing.Point(93, 89);
+            txtLocation.Name = "txtLocation";
+            txtLocation.ReadOnly = true;
+            txtLocation.Size = new System.Drawing.Size(330, 23);
+            txtLocation.TabIndex = 2;
             // 
-            // dataGridView1
+            // radMachinery
             // 
-            dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new System.Drawing.Point(118, 177);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(311, 189);
-            dataGridView1.TabIndex = 24;
+            radMachinery.AutoSize = true;
+            radMachinery.Location = new System.Drawing.Point(225, 7);
+            radMachinery.Name = "radMachinery";
+            radMachinery.Size = new System.Drawing.Size(81, 19);
+            radMachinery.TabIndex = 23;
+            radMachinery.Text = "Machinery";
+            radMachinery.UseVisualStyleBackColor = true;
+            radMachinery.CheckedChanged += radMachinery_CheckedChanged;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(3, 91);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(53, 15);
+            label12.TabIndex = 1;
+            label12.Text = "Location";
+            // 
+            // radBuilding
+            // 
+            radBuilding.AutoSize = true;
+            radBuilding.Location = new System.Drawing.Point(150, 7);
+            radBuilding.Name = "radBuilding";
+            radBuilding.Size = new System.Drawing.Size(69, 19);
+            radBuilding.TabIndex = 23;
+            radBuilding.Text = "Building";
+            radBuilding.UseVisualStyleBackColor = true;
+            radBuilding.CheckedChanged += radBuilding_CheckedChanged;
+            // 
+            // txtAssessedValue
+            // 
+            txtAssessedValue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtAssessedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtAssessedValue.Location = new System.Drawing.Point(93, 118);
+            txtAssessedValue.Name = "txtAssessedValue";
+            txtAssessedValue.ReadOnly = true;
+            txtAssessedValue.Size = new System.Drawing.Size(330, 23);
+            txtAssessedValue.TabIndex = 2;
+            // 
+            // txtOwner
+            // 
+            txtOwner.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtOwner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtOwner.Location = new System.Drawing.Point(93, 61);
+            txtOwner.Name = "txtOwner";
+            txtOwner.ReadOnly = true;
+            txtOwner.Size = new System.Drawing.Size(330, 23);
+            txtOwner.TabIndex = 2;
+            // 
+            // radLand
+            // 
+            radLand.AutoSize = true;
+            radLand.Checked = true;
+            radLand.Location = new System.Drawing.Point(93, 7);
+            radLand.Name = "radLand";
+            radLand.Size = new System.Drawing.Size(51, 19);
+            radLand.TabIndex = 23;
+            radLand.TabStop = true;
+            radLand.Text = "Land";
+            radLand.UseVisualStyleBackColor = true;
+            radLand.CheckedChanged += radLand_CheckedChanged;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(3, 120);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(85, 15);
+            label13.TabIndex = 1;
+            label13.Text = "Assessed Value";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(3, 62);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(42, 15);
+            label14.TabIndex = 1;
+            label14.Text = "Owner";
+            // 
+            // bgwDelinquencies
+            // 
+            bgwDelinquencies.WorkerReportsProgress = true;
+            bgwDelinquencies.WorkerSupportsCancellation = true;
+            bgwDelinquencies.DoWork += bgwDelinquencies_DoWork;
+            bgwDelinquencies.ProgressChanged += bgwDelinquencies_ProgressChanged;
+            bgwDelinquencies.RunWorkerCompleted += bgwDelinquencies_RunWorkerCompleted;
             // 
             // ucWarrantLevy
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(textBox6);
-            Controls.Add(label8);
-            Controls.Add(textBox5);
-            Controls.Add(label7);
-            Controls.Add(textBox4);
-            Controls.Add(label6);
-            Controls.Add(textBox3);
-            Controls.Add(label5);
-            Controls.Add(textBox2);
-            Controls.Add(label4);
-            Controls.Add(label9);
-            Controls.Add(label3);
-            Controls.Add(dataGridView1);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(label1);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox1);
+            Controls.Add(groupBox2);
             Name = "ucWarrantLevy";
-            Size = new System.Drawing.Size(448, 399);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Size = new System.Drawing.Size(457, 482);
+            groupBox2.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgDelinquencies).EndInit();
+            groupBox1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DateTimePicker dtPckrDateIssued;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgDelinquencies;
+        private System.Windows.Forms.ProgressBar pbDelinquencies;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtLocation;
+        private System.Windows.Forms.RadioButton radMachinery;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.RadioButton radBuilding;
+        private System.Windows.Forms.TextBox txtAssessedValue;
+        private System.Windows.Forms.TextBox txtOwner;
+        private System.Windows.Forms.RadioButton radLand;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.ComponentModel.BackgroundWorker bgwDelinquencies;
     }
 }
