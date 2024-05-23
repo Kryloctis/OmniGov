@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Data;
+using AccountingSystem.Views.Shared;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ACC.Data;
-using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Transactions.Assessment;
-using DocumentFormat.OpenXml.Office2010.PowerPoint;
 
 namespace AccountingSystem.Views.Transactions.Assessment
 {
     public partial class ucDelinquenyNotice : UserControl
     {
         private int rptId;
+        private DataTable dtRealProperties;
 
         public ucDelinquenyNotice()
         {
@@ -42,17 +37,19 @@ namespace AccountingSystem.Views.Transactions.Assessment
             var dtRealProperties = new DataTable();
 
             if (radLand.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewArpNoRecordsByKind('L');
+                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('L');
             else if (radBuilding.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewArpNoRecordsByKind('B');
+                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('B');
             else if (radMachinery.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewArpNoRecordsByKind('M');
+                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('M');
 
             var autoCompleteSrc = dtRealProperties.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
+
+            this.dtRealProperties = dtRealProperties;
         }
 
         private void ResetRealProperty()
@@ -63,38 +60,11 @@ namespace AccountingSystem.Views.Transactions.Assessment
             txtAssessedValue.Clear();
         }
 
-        private void LoadRptDetails(Dictionary<string, string> dictRpt)
-        {
-            if (dictRpt is null || dictRpt.Count < 1)
-            {
-                txtOwner.Clear();
-                txtLocation.Clear();
-                txtAssessedValue.Clear();
-                return;
-            };
-
-            txtOwner.Text = dictRpt["taxpayer_name"].ToString();
-            txtLocation.Text = $"{dictRpt["barangay_name"]}, {dictRpt["municipality_name"]}, {dictRpt["province_name"]}";
-            txtAssessedValue.Text = Convert.ToDecimal(dictRpt["assessed_value"]).ToString("N2");
-            LoadRptDelinquencies();
-        }
-
-        private void txtRpt_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordByCompleteArpNo(txtRpt.Text);
-                LoadRptDetails(dictRpt);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void radLand_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
                 ResetRealProperty();
-                LoadRealProperties();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -104,7 +74,6 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 ResetRealProperty();
-                LoadRealProperties();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -114,9 +83,25 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 ResetRealProperty();
-                LoadRealProperties();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadRptDetails(DataRow dataRow)
+        {
+            if (dataRow is null)
+            {
+                txtOwner.Clear();
+                txtLocation.Clear();
+                txtAssessedValue.Clear();
+                LoadRptDelinquencies();
+                return;
+            };
+
+            txtOwner.Text = dataRow["taxpayer_name"].ToString();
+            txtLocation.Text = $"{dataRow["barangay_name"]}, {dataRow["municipality_name"]}, {dataRow["province_name"]}";
+            txtAssessedValue.Text = Convert.ToDecimal(dataRow["assessed_value"]).ToString("N2");
+            LoadRptDelinquencies();
         }
 
         private void LoadRptDelinquencies()
@@ -124,25 +109,93 @@ namespace AccountingSystem.Views.Transactions.Assessment
             if (!bgwDelinquencies.IsBusy)
             {
                 pbDelinquencies.Value = 0;
-                bgwDelinquencies.RunWorkerAsync();
+                string completeArpNo = txtRpt.Text;
+                var delinquencyNoticeDate = dtPckrDate.Value;
+                bgwDelinquencies.RunWorkerAsync((completeArpNo, delinquencyNoticeDate));
             }
+        }
+
+        private void txtRpt_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var rptDetails = dtRealProperties.AsEnumerable().Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text).FirstOrDefault();
+                LoadRptDetails(rptDetails);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
+        {
+            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+
+            int? prevAssmntYear = null;
+
+            if (dictPrevAssmnt.Count > 1)
+                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
+
+            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+            return (basicPenalty, sefPenalty);
         }
 
         private void bgwDelinquencies_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
+                var parameters = ((string completeArpNo, DateTime date))e.Argument;
                 var dataTable = new DataTable();
+                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(parameters.completeArpNo, parameters.date);
                 var dataColumns = new DataColumn[]
                 {
                     new DataColumn("tax_year", typeof(int)),
                     new DataColumn("tax_type", typeof(string)),
-                    new DataColumn("tax_amount", typeof(string)),
+                    new DataColumn("tax_due", typeof(string)),
                     new DataColumn("penalty_amount", typeof(string)),
                     new DataColumn("total_amount", typeof(string)),
                 };
 
                 dataTable.Columns.AddRange(dataColumns);
+                int totalProgressCount = dtAssessmentPostingDb.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dataRow in dtAssessmentPostingDb.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+
+                    decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
+                    decimal basicRate = Convert.ToDecimal(dataRow["basic_rate"]);
+                    decimal sefRate = Convert.ToDecimal(dataRow["sef_rate"]);
+                    string completeArpNo = dataRow["complete_arp_no"].ToString();
+                    int assessmentYear = Convert.ToInt32(dataRow["year"]);
+                    int effectivityQuarter = Convert.ToInt32(dataRow["effectivity_quarterly"]);
+                    int effectivityYear = Convert.ToInt32(dataRow["effectivity_year"]);
+                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
+                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
+                    decimal penaltyRate = Convert.ToDecimal(dataRow["penalty_rate"]);
+
+                    var penaltyParameters = (assessmentYear, completeArpNo, effectivityQuarter, effectivityYear);
+                    var penalties = GetPenalties(dtPckrDate.Value, penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
+
+                    if (penalties.basicPenalty <= 0 && penalties.sefPenalty <= 0)
+                    {
+                        totalProgressCount--;
+                        Helper.ProgressCounter(bgwDelinquencies, totalProgressCount, progressCount);
+                        continue;
+                    }
+
+                    newRow["tax_year"] = dataRow["year"];
+                    newRow["tax_type"] = "Basic\nSEF";
+                    newRow["tax_due"] = $"{basicTaxDue.ToString("N2")}\n{sefTaxDue.ToString("N2")}";
+                    newRow["penalty_amount"] = $"{penalties.basicPenalty.ToString("N2")}\n{penalties.sefPenalty.ToString("N2")}";
+                    newRow["total_amount"] = (penalties.basicPenalty + penalties.sefPenalty).ToString("N2");
+                    dataTable.Rows.Add(newRow);
+                    progressCount++;
+                    Helper.ProgressCounter(bgwDelinquencies, totalProgressCount, progressCount);
+                }
+
                 e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -168,6 +221,28 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     pbDelinquencies.Value = 100;
 
                 dgDelinquencies.DataSource = dataTable;
+                dgDelinquencies.Columns["tax_year"].HeaderText = "Year";
+                dgDelinquencies.Columns["tax_type"].HeaderText = "Type";
+                dgDelinquencies.Columns["tax_due"].HeaderText = "Tax Due";
+                dgDelinquencies.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.Columns["tax_due"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.Columns["penalty_amount"].HeaderText = "Penalty";
+                dgDelinquencies.Columns["penalty_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.Columns["penalty_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.Columns["total_amount"].HeaderText = "Total";
+                dgDelinquencies.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.Columns["total_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgDelinquencies.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                dgDelinquencies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtPckrDate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRptDelinquencies();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

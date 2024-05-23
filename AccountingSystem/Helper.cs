@@ -491,7 +491,13 @@ namespace AccountingSystem
 
         public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
         {
-            int progressBarPercentage = (progressCount * 100) / totalProgressCount;
+            if (totalProgressCount <= 0)
+            {
+                backgroundWorker.ReportProgress(0, progressText);
+                return;
+            }
+
+            int progressBarPercentage = (int)((double)progressCount / totalProgressCount * 100);
             backgroundWorker.ReportProgress(progressBarPercentage, progressText);
         }
 

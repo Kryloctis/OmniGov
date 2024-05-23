@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
         public frmRptDelinquencyNotices()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
 
             //Removes tabs to tabcontrol
             tabControl1.Padding = new Point(0, 0);

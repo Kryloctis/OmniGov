@@ -22,7 +22,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords();
 
-        DataTable GetViewArpNoRecordsByKind(char propertyType);
+        DataTable GetViewRecordsByKind(char propertyType);
 
         Dictionary<string, string> GetViewRecordById(int Id);
 

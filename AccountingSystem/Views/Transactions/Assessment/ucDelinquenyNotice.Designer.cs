@@ -78,11 +78,11 @@ namespace AccountingSystem.Views.Transactions.Assessment
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(panel1);
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            groupBox1.Location = new System.Drawing.Point(0, 88);
+            groupBox1.Location = new System.Drawing.Point(0, 101);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new System.Drawing.Size(450, 190);
             groupBox1.TabIndex = 26;
@@ -107,6 +107,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             panel1.Location = new System.Drawing.Point(3, 20);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
             panel1.Size = new System.Drawing.Size(444, 167);
@@ -235,11 +236,12 @@ namespace AccountingSystem.Views.Transactions.Assessment
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.Controls.Add(panel2);
-            groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             groupBox2.Location = new System.Drawing.Point(0, 0);
+            groupBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(450, 88);
             groupBox2.TabIndex = 27;
@@ -272,6 +274,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             dtPckrDate.Name = "dtPckrDate";
             dtPckrDate.Size = new System.Drawing.Size(330, 23);
             dtPckrDate.TabIndex = 26;
+            dtPckrDate.ValueChanged += dtPckrDate_ValueChanged;
             // 
             // label1
             // 
@@ -325,13 +328,13 @@ namespace AccountingSystem.Views.Transactions.Assessment
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox3.Controls.Add(panel3);
-            groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             groupBox3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            groupBox3.Location = new System.Drawing.Point(0, 278);
+            groupBox3.Location = new System.Drawing.Point(0, 301);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(450, 165);
+            groupBox3.Size = new System.Drawing.Size(450, 235);
             groupBox3.TabIndex = 28;
             groupBox3.TabStop = false;
             groupBox3.Text = "Delinquencies";
@@ -346,7 +349,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             panel3.Location = new System.Drawing.Point(3, 20);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(4);
-            panel3.Size = new System.Drawing.Size(444, 142);
+            panel3.Size = new System.Drawing.Size(444, 212);
             panel3.TabIndex = 0;
             // 
             // dgDelinquencies
@@ -380,7 +383,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgDelinquencies.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgDelinquencies.RowTemplate.Height = 25;
-            dgDelinquencies.Size = new System.Drawing.Size(436, 129);
+            dgDelinquencies.Size = new System.Drawing.Size(436, 199);
             dgDelinquencies.TabIndex = 0;
             // 
             // pbDelinquencies
@@ -406,7 +409,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Name = "ucDelinquenyNotice";
-            Size = new System.Drawing.Size(450, 443);
+            Size = new System.Drawing.Size(450, 544);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);

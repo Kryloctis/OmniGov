@@ -41,5 +41,7 @@ namespace RPT.Domain.Interfaces
         DataTable GetViewRecordsByOwnerId(int taxpayerId);
 
         DataTable GetViewDeliquentRecords();
+
+        DataTable GetViewDelinquentRecords(string completeArpNo, DateTime date);
     }
 }

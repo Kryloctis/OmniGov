@@ -244,7 +244,7 @@
             // 
             panel4.Controls.Add(btnSave);
             panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            panel4.Location = new System.Drawing.Point(4, 471);
+            panel4.Location = new System.Drawing.Point(4, 515);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(4);
             panel4.Size = new System.Drawing.Size(736, 50);
@@ -265,7 +265,7 @@
             ucDelinquenyNotice1.Dock = System.Windows.Forms.DockStyle.Top;
             ucDelinquenyNotice1.Location = new System.Drawing.Point(4, 4);
             ucDelinquenyNotice1.Name = "ucDelinquenyNotice1";
-            ucDelinquenyNotice1.Size = new System.Drawing.Size(736, 467);
+            ucDelinquenyNotice1.Size = new System.Drawing.Size(736, 511);
             ucDelinquenyNotice1.TabIndex = 35;
             // 
             // toolStrip2

@@ -490,14 +490,14 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
-        public DataTable GetViewArpNoRecordsByKind(char propertyKind)
+        public DataTable GetViewRecordsByKind(char propertyKind)
         {
             var parameters = new object[][]
             {
                 new object[] { "@property_kind", DbType.String, propertyKind},
             };
 
-            string query = $"SELECT complete_arp_no FROM {viewTableName} WHERE property_kind = @property_kind";
+            string query = $"SELECT * FROM {viewTableName} WHERE property_kind = @property_kind";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }

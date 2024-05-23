@@ -12,7 +12,12 @@ namespace AccountingSystem.Views.Shared
 
         public static int GetMonthsDelinquent(DateTime transactionDate, (int assessmentYear, int effectivityQuarter, int effectivityYear) currentAssmntParameters, int? recentAssmntYear)
         {
-            if (recentAssmntYear is not null && transactionDate.Month > 3)
+            if (currentAssmntParameters.assessmentYear! > transactionDate.Year)
+            {
+                return 0;
+            }
+
+            else if (recentAssmntYear is not null && transactionDate.Month > 3)
             {
                 return GetMonthsBetweenYears(recentAssmntYear.Value, transactionDate.Year) + transactionDate.Month;
             }
