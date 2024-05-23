@@ -136,7 +136,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             {
                 if (isEdit)
                 {
-                    if (SaveData())
+                    if (UpdateData())
                     {
                         Helper.MessageBoxSuccess("Delinquency notice has been updated.");
                         ucDelinquenyNotice.ResetForm();

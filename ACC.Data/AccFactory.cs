@@ -208,5 +208,7 @@ namespace ACC.Data
         public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(mySqlGenericCommandsLFS);
 
         public static IRcdDeposits RcdDepositsRepository() => new RcdDepositsRepository(mySqlGenericCommandsLFS);
+
+        public static IDelinquentNotice DelinquentNoticeRepository() => new DelinquentNoticeRepository(mySqlGenericCommandsLFS);
     }
 }
