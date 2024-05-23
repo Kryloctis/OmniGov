@@ -51,6 +51,7 @@
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             propertyTaxPostingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             dellinquencyNoticesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            warrantsOfLevyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             auctionTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             biddingTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -72,7 +73,6 @@
             schedUnreleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            warrantsOfLevyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -242,6 +242,13 @@
             dellinquencyNoticesToolStripMenuItem.Text = "Delinquency Notices...";
             dellinquencyNoticesToolStripMenuItem.Click += propertyAssessmentToolStripMenuItem_Click;
             // 
+            // warrantsOfLevyToolStripMenuItem
+            // 
+            warrantsOfLevyToolStripMenuItem.Name = "warrantsOfLevyToolStripMenuItem";
+            warrantsOfLevyToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            warrantsOfLevyToolStripMenuItem.Text = "Warrants of Levy...";
+            warrantsOfLevyToolStripMenuItem.Click += warrantsOfLevyToolStripMenuItem_Click;
+            // 
             // auctionTstrpMnuItm
             // 
             auctionTstrpMnuItm.Name = "auctionTstrpMnuItm";
@@ -385,12 +392,6 @@
             dailyCashPositionsTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
             dailyCashPositionsTstrpMnuItm.Text = "Daily Cash Positions...";
             dailyCashPositionsTstrpMnuItm.Click += dailyCashPositionsTstrpMnuItm_Click;
-            // 
-            // warrantsOfLevyToolStripMenuItem
-            // 
-            warrantsOfLevyToolStripMenuItem.Name = "warrantsOfLevyToolStripMenuItem";
-            warrantsOfLevyToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            warrantsOfLevyToolStripMenuItem.Text = "Warrants of Levy...";
             // 
             // ucTreasury
             // 

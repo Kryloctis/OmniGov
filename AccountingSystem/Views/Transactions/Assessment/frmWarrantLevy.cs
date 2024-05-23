@@ -21,6 +21,15 @@ namespace AccountingSystem.Views.Transactions.Assessment
         public frmWarrantLevy()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+
+            //Removes tabs to tabcontrol
+            tabControl1.Padding = new Point(0, 0);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+
             ucWarrantLevy = ucWarrantLevy1;
         }
 
@@ -88,10 +97,60 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                tabControl1.SelectedTab = tabPageMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmWarrantLevy_Load(object sender, EventArgs e)
         {
+        }
+
+        private void LoadRecords()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                int rowLimit = Convert.ToInt32(cmbxRowLimit.SelectedValue);
+                string searchKey = txtSearch.Text.Trim();
+
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int rowLimit, string searchKey))e.Argument;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                {
+                    progressBar1.Value = 100;
+                    lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+                }
+
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

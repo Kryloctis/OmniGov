@@ -52,13 +52,13 @@
             btnDelete = new System.Windows.Forms.ToolStripButton();
             tabPageForm = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
+            panel4 = new System.Windows.Forms.Panel();
+            btnSave = new System.Windows.Forms.Button();
             ucWarrantLevy1 = new ucWarrantLevy();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            panel4 = new System.Windows.Forms.Panel();
-            btnSave = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageMain.SuspendLayout();
@@ -68,8 +68,8 @@
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
             panel3.SuspendLayout();
-            toolStrip2.SuspendLayout();
             panel4.SuspendLayout();
+            toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -285,6 +285,26 @@
             panel3.Size = new System.Drawing.Size(761, 340);
             panel3.TabIndex = 29;
             // 
+            // panel4
+            // 
+            panel4.Controls.Add(btnSave);
+            panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            panel4.Location = new System.Drawing.Point(4, 500);
+            panel4.Name = "panel4";
+            panel4.Padding = new System.Windows.Forms.Padding(4);
+            panel4.Size = new System.Drawing.Size(736, 72);
+            panel4.TabIndex = 1;
+            // 
+            // btnSave
+            // 
+            btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSave.Location = new System.Drawing.Point(579, 7);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
             // ucWarrantLevy1
             // 
             ucWarrantLevy1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -323,25 +343,12 @@
             statusStrip2.TabIndex = 30;
             statusStrip2.Text = "statusStrip2";
             // 
-            // panel4
+            // backgroundWorker1
             // 
-            panel4.Controls.Add(btnSave);
-            panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            panel4.Location = new System.Drawing.Point(4, 500);
-            panel4.Name = "panel4";
-            panel4.Padding = new System.Windows.Forms.Padding(4);
-            panel4.Size = new System.Drawing.Size(736, 72);
-            panel4.TabIndex = 1;
-            // 
-            // btnSave
-            // 
-            btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSave.Location = new System.Drawing.Point(579, 7);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(150, 23);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "Save (Ctrl + S)";
-            btnSave.UseVisualStyleBackColor = true;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmWarrantLevy
             // 
@@ -355,7 +362,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transactions > Assessment > Warrant of Levy";
+            Text = "Transactions > Warrant of Levy";
             Load += frmWarrantLevy_Load;
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
@@ -370,9 +377,9 @@
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
             panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
-            panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 

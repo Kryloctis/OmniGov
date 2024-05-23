@@ -366,7 +366,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transactions > Assessment > Delinquency Notices";
+            Text = "Transactions > Delinquency Notices";
             Load += frnRptAssessment_Load;
             tabControl1.ResumeLayout(false);
             tabPageMain.ResumeLayout(false);
