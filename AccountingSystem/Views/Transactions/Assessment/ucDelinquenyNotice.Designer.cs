@@ -385,6 +385,8 @@ namespace AccountingSystem.Views.Transactions.Assessment
             dgDelinquencies.RowTemplate.Height = 25;
             dgDelinquencies.Size = new System.Drawing.Size(436, 199);
             dgDelinquencies.TabIndex = 0;
+            dgDelinquencies.Validating += dgDelinquencies_Validating;
+            dgDelinquencies.Validated += dgDelinquencies_Validated;
             // 
             // pbDelinquencies
             // 

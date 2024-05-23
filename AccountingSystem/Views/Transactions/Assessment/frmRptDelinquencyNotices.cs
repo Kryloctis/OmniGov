@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
 {
     public partial class frmRptDelinquencyNotices : Form
     {
+        private bool isEdit;
         private ucDelinquenyNotice ucDelinquenyNotice;
 
         public frmRptDelinquencyNotices()
@@ -55,7 +56,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
         {
             try
             {
+                isEdit = false;
                 tabControl1.SelectedTab = tabPageForm;
+                btnSave.Text = "Save (Ctrl + S)";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -72,7 +75,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
         {
             try
             {
+                isEdit = true;
                 tabControl1.SelectedTab = tabPageForm;
+                btnSave.Text = "Update (Ctrl + S)";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -99,6 +104,53 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 ToggleContents(tabControl1);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal bool SaveData()
+        {
+            if (!ucDelinquenyNotice.ValidateChildren())
+            {
+                Helper.MessageBoxError(ucDelinquenyNotice.GetFormErrors());
+                return false;
+            }
+
+            return true;
+        }
+
+        internal bool UpdateData()
+        {
+            if (!ucDelinquenyNotice.ValidateChildren())
+            {
+                Helper.MessageBoxError(ucDelinquenyNotice.GetFormErrors());
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (isEdit)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Delinquency notice has been updated.");
+                        ucDelinquenyNotice.ResetForm();
+                        tabControl1.SelectedTab = tabPageMain;
+                    }
+                }
+                else
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Delinquency notice has been saved.");
+                        ucDelinquenyNotice.ResetForm();
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

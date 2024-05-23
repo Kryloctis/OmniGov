@@ -10,6 +10,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
 {
     public partial class ucDelinquenyNotice : UserControl
     {
+        private bool isEdit;
         private int rptId;
         private DataTable dtRealProperties;
 
@@ -24,8 +25,19 @@ namespace AccountingSystem.Views.Transactions.Assessment
             LoadRealProperties();
         }
 
+        internal string GetFormErrors()
+        {
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtRpt)
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
         internal void ResetForm()
         {
+            txtRpt.Clear();
             rad1stNotice.Checked = true;
             radLand.Checked = true;
             dtPckrDate.Value = Helper.GetCurrentDate();
@@ -245,6 +257,30 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 LoadRptDelinquencies();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool ValidateDelinquencies(ErrorProvider errorProvider, TextBox textBox, DataGridView dataGridView, string errorMessage)
+        {
+            if (dataGridView.Rows.Count < 1)
+            {
+                errorProvider.SetError(textBox, errorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        private void dgDelinquencies_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ValidateDelinquencies(errorProvider1, txtRpt, dgDelinquencies, "No record of delinquencies found");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgDelinquencies_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtRpt);
         }
     }
 }

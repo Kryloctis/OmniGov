@@ -259,6 +259,7 @@
             btnSave.TabIndex = 0;
             btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucDelinquenyNotice1
             // 
