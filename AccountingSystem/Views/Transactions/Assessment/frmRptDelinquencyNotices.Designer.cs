@@ -52,6 +52,7 @@
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabControl1.SuspendLayout();
             tabPageMain.SuspendLayout();
             panel1.SuspendLayout();
@@ -137,6 +138,7 @@
             cmbxRowLimit.Name = "cmbxRowLimit";
             cmbxRowLimit.Size = new System.Drawing.Size(120, 23);
             cmbxRowLimit.TabIndex = 0;
+            cmbxRowLimit.SelectionChangeCommitted += cmbxRowLimit_SelectionChangeCommitted;
             // 
             // toolStrip1
             // 
@@ -299,6 +301,14 @@
             statusStrip2.TabIndex = 30;
             statusStrip2.Text = "statusStrip2";
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
             // frmRptDelinquencyNotices
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -357,5 +367,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

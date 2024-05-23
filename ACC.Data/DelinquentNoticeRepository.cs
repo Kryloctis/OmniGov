@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -14,6 +15,8 @@ namespace ACC.Data
     public class DelinquentNoticeRepository : IDelinquentNotice
     {
         private readonly string tableName = "delinquent_notice";
+        private readonly string viewTableName = "view_delinquent_notice";
+
         private AccGenericCommands mySqlGenericCommandsLFS;
 
         public DelinquentNoticeRepository(AccGenericCommands mySqlGenericCommandsLFS)
@@ -72,6 +75,18 @@ namespace ACC.Data
             };
 
             string query = $"SELECT * FROM {tableName} WHERE notice_type LIKE @search_text";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public DataTable GetViewRecordsBySearch(int rowLimit, string searchKey)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_key OR complete_arp_no LIKE @search_key) LIMIT @row_limit ";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
