@@ -40,6 +40,27 @@ namespace ACC.Data
             }
         }
 
+        public Dictionary<string, string> GetViewRecordById(int Id)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@delinquent_notice_id", DbType.Int32, Id } };
+            string query = $"SELECT * FROM {viewTableName} WHERE delinquent_notice_id = @delinquent_notice_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var recordDictionary = new Dictionary<string, string>();
@@ -86,7 +107,7 @@ namespace ACC.Data
                 new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_key OR complete_arp_no LIKE @search_key) LIMIT @row_limit ";
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_key OR complete_arp_no LIKE @search_key) ORDER BY taxpayers_name ASC LIMIT @row_limit ";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 

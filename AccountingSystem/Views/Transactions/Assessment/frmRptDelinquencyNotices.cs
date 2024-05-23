@@ -1,6 +1,8 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using DocumentFormat.OpenXml.Office2013.Drawing.Chart;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -38,24 +40,12 @@ namespace AccountingSystem.Views.Transactions.Assessment
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ToggleContents(TabControl tabControl)
-        {
-            switch (tabControl.SelectedTab.Name)
-            {
-                case "tabPageForm":
-                    ucDelinquenyNotice.OnLoad();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
                 isEdit = false;
+                ucDelinquenyNotice.OnLoad(isEdit);
                 tabControl1.SelectedTab = tabPageForm;
                 btnSave.Text = "Save (Ctrl + S)";
             }
@@ -76,16 +66,40 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 isEdit = true;
+                int rowIndex = dataGridView1.CurrentRow.Index;
+                int delinquencyNoticeId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["delinquent_notice_id"].Value);
+                ucDelinquenyNotice.OnLoad(isEdit, delinquencyNoticeId);
                 tabControl1.SelectedTab = tabPageForm;
                 btnSave.Text = "Update (Ctrl + S)";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private bool DeleteData(DataGridView dataGridView)
+        {
+            var selectedRows = dataGridView.SelectedRows;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+            {
+                var registryModels = new List<DelinquentNoticeModel>();
+
+                foreach (DataGridViewRow row in selectedRows)
+                    registryModels.Add(new DelinquentNoticeModel() { Id = Convert.ToInt32(row.Cells["delinquent_notice_id"].Value) });
+
+                return AccFactory.DelinquentNoticeRepository().Delete(registryModels);
+            }
+            return false;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
+                if (DeleteData(dataGridView1))
+                {
+                    Helper.MessageBoxSuccess($"{dataGridView1.SelectedRows.Count} record/s has been deleted.");
+                    LoadRptDelinquentNotices();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -101,33 +115,6 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControl1);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal bool SaveData()
-        {
-            if (!ucDelinquenyNotice.ValidateChildren())
-            {
-                Helper.MessageBoxError(ucDelinquenyNotice.GetFormErrors());
-                return false;
-            }
-
-            return true;
-        }
-
-        internal bool UpdateData()
-        {
-            if (!ucDelinquenyNotice.ValidateChildren())
-            {
-                Helper.MessageBoxError(ucDelinquenyNotice.GetFormErrors());
-                return false;
-            }
-
-            return true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -136,19 +123,21 @@ namespace AccountingSystem.Views.Transactions.Assessment
             {
                 if (isEdit)
                 {
-                    if (UpdateData())
+                    if (ucDelinquenyNotice.UpdateData())
                     {
                         Helper.MessageBoxSuccess("Delinquency notice has been updated.");
                         ucDelinquenyNotice.ResetForm();
                         tabControl1.SelectedTab = tabPageMain;
+                        LoadRptDelinquentNotices();
                     }
                 }
                 else
                 {
-                    if (SaveData())
+                    if (ucDelinquenyNotice.InsertData())
                     {
                         Helper.MessageBoxSuccess("Delinquency notice has been saved.");
                         ucDelinquenyNotice.ResetForm();
+                        LoadRptDelinquentNotices();
                     }
                 }
             }
@@ -227,18 +216,25 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     return;
 
                 if (dataTable.Rows.Count < 1)
+                {
                     progressBar1.Value = 100;
+                    lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+                }
 
                 dataGridView1.DataSource = dataTable;
                 dataGridView1.Columns["delinquent_notice_id"].Visible = false;
                 dataGridView1.Columns["notice_type"].HeaderText = "Notice Type";
                 dataGridView1.Columns["notice_date"].HeaderText = "Notice Date";
+                dataGridView1.Columns["notice_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
                 dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
                 dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer Name";
                 dataGridView1.Columns["created_at"].Visible = false;
                 dataGridView1.Columns["created_by"].Visible = false;
                 dataGridView1.Columns["updated_at"].Visible = false;
                 dataGridView1.Columns["updated_by"].Visible = false;
+
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -250,6 +246,15 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 LoadRptDelinquentNotices();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

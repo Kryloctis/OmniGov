@@ -399,6 +399,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             // bgwDelinquencies
             // 
             bgwDelinquencies.WorkerReportsProgress = true;
+            bgwDelinquencies.WorkerSupportsCancellation = true;
             bgwDelinquencies.DoWork += bgwDelinquencies_DoWork;
             bgwDelinquencies.ProgressChanged += bgwDelinquencies_ProgressChanged;
             bgwDelinquencies.RunWorkerCompleted += bgwDelinquencies_RunWorkerCompleted;

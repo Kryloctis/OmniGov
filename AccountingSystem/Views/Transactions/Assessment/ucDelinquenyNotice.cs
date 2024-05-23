@@ -1,9 +1,12 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
+using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Assessment
@@ -11,7 +14,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
     public partial class ucDelinquenyNotice : UserControl
     {
         private bool isEdit;
-        private int rptId;
+        private int delinquencyNoticeId;
         private DataTable dtRealProperties;
 
         public ucDelinquenyNotice()
@@ -20,9 +23,120 @@ namespace AccountingSystem.Views.Transactions.Assessment
             Helper.DatagridFullRowSelectStyle(dgDelinquencies, true);
         }
 
-        internal void OnLoad()
+        private string GetNoticeType()
         {
+            if (rad1stNotice.Checked)
+                return "1st Notice";
+            else if (rad2ndNotice.Checked)
+                return "2nd Notice";
+            else
+                return "3rd Notice";
+        }
+
+        private void LoadSelectedRecord(int delinquencyNoticeId)
+        {
+            dtPckrDate.ValueChanged -= new EventHandler(dtPckrDate_ValueChanged);
+
+            var dictDelinquencyNoticeId = AccFactory.DelinquentNoticeRepository().GetViewRecordById(delinquencyNoticeId);
+            dtPckrDate.Value = Convert.ToDateTime(dictDelinquencyNoticeId["notice_date"]);
+            string propertyKind = dictDelinquencyNoticeId["property_kind"];
+            string noticeType = dictDelinquencyNoticeId["notice_type"];
+
+            switch (propertyKind)
+            {
+                case "L":
+                    radLand.Checked = true;
+                    break;
+
+                case "B":
+                    radBuilding.Checked = true;
+                    break;
+
+                case "M":
+                    radMachinery.Checked = true;
+                    break;
+            }
+
+            switch (noticeType)
+            {
+                case "1st Notice":
+                    rad1stNotice.Checked = true;
+                    break;
+
+                case "2nd Notice":
+                    rad2ndNotice.Checked = true;
+                    break;
+
+                case "3rd Notice":
+                    rad3rdNotice.Checked = true;
+                    break;
+            }
+
+            txtRpt.Text = dictDelinquencyNoticeId["complete_arp_no"];
+            dtPckrDate.ValueChanged += new EventHandler(dtPckrDate_ValueChanged);
+        }
+
+        private DelinquentNoticeModel InsertDelinquentNoticeModel()
+        {
+            var dictRpt = dtRealProperties.AsEnumerable().Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text).FirstOrDefault();
+
+            return new DelinquentNoticeModel()
+            {
+                NoticeDate = dtPckrDate.Value,
+                NoticeType = GetNoticeType(),
+                RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
+                CreatedBy = Helper.userId,
+            };
+        }
+
+        private DelinquentNoticeModel UpdateDelinquentNoticeModel()
+        {
+            var dictRpt = dtRealProperties.AsEnumerable().Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text).FirstOrDefault();
+
+            return new DelinquentNoticeModel()
+            {
+                Id = delinquencyNoticeId,
+                NoticeDate = dtPckrDate.Value,
+                NoticeType = GetNoticeType(),
+                RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
+                UpdatedBy = Helper.userId,
+            };
+        }
+
+        internal bool InsertData()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var model = InsertDelinquentNoticeModel();
+            return AccFactory.DelinquentNoticeRepository().Insert(model);
+        }
+
+        internal bool UpdateData()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var model = UpdateDelinquentNoticeModel();
+            return AccFactory.DelinquentNoticeRepository().Update(model);
+        }
+
+        internal void OnLoad(bool isEdit, int? delinquencyNoticeId = null)
+        {
+            this.isEdit = isEdit;
             LoadRealProperties();
+
+            if (isEdit)
+            {
+                this.delinquencyNoticeId = delinquencyNoticeId.Value;
+                LoadSelectedRecord(this.delinquencyNoticeId);
+            }
         }
 
         internal string GetFormErrors()
@@ -116,17 +230,6 @@ namespace AccountingSystem.Views.Transactions.Assessment
             LoadRptDelinquencies();
         }
 
-        private void LoadRptDelinquencies()
-        {
-            if (!bgwDelinquencies.IsBusy)
-            {
-                pbDelinquencies.Value = 0;
-                string completeArpNo = txtRpt.Text;
-                var delinquencyNoticeDate = dtPckrDate.Value;
-                bgwDelinquencies.RunWorkerAsync((completeArpNo, delinquencyNoticeDate));
-            }
-        }
-
         private void txtRpt_TextChanged(object sender, EventArgs e)
         {
             try
@@ -151,6 +254,17 @@ namespace AccountingSystem.Views.Transactions.Assessment
             decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
 
             return (basicPenalty, sefPenalty);
+        }
+
+        private void LoadRptDelinquencies()
+        {
+            if (!bgwDelinquencies.IsBusy)
+            {
+                pbDelinquencies.Value = 0;
+                string completeArpNo = txtRpt.Text;
+                var delinquencyNoticeDate = dtPckrDate.Value;
+                bgwDelinquencies.RunWorkerAsync((completeArpNo, delinquencyNoticeDate));
+            }
         }
 
         private void bgwDelinquencies_DoWork(object sender, DoWorkEventArgs e)
