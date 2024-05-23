@@ -67,7 +67,6 @@ namespace AccountingSystem.Views.Dashboard
             }
         }
 
-
         #endregion Permission Validations
 
         private void radBudget_CheckedChanged(object sender, EventArgs e)

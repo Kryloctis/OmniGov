@@ -49,7 +49,8 @@
             af52TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             pymntHstoryTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            assessmentPostingTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            propertyTaxPostingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            dellinquencyNoticesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             auctionTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             biddingTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,6 +59,7 @@
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             reportsTstrpDrpDwnMnu = new System.Windows.Forms.ToolStripDropDownButton();
             reportOfCollectionsDepositsRcdTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             rptStatementOfAccTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             listOfRealPropertyDelinquenciesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +72,7 @@
             schedUnreleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             dailyCashPositionsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            warrantsOfLevyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -157,7 +159,7 @@
             // transactionsTstripDrpDwnBtn
             // 
             transactionsTstripDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            transactionsTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, pymntHstoryTstrpMnuItm, toolStripSeparator10, assessmentPostingTstrpMnuItm, auctionTstrpMnuItm, biddingTstrpMnuItm, toolStripSeparator11, checkIssuanceTstrpMnuItm, releasedAndUnreleaseChecksTstrpMnuItm, bankDepositTstrpMnuItm });
+            transactionsTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, pymntHstoryTstrpMnuItm, toolStripSeparator10, propertyTaxPostingToolStripMenuItem1, dellinquencyNoticesToolStripMenuItem, warrantsOfLevyToolStripMenuItem, auctionTstrpMnuItm, biddingTstrpMnuItm, toolStripSeparator11, checkIssuanceTstrpMnuItm, releasedAndUnreleaseChecksTstrpMnuItm, bankDepositTstrpMnuItm });
             transactionsTstripDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("transactionsTstripDrpDwnBtn.Image");
             transactionsTstripDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             transactionsTstripDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
@@ -226,12 +228,19 @@
             toolStripSeparator10.Name = "toolStripSeparator10";
             toolStripSeparator10.Size = new System.Drawing.Size(223, 6);
             // 
-            // assessmentPostingTstrpMnuItm
+            // propertyTaxPostingToolStripMenuItem1
             // 
-            assessmentPostingTstrpMnuItm.Name = "assessmentPostingTstrpMnuItm";
-            assessmentPostingTstrpMnuItm.Size = new System.Drawing.Size(226, 22);
-            assessmentPostingTstrpMnuItm.Text = "Assessment Posting...";
-            assessmentPostingTstrpMnuItm.Click += assessmentPostingTstrpMnuItm_Click;
+            propertyTaxPostingToolStripMenuItem1.Name = "propertyTaxPostingToolStripMenuItem1";
+            propertyTaxPostingToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
+            propertyTaxPostingToolStripMenuItem1.Text = "Tax Posting..";
+            propertyTaxPostingToolStripMenuItem1.Click += propertyTaxPostingToolStripMenuItem1_Click;
+            // 
+            // dellinquencyNoticesToolStripMenuItem
+            // 
+            dellinquencyNoticesToolStripMenuItem.Name = "dellinquencyNoticesToolStripMenuItem";
+            dellinquencyNoticesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            dellinquencyNoticesToolStripMenuItem.Text = "Delinquency Notices...";
+            dellinquencyNoticesToolStripMenuItem.Click += propertyAssessmentToolStripMenuItem_Click;
             // 
             // auctionTstrpMnuItm
             // 
@@ -290,6 +299,12 @@
             reportOfCollectionsDepositsRcdTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
             reportOfCollectionsDepositsRcdTstrpMnuItm.Text = "Report of Collections Deposits (RCD)...";
             reportOfCollectionsDepositsRcdTstrpMnuItm.Click += rcdTstrpMnuItm_Click;
+            // 
+            // abstractOfGeneralCollectionsToolStripMenuItem
+            // 
+            abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
+            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(409, 22);
+            abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections...";
             // 
             // toolStripSeparator1
             // 
@@ -371,11 +386,11 @@
             dailyCashPositionsTstrpMnuItm.Text = "Daily Cash Positions...";
             dailyCashPositionsTstrpMnuItm.Click += dailyCashPositionsTstrpMnuItm_Click;
             // 
-            // abstractOfGeneralCollectionsToolStripMenuItem
+            // warrantsOfLevyToolStripMenuItem
             // 
-            abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
-            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(409, 22);
-            abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections...";
+            warrantsOfLevyToolStripMenuItem.Name = "warrantsOfLevyToolStripMenuItem";
+            warrantsOfLevyToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            warrantsOfLevyToolStripMenuItem.Text = "Warrants of Levy...";
             // 
             // ucTreasury
             // 
@@ -408,7 +423,6 @@
         private System.Windows.Forms.ToolStripMenuItem af53TstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem af52TstrpMnuItm;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem assessmentPostingTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem auctionTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem biddingTstrpMnuItm;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
@@ -434,5 +448,8 @@
         private System.Windows.Forms.ToolStripMenuItem receiptInventoryTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem recieiptIssuanceTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem propertyTaxPostingToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem dellinquencyNoticesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem warrantsOfLevyToolStripMenuItem;
     }
 }

@@ -1,9 +1,4 @@
 ﻿using ACC.Data;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office.CustomUI;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
-using Org.BouncyCastle.Utilities.Zlib;
 using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.AssessmentPosting
+namespace AccountingSystem.Views.Transactions.Assessment
 {
     public partial class frmAssessmentPosting : Form
     {

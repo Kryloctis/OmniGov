@@ -33,11 +33,6 @@ namespace ACC.Data
             }
         }
 
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(List<RptAssessmentPostsModel> entityList)
         {
             throw new NotImplementedException();
@@ -343,7 +338,6 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID)
         {
             var parameter = new object[][]
@@ -376,6 +370,17 @@ namespace ACC.Data
             var dataTable = new DataTable();
 
             return mySqlGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable GetViewDelinquentRecords(string completeArpNo, DateTime date)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no";
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

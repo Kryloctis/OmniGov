@@ -1,11 +1,15 @@
 using ACC.Data;
+using AccountingSystem.Views.Manage.TaxPayers;
+using DocumentFormat.OpenXml.Office2010.Word.DrawingShape;
 using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
@@ -487,7 +491,13 @@ namespace AccountingSystem
 
         public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
         {
-            int progressBarPercentage = (progressCount * 100) / totalProgressCount;
+            if (totalProgressCount <= 0)
+            {
+                backgroundWorker.ReportProgress(0, progressText);
+                return;
+            }
+
+            int progressBarPercentage = (int)((double)progressCount / totalProgressCount * 100);
             backgroundWorker.ReportProgress(progressBarPercentage, progressText);
         }
 

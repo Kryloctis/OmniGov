@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.AssessmentPosting
+namespace AccountingSystem.Views.Transactions.Assessment
 {
     partial class frmAssessmentPosting
     {
@@ -75,11 +75,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             panel2.Controls.Add(chckBxAll);
             panel2.Controls.Add(dgProperties);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 107);
+            panel2.Location = new System.Drawing.Point(0, 92);
             panel2.Margin = new System.Windows.Forms.Padding(0);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(1016, 455);
+            panel2.Size = new System.Drawing.Size(915, 445);
             panel2.TabIndex = 10;
             // 
             // chckBxAll
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             dgProperties.Location = new System.Drawing.Point(4, 4);
             dgProperties.Name = "dgProperties";
             dgProperties.RowTemplate.Height = 25;
-            dgProperties.Size = new System.Drawing.Size(1008, 447);
+            dgProperties.Size = new System.Drawing.Size(907, 437);
             dgProperties.TabIndex = 15;
             dgProperties.CellEnter += dgProperties_CellEnter;
             dgProperties.CellValueChanged += dgProperties_CellValueChanged;
@@ -126,7 +126,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(1016, 50);
+            toolStrip1.Size = new System.Drawing.Size(915, 35);
             toolStrip1.TabIndex = 14;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -135,20 +135,18 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             btnPost.Image = Properties.Resources.task_list_pin_20px;
             btnPost.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnPost.Name = "btnPost";
-            btnPost.Size = new System.Drawing.Size(34, 39);
+            btnPost.Size = new System.Drawing.Size(54, 24);
             btnPost.Text = "Post";
-            btnPost.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnPost.Click += BtnPost_Click;
             // 
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(24, 39);
-            btnSearch.Text = "toolStripButton1";
+            btnSearch.Size = new System.Drawing.Size(66, 39);
+            btnSearch.Text = "Search";
             btnSearch.Click += BtnSearch_Click;
             // 
             // txtSearch
@@ -161,9 +159,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblPost, pbPost, toolStripStatusLabel2, toolStripStatusLabel3, lblPostedAt, toolStripStatusLabel6, toolStripStatusLabel5, lblPostedBy });
-            statusStrip1.Location = new System.Drawing.Point(0, 562);
+            statusStrip1.Location = new System.Drawing.Point(0, 537);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(1016, 22);
+            statusStrip1.Size = new System.Drawing.Size(915, 22);
             statusStrip1.TabIndex = 15;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -253,9 +251,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             statusStrip2.Dock = System.Windows.Forms.DockStyle.Top;
             statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel7, txtBarangay, toolStripStatusLabel9, txtYear, toolStripStatusLabel11, toolStripStatusLabel12 });
-            statusStrip2.Location = new System.Drawing.Point(0, 80);
+            statusStrip2.Location = new System.Drawing.Point(0, 65);
             statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(1016, 22);
+            statusStrip2.Size = new System.Drawing.Size(915, 22);
             statusStrip2.SizingGrip = false;
             statusStrip2.TabIndex = 18;
             statusStrip2.Text = "statusStrip2";
@@ -302,9 +300,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             panel1.Controls.Add(nudYear);
             panel1.Controls.Add(cmbxBarangays);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(1016, 30);
+            panel1.Size = new System.Drawing.Size(915, 30);
             panel1.TabIndex = 19;
             // 
             // cmbxRowFilter
@@ -319,9 +317,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 102);
+            progressBar1.Location = new System.Drawing.Point(0, 87);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(1016, 5);
+            progressBar1.Size = new System.Drawing.Size(915, 5);
             progressBar1.TabIndex = 20;
             // 
             // frmAssessmentPosting
@@ -329,7 +327,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(1016, 584);
+            ClientSize = new System.Drawing.Size(915, 559);
             Controls.Add(panel2);
             Controls.Add(progressBar1);
             Controls.Add(statusStrip2);
@@ -338,9 +336,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Controls.Add(statusStrip1);
             MinimizeBox = false;
             Name = "frmAssessmentPosting";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transactions > Assessments > Real Properties";
+            Text = "Transactions > Assessment > Real Properties";
             Load += FrmAssessmentPosting_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

@@ -11,7 +11,6 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
-using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
@@ -26,6 +25,7 @@ using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using AccountingSystem.Views.Transactions.Assessment;
 
 namespace AccountingSystem.Views.Dashboard.Treasury
 {
@@ -85,7 +85,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             if (!Helper.HasPermission("Transaction > Bank Deposits"))
                 bankDepositTstrpMnuItm.Enabled = false;
 
-
             if (!Helper.HasPermission("Manage > Receipts"))
                 receiptInventoryTstrpMnuItm.Enabled = false;
 
@@ -98,8 +97,8 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             if (!Helper.HasPermission("Transaction > Payments"))
                 paymentsToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction > Assessment Posting"))
-                assessmentPostingTstrpMnuItm.Enabled = false;
+            //if (!Helper.HasPermission("Transaction > Assessment Posting"))
+            //    propertyTaxPostingToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
                 releasedAndUnreleaseChecksTstrpMnuItm.Enabled = false;
@@ -242,15 +241,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmPaymentHistory().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void assessmentPostingTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmAssessmentPosting().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -413,6 +403,24 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmReceiptsIssued().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void propertyAssessmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptDelinquencyNotices().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void propertyTaxPostingToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmAssessmentPosting().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
