@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Shared
             {
                 return 0;
             }
-
             else if (recentAssmntYear is not null && transactionDate.Month > 3)
             {
                 return GetMonthsBetweenYears(recentAssmntYear.Value, transactionDate.Year) + transactionDate.Month;

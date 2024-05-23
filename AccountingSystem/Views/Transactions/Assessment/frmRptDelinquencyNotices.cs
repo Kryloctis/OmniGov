@@ -189,9 +189,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     newRow["complete_arp_no"] = dataRow["complete_arp_no"];
                     newRow["taxpayers_name"] = dataRow["taxpayers_name"];
                     newRow["created_at"] = dataRow["created_at"];
-                    newRow["created_by"] = dataRow["created_by"];
+                    newRow["created_by"] = string.IsNullOrWhiteSpace(dataRow["created_by"].ToString()) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(dataRow["created_by"]))["user_full_name"];
                     newRow["updated_at"] = dataRow["updated_at"];
-                    newRow["updated_by"] = dataRow["updated_by"];
+                    newRow["updated_by"] = string.IsNullOrWhiteSpace(dataRow["updated_at"].ToString()) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(dataRow["updated_by"]))["user_full_name"];
 
                     dataTable.Rows.Add(newRow);
                     progressCount++;
@@ -229,7 +229,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
                 dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer Name";
                 dataGridView1.Columns["created_at"].Visible = false;
-                dataGridView1.Columns["created_by"].Visible = false;
+                dataGridView1.Columns["created_by"].HeaderText = "Created By";
                 dataGridView1.Columns["updated_at"].Visible = false;
                 dataGridView1.Columns["updated_by"].Visible = false;
 
@@ -252,6 +252,8 @@ namespace AccountingSystem.Views.Transactions.Assessment
         {
             try
             {
+                var stampIndex = new byte[] { 5, 7 };
+                Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

@@ -44,6 +44,12 @@
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             tabPageForm = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
             panel4 = new System.Windows.Forms.Panel();
@@ -200,7 +206,7 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel2, toolStripStatusLabel3, lblCreatedAt, toolStripStatusLabel5, toolStripStatusLabel6, lblUpdatedAt });
             statusStrip1.Location = new System.Drawing.Point(0, 375);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(761, 22);
@@ -218,6 +224,44 @@
             lblRecordCount.Name = "lblRecordCount";
             lblRecordCount.Size = new System.Drawing.Size(13, 17);
             lblRecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(474, 17);
+            toolStripStatusLabel2.Spring = true;
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(64, 17);
+            toolStripStatusLabel3.Text = "Created at:";
+            // 
+            // lblCreatedAt
+            // 
+            lblCreatedAt.Name = "lblCreatedAt";
+            lblCreatedAt.Size = new System.Drawing.Size(17, 17);
+            lblCreatedAt.Text = "--";
+            // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            // 
+            // toolStripStatusLabel6
+            // 
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(68, 17);
+            toolStripStatusLabel6.Text = "Updated at:";
+            // 
+            // lblUpdatedAt
+            // 
+            lblUpdatedAt.Name = "lblUpdatedAt";
+            lblUpdatedAt.Size = new System.Drawing.Size(17, 17);
+            lblUpdatedAt.Text = "--";
             // 
             // tabPageForm
             // 
@@ -369,5 +413,11 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }
