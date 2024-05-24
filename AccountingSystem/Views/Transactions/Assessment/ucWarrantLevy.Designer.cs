@@ -102,6 +102,7 @@
             dtPckrDateIssued.Name = "dtPckrDateIssued";
             dtPckrDateIssued.Size = new System.Drawing.Size(322, 23);
             dtPckrDateIssued.TabIndex = 26;
+            dtPckrDateIssued.ValueChanged += dtPckrDateIssued_ValueChanged;
             // 
             // label10
             // 
