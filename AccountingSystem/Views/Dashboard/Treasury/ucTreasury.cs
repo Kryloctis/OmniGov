@@ -424,5 +424,14 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void warrantsOfLevyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmWarrantLevy().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

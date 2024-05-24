@@ -1,7 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
-using Org.BouncyCastle.Asn1.Mozilla;
 using RPT.Domain.Interfaces;
 using System;
+using System.Net.NetworkInformation;
 
 namespace ACC.Data
 {
@@ -210,5 +210,7 @@ namespace ACC.Data
         public static IRcdDeposits RcdDepositsRepository() => new RcdDepositsRepository(mySqlGenericCommandsLFS);
 
         public static IDelinquentNotice DelinquentNoticeRepository() => new DelinquentNoticeRepository(mySqlGenericCommandsLFS);
+
+        public static IRptLevy RptLevyRepository() => new RptLevyRepository(mySqlGenericCommandsLFS);
     }
 }

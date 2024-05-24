@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             groupBox1.Location = new System.Drawing.Point(0, 101);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(450, 190);
+            groupBox1.Size = new System.Drawing.Size(450, 176);
             groupBox1.TabIndex = 26;
             groupBox1.TabStop = false;
             groupBox1.Text = "Real Property";
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(444, 167);
+            panel1.Size = new System.Drawing.Size(444, 153);
             panel1.TabIndex = 0;
             // 
             // txtRpt
@@ -129,9 +129,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(6, 35);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(51, 15);
+            label8.Size = new System.Drawing.Size(56, 15);
             label8.TabIndex = 27;
-            label8.Text = "ARP No.";
+            label8.Text = "ARP No.*";
             // 
             // label6
             // 
@@ -332,9 +332,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
             groupBox3.Controls.Add(panel3);
             groupBox3.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             groupBox3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            groupBox3.Location = new System.Drawing.Point(0, 301);
+            groupBox3.Location = new System.Drawing.Point(0, 287);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(450, 235);
+            groupBox3.Size = new System.Drawing.Size(450, 220);
             groupBox3.TabIndex = 28;
             groupBox3.TabStop = false;
             groupBox3.Text = "Delinquencies";
@@ -349,7 +349,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             panel3.Location = new System.Drawing.Point(3, 20);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(4);
-            panel3.Size = new System.Drawing.Size(444, 212);
+            panel3.Size = new System.Drawing.Size(444, 197);
             panel3.TabIndex = 0;
             // 
             // dgDelinquencies
@@ -383,7 +383,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgDelinquencies.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgDelinquencies.RowTemplate.Height = 25;
-            dgDelinquencies.Size = new System.Drawing.Size(436, 199);
+            dgDelinquencies.Size = new System.Drawing.Size(436, 184);
             dgDelinquencies.TabIndex = 0;
             dgDelinquencies.Validating += dgDelinquencies_Validating;
             dgDelinquencies.Validated += dgDelinquencies_Validated;
@@ -412,7 +412,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Name = "ucDelinquenyNotice";
-            Size = new System.Drawing.Size(450, 544);
+            Size = new System.Drawing.Size(450, 507);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);
