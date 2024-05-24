@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 isEdit = false;
+                ucDelinquenyNotice.ResetForm();
                 ucDelinquenyNotice.OnLoad(isEdit);
                 tabControl1.SelectedTab = tabPageForm;
                 btnSave.Text = "Save (Ctrl + S)";

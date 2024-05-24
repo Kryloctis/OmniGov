@@ -305,6 +305,7 @@
             btnSave.TabIndex = 0;
             btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucWarrantLevy1
             // 
@@ -355,6 +356,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
             MinimizeBox = false;

@@ -59,8 +59,8 @@ namespace ACC.Data
         {
             var recordDictionary = new Dictionary<string, string>();
 
-            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
-            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            var parameters = new object[][] { new object[] { "@rpt_levy_id", DbType.Int32, Id } };
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_levy_id = @rpt_levy_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 

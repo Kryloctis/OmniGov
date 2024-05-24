@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             {
                 isEdit = false;
                 ucWarrantLevy.OnLoad(isEdit);
+                ucWarrantLevy.ResetForm();
                 tabControl1.SelectedTab = tabPageForm;
                 btnSave.Text = "Save (Ctrl + S)";
             }
@@ -47,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             {
                 isEdit = true;
                 int rowIndex = dataGridView1.CurrentRow.Index;
-                int warrantLevyId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["warrant_levy_id"].Value);
+                int warrantLevyId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["rpt_levy_id"].Value);
                 ucWarrantLevy.OnLoad(isEdit, warrantLevyId);
                 tabControl1.SelectedTab = tabPageForm;
                 btnSave.Text = "Update (Ctrl + S)";
@@ -61,12 +62,12 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
             if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
             {
-                var registryModels = new List<DelinquentNoticeModel>();
+                var models = new List<RptLevyModel>();
 
                 foreach (DataGridViewRow row in selectedRows)
-                    registryModels.Add(new DelinquentNoticeModel() { Id = Convert.ToInt32(row.Cells["delinquent_notice_id"].Value) });
+                    models.Add(new RptLevyModel() { Id = Convert.ToInt32(row.Cells["rpt_levy_id"].Value) });
 
-                return AccFactory.DelinquentNoticeRepository().Delete(registryModels);
+                return AccFactory.RptLevyRepository().Delete(models);
             }
             return false;
         }
@@ -78,6 +79,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 if (DeleteData(dataGridView1))
                 {
                     Helper.MessageBoxSuccess($"{dataGridView1.SelectedRows.Count} record/s has been deleted.");
+                    LoadRecords();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -144,8 +146,9 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 {
                     new DataColumn("rpt_levy_id", typeof(int)),
                     new DataColumn("complete_arp_no", typeof(string)),
+                    new DataColumn("taxpayers_name", typeof(string)),
                     new DataColumn("property_kind", typeof(string)),
-                    new DataColumn("taxpayers_name", typeof(DateTime)),
+                    new DataColumn("date_issued", typeof(DateTime)),
                     new DataColumn("created_at", typeof(string)),
                     new DataColumn("created_by", typeof(string)),
                     new DataColumn("updated_at", typeof(string)),
@@ -163,6 +166,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     newRow["complete_arp_no"] = dataRow["complete_arp_no"];
                     newRow["property_kind"] = dataRow["property_kind"];
                     newRow["taxpayers_name"] = dataRow["taxpayers_name"];
+                    newRow["date_issued"] = dataRow["date_issued"];
                     newRow["created_at"] = dataRow["created_at"];
                     newRow["created_by"] = string.IsNullOrWhiteSpace(dataRow["created_by"].ToString()) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(dataRow["created_by"]))["user_full_name"];
                     newRow["updated_at"] = dataRow["updated_at"];
@@ -200,6 +204,10 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 dataGridView1.Columns["rpt_levy_id"].Visible = false;
                 dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
                 dataGridView1.Columns["property_kind"].HeaderText = "Property Kind";
+                dataGridView1.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Columns["date_issued"].HeaderText = "Date Issued";
+                dataGridView1.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
                 dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer";
                 dataGridView1.Columns["created_at"].Visible = false;
                 dataGridView1.Columns["created_by"].HeaderText = "Created By";
@@ -216,9 +224,36 @@ namespace AccountingSystem.Views.Transactions.Assessment
         {
             try
             {
-                var stampIndex = new byte[] { 4, 6 };
+                var stampIndex = new byte[] { 5, 7 };
                 Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (isEdit)
+                {
+                    if (ucWarrantLevy.UpdateData())
+                    {
+                        Helper.MessageBoxSuccess("Warrant of levy has been updated.");
+                        ucWarrantLevy.ResetForm();
+                        tabControl1.SelectedTab = tabPageMain;
+                        LoadRecords();
+                    }
+                }
+                else
+                {
+                    if (ucWarrantLevy.InsertData())
+                    {
+                        Helper.MessageBoxSuccess("Warrant of levy has been saved.");
+                        ucWarrantLevy.ResetForm();
+                        LoadRecords();
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
 using System;
 using System.ComponentModel;
@@ -20,6 +21,42 @@ namespace AccountingSystem.Views.Transactions.Assessment
             Helper.DatagridFullRowSelectStyle(dgDelinquencies, true);
         }
 
+        internal string GetFormErrors()
+        {
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtRpt)
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        private void LoadSelectedRecord(int warrantLevyId)
+        {
+            //dtPckrDateIssued.ValueChanged -= new EventHandler(dtPckrDate_ValueChanged);
+
+            var dictDelinquencyNoticeId = AccFactory.RptLevyRepository().GetViewRecordById(warrantLevyId);
+            dtPckrDateIssued.Value = Convert.ToDateTime(dictDelinquencyNoticeId["date_issued"]);
+            string propertyKind = dictDelinquencyNoticeId["property_kind"];
+
+            switch (propertyKind)
+            {
+                case "L":
+                    radLand.Checked = true;
+                    break;
+
+                case "B":
+                    radBuilding.Checked = true;
+                    break;
+
+                case "M":
+                    radMachinery.Checked = true;
+                    break;
+            }
+
+            txtRpt.Text = dictDelinquencyNoticeId["complete_arp_no"];
+        }
+
         internal void OnLoad(bool isEdit, int? warrantLevyId = null)
         {
             this.isEdit = isEdit;
@@ -28,8 +65,63 @@ namespace AccountingSystem.Views.Transactions.Assessment
             if (isEdit)
             {
                 this.warrantLevyId = warrantLevyId.Value;
-                //LoadSelectedRecord(this.warrantLevyId);
+                LoadSelectedRecord(this.warrantLevyId);
             }
+        }
+
+        private RptLevyModel InsertRptLevyModel()
+        {
+            var dictRpt = dtRealProperties.AsEnumerable().Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text).FirstOrDefault();
+            return new RptLevyModel()
+            {
+                DateIssued = dtPckrDateIssued.Value,
+                RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
+                CreatedBy = Helper.userId,
+            };
+        }
+
+        private RptLevyModel UpdateRptLevyModel()
+        {
+            var dictRpt = dtRealProperties.AsEnumerable().Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text).FirstOrDefault();
+            return new RptLevyModel()
+            {
+                Id = warrantLevyId,
+                DateIssued = dtPckrDateIssued.Value,
+                RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
+                UpdatedBy = Helper.userId,
+            };
+        }
+
+        internal bool InsertData()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var model = InsertRptLevyModel();
+            return AccFactory.RptLevyRepository().Insert(model);
+        }
+
+        internal bool UpdateData()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var model = UpdateRptLevyModel();
+            return AccFactory.RptLevyRepository().Update(model);
+        }
+
+        internal void ResetForm()
+        {
+            txtRpt.Clear();
+            radLand.Checked = true;
+            dtPckrDateIssued.Value = Helper.GetCurrentDate();
+            LoadRealProperties();
         }
 
         private void LoadRealProperties()
@@ -236,6 +328,30 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 dgDelinquencies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool ValidateDelinquencies(ErrorProvider errorProvider, TextBox textBox, DataGridView dataGridView, string errorMessage)
+        {
+            if (dataGridView.Rows.Count < 1)
+            {
+                errorProvider.SetError(textBox, errorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        private void dgDelinquencies_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ValidateDelinquencies(errorProvider1, txtRpt, dgDelinquencies, "No record of delinquencies found");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgDelinquencies_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtRpt);
         }
     }
 }
