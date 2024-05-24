@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -7,6 +8,6 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecordsBySearch(int rowLimit, string searchKey);
 
-        DataTable GetViewRecordById(int Id);
+        Dictionary<string, string> GetViewRecordById(int Id);
     }
 }

@@ -1,14 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.AccountableForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Assessment
@@ -89,10 +85,20 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -106,6 +112,13 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
         private void frmWarrantLevy_Load(object sender, EventArgs e)
         {
+            try
+            {
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+                LoadRecords();
+                dataGridView1_SelectionChanged(sender, null);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadRecords()
@@ -125,6 +138,42 @@ namespace AccountingSystem.Views.Transactions.Assessment
             try
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
+                var dtWarrantLevy = AccFactory.RptLevyRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
+                var dataTable = new DataTable();
+                var dtColumns = new DataColumn[]
+                {
+                    new DataColumn("rpt_levy_id", typeof(int)),
+                    new DataColumn("complete_arp_no", typeof(string)),
+                    new DataColumn("property_kind", typeof(string)),
+                    new DataColumn("taxpayers_name", typeof(DateTime)),
+                    new DataColumn("created_at", typeof(string)),
+                    new DataColumn("created_by", typeof(string)),
+                    new DataColumn("updated_at", typeof(string)),
+                    new DataColumn("updated_by", typeof(string)),
+                };
+                dataTable.Columns.AddRange(dtColumns);
+
+                int totalProgressCount = dtWarrantLevy.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dataRow in dtWarrantLevy.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    newRow["rpt_levy_id"] = dataRow["rpt_levy_id"];
+                    newRow["complete_arp_no"] = dataRow["complete_arp_no"];
+                    newRow["property_kind"] = dataRow["property_kind"];
+                    newRow["taxpayers_name"] = dataRow["taxpayers_name"];
+                    newRow["created_at"] = dataRow["created_at"];
+                    newRow["created_by"] = string.IsNullOrWhiteSpace(dataRow["created_by"].ToString()) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(dataRow["created_by"]))["user_full_name"];
+                    newRow["updated_at"] = dataRow["updated_at"];
+                    newRow["updated_by"] = string.IsNullOrWhiteSpace(dataRow["updated_by"].ToString()) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(dataRow["updated_by"]))["user_full_name"];
+
+                    dataTable.Rows.Add(newRow);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -147,8 +196,29 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
                 }
 
+                dataGridView1.DataSource = dataTable;
+                dataGridView1.Columns["rpt_levy_id"].Visible = false;
+                dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
+                dataGridView1.Columns["property_kind"].HeaderText = "Property Kind";
+                dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer";
+                dataGridView1.Columns["created_at"].Visible = false;
+                dataGridView1.Columns["created_by"].HeaderText = "Created By";
+                dataGridView1.Columns["updated_at"].Visible = false;
+                dataGridView1.Columns["updated_by"].Visible = false;
+
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
                 lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var stampIndex = new byte[] { 4, 6 };
+                Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
+                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
