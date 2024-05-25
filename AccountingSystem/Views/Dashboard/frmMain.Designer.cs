@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new System.Windows.Forms.Panel();
+            radReports = new System.Windows.Forms.RadioButton();
             radSettings = new System.Windows.Forms.RadioButton();
             btnLogout = new System.Windows.Forms.Button();
             radTreasury = new System.Windows.Forms.RadioButton();
@@ -50,6 +51,9 @@
             tabPageSettings = new System.Windows.Forms.TabPage();
             ucSettings1 = new Settings.ucSettings();
             label5 = new System.Windows.Forms.Label();
+            tabPageReports = new System.Windows.Forms.TabPage();
+            ucReports1 = new Reports.ucReports();
+            label1 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panel1.SuspendLayout();
@@ -61,11 +65,13 @@
             tabPageTreasury.SuspendLayout();
             panel4.SuspendLayout();
             tabPageSettings.SuspendLayout();
+            tabPageReports.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.White;
+            panel1.Controls.Add(radReports);
             panel1.Controls.Add(radSettings);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(radTreasury);
@@ -78,6 +84,24 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(142, 666);
             panel1.TabIndex = 1;
+            // 
+            // radReports
+            // 
+            radReports.Appearance = System.Windows.Forms.Appearance.Button;
+            radReports.AutoSize = true;
+            radReports.Dock = System.Windows.Forms.DockStyle.Top;
+            radReports.FlatAppearance.BorderSize = 0;
+            radReports.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radReports.Location = new System.Drawing.Point(0, 99);
+            radReports.Margin = new System.Windows.Forms.Padding(0);
+            radReports.Name = "radReports";
+            radReports.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radReports.Size = new System.Drawing.Size(142, 33);
+            radReports.TabIndex = 10;
+            radReports.Text = "Reports";
+            radReports.UseVisualStyleBackColor = true;
+            radReports.CheckedChanged += radReports_CheckedChanged;
             // 
             // radSettings
             // 
@@ -180,6 +204,7 @@
             tabControlMain.Controls.Add(tabPageAccounting);
             tabControlMain.Controls.Add(tabPageTreasury);
             tabControlMain.Controls.Add(tabPageSettings);
+            tabControlMain.Controls.Add(tabPageReports);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             tabControlMain.Location = new System.Drawing.Point(142, 0);
@@ -357,6 +382,38 @@
             label5.TabIndex = 5;
             label5.Text = "Settings";
             // 
+            // tabPageReports
+            // 
+            tabPageReports.Controls.Add(ucReports1);
+            tabPageReports.Controls.Add(label1);
+            tabPageReports.Location = new System.Drawing.Point(4, 24);
+            tabPageReports.Name = "tabPageReports";
+            tabPageReports.Size = new System.Drawing.Size(1125, 638);
+            tabPageReports.TabIndex = 5;
+            tabPageReports.Text = "tabPageReports";
+            tabPageReports.UseVisualStyleBackColor = true;
+            // 
+            // ucReports1
+            // 
+            ucReports1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucReports1.Location = new System.Drawing.Point(0, 80);
+            ucReports1.Name = "ucReports1";
+            ucReports1.Padding = new System.Windows.Forms.Padding(4);
+            ucReports1.Size = new System.Drawing.Size(1125, 558);
+            ucReports1.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.Dock = System.Windows.Forms.DockStyle.Top;
+            label1.Font = new System.Drawing.Font("Segoe UI Light", 20F);
+            label1.Location = new System.Drawing.Point(0, 0);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label1.Size = new System.Drawing.Size(1125, 80);
+            label1.TabIndex = 6;
+            label1.Text = "Reports";
+            // 
             // taxRatesToolStripMenuItem
             // 
             taxRatesToolStripMenuItem.Name = "taxRatesToolStripMenuItem";
@@ -394,6 +451,7 @@
             tabPageTreasury.ResumeLayout(false);
             panel4.ResumeLayout(false);
             tabPageSettings.ResumeLayout(false);
+            tabPageReports.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -424,5 +482,9 @@
         private Treasury.ucTreasury ucTreasury1;
         private Settings.ucSettings ucSettings1;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.RadioButton radReports;
+        private System.Windows.Forms.TabPage tabPageReports;
+        private System.Windows.Forms.Label label1;
+        private Reports.ucReports ucReports1;
     }
 }

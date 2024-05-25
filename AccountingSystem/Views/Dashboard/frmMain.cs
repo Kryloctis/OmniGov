@@ -101,6 +101,10 @@ namespace AccountingSystem.Views.Dashboard
                     ucSettings.OnLoad();
                     radSettings.Checked = true;
                     break;
+
+                case "tabPageReports":
+                    radReports.Checked = true;
+                    break;
             }
         }
 
@@ -165,6 +169,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 LoadTabPagesContents(tabControlMain);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radReports_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControlMain.SelectedTab = tabPageReports;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
