@@ -63,7 +63,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>NAME OF DECLARED OWNER :</Value>
+                    <Value>NAME OF DECLARED OWNER</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -99,7 +99,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>COMPLETE ADDRESS :</Value>
+                    <Value>COMPLETE ADDRESS</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -116,76 +116,6 @@
             <Height>0.25in</Height>
             <Width>2.1014in</Width>
             <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox10">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!paramDeclaredOwner.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.06944in</Top>
-            <Left>2.15271in</Left>
-            <Height>0.25in</Height>
-            <Width>5.29604in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox15">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!paramTaxDeclarationNumber.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.35071in</Top>
-            <Left>2.15114in</Left>
-            <Height>0.25in</Height>
-            <Width>5.29761in</Width>
-            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -220,7 +150,7 @@
             <Left>0.02353in</Left>
             <Height>0.25in</Height>
             <Width>2.1014in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -239,21 +169,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Records show that you have failed to settle your real property tax delinquency as provided in our letter date (</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramDateOfFirstNotice.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>) and computed as follows:</Value>
+                    <Value>Records show that you have failed to settle your real property tax delinquency as provided in our letter date () and computed as follows:</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -268,7 +184,7 @@
             <Left>1.45212in</Left>
             <Height>0.5625in</Height>
             <Width>5.98646in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -305,7 +221,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -340,7 +256,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -375,7 +291,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -410,7 +326,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -445,7 +361,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -480,7 +396,7 @@
             <Left>0.01336in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -499,7 +415,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramDeclaredOwner.Value</Value>
+                    <Value>=Parameters!paramDeclaredOwners.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -516,7 +432,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -535,7 +451,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramTaxDeclarationNumber.Value</Value>
+                    <Value>=Parameters!paramTaxDecNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -550,7 +466,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -569,7 +485,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramTCT.Value</Value>
+                    <Value>=Parameters!paramTctNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -584,7 +500,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -603,7 +519,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramLocationOfProperty.Value</Value>
+                    <Value>=Parameters!paramPropertyLocation.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -618,7 +534,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -637,7 +553,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramKindOfProperty.Value</Value>
+                    <Value>=Parameters!paramPropertyKind.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -652,7 +568,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -686,7 +602,7 @@
             <Left>1.45212in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -710,13 +626,6 @@
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramTaxDue.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
                 </TextRuns>
                 <Style>
                   <TextAlign>Right</TextAlign>
@@ -728,7 +637,7 @@
             <Left>3.27907in</Left>
             <Height>0.25in</Height>
             <Width>4.33932in</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -764,7 +673,7 @@
             <Left>3.27907in</Left>
             <Height>0.25in</Height>
             <Width>4.33931in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -800,7 +709,7 @@
             <Left>12.90842cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -839,7 +748,7 @@
             <Left>12.90842cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -873,7 +782,7 @@
             <Left>3.9719in</Left>
             <Height>0.25in</Height>
             <Width>1.06849in</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1545,7 +1454,7 @@
             <Left>0.03821in</Left>
             <Height>0.78125in</Height>
             <Width>7.67521in</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1702,19 +1611,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Date : </Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=Globals!ExecutionTime</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
+                      <Value>Date :  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -1760,43 +1657,37 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramDeclaredOwner">
+    <ReportParameter Name="paramDeclaredOwners">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTaxDeclarationNumber">
+    <ReportParameter Name="paramTaxDecNo">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTCT">
+    <ReportParameter Name="paramTctNo">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramLocationOfProperty">
+    <ReportParameter Name="paramPropertyLocation">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramKindOfProperty">
+    <ReportParameter Name="paramPropertyKind">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramAssessedValue">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramDateOfFirstNotice">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1814,7 +1705,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTaxDue">
+    <ReportParameter Name="paramLgu">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1829,37 +1720,32 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramDeclaredOwner</ParameterName>
+          <ParameterName>paramDeclaredOwners</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramTaxDeclarationNumber</ParameterName>
+          <ParameterName>paramTaxDecNo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramTCT</ParameterName>
+          <ParameterName>paramTctNo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramLocationOfProperty</ParameterName>
+          <ParameterName>paramPropertyLocation</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramKindOfProperty</ParameterName>
+          <ParameterName>paramPropertyKind</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>paramAssessedValue</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramDateOfFirstNotice</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
@@ -1872,9 +1758,9 @@
           <ParameterName>paramSignatoryTitle</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
+          <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramTaxDue</ParameterName>
+          <ParameterName>paramLgu</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

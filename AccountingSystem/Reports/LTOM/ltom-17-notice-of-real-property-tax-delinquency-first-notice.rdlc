@@ -77,10 +77,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.47581in</Top>
-            <Left>1.00282in</Left>
+            <Top>0.36596in</Top>
             <Height>0.25in</Height>
-            <Width>2.27848in</Width>
+            <Width>5.67511in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -111,10 +110,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.75708in</Top>
-            <Left>1.00282in</Left>
+            <Top>0.62984in</Top>
             <Height>0.25in</Height>
-            <Width>2.27848in</Width>
+            <Width>5.67511in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -146,8 +144,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.24366in</Top>
-            <Left>1.00282in</Left>
+            <Top>1.07429in</Top>
             <Height>0.25in</Height>
             <Width>2.1014in</Width>
             <ZIndex>2</ZIndex>
@@ -180,10 +177,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.5631in</Top>
-            <Left>1.00282in</Left>
+            <Top>1.35207in</Top>
             <Height>0.4375in</Height>
-            <Width>5.5265in</Width>
+            <Width>5.66983in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -214,8 +210,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.07005in</Top>
-            <Left>1.00282in</Left>
+            <Top>1.89908in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>4</ZIndex>
@@ -247,8 +243,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.32005in</Top>
-            <Left>1.00282in</Left>
+            <Top>2.14908in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>5</ZIndex>
@@ -280,8 +276,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.57005in</Top>
-            <Left>1.00282in</Left>
+            <Top>2.39908in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>6</ZIndex>
@@ -313,8 +309,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.82005in</Top>
-            <Left>1.00282in</Left>
+            <Top>2.64908in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>7</ZIndex>
@@ -346,8 +342,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.07005in</Top>
-            <Left>1.00282in</Left>
+            <Top>2.89908in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>8</ZIndex>
@@ -379,8 +375,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.32005in</Top>
-            <Left>1.00282in</Left>
+            <Top>3.17686in</Top>
+            <Left>0.01017in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
             <ZIndex>9</ZIndex>
@@ -421,10 +417,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.67364in</Top>
-            <Left>2.2039in</Left>
+            <Top>4.36088in</Top>
+            <Left>1.35458in</Left>
             <Height>0.25in</Height>
-            <Width>2.92246in</Width>
+            <Width>2.8808in</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -457,8 +453,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.9792in</Top>
-            <Left>2.19001in</Left>
+            <Top>4.66644in</Top>
+            <Left>1.34069in</Left>
             <Height>0.25in</Height>
             <Width>4.33931in</Width>
             <ZIndex>11</ZIndex>
@@ -493,10 +489,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>15.90224cm</Top>
-            <Left>10.17746cm</Left>
+            <Top>14.57318cm</Top>
+            <Left>8.12951cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.44229cm</Width>
+            <Width>6.35881cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -532,10 +528,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>15.23169cm</Top>
-            <Left>10.17746cm</Left>
+            <Top>13.90263cm</Top>
+            <Left>8.12951cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.40701cm</Width>
+            <Width>6.32353cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -566,8 +562,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>5.49525in</Top>
-            <Left>2.88283in</Left>
+            <Top>5.15403in</Top>
+            <Left>3.20059in</Left>
             <Height>0.25in</Height>
             <Width>1.06849in</Width>
             <ZIndex>14</ZIndex>
@@ -607,10 +603,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.07005in</Top>
-            <Left>2.38603in</Left>
+            <Top>1.89908in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -640,20 +636,22 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramTaxDeclarationNo.Value</Value>
+                    <Value>=Parameters!paramTaxDecNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.32005in</Top>
-            <Left>2.38603in</Left>
+            <Top>2.14908in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -683,20 +681,22 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramTCTNo.Value</Value>
+                    <Value>=Parameters!paramTctNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.57005in</Top>
-            <Left>2.38603in</Left>
+            <Top>2.39908in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -726,20 +726,22 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramLocationOfProperty.Value</Value>
+                    <Value>=Parameters!paramPropertyLocation.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.82005in</Top>
-            <Left>2.38603in</Left>
+            <Top>2.64908in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -769,20 +771,22 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramKindOfProperty.Value</Value>
+                    <Value>=Parameters!paramPropertyKind.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.07005in</Top>
-            <Left>2.38603in</Left>
+            <Top>2.89908in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -818,14 +822,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.32005in</Top>
-            <Left>2.38603in</Left>
+            <Top>3.17686in</Top>
+            <Left>1.39338in</Left>
             <Height>0.25in</Height>
-            <Width>4.14329in</Width>
+            <Width>2.54607in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -846,22 +852,22 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.93282in</Width>
+                  <Width>0.9584in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94634in</Width>
+                  <Width>0.97192in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.00094in</Width>
+                  <Width>1.02652in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94684in</Width>
+                  <Width>0.97242in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.89653in</Width>
+                  <Width>0.92211in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.80302in</Width>
+                  <Width>0.8286in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1480,10 +1486,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtLtom17_19</DataSetName>
-            <Top>3.82294in</Top>
-            <Left>1.00282in</Left>
+            <Top>3.51019in</Top>
+            <Left>0.01017in</Left>
             <Height>0.78125in</Height>
-            <Width>5.5265in</Width>
+            <Width>5.68in</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
@@ -1508,10 +1514,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.3616cm</Top>
-            <Left>11.99029cm</Left>
+            <Top>0.17639cm</Top>
+            <Left>9.00721cm</Left>
             <Height>0.57675cm</Height>
-            <Width>4.59418cm</Width>
+            <Width>0.999cm</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
@@ -1530,7 +1536,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Sum(Fields!total_amount.Value, "dsNoticeOfRealPropertyTaxDelinquencyFirstNotice")</Value>
+                    <Value />
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1544,10 +1550,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.67364in</Top>
-            <Left>5.15414in</Left>
+            <Top>4.36089in</Top>
+            <Left>4.29465in</Left>
             <Height>0.25in</Height>
-            <Width>1.37518in</Width>
+            <Width>1.38535in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -1559,14 +1565,49 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.17639cm</Top>
+            <Left>10.07677cm</Left>
+            <Height>0.57675cm</Height>
+            <Width>4.33802cm</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>6.83242in</Height>
+        <Height>5.97369in</Height>
         <Style />
       </Body>
-      <Width>7.75162in</Width>
+      <Width>5.70406in</Width>
       <Page>
         <PageHeader>
-          <Height>1.32499in</Height>
+          <Height>2.01902in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1580,6 +1621,7 @@
                       <Value>REPUBLIC OF THE PHILIPPINES </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1590,13 +1632,20 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Province/City/Municipality of  </Value>
+                      <Value>Province/City/Municipality of</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value xml:space="preserve">  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Parameters!paramLGU.Value</Value>
+                      <Value>=Parameters!paramLgu.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <TextDecoration>Underline</TextDecoration>
@@ -1609,10 +1658,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.52164cm</Top>
-              <Left>0.01291cm</Left>
-              <Height>1.02277cm</Height>
-              <Width>19.59542cm</Width>
+              <Top>2.99343cm</Top>
+              <Left>0cm</Left>
+              <Height>1.2609cm</Height>
+              <Width>14.4272cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1630,7 +1679,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LTOM FORM NO. 17 - NOTICE OF REAL PROPERTY TAX DELINQUENCY</Value>
+                      <Value>LTOM FORM NO. 17 - NOTICE OF REAL PROPERTY TAX DELINQUENCY (FIRST NOTICE)</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
@@ -1640,30 +1689,15 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value> (FIRST NOTICE)</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontSize>14pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.03873cm</Left>
+              <Top>0.57944in</Top>
+              <Left>0cm</Left>
               <Height>1.39376cm</Height>
-              <Width>19.59542cm</Width>
+              <Width>11.45778cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1696,10 +1730,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.66788cm</Top>
-              <Left>0.01291cm</Left>
+              <Top>4.43071cm</Top>
+              <Left>0cm</Left>
               <Height>0.6976cm</Height>
-              <Width>19.62125cm</Width>
+              <Width>14.4272cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1711,6 +1745,56 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>FORMS AND ANNEXES</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#231f20</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.24011in</Top>
+              <Left>0in</Left>
+              <Height>0.20045in</Height>
+              <Width>3.14607in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line1">
+              <Top>0.51in</Top>
+              <Left>5.70406in</Left>
+              <Height>0in</Height>
+              <Width>-5.69918in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Orange</Color>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
           </ReportItems>
           <Style>
             <Border>
@@ -1718,39 +1802,28 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.5in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>10.27in</PageHeight>
+        <PageWidth>7.2in</PageWidth>
+        <LeftMargin>0.73in</LeftMargin>
+        <RightMargin>0.73in</RightMargin>
+        <TopMargin>0.24in</TopMargin>
+        <BottomMargin>0.31in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramLGU">
+    <ReportParameter Name="paramLgu">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDeclaredOwner">
+    <ReportParameter Name="paramDeclaredOwners">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramCompleteAddress">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramTotalTaxDue">
-      <DataType>Float</DataType>
-      <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramSignatory">
@@ -1765,31 +1838,25 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDeclaredOwners">
+    <ReportParameter Name="paramTaxDecNo">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTaxDeclarationNo">
+    <ReportParameter Name="paramTctNo">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTCTNo">
+    <ReportParameter Name="paramPropertyLocation">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramLocationOfProperty">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramKindOfProperty">
+    <ReportParameter Name="paramPropertyKind">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1810,22 +1877,12 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramLGU</ParameterName>
+          <ParameterName>paramLgu</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramDeclaredOwner</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>paramCompleteAddress</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>paramTotalTaxDue</ParameterName>
+          <ParameterName>paramDeclaredOwners</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1838,29 +1895,24 @@
           <ParameterName>paramSignatoryTitle</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramDeclaredOwners</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramTaxDeclarationNo</ParameterName>
+          <ParameterName>paramTaxDecNo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramTCTNo</ParameterName>
+          <ParameterName>paramTctNo</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramLocationOfProperty</ParameterName>
+          <ParameterName>paramPropertyLocation</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramKindOfProperty</ParameterName>
+          <ParameterName>paramPropertyKind</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>

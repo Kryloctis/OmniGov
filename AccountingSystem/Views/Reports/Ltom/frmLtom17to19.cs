@@ -1,13 +1,12 @@
 ﻿using ACC.Data;
-using Org.BouncyCastle.Crypto.Agreement;
+using AccountingSystem.DataSets;
+using AccountingSystem.Views.Shared;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
@@ -85,16 +84,150 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
         }
 
+        private void LoadReport()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                pbReport.Value = 0;
+                int rptDelinquencyNoticeId = Convert.ToInt32(cmbxDelinquentNoticeRecord.SelectedValue);
+                backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
+            }
+        }
+
+        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
+        {
+            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+
+            int? prevAssmntYear = null;
+
+            if (dictPrevAssmnt.Count > 1)
+                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
+
+            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+            return (basicPenalty, sefPenalty);
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            try
+            {
+                int rptDelinquencyNoticeId = Convert.ToInt32(e.Argument);
+                var dictDelinquentNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordById(rptDelinquencyNoticeId);
+                var noticeDate = Convert.ToDateTime(dictDelinquentNotice["notice_date"]);
+                var completeArpNo = dictDelinquentNotice["complete_arp_no"];
+
+                var dtLtom17to19 = new dsTreasury.dtLtom17_19DataTable().Clone();
+                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
+
+                int totalProgressCount = dtAssessmentPostingDb.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dataRow in dtAssessmentPostingDb.Rows)
+                {
+                    decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
+                    decimal basicRate = Convert.ToDecimal(dataRow["basic_rate"]);
+                    decimal sefRate = Convert.ToDecimal(dataRow["sef_rate"]);
+                    int taxYear = Convert.ToInt32(dataRow["year"]);
+                    int effectivityQuarter = Convert.ToInt32(dataRow["effectivity_quarterly"]);
+                    int effectivityYear = Convert.ToInt32(dataRow["effectivity_year"]);
+                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
+                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
+                    decimal penaltyRate = Convert.ToDecimal(dataRow["penalty_rate"]);
+
+                    var penaltyParameters = (taxYear, completeArpNo, effectivityQuarter, effectivityYear);
+                    var penalties = GetPenalties(noticeDate, penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
+
+                    if (penalties.basicPenalty <= 0 && penalties.sefPenalty <= 0)
+                    {
+                        totalProgressCount--;
+                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                        continue;
+                    }
+
+                    var newRow = dtLtom17to19.NewRow();
+                    newRow["tax_year"] = dataRow["year"];
+                    newRow["basic_tax"] = basicTaxDue.ToString("N2");
+                    newRow["basic_penalty"] = penalties.basicPenalty.ToString("N2");
+                    newRow["sef_tax"] = sefTaxDue.ToString("N2");
+                    newRow["sef_penalty"] = penalties.sefPenalty.ToString("N2");
+                    newRow["total_amount"] = (penalties.basicPenalty + penalties.sefPenalty + basicTaxDue + sefTaxDue).ToString("N2");
+                    dtLtom17to19.Rows.Add(newRow);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = (dtLtom17to19, dictDelinquentNotice);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            pbReport.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            try
+            {
+                var result = ((DataTable dataTable, Dictionary<string, string> dictDelinquentNotice))e.Result;
+
+                if (result.dataTable.Rows.Count < 1)
+                    pbReport.Value = 100;
+
+                var checkedRadioButton = flwLayoutType.Controls
+                                     .OfType<RadioButton>()
+                                     .FirstOrDefault(rb => rb.Checked);
+                string reportPath;
+                var lguDetails = Helper.LGUDetails();
+                var parameters = new ReportParameter[]
+                {
+                    new ReportParameter("paramLgu", lguDetails["lgu_name"]),
+                    new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
+                    new ReportParameter("paramSignatory", string.Empty),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramTaxDecNo", result.dictDelinquentNotice["complete_arp_no"]),
+                    new ReportParameter("paramTctNo", string.Empty),
+                    new ReportParameter("paramPropertyLocation", string.Empty),
+                    new ReportParameter("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
+                    new ReportParameter("paramAssessedValue", "0.00")
+                };
+
+                switch (checkedRadioButton.Name)
+                {
+                    case "rad1stNotice":
+                        reportPath = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
+                        break;
+
+                    case "rad2ndNotice":
+                        reportPath = "ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc";
+                        break;
+
+                    case "rad3rdNotice":
+                        reportPath = "ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc";
+                        break;
+
+                    default:
+                        reportPath = string.Empty;
+                        break;
+                }
+
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\{reportPath}";
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource("dtLtom17_19", result.dataTable));
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void rad1stNotice_CheckedChanged(object sender, EventArgs e)
@@ -135,6 +268,15 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
+        }
+
+        private void btnRunReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReport();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

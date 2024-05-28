@@ -160,6 +160,7 @@
             btnRunReport.TabIndex = 12;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
             // txtRpt
             // 
