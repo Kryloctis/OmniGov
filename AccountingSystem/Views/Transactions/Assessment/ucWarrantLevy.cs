@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
 
         private void LoadSelectedRecord(int warrantLevyId)
         {
-            //dtPckrDateIssued.ValueChanged -= new EventHandler(dtPckrDate_ValueChanged);
+            dtPckrDateIssued.ValueChanged -= new EventHandler(dtPckrDateIssued_ValueChanged);
 
             var dictDelinquencyNoticeId = AccFactory.RptLevyRepository().GetViewRecordById(warrantLevyId);
             dtPckrDateIssued.Value = Convert.ToDateTime(dictDelinquencyNoticeId["date_issued"]);
@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             }
 
             txtRpt.Text = dictDelinquencyNoticeId["complete_arp_no"];
+            dtPckrDateIssued.ValueChanged += new EventHandler(dtPckrDateIssued_ValueChanged);
         }
 
         internal void OnLoad(bool isEdit, int? warrantLevyId = null)
@@ -352,6 +353,15 @@ namespace AccountingSystem.Views.Transactions.Assessment
         private void dgDelinquencies_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtRpt);
+        }
+
+        private void dtPckrDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRptDelinquencies();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
