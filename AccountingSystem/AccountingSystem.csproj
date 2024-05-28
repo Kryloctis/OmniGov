@@ -57,23 +57,23 @@
 		<None Remove="Reports\journal-entry-voucher.rdlc" />
 		<None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
 		<None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
-		<None Remove="Reports\LTOM\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc" />
-		<None Remove="Reports\LTOM\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc" />
-		<None Remove="Reports\LTOM\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc" />
-		<None Remove="Reports\LTOM\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc" />
-		<None Remove="Reports\LTOM\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc" />
-		<None Remove="Reports\LTOM\ltom-20-warrant-of-levy.rdlc" />
-		<None Remove="Reports\LTOM\ltom-21-notice-of-levy.rdlc" />
-		<None Remove="Reports\LTOM\ltom-22-report-of-levy.rdlc" />
-		<None Remove="Reports\LTOM\ltom-24-notice-of-sale.rdlc" />
-		<None Remove="Reports\LTOM\ltom-25-public-auction-registration-form.rdlc" />
-		<None Remove="Reports\LTOM\ltom-26-list-of-registered-bidders.rdlc" />
-		<None Remove="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc" />
-		<None Remove="Reports\LTOM\ltom-28-rules-and-regulation-of-public-auction.rdlc" />
-		<None Remove="Reports\LTOM\ltom-29-certificate-of-sale.rdlc" />
-		<None Remove="Reports\LTOM\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc" />
-		<None Remove="Reports\LTOM\ltom-32-certificate-of-redemption.rdlc" />
-		<None Remove="Reports\LTOM\ltom-33-cancellation-of-warrant-of-levey.rdlc" />
+		<None Remove="Reports\Ltom\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc" />
+		<None Remove="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc" />
+		<None Remove="Reports\Ltom\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc" />
+		<None Remove="Reports\Ltom\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc" />
+		<None Remove="Reports\Ltom\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc" />
+		<None Remove="Reports\Ltom\ltom-20-warrant-of-levy.rdlc" />
+		<None Remove="Reports\Ltom\ltom-21-notice-of-levy.rdlc" />
+		<None Remove="Reports\Ltom\ltom-22-report-of-levy.rdlc" />
+		<None Remove="Reports\Ltom\ltom-24-notice-of-sale.rdlc" />
+		<None Remove="Reports\Ltom\ltom-25-public-auction-registration-form.rdlc" />
+		<None Remove="Reports\Ltom\ltom-26-list-of-registered-bidders.rdlc" />
+		<None Remove="Reports\Ltom\ltom-27-undertaking-and-waver-of-bidders.rdlc" />
+		<None Remove="Reports\Ltom\ltom-28-rules-and-regulation-of-public-auction.rdlc" />
+		<None Remove="Reports\Ltom\ltom-29-certificate-of-sale.rdlc" />
+		<None Remove="Reports\Ltom\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc" />
+		<None Remove="Reports\Ltom\ltom-32-certificate-of-redemption.rdlc" />
+		<None Remove="Reports\Ltom\ltom-33-cancellation-of-warrant-of-levey.rdlc" />
 		<None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\post-trial-balance.rdlc" />
 		<None Remove="Reports\pre-trial-balance.rdlc" />
@@ -96,10 +96,10 @@
 		<None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="Reports\LTOM\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc">
+	  <Content Include="Reports\Ltom\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Reports\LTOM\ltom-26-list-of-registered-bidders.rdlc">
+	  <Content Include="Reports\Ltom\ltom-26-list-of-registered-bidders.rdlc">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
@@ -164,49 +164,49 @@
 		<Content Include="Reports\ListRptDelinquencies.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc">
+		<Content Include="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc">
+		<Content Include="Reports\Ltom\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc">
+		<Content Include="Reports\Ltom\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc">
+		<Content Include="Reports\Ltom\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-20-warrant-of-levy.rdlc">
+		<Content Include="Reports\Ltom\ltom-20-warrant-of-levy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-21-notice-of-levy.rdlc">
+		<Content Include="Reports\Ltom\ltom-21-notice-of-levy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-22-report-of-levy.rdlc">
+		<Content Include="Reports\Ltom\ltom-22-report-of-levy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-24-notice-of-sale.rdlc">
+		<Content Include="Reports\Ltom\ltom-24-notice-of-sale.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-25-public-auction-registration-form.rdlc">
+		<Content Include="Reports\Ltom\ltom-25-public-auction-registration-form.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-27-undertaking-and-waver-of-bidders.rdlc">
+		<Content Include="Reports\Ltom\ltom-27-undertaking-and-waver-of-bidders.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-28-rules-and-regulation-of-public-auction.rdlc">
+		<Content Include="Reports\Ltom\ltom-28-rules-and-regulation-of-public-auction.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-29-certificate-of-sale.rdlc">
+		<Content Include="Reports\Ltom\ltom-29-certificate-of-sale.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc">
+		<Content Include="Reports\Ltom\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-32-certificate-of-redemption.rdlc">
+		<Content Include="Reports\Ltom\ltom-32-certificate-of-redemption.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\LTOM\ltom-33-cancellation-of-warrant-of-levey.rdlc">
+		<Content Include="Reports\Ltom\ltom-33-cancellation-of-warrant-of-levey.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\post-trial-balance.rdlc">

@@ -144,5 +144,28 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET  real_properties_id = @real_properties_id, notice_type = @notice_type, notice_date = @notice_date, updated_by = @updated_by WHERE id = @id;";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public DataTable GetViewRecords(string noticeType)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@notice_type", DbType.String, noticeType }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE notice_type = @notice_type";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public DataTable GetViewRecordsByRptId(int rptId, string noticeType)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_properties_id", DbType.Int32, rptId},
+                new object[] { "@notice_type", DbType.String, noticeType},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND notice_type = @notice_type";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }

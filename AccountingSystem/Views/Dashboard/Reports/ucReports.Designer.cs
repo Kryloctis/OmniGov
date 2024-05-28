@@ -131,6 +131,7 @@
             btnLtom17and19.Text = "LTOM Form No. (17-19) - Notice of Real Property Tax Delinquency\r\n";
             btnLtom17and19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom17and19.UseVisualStyleBackColor = true;
+            btnLtom17and19.Click += btnLtom17and19_Click;
             // 
             // button1
             // 
