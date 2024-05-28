@@ -185,7 +185,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                 var lguDetails = Helper.LGUDetails();
                 var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLgu", lguDetails["lgu_name"]),
+                    new ReportParameter("paramLgu", lguDetails["municipality"]),
+                    new ReportParameter("paramNoticeDate", result.dictDelinquentNotice["notice_date"]),
                     new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
                     new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
