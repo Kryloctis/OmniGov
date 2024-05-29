@@ -82,12 +82,19 @@ namespace AccountingSystem.Views.Reports.Ltom
                 cmbxDelinquentNoticeRecord.ValueMember = "delinquent_notice_id";
                 cmbxDelinquentNoticeRecord.DisplayMember = "notice_date";
             }
+            else { cmbxDelinquentNoticeRecord.SelectedIndex = -1; }
         }
 
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
             {
+                if (cmbxDelinquentNoticeRecord.SelectedValue is null)
+                {
+                    reportViewer1.Clear();
+                    return;
+                }
+
                 pbReport.Value = 0;
                 int rptDelinquencyNoticeId = Convert.ToInt32(cmbxDelinquentNoticeRecord.SelectedValue);
                 backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
