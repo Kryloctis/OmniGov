@@ -109,9 +109,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             if (!Helper.HasPermission("Report > Report of Checks Issued"))
                 reportOfCheckIssuedRciTstrpMnuItm.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
-                reportOfCollectionsDepositsRcdTstrpMnuItm.Enabled = false;
-
             if (!Helper.HasPermission("Report > Abstract of General Collections"))
                 abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
 

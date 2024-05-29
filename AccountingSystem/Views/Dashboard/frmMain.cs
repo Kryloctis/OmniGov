@@ -2,8 +2,10 @@
 using AccountingSystem.Views.Dashboard.Accounting;
 using AccountingSystem.Views.Dashboard.AccountingDashboard;
 using AccountingSystem.Views.Dashboard.Budget;
+using AccountingSystem.Views.Dashboard.Reports;
 using AccountingSystem.Views.Dashboard.Settings;
 using AccountingSystem.Views.Dashboard.Treasury;
+using AccountingSystem.Views.Reports.RCD;
 using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Drawing;
@@ -19,6 +21,7 @@ namespace AccountingSystem.Views.Dashboard
         private ucAccounting ucAccounting;
         private ucTreasury ucTreasury;
         private ucSettings ucSettings;
+        private ucReports ucReports;
 
         public frmMain(frmSignIn frmSignIn)
         {
@@ -37,6 +40,7 @@ namespace AccountingSystem.Views.Dashboard
             this.ucAccounting = ucAccounting1;
             this.ucTreasury = ucTreasury1;
             this.ucSettings = ucSettings1;
+            this.ucReports = ucReports1;
         }
 
         #region Permission Validations
@@ -103,6 +107,7 @@ namespace AccountingSystem.Views.Dashboard
                     break;
 
                 case "tabPageReports":
+                    ucReports.OnLoad();
                     radReports.Checked = true;
                     break;
             }

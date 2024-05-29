@@ -89,14 +89,10 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             if (!backgroundWorker1.IsBusy)
             {
-                if (cmbxDelinquentNoticeRecord.SelectedValue is null)
-                {
-                    reportViewer1.Clear();
-                    return;
-                }
-
                 pbReport.Value = 0;
-                int rptDelinquencyNoticeId = Convert.ToInt32(cmbxDelinquentNoticeRecord.SelectedValue);
+                btnRunReport.Enabled = false;
+                btnRunReport.Text = "Generating Report";
+                var rptDelinquencyNoticeId = cmbxDelinquentNoticeRecord.SelectedValue;
                 backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
             }
         }
@@ -121,8 +117,16 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                int rptDelinquencyNoticeId = Convert.ToInt32(e.Argument);
-                var dictDelinquentNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordById(rptDelinquencyNoticeId);
+                var rptDelinquencyNoticeId = e.Argument;
+
+                if (rptDelinquencyNoticeId is null)
+                {
+                    backgroundWorker1.CancelAsync();
+                    e.Cancel = true;
+                    return;
+                }
+
+                var dictDelinquentNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordById(Convert.ToInt32(rptDelinquencyNoticeId));
                 var noticeDate = Convert.ToDateTime(dictDelinquentNotice["notice_date"]);
                 var completeArpNo = dictDelinquentNotice["complete_arp_no"];
 
@@ -180,6 +184,15 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                if (e.Cancelled)
+                {
+                    pbReport.Value = 100;
+                    btnRunReport.Text = "Run Report";
+                    btnRunReport.Enabled = true;
+                    reportViewer1.Clear();
+                    return;
+                }
+
                 var result = ((DataTable dataTable, Dictionary<string, string> dictDelinquentNotice))e.Result;
 
                 if (result.dataTable.Rows.Count < 1)
@@ -235,6 +248,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+                btnRunReport.Text = "Run Report";
+                btnRunReport.Enabled = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

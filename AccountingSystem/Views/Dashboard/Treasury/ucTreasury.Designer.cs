@@ -59,7 +59,6 @@
             releasedAndUnreleaseChecksTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             reportsTstrpDrpDwnMnu = new System.Windows.Forms.ToolStripDropDownButton();
-            reportOfCollectionsDepositsRcdTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             rptStatementOfAccTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -292,20 +291,13 @@
             // reportsTstrpDrpDwnMnu
             // 
             reportsTstrpDrpDwnMnu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { reportOfCollectionsDepositsRcdTstrpMnuItm, abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator1, rptStatementOfAccTstrpMnuItm, listOfRealPropertyDelinquenciesTstrpMnuItm, rptDuesAndPymntsTstrpMnuItm, crtfdListOfRptDeliquenciesTstrpMnuItm, toolStripSeparator3, bankCashbookTstrpMnuItm, reportOfCheckIssuedRciTstrpMnuItm, schedReleasedChequesTstrpMnuItm, schedUnreleasedChequesTstrpMnuItm, consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm, dailyCashPositionsTstrpMnuItm });
+            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator1, rptStatementOfAccTstrpMnuItm, listOfRealPropertyDelinquenciesTstrpMnuItm, rptDuesAndPymntsTstrpMnuItm, crtfdListOfRptDeliquenciesTstrpMnuItm, toolStripSeparator3, bankCashbookTstrpMnuItm, reportOfCheckIssuedRciTstrpMnuItm, schedReleasedChequesTstrpMnuItm, schedUnreleasedChequesTstrpMnuItm, consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm, dailyCashPositionsTstrpMnuItm });
             reportsTstrpDrpDwnMnu.Image = (System.Drawing.Image)resources.GetObject("reportsTstrpDrpDwnMnu.Image");
             reportsTstrpDrpDwnMnu.ImageTransparentColor = System.Drawing.Color.Magenta;
             reportsTstrpDrpDwnMnu.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             reportsTstrpDrpDwnMnu.Name = "reportsTstrpDrpDwnMnu";
             reportsTstrpDrpDwnMnu.Size = new System.Drawing.Size(70, 19);
             reportsTstrpDrpDwnMnu.Text = "● Reports";
-            // 
-            // reportOfCollectionsDepositsRcdTstrpMnuItm
-            // 
-            reportOfCollectionsDepositsRcdTstrpMnuItm.Name = "reportOfCollectionsDepositsRcdTstrpMnuItm";
-            reportOfCollectionsDepositsRcdTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            reportOfCollectionsDepositsRcdTstrpMnuItm.Text = "Report of Collections Deposits (RCD)...";
-            reportOfCollectionsDepositsRcdTstrpMnuItm.Click += rcdTstrpMnuItm_Click;
             // 
             // abstractOfGeneralCollectionsToolStripMenuItem
             // 
@@ -431,7 +423,6 @@
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem bankDepositTstrpMnuItm;
         private System.Windows.Forms.ToolStripDropDownButton reportsTstrpDrpDwnMnu;
-        private System.Windows.Forms.ToolStripMenuItem reportOfCollectionsDepositsRcdTstrpMnuItm;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem schedUnreleasedChequesTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem rptStatementOfAccTstrpMnuItm;
