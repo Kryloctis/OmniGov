@@ -183,6 +183,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                                      .FirstOrDefault(rb => rb.Checked);
                 string reportPath;
                 var lguDetails = Helper.LGUDetails();
+                var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
                 var parameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLgu", lguDetails["municipality"]),
@@ -192,9 +193,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramTaxDecNo", result.dictDelinquentNotice["complete_arp_no"]),
                     new ReportParameter("paramTctNo", string.Empty),
-                    new ReportParameter("paramPropertyLocation", string.Empty),
+                    new ReportParameter("paramPropertyLocation", propertyLocation),
                     new ReportParameter("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramAssessedValue", "0.00")
+                    new ReportParameter("paramAssessedValue", result.dictDelinquentNotice["assessed_value"])
                 };
 
                 switch (checkedRadioButton.Name)
