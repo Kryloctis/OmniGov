@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RCD
+namespace AccountingSystem.Views.Reports.Rcd
 {
     public partial class ucRcd : UserControl
     {

@@ -1,7 +1,7 @@
 ﻿using AccountingSystem.Views.Reports.Ltom;
-using AccountingSystem.Views.Reports.RCD;
 using System;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.Rcd;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {

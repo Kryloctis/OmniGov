@@ -5,7 +5,6 @@ using AccountingSystem.Views.Dashboard.Budget;
 using AccountingSystem.Views.Dashboard.Reports;
 using AccountingSystem.Views.Dashboard.Settings;
 using AccountingSystem.Views.Dashboard.Treasury;
-using AccountingSystem.Views.Reports.RCD;
 using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Drawing;

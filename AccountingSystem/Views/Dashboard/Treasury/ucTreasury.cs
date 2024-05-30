@@ -7,7 +7,6 @@ using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
-using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
@@ -26,6 +25,7 @@ using System;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using AccountingSystem.Views.Transactions.Assessment;
+using AccountingSystem.Views.Reports.Rcd;
 
 namespace AccountingSystem.Views.Dashboard.Treasury
 {
@@ -283,15 +283,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmBankDeposits().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void rcdTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmRcd().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

@@ -1,14 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
-using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RCD
+namespace AccountingSystem.Views.Reports.Rcd
 {
     public partial class frmRcd : Form
     {
@@ -22,6 +21,13 @@ namespace AccountingSystem.Views.Reports.RCD
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
             uc = ucRcd1;
             ucReport = ucRcdReport1;
+
+            //Removes tabs to tabcontrol
+            tabControl1.Padding = new Point(0, 0);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -61,8 +67,8 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 int index = dataGridView1.CurrentCell.RowIndex;
                 int rcdId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
-                ucReport.OnLoad(rcdId);
                 tabControl1.SelectedTab = tabPagePrint;
+                ucReport.OnLoad(rcdId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
