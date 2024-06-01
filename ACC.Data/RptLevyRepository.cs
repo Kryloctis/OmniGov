@@ -119,5 +119,16 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET real_properties_id = @real_properties_id, date_issued = @date_issued, updated_by = @updated_by WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public DataTable GetViewRecords(int rptId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_properties_id", DbType.Int32, rptId}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }

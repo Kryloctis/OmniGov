@@ -118,6 +118,7 @@
             btnLtom20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLtom20.UseVisualStyleBackColor = true;
+            btnLtom20.Click += btnLtom20_Click;
             // 
             // btnLtom17and19
             // 

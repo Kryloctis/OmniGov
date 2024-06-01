@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsBySearch(int rowLimit, string searchKey);
 
         Dictionary<string, string> GetViewRecordById(int Id);
+
+        DataTable GetViewRecords(int rptId);
     }
 }

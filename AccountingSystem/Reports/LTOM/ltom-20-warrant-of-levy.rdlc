@@ -150,7 +150,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.69928in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>2.10668in</Width>
             <ZIndex>2</ZIndex>
@@ -184,7 +183,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.97706in</Top>
-            <Left>0in</Left>
             <Height>0.4375in</Height>
             <Width>5.67511in</Width>
             <ZIndex>3</ZIndex>
@@ -218,7 +216,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>1.48239in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>4</ZIndex>
@@ -251,7 +248,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>1.74628in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>5</ZIndex>
@@ -284,7 +280,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>2.01017in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>6</ZIndex>
@@ -317,7 +312,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>2.27406in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>7</ZIndex>
@@ -350,7 +344,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>2.53795in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>8</ZIndex>
@@ -383,7 +376,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>2.80184in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>1.2409in</Width>
             <ZIndex>9</ZIndex>
@@ -600,9 +592,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramAssessedValue.Value</Value>
+                    <Value>=CDec(Parameters!paramAssessedValue.Value)</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -853,7 +846,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Left>0in</Left>
+            <Top>0in</Top>
             <Height>0.25in</Height>
             <Width>5.67511in</Width>
             <ZIndex>22</ZIndex>
@@ -888,7 +881,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.25484in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>5.67511in</Width>
             <ZIndex>23</ZIndex>
@@ -1948,29 +1940,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Issued this </Value>
+                    <Value>Issued this  </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>11pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramIssuedDay.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> day of </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>11pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramIssuedMonth.Value</Value>
+                    <Value>=CDate(Parameters!paramIssuedDate.Value).Day</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -1978,14 +1955,47 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>, </Value>
+                    <Value>  day of  </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>11pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramIssuedYear.Value</Value>
+                    <Value>=CDate(Parameters!paramIssuedDate.Value)</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <Format>MMMM</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <Format>MMMM</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>,  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=CDate(Parameters!paramIssuedDate.Value).Year</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -2362,19 +2372,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramIssuedDay">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramIssuedMonth">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramIssuedYear">
+    <ReportParameter Name="paramIssuedDate">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2393,6 +2391,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramLgu">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDeclaredOwners">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2432,17 +2436,7 @@
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramIssuedDay</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramIssuedMonth</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramIssuedYear</ParameterName>
+          <ParameterName>paramIssuedDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2458,6 +2452,11 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramLgu</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramDeclaredOwners</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
