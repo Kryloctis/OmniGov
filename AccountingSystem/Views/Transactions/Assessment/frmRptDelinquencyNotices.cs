@@ -222,18 +222,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
                 }
 
-                dataGridView1.DataSource = dataTable;
-                dataGridView1.Columns["delinquent_notice_id"].Visible = false;
-                dataGridView1.Columns["notice_type"].HeaderText = "Notice Type";
-                dataGridView1.Columns["notice_date"].HeaderText = "Notice Date";
-                dataGridView1.Columns["notice_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
-                dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
-                dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer Name";
-                dataGridView1.Columns["created_at"].Visible = false;
-                dataGridView1.Columns["created_by"].HeaderText = "Created By";
-                dataGridView1.Columns["updated_at"].Visible = false;
-                dataGridView1.Columns["updated_by"].Visible = false;
-
+                HelperLoadRecords.DgvRptDelinquencyNotices(dataGridView1, dataTable);
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
                 lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
             }
