@@ -200,20 +200,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
                     lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
                 }
 
-                dataGridView1.DataSource = dataTable;
-                dataGridView1.Columns["rpt_levy_id"].Visible = false;
-                dataGridView1.Columns["complete_arp_no"].HeaderText = "ARP No.";
-                dataGridView1.Columns["property_kind"].HeaderText = "Property Kind";
-                dataGridView1.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dataGridView1.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dataGridView1.Columns["date_issued"].HeaderText = "Date Issued";
-                dataGridView1.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
-                dataGridView1.Columns["taxpayers_name"].HeaderText = "Taxpayer";
-                dataGridView1.Columns["created_at"].Visible = false;
-                dataGridView1.Columns["created_by"].HeaderText = "Created By";
-                dataGridView1.Columns["updated_at"].Visible = false;
-                dataGridView1.Columns["updated_by"].Visible = false;
-
+                HelperLoadRecords.DgvWarrantLevy(dataGridView1, dataTable);
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
                 lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
             }

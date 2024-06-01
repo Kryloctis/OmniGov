@@ -2104,5 +2104,22 @@ namespace AccountingSystem
             dataGridView.Columns["updated_at"].Visible = false;
             dataGridView.Columns["updated_by"].Visible = false;
         }
+
+        internal static void DgvWarrantLevy(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["rpt_levy_id"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["date_issued"].HeaderText = "Date Issued";
+            dataGridView.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Taxpayer";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_by"].HeaderText = "Created By";
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["updated_by"].Visible = false;
+        }
     }
 }
