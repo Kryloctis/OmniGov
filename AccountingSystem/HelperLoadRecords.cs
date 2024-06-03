@@ -2089,5 +2089,37 @@ namespace AccountingSystem
             dataGridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
+
+        internal static void DgvRptDelinquencyNotices(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["delinquent_notice_id"].Visible = false;
+            dataGridView.Columns["notice_type"].HeaderText = "Notice Type";
+            dataGridView.Columns["notice_date"].HeaderText = "Notice Date";
+            dataGridView.Columns["notice_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Taxpayer Name";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_by"].HeaderText = "Created By";
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["updated_by"].Visible = false;
+        }
+
+        internal static void DgvWarrantLevy(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["rpt_levy_id"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["date_issued"].HeaderText = "Date Issued";
+            dataGridView.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Taxpayer";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_by"].HeaderText = "Created By";
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["updated_by"].Visible = false;
+        }
     }
 }

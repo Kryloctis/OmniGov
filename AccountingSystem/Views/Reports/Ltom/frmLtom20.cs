@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Interfaces;
 using AccountingSystem.DataSets;
 using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -6,16 +7,19 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
 {
-    public partial class frmLtom17to19 : Form
+    public partial class frmLtom20 : Form
     {
-        private DataTable dtDelinquentNotice;
+        private DataTable dtRpt;
 
-        public frmLtom17to19()
+        public frmLtom20()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -24,76 +28,46 @@ namespace AccountingSystem.Views.Reports.Ltom
             txtRpt.AutoCompleteMode = AutoCompleteMode.Suggest;
         }
 
-        private void frmLtom17to19_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRealProperties();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void LoadRealProperties()
         {
-            dtDelinquentNotice = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
 
-            var autoCompleteSrc = dtDelinquentNotice.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
         }
 
-        private void LoadDelinquencyNoticeRecords()
+        private void LoadIssuedWarrantLevy()
         {
-            var rptId = dtDelinquentNotice.AsEnumerable()
+            var rptId = dtRpt.AsEnumerable()
                                .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
                                .Select(row => row["real_property_id"])
                                .FirstOrDefault();
 
-            var checkedRadioButton = flwLayoutType.Controls
-                                      .OfType<RadioButton>()
-                                      .FirstOrDefault(rb => rb.Checked);
-            string noticeType;
-
-            switch (checkedRadioButton.Name)
-            {
-                case "rad1stNotice":
-                    noticeType = "1st Notice";
-                    break;
-
-                case "rad2ndNotice":
-                    noticeType = "2nd Notice";
-                    break;
-
-                case "rad3rdNotice":
-                    noticeType = "3rd Notice";
-                    break;
-
-                default:
-                    noticeType = string.Empty;
-                    break;
-            }
-
             if (rptId is not null)
             {
-                var dtNoticeDelinquencies = AccFactory.DelinquentNoticeRepository().GetViewRecordsByRptId(Convert.ToInt32(rptId), noticeType);
-                cmbxDelinquentNoticeRecord.DataSource = dtNoticeDelinquencies;
-                cmbxDelinquentNoticeRecord.ValueMember = "delinquent_notice_id";
-                cmbxDelinquentNoticeRecord.DisplayMember = "notice_date";
+                var dtNoticeDelinquencies = AccFactory.RptLevyRepository().GetViewRecords(Convert.ToInt32(rptId));
+                cmbxWarrantLevy.DataSource = dtNoticeDelinquencies;
+                cmbxWarrantLevy.ValueMember = "rpt_levy_id";
+                cmbxWarrantLevy.DisplayMember = "date_issued";
             }
-            else { cmbxDelinquentNoticeRecord.SelectedIndex = -1; }
+        }
+
+        private void frmLtom20_Load(object sender, EventArgs e)
+        {
+            LoadRealProperties();
         }
 
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
             {
-                pbReport.Value = 0;
-                btnRunReport.Enabled = false;
+                pbReport.Value = 0; btnRunReport.Enabled = false;
                 btnRunReport.Text = "Generating Report";
-                var rptDelinquencyNoticeId = cmbxDelinquentNoticeRecord.SelectedValue;
-                backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
+                var warrantLevyId = cmbxWarrantLevy.SelectedValue;
+                backgroundWorker1.RunWorkerAsync(warrantLevyId);
             }
         }
 
@@ -117,18 +91,18 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                var rptDelinquencyNoticeId = e.Argument;
+                var warrantLevyId = e.Argument;
 
-                if (rptDelinquencyNoticeId is null)
+                if (warrantLevyId is null)
                 {
                     backgroundWorker1.CancelAsync();
                     e.Cancel = true;
                     return;
                 }
 
-                var dictDelinquentNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordById(Convert.ToInt32(rptDelinquencyNoticeId));
-                var noticeDate = Convert.ToDateTime(dictDelinquentNotice["notice_date"]);
-                var completeArpNo = dictDelinquentNotice["complete_arp_no"];
+                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewRecordById(Convert.ToInt32(warrantLevyId));
+                var noticeDate = Convert.ToDateTime(dictWarrantLevy["date_issued"]);
+                var completeArpNo = dictWarrantLevy["complete_arp_no"];
 
                 var dtLtom17to19 = new dsTreasury.dtLtom17_19DataTable().Clone();
                 var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
@@ -170,9 +144,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
-                e.Result = (dtLtom17to19, dictDelinquentNotice);
+                e.Result = (dtLtom17to19, dictWarrantLevy);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -198,16 +172,12 @@ namespace AccountingSystem.Views.Reports.Ltom
                 if (result.dataTable.Rows.Count < 1)
                     pbReport.Value = 100;
 
-                var checkedRadioButton = flwLayoutType.Controls
-                                     .OfType<RadioButton>()
-                                     .FirstOrDefault(rb => rb.Checked);
-                string reportPath;
                 var lguDetails = Helper.LGUDetails();
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
+
                 var parameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLgu", lguDetails["municipality"]),
-                    new ReportParameter("paramNoticeDate", result.dictDelinquentNotice["notice_date"]),
                     new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
                     new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
@@ -215,31 +185,13 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramTctNo", string.Empty),
                     new ReportParameter("paramPropertyLocation", propertyLocation),
                     new ReportParameter("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramAssessedValue", result.dictDelinquentNotice["assessed_value"])
+                    new ReportParameter("paramAssessedValue", result.dictDelinquentNotice["assessed_value"]),
+                    new ReportParameter("paramIssuedDate", result.dictDelinquentNotice["date_issued"])
                 };
-
-                switch (checkedRadioButton.Name)
-                {
-                    case "rad1stNotice":
-                        reportPath = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
-                        break;
-
-                    case "rad2ndNotice":
-                        reportPath = "ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc";
-                        break;
-
-                    case "rad3rdNotice":
-                        reportPath = "ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc";
-                        break;
-
-                    default:
-                        reportPath = string.Empty;
-                        break;
-                }
 
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\{reportPath}";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-20-warrant-of-levy.rdlc";
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtLtom17_19", result.dataTable));
                 localReport.SetParameters(parameters);
@@ -251,47 +203,16 @@ namespace AccountingSystem.Views.Reports.Ltom
                 btnRunReport.Text = "Run Report";
                 btnRunReport.Enabled = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void rad1stNotice_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadDelinquencyNoticeRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void rad2ndNotice_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadDelinquencyNoticeRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void rad3rdNotice_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadDelinquencyNoticeRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void txtRpt_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                LoadDelinquencyNoticeRecords();
+                LoadIssuedWarrantLevy();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)

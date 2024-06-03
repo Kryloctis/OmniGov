@@ -34,7 +34,8 @@
             btnLtom21 = new System.Windows.Forms.Button();
             btnLtom20 = new System.Windows.Forms.Button();
             btnLtom17and19 = new System.Windows.Forms.Button();
-            button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
+            btnRcd = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
@@ -61,7 +62,8 @@
             panel1.Controls.Add(btnLtom21);
             panel1.Controls.Add(btnLtom20);
             panel1.Controls.Add(btnLtom17and19);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnRcd);
             panel1.Controls.Add(label1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
@@ -76,7 +78,7 @@
             btnLtom22.FlatAppearance.BorderSize = 0;
             btnLtom22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom22.Location = new System.Drawing.Point(0, 162);
+            btnLtom22.Location = new System.Drawing.Point(0, 195);
             btnLtom22.Name = "btnLtom22";
             btnLtom22.Size = new System.Drawing.Size(389, 33);
             btnLtom22.TabIndex = 33;
@@ -92,7 +94,7 @@
             btnLtom21.FlatAppearance.BorderSize = 0;
             btnLtom21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom21.Location = new System.Drawing.Point(0, 129);
+            btnLtom21.Location = new System.Drawing.Point(0, 162);
             btnLtom21.Name = "btnLtom21";
             btnLtom21.Size = new System.Drawing.Size(389, 33);
             btnLtom21.TabIndex = 31;
@@ -108,7 +110,7 @@
             btnLtom20.FlatAppearance.BorderSize = 0;
             btnLtom20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom20.Location = new System.Drawing.Point(0, 96);
+            btnLtom20.Location = new System.Drawing.Point(0, 129);
             btnLtom20.Name = "btnLtom20";
             btnLtom20.Size = new System.Drawing.Size(389, 33);
             btnLtom20.TabIndex = 32;
@@ -116,6 +118,7 @@
             btnLtom20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLtom20.UseVisualStyleBackColor = true;
+            btnLtom20.Click += btnLtom20_Click;
             // 
             // btnLtom17and19
             // 
@@ -124,7 +127,7 @@
             btnLtom17and19.FlatAppearance.BorderSize = 0;
             btnLtom17and19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom17and19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom17and19.Location = new System.Drawing.Point(0, 63);
+            btnLtom17and19.Location = new System.Drawing.Point(0, 96);
             btnLtom17and19.Name = "btnLtom17and19";
             btnLtom17and19.Size = new System.Drawing.Size(389, 33);
             btnLtom17and19.TabIndex = 28;
@@ -133,21 +136,38 @@
             btnLtom17and19.UseVisualStyleBackColor = true;
             btnLtom17and19.Click += btnLtom17and19_Click;
             // 
-            // button1
+            // button2
             // 
-            button1.AutoEllipsis = true;
-            button1.Dock = System.Windows.Forms.DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.Location = new System.Drawing.Point(0, 30);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(389, 33);
-            button1.TabIndex = 35;
-            button1.Text = "LTOM Form No. 16 - Notice of Delinquency in the Payment of Real Property Tax";
-            button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            button2.AutoEllipsis = true;
+            button2.Dock = System.Windows.Forms.DockStyle.Top;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            button2.Location = new System.Drawing.Point(0, 63);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(389, 33);
+            button2.TabIndex = 36;
+            button2.Text = "LTOM Form No. 16 - Notice of Delinquency in the Payment of Real Property Tax";
+            button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // btnRcd
+            // 
+            btnRcd.AutoEllipsis = true;
+            btnRcd.Dock = System.Windows.Forms.DockStyle.Top;
+            btnRcd.FlatAppearance.BorderSize = 0;
+            btnRcd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnRcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRcd.Location = new System.Drawing.Point(0, 30);
+            btnRcd.Name = "btnRcd";
+            btnRcd.Size = new System.Drawing.Size(389, 33);
+            btnRcd.TabIndex = 37;
+            btnRcd.Text = "Report of Collections Deposits (RCD)";
+            btnRcd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRcd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRcd.UseVisualStyleBackColor = true;
+            btnRcd.Click += btnRcd_Click;
             // 
             // label1
             // 
@@ -183,6 +203,7 @@
         private System.Windows.Forms.Button btnLtom20;
         private System.Windows.Forms.Button btnLtom17and19;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRcd;
     }
 }

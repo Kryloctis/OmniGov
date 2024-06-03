@@ -1,4 +1,5 @@
-﻿namespace AccountingSystem.Views.Reports.RCD
+﻿using AccountingSystem.Views.Reports.Rcd;
+namespace AccountingSystem.Views.Reports.Rcd
 {
     partial class frmRcd
     {
@@ -28,8 +29,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -49,9 +50,6 @@
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             btnPrint = new System.Windows.Forms.ToolStripButton();
             tabPageForm = new System.Windows.Forms.TabPage();
-            panel3 = new System.Windows.Forms.Panel();
-            btnSave = new System.Windows.Forms.Button();
-            ucRcd1 = new ucRcd();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
             tabPagePrint = new System.Windows.Forms.TabPage();
@@ -61,6 +59,11 @@
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            panel3 = new System.Windows.Forms.Panel();
+            statusStrip3 = new System.Windows.Forms.StatusStrip();
+            panel4 = new System.Windows.Forms.Panel();
+            btnSave = new System.Windows.Forms.Button();
+            ucRcd1 = new ucRcd();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -68,29 +71,26 @@
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabPageForm.SuspendLayout();
-            panel3.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePrint.SuspendLayout();
             panel1.SuspendLayout();
             toolStrip3.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
-            tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             tabControl1.Controls.Add(tabPageList);
             tabControl1.Controls.Add(tabPageForm);
             tabControl1.Controls.Add(tabPagePrint);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            tabControl1.ItemSize = new System.Drawing.Size(0, 1);
+            tabControl1.ItemSize = new System.Drawing.Size(93, 20);
             tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Margin = new System.Windows.Forms.Padding(0);
             tabControl1.Name = "tabControl1";
-            tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(719, 620);
-            tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            tabControl1.Size = new System.Drawing.Size(840, 428);
             tabControl1.TabIndex = 8;
             // 
             // tabPageList
@@ -100,48 +100,48 @@
             tabPageList.Controls.Add(progressBar1);
             tabPageList.Controls.Add(panel2);
             tabPageList.Controls.Add(toolStrip1);
-            tabPageList.Location = new System.Drawing.Point(4, 5);
+            tabPageList.Location = new System.Drawing.Point(4, 24);
             tabPageList.Margin = new System.Windows.Forms.Padding(0);
             tabPageList.Name = "tabPageList";
-            tabPageList.Size = new System.Drawing.Size(711, 611);
+            tabPageList.Size = new System.Drawing.Size(832, 400);
             tabPageList.TabIndex = 0;
             tabPageList.Text = "List";
             tabPageList.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle12;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(0, 70);
             dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(711, 519);
+            dataGridView1.Size = new System.Drawing.Size(832, 308);
             dataGridView1.TabIndex = 1;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRowCount });
-            statusStrip1.Location = new System.Drawing.Point(0, 589);
+            statusStrip1.Location = new System.Drawing.Point(0, 378);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(711, 22);
+            statusStrip1.Size = new System.Drawing.Size(832, 22);
             statusStrip1.TabIndex = 10;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -163,7 +163,7 @@
             progressBar1.Location = new System.Drawing.Point(0, 65);
             progressBar1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(711, 5);
+            progressBar1.Size = new System.Drawing.Size(832, 5);
             progressBar1.TabIndex = 0;
             // 
             // panel2
@@ -173,7 +173,7 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(711, 30);
+            panel2.Size = new System.Drawing.Size(832, 30);
             panel2.TabIndex = 3;
             // 
             // cmbxRowFilter
@@ -205,7 +205,7 @@
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(711, 35);
+            toolStrip1.Size = new System.Drawing.Size(832, 35);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -270,44 +270,15 @@
             // tabPageForm
             // 
             tabPageForm.Controls.Add(panel3);
-            tabPageForm.Controls.Add(ucRcd1);
+            tabPageForm.Controls.Add(statusStrip3);
             tabPageForm.Controls.Add(toolStrip2);
-            tabPageForm.Location = new System.Drawing.Point(4, 5);
+            tabPageForm.Location = new System.Drawing.Point(4, 24);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageForm.Name = "tabPageForm";
-            tabPageForm.Size = new System.Drawing.Size(711, 611);
+            tabPageForm.Size = new System.Drawing.Size(832, 400);
             tabPageForm.TabIndex = 1;
             tabPageForm.Text = "Form";
             tabPageForm.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(btnSave);
-            panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            panel3.Location = new System.Drawing.Point(0, 503);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(711, 30);
-            panel3.TabIndex = 13;
-            // 
-            // btnSave
-            // 
-            btnSave.Location = new System.Drawing.Point(543, 3);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(150, 23);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "Save (Ctrl + S)";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // ucRcd1
-            // 
-            ucRcd1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucRcd1.Location = new System.Drawing.Point(0, 35);
-            ucRcd1.Margin = new System.Windows.Forms.Padding(0);
-            ucRcd1.Name = "ucRcd1";
-            ucRcd1.Size = new System.Drawing.Size(711, 468);
-            ucRcd1.TabIndex = 11;
             // 
             // toolStrip2
             // 
@@ -319,7 +290,7 @@
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(711, 35);
+            toolStrip2.Size = new System.Drawing.Size(832, 35);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -336,10 +307,10 @@
             // 
             tabPagePrint.Controls.Add(panel1);
             tabPagePrint.Controls.Add(toolStrip3);
-            tabPagePrint.Location = new System.Drawing.Point(4, 5);
+            tabPagePrint.Location = new System.Drawing.Point(4, 24);
             tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
             tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(711, 611);
+            tabPagePrint.Size = new System.Drawing.Size(832, 400);
             tabPagePrint.TabIndex = 2;
             tabPagePrint.Text = "tabPagePrint";
             tabPagePrint.UseVisualStyleBackColor = true;
@@ -352,7 +323,7 @@
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Margin = new System.Windows.Forms.Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(711, 576);
+            panel1.Size = new System.Drawing.Size(832, 365);
             panel1.TabIndex = 1;
             // 
             // ucRcdReport1
@@ -360,14 +331,14 @@
             ucRcdReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRcdReport1.Location = new System.Drawing.Point(0, 0);
             ucRcdReport1.Name = "ucRcdReport1";
-            ucRcdReport1.Size = new System.Drawing.Size(711, 554);
+            ucRcdReport1.Size = new System.Drawing.Size(832, 343);
             ucRcdReport1.TabIndex = 3;
             // 
             // statusStrip2
             // 
-            statusStrip2.Location = new System.Drawing.Point(0, 554);
+            statusStrip2.Location = new System.Drawing.Point(0, 343);
             statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(711, 22);
+            statusStrip2.Size = new System.Drawing.Size(832, 22);
             statusStrip2.TabIndex = 2;
             statusStrip2.Text = "statusStrip2";
             // 
@@ -380,7 +351,7 @@
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(711, 35);
+            toolStrip3.Size = new System.Drawing.Size(832, 35);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
             // 
@@ -401,17 +372,70 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
+            // panel3
+            // 
+            panel3.AutoScroll = true;
+            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(ucRcd1);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 35);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(4);
+            panel3.Size = new System.Drawing.Size(832, 343);
+            panel3.TabIndex = 1;
+            // 
+            // statusStrip3
+            // 
+            statusStrip3.Location = new System.Drawing.Point(0, 378);
+            statusStrip3.Name = "statusStrip3";
+            statusStrip3.Size = new System.Drawing.Size(832, 22);
+            statusStrip3.TabIndex = 2;
+            statusStrip3.Text = "statusStrip3";
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(btnSave);
+            panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            panel4.Location = new System.Drawing.Point(4, 469);
+            panel4.Name = "panel4";
+            panel4.Padding = new System.Windows.Forms.Padding(4);
+            panel4.Size = new System.Drawing.Size(807, 77);
+            panel4.TabIndex = 15;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new System.Drawing.Point(650, 7);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(150, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // ucRcd1
+            // 
+            ucRcd1.Dock = System.Windows.Forms.DockStyle.Top;
+            ucRcd1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucRcd1.Location = new System.Drawing.Point(4, 4);
+            ucRcd1.Margin = new System.Windows.Forms.Padding(0);
+            ucRcd1.Name = "ucRcd1";
+            ucRcd1.Size = new System.Drawing.Size(807, 465);
+            ucRcd1.TabIndex = 14;
+            // 
             // frmRcd
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(719, 620);
+            ClientSize = new System.Drawing.Size(840, 428);
             Controls.Add(tabControl1);
             Font = new System.Drawing.Font("Segoe UI", 9F);
             KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(856, 467);
             Name = "frmRcd";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Reports > Report of Collections and Deposits";
@@ -428,7 +452,6 @@
             toolStrip1.PerformLayout();
             tabPageForm.ResumeLayout(false);
             tabPageForm.PerformLayout();
-            panel3.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             tabPagePrint.ResumeLayout(false);
@@ -437,6 +460,8 @@
             panel1.PerformLayout();
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -455,7 +480,6 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnPrint;
-        private ucRcd ucRcd1;
         private System.Windows.Forms.TabPage tabPagePrint;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
@@ -464,13 +488,16 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox cmbxRowFilter;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRowCount;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private ucRcdReport ucRcdReport1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnSave;
+        private ucRcd ucRcd1;
+        private System.Windows.Forms.StatusStrip statusStrip3;
     }
 }

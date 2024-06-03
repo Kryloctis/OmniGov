@@ -36,11 +36,6 @@ namespace ACC.Data
             this.rptPreviousAssessment = rptPreviousAssessment;
         }
 
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(List<RealPropertiesModel> entityList)
         {
             using (var scope = new TransactionScope())

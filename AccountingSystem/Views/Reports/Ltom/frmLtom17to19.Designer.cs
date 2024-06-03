@@ -233,7 +233,7 @@
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(785, 467);
+            MinimumSize = new System.Drawing.Size(856, 467);
             Name = "frmLtom17to19";
             ShowIcon = false;
             ShowInTaskbar = false;

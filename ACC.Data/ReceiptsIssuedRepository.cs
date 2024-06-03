@@ -369,7 +369,7 @@ namespace ACC.Data
         }
 
         public Dictionary<string, string> GetViewRcdRecord(AccountableFormsModel accountableFormsModel, UsersModel usersModel)
-        {   
+        {
             var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]

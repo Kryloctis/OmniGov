@@ -210,10 +210,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.02408in</Top>
+            <Top>1.96852in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -243,10 +243,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.27408in</Top>
+            <Top>2.23241in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -276,10 +276,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.52408in</Top>
+            <Top>2.4963in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -309,10 +309,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.77408in</Top>
+            <Top>2.76019in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -345,7 +345,7 @@
             <Top>3.02408in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -375,10 +375,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.30186in</Top>
+            <Top>3.28797in</Top>
             <Left>0.01017in</Left>
             <Height>0.25in</Height>
-            <Width>1.36932in</Width>
+            <Width>1.2409in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -401,7 +401,7 @@
                     <Value>Please settle the delinquency within ten (10) days from the receipt of this notice.</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>11pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -411,7 +411,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.79144in</Top>
+            <Top>4.84659in</Top>
             <Left>0.35959in</Left>
             <Height>0.25in</Height>
             <Width>5.32041in</Width>
@@ -447,8 +447,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>14.89068cm</Top>
-            <Left>8.12951cm</Left>
+            <Top>14.92117cm</Top>
+            <Left>8.10367cm</Left>
             <Height>0.6cm</Height>
             <Width>6.35881cm</Width>
             <ZIndex>11</ZIndex>
@@ -486,8 +486,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>14.22013cm</Top>
-            <Left>8.12951cm</Left>
+            <Top>14.25062cm</Top>
+            <Left>8.10367cm</Left>
             <Height>0.6cm</Height>
             <Width>6.32353cm</Width>
             <ZIndex>12</ZIndex>
@@ -520,8 +520,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>5.27903in</Top>
-            <Left>3.20059in</Left>
+            <Top>5.29104in</Top>
+            <Left>3.19042in</Left>
             <Height>0.25in</Height>
             <Width>1.06849in</Width>
             <ZIndex>13</ZIndex>
@@ -543,12 +543,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramDeclaredOwners.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -561,10 +555,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.02408in</Top>
-            <Left>1.39338in</Left>
+            <Top>1.96852in</Top>
+            <Left>1.37485in</Left>
             <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Width>3.48669in</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -588,12 +582,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramTaxDecNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -606,10 +594,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.27408in</Top>
-            <Left>1.39338in</Left>
+            <Top>2.23241in</Top>
+            <Left>1.37485in</Left>
             <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Width>3.48669in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -633,12 +621,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramTctNo.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -651,10 +633,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.52408in</Top>
-            <Left>1.39338in</Left>
+            <Top>2.4963in</Top>
+            <Left>1.37485in</Left>
             <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Width>3.48669in</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -678,12 +660,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramPropertyLocation.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -696,10 +672,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.77408in</Top>
-            <Left>1.39338in</Left>
-            <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Top>2.76019in</Top>
+            <Left>1.37485in</Left>
+            <Height>0.2516in</Height>
+            <Width>3.48669in</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -723,12 +699,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramPropertyKind.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -742,9 +712,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>3.02408in</Top>
-            <Left>1.39338in</Left>
+            <Left>1.37485in</Left>
             <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Width>3.48669in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -768,12 +738,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> : </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=Parameters!paramAssessedValue.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
@@ -786,10 +750,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.30186in</Top>
-            <Left>1.39338in</Left>
+            <Top>3.28797in</Top>
+            <Left>1.37485in</Left>
             <Height>0.25in</Height>
-            <Width>4.27644in</Width>
+            <Width>3.48669in</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -895,7 +859,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -933,7 +896,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1006,7 +968,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1042,7 +1003,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1078,7 +1038,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1114,7 +1073,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1150,7 +1108,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1186,7 +1143,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1757,7 +1713,7 @@
             <Top>3.63519in</Top>
             <Left>0.01017in</Left>
             <Height>1.14196in</Height>
-            <Width>5.68in</Width>
+            <Width>5.67997in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1837,8 +1793,208 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>1.97013in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.2484in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox33">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.23241in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.2516in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.4963in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.2516in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox35">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.76019in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.25161in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox43">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.02569in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.25in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox45">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.28958in</Top>
+            <Left>1.26495in</Left>
+            <Height>0.24839in</Height>
+            <Width>0.09601in</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>6.09869in</Height>
+        <Height>6.1107in</Height>
         <Style />
       </Body>
       <Width>5.70406in</Width>
@@ -1968,7 +2124,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Left>0in</Left>
               <Height>0.44056in</Height>
               <Width>3.14607in</Width>
               <ZIndex>2</ZIndex>

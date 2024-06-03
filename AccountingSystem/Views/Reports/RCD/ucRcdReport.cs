@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RCD
+namespace AccountingSystem.Views.Reports.Rcd
 {
     public partial class ucRcdReport : UserControl
     {
@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 int rcdId = (int)e.Argument;
-
                 var rcdModel = new RcdModel() { Id = rcdId };
                 var rcdCollectionsModel = new RcdCollectionsModel() { RcdModel = rcdModel };
                 var rcdDepositsModel = new RcdDepositsModel() { RcdModel = rcdModel };
@@ -54,14 +53,13 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 var dtRcdAccForms = new dsTreasury.dtRcdAccFormsDataTable();
 
-                int totalProgressCount = dbRcdCollections.Rows.Count + dbRcdDeposits.Rows.Count;
+                int totalProgressCount = (dbRcdCollections.Rows.Count * 2) + dbRcdDeposits.Rows.Count;
                 int progressCount = 0;
 
                 //Collections
                 foreach (DataRow dataRow in dbRcdCollections.Rows)
                 {
                     var rcdCollectionsNewRow = dtRcdCollections.NewRow();
-                    var rcdAccFormsNewRow = dtRcdAccForms.NewRow();
                     string accForm = $"{dataRow["acc_form_no"]} - {dataRow["acc_form_desc"]}";
                     decimal collectedReceiptFrom = Convert.ToInt32(dataRow["receipt_from"]);
                     decimal collectedReceiptTo = Convert.ToInt32(dataRow["receipt_to"]);
@@ -72,20 +70,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     rcdCollectionsNewRow["receipt_to"] = collectedReceiptTo;
                     rcdCollectionsNewRow["amount"] = totalCollection;
 
-                    var accFormsModel = new AccountableFormsModel() { Id = Convert.ToInt32(dataRow["acc_form_id"]) };
-                    var usersModel = new UsersModel() { Id = Convert.ToInt32(dataRow["created_by"]) };
-                    var dictRcdAccForms = AccFactory.ReceiptsIssuedRepository().GetViewRcdRecord(accFormsModel, usersModel);
-
-                    rcdAccFormsNewRow["acc_form"] = accForm;
-                    rcdAccFormsNewRow["beg_from"] = dictRcdAccForms["receipt_issued_from"];
-                    rcdAccFormsNewRow["beg_to"] = dictRcdAccForms["receipt_issued_to"];
-                    rcdAccFormsNewRow["issued_from"] = collectedReceiptFrom;
-                    rcdAccFormsNewRow["issued_to"] = collectedReceiptTo;
-                    rcdAccFormsNewRow["end_from"] = collectedReceiptTo + 1;
-                    rcdAccFormsNewRow["end_to"] = dictRcdAccForms["receipt_issued_to"];
-
                     dtRcdCollections.Rows.Add(rcdCollectionsNewRow);
-                    dtRcdAccForms.Rows.Add(rcdAccFormsNewRow);
+
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
@@ -104,9 +90,33 @@ namespace AccountingSystem.Views.Reports.RCD
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
+                foreach (DataRow dataRow in dbRcdCollections.Rows)
+                {
+                    var accFormsModel = new AccountableFormsModel() { Id = Convert.ToInt32(dataRow["acc_form_id"]) };
+                    var usersModel = new UsersModel() { Id = Convert.ToInt32(dataRow["created_by"]) };
+                    var dictRcdAccForms = AccFactory.ReceiptsIssuedRepository().GetViewRcdRecord(accFormsModel, usersModel);
+                    string accForm = $"{dataRow["acc_form_no"]} - {dataRow["acc_form_desc"]}";
+                    decimal collectedReceiptFrom = Convert.ToInt32(dataRow["receipt_from"]);
+                    decimal collectedReceiptTo = Convert.ToInt32(dataRow["receipt_to"]);
+                    decimal totalCollection = Convert.ToDecimal(dataRow["total_amount"]);
+
+                    var rcdAccFormsNewRow = dtRcdAccForms.NewRow();
+                    rcdAccFormsNewRow["acc_form"] = accForm;
+                    rcdAccFormsNewRow["beg_from"] = dictRcdAccForms["receipt_issued_from"];
+                    rcdAccFormsNewRow["beg_to"] = dictRcdAccForms["receipt_issued_to"];
+                    rcdAccFormsNewRow["issued_from"] = collectedReceiptFrom;
+                    rcdAccFormsNewRow["issued_to"] = collectedReceiptTo;
+                    rcdAccFormsNewRow["end_from"] = collectedReceiptTo + 1;
+                    rcdAccFormsNewRow["end_to"] = dictRcdAccForms["receipt_issued_to"];
+
+                    dtRcdAccForms.Rows.Add(rcdAccFormsNewRow);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
                 e.Result = (dtRcdCollections, dtRcdDeposits, dtRcdAccForms);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -150,7 +160,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 report.DataSources.Add(new ReportDataSource("dtRcdChecks", new DataTable()));
                 report.SetParameters(reportParameters);
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
             }
