@@ -1,38 +1,13 @@
 ﻿Local Finance System
-Version 1.2.0
+Version 1.0.6.0
 
 Updates:
 
-> Implemented Payment and Receipt Printing Modules:
-
-
-> Overall
-	~ Fixed and enhanced UI and record load of Collecting Officers, Banks, Bank Accounts, Accountable Form, 
-	  Discounts, Penalties, TaxRates, Taxpayers, Fees & Charges.
-	
-	~ Added new module 'Registry'.
-
-> Treasury
-	~ Can generates reports: 
-		Certified List of Real Property Tax Deliquencies (Consolidated Real Property Tax Delinquencies)
-		Real Property Tax Dues and Payments (Tax Due Bill Report)
-		List of Real Property Delinquencies (List of Delinquent Accounts.)
-		Real Property Tax Statement of Account
-	
-	~ Added payment history module
-
-	~ Implemented payment and printing receipt module:
-		AF 56 - Real Property Tax Receipt
-		AF51 & 57
-		AF52 Certificate of Cattle Transfer of Cattle Ownership
-		AF53 Certificate of Cattle Ownership
-		AF54 Marriage License
-		AF58 Burial Permit
-
-	~ Fixed and enhanced for more optimal use of posting of assessments.
-
-
-> Help > About Real Property Management App
-	~ Added version indicator and about the app module.
-
+- All new user interface and user experience!
+- Implemented recording of real property delinquency notices.
+- Implemented recording of warrants of levy.
+- Improved the Record of Collections Deposits report.
+- Implemented the LTOM Form No. 17 Notice of Real Property Delinquencies (First Notice) report.
+- Implemented the LTOM Form No. 18 Notice of Real Property Delinquencies (Second Notice) report.
+- Implemented the LTOM Form No. 17 Notice of Real Property Delinquencies (Final Notice) report.
 		
