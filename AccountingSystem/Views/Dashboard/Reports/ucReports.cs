@@ -4,6 +4,11 @@ using System.Windows.Forms;
 using AccountingSystem.Views.Reports.Rcd;
 using AccountingSystem.Views.Reports.Saaob;
 using AccountingSystem.Views.Reports.Saaobb;
+using AccountingSystem.Views.Reports.Journals;
+using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Reports.TrialBalance;
+using AccountingSystem.Views.Reports.Financial_Statements;
+using System.Collections.Generic;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -26,9 +31,57 @@ namespace AccountingSystem.Views.Dashboard.Reports
 
             if (!Helper.HasPermission("Report > SAAOB"))
                 btnSaaob.Enabled = false;
-            
-            if(!Helper.HasPermission("Report > SAAOBB"))
+
+            if (!Helper.HasPermission("Report > SAAOBB"))
                 btnSaaobb.Enabled = false;
+
+            var journalReportPermissions = new List<string>
+            {
+                "Report > General Journal",
+                "Report > Cash Receipts Journal",
+                "Report > Procurement Received Journal",
+                "Report > Cash Disbursements Journal",
+                "Report > Check Disbursements Journal",
+                "Report > Authority to Debit Account Disbursements Journal",
+            };
+
+            var ledgerReportPermissions = new List<string>
+            {
+                "Report > General Ledger",
+                "Report > Subsidiary Ledger",
+                "Report > Summary Subsidiary Ledger",
+                "Report > Transaction Log",
+            };
+
+            var trialBalanceReportPermissions = new List<string>
+            {
+                "Report > Pre Trial Balance",
+                "Report > Post Trial Balance",
+            };
+
+            var financialStatementsReportPermissions = new List<string>
+            {
+                "Report > Statement of Financial Position",
+                "Report > Statement of Financial Performance",
+                "Report > Statement of Changes in Net Assets Equity",
+                "Report > Statement of Cash Flows",
+            };
+
+            var validateJournals = new List<bool>();
+            journalReportPermissions.ForEach(x => { validateJournals.Add(!Helper.HasPermission(x)); });
+            btnJournals.Enabled = validateJournals.Contains(false);
+
+            var validateLedgers = new List<bool>();
+            ledgerReportPermissions.ForEach(x => { validateLedgers.Add(!Helper.HasPermission(x)); });
+            btnLedgers.Enabled = validateLedgers.Contains(false);
+
+            var validateTrialBalance = new List<bool>();
+            trialBalanceReportPermissions.ForEach(x => { validateTrialBalance.Add(!Helper.HasPermission(x)); });
+            btnTrialBalance.Enabled = validateTrialBalance.Contains(false);
+
+            var validateFinancialStatements = new List<bool>();
+            financialStatementsReportPermissions.ForEach(x => { validateFinancialStatements.Add(!Helper.HasPermission(x)); });
+            btnFs.Enabled = validateFinancialStatements.Contains(false);
         }
 
         private void btnLtom17and19_Click(object sender, EventArgs e)
@@ -73,6 +126,46 @@ namespace AccountingSystem.Views.Dashboard.Reports
             try
             {
                 _ = new frmSaaobb().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void btnJournals_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmJournalReports().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLedgers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLedgers().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnTrialBalance_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmTrialBalance().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnFs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmFinancialStatements().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
