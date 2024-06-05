@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsTreasury">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>5bd28504-7b6e-4d98-ad9d-c4461c35bda8</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsLtom30">
+      <Query>
+        <DataSourceName>dsTreasury</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="tax_year">
+          <DataField>tax_year</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="assessed_value">
+          <DataField>assessed_value</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="basic_tax">
+          <DataField>basic_tax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="basic_penalty">
+          <DataField>basic_penalty</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sef_tax">
+          <DataField>sef_tax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sef_penalty">
+          <DataField>sef_penalty</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="expenses_of_sale">
+          <DataField>expenses_of_sale</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="total_amount">
+          <DataField>total_amount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Home\OneDrive\Desktop\LFS\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
+        <rd:TableName>dtLtom29</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -46,7 +105,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramPlaceOfWhereAuctionWasConducted.Value</Value>
+                    <Value>=Parameters!paramPlaceOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -67,7 +126,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.52132in</Top>
+            <Top>2.27132in</Top>
             <Left>0.02659in</Left>
             <Height>0.70834in</Height>
             <Width>7.77448in</Width>
@@ -101,7 +160,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.15673in</Top>
+            <Top>0.03173in</Top>
             <Left>0.03929in</Left>
             <Height>0.23959in</Height>
             <Width>7.74908in</Width>
@@ -136,8 +195,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>15.56459cm</Top>
-            <Left>13.00966cm</Left>
+            <Top>14.61207cm</Top>
+            <Left>13.32716cm</Left>
             <Height>0.6cm</Height>
             <Width>6.09017cm</Width>
             <ZIndex>2</ZIndex>
@@ -175,8 +234,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>14.89403cm</Top>
-            <Left>13.00966cm</Left>
+            <Top>13.94151cm</Top>
+            <Left>13.32716cm</Left>
             <Height>0.6cm</Height>
             <Width>6.09017cm</Width>
             <ZIndex>3</ZIndex>
@@ -198,7 +257,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Declared Owner/s : </Value>
+                    <Value>Declared Owner/s </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -212,7 +271,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.61458in</Top>
+            <Top>0.48958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -235,7 +294,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Tax Declaration No :</Value>
+                    <Value>Tax Declaration No </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -247,7 +306,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.86458in</Top>
+            <Top>0.73958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -270,7 +329,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>TCT No. :</Value>
+                    <Value>TCT No. </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -282,7 +341,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.11458in</Top>
+            <Top>0.98958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -305,7 +364,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Location of Property :</Value>
+                    <Value>Location of Property </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -317,7 +376,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.36458in</Top>
+            <Top>1.23958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -340,7 +399,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Kind of Property :</Value>
+                    <Value>Kind of Property </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -352,7 +411,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.61458in</Top>
+            <Top>1.48958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -375,7 +434,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Assessed Value :</Value>
+                    <Value>Assessed Value </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -387,7 +446,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.86458in</Top>
+            <Top>1.73958in</Top>
             <Left>0.03929in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
@@ -423,7 +482,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.61458in</Top>
+            <Top>0.48958in</Top>
             <Left>1.47805in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
@@ -457,7 +516,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.86458in</Top>
+            <Top>0.73958in</Top>
             <Left>1.47805in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
@@ -491,7 +550,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.11458in</Top>
+            <Top>0.98958in</Top>
             <Left>1.47805in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
@@ -525,7 +584,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.36458in</Top>
+            <Top>1.23958in</Top>
             <Left>1.47805in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
@@ -559,7 +618,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.61458in</Top>
+            <Top>1.48958in</Top>
             <Left>1.47805in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
@@ -582,10 +641,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramAssessedValue.Value</Value>
+                    <Value>=Sum(Fields!assessed_value.Value, "dsLtom30")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -595,8 +655,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.86458in</Top>
-            <Left>1.47806in</Left>
+            <Top>1.76735in</Top>
+            <Left>1.46417in</Left>
             <Height>0.25in</Height>
             <Width>4.61896in</Width>
             <ZIndex>15</ZIndex>
@@ -621,6 +681,7 @@
                     <Value>Basic and SEF Taxes</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -631,10 +692,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.2991in</Top>
+            <Top>3.0491in</Top>
             <Left>0.06753cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.23281in</Width>
+            <Width>1.36813in</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -653,9 +714,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramBasicAndSEFTaxes.Value</Value>
+                    <Value>=Sum(Fields!basic_tax.Value, "dsLtom30") + Sum(Fields!sef_tax.Value, "dsLtom30")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -666,10 +728,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.2991in</Top>
-            <Left>3.30471cm</Left>
+            <Top>3.0491in</Top>
+            <Left>3.71898cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.87864in</Width>
+            <Width>2.17041in</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -691,6 +753,7 @@
                     <Value>Penalties</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -701,10 +764,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.51786in</Top>
+            <Top>3.26786in</Top>
             <Left>0.06753cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.23281in</Width>
+            <Width>1.36813in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -723,9 +786,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramPenalties.Value</Value>
+                    <Value>=Sum(Fields!basic_penalty.Value, "dsLtom30") + Sum(Fields!sef_penalty.Value, "dsLtom30")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -736,10 +800,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.51786in</Top>
-            <Left>3.30471cm</Left>
+            <Top>3.25397in</Top>
+            <Left>3.71897cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.87864in</Width>
+            <Width>2.1843in</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -761,6 +825,7 @@
                     <Value>Cost of Sale</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -771,10 +836,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.73662in</Top>
+            <Top>3.48662in</Top>
             <Left>0.06754cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.23281in</Width>
+            <Width>1.36813in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -796,6 +861,7 @@
                     <Value>=Parameters!paramCostOfSale.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -806,10 +872,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.73662in</Top>
-            <Left>3.30472cm</Left>
+            <Top>3.48662in</Top>
+            <Left>3.71898cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.87864in</Width>
+            <Width>2.1843in</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
@@ -831,6 +897,7 @@
                     <Value>Excess of Bid Price</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -841,10 +908,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.95538in</Top>
+            <Top>3.70538in</Top>
             <Left>0.06754cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.23281in</Width>
+            <Width>1.36813in</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
@@ -866,6 +933,7 @@
                     <Value>=Parameters!paramExcessOfBidPrice.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -876,10 +944,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.95538in</Top>
-            <Left>3.30472cm</Left>
+            <Top>3.70538in</Top>
+            <Left>3.71898cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.87864in</Width>
+            <Width>2.1843in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -901,6 +969,7 @@
                     <Value>Total</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -911,10 +980,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>4.17414in</Top>
+            <Top>3.92414in</Top>
             <Left>0.06753cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.23281in</Width>
+            <Width>1.36813in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
@@ -933,9 +1002,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramTotal.Value</Value>
+                    <Value>=Sum(Fields!basic_tax.Value, "dsLtom30") + Sum(Fields!sef_tax.Value, "dsLtom30") + Sum(Fields!basic_penalty.Value, "dsLtom30") + Sum(Fields!sef_penalty.Value, "dsLtom30")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -946,10 +1016,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>4.17414in</Top>
-            <Left>3.30471cm</Left>
+            <Top>3.92414in</Top>
+            <Left>3.71897cm</Left>
             <Height>0.21876in</Height>
-            <Width>1.87864in</Width>
+            <Width>2.1843in</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -974,7 +1044,6 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListLevel>1</ListLevel>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>150pt</LineHeight>
@@ -982,7 +1051,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>4.6875in</Top>
+            <Top>4.3125in</Top>
             <Left>0.09979cm</Left>
             <Height>0.21876in</Height>
             <Width>7.77448in</Width>
@@ -1011,16 +1080,16 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Right</TextAlign>
                   <LineHeight>150pt</LineHeight>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.01041in</Top>
+            <Top>4.88541in</Top>
             <Left>0.0998cm</Left>
             <Height>0.21876in</Height>
-            <Width>0.89948in</Width>
+            <Width>1.22011in</Width>
             <ZIndex>27</ZIndex>
             <Style>
               <Border>
@@ -1052,10 +1121,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.01041in</Top>
-            <Left>2.49031cm</Left>
+            <Top>4.88541in</Top>
+            <Left>3.30472cm</Left>
             <Height>0.21876in</Height>
-            <Width>3.80759in</Width>
+            <Width>3.73696in</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -1087,46 +1156,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.01041in</Top>
-            <Left>13.00966cm</Left>
+            <Top>4.88541in</Top>
+            <Left>13.32716cm</Left>
             <Height>0.21876in</Height>
-            <Width>0.44115in</Width>
+            <Width>0.54532in</Width>
             <ZIndex>29</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox35">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Globals!ExecutionTime</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                  <LineHeight>150pt</LineHeight>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.01041in</Top>
-            <Left>14.20072cm</Left>
-            <Height>0.21876in</Height>
-            <Width>2.19753in</Width>
-            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1157,10 +1191,46 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.54862in</Top>
-            <Left>13.00966cm</Left>
+            <Top>5.29862in</Top>
+            <Left>13.32716cm</Left>
             <Height>0.21876in</Height>
-            <Width>2.14948in</Width>
+            <Width>2.3977in</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox37">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <Format>d</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>150pt</LineHeight>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>4.88541in</Top>
+            <Left>14.88865cm</Left>
+            <Height>0.21876in</Height>
+            <Width>1.78294in</Width>
             <ZIndex>31</ZIndex>
             <Style>
               <Border>
@@ -1173,13 +1243,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>6.41667in</Height>
+        <Height>6.0515in</Height>
         <Style />
       </Body>
       <Width>7.81377in</Width>
       <Page>
         <PageHeader>
-          <Height>0.97743in</Height>
+          <Height>1.07861in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1287,13 +1357,14 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>1.93131cm</Top>
               <Left>0.0998cm</Left>
-              <Height>0.55137cm</Height>
+              <Height>0.80835cm</Height>
               <Width>19.68911cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1307,8 +1378,8 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>8.27in</PageHeight>
-        <PageWidth>11.69in</PageWidth>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
@@ -1367,7 +1438,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramPlaceOfWhereAuctionWasConducted">
+    <ReportParameter Name="paramPlaceOfAuction">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1464,7 +1535,7 @@
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>4</RowIndex>
-          <ParameterName>paramPlaceOfWhereAuctionWasConducted</ParameterName>
+          <ParameterName>paramPlaceOfAuction</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>

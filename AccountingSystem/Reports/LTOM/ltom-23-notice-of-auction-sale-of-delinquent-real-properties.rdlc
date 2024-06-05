@@ -2,18 +2,18 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="dsLTOM">
+    <DataSource Name="dsTreasury">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>88ef43e1-ae0f-457d-bebb-58523b08507f</rd:DataSourceID>
+      <rd:DataSourceID>7682ca63-470c-4541-83fa-4bc2cef86629</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsNoticeOfAuctionOfSaleOfDelinquentRealProperties">
+    <DataSet Name="dsNoticeOfAuctionSaleOfDelinquentProperty">
       <Query>
-        <DataSourceName>dsLTOM</DataSourceName>
+        <DataSourceName>dsTreasury</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -55,9 +55,9 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsLTOM</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Home\OneDrive\Desktop\Archie LFS\AccountingSystem\dsLTOM.xsd</rd:SchemaPath>
-        <rd:TableName>dtNoticeOfAuctionSaleOfDelinquentRealProperties</rd:TableName>
+        <rd:DataSetName>dsTreasury</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Home\OneDrive\Desktop\LFS\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
+        <rd:TableName>dtLtom23</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -122,7 +122,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.22285cm</Top>
+            <Top>1.22283cm</Top>
             <Height>0.63074cm</Height>
             <Width>31.37967cm</Width>
             <ZIndex>1</ZIndex>
@@ -143,31 +143,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Pursuant to to Section. 260of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties on </Value>
+                    <Value>Pursuant to to Section. 260 of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties at </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramLGU.Value</Value>
+                    <Value>=CDate(Parameters!paramTimeOfAuction.Value)</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> at </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramTimeOfAuction.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>dd/MM/yyyy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -182,13 +170,15 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve"> </Value>
+                    <Value>.</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -278,7 +268,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>7.69861cm</Top>
+            <Top>7.69859cm</Top>
             <Left>24.93738cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
@@ -317,7 +307,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>7.02805cm</Top>
+            <Top>7.02803cm</Top>
             <Left>24.93738cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
@@ -366,7 +356,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.58333in</Height>
+                  <Height>0.55208in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -695,7 +685,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.19792in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -707,10 +697,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!declared_owner.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>declared_owner</rd:DefaultName>
@@ -719,6 +713,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -737,10 +732,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!tax_declaration_number.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>tax_declaration_number</rd:DefaultName>
@@ -749,6 +748,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -767,10 +767,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!tct_number.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>tct_number</rd:DefaultName>
@@ -779,6 +783,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -797,10 +802,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!location_of_property.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>location_of_property</rd:DefaultName>
@@ -809,6 +818,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -827,10 +837,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!kind_of_property.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>kind_of_property</rd:DefaultName>
@@ -839,6 +853,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -857,10 +872,15 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!assessed_value.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>assessed_value</rd:DefaultName>
@@ -869,6 +889,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -887,10 +908,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!years_delinquent.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>years_delinquent</rd:DefaultName>
@@ -899,6 +924,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -917,10 +943,15 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!total_delinquency_as_of.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>total_delinquency_as_of</rd:DefaultName>
@@ -929,6 +960,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -947,10 +979,15 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!cost_of_sale.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>cost_of_sale</rd:DefaultName>
@@ -959,6 +996,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -994,9 +1032,10 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dsNoticeOfAuctionOfSaleOfDelinquentRealProperties</DataSetName>
-            <Top>1.40074in</Top>
-            <Height>0.83333in</Height>
+            <DataSetName>dsNoticeOfAuctionSaleOfDelinquentProperty</DataSetName>
+            <Top>1.38858in</Top>
+            <Left>0.00003cm</Left>
+            <Height>0.75in</Height>
             <Width>12.35421in</Width>
             <ZIndex>6</ZIndex>
             <Style>
@@ -1006,13 +1045,13 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>3.31537in</Height>
+        <Height>3.26717in</Height>
         <Style />
       </Body>
-      <Width>12.35421in</Width>
+      <Width>12.35422in</Width>
       <Page>
         <PageHeader>
-          <Height>1.04733in</Height>
+          <Height>1.16192in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1076,12 +1115,6 @@
                         <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
                   </TextRuns>
                   <Style>
                     <TextAlign>Center</TextAlign>
@@ -1102,7 +1135,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.74641cm</Top>
+              <Top>0.81697cm</Top>
               <Left>0.00002cm</Left>
               <Height>1.36672cm</Height>
               <Width>31.37967cm</Width>
@@ -1133,6 +1166,13 @@
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <Format>d</Format>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value xml:space="preserve"> </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1143,13 +1183,15 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>2.14841cm</Top>
-              <Height>0.51182cm</Height>
+              <Left>0.00002cm</Left>
+              <Height>0.80286cm</Height>
               <Width>31.37969cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1163,8 +1205,8 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>8.27in</PageHeight>
-        <PageWidth>11.69in</PageWidth>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>13in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>

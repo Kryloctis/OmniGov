@@ -1,7 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using RPT.Domain.Interfaces;
 using System;
-using System.Net.NetworkInformation;
 
 namespace ACC.Data
 {
@@ -212,5 +211,9 @@ namespace ACC.Data
         public static IDelinquentNotice DelinquentNoticeRepository() => new DelinquentNoticeRepository(mySqlGenericCommandsLFS);
 
         public static IRptLevy RptLevyRepository() => new RptLevyRepository(mySqlGenericCommandsLFS);
+
+        public static IAuctionRepository AuctionRepository() => new AuctionRepository(mySqlGenericCommandsLFS);
+
+        public static IRptAuctionRepository RptAuctionRepository() => new RptAuctionRepository(mySqlGenericCommandsLFS);
     }
 }
