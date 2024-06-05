@@ -1,7 +1,7 @@
 ﻿using AccountingSystem.Views.Reports.Ltom;
+using AccountingSystem.Views.Reports.Rcd;
 using System;
 using System.Windows.Forms;
-using AccountingSystem.Views.Reports.Rcd;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -46,6 +46,16 @@ namespace AccountingSystem.Views.Dashboard.Reports
             try
             {
                 _ = new frmLtom20().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom23_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom23().ShowDialog();
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
