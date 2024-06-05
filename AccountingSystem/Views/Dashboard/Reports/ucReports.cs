@@ -2,6 +2,8 @@
 using System;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.Rcd;
+using AccountingSystem.Views.Reports.Saaob;
+using AccountingSystem.Views.Reports.Saaobb;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -21,6 +23,12 @@ namespace AccountingSystem.Views.Dashboard.Reports
         {
             if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
                 btnRcd.Enabled = false;
+
+            if (!Helper.HasPermission("Report > SAAOB"))
+                btnSaaob.Enabled = false;
+            
+            if(!Helper.HasPermission("Report > SAAOBB"))
+                btnSaaobb.Enabled = false;
         }
 
         private void btnLtom17and19_Click(object sender, EventArgs e)
@@ -49,6 +57,24 @@ namespace AccountingSystem.Views.Dashboard.Reports
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSaaob_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmSaaob().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSaaobb_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmSaaobb().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

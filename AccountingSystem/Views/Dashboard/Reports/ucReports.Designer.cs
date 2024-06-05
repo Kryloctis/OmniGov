@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            panel3 = new System.Windows.Forms.Panel();
+            label3 = new System.Windows.Forms.Label();
+            panel2 = new System.Windows.Forms.Panel();
+            btnSaaobb = new System.Windows.Forms.Button();
+            btnSaaob = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
             btnLtom22 = new System.Windows.Forms.Button();
             btnLtom21 = new System.Windows.Forms.Button();
@@ -38,6 +44,8 @@
             btnRcd = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
+            panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +54,9 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel3, 1, 0);
+            tableLayoutPanel1.Controls.Add(panel2, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel1, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -56,8 +66,87 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(791, 522);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(label3);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(398, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(390, 255);
+            panel3.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.Dock = System.Windows.Forms.DockStyle.Top;
+            label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label3.Location = new System.Drawing.Point(0, 0);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(390, 30);
+            label3.TabIndex = 36;
+            label3.Text = "Accounting";
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(btnSaaobb);
+            panel2.Controls.Add(btnSaaob);
+            panel2.Controls.Add(label2);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(389, 255);
+            panel2.TabIndex = 2;
+            // 
+            // btnSaaobb
+            // 
+            btnSaaobb.AutoEllipsis = true;
+            btnSaaobb.Dock = System.Windows.Forms.DockStyle.Top;
+            btnSaaobb.FlatAppearance.BorderSize = 0;
+            btnSaaobb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSaaobb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSaaobb.Location = new System.Drawing.Point(0, 63);
+            btnSaaobb.Name = "btnSaaobb";
+            btnSaaobb.Size = new System.Drawing.Size(389, 33);
+            btnSaaobb.TabIndex = 39;
+            btnSaaobb.Text = "SAAOBB";
+            btnSaaobb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSaaobb.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnSaaobb.UseVisualStyleBackColor = true;
+            btnSaaobb.Click += btnSaaobb_Click;
+            // 
+            // btnSaaob
+            // 
+            btnSaaob.AutoEllipsis = true;
+            btnSaaob.Dock = System.Windows.Forms.DockStyle.Top;
+            btnSaaob.FlatAppearance.BorderSize = 0;
+            btnSaaob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSaaob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSaaob.Location = new System.Drawing.Point(0, 30);
+            btnSaaob.Name = "btnSaaob";
+            btnSaaob.Size = new System.Drawing.Size(389, 33);
+            btnSaaob.TabIndex = 38;
+            btnSaaob.Text = "SAAOB";
+            btnSaaob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSaaob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnSaaob.UseVisualStyleBackColor = true;
+            btnSaaob.Click += btnSaaob_Click;
+            // 
+            // label2
+            // 
+            label2.Dock = System.Windows.Forms.DockStyle.Top;
+            label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label2.Location = new System.Drawing.Point(0, 0);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(389, 30);
+            label2.TabIndex = 36;
+            label2.Text = "Budget";
+            // 
             // panel1
             // 
+            panel1.AutoScroll = true;
             panel1.Controls.Add(btnLtom22);
             panel1.Controls.Add(btnLtom21);
             panel1.Controls.Add(btnLtom20);
@@ -66,7 +155,7 @@
             panel1.Controls.Add(btnRcd);
             panel1.Controls.Add(label1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(3, 3);
+            panel1.Location = new System.Drawing.Point(3, 264);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(389, 255);
             panel1.TabIndex = 0;
@@ -190,6 +279,8 @@
             Padding = new System.Windows.Forms.Padding(4);
             Size = new System.Drawing.Size(799, 530);
             tableLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -205,5 +296,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnRcd;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSaaobb;
+        private System.Windows.Forms.Button btnSaaob;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
     }
 }
