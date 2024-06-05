@@ -2120,5 +2120,33 @@ namespace AccountingSystem
             dataGridView.Columns["updated_at"].Visible = false;
             dataGridView.Columns["updated_by"].Visible = false;
         }
+
+        internal static void DgAuction(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["start_date"].HeaderText = "Start Date";
+            dataGridView.Columns["start_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["end_date"].HeaderText = "End Date";
+            dataGridView.Columns["end_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["location"].HeaderText = "Location";
+            dataGridView.Columns["created_at"].Visible = false;
+        }
+
+        internal static void DgRptAuction(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["rpt_auction_id"].Visible = false;
+            dataGridView.Columns["real_properties_id"].Visible = false;
+            dataGridView.Columns["auction_id"].Visible = false;
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["start_date"].HeaderText = "Start Date";
+            dataGridView.Columns["start_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["end_date"].HeaderText = "End Date";
+            dataGridView.Columns["end_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["location"].HeaderText = "Location";
+            dataGridView.Columns["street"].HeaderText = "Street";
+            dataGridView.Columns["complete_arp_no"].HeaderText = "Complete ARP No.";
+        }
     }
 }

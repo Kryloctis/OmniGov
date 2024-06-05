@@ -10,6 +10,8 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
+using AccountingSystem.Views.Transactions.Assessment;
+using AccountingSystem.Views.Transactions.Auction;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
@@ -23,9 +25,6 @@ using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using AccountingSystem.Views.Transactions.Assessment;
-using AccountingSystem.Views.Reports.Rcd;
 
 namespace AccountingSystem.Views.Dashboard.Treasury
 {
@@ -246,7 +245,7 @@ namespace AccountingSystem.Views.Dashboard.Treasury
         {
             try
             {
-                _ = new NotImplementedException();
+                _ = new frmAuction().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -421,5 +420,7 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+
     }
 }

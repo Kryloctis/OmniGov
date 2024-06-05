@@ -176,28 +176,14 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramTimeOfAuction.Value</Value>
+                    <Value>=Parameters!paramPlaceOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> at  </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramPlaceofAuction.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>. The auction will be held at the </Value>
+                    <Value> The auction will be held at the </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -976,7 +962,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.07465in</Top>
+            <Top>3.04688in</Top>
             <Height>0.36458in</Height>
             <Width>7.73891in</Width>
             <ZIndex>6</ZIndex>
@@ -1124,7 +1110,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.38194in</Top>
-            <Left>5.5204cm</Left>
+            <Left>5.54686cm</Left>
             <Height>0.25in</Height>
             <Width>5.53543in</Width>
             <ZIndex>10</ZIndex>
@@ -1158,7 +1144,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.66321in</Top>
-            <Left>5.5204cm</Left>
+            <Left>5.54686cm</Left>
             <Height>0.26736in</Height>
             <Width>5.53543in</Width>
             <ZIndex>11</ZIndex>
@@ -1277,9 +1263,10 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Globals!ExecutionTime</Value>
+                      <Value>=CDate(Globals!ExecutionTime)</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <Format>d</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1341,7 +1328,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramPlaceofAuction">
+    <ReportParameter Name="paramPlaceOfAuction">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1395,7 +1382,7 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramPlaceofAuction</ParameterName>
+          <ParameterName>paramPlaceOfAuction</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>

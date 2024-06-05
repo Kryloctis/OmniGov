@@ -1,14 +1,14 @@
-﻿using AccountingSystem.Views.Reports.Ltom;
-using System;
-using System.Windows.Forms;
+﻿using AccountingSystem.Views.Reports.Financial_Statements;
+using AccountingSystem.Views.Reports.Journals;
+using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Reports.Ltom;
 using AccountingSystem.Views.Reports.Rcd;
 using AccountingSystem.Views.Reports.Saaob;
 using AccountingSystem.Views.Reports.Saaobb;
-using AccountingSystem.Views.Reports.Journals;
-using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Reports.TrialBalance;
-using AccountingSystem.Views.Reports.Financial_Statements;
+using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -110,6 +110,15 @@ namespace AccountingSystem.Views.Dashboard.Reports
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom23_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom23().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSaaob_Click(object sender, EventArgs e)

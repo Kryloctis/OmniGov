@@ -52,6 +52,7 @@
             ucSettings1 = new Settings.ucSettings();
             label5 = new System.Windows.Forms.Label();
             tabPageReports = new System.Windows.Forms.TabPage();
+            panel5 = new System.Windows.Forms.Panel();
             ucReports1 = new Reports.ucReports();
             label1 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +67,7 @@
             panel4.SuspendLayout();
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -384,7 +386,7 @@
             // 
             // tabPageReports
             // 
-            tabPageReports.Controls.Add(ucReports1);
+            tabPageReports.Controls.Add(panel5);
             tabPageReports.Controls.Add(label1);
             tabPageReports.Location = new System.Drawing.Point(4, 24);
             tabPageReports.Name = "tabPageReports";
@@ -393,14 +395,25 @@
             tabPageReports.Text = "tabPageReports";
             tabPageReports.UseVisualStyleBackColor = true;
             // 
+            // panel5
+            // 
+            panel5.AutoScroll = true;
+            panel5.Controls.Add(ucReports1);
+            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel5.Location = new System.Drawing.Point(0, 80);
+            panel5.Margin = new System.Windows.Forms.Padding(0);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(1125, 558);
+            panel5.TabIndex = 7;
+            // 
             // ucReports1
             // 
-            ucReports1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucReports1.Location = new System.Drawing.Point(0, 80);
+            ucReports1.Dock = System.Windows.Forms.DockStyle.Top;
+            ucReports1.Location = new System.Drawing.Point(0, 0);
             ucReports1.Name = "ucReports1";
             ucReports1.Padding = new System.Windows.Forms.Padding(4);
-            ucReports1.Size = new System.Drawing.Size(1125, 558);
-            ucReports1.TabIndex = 7;
+            ucReports1.Size = new System.Drawing.Size(1108, 666);
+            ucReports1.TabIndex = 8;
             // 
             // label1
             // 
@@ -452,6 +465,7 @@
             panel4.ResumeLayout(false);
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
+            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -486,5 +500,6 @@
         private System.Windows.Forms.TabPage tabPageReports;
         private System.Windows.Forms.Label label1;
         private Reports.ucReports ucReports1;
+        private System.Windows.Forms.Panel panel5;
     }
 }

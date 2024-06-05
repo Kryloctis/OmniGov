@@ -30,6 +30,7 @@
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel1 = new System.Windows.Forms.Panel();
+            btnLtom23 = new System.Windows.Forms.Button();
             btnLtom22 = new System.Windows.Forms.Button();
             btnLtom21 = new System.Windows.Forms.Button();
             btnLtom20 = new System.Windows.Forms.Button();
@@ -72,7 +73,7 @@
             // 
             // panel1
             // 
-            panel1.AutoScroll = true;
+            panel1.Controls.Add(btnLtom23);
             panel1.Controls.Add(btnLtom22);
             panel1.Controls.Add(btnLtom21);
             panel1.Controls.Add(btnLtom20);
@@ -85,6 +86,23 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(785, 392);
             panel1.TabIndex = 3;
+            // 
+            // btnLtom23
+            // 
+            btnLtom23.AutoEllipsis = true;
+            btnLtom23.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom23.FlatAppearance.BorderSize = 0;
+            btnLtom23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom23.Location = new System.Drawing.Point(0, 228);
+            btnLtom23.Name = "btnLtom23";
+            btnLtom23.Size = new System.Drawing.Size(785, 33);
+            btnLtom23.TabIndex = 39;
+            btnLtom23.Text = "LTOM Form No. 23 - Notice of Auction Sale of Delinquent Real Properties";
+            btnLtom23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom23.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom23.UseVisualStyleBackColor = true;
+            btnLtom23.Click += btnLtom23_Click;
             // 
             // btnLtom22
             // 
@@ -380,5 +398,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnTrialBalance;
         private System.Windows.Forms.Button btnFs;
+        private System.Windows.Forms.Button btnLtom23;
     }
 }
