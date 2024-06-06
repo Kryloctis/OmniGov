@@ -45,6 +45,37 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
+        public DataTable GetAuctionProperties(int auctionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetAuctionPropertiesByAuctionIdAndRptId(int auctionId, int rptId)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_auction_id", DbType.Int32, auctionId },
+                new object[] { "@real_properties_id", DbType.Int32, rptId },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @rpt_auction_id AND real_properties_id = @real_properties_id";
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+
+        }
+
         public Dictionary<string, string> GetAuctionPropertiesByAuctionIdAndTaxpayerId(int auctionId, int taxpayerId)
         {
             var recordDictionary = new Dictionary<string, string>();

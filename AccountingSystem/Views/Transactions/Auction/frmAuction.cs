@@ -10,11 +10,6 @@ namespace AccountingSystem.Views.Transactions.Auction
     public partial class frmAuction : Form
     {
         private readonly ucAuctionEvents ucAuctionEvents;
-        private readonly ucCertificateOfSale ucCertificateOfSale;
-        private readonly ucDeclarationOfForfeitureOfDelinquentProperty ucDeclarationOfForfeitureOfDelinquentProperty;
-        private readonly ucNoticeOfAuctionSaleOfDelinquentRealProperties ucNoticeOfAuctionSaleOfDelinquentRealProperties;
-        private readonly ucNoticeOfsale ucNoticeOfsale;
-        private readonly ucReportOfSale ucReportOfSale;
         private readonly ucRptScheduling ucRptScheduling;
 
         public frmAuction()

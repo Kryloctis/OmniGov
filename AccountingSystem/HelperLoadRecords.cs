@@ -2152,9 +2152,9 @@ namespace AccountingSystem
 
         internal static void AuctionScheduleCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
+            comboBox.ValueMember = valueMember;
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
         }
     }
 }

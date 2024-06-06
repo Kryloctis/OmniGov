@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.Auction
 {
-    partial class ucNoticeOfsale
+    partial class ucNoticeOfSale
     {
         /// <summary> 
         /// Required designer variable.
@@ -67,13 +67,13 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // ucNoticeOfsale
+            // ucNoticeOfSale
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(progressBar1);
-            Name = "ucNoticeOfsale";
+            Name = "ucNoticeOfSale";
             Size = new System.Drawing.Size(606, 474);
             ResumeLayout(false);
         }

@@ -366,7 +366,7 @@ namespace ACC.Data
 
         public DataTable GetViewDeliquentRecords()
         {
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE posted_at <= CURDATE() AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
 
             return mySqlGenericCommands.Fill(query, dataTable);
