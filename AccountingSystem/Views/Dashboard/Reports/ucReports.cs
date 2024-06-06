@@ -60,5 +60,25 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnLtom24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLtom29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLtom30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLtom31_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

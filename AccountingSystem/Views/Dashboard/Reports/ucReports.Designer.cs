@@ -30,6 +30,10 @@
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel1 = new System.Windows.Forms.Panel();
+            btnLtom31 = new System.Windows.Forms.Button();
+            btnLtom30 = new System.Windows.Forms.Button();
+            btnLtom29 = new System.Windows.Forms.Button();
+            btnLtom24 = new System.Windows.Forms.Button();
             btnLtom23 = new System.Windows.Forms.Button();
             btnLtom22 = new System.Windows.Forms.Button();
             btnLtom21 = new System.Windows.Forms.Button();
@@ -52,13 +56,17 @@
             tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.6705F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.3295021F));
             tableLayoutPanel1.Size = new System.Drawing.Size(791, 522);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnLtom31);
+            panel1.Controls.Add(btnLtom30);
+            panel1.Controls.Add(btnLtom29);
+            panel1.Controls.Add(btnLtom24);
             panel1.Controls.Add(btnLtom23);
             panel1.Controls.Add(btnLtom22);
             panel1.Controls.Add(btnLtom21);
@@ -70,8 +78,76 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(389, 255);
+            panel1.Size = new System.Drawing.Size(389, 389);
             panel1.TabIndex = 0;
+            // 
+            // btnLtom31
+            // 
+            btnLtom31.AutoEllipsis = true;
+            btnLtom31.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom31.FlatAppearance.BorderSize = 0;
+            btnLtom31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom31.Location = new System.Drawing.Point(0, 360);
+            btnLtom31.Name = "btnLtom31";
+            btnLtom31.Size = new System.Drawing.Size(389, 33);
+            btnLtom31.TabIndex = 43;
+            btnLtom31.Text = "LTOM Form No. 31 - Report of Sale";
+            btnLtom31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom31.UseVisualStyleBackColor = true;
+            btnLtom31.Click += btnLtom31_Click;
+            // 
+            // btnLtom30
+            // 
+            btnLtom30.AutoEllipsis = true;
+            btnLtom30.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom30.FlatAppearance.BorderSize = 0;
+            btnLtom30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom30.Location = new System.Drawing.Point(0, 327);
+            btnLtom30.Name = "btnLtom30";
+            btnLtom30.Size = new System.Drawing.Size(389, 33);
+            btnLtom30.TabIndex = 42;
+            btnLtom30.Text = "LTOM Form No. 30 - Declaration of Forfeiture of Delinquent Property";
+            btnLtom30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom30.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom30.UseVisualStyleBackColor = true;
+            btnLtom30.Click += btnLtom30_Click;
+            // 
+            // btnLtom29
+            // 
+            btnLtom29.AutoEllipsis = true;
+            btnLtom29.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom29.FlatAppearance.BorderSize = 0;
+            btnLtom29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom29.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom29.Location = new System.Drawing.Point(0, 294);
+            btnLtom29.Name = "btnLtom29";
+            btnLtom29.Size = new System.Drawing.Size(389, 33);
+            btnLtom29.TabIndex = 41;
+            btnLtom29.Text = "LTOM Form No. 29 - Certificate of Sale";
+            btnLtom29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom29.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom29.UseVisualStyleBackColor = true;
+            btnLtom29.Click += btnLtom29_Click;
+            // 
+            // btnLtom24
+            // 
+            btnLtom24.AutoEllipsis = true;
+            btnLtom24.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom24.FlatAppearance.BorderSize = 0;
+            btnLtom24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom24.Location = new System.Drawing.Point(0, 261);
+            btnLtom24.Name = "btnLtom24";
+            btnLtom24.Size = new System.Drawing.Size(389, 33);
+            btnLtom24.TabIndex = 40;
+            btnLtom24.Text = "LTOM Form No. 24 - Notice of Sale";
+            btnLtom24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom24.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom24.UseVisualStyleBackColor = true;
+            btnLtom24.Click += btnLtom24_Click;
             // 
             // btnLtom23
             // 
@@ -225,5 +301,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnRcd;
         private System.Windows.Forms.Button btnLtom23;
+        private System.Windows.Forms.Button btnLtom24;
+        private System.Windows.Forms.Button btnLtom29;
+        private System.Windows.Forms.Button btnLtom30;
+        private System.Windows.Forms.Button btnLtom31;
     }
 }

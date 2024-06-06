@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageListOfAuction = new System.Windows.Forms.TabPage();
             dgAuctionList = new System.Windows.Forms.DataGridView();
@@ -71,12 +71,6 @@
             btnAddScheduledProperty = new System.Windows.Forms.ToolStripButton();
             btnEditScheduledProperty = new System.Windows.Forms.ToolStripButton();
             btnDeleteScheduledProperty = new System.Windows.Forms.ToolStripButton();
-            toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            lTOM23ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM24ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM29ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM31ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             btnSearchRptSched = new System.Windows.Forms.ToolStripButton();
             toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             tabPageRptScheduleForm = new System.Windows.Forms.TabPage();
@@ -86,22 +80,6 @@
             ucRptScheduling2 = new ucRptScheduling();
             toolStrip5 = new System.Windows.Forms.ToolStrip();
             toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            tabPagePrint = new System.Windows.Forms.TabPage();
-            tabControlReportsViewer = new System.Windows.Forms.TabControl();
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties = new System.Windows.Forms.TabPage();
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1 = new ucNoticeOfAuctionSaleOfDelinquentRealProperties();
-            tabPageNoticeOfSale = new System.Windows.Forms.TabPage();
-            ucNoticeOfsale1 = new ucNoticeOfsale();
-            tabPageCertificateOfSale = new System.Windows.Forms.TabPage();
-            ucCertificateOfSale1 = new ucCertificateOfSale();
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty = new System.Windows.Forms.TabPage();
-            ucDeclarationOfForfeitureOfDelinquentProperty1 = new ucDeclarationOfForfeitureOfDelinquentProperty();
-            tabPageReportOfSale = new System.Windows.Forms.TabPage();
-            ucReportOfSale1 = new ucReportOfSale();
-            toolStrip3 = new System.Windows.Forms.ToolStrip();
-            toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            panel1 = new System.Windows.Forms.Panel();
-            statusStrip2 = new System.Windows.Forms.StatusStrip();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             tabControl1.SuspendLayout();
@@ -121,15 +99,6 @@
             tabPageRptScheduleForm.SuspendLayout();
             panel5.SuspendLayout();
             toolStrip5.SuspendLayout();
-            tabPagePrint.SuspendLayout();
-            tabControlReportsViewer.SuspendLayout();
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.SuspendLayout();
-            tabPageNoticeOfSale.SuspendLayout();
-            tabPageCertificateOfSale.SuspendLayout();
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.SuspendLayout();
-            tabPageReportOfSale.SuspendLayout();
-            toolStrip3.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -139,7 +108,6 @@
             tabControl1.Controls.Add(tabPageAuctionForm);
             tabControl1.Controls.Add(tabPageListOfRptSchedule);
             tabControl1.Controls.Add(tabPageRptScheduleForm);
-            tabControl1.Controls.Add(tabPagePrint);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             tabControl1.ItemSize = new System.Drawing.Size(0, 1);
@@ -169,23 +137,23 @@
             // 
             // dgAuctionList
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgAuctionList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgAuctionList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgAuctionList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgAuctionList.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgAuctionList.DefaultCellStyle = dataGridViewCellStyle2;
             dgAuctionList.Dock = System.Windows.Forms.DockStyle.Fill;
             dgAuctionList.Location = new System.Drawing.Point(0, 70);
             dgAuctionList.Margin = new System.Windows.Forms.Padding(0);
@@ -406,23 +374,23 @@
             // 
             // dgRptSchedule
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgRptSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgRptSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgRptSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgRptSchedule.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgRptSchedule.DefaultCellStyle = dataGridViewCellStyle4;
             dgRptSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
             dgRptSchedule.Location = new System.Drawing.Point(0, 70);
             dgRptSchedule.Margin = new System.Windows.Forms.Padding(0);
@@ -495,7 +463,7 @@
             toolStrip4.BackColor = System.Drawing.Color.Transparent;
             toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripSeparator3, btnAddScheduledProperty, btnEditScheduledProperty, btnDeleteScheduledProperty, toolStripSplitButton1, btnSearchRptSched, toolStripTextBox1 });
+            toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripSeparator3, btnAddScheduledProperty, btnEditScheduledProperty, btnDeleteScheduledProperty, btnSearchRptSched, toolStripTextBox1 });
             toolStrip4.Location = new System.Drawing.Point(0, 0);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new System.Windows.Forms.Padding(4);
@@ -543,50 +511,6 @@
             btnDeleteScheduledProperty.Size = new System.Drawing.Size(64, 24);
             btnDeleteScheduledProperty.Text = "Delete";
             btnDeleteScheduledProperty.Click += btnDeleteScheduledProperty_Click;
-            // 
-            // toolStripSplitButton1
-            // 
-            toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM23ToolStripMenuItem, lTOM24ToolStripMenuItem, lTOM29ToolStripMenuItem, lTOMToolStripMenuItem, lTOM31ToolStripMenuItem });
-            toolStripSplitButton1.Image = Properties.Resources.printer_filled_16px;
-            toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new System.Drawing.Size(68, 24);
-            toolStripSplitButton1.Text = "Print";
-            // 
-            // lTOM23ToolStripMenuItem
-            // 
-            lTOM23ToolStripMenuItem.Name = "lTOM23ToolStripMenuItem";
-            lTOM23ToolStripMenuItem.Size = new System.Drawing.Size(404, 22);
-            lTOM23ToolStripMenuItem.Text = "LTOM 23 - Notice of Auction Sale of Delinquent Real Properties";
-            lTOM23ToolStripMenuItem.Click += lTOM23ToolStripMenuItem_Click;
-            // 
-            // lTOM24ToolStripMenuItem
-            // 
-            lTOM24ToolStripMenuItem.Name = "lTOM24ToolStripMenuItem";
-            lTOM24ToolStripMenuItem.Size = new System.Drawing.Size(404, 22);
-            lTOM24ToolStripMenuItem.Text = "LTOM 24 - Notice of Sale";
-            lTOM24ToolStripMenuItem.Click += lTOM24ToolStripMenuItem_Click;
-            // 
-            // lTOM29ToolStripMenuItem
-            // 
-            lTOM29ToolStripMenuItem.Name = "lTOM29ToolStripMenuItem";
-            lTOM29ToolStripMenuItem.Size = new System.Drawing.Size(404, 22);
-            lTOM29ToolStripMenuItem.Text = "LTOM 29 - Certificate of Sale";
-            lTOM29ToolStripMenuItem.Click += lTOM29ToolStripMenuItem_Click;
-            // 
-            // lTOMToolStripMenuItem
-            // 
-            lTOMToolStripMenuItem.Name = "lTOMToolStripMenuItem";
-            lTOMToolStripMenuItem.Size = new System.Drawing.Size(404, 22);
-            lTOMToolStripMenuItem.Text = "LTOM 30 - Declaraction of Forfeiture of Delinquent Property";
-            lTOMToolStripMenuItem.Click += lTOMToolStripMenuItem_Click;
-            // 
-            // lTOM31ToolStripMenuItem
-            // 
-            lTOM31ToolStripMenuItem.Name = "lTOM31ToolStripMenuItem";
-            lTOM31ToolStripMenuItem.Size = new System.Drawing.Size(404, 22);
-            lTOM31ToolStripMenuItem.Text = "LTOM 31 - Report of Sale";
-            lTOM31ToolStripMenuItem.Click += lTOM31ToolStripMenuItem_Click;
             // 
             // btnSearchRptSched
             // 
@@ -680,175 +604,6 @@
             toolStripButton7.Text = "Back";
             toolStripButton7.Click += toolStripButton7_Click;
             // 
-            // tabPagePrint
-            // 
-            tabPagePrint.Controls.Add(tabControlReportsViewer);
-            tabPagePrint.Controls.Add(toolStrip3);
-            tabPagePrint.Controls.Add(panel1);
-            tabPagePrint.Location = new System.Drawing.Point(4, 5);
-            tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
-            tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(761, 419);
-            tabPagePrint.TabIndex = 2;
-            tabPagePrint.Text = "Auction > Print";
-            tabPagePrint.UseVisualStyleBackColor = true;
-            // 
-            // tabControlReportsViewer
-            // 
-            tabControlReportsViewer.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            tabControlReportsViewer.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            tabControlReportsViewer.Controls.Add(tabPageNoticeOfAuctionSaleOfDelinquentRealProperties);
-            tabControlReportsViewer.Controls.Add(tabPageNoticeOfSale);
-            tabControlReportsViewer.Controls.Add(tabPageCertificateOfSale);
-            tabControlReportsViewer.Controls.Add(tabPageDeclaractionOfForfeitureOfDelinquentProeperty);
-            tabControlReportsViewer.Controls.Add(tabPageReportOfSale);
-            tabControlReportsViewer.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            tabControlReportsViewer.ItemSize = new System.Drawing.Size(0, 1);
-            tabControlReportsViewer.Location = new System.Drawing.Point(-4, 35);
-            tabControlReportsViewer.Margin = new System.Windows.Forms.Padding(0);
-            tabControlReportsViewer.Name = "tabControlReportsViewer";
-            tabControlReportsViewer.Padding = new System.Drawing.Point(0, 0);
-            tabControlReportsViewer.SelectedIndex = 0;
-            tabControlReportsViewer.Size = new System.Drawing.Size(792, 368);
-            tabControlReportsViewer.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            tabControlReportsViewer.TabIndex = 3;
-            // 
-            // tabPageNoticeOfAuctionSaleOfDelinquentRealProperties
-            // 
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.BackColor = System.Drawing.SystemColors.Control;
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Controls.Add(ucNoticeOfAuctionSaleOfDelinquentRealProperties1);
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Location = new System.Drawing.Point(4, 5);
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Margin = new System.Windows.Forms.Padding(0);
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Name = "tabPageNoticeOfAuctionSaleOfDelinquentRealProperties";
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Size = new System.Drawing.Size(784, 359);
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.TabIndex = 0;
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.Text = "Auction > Print > Notice of Auction Sale of Delinquent Real Properties";
-            // 
-            // ucNoticeOfAuctionSaleOfDelinquentRealProperties1
-            // 
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1.Location = new System.Drawing.Point(0, 0);
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1.Name = "ucNoticeOfAuctionSaleOfDelinquentRealProperties1";
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1.Size = new System.Drawing.Size(784, 359);
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties1.TabIndex = 0;
-            // 
-            // tabPageNoticeOfSale
-            // 
-            tabPageNoticeOfSale.BackColor = System.Drawing.Color.Transparent;
-            tabPageNoticeOfSale.Controls.Add(ucNoticeOfsale1);
-            tabPageNoticeOfSale.Location = new System.Drawing.Point(4, 5);
-            tabPageNoticeOfSale.Margin = new System.Windows.Forms.Padding(0);
-            tabPageNoticeOfSale.Name = "tabPageNoticeOfSale";
-            tabPageNoticeOfSale.Size = new System.Drawing.Size(784, 359);
-            tabPageNoticeOfSale.TabIndex = 1;
-            tabPageNoticeOfSale.Text = "Auction > Print > Notice of Sale";
-            tabPageNoticeOfSale.UseVisualStyleBackColor = true;
-            // 
-            // ucNoticeOfsale1
-            // 
-            ucNoticeOfsale1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucNoticeOfsale1.Location = new System.Drawing.Point(0, 0);
-            ucNoticeOfsale1.Name = "ucNoticeOfsale1";
-            ucNoticeOfsale1.Size = new System.Drawing.Size(784, 359);
-            ucNoticeOfsale1.TabIndex = 0;
-            // 
-            // tabPageCertificateOfSale
-            // 
-            tabPageCertificateOfSale.BackColor = System.Drawing.SystemColors.Control;
-            tabPageCertificateOfSale.Controls.Add(ucCertificateOfSale1);
-            tabPageCertificateOfSale.Location = new System.Drawing.Point(4, 5);
-            tabPageCertificateOfSale.Margin = new System.Windows.Forms.Padding(0);
-            tabPageCertificateOfSale.Name = "tabPageCertificateOfSale";
-            tabPageCertificateOfSale.Size = new System.Drawing.Size(784, 359);
-            tabPageCertificateOfSale.TabIndex = 2;
-            tabPageCertificateOfSale.Text = "Auction > Print > Certificate of Sale";
-            // 
-            // ucCertificateOfSale1
-            // 
-            ucCertificateOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucCertificateOfSale1.Location = new System.Drawing.Point(0, 0);
-            ucCertificateOfSale1.Name = "ucCertificateOfSale1";
-            ucCertificateOfSale1.Size = new System.Drawing.Size(784, 359);
-            ucCertificateOfSale1.TabIndex = 0;
-            // 
-            // tabPageDeclaractionOfForfeitureOfDelinquentProeperty
-            // 
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.BackColor = System.Drawing.SystemColors.Control;
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Controls.Add(ucDeclarationOfForfeitureOfDelinquentProperty1);
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Location = new System.Drawing.Point(4, 5);
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Margin = new System.Windows.Forms.Padding(0);
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Name = "tabPageDeclaractionOfForfeitureOfDelinquentProeperty";
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Size = new System.Drawing.Size(784, 359);
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.TabIndex = 3;
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.Text = "Auction > Print > Declaraction of Forfeiture of Delinquent Property";
-            // 
-            // ucDeclarationOfForfeitureOfDelinquentProperty1
-            // 
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Location = new System.Drawing.Point(0, 0);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Name = "ucDeclarationOfForfeitureOfDelinquentProperty1";
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Size = new System.Drawing.Size(784, 359);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.TabIndex = 0;
-            // 
-            // tabPageReportOfSale
-            // 
-            tabPageReportOfSale.BackColor = System.Drawing.SystemColors.Control;
-            tabPageReportOfSale.Controls.Add(ucReportOfSale1);
-            tabPageReportOfSale.Location = new System.Drawing.Point(4, 5);
-            tabPageReportOfSale.Margin = new System.Windows.Forms.Padding(0);
-            tabPageReportOfSale.Name = "tabPageReportOfSale";
-            tabPageReportOfSale.Size = new System.Drawing.Size(784, 359);
-            tabPageReportOfSale.TabIndex = 4;
-            tabPageReportOfSale.Text = "Auction > Print > Report of Sale";
-            // 
-            // ucReportOfSale1
-            // 
-            ucReportOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucReportOfSale1.Location = new System.Drawing.Point(0, 0);
-            ucReportOfSale1.Name = "ucReportOfSale1";
-            ucReportOfSale1.Size = new System.Drawing.Size(784, 359);
-            ucReportOfSale1.TabIndex = 0;
-            // 
-            // toolStrip3
-            // 
-            toolStrip3.BackColor = System.Drawing.Color.Transparent;
-            toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton8 });
-            toolStrip3.Location = new System.Drawing.Point(0, 0);
-            toolStrip3.Name = "toolStrip3";
-            toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(761, 35);
-            toolStrip3.TabIndex = 0;
-            toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButton8
-            // 
-            toolStripButton8.Image = Properties.Resources.arrow_left_20px;
-            toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton8.Name = "toolStripButton8";
-            toolStripButton8.Size = new System.Drawing.Size(56, 24);
-            toolStripButton8.Text = "Back";
-            toolStripButton8.Click += toolStripButton8_Click;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(statusStrip2);
-            panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panel1.Location = new System.Drawing.Point(0, 395);
-            panel1.Margin = new System.Windows.Forms.Padding(0);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(761, 24);
-            panel1.TabIndex = 1;
-            // 
-            // statusStrip2
-            // 
-            statusStrip2.Location = new System.Drawing.Point(0, 2);
-            statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(761, 22);
-            statusStrip2.TabIndex = 2;
-            statusStrip2.Text = "statusStrip2";
-            // 
             // backgroundWorker1
             // 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -873,6 +628,7 @@
             ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
             KeyPreview = true;
+            MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(785, 467);
             Name = "frmAuction";
             ShowInTaskbar = false;
@@ -907,18 +663,6 @@
             panel5.ResumeLayout(false);
             toolStrip5.ResumeLayout(false);
             toolStrip5.PerformLayout();
-            tabPagePrint.ResumeLayout(false);
-            tabPagePrint.PerformLayout();
-            tabControlReportsViewer.ResumeLayout(false);
-            tabPageNoticeOfAuctionSaleOfDelinquentRealProperties.ResumeLayout(false);
-            tabPageNoticeOfSale.ResumeLayout(false);
-            tabPageCertificateOfSale.ResumeLayout(false);
-            tabPageDeclaractionOfForfeitureOfDelinquentProeperty.ResumeLayout(false);
-            tabPageReportOfSale.ResumeLayout(false);
-            toolStrip3.ResumeLayout(false);
-            toolStrip3.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -946,11 +690,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnBack;
-        private System.Windows.Forms.TabPage tabPagePrint;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
         private ucAuctionEvents ucAuctionEvents1;
         private System.Windows.Forms.TabPage tabPageListOfRptSchedule;
         private System.Windows.Forms.ToolStrip toolStrip4;
@@ -974,12 +713,6 @@
         private System.Windows.Forms.DateTimePicker dtpRptSchedule;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripMenuItem lTOM23ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOM24ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOM29ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOMToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOM31ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
@@ -988,18 +721,7 @@
         private System.Windows.Forms.DataGridView dgRptScheduleList;
         private System.Windows.Forms.DataGridView dgRptSchedule;
         private ucAuctionEvents ucAuctionEvents2;
-        private System.Windows.Forms.TabControl tabControlReportsViewer;
-        private System.Windows.Forms.TabPage tabPageNoticeOfAuctionSaleOfDelinquentRealProperties;
-        private System.Windows.Forms.TabPage tabPageNoticeOfSale;
         private ucRptScheduling ucRptScheduling2;
-        private System.Windows.Forms.TabPage tabPageCertificateOfSale;
-        private System.Windows.Forms.TabPage tabPageDeclaractionOfForfeitureOfDelinquentProeperty;
-        private System.Windows.Forms.TabPage tabPageReportOfSale;
-        private ucNoticeOfAuctionSaleOfDelinquentRealProperties ucNoticeOfAuctionSaleOfDelinquentRealProperties1;
-        private ucNoticeOfsale ucNoticeOfsale1;
-        private ucCertificateOfSale ucCertificateOfSale1;
-        private ucDeclarationOfForfeitureOfDelinquentProperty ucDeclarationOfForfeitureOfDelinquentProperty1;
-        private ucReportOfSale ucReportOfSale1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
