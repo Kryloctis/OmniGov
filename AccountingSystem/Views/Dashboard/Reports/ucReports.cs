@@ -1,8 +1,14 @@
-﻿using AccountingSystem.Views.Reports.Financial_Statements;
+﻿using AccountingSystem.Views.Reports.Cashbook;
+using AccountingSystem.Views.Reports.ConsolidatedReceipts;
+using AccountingSystem.Views.Reports.DailyCashReport;
+using AccountingSystem.Views.Reports.Financial_Statements;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Reports.Ltom;
 using AccountingSystem.Views.Reports.Rcd;
+using AccountingSystem.Views.Reports.RCI;
+using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
+using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Reports.Saaob;
 using AccountingSystem.Views.Reports.Saaobb;
 using AccountingSystem.Views.Reports.TrialBalance;
@@ -21,14 +27,12 @@ namespace AccountingSystem.Views.Dashboard.Reports
 
         internal void OnLoad()
         {
-            ValidatedPermissions();
+            ValidateAccountingPermissions();
+            ValidateTreasuryPermissions();
         }
 
-        private void ValidatedPermissions()
+        private void ValidateAccountingPermissions()
         {
-            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
-                btnRcd.Enabled = false;
-
             if (!Helper.HasPermission("Report > SAAOB"))
                 btnSaaob.Enabled = false;
 
@@ -82,6 +86,39 @@ namespace AccountingSystem.Views.Dashboard.Reports
             var validateFinancialStatements = new List<bool>();
             financialStatementsReportPermissions.ForEach(x => { validateFinancialStatements.Add(!Helper.HasPermission(x)); });
             btnFs.Enabled = validateFinancialStatements.Contains(false);
+        }
+
+        private void ValidateTreasuryPermissions()
+        {
+            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
+                btnRcd.Enabled = false;
+
+            if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
+                btnLstRptDelinquencies.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Report of Checks Issued"))
+                btnRci.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Bank Cashbook"))
+                btnBankCashbook.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Consolidated Receipts"))
+                btnConsRprtAccForms.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Daily Cash Position"))
+                btnDlyCashPstn.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
+                btnRptDuesPayments.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
+                btnConsRprtAccForms.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
+                btnSchedRc.Enabled = false;
+
+            if (!Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
+                btnSchedUnRc.Enabled = false;
         }
 
         private void btnLtom17and19_Click(object sender, EventArgs e)
@@ -175,6 +212,96 @@ namespace AccountingSystem.Views.Dashboard.Reports
             try
             {
                 _ = new frmFinancialStatements().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnBankCashbook_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCashbook().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSchedRc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmReleasedChecksReport().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSchedUnRc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmUnreleasedChequesReport().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnConsRprtAccForms_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmConsolidatedReceipts().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnDlyCashPstn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmDailyCash().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRci_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRCIReport().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRptStmntAcc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLstRptDelinquencies_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmListRptDelinquencies().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRptDuesPayments_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmRptDuesPayments().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnCertListRptDelinquencies_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCertifiedListRptDelinquences().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

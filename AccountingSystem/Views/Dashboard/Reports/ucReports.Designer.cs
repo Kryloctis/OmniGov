@@ -30,19 +30,32 @@
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel1 = new System.Windows.Forms.Panel();
+            panel4 = new System.Windows.Forms.Panel();
             btnLtom23 = new System.Windows.Forms.Button();
             btnLtom22 = new System.Windows.Forms.Button();
             btnLtom21 = new System.Windows.Forms.Button();
             btnLtom20 = new System.Windows.Forms.Button();
             btnLtom17and19 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
+            btnCertListRptDelinquencies = new System.Windows.Forms.Button();
+            btnRptDuesPayments = new System.Windows.Forms.Button();
+            btnLstRptDelinquencies = new System.Windows.Forms.Button();
+            btnRptStmntAcc = new System.Windows.Forms.Button();
             btnRcd = new System.Windows.Forms.Button();
+            btnRci = new System.Windows.Forms.Button();
+            btnDlyCashPstn = new System.Windows.Forms.Button();
+            btnConsRprtAccForms = new System.Windows.Forms.Button();
+            btnSchedUnRc = new System.Windows.Forms.Button();
+            btnSchedRc = new System.Windows.Forms.Button();
+            btnBankCashbook = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             panel2 = new System.Windows.Forms.Panel();
+            panel6 = new System.Windows.Forms.Panel();
             btnSaaobb = new System.Windows.Forms.Button();
             btnSaaob = new System.Windows.Forms.Button();
             label2 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            panel5 = new System.Windows.Forms.Panel();
             btnFs = new System.Windows.Forms.Button();
             btnTrialBalance = new System.Windows.Forms.Button();
             btnLedgers = new System.Windows.Forms.Button();
@@ -50,8 +63,11 @@
             label3 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
+            panel4.SuspendLayout();
             panel2.SuspendLayout();
+            panel6.SuspendLayout();
             panel3.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -61,31 +77,53 @@
             tableLayoutPanel1.Controls.Add(panel1, 0, 2);
             tableLayoutPanel1.Controls.Add(panel2, 0, 0);
             tableLayoutPanel1.Controls.Add(panel3, 0, 1);
-            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 133F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(791, 723);
+            tableLayoutPanel1.Size = new System.Drawing.Size(502, 1034);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
-            panel1.Controls.Add(btnLtom23);
-            panel1.Controls.Add(btnLtom22);
-            panel1.Controls.Add(btnLtom21);
-            panel1.Controls.Add(btnLtom20);
-            panel1.Controls.Add(btnLtom17and19);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(btnRcd);
+            panel1.Controls.Add(panel4);
             panel1.Controls.Add(label1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 328);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(785, 392);
+            panel1.Size = new System.Drawing.Size(496, 703);
             panel1.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(btnLtom23);
+            panel4.Controls.Add(btnLtom22);
+            panel4.Controls.Add(btnLtom21);
+            panel4.Controls.Add(btnLtom20);
+            panel4.Controls.Add(btnLtom17and19);
+            panel4.Controls.Add(button2);
+            panel4.Controls.Add(btnCertListRptDelinquencies);
+            panel4.Controls.Add(btnRptDuesPayments);
+            panel4.Controls.Add(btnLstRptDelinquencies);
+            panel4.Controls.Add(btnRptStmntAcc);
+            panel4.Controls.Add(btnRcd);
+            panel4.Controls.Add(btnRci);
+            panel4.Controls.Add(btnDlyCashPstn);
+            panel4.Controls.Add(btnConsRprtAccForms);
+            panel4.Controls.Add(btnSchedUnRc);
+            panel4.Controls.Add(btnSchedRc);
+            panel4.Controls.Add(btnBankCashbook);
+            panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            panel4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel4.ForeColor = System.Drawing.SystemColors.ControlText;
+            panel4.Location = new System.Drawing.Point(0, 30);
+            panel4.Name = "panel4";
+            panel4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            panel4.Size = new System.Drawing.Size(496, 581);
+            panel4.TabIndex = 1;
             // 
             // btnLtom23
             // 
@@ -94,10 +132,10 @@
             btnLtom23.FlatAppearance.BorderSize = 0;
             btnLtom23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom23.Location = new System.Drawing.Point(0, 228);
+            btnLtom23.Location = new System.Drawing.Point(5, 528);
             btnLtom23.Name = "btnLtom23";
-            btnLtom23.Size = new System.Drawing.Size(785, 33);
-            btnLtom23.TabIndex = 39;
+            btnLtom23.Size = new System.Drawing.Size(491, 33);
+            btnLtom23.TabIndex = 56;
             btnLtom23.Text = "LTOM Form No. 23 - Notice of Auction Sale of Delinquent Real Properties";
             btnLtom23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom23.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -111,10 +149,10 @@
             btnLtom22.FlatAppearance.BorderSize = 0;
             btnLtom22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom22.Location = new System.Drawing.Point(0, 195);
+            btnLtom22.Location = new System.Drawing.Point(5, 495);
             btnLtom22.Name = "btnLtom22";
-            btnLtom22.Size = new System.Drawing.Size(785, 33);
-            btnLtom22.TabIndex = 33;
+            btnLtom22.Size = new System.Drawing.Size(491, 33);
+            btnLtom22.TabIndex = 53;
             btnLtom22.Text = "LTOM Form No. 22 - Report of Levy (Sanggunian)";
             btnLtom22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom22.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -127,10 +165,10 @@
             btnLtom21.FlatAppearance.BorderSize = 0;
             btnLtom21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom21.Location = new System.Drawing.Point(0, 162);
+            btnLtom21.Location = new System.Drawing.Point(5, 462);
             btnLtom21.Name = "btnLtom21";
-            btnLtom21.Size = new System.Drawing.Size(785, 33);
-            btnLtom21.TabIndex = 31;
+            btnLtom21.Size = new System.Drawing.Size(491, 33);
+            btnLtom21.TabIndex = 51;
             btnLtom21.Text = "LTOM Form No. 21 - Notice of Levy (Local Assessor and Registrar of Deeds)\r\n";
             btnLtom21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom21.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -143,10 +181,10 @@
             btnLtom20.FlatAppearance.BorderSize = 0;
             btnLtom20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom20.Location = new System.Drawing.Point(0, 129);
+            btnLtom20.Location = new System.Drawing.Point(5, 429);
             btnLtom20.Name = "btnLtom20";
-            btnLtom20.Size = new System.Drawing.Size(785, 33);
-            btnLtom20.TabIndex = 32;
+            btnLtom20.Size = new System.Drawing.Size(491, 33);
+            btnLtom20.TabIndex = 52;
             btnLtom20.Text = "LTOM Form No. 20 - Warrant of Levy";
             btnLtom20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -160,10 +198,10 @@
             btnLtom17and19.FlatAppearance.BorderSize = 0;
             btnLtom17and19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom17and19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom17and19.Location = new System.Drawing.Point(0, 96);
+            btnLtom17and19.Location = new System.Drawing.Point(5, 396);
             btnLtom17and19.Name = "btnLtom17and19";
-            btnLtom17and19.Size = new System.Drawing.Size(785, 33);
-            btnLtom17and19.TabIndex = 28;
+            btnLtom17and19.Size = new System.Drawing.Size(491, 33);
+            btnLtom17and19.TabIndex = 50;
             btnLtom17and19.Text = "LTOM Form No. (17-19) - Notice of Real Property Tax Delinquency\r\n";
             btnLtom17and19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom17and19.UseVisualStyleBackColor = true;
@@ -176,14 +214,82 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button2.Location = new System.Drawing.Point(0, 63);
+            button2.Location = new System.Drawing.Point(5, 363);
             button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(785, 33);
-            button2.TabIndex = 36;
+            button2.Size = new System.Drawing.Size(491, 33);
+            button2.TabIndex = 54;
             button2.Text = "LTOM Form No. 16 - Notice of Delinquency in the Payment of Real Property Tax";
             button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             button2.UseVisualStyleBackColor = true;
+            // 
+            // btnCertListRptDelinquencies
+            // 
+            btnCertListRptDelinquencies.AutoEllipsis = true;
+            btnCertListRptDelinquencies.Dock = System.Windows.Forms.DockStyle.Top;
+            btnCertListRptDelinquencies.FlatAppearance.BorderSize = 0;
+            btnCertListRptDelinquencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnCertListRptDelinquencies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnCertListRptDelinquencies.Location = new System.Drawing.Point(5, 330);
+            btnCertListRptDelinquencies.Name = "btnCertListRptDelinquencies";
+            btnCertListRptDelinquencies.Size = new System.Drawing.Size(491, 33);
+            btnCertListRptDelinquencies.TabIndex = 60;
+            btnCertListRptDelinquencies.Text = "Certified List of Real Property Tax Deliquencies";
+            btnCertListRptDelinquencies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnCertListRptDelinquencies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnCertListRptDelinquencies.UseVisualStyleBackColor = true;
+            btnCertListRptDelinquencies.Click += btnCertListRptDelinquencies_Click;
+            // 
+            // btnRptDuesPayments
+            // 
+            btnRptDuesPayments.AutoEllipsis = true;
+            btnRptDuesPayments.Dock = System.Windows.Forms.DockStyle.Top;
+            btnRptDuesPayments.FlatAppearance.BorderSize = 0;
+            btnRptDuesPayments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnRptDuesPayments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRptDuesPayments.Location = new System.Drawing.Point(5, 297);
+            btnRptDuesPayments.Name = "btnRptDuesPayments";
+            btnRptDuesPayments.Size = new System.Drawing.Size(491, 33);
+            btnRptDuesPayments.TabIndex = 59;
+            btnRptDuesPayments.Text = "Real Property Tax Dues and Payments";
+            btnRptDuesPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRptDuesPayments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRptDuesPayments.UseVisualStyleBackColor = true;
+            btnRptDuesPayments.Click += btnRptDuesPayments_Click;
+            // 
+            // btnLstRptDelinquencies
+            // 
+            btnLstRptDelinquencies.AutoEllipsis = true;
+            btnLstRptDelinquencies.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLstRptDelinquencies.FlatAppearance.BorderSize = 0;
+            btnLstRptDelinquencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLstRptDelinquencies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLstRptDelinquencies.Location = new System.Drawing.Point(5, 264);
+            btnLstRptDelinquencies.Name = "btnLstRptDelinquencies";
+            btnLstRptDelinquencies.Size = new System.Drawing.Size(491, 33);
+            btnLstRptDelinquencies.TabIndex = 57;
+            btnLstRptDelinquencies.Text = "List of Real Property Delinquencies";
+            btnLstRptDelinquencies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLstRptDelinquencies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLstRptDelinquencies.UseVisualStyleBackColor = true;
+            btnLstRptDelinquencies.Click += btnLstRptDelinquencies_Click;
+            // 
+            // btnRptStmntAcc
+            // 
+            btnRptStmntAcc.AutoEllipsis = true;
+            btnRptStmntAcc.Dock = System.Windows.Forms.DockStyle.Top;
+            btnRptStmntAcc.FlatAppearance.BorderSize = 0;
+            btnRptStmntAcc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnRptStmntAcc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRptStmntAcc.Location = new System.Drawing.Point(5, 231);
+            btnRptStmntAcc.Name = "btnRptStmntAcc";
+            btnRptStmntAcc.Size = new System.Drawing.Size(491, 33);
+            btnRptStmntAcc.TabIndex = 58;
+            btnRptStmntAcc.Text = "Real Property Tax Statement of Account";
+            btnRptStmntAcc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRptStmntAcc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRptStmntAcc.UseVisualStyleBackColor = true;
+            btnRptStmntAcc.Click += btnRptStmntAcc_Click;
             // 
             // btnRcd
             // 
@@ -192,15 +298,117 @@
             btnRcd.FlatAppearance.BorderSize = 0;
             btnRcd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnRcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnRcd.Location = new System.Drawing.Point(0, 30);
+            btnRcd.Location = new System.Drawing.Point(5, 198);
             btnRcd.Name = "btnRcd";
-            btnRcd.Size = new System.Drawing.Size(785, 33);
-            btnRcd.TabIndex = 37;
+            btnRcd.Size = new System.Drawing.Size(491, 33);
+            btnRcd.TabIndex = 55;
             btnRcd.Text = "Report of Collections Deposits (RCD)";
             btnRcd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRcd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnRcd.UseVisualStyleBackColor = true;
             btnRcd.Click += btnRcd_Click;
+            // 
+            // btnRci
+            // 
+            btnRci.AutoEllipsis = true;
+            btnRci.Dock = System.Windows.Forms.DockStyle.Top;
+            btnRci.FlatAppearance.BorderSize = 0;
+            btnRci.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnRci.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRci.Location = new System.Drawing.Point(5, 165);
+            btnRci.Name = "btnRci";
+            btnRci.Size = new System.Drawing.Size(491, 33);
+            btnRci.TabIndex = 62;
+            btnRci.Text = "Report of Check Issued (RCI)";
+            btnRci.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnRci.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRci.UseVisualStyleBackColor = true;
+            btnRci.Click += btnRci_Click;
+            // 
+            // btnDlyCashPstn
+            // 
+            btnDlyCashPstn.AutoEllipsis = true;
+            btnDlyCashPstn.Dock = System.Windows.Forms.DockStyle.Top;
+            btnDlyCashPstn.FlatAppearance.BorderSize = 0;
+            btnDlyCashPstn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnDlyCashPstn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDlyCashPstn.Location = new System.Drawing.Point(5, 132);
+            btnDlyCashPstn.Name = "btnDlyCashPstn";
+            btnDlyCashPstn.Size = new System.Drawing.Size(491, 33);
+            btnDlyCashPstn.TabIndex = 66;
+            btnDlyCashPstn.Text = "Daily Cash Positions";
+            btnDlyCashPstn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDlyCashPstn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnDlyCashPstn.UseVisualStyleBackColor = true;
+            btnDlyCashPstn.Click += btnDlyCashPstn_Click;
+            // 
+            // btnConsRprtAccForms
+            // 
+            btnConsRprtAccForms.AutoEllipsis = true;
+            btnConsRprtAccForms.Dock = System.Windows.Forms.DockStyle.Top;
+            btnConsRprtAccForms.FlatAppearance.BorderSize = 0;
+            btnConsRprtAccForms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnConsRprtAccForms.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnConsRprtAccForms.Location = new System.Drawing.Point(5, 99);
+            btnConsRprtAccForms.Name = "btnConsRprtAccForms";
+            btnConsRprtAccForms.Size = new System.Drawing.Size(491, 33);
+            btnConsRprtAccForms.TabIndex = 65;
+            btnConsRprtAccForms.Text = "Consolidated Report of Accountability for Accountable Forms";
+            btnConsRprtAccForms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnConsRprtAccForms.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnConsRprtAccForms.UseVisualStyleBackColor = true;
+            btnConsRprtAccForms.Click += btnConsRprtAccForms_Click;
+            // 
+            // btnSchedUnRc
+            // 
+            btnSchedUnRc.AutoEllipsis = true;
+            btnSchedUnRc.Dock = System.Windows.Forms.DockStyle.Top;
+            btnSchedUnRc.FlatAppearance.BorderSize = 0;
+            btnSchedUnRc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSchedUnRc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSchedUnRc.Location = new System.Drawing.Point(5, 66);
+            btnSchedUnRc.Name = "btnSchedUnRc";
+            btnSchedUnRc.Size = new System.Drawing.Size(491, 33);
+            btnSchedUnRc.TabIndex = 64;
+            btnSchedUnRc.Text = "Schedule of Unreleased Cheques";
+            btnSchedUnRc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSchedUnRc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnSchedUnRc.UseVisualStyleBackColor = true;
+            btnSchedUnRc.Click += btnSchedUnRc_Click;
+            // 
+            // btnSchedRc
+            // 
+            btnSchedRc.AutoEllipsis = true;
+            btnSchedRc.Dock = System.Windows.Forms.DockStyle.Top;
+            btnSchedRc.FlatAppearance.BorderSize = 0;
+            btnSchedRc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSchedRc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSchedRc.Location = new System.Drawing.Point(5, 33);
+            btnSchedRc.Name = "btnSchedRc";
+            btnSchedRc.Size = new System.Drawing.Size(491, 33);
+            btnSchedRc.TabIndex = 63;
+            btnSchedRc.Text = "Schedule of Released Cheques";
+            btnSchedRc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSchedRc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnSchedRc.UseVisualStyleBackColor = true;
+            btnSchedRc.Click += btnSchedRc_Click;
+            // 
+            // btnBankCashbook
+            // 
+            btnBankCashbook.AutoEllipsis = true;
+            btnBankCashbook.Dock = System.Windows.Forms.DockStyle.Top;
+            btnBankCashbook.FlatAppearance.BorderSize = 0;
+            btnBankCashbook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnBankCashbook.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnBankCashbook.Location = new System.Drawing.Point(5, 0);
+            btnBankCashbook.Name = "btnBankCashbook";
+            btnBankCashbook.Size = new System.Drawing.Size(491, 33);
+            btnBankCashbook.TabIndex = 61;
+            btnBankCashbook.Text = "Bank Cashbook";
+            btnBankCashbook.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnBankCashbook.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnBankCashbook.UseVisualStyleBackColor = true;
+            btnBankCashbook.Click += btnBankCashbook_Click;
             // 
             // label1
             // 
@@ -209,21 +417,31 @@
             label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label1.Location = new System.Drawing.Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(785, 30);
-            label1.TabIndex = 34;
+            label1.Size = new System.Drawing.Size(496, 30);
+            label1.TabIndex = 0;
             label1.Text = "Treasury";
             // 
             // panel2
             // 
-            panel2.Controls.Add(btnSaaobb);
-            panel2.Controls.Add(btnSaaob);
+            panel2.Controls.Add(panel6);
             panel2.Controls.Add(label2);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(785, 127);
+            panel2.Size = new System.Drawing.Size(496, 127);
             panel2.TabIndex = 2;
             panel2.Paint += panel2_Paint;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(btnSaaobb);
+            panel6.Controls.Add(btnSaaob);
+            panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel6.Location = new System.Drawing.Point(0, 30);
+            panel6.Name = "panel6";
+            panel6.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            panel6.Size = new System.Drawing.Size(496, 97);
+            panel6.TabIndex = 37;
             // 
             // btnSaaobb
             // 
@@ -232,10 +450,10 @@
             btnSaaobb.FlatAppearance.BorderSize = 0;
             btnSaaobb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSaaobb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSaaobb.Location = new System.Drawing.Point(0, 63);
+            btnSaaobb.Location = new System.Drawing.Point(5, 33);
             btnSaaobb.Name = "btnSaaobb";
-            btnSaaobb.Size = new System.Drawing.Size(785, 33);
-            btnSaaobb.TabIndex = 39;
+            btnSaaobb.Size = new System.Drawing.Size(491, 33);
+            btnSaaobb.TabIndex = 41;
             btnSaaobb.Text = "Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
             btnSaaobb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSaaobb.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -249,10 +467,10 @@
             btnSaaob.FlatAppearance.BorderSize = 0;
             btnSaaob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSaaob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSaaob.Location = new System.Drawing.Point(0, 30);
+            btnSaaob.Location = new System.Drawing.Point(5, 0);
             btnSaaob.Name = "btnSaaob";
-            btnSaaob.Size = new System.Drawing.Size(785, 33);
-            btnSaaob.TabIndex = 38;
+            btnSaaob.Size = new System.Drawing.Size(491, 33);
+            btnSaaob.TabIndex = 40;
             btnSaaob.Text = "Status of Appropriations, Allotments and Obligation (SAAOB)";
             btnSaaob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSaaob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -266,22 +484,32 @@
             label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label2.Location = new System.Drawing.Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(785, 30);
+            label2.Size = new System.Drawing.Size(496, 30);
             label2.TabIndex = 36;
             label2.Text = "Budget";
             // 
             // panel3
             // 
-            panel3.Controls.Add(btnFs);
-            panel3.Controls.Add(btnTrialBalance);
-            panel3.Controls.Add(btnLedgers);
-            panel3.Controls.Add(btnJournals);
+            panel3.Controls.Add(panel5);
             panel3.Controls.Add(label3);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(3, 136);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(785, 186);
+            panel3.Size = new System.Drawing.Size(496, 186);
             panel3.TabIndex = 4;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(btnFs);
+            panel5.Controls.Add(btnTrialBalance);
+            panel5.Controls.Add(btnLedgers);
+            panel5.Controls.Add(btnJournals);
+            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel5.Location = new System.Drawing.Point(0, 30);
+            panel5.Name = "panel5";
+            panel5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            panel5.Size = new System.Drawing.Size(496, 156);
+            panel5.TabIndex = 41;
             // 
             // btnFs
             // 
@@ -290,10 +518,10 @@
             btnFs.FlatAppearance.BorderSize = 0;
             btnFs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnFs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnFs.Location = new System.Drawing.Point(0, 129);
+            btnFs.Location = new System.Drawing.Point(5, 99);
             btnFs.Name = "btnFs";
-            btnFs.Size = new System.Drawing.Size(785, 33);
-            btnFs.TabIndex = 44;
+            btnFs.Size = new System.Drawing.Size(491, 33);
+            btnFs.TabIndex = 48;
             btnFs.Text = "Financial Statements";
             btnFs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnFs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -307,10 +535,10 @@
             btnTrialBalance.FlatAppearance.BorderSize = 0;
             btnTrialBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnTrialBalance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnTrialBalance.Location = new System.Drawing.Point(0, 96);
+            btnTrialBalance.Location = new System.Drawing.Point(5, 66);
             btnTrialBalance.Name = "btnTrialBalance";
-            btnTrialBalance.Size = new System.Drawing.Size(785, 33);
-            btnTrialBalance.TabIndex = 43;
+            btnTrialBalance.Size = new System.Drawing.Size(491, 33);
+            btnTrialBalance.TabIndex = 47;
             btnTrialBalance.Text = "Trial Balance";
             btnTrialBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnTrialBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -324,10 +552,10 @@
             btnLedgers.FlatAppearance.BorderSize = 0;
             btnLedgers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLedgers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLedgers.Location = new System.Drawing.Point(0, 63);
+            btnLedgers.Location = new System.Drawing.Point(5, 33);
             btnLedgers.Name = "btnLedgers";
-            btnLedgers.Size = new System.Drawing.Size(785, 33);
-            btnLedgers.TabIndex = 42;
+            btnLedgers.Size = new System.Drawing.Size(491, 33);
+            btnLedgers.TabIndex = 46;
             btnLedgers.Text = "Ledgers";
             btnLedgers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLedgers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -341,10 +569,10 @@
             btnJournals.FlatAppearance.BorderSize = 0;
             btnJournals.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnJournals.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnJournals.Location = new System.Drawing.Point(0, 30);
+            btnJournals.Location = new System.Drawing.Point(5, 0);
             btnJournals.Name = "btnJournals";
-            btnJournals.Size = new System.Drawing.Size(785, 33);
-            btnJournals.TabIndex = 41;
+            btnJournals.Size = new System.Drawing.Size(491, 33);
+            btnJournals.TabIndex = 45;
             btnJournals.Text = "Journals";
             btnJournals.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnJournals.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -358,7 +586,7 @@
             label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label3.Location = new System.Drawing.Point(0, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(785, 30);
+            label3.Size = new System.Drawing.Size(496, 30);
             label3.TabIndex = 40;
             label3.Text = "Accounting";
             // 
@@ -366,14 +594,18 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScroll = true;
             Controls.Add(tableLayoutPanel1);
             Name = "ucReports";
             Padding = new System.Windows.Forms.Padding(4);
-            Size = new System.Drawing.Size(799, 731);
+            Size = new System.Drawing.Size(510, 772);
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel6.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -382,22 +614,35 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnSaaobb;
-        private System.Windows.Forms.Button btnSaaob;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnLtom23;
         private System.Windows.Forms.Button btnLtom22;
         private System.Windows.Forms.Button btnLtom21;
         private System.Windows.Forms.Button btnLtom20;
         private System.Windows.Forms.Button btnLtom17and19;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCertListRptDelinquencies;
+        private System.Windows.Forms.Button btnRptDuesPayments;
+        private System.Windows.Forms.Button btnLstRptDelinquencies;
+        private System.Windows.Forms.Button btnRptStmntAcc;
         private System.Windows.Forms.Button btnRcd;
+        private System.Windows.Forms.Button btnRci;
+        private System.Windows.Forms.Button btnDlyCashPstn;
+        private System.Windows.Forms.Button btnConsRprtAccForms;
+        private System.Windows.Forms.Button btnSchedUnRc;
+        private System.Windows.Forms.Button btnSchedRc;
+        private System.Windows.Forms.Button btnBankCashbook;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnFs;
+        private System.Windows.Forms.Button btnTrialBalance;
         private System.Windows.Forms.Button btnLedgers;
         private System.Windows.Forms.Button btnJournals;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnTrialBalance;
-        private System.Windows.Forms.Button btnFs;
-        private System.Windows.Forms.Button btnLtom23;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnSaaobb;
+        private System.Windows.Forms.Button btnSaaob;
     }
 }
