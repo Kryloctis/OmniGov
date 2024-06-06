@@ -148,7 +148,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new System.Drawing.Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(792, 434);
+            tabControl1.Size = new System.Drawing.Size(769, 428);
             tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControl1.TabIndex = 9;
             // 
@@ -162,7 +162,7 @@
             tabPageListOfAuction.Location = new System.Drawing.Point(4, 5);
             tabPageListOfAuction.Margin = new System.Windows.Forms.Padding(0);
             tabPageListOfAuction.Name = "tabPageListOfAuction";
-            tabPageListOfAuction.Size = new System.Drawing.Size(784, 425);
+            tabPageListOfAuction.Size = new System.Drawing.Size(761, 419);
             tabPageListOfAuction.TabIndex = 0;
             tabPageListOfAuction.Text = "Auction";
             tabPageListOfAuction.UseVisualStyleBackColor = true;
@@ -191,16 +191,16 @@
             dgAuctionList.Margin = new System.Windows.Forms.Padding(0);
             dgAuctionList.Name = "dgAuctionList";
             dgAuctionList.RowTemplate.Height = 25;
-            dgAuctionList.Size = new System.Drawing.Size(784, 333);
+            dgAuctionList.Size = new System.Drawing.Size(761, 327);
             dgAuctionList.TabIndex = 1;
             dgAuctionList.SelectionChanged += dgAuctionList_SelectionChanged;
             // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRowCount });
-            statusStrip1.Location = new System.Drawing.Point(0, 403);
+            statusStrip1.Location = new System.Drawing.Point(0, 397);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(784, 22);
+            statusStrip1.Size = new System.Drawing.Size(761, 22);
             statusStrip1.TabIndex = 10;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -222,7 +222,7 @@
             progressBar1.Location = new System.Drawing.Point(0, 65);
             progressBar1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(784, 5);
+            progressBar1.Size = new System.Drawing.Size(761, 5);
             progressBar1.TabIndex = 0;
             // 
             // panel2
@@ -232,7 +232,7 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(784, 30);
+            panel2.Size = new System.Drawing.Size(761, 30);
             panel2.TabIndex = 3;
             // 
             // cmbxRowFilter
@@ -263,7 +263,7 @@
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(784, 35);
+            toolStrip1.Size = new System.Drawing.Size(761, 35);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -870,9 +870,10 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(792, 434);
+            ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
             KeyPreview = true;
+            MinimumSize = new System.Drawing.Size(785, 467);
             Name = "frmAuction";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
