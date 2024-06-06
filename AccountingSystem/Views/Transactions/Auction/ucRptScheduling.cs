@@ -56,10 +56,7 @@ namespace AccountingSystem.Views.Transactions.Auction
         private void LoadAuctionSchedule()
         {
             var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
-
-            cmbxAuctionSchedule.ValueMember = "auction_id";
-            cmbxAuctionSchedule.DisplayMember = "date";
-            cmbxAuctionSchedule.DataSource = dtAuctionSchedule;
+            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
         private void LoadProperties()
