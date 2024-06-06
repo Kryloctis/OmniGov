@@ -53,23 +53,5 @@ namespace AccountingSystem.Views.Dashboard.Budget
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        private void sAAOBToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmSaaob().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void sAAOBBToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmSaaobb().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
     }
 }
