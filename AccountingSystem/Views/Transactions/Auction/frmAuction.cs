@@ -195,6 +195,8 @@ namespace AccountingSystem.Views.Transactions.Auction
             try
             {
                 Helper.EnableDisableToolStripButtons(dgAuctionList, btnEdit, btnDelete);
+                btnRptSchedules.Enabled = btnEdit.Enabled;
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -348,7 +350,7 @@ namespace AccountingSystem.Views.Transactions.Auction
             TabPageController(tabPageListOfAuction);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void btnRptSchedules_Click(object sender, EventArgs e)
         {
             TabPageController(tabPageListOfRptSchedule);
         }

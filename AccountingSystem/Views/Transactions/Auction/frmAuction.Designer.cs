@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageListOfAuction = new System.Windows.Forms.TabPage();
             dgAuctionList = new System.Windows.Forms.DataGridView();
@@ -49,7 +49,7 @@
             btnSearch = new System.Windows.Forms.ToolStripButton();
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            btnRptSchedules = new System.Windows.Forms.ToolStripButton();
             tabPageAuctionForm = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
             btnSave = new System.Windows.Forms.Button();
@@ -169,23 +169,23 @@
             // 
             // dgAuctionList
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgAuctionList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgAuctionList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgAuctionList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgAuctionList.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgAuctionList.DefaultCellStyle = dataGridViewCellStyle6;
             dgAuctionList.Dock = System.Windows.Forms.DockStyle.Fill;
             dgAuctionList.Location = new System.Drawing.Point(0, 70);
             dgAuctionList.Margin = new System.Windows.Forms.Padding(0);
@@ -259,7 +259,7 @@
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch, toolStripSeparator1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch, toolStripSeparator1, btnRptSchedules });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -316,14 +316,14 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButton2
+            // btnRptSchedules
             // 
-            toolStripButton2.Image = Properties.Resources.schedule_filled_28px;
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(105, 24);
-            toolStripButton2.Text = "Rpt Schedules";
-            toolStripButton2.Click += toolStripButton2_Click;
+            btnRptSchedules.Image = Properties.Resources.schedule_filled_28px;
+            btnRptSchedules.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnRptSchedules.Name = "btnRptSchedules";
+            btnRptSchedules.Size = new System.Drawing.Size(105, 24);
+            btnRptSchedules.Text = "Rpt Schedules";
+            btnRptSchedules.Click += btnRptSchedules_Click;
             // 
             // tabPageAuctionForm
             // 
@@ -333,7 +333,7 @@
             tabPageAuctionForm.Location = new System.Drawing.Point(4, 5);
             tabPageAuctionForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageAuctionForm.Name = "tabPageAuctionForm";
-            tabPageAuctionForm.Size = new System.Drawing.Size(784, 425);
+            tabPageAuctionForm.Size = new System.Drawing.Size(761, 419);
             tabPageAuctionForm.TabIndex = 1;
             tabPageAuctionForm.Text = "Auction > Form";
             tabPageAuctionForm.UseVisualStyleBackColor = true;
@@ -344,13 +344,13 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Top;
             panel3.Location = new System.Drawing.Point(0, 166);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(784, 30);
+            panel3.Size = new System.Drawing.Size(761, 30);
             panel3.TabIndex = 13;
             // 
             // btnSave
             // 
             btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSave.Location = new System.Drawing.Point(616, 4);
+            btnSave.Location = new System.Drawing.Point(593, 4);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 0;
@@ -363,7 +363,7 @@
             ucAuctionEvents2.Dock = System.Windows.Forms.DockStyle.Top;
             ucAuctionEvents2.Location = new System.Drawing.Point(0, 35);
             ucAuctionEvents2.Name = "ucAuctionEvents2";
-            ucAuctionEvents2.Size = new System.Drawing.Size(784, 131);
+            ucAuctionEvents2.Size = new System.Drawing.Size(761, 131);
             ucAuctionEvents2.TabIndex = 14;
             // 
             // toolStrip2
@@ -376,7 +376,7 @@
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(784, 35);
+            toolStrip2.Size = new System.Drawing.Size(761, 35);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -399,45 +399,45 @@
             tabPageListOfRptSchedule.Location = new System.Drawing.Point(4, 5);
             tabPageListOfRptSchedule.Margin = new System.Windows.Forms.Padding(0);
             tabPageListOfRptSchedule.Name = "tabPageListOfRptSchedule";
-            tabPageListOfRptSchedule.Size = new System.Drawing.Size(784, 425);
+            tabPageListOfRptSchedule.Size = new System.Drawing.Size(761, 419);
             tabPageListOfRptSchedule.TabIndex = 3;
             tabPageListOfRptSchedule.Text = "Auction > Rpt Schedule";
             tabPageListOfRptSchedule.UseVisualStyleBackColor = true;
             // 
             // dgRptSchedule
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgRptSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgRptSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgRptSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgRptSchedule.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgRptSchedule.DefaultCellStyle = dataGridViewCellStyle8;
             dgRptSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
             dgRptSchedule.Location = new System.Drawing.Point(0, 70);
             dgRptSchedule.Margin = new System.Windows.Forms.Padding(0);
             dgRptSchedule.Name = "dgRptSchedule";
             dgRptSchedule.RowTemplate.Height = 25;
-            dgRptSchedule.Size = new System.Drawing.Size(784, 333);
+            dgRptSchedule.Size = new System.Drawing.Size(761, 327);
             dgRptSchedule.TabIndex = 6;
             dgRptSchedule.SelectionChanged += dgRptSchedule_SelectionChanged;
             // 
             // statusStrip3
             // 
             statusStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, toolStripStatusLabel3 });
-            statusStrip3.Location = new System.Drawing.Point(0, 403);
+            statusStrip3.Location = new System.Drawing.Point(0, 397);
             statusStrip3.Name = "statusStrip3";
-            statusStrip3.Size = new System.Drawing.Size(784, 22);
+            statusStrip3.Size = new System.Drawing.Size(761, 22);
             statusStrip3.TabIndex = 11;
             statusStrip3.Text = "statusStrip3";
             // 
@@ -459,7 +459,7 @@
             progressBar2.Location = new System.Drawing.Point(0, 65);
             progressBar2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             progressBar2.Name = "progressBar2";
-            progressBar2.Size = new System.Drawing.Size(784, 5);
+            progressBar2.Size = new System.Drawing.Size(761, 5);
             progressBar2.TabIndex = 5;
             // 
             // panel6
@@ -469,7 +469,7 @@
             panel6.Dock = System.Windows.Forms.DockStyle.Top;
             panel6.Location = new System.Drawing.Point(0, 35);
             panel6.Name = "panel6";
-            panel6.Size = new System.Drawing.Size(784, 30);
+            panel6.Size = new System.Drawing.Size(761, 30);
             panel6.TabIndex = 4;
             // 
             // cmbxSchedulePropertyRowFilter
@@ -499,7 +499,7 @@
             toolStrip4.Location = new System.Drawing.Point(0, 0);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip4.Size = new System.Drawing.Size(784, 35);
+            toolStrip4.Size = new System.Drawing.Size(761, 35);
             toolStrip4.TabIndex = 1;
             toolStrip4.Text = "toolStrip4";
             // 
@@ -613,7 +613,7 @@
             tabPageRptScheduleForm.Location = new System.Drawing.Point(4, 5);
             tabPageRptScheduleForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageRptScheduleForm.Name = "tabPageRptScheduleForm";
-            tabPageRptScheduleForm.Size = new System.Drawing.Size(784, 425);
+            tabPageRptScheduleForm.Size = new System.Drawing.Size(761, 419);
             tabPageRptScheduleForm.TabIndex = 4;
             tabPageRptScheduleForm.Text = "Auction > Rpt Schedule > Form";
             tabPageRptScheduleForm.UseVisualStyleBackColor = true;
@@ -625,13 +625,13 @@
             panel5.Dock = System.Windows.Forms.DockStyle.Top;
             panel5.Location = new System.Drawing.Point(0, 102);
             panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(784, 30);
+            panel5.Size = new System.Drawing.Size(761, 30);
             panel5.TabIndex = 13;
             // 
             // btnSaveRptAuctionSchedule
             // 
             btnSaveRptAuctionSchedule.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSaveRptAuctionSchedule.Location = new System.Drawing.Point(616, 4);
+            btnSaveRptAuctionSchedule.Location = new System.Drawing.Point(593, 4);
             btnSaveRptAuctionSchedule.Name = "btnSaveRptAuctionSchedule";
             btnSaveRptAuctionSchedule.Size = new System.Drawing.Size(150, 23);
             btnSaveRptAuctionSchedule.TabIndex = 1;
@@ -642,7 +642,7 @@
             // button1
             // 
             button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(1127, 3);
+            button1.Location = new System.Drawing.Point(1104, 3);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(150, 23);
             button1.TabIndex = 0;
@@ -654,7 +654,7 @@
             ucRptScheduling2.Dock = System.Windows.Forms.DockStyle.Top;
             ucRptScheduling2.Location = new System.Drawing.Point(0, 35);
             ucRptScheduling2.Name = "ucRptScheduling2";
-            ucRptScheduling2.Size = new System.Drawing.Size(784, 67);
+            ucRptScheduling2.Size = new System.Drawing.Size(761, 67);
             ucRptScheduling2.TabIndex = 14;
             // 
             // toolStrip5
@@ -667,7 +667,7 @@
             toolStrip5.Location = new System.Drawing.Point(0, 0);
             toolStrip5.Name = "toolStrip5";
             toolStrip5.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip5.Size = new System.Drawing.Size(784, 35);
+            toolStrip5.Size = new System.Drawing.Size(761, 35);
             toolStrip5.TabIndex = 0;
             toolStrip5.Text = "toolStrip5";
             // 
@@ -688,7 +688,7 @@
             tabPagePrint.Location = new System.Drawing.Point(4, 5);
             tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
             tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(784, 425);
+            tabPagePrint.Size = new System.Drawing.Size(761, 419);
             tabPagePrint.TabIndex = 2;
             tabPagePrint.Text = "Auction > Print";
             tabPagePrint.UseVisualStyleBackColor = true;
@@ -818,7 +818,7 @@
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(784, 35);
+            toolStrip3.Size = new System.Drawing.Size(761, 35);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
             // 
@@ -835,17 +835,17 @@
             // 
             panel1.Controls.Add(statusStrip2);
             panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panel1.Location = new System.Drawing.Point(0, 401);
+            panel1.Location = new System.Drawing.Point(0, 395);
             panel1.Margin = new System.Windows.Forms.Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(784, 24);
+            panel1.Size = new System.Drawing.Size(761, 24);
             panel1.TabIndex = 1;
             // 
             // statusStrip2
             // 
             statusStrip2.Location = new System.Drawing.Point(0, 2);
             statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(784, 22);
+            statusStrip2.Size = new System.Drawing.Size(761, 22);
             statusStrip2.TabIndex = 2;
             statusStrip2.Text = "statusStrip2";
             // 
@@ -955,7 +955,7 @@
         private System.Windows.Forms.TabPage tabPageListOfRptSchedule;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton btnRptSchedules;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnAddScheduledProperty;
         private System.Windows.Forms.ToolStripButton btnEditScheduledProperty;
