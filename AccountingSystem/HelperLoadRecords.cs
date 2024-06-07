@@ -2148,5 +2148,12 @@ namespace AccountingSystem
             dataGridView.Columns["street"].HeaderText = "Street";
             dataGridView.Columns["complete_arp_no"].HeaderText = "Complete ARP No.";
         }
+
+        internal static void AuctionScheduleCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataTable;
+        }
     }
 }

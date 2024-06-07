@@ -10,11 +10,6 @@ namespace AccountingSystem.Views.Transactions.Auction
     public partial class frmAuction : Form
     {
         private readonly ucAuctionEvents ucAuctionEvents;
-        private readonly ucCertificateOfSale ucCertificateOfSale;
-        private readonly ucDeclarationOfForfeitureOfDelinquentProperty ucDeclarationOfForfeitureOfDelinquentProperty;
-        private readonly ucNoticeOfAuctionSaleOfDelinquentRealProperties ucNoticeOfAuctionSaleOfDelinquentRealProperties;
-        private readonly ucNoticeOfsale ucNoticeOfsale;
-        private readonly ucReportOfSale ucReportOfSale;
         private readonly ucRptScheduling ucRptScheduling;
 
         public frmAuction()
@@ -27,10 +22,6 @@ namespace AccountingSystem.Views.Transactions.Auction
             ucAuctionEvents = ucAuctionEvents2;
             ucRptScheduling = ucRptScheduling2;
 
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties = ucNoticeOfAuctionSaleOfDelinquentRealProperties1;
-            ucNoticeOfsale = ucNoticeOfsale1;
-            ucCertificateOfSale = ucCertificateOfSale1;
-            ucDeclarationOfForfeitureOfDelinquentProperty = ucDeclarationOfForfeitureOfDelinquentProperty1;
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -116,6 +107,7 @@ namespace AccountingSystem.Views.Transactions.Auction
         {
             TabPageController(tabPageListOfAuction);
         }
+
         private void btnDelete_Click(object sender, System.EventArgs e)
         {
             try
@@ -195,6 +187,8 @@ namespace AccountingSystem.Views.Transactions.Auction
             try
             {
                 Helper.EnableDisableToolStripButtons(dgAuctionList, btnEdit, btnDelete);
+                btnRptSchedules.Enabled = btnEdit.Enabled;
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -218,7 +212,6 @@ namespace AccountingSystem.Views.Transactions.Auction
                 LoadAuction();
                 LoadRptSchedule();
 
-                EnableDisableReportItem();
                 Helper.EnableDisableToolStripButtons(dgAuctionList, btnEdit, btnDelete);
                 Helper.EnableDisableToolStripButtons(dgRptSchedule, btnEditScheduledProperty, btnDeleteScheduledProperty);
             }
@@ -255,53 +248,6 @@ namespace AccountingSystem.Views.Transactions.Auction
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxSchedulePropertyRowFilter);
         }
 
-        private void lTOM23ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageNoticeOfAuctionSaleOfDelinquentRealProperties);
-
-            int index = dgAuctionList.CurrentCell.RowIndex;
-            int auctionId = Convert.ToInt32(dgAuctionList.Rows[index].Cells["id"].Value);
-            ucNoticeOfAuctionSaleOfDelinquentRealProperties.OnLoad(auctionId);
-        }
-
-        private void lTOM24ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageNoticeOfSale);
-
-            int index = dgAuctionList.CurrentCell.RowIndex;
-            int auctionId = Convert.ToInt32(dgAuctionList.Rows[index].Cells["id"].Value);
-            int taxpayerId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["taxpayers_id"].Value);
-
-            ucNoticeOfsale.OnLoad(auctionId, taxpayerId);
-
-        }
-
-        private void lTOM29ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageCertificateOfSale);
-
-            int index = dgAuctionList.CurrentCell.RowIndex;
-            int taxpayerId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["taxpayers_id"].Value);
-            int auctionId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["auction_id"].Value);
-
-            ucCertificateOfSale.OnLoad(taxpayerId, auctionId);
-        }
-
-        private void lTOM31ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageReportOfSale);
-        }
-
-        private void lTOMToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageDeclaractionOfForfeitureOfDelinquentProeperty);
-
-            int index = dgRptSchedule.CurrentCell.RowIndex;
-            int auctionId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["auction_id"].Value);
-            int taxpayerId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["taxpayers_id"].Value);
-            ucDeclarationOfForfeitureOfDelinquentProperty.OnLoad(auctionId, taxpayerId);
-        }
-
         private void SaveAuction()
         {
             try
@@ -328,15 +274,7 @@ namespace AccountingSystem.Views.Transactions.Auction
         {
             try
             {
-                if (tabControlReportsViewer.TabPages.Contains(tabPageRoute))
-                {
-                    tabControl1.SelectedTab = tabPagePrint;
-                    tabControlReportsViewer.SelectedTab = tabPageRoute;
-                }
-                else
-                    tabControl1.SelectedTab = tabPageRoute;
-
-
+                tabControl1.SelectedTab = tabPageRoute;
                 Text = $"Transactions > {tabPageRoute.Text} ";
 
             }
@@ -348,7 +286,7 @@ namespace AccountingSystem.Views.Transactions.Auction
             TabPageController(tabPageListOfAuction);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void btnRptSchedules_Click(object sender, EventArgs e)
         {
             TabPageController(tabPageListOfRptSchedule);
         }
@@ -505,22 +443,11 @@ namespace AccountingSystem.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void EnableDisableReportItem()
-        {
-            bool enable = dgRptSchedule.Rows.Count != 0;
-
-            lTOM24ToolStripMenuItem.Enabled = enable;
-            lTOM29ToolStripMenuItem.Enabled = enable;
-            lTOMToolStripMenuItem.Enabled = enable;
-
-        }
-
         private void dgRptSchedule_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
                 Helper.EnableDisableToolStripButtons(dgRptSchedule, btnEditScheduledProperty, btnDeleteScheduledProperty);
-                EnableDisableReportItem();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

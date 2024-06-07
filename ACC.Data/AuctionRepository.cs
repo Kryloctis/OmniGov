@@ -118,7 +118,7 @@ namespace ACC.Data
 
         public DataTable GetAuctionSchedule()
         {
-            string query = $"SELECT auction_id, CONCAT(DATE_FORMAT(start_date, '%M %e, %Y'), ' - ' , DATE_FORMAT(end_date,  '%M %e, %Y')) AS date FROM view_rpt_auction";
+            string query = $"SELECT id, CONCAT(DATE_FORMAT(start_date, '%M %e, %Y'), ' - ' , DATE_FORMAT(end_date,  '%M %e, %Y')) AS date FROM {tableName}";
 
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }

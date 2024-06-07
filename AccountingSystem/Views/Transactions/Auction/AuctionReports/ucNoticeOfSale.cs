@@ -9,21 +9,21 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Auction
 {
-    public partial class ucNoticeOfsale : UserControl
+    public partial class ucNoticeOfSale : UserControl
     {
         private int auctionId;
-        private int taxpayerId;
+        private int propertyId;
 
-        public ucNoticeOfsale()
+        public ucNoticeOfSale()
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
         }
 
-        internal void OnLoad(int auctionId, int taxpayerId)
+        internal void OnLoad(int auctionId, int propertyId)
         {
             this.auctionId = auctionId;
-            this.taxpayerId = taxpayerId;
+            this.propertyId = propertyId;
             LoadReport();
         }
 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.Auction
 
                     var newRow = dtRptAuctionProperties.NewRow();
 
-                    int taxpayerID = Convert.ToInt32(dataRow["taxpayers_id"]);
+                    int propertyId = Convert.ToInt32(dataRow["taxpayers_id"]);
                     string taxPayer = dataRow["taxpayer_name"].ToString();
                     string completeArpNo = dataRow["complete_arp_no"].ToString();
                     string locationOfProperty = dataRow["location"].ToString();
@@ -92,7 +92,8 @@ namespace AccountingSystem.Views.Transactions.Auction
                     decimal total = 0;
 
                     #region Computation
-                    var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
+                    //var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(propertyId);
+                    var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
 
                     foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
                     {
@@ -174,8 +175,7 @@ namespace AccountingSystem.Views.Transactions.Auction
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndTaxpayerId(auctionId, taxpayerId);
-
+                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, propertyId);
                 var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
                 var reportParameters = new ReportParameter[]

@@ -13,17 +13,13 @@ namespace AccountingSystem.Views.Reports.Ltom
         public frmLtom23()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             ucNoticeOfAuctionSaleOfDelinquentRealProperties = ucNoticeOfAuctionSaleOfDelinquentRealProperties1;
         }
 
         private void LoadAuctionSchedule()
         {
             var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
-
-            cmbxAuctionSchedule.ValueMember = "auction_id";
-            cmbxAuctionSchedule.DisplayMember = "date";
-            cmbxAuctionSchedule.DataSource = dtAuctionSchedule;
+            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "auction_id");
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
