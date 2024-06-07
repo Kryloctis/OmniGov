@@ -527,7 +527,7 @@
             toolStripTextBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             toolStripTextBox1.Name = "toolStripTextBox1";
-            toolStripTextBox1.Size = new System.Drawing.Size(150, 27);
+            toolStripTextBox1.Size = new System.Drawing.Size(200, 27);
             // 
             // tabPageRptScheduleForm
             // 
