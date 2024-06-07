@@ -57,7 +57,11 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void frmLtom20_Load(object sender, EventArgs e)
         {
-            LoadRealProperties();
+            try
+            {
+                LoadRealProperties();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadReport()

@@ -1,6 +1,5 @@
 ﻿using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
-using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.Financial_Statements;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
@@ -15,6 +14,7 @@ using AccountingSystem.Views.Reports.TrialBalance;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.DailyCashPositionReport;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -114,11 +114,8 @@ namespace AccountingSystem.Views.Dashboard.Reports
             if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
                 btnConsRprtAccForms.Enabled = false;
 
-            if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
+            if (!Helper.HasPermission("Report > Schedule of Released Cheques") || !Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
                 btnSchedRc.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
-                btnSchedUnRc.Enabled = false;
         }
 
         private void btnLtom17and19_Click(object sender, EventArgs e)
@@ -229,16 +226,7 @@ namespace AccountingSystem.Views.Dashboard.Reports
         {
             try
             {
-                _ = new frmReleasedChecksReport().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnSchedUnRc_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmUnreleasedChequesReport().ShowDialog();
+                _ = new frmReleasedUnreleasedChecksReport().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

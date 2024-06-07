@@ -29,116 +29,177 @@ namespace AccountingSystem.Views.Reports.Cashbook
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbBank = new System.Windows.Forms.ComboBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            btnRunReport = new System.Windows.Forms.Button();
+            cmbxBankAcc = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            cmbxBank = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 37);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1051, 525);
-            this.panel1.TabIndex = 0;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(4, 9);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(602, 393);
+            panel1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 406);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(840, 22);
+            statusStrip1.TabIndex = 9;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            splitContainer1.IsSplitterFixed = true;
+            splitContainer1.Location = new System.Drawing.Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(btnRunReport);
+            splitContainer1.Panel1.Controls.Add(cmbxBankAcc);
+            splitContainer1.Panel1.Controls.Add(label1);
+            splitContainer1.Panel1.Controls.Add(cmbxBank);
+            splitContainer1.Panel1.Controls.Add(label2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(progressBar1);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            splitContainer1.Size = new System.Drawing.Size(840, 406);
+            splitContainer1.SplitterDistance = 226;
+            splitContainer1.TabIndex = 10;
+            // 
+            // btnRunReport
+            // 
+            btnRunReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnRunReport.Location = new System.Drawing.Point(12, 111);
+            btnRunReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnRunReport.Name = "btnRunReport";
+            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.TabIndex = 12;
+            btnRunReport.Text = "Run Report";
+            btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
+            // 
+            // cmbxBankAcc
+            // 
+            cmbxBankAcc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBankAcc.FormattingEnabled = true;
+            cmbxBankAcc.Location = new System.Drawing.Point(12, 76);
+            cmbxBankAcc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 10);
+            cmbxBankAcc.Name = "cmbxBankAcc";
+            cmbxBankAcc.Size = new System.Drawing.Size(200, 23);
+            cmbxBankAcc.TabIndex = 10;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Bank";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(36, 15);
+            label1.TabIndex = 8;
+            label1.Text = "Bank:";
             // 
-            // cmbBank
+            // cmbxBank
             // 
-            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(50, 8);
-            this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(245, 23);
-            this.cmbBank.TabIndex = 4;
-            this.cmbBank.SelectionChangeCommitted += new System.EventHandler(this.cmbBank_SelectionChangeCommitted);
-            // 
-            // btnRetrieve
-            // 
-            this.btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRetrieve.Location = new System.Drawing.Point(608, 8);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(82, 23);
-            this.btnRetrieve.TabIndex = 7;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnretrieve_Click);
+            cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBank.FormattingEnabled = true;
+            cmbxBank.Location = new System.Drawing.Point(12, 26);
+            cmbxBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 10);
+            cmbxBank.Name = "cmbxBank";
+            cmbxBank.Size = new System.Drawing.Size(200, 23);
+            cmbxBank.TabIndex = 11;
+            cmbxBank.SelectionChangeCommitted += cmbxBank_SelectionChangeCommitted;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(299, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Account";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(12, 59);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(55, 15);
+            label2.TabIndex = 9;
+            label2.Text = "Account:";
             // 
-            // cmbBankAccounts
+            // progressBar1
             // 
-            this.cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBankAccounts.FormattingEnabled = true;
-            this.cmbBankAccounts.Location = new System.Drawing.Point(357, 8);
-            this.cmbBankAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbBankAccounts.Name = "cmbBankAccounts";
-            this.cmbBankAccounts.Size = new System.Drawing.Size(245, 23);
-            this.cmbBankAccounts.TabIndex = 4;
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(602, 5);
+            progressBar1.TabIndex = 1;
             // 
-            // panel2
+            // backgroundWorker1
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1051, 37);
-            this.panel2.TabIndex = 8;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
             // 
             // frmCashbook
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 562);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnRetrieve);
-            this.Controls.Add(this.cmbBankAccounts);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbBank);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1067, 601);
-            this.Name = "frmCashbook";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Check Cashbook";
-            this.Load += new System.EventHandler(this.frmCashbook_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(840, 428);
+            Controls.Add(splitContainer1);
+            Controls.Add(statusStrip1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(856, 467);
+            Name = "frmCashbook";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Reports > Cashbook";
+            Load += frmCashbook_Load;
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button btnRunReport;
+        private System.Windows.Forms.ComboBox cmbxBankAcc;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbBank;
-        private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.ComboBox cmbxBank;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbBankAccounts;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

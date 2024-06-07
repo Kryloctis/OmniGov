@@ -75,12 +75,12 @@
             splitContainer1.Panel2.Controls.Add(pbReport);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
-            splitContainer1.SplitterDistance = 211;
+            splitContainer1.SplitterDistance = 226;
             splitContainer1.TabIndex = 1;
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Location = new System.Drawing.Point(12, 114);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
@@ -92,7 +92,7 @@
             // 
             cmbxWarrantLevy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxWarrantLevy.FormattingEnabled = true;
-            cmbxWarrantLevy.Location = new System.Drawing.Point(7, 78);
+            cmbxWarrantLevy.Location = new System.Drawing.Point(12, 78);
             cmbxWarrantLevy.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxWarrantLevy.Name = "cmbxWarrantLevy";
             cmbxWarrantLevy.Size = new System.Drawing.Size(200, 23);
@@ -102,7 +102,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(7, 60);
+            label3.Location = new System.Drawing.Point(12, 60);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(56, 15);
             label3.TabIndex = 17;
@@ -112,7 +112,7 @@
             // 
             txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtRpt.Location = new System.Drawing.Point(7, 27);
+            txtRpt.Location = new System.Drawing.Point(12, 27);
             txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRpt.Name = "txtRpt";
             txtRpt.Size = new System.Drawing.Size(200, 23);
@@ -122,7 +122,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(7, 9);
+            label1.Location = new System.Drawing.Point(12, 9);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(57, 15);
             label1.TabIndex = 0;
@@ -133,7 +133,7 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 9);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(617, 393);
+            panel3.Size = new System.Drawing.Size(602, 393);
             panel3.TabIndex = 12;
             // 
             // pbReport
@@ -141,7 +141,7 @@
             pbReport.Dock = System.Windows.Forms.DockStyle.Top;
             pbReport.Location = new System.Drawing.Point(4, 4);
             pbReport.Name = "pbReport";
-            pbReport.Size = new System.Drawing.Size(617, 5);
+            pbReport.Size = new System.Drawing.Size(602, 5);
             pbReport.TabIndex = 11;
             // 
             // backgroundWorker1
