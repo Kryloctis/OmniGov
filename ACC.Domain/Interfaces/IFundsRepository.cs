@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -13,7 +14,7 @@ namespace ACC.Domain.Interfaces
 
         bool NameExist(string name, int id);
 
-        DataTable GetRecordsPrintCashposition(string date);
+        DataTable GetRecordsPrintCashposition(DateTime date);
 
         DataTable GetRecords(string searchText, int rowLimit);
     }

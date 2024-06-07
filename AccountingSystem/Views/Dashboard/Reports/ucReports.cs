@@ -1,6 +1,5 @@
 ﻿using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
-using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.Financial_Statements;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
@@ -15,6 +14,7 @@ using AccountingSystem.Views.Reports.TrialBalance;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountingSystem.Views.Reports.DailyCashPositionReport;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {

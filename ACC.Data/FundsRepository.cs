@@ -50,11 +50,16 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
-        public DataTable GetRecordsPrintCashposition(string date)
+        public DataTable GetRecordsPrintCashposition(DateTime date)
         {
-            string query = $"SELECT {tableName}.id,CONCAT({tableName}.fund_name,'(',{tableName}.fund_code,')') AS fund,(SELECT IFNULL(SUM(amount),0) FROM {tableNameBankDeposits} WHERE funds_id={tableName}.id AND date < CAST('{date}' AS DATE)) AS beginning,(SELECT IFNULL(SUM(amount),0) FROM {tableNamePaymentCollections} WHERE funds_id={tableName}.id AND payment_date=CAST('{date}' AS DATE)) AS collection,(SELECT IFNULL(SUM(amount),0) FROM {tableNameBankDeposits} WHERE funds_id={tableName}.id AND date = CAST('{date}' AS DATE)) AS deposited FROM {tableName}";
+            var parameters = new object[][]
+            {
+                new object[] { "@date", DbType.DateTime, date}
+            };
 
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            string query = $"SELECT {tableName}.id, funds.fund_name, CONCAT({tableName}.fund_name,'(',{tableName}.fund_code,')') AS fund,(SELECT IFNULL(SUM(amount),0) FROM {tableNameBankDeposits} WHERE funds_id={tableName}.id AND date < CAST('@date' AS DATE)) AS beginning,(SELECT IFNULL(SUM(amount),0) FROM {tableNamePaymentCollections} WHERE funds_id={tableName}.id AND payment_date=CAST('@date' AS DATE)) AS collection,(SELECT IFNULL(SUM(amount),0) FROM {tableNameBankDeposits} WHERE funds_id={tableName}.id AND date = CAST('@date' AS DATE)) AS deposited FROM {tableName}";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -109,11 +114,6 @@ namespace ACC.Data
                 scope.Complete();
                 return true;
             }
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)

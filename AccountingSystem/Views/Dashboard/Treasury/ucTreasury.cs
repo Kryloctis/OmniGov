@@ -6,7 +6,6 @@ using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
-using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;

@@ -1517,7 +1517,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>0.80088cm</Top>
-                <Left>0in</Left>
                 <Height>0.6cm</Height>
                 <Width>6.85504cm</Width>
                 <Style>
@@ -1590,7 +1589,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>1.40088cm</Top>
-                <Left>0in</Left>
                 <Height>0.6cm</Height>
                 <Width>6.85504cm</Width>
                 <ZIndex>2</ZIndex>
@@ -2228,14 +2226,20 @@
     </ReportParameter>
     <ReportParameter Name="paramDate">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramMayor">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramLGUProvince">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramNotedSignatory">
