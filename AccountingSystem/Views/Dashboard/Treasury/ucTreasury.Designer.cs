@@ -58,20 +58,6 @@
             checkIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            reportsTstrpDrpDwnMnu = new System.Windows.Forms.ToolStripDropDownButton();
-            abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            rptStatementOfAccTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            listOfRealPropertyDelinquenciesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            rptDuesAndPymntsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            crtfdListOfRptDeliquenciesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            bankCashbookTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            reportOfCheckIssuedRciTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            schedReleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            schedUnreleasedChequesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            dailyCashPositionsTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -79,7 +65,7 @@
             // 
             toolStrip3.BackColor = System.Drawing.Color.Transparent;
             toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { manageTstripDrpDwnBtn, transactionsTstripDrpDwnBtn, reportsTstrpDrpDwnMnu });
+            toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { manageTstripDrpDwnBtn, transactionsTstripDrpDwnBtn });
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
@@ -288,103 +274,6 @@
             bankDepositTstrpMnuItm.Text = "Bank Deposit...";
             bankDepositTstrpMnuItm.Click += bankDepositTstrpMnuItm_Click;
             // 
-            // reportsTstrpDrpDwnMnu
-            // 
-            reportsTstrpDrpDwnMnu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            reportsTstrpDrpDwnMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { abstractOfGeneralCollectionsToolStripMenuItem, toolStripSeparator1, rptStatementOfAccTstrpMnuItm, listOfRealPropertyDelinquenciesTstrpMnuItm, rptDuesAndPymntsTstrpMnuItm, crtfdListOfRptDeliquenciesTstrpMnuItm, toolStripSeparator3, bankCashbookTstrpMnuItm, reportOfCheckIssuedRciTstrpMnuItm, schedReleasedChequesTstrpMnuItm, schedUnreleasedChequesTstrpMnuItm, consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm, dailyCashPositionsTstrpMnuItm });
-            reportsTstrpDrpDwnMnu.Image = (System.Drawing.Image)resources.GetObject("reportsTstrpDrpDwnMnu.Image");
-            reportsTstrpDrpDwnMnu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            reportsTstrpDrpDwnMnu.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
-            reportsTstrpDrpDwnMnu.Name = "reportsTstrpDrpDwnMnu";
-            reportsTstrpDrpDwnMnu.Size = new System.Drawing.Size(70, 19);
-            reportsTstrpDrpDwnMnu.Text = "● Reports";
-            // 
-            // abstractOfGeneralCollectionsToolStripMenuItem
-            // 
-            abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
-            abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(409, 22);
-            abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections...";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(406, 6);
-            // 
-            // rptStatementOfAccTstrpMnuItm
-            // 
-            rptStatementOfAccTstrpMnuItm.Name = "rptStatementOfAccTstrpMnuItm";
-            rptStatementOfAccTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            rptStatementOfAccTstrpMnuItm.Text = "Real Property Tax Statement of Account...";
-            rptStatementOfAccTstrpMnuItm.Click += rptStatementOfAccTstrpMnuItm_Click;
-            // 
-            // listOfRealPropertyDelinquenciesTstrpMnuItm
-            // 
-            listOfRealPropertyDelinquenciesTstrpMnuItm.Name = "listOfRealPropertyDelinquenciesTstrpMnuItm";
-            listOfRealPropertyDelinquenciesTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            listOfRealPropertyDelinquenciesTstrpMnuItm.Text = "List of Real Property Delinquencies...";
-            listOfRealPropertyDelinquenciesTstrpMnuItm.Click += listOfRealPropertyDelinquenciesTstrpMnuItm_Click;
-            // 
-            // rptDuesAndPymntsTstrpMnuItm
-            // 
-            rptDuesAndPymntsTstrpMnuItm.Name = "rptDuesAndPymntsTstrpMnuItm";
-            rptDuesAndPymntsTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            rptDuesAndPymntsTstrpMnuItm.Text = "Real Property Tax Dues and Payments...";
-            rptDuesAndPymntsTstrpMnuItm.Click += rptDuesAndPymntsTstrpMnuItm_Click;
-            // 
-            // crtfdListOfRptDeliquenciesTstrpMnuItm
-            // 
-            crtfdListOfRptDeliquenciesTstrpMnuItm.Name = "crtfdListOfRptDeliquenciesTstrpMnuItm";
-            crtfdListOfRptDeliquenciesTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            crtfdListOfRptDeliquenciesTstrpMnuItm.Text = "Certified List of Real Property Tax Deliquencies...";
-            crtfdListOfRptDeliquenciesTstrpMnuItm.Click += crtfdListOfRptDeliquenciesTstrpMnuItm_Click;
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(406, 6);
-            // 
-            // bankCashbookTstrpMnuItm
-            // 
-            bankCashbookTstrpMnuItm.Name = "bankCashbookTstrpMnuItm";
-            bankCashbookTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            bankCashbookTstrpMnuItm.Text = "Bank Cashbook...";
-            bankCashbookTstrpMnuItm.Click += bankCashbookTstrpMnuItm_Click;
-            // 
-            // reportOfCheckIssuedRciTstrpMnuItm
-            // 
-            reportOfCheckIssuedRciTstrpMnuItm.Name = "reportOfCheckIssuedRciTstrpMnuItm";
-            reportOfCheckIssuedRciTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            reportOfCheckIssuedRciTstrpMnuItm.Text = "Report of Check Issued (RCI)";
-            reportOfCheckIssuedRciTstrpMnuItm.Click += reportOfCheckIssuedRciTstrpMnuItm_Click;
-            // 
-            // schedReleasedChequesTstrpMnuItm
-            // 
-            schedReleasedChequesTstrpMnuItm.Name = "schedReleasedChequesTstrpMnuItm";
-            schedReleasedChequesTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            schedReleasedChequesTstrpMnuItm.Text = "Schedule of Released Cheques...";
-            schedReleasedChequesTstrpMnuItm.Click += schedReleasedChequesTstrpMnuItm_Click;
-            // 
-            // schedUnreleasedChequesTstrpMnuItm
-            // 
-            schedUnreleasedChequesTstrpMnuItm.Name = "schedUnreleasedChequesTstrpMnuItm";
-            schedUnreleasedChequesTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            schedUnreleasedChequesTstrpMnuItm.Text = "Schedule of Unreleased Cheques...";
-            schedUnreleasedChequesTstrpMnuItm.Click += schedUnreleasedChequesTstrpMnuItm_Click;
-            // 
-            // consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm
-            // 
-            consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Name = "consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm";
-            consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Text = "Consolidated Report of Accountability for Accountable Forms...";
-            consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Click += consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm_Click;
-            // 
-            // dailyCashPositionsTstrpMnuItm
-            // 
-            dailyCashPositionsTstrpMnuItm.Name = "dailyCashPositionsTstrpMnuItm";
-            dailyCashPositionsTstrpMnuItm.Size = new System.Drawing.Size(409, 22);
-            dailyCashPositionsTstrpMnuItm.Text = "Daily Cash Positions...";
-            dailyCashPositionsTstrpMnuItm.Click += dailyCashPositionsTstrpMnuItm_Click;
-            // 
             // ucTreasury
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -422,24 +311,10 @@
         private System.Windows.Forms.ToolStripMenuItem checkIssuanceTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem bankDepositTstrpMnuItm;
-        private System.Windows.Forms.ToolStripDropDownButton reportsTstrpDrpDwnMnu;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem schedUnreleasedChequesTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem rptStatementOfAccTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem listOfRealPropertyDelinquenciesTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem rptDuesAndPymntsTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem crtfdListOfRptDeliquenciesTstrpMnuItm;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem schedReleasedChequesTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem bankCashbookTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem dailyCashPositionsTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem pymntHstoryTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem reportOfCheckIssuedRciTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem receiptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptInventoryTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem recieiptIssuanceTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem propertyTaxPostingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dellinquencyNoticesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warrantsOfLevyToolStripMenuItem;

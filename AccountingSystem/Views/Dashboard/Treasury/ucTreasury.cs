@@ -101,36 +101,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
 
             if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
                 releasedAndUnreleaseChecksTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
-                listOfRealPropertyDelinquenciesTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Report of Checks Issued"))
-                reportOfCheckIssuedRciTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Abstract of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Bank Cashbook"))
-                bankCashbookTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Consolidated Receipts"))
-                consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Daily Cash Position"))
-                dailyCashPositionsTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
-                rptDuesAndPymntsTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
-                crtfdListOfRptDeliquenciesTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Schedule of Released Cheques"))
-                schedReleasedChequesTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
-                schedUnreleasedChequesTstrpMnuItm.Enabled = false;
         }
 
         private void taxpayersTstrpMnuItm_Click(object sender, EventArgs e)
@@ -286,96 +256,6 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void rptStatementOfAccTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void listOfRealPropertyDelinquenciesTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmListRptDelinquencies().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void rptDuesAndPymntsTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmRptDuesPayments().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void crtfdListOfRptDeliquenciesTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmCertifiedListRptDelinquences().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void bankCashbookTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmCashbook().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void reportOfCheckIssuedRciTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmRCIReport().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void schedReleasedChequesTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmReleasedChecksReport().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void schedUnreleasedChequesTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmUnreleasedChequesReport().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void consolidatedReportOfAccountabilityForAccFormsTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmConsolidatedReceipts().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dailyCashPositionsTstrpMnuItm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmDailyCash().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void receiptInventoryTstrpMnuItm_Click(object sender, EventArgs e)
         {
             try
@@ -420,7 +300,5 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
     }
 }

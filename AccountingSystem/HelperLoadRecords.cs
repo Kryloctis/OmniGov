@@ -284,7 +284,6 @@ namespace AccountingSystem
             dataGridView.Columns["posted_at"].Visible = false;
             dataGridView.Columns["posted_by"].Visible = false;
 
-            dataGridView.Columns["is_checked"].ReadOnly = false;
             dataGridView.Columns["posting_status"].ReadOnly = true;
             dataGridView.Columns["real_property_id"].ReadOnly = true;
             dataGridView.Columns["pin"].ReadOnly = true;
@@ -2153,8 +2152,8 @@ namespace AccountingSystem
         internal static void AuctionScheduleCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.ValueMember = valueMember;
-            comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataTable;
         }
     }
 }
