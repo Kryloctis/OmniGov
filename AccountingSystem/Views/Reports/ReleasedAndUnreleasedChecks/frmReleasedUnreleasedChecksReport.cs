@@ -210,7 +210,7 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
                 localReport.DataSources.Add(new ReportDataSource(localReportParam.dtName, dataTable));
                 localReport.SetParameters(parameters);
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
                 ToogleRunButton(true);

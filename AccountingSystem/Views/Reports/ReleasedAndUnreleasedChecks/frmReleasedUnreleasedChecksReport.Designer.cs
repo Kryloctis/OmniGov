@@ -57,10 +57,9 @@
             // panel1
             // 
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 5);
+            panel1.Location = new System.Drawing.Point(4, 9);
             panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(610, 401);
+            panel1.Size = new System.Drawing.Size(602, 393);
             panel1.TabIndex = 13;
             // 
             // statusStrip1
@@ -86,6 +85,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(progressBar1);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 226;
             splitContainer1.TabIndex = 17;
@@ -219,9 +219,9 @@
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 0);
+            progressBar1.Location = new System.Drawing.Point(4, 4);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(610, 5);
+            progressBar1.Size = new System.Drawing.Size(602, 5);
             progressBar1.TabIndex = 14;
             // 
             // reportViewer1

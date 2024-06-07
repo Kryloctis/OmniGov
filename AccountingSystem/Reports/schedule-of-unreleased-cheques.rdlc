@@ -66,16 +66,16 @@
                   <Width>3.98234cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.92132cm</Width>
+                  <Width>4.02873cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.69364cm</Width>
+                  <Width>5.8194cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.14186cm</Width>
+                  <Width>5.84433cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.69928cm</Width>
+                  <Width>4.62722cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -95,7 +95,8 @@
                                     <TextRun>
                                       <Value>CHEQUE</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -129,7 +130,8 @@
                                     <TextRun>
                                       <Value>DATE</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -165,7 +167,8 @@
                                     <TextRun>
                                       <Value>SERIAL NO.</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -216,7 +219,8 @@
                                 <TextRun>
                                   <Value>DV/PAYROLL NUMBER</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -252,7 +256,8 @@
                                 <TextRun>
                                   <Value>PAYEE</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -288,7 +293,8 @@
                                 <TextRun>
                                   <Value>NATURE OF PAYMENT</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -324,7 +330,8 @@
                                 <TextRun>
                                   <Value>AMOUNT</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -365,6 +372,8 @@
                                 <TextRun>
                                   <Value>=Fields!cheque_date.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>dd/MM/yyyy</Format>
                                   </Style>
                                 </TextRun>
@@ -379,6 +388,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -397,7 +407,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!cheque_serial_number.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -410,6 +423,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -428,7 +442,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!dv_number.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -441,6 +458,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -459,7 +477,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!payee.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -472,6 +493,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -490,7 +512,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!nature_of_payment.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -503,6 +528,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -522,6 +548,8 @@
                                 <TextRun>
                                   <Value>=Fields!amount.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
                                 </TextRun>
@@ -536,6 +564,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -570,23 +599,25 @@
             </TablixRowHierarchy>
             <DataSetName>dtSchedulesOfUnreleasedCheque</DataSetName>
             <Top>0.17639cm</Top>
-            <Left>0.3335cm</Left>
+            <Left>0.04945cm</Left>
             <Height>1.89056cm</Height>
-            <Width>31.27855cm</Width>
+            <Width>28.14212cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <FontFamily>Calibri</FontFamily>
+              <FontSize>9pt</FontSize>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.22075in</Height>
+        <Height>0.91992in</Height>
         <Style />
       </Body>
-      <Width>12.54647in</Width>
+      <Width>11.14483in</Width>
       <Page>
         <PageHeader>
-          <Height>1.32675in</Height>
+          <Height>1.44984in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -599,6 +630,7 @@
                     <TextRun>
                       <Value>SCHEDULE OF UNRELEASED CHECKS</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>16pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -610,9 +642,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.07571cm</Left>
-              <Height>0.89105cm</Height>
-              <Width>31.79233cm</Width>
+              <Left>0cm</Left>
+              <Height>0.82755cm</Height>
+              <Width>28.19158cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -631,17 +663,20 @@
                   <TextRuns>
                     <TextRun>
                       <Value>For the Period Covered </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Left</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.00394cm</Top>
-              <Left>11.47425cm</Left>
+              <Top>1.03922cm</Top>
+              <Left>10.04328cm</Left>
               <Height>0.6cm</Height>
               <Width>3.88938cm</Width>
               <ZIndex>1</ZIndex>
@@ -649,6 +684,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -664,8 +700,10 @@
                     <TextRun>
                       <Value>=CDate(Parameters!paramPeriodCovered.Value)</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <Format>d MMMM yyyy</Format>
+                        <Format>MMMM dd, yyyy</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -675,10 +713,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.00394cm</Top>
-              <Left>15.36363cm</Left>
+              <Top>1.03922cm</Top>
+              <Left>13.93266cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.42312cm</Width>
+              <Width>3.78737cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -689,6 +727,7 @@
                   <Style>Solid</Style>
                   <Width>1pt</Width>
                 </BottomBorder>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -704,6 +743,7 @@
                     <TextRun>
                       <Value>LGU</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
@@ -714,10 +754,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.81561cm</Top>
-              <Left>0.15794cm</Left>
+              <Top>2.13311cm</Top>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.02495cm</Width>
+              <Width>4.48205cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -739,6 +779,7 @@
                     <TextRun>
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -748,8 +789,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.78033cm</Top>
-              <Left>5.35973cm</Left>
+              <Top>2.13311cm</Top>
+              <Left>4.51732cm</Left>
               <Height>0.6cm</Height>
               <Width>9.83456cm</Width>
               <ZIndex>4</ZIndex>
@@ -758,9 +799,10 @@
                   <Style>None</Style>
                 </Border>
                 <BottomBorder>
+                  <Style>Solid</Style>
                   <Width>1pt</Width>
                 </BottomBorder>
-                <VerticalAlign>Middle</VerticalAlign>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -776,6 +818,7 @@
                     <TextRun>
                       <Value>Bank Name / Account Number</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
@@ -786,10 +829,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.592cm</Top>
-              <Left>0.11921cm</Left>
+              <Top>2.9095cm</Top>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.06413cm</Width>
+              <Width>4.48205cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -811,6 +854,7 @@
                     <TextRun>
                       <Value>=Parameters!paramBankAccount.Value</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -820,8 +864,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>2.592cm</Top>
-              <Left>5.35973cm</Left>
+              <Top>2.9095cm</Top>
+              <Left>4.51732cm</Left>
               <Height>0.6cm</Height>
               <Width>9.83456cm</Width>
               <ZIndex>6</ZIndex>
@@ -830,9 +874,10 @@
                   <Style>None</Style>
                 </Border>
                 <BottomBorder>
+                  <Style>Solid</Style>
                   <Width>1pt</Width>
                 </BottomBorder>
-                <VerticalAlign>Middle</VerticalAlign>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -848,6 +893,7 @@
                     <TextRun>
                       <Value>Fund</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
@@ -858,7 +904,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.78033cm</Top>
+              <Top>2.13311cm</Top>
               <Left>15.37068cm</Left>
               <Height>0.6cm</Height>
               <Width>2.02495cm</Width>
@@ -883,6 +929,7 @@
                     <TextRun>
                       <Value>=Parameters!paramFund.Value</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -892,19 +939,20 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.78033cm</Top>
-              <Left>17.57202cm</Left>
+              <Top>2.13311cm</Top>
+              <Left>17.43091cm</Left>
               <Height>0.6cm</Height>
-              <Width>4.54148cm</Width>
+              <Width>10.76067cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
                 <BottomBorder>
+                  <Style>Solid</Style>
                   <Width>1pt</Width>
                 </BottomBorder>
-                <VerticalAlign>Middle</VerticalAlign>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -920,9 +968,9 @@
                     <TextRun>
                       <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -932,16 +980,19 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.592cm</Top>
-              <Left>17.57202cm</Left>
+              <Top>2.9095cm</Top>
+              <Left>17.43091cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.93877cm</Width>
+              <Width>10.76067cm</Width>
               <ZIndex>9</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <VerticalAlign>Middle</VerticalAlign>
+                <BottomBorder>
+                  <Style>Solid</Style>
+                </BottomBorder>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -957,6 +1008,7 @@
                     <TextRun>
                       <Value>Sheet No.</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
@@ -967,7 +1019,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.592cm</Top>
+              <Top>2.9095cm</Top>
               <Left>15.37068cm</Left>
               <Height>0.6cm</Height>
               <Width>2.02495cm</Width>
@@ -991,7 +1043,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1.12293in</Height>
+          <Height>0.98664in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1004,35 +1056,24 @@
                     <TextRun>
                       <Value>CERTIFIED CORRECT</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox113</rd:DefaultName>
-              <Top>0.127cm</Top>
-              <Left>0.1313in</Left>
+              <Top>0.17639cm</Top>
+              <Left>3.95405in</Left>
               <Height>0.21667in</Height>
-              <Width>5.40078in</Width>
+              <Width>3.35493in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <TopBorder>
-                  <Style>Solid</Style>
-                </TopBorder>
-                <LeftBorder>
-                  <Style>Solid</Style>
-                </LeftBorder>
-                <RightBorder>
-                  <Style>Solid</Style>
-                </RightBorder>
-                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1049,126 +1090,25 @@
                       <Label>AdministrativeOfficerSignatory</Label>
                       <Value>RECEIVED BY</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox113</rd:DefaultName>
-              <Top>0.127cm</Top>
-              <Left>5.53137in</Left>
-              <Height>0.225in</Height>
-              <Width>6.91432in</Width>
+              <Top>0.17639cm</Top>
+              <Left>7.54931in</Left>
+              <Height>0.21667in</Height>
+              <Width>3.54974in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <TopBorder>
-                  <Style>Solid</Style>
-                </TopBorder>
-                <LeftBorder>
-                  <Style>Solid</Style>
-                </LeftBorder>
-                <RightBorder>
-                  <Style>Solid</Style>
-                </RightBorder>
-                <VerticalAlign>Bottom</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox123">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value />
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox113</rd:DefaultName>
-              <Top>0.29028in</Top>
-              <Left>5.53137in</Left>
-              <Height>0.80139in</Height>
-              <Width>6.91432in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>Solid</Style>
-                </Border>
-                <TopBorder>
-                  <Style>None</Style>
-                </TopBorder>
-                <LeftBorder>
-                  <Style>Solid</Style>
-                </LeftBorder>
-                <RightBorder>
-                  <Style>Solid</Style>
-                </RightBorder>
-                <VerticalAlign>Top</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox116">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value />
-                      <Style>
-                        <FontFamily>calibri</FontFamily>
-                        <FontSize>9pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox113</rd:DefaultName>
-              <Top>0.275in</Top>
-              <Left>0.1313in</Left>
-              <Height>0.81667in</Height>
-              <Width>5.40078in</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <BottomBorder>
-                  <Style>Solid</Style>
-                </BottomBorder>
-                <LeftBorder>
-                  <Style>Solid</Style>
-                </LeftBorder>
-                <RightBorder>
-                  <Style>Solid</Style>
-                </RightBorder>
-                <VerticalAlign>Top</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1195,11 +1135,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox20</rd:DefaultName>
-              <Top>1.58196cm</Top>
-              <Left>2.90049cm</Left>
+              <Top>1.63135cm</Top>
+              <Left>10.04328cm</Left>
               <Height>0.6cm</Height>
               <Width>8.52153cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1223,6 +1163,7 @@
                       <Value>=Parameters!paramCertifiedCorrectSignatory.Value</Value>
                       <Style>
                         <FontFamily>calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1233,11 +1174,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox20</rd:DefaultName>
-              <Top>0.98196cm</Top>
-              <Left>2.90049cm</Left>
+              <Top>1.03135cm</Top>
+              <Left>10.04328cm</Left>
               <Height>0.6cm</Height>
               <Width>8.52153cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1263,6 +1204,7 @@
                       <Value>=Parameters!paramCertifiedCorrectSignatory.Value</Value>
                       <Style>
                         <FontFamily>calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1273,11 +1215,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox20</rd:DefaultName>
-              <Top>0.98196cm</Top>
-              <Left>18.97925cm</Left>
+              <Top>1.03135cm</Top>
+              <Left>19.17525cm</Left>
               <Height>0.6cm</Height>
               <Width>9.01633cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1313,11 +1255,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox20</rd:DefaultName>
-              <Top>1.58196cm</Top>
-              <Left>18.97925cm</Left>
+              <Top>1.63135cm</Top>
+              <Left>19.17525cm</Left>
               <Height>0.6cm</Height>
               <Width>9.01633cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1338,12 +1280,12 @@
             </Border>
           </Style>
         </PageFooter>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>13in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>8.27in</PageHeight>
+        <PageWidth>11.69in</PageWidth>
+        <LeftMargin>0.2in</LeftMargin>
+        <RightMargin>0.2in</RightMargin>
+        <TopMargin>0.2in</TopMargin>
+        <BottomMargin>0.2in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
