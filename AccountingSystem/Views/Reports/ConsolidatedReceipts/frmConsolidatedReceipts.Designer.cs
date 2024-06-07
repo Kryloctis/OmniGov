@@ -29,87 +29,158 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpEndingDate = new System.Windows.Forms.DateTimePicker();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
+            label2 = new System.Windows.Forms.Label();
+            dtpEndingDate = new System.Windows.Forms.DateTimePicker();
+            panel1 = new System.Windows.Forms.Panel();
+            btnRunReport = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            SuspendLayout();
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 15);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Ending Date ";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(12, 9);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(74, 15);
+            label2.TabIndex = 28;
+            label2.Text = "Ending Date ";
             // 
             // dtpEndingDate
             // 
-            this.dtpEndingDate.CustomFormat = "MMMM dd, yyyy";
-            this.dtpEndingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEndingDate.Location = new System.Drawing.Point(88, 8);
-            this.dtpEndingDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpEndingDate.Name = "dtpEndingDate";
-            this.dtpEndingDate.Size = new System.Drawing.Size(148, 23);
-            this.dtpEndingDate.TabIndex = 27;
+            dtpEndingDate.CustomFormat = "MMMM dd, yyyy";
+            dtpEndingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpEndingDate.Location = new System.Drawing.Point(12, 27);
+            dtpEndingDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            dtpEndingDate.Name = "dtpEndingDate";
+            dtpEndingDate.Size = new System.Drawing.Size(200, 23);
+            dtpEndingDate.TabIndex = 27;
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 38);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1051, 524);
-            this.panel1.TabIndex = 26;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(4, 9);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(602, 393);
+            panel1.TabIndex = 26;
             // 
-            // btnRetrieve
+            // btnRunReport
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(242, 8);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 23;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRunReport.Location = new System.Drawing.Point(12, 63);
+            btnRunReport.Name = "btnRunReport";
+            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.TabIndex = 23;
+            btnRunReport.Text = "Run Report";
+            btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRetrieve_Click;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dtpEndingDate);
-            this.panel2.Controls.Add(this.btnRetrieve);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1051, 38);
-            this.panel2.TabIndex = 29;
+            panel2.Controls.Add(dtpEndingDate);
+            panel2.Controls.Add(btnRunReport);
+            panel2.Controls.Add(label2);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(226, 406);
+            panel2.TabIndex = 29;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 406);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(840, 22);
+            statusStrip1.TabIndex = 30;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.Location = new System.Drawing.Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(panel2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(progressBar1);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            splitContainer1.Size = new System.Drawing.Size(840, 406);
+            splitContainer1.SplitterDistance = 226;
+            splitContainer1.TabIndex = 31;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(602, 5);
+            progressBar1.TabIndex = 27;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
             // 
             // frmConsolidatedReceipts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 562);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmConsolidatedReceipts";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Consolidated Report of Accountability for Accountable Forms";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(840, 428);
+            Controls.Add(splitContainer1);
+            Controls.Add(statusStrip1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(856, 467);
+            Name = "frmConsolidatedReceipts";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Reports > Consolidated Report of Accountability for Accountable Forms";
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.DateTimePicker dtpEndingDate;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }
