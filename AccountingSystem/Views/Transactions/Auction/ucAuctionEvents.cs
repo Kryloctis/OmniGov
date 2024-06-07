@@ -92,12 +92,15 @@ namespace AccountingSystem.Views.Transactions.Auction
 
         private void dtpStartDate_Validating(object sender, CancelEventArgs e)
         {
-            var dateSelected = dtpStartDate.Value;
-            bool invalidDate = Helper.GetCurrentDate() > dateSelected;
+            var startDate = dtpStartDate.Value;
+            var endDate = dtpEndDate.Value;
+
+
+            bool invalidDate = endDate < startDate;
 
             if (invalidDate)
             {
-                errorProvider1.SetError(dtpStartDate, "Start Date");
+                errorProvider1.SetError(dtpStartDate, "Start date.");
                 e.Cancel = invalidDate;
             }
         }

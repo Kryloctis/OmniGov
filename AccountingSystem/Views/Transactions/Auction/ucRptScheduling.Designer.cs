@@ -69,6 +69,7 @@
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
             // cmbxProperty

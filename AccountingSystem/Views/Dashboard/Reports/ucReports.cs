@@ -293,5 +293,47 @@ namespace AccountingSystem.Views.Dashboard.Reports
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnLtom24_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom24().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+
+        }
+
+        private void btnLtom29_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom29().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom30_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom30().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom31_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom31().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
     }
 }
