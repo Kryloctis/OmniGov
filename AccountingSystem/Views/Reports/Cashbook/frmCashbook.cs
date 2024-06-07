@@ -1,20 +1,21 @@
 ﻿using ACC.Data;
 using Microsoft.Reporting.WinForms;
+using Microsoft.ReportingServices.Interfaces;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace AccountingSystem.Views.Reports.Cashbook
 {
     public partial class frmCashbook : Form
     {
-        private readonly ReportViewer reportViewer = new();
-
         public frmCashbook()
         {
             InitializeComponent();
-            reportViewer.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer);
+            reportViewer1.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer1);
             Helper.LoadFormIcon(this);
         }
 
@@ -36,110 +37,156 @@ namespace AccountingSystem.Views.Reports.Cashbook
         internal void LoadBanks()
         {
             var dtBanks = AccFactory.BanksRepository().GetRecords();
-            HelperLoadRecords.BankComboBox(dtBanks, cmbBank, "id", "bank_name");
+            HelperLoadRecords.BankComboBox(dtBanks, cmbxBank, "id", "bank_name");
         }
 
         internal void LoadBankAccounts()
         {
-            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
-            HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbBankAccounts, "id", "account_no");
+            HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbxBankAcc, "id", "account_no");
         }
 
-        private DataTable DataTableCashBook(int bankID, int bankAccountID)
+        private void ToogleRunButton(bool isGenerated) 
         {
-            var dtCashBook = new dsLFS.dtCashbookDataTable();
-            var dtCashBookFromDB = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID);
-            var dtRCI = AccFactory.RCIRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID);
+            btnRunReport.Text = isGenerated? "Run Report" :  "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
 
-            if (dtCashBookFromDB.Rows.Count > 0 || dtRCI.Rows.Count > 0)
+        private void LoadReport()
+        {
+            if (!backgroundWorker1.IsBusy)
             {
-                decimal balance = 0;
-                decimal debit = 0;
-                decimal credit = 0;
-                foreach (DataRow item in dtCashBookFromDB.Rows)
-                {
-                    DataRow row = dtCashBook.NewRow();
-                    row["date"] = item["date"];
-                    row["particulars"] = string.Format("Deposit - {0} - {1}", item["bank_name"], item["account_no"]);
-                    row["reference"] = item["reference"];
-                    row["debit"] = item["amount"];
-                    row["credit"] = 0;
-                    row["balance"] = balance;
-                    dtCashBook.Rows.Add(row);
-                }
-
-                foreach (DataRow item in dtRCI.Rows)
-                {
-                    DataRow row = dtCashBook.NewRow();
-                    row["date"] = item["cheque_date"];
-                    row["particulars"] = string.Format("Check Issued - {0} - {1}", item["payee"], item["nature_of_payment"]);
-                    row["reference"] = string.Format("{0} - {1}", item["cheque_no"], item["dv_no"]);
-                    row["credit"] = item["amount"];
-                    row["debit"] = 0;
-                    row["balance"] = balance;
-                    dtCashBook.Rows.Add(row);
-                }
-                dtCashBook.Select(string.Empty, "date ASC");
-
-                if (dtCashBook.Rows.Count > 0)
-                {
-                    foreach (DataRow item in dtCashBook.Rows)
-                    {
-                        debit += item["debit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["debit"]);
-                        credit += item["credit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["credit"]);
-                        balance = debit - credit;
-                        item["balance"] = balance;
-                    }
-                }
+                int bankId = Convert.ToInt32(cmbxBank.SelectedValue);
+                int bankAccountId = Convert.ToInt32(cmbxBankAcc.SelectedValue);
+                ToogleRunButton(false);
+                backgroundWorker1.RunWorkerAsync((bankId, bankAccountId));
             }
-            return dtCashBook;
         }
 
-        private void LoadReport(LocalReport report)
-        {
-            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            int bankAccountID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
-
-            var lguDetails = Helper.LGUDetails();
-            var account = cmbBank.Text;
-            var parameters = new[]
-            {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramBankaccount", account)
-            };
-
-            report.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";
-            report.DataSources.Clear();
-            report.DataSources.Add(new ReportDataSource("dtCashbook", DataTableCashBook(bankID, bankAccountID)));
-            report.SetParameters(parameters);
-            report.Refresh();
-        }
-
-        private void btnretrieve_Click(object sender, EventArgs e)
+        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {
-                if (cmbBank.SelectedIndex == -1 && cmbBankAccounts.SelectedIndex == -1)
+                LoadBankAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRunReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbxBank.SelectedIndex == -1 && cmbxBankAcc.SelectedIndex == -1)
                 {
                     Helper.MessageBoxError("Please select Bank and Bank Accounts");
                     return;
                 }
 
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
-                //reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
+                LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                LoadBankAccounts();
+                var parameters = ((int bankId, int bankAccountId))e.Argument;
+                var dtCashBook = new dsLFS.dtCashbookDataTable().Clone();
+                var dtCashBookFromDb = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
+                var dtRci = AccFactory.RCIRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
+
+                int totalProgressCount = dtCashBookFromDb.Rows.Count + dtRci.Rows.Count;
+                int progressCount = 0;
+
+                if (dtCashBookFromDb.Rows.Count > 0 || dtRci.Rows.Count > 0)
+                {
+                    decimal balance = 0;
+                    decimal debit = 0;
+                    decimal credit = 0;
+                    foreach (DataRow item in dtCashBookFromDb.Rows)
+                    {
+                        DataRow row = dtCashBook.NewRow();
+                        row["date"] = item["date"];
+                        row["particulars"] = string.Format("Deposit - {0} - {1}", item["bank_name"], item["account_no"]);
+                        row["reference"] = item["reference"];
+                        row["debit"] = item["amount"];
+                        row["credit"] = 0;
+                        row["balance"] = balance;
+                        dtCashBook.Rows.Add(row);
+                        progressCount++;
+                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                    }
+
+                    foreach (DataRow item in dtRci.Rows)
+                    {
+                        DataRow row = dtCashBook.NewRow();
+                        row["date"] = item["cheque_date"];
+                        row["particulars"] = string.Format("Check Issued - {0} - {1}", item["payee"], item["nature_of_payment"]);
+                        row["reference"] = string.Format("{0} - {1}", item["cheque_no"], item["dv_no"]);
+                        row["credit"] = item["amount"];
+                        row["debit"] = 0;
+                        row["balance"] = balance;
+                        dtCashBook.Rows.Add(row);
+                        progressCount++;
+                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                    }
+                    dtCashBook.Select(string.Empty, "date ASC");
+
+                    if (dtCashBook.Rows.Count > 0)
+                    {
+                        foreach (DataRow item in dtCashBook.Rows)
+                        {
+                            debit += item["debit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["debit"]);
+                            credit += item["credit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["credit"]);
+                            balance = debit - credit;
+                            item["balance"] = balance;
+                        }
+                    }
+                }
+                e.Result = dtCashBook;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result is not DataTable dataTable)
+                {
+                    progressBar1.Value = 100;
+                    ToogleRunButton(true);
+                    return;
+                }
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+                var localReport = reportViewer1.LocalReport;
+                var lguDetails = Helper.LGUDetails();
+                var account = cmbxBank.Text;
+                var parameters = new[]
+                {
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                    new ReportParameter("paramBankaccount", account)
+                };
+
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource("dtCashbook", dataTable));
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.RefreshReport();
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
