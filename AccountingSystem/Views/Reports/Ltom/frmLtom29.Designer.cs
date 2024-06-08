@@ -28,22 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            btnRunReport = new System.Windows.Forms.Button();
+            panel3 = new System.Windows.Forms.Panel();
+            ucCertificateOfSale1 = new Transactions.Auction.ucCertificateOfSale();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            splitContainer1.Location = new System.Drawing.Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(btnRunReport);
+            splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panel3);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            splitContainer1.Size = new System.Drawing.Size(840, 406);
+            splitContainer1.SplitterDistance = 211;
+            splitContainer1.TabIndex = 6;
+            // 
+            // btnRunReport
+            // 
+            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Name = "btnRunReport";
+            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.TabIndex = 19;
+            btnRunReport.Text = "Run Report";
+            btnRunReport.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(ucCertificateOfSale1);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(4, 4);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(617, 398);
+            panel3.TabIndex = 12;
+            // 
+            // ucCertificateOfSale1
+            // 
+            ucCertificateOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucCertificateOfSale1.Location = new System.Drawing.Point(0, 0);
+            ucCertificateOfSale1.Name = "ucCertificateOfSale1";
+            ucCertificateOfSale1.Size = new System.Drawing.Size(617, 398);
+            ucCertificateOfSale1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 406);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(840, 22);
+            statusStrip1.TabIndex = 7;
+            statusStrip1.Text = "statusStrip1";
             // 
             // frmLtom29
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(840, 428);
+            Controls.Add(splitContainer1);
+            Controls.Add(statusStrip1);
             MaximizeBox = false;
             Name = "frmLtom29";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Treasury > Certificate of Sale";
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button btnRunReport;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private Transactions.Auction.ucCertificateOfSale ucCertificateOfSale1;
     }
 }

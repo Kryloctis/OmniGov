@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AccountingSystem.Views.Transactions.Auction;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom31 : Form
     {
+        private ucReportOfSale ucReportOfSale;
+
         public frmLtom31()
         {
             InitializeComponent();
+            ucReportOfSale = ucReportOfSale1;
         }
+
     }
 }
