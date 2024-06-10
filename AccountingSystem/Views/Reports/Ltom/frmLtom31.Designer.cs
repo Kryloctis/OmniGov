@@ -31,8 +31,10 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ucReportOfSale1 = new Transactions.Auction.ucReportOfSale();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -49,6 +51,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
+            splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
@@ -62,12 +66,13 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Location = new System.Drawing.Point(8, 62);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
             // panel3
             // 
@@ -78,6 +83,14 @@
             panel3.Size = new System.Drawing.Size(617, 398);
             panel3.TabIndex = 12;
             // 
+            // ucReportOfSale1
+            // 
+            ucReportOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucReportOfSale1.Location = new System.Drawing.Point(0, 0);
+            ucReportOfSale1.Name = "ucReportOfSale1";
+            ucReportOfSale1.Size = new System.Drawing.Size(617, 398);
+            ucReportOfSale1.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             statusStrip1.Location = new System.Drawing.Point(0, 406);
@@ -86,13 +99,25 @@
             statusStrip1.TabIndex = 11;
             statusStrip1.Text = "statusStrip1";
             // 
-            // ucReportOfSale1
+            // cmbxAuctionSchedule
             // 
-            ucReportOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucReportOfSale1.Location = new System.Drawing.Point(0, 0);
-            ucReportOfSale1.Name = "ucReportOfSale1";
-            ucReportOfSale1.Size = new System.Drawing.Size(617, 398);
-            ucReportOfSale1.TabIndex = 0;
+            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxAuctionSchedule.FormattingEnabled = true;
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(8, 31);
+            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
+            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
+            cmbxAuctionSchedule.TabIndex = 27;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label3.Location = new System.Drawing.Point(7, 14);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(106, 15);
+            label3.TabIndex = 26;
+            label3.Text = "Auction Schedule :";
             // 
             // frmLtom31
             // 
@@ -107,7 +132,9 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Treasury > Report of Sale";
+            Load += frmLtom31_Load;
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
@@ -123,5 +150,7 @@
         private System.Windows.Forms.Panel panel3;
         private Transactions.Auction.ucReportOfSale ucReportOfSale1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
+        private System.Windows.Forms.Label label3;
     }
 }

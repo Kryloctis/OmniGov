@@ -225,12 +225,6 @@
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramDateOfPublicAuction.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
                 </TextRuns>
                 <ListLevel>9</ListLevel>
                 <SpaceAfter>2pt</SpaceAfter>

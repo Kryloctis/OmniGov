@@ -107,7 +107,6 @@
             cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
             cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
             cmbxAuctionSchedule.TabIndex = 18;
-            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
             // 
             // label3
             // 

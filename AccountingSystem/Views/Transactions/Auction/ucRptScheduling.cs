@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Auction
@@ -59,30 +58,39 @@ namespace AccountingSystem.Views.Transactions.Auction
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
+        //private void LoadProperties()
+        //{
+        //    var dtRpt = AccFactory.RealPropertiesRepository().GetRecords();
+
+        //    var datatable = new DataTable();
+        //    datatable.Columns.Add("id", typeof(int));
+        //    datatable.Columns.Add("complete_arp_no", typeof(string));
+
+        //    foreach (DataRow row in dtRpt.Rows)
+        //    {
+        //        int taxPayersId = Convert.ToInt32(row["taxpayers_id"]);
+        //        var dtRptDelinquent = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxPayersId);
+
+        //        foreach (DataRow rowRptDelinqeunt in dtRptDelinquent.Rows)
+        //        {
+        //            DataRow dr = datatable.NewRow();
+        //            int rptId = Convert.ToInt32(row["id"]);
+        //            string completeArpNo = rowRptDelinqeunt["complete_arp_no"].ToString();
+        //            datatable.Rows.Add(rptId, completeArpNo);
+        //        }
+        //    }
+
+        //    cmbxProperty.DataSource = datatable;
+        //    cmbxProperty.ValueMember = "id";
+        //    cmbxProperty.DisplayMember = "complete_arp_no";
+        //}
+
         private void LoadProperties()
         {
-            var dtRpt = AccFactory.RealPropertiesRepository().GetRecords();
+            var deliquentRpt = AccFactory.DelinquentNoticeRepository().GetViewRecords("3rd Notice");
 
-            var datatable = new DataTable();
-            datatable.Columns.Add("id", typeof(int));
-            datatable.Columns.Add("complete_arp_no", typeof(string));
-
-            foreach (DataRow row in dtRpt.Rows)
-            {
-                int taxPayersId = Convert.ToInt32(row["taxpayers_id"]);
-                var dtRptDelinquent = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxPayersId);
-
-                foreach (DataRow rowRptDelinqeunt in dtRptDelinquent.Rows)
-                {
-                    DataRow dr = datatable.NewRow();
-                    int rptId = Convert.ToInt32(row["id"]);
-                    string completeArpNo = rowRptDelinqeunt["complete_arp_no"].ToString();
-                    datatable.Rows.Add(rptId, completeArpNo);
-                }
-            }
-
-            cmbxProperty.DataSource = datatable;
-            cmbxProperty.ValueMember = "id";
+            cmbxProperty.DataSource = deliquentRpt;
+            cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
         }
 

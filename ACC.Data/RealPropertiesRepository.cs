@@ -1,10 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
 using System.Transactions;
 
 namespace ACC.Data
@@ -61,7 +59,7 @@ namespace ACC.Data
             var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@real_property_id", DbType.Int32, Id } };
 
-            string query = $"SELECT * FROM {tableName} WHERE real_property_id = @real_property_id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @real_property_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 

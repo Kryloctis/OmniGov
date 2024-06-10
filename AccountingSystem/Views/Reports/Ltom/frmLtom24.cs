@@ -66,9 +66,5 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
     }
 }

@@ -31,8 +31,10 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ucDeclarationOfForfeitureOfDelinquentProperty1 = new Transactions.Auction.ucDeclarationOfForfeitureOfDelinquentProperty();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -49,6 +51,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
+            splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
@@ -62,7 +66,7 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Location = new System.Drawing.Point(7, 53);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
@@ -78,6 +82,14 @@
             panel3.Size = new System.Drawing.Size(617, 398);
             panel3.TabIndex = 12;
             // 
+            // ucDeclarationOfForfeitureOfDelinquentProperty1
+            // 
+            ucDeclarationOfForfeitureOfDelinquentProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucDeclarationOfForfeitureOfDelinquentProperty1.Location = new System.Drawing.Point(0, 0);
+            ucDeclarationOfForfeitureOfDelinquentProperty1.Name = "ucDeclarationOfForfeitureOfDelinquentProperty1";
+            ucDeclarationOfForfeitureOfDelinquentProperty1.Size = new System.Drawing.Size(617, 398);
+            ucDeclarationOfForfeitureOfDelinquentProperty1.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             statusStrip1.Location = new System.Drawing.Point(0, 406);
@@ -86,13 +98,25 @@
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
             // 
-            // ucDeclarationOfForfeitureOfDelinquentProperty1
+            // cmbxAuctionSchedule
             // 
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Location = new System.Drawing.Point(0, 0);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Name = "ucDeclarationOfForfeitureOfDelinquentProperty1";
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Size = new System.Drawing.Size(617, 398);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.TabIndex = 0;
+            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxAuctionSchedule.FormattingEnabled = true;
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(8, 26);
+            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
+            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
+            cmbxAuctionSchedule.TabIndex = 25;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label3.Location = new System.Drawing.Point(7, 9);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(106, 15);
+            label3.TabIndex = 24;
+            label3.Text = "Auction Schedule :";
             // 
             // frmLtom30
             // 
@@ -108,6 +132,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Treasury > Declaration of Forfeiture of Delinquent Property";
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
@@ -123,5 +148,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private Transactions.Auction.ucDeclarationOfForfeitureOfDelinquentProperty ucDeclarationOfForfeitureOfDelinquentProperty1;
+        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
+        private System.Windows.Forms.Label label3;
     }
 }

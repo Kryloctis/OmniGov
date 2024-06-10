@@ -26,7 +26,6 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0cm</Top>
             <Left>0.03229cm</Left>
             <Height>0.55137cm</Height>
             <Width>19.68911cm</Width>
@@ -480,8 +479,10 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
+        <PageHeight>10.27in</PageHeight>
+        <PageWidth>7.2in</PageWidth>
+        <InteractiveHeight>10.27in</InteractiveHeight>
+        <InteractiveWidth>7.2in</InteractiveWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
