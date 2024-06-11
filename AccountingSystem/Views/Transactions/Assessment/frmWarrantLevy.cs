@@ -254,7 +254,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
         {
             try
             {
-                if (e.KeyCode == Keys.S && e.Control)
+                if (e.KeyCode == Keys.S && e.Control && tabControl1.SelectedTab == tabPageForm)
                 {
                     SaveData();
                 }

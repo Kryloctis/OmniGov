@@ -369,6 +369,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Delinquency Notices";
             Load += frnRptAssessment_Load;
+            KeyDown += frmRptDelinquencyNotices_KeyDown;
             tabControl1.ResumeLayout(false);
             tabPageMain.ResumeLayout(false);
             tabPageMain.PerformLayout();

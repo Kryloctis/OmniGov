@@ -83,7 +83,7 @@
             splitContainer1.Panel2.Controls.Add(pbReport);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
-            splitContainer1.SplitterDistance = 211;
+            splitContainer1.SplitterDistance = 226;
             splitContainer1.TabIndex = 2;
             splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
@@ -91,7 +91,7 @@
             // 
             cmbxDelinquentNoticeRecord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxDelinquentNoticeRecord.FormattingEnabled = true;
-            cmbxDelinquentNoticeRecord.Location = new System.Drawing.Point(7, 164);
+            cmbxDelinquentNoticeRecord.Location = new System.Drawing.Point(12, 164);
             cmbxDelinquentNoticeRecord.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxDelinquentNoticeRecord.Name = "cmbxDelinquentNoticeRecord";
             cmbxDelinquentNoticeRecord.Size = new System.Drawing.Size(200, 23);
@@ -102,7 +102,7 @@
             flwLayoutType.Controls.Add(rad1stNotice);
             flwLayoutType.Controls.Add(rad2ndNotice);
             flwLayoutType.Controls.Add(rad3rdNotice);
-            flwLayoutType.Location = new System.Drawing.Point(7, 29);
+            flwLayoutType.Location = new System.Drawing.Point(12, 29);
             flwLayoutType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             flwLayoutType.Name = "flwLayoutType";
             flwLayoutType.Size = new System.Drawing.Size(200, 56);
@@ -146,7 +146,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(7, 9);
+            label4.Location = new System.Drawing.Point(12, 9);
             label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(37, 15);
@@ -155,7 +155,7 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 200);
+            btnRunReport.Location = new System.Drawing.Point(12, 200);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 12;
@@ -165,7 +165,7 @@
             // 
             // txtRpt
             // 
-            txtRpt.Location = new System.Drawing.Point(7, 113);
+            txtRpt.Location = new System.Drawing.Point(12, 113);
             txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRpt.Name = "txtRpt";
             txtRpt.Size = new System.Drawing.Size(200, 23);
@@ -176,7 +176,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(7, 95);
+            label1.Location = new System.Drawing.Point(12, 95);
             label1.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(60, 15);
@@ -187,7 +187,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(7, 146);
+            label3.Location = new System.Drawing.Point(12, 146);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(157, 15);
             label3.TabIndex = 7;
@@ -198,7 +198,7 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 9);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(617, 393);
+            panel3.Size = new System.Drawing.Size(602, 393);
             panel3.TabIndex = 10;
             // 
             // pbReport
@@ -206,7 +206,7 @@
             pbReport.Dock = System.Windows.Forms.DockStyle.Top;
             pbReport.Location = new System.Drawing.Point(4, 4);
             pbReport.Name = "pbReport";
-            pbReport.Size = new System.Drawing.Size(617, 5);
+            pbReport.Size = new System.Drawing.Size(602, 5);
             pbReport.TabIndex = 9;
             // 
             // reportViewer1
@@ -239,7 +239,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Notice of Real Property Tax Delinquency";
+            Text = "Reports > Treasury > LTOM Form No. (17-19) - Notice of Real Property Tax Delinquency";
             Load += frmLtom17to19_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

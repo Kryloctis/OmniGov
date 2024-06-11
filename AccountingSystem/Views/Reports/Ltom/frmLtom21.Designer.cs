@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.Ltom
 {
-    partial class frmLtom20
+    partial class frmLtom21
     {
         /// <summary>
         /// Required designer variable.
@@ -31,14 +31,14 @@
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             btnRunReport = new System.Windows.Forms.Button();
-            cmbxWarrantLevy = new System.Windows.Forms.ComboBox();
-            label3 = new System.Windows.Forms.Label();
-            txtRpt = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             pbReport = new System.Windows.Forms.ProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            cmbxWarrantLevy = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
+            txtRpt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -88,37 +88,6 @@
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
             // 
-            // cmbxWarrantLevy
-            // 
-            cmbxWarrantLevy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxWarrantLevy.FormattingEnabled = true;
-            cmbxWarrantLevy.Location = new System.Drawing.Point(12, 78);
-            cmbxWarrantLevy.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxWarrantLevy.Name = "cmbxWarrantLevy";
-            cmbxWarrantLevy.Size = new System.Drawing.Size(200, 23);
-            cmbxWarrantLevy.TabIndex = 18;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(12, 60);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(56, 15);
-            label3.TabIndex = 17;
-            label3.Text = "Issued at:";
-            // 
-            // txtRpt
-            // 
-            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtRpt.Location = new System.Drawing.Point(12, 27);
-            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtRpt.Name = "txtRpt";
-            txtRpt.Size = new System.Drawing.Size(200, 23);
-            txtRpt.TabIndex = 6;
-            txtRpt.TextChanged += txtRpt_TextChanged;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -161,7 +130,38 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // frmLtom20
+            // cmbxWarrantLevy
+            // 
+            cmbxWarrantLevy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxWarrantLevy.FormattingEnabled = true;
+            cmbxWarrantLevy.Location = new System.Drawing.Point(12, 78);
+            cmbxWarrantLevy.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxWarrantLevy.Name = "cmbxWarrantLevy";
+            cmbxWarrantLevy.Size = new System.Drawing.Size(200, 23);
+            cmbxWarrantLevy.TabIndex = 18;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label3.Location = new System.Drawing.Point(12, 60);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(56, 15);
+            label3.TabIndex = 17;
+            label3.Text = "Issued at:";
+            // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(12, 27);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 6;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // frmLtom21
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -169,12 +169,11 @@
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(856, 467);
-            Name = "frmLtom20";
+            Name = "frmLtom21";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > LTOM Form No. 20 - Warrant of Levy";
+            Text = "Reports > Treasury > LTOM Form No. 21 - Notice of Levy (Local Assessor and Registrar of Deeds)";
             Load += frmLtom20_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
@@ -190,13 +189,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtRpt;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ProgressBar pbReport;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.ComboBox cmbxWarrantLevy;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.ComboBox cmbxWarrantLevy;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtRpt;
     }
 }
