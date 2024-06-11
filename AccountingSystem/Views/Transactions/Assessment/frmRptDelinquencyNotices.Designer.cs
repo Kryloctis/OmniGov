@@ -360,6 +360,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
+            KeyPreview = true;
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(785, 467);
             Name = "frmRptDelinquencyNotices";

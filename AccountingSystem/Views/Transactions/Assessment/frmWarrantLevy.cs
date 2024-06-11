@@ -218,28 +218,45 @@ namespace AccountingSystem.Views.Transactions.Assessment
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void SaveData()
+        {
+            if (isEdit)
+            {
+                if (ucWarrantLevy.UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Warrant of levy has been updated.");
+                    ucWarrantLevy.ResetForm();
+                    tabControl1.SelectedTab = tabPageMain;
+                    LoadRecords();
+                }
+            }
+            else
+            {
+                if (ucWarrantLevy.InsertData())
+                {
+                    Helper.MessageBoxSuccess("Warrant of levy has been saved.");
+                    ucWarrantLevy.ResetForm();
+                    LoadRecords();
+                }
+            }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (isEdit)
+                SaveData();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmWarrantLevy_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control)
                 {
-                    if (ucWarrantLevy.UpdateData())
-                    {
-                        Helper.MessageBoxSuccess("Warrant of levy has been updated.");
-                        ucWarrantLevy.ResetForm();
-                        tabControl1.SelectedTab = tabPageMain;
-                        LoadRecords();
-                    }
-                }
-                else
-                {
-                    if (ucWarrantLevy.InsertData())
-                    {
-                        Helper.MessageBoxSuccess("Warrant of levy has been saved.");
-                        ucWarrantLevy.ResetForm();
-                        LoadRecords();
-                    }
+                    SaveData();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
