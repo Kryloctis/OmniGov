@@ -50,6 +50,9 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -66,46 +66,43 @@ namespace AccountingSystem.Views.Transactions.Auction
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
-
-            if (dataTable.Rows.Count < 1)
-                progressBar1.Value = 100;
-
-
-            var report = reportViewer1.LocalReport;
-            report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-31-report-of-sale.rdlc";
-            report.DataSources.Clear();
-
-
-            var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
-
-            string lguName = Helper.LGUDetails()["lgu_name"];
-            string location = dtAuction["location"];
-            string date = dtAuction["start_date"];
-
-            var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
-
-            var reportParameters = new ReportParameter[]
-            {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfPublicAuction", date)
-            };
-
-            report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
-            report.SetParameters(reportParameters);
-
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer1.ZoomMode = ZoomMode.PageWidth;
-            reportViewer1.ZoomPercent = 100;
-            reportViewer1.RefreshReport();
-
             try
             {
+                if (e.Cancelled)
+                    return;
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
 
 
+                var report = reportViewer1.LocalReport;
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-31-report-of-sale.rdlc";
+                report.DataSources.Clear();
+
+
+                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+
+                string lguName = Helper.LGUDetails()["lgu_name"];
+                string location = dtAuction["location"];
+                string date = dtAuction["start_date"];
+
+                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
+
+                var reportParameters = new ReportParameter[]
+                {
+                    new ReportParameter("paramLGU", lguName),
+                    new ReportParameter("paramDateOfPublicAuction", date)
+                };
+
+                report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
+                report.SetParameters(reportParameters);
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                reportViewer1.ZoomPercent = 100;
+                reportViewer1.RefreshReport();
 
             }
 

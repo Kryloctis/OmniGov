@@ -140,47 +140,49 @@ namespace AccountingSystem.Views.Transactions.Auction
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            try
+
+            if (e.Cancelled)
+                return;
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
+
+            var report = reportViewer1.LocalReport;
+            report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc";
+            report.DataSources.Clear();
+
+
+            string lguName = Helper.LGUDetails()["lgu_name"];
+            var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
+
+            var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndTaxpayerId(auctionId, taxpayerId);
+
+            var reportParameters = new ReportParameter[]
             {
-                if (e.Cancelled)
-                    return;
-                if (e.Result is not DataTable dataTable)
-                    return;
-
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
-
-                var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc";
-                report.DataSources.Clear();
-
-
-                string lguName = Helper.LGUDetails()["lgu_name"];
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
-
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndTaxpayerId(auctionId, taxpayerId);
-
-                var reportParameters = new ReportParameter[]
-                {
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
                     new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
-                    new ReportParameter("paramPlaceOfAuction", dictAuctionProperty["location"]),
-                    new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
-                    new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
-                    new ReportParameter("paramTCT", string.Empty),
-                    new ReportParameter("paramPropertyLocation", dictAuctionProperty["location"]),
-                    new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),
+                    //new ReportParameter("paramPlaceOfAuction", dictAuctionProperty["location"]),
+                    //new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
+                    //new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
+                    //new ReportParameter("paramTCT", string.Empty),
+                    //new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),
 
-                };
+            };
 
-                report.DataSources.Add(new ReportDataSource("dsLtom30", dataTable));
-                report.SetParameters(reportParameters);
+            report.DataSources.Add(new ReportDataSource("dsLtom30", dataTable));
+            report.SetParameters(reportParameters);
 
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
-                reportViewer1.ZoomPercent = 100;
-                reportViewer1.RefreshReport();
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            reportViewer1.ZoomPercent = 100;
+            reportViewer1.RefreshReport();
+
+            try
+            {
+
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
