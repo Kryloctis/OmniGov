@@ -89,6 +89,7 @@
             // 
             // cmbxDelinquentNoticeRecord
             // 
+            cmbxDelinquentNoticeRecord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxDelinquentNoticeRecord.FormattingEnabled = true;
             cmbxDelinquentNoticeRecord.Location = new System.Drawing.Point(7, 164);
             cmbxDelinquentNoticeRecord.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
