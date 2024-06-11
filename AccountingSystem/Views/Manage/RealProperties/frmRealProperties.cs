@@ -162,10 +162,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
             if (e.Result is not DataTable dataTable)
+            {
+                pbLoadRecords.Value = 100;
                 return;
+            }
+
+            if (e.Cancelled || dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
 
             HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dataTable);
 
