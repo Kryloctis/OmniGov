@@ -7,12 +7,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmAddTaxpayers : Form
     {
-        internal readonly ucTaxPayers uc;
+        private readonly ucTaxPayers uc;
+        private frmTaxpayers frmTaxpayers;
 
-        public frmAddTaxpayers()
+        public frmAddTaxpayers(frmTaxpayers frmTaxpayers)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            this.frmTaxpayers = frmTaxpayers;
             uc = ucTaxPayers1;
         }
 
@@ -37,6 +39,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 if (SaveTaxpayer())
                 {
                     Helper.MessageBoxSuccess("Taxpayer has been saved.");
+                    frmTaxpayers.LoadTaxpayers();
                     uc.ResetForm();
                 }
             }
@@ -62,6 +65,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     if (SaveTaxpayer())
                     {
                         Helper.MessageBoxSuccess("Taxpayer has been saved.");
+                        frmTaxpayers.LoadTaxpayers();
                         uc.ResetForm();
                     }
                 }
