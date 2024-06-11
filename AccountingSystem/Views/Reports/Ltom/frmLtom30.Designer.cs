@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
             cmbxProperty = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
             ucDeclarationOfForfeitureOfDelinquentProperty1 = new Transactions.Auction.ucDeclarationOfForfeitureOfDelinquentProperty();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
-            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -67,6 +67,27 @@
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 8;
+            // 
+            // cmbxAuctionSchedule
+            // 
+            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxAuctionSchedule.FormattingEnabled = true;
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(7, 26);
+            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
+            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
+            cmbxAuctionSchedule.TabIndex = 29;
+            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label3.Location = new System.Drawing.Point(6, 9);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(106, 15);
+            label3.TabIndex = 28;
+            label3.Text = "Auction Schedule :";
             // 
             // cmbxProperty
             // 
@@ -122,26 +143,6 @@
             statusStrip1.Size = new System.Drawing.Size(840, 22);
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
-            // 
-            // cmbxAuctionSchedule
-            // 
-            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxAuctionSchedule.FormattingEnabled = true;
-            cmbxAuctionSchedule.Location = new System.Drawing.Point(7, 26);
-            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
-            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
-            cmbxAuctionSchedule.TabIndex = 29;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(6, 9);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(106, 15);
-            label3.TabIndex = 28;
-            label3.Text = "Auction Schedule :";
             // 
             // frmLtom30
             // 

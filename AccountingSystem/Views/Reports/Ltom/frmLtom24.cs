@@ -23,8 +23,11 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int propertyId = Convert.ToInt32(cmbxProperty.SelectedValue);
-                ucNoticeOfSale.OnLoad(auctionId, propertyId);
 
+                if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
+                    return;
+
+                ucNoticeOfSale.OnLoad(auctionId, propertyId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -66,5 +69,9 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
     }
 }

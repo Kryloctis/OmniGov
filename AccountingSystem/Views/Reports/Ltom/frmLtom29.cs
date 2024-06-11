@@ -25,6 +25,10 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
+
+                if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
+                    return;
+
                 ucCertificateOfSale.OnLoad(auctionId, rptId);
 
             }

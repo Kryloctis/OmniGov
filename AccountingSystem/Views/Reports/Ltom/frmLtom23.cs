@@ -27,6 +27,9 @@ namespace AccountingSystem.Views.Reports.Ltom
             try
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                if (cmbxAuctionSchedule.SelectedIndex == -1)
+                    return;
+
                 ucNoticeOfAuctionSaleOfDelinquentRealProperties.OnLoad(auctionId);
 
             }

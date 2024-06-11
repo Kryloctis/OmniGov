@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.Auction;
 using System;
 using System.Data;
@@ -33,12 +34,13 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadProperties()
         {
-
-            var delinquentProperties = AccFactory.DelinquentNoticeRepository().GetViewRecords("3rd Notice");
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
 
             cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
-            cmbxProperty.DataSource = delinquentProperties;
+            cmbxProperty.DataSource = auctionProperties;
 
         }
 
@@ -60,11 +62,19 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 int rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                ucDeclarationOfForfeitureOfDelinquentProperty.OnLoad(rptId, auctionId);
+
+                if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
+                    return;
+
+                ucDeclarationOfForfeitureOfDelinquentProperty.OnLoad(auctionId, rptId);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
     }
 }
