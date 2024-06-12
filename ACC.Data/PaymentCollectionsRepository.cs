@@ -479,5 +479,10 @@ namespace ACC.Data
 
             return rcdCollectionsModels;
         }
+
+        public bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, BiddingsModel biddingModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

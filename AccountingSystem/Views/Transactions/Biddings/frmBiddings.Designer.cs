@@ -496,6 +496,7 @@
             btnConfirmPayment.TabIndex = 2;
             btnConfirmPayment.Text = "Confirm Payment";
             btnConfirmPayment.UseVisualStyleBackColor = true;
+            btnConfirmPayment.Click += btnConfirmPayment_Click;
             // 
             // button2
             // 
@@ -616,7 +617,7 @@
             tabPageListOfRegisteredBidders.Location = new System.Drawing.Point(4, 5);
             tabPageListOfRegisteredBidders.Margin = new System.Windows.Forms.Padding(0);
             tabPageListOfRegisteredBidders.Name = "tabPageListOfRegisteredBidders";
-            tabPageListOfRegisteredBidders.Size = new System.Drawing.Size(805, 359);
+            tabPageListOfRegisteredBidders.Size = new System.Drawing.Size(761, 353);
             tabPageListOfRegisteredBidders.TabIndex = 1;
             tabPageListOfRegisteredBidders.Text = "List of Registed Bidders";
             tabPageListOfRegisteredBidders.UseVisualStyleBackColor = true;
@@ -626,7 +627,7 @@
             ucListOfRegisteredBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucListOfRegisteredBidders1.Location = new System.Drawing.Point(0, 0);
             ucListOfRegisteredBidders1.Name = "ucListOfRegisteredBidders1";
-            ucListOfRegisteredBidders1.Size = new System.Drawing.Size(805, 359);
+            ucListOfRegisteredBidders1.Size = new System.Drawing.Size(761, 353);
             ucListOfRegisteredBidders1.TabIndex = 0;
             // 
             // tabPageUndertakingAndWaiverOfBidders
@@ -635,7 +636,7 @@
             tabPageUndertakingAndWaiverOfBidders.Location = new System.Drawing.Point(4, 5);
             tabPageUndertakingAndWaiverOfBidders.Margin = new System.Windows.Forms.Padding(0);
             tabPageUndertakingAndWaiverOfBidders.Name = "tabPageUndertakingAndWaiverOfBidders";
-            tabPageUndertakingAndWaiverOfBidders.Size = new System.Drawing.Size(805, 359);
+            tabPageUndertakingAndWaiverOfBidders.Size = new System.Drawing.Size(761, 353);
             tabPageUndertakingAndWaiverOfBidders.TabIndex = 2;
             tabPageUndertakingAndWaiverOfBidders.Text = "Undertaking and Waiver of Bidders";
             tabPageUndertakingAndWaiverOfBidders.UseVisualStyleBackColor = true;
@@ -645,7 +646,7 @@
             ucUnderTakingAndWaiverOfBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucUnderTakingAndWaiverOfBidders1.Location = new System.Drawing.Point(0, 0);
             ucUnderTakingAndWaiverOfBidders1.Name = "ucUnderTakingAndWaiverOfBidders1";
-            ucUnderTakingAndWaiverOfBidders1.Size = new System.Drawing.Size(805, 359);
+            ucUnderTakingAndWaiverOfBidders1.Size = new System.Drawing.Size(761, 353);
             ucUnderTakingAndWaiverOfBidders1.TabIndex = 0;
             // 
             // tabPageRulesAndRegulationOfPublicAuction
@@ -654,7 +655,7 @@
             tabPageRulesAndRegulationOfPublicAuction.Location = new System.Drawing.Point(4, 5);
             tabPageRulesAndRegulationOfPublicAuction.Margin = new System.Windows.Forms.Padding(0);
             tabPageRulesAndRegulationOfPublicAuction.Name = "tabPageRulesAndRegulationOfPublicAuction";
-            tabPageRulesAndRegulationOfPublicAuction.Size = new System.Drawing.Size(805, 359);
+            tabPageRulesAndRegulationOfPublicAuction.Size = new System.Drawing.Size(761, 353);
             tabPageRulesAndRegulationOfPublicAuction.TabIndex = 3;
             tabPageRulesAndRegulationOfPublicAuction.Text = "Rules and Regulations of Public Auction";
             tabPageRulesAndRegulationOfPublicAuction.UseVisualStyleBackColor = true;
@@ -664,7 +665,7 @@
             ucRulesAndRegulation1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRulesAndRegulation1.Location = new System.Drawing.Point(0, 0);
             ucRulesAndRegulation1.Name = "ucRulesAndRegulation1";
-            ucRulesAndRegulation1.Size = new System.Drawing.Size(805, 359);
+            ucRulesAndRegulation1.Size = new System.Drawing.Size(761, 353);
             ucRulesAndRegulation1.TabIndex = 0;
             // 
             // statusStrip2

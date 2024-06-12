@@ -42,12 +42,25 @@ namespace ACC.Data
 
         public bool Insert(BiddingsModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_auction_id", DbType.Int32, entity.RptAuctionId},
+                new object[] { "@bidders_id", DbType.Int32, entity.BiddersId},
+                new object[] { "@ordinance_no", DbType.String, entity.OrdinanceNo},
+                new object[] { "@date", DbType.DateTime2, entity.Date},
+                new object[] { "@bid_amount", DbType.Decimal, entity.BidAmount},
+                new object[] { "@created_at", DbType.Int32, entity.CreatedBy},
+
+            };
+
+            string query = $"INSERT INTO {tableName} () VALUES ()";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BiddingsModel entity)
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

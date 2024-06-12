@@ -1,4 +1,7 @@
-﻿using AccountingSystem.Views.Manage.TaxPayers;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Transactions.Payments;
 using System;
 using System.Windows.Forms;
 
@@ -8,6 +11,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
     {
         private ucTaxPayers ucTaxPayers;
         private ucBiddings ucBiddings;
+        private ucPayment ucPayment;
 
         public frmBiddings()
         {
@@ -15,6 +19,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
             ucTaxPayers = ucTaxPayers1;
             ucBiddings = ucBiddings1;
+            ucPayment = ucPayment1;
 
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBiddings, true);
@@ -109,6 +114,44 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             TabPageController(tabPageList);
         }
+
+        private void ResetForm()
+        {
+            TabPageController(tabPageList);
+        }
+        private void btnConfirmPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (ConfirmPayment())
+                {
+                    Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
+                    ResetForm();
+                    return;
+                }
+                else
+                {
+                    Helper.MessageBoxSuccess("Payment error");
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool ConfirmPayment()
+        {
+            var biddingModel = new BiddingsModel()
+            {
+                RptAuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
+                BiddersId = 1,
+                OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
+                Date = ucBiddings.dtpDate.Value,
+                BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value)
+            };
+
+            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, biddingModel);
+        }
+
 
     }
 }
