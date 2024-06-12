@@ -215,5 +215,6 @@ namespace ACC.Data
         public static IAuctionRepository AuctionRepository() => new AuctionRepository(mySqlGenericCommandsLFS);
 
         public static IRptAuctionRepository RptAuctionRepository() => new RptAuctionRepository(mySqlGenericCommandsLFS);
+        public static IBiddingsRepository BiddingsRepository() => new BiddingsRepository(mySqlGenericCommandsLFS);
     }
 }

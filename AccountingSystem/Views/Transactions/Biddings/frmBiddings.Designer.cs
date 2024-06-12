@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dgBiddings = new System.Windows.Forms.DataGridView();
@@ -149,23 +149,23 @@
             // 
             // dgBiddings
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgBiddings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgBiddings.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgBiddings.DefaultCellStyle = dataGridViewCellStyle2;
             dgBiddings.Dock = System.Windows.Forms.DockStyle.Fill;
             dgBiddings.Location = new System.Drawing.Point(0, 70);
             dgBiddings.Margin = new System.Windows.Forms.Padding(0);
@@ -338,7 +338,7 @@
             tabPageForm.Location = new System.Drawing.Point(4, 5);
             tabPageForm.Margin = new System.Windows.Forms.Padding(0);
             tabPageForm.Name = "tabPageForm";
-            tabPageForm.Size = new System.Drawing.Size(805, 425);
+            tabPageForm.Size = new System.Drawing.Size(761, 419);
             tabPageForm.TabIndex = 1;
             tabPageForm.Text = "Biddings > Form";
             tabPageForm.UseVisualStyleBackColor = true;
@@ -350,13 +350,13 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Top;
             panel3.Location = new System.Drawing.Point(0, 353);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(805, 29);
+            panel3.Size = new System.Drawing.Size(761, 29);
             panel3.TabIndex = 15;
             // 
             // button3
             // 
             button3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button3.Location = new System.Drawing.Point(660, 3);
+            button3.Location = new System.Drawing.Point(616, 3);
             button3.Name = "button3";
             button3.Size = new System.Drawing.Size(143, 23);
             button3.TabIndex = 17;
@@ -367,7 +367,7 @@
             // btnPayment
             // 
             btnPayment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnPayment.Location = new System.Drawing.Point(1017, 3);
+            btnPayment.Location = new System.Drawing.Point(973, 3);
             btnPayment.Name = "btnPayment";
             btnPayment.Size = new System.Drawing.Size(144, 23);
             btnPayment.TabIndex = 0;
@@ -390,7 +390,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(groupBox2);
-            splitContainer1.Size = new System.Drawing.Size(805, 318);
+            splitContainer1.Size = new System.Drawing.Size(761, 318);
             splitContainer1.SplitterDistance = 437;
             splitContainer1.TabIndex = 17;
             // 
@@ -426,7 +426,7 @@
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            groupBox2.Size = new System.Drawing.Size(364, 318);
+            groupBox2.Size = new System.Drawing.Size(320, 318);
             groupBox2.TabIndex = 16;
             groupBox2.TabStop = false;
             groupBox2.Text = "Bidding Details";
@@ -437,7 +437,7 @@
             ucBiddings1.Font = new System.Drawing.Font("Segoe UI", 9F);
             ucBiddings1.Location = new System.Drawing.Point(3, 50);
             ucBiddings1.Name = "ucBiddings1";
-            ucBiddings1.Size = new System.Drawing.Size(358, 265);
+            ucBiddings1.Size = new System.Drawing.Size(314, 265);
             ucBiddings1.TabIndex = 0;
             // 
             // toolStrip2
@@ -450,7 +450,7 @@
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(805, 35);
+            toolStrip2.Size = new System.Drawing.Size(761, 35);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -471,7 +471,7 @@
             tabPagePayment.Location = new System.Drawing.Point(4, 5);
             tabPagePayment.Margin = new System.Windows.Forms.Padding(0);
             tabPagePayment.Name = "tabPagePayment";
-            tabPagePayment.Size = new System.Drawing.Size(805, 425);
+            tabPagePayment.Size = new System.Drawing.Size(761, 419);
             tabPagePayment.TabIndex = 3;
             tabPagePayment.Text = "Biddings > Payment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -484,13 +484,13 @@
             panel4.Dock = System.Windows.Forms.DockStyle.Top;
             panel4.Location = new System.Drawing.Point(0, 379);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(805, 30);
+            panel4.Size = new System.Drawing.Size(761, 30);
             panel4.TabIndex = 18;
             // 
             // btnConfirmPayment
             // 
             btnConfirmPayment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnConfirmPayment.Location = new System.Drawing.Point(658, 3);
+            btnConfirmPayment.Location = new System.Drawing.Point(614, 3);
             btnConfirmPayment.Name = "btnConfirmPayment";
             btnConfirmPayment.Size = new System.Drawing.Size(144, 23);
             btnConfirmPayment.TabIndex = 2;
@@ -500,7 +500,7 @@
             // button2
             // 
             button2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button2.Location = new System.Drawing.Point(1157, 4);
+            button2.Location = new System.Drawing.Point(1113, 4);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(150, 23);
             button2.TabIndex = 1;
@@ -510,7 +510,7 @@
             // button1
             // 
             button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(1653, 3);
+            button1.Location = new System.Drawing.Point(1609, 3);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(150, 23);
             button1.TabIndex = 0;
@@ -523,7 +523,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Top;
             ucPayment1.Location = new System.Drawing.Point(0, 35);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(805, 344);
+            ucPayment1.Size = new System.Drawing.Size(761, 344);
             ucPayment1.TabIndex = 17;
             // 
             // toolStrip4
@@ -536,7 +536,7 @@
             toolStrip4.Location = new System.Drawing.Point(0, 0);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip4.Size = new System.Drawing.Size(805, 35);
+            toolStrip4.Size = new System.Drawing.Size(761, 35);
             toolStrip4.TabIndex = 1;
             toolStrip4.Text = "toolStrip4";
             // 
@@ -556,7 +556,7 @@
             tabPagePrint.Location = new System.Drawing.Point(4, 5);
             tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
             tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(805, 425);
+            tabPagePrint.Size = new System.Drawing.Size(761, 419);
             tabPagePrint.TabIndex = 2;
             tabPagePrint.Text = "Biddings > Print";
             tabPagePrint.UseVisualStyleBackColor = true;
@@ -569,7 +569,7 @@
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Margin = new System.Windows.Forms.Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(805, 390);
+            panel1.Size = new System.Drawing.Size(761, 384);
             panel1.TabIndex = 1;
             // 
             // tabControlPrintPreview
@@ -587,7 +587,7 @@
             tabControlPrintPreview.Name = "tabControlPrintPreview";
             tabControlPrintPreview.Padding = new System.Drawing.Point(0, 0);
             tabControlPrintPreview.SelectedIndex = 0;
-            tabControlPrintPreview.Size = new System.Drawing.Size(813, 368);
+            tabControlPrintPreview.Size = new System.Drawing.Size(769, 362);
             tabControlPrintPreview.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlPrintPreview.TabIndex = 4;
             // 
@@ -597,7 +597,7 @@
             tabPagePublicAuctionRegistrationForm.Location = new System.Drawing.Point(4, 5);
             tabPagePublicAuctionRegistrationForm.Margin = new System.Windows.Forms.Padding(0);
             tabPagePublicAuctionRegistrationForm.Name = "tabPagePublicAuctionRegistrationForm";
-            tabPagePublicAuctionRegistrationForm.Size = new System.Drawing.Size(805, 359);
+            tabPagePublicAuctionRegistrationForm.Size = new System.Drawing.Size(761, 353);
             tabPagePublicAuctionRegistrationForm.TabIndex = 0;
             tabPagePublicAuctionRegistrationForm.Text = "Public Auction Registration Form";
             tabPagePublicAuctionRegistrationForm.UseVisualStyleBackColor = true;
@@ -607,7 +607,7 @@
             ucPublicAuctionRegistrationForm1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPublicAuctionRegistrationForm1.Location = new System.Drawing.Point(0, 0);
             ucPublicAuctionRegistrationForm1.Name = "ucPublicAuctionRegistrationForm1";
-            ucPublicAuctionRegistrationForm1.Size = new System.Drawing.Size(805, 359);
+            ucPublicAuctionRegistrationForm1.Size = new System.Drawing.Size(761, 353);
             ucPublicAuctionRegistrationForm1.TabIndex = 0;
             // 
             // tabPageListOfRegisteredBidders
@@ -669,9 +669,9 @@
             // 
             // statusStrip2
             // 
-            statusStrip2.Location = new System.Drawing.Point(0, 368);
+            statusStrip2.Location = new System.Drawing.Point(0, 362);
             statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(805, 22);
+            statusStrip2.Size = new System.Drawing.Size(761, 22);
             statusStrip2.TabIndex = 2;
             statusStrip2.Text = "statusStrip2";
             // 
@@ -684,7 +684,7 @@
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(805, 35);
+            toolStrip3.Size = new System.Drawing.Size(761, 35);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
             // 

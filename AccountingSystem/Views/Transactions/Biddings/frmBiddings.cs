@@ -1,13 +1,21 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.TaxPayers;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Biddings
 {
     public partial class frmBiddings : Form
     {
+        private ucTaxPayers ucTaxPayers;
+        private ucBiddings ucBiddings;
+
         public frmBiddings()
         {
             InitializeComponent();
+
+            ucTaxPayers = ucTaxPayers1;
+            ucBiddings = ucBiddings1;
+
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBiddings, true);
         }
@@ -49,7 +57,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void frmBiddings_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
             LoadRowFilter();
             Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
         }

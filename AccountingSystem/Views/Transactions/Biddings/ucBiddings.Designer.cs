@@ -117,6 +117,7 @@
             nudBidAmount.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudBidAmount.DecimalPlaces = 2;
             nudBidAmount.Location = new System.Drawing.Point(116, 92);
+            nudBidAmount.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudBidAmount.Name = "nudBidAmount";
             nudBidAmount.Size = new System.Drawing.Size(436, 23);
             nudBidAmount.TabIndex = 5;
@@ -140,6 +141,7 @@
             Controls.Add(label1);
             Name = "ucBiddings";
             Size = new System.Drawing.Size(573, 120);
+            Load += ucBiddings_Load;
             ((System.ComponentModel.ISupportInitialize)nudBidAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
