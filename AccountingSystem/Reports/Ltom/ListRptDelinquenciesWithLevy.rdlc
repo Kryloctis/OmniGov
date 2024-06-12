@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtDelinquentPropertyWithIssuedWarrantOfLevy">
+    <DataSet Name="dtLtom22">
       <Query>
         <DataSourceName>dsTreasury</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -21,8 +21,8 @@
           <DataField>declared_owner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="tax_declaration_no">
-          <DataField>tax_declaration_no</DataField>
+        <Field Name="tax_dec_no">
+          <DataField>tax_dec_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="location_of_property">
@@ -41,7 +41,7 @@
       <rd:DataSetInfo>
         <rd:DataSetName>dsTreasury</rd:DataSetName>
         <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
-        <rd:TableName>dtDeliquentPropertyWithIssuedWarrantOfLevy</rd:TableName>
+        <rd:TableName>dtLtom22</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -307,7 +307,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tax_declaration_no.Value</Value>
+                                  <Value>=Fields!tax_dec_no.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -653,7 +653,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
-            <DataSetName>dtDelinquentPropertyWithIssuedWarrantOfLevy</DataSetName>
+            <DataSetName>dtLtom22</DataSetName>
             <Top>0.14993cm</Top>
             <Left>0.03175cm</Left>
             <Height>2.04666cm</Height>
@@ -684,8 +684,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.46026cm</Top>
-            <Left>20.80002cm</Left>
+            <Top>4.13743cm</Top>
+            <Left>21.35831cm</Left>
             <Height>0.6cm</Height>
             <Width>6.85746cm</Width>
             <ZIndex>1</ZIndex>
@@ -723,8 +723,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>3.7897cm</Top>
-            <Left>20.80002cm</Left>
+            <Top>3.46687cm</Top>
+            <Left>21.35831cm</Left>
             <Height>0.6cm</Height>
             <Width>6.85746cm</Width>
             <ZIndex>2</ZIndex>
@@ -759,8 +759,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>2.48428cm</Top>
-            <Left>17.62502cm</Left>
+            <Top>2.69048cm</Top>
+            <Left>21.35831cm</Left>
             <Height>0.6cm</Height>
             <Width>6.85746cm</Width>
             <ZIndex>3</ZIndex>
@@ -776,7 +776,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.03031in</Height>
+        <Height>1.86513in</Height>
         <Style />
       </Body>
       <Width>11.13794in</Width>
@@ -879,7 +879,7 @@
                   <TextRuns>
                     <TextRun>
                       <Label>municipality</Label>
-                      <Value>=UCase(Parameters!paramLGUName.Value)</Value>
+                      <Value>=UCase(Parameters!paramLgu.Value)</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>11pt</FontSize>
@@ -925,15 +925,22 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramLGUName">
+    <ReportParameter Name="paramLgu">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramAsOf">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="paramSignatory">
+      <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
@@ -945,12 +952,17 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramLGUName</ParameterName>
+          <ParameterName>paramLgu</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramSignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramAsOf</ParameterName>
+          <ParameterName>paramSignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

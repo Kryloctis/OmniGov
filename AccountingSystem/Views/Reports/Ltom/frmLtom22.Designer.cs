@@ -34,13 +34,18 @@
             btnRunReport = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            splitContainer2 = new System.Windows.Forms.SplitContainer();
             pbReport = new System.Windows.Forms.ProgressBar();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            reportViewer2 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -106,11 +111,22 @@
             // 
             // panel3
             // 
+            panel3.AutoScroll = true;
+            panel3.Controls.Add(splitContainer2);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 9);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(602, 393);
             panel3.TabIndex = 12;
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer2.Location = new System.Drawing.Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            splitContainer2.Size = new System.Drawing.Size(602, 393);
+            splitContainer2.SplitterDistance = 203;
+            splitContainer2.TabIndex = 0;
             // 
             // pbReport
             // 
@@ -137,6 +153,15 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
+            // reportViewer2
+            // 
+            reportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer2.Location = new System.Drawing.Point(0, 0);
+            reportViewer2.Name = "ReportViewer";
+            reportViewer2.ServerReport.BearerToken = null;
+            reportViewer2.Size = new System.Drawing.Size(396, 246);
+            reportViewer2.TabIndex = 0;
+            // 
             // frmLtom22
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -157,6 +182,9 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,5 +200,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer2;
     }
 }

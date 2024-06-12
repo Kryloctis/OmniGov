@@ -130,5 +130,11 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
     }
 }

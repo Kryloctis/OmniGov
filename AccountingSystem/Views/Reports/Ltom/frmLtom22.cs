@@ -21,7 +21,8 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            panel3.Controls.Add(reportViewer1);
+            splitContainer2.Panel1.Controls.Add(reportViewer1);
+            splitContainer2.Panel2.Controls.Add(reportViewer2);
         }
 
         private void frmLtom22_Load(object sender, EventArgs e)
@@ -67,7 +68,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             try
             {
                 var date = (DateTime)e.Argument;
-
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
                 {
@@ -76,7 +76,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                     { "Set Parameter Values", 40 }
                 };
 
-                int totalProgressCount = tasks.Sum(t => t.Value);
+                var dtLtom22 = new dsTreasury.dtLtom22DataTable().Clone();
+                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords();
+                int totalProgressCount = tasks.Sum(t => t.Value) + dtRptLevy.Rows.Count;
                 int progressCount = 0;
 
                 // Fetch LGU Details
@@ -85,19 +87,40 @@ namespace AccountingSystem.Views.Reports.Ltom
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Initialize Parameters
-                List<ReportParameter> reportParameters = new List<ReportParameter>();
+                List<ReportParameter> reportParameters1 = new List<ReportParameter>();
+                List<ReportParameter> reportParameters2 = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Set Parameter Values
-                reportParameters.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
-                reportParameters.Add(new ReportParameter("paramReportDate", date.ToString()));
-                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
-                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters1.Add(new ReportParameter("paramReportDate", date.ToString()));
+                reportParameters1.Add(new ReportParameter("paramSignatory", string.Empty));
+                reportParameters1.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+
+                reportParameters2.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters2.Add(new ReportParameter("paramSignatory", string.Empty));
+                reportParameters2.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                e.Result = reportParameters;
+                foreach (DataRow dataRow in dtRptLevy.Rows)
+                {
+                    var newRow = dtLtom22.NewRow();
+                    string fullAddress = Helper.GenerateFullAddress(string.Empty, dataRow["barangay_name"].ToString(), dataRow["municipalities_name"].ToString(), dataRow["provinces_name"].ToString());
+
+                    newRow["declared_owner"] = dataRow["taxpayers_name"];
+                    newRow["tax_dec_no"] = dataRow["complete_arp_no"];
+                    newRow["location_of_property"] = fullAddress;
+                    newRow["kind_of_property"] = dataRow["property_kind"];
+                    newRow["assessed_value"] = dataRow["assessed_value"];
+
+                    progressCount++;
+                    dtLtom22.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = (reportParameters1, reportParameters2, dtLtom22);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -111,16 +134,29 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                var parameters = (List<ReportParameter>)e.Result;
+                var parameters = ((List<ReportParameter> reportParameters1, List<ReportParameter> reportParameters2, DataTable dtRptLevy))e.Result;
+
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
                 localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom22ReportOfLevy.rdlc";
-                localReport.SetParameters(parameters);
+                localReport.SetParameters(parameters.reportParameters1);
                 localReport.Refresh();
+
+                reportViewer2.Clear();
+                var localReport2 = reportViewer2.LocalReport;
+                localReport2.DataSources.Clear();
+                localReport2.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ListRptDelinquenciesWithLevy.rdlc";
+                localReport2.DataSources.Add(new ReportDataSource("dtLtom22", parameters.dtRptLevy));
+                localReport2.SetParameters(parameters.reportParameters2);
+                localReport2.Refresh();
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+
+                reportViewer2.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer2.ZoomMode = ZoomMode.FullPage;
+                reportViewer2.Refresh();
                 ToogleRunButton(true);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
