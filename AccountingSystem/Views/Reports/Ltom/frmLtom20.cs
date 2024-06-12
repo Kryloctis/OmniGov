@@ -64,12 +64,18 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
             {
-                pbReport.Value = 0; btnRunReport.Enabled = false;
-                btnRunReport.Text = "Generating Report";
+                pbReport.Value = 0;
+                ToogleRunButton(false);
                 var warrantLevyId = cmbxWarrantLevy.SelectedValue;
                 backgroundWorker1.RunWorkerAsync(warrantLevyId);
             }
@@ -204,8 +210,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-                btnRunReport.Text = "Run Report";
-                btnRunReport.Enabled = true;
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }

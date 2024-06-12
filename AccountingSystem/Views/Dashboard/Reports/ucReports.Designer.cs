@@ -62,6 +62,7 @@
             btnLedgers = new System.Windows.Forms.Button();
             btnJournals = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
+            btnLtom21 = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -87,7 +88,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.6705F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.3295021F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(383, 1054);
+            tableLayoutPanel1.Size = new System.Drawing.Size(366, 1054);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -97,7 +98,7 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 328);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(377, 723);
+            panel1.Size = new System.Drawing.Size(360, 723);
             panel1.TabIndex = 3;
             // 
             // panel4
@@ -107,6 +108,7 @@
             panel4.Controls.Add(btnLtom29);
             panel4.Controls.Add(btnLtom24);
             panel4.Controls.Add(btnLtom23);
+            panel4.Controls.Add(btnLtom21);
             panel4.Controls.Add(btnLtom20);
             panel4.Controls.Add(btnLtom17and19);
             panel4.Controls.Add(button2);
@@ -126,7 +128,7 @@
             panel4.Location = new System.Drawing.Point(0, 30);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            panel4.Size = new System.Drawing.Size(377, 690);
+            panel4.Size = new System.Drawing.Size(360, 690);
             panel4.TabIndex = 1;
             // 
             // btnLtom31
@@ -136,9 +138,9 @@
             btnLtom31.FlatAppearance.BorderSize = 0;
             btnLtom31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom31.Location = new System.Drawing.Point(5, 561);
+            btnLtom31.Location = new System.Drawing.Point(5, 594);
             btnLtom31.Name = "btnLtom31";
-            btnLtom31.Size = new System.Drawing.Size(372, 33);
+            btnLtom31.Size = new System.Drawing.Size(355, 33);
             btnLtom31.TabIndex = 43;
             btnLtom31.Text = "LTOM Form No. 31 - Report of Sale";
             btnLtom31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -153,9 +155,9 @@
             btnLtom30.FlatAppearance.BorderSize = 0;
             btnLtom30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom30.Location = new System.Drawing.Point(5, 528);
+            btnLtom30.Location = new System.Drawing.Point(5, 561);
             btnLtom30.Name = "btnLtom30";
-            btnLtom30.Size = new System.Drawing.Size(372, 33);
+            btnLtom30.Size = new System.Drawing.Size(355, 33);
             btnLtom30.TabIndex = 42;
             btnLtom30.Text = "LTOM Form No. 30 - Declaration of Forfeiture of Delinquent Property";
             btnLtom30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -170,9 +172,9 @@
             btnLtom29.FlatAppearance.BorderSize = 0;
             btnLtom29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom29.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom29.Location = new System.Drawing.Point(5, 495);
+            btnLtom29.Location = new System.Drawing.Point(5, 528);
             btnLtom29.Name = "btnLtom29";
-            btnLtom29.Size = new System.Drawing.Size(372, 33);
+            btnLtom29.Size = new System.Drawing.Size(355, 33);
             btnLtom29.TabIndex = 41;
             btnLtom29.Text = "LTOM Form No. 29 - Certificate of Sale";
             btnLtom29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -187,9 +189,9 @@
             btnLtom24.FlatAppearance.BorderSize = 0;
             btnLtom24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom24.Location = new System.Drawing.Point(5, 462);
+            btnLtom24.Location = new System.Drawing.Point(5, 495);
             btnLtom24.Name = "btnLtom24";
-            btnLtom24.Size = new System.Drawing.Size(372, 33);
+            btnLtom24.Size = new System.Drawing.Size(355, 33);
             btnLtom24.TabIndex = 40;
             btnLtom24.Text = "LTOM Form No. 24 - Notice of Sale";
             btnLtom24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -204,9 +206,9 @@
             btnLtom23.FlatAppearance.BorderSize = 0;
             btnLtom23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom23.Location = new System.Drawing.Point(5, 429);
+            btnLtom23.Location = new System.Drawing.Point(5, 462);
             btnLtom23.Name = "btnLtom23";
-            btnLtom23.Size = new System.Drawing.Size(372, 33);
+            btnLtom23.Size = new System.Drawing.Size(355, 33);
             btnLtom23.TabIndex = 56;
             btnLtom23.Text = "LTOM Form No. 23 - Notice of Auction Sale of Delinquent Real Properties";
             btnLtom23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -223,7 +225,7 @@
             btnLtom20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom20.Location = new System.Drawing.Point(5, 396);
             btnLtom20.Name = "btnLtom20";
-            btnLtom20.Size = new System.Drawing.Size(372, 33);
+            btnLtom20.Size = new System.Drawing.Size(355, 33);
             btnLtom20.TabIndex = 52;
             btnLtom20.Text = "LTOM Form No. 20 - Warrant of Levy";
             btnLtom20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -240,7 +242,7 @@
             btnLtom17and19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLtom17and19.Location = new System.Drawing.Point(5, 363);
             btnLtom17and19.Name = "btnLtom17and19";
-            btnLtom17and19.Size = new System.Drawing.Size(372, 33);
+            btnLtom17and19.Size = new System.Drawing.Size(355, 33);
             btnLtom17and19.TabIndex = 50;
             btnLtom17and19.Text = "LTOM Form No. (17-19) - Notice of Real Property Tax Delinquency\r\n";
             btnLtom17and19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -256,7 +258,7 @@
             button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button2.Location = new System.Drawing.Point(5, 330);
             button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(372, 33);
+            button2.Size = new System.Drawing.Size(355, 33);
             button2.TabIndex = 54;
             button2.Text = "LTOM Form No. 16 - Notice of Delinquency in the Payment of Real Property Tax";
             button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -272,7 +274,7 @@
             btnCertListRptDelinquencies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnCertListRptDelinquencies.Location = new System.Drawing.Point(5, 297);
             btnCertListRptDelinquencies.Name = "btnCertListRptDelinquencies";
-            btnCertListRptDelinquencies.Size = new System.Drawing.Size(372, 33);
+            btnCertListRptDelinquencies.Size = new System.Drawing.Size(355, 33);
             btnCertListRptDelinquencies.TabIndex = 60;
             btnCertListRptDelinquencies.Text = "Certified List of Real Property Tax Deliquencies";
             btnCertListRptDelinquencies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -289,7 +291,7 @@
             btnRptDuesPayments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRptDuesPayments.Location = new System.Drawing.Point(5, 264);
             btnRptDuesPayments.Name = "btnRptDuesPayments";
-            btnRptDuesPayments.Size = new System.Drawing.Size(372, 33);
+            btnRptDuesPayments.Size = new System.Drawing.Size(355, 33);
             btnRptDuesPayments.TabIndex = 59;
             btnRptDuesPayments.Text = "Real Property Tax Dues and Payments";
             btnRptDuesPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -306,7 +308,7 @@
             btnLstRptDelinquencies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLstRptDelinquencies.Location = new System.Drawing.Point(5, 231);
             btnLstRptDelinquencies.Name = "btnLstRptDelinquencies";
-            btnLstRptDelinquencies.Size = new System.Drawing.Size(372, 33);
+            btnLstRptDelinquencies.Size = new System.Drawing.Size(355, 33);
             btnLstRptDelinquencies.TabIndex = 57;
             btnLstRptDelinquencies.Text = "List of Real Property Delinquencies";
             btnLstRptDelinquencies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -323,7 +325,7 @@
             btnRptStmntAcc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRptStmntAcc.Location = new System.Drawing.Point(5, 198);
             btnRptStmntAcc.Name = "btnRptStmntAcc";
-            btnRptStmntAcc.Size = new System.Drawing.Size(372, 33);
+            btnRptStmntAcc.Size = new System.Drawing.Size(355, 33);
             btnRptStmntAcc.TabIndex = 58;
             btnRptStmntAcc.Text = "Real Property Tax Statement of Account";
             btnRptStmntAcc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -340,7 +342,7 @@
             btnRcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRcd.Location = new System.Drawing.Point(5, 165);
             btnRcd.Name = "btnRcd";
-            btnRcd.Size = new System.Drawing.Size(372, 33);
+            btnRcd.Size = new System.Drawing.Size(355, 33);
             btnRcd.TabIndex = 55;
             btnRcd.Text = "Report of Collections Deposits (RCD)";
             btnRcd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -357,7 +359,7 @@
             btnRci.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnRci.Location = new System.Drawing.Point(5, 132);
             btnRci.Name = "btnRci";
-            btnRci.Size = new System.Drawing.Size(372, 33);
+            btnRci.Size = new System.Drawing.Size(355, 33);
             btnRci.TabIndex = 62;
             btnRci.Text = "Report of Check Issued (RCI)";
             btnRci.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -374,7 +376,7 @@
             btnDlyCashPstn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnDlyCashPstn.Location = new System.Drawing.Point(5, 99);
             btnDlyCashPstn.Name = "btnDlyCashPstn";
-            btnDlyCashPstn.Size = new System.Drawing.Size(372, 33);
+            btnDlyCashPstn.Size = new System.Drawing.Size(355, 33);
             btnDlyCashPstn.TabIndex = 66;
             btnDlyCashPstn.Text = "Daily Cash Positions";
             btnDlyCashPstn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -391,7 +393,7 @@
             btnConsRprtAccForms.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnConsRprtAccForms.Location = new System.Drawing.Point(5, 66);
             btnConsRprtAccForms.Name = "btnConsRprtAccForms";
-            btnConsRprtAccForms.Size = new System.Drawing.Size(372, 33);
+            btnConsRprtAccForms.Size = new System.Drawing.Size(355, 33);
             btnConsRprtAccForms.TabIndex = 65;
             btnConsRprtAccForms.Text = "Consolidated Report of Accountability for Accountable Forms";
             btnConsRprtAccForms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -408,7 +410,7 @@
             btnSchedRc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSchedRc.Location = new System.Drawing.Point(5, 33);
             btnSchedRc.Name = "btnSchedRc";
-            btnSchedRc.Size = new System.Drawing.Size(372, 33);
+            btnSchedRc.Size = new System.Drawing.Size(355, 33);
             btnSchedRc.TabIndex = 63;
             btnSchedRc.Text = "Schedule of Released and Unreleased Cheques";
             btnSchedRc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -425,7 +427,7 @@
             btnBankCashbook.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnBankCashbook.Location = new System.Drawing.Point(5, 0);
             btnBankCashbook.Name = "btnBankCashbook";
-            btnBankCashbook.Size = new System.Drawing.Size(372, 33);
+            btnBankCashbook.Size = new System.Drawing.Size(355, 33);
             btnBankCashbook.TabIndex = 61;
             btnBankCashbook.Text = "Cashbook";
             btnBankCashbook.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -440,7 +442,7 @@
             label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label1.Location = new System.Drawing.Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(377, 30);
+            label1.Size = new System.Drawing.Size(360, 30);
             label1.TabIndex = 0;
             label1.Text = "Treasury";
             // 
@@ -451,7 +453,7 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(377, 127);
+            panel2.Size = new System.Drawing.Size(360, 127);
             panel2.TabIndex = 2;
             panel2.Paint += panel2_Paint;
             // 
@@ -463,7 +465,7 @@
             panel6.Location = new System.Drawing.Point(0, 30);
             panel6.Name = "panel6";
             panel6.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            panel6.Size = new System.Drawing.Size(377, 97);
+            panel6.Size = new System.Drawing.Size(360, 97);
             panel6.TabIndex = 37;
             // 
             // btnSaaobb
@@ -475,7 +477,7 @@
             btnSaaobb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSaaobb.Location = new System.Drawing.Point(5, 33);
             btnSaaobb.Name = "btnSaaobb";
-            btnSaaobb.Size = new System.Drawing.Size(372, 33);
+            btnSaaobb.Size = new System.Drawing.Size(355, 33);
             btnSaaobb.TabIndex = 41;
             btnSaaobb.Text = "Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
             btnSaaobb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -492,7 +494,7 @@
             btnSaaob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSaaob.Location = new System.Drawing.Point(5, 0);
             btnSaaob.Name = "btnSaaob";
-            btnSaaob.Size = new System.Drawing.Size(372, 33);
+            btnSaaob.Size = new System.Drawing.Size(355, 33);
             btnSaaob.TabIndex = 40;
             btnSaaob.Text = "Status of Appropriations, Allotments and Obligation (SAAOB)";
             btnSaaob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -507,7 +509,7 @@
             label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label2.Location = new System.Drawing.Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(377, 30);
+            label2.Size = new System.Drawing.Size(360, 30);
             label2.TabIndex = 36;
             label2.Text = "Budget";
             // 
@@ -518,7 +520,7 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(3, 136);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(377, 186);
+            panel3.Size = new System.Drawing.Size(360, 186);
             panel3.TabIndex = 4;
             // 
             // panel5
@@ -531,7 +533,7 @@
             panel5.Location = new System.Drawing.Point(0, 30);
             panel5.Name = "panel5";
             panel5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            panel5.Size = new System.Drawing.Size(377, 156);
+            panel5.Size = new System.Drawing.Size(360, 156);
             panel5.TabIndex = 41;
             // 
             // btnFs
@@ -543,7 +545,7 @@
             btnFs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnFs.Location = new System.Drawing.Point(5, 99);
             btnFs.Name = "btnFs";
-            btnFs.Size = new System.Drawing.Size(372, 33);
+            btnFs.Size = new System.Drawing.Size(355, 33);
             btnFs.TabIndex = 48;
             btnFs.Text = "Financial Statements";
             btnFs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -560,7 +562,7 @@
             btnTrialBalance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnTrialBalance.Location = new System.Drawing.Point(5, 66);
             btnTrialBalance.Name = "btnTrialBalance";
-            btnTrialBalance.Size = new System.Drawing.Size(372, 33);
+            btnTrialBalance.Size = new System.Drawing.Size(355, 33);
             btnTrialBalance.TabIndex = 47;
             btnTrialBalance.Text = "Trial Balance";
             btnTrialBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -577,7 +579,7 @@
             btnLedgers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLedgers.Location = new System.Drawing.Point(5, 33);
             btnLedgers.Name = "btnLedgers";
-            btnLedgers.Size = new System.Drawing.Size(372, 33);
+            btnLedgers.Size = new System.Drawing.Size(355, 33);
             btnLedgers.TabIndex = 46;
             btnLedgers.Text = "Ledgers";
             btnLedgers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -594,7 +596,7 @@
             btnJournals.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnJournals.Location = new System.Drawing.Point(5, 0);
             btnJournals.Name = "btnJournals";
-            btnJournals.Size = new System.Drawing.Size(372, 33);
+            btnJournals.Size = new System.Drawing.Size(355, 33);
             btnJournals.TabIndex = 45;
             btnJournals.Text = "Journals";
             btnJournals.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -609,9 +611,26 @@
             label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label3.Location = new System.Drawing.Point(0, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(377, 30);
+            label3.Size = new System.Drawing.Size(360, 30);
             label3.TabIndex = 40;
             label3.Text = "Accounting";
+            // 
+            // btnLtom21
+            // 
+            btnLtom21.AutoEllipsis = true;
+            btnLtom21.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom21.FlatAppearance.BorderSize = 0;
+            btnLtom21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom21.Location = new System.Drawing.Point(5, 429);
+            btnLtom21.Name = "btnLtom21";
+            btnLtom21.Size = new System.Drawing.Size(355, 33);
+            btnLtom21.TabIndex = 67;
+            btnLtom21.Text = "LTOM Form No. 21 - Notice of Levy (Local Assessor and Registrar of deeds)";
+            btnLtom21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom21.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom21.UseVisualStyleBackColor = true;
+            btnLtom21.Click += btnLtom21_Click;
             // 
             // ucReports
             // 
@@ -621,7 +640,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "ucReports";
             Padding = new System.Windows.Forms.Padding(4);
-            Size = new System.Drawing.Size(391, 772);
+            Size = new System.Drawing.Size(374, 772);
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -668,5 +687,6 @@
         private System.Windows.Forms.Button btnLtom29;
         private System.Windows.Forms.Button btnLtom30;
         private System.Windows.Forms.Button btnLtom31;
+        private System.Windows.Forms.Button btnLtom21;
     }
 }

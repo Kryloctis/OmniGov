@@ -30,15 +30,17 @@
         {
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            listBox1 = new System.Windows.Forms.ListBox();
+            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             btnRunReport = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtRpt = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             pbReport = new System.Windows.Forms.ProgressBar();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            cmbxWarrantLevy = new System.Windows.Forms.ComboBox();
-            label3 = new System.Windows.Forms.Label();
-            txtRpt = new System.Windows.Forms.TextBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -62,8 +64,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(listBox1);
+            splitContainer1.Panel1.Controls.Add(dateTimePicker1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(cmbxWarrantLevy);
+            splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Controls.Add(txtRpt);
             splitContainer1.Panel1.Controls.Add(label1);
@@ -78,15 +82,67 @@
             splitContainer1.SplitterDistance = 226;
             splitContainer1.TabIndex = 1;
             // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new System.Drawing.Point(12, 129);
+            listBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            listBox1.Name = "listBox1";
+            listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            listBox1.Size = new System.Drawing.Size(200, 169);
+            listBox1.TabIndex = 21;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
+            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new System.Drawing.Point(12, 78);
+            dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new System.Drawing.Size(200, 23);
+            dateTimePicker1.TabIndex = 20;
+            // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(12, 114);
+            btnRunReport.Location = new System.Drawing.Point(12, 311);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label2.Location = new System.Drawing.Point(12, 111);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(57, 15);
+            label2.TabIndex = 17;
+            label2.Text = "Warrants:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label3.Location = new System.Drawing.Point(12, 60);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(34, 15);
+            label3.TabIndex = 17;
+            label3.Text = "Date:";
+            // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(12, 27);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 6;
+            txtRpt.TextChanged += txtRpt_TextChanged;
             // 
             // label1
             // 
@@ -113,14 +169,6 @@
             pbReport.Size = new System.Drawing.Size(602, 5);
             pbReport.TabIndex = 11;
             // 
-            // backgroundWorker1
-            // 
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
-            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
             // reportViewer1
             // 
             reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -130,36 +178,13 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // cmbxWarrantLevy
+            // backgroundWorker1
             // 
-            cmbxWarrantLevy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxWarrantLevy.FormattingEnabled = true;
-            cmbxWarrantLevy.Location = new System.Drawing.Point(12, 78);
-            cmbxWarrantLevy.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxWarrantLevy.Name = "cmbxWarrantLevy";
-            cmbxWarrantLevy.Size = new System.Drawing.Size(200, 23);
-            cmbxWarrantLevy.TabIndex = 18;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(12, 60);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(56, 15);
-            label3.TabIndex = 17;
-            label3.Text = "Issued at:";
-            // 
-            // txtRpt
-            // 
-            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtRpt.Location = new System.Drawing.Point(12, 27);
-            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtRpt.Name = "txtRpt";
-            txtRpt.Size = new System.Drawing.Size(200, 23);
-            txtRpt.TabIndex = 6;
-            txtRpt.TextChanged += txtRpt_TextChanged;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmLtom21
             // 
@@ -169,6 +194,7 @@
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(856, 467);
             Name = "frmLtom21";
             ShowIcon = false;
             ShowInTaskbar = false;
@@ -192,10 +218,12 @@
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ProgressBar pbReport;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.ComboBox cmbxWarrantLevy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

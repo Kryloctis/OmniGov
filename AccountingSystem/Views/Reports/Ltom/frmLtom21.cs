@@ -39,22 +39,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             txtRpt.AutoCompleteCustomSource = autoCom;
         }
 
-        private void LoadIssuedWarrantLevy()
-        {
-            var rptId = dtRpt.AsEnumerable()
-                               .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
-                               .Select(row => row["real_property_id"])
-                               .FirstOrDefault();
-
-            if (rptId is not null)
-            {
-                var dtNoticeDelinquencies = AccFactory.RptLevyRepository().GetViewRecords(Convert.ToInt32(rptId));
-                cmbxWarrantLevy.DataSource = dtNoticeDelinquencies;
-                cmbxWarrantLevy.ValueMember = "rpt_levy_id";
-                cmbxWarrantLevy.DisplayMember = "date_issued";
-            }
-        }
-
         private void frmLtom20_Load(object sender, EventArgs e)
         {
             try
@@ -64,157 +48,58 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void LoadReport()
         {
-            if (!backgroundWorker1.IsBusy)
-            {
-                pbReport.Value = 0; btnRunReport.Enabled = false;
-                btnRunReport.Text = "Generating Report";
-                var warrantLevyId = cmbxWarrantLevy.SelectedValue;
-                backgroundWorker1.RunWorkerAsync(warrantLevyId);
-            }
-        }
-
-        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
-        {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
-
-            int? prevAssmntYear = null;
-
-            if (dictPrevAssmnt.Count > 1)
-                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
-
-            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
-            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
-            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
-
-            return (basicPenalty, sefPenalty);
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
             try
             {
-                var warrantLevyId = e.Argument;
-
-                if (warrantLevyId is null)
+                if (!backgroundWorker1.IsBusy)
                 {
-                    backgroundWorker1.CancelAsync();
-                    e.Cancel = true;
-                    return;
+                    int rptId = dtRpt.AsEnumerable()
+                                      .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                                      .Select(row => row.Field<int>("real_property_id"))
+                                      .FirstOrDefault();
+                    var date = dateTimePicker1.Value;
+
+                    pbReport.Value = 0;
+                    ToogleRunButton(false);
+                    backgroundWorker1.RunWorkerAsync((rptId, date));
                 }
-
-                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewRecordById(Convert.ToInt32(warrantLevyId));
-                var noticeDate = Convert.ToDateTime(dictWarrantLevy["date_issued"]);
-                var completeArpNo = dictWarrantLevy["complete_arp_no"];
-
-                var dtLtom17to19 = new dsTreasury.dtLtom17_19DataTable().Clone();
-                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
-
-                int totalProgressCount = dtAssessmentPostingDb.Rows.Count;
-                int progressCount = 0;
-
-                foreach (DataRow dataRow in dtAssessmentPostingDb.Rows)
-                {
-                    decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
-                    decimal basicRate = Convert.ToDecimal(dataRow["basic_rate"]);
-                    decimal sefRate = Convert.ToDecimal(dataRow["sef_rate"]);
-                    int taxYear = Convert.ToInt32(dataRow["year"]);
-                    int effectivityQuarter = Convert.ToInt32(dataRow["effectivity_quarterly"]);
-                    int effectivityYear = Convert.ToInt32(dataRow["effectivity_year"]);
-                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
-                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
-                    decimal penaltyRate = Convert.ToDecimal(dataRow["penalty_rate"]);
-
-                    var penaltyParameters = (taxYear, completeArpNo, effectivityQuarter, effectivityYear);
-                    var penalties = GetPenalties(noticeDate, penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
-
-                    if (penalties.basicPenalty <= 0 && penalties.sefPenalty <= 0)
-                    {
-                        totalProgressCount--;
-                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                        continue;
-                    }
-
-                    var newRow = dtLtom17to19.NewRow();
-                    newRow["tax_year"] = dataRow["year"];
-                    newRow["basic_tax"] = basicTaxDue.ToString("N2");
-                    newRow["basic_penalty"] = penalties.basicPenalty.ToString("N2");
-                    newRow["sef_tax"] = sefTaxDue.ToString("N2");
-                    newRow["sef_penalty"] = penalties.sefPenalty.ToString("N2");
-                    newRow["total_amount"] = (penalties.basicPenalty + penalties.sefPenalty + basicTaxDue + sefTaxDue).ToString("N2");
-                    dtLtom17to19.Rows.Add(newRow);
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                }
-
-                e.Result = (dtLtom17to19, dictWarrantLevy);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void LoadWarrants()
         {
-            pbReport.Value = e.ProgressPercentage;
-        }
+            int rptId = dtRpt.AsEnumerable()
+                                   .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                                   .Select(row => row.Field<int>("real_property_id"))
+                                   .FirstOrDefault();
+            var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(rptId);
+            var listBxItems = new List<string>();
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
+            foreach (DataRow row in dtRptLevy.Rows)
             {
-                if (e.Cancelled)
-                {
-                    pbReport.Value = 100;
-                    btnRunReport.Text = "Run Report";
-                    btnRunReport.Enabled = true;
-                    reportViewer1.Clear();
-                    return;
-                }
-
-                var result = ((DataTable dataTable, Dictionary<string, string> dictDelinquentNotice))e.Result;
-
-                if (result.dataTable.Rows.Count < 1)
-                    pbReport.Value = 100;
-
-                var lguDetails = Helper.LGUDetails();
-                var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
-
-                var parameters = new ReportParameter[]
-                {
-                    new ReportParameter("paramLgu", lguDetails["municipality"]),
-                    new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
-                    new ReportParameter("paramSignatory", string.Empty),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramTaxDecNo", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramTctNo", string.Empty),
-                    new ReportParameter("paramPropertyLocation", propertyLocation),
-                    new ReportParameter("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramAssessedValue", result.dictDelinquentNotice["assessed_value"]),
-                    new ReportParameter("paramIssuedDate", result.dictDelinquentNotice["date_issued"])
-                };
-
-                reportViewer1.Clear();
-                var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-20-warrant-of-levy.rdlc";
-                localReport.DataSources.Clear();
-                localReport.DataSources.Add(new ReportDataSource("dtLtom17_19", result.dataTable));
-                localReport.SetParameters(parameters);
-                localReport.Refresh();
-
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.FullPage;
-                reportViewer1.Refresh();
-                btnRunReport.Text = "Run Report";
-                btnRunReport.Enabled = true;
+                string status = (sbyte)row["is_cancelled"] != 0 ? "- Cancelled" : "";
+                string date = Convert.ToDateTime(row["date_issued"]).ToString("MMM dd, yyyy");
+                string item = $"{date}{status}";
+                listBxItems.Add(item);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+
+            listBox1.DataSource = listBxItems;
+            listBox1.DisplayMember = "ToString";
         }
 
         private void txtRpt_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                LoadIssuedWarrantLevy();
+                LoadWarrants();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -226,6 +111,83 @@ namespace AccountingSystem.Views.Reports.Ltom
                 LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int rptId, DateTime date))e.Argument;
+                var dictRptAssessmentPost = AccFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
+
+                // Define tasks and their progress weights
+                var tasks = new Dictionary<string, int>
+                {
+                    { "Fetch LGU Details", 10 },
+                    { "Generate Property Location", 20 },
+                    { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 }
+                };
+
+                int totalProgressCount = tasks.Sum(t => t.Value);
+                int progressCount = 0;
+
+                // Fetch LGU Details
+                var lguDetails = Helper.LGUDetails();
+                progressCount += tasks["Fetch LGU Details"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Generate Property Location
+                var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRptAssessmentPost["barangay_name"], dictRptAssessmentPost["municipality_name"], dictRptAssessmentPost["province_name"]);
+                progressCount += tasks["Generate Property Location"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Initialize Parameters
+                List<ReportParameter> reportParameters = new List<ReportParameter>();
+                progressCount += tasks["Initialize Parameters"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Set Parameter Values
+                reportParameters.Add(new ReportParameter("paramLgu", lguDetails["municipality"]));
+                reportParameters.Add(new ReportParameter("paramDeclaredOwners", dictRptAssessmentPost["taxpayer_name"]));
+                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters.Add(new ReportParameter("paramTaxDecNo", dictRptAssessmentPost["complete_arp_no"]));
+                reportParameters.Add(new ReportParameter("paramTctNo", string.Empty));
+                reportParameters.Add(new ReportParameter("paramPropertyLocation", propertyLocation));
+                reportParameters.Add(new ReportParameter("paramPropertyKind", dictRptAssessmentPost["complete_arp_no"]));
+                reportParameters.Add(new ReportParameter("paramAssessedValue", dictRptAssessmentPost["assessed_value"]));
+                reportParameters.Add(new ReportParameter("paramNoticeDate", parameters.date.ToString()));
+                progressCount += tasks["Set Parameter Values"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                e.Result = reportParameters;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbReport.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                var parameters = (List<ReportParameter>)e.Result;
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-21-notice-of-levy.rdlc";
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
+                ToogleRunButton(true);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
