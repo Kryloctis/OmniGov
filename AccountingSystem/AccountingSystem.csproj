@@ -315,6 +315,9 @@
 		<Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsEdit.cs" />
 		<Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs" />
 		<Compile Update="Views\Manage\RealProperties\ucRealProperties.cs" />
+		<Compile Update="Views\Reports\Ltom\frmLtom22.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="Views\Reports\Ltom\frmLtom21.cs">
 		  <SubType>Form</SubType>
 		</Compile>

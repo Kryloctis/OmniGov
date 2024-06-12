@@ -95,7 +95,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>13.58018cm</Top>
-            <Left>8.0585cm</Left>
+            <Left>8.05851cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
             <ZIndex>2</ZIndex>
@@ -134,7 +134,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>12.90962cm</Top>
-            <Left>8.0585cm</Left>
+            <Left>8.05851cm</Left>
             <Height>0.6cm</Height>
             <Width>6.44229cm</Width>
             <ZIndex>3</ZIndex>
@@ -232,7 +232,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>2.42459cm</Top>
-            <Left>0.00002cm</Left>
+            <Left>0.00003cm</Left>
             <Height>1.2609cm</Height>
             <Width>14.41478cm</Width>
             <ZIndex>5</ZIndex>
@@ -268,7 +268,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>3.86188cm</Top>
-            <Left>0.00002cm</Left>
+            <Left>0.00003cm</Left>
             <Height>0.6976cm</Height>
             <Width>14.41478cm</Width>
             <ZIndex>6</ZIndex>
@@ -352,7 +352,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.56556in</Top>
-            <Left>0.00002cm</Left>
+            <Left>0.00003cm</Left>
             <Height>0.81168cm</Height>
             <Width>4.92633cm</Width>
             <ZIndex>9</ZIndex>
@@ -492,7 +492,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>5.05337cm</Top>
-            <Left>10.07676cm</Left>
+            <Left>10.07677cm</Left>
             <Height>0.57675cm</Height>
             <Width>1.21436cm</Width>
             <ZIndex>13</ZIndex>
@@ -527,7 +527,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>5.80651cm</Top>
-            <Left>10.07676cm</Left>
+            <Left>10.07677cm</Left>
             <Height>0.57675cm</Height>
             <Width>4.33802cm</Width>
             <ZIndex>14</ZIndex>
@@ -582,26 +582,22 @@
         <Height>5.58275in</Height>
         <Style />
       </Body>
-      <Width>5.70897in</Width>
+      <Width>5.70898in</Width>
       <Page>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>10.27in</PageHeight>
+        <PageWidth>7.2in</PageWidth>
+        <InteractiveHeight>10.27in</InteractiveHeight>
+        <InteractiveWidth>7.2in</InteractiveWidth>
+        <LeftMargin>0.73in</LeftMargin>
+        <RightMargin>0.73in</RightMargin>
+        <TopMargin>0.24in</TopMargin>
+        <BottomMargin>0.31in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramAssessedValue">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="paramSignatory">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -632,11 +628,6 @@
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>3</NumberOfRows>
       <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramAssessedValue</ParameterName>
-        </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>

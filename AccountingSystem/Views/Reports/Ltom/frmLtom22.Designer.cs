@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.Ltom
 {
-    partial class frmLtom21
+    partial class frmLtom22
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,9 @@
         {
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            listBox1 = new System.Windows.Forms.ListBox();
             dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             btnRunReport = new System.Windows.Forms.Button();
-            label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
-            txtRpt = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             pbReport = new System.Windows.Forms.ProgressBar();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -64,13 +60,9 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(listBox1);
             splitContainer1.Panel1.Controls.Add(dateTimePicker1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(label3);
-            splitContainer1.Panel1.Controls.Add(txtRpt);
-            splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
@@ -82,22 +74,11 @@
             splitContainer1.SplitterDistance = 226;
             splitContainer1.TabIndex = 1;
             // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new System.Drawing.Point(12, 129);
-            listBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            listBox1.Name = "listBox1";
-            listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            listBox1.Size = new System.Drawing.Size(200, 169);
-            listBox1.TabIndex = 21;
-            // 
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "MMM dd, yyyy";
             dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(12, 78);
+            dateTimePicker1.Location = new System.Drawing.Point(12, 27);
             dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new System.Drawing.Size(200, 23);
@@ -105,7 +86,7 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(12, 311);
+            btnRunReport.Location = new System.Drawing.Point(12, 63);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
@@ -113,45 +94,15 @@
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label2.Location = new System.Drawing.Point(12, 111);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(57, 15);
-            label2.TabIndex = 17;
-            label2.Text = "Warrants:";
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(12, 60);
+            label3.Location = new System.Drawing.Point(12, 9);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(34, 15);
             label3.TabIndex = 17;
             label3.Text = "Date:";
-            // 
-            // txtRpt
-            // 
-            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtRpt.Location = new System.Drawing.Point(12, 27);
-            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtRpt.Name = "txtRpt";
-            txtRpt.Size = new System.Drawing.Size(200, 23);
-            txtRpt.TabIndex = 6;
-            txtRpt.TextChanged += txtRpt_TextChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(57, 15);
-            label1.TabIndex = 0;
-            label1.Text = "ARP No. :";
             // 
             // panel3
             // 
@@ -186,7 +137,7 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // frmLtom21
+            // frmLtom22
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,12 +146,12 @@
             Controls.Add(statusStrip1);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(856, 467);
-            Name = "frmLtom21";
+            Name = "frmLtom22";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > LTOM Form No. 21 - Notice of Levy (Local Assessor and Registrar of Deeds)";
-            Load += frmLtom21_Load;
+            Text = "Reports > Treasury > LTOM Form No. 22 - Report of Levy (Sanggunian)";
+            Load += frmLtom22_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
@@ -214,16 +165,12 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ProgressBar pbReport;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtRpt;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

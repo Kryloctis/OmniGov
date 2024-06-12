@@ -15,35 +15,19 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
 {
-    public partial class frmLtom21 : Form
+    public partial class frmLtom22 : Form
     {
-        private DataTable dtRpt;
-
-        public frmLtom21()
+        public frmLtom22()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             panel3.Controls.Add(reportViewer1);
-            txtRpt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtRpt.AutoCompleteMode = AutoCompleteMode.Suggest;
         }
 
-        private void LoadRealProperties()
-        {
-            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
-
-            var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
-            var autoCom = new AutoCompleteStringCollection();
-            autoCom.Clear();
-            autoCom.AddRange(autoCompleteSrc.ToArray());
-            txtRpt.AutoCompleteCustomSource = autoCom;
-        }
-
-        private void frmLtom21_Load(object sender, EventArgs e)
+        private void frmLtom22_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadRealProperties();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -60,48 +44,13 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 if (!backgroundWorker1.IsBusy)
                 {
-                    int rptId = dtRpt.AsEnumerable()
-                                      .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
-                                      .Select(row => row.Field<int>("real_property_id"))
-                                      .FirstOrDefault();
                     var date = dateTimePicker1.Value;
-
                     pbReport.Value = 0;
                     ToogleRunButton(false);
-                    backgroundWorker1.RunWorkerAsync((rptId, date));
+                    backgroundWorker1.RunWorkerAsync(date);
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
-        }
-
-        private void LoadWarrants()
-        {
-            int rptId = dtRpt.AsEnumerable()
-                                   .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
-                                   .Select(row => row.Field<int>("real_property_id"))
-                                   .FirstOrDefault();
-            var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(rptId);
-            var listBxItems = new List<string>();
-
-            foreach (DataRow row in dtRptLevy.Rows)
-            {
-                string status = (sbyte)row["is_cancelled"] != 0 ? "- Cancelled" : "";
-                string date = Convert.ToDateTime(row["date_issued"]).ToString("MMM dd, yyyy");
-                string item = $"{date}{status}";
-                listBxItems.Add(item);
-            }
-
-            listBox1.DataSource = listBxItems;
-            listBox1.DisplayMember = "ToString";
-        }
-
-        private void txtRpt_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadWarrants();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
@@ -117,14 +66,12 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                var parameters = ((int rptId, DateTime date))e.Argument;
-                var dictRptAssessmentPost = AccFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
+                var date = (DateTime)e.Argument;
 
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
                 {
                     { "Fetch LGU Details", 10 },
-                    { "Generate Property Location", 20 },
                     { "Initialize Parameters", 30 },
                     { "Set Parameter Values", 40 }
                 };
@@ -137,27 +84,16 @@ namespace AccountingSystem.Views.Reports.Ltom
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Generate Property Location
-                var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRptAssessmentPost["barangay_name"], dictRptAssessmentPost["municipality_name"], dictRptAssessmentPost["province_name"]);
-                progressCount += tasks["Generate Property Location"];
-                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-
                 // Initialize Parameters
                 List<ReportParameter> reportParameters = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Set Parameter Values
-                reportParameters.Add(new ReportParameter("paramLgu", lguDetails["municipality"]));
-                reportParameters.Add(new ReportParameter("paramDeclaredOwners", dictRptAssessmentPost["taxpayer_name"]));
+                reportParameters.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters.Add(new ReportParameter("paramReportDate", date.ToString()));
                 reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
                 reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
-                reportParameters.Add(new ReportParameter("paramTaxDecNo", dictRptAssessmentPost["complete_arp_no"]));
-                reportParameters.Add(new ReportParameter("paramTctNo", string.Empty));
-                reportParameters.Add(new ReportParameter("paramPropertyLocation", propertyLocation));
-                reportParameters.Add(new ReportParameter("paramPropertyKind", dictRptAssessmentPost["complete_arp_no"]));
-                reportParameters.Add(new ReportParameter("paramAssessedValue", dictRptAssessmentPost["assessed_value"]));
-                reportParameters.Add(new ReportParameter("paramNoticeDate", parameters.date.ToString()));
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -178,7 +114,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-21-notice-of-levy.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-22-report-of-levy.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 
