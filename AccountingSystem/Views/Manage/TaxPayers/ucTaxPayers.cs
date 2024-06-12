@@ -1,13 +1,8 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Registry;
-using Org.BouncyCastle.Crypto;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -32,7 +27,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void LoadTaxPayersType()
+        internal void LoadTaxPayersType()
         {
             var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
 

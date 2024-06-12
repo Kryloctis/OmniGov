@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
         private void frmBiddings_Load(object sender, EventArgs e)
         {
             LoadRowFilter();
+            ucTaxPayers.LoadTaxPayersType();
             Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
         }
 

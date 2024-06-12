@@ -117,11 +117,12 @@
             nudBidAmount.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudBidAmount.DecimalPlaces = 2;
             nudBidAmount.Location = new System.Drawing.Point(116, 92);
-            nudBidAmount.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            nudBidAmount.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             nudBidAmount.Name = "nudBidAmount";
             nudBidAmount.Size = new System.Drawing.Size(436, 23);
             nudBidAmount.TabIndex = 5;
             nudBidAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudBidAmount.ThousandsSeparator = true;
             // 
             // errorProvider1
             // 
