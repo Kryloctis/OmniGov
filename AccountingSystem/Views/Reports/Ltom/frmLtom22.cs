@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-22-report-of-levy.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom22ReportOfLevy.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

@@ -226,15 +226,15 @@ namespace AccountingSystem.Views.Reports.Ltom
                 switch (checkedRadioButton.Name)
                 {
                     case "rad1stNotice":
-                        reportPath = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
+                        reportPath = "Ltom17NoticeRptDelinq.rdlc";
                         break;
 
                     case "rad2ndNotice":
-                        reportPath = "ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc";
+                        reportPath = "Ltom18NoticeRptDelinq.rdlc";
                         break;
 
                     case "rad3rdNotice":
-                        reportPath = "ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc";
+                        reportPath = "Ltom19NoticeRptDelinq.rdlc";
                         break;
 
                     default:

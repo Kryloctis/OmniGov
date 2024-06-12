@@ -201,7 +201,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-20-warrant-of-levy.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom20WarrantOfLevy.rdlc";
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtLtom17_19", result.dataTable));
                 localReport.SetParameters(parameters);
