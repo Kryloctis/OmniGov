@@ -704,7 +704,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
-            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmBiddings";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

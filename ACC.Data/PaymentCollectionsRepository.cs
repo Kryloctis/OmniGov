@@ -21,8 +21,10 @@ namespace ACC.Data
         private IPaymentFeesCharges paymentFeesCharges;
         private IRcdCollections rcdCollectionsRepository;
         private IRcdDeposits rcdDepositsRepository;
+        private IBiddingsRepository biddingsRepository;
+        private IBiddersRepository biddersRepository;
 
-        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBiddingsRepository biddingsRepository, IBiddersRepository biddersRepository)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
             this.rptPaymentRepository = rptPaymentRepository;
@@ -34,6 +36,8 @@ namespace ACC.Data
             this.paymentFeesCharges = paymentFeesCharges;
             this.rcdCollectionsRepository = rcdCollections;
             this.rcdDepositsRepository = rcdDeposits;
+            this.biddingsRepository = biddingsRepository;
+            this.biddersRepository = biddersRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -480,9 +484,26 @@ namespace ACC.Data
             return rcdCollectionsModels;
         }
 
-        public bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, BiddingsModel biddingModel)
+
+        public bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, TaxpayersModel taxpayersModel, BiddingsModel biddingsModel, BiddersModel biddersModel)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int lastPaymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+
+
+                biddersModel.PaymentCollectionsId = lastPaymentCollectionId;
+                biddersModel.TaxpayersId = 1; //supposedly ang last inserted ni na taxpayer.
+                biddersRepository.Insert(biddersModel);
+
+                int lastInsertedBiddersId = biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);
+                biddingsModel.BiddersId = lastInsertedBiddersId;
+                biddingsRepository.Insert(biddingsModel);
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }

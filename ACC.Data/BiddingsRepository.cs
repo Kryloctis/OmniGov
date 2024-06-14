@@ -8,7 +8,7 @@ namespace ACC.Data
     internal class BiddingsRepository : IBiddingsRepository
     {
         private AccGenericCommands mySqlGenericCommandsLFS;
-        private string tableName = "Biddings";
+        private string tableName = "bid";
 
         public BiddingsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
@@ -47,13 +47,12 @@ namespace ACC.Data
                 new object[] { "@rpt_auction_id", DbType.Int32, entity.RptAuctionId},
                 new object[] { "@bidders_id", DbType.Int32, entity.BiddersId},
                 new object[] { "@ordinance_no", DbType.String, entity.OrdinanceNo},
-                new object[] { "@date", DbType.DateTime2, entity.Date},
+                new object[] { "@date", DbType.DateTime, entity.Date},
                 new object[] { "@bid_amount", DbType.Decimal, entity.BidAmount},
-                new object[] { "@created_at", DbType.Int32, entity.CreatedBy},
-
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} () VALUES ()";
+            string query = $"INSERT INTO {tableName} (rpt_auction_id, bidders_id, ordinance_no, date, bid_amount, created_by) VALUES (@rpt_auction_id, @bidders_id, @ordinance_no, @date, @bid_amount, @created_by)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 

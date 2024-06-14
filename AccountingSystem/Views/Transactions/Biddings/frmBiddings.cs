@@ -55,9 +55,23 @@ namespace AccountingSystem.Views.Transactions.Biddings
             TabPageController(tabPageForm);
         }
 
+        private decimal ComputeAmountDue()
+        {
+            decimal bidAmount = ucBiddings.nudBidAmount.Value;
+            decimal otherDuesToBeDeterminedLater = 0;
+
+            decimal amountDue = bidAmount + otherDuesToBeDeterminedLater;
+
+            return amountDue;
+        }
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             TabPageController(tabPagePayment);
+
+            decimal totalAmountPayable = ComputeAmountDue();
+            ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
         }
 
         private void frmBiddings_Load(object sender, EventArgs e)
@@ -123,16 +137,11 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             try
             {
-
                 if (ConfirmPayment())
                 {
                     Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
                     ResetForm();
                     return;
-                }
-                else
-                {
-                    Helper.MessageBoxSuccess("Payment error");
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -140,16 +149,25 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private bool ConfirmPayment()
         {
+
+            var biddersModel = new BiddersModel()
+            {
+                AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
+                BidderNo = "123",
+                CreatedBy = Helper.userId
+            };
+
             var biddingModel = new BiddingsModel()
             {
                 RptAuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
-                BiddersId = 1,
                 OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
                 Date = ucBiddings.dtpDate.Value,
-                BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value)
+                BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),
+                CreatedBy = Helper.userId
             };
 
-            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, biddingModel);
+
+            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), biddingModel, biddersModel);
         }
 
 
