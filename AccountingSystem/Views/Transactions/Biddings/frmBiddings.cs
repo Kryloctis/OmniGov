@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Reports.Ltom;
 using AccountingSystem.Views.Transactions.Payments;
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             {
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
-                LoadBidders();
+                //LoadBidders();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -112,7 +113,14 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void lTOM26ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            TabPageController(tabPageListOfRegisteredBidders);
+
+            try
+            {
+                _ = new frmLtom26().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+            //TabPageController(tabPageListOfRegisteredBidders);
         }
 
         private void lTOM27ToolStripMenuItem_Click(object sender, EventArgs e)
