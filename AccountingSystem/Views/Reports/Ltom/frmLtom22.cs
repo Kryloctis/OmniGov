@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 };
 
                 var dtLtom22 = new dsTreasury.dtLtom22DataTable().Clone();
-                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords();
+                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(date);
                 int totalProgressCount = tasks.Sum(t => t.Value) + dtRptLevy.Rows.Count;
                 int progressCount = 0;
 

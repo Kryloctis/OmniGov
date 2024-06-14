@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,10 +132,15 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public DataTable GetViewRecords()
+        public DataTable GetViewRecords(DateTime date)
         {
-            string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            var parameters = new object[][]
+            {
+                new object[] { "@date_issued", DbType.Date, date.Date}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
