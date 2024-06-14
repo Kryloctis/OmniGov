@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             listBox1 = new System.Windows.Forms.ListBox();
@@ -41,10 +42,12 @@
             pbReport = new System.Windows.Forms.ProgressBar();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // statusStrip1
@@ -79,7 +82,7 @@
             splitContainer1.Panel2.Controls.Add(pbReport);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
-            splitContainer1.SplitterDistance = 226;
+            splitContainer1.SplitterDistance = 228;
             splitContainer1.TabIndex = 1;
             // 
             // listBox1
@@ -92,6 +95,8 @@
             listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
             listBox1.Size = new System.Drawing.Size(200, 169);
             listBox1.TabIndex = 21;
+            listBox1.Validating += listBox1_Validating;
+            listBox1.Validated += listBox1_Validated;
             // 
             // dateTimePicker1
             // 
@@ -102,6 +107,7 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new System.Drawing.Size(200, 23);
             dateTimePicker1.TabIndex = 20;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // btnRunReport
             // 
@@ -143,6 +149,8 @@
             txtRpt.Size = new System.Drawing.Size(200, 23);
             txtRpt.TabIndex = 6;
             txtRpt.TextChanged += txtRpt_TextChanged;
+            txtRpt.Validating += txtRpt_Validating;
+            txtRpt.Validated += txtRpt_Validated;
             // 
             // label1
             // 
@@ -158,7 +166,7 @@
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 9);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(602, 393);
+            panel3.Size = new System.Drawing.Size(600, 393);
             panel3.TabIndex = 12;
             // 
             // pbReport
@@ -166,7 +174,7 @@
             pbReport.Dock = System.Windows.Forms.DockStyle.Top;
             pbReport.Location = new System.Drawing.Point(4, 4);
             pbReport.Name = "pbReport";
-            pbReport.Size = new System.Drawing.Size(602, 5);
+            pbReport.Size = new System.Drawing.Size(600, 5);
             pbReport.TabIndex = 11;
             // 
             // reportViewer1
@@ -186,10 +194,16 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
             // frmLtom21
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(840, 428);
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
@@ -206,6 +220,7 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -225,5 +240,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

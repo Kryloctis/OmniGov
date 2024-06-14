@@ -14,5 +14,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords(int rptId);
 
         DataTable GetViewRecords(DateTime date);
+
+        DataTable GetViewRecords(int rptId, DateTime date);
+
     }
 }

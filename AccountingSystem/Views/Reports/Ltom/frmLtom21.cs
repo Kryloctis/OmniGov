@@ -1,16 +1,11 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using AccountingSystem.DataSets;
-using AccountingSystem.Views.Shared;
+using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
@@ -60,13 +55,21 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 if (!backgroundWorker1.IsBusy)
                 {
-                    int rptId = dtRpt.AsEnumerable()
+                    object rptId = dtRpt.AsEnumerable()
                                       .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
-                                      .Select(row => row.Field<int>("real_property_id"))
+                                      .Select(row => row.Field<object>("real_property_id"))
                                       .FirstOrDefault();
                     var date = dateTimePicker1.Value;
 
                     pbReport.Value = 0;
+
+                    if (!ValidateChildren())
+                    {
+                        backgroundWorker1.CancelAsync();
+                        pbReport.Value = 100;
+                        return;
+                    }
+
                     ToogleRunButton(false);
                     backgroundWorker1.RunWorkerAsync((rptId, date));
                 }
@@ -76,18 +79,19 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadWarrants()
         {
+            var date = dateTimePicker1.Value;
             int rptId = dtRpt.AsEnumerable()
                                    .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
                                    .Select(row => row.Field<int>("real_property_id"))
                                    .FirstOrDefault();
-            var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(rptId);
+            var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(rptId, date);
             var listBxItems = new List<string>();
 
             foreach (DataRow row in dtRptLevy.Rows)
             {
                 string status = (sbyte)row["is_cancelled"] != 0 ? "- Cancelled" : "";
-                string date = Convert.ToDateTime(row["date_issued"]).ToString("MMM dd, yyyy");
-                string item = $"{date}{status}";
+                string rowDate = Convert.ToDateTime(row["date_issued"]).ToString("MMM dd, yyyy");
+                string item = $"{rowDate}{status}";
                 listBxItems.Add(item);
             }
 
@@ -117,8 +121,9 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                var parameters = ((int rptId, DateTime date))e.Argument;
-                var dictRptAssessmentPost = AccFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
+                var parameters = ((object rptId, DateTime date))e.Argument;
+
+                var dictRptAssessmentPost = AccFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(parameters.rptId));
 
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
@@ -175,6 +180,14 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                if (e.Cancelled)
+                {
+                    reportViewer1.Clear();
+                    pbReport.Value = 100;
+                    ToogleRunButton(true);
+                    return;
+                }
+
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
@@ -186,6 +199,73 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
                 ToogleRunButton(true);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private bool ArpNoValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            object rptId = dtRpt.AsEnumerable()
+                                    .Where(row => row.Field<string>("complete_arp_no") == textBox.Text)
+                                    .Select(row => row.Field<object>("real_property_id"))
+                                    .FirstOrDefault();
+
+            if (rptId is null)
+            {
+                errorProvider.SetError(textBox, "Invalid Arp No.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void txtRpt_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ArpNoValidated(errorProvider1, txtRpt);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void txtRpt_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtRpt);
+        }
+
+        private bool PropertHasWarrantLevy(ErrorProvider errorProvider, ListBox listBox)
+        {
+            int nonCancelledCount = listBox1.Items.Cast<object>()
+                                       .Count(item => !item.ToString().Contains("Cancelled"));
+            if (nonCancelledCount < 1)
+            {
+                errorProvider.SetIconAlignment(listBox1, ErrorIconAlignment.TopRight);
+                errorProvider.SetError(listBox, "No active warrant of levy found");
+                return true;
+            }
+
+            return false;
+        }
+
+        private void listBox1_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = PropertHasWarrantLevy(errorProvider1, listBox1);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void listBox1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(listBox1, string.Empty);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadWarrants();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

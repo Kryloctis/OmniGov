@@ -142,5 +142,17 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public DataTable GetViewRecords(int rptId, DateTime date)
+        {
+            var parameters = new object[][] 
+            {
+                new object[] { "@real_properties_id", DbType.Int32, rptId},
+                new object[] { "@date_issued", DbType.Date, date},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND date_issued <= @date_issued";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }
