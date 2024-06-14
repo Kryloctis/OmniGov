@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -11,5 +12,10 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetViewRecordById(int Id);
 
         DataTable GetViewRecords(int rptId);
+
+        DataTable GetViewRecords(DateTime date);
+
+        DataTable GetViewRecords(int rptId, DateTime date);
+
     }
 }

@@ -184,6 +184,7 @@ namespace AccountingSystem.Views.Transactions.Assessment
             txtOwner.Clear();
             txtLocation.Clear();
             txtAssessedValue.Clear();
+            LoadRealProperties();
         }
 
         private void radLand_CheckedChanged(object sender, EventArgs e)

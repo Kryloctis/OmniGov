@@ -117,30 +117,34 @@ namespace AccountingSystem.Views.Transactions.Assessment
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+        private void SaveData()
+        {
+            if (isEdit)
+            {
+                if (ucDelinquenyNotice.UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Delinquency notice has been updated.");
+                    ucDelinquenyNotice.ResetForm();
+                    tabControl1.SelectedTab = tabPageMain;
+                    LoadRptDelinquentNotices();
+                }
+            }
+            else
+            {
+                if (ucDelinquenyNotice.InsertData())
+                {
+                    Helper.MessageBoxSuccess("Delinquency notice has been saved.");
+                    ucDelinquenyNotice.ResetForm();
+                    LoadRptDelinquentNotices();
+                }
+            }
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (isEdit)
-                {
-                    if (ucDelinquenyNotice.UpdateData())
-                    {
-                        Helper.MessageBoxSuccess("Delinquency notice has been updated.");
-                        ucDelinquenyNotice.ResetForm();
-                        tabControl1.SelectedTab = tabPageMain;
-                        LoadRptDelinquentNotices();
-                    }
-                }
-                else
-                {
-                    if (ucDelinquenyNotice.InsertData())
-                    {
-                        Helper.MessageBoxSuccess("Delinquency notice has been saved.");
-                        ucDelinquenyNotice.ResetForm();
-                        LoadRptDelinquentNotices();
-                    }
-                }
+                SaveData();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -245,6 +249,18 @@ namespace AccountingSystem.Views.Transactions.Assessment
                 var stampIndex = new byte[] { 5, 7 };
                 Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmRptDelinquencyNotices_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.S && e.Control && tabControl1.SelectedTab == tabPageForm)
+                {
+                    SaveData();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

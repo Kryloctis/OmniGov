@@ -359,6 +359,7 @@
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(769, 428);
             Controls.Add(tabControl1);
+            KeyPreview = true;
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(785, 467);
             Name = "frmWarrantLevy";
@@ -367,6 +368,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Warrant of Levy";
             Load += frmWarrantLevy_Load;
+            KeyDown += frmWarrantLevy_KeyDown;
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);

@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                _ = new frmAddTaxpayers().ShowDialog();
+                _ = new frmAddTaxpayers(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
