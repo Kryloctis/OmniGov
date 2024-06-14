@@ -4,6 +4,5 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBiddingsRepository : IAccRepository<BiddingsModel>
     {
-
     }
 }

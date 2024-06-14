@@ -47,6 +47,12 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetViewRecords()
+        {
+            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id";
+
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
 
         public bool IdExist(int id)
         {

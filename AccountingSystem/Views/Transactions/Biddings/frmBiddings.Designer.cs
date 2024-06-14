@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dgBiddings = new System.Windows.Forms.DataGridView();
@@ -39,7 +39,7 @@
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel2 = new System.Windows.Forms.Panel();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
-            dtpAuctionSchedule = new System.Windows.Forms.DateTimePicker();
+            dtpBiddingDate = new System.Windows.Forms.DateTimePicker();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -85,6 +85,7 @@
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgBiddings).BeginInit();
@@ -149,23 +150,23 @@
             // 
             // dgBiddings
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgBiddings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgBiddings.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgBiddings.DefaultCellStyle = dataGridViewCellStyle4;
             dgBiddings.Dock = System.Windows.Forms.DockStyle.Fill;
             dgBiddings.Location = new System.Drawing.Point(0, 70);
             dgBiddings.Margin = new System.Windows.Forms.Padding(0);
@@ -207,7 +208,7 @@
             // panel2
             // 
             panel2.Controls.Add(cmbxRowFilter);
-            panel2.Controls.Add(dtpAuctionSchedule);
+            panel2.Controls.Add(dtpBiddingDate);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
@@ -223,14 +224,14 @@
             cmbxRowFilter.Size = new System.Drawing.Size(121, 23);
             cmbxRowFilter.TabIndex = 1;
             // 
-            // dtpAuctionSchedule
+            // dtpBiddingDate
             // 
-            dtpAuctionSchedule.CustomFormat = "MMM dd, yyyy";
-            dtpAuctionSchedule.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpAuctionSchedule.Location = new System.Drawing.Point(130, 3);
-            dtpAuctionSchedule.Name = "dtpAuctionSchedule";
-            dtpAuctionSchedule.Size = new System.Drawing.Size(137, 23);
-            dtpAuctionSchedule.TabIndex = 0;
+            dtpBiddingDate.CustomFormat = "MMM dd, yyyy";
+            dtpBiddingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpBiddingDate.Location = new System.Drawing.Point(130, 3);
+            dtpBiddingDate.Name = "dtpBiddingDate";
+            dtpBiddingDate.Size = new System.Drawing.Size(137, 23);
+            dtpBiddingDate.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -698,6 +699,14 @@
             toolStripButton8.Text = "Back";
             toolStripButton8.Click += toolStripButton8_Click;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
             // frmBiddings
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -761,7 +770,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cmbxRowFilter;
-        private System.Windows.Forms.DateTimePicker dtpAuctionSchedule;
+        private System.Windows.Forms.DateTimePicker dtpBiddingDate;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
@@ -807,5 +816,6 @@
         private System.Windows.Forms.Button button3;
         private ucBiddings ucBiddings1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
