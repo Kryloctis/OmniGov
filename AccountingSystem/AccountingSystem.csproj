@@ -57,14 +57,8 @@
 		<None Remove="Reports\journal-entry-voucher.rdlc" />
 		<None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
 		<None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
-		<None Remove="Reports\Ltom\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc" />
+		<None Remove="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc" />
 		<None Remove="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc" />
-		<None Remove="Reports\Ltom\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc" />
-		<None Remove="Reports\Ltom\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc" />
-		<None Remove="Reports\Ltom\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc" />
-		<None Remove="Reports\Ltom\ltom-20-warrant-of-levy.rdlc" />
-		<None Remove="Reports\Ltom\ltom-21-notice-of-levy.rdlc" />
-		<None Remove="Reports\Ltom\ltom-22-report-of-levy.rdlc" />
 		<None Remove="Reports\LTOM\ltom-23-notice-of-auction-sale-of-delinquent-real-properties.rdlc" />
 		<None Remove="Reports\LTOM\ltom-24-notice-of-sale.rdlc" />
 		<None Remove="Reports\Ltom\ltom-25-public-auction-registration-form.rdlc" />
@@ -76,6 +70,12 @@
 		<None Remove="Reports\LTOM\ltom-31-report-of-sale.rdlc" />
 		<None Remove="Reports\Ltom\ltom-32-certificate-of-redemption.rdlc" />
 		<None Remove="Reports\Ltom\ltom-33-cancellation-of-warrant-of-levey.rdlc" />
+		<None Remove="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltom\Ltom18NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltom\Ltom19NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltom\Ltom20WarrantOfLevy.rdlc" />
+		<None Remove="Reports\Ltom\Ltom21NoticeOfLevy.rdlc" />
+		<None Remove="Reports\Ltom\Ltom22ReportOfLevy.rdlc" />
 		<None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\post-trial-balance.rdlc" />
 		<None Remove="Reports\pre-trial-balance.rdlc" />
@@ -103,7 +103,7 @@
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="Reports\Ltom\list_of_real-property-tax-delinquencies-issued-with-warrant-of-levy.rdlc">
+	  <Content Include="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Reports\LTOM\ltom-24-notice-of-sale.rdlc">
@@ -177,22 +177,22 @@
 		<Content Include="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc">
+		<Content Include="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc">
+		<Content Include="Reports\Ltom\Ltom18NoticeRptDelinq.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc">
+		<Content Include="Reports\Ltom\Ltom19NoticeRptDelinq.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-20-warrant-of-levy.rdlc">
+		<Content Include="Reports\Ltom\Ltom20WarrantOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-21-notice-of-levy.rdlc">
+		<Content Include="Reports\Ltom\Ltom21NoticeOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-22-report-of-levy.rdlc">
+		<Content Include="Reports\Ltom\Ltom22ReportOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\Ltom\ltom-25-public-auction-registration-form.rdlc">
@@ -315,6 +315,12 @@
 		<Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsEdit.cs" />
 		<Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs" />
 		<Compile Update="Views\Manage\RealProperties\ucRealProperties.cs" />
+		<Compile Update="Views\Reports\Ltom\frmLtom22.cs">
+		  <SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Views\Reports\Ltom\frmLtom21.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Update="Properties\Resources.resx">

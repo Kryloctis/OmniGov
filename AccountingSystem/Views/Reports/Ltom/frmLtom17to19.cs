@@ -85,13 +85,18 @@ namespace AccountingSystem.Views.Reports.Ltom
             else { cmbxDelinquentNoticeRecord.SelectedIndex = -1; }
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 pbReport.Value = 0;
-                btnRunReport.Enabled = false;
-                btnRunReport.Text = "Generating Report";
+                ToogleRunButton(false);
                 var rptDelinquencyNoticeId = cmbxDelinquentNoticeRecord.SelectedValue;
                 backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
             }
@@ -221,15 +226,15 @@ namespace AccountingSystem.Views.Reports.Ltom
                 switch (checkedRadioButton.Name)
                 {
                     case "rad1stNotice":
-                        reportPath = "ltom-17-notice-of-real-property-tax-delinquency-first-notice.rdlc";
+                        reportPath = "Ltom17NoticeRptDelinq.rdlc";
                         break;
 
                     case "rad2ndNotice":
-                        reportPath = "ltom-18-notice-of-real-property-tax-delinquency-second-notice.rdlc";
+                        reportPath = "Ltom18NoticeRptDelinq.rdlc";
                         break;
 
                     case "rad3rdNotice":
-                        reportPath = "ltom-19-notice-of-real-property-tax-delinquency-final-notice.rdlc";
+                        reportPath = "Ltom19NoticeRptDelinq.rdlc";
                         break;
 
                     default:
@@ -248,8 +253,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-                btnRunReport.Text = "Run Report";
-                btnRunReport.Enabled = true;
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

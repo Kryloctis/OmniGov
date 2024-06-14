@@ -302,7 +302,6 @@ namespace AccountingSystem.Views.Dashboard.Reports
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void btnLtom29_Click(object sender, EventArgs e)
@@ -335,5 +334,22 @@ namespace AccountingSystem.Views.Dashboard.Reports
             { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void btnLtom21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom21().ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnLtom22_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom22().ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }
