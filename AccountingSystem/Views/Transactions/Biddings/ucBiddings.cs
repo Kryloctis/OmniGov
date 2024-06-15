@@ -75,5 +75,10 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             LoadProperties();
         }
+
+        private void nudBidAmount_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

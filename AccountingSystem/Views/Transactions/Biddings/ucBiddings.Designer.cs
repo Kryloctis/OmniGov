@@ -40,6 +40,8 @@
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             label2 = new System.Windows.Forms.Label();
             cmbxProperty = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)nudBidAmount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -56,10 +58,10 @@
             // txtOrdinanceNo
             // 
             txtOrdinanceNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtOrdinanceNo.Location = new System.Drawing.Point(116, 63);
+            txtOrdinanceNo.Location = new System.Drawing.Point(136, 63);
             txtOrdinanceNo.Name = "txtOrdinanceNo";
-            txtOrdinanceNo.Size = new System.Drawing.Size(436, 23);
-            txtOrdinanceNo.TabIndex = 1;
+            txtOrdinanceNo.Size = new System.Drawing.Size(427, 23);
+            txtOrdinanceNo.TabIndex = 3;
             // 
             // label3
             // 
@@ -82,7 +84,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(5, 123);
+            label5.Location = new System.Drawing.Point(5, 152);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(76, 15);
             label5.TabIndex = 0;
@@ -95,11 +97,11 @@
             cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxAuctionSchedule.Font = new System.Drawing.Font("Segoe UI", 9F);
             cmbxAuctionSchedule.FormattingEnabled = true;
-            cmbxAuctionSchedule.Location = new System.Drawing.Point(116, 5);
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(136, 5);
             cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
-            cmbxAuctionSchedule.Size = new System.Drawing.Size(436, 23);
-            cmbxAuctionSchedule.TabIndex = 3;
+            cmbxAuctionSchedule.Size = new System.Drawing.Size(427, 23);
+            cmbxAuctionSchedule.TabIndex = 1;
             cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
             // 
             // dtpDate
@@ -109,23 +111,24 @@
             dtpDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             dtpDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDate.Location = new System.Drawing.Point(116, 92);
+            dtpDate.Location = new System.Drawing.Point(136, 92);
             dtpDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new System.Drawing.Size(436, 23);
+            dtpDate.Size = new System.Drawing.Size(427, 23);
             dtpDate.TabIndex = 4;
             // 
             // nudBidAmount
             // 
             nudBidAmount.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudBidAmount.DecimalPlaces = 2;
-            nudBidAmount.Location = new System.Drawing.Point(116, 121);
+            nudBidAmount.Location = new System.Drawing.Point(136, 150);
             nudBidAmount.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             nudBidAmount.Name = "nudBidAmount";
-            nudBidAmount.Size = new System.Drawing.Size(436, 23);
-            nudBidAmount.TabIndex = 5;
+            nudBidAmount.Size = new System.Drawing.Size(427, 23);
+            nudBidAmount.TabIndex = 6;
             nudBidAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             nudBidAmount.ThousandsSeparator = true;
+            nudBidAmount.ValueChanged += nudBidAmount_ValueChanged;
             // 
             // errorProvider1
             // 
@@ -147,11 +150,28 @@
             cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxProperty.Font = new System.Drawing.Font("Segoe UI", 9F);
             cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(116, 34);
+            cmbxProperty.Location = new System.Drawing.Point(136, 34);
             cmbxProperty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(436, 23);
-            cmbxProperty.TabIndex = 3;
+            cmbxProperty.Size = new System.Drawing.Size(427, 23);
+            cmbxProperty.TabIndex = 2;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(5, 124);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(124, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Bidders Assigned No.*";
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBox1.Location = new System.Drawing.Point(136, 121);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(427, 23);
+            textBox1.TabIndex = 5;
             // 
             // ucBiddings
             // 
@@ -161,14 +181,16 @@
             Controls.Add(dtpDate);
             Controls.Add(cmbxProperty);
             Controls.Add(cmbxAuctionSchedule);
+            Controls.Add(textBox1);
             Controls.Add(txtOrdinanceNo);
             Controls.Add(label5);
             Controls.Add(label4);
+            Controls.Add(label6);
             Controls.Add(label2);
             Controls.Add(label3);
             Controls.Add(label1);
             Name = "ucBiddings";
-            Size = new System.Drawing.Size(573, 147);
+            Size = new System.Drawing.Size(584, 178);
             Load += ucBiddings_Load;
             ((System.ComponentModel.ISupportInitialize)nudBidAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
@@ -189,5 +211,7 @@
         internal System.Windows.Forms.DateTimePicker dtpDate;
         internal System.Windows.Forms.NumericUpDown nudBidAmount;
         internal System.Windows.Forms.ComboBox cmbxProperty;
+        internal System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
     }
 }
