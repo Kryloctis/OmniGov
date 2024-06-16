@@ -489,12 +489,18 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
+                int createdBy = paymentCollectionsModel.CreatedBy;
                 _ = Insert(paymentCollectionsModel);
-                int lastPaymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                int lastPaymentCollectionId = GetLastInsertedID(createdBy);
 
+
+                var taxpayerRepo = AccFactory.TaxpayersRepository();
+                taxpayersModel.CreatedBy = createdBy;
+                taxpayerRepo.Insert(taxpayersModel);
+                int lastInsertedTaxpayerId = taxpayerRepo.GetLastInsertedId(createdBy);
 
                 biddersModel.PaymentCollectionsId = lastPaymentCollectionId;
-                biddersModel.TaxpayersId = 1; //supposedly ang last inserted ni na taxpayer.
+                biddersModel.TaxpayersId = lastInsertedTaxpayerId;
                 biddersRepository.Insert(biddersModel);
 
                 int lastInsertedBiddersId = biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);

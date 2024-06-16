@@ -334,7 +334,7 @@ namespace ACC.Data
                     taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
                     taxpayersModel.IsActive = true;
                     _ = taxpayersRepository.Insert(taxpayersModel);
-                    taxpayerId = taxpayersRepository.GetLastInsertedId();
+                    taxpayerId = taxpayersRepository.GetLastInsertedId(null);
                 }
 
                 //Real Properties

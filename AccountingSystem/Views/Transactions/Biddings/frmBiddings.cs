@@ -67,7 +67,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
             return amountDue;
         }
 
-
         private void button3_Click(object sender, EventArgs e)
         {
             TabPageController(tabPagePayment);
@@ -105,7 +104,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
         }
 
-
         private void TabPageController(TabPage tabPageRoute)
         {
             try
@@ -116,15 +114,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageList);
-        }
-
         private void ResetForm()
         {
             TabPageController(tabPageList);
+            LoadBidders();
         }
+
         private void btnConfirmPayment_Click(object sender, EventArgs e)
         {
             try
@@ -157,7 +152,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),
                 CreatedBy = Helper.userId
             };
-
 
             return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), bidModel, biddersModel);
         }
@@ -240,5 +234,11 @@ namespace AccountingSystem.Views.Transactions.Biddings
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadBidders();
+        }
+
     }
 }

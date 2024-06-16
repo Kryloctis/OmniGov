@@ -160,15 +160,15 @@ namespace ACC.Data
             return false;
         }
 
-        public int GetLastInsertedId()
+        public int GetLastInsertedId(int? createdBy)
         {
-            //var parameters = new object[][]
-            //{
-            //    new object[]{ "@created_by", DbType.Int32, createdById }
-            //};
+            var parameters = new object[][]
+            {
+                new object[]{ "@created_by", DbType.Int32, createdBy }
+            };
 
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewRecords()

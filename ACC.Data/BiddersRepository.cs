@@ -113,7 +113,7 @@ namespace ACC.Data
                 new object[] { "@auction_id", DbType.Int32, entity.AuctionId},
                 new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId},
                 new object[] { "@bidder_no", DbType.String, entity.BidderNo},
-                new object[] { "@created_by", DbType.String, entity.CreatedBy},
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy},
 
             };
 
