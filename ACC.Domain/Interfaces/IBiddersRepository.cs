@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
     {
         int GetLastInsertedId(int createdById);
         DataTable GetViewRecords();
+
+        DataTable GetViewRecordsByAuctionIdAndBiddersId(int auctionId, int bidderId);
     }
 
 }

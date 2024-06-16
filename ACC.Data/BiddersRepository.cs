@@ -54,6 +54,18 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
+        public DataTable GetViewRecordsByAuctionIdAndBiddersId(int auctionId, int bidderId)
+        {
+            var parameters = new object[][] {
+                new object[]{ "@auction_id", DbType.Int32, auctionId },
+                new object[]{ "@bidder_id", DbType.Int32, bidderId },
+            };
+
+            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id WHERE bidders.id = @bidder_id AND bid.rpt_auction_id = @auction_id";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

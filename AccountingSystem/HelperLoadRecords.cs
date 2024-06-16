@@ -2155,6 +2155,12 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
             comboBox.DataSource = dataTable;
         }
+        internal static void BiddersCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataTable;
+        }
 
         internal static void DgBidders(DataGridView dataGridView, DataTable dataTable)
         {

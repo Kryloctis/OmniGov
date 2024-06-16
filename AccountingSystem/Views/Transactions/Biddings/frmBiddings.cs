@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             {
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
-                //LoadBidders();
+                LoadBidders();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -120,12 +120,17 @@ namespace AccountingSystem.Views.Transactions.Biddings
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
-            //TabPageController(tabPageListOfRegisteredBidders);
         }
 
         private void lTOM27ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPageController(tabPageUndertakingAndWaiverOfBidders);
+            try
+            {
+                _ = new frmLtom27().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+
         }
 
         private void lTOM28ToolStripMenuItem_Click(object sender, EventArgs e)
