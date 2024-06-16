@@ -151,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
             var bidModel = new BidModel()
             {
-                RptAuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
+                RptAuctionId = Convert.ToInt32(ucBiddings.cmbxProperty.SelectedValue),
                 OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
                 Date = ucBiddings.dtpDate.Value,
                 BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),

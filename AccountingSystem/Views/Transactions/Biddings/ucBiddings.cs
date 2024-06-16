@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
             var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
 
-            cmbxProperty.ValueMember = "real_properties_id";
+            cmbxProperty.ValueMember = "rpt_auction_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
             cmbxProperty.DataSource = auctionProperties;
 
