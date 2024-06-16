@@ -47,6 +47,27 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public Dictionary<string, string> GetViewRecordByAuctionIdAndBidderId(int auctionId, int bidderId)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@auction_id", DbType.Int32, auctionId }, new object[] { "@bidder_id", DbType.Int32, bidderId } };
+            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id WHERE bidders.id = @bidder_id AND bidders.auction_id = @auction_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
         public DataTable GetViewRecords()
         {
             string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id";

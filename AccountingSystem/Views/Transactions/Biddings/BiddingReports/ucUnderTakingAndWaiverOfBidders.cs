@@ -1,8 +1,8 @@
 ﻿using ACC.Data;
-using AccountingSystem.DataSets;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Data;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -38,35 +38,49 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((int auctionId, int bidderId))e.Argument;
 
-                var dbRegisteredBidders = AccFactory.BiddersRepository().GetViewRecordsByAuctionIdAndBiddersId(parameters.auctionId, parameters.bidderId);
-                var dtRegisteredBidders = new dsTreasury.dtLtom26_27_28DataTable();
+            var parameters = ((int auctionId, int bidderId))e.Argument;
 
-                int totalProgressCount = dbRegisteredBidders.Rows.Count;
-                int progressCount = 0;
 
-                foreach (DataRow row in dbRegisteredBidders.Rows)
+            // Define tasks and their progress weights
+            var tasks = new Dictionary<string, int>
                 {
-                    var newRow = dtRegisteredBidders.NewRow();
+                    { "Fetch LGU Details", 10 },
+                    { "Generate Bidder Information", 20 },
+                    { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 }
+                };
 
-                    newRow["assigned_bidder_no"] = row["assigned_bidder_no"];
-                    newRow["name_of_bidders_representative"] = row["name_of_bidders_representative"];
-                    newRow["complete_address_or_business_address"] = row["complete_address_or_business_address"];
-                    newRow["contact_no"] = row["contact_no"];
-                    newRow["official_receipts_no"] = row["official_receipts_no"];
+            int totalProgressCount = tasks.Sum(t => t.Value);
+            int progressCount = 0;
 
+            // Fetch LGU Details
+            var lguDetails = Helper.LGUDetails();
+            progressCount += tasks["Fetch LGU Details"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                    progressCount++;
-                }
+            //Generate Bidder Information
+            var dictBiddings = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+            progressCount += tasks["Generate Bidder Information"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                e.Result = dtRegisteredBidders;
+            // Initialize Parameters
+            List<ReportParameter> reportParameters = new List<ReportParameter>();
+            progressCount += tasks["Initialize Parameters"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            // Set Parameter Values
+            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramNameOfBidder", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", "San Jose, Pagadian City"));
+            reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+            reportParameters.Add(new ReportParameter("paramActualDateOfPublicAuction", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramPlaceOfPublicAuction", lguDetails["municipality"]));
+            progressCount += tasks["Set Parameter Values"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+            e.Result = reportParameters;
+
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -76,46 +90,28 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            try
+            if (e.Cancelled)
             {
-                if (e.Cancelled)
-                    return;
-                if (e.Result is not DataTable dataTable)
-                    return;
-
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
-
-
-                var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-27-undertaking-and-waver-of-bidders.rdlc";
-                report.DataSources.Clear();
-
-                string lguName = Helper.LGUDetails()["lgu_name"];
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
-
-                var reportParameters = new ReportParameter[]
-                {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
-
-                    new ReportParameter("paramNameOfBidder", "Bidder Name"),
-                    new ReportParameter("paramCompleteAddressOfBidder", "Complete address"),
-                    new ReportParameter("paramPlaceOfPublicAuction", "Place public auction"),
-
-                };
-
-                report.DataSources.Add(new ReportDataSource("dtLtom26_27_28", dataTable));
-                report.SetParameters(reportParameters);
-
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
-                reportViewer1.ZoomPercent = 100;
-                reportViewer1.RefreshReport();
+                reportViewer1.Clear();
+                progressBar1.Value = 100;
+                return;
             }
 
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var parameters = (List<ReportParameter>)e.Result;
+            reportViewer1.Clear();
+            var localReport = reportViewer1.LocalReport;
+            localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-27-undertaking-and-waver-of-bidders.rdlc";
+            localReport.SetParameters(parameters);
+            localReport.Refresh();
+
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.FullPage;
+            reportViewer1.Refresh();
+            try
+            {
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
         }
     }
 }
