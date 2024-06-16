@@ -22,6 +22,18 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetBiddersByAuctionIdAndRptId(int auctionId, int rptId)
+        {
+            var parameters = new object[][] {
+                new object[]{ "@auction_id", DbType.Int32, auctionId },
+                new object[]{ "@rpt_auction_id", DbType.Int32, rptId },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id AND ";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public int GetLastInsertedId(int createdById)
         {
             var parameters = new object[][]

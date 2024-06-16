@@ -10,7 +10,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucUnderTakingAndWaiverOfBidders : UserControl
     {
-        private int auctionId;
+        private int rptAuctionId;
         private int bidderId;
 
         public ucUnderTakingAndWaiverOfBidders()
@@ -20,10 +20,10 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         }
 
-        internal void OnLoad(int auctionId, int bidderId)
+        internal void OnLoad(int rptAuctionId, int bidderId)
         {
             LoadReport();
-            this.auctionId = auctionId;
+            this.rptAuctionId = rptAuctionId;
             this.bidderId = bidderId;
         }
 
@@ -32,14 +32,14 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync((auctionId, bidderId));
+                backgroundWorker1.RunWorkerAsync((rptAuctionId, bidderId));
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
-            var parameters = ((int auctionId, int bidderId))e.Argument;
+            var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
 
             // Define tasks and their progress weights
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             //Generate Bidder Information
-            var dictBiddings = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+            var dictBiddings = AccFactory.BiddersRepository().GetViewRecordsByAuctionIdAndBiddersId(parameters.rptAuctionId, parameters.bidderId);
             progressCount += tasks["Generate Bidder Information"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.Biddings.BiddingReports;
 using System;
 using System.Data;
@@ -24,15 +25,33 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
+        private void ResetForm()
         {
             cmbxAuctionSchedule.ResetText();
+            cmbxProperties.ResetText();
             cmbxBidders.ResetText();
-            cmbxAuctionSchedule.SelectedIndex = -1;
-            cmbxBidders.SelectedIndex = -1;
 
+            cmbxAuctionSchedule.SelectedIndex = -1;
+            cmbxProperties.SelectedIndex = -1;
+            cmbxBidders.SelectedIndex = -1;
+        }
+
+        private void OnLoad()
+        {
             LoadAuctionSchedule();
+            LoadProperties();
             LoadBidders();
+        }
+
+        private void LoadProperties()
+        {
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+
+            cmbxProperties.ValueMember = "real_properties_id";
+            cmbxProperties.DisplayMember = "complete_arp_no";
+            cmbxProperties.DataSource = auctionProperties;
         }
 
         private void LoadAuctionSchedule()
@@ -43,8 +62,11 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadBidders()
         {
-            DataTable dtBidders = AccFactory.BiddersRepository().GetViewRecords();
-            HelperLoadRecords.BiddersCombobox(dtBidders, cmbxBidders, "bidder", "id");
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            int rptId = Convert.ToInt32(cmbxProperties.SelectedValue);
+
+            var dtBidders = AccFactory.RptAuctionRepository().GetBiddersByAuctionAndPropertyId(auctionId, rptId);
+            HelperLoadRecords.BiddersCombobox(dtBidders, cmbxBidders, "taxpayer_name", "taxpayers_id");
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
@@ -52,15 +74,27 @@ namespace AccountingSystem.Views.Reports.Ltom
             try
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                int rptAuctionId = Convert.ToInt32(cmbxProperties.SelectedValue);
+
                 int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
                 if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1)
                     return;
 
-                ucUnderTakingAndWaiverOfBidders.OnLoad(auctionId, biddersId);
+                ucUnderTakingAndWaiverOfBidders.OnLoad(rptAuctionId, biddersId);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
+
+        private void cmbxProperties_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadBidders();
         }
     }
 }

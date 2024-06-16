@@ -485,7 +485,7 @@ namespace ACC.Data
         }
 
 
-        public bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, TaxpayersModel taxpayersModel, BiddingsModel biddingsModel, BiddersModel biddersModel)
+        public bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, TaxpayersModel taxpayersModel, BidModel bidModel, BiddersModel biddersModel)
         {
             using (var scope = new TransactionScope())
             {
@@ -498,8 +498,8 @@ namespace ACC.Data
                 biddersRepository.Insert(biddersModel);
 
                 int lastInsertedBiddersId = biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);
-                biddingsModel.BiddersId = lastInsertedBiddersId;
-                biddingsRepository.Insert(biddingsModel);
+                bidModel.BiddersId = lastInsertedBiddersId;
+                biddingsRepository.Insert(bidModel);
 
                 scope.Complete();
                 return true;

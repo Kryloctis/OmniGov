@@ -185,11 +185,11 @@ namespace AccountingSystem.Views.Transactions.Biddings
             var biddersModel = new BiddersModel()
             {
                 AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
-                BidderNo = "123",
+                BidderNo = ucBiddings.txtAssignedBidderNo.Text,
                 CreatedBy = Helper.userId
             };
 
-            var biddingModel = new BiddingsModel()
+            var bidModel = new BidModel()
             {
                 RptAuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
                 OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
@@ -199,7 +199,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             };
 
 
-            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), biddingModel, biddersModel);
+            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), bidModel, biddersModel);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

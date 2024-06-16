@@ -32,11 +32,13 @@
             cmbxBidders = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
+            cmbxProperties = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ucUnderTakingAndWaiverOfBidders1 = new Transactions.Biddings.BiddingReports.ucUnderTakingAndWaiverOfBidders();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -56,6 +58,8 @@
             splitContainer1.Panel1.Controls.Add(cmbxBidders);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
+            splitContainer1.Panel1.Controls.Add(cmbxProperties);
+            splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
@@ -72,7 +76,7 @@
             // 
             cmbxBidders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxBidders.FormattingEnabled = true;
-            cmbxBidders.Location = new System.Drawing.Point(7, 77);
+            cmbxBidders.Location = new System.Drawing.Point(7, 131);
             cmbxBidders.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxBidders.Name = "cmbxBidders";
             cmbxBidders.Size = new System.Drawing.Size(200, 23);
@@ -82,7 +86,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(7, 60);
+            label1.Location = new System.Drawing.Point(7, 114);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(55, 15);
             label1.TabIndex = 20;
@@ -90,13 +94,34 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 108);
+            btnRunReport.Location = new System.Drawing.Point(7, 162);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 19;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
+            // 
+            // cmbxProperties
+            // 
+            cmbxProperties.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxProperties.FormattingEnabled = true;
+            cmbxProperties.Location = new System.Drawing.Point(7, 81);
+            cmbxProperties.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxProperties.Name = "cmbxProperties";
+            cmbxProperties.Size = new System.Drawing.Size(200, 23);
+            cmbxProperties.TabIndex = 18;
+            cmbxProperties.SelectedIndexChanged += cmbxProperties_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label2.Location = new System.Drawing.Point(7, 64);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(66, 15);
+            label2.TabIndex = 17;
+            label2.Text = "Properties :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -107,6 +132,7 @@
             cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
             cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
             cmbxAuctionSchedule.TabIndex = 18;
+            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -127,14 +153,6 @@
             panel3.Size = new System.Drawing.Size(577, 420);
             panel3.TabIndex = 12;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 428);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(800, 22);
-            statusStrip1.TabIndex = 9;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // ucUnderTakingAndWaiverOfBidders1
             // 
             ucUnderTakingAndWaiverOfBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -142,6 +160,14 @@
             ucUnderTakingAndWaiverOfBidders1.Name = "ucUnderTakingAndWaiverOfBidders1";
             ucUnderTakingAndWaiverOfBidders1.Size = new System.Drawing.Size(577, 420);
             ucUnderTakingAndWaiverOfBidders1.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(800, 22);
+            statusStrip1.TabIndex = 9;
+            statusStrip1.Text = "statusStrip1";
             // 
             // frmLtom27
             // 
@@ -177,5 +203,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private Transactions.Biddings.BiddingReports.ucUnderTakingAndWaiverOfBidders ucUnderTakingAndWaiverOfBidders1;
+        private System.Windows.Forms.ComboBox cmbxProperties;
+        private System.Windows.Forms.Label label2;
     }
 }

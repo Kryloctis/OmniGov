@@ -41,7 +41,7 @@
             label2 = new System.Windows.Forms.Label();
             cmbxProperty = new System.Windows.Forms.ComboBox();
             label6 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtAssignedBidderNo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)nudBidAmount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -165,13 +165,13 @@
             label6.TabIndex = 0;
             label6.Text = "Bidders Assigned No.*";
             // 
-            // textBox1
+            // txtAssignedBidderNo
             // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.Location = new System.Drawing.Point(136, 121);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(427, 23);
-            textBox1.TabIndex = 5;
+            txtAssignedBidderNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtAssignedBidderNo.Location = new System.Drawing.Point(136, 121);
+            txtAssignedBidderNo.Name = "txtAssignedBidderNo";
+            txtAssignedBidderNo.Size = new System.Drawing.Size(427, 23);
+            txtAssignedBidderNo.TabIndex = 5;
             // 
             // ucBiddings
             // 
@@ -181,7 +181,7 @@
             Controls.Add(dtpDate);
             Controls.Add(cmbxProperty);
             Controls.Add(cmbxAuctionSchedule);
-            Controls.Add(textBox1);
+            Controls.Add(txtAssignedBidderNo);
             Controls.Add(txtOrdinanceNo);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -211,7 +211,7 @@
         internal System.Windows.Forms.DateTimePicker dtpDate;
         internal System.Windows.Forms.NumericUpDown nudBidAmount;
         internal System.Windows.Forms.ComboBox cmbxProperty;
-        internal System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.TextBox txtAssignedBidderNo;
         private System.Windows.Forms.Label label6;
     }
 }
