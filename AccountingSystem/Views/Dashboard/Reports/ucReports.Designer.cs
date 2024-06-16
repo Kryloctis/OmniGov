@@ -34,8 +34,12 @@
             btnLtom31 = new System.Windows.Forms.Button();
             btnLtom30 = new System.Windows.Forms.Button();
             btnLtom29 = new System.Windows.Forms.Button();
+            btnLtom27 = new System.Windows.Forms.Button();
+            btnLtom26 = new System.Windows.Forms.Button();
+            btnLtom25 = new System.Windows.Forms.Button();
             btnLtom24 = new System.Windows.Forms.Button();
             btnLtom23 = new System.Windows.Forms.Button();
+            btnLtom22 = new System.Windows.Forms.Button();
             btnLtom21 = new System.Windows.Forms.Button();
             btnLtom20 = new System.Windows.Forms.Button();
             btnLtom17and19 = new System.Windows.Forms.Button();
@@ -63,7 +67,7 @@
             btnLedgers = new System.Windows.Forms.Button();
             btnJournals = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
-            btnLtom22 = new System.Windows.Forms.Button();
+            btnLtom28 = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -89,7 +93,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.6705F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.3295021F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(349, 1054);
+            tableLayoutPanel1.Size = new System.Drawing.Size(349, 1166);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -99,14 +103,18 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 328);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(343, 723);
+            panel1.Size = new System.Drawing.Size(343, 835);
             panel1.TabIndex = 3;
             // 
             // panel4
             // 
             panel4.Controls.Add(btnLtom31);
             panel4.Controls.Add(btnLtom30);
+            panel4.Controls.Add(btnLtom28);
             panel4.Controls.Add(btnLtom29);
+            panel4.Controls.Add(btnLtom27);
+            panel4.Controls.Add(btnLtom26);
+            panel4.Controls.Add(btnLtom25);
             panel4.Controls.Add(btnLtom24);
             panel4.Controls.Add(btnLtom23);
             panel4.Controls.Add(btnLtom22);
@@ -130,7 +138,7 @@
             panel4.Location = new System.Drawing.Point(0, 30);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            panel4.Size = new System.Drawing.Size(343, 690);
+            panel4.Size = new System.Drawing.Size(343, 805);
             panel4.TabIndex = 1;
             // 
             // btnLtom31
@@ -140,7 +148,7 @@
             btnLtom31.FlatAppearance.BorderSize = 0;
             btnLtom31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom31.Location = new System.Drawing.Point(5, 627);
+            btnLtom31.Location = new System.Drawing.Point(5, 759);
             btnLtom31.Name = "btnLtom31";
             btnLtom31.Size = new System.Drawing.Size(338, 33);
             btnLtom31.TabIndex = 43;
@@ -157,7 +165,7 @@
             btnLtom30.FlatAppearance.BorderSize = 0;
             btnLtom30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom30.Location = new System.Drawing.Point(5, 594);
+            btnLtom30.Location = new System.Drawing.Point(5, 726);
             btnLtom30.Name = "btnLtom30";
             btnLtom30.Size = new System.Drawing.Size(338, 33);
             btnLtom30.TabIndex = 42;
@@ -174,7 +182,7 @@
             btnLtom29.FlatAppearance.BorderSize = 0;
             btnLtom29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLtom29.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom29.Location = new System.Drawing.Point(5, 561);
+            btnLtom29.Location = new System.Drawing.Point(5, 660);
             btnLtom29.Name = "btnLtom29";
             btnLtom29.Size = new System.Drawing.Size(338, 33);
             btnLtom29.TabIndex = 41;
@@ -183,6 +191,57 @@
             btnLtom29.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLtom29.UseVisualStyleBackColor = true;
             btnLtom29.Click += btnLtom29_Click;
+            // 
+            // btnLtom27
+            // 
+            btnLtom27.AutoEllipsis = true;
+            btnLtom27.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom27.FlatAppearance.BorderSize = 0;
+            btnLtom27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom27.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom27.Location = new System.Drawing.Point(5, 627);
+            btnLtom27.Name = "btnLtom27";
+            btnLtom27.Size = new System.Drawing.Size(338, 33);
+            btnLtom27.TabIndex = 43;
+            btnLtom27.Text = "LTOM Form No. 27 - Undertaking and Waivers of Bidders\r\n";
+            btnLtom27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom27.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom27.UseVisualStyleBackColor = true;
+            btnLtom27.Click += btnLtom27_Click;
+            // 
+            // btnLtom26
+            // 
+            btnLtom26.AutoEllipsis = true;
+            btnLtom26.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom26.FlatAppearance.BorderSize = 0;
+            btnLtom26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom26.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom26.Location = new System.Drawing.Point(5, 594);
+            btnLtom26.Name = "btnLtom26";
+            btnLtom26.Size = new System.Drawing.Size(338, 33);
+            btnLtom26.TabIndex = 42;
+            btnLtom26.Text = "LTOM Form No. 26 - List of Registered Bidders\r\n";
+            btnLtom26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom26.UseVisualStyleBackColor = true;
+            btnLtom26.Click += btnLtom26_Click;
+            // 
+            // btnLtom25
+            // 
+            btnLtom25.AutoEllipsis = true;
+            btnLtom25.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom25.FlatAppearance.BorderSize = 0;
+            btnLtom25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom25.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom25.Location = new System.Drawing.Point(5, 561);
+            btnLtom25.Name = "btnLtom25";
+            btnLtom25.Size = new System.Drawing.Size(338, 33);
+            btnLtom25.TabIndex = 70;
+            btnLtom25.Text = "LTOM Form No. 25 - Public Auction Registration Form";
+            btnLtom25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom25.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom25.UseVisualStyleBackColor = true;
+            btnLtom25.Click += btnLtom25_Click;
             // 
             // btnLtom24
             // 
@@ -217,6 +276,23 @@
             btnLtom23.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLtom23.UseVisualStyleBackColor = true;
             btnLtom23.Click += btnLtom23_Click;
+            // 
+            // btnLtom22
+            // 
+            btnLtom22.AutoEllipsis = true;
+            btnLtom22.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom22.FlatAppearance.BorderSize = 0;
+            btnLtom22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom22.Location = new System.Drawing.Point(5, 462);
+            btnLtom22.Name = "btnLtom22";
+            btnLtom22.Size = new System.Drawing.Size(338, 33);
+            btnLtom22.TabIndex = 68;
+            btnLtom22.Text = "LTOM Form No. 22 - Report of Levy (Sanggunian)";
+            btnLtom22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom22.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom22.UseVisualStyleBackColor = true;
+            btnLtom22.Click += btnLtom22_Click;
             // 
             // btnLtom21
             // 
@@ -634,22 +710,22 @@
             label3.TabIndex = 40;
             label3.Text = "Accounting";
             // 
-            // btnLtom22
+            // btnLtom28
             // 
-            btnLtom22.AutoEllipsis = true;
-            btnLtom22.Dock = System.Windows.Forms.DockStyle.Top;
-            btnLtom22.FlatAppearance.BorderSize = 0;
-            btnLtom22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnLtom22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom22.Location = new System.Drawing.Point(5, 462);
-            btnLtom22.Name = "btnLtom22";
-            btnLtom22.Size = new System.Drawing.Size(338, 33);
-            btnLtom22.TabIndex = 68;
-            btnLtom22.Text = "LTOM Form No. 22 - Report of Levy (Sanggunian)";
-            btnLtom22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLtom22.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnLtom22.UseVisualStyleBackColor = true;
-            btnLtom22.Click += btnLtom22_Click;
+            btnLtom28.AutoEllipsis = true;
+            btnLtom28.Dock = System.Windows.Forms.DockStyle.Top;
+            btnLtom28.FlatAppearance.BorderSize = 0;
+            btnLtom28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLtom28.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom28.Location = new System.Drawing.Point(5, 693);
+            btnLtom28.Name = "btnLtom28";
+            btnLtom28.Size = new System.Drawing.Size(338, 33);
+            btnLtom28.TabIndex = 44;
+            btnLtom28.Text = "LTOM Form No. 28 - Rules and Regulations of Public Auction";
+            btnLtom28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnLtom28.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnLtom28.UseVisualStyleBackColor = true;
+            btnLtom28.Click += btnLtom28_Click;
             // 
             // ucReports
             // 
@@ -659,7 +735,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "ucReports";
             Padding = new System.Windows.Forms.Padding(4);
-            Size = new System.Drawing.Size(357, 772);
+            Size = new System.Drawing.Size(357, 1193);
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -708,5 +784,9 @@
         private System.Windows.Forms.Button btnLtom31;
         private System.Windows.Forms.Button btnLtom21;
         private System.Windows.Forms.Button btnLtom22;
+        private System.Windows.Forms.Button btnLtom25;
+        private System.Windows.Forms.Button btnLtom26;
+        private System.Windows.Forms.Button btnLtom27;
+        private System.Windows.Forms.Button btnLtom28;
     }
 }

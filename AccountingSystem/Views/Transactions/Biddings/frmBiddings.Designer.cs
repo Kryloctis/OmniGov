@@ -46,12 +46,6 @@
             btnDelete = new System.Windows.Forms.ToolStripButton();
             btnSearch = new System.Windows.Forms.ToolStripButton();
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            lTOM26ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM26ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM27ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lTOM28ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tabPageForm = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
             button3 = new System.Windows.Forms.Button();
@@ -71,20 +65,6 @@
             ucPayment1 = new Payments.ucPayment();
             toolStrip4 = new System.Windows.Forms.ToolStrip();
             btnPaymentBack = new System.Windows.Forms.ToolStripButton();
-            tabPagePrint = new System.Windows.Forms.TabPage();
-            panel1 = new System.Windows.Forms.Panel();
-            tabControlPrintPreview = new System.Windows.Forms.TabControl();
-            tabPagePublicAuctionRegistrationForm = new System.Windows.Forms.TabPage();
-            ucPublicAuctionRegistrationForm1 = new BiddingReports.ucPublicAuctionRegistrationForm();
-            tabPageListOfRegisteredBidders = new System.Windows.Forms.TabPage();
-            ucListOfRegisteredBidders1 = new BiddingReports.ucListOfRegisteredBidders();
-            tabPageUndertakingAndWaiverOfBidders = new System.Windows.Forms.TabPage();
-            ucUnderTakingAndWaiverOfBidders1 = new BiddingReports.ucUnderTakingAndWaiverOfBidders();
-            tabPageRulesAndRegulationOfPublicAuction = new System.Windows.Forms.TabPage();
-            ucRulesAndRegulation1 = new BiddingReports.ucRulesAndRegulation();
-            statusStrip2 = new System.Windows.Forms.StatusStrip();
-            toolStrip3 = new System.Windows.Forms.ToolStrip();
-            toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabControl1.SuspendLayout();
             tabPageList.SuspendLayout();
@@ -104,14 +84,6 @@
             tabPagePayment.SuspendLayout();
             panel4.SuspendLayout();
             toolStrip4.SuspendLayout();
-            tabPagePrint.SuspendLayout();
-            panel1.SuspendLayout();
-            tabControlPrintPreview.SuspendLayout();
-            tabPagePublicAuctionRegistrationForm.SuspendLayout();
-            tabPageListOfRegisteredBidders.SuspendLayout();
-            tabPageUndertakingAndWaiverOfBidders.SuspendLayout();
-            tabPageRulesAndRegulationOfPublicAuction.SuspendLayout();
-            toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -120,7 +92,6 @@
             tabControl1.Controls.Add(tabPageList);
             tabControl1.Controls.Add(tabPageForm);
             tabControl1.Controls.Add(tabPagePayment);
-            tabControl1.Controls.Add(tabPagePrint);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             tabControl1.ItemSize = new System.Drawing.Size(0, 1);
@@ -238,7 +209,7 @@
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch, toolStripSeparator1, toolStripSplitButton1 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -288,48 +259,6 @@
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 27);
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripSplitButton1
-            // 
-            toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lTOM26ToolStripMenuItem, lTOM26ToolStripMenuItem1, lTOM27ToolStripMenuItem, lTOM28ToolStripMenuItem });
-            toolStripSplitButton1.Image = Properties.Resources.printer_filled_24px;
-            toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new System.Drawing.Size(68, 24);
-            toolStripSplitButton1.Text = "Print";
-            // 
-            // lTOM26ToolStripMenuItem
-            // 
-            lTOM26ToolStripMenuItem.Name = "lTOM26ToolStripMenuItem";
-            lTOM26ToolStripMenuItem.Size = new System.Drawing.Size(341, 22);
-            lTOM26ToolStripMenuItem.Text = "LTOM 25 - Public Auction Registration Form";
-            lTOM26ToolStripMenuItem.Click += lTOM26ToolStripMenuItem_Click;
-            // 
-            // lTOM26ToolStripMenuItem1
-            // 
-            lTOM26ToolStripMenuItem1.Name = "lTOM26ToolStripMenuItem1";
-            lTOM26ToolStripMenuItem1.Size = new System.Drawing.Size(341, 22);
-            lTOM26ToolStripMenuItem1.Text = "LTOM 26 - List of Registed Bidders";
-            lTOM26ToolStripMenuItem1.Click += lTOM26ToolStripMenuItem1_Click;
-            // 
-            // lTOM27ToolStripMenuItem
-            // 
-            lTOM27ToolStripMenuItem.Name = "lTOM27ToolStripMenuItem";
-            lTOM27ToolStripMenuItem.Size = new System.Drawing.Size(341, 22);
-            lTOM27ToolStripMenuItem.Text = "LTOM 27 - Undertaking and Waiver of Bidders";
-            lTOM27ToolStripMenuItem.Click += lTOM27ToolStripMenuItem_Click;
-            // 
-            // lTOM28ToolStripMenuItem
-            // 
-            lTOM28ToolStripMenuItem.Name = "lTOM28ToolStripMenuItem";
-            lTOM28ToolStripMenuItem.Size = new System.Drawing.Size(341, 22);
-            lTOM28ToolStripMenuItem.Text = "LTOM 28 - Rules and Regulations of Public Auction";
-            lTOM28ToolStripMenuItem.Click += lTOM28ToolStripMenuItem_Click;
             // 
             // tabPageForm
             // 
@@ -551,154 +480,6 @@
             btnPaymentBack.Text = "Back";
             btnPaymentBack.Click += btnPaymentBack_Click;
             // 
-            // tabPagePrint
-            // 
-            tabPagePrint.Controls.Add(panel1);
-            tabPagePrint.Controls.Add(toolStrip3);
-            tabPagePrint.Location = new System.Drawing.Point(4, 5);
-            tabPagePrint.Margin = new System.Windows.Forms.Padding(0);
-            tabPagePrint.Name = "tabPagePrint";
-            tabPagePrint.Size = new System.Drawing.Size(761, 419);
-            tabPagePrint.TabIndex = 2;
-            tabPagePrint.Text = "Biddings > Print";
-            tabPagePrint.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(tabControlPrintPreview);
-            panel1.Controls.Add(statusStrip2);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 35);
-            panel1.Margin = new System.Windows.Forms.Padding(0);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(761, 384);
-            panel1.TabIndex = 1;
-            // 
-            // tabControlPrintPreview
-            // 
-            tabControlPrintPreview.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            tabControlPrintPreview.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            tabControlPrintPreview.Controls.Add(tabPagePublicAuctionRegistrationForm);
-            tabControlPrintPreview.Controls.Add(tabPageListOfRegisteredBidders);
-            tabControlPrintPreview.Controls.Add(tabPageUndertakingAndWaiverOfBidders);
-            tabControlPrintPreview.Controls.Add(tabPageRulesAndRegulationOfPublicAuction);
-            tabControlPrintPreview.ItemSize = new System.Drawing.Size(0, 1);
-            tabControlPrintPreview.Location = new System.Drawing.Point(-4, 0);
-            tabControlPrintPreview.Margin = new System.Windows.Forms.Padding(0);
-            tabControlPrintPreview.Multiline = true;
-            tabControlPrintPreview.Name = "tabControlPrintPreview";
-            tabControlPrintPreview.Padding = new System.Drawing.Point(0, 0);
-            tabControlPrintPreview.SelectedIndex = 0;
-            tabControlPrintPreview.Size = new System.Drawing.Size(769, 362);
-            tabControlPrintPreview.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            tabControlPrintPreview.TabIndex = 4;
-            // 
-            // tabPagePublicAuctionRegistrationForm
-            // 
-            tabPagePublicAuctionRegistrationForm.Controls.Add(ucPublicAuctionRegistrationForm1);
-            tabPagePublicAuctionRegistrationForm.Location = new System.Drawing.Point(4, 5);
-            tabPagePublicAuctionRegistrationForm.Margin = new System.Windows.Forms.Padding(0);
-            tabPagePublicAuctionRegistrationForm.Name = "tabPagePublicAuctionRegistrationForm";
-            tabPagePublicAuctionRegistrationForm.Size = new System.Drawing.Size(761, 353);
-            tabPagePublicAuctionRegistrationForm.TabIndex = 0;
-            tabPagePublicAuctionRegistrationForm.Text = "Public Auction Registration Form";
-            tabPagePublicAuctionRegistrationForm.UseVisualStyleBackColor = true;
-            // 
-            // ucPublicAuctionRegistrationForm1
-            // 
-            ucPublicAuctionRegistrationForm1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPublicAuctionRegistrationForm1.Location = new System.Drawing.Point(0, 0);
-            ucPublicAuctionRegistrationForm1.Name = "ucPublicAuctionRegistrationForm1";
-            ucPublicAuctionRegistrationForm1.Size = new System.Drawing.Size(761, 353);
-            ucPublicAuctionRegistrationForm1.TabIndex = 0;
-            // 
-            // tabPageListOfRegisteredBidders
-            // 
-            tabPageListOfRegisteredBidders.Controls.Add(ucListOfRegisteredBidders1);
-            tabPageListOfRegisteredBidders.Location = new System.Drawing.Point(4, 5);
-            tabPageListOfRegisteredBidders.Margin = new System.Windows.Forms.Padding(0);
-            tabPageListOfRegisteredBidders.Name = "tabPageListOfRegisteredBidders";
-            tabPageListOfRegisteredBidders.Size = new System.Drawing.Size(761, 353);
-            tabPageListOfRegisteredBidders.TabIndex = 1;
-            tabPageListOfRegisteredBidders.Text = "List of Registed Bidders";
-            tabPageListOfRegisteredBidders.UseVisualStyleBackColor = true;
-            // 
-            // ucListOfRegisteredBidders1
-            // 
-            ucListOfRegisteredBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucListOfRegisteredBidders1.Location = new System.Drawing.Point(0, 0);
-            ucListOfRegisteredBidders1.Name = "ucListOfRegisteredBidders1";
-            ucListOfRegisteredBidders1.Size = new System.Drawing.Size(761, 353);
-            ucListOfRegisteredBidders1.TabIndex = 0;
-            // 
-            // tabPageUndertakingAndWaiverOfBidders
-            // 
-            tabPageUndertakingAndWaiverOfBidders.Controls.Add(ucUnderTakingAndWaiverOfBidders1);
-            tabPageUndertakingAndWaiverOfBidders.Location = new System.Drawing.Point(4, 5);
-            tabPageUndertakingAndWaiverOfBidders.Margin = new System.Windows.Forms.Padding(0);
-            tabPageUndertakingAndWaiverOfBidders.Name = "tabPageUndertakingAndWaiverOfBidders";
-            tabPageUndertakingAndWaiverOfBidders.Size = new System.Drawing.Size(761, 353);
-            tabPageUndertakingAndWaiverOfBidders.TabIndex = 2;
-            tabPageUndertakingAndWaiverOfBidders.Text = "Undertaking and Waiver of Bidders";
-            tabPageUndertakingAndWaiverOfBidders.UseVisualStyleBackColor = true;
-            // 
-            // ucUnderTakingAndWaiverOfBidders1
-            // 
-            ucUnderTakingAndWaiverOfBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucUnderTakingAndWaiverOfBidders1.Location = new System.Drawing.Point(0, 0);
-            ucUnderTakingAndWaiverOfBidders1.Name = "ucUnderTakingAndWaiverOfBidders1";
-            ucUnderTakingAndWaiverOfBidders1.Size = new System.Drawing.Size(761, 353);
-            ucUnderTakingAndWaiverOfBidders1.TabIndex = 0;
-            // 
-            // tabPageRulesAndRegulationOfPublicAuction
-            // 
-            tabPageRulesAndRegulationOfPublicAuction.Controls.Add(ucRulesAndRegulation1);
-            tabPageRulesAndRegulationOfPublicAuction.Location = new System.Drawing.Point(4, 5);
-            tabPageRulesAndRegulationOfPublicAuction.Margin = new System.Windows.Forms.Padding(0);
-            tabPageRulesAndRegulationOfPublicAuction.Name = "tabPageRulesAndRegulationOfPublicAuction";
-            tabPageRulesAndRegulationOfPublicAuction.Size = new System.Drawing.Size(761, 353);
-            tabPageRulesAndRegulationOfPublicAuction.TabIndex = 3;
-            tabPageRulesAndRegulationOfPublicAuction.Text = "Rules and Regulations of Public Auction";
-            tabPageRulesAndRegulationOfPublicAuction.UseVisualStyleBackColor = true;
-            // 
-            // ucRulesAndRegulation1
-            // 
-            ucRulesAndRegulation1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucRulesAndRegulation1.Location = new System.Drawing.Point(0, 0);
-            ucRulesAndRegulation1.Name = "ucRulesAndRegulation1";
-            ucRulesAndRegulation1.Size = new System.Drawing.Size(761, 353);
-            ucRulesAndRegulation1.TabIndex = 0;
-            // 
-            // statusStrip2
-            // 
-            statusStrip2.Location = new System.Drawing.Point(0, 362);
-            statusStrip2.Name = "statusStrip2";
-            statusStrip2.Size = new System.Drawing.Size(761, 22);
-            statusStrip2.TabIndex = 2;
-            statusStrip2.Text = "statusStrip2";
-            // 
-            // toolStrip3
-            // 
-            toolStrip3.BackColor = System.Drawing.Color.Transparent;
-            toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton8 });
-            toolStrip3.Location = new System.Drawing.Point(0, 0);
-            toolStrip3.Name = "toolStrip3";
-            toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(761, 35);
-            toolStrip3.TabIndex = 0;
-            toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButton8
-            // 
-            toolStripButton8.Image = Properties.Resources.arrow_left_20px;
-            toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton8.Name = "toolStripButton8";
-            toolStripButton8.Size = new System.Drawing.Size(56, 24);
-            toolStripButton8.Text = "Back";
-            toolStripButton8.Click += toolStripButton8_Click;
-            // 
             // backgroundWorker1
             // 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -717,7 +498,7 @@
             Name = "frmBiddings";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Transactions > Biddings";
+            Text = "Transactions > Bid";
             Load += frmBiddings_Load;
             tabControl1.ResumeLayout(false);
             tabPageList.ResumeLayout(false);
@@ -745,17 +526,6 @@
             panel4.ResumeLayout(false);
             toolStrip4.ResumeLayout(false);
             toolStrip4.PerformLayout();
-            tabPagePrint.ResumeLayout(false);
-            tabPagePrint.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            tabControlPrintPreview.ResumeLayout(false);
-            tabPagePublicAuctionRegistrationForm.ResumeLayout(false);
-            tabPageListOfRegisteredBidders.ResumeLayout(false);
-            tabPageUndertakingAndWaiverOfBidders.ResumeLayout(false);
-            tabPageRulesAndRegulationOfPublicAuction.ResumeLayout(false);
-            toolStrip3.ResumeLayout(false);
-            toolStrip3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -777,37 +547,17 @@
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TabPage tabPageForm;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnBack;
-        private System.Windows.Forms.TabPage tabPagePrint;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.TabPage tabPagePayment;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton btnPaymentBack;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripMenuItem lTOM26ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOM26ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem lTOM27ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lTOM28ToolStripMenuItem;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private Payments.ucPayment ucPayment1;
         private System.Windows.Forms.Button btnConfirmPayment;
-        private System.Windows.Forms.TabControl tabControlPrintPreview;
-        private System.Windows.Forms.TabPage tabPagePublicAuctionRegistrationForm;
-        private System.Windows.Forms.TabPage tabPageListOfRegisteredBidders;
-        private System.Windows.Forms.TabPage tabPageUndertakingAndWaiverOfBidders;
-        private System.Windows.Forms.TabPage tabPageRulesAndRegulationOfPublicAuction;
-        private BiddingReports.ucPublicAuctionRegistrationForm ucPublicAuctionRegistrationForm1;
-        private BiddingReports.ucListOfRegisteredBidders ucListOfRegisteredBidders1;
-        private BiddingReports.ucUnderTakingAndWaiverOfBidders ucUnderTakingAndWaiverOfBidders1;
-        private BiddingReports.ucRulesAndRegulation ucRulesAndRegulation1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private Manage.TaxPayers.ucTaxPayers ucTaxPayers1;

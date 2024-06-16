@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Reports.Ltom;
 using AccountingSystem.Views.Transactions.Payments;
 using System;
 using System.Collections.Generic;
@@ -106,50 +105,11 @@ namespace AccountingSystem.Views.Transactions.Biddings
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
         }
 
-        private void lTOM26ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPagePublicAuctionRegistrationForm);
-        }
-
-        private void lTOM26ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                _ = new frmLtom26().ShowDialog();
-            }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void lTOM27ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmLtom27().ShowDialog();
-            }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
-
-        }
-
-        private void lTOM28ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPageController(tabPageRulesAndRegulationOfPublicAuction);
-        }
 
         private void TabPageController(TabPage tabPageRoute)
         {
             try
             {
-                if (tabControlPrintPreview.TabPages.Contains(tabPageRoute))
-                {
-                    tabControl1.SelectedTab = tabPagePrint;
-                    tabControlPrintPreview.SelectedTab = tabPageRoute;
-                    Text = $"Transaction > Print > {tabPageRoute.Text} ";
-                    return;
-                }
-
                 Text = $"Transaction > {tabPageRoute.Text} ";
                 tabControl1.SelectedTab = tabPageRoute;
             }

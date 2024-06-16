@@ -41,15 +41,14 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
-
             // Define tasks and their progress weights
             var tasks = new Dictionary<string, int>
-                {
-                    { "Fetch LGU Details", 10 },
-                    { "Generate Bidder Information", 20 },
-                    { "Initialize Parameters", 30 },
-                    { "Set Parameter Values", 40 }
-                };
+            {
+                { "Fetch LGU Details", 10 },
+                { "Generate Bidder and Bidding Information", 20 },
+                { "Initialize Parameters", 30 },
+                { "Set Parameter Values", 40 }
+            };
 
             int totalProgressCount = tasks.Sum(t => t.Value);
             int progressCount = 0;
@@ -59,9 +58,14 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             progressCount += tasks["Fetch LGU Details"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            //Generate Bidder Information
-            var dictBiddings = AccFactory.BiddersRepository().GetViewRecordsByAuctionIdAndBiddersId(parameters.rptAuctionId, parameters.bidderId);
-            progressCount += tasks["Generate Bidder Information"];
+            //Generate Bidder and Bidding Information
+            var dictBid = AccFactory.BidRepository().GetRecordByAuctionIdAndBidderId(parameters.rptAuctionId, parameters.bidderId);
+            string nameOfBidder = dictBid["name"].ToString();
+            string bidderCompleteAddress = dictBid["address"].ToString();
+            string dateOfPublicAuction = $"{dictBid["start_date"]} - {dictBid["start_date"]}";
+            string placeOfPublicAuction = dictBid["location"];
+
+            progressCount += tasks["Generate Bidder and Bidding Information"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             // Initialize Parameters
@@ -71,16 +75,15 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
             // Set Parameter Values
             reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
-            reportParameters.Add(new ReportParameter("paramNameOfBidder", lguDetails["municipality"]));
-            reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", "San Jose, Pagadian City"));
+            reportParameters.Add(new ReportParameter("paramNameOfBidder", nameOfBidder));
+            reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", bidderCompleteAddress));
             reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
-            reportParameters.Add(new ReportParameter("paramActualDateOfPublicAuction", lguDetails["municipality"]));
-            reportParameters.Add(new ReportParameter("paramPlaceOfPublicAuction", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramActualDateOfPublicAuction", dateOfPublicAuction));
+            reportParameters.Add(new ReportParameter("paramPlaceOfPublicAuction", placeOfPublicAuction));
             progressCount += tasks["Set Parameter Values"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             e.Result = reportParameters;
-
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
