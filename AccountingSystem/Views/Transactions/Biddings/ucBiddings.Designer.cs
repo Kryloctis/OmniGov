@@ -62,6 +62,8 @@
             txtOrdinanceNo.Name = "txtOrdinanceNo";
             txtOrdinanceNo.Size = new System.Drawing.Size(427, 23);
             txtOrdinanceNo.TabIndex = 3;
+            txtOrdinanceNo.Validating += txtOrdinanceNo_Validating;
+            txtOrdinanceNo.Validated += txtOrdinanceNo_Validated;
             // 
             // label3
             // 
@@ -103,6 +105,8 @@
             cmbxAuctionSchedule.Size = new System.Drawing.Size(427, 23);
             cmbxAuctionSchedule.TabIndex = 1;
             cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
+            cmbxAuctionSchedule.Validating += cmbxAuctionSchedule_Validating;
+            cmbxAuctionSchedule.Validated += cmbxAuctionSchedule_Validated;
             // 
             // dtpDate
             // 
@@ -116,6 +120,8 @@
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new System.Drawing.Size(427, 23);
             dtpDate.TabIndex = 4;
+            dtpDate.Validating += dtpDate_Validating;
+            dtpDate.Validated += dtpDate_Validated;
             // 
             // nudBidAmount
             // 
@@ -129,9 +135,12 @@
             nudBidAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             nudBidAmount.ThousandsSeparator = true;
             nudBidAmount.ValueChanged += nudBidAmount_ValueChanged;
+            nudBidAmount.Validating += nudBidAmount_Validating;
+            nudBidAmount.Validated += nudBidAmount_Validated;
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
             // label2
@@ -155,6 +164,8 @@
             cmbxProperty.Name = "cmbxProperty";
             cmbxProperty.Size = new System.Drawing.Size(427, 23);
             cmbxProperty.TabIndex = 2;
+            cmbxProperty.Validating += cmbxProperty_Validating;
+            cmbxProperty.Validated += cmbxProperty_Validated;
             // 
             // label6
             // 
@@ -172,6 +183,8 @@
             txtAssignedBidderNo.Name = "txtAssignedBidderNo";
             txtAssignedBidderNo.Size = new System.Drawing.Size(427, 23);
             txtAssignedBidderNo.TabIndex = 5;
+            txtAssignedBidderNo.Validating += txtAssignedBidderNo_Validating;
+            txtAssignedBidderNo.Validated += txtAssignedBidderNo_Validated;
             // 
             // ucBiddings
             // 
@@ -191,7 +204,6 @@
             Controls.Add(label1);
             Name = "ucBiddings";
             Size = new System.Drawing.Size(584, 178);
-            Load += ucBiddings_Load;
             ((System.ComponentModel.ISupportInitialize)nudBidAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);

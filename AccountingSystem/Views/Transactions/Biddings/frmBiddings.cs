@@ -18,13 +18,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
         public frmBiddings()
         {
             InitializeComponent();
-
-            ucTaxPayers = ucTaxPayers1;
-            ucBiddings = ucBiddings1;
-            ucPayment = ucPayment1;
-
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBiddings, true);
+
+            ucBiddings = ucBiddings1;
+            ucPayment = ucPayment1;
+            ucTaxPayers = ucTaxPayers1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -39,7 +38,35 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int selectedRowCount = dgBiddings.SelectedRows.Count;
+                if (DeleteBiddings(dgBiddings))
+                {
+                    Helper.MessageBoxSuccess($"{selectedRowCount} records has been deleted.");
+                    LoadBidders();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
+        private bool DeleteBiddings(DataGridView dataGridView)
+        {
+            var models = new List<BidModel>();
+            var selectedRow = dataGridView.SelectedRows;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRow.Count))
+            {
+                foreach (DataGridViewRow rowItem in selectedRow)
+                {
+                    var model = new BidModel() { Id = Convert.ToInt32(rowItem.Cells["id"].Value) };
+                    models.Add(model);
+                }
+
+                return AccFactory.BidRepository().Delete(models);
+            }
+
+            return false;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -69,8 +96,13 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TabPageController(tabPagePayment);
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(ucBiddings.GetFormErrors());
+                return;
+            }
 
+            TabPageController(tabPagePayment);
             decimal totalAmountPayable = ComputeAmountDue();
             ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
         }
@@ -81,6 +113,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             {
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
+                ucBiddings.OnLoad();
                 LoadBidders();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
             }
@@ -240,5 +273,14 @@ namespace AccountingSystem.Views.Transactions.Biddings
             LoadBidders();
         }
 
+        private void dgBiddings_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

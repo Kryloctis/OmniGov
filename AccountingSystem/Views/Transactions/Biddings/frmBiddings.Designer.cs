@@ -145,6 +145,7 @@
             dgBiddings.RowTemplate.Height = 25;
             dgBiddings.Size = new System.Drawing.Size(761, 327);
             dgBiddings.TabIndex = 1;
+            dgBiddings.SelectionChanged += dgBiddings_SelectionChanged;
             // 
             // statusStrip1
             // 
