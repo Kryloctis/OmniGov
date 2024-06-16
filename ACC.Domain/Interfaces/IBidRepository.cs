@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IBiddingsRepository : IAccRepository<BiddingsModel>
+    public interface IBidRepository : IAccRepository<BidModel>
     {
     }
 }

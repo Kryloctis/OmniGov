@@ -10,6 +10,7 @@ namespace ACC.Data
     {
         private AccGenericCommands mySqlGenericCommandsLFS;
         private string tableName = "bidders";
+        private string viewTableName = "view_bidders";
 
         public BiddersRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {

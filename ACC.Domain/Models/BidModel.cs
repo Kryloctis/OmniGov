@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Models
 {
-    public class BiddingsModel
+    public class BidModel
     {
         public int Id { get; set; }
         public int RptAuctionId { get; set; }

@@ -5,17 +5,18 @@ using System.Data;
 
 namespace ACC.Data
 {
-    internal class BiddingsRepository : IBiddingsRepository
+    internal class BidRepository : IBidRepository
     {
         private AccGenericCommands mySqlGenericCommandsLFS;
         private string tableName = "bid";
+        private string viewTableName = "view_bid";
 
-        public BiddingsRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public BidRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
-        public bool Delete(List<BiddingsModel> entityList)
+        public bool Delete(List<BidModel> entityList)
         {
             throw new System.NotImplementedException();
         }
@@ -40,7 +41,7 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public bool Insert(BiddingsModel entity)
+        public bool Insert(BidModel entity)
         {
             var parameters = new object[][]
             {
@@ -56,7 +57,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(BiddingsModel entity)
+        public bool Update(BidModel entity)
         {
             throw new System.NotImplementedException();
         }
