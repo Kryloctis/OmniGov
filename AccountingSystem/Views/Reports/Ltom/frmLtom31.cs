@@ -57,5 +57,10 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
 
         }
+
+        private void ucReportOfSale1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

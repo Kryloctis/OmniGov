@@ -110,6 +110,7 @@
             ucReportOfSale1.Name = "ucReportOfSale1";
             ucReportOfSale1.Size = new System.Drawing.Size(617, 398);
             ucReportOfSale1.TabIndex = 0;
+            ucReportOfSale1.Load += ucReportOfSale1_Load;
             // 
             // statusStrip1
             // 
