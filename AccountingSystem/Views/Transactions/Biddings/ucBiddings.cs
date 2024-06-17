@@ -20,12 +20,23 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 errorProvider1.GetError(cmbxProperty),
                 errorProvider1.GetError(txtOrdinanceNo),
                 errorProvider1.GetError(txtAssignedBidderNo),
-                errorProvider1.GetError(dtpDate),
                 errorProvider1.GetError(nudBidAmount),
             };
 
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
+
+        internal bool ValidateInput()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            return true;
+        }
+
 
         internal void ResetForm()
         {
@@ -108,20 +119,28 @@ namespace AccountingSystem.Views.Transactions.Biddings
             Helper.ClearErrorTextBox(errorProvider1, txtOrdinanceNo);
         }
 
-        private void dtpDate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private bool AssignedBidderNoValidated(ErrorProvider errorProvider, TextBox textBox)
         {
+            bool isValidated;
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            string bidderNo = txtAssignedBidderNo.Text.Trim();
 
-        }
 
-        private void dtpDate_Validated(object sender, EventArgs e)
-        {
+            bool bidderNoExist = AccFactory.BiddersRepository().BidderNoExist(auctionId, bidderNo);
 
+            isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Assigned Bidder No.") && !bidderNoExist;
+            errorProvider.SetError(textBox, bidderNoExist ? "Assigned Bidder No. Exist." : errorProvider.GetError(textBox));
+
+            return isValidated;
         }
 
         private void txtAssignedBidderNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAssignedBidderNo, "Bidder Assign No.");
-            //insert bidder no. duplicate.
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAssignedBidderNo, "Assigned Bidder No.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtAssignedBidderNo_Validated(object sender, EventArgs e)
@@ -138,5 +157,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudBidAmount);
         }
+
+
     }
 }

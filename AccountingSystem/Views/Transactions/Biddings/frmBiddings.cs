@@ -96,15 +96,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!ValidateChildren())
+            if (ucBiddings.ValidateInput())
             {
-                Helper.MessageBoxError(ucBiddings.GetFormErrors());
-                return;
+                TabPageController(tabPagePayment);
+                decimal totalAmountPayable = ComputeAmountDue();
+                ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
             }
-
-            TabPageController(tabPagePayment);
-            decimal totalAmountPayable = ComputeAmountDue();
-            ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
         }
 
         private void frmBiddings_Load(object sender, EventArgs e)
@@ -169,7 +166,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private bool ConfirmPayment()
         {
-
             var biddersModel = new BiddersModel()
             {
                 AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),

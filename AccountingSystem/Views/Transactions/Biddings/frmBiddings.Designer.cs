@@ -365,6 +365,7 @@
             // 
             // ucBiddings1
             // 
+            ucBiddings1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucBiddings1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBiddings1.Font = new System.Drawing.Font("Segoe UI", 9F);
             ucBiddings1.Location = new System.Drawing.Point(3, 50);

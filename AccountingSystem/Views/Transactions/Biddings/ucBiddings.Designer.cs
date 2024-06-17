@@ -120,8 +120,6 @@
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new System.Drawing.Size(427, 23);
             dtpDate.TabIndex = 4;
-            dtpDate.Validating += dtpDate_Validating;
-            dtpDate.Validated += dtpDate_Validated;
             // 
             // nudBidAmount
             // 
@@ -190,6 +188,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(nudBidAmount);
             Controls.Add(dtpDate);
             Controls.Add(cmbxProperty);

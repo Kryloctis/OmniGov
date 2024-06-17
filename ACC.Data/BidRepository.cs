@@ -16,6 +16,8 @@ namespace ACC.Data
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
+
+
         public bool Delete(List<BidModel> entityList)
         {
             throw new System.NotImplementedException();

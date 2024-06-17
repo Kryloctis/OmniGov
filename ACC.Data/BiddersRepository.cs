@@ -34,6 +34,17 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
+        public bool BidderNoExist(int auctionId, string bidderNo)
+        {
+            var parameters = new object[][] {
+                new object[] { "@auction_id", DbType.Int32, auctionId },
+                new object[] { "@bidder_no", DbType.String, bidderNo }
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE auction_id = @auction_id AND bidder_no = @bidder_no";
+            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return !string.IsNullOrWhiteSpace(result);
+        }
         public int GetLastInsertedId(int createdById)
         {
             var parameters = new object[][]

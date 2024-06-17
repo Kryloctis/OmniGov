@@ -13,8 +13,8 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByAuctionIdAndBidderId(int auctionId, int bidderId);
 
-
         DataTable GetBiddersByAuctionIdAndRptId(int auctionId, int rptId);
+        bool BidderNoExist(int auctionId, string bidderNo);
     }
 
 }
