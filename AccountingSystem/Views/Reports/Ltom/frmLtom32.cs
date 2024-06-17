@@ -14,5 +14,10 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
 
         }
+
+        private void ucCertificateOfRedemption1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

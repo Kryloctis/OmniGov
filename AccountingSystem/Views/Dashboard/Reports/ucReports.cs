@@ -391,5 +391,25 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnLtom32_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom32().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom33_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom33().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }
