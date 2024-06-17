@@ -70,10 +70,8 @@ namespace AccountingSystem.Views.Transactions.Auction
                 int totalProgressCount = dbRptAuctionProperties.Rows.Count;
                 int progressCount = 0;
 
-
                 foreach (DataRow dataRow in dbRptAuctionProperties.Rows)
                 {
-
                     var newRow = dtRptAuctionProperties.NewRow();
 
                     int taxpayerID = Convert.ToInt32(dataRow["taxpayers_id"]);
@@ -82,6 +80,7 @@ namespace AccountingSystem.Views.Transactions.Auction
                     string locationOfProperty = dataRow["location"].ToString();
                     string propertyKind = dataRow["property_kind"].ToString();
                     decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
+
                     int monthsDelinquent = 0;
                     decimal basicTaxDue = 0;
                     decimal sefTaxDue = 0;

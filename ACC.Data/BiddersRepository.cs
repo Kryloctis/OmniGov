@@ -22,26 +22,26 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public DataTable GetBiddersByAuctionIdAndRptId(int auctionId, int rptId)
+        public DataTable GetBiddersByAuctionIdAndRptId(int auctionId, int rptAuctionId)
         {
             var parameters = new object[][] {
                 new object[]{ "@auction_id", DbType.Int32, auctionId },
-                new object[]{ "@rpt_auction_id", DbType.Int32, rptId },
+                new object[]{ "@rpt_auction_id", DbType.Int32, rptAuctionId },
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id AND ";
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id AND rpt_auction_id = @rpt_auction_id";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public bool BidderNoExist(int auctionId, string bidderNo)
+        public bool BidderNoExist(int rptAuctionId, string bidderNo)
         {
             var parameters = new object[][] {
-                new object[] { "@auction_id", DbType.Int32, auctionId },
+                new object[] { "@rpt_auction_id", DbType.Int32, rptAuctionId },
                 new object[] { "@bidder_no", DbType.String, bidderNo }
             };
 
-            string query = $"SELECT id FROM {tableName} WHERE auction_id = @auction_id AND bidder_no = @bidder_no";
+            string query = $"SELECT id FROM {viewTableName} WHERE rpt_auction_id = @rpt_auction_id AND bidder_no = @bidder_no";
             string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
@@ -76,7 +76,7 @@ namespace ACC.Data
             var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][] { new object[] { "@auction_id", DbType.Int32, auctionId }, new object[] { "@bidder_id", DbType.Int32, bidderId } };
-            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id WHERE bidders.id = @bidder_id AND bidders.auction_id = @auction_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @bidder_id AND auction_id = @auction_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -94,8 +94,7 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id";
-
+            string query = $"SELECT * FROM {viewTableName}";
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
@@ -106,7 +105,7 @@ namespace ACC.Data
                 new object[]{ "@bidder_id", DbType.Int32, bidderId },
             };
 
-            string query = $"Select bidders.id, bidders.taxpayers_id, bidders.auction_id, taxpayers.name AS bidder, bidders.bidder_no, bid.ordinance_no, bid.date, bid.bid_amount  FROM bidders AS bidders INNER JOIN bid AS bid ON bidders.id = bid.bidders_id INNER JOIN taxpayers AS taxpayers  ON bidders.taxpayers_id = taxpayers.id WHERE bidders.id = @bidder_id AND bid.rpt_auction_id = @auction_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @bidder_id AND rpt_auction_id = @auction_id";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }

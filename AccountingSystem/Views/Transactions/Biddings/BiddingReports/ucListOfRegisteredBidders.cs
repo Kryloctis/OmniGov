@@ -48,26 +48,22 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 int totalProgressCount = dbRegisteredBidders.Rows.Count;
                 int progressCount = 0;
 
-
                 foreach (DataRow dataRow in dbRegisteredBidders.Rows)
                 {
-
                     var newRow = dtRegisteredBidders.NewRow();
 
                     newRow["assigned_bidders_no"] = dataRow["bidder_no"];
-                    newRow["name_of_bidders_or_representative"] = dataRow["bidder"];
-                    newRow["complete_address_or_business_address"] = "San Jose";
-                    newRow["contact_no"] = "09052381040";
-                    newRow["official_receipts_no"] = "93122";
+                    newRow["name_of_bidders_or_representative"] = dataRow["name"];
+                    newRow["complete_address_or_business_address"] = dataRow["address"];
+                    newRow["contact_no"] = dataRow["contact_info"];
+                    newRow["official_receipts_no"] = dataRow["receipt_no"];
 
                     dtRegisteredBidders.Rows.Add(newRow);
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
-
                 e.Result = dtRegisteredBidders;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 

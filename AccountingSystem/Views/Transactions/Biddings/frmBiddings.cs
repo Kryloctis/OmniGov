@@ -221,7 +221,8 @@ namespace AccountingSystem.Views.Transactions.Biddings
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                var dtDb = AccFactory.BiddersRepository().GetViewRecords();
+                //var dtDb = AccFactory.BiddersRepository().GetViewRecords();
+                var dtDb = AccFactory.BidRepository().GetViewRecords();
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
                 var dataTable = new DataTable();
@@ -232,7 +233,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
                     new DataColumn("id", typeof(int)),
                     new DataColumn("taxpayers_id", typeof(int)),
                     new DataColumn("auction_id", typeof(int)),
-                    new DataColumn("bidder", typeof(string)),
+                    new DataColumn("name", typeof(string)),
                     new DataColumn("bidder_no", typeof(string)),
                     new DataColumn("ordinance_no", typeof(string)),
                     new DataColumn("date", typeof(DateTime)),
@@ -245,10 +246,10 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 {
                     var newRow = dataTable.NewRow();
 
-                    newRow["id"] = row["id"];
+                    newRow["id"] = row["id"];   //bid id
                     newRow["taxpayers_id"] = row["taxpayers_id"];
                     newRow["auction_id"] = row["auction_id"];
-                    newRow["bidder"] = row["bidder"];
+                    newRow["name"] = row["name"];
                     newRow["bidder_no"] = row["bidder_no"];
                     newRow["ordinance_no"] = row["ordinance_no"];
                     newRow["date"] = row["date"];

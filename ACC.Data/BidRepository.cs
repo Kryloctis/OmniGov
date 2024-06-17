@@ -63,6 +63,12 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

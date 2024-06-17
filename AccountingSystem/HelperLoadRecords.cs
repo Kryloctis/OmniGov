@@ -2168,7 +2168,7 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["taxpayers_id"].Visible = false;
             dataGridView.Columns["auction_id"].Visible = false;
-            dataGridView.Columns["bidder"].HeaderText = "Bidder";
+            dataGridView.Columns["name"].HeaderText = "Bidder";
             dataGridView.Columns["bidder_no"].HeaderText = "Bidder No.";
             dataGridView.Columns["ordinance_no"].HeaderText = "Ordinance No.";
             dataGridView.Columns["date"].HeaderText = "Date";

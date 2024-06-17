@@ -122,11 +122,10 @@ namespace AccountingSystem.Views.Transactions.Biddings
         private bool AssignedBidderNoValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             bool isValidated;
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            int rptAuction = Convert.ToInt32(cmbxProperty.SelectedValue);
             string bidderNo = txtAssignedBidderNo.Text.Trim();
 
-
-            bool bidderNoExist = AccFactory.BiddersRepository().BidderNoExist(auctionId, bidderNo);
+            bool bidderNoExist = AccFactory.BiddersRepository().BidderNoExist(rptAuction, bidderNo);
 
             isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Assigned Bidder No.") && !bidderNoExist;
             errorProvider.SetError(textBox, bidderNoExist ? "Assigned Bidder No. Exist." : errorProvider.GetError(textBox));
@@ -138,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAssignedBidderNo, "Assigned Bidder No.");
+                e.Cancel = !AssignedBidderNoValidated(errorProvider1, txtAssignedBidderNo);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -157,7 +156,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudBidAmount);
         }
-
 
     }
 }

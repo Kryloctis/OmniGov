@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
@@ -7,5 +8,6 @@ namespace ACC.Domain.Interfaces
     {
         Dictionary<string, string> GetRecordByAuctionIdAndBidderId(int rptAuctionId, int biddersId);
 
+        DataTable GetViewRecords();
     }
 }

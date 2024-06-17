@@ -59,10 +59,10 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             //Generate Bidder and Bidding Information
-            var dictBid = AccFactory.BidRepository().GetRecordByAuctionIdAndBidderId(parameters.rptAuctionId, parameters.bidderId);
+            var dictBid = AccFactory.BidRepository().GetRecordByAuctionIdAndBidderId(rptAuctionId, bidderId);
             string nameOfBidder = dictBid["name"].ToString();
             string bidderCompleteAddress = dictBid["address"].ToString();
-            string dateOfPublicAuction = $"{dictBid["start_date"]} - {dictBid["start_date"]}";
+            string dateOfPublicAuction = $"{Convert.ToDateTime(dictBid["start_date"]).ToString("MMMM dd yyyy")} - {Convert.ToDateTime(dictBid["end_date"]).ToString("MMMM dd yyyy")}";
             string placeOfPublicAuction = dictBid["location"];
 
             progressCount += tasks["Generate Bidder and Bidding Information"];
