@@ -22,9 +22,9 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         internal void OnLoad(int rptAuctionId, int bidderId)
         {
-            LoadReport();
             this.rptAuctionId = rptAuctionId;
             this.bidderId = bidderId;
+            LoadReport();
         }
 
         private void LoadReport()

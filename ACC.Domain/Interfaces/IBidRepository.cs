@@ -6,6 +6,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBidRepository : IAccRepository<BidModel>
     {
+        Dictionary<string, string> GetHighestBidderByAuctionIdAndRptId(int rptAuctionId, int rptId);
         Dictionary<string, string> GetRecordByAuctionIdAndBidderId(int rptAuctionId, int biddersId);
 
         DataTable GetViewRecords();

@@ -31,10 +31,12 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
+            cmbxProperty = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ucCertificateOfRedemption1 = new Transactions.Biddings.BiddingReports.ucCertificateOfRedemption();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +55,8 @@
             // 
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
+            splitContainer1.Panel1.Controls.Add(cmbxProperty);
+            splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
@@ -68,30 +72,52 @@
             // 
             cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxAuctionSchedule.FormattingEnabled = true;
-            cmbxAuctionSchedule.Location = new System.Drawing.Point(8, 31);
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(8, 26);
             cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
             cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
-            cmbxAuctionSchedule.TabIndex = 27;
+            cmbxAuctionSchedule.TabIndex = 34;
+            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(7, 13);
+            label3.Location = new System.Drawing.Point(7, 9);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(106, 15);
-            label3.TabIndex = 26;
+            label3.TabIndex = 33;
             label3.Text = "Auction Schedule :";
+            // 
+            // cmbxProperty
+            // 
+            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxProperty.FormattingEnabled = true;
+            cmbxProperty.Location = new System.Drawing.Point(8, 72);
+            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxProperty.Name = "cmbxProperty";
+            cmbxProperty.Size = new System.Drawing.Size(200, 23);
+            cmbxProperty.TabIndex = 32;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label1.Location = new System.Drawing.Point(7, 55);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(66, 15);
+            label1.TabIndex = 31;
+            label1.Text = "Properties :";
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(8, 62);
+            btnRunReport.Location = new System.Drawing.Point(8, 101);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
-            btnRunReport.TabIndex = 19;
+            btnRunReport.TabIndex = 30;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
             // panel3
             // 
@@ -102,14 +128,6 @@
             panel3.Size = new System.Drawing.Size(617, 398);
             panel3.TabIndex = 12;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 406);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(840, 22);
-            statusStrip1.TabIndex = 13;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // ucCertificateOfRedemption1
             // 
             ucCertificateOfRedemption1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -118,6 +136,14 @@
             ucCertificateOfRedemption1.Size = new System.Drawing.Size(617, 398);
             ucCertificateOfRedemption1.TabIndex = 0;
             ucCertificateOfRedemption1.Load += ucCertificateOfRedemption1_Load;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 406);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(840, 22);
+            statusStrip1.TabIndex = 13;
+            statusStrip1.Text = "statusStrip1";
             // 
             // frmLtom32
             // 
@@ -145,11 +171,13 @@
 
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private Transactions.Biddings.BiddingReports.ucCertificateOfRedemption ucCertificateOfRedemption1;
+        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbxProperty;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnRunReport;
     }
 }
