@@ -44,12 +44,12 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
-            {
-                { "Fetch LGU Details", 10 },
-                { "Generate Bidder and Bidding Information", 20 },
-                { "Initialize Parameters", 30 },
-                { "Set Parameter Values", 40 }
-            };
+                {
+                    { "Fetch LGU Details", 10 },
+                    { "Generate Bidder and Bidding Information", 20 },
+                    { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 }
+                };
 
                 int totalProgressCount = tasks.Sum(t => t.Value);
                 int progressCount = 0;

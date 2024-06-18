@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
-            label3 = new System.Windows.Forms.Label();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
+            txtRpt = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
+            cmbxWarrantLevy = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
+            ucCancellationOfWarrantOfLevy1 = new Transactions.Biddings.BiddingReports.ucCancellationOfWarrantOfLevy();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -51,10 +53,10 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
-            splitContainer1.Panel1.Controls.Add(label3);
-            splitContainer1.Panel1.Controls.Add(cmbxProperty);
+            splitContainer1.Panel1.Controls.Add(txtRpt);
             splitContainer1.Panel1.Controls.Add(label1);
+            splitContainer1.Panel1.Controls.Add(cmbxWarrantLevy);
+            splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
@@ -66,62 +68,72 @@
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 14;
             // 
-            // cmbxAuctionSchedule
+            // txtRpt
             // 
-            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxAuctionSchedule.FormattingEnabled = true;
-            cmbxAuctionSchedule.Location = new System.Drawing.Point(8, 26);
-            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
-            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
-            cmbxAuctionSchedule.TabIndex = 34;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(11, 13);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(106, 15);
-            label3.TabIndex = 33;
-            label3.Text = "Auction Schedule :";
-            // 
-            // cmbxProperty
-            // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(8, 72);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 32;
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(6, 30);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 32;
+            txtRpt.TextChanged += txtRpt_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(11, 59);
+            label1.Location = new System.Drawing.Point(6, 12);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(66, 15);
+            label1.Size = new System.Drawing.Size(57, 15);
             label1.TabIndex = 31;
-            label1.Text = "Properties :";
+            label1.Text = "ARP No. :";
+            // 
+            // cmbxWarrantLevy
+            // 
+            cmbxWarrantLevy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxWarrantLevy.FormattingEnabled = true;
+            cmbxWarrantLevy.Location = new System.Drawing.Point(6, 81);
+            cmbxWarrantLevy.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxWarrantLevy.Name = "cmbxWarrantLevy";
+            cmbxWarrantLevy.Size = new System.Drawing.Size(200, 23);
+            cmbxWarrantLevy.TabIndex = 20;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            label2.Location = new System.Drawing.Point(6, 63);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(56, 15);
+            label2.TabIndex = 19;
+            label2.Text = "Issued at:";
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(8, 101);
+            btnRunReport.Location = new System.Drawing.Point(6, 117);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 30;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
             // panel3
             // 
+            panel3.Controls.Add(ucCancellationOfWarrantOfLevy1);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 4);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(617, 398);
             panel3.TabIndex = 12;
+            // 
+            // ucCancellationOfWarrantOfLevy1
+            // 
+            ucCancellationOfWarrantOfLevy1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucCancellationOfWarrantOfLevy1.Location = new System.Drawing.Point(0, 0);
+            ucCancellationOfWarrantOfLevy1.Name = "ucCancellationOfWarrantOfLevy1";
+            ucCancellationOfWarrantOfLevy1.Size = new System.Drawing.Size(617, 398);
+            ucCancellationOfWarrantOfLevy1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -143,11 +155,13 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Treasury > Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)";
+            Load += frmLtom33_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -155,12 +169,13 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbxProperty;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private Transactions.Biddings.BiddingReports.ucCancellationOfWarrantOfLevy ucCancellationOfWarrantOfLevy1;
+        private System.Windows.Forms.ComboBox cmbxWarrantLevy;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label1;
     }
 }

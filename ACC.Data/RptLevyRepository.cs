@@ -1,13 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace ACC.Data
@@ -145,13 +140,45 @@ namespace ACC.Data
 
         public DataTable GetViewRecords(int rptId, DateTime date)
         {
-            var parameters = new object[][] 
+            var parameters = new object[][]
             {
                 new object[] { "@real_properties_id", DbType.Int32, rptId},
                 new object[] { "@date_issued", DbType.Date, date},
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND date_issued <= @date_issued";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public Dictionary<string, string> GetViewCancelledLevy(int Id)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@rpt_levy_id", DbType.Int32, Id } };
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_levy_id = @rpt_levy_id AND is_cancelled = 1";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
+        public DataTable GetCancelledLevy(int rptId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_properties_id", DbType.Int32, rptId}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND is_cancelled = 1";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }

@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 if (DeleteBiddings(dgBiddings))
                 {
                     Helper.MessageBoxSuccess($"{selectedRowCount} records has been deleted.");
-                    LoadBidders();
+                    LoadBid();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (ucBiddings.ValidateInput())
+            if (ucBiddings.ValidateInput() && ucTaxPayers.ValidateChildren())
             {
                 TabPageController(tabPagePayment);
                 decimal totalAmountPayable = ComputeAmountDue();
@@ -111,13 +111,13 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
                 ucBiddings.OnLoad();
-                LoadBidders();
+                LoadBid();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadBidders()
+        private void LoadBid()
         {
             if (!backgroundWorker1.IsBusy)
             {
@@ -147,7 +147,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
         private void ResetForm()
         {
             TabPageController(tabPageList);
-            LoadBidders();
+            LoadBid();
         }
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
@@ -267,7 +267,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadBidders();
+            LoadBid();
         }
 
         private void dgBiddings_SelectionChanged(object sender, EventArgs e)
