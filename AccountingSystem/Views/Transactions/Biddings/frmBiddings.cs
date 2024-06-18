@@ -72,6 +72,29 @@ namespace AccountingSystem.Views.Transactions.Biddings
         private void btnEdit_Click(object sender, EventArgs e)
         {
             TabPageController(tabPageForm);
+            int index = dgBiddings.CurrentCell.RowIndex;
+            int bidId = Convert.ToInt32(dgBiddings.Rows[index].Cells["id"].Value);
+            int taxpayerId = Convert.ToInt32(dgBiddings.Rows[index].Cells["taxpayers_id"].Value);
+
+            ucBiddings.OnLoad(true, bidId);
+
+            LoadSelectedTaxPayer(taxpayerId);
+        }
+
+        private void LoadSelectedTaxPayer(int taxpayerId)
+        {
+            ucTaxPayers.Enabled = false;
+
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+
+            ucTaxPayers.txtTIN.Text = dictTaxpayer["tin"];
+            ucTaxPayers.txtName.Text = dictTaxpayer["name"];
+            ucTaxPayers.cmbxTaxPayerType.Text = dictTaxpayer["tin"];
+            ucTaxPayers.txtAddress.Text = dictTaxpayer["address"];
+            ucTaxPayers.txtMunicipality.Text = dictTaxpayer["municipality"];
+            ucTaxPayers.txtProvince.Text = dictTaxpayer["province"];
+            ucTaxPayers.txtContact.Text = dictTaxpayer["contact_info"];
+
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -110,7 +133,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             {
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
-                ucBiddings.OnLoad();
+                ucBiddings.OnLoad(false, null);
                 LoadBid();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
             }

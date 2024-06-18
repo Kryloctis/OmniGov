@@ -7,6 +7,8 @@ namespace AccountingSystem.Views.Transactions.Biddings
 {
     public partial class ucBiddings : UserControl
     {
+        private bool isEdit = false;
+        private int? biddingId;
         public ucBiddings()
         {
             InitializeComponent();
@@ -53,14 +55,24 @@ namespace AccountingSystem.Views.Transactions.Biddings
             LoadProperties();
         }
 
-        internal void OnLoad()
+        internal void OnLoad(bool isEdit, int? biddingId)
         {
             try
             {
-                ResetForm();
+                this.biddingId = biddingId;
+                this.isEdit = isEdit;
+                if (isEdit) LoadSelectedRecord(biddingId.Value); else ResetForm();
+                errorProvider1.Clear();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+        private void LoadSelectedRecord(int biddingId)
+        {
+            var dictBid = AccFactory.BidRepository().GetViewRecordById(biddingId);
+
+
+        }
+
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);

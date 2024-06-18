@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
     {
         Dictionary<string, string> GetHighestBidderByAuctionIdAndRptId(int rptAuctionId, int rptId);
         Dictionary<string, string> GetRecordByAuctionIdAndBidderId(int rptAuctionId, int biddersId);
-
+        Dictionary<string, string> GetViewRecordById(int bidId);
         DataTable GetViewRecords();
     }
 }

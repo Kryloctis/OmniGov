@@ -88,6 +88,30 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public Dictionary<string, string> GetViewRecordById(int bidId)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] {
+                new object[] { "@id", DbType.Int32, bidId },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
