@@ -10,5 +10,7 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByAuctionIdAndBidderId(int rptAuctionId, int biddersId);
         Dictionary<string, string> GetViewRecordById(int bidId);
         DataTable GetViewRecords();
+
+        bool UpdateBidDetails(BiddersModel biddersModel, BidModel bidModel);
     }
 }

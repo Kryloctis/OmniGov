@@ -48,7 +48,7 @@
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
             tabPageForm = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
-            button3 = new System.Windows.Forms.Button();
+            btnProceedToPayment = new System.Windows.Forms.Button();
             btnPayment = new System.Windows.Forms.Button();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             groupBox1 = new System.Windows.Forms.GroupBox();
@@ -277,7 +277,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(button3);
+            panel3.Controls.Add(btnProceedToPayment);
             panel3.Controls.Add(btnPayment);
             panel3.Dock = System.Windows.Forms.DockStyle.Top;
             panel3.Location = new System.Drawing.Point(0, 353);
@@ -285,16 +285,16 @@
             panel3.Size = new System.Drawing.Size(761, 29);
             panel3.TabIndex = 15;
             // 
-            // button3
+            // btnProceedToPayment
             // 
-            button3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button3.Location = new System.Drawing.Point(616, 3);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(143, 23);
-            button3.TabIndex = 17;
-            button3.Text = "Proceed to Payment";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnProceedToPayment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnProceedToPayment.Location = new System.Drawing.Point(616, 3);
+            btnProceedToPayment.Name = "btnProceedToPayment";
+            btnProceedToPayment.Size = new System.Drawing.Size(143, 23);
+            btnProceedToPayment.TabIndex = 17;
+            btnProceedToPayment.Text = "Proceed to Payment";
+            btnProceedToPayment.UseVisualStyleBackColor = true;
+            btnProceedToPayment.Click += button3_Click;
             // 
             // btnPayment
             // 
@@ -566,7 +566,7 @@
         private Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnPayment;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnProceedToPayment;
         private ucBiddings ucBiddings1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;

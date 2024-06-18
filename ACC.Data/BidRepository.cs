@@ -144,5 +144,11 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public bool UpdateBidDetails(BiddersModel biddersModel, BidModel bidModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
     }
 }

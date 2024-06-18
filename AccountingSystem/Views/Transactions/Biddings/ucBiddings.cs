@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 {
     public partial class ucBiddings : UserControl
     {
-        private bool isEdit = false;
+        internal bool isEdit = false;
         private int? biddingId;
         public ucBiddings()
         {
@@ -45,11 +45,15 @@ namespace AccountingSystem.Views.Transactions.Biddings
             dtpDate.Value = Helper.GetCurrentDate();
             txtOrdinanceNo.Clear();
             nudBidAmount.Value = 0;
+            txtAssignedBidderNo.Clear();
 
             cmbxAuctionSchedule.ResetText();
             cmbxProperty.ResetText();
             cmbxAuctionSchedule.SelectedIndex = -1;
             cmbxProperty.SelectedIndex = -1;
+
+            nudBidAmount.Enabled = true;
+            isEdit = false;
 
             LoadAuctionSchedule();
             LoadProperties();
@@ -61,7 +65,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
             {
                 this.biddingId = biddingId;
                 this.isEdit = isEdit;
-                if (isEdit) LoadSelectedRecord(biddingId.Value); else ResetForm();
+                if (isEdit)
+                {
+                    LoadSelectedRecord(biddingId.Value);
+                    nudBidAmount.Enabled = false;
+                }
+                else ResetForm();
                 errorProvider1.Clear();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -70,7 +79,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             var dictBid = AccFactory.BidRepository().GetViewRecordById(biddingId);
 
-
+            cmbxAuctionSchedule.SelectedValue = Convert.ToInt32(dictBid["auction_id"]);
+            cmbxProperty.SelectedValue = Convert.ToInt32(dictBid["rpt_auction_id"]);
+            dtpDate.Value = Convert.ToDateTime(dictBid["date"]);
+            txtOrdinanceNo.Text = dictBid["ordinance_no"].ToString();
+            txtAssignedBidderNo.Text = dictBid["bidder_no"].ToString();
+            nudBidAmount.Value = Convert.ToDecimal(dictBid["bid_amount"]);
         }
 
         private void LoadProperties()

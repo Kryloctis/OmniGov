@@ -33,6 +33,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            if (ucBiddings.isEdit)
+            {
+                if (Helper.MessageBoxConfirmCancel("Do you want to cancel updating the bidding details?"))
+                    ResetForm();
+            }
+
             TabPageController(tabPageList);
         }
 
@@ -95,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             ucTaxPayers.txtProvince.Text = dictTaxpayer["province"];
             ucTaxPayers.txtContact.Text = dictTaxpayer["contact_info"];
 
+            btnProceedToPayment.Text = "Update";
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -117,8 +124,52 @@ namespace AccountingSystem.Views.Transactions.Biddings
             return amountDue;
         }
 
+
+        internal void Update()
+        {
+            try
+            {
+                if (UpdateBidDetails())
+                {
+                    Helper.MessageBoxSuccess("Bid and Bidders details updated.");
+                    ResetForm();
+                    return;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool UpdateBidDetails()
+        {
+            var biddersModel = new BiddersModel()
+            {
+                AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
+                BidderNo = ucBiddings.txtAssignedBidderNo.Text,
+                CreatedBy = Helper.userId
+            };
+
+            var bidModel = new BidModel()
+            {
+                RptAuctionId = Convert.ToInt32(ucBiddings.cmbxProperty.SelectedValue),
+                OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
+                Date = ucBiddings.dtpDate.Value,
+                BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),
+                CreatedBy = Helper.userId
+            };
+
+            return AccFactory.BidRepository().UpdateBidDetails(biddersModel, bidModel);
+
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+            if (ucBiddings.isEdit)
+            {
+                btnProceedToPayment.Text = "Update";
+                Update();
+            }
+
+
             if (ucBiddings.ValidateInput() && ucTaxPayers.ValidateChildren())
             {
                 TabPageController(tabPagePayment);
@@ -171,6 +222,12 @@ namespace AccountingSystem.Views.Transactions.Biddings
         {
             TabPageController(tabPageList);
             LoadBid();
+            ucBiddings.isEdit = false;
+            btnProceedToPayment.Text = "Proceed to Payment.";
+            ucTaxPayers.Enabled = true;
+
+            ucBiddings.ResetForm();
+            ucTaxPayers.ResetForm();
         }
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
@@ -285,6 +342,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
 
                 e.Result = dataTable;
             }
+
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
