@@ -67,6 +67,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     {
                         backgroundWorker1.CancelAsync();
                         pbReport.Value = 100;
+                        reportViewer1.Clear();
                         return;
                     }
 
@@ -188,8 +189,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                     return;
                 }
 
-                var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
+                var parameters = (List<ReportParameter>)e.Result;
                 var localReport = reportViewer1.LocalReport;
                 localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom21NoticeOfLevy.rdlc";
                 localReport.SetParameters(parameters);
