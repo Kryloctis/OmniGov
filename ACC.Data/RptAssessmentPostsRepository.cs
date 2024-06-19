@@ -382,5 +382,16 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no";
             return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public DataTable GetViewRecords(DateTime date)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@posted_at", DbType.Date, date}
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE DATE(posted_at) <= @posted_at";
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }

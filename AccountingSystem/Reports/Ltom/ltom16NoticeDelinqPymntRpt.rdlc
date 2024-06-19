@@ -17,29 +17,29 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="declared_owner">
-          <DataField>declared_owner</DataField>
+        <Field Name="owner">
+          <DataField>owner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="tax_declaration_number">
-          <DataField>tax_declaration_number</DataField>
+        <Field Name="tax_dec_no">
+          <DataField>tax_dec_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="location_of_property">
-          <DataField>location_of_property</DataField>
+        <Field Name="property_location">
+          <DataField>property_location</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="kind_of_property">
-          <DataField>kind_of_property</DataField>
+        <Field Name="property_kind">
+          <DataField>property_kind</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="total_assessed_value">
-          <DataField>total_assessed_value</DataField>
+        <Field Name="assessed_value">
+          <DataField>assessed_value</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="years_of_delinquence">
           <DataField>years_of_delinquence</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="tax_due">
           <DataField>tax_due</DataField>
@@ -490,14 +490,14 @@ Property</Value>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="declared_owner">
+                        <Textbox Name="owner">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!declared_owner.Value</Value>
+                                  <Value>=Fields!owner.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -507,7 +507,7 @@ Property</Value>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>declared_owner</rd:DefaultName>
+                          <rd:DefaultName>owner</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -523,14 +523,14 @@ Property</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="tax_declaration_number">
+                        <Textbox Name="tax_dec_no">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tax_declaration_number.Value</Value>
+                                  <Value>=Fields!tax_dec_no.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -542,7 +542,7 @@ Property</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>tax_declaration_number</rd:DefaultName>
+                          <rd:DefaultName>tax_dec_no</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -558,14 +558,14 @@ Property</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="location_of_property">
+                        <Textbox Name="property_location">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!location_of_property.Value</Value>
+                                  <Value>=Fields!property_location.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -577,7 +577,7 @@ Property</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>location_of_property</rd:DefaultName>
+                          <rd:DefaultName>property_location</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -589,19 +589,18 @@ Property</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="kind_of_property">
+                        <Textbox Name="property_kind">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!kind_of_property.Value</Value>
+                                  <Value>=Fields!property_kind.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -613,7 +612,7 @@ Property</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>kind_of_property</rd:DefaultName>
+                          <rd:DefaultName>property_kind</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -629,14 +628,14 @@ Property</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="total_assessed_value">
+                        <Textbox Name="assessed_value">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!total_assessed_value.Value</Value>
+                                  <Value>=Fields!assessed_value.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -649,7 +648,7 @@ Property</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>total_assessed_value</rd:DefaultName>
+                          <rd:DefaultName>assessed_value</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -672,7 +671,7 @@ Property</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!years_of_delinquence.Value &lt; 12, Fields!years_of_delinquence.Value &amp; " Month/s", Round(Fields!years_of_delinquence.Value / 12) &amp; " Year/s")</Value>
+                                  <Value>=Fields!years_of_delinquence.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1094,7 +1093,6 @@ Property</Value>
       <Page>
         <PageFooter>
           <Height>0.62511in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="Textbox5">
