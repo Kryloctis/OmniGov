@@ -75,14 +75,9 @@ namespace AccountingSystem.Views.Transactions.Auction
 
                 foreach (DataRow dataRow in dbRptAuctionProperties.Rows)
                 {
-
                     var newRow = dtRptAuctionProperties.NewRow();
 
-                    int propertyId = Convert.ToInt32(dataRow["taxpayers_id"]);
-                    string taxPayer = dataRow["taxpayer_name"].ToString();
                     string completeArpNo = dataRow["complete_arp_no"].ToString();
-                    string locationOfProperty = dataRow["location"].ToString();
-                    string propertyKind = dataRow["property_kind"].ToString();
                     decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
                     int monthsDelinquent = 0;
                     decimal basicTaxDue = 0;

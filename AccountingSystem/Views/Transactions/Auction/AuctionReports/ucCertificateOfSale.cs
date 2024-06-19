@@ -11,8 +11,8 @@ namespace AccountingSystem.Views.Transactions.Auction
 {
     public partial class ucCertificateOfSale : UserControl
     {
-        private int taxpayerId;
         private int auctionId;
+        private int rptId;
 
         public ucCertificateOfSale()
         {
@@ -20,10 +20,10 @@ namespace AccountingSystem.Views.Transactions.Auction
             panel1.Controls.Add(reportViewer1);
         }
 
-        internal void OnLoad(int taxpayerId, int auctionId)
+        internal void OnLoad(int auctionId, int rptId)
         {
-            this.taxpayerId = taxpayerId;
             this.auctionId = auctionId;
+            this.rptId = rptId;
             LoadReport();
         }
 
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.Auction
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync((taxpayerId, auctionId));
+                backgroundWorker1.RunWorkerAsync((auctionId, rptId));
             }
         }
 
@@ -56,76 +56,63 @@ namespace AccountingSystem.Views.Transactions.Auction
             return (basicPenalty, sefPenalty);
         }
 
-
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
-                var parameters = ((int taxpayerId, int auctionId))e.Argument;
+
+                var parameters = ((int auctionId, int rptId))e.Argument;
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
-                int taxpayerID = parameters.taxpayerId;
 
-                var dbRptAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
-                var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
-
-                int totalProgressCount = dbRptAuctionProperties.Rows.Count;
                 int progressCount = 0;
+                var dictRpt = AccFactory.RealPropertiesRepository().GetRecordByID(parameters.rptId);
+                string completeArp = dictRpt["complete_arp_no"].ToString();
+
+                var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
+                var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
+                int totalProgressCount = dtDelinquentProperty.Rows.Count;
 
 
-                var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
-                var newRow = dtRptAuctionProperties.NewRow();
-
-                foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
+                foreach (DataRow drDelinquentProperty in dtDelinquentProperty.Rows)
                 {
+                    string completeArpNo = drDelinquentProperty["complete_arp_no"].ToString();
 
+                    var newRow = dtRptAuctionProperties.NewRow();
 
-                    string completeArpNo = dataRowDeliquency["complete_arp_no"].ToString();
-                    int assessmentYear = Convert.ToInt32(dataRowDeliquency["year"]);
-                    int effectivityQuarter = Convert.ToInt32(dataRowDeliquency["effectivity_quarterly"]);
-                    int effectivityYear = Convert.ToInt32(dataRowDeliquency["effectivity_year"]);
-                    var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(completeArpNo, assessmentYear);
-                    decimal assessedValue = Convert.ToDecimal(dataRowDeliquency["assessed_value"]);
-                    int monthsDelinquent;
-                    decimal basicTaxDue;
-                    decimal sefTaxDue;
-                    decimal penaltyRate;
-                    decimal totalTaxDue;
-                    decimal total;
-
-                    int? prevAssmntYear = null;
-
-                    if (dictPrevAssmnt.Count > 1)
-                        prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
-
-                    monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(Helper.GetCurrentDate(), (assessmentYear, effectivityQuarter, effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
-
-                    decimal rowBasicRate = Convert.ToDecimal(dataRowDeliquency["basic_rate"]);
-                    decimal rowSefRate = Convert.ToDecimal(dataRowDeliquency["sef_rate"]);
-
-                    basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, assessedValue);
-                    sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, assessedValue);
-                    penaltyRate = Convert.ToDecimal(dataRowDeliquency["penalty_rate"]);
+                    decimal assessedValue = Convert.ToDecimal(drDelinquentProperty["assessed_value"]);
+                    decimal basicRate = Convert.ToDecimal(drDelinquentProperty["basic_rate"]);
+                    decimal sefRate = Convert.ToDecimal(drDelinquentProperty["sef_rate"]);
+                    int assessmentYear = Convert.ToInt32(drDelinquentProperty["year"]);
+                    int effectivityQuarter = Convert.ToInt32(drDelinquentProperty["effectivity_quarterly"]);
+                    int effectivityYear = Convert.ToInt32(drDelinquentProperty["effectivity_year"]);
+                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
+                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
+                    decimal penaltyRate = Convert.ToDecimal(drDelinquentProperty["penalty_rate"]);
 
                     var penaltyParameters = (assessmentYear, completeArpNo, effectivityQuarter, effectivityYear);
-                    var penalties = GetPenalties(Helper.GetCurrentDate(), penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
-
-                    totalTaxDue = basicTaxDue + sefTaxDue;
-                    total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
+                    var penalties = GetPenalties(DateTime.Now, penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
+                    var total = (penalties.basicPenalty + penalties.sefPenalty).ToString("N2");
 
                     newRow["tax_year"] = assessmentYear;
+                    newRow["assessed_value"] = assessedValue;
                     newRow["basic_tax"] = basicTaxDue;
                     newRow["basic_penalty"] = penalties.basicPenalty;
                     newRow["sef_tax"] = sefTaxDue;
                     newRow["sef_penalty"] = penalties.sefPenalty;
+                    newRow["expenses_of_sale"] = 0.0;
                     newRow["total_amount"] = total;
-                    newRow["assessed_value"] = assessedValue;
 
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                    dtRptAuctionProperties.Rows.Add(newRow);
+
+                    if (completeArp == completeArpNo)
+                        dtRptAuctionProperties.Rows.Add(newRow);
+                    else
+                        continue;
                 }
 
                 e.Result = dtRptAuctionProperties;
+
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -156,11 +143,11 @@ namespace AccountingSystem.Views.Transactions.Auction
                 var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndTaxpayerId(auctionId, taxpayerId);
+                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {
-               new ReportParameter("paramLGU", lguName),
+                    new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
                     new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),

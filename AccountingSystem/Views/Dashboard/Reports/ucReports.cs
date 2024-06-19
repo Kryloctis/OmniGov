@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
+using AccountingSystem.Views.Reports.DailyCashPositionReport;
 using AccountingSystem.Views.Reports.Financial_Statements;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Reports.Ledgers;
@@ -14,7 +15,6 @@ using AccountingSystem.Views.Reports.TrialBalance;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccountingSystem.Views.Reports.DailyCashPositionReport;
 
 namespace AccountingSystem.Views.Dashboard.Reports
 {
@@ -350,6 +350,66 @@ namespace AccountingSystem.Views.Dashboard.Reports
                 _ = new frmLtom22().ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnLtom25_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //_ = new frmLtom25().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom26_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom26().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom27_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom27().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom28_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //_ = new frmLtom28().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom32_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom32().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnLtom33_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom33().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

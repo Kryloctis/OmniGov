@@ -26,10 +26,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0cm</Top>
+            <Top>0.3175cm</Top>
             <Left>0.03229cm</Left>
             <Height>0.55137cm</Height>
-            <Width>19.68911cm</Width>
+            <Width>18.18806cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -54,10 +54,11 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramWarrantOfLeveyDate.Value</Value>
+                    <Value>=CDate(Parameters!paramWarrantOfLevyDate.Value)</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>d</Format>
                       <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
@@ -101,14 +102,16 @@
                   </TextRun>
                 </TextRuns>
                 <SpaceAfter>2pt</SpaceAfter>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.84375in</Top>
+            <Top>1.71875in</Top>
             <Left>0.00508in</Left>
             <Height>0.55209in</Height>
-            <Width>7.75162in</Width>
+            <Width>7.16829in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -141,10 +144,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>7.72612cm</Top>
+            <Top>7.40862cm</Top>
             <Left>13.61185cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.09017cm</Width>
+            <Width>4.6085cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -180,10 +183,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>7.05556cm</Top>
+            <Top>6.73806cm</Top>
             <Left>13.61185cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.09017cm</Width>
+            <Width>4.6085cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -216,10 +219,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox17</rd:DefaultName>
-            <Top>2.52778in</Top>
+            <Top>2.40278in</Top>
             <Left>0.01271in</Left>
             <Height>0.20834in</Height>
-            <Width>7.73891in</Width>
+            <Width>7.16066in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -277,8 +280,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.41667in</Top>
+            <Left>0.02582cm</Left>
             <Height>0.57292in</Height>
-            <Width>7.75162in</Width>
+            <Width>7.1632in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -314,7 +318,7 @@
             <Top>1.23275in</Top>
             <Left>0.01525in</Left>
             <Height>0.20834in</Height>
-            <Width>7.73891in</Width>
+            <Width>7.15812in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -327,13 +331,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>4.028in</Height>
+        <Height>3.24675in</Height>
         <Style />
       </Body>
-      <Width>7.76941in</Width>
+      <Width>7.23587in</Width>
       <Page>
         <PageHeader>
-          <Height>1.16375in</Height>
+          <Height>1.27486in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -360,6 +364,7 @@
                       <Value>=Parameters!paramLGU.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -371,12 +376,13 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>1.49606cm</Top>
               <Left>0.01291cm</Left>
-              <Height>0.92657cm</Height>
-              <Width>19.70202cm</Width>
+              <Height>1.0677cm</Height>
+              <Width>18.20744cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -408,7 +414,7 @@
                       <Value>(LOCAL ASSESSOR AND REGISTRAR OF DEEDS)</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -421,7 +427,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Left>0.01291cm</Left>
               <Height>1.46079cm</Height>
-              <Width>19.68911cm</Width>
+              <Width>18.20744cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -449,6 +455,7 @@
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <Format>d</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -458,10 +465,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.42264cm</Top>
-              <Left>0.03228cm</Left>
+              <Top>2.70487cm</Top>
+              <Left>0.03874cm</Left>
               <Height>0.53328cm</Height>
-              <Width>19.70202cm</Width>
+              <Width>18.18807cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -482,6 +489,8 @@
         </PageHeader>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
+        <InteractiveHeight>11.69in</InteractiveHeight>
+        <InteractiveWidth>8.27in</InteractiveWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
@@ -504,7 +513,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramWarrantOfLeveyDate">
+    <ReportParameter Name="paramWarrantOfLevyDate">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -517,6 +526,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramTCTNo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramLGU">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -541,7 +556,7 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramWarrantOfLeveyDate</ParameterName>
+          <ParameterName>paramWarrantOfLevyDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -552,6 +567,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>paramTCTNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramLGU</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

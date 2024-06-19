@@ -11,7 +11,11 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordById(int Id);
 
+        Dictionary<string, string> GetViewCancelledLevy(int Id);
+
         DataTable GetViewRecords(int rptId);
+
+        DataTable GetCancelledLevy(int rptId);
 
         DataTable GetViewRecords(DateTime date);
 
