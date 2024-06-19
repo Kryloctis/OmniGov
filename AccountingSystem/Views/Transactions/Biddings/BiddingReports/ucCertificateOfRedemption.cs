@@ -76,6 +76,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 string kindOfProperty = dictRpt["property_kind"];
                 decimal assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
 
+
                 progressCount += tasks["Generate Bidder and Bidding Information"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -88,6 +89,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
                 reportParameters.Add(new ReportParameter("paramNameOfHighestBidder", nameOfBidder));
                 reportParameters.Add(new ReportParameter("paramDateOfAuction", dateOfAuction));
+                reportParameters.Add(new ReportParameter("paramOfficialReceiptNumber", receiptNumber));
                 reportParameters.Add(new ReportParameter("paramDeclaredOwner", declaredOwner));
                 reportParameters.Add(new ReportParameter("paramBidAmount", bidAmount.ToString("N2")));
                 reportParameters.Add(new ReportParameter("paramTaxDeclarationNo", completeArp));

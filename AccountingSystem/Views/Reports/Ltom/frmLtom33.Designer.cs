@@ -104,9 +104,9 @@
             label2.Font = new System.Drawing.Font("Segoe UI", 9F);
             label2.Location = new System.Drawing.Point(6, 63);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(56, 15);
+            label2.Size = new System.Drawing.Size(59, 15);
             label2.TabIndex = 19;
-            label2.Text = "Issued at:";
+            label2.Text = "Issued at :";
             // 
             // btnRunReport
             // 
