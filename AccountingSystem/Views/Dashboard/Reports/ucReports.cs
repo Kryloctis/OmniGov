@@ -420,5 +420,6 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }
