@@ -58,7 +58,6 @@
 		<None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
 		<None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
 		<None Remove="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc" />
-		<None Remove="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\LTOM\ltom-23-notice-of-auction-sale-of-delinquent-real-properties.rdlc" />
 		<None Remove="Reports\LTOM\ltom-24-notice-of-sale.rdlc" />
 		<None Remove="Reports\Ltom\ltom-25-public-auction-registration-form.rdlc" />
@@ -70,6 +69,7 @@
 		<None Remove="Reports\LTOM\ltom-31-report-of-sale.rdlc" />
 		<None Remove="Reports\Ltom\ltom-32-certificate-of-redemption.rdlc" />
 		<None Remove="Reports\Ltom\ltom-33-cancellation-of-warrant-of-levey.rdlc" />
+		<None Remove="Reports\Ltom\ltom16NoticeDelinqPymntRpt.rdlc" />
 		<None Remove="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc" />
 		<None Remove="Reports\Ltom\Ltom18NoticeRptDelinq.rdlc" />
 		<None Remove="Reports\Ltom\Ltom19NoticeRptDelinq.rdlc" />
@@ -174,7 +174,7 @@
 		<Content Include="Reports\ListRptDelinquencies.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\ltom-16-notice-delinquency-in-the-payment-of-rpt.rdlc">
+		<Content Include="Reports\Ltom\Ltom16NoticeDelinqPymntRpt.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc">

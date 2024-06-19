@@ -3063,15 +3063,15 @@ namespace AccountingSystem.DataSets {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtLtom16DataTable : global::System.Data.TypedTableBase<dtLtom16Row> {
             
-            private global::System.Data.DataColumn columndeclared_owner;
+            private global::System.Data.DataColumn columnowner;
             
-            private global::System.Data.DataColumn columntax_declaration_number;
+            private global::System.Data.DataColumn columntax_dec_no;
             
-            private global::System.Data.DataColumn columnlocation_of_property;
+            private global::System.Data.DataColumn columnproperty_location;
             
-            private global::System.Data.DataColumn columnkind_of_property;
+            private global::System.Data.DataColumn columnproperty_kind;
             
-            private global::System.Data.DataColumn columntotal_assessed_value;
+            private global::System.Data.DataColumn columnassessed_value;
             
             private global::System.Data.DataColumn columnyears_of_delinquence;
             
@@ -3112,41 +3112,41 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn declared_ownerColumn {
+            public global::System.Data.DataColumn ownerColumn {
                 get {
-                    return this.columndeclared_owner;
+                    return this.columnowner;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn tax_declaration_numberColumn {
+            public global::System.Data.DataColumn tax_dec_noColumn {
                 get {
-                    return this.columntax_declaration_number;
+                    return this.columntax_dec_no;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn location_of_propertyColumn {
+            public global::System.Data.DataColumn property_locationColumn {
                 get {
-                    return this.columnlocation_of_property;
+                    return this.columnproperty_location;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn kind_of_propertyColumn {
+            public global::System.Data.DataColumn property_kindColumn {
                 get {
-                    return this.columnkind_of_property;
+                    return this.columnproperty_kind;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn total_assessed_valueColumn {
+            public global::System.Data.DataColumn assessed_valueColumn {
                 get {
-                    return this.columntotal_assessed_value;
+                    return this.columnassessed_value;
                 }
             }
             
@@ -3203,14 +3203,14 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtLtom16Row AdddtLtom16Row(string declared_owner, string tax_declaration_number, string location_of_property, string kind_of_property, decimal total_assessed_value, string years_of_delinquence, decimal tax_due) {
+            public dtLtom16Row AdddtLtom16Row(string owner, string tax_dec_no, string property_location, string property_kind, decimal assessed_value, double years_of_delinquence, decimal tax_due) {
                 dtLtom16Row rowdtLtom16Row = ((dtLtom16Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        declared_owner,
-                        tax_declaration_number,
-                        location_of_property,
-                        kind_of_property,
-                        total_assessed_value,
+                        owner,
+                        tax_dec_no,
+                        property_location,
+                        property_kind,
+                        assessed_value,
                         years_of_delinquence,
                         tax_due};
                 rowdtLtom16Row.ItemArray = columnValuesArray;
@@ -3235,11 +3235,11 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columndeclared_owner = base.Columns["declared_owner"];
-                this.columntax_declaration_number = base.Columns["tax_declaration_number"];
-                this.columnlocation_of_property = base.Columns["location_of_property"];
-                this.columnkind_of_property = base.Columns["kind_of_property"];
-                this.columntotal_assessed_value = base.Columns["total_assessed_value"];
+                this.columnowner = base.Columns["owner"];
+                this.columntax_dec_no = base.Columns["tax_dec_no"];
+                this.columnproperty_location = base.Columns["property_location"];
+                this.columnproperty_kind = base.Columns["property_kind"];
+                this.columnassessed_value = base.Columns["assessed_value"];
                 this.columnyears_of_delinquence = base.Columns["years_of_delinquence"];
                 this.columntax_due = base.Columns["tax_due"];
             }
@@ -3247,17 +3247,17 @@ namespace AccountingSystem.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columndeclared_owner = new global::System.Data.DataColumn("declared_owner", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeclared_owner);
-                this.columntax_declaration_number = new global::System.Data.DataColumn("tax_declaration_number", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntax_declaration_number);
-                this.columnlocation_of_property = new global::System.Data.DataColumn("location_of_property", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlocation_of_property);
-                this.columnkind_of_property = new global::System.Data.DataColumn("kind_of_property", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnkind_of_property);
-                this.columntotal_assessed_value = new global::System.Data.DataColumn("total_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotal_assessed_value);
-                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnowner = new global::System.Data.DataColumn("owner", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnowner);
+                this.columntax_dec_no = new global::System.Data.DataColumn("tax_dec_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_dec_no);
+                this.columnproperty_location = new global::System.Data.DataColumn("property_location", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproperty_location);
+                this.columnproperty_kind = new global::System.Data.DataColumn("property_kind", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproperty_kind);
+                this.columnassessed_value = new global::System.Data.DataColumn("assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnassessed_value);
+                this.columnyears_of_delinquence = new global::System.Data.DataColumn("years_of_delinquence", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnyears_of_delinquence);
                 this.columntax_due = new global::System.Data.DataColumn("tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_due);
@@ -9291,90 +9291,90 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string declared_owner {
+            public string owner {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom16.declared_ownerColumn]));
+                        return ((string)(this[this.tabledtLtom16.ownerColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'declared_owner\' in table \'dtLtom16\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'owner\' in table \'dtLtom16\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom16.declared_ownerColumn] = value;
+                    this[this.tabledtLtom16.ownerColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string tax_declaration_number {
+            public string tax_dec_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom16.tax_declaration_numberColumn]));
+                        return ((string)(this[this.tabledtLtom16.tax_dec_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'tax_declaration_number\' in table \'dtLtom16\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_dec_no\' in table \'dtLtom16\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom16.tax_declaration_numberColumn] = value;
+                    this[this.tabledtLtom16.tax_dec_noColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string location_of_property {
+            public string property_location {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom16.location_of_propertyColumn]));
+                        return ((string)(this[this.tabledtLtom16.property_locationColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'location_of_property\' in table \'dtLtom16\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'property_location\' in table \'dtLtom16\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom16.location_of_propertyColumn] = value;
+                    this[this.tabledtLtom16.property_locationColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string kind_of_property {
+            public string property_kind {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom16.kind_of_propertyColumn]));
+                        return ((string)(this[this.tabledtLtom16.property_kindColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'kind_of_property\' in table \'dtLtom16\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'property_kind\' in table \'dtLtom16\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom16.kind_of_propertyColumn] = value;
+                    this[this.tabledtLtom16.property_kindColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal total_assessed_value {
+            public decimal assessed_value {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtLtom16.total_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtLtom16.assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_assessed_value\' in table \'dtLtom16\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'assessed_value\' in table \'dtLtom16\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtLtom16.total_assessed_valueColumn] = value;
+                    this[this.tabledtLtom16.assessed_valueColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string years_of_delinquence {
+            public double years_of_delinquence {
                 get {
                     try {
-                        return ((string)(this[this.tabledtLtom16.years_of_delinquenceColumn]));
+                        return ((double)(this[this.tabledtLtom16.years_of_delinquenceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'years_of_delinquence\' in table \'dtLtom16\' is DBNull.", e);
@@ -9403,62 +9403,62 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isdeclared_ownerNull() {
-                return this.IsNull(this.tabledtLtom16.declared_ownerColumn);
+            public bool IsownerNull() {
+                return this.IsNull(this.tabledtLtom16.ownerColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setdeclared_ownerNull() {
-                this[this.tabledtLtom16.declared_ownerColumn] = global::System.Convert.DBNull;
+            public void SetownerNull() {
+                this[this.tabledtLtom16.ownerColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Istax_declaration_numberNull() {
-                return this.IsNull(this.tabledtLtom16.tax_declaration_numberColumn);
+            public bool Istax_dec_noNull() {
+                return this.IsNull(this.tabledtLtom16.tax_dec_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Settax_declaration_numberNull() {
-                this[this.tabledtLtom16.tax_declaration_numberColumn] = global::System.Convert.DBNull;
+            public void Settax_dec_noNull() {
+                this[this.tabledtLtom16.tax_dec_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Islocation_of_propertyNull() {
-                return this.IsNull(this.tabledtLtom16.location_of_propertyColumn);
+            public bool Isproperty_locationNull() {
+                return this.IsNull(this.tabledtLtom16.property_locationColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setlocation_of_propertyNull() {
-                this[this.tabledtLtom16.location_of_propertyColumn] = global::System.Convert.DBNull;
+            public void Setproperty_locationNull() {
+                this[this.tabledtLtom16.property_locationColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Iskind_of_propertyNull() {
-                return this.IsNull(this.tabledtLtom16.kind_of_propertyColumn);
+            public bool Isproperty_kindNull() {
+                return this.IsNull(this.tabledtLtom16.property_kindColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setkind_of_propertyNull() {
-                this[this.tabledtLtom16.kind_of_propertyColumn] = global::System.Convert.DBNull;
+            public void Setproperty_kindNull() {
+                this[this.tabledtLtom16.property_kindColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Istotal_assessed_valueNull() {
-                return this.IsNull(this.tabledtLtom16.total_assessed_valueColumn);
+            public bool Isassessed_valueNull() {
+                return this.IsNull(this.tabledtLtom16.assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Settotal_assessed_valueNull() {
-                this[this.tabledtLtom16.total_assessed_valueColumn] = global::System.Convert.DBNull;
+            public void Setassessed_valueNull() {
+                this[this.tabledtLtom16.assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
