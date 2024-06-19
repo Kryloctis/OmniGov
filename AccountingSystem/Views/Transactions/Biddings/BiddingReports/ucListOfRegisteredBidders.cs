@@ -88,14 +88,13 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-26-list-of-registered-bidders.rdlc";
                 report.DataSources.Clear();
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
+                string lguName = Helper.LGUDetails()["lgu_name"]; ;
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom26_27_28", dataTable));

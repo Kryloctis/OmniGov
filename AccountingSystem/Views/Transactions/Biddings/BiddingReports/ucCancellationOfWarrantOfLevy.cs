@@ -76,7 +76,6 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 //Fetch Warrant of Levy.
                 var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
                 progressCount += tasks["Fetch Warrant of Levy"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -90,8 +89,8 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramWarrantOfLevyDate", dictWarrantLevy["date_issued"]));
                 reportParameters.Add(new ReportParameter("paramTaxDecNo", dictWarrantLevy["complete_arp_no"]));
                 reportParameters.Add(new ReportParameter("paramTCTNo", "-"));
-                reportParameters.Add(new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]));
-                reportParameters.Add(new ReportParameter("paramSignatory", signatory["signatories_full_name"]));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

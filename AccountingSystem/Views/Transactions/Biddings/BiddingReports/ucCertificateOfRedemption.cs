@@ -76,8 +76,6 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 string kindOfProperty = dictRpt["property_kind"];
                 decimal assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
 
-
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
                 progressCount += tasks["Generate Bidder and Bidding Information"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -97,8 +95,8 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramLocationOfProperty", propertyLocation));
                 reportParameters.Add(new ReportParameter("paramKindOfProperty", kindOfProperty));
                 reportParameters.Add(new ReportParameter("paramAssessedValue", assessedValue.ToString("N2")));
-                reportParameters.Add(new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]));
-                reportParameters.Add(new ReportParameter("paramSignatory", signatory["signatories_full_name"]));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

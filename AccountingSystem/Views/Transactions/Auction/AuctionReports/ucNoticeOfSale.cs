@@ -171,7 +171,6 @@ namespace AccountingSystem.Views.Transactions.Auction
                 string date = dtAuction["start_date"];
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, propertyId);
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -180,8 +179,8 @@ namespace AccountingSystem.Views.Transactions.Auction
                     new ReportParameter("paramPlaceOfAuction", location),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
                     new ReportParameter("paramCompleteAddress", dictAuctionProperty["taxpayer_address"]),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom24", dataTable));

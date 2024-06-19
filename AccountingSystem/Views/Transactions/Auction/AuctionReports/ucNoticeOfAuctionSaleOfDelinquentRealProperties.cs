@@ -169,15 +169,14 @@ namespace AccountingSystem.Views.Transactions.Auction
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramTimeOfAuction", date),
                     new ReportParameter("paramPlaceOfAuction", location),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
 
 
                 };

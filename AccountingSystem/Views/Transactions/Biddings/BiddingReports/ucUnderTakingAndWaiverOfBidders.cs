@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
             reportParameters.Add(new ReportParameter("paramNameOfBidder", nameOfBidder));
             reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", bidderCompleteAddress));
+            reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
             reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
             reportParameters.Add(new ReportParameter("paramActualDateOfPublicAuction", dateOfPublicAuction));
             reportParameters.Add(new ReportParameter("paramPlaceOfPublicAuction", placeOfPublicAuction));

@@ -140,7 +140,6 @@ namespace AccountingSystem.Views.Transactions.Auction
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
@@ -148,8 +147,8 @@ namespace AccountingSystem.Views.Transactions.Auction
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
                     new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
                     new ReportParameter("paramARPNo", dictAuctionProperty["complete_arp_no"]),
