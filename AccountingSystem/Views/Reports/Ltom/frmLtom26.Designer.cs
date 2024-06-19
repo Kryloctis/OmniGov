@@ -131,7 +131,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > List of Registered Bidders";
+            Text = "Reports > Treasury > LTOM Form No. 26 - List of Registered Bidders";
             Load += frmLtom26_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

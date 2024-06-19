@@ -170,7 +170,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Rules and Regulations of Public Auction";
+            Text = "Reports > Treasury > LTOM Form No. 28 - Rules and Regulations of Public Auction";
             Load += frmLtom28_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

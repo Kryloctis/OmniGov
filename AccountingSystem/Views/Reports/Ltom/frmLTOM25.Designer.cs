@@ -181,7 +181,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Public Auction Registration Form";
+            Text = "Reports > Treasury > LTOM Form No. 25 -  Public Auction Registration Form";
             Load += frmLtom25_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

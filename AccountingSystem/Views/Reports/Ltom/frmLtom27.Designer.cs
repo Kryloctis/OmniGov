@@ -181,7 +181,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Undertaking and Waivers of Bidders";
+            Text = "Reports > Treasury > LTOM Form No. 27 -  Undertaking and Waivers of Bidders";
             Load += frmLtom27_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

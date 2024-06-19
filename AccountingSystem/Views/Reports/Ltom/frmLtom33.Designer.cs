@@ -154,7 +154,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)";
+            Text = "Reports > Treasury > LTOM No. 33 - Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)";
             Load += frmLtom33_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
