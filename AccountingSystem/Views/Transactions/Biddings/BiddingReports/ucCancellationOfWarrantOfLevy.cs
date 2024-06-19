@@ -1,0 +1,135 @@
+﻿using ACC.Data;
+using AccountingSystem.Views.Shared;
+using Microsoft.Reporting.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+
+namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
+{
+    public partial class ucCancellationOfWarrantOfLevy : UserControl
+    {
+        int warrantOfLevyId;
+        public ucCancellationOfWarrantOfLevy()
+        {
+            InitializeComponent();
+            panel1.Controls.Add(reportViewer1);
+        }
+
+        internal void OnLoad(int warrantOfLevyId)
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                this.warrantOfLevyId = warrantOfLevyId;
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync(this.warrantOfLevyId);
+            }
+        }
+
+        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
+        {
+            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+
+            int? prevAssmntYear = null;
+
+            if (dictPrevAssmnt.Count > 1)
+                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
+
+            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
+            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
+
+            return (basicPenalty, sefPenalty);
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                var warrantLevyId = e.Argument;
+
+                if (warrantLevyId is null)
+                {
+                    backgroundWorker1.CancelAsync();
+                    e.Cancel = true;
+                    return;
+                }
+
+                // Define tasks and their progress weights
+                var tasks = new Dictionary<string, int>
+                {
+                    { "Fetch LGU Details", 10 },
+                    { "Fetch Warrant of Levy", 20 },
+                    { "Set Parameter Values", 40 },
+                    { "Initialize Parameters", 30 },
+                };
+
+                int totalProgressCount = tasks.Sum(t => t.Value);
+                int progressCount = 0;
+
+                // Fetch LGU Details
+                var lguDetails = Helper.LGUDetails();
+                progressCount += tasks["Fetch LGU Details"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                //Fetch Warrant of Levy.
+                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
+
+                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
+                progressCount += tasks["Fetch Warrant of Levy"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Initialize Parameters
+                List<ReportParameter> reportParameters = new List<ReportParameter>();
+                progressCount += tasks["Initialize Parameters"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Set Parameter Values
+                reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+                reportParameters.Add(new ReportParameter("paramWarrantOfLevyDate", dictWarrantLevy["date_issued"]));
+                reportParameters.Add(new ReportParameter("paramTaxDecNo", dictWarrantLevy["complete_arp_no"]));
+                reportParameters.Add(new ReportParameter("paramTCTNo", "-"));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]));
+                reportParameters.Add(new ReportParameter("paramSignatory", signatory["signatories_full_name"]));
+
+                progressCount += tasks["Set Parameter Values"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                e.Result = reportParameters;
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Cancelled)
+                {
+                    reportViewer1.Clear();
+                    progressBar1.Value = 100;
+                    return;
+                }
+
+                var parameters = (List<ReportParameter>)e.Result;
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-33-cancellation-of-warrant-of-levey.rdlc";
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+    }
+}

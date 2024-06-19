@@ -2155,5 +2155,29 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
             comboBox.DataSource = dataTable;
         }
+        internal static void BiddersCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DataSource = dataTable;
+        }
+
+        internal static void DgBidders(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["auction_id"].Visible = false;
+            dataGridView.Columns["name"].HeaderText = "Bidder";
+            dataGridView.Columns["bidder_no"].HeaderText = "Bidder No.";
+            dataGridView.Columns["ordinance_no"].HeaderText = "Ordinance No.";
+            dataGridView.Columns["date"].HeaderText = "Date";
+            dataGridView.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["bid_amount"].HeaderText = "Bid Amount";
+            dataGridView.Columns["bid_amount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["bid_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["bid_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        }
     }
 }

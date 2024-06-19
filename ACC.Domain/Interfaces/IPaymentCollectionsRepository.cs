@@ -37,6 +37,8 @@ namespace ACC.Domain.Interfaces
 
         bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels);
 
+        bool InsertWithBiddingPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, TaxpayersModel taxpayersModel, BidModel bidModel, BiddersModel biddersModel);
+
         public DataTable GetViewConsolidatedRcdRecords(DateTime date, UsersModel createdBy);
 
         public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel);

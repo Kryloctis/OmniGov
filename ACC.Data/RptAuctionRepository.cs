@@ -101,6 +101,19 @@ namespace ACC.Data
             return recordDictionary;
         }
 
+        public DataTable GetBiddersByAuctionAndPropertyId(int auctionId, int rptId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@auction_id", DbType.Int32, auctionId },
+                new object[] { "@real_properties_id", DbType.Int32, rptId },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id AND real_properties_id = @real_properties_id";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var recordDictionary = new Dictionary<string, string>();

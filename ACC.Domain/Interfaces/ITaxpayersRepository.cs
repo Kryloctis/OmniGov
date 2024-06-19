@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
 
         bool TaxpayerNameExist(int id, string name);
 
-        int GetLastInsertedId();
+        int GetLastInsertedId(int? createdBy);
 
         int GetIdByName(string name);
 
