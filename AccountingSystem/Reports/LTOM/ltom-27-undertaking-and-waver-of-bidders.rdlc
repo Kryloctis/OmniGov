@@ -64,7 +64,7 @@
             <Top>11.29037cm</Top>
             <Left>12.85746cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.85746cm</Width>
+            <Width>6.40768cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -104,7 +104,7 @@
             <Top>10.61981cm</Top>
             <Left>12.85746cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.85746cm</Width>
+            <Width>6.40768cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -258,7 +258,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>That I hereby udnetake to pay the bid price that I will successfully bid for, otherwise, the property/ies sold to me shall be awarded to the LGU concered;</Value>
+                    <Value>That I hereby udnetake to pay the bid price that I will</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> successfully bid for, otherwise, the property/ies sold to me shall be awarded to the LGU concered;</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
@@ -273,6 +285,12 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Further, I am aware and understand that the registration fee of the said public auction is non-deductible from the bid price; and </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
@@ -346,29 +364,39 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>_________</Value>
+                    <Value>=Globals!ExecutionTime.Day</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> day of ________, </Value>
+                    <Value> day of </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>__________</Value>
+                    <Value>=CDate(Globals!ExecutionTime).ToString("MMMM")</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>.</Value>
+                    <Value>, </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime.Year</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -380,7 +408,7 @@
             <Top>3.76784in</Top>
             <Left>0.0127in</Left>
             <Height>0.39931in</Height>
-            <Width>7.76178in</Width>
+            <Width>7.572in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -1169,7 +1197,7 @@
         <Height>8.45833in</Height>
         <Style />
       </Body>
-      <Width>7.77956in</Width>
+      <Width>7.77448in</Width>
       <Page>
         <PageHeader>
           <Height>1.07332in</Height>
