@@ -31,10 +31,10 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             cmbxProperty = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
+            cmbxBidders = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
             ucRulesAndRegulation1 = new Transactions.Biddings.BiddingReports.ucRulesAndRegulation();
@@ -56,13 +56,12 @@
             // 
             splitContainer1.Panel1.Controls.Add(cmbxProperty);
             splitContainer1.Panel1.Controls.Add(label2);
-            splitContainer1.Panel1.Controls.Add(comboBox1);
+            splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
+            splitContainer1.Panel1.Controls.Add(cmbxBidders);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
-            splitContainer1.Panel1.Paint += splitContainer1_Panel1_Paint;
             // 
             // splitContainer1.Panel2
             // 
@@ -81,32 +80,34 @@
             cmbxProperty.Name = "cmbxProperty";
             cmbxProperty.Size = new System.Drawing.Size(200, 23);
             cmbxProperty.TabIndex = 26;
+            cmbxProperty.SelectedIndexChanged += cmbxProperty_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label2.Location = new System.Drawing.Point(11, 64);
+            label2.Location = new System.Drawing.Point(5, 62);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(111, 15);
+            label2.Size = new System.Drawing.Size(60, 15);
             label2.TabIndex = 25;
-            label2.Text = "Auction Properties :";
+            label2.Text = "Properties";
             // 
-            // comboBox1
+            // cmbxAuctionSchedule
             // 
-            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(7, 27);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(200, 23);
-            comboBox1.TabIndex = 24;
+            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxAuctionSchedule.FormattingEnabled = true;
+            cmbxAuctionSchedule.Location = new System.Drawing.Point(7, 27);
+            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
+            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
+            cmbxAuctionSchedule.TabIndex = 24;
+            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(11, 13);
+            label1.Location = new System.Drawing.Point(5, 11);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(106, 15);
             label1.TabIndex = 23;
@@ -120,23 +121,23 @@
             btnRunReport.TabIndex = 22;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
-            // cmbxAuctionSchedule
+            // cmbxBidders
             // 
-            cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxAuctionSchedule.FormattingEnabled = true;
-            cmbxAuctionSchedule.Location = new System.Drawing.Point(7, 127);
-            cmbxAuctionSchedule.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxAuctionSchedule.Name = "cmbxAuctionSchedule";
-            cmbxAuctionSchedule.Size = new System.Drawing.Size(200, 23);
-            cmbxAuctionSchedule.TabIndex = 21;
-            cmbxAuctionSchedule.SelectedIndexChanged += cmbxAuctionSchedule_SelectedIndexChanged;
+            cmbxBidders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBidders.FormattingEnabled = true;
+            cmbxBidders.Location = new System.Drawing.Point(7, 127);
+            cmbxBidders.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxBidders.Name = "cmbxBidders";
+            cmbxBidders.Size = new System.Drawing.Size(200, 23);
+            cmbxBidders.TabIndex = 21;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label3.Location = new System.Drawing.Point(11, 113);
+            label3.Location = new System.Drawing.Point(5, 111);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(51, 15);
             label3.TabIndex = 20;
@@ -188,10 +189,10 @@
         private Transactions.Biddings.BiddingReports.ucRulesAndRegulation ucRulesAndRegulation1;
         private System.Windows.Forms.ComboBox cmbxProperty;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRunReport;
-        private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
+        private System.Windows.Forms.ComboBox cmbxBidders;
         private System.Windows.Forms.Label label3;
     }
 }

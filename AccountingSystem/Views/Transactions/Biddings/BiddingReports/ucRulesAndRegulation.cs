@@ -8,14 +8,19 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucRulesAndRegulation : UserControl
     {
+        int rptAuctionId;
+        int bidderId;
+
         public ucRulesAndRegulation()
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
         }
 
-        internal void OnLoad()
+        internal void OnLoad(int rptAuctionId, int bidderId)
         {
+            this.rptAuctionId = rptAuctionId;
+            this.bidderId = bidderId;
             LoadReport();
         }
 
