@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];
 
-            reportParameters.Add(new ReportParameter("paramLGU", "asd"));
+            reportParameters.Add(new ReportParameter("paramLGU", "Titay"));
             e.Result = reportParameters;
         }
 

@@ -62,7 +62,10 @@ namespace AccountingSystem.Views.Reports.Ltom
             if (inValidFilter)
                 return;
 
-            ucPublicAuctionRegistrationForm.OnLoad();
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            int bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
+
+            ucPublicAuctionRegistrationForm.OnLoad(auctionId, bidderId);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
