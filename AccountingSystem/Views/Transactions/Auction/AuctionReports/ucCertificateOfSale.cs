@@ -164,8 +164,6 @@ namespace AccountingSystem.Views.Transactions.Auction
                     new ReportParameter("paramSoldPrice",  string.Empty),
                     new ReportParameter("paramOfficialReceiptNo",  string.Empty),
                     new ReportParameter("paramSoldDate",  string.Empty),
-
-
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom29", dataTable));

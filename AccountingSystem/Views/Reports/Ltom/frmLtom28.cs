@@ -6,22 +6,31 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom28 : Form
     {
-        private ucPublicAuctionRegistrationForm ucPublicAuctionRegistrationForm;
-
+        private ucRulesAndRegulation ucRulesAndRegulation;
         public frmLtom28()
         {
             InitializeComponent();
-            ucPublicAuctionRegistrationForm = ucPublicAuctionRegistrationForm1;
-        }
-
-        private void ucPublicAuctionRegistrationForm1_Load(object sender, EventArgs e)
-        {
-
+            ucRulesAndRegulation = ucRulesAndRegulation1;
         }
 
         private void frmLtom28_Load(object sender, EventArgs e)
         {
-            ucPublicAuctionRegistrationForm.OnLoad();
+            ucRulesAndRegulation.OnLoad();
+        }
+
+        private void ucRulesAndRegulation1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

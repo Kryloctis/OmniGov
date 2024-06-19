@@ -356,7 +356,7 @@ namespace AccountingSystem.Views.Dashboard.Reports
         {
             try
             {
-                //_ = new frmLtom25().ShowDialog();
+                _ = new frmLtom25().ShowDialog();
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
