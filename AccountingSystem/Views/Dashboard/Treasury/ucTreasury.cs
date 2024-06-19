@@ -4,14 +4,10 @@ using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Reports.Cashbook;
-using AccountingSystem.Views.Reports.ConsolidatedReceipts;
-using AccountingSystem.Views.Reports.RCI;
-using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
-using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Transactions.Assessment;
 using AccountingSystem.Views.Transactions.Auction;
 using AccountingSystem.Views.Transactions.BankDeposits;
+using AccountingSystem.Views.Transactions.Biddings;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
@@ -223,7 +219,7 @@ namespace AccountingSystem.Views.Dashboard.Treasury
         {
             try
             {
-                _ = new NotImplementedException();
+                _ = new frmBiddings().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

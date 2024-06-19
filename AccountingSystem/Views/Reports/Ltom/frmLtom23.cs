@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void LoadAuctionSchedule()
         {
             var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
-            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "auction_id");
+            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
@@ -27,6 +27,9 @@ namespace AccountingSystem.Views.Reports.Ltom
             try
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                if (cmbxAuctionSchedule.SelectedIndex == -1)
+                    return;
+
                 ucNoticeOfAuctionSaleOfDelinquentRealProperties.OnLoad(auctionId);
 
             }

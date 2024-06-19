@@ -130,6 +130,8 @@ namespace AccountingSystem.Views.Transactions.Auction
             ucAuctionEvents.OnLoad(true, auctionId);
         }
 
+
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveAuction();

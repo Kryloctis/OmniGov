@@ -72,8 +72,8 @@
                     <Value>=Parameters!paramDateOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -89,7 +89,9 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>'₱'#,0,.00;('₱'#,0,.00)</Format>
                       <TextDecoration>Underline</TextDecoration>
+                      <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -562,7 +564,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!paramKindOfPropert.Value</Value>
+                    <Value>=Parameters!paramKindOfProperty.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -641,6 +643,8 @@
                     <Value>=Parameters!paramDateOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -653,6 +657,8 @@
                     <Value>=Parameters!paramOfficialReceiptNumber.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -665,6 +671,8 @@
                     <Value>=Parameters!paramDateOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -803,6 +811,7 @@
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <Format>d</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -911,7 +920,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramKindOfPropert">
+    <ReportParameter Name="paramKindOfProperty">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -993,7 +1002,7 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramKindOfPropert</ParameterName>
+          <ParameterName>paramKindOfProperty</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>

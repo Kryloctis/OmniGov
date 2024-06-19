@@ -1,13 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace ACC.Data
