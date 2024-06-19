@@ -352,6 +352,15 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        private void btnLtom16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmLtom16().ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
         private void btnLtom25_Click(object sender, EventArgs e)
         {
             try

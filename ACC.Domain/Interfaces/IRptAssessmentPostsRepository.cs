@@ -22,6 +22,8 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo);
 
+        DataTable GetViewRecords(DateTime date);
+
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
 
         DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo);
