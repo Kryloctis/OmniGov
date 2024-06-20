@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageList = new System.Windows.Forms.TabPage();
             dgBiddings = new System.Windows.Forms.DataGridView();
@@ -52,6 +52,8 @@
             btnPayment = new System.Windows.Forms.Button();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            panel1 = new System.Windows.Forms.Panel();
+            cbxNewTaxpayer = new System.Windows.Forms.CheckBox();
             ucTaxPayers1 = new Manage.TaxPayers.ucTaxPayers();
             groupBox2 = new System.Windows.Forms.GroupBox();
             ucBiddings1 = new ucBiddings();
@@ -79,6 +81,7 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
             groupBox2.SuspendLayout();
             toolStrip2.SuspendLayout();
             tabPagePayment.SuspendLayout();
@@ -121,23 +124,23 @@
             // 
             // dgBiddings
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgBiddings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgBiddings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgBiddings.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgBiddings.DefaultCellStyle = dataGridViewCellStyle8;
             dgBiddings.Dock = System.Windows.Forms.DockStyle.Fill;
             dgBiddings.Location = new System.Drawing.Point(0, 70);
             dgBiddings.Margin = new System.Windows.Forms.Padding(0);
@@ -328,6 +331,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(panel1);
             groupBox1.Controls.Add(ucTaxPayers1);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -337,6 +341,29 @@
             groupBox1.TabIndex = 16;
             groupBox1.TabStop = false;
             groupBox1.Text = "Bidder Info.";
+            // 
+            // panel1
+            // 
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Controls.Add(cbxNewTaxpayer);
+            panel1.Location = new System.Drawing.Point(8, 26);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(423, 25);
+            panel1.TabIndex = 2;
+            // 
+            // cbxNewTaxpayer
+            // 
+            cbxNewTaxpayer.AutoSize = true;
+            cbxNewTaxpayer.Checked = true;
+            cbxNewTaxpayer.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbxNewTaxpayer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            cbxNewTaxpayer.Location = new System.Drawing.Point(93, 3);
+            cbxNewTaxpayer.Name = "cbxNewTaxpayer";
+            cbxNewTaxpayer.Size = new System.Drawing.Size(144, 19);
+            cbxNewTaxpayer.TabIndex = 0;
+            cbxNewTaxpayer.Text = "New Bidder / Taxpayer";
+            cbxNewTaxpayer.UseVisualStyleBackColor = true;
+            cbxNewTaxpayer.CheckedChanged += cbxNewTaxpayer_CheckedChanged;
             // 
             // ucTaxPayers1
             // 
@@ -521,6 +548,8 @@
             splitContainer1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             groupBox2.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
@@ -570,5 +599,7 @@
         private ucBiddings ucBiddings1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbxNewTaxpayer;
     }
 }
