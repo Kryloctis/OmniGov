@@ -58,8 +58,9 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
             reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
+            reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
             reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));
-            reportParameters.Add(new ReportParameter("paramBidderName", dictBidder["receipt_no"]));
+            reportParameters.Add(new ReportParameter("paramBidderName", dictBidder["name"]));
             reportParameters.Add(new ReportParameter("paramTelephoneNo", dictBidder["contact_info"]));
             reportParameters.Add(new ReportParameter("paramEmail", string.Empty));
             reportParameters.Add(new ReportParameter("paramCitizenship", string.Empty));

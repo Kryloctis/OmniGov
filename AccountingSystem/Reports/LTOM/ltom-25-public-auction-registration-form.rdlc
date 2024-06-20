@@ -12,7 +12,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIf(Parameters!paramIsRepresentative.Value = true, "/" , "")</Value>
+                    <Value EvaluationMode="Constant" />
                     <Style>
                       <FontFamily>Wingdings 2</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -23,14 +23,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.02778in</Top>
+            <Top>0.01389in</Top>
             <Left>6.24671in</Left>
-            <Height>0.16082in</Height>
-            <Width>0.14811in</Width>
+            <Height>0.18126in</Height>
+            <Width>0.18961in</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
+              <BackgroundColor>=IIf(Parameters!paramIsRepresentative.Value = true, "White", "Black")</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -78,7 +79,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIf(Parameters!paramIsRepresentative.Value = true, "" , "/")</Value>
+                    <Value EvaluationMode="Constant" />
                     <Style>
                       <FontFamily>Wingdings 2</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -91,13 +92,14 @@
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>0.25804in</Top>
             <Left>6.24671in</Left>
-            <Height>0.17002in</Height>
-            <Width>0.15278in</Width>
+            <Height>0.18126in</Height>
+            <Width>0.18961in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
+              <BackgroundColor>=IIf(Parameters!paramIsRepresentative.Value = true, "Black", "White")</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -125,7 +127,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.56018cm</Top>
-            <Left>16.4145cm</Left>
+            <Left>16.41881cm</Left>
             <Height>0.59061cm</Height>
             <Width>2.95862cm</Width>
             <ZIndex>3</ZIndex>
@@ -1630,10 +1632,11 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Parameters!paramQualificationStatus.Value</Value>
+                      <Value>qualified</Value>
                       <Style>
                         <FontFamily>calibri</FontFamily>
                         <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                     <TextRun>
