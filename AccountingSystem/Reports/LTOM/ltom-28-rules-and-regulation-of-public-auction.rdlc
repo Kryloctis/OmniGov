@@ -378,8 +378,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.17638cm</Top>
-            <Height>8.38889in</Height>
+            <Top>0.10582cm</Top>
+            <Height>8.41666in</Height>
             <Width>5.70897in</Width>
             <Style>
               <Border>
@@ -626,9 +626,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.48611in</Top>
-            <Left>0in</Left>
-            <Height>4.43114in</Height>
+            <Top>8.63194in</Top>
+            <Height>4.10475in</Height>
             <Width>5.70897in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -1002,11 +1001,160 @@
                   <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Upon full payment of the redemption price, the declared owner/person having legal interest therein or authorized representative of the delinquent real property shall be entitled to a Certificate of Redemption which shall be issued by the local treasurer. The local treasurer shall be responsible for the request for cancellation of annotation of the Certificate of Title and Tax Declaration with the RoD and local assessor, respectively.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The highest bidder shall return the Certificate of Sale to the local treasurer, who shall forthwith return to the former the entire amount paid in the Public Auction, including interest of not more than two percent (2%) per month from the date of sale to the date of payment of the redemption price.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>From the date of sale until the expiration of the period of redemption, the delinquent real property shall remain in the possession of the declared owner/person having legal interest therein or authorized representative, who shall be entitled to all the income and fruits thereof. The proceeds of the sale in excess of the delinquent tax, the interest due or penalties and the expenses of sale shall be remitted to the declared owner/ person having legal interest therein or authorized representative.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>In case the declared owner/person having legal interest therein or authorized representative of the delinquent real property fails to redeem the delinquent property, the local treasurer shall execute a Final Deed of Sale in favor of the highest bidder, conveying subject real property, free from all liens of delinquent tax, the interests due or penalties and expenses of sale. However, the highest bidder shall be responsible to pay the corresponding taxes and fees and charges relative to the transfer thereof.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>In case there is no bidder for the real property advertised for public auction, or if the highest bid is for an amount insufficient to pay the taxes, fees, or charges, related surcharges, interests, penalties and costs, the local treasurer conducting the sale shall purchase the property in behalf of the LGU to satisfy the claim.
+</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>12.93114in</Top>
-            <Left>0in</Left>
-            <Height>8.99653in</Height>
+            <Top>12.79225in</Top>
+            <Height>13.36112in</Height>
             <Width>5.70897in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -1020,13 +1168,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>21.92767in</Height>
+        <Height>26.21586in</Height>
         <Style />
       </Body>
       <Width>5.70897in</Width>
       <Page>
         <PageHeader>
-          <Height>1.71691in</Height>
+          <Height>1.84191in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1051,7 +1199,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0cm</Left>
               <Height>0.71452cm</Height>
               <Width>14.50078cm</Width>
               <Style>
@@ -1071,7 +1218,21 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>REPUBLIC OF THE PHILIPPINES PROVINCE/CITY/MUNICIPALITY OF </Value>
+                      <Value>REPUBLIC OF THE PHILIPPINES </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Province/City/Municipality of</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -1097,9 +1258,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.78508cm</Top>
-              <Left>0cm</Left>
-              <Height>0.96985cm</Height>
+              <Top>0.7498cm</Top>
+              <Height>1.3579cm</Height>
               <Width>14.50078cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -1134,8 +1294,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.96659cm</Top>
-              <Left>0cm</Left>
+              <Top>2.28409cm</Top>
               <Height>0.55137cm</Height>
               <Width>14.50078cm</Width>
               <ZIndex>2</ZIndex>
@@ -1198,8 +1357,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.58851cm</Top>
-              <Left>0cm</Left>
+              <Top>2.90601cm</Top>
               <Height>1.01032cm</Height>
               <Width>14.50078cm</Width>
               <ZIndex>3</ZIndex>
@@ -1239,8 +1397,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>3.70467cm</Top>
-              <Left>0cm</Left>
+              <Top>4.02217cm</Top>
               <Height>0.65629cm</Height>
               <Width>14.50078cm</Width>
               <ZIndex>4</ZIndex>

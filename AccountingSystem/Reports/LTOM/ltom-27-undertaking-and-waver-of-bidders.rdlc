@@ -26,8 +26,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.17639cm</Top>
-            <Left>0.03226cm</Left>
+            <Top>0.49389cm</Top>
+            <Left>0.05807cm</Left>
             <Height>0.75968cm</Height>
             <Width>19.23287cm</Width>
             <Style>
@@ -258,19 +258,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>That I hereby udnetake to pay the bid price that I will</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Globals!ExecutionTime</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> successfully bid for, otherwise, the property/ies sold to me shall be awarded to the LGU concered;</Value>
+                    <Value>That I hereby undertake to pay the bid price that I will successfully bid for, otherwise, the property/ies sold to me shall be awarded to the LGU concered;</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
@@ -285,12 +273,6 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Further, I am aware and understand that the registration fee of the said public auction is non-deductible from the bid price; and </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Globals!ExecutionTime</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                     </Style>
@@ -1200,7 +1182,7 @@
       <Width>7.77448in</Width>
       <Page>
         <PageHeader>
-          <Height>1.07332in</Height>
+          <Height>1.30943in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1245,7 +1227,22 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>REPUBLIC OF THE PHILIPPINES PROVINCE/CITY/MUNICIPALITY OF </Value>
+                      <Value>REPUBLIC OF THE PHILIPPINES </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Province/City/Municipality of</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -1273,7 +1270,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.81697cm</Top>
               <Left>0.05807cm</Left>
-              <Height>0.96985cm</Height>
+              <Height>1.60484cm</Height>
               <Width>19.20706cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -1307,7 +1304,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.9632cm</Top>
+              <Top>2.5982cm</Top>
               <Left>0.03226cm</Left>
               <Height>0.72776cm</Height>
               <Width>19.23287cm</Width>

@@ -142,7 +142,6 @@ namespace AccountingSystem.Views.Transactions.Auction
 
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
-
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
@@ -153,6 +152,7 @@ namespace AccountingSystem.Views.Transactions.Auction
 
                     new ReportParameter("paramPlaceOfAuction", dictAuctionProperty["location"]),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
+                    new ReportParameter("paramPropertyLocation", dictAuctionProperty["taxpayer_address"]),
                     new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
                     new ReportParameter("paramTCT", string.Empty),
                     new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),

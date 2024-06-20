@@ -143,6 +143,9 @@ namespace AccountingSystem.Views.Transactions.Auction
 
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+                string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";
+
+                var dictBid = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -157,12 +160,12 @@ namespace AccountingSystem.Views.Transactions.Auction
                     new ReportParameter("paramPropertyLocation", dictAuctionProperty["location"]),
                     new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),
 
-                    new ReportParameter("paramDateOfPublicAuction", "Archie"),
-                    new ReportParameter("paramBuyer",  string.Empty),
-                    new ReportParameter("paramBuyerAddress",  string.Empty),
-                    new ReportParameter("paramSoldPrice",  string.Empty),
-                    new ReportParameter("paramOfficialReceiptNo",  string.Empty),
-                    new ReportParameter("paramSoldDate",  string.Empty),
+                    new ReportParameter("paramDateOfPublicAuction", date),
+                    new ReportParameter("paramBuyer",  dictBid["name"]),
+                    new ReportParameter("paramBuyerAddress",  dictBid["address"]),
+                    new ReportParameter("paramSoldPrice",  dictBid["bid_amount"]),
+                    new ReportParameter("paramOfficialReceiptNo",  dictBid["receipt_no"]),
+                    new ReportParameter("paramSoldDate",  dictBid["date"]),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom29", dataTable));

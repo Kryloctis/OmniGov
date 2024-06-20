@@ -73,8 +73,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.07056cm</Top>
-            <Height>0.9195cm</Height>
+            <Top>0.38806cm</Top>
+            <Left>0cm</Left>
+            <Height>0.99888cm</Height>
             <Width>25.40411cm</Width>
             <Style>
               <Border>
@@ -579,7 +580,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtLtom26_27_28</DataSetName>
-            <Top>0.52143in</Top>
+            <Top>0.64643in</Top>
             <Height>0.69792in</Height>
             <Width>10.00162in</Width>
             <ZIndex>3</ZIndex>
@@ -629,7 +630,7 @@
       <Width>10.00162in</Width>
       <Page>
         <PageHeader>
-          <Height>1.31626in</Height>
+          <Height>1.44126in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -673,7 +674,20 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>REPUBLIC OF THE PHILIPPINES PROVINCE/CITY/MUNICIPALITY OF </Value>
+                      <Value>REPUBLIC OF THE PHILIPPINES</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value> Province/City/Municipality</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -699,8 +713,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.85224cm</Top>
-              <Height>0.96985cm</Height>
+              <Top>0.81697cm</Top>
+              <Height>1.35789cm</Height>
               <Width>25.40411cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -734,8 +748,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.99847cm</Top>
-              <Left>0cm</Left>
+              <Top>2.31597cm</Top>
               <Height>0.71894cm</Height>
               <Width>25.40411cm</Width>
               <ZIndex>2</ZIndex>
@@ -782,7 +795,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.62039cm</Top>
+              <Top>2.93789cm</Top>
               <Height>0.72291cm</Height>
               <Width>25.40411cm</Width>
               <ZIndex>3</ZIndex>
