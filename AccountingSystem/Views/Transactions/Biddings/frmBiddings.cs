@@ -183,7 +183,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             if (ucBiddings.isEdit)
             {
                 btnProceedToPayment.Text = "Update";
-                Update();
+                UpdateBidding();
             }
 
 
@@ -193,6 +193,11 @@ namespace AccountingSystem.Views.Transactions.Biddings
                 decimal totalAmountPayable = ComputeAmountDue();
                 ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
             }
+        }
+
+        private void UpdateBidding()
+        {
+            throw new NotImplementedException();
         }
 
         private void frmBiddings_Load(object sender, EventArgs e)
@@ -319,7 +324,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                //var dtDb = AccFactory.BiddersRepository().GetViewRecords();
                 var dtDb = AccFactory.BidRepository().GetViewRecords();
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;

@@ -143,23 +143,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Pursuant to to Section. 260 of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties at </Value>
+                    <Value>Pursuant to to Section. 260 of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties at  </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=CDate(Parameters!paramTimeOfAuction.Value)</Value>
+                    <Value>=Parameters!paramDateOfAuction.Value</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <Format>dd/MM/yyyy</Format>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> . The auction will be held at </Value>
+                    <Value>. The auction will be held at </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -171,6 +171,7 @@
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
