@@ -65,8 +65,8 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                int rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                int rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
 
                 if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
                     return;

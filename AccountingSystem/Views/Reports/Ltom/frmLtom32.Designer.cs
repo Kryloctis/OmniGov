@@ -157,7 +157,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Certificate of Redemption";
+            Text = "Reports > Treasury >  LTOM No. 32 - Certificate of Redemption";
             Load += frmLtom32_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

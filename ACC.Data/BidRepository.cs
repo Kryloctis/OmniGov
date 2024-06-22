@@ -23,16 +23,16 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public Dictionary<string, string> GetHighestBidderByAuctionIdAndRptId(int rptAuctionId, int rptId)
+        public Dictionary<string, string> GetHighestBidderByAuctionIdAndRptId(int auctionId, int rptId)
         {
             var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][] {
-                new object[] { "@rpt_auction_id", DbType.Int32, rptAuctionId },
+                new object[] { "@auction_id", DbType.Int32, auctionId },
                 new object[] { "@real_properties_id", DbType.Int32, rptId }
             };
 
-            string query = $"SELECT *, MAX(bid_amount) bid_amount FROM {viewTableName} WHERE rpt_auction_id = 35 AND real_properties_id = 10";
+            string query = $"SELECT *, MAX(bid_amount) bid_amount FROM {viewTableName} WHERE auction_id = @auction_id AND real_properties_id = @real_properties_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 

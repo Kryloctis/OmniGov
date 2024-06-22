@@ -10,525 +10,23 @@
       <rd:DataSourceID>f228d7a0-bb01-4584-bed1-6bc83a5e344f</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="dtLtom26_27_28">
-      <Query>
-        <DataSourceName>dsTreasury</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="assigned_bidders_no">
-          <DataField>assigned_bidders_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="name_of_bidders_or_representative">
-          <DataField>name_of_bidders_or_representative</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="complete_address_or_business_address">
-          <DataField>complete_address_or_business_address</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="contact_no">
-          <DataField>contact_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="official_receipts_no">
-          <DataField>official_receipts_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>dsTreasury</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\janre\Source\Repos\Hyubane25\LocalFinanceSystem\AccountingSystem\DataSets\dsTreasury.xsd</rd:SchemaPath>
-        <rd:TableName>dtLtom26_27_28</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox15">
+          <Textbox Name="Textbox5">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>OFFICE OF THE LOCAL TREASURER RULES AND REGULATION OF PUBLIC AUCTION </Value>
+                    <Value>I. WHO MAY PARTICIPATE :</Value>
                     <Style>
-                      <FontFamily>Calibri</FontFamily>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>(SHALL BE READ BEFORE THE CONDUCT OF PUBLIC AUCTION)</Value>
-                    <Style>
-                      <FontFamily>Calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.38806cm</Top>
-            <Left>0.02582cm</Left>
-            <Height>1.03311cm</Height>
-            <Width>19.70202cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Rectangle Name="recPage1">
-            <ReportItems>
-              <Textbox Name="Textbox6">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>28 Art. 1491. The following persons cannot acquire by purchase, even at a public or judicial auction, either in person or through the mediation of another</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>The guardian, the property of the person or persons who may be under his guardianship:</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Agents, the property whose administration or sale may have been entrusted to them, unless the consent of the principal has been given;</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Executors and administrators, the property of the estate under administration;</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Public officers and employees, the property of the State or of any subdivision thereof, or of any government-owned or controlled corporation, or institution, the administration of which has been entrusted to them; this provision shall apply to judges and government experts who, in any manner whatsoever, take part in the sale; </Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Justices, judges, prosecuting attomeys, clerks of superior and inferior courts, and other officers and employees connected with the administration of justice, the property and rights in litigation or levied upon an execution before the court within whose jurisdiction or territory they exercise their respective functions; this prohibition includes the act of acquiring by assignment and shall apply to lawyers, with respect to the property and rights which may be the object of any litigation in which they may take part by virtue of their profession.</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Any others specially disqualified by law.</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>29 SECTION 89. Prohibited Business and Pecuniary Interest.</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>It shall be unlawful for any local government official or employee, directly or indirectly, to:</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Engage in any business transaction with the local government unit in which he is an official or employee or over which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys, whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of the resources of the local government unit to such person or firm:</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Hold such interests in any cockpit or other games licensed by a local government unit.
-</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or assessment, or by virtue of a legal process at the instance of the said local government unit.</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Be a surety for any person contracting or doing business with the local government unit for which a surety is required; and</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary interest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct and Ethical Standards for Public Officials and Employees and other laws shall also be applicable to local government officials and employees.</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">
-</Value>
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>7pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>3</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibi</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox6</rd:DefaultName>
-                <Top>2.26042in</Top>
-                <Left>0.01291cm</Left>
-                <Height>5.33333in</Height>
-                <Width>7.75162in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox5">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>I. WHO MAY PARTICIPATE :</Value>
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Person's or Corporation/s that paid the required registration fee and accomplished the registration form issued, such as but not limited to:</Value>
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>All Filipino citizens who are not otherwise disqualified by law to acquire real property in the Philippines and in pursuant to the limitations provided under Art. 1491 of RA 386 otherwise known as the Civil Code of the Philippines and Sec. 89 of RA 7160 otherwise known as the Local Government Code (LGC) of 1991 and other applicable laws rules and regulations.</Value>
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Partnership, corporations and other legal entities duly registered with the Securities and Exchange Commission (SEC), 60% of the capital of which is owned by Filipino citizens and not disqualified by law to acquire real property in the Philippines;</Value>
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Numbered</ListStyle>
-                    <ListLevel>4</ListLevel>
-                    <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox5</rd:DefaultName>
-                <Top>0.08681in</Top>
-                <Left>0.00508in</Left>
-                <Height>2.11805in</Height>
-                <Width>7.75162in</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                    <Width>1.5pt</Width>
-                  </Border>
-                  <BottomBorder>
-                    <Style>Solid</Style>
-                  </BottomBorder>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-            </ReportItems>
-            <PageBreak>
-              <BreakLocation>End</BreakLocation>
-            </PageBreak>
-            <KeepTogether>true</KeepTogether>
-            <Top>0.73313in</Top>
-            <Left>0.00508in</Left>
-            <Height>7.6875in</Height>
-            <Width>7.7567in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle3">
-            <KeepTogether>true</KeepTogether>
-            <Top>8.49007in</Top>
-            <Left>0.00508in</Left>
-            <Height>13.3287in</Height>
-            <Width>7.7567in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Rectangle>
-          <Textbox Name="Textbox10">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -536,508 +34,25 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>II. CONDUCT OF AUCTION :</Value>
+                    <Value />
                     <Style>
                       <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>PublicAuctionshall be conducted using the  </Value>
+                    <Value>Person's or Corporation/s that paid the required registration fee and accomplished the registration form issued, such as but not limited to:</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramMethodOfAuction.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> method.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>All correspondence and documents relating to public auction, shall be written in English. Supporting documents and printed literature may be in another language provided they are accompanied by an accurate translation in English.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Participating bidders shall be required to pay a non-refundable registration fee and a refundable cash bond and shall accomplish the "registration form".</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Registered bidders shall be read and issued a copy of Rules and Regulations in Public Auction and shall sign the "undertaking and waver".</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value> Registered bidders who accede to the rules and regulation of public auction shall be entered into a list, and shall be assigned with a bidder number, upon which such bidder shall be called or referred to during the entire proceedings of the public auction. Only those with assigned bidder number may participate in the public auction.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>All bid price shall be quoted in Philippine Peso.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The local treasurer and his/her duly authorized representative shall facilitate the proceedings and shall read/tally the list of delinquent properties subject for public auction. The delinquent real property shall be sold to the highest cash bidder.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>All bids shall be reviewed and validated by the local treasurer and/or his/her duly authorized representative/s.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Bids shall be ranked, the ranking shall be calculated from highest to lowest bid, the highest bid shall be declared as the winner.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>III. CONDITIONS :</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>All participating bidders are required to pay a non-refundable amount of  </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramRegistrationFeeInWords.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>, Php. </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramRegistrationFeeInFigures.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>  that shall covert the registration fee for the Public Auction and post a refundable bond in the amount of  </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramCashBoundAmountInWords.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>, Php. </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramCashBoundAmountInFigures.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>as provided under the Real Property Tax(RPT) Ordinance No.  </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramOrdinanceNumber.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> dated </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!paramOrdinanceDate.Value</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The local treasurer does not warrant the authenticity or validity of the Certificate of Title (title) of the registered of declared owner nor does guarante the correctness or accuracy of the description of the property.  Successful bidders acquire no better Title than that of the registered or declared owner appearing on the Title and they will acquire the property together with all its encumbrances like mortgage, lease and the like, existing at the time of the purchase in the public auction. In the observance of due diligence, participating bidders may first ascertain the existence and authenticity of the Title of the property they wish to bid. </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>If land and improvement is covered by two (2) separate tax declarations and both are delinquent but declared under one (1) person or declared as joint ownership, the same shall be auctioned off together, to avoid the sale to a different bidder.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The delinquent real property shall be sold to the highest bidder whose bid is sufficient to pay the delinquent RPT, the interest due or penalties, and the expenses of sale, the sum of which shall be the floor price for accepting any bid.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The highest bidder shall, upon award, immediately pay the bid price which shall be made in cash or manager's check for the exact amount of the bid payable in the name of the local treasurer or in the name of the LGU concerned, as the case may be.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>A Certificate of Sale shall be issued by the local treasurer to the highest bidder, which contains the name of the latter, a sufficient description of the property sold, the amount of the delinquent tax, the interest due or penalties, the expenses of sale and a brief description of the public auction.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>At any time before the date of the public auction, the declared owner/person having legal interest therein or authorized representative may stop the proceedings by paying in full, the following:</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The amount of delinquent tax</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The interest due or penalties, and</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The expenses of sale.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Within one (1) year from the date of public auction, or as the case maybe the declared owner/person having legal interest therein or authorized representative of the delinquent real property, shall have the right to redeem the same by paying in full, the following:</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The redemption price, which consists of the amount of delinquent ta: </Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The interests due or penalties.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The expenses of sale, computed from the date of delinquency to the date of sale.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Interest of not more than two percent (2%) per month on the purchas price from the date of Public Auction to the date of payment of th redemption price. Full payment of the redemption price shall invalidate the Certificate Sale issued.</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
@@ -1045,6 +60,286 @@
                     <Value />
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All Filipino citizens who are not otherwise disqualified by law to acquire real property in the Philippines and in pursuant to the limitations provided under Art. 1491 of RA 386 otherwise known as the Civil Code of the Philippines and Sec. 89 of RA 7160 otherwise known as the Local Government Code (LGC) of 1991 and other applicable laws rules and regulations.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Partnership, corporations and other legal entities duly registered with the Securities and Exchange Commission (SEC), 60% of the capital of which is owned by Filipino citizens and not disqualified by law to acquire real property in the Philippines;</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value> 28 Art. 1491. The following persons cannot acquire by purchase, even at a public or judicial auction, either in person or through the  mediation of another</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The guardian, the property of the person or persons who may be under his guardianship:</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Agents, the property whose administration or s`ale may have been entrusted to them, unless the consent of the principal has been given;</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Executors and administrators, the property of the estate under administration;</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Public officers and employees, the property of the State or of any subdivision thereof, or of any government-owned or controlled corporation, or institution, the administration of which has been entrusted to them; this provision shall apply to judges and government experts who, in any manner whatsoever, take part in the sale; </Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Justices, judges, prosecuting attomeys, clerks of superior and inferior courts, and other officers and employees connected with the administration of justice, the property and rights in litigation or levied upon an execution before the court within whose jurisdiction or territory they exercise their respective functions; this prohibition includes the act of acquiring by assignment and shall apply to lawyers, with respect to the property and rights which may be the object of any litigation in which they may take part by virtue of their profession.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Any others specially disqualified by law.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>29 SECTION 89. Prohibited Business and Pecuniary Interest.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>It shall be unlawful for any local government official or employee, directly or indirectly, to:</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Engage in any business transaction with the local government unit in which he is an official or employee or over which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys, whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of the resources of the local government unit to such person or firm:</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>4</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Hold such interests in any cockpit or other games licensed by a local government unit.
+</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>4</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or assessment, or by virtue of a legal process at the instance of the said local government unit.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>4</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Be a surety for any person contracting or doing business with the local government unit for which a surety is required; and</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>4</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Posses of use any public property of the local government unit for private purposes.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>4</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary interest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct and Ethical Standards for Public Officials and Employees and other laws shall also be applicable to local government officials and employees.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1060,6 +355,7 @@
 </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1069,13 +365,798 @@
                   <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>8.49007in</Top>
-            <Left>0.00508in</Left>
-            <Height>13.3287in</Height>
-            <Width>7.75162in</Width>
-            <ZIndex>3</ZIndex>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.10582cm</Top>
+            <Height>8.41666in</Height>
+            <Width>5.70897in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+                <Width>1.5pt</Width>
+              </Border>
+              <BottomBorder>
+                <Style>None</Style>
+              </BottomBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>II. CONDUCT OF AUCTION :</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>PublicAuctionshall be conducted using the  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramMethodOfAuction.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> method.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All correspondence and documents relating to public auction, shall be written in English. Supporting documents and printed literature may be in another language provided they are accompanied by an accurate translation in English.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Participating bidders shall be required to pay a non-refundable registration fee and a refundable cash bond and shall accomplish the "registration form".</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Registered bidders shall be read and issued a copy of Rules and Regulations in Public Auction and shall sign the "undertaking and waver".</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value> Registered bidders who accede to the rules and regulation of public auction shall be entered into a list, and shall be assigned with a bidder number, upon which such bidder shall be called or referred to during the entire proceedings of the public auction. Only those with assigned bidder number may participate in the public auction.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All bid price shall be quoted in Philippine Peso.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The local treasurer and his/her duly authorized representative shall facilitate the proceedings and shall read/tally the list of delinquent properties subject for public auction. The delinquent real property shall be sold to the highest cash bidder.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All bids shall be reviewed and validated by the local treasurer and/or his/her duly authorized representative/s.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Bids shall be ranked, the ranking shall be calculated from highest to lowest bid, the highest bid shall be declared as the winner.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>6</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>8.63194in</Top>
+            <Height>4.10475in</Height>
+            <Width>5.70897in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>III. CONDITIONS :</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>All participating bidders are required to pay a non-refundable amount of  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramRegistrationFeeInWords.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, Php. </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramRegistrationFeeInFigures.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>  that shall covert the registration fee for the Public Auction and post a refundable bond in the amount of  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCashBoundAmountInWords.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, Php. </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCashBoundAmountInFigures.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>as provided under the Real Property Tax(RPT) Ordinance No.  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramOrdinanceNumber.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> dated </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramOrdinanceDate.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The local treasurer does not warrant the authenticity or validity of the Certificate of Title (title) of the registered of declared owner nor does guarante the correctness or accuracy of the description of the property.  Successful bidders acquire no better Title than that of the registered or declared owner appearing on the Title and they will acquire the property together with all its encumbrances like mortgage, lease and the like, existing at the time of the purchase in the public auction. In the observance of due diligence, participating bidders may first ascertain the existence and authenticity of the Title of the property they wish to bid. </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>If land and improvement is covered by two (2) separate tax declarations and both are delinquent but declared under one (1) person or declared as joint ownership, the same shall be auctioned off together, to avoid the sale to a different bidder.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The delinquent real property shall be sold to the highest bidder whose bid is sufficient to pay the delinquent RPT, the interest due or penalties, and the expenses of sale, the sum of which shall be the floor price for accepting any bid.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The highest bidder shall, upon award, immediately pay the bid price which shall be made in cash or manager's check for the exact amount of the bid payable in the name of the local treasurer or in the name of the LGU concerned, as the case may be.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>A Certificate of Sale shall be issued by the local treasurer to the highest bidder, which contains the name of the latter, a sufficient description of the property sold, the amount of the delinquent tax, the interest due or penalties, the expenses of sale and a brief description of the public auction.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>At any time before the date of the public auction, the declared owner/person having legal interest therein or authorized representative may stop the proceedings by paying in full, the following:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The amount of delinquent tax</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The interest due or penalties, and</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The expenses of sale.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Within one (1) year from the date of public auction, or as the case maybe the declared owner/person having legal interest therein or authorized representative of the delinquent real property, shall have the right to redeem the same by paying in full, the following:</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The redemption price, which consists of the amount of delinquent ta: </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The interests due or penalties.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The expenses of sale, computed from the date of delinquency to the date of sale.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Interest of not more than two percent (2%) per month on the purchas price from the date of Public Auction to the date of payment of th redemption price. Full payment of the redemption price shall invalidate the Certificate Sale issued.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Upon full payment of the redemption price, the declared owner/person having legal interest therein or authorized representative of the delinquent real property shall be entitled to a Certificate of Redemption which shall be issued by the local treasurer. The local treasurer shall be responsible for the request for cancellation of annotation of the Certificate of Title and Tax Declaration with the RoD and local assessor, respectively.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The highest bidder shall return the Certificate of Sale to the local treasurer, who shall forthwith return to the former the entire amount paid in the Public Auction, including interest of not more than two percent (2%) per month from the date of sale to the date of payment of the redemption price.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>From the date of sale until the expiration of the period of redemption, the delinquent real property shall remain in the possession of the declared owner/person having legal interest therein or authorized representative, who shall be entitled to all the income and fruits thereof. The proceeds of the sale in excess of the delinquent tax, the interest due or penalties and the expenses of sale shall be remitted to the declared owner/ person having legal interest therein or authorized representative.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>In case the declared owner/person having legal interest therein or authorized representative of the delinquent real property fails to redeem the delinquent property, the local treasurer shall execute a Final Deed of Sale in favor of the highest bidder, conveying subject real property, free from all liens of delinquent tax, the interests due or penalties and expenses of sale. However, the highest bidder shall be responsible to pay the corresponding taxes and fees and charges relative to the transfer thereof.</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>In case there is no bidder for the real property advertised for public auction, or if the highest bid is for an amount insufficient to pay the taxes, fees, or charges, related surcharges, interests, penalties and costs, the local treasurer conducting the sale shall purchase the property in behalf of the LGU to satisfy the claim.
+</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListStyle>Numbered</ListStyle>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>12.79225in</Top>
+            <Height>13.36112in</Height>
+            <Width>5.70897in</Width>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1087,13 +1168,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>22.08498in</Height>
+        <Height>26.21586in</Height>
         <Style />
       </Body>
-      <Width>7.76687in</Width>
+      <Width>5.70897in</Width>
       <Page>
         <PageHeader>
-          <Height>1.2084in</Height>
+          <Height>1.84191in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1107,7 +1188,7 @@
                       <Value>LTOM FORM NO. 28 - RULES AND REGULATION OF PUBLIC AUCTION</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>16pt</FontSize>
+                        <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1118,9 +1199,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.02582cm</Left>
-              <Height>0.74641cm</Height>
-              <Width>19.68911cm</Width>
+              <Height>0.71452cm</Height>
+              <Width>14.50078cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1138,7 +1218,21 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>REPUBLIC OF THE PHILIPPINES PROVINCE/CITY/MUNICIPALITY OF </Value>
+                      <Value>REPUBLIC OF THE PHILIPPINES </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Province/City/Municipality of</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -1154,6 +1248,7 @@
                       <Value>=Parameters!paramLGU.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1163,15 +1258,15 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.78508cm</Top>
-              <Left>0.02582cm</Left>
-              <Height>0.96985cm</Height>
-              <Width>19.70202cm</Width>
+              <Top>0.7498cm</Top>
+              <Height>1.3579cm</Height>
+              <Width>14.50078cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1199,11 +1294,73 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.93131cm</Top>
-              <Left>0.02582cm</Left>
+              <Top>2.28409cm</Top>
               <Height>0.55137cm</Height>
-              <Width>19.70202cm</Width>
+              <Width>14.50078cm</Width>
               <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox15">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>OFFICE OF THE LOCAL TREASURER RULES AND REGULATION OF PUBLIC AUCTION </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>(</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>SHALL BE READ BEFORE THE CONDUCT OF PUBLIC AUCTION</Value>
+                      <Style>
+                        <FontFamily>Calibri Light</FontFamily>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>2.90601cm</Top>
+              <Height>1.01032cm</Height>
+              <Width>14.50078cm</Width>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1230,6 +1387,7 @@
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <Format>d</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1239,10 +1397,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.51796cm</Top>
-              <Height>0.55137cm</Height>
-              <Width>19.70202cm</Width>
-              <ZIndex>3</ZIndex>
+              <Top>4.02217cm</Top>
+              <Height>0.65629cm</Height>
+              <Width>14.50078cm</Width>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1260,12 +1418,12 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>8.27in</PageHeight>
-        <PageWidth>11.69in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>10.27in</PageHeight>
+        <PageWidth>7.2in</PageWidth>
+        <LeftMargin>0.73in</LeftMargin>
+        <RightMargin>0.73in</RightMargin>
+        <TopMargin>0.24in</TopMargin>
+        <BottomMargin>0.31in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
@@ -1314,6 +1472,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramMethodOfAuction">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1354,6 +1518,11 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>paramOrdinanceDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramMethodOfAuction</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

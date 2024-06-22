@@ -15,6 +15,8 @@ namespace AccountingSystem.Views.Transactions.Biddings
         private ucBiddings ucBiddings;
         private ucPayment ucPayment;
 
+        private DataTable dtTaxpayers;
+
         public frmBiddings()
         {
             InitializeComponent();
@@ -24,6 +26,21 @@ namespace AccountingSystem.Views.Transactions.Biddings
             ucBiddings = ucBiddings1;
             ucPayment = ucPayment1;
             ucTaxPayers = ucTaxPayers1;
+
+        }
+
+        private void TextBoxSearchTaxpayer()
+        {
+            var txtName = ucTaxPayers.txtName;
+            txtName.AutoCompleteMode = AutoCompleteMode.Append;
+            txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            AutoCompleteStringCollection collection = new();
+            dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(txtName.Text);
+            foreach (DataRow d in dtTaxpayers.Rows)
+                collection.Add(d["taxpayers_name"].ToString());
+
+            txtName.AutoCompleteCustomSource = collection;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -166,7 +183,7 @@ namespace AccountingSystem.Views.Transactions.Biddings
             if (ucBiddings.isEdit)
             {
                 btnProceedToPayment.Text = "Update";
-                Update();
+                UpdateBidding();
             }
 
 
@@ -178,12 +195,18 @@ namespace AccountingSystem.Views.Transactions.Biddings
             }
         }
 
+        private void UpdateBidding()
+        {
+            throw new NotImplementedException();
+        }
+
         private void frmBiddings_Load(object sender, EventArgs e)
         {
             try
             {
                 LoadRowFilter();
                 ucTaxPayers.LoadTaxPayersType();
+                ucTaxPayers.chckIsActive.Visible = false;
                 ucBiddings.OnLoad(false, null);
                 LoadBid();
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
@@ -301,7 +324,6 @@ namespace AccountingSystem.Views.Transactions.Biddings
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                //var dtDb = AccFactory.BiddersRepository().GetViewRecords();
                 var dtDb = AccFactory.BidRepository().GetViewRecords();
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
@@ -360,5 +382,49 @@ namespace AccountingSystem.Views.Transactions.Biddings
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void cbxNewTaxpayer_CheckedChanged(object sender, EventArgs e)
+        {
+            TextBox txtName = ucTaxPayers.txtName;
+
+            if (cbxNewTaxpayer.Checked)
+            {
+                txtName.TextChanged -= txtName_TextChanged;
+                txtName.PlaceholderText = string.Empty;
+
+            }
+            else
+            {
+                txtName.TextChanged += txtName_TextChanged;
+                txtName.PlaceholderText = "Search taxpayer / bidder records here.";
+                TextBoxSearchTaxpayer();
+            }
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            var txtName = ucTaxPayers.txtName;
+
+            if (txtName.AutoCompleteCustomSource.Contains(txtName.Text))
+            {
+                string taxpayerName = txtName.Text;
+                var query = from row in dtTaxpayers.AsEnumerable()
+                            where row.Field<string>("taxpayers_name") == taxpayerName
+                            select row;
+
+                foreach (DataRow row in query)
+                {
+                    ucTaxPayers.txtTIN.Text = row["taxpayers_tin"].ToString();
+                    ucTaxPayers.txtAddress.Text = row["taxpayers_address"].ToString();
+                    ucTaxPayers.txtMunicipality.Text = row["taxpayers_municipality"].ToString();
+                    ucTaxPayers.txtProvince.Text = row["taxpayers_province"].ToString();
+                    ucTaxPayers.txtContact.Text = row["taxpayers_contact_info"].ToString();
+                    ucTaxPayers.chckRepresentative.Checked = string.IsNullOrEmpty(row["representative_registry_id"].ToString());
+                    ucTaxPayers.cmbxRepresentative.Text = row["representative_name"].ToString();
+                }
+            }
+
+        }
+
     }
 }

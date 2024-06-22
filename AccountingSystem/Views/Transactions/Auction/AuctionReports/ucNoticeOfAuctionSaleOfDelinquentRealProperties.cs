@@ -167,17 +167,16 @@ namespace AccountingSystem.Views.Transactions.Auction
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
-                string date = dtAuction["start_date"];
+                string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramTimeOfAuction", date),
+                    new ReportParameter("paramDateOfAuction", date),
                     new ReportParameter("paramPlaceOfAuction", location),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
 
 
                 };

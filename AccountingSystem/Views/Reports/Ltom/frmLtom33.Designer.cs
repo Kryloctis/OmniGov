@@ -104,9 +104,9 @@
             label2.Font = new System.Drawing.Font("Segoe UI", 9F);
             label2.Location = new System.Drawing.Point(6, 63);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(56, 15);
+            label2.Size = new System.Drawing.Size(59, 15);
             label2.TabIndex = 19;
-            label2.Text = "Issued at:";
+            label2.Text = "Issued at :";
             // 
             // btnRunReport
             // 
@@ -154,7 +154,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)";
+            Text = "Reports > Treasury > LTOM No. 33 - Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)";
             Load += frmLtom33_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

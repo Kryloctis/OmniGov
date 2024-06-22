@@ -140,16 +140,18 @@ namespace AccountingSystem.Views.Transactions.Auction
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+                string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";
+
+                var dictBid = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]),
-                    new ReportParameter("paramSignatory", signatory["signatories_full_name"]),
+                    new ReportParameter("paramSignatoryTitle", string.Empty),
+                    new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
                     new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
                     new ReportParameter("paramARPNo", dictAuctionProperty["complete_arp_no"]),
@@ -158,14 +160,12 @@ namespace AccountingSystem.Views.Transactions.Auction
                     new ReportParameter("paramPropertyLocation", dictAuctionProperty["location"]),
                     new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),
 
-                    new ReportParameter("paramDateOfPublicAuction", "Archie"),
-                    new ReportParameter("paramBuyer",  string.Empty),
-                    new ReportParameter("paramBuyerAddress",  string.Empty),
-                    new ReportParameter("paramSoldPrice",  string.Empty),
-                    new ReportParameter("paramOfficialReceiptNo",  string.Empty),
-                    new ReportParameter("paramSoldDate",  string.Empty),
-
-
+                    new ReportParameter("paramDateOfPublicAuction", date),
+                    new ReportParameter("paramBuyer",  dictBid["name"]),
+                    new ReportParameter("paramBuyerAddress",  dictBid["address"]),
+                    new ReportParameter("paramSoldPrice",  dictBid["bid_amount"]),
+                    new ReportParameter("paramOfficialReceiptNo",  dictBid["receipt_no"]),
+                    new ReportParameter("paramSoldDate",  dictBid["date"]),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom29", dataTable));

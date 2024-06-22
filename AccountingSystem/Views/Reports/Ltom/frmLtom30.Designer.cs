@@ -156,7 +156,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Declaration of Forfeiture of Delinquent Property";
+            Text = "Reports > Treasury > LTOM No. 30 - Declaration of Forfeiture of Delinquent Property";
             Load += frmLtom30_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

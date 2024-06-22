@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -25,22 +24,6 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 progressBar1.Value = 0;
                 backgroundWorker1.RunWorkerAsync(this.warrantOfLevyId);
             }
-        }
-
-        private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
-        {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
-
-            int? prevAssmntYear = null;
-
-            if (dictPrevAssmnt.Count > 1)
-                prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
-
-            int monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(transactionDate, (currentAssmntParameters.assessmentYear, currentAssmntParameters.effectivityQuarter, currentAssmntParameters.effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
-            decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
-            decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
-
-            return (basicPenalty, sefPenalty);
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -76,7 +59,6 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 //Fetch Warrant of Levy.
                 var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
                 progressCount += tasks["Fetch Warrant of Levy"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -90,8 +72,8 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramWarrantOfLevyDate", dictWarrantLevy["date_issued"]));
                 reportParameters.Add(new ReportParameter("paramTaxDecNo", dictWarrantLevy["complete_arp_no"]));
                 reportParameters.Add(new ReportParameter("paramTCTNo", "-"));
-                reportParameters.Add(new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]));
-                reportParameters.Add(new ReportParameter("paramSignatory", signatory["signatories_full_name"]));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

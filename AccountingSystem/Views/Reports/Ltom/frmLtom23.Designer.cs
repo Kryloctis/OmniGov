@@ -131,7 +131,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Treasury > Notice of Auction Sale of Delinquent Real Properties";
+            Text = "Reports > Treasury > LTOM Form No. 23 -  Notice of Auction Sale of Delinquent Real Properties";
             Load += frmLtom23_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

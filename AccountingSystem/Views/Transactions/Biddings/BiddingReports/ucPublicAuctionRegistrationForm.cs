@@ -1,16 +1,26 @@
-﻿using System.Windows.Forms;
+﻿using ACC.Data;
+using Microsoft.Reporting.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucPublicAuctionRegistrationForm : UserControl
     {
+        int auctionId;
+        int bidderId;
+
         public ucPublicAuctionRegistrationForm()
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
         }
-        internal void OnLoad()
+        internal void OnLoad(int auctionId, int bidderId)
         {
+            this.auctionId = auctionId;
+            this.bidderId = bidderId;
             LoadReport();
         }
 
@@ -19,13 +29,44 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                backgroundWorker1.RunWorkerAsync((auctionId, bidderId));
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            var parameters = ((int auctionId, int bidderId))e.Argument;
 
+            var tasks = new Dictionary<string, int>
+            {
+                { "Fetch Bidder", 50},
+                { "Initialize Parameters", 100 },
+            };
+
+            int totalProgressCount = tasks.Sum(t => t.Value);
+            int progressCount = 0;
+
+            var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+
+
+            var lguDetails = Helper.LGUDetails();
+            List<ReportParameter> reportParameters = new List<ReportParameter>();
+            progressCount += tasks["Initialize Parameters"];
+
+            var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
+
+            reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
+            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
+            reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
+            reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));
+            reportParameters.Add(new ReportParameter("paramBidderName", dictBidder["name"]));
+            reportParameters.Add(new ReportParameter("paramTelephoneNo", dictBidder["contact_info"]));
+            reportParameters.Add(new ReportParameter("paramEmail", string.Empty));
+            reportParameters.Add(new ReportParameter("paramCitizenship", string.Empty));
+            reportParameters.Add(new ReportParameter("paramSex", string.Empty));
+
+            e.Result = reportParameters;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -35,7 +76,29 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            try
+            {
 
+                if (e.Cancelled)
+                {
+                    reportViewer1.Clear();
+                    progressBar1.Value = 100;
+                    return;
+                }
+
+                var parameters = (List<ReportParameter>)e.Result;
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-25-public-auction-registration-form.rdlc";
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

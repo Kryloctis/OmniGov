@@ -88,7 +88,6 @@ namespace AccountingSystem.Views.Transactions.Auction
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
 
                 var reportParameters = new ReportParameter[]
                 {

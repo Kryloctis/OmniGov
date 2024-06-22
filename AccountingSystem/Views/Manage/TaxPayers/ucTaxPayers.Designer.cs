@@ -269,7 +269,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtProvince;
-        private System.Windows.Forms.CheckBox chckRepresentative;
-        private System.Windows.Forms.ComboBox cmbxRepresentative;
+        internal System.Windows.Forms.CheckBox chckRepresentative;
+        internal System.Windows.Forms.ComboBox cmbxRepresentative;
     }
 }

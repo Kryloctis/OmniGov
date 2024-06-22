@@ -77,7 +77,6 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 decimal assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
 
 
-                var signatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Treasurer", "LTOM");
                 progressCount += tasks["Generate Bidder and Bidding Information"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -90,6 +89,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
                 reportParameters.Add(new ReportParameter("paramNameOfHighestBidder", nameOfBidder));
                 reportParameters.Add(new ReportParameter("paramDateOfAuction", dateOfAuction));
+                reportParameters.Add(new ReportParameter("paramOfficialReceiptNumber", receiptNumber));
                 reportParameters.Add(new ReportParameter("paramDeclaredOwner", declaredOwner));
                 reportParameters.Add(new ReportParameter("paramBidAmount", bidAmount.ToString("N2")));
                 reportParameters.Add(new ReportParameter("paramTaxDeclarationNo", completeArp));
@@ -97,8 +97,8 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportParameters.Add(new ReportParameter("paramLocationOfProperty", propertyLocation));
                 reportParameters.Add(new ReportParameter("paramKindOfProperty", kindOfProperty));
                 reportParameters.Add(new ReportParameter("paramAssessedValue", assessedValue.ToString("N2")));
-                reportParameters.Add(new ReportParameter("paramSignatoryTitle", signatory["signatories_title"]));
-                reportParameters.Add(new ReportParameter("paramSignatory", signatory["signatories_full_name"]));
+                reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

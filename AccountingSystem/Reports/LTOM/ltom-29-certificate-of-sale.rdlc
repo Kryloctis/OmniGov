@@ -81,6 +81,7 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -114,6 +115,7 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -123,10 +125,12 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramSoldPrice.Value</Value>
+                    <Value>=CDec(Parameters!paramSoldPrice.Value)</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>n2</Format>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -140,6 +144,7 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -149,10 +154,12 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramSoldDate.Value</Value>
+                    <Value>=CDate(Parameters!paramSoldDate.Value)</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>d</Format>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -1738,6 +1745,8 @@
                     <Value>=Globals!ExecutionTime.Day</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -1750,6 +1759,8 @@
                     <Value>=Globals!ExecutionTime.Month</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -1762,6 +1773,8 @@
                     <Value>=Globals!ExecutionTime.Year</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
