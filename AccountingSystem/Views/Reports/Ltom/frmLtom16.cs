@@ -70,6 +70,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                                                       var monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(parameter, (parameter.Year, (int)row["effectivity_quarterly"], (int)row["effectivity_year"]), null);
 
                                                       var totalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue((decimal)row["basic_rate"], (decimal)row["sef_rate"], (decimal)row["assessed_value"]);
+                                                      var totalPenalty = RealPropertyTaxComputations.GetPenalty((decimal)row["penalty_rate"], monthsDelinquent, totalTaxDue);
 
                                                       return new
                                                       {
@@ -79,7 +80,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                                                           PropertyKind = row["property_kind"],
                                                           AssessedValue = row["assessed_value"],
                                                           YearsOfDelinquency = GetYearsFromMonths(monthsDelinquent),
-                                                          TaxDue = totalTaxDue
+                                                          TaxDue = totalTaxDue + totalPenalty
                                                       };
                                                   })).Distinct();
 
