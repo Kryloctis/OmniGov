@@ -116,12 +116,13 @@ namespace AccountingSystem.Views.Reports.Ltom
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
-
+                string time = $"{Convert.ToDateTime(dtAuction["start_date"]):HH:mm:tt} - {Convert.ToDateTime(dtAuction["start_date"]):HH:mm:tt}";
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
                     new ReportParameter("paramDateOfAuction", date),
+                    new ReportParameter("paramTimeOfAuction", time),
                     new ReportParameter("paramPlaceOfAuction", location),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramSignatory", string.Empty),

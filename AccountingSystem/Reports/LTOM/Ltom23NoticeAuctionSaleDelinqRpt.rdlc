@@ -90,6 +90,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.3175cm</Top>
+            <Left>0.00005cm</Left>
             <Height>0.63074cm</Height>
             <Width>22.257cm</Width>
             <Style>
@@ -144,7 +145,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Pursuant to to Section. 260 of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties at  </Value>
+                    <Value>Pursuant to to Section. 260 of RA 7160 (Local Government Code of 1991), the undersigned hereby gives notice to the public that we will conduct an auction sale of delinquent real properties on  </Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramTimeOfAuction.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> at  </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -188,8 +205,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.07956in</Top>
-            <Height>0.36458in</Height>
+            <Top>0.9242in</Top>
+            <Height>0.51994in</Height>
             <Width>8.7626in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -221,6 +238,8 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -369,9 +388,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>DECLARED OWNERS</Value>
+                                  <Value>Declared Owner/s</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -386,7 +406,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -405,9 +424,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TAX DECLARATION NUMBER</Value>
+                                  <Value>Tax Declaraction Number</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -422,7 +442,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -441,9 +460,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TCT NUMBER</Value>
+                                  <Value>TCT Number</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -458,7 +478,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -477,9 +496,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>LOCATION OF PROPERTY</Value>
+                                  <Value>Location of Property</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -494,7 +514,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -513,9 +532,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>KIND OF PROPERTY</Value>
+                                  <Value>Kind of Proeprty</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -530,7 +550,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -549,9 +568,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>ASSESSED VALUE</Value>
+                                  <Value>Assessed Value</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -566,7 +586,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -585,9 +604,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>YEARS OF DELIQUENT</Value>
+                                  <Value>Year/s of Delinquency</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -602,7 +622,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -621,15 +640,17 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TOTAL DELIQUENT AS OF </Value>
+                                  <Value>Total Delinquencies as of </Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>=CDate(Globals!ExecutionTime).ToString("MMMM dd, yyyy")</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>d</Format>
                                     <TextDecoration>Underline</TextDecoration>
                                   </Style>
@@ -646,7 +667,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -665,9 +685,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>COST OF SALE</Value>
+                                  <Value>Cost of Sale</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -682,7 +703,6 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -708,6 +728,7 @@
                                 <TextRun>
                                   <Value>=Fields!declared_owner.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -743,6 +764,7 @@
                                 <TextRun>
                                   <Value>=Fields!tax_declaration_number.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -778,6 +800,7 @@
                                 <TextRun>
                                   <Value>=Fields!tct_number.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -813,6 +836,7 @@
                                 <TextRun>
                                   <Value>=Fields!location_of_property.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -848,6 +872,7 @@
                                 <TextRun>
                                   <Value>=Fields!kind_of_property.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -883,6 +908,7 @@
                                 <TextRun>
                                   <Value>=Fields!assessed_value.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
@@ -919,12 +945,13 @@
                                 <TextRun>
                                   <Value>=Fields!years_delinquent.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Right</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -954,6 +981,7 @@
                                 <TextRun>
                                   <Value>=Fields!total_delinquency_as_of.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
@@ -990,6 +1018,7 @@
                                 <TextRun>
                                   <Value>=Fields!cost_of_sale.Value</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
@@ -1046,7 +1075,7 @@
             <Top>1.51358in</Top>
             <Left>0.00003cm</Left>
             <Height>0.8006in</Height>
-            <Width>8.76259in</Width>
+            <Width>8.76257in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -1058,7 +1087,7 @@
         <Height>3.85284in</Height>
         <Style />
       </Body>
-      <Width>8.7626in</Width>
+      <Width>8.76262in</Width>
       <Page>
         <PageHeader>
           <Height>1.16192in</Height>
@@ -1242,12 +1271,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTimeOfAuction">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="paramPlaceOfAuction">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -1261,6 +1284,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramTimeOfAuction">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1283,11 +1312,6 @@
           <ParameterName>paramDateOfAuction</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>paramTimeOfAuction</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramPlaceOfAuction</ParameterName>
@@ -1301,6 +1325,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>paramSignatoryTitle</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramTimeOfAuction</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
