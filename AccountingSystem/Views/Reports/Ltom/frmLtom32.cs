@@ -17,6 +17,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucCertificateOfRedemption = ucCertificateOfRedemption1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void frmLtom32_Load(object sender, EventArgs e)
         {
             try
@@ -65,6 +71,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
 
@@ -72,7 +79,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     return;
 
                 ucCertificateOfRedemption.OnLoad(auctionId, rptId);
-
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

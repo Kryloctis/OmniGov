@@ -16,6 +16,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucRulesAndRegulation = ucRulesAndRegulation1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void OnLoad()
         {
             LoadAuctionSchedule();
@@ -57,6 +63,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
@@ -64,7 +71,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     return;
 
                 ucRulesAndRegulation.OnLoad(auctionId, biddersId);
-
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

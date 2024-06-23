@@ -15,16 +15,22 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucListOfRegisteredBidders = ucListOfRegisteredBidders1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 if (cmbxAuctionSchedule.SelectedIndex == -1)
                     return;
 
                 ucListOfRegisteredBidders.OnLoad(auctionId);
-
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

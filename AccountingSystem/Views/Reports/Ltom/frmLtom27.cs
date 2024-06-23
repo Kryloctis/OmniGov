@@ -16,6 +16,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucUnderTakingAndWaiverOfBidders = ucUnderTakingAndWaiverOfBidders1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void frmLtom27_Load(object sender, EventArgs e)
         {
             try
@@ -74,6 +80,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                ToogleRunButton(false);
                 int rptAuctionId = Convert.ToInt32(cmbxProperties.SelectedValue);
                 int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
@@ -81,7 +88,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     return;
 
                 ucUnderTakingAndWaiverOfBidders.OnLoad(rptAuctionId, biddersId);
-
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

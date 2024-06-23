@@ -16,6 +16,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucNoticeOfAuctionSaleOfDelinquentRealProperties = ucNoticeOfAuctionSaleOfDelinquentRealProperties1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+
+        }
         private void LoadAuctionSchedule()
         {
             var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
@@ -26,12 +32,13 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 if (cmbxAuctionSchedule.SelectedIndex == -1)
                     return;
 
                 ucNoticeOfAuctionSaleOfDelinquentRealProperties.OnLoad(auctionId);
-
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

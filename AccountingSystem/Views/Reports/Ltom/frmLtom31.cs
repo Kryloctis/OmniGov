@@ -16,15 +16,22 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucReportOfSale = ucReportOfSale1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 if (cmbxAuctionSchedule.SelectedIndex == -1)
                     return;
 
                 ucReportOfSale.OnLoad(auctionId);
+                ToogleRunButton(true);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

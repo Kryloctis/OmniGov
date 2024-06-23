@@ -18,6 +18,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             UcCancellationOfWarrantOfLevy = ucCancellationOfWarrantOfLevy1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             LoadReport();
@@ -63,12 +69,16 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
+
+                ToogleRunButton(false);
                 int warrantOfLevyId = Convert.ToInt32(cmbxWarrantLevy.SelectedValue);
 
                 if (cmbxWarrantLevy.SelectedIndex == -1)
                     return;
 
                 UcCancellationOfWarrantOfLevy.OnLoad(warrantOfLevyId);
+
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

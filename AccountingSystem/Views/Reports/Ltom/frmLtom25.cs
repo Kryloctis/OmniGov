@@ -17,6 +17,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucPublicAuctionRegistrationForm = ucPublicAuctionRegistrationForm1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void frmLtom25_Load(object sender, System.EventArgs e)
         {
             OnLoad();
@@ -57,6 +63,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
+            ToogleRunButton(false);
             bool inValidFilter = cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1;
 
             if (inValidFilter)
@@ -66,6 +73,7 @@ namespace AccountingSystem.Views.Reports.Ltom
             int bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
             ucPublicAuctionRegistrationForm.OnLoad(auctionId, bidderId);
+            ToogleRunButton(true);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)

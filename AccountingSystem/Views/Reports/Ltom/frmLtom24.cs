@@ -17,10 +17,16 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucNoticeOfSale = ucNoticeOfSale2;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
+                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int propertyId = Convert.ToInt32(cmbxProperty.SelectedValue);
 
@@ -28,6 +34,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     return;
 
                 ucNoticeOfSale.OnLoad(auctionId, propertyId);
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

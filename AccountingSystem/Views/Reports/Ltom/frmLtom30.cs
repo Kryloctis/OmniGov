@@ -17,6 +17,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             ucDeclarationOfForfeitureOfDelinquentProperty = ucDeclarationOfForfeitureOfDelinquentProperty1;
         }
 
+        private void ToogleRunButton(bool isGenerated)
+        {
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
+        }
+
         private void frmLtom30_Load(object sender, EventArgs e)
         {
             try
@@ -34,6 +40,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadProperties()
         {
+            ToogleRunButton(false);
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
             var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
             var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
@@ -41,7 +48,7 @@ namespace AccountingSystem.Views.Reports.Ltom
             cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
             cmbxProperty.DataSource = auctionProperties;
-
+            ToogleRunButton(true);
         }
 
         private void OnLoad()
