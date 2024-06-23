@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.Auction
 
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-31-report-of-sale.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
 
 

@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-33-cancellation-of-warrant-of-levey.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom33CancellationOfWarrantOfLevey.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

@@ -137,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.Auction
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-30-declaration-of-forfeiture-of-delinquent-property.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
                 report.DataSources.Clear();
 
 
