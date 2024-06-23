@@ -244,7 +244,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
-                reportViewer1.RefreshReport();
+                reportViewer1.Refresh();
 
                 ToogleRunButton(true);
             }
