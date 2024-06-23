@@ -357,7 +357,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.55208in</Height>
+                  <Height>0.57291in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -620,9 +620,17 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TOTAL DELIQUENT AS OF</Value>
+                                  <Value>TOTAL DELIQUENT AS OF </Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=CDate(Globals!ExecutionTime).ToString("MMMM dd, yyyy")</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>d</Format>
+                                    <TextDecoration>Underline</TextDecoration>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1036,7 +1044,7 @@
             <DataSetName>dsNoticeOfAuctionSaleOfDelinquentProperty</DataSetName>
             <Top>1.38858in</Top>
             <Left>0.00003cm</Left>
-            <Height>0.75in</Height>
+            <Height>0.77083in</Height>
             <Width>12.35421in</Width>
             <ZIndex>6</ZIndex>
             <Style>
@@ -1137,7 +1145,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.81697cm</Top>
-              <Left>0.00002cm</Left>
+              <Left>0.00005cm</Left>
               <Height>1.36672cm</Height>
               <Width>31.37967cm</Width>
               <ZIndex>1</ZIndex>
