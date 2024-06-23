@@ -192,8 +192,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                         if (dictPrevAssmnt.Count > 1)
                             prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
 
-                        monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(Helper.GetCurrentDate(), (assessmentYear, effectivityQuarter, effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
-
+                        var currentDate = Helper.GetCurrentDate();
+                        monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(currentDate, (currentDate.Year, effectivityQuarter, effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
                         decimal rowBasicRate = Convert.ToDecimal(dataRowDeliquency["basic_rate"]);
                         decimal rowSefRate = Convert.ToDecimal(dataRowDeliquency["sef_rate"]);
 
@@ -214,7 +214,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     newRow["location_of_property"] = locationOfProperty;
                     newRow["kind_of_property"] = propertyKind;
                     newRow["assessed_value"] = assessedValue;
-                    newRow["years_delinquent"] = monthsDelinquent / 12;
+                    newRow["years_delinquent"] = (double)monthsDelinquent / 12;
                     newRow["total_delinquency_as_of"] = total;
                     newRow["cost_of_sale"] = 0;
 
