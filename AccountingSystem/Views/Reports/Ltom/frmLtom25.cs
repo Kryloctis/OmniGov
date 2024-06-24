@@ -1,20 +1,23 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.Biddings.BiddingReports;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom25 : Form
     {
-        private ucPublicAuctionRegistrationForm ucPublicAuctionRegistrationForm;
+        int auctionId;
+        int bidderId;
 
         public frmLtom25()
         {
             InitializeComponent();
-            ucPublicAuctionRegistrationForm = ucPublicAuctionRegistrationForm1;
+            panel1.Controls.Add(reportViewer1);
         }
 
         private void ToogleRunButton(bool isGenerated)
@@ -63,22 +66,35 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
-            ToogleRunButton(false);
-            bool inValidFilter = cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1;
 
-            if (inValidFilter)
-                return;
+            try
+            {
+                ToogleRunButton(false);
+                bool inValidFilter = cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1;
 
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            int bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
+                if (inValidFilter)
+                    return;
 
-            ucPublicAuctionRegistrationForm.OnLoad(auctionId, bidderId);
-            ToogleRunButton(true);
+                LoadReport();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void LoadReport()
         {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                ToogleRunButton(false);
+
+                int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                int bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
+
+                auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                backgroundWorker1.RunWorkerAsync((auctionId, bidderId));
+            }
         }
+
 
         private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -90,5 +106,79 @@ namespace AccountingSystem.Views.Reports.Ltom
             LoadBidders();
         }
 
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var parameters = ((int auctionId, int bidderId))e.Argument;
+
+            var tasks = new Dictionary<string, int>
+            {
+                { "Fetch Bidder", 30},
+                { "Initialize Parameters", 20 },
+                { "Set Parameter Values", 40 },
+            };
+
+            int totalProgressCount = tasks.Sum(t => t.Value);
+            int progressCount = 0;
+
+            var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+            progressCount += tasks["Fetch Bidder"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+            var lguDetails = Helper.LGUDetails();
+            List<ReportParameter> reportParameters = new List<ReportParameter>();
+            progressCount += tasks["Initialize Parameters"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+            var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
+
+            reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
+            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
+            reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
+            reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));
+            reportParameters.Add(new ReportParameter("paramBidderName", dictBidder["name"]));
+            reportParameters.Add(new ReportParameter("paramTelephoneNo", dictBidder["contact_info"]));
+            reportParameters.Add(new ReportParameter("paramEmail", string.Empty));
+            reportParameters.Add(new ReportParameter("paramCitizenship", string.Empty));
+            reportParameters.Add(new ReportParameter("paramSex", string.Empty));
+
+            progressCount += tasks["Set Parameter Values"];
+            Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+            e.Result = reportParameters;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Cancelled)
+                {
+                    reportViewer1.Clear();
+                    progressBar1.Value = 100;
+                    ToogleRunButton(true);
+                    return;
+                }
+
+                var parameters = (List<ReportParameter>)e.Result;
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom25PublicAuctionRegFrm.rdlc";
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
+
+                ToogleRunButton(true);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

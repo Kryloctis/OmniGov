@@ -875,7 +875,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -914,7 +914,6 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
-                <Top>0in</Top>
                 <Left>0.05382cm</Left>
                 <Height>0.26736in</Height>
                 <Width>2.86837in</Width>

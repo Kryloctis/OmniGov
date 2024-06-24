@@ -40,7 +40,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadReport()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
@@ -86,8 +85,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
-
                 string lguName = Helper.LGUDetails()["lgu_name"]; ;
 
                 var reportParameters = new ReportParameter[]
@@ -96,11 +93,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramSignatory", string.Empty),
                 };
-
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
-                reportViewer1.ZoomPercent = 100;
-                reportViewer1.RefreshReport();
 
                 reportViewer1.Clear();
                 var report = reportViewer1.LocalReport;
@@ -114,6 +106,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
                 ToogleRunButton(true);
+
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
