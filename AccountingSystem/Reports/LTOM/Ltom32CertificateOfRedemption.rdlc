@@ -5,40 +5,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox13">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>OFFICE OF THE LOCAL TREASURER</Value>
-                    <Style>
-                      <FontFamily>Calibri</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0.03228cm</Left>
-            <Height>0.55137cm</Height>
-            <Width>19.68911cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox18">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -116,11 +82,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.34375in</Top>
-            <Left>0.00508in</Left>
-            <Height>0.36459in</Height>
-            <Width>7.75162in</Width>
-            <ZIndex>1</ZIndex>
+            <Top>0.28981in</Top>
+            <Height>0.54167in</Height>
+            <Width>5.70475in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -153,10 +117,10 @@
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>9.94862cm</Top>
-            <Left>13.61185cm</Left>
+            <Left>8.21435cm</Left>
             <Height>0.6cm</Height>
             <Width>6.09017cm</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -192,10 +156,10 @@
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>9.27806cm</Top>
-            <Left>13.61185cm</Left>
+            <Left>8.21435cm</Left>
             <Height>0.6cm</Height>
             <Width>6.09017cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -228,11 +192,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.92188in</Top>
+            <Top>1.04688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -263,11 +227,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.17188in</Top>
+            <Top>1.29688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -298,11 +262,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.42188in</Top>
+            <Top>1.54688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -333,11 +297,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.67188in</Top>
+            <Top>1.79688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -368,11 +332,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.92188in</Top>
+            <Top>2.04688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -403,11 +367,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.17188in</Top>
+            <Top>2.29688in</Top>
             <Left>0.01271in</Left>
             <Height>0.25in</Height>
             <Width>1.36932in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -439,11 +403,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.92188in</Top>
+            <Top>1.04688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>10</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -473,11 +437,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.17188in</Top>
+            <Top>1.29688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>11</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -507,11 +471,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.42188in</Top>
+            <Top>1.54688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>12</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -541,11 +505,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.67188in</Top>
+            <Top>1.79688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>13</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -575,11 +539,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.92188in</Top>
+            <Top>2.04688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>14</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -611,11 +575,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>2.17188in</Top>
+            <Top>2.29688in</Top>
             <Left>1.45147in</Left>
             <Height>0.25in</Height>
-            <Width>4.61896in</Width>
-            <ZIndex>15</ZIndex>
+            <Width>4.18023in</Width>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -690,8 +654,48 @@
             <rd:DefaultName>Textbox17</rd:DefaultName>
             <Top>2.65792in</Top>
             <Left>0.01271in</Left>
-            <Height>0.54167in</Height>
-            <Width>7.74399in</Width>
+            <Height>0.73959in</Height>
+            <Width>5.61899in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Date : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <Format>d</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Left>0.04958cm</Left>
+            <Height>0.55974cm</Height>
+            <Width>14.41478cm</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -704,73 +708,27 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>4.34375in</Height>
+        <Height>4.30014in</Height>
         <Style />
       </Body>
-      <Width>7.76433in</Width>
+      <Width>5.71453in</Width>
       <Page>
         <PageHeader>
-          <Height>0.90333in</Height>
+          <Height>1.49741in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox12">
+            <Textbox Name="Textbox53">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>REPUBLIC OF THE PHILIPPINES PROVINCE/CITY/MUNICIPALITY OF </Value>
+                      <Value>OFFICE OF THE LOCAL TREASURER</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!paramLGU.Value</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.76487cm</Top>
-              <Left>0.01291cm</Left>
-              <Height>0.96985cm</Height>
-              <Width>19.70202cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox11">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>LTOM FORM NO. 32 - CERTIFICATE OF REDEMPTION</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontSize>16pt</FontSize>
+                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -781,9 +739,72 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.01291cm</Left>
-              <Height>0.74641cm</Height>
-              <Width>19.68911cm</Width>
+              <Top>3.10581cm</Top>
+              <Left>0.04958cm</Left>
+              <Height>0.6976cm</Height>
+              <Width>14.46533cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox45">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>REPUBLIC OF THE PHILIPPINES </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Province/City/Municipality of</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value xml:space="preserve">  </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=UCase(Parameters!paramLGU.Value)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>1.70379cm</Top>
+              <Left>0.10013cm</Left>
+              <Height>1.2609cm</Height>
+              <Width>14.41478cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -795,23 +816,19 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox14">
+            <Textbox Name="Textbox56">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Date : </Value>
+                      <Value>LTOM FORM NO. 32 - </Value>
                       <Style>
+                        <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=Globals!ExecutionTime</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <Format>d</Format>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -821,14 +838,100 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.73472cm</Top>
-              <Height>0.55974cm</Height>
-              <Width>19.70202cm</Width>
+              <Top>0.26788in</Top>
+              <Left>0.10013cm</Left>
+              <Height>0.81168cm</Height>
+              <Width>4.92633cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox60">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>CERTIFICATE OF REDEMPTION</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>16pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox9</rd:DefaultName>
+              <Top>0.26789in</Top>
+              <Left>1.97291in</Left>
+              <Height>0.31955in</Height>
+              <Width>3.72172in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line1">
+              <Top>0.26789in</Top>
+              <Left>5.71156in</Left>
+              <Height>0in</Height>
+              <Width>-5.69885in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Orange</Color>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>FORMS AND ANNEXES</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#231f20</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Left>0.03942in</Left>
+              <Height>0.23223in</Height>
+              <Width>5.66533in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -842,12 +945,12 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>10.27in</PageHeight>
+        <PageWidth>7.2in</PageWidth>
+        <LeftMargin>0.73in</LeftMargin>
+        <RightMargin>0.73in</RightMargin>
+        <TopMargin>0.24in</TopMargin>
+        <BottomMargin>0.31in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
