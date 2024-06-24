@@ -37,12 +37,13 @@
             cmbxBidders = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
-            ucRulesAndRegulation1 = new Transactions.Biddings.BiddingReports.ucRulesAndRegulation();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -66,6 +67,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(progressBar1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(800, 450);
             splitContainer1.SplitterDistance = 211;
@@ -145,20 +147,36 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(ucRulesAndRegulation1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(4, 4);
+            panel1.Location = new System.Drawing.Point(4, 9);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(577, 442);
-            panel1.TabIndex = 12;
+            panel1.Size = new System.Drawing.Size(577, 437);
+            panel1.TabIndex = 10;
             // 
-            // ucRulesAndRegulation1
+            // progressBar1
             // 
-            ucRulesAndRegulation1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucRulesAndRegulation1.Location = new System.Drawing.Point(0, 0);
-            ucRulesAndRegulation1.Name = "ucRulesAndRegulation1";
-            ucRulesAndRegulation1.Size = new System.Drawing.Size(577, 442);
-            ucRulesAndRegulation1.TabIndex = 1;
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(577, 5);
+            progressBar1.TabIndex = 9;
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmLtom28
             // 
@@ -178,15 +196,12 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
-        private Transactions.Biddings.BiddingReports.ucRulesAndRegulation ucRulesAndRegulation1;
         private System.Windows.Forms.ComboBox cmbxProperty;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
@@ -194,5 +209,9 @@
         private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.ComboBox cmbxBidders;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

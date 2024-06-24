@@ -452,15 +452,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>II.</Value>
+                    <Value>II. </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> CONDUCT OF AUCTION :</Value>
+                    <Value>CONDUCT OF AUCTION :</Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -1257,7 +1258,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.17639cm</Top>
+            <Top>0.49389cm</Top>
             <Left>0.0386cm</Left>
             <Height>25.14708in</Height>
             <Width>5.70897in</Width>
@@ -1276,7 +1277,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>25.21653in</Height>
+        <Height>25.34152in</Height>
         <Style />
       </Body>
       <Width>5.72417in</Width>
