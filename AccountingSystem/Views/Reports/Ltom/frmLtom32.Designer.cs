@@ -93,17 +93,17 @@
             // 
             cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(8, 72);
+            cmbxProperty.Location = new System.Drawing.Point(7, 76);
             cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
+            cmbxProperty.Size = new System.Drawing.Size(201, 23);
             cmbxProperty.TabIndex = 32;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(7, 55);
+            label1.Location = new System.Drawing.Point(7, 59);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(66, 15);
             label1.TabIndex = 31;
@@ -111,7 +111,7 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(8, 101);
+            btnRunReport.Location = new System.Drawing.Point(8, 105);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 30;

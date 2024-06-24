@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
-            label2 = new System.Windows.Forms.Label();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
@@ -56,8 +56,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(cmbxProperty);
-            splitContainer1.Panel1.Controls.Add(label2);
+            splitContainer1.Panel1.Controls.Add(txtRpt);
+            splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
@@ -74,26 +74,25 @@
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 6;
             // 
-            // cmbxProperty
+            // txtRpt
             // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(7, 78);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 26;
-            cmbxProperty.SelectedIndexChanged += cmbxProperty_SelectedIndexChanged;
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(6, 77);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 34;
+            txtRpt.TextChanged += txtRpt_TextChanged;
             // 
-            // label2
+            // label4
             // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label2.Location = new System.Drawing.Point(7, 60);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(111, 15);
-            label2.TabIndex = 25;
-            label2.Text = "Auction Properties :";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(6, 59);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 33;
+            label4.Text = "ARP No. :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -135,6 +134,7 @@
             cmbxBidders.Name = "cmbxBidders";
             cmbxBidders.Size = new System.Drawing.Size(200, 23);
             cmbxBidders.TabIndex = 21;
+            cmbxBidders.SelectedIndexChanged += cmbxBidders_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -142,9 +142,9 @@
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             label3.Location = new System.Drawing.Point(7, 109);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(51, 15);
+            label3.Size = new System.Drawing.Size(55, 15);
             label3.TabIndex = 20;
-            label3.Text = "Biiders : ";
+            label3.Text = "Bidders : ";
             // 
             // panel1
             // 
@@ -218,11 +218,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbxProperty;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label4;
     }
 }

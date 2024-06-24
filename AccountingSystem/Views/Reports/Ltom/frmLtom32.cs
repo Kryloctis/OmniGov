@@ -88,5 +88,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             LoadProperties();
         }
+
     }
 }
