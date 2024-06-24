@@ -37,8 +37,11 @@
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
-            ucUnderTakingAndWaiverOfBidders1 = new Transactions.Biddings.BiddingReports.ucUnderTakingAndWaiverOfBidders();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            panel1 = new System.Windows.Forms.Panel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -146,20 +149,13 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(ucUnderTakingAndWaiverOfBidders1);
+            panel3.Controls.Add(panel1);
+            panel3.Controls.Add(progressBar1);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 4);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(577, 420);
             panel3.TabIndex = 12;
-            // 
-            // ucUnderTakingAndWaiverOfBidders1
-            // 
-            ucUnderTakingAndWaiverOfBidders1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucUnderTakingAndWaiverOfBidders1.Location = new System.Drawing.Point(0, 0);
-            ucUnderTakingAndWaiverOfBidders1.Name = "ucUnderTakingAndWaiverOfBidders1";
-            ucUnderTakingAndWaiverOfBidders1.Size = new System.Drawing.Size(577, 420);
-            ucUnderTakingAndWaiverOfBidders1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -168,6 +164,39 @@
             statusStrip1.Size = new System.Drawing.Size(800, 22);
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // panel1
+            // 
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 5);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(577, 415);
+            panel1.TabIndex = 8;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 0);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(577, 5);
+            progressBar1.TabIndex = 7;
             // 
             // frmLtom27
             // 
@@ -202,8 +231,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private Transactions.Biddings.BiddingReports.ucUnderTakingAndWaiverOfBidders ucUnderTakingAndWaiverOfBidders1;
         private System.Windows.Forms.ComboBox cmbxProperties;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }
