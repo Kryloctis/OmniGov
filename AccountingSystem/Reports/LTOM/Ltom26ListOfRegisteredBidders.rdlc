@@ -536,7 +536,7 @@
             <Top>1.64122in</Top>
             <Left>0.02757cm</Left>
             <Height>0.69792in</Height>
-            <Width>8.43913in</Width>
+            <Width>8.43912in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -578,9 +578,9 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>3.26563in</Top>
+            <Top>3.20487in</Top>
             <Left>8.53387in</Left>
-            <Height>-3.26563in</Height>
+            <Height>-3.20487in</Height>
             <Width>0in</Width>
             <ZIndex>4</ZIndex>
             <RepeatWith>Tablix2</RepeatWith>
@@ -909,7 +909,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.26563in</Height>
+        <Height>3.31945in</Height>
         <Style />
       </Body>
       <Width>8.76889in</Width>
