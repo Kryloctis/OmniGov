@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Reports.Ltom
     public partial class frmLtom24 : Form
     {
 
-        private int auctionId;
-        private int propertyId;
+        int auctionId;
+        int rptId;
 
         public frmLtom24()
         {
@@ -26,6 +26,7 @@ namespace AccountingSystem.Views.Reports.Ltom
             btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
             btnRunReport.Enabled = isGenerated;
         }
+
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
@@ -38,34 +39,10 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadReport()
-        {
-
-            if (!backgroundWorker1.IsBusy)
-            {
-                progressBar1.Value = 0;
-                ToogleRunButton(false);
-                auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                propertyId = Convert.ToInt32(cmbxProperty.SelectedValue);
-                backgroundWorker1.RunWorkerAsync((auctionId, propertyId));
-            }
-        }
-
         private void LoadAuctionSchedule()
         {
             DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
-        }
-
-        private void OnLoad()
-        {
-            cmbxAuctionSchedule.ResetText();
-            cmbxProperty.ResetText();
-            cmbxAuctionSchedule.SelectedIndex = -1;
-            cmbxProperty.SelectedIndex = -1;
-
-            LoadAuctionSchedule();
-            LoadProperties();
         }
 
         private void LoadProperties()
@@ -79,6 +56,27 @@ namespace AccountingSystem.Views.Reports.Ltom
             cmbxProperty.DisplayMember = "complete_arp_no";
         }
 
+
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
+
+        }
+
+
+
+        private void OnLoad()
+        {
+            cmbxAuctionSchedule.ResetText();
+            cmbxProperty.ResetText();
+            cmbxAuctionSchedule.SelectedIndex = -1;
+            cmbxProperty.SelectedIndex = -1;
+
+            LoadAuctionSchedule();
+            LoadProperties();
+        }
+
+
         private void frmLtom24_Load(object sender, EventArgs e)
         {
             try
@@ -88,10 +86,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
 
         private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate,
                                                      (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters,
@@ -114,77 +108,79 @@ namespace AccountingSystem.Views.Reports.Ltom
         }
 
 
+        private void LoadReport()
+        {
+
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                ToogleRunButton(false);
+                auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
+                backgroundWorker1.RunWorkerAsync((auctionId, rptId));
+            }
+        }
+
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
-
                 var parameters = ((int auctionId, int rptId))e.Argument;
 
-                var auctionModel = new AuctionModel() { Id = parameters.auctionId };
-                var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
 
-                var dbRptAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+                var dictAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(parameters.auctionId, parameters.rptId);
+                string completeArpNo = dictAuctionProperties["complete_arp_no"].ToString();
+                int taxPayersId = Convert.ToInt32(dictAuctionProperties["taxpayers_id"]);
+
+
+                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, Helper.GetCurrentDate().Year, completeArpNo, true);
                 var dtRptAuctionProperties = new dsTreasury.dtLtom24DataTable();
-
-                int totalProgressCount = dbRptAuctionProperties.Rows.Count;
+                int totalProgressCount = dtAssessmentPosting.Rows.Count;
                 int progressCount = 0;
 
-                foreach (DataRow dataRow in dbRptAuctionProperties.Rows)
+
+                foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
+                    decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
+                    decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
+                    decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
+                    decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+                    DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
+                    int assessmentYear = Convert.ToInt32(row["year"]);
+                    int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
+                    int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                    string rptPaymentId = row["rpt_payments_id"].ToString();
+
+                    decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
+                    decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
+
+                    var penaltyParameters = (assessmentYear, completeArpNo, effectivityQuarter, effectivityYear);
+                    var penalties = GetPenalties(Helper.GetCurrentDate(), penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
+
+                    //Get discount rate
+                    var discountParameters = (postedAt, assessmentYear);
+                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(Helper.GetCurrentDate(), discountParameters);
+
+                    //Apply Discounts
+                    decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDue);
+                    decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDue);
+
+                    decimal basicPenaltyDiscount = penalties.basicPenalty > 0 ? penalties.basicPenalty : -basicDiscount;
+                    decimal sefPenaltyDiscount = penalties.sefPenalty > 1 ? penalties.sefPenalty : -sefDiscount;
+
+                    decimal totalBasicPayment = basicTaxDue + basicPenaltyDiscount;
+                    decimal totalSefPayment = sefTaxDue + sefPenaltyDiscount;
+                    decimal totalTaxDue = totalBasicPayment + totalSefPayment;
+
+
                     var newRow = dtRptAuctionProperties.NewRow();
 
-                    string completeArpNo = dataRow["complete_arp_no"].ToString();
-                    decimal assessedValue = Convert.ToDecimal(dataRow["assessed_value"]);
-                    int monthsDelinquent = 0;
-                    decimal basicTaxDue = 0;
-                    decimal sefTaxDue = 0;
-                    decimal penaltyRate = 0;
-                    decimal totalTaxDue = 0;
-                    decimal total = 0;
-
-                    #region Computation
-                    //var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(parameters.rptId);
-                    var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
-
-                    foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
-                    {
-                        int assessmentYear = Convert.ToInt32(dataRowDeliquency["year"]);
-                        int effectivityQuarter = Convert.ToInt32(dataRowDeliquency["effectivity_quarterly"]);
-                        int effectivityYear = Convert.ToInt32(dataRowDeliquency["effectivity_year"]);
-                        var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(completeArpNo, assessmentYear);
-
-                        int? prevAssmntYear = null;
-
-                        if (dictPrevAssmnt.Count > 1)
-                            prevAssmntYear = Convert.ToInt32(dictPrevAssmnt["year"]);
-
-                        monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(Helper.GetCurrentDate(), (assessmentYear, effectivityQuarter, effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
-
-                        decimal rowBasicRate = Convert.ToDecimal(dataRowDeliquency["basic_rate"]);
-                        decimal rowSefRate = Convert.ToDecimal(dataRowDeliquency["sef_rate"]);
-
-                        basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, assessedValue);
-                        sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, assessedValue);
-                        penaltyRate = Convert.ToDecimal(dataRowDeliquency["penalty_rate"]);
-
-                        var penaltyParameters = (assessmentYear, completeArpNo, effectivityQuarter, effectivityYear);
-                        var penalties = GetPenalties(Helper.GetCurrentDate(), penaltyParameters, penaltyRate, basicTaxDue, sefTaxDue);
-
-                        totalTaxDue = basicTaxDue + sefTaxDue;
-                        total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
-
-
-                        newRow["tax_year"] = assessmentYear;
-                        newRow["basic_tax"] = basicTaxDue;
-                        newRow["basic_penalty"] = penalties.basicPenalty;
-                        newRow["sef_tax"] = sefTaxDue;
-                        newRow["sef_penalty"] = penalties.sefPenalty;
-                        newRow["total_amount"] = total;
-
-                    }
-                    #endregion
-
+                    newRow["tax_year"] = assessmentYear;
+                    newRow["basic_tax"] = basicTaxDue;
+                    newRow["basic_penalty"] = penalties.basicPenalty;
+                    newRow["sef_tax"] = sefTaxDue;
+                    newRow["sef_penalty"] = penalties.sefPenalty;
+                    newRow["total_amount"] = totalTaxDue;
 
                     dtRptAuctionProperties.Rows.Add(newRow);
                     progressCount++;
@@ -215,18 +211,13 @@ namespace AccountingSystem.Views.Reports.Ltom
                     progressBar1.Value = 100;
 
 
-                var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom24NoticeSale.rdlc";
-                report.DataSources.Clear();
-
-
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, propertyId);
+                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -239,13 +230,17 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramSignatory", string.Empty),
                 };
 
+                reportViewer1.Clear();
+                var report = reportViewer1.LocalReport;
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom24NoticeSale.rdlc";
+                report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtLtom24", dataTable));
                 report.SetParameters(reportParameters);
+                report.Refresh();
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-
                 ToogleRunButton(true);
             }
 
