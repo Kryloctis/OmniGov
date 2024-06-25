@@ -213,11 +213,15 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
+                string lguName = Helper.LGUDetails()["municipality"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+
+                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(rptId);
+                var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRpt["barangay_name"], dictRpt["municipality_name"], dictRpt["province_name"]);
+                var assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -226,6 +230,13 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramPlaceOfAuction", location),
                     new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
                     new ReportParameter("paramCompleteAddress", dictAuctionProperty["taxpayer_address"]),
+
+                    new ReportParameter("paramTaxDeclaractionNo", dictAuctionProperty["complete_arp_no"]),
+                    new ReportParameter("paramTCT", string.Empty),
+                    new ReportParameter("paramLocationOfProperty", propertyLocation),
+                    new ReportParameter("paramPropertyKind", dictAuctionProperty["property_kind"]),
+                    new ReportParameter("paramAssessedValue", assessedValue.ToString("N2")),
+
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramSignatory", string.Empty),
                 };
@@ -241,6 +252,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+
                 ToogleRunButton(true);
             }
 
