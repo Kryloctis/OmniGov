@@ -92,9 +92,9 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Location = new System.Drawing.Point(5, 114);
             btnRunReport.Name = "btnRunReport";
-            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.Size = new System.Drawing.Size(202, 23);
             btnRunReport.TabIndex = 24;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;

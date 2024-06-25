@@ -83,10 +83,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                 progressBar1.Value = 0;
                 ToogleRunButton(false);
 
-                int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
-
                 auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+
                 backgroundWorker1.RunWorkerAsync((auctionId, bidderId));
             }
         }

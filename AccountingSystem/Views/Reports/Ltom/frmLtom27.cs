@@ -11,6 +11,12 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom27 : Form
     {
+        int auctionId;
+        int bidderId;
+        int rptAuctionId;
+        private DataTable dtAuctionRpt;
+
+
         public frmLtom27()
         {
             InitializeComponent();
@@ -35,11 +41,9 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void ResetForm()
         {
             cmbxAuctionSchedule.ResetText();
-            cmbxProperties.ResetText();
             cmbxBidders.ResetText();
 
             cmbxAuctionSchedule.SelectedIndex = -1;
-            cmbxProperties.SelectedIndex = -1;
             cmbxBidders.SelectedIndex = -1;
         }
 
@@ -53,12 +57,13 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
-            cmbxProperties.ValueMember = "rpt_auction_id";
-            cmbxProperties.DisplayMember = "complete_arp_no";
-            cmbxProperties.DataSource = auctionProperties;
+            var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCom = new AutoCompleteStringCollection();
+            autoCom.Clear();
+            autoCom.AddRange(autoCompleteSrc.ToArray());
+            txtRpt.AutoCompleteCustomSource = autoCom;
         }
 
         private void LoadAuctionSchedule()
@@ -69,48 +74,53 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadBidders()
         {
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            int rptAuctionId = Convert.ToInt32(cmbxProperties.SelectedValue);
+            rptAuctionId = Convert.ToInt32(dtAuctionRpt.AsEnumerable()
+                                   .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                                   .Select(row => row["rpt_auction_id"])
+                                   .FirstOrDefault());
 
-            var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
+            if (rptAuctionId is not 0)
+            {
+                int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
 
-            HelperLoadRecords.BiddersCombobox(dtBidders, cmbxBidders, "name", "id");
+                cmbxBidders.DisplayMember = "name";
+                cmbxBidders.ValueMember = "id";
+                cmbxBidders.DataSource = dtBidders;
+            }
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
-                if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1)
+                bool inValidFilter = cmbxAuctionSchedule.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtRpt.Text.Trim()) || cmbxBidders.SelectedIndex == -1;
+
+                if (inValidFilter)
                     return;
 
                 LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
                 ToogleRunButton(false);
-                int rptAuctionId = Convert.ToInt32(cmbxProperties.SelectedValue);
-                int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
-                backgroundWorker1.RunWorkerAsync((rptAuctionId, biddersId));
+                bidderId = Convert.ToInt32(cmbxBidders.SelectedValue);
+                backgroundWorker1.RunWorkerAsync((rptAuctionId, bidderId));
             }
         }
-
 
         private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProperties();
         }
 
-        private void cmbxProperties_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadBidders();
-        }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -191,6 +201,11 @@ namespace AccountingSystem.Views.Reports.Ltom
                 ToogleRunButton(true);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void txtRpt_TextChanged(object sender, EventArgs e)
+        {
+            LoadBidders();
         }
     }
 }

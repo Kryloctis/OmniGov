@@ -32,16 +32,16 @@
             cmbxBidders = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            cmbxProperties = new System.Windows.Forms.ComboBox();
-            label2 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             panel1 = new System.Windows.Forms.Panel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -58,11 +58,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(txtRpt);
+            splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(cmbxBidders);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(cmbxProperties);
-            splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
@@ -105,27 +105,6 @@
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
             // 
-            // cmbxProperties
-            // 
-            cmbxProperties.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperties.FormattingEnabled = true;
-            cmbxProperties.Location = new System.Drawing.Point(7, 81);
-            cmbxProperties.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperties.Name = "cmbxProperties";
-            cmbxProperties.Size = new System.Drawing.Size(200, 23);
-            cmbxProperties.TabIndex = 18;
-            cmbxProperties.SelectedIndexChanged += cmbxProperties_SelectedIndexChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label2.Location = new System.Drawing.Point(7, 64);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(66, 15);
-            label2.TabIndex = 17;
-            label2.Text = "Properties :";
-            // 
             // cmbxAuctionSchedule
             // 
             cmbxAuctionSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -157,14 +136,6 @@
             panel3.Size = new System.Drawing.Size(577, 420);
             panel3.TabIndex = 12;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 428);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(800, 22);
-            statusStrip1.TabIndex = 9;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // panel1
             // 
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -172,6 +143,22 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(577, 415);
             panel1.TabIndex = 8;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 0);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(577, 5);
+            progressBar1.TabIndex = 7;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(800, 22);
+            statusStrip1.TabIndex = 9;
+            statusStrip1.Text = "statusStrip1";
             // 
             // backgroundWorker1
             // 
@@ -190,13 +177,25 @@
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
             // 
-            // progressBar1
+            // txtRpt
             // 
-            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 0);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(577, 5);
-            progressBar1.TabIndex = 7;
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(7, 80);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 36;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(7, 62);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 35;
+            label4.Text = "ARP No. :";
             // 
             // frmLtom27
             // 
@@ -231,11 +230,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ComboBox cmbxProperties;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label4;
     }
 }

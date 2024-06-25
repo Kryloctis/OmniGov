@@ -109,7 +109,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
-
         }
 
         private void OnLoad()
@@ -207,11 +206,13 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
 
-
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
                 string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";
 
                 var dictBid = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(auctionId, rptId);
+
+                if (dictBid.Count == 0)
+                    return;
 
                 var reportParameters = new ReportParameter[]
                 {

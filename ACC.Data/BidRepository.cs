@@ -32,7 +32,7 @@ namespace ACC.Data
                 new object[] { "@real_properties_id", DbType.Int32, rptId }
             };
 
-            string query = $"SELECT *, MAX(bid_amount) bid_amount FROM {viewTableName} WHERE auction_id = @auction_id AND real_properties_id = @real_properties_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id  ORDER BY bid_amount DESC LIMIT 1";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -116,6 +116,17 @@ namespace ACC.Data
         {
             string query = $"SELECT * FROM {viewTableName}";
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
+
+        public DataTable GetViewRecordsByAuctionId(int auctionId)
+        {
+            var parameters = new object[][] {
+                new object[] { "@auction_id", DbType.Int32, auctionId },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
