@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal bool isCashTickets;
         internal bool isCollectorJO;
-        internal bool isUpdate;
+        internal bool isEdit;
 
         public ucReceiptsIssued()
         {
@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             selectedReceiptID = 0;
             collectingOfficerId = 0;
             isCashTickets = false;
-            isUpdate = false;
             receiptNumberFrom = 0;
             txtReceiptQuantity.Clear();
             txtReceiptIssuedTo.Clear();
@@ -146,10 +145,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 if (remainingReceipts == 0)
                 {
-                    if (isUpdate && selectedReceiptID != receiptsId)
+                    if (isEdit && selectedReceiptID != receiptsId)
                         row.Delete();
 
-                    if (!isUpdate)
+                    if (!isEdit)
                         row.Delete();
                 }
 
@@ -240,7 +239,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 isReceiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
 
-                if (isUpdate)
+                if (isEdit)
                     isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
                 else
                     isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
@@ -250,11 +249,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 else
                     return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                return false;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); return false; }
         }
 
         private bool ReceiptNumberExist(int receiptNumber)
@@ -351,7 +346,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 SetFieldsForNonCashTickets();
 
-                if (!isUpdate)
+                if (!isEdit)
                     txtReceiptIssuedFrom.Text = (receiptNumberFrom + totalIssuedReceipt).ToString("D7");
             }
         }

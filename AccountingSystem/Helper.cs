@@ -979,21 +979,30 @@ namespace AccountingSystem
             }
         }
 
+        public static void ShowRecordTimestampMod(DataGridView dataGridView, ToolStripLabel lblCreatedAt, ToolStripLabel lblUpdatedAt)
+        {
+            // Check if a row is selected
+            if (dataGridView.Columns.Contains("created_at") && dataGridView.Columns.Contains("updated_at") && dataGridView.SelectedRows.Count > 0)
+            {
+                // Retrieve the values from the "created_at" and "updated_at" columns
+                var createdAtValue = dataGridView.CurrentRow.Cells["created_at"].Value;
+                var updatedAtValue = dataGridView.CurrentRow.Cells["updated_at"].Value;
+
+                // Convert values to string (or handle null values appropriately)
+                lblCreatedAt.Text = !string.IsNullOrWhiteSpace(createdAtValue.ToString()) ? Convert.ToDateTime(createdAtValue).ToShortDateString() : string.Empty;
+                lblUpdatedAt.Text = !string.IsNullOrWhiteSpace(updatedAtValue.ToString()) ? Convert.ToDateTime(updatedAtValue).ToShortDateString() : string.Empty;
+            }
+            else
+            {
+                // If no row is selected, you can handle it accordingly
+                lblCreatedAt.Text = string.Empty;
+                lblUpdatedAt.Text = string.Empty;
+            }
+        }
+
         public static string TruncateString(string myString, int maxLength)
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
-        }
-
-        public static Dictionary<string, int> DelinquencyStatus()
-        {
-            Dictionary<string, int> dictDelinquencyStatus = new Dictionary<string, int>();
-
-            dictDelinquencyStatus.Add("Notified", 0);
-            dictDelinquencyStatus.Add("First Notice Sent", 1);
-            dictDelinquencyStatus.Add("Second Notice Sent", 2);
-            dictDelinquencyStatus.Add("Final Notice Sent", 3);
-
-            return dictDelinquencyStatus;
         }
     }
 }

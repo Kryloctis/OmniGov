@@ -31,7 +31,7 @@ namespace ACC.Domain.Interfaces
 
         bool ReceiptHasIssuance(int receiptId);
 
-        DataTable GetRecordsBySearch(DateTime dateIssued, string searchText);
+        DataTable GetRecordsBySearch(DateTime dateIssued, string searchText, int rowLimit);
 
         bool ReceiptNumberInRange(int receiptId, int receiptNumber);
 

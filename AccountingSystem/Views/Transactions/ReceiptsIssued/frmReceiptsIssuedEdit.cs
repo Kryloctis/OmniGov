@@ -8,17 +8,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReceiptsIssuedEdit : Form
     {
-        private frmReceiptsIssued _frmReceiptsIssued;
+        private int receiptIssuedID;
+        private frmReceiptsIssued frmReceiptsIssued;
         private readonly ucReceiptsIssued uc;
 
         public frmReceiptsIssuedEdit(frmReceiptsIssued frmReceiptsIssued, int receiptIssuedID)
         {
             InitializeComponent();
-            _frmReceiptsIssued = frmReceiptsIssued;
-
+            Helper.LoadFormIcon(this);
+            this.frmReceiptsIssued = frmReceiptsIssued;
             uc = ucReceipts1;
-            uc.isUpdate = true;
-            uc.receiptIssuedId = receiptIssuedID;
+            this.receiptIssuedID = receiptIssuedID;
         }
 
         internal void LoadSelectedValue()
@@ -73,10 +73,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                LoadSelectedValue();
-                CheckReceiptsIssuedStatus();
+                uc.isEdit = true;
+                uc.receiptIssuedId = receiptIssuedID;
                 uc.LoadReceipts();
                 uc.ControlsConfiguration();
+                LoadSelectedValue();
+                CheckReceiptsIssuedStatus();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -119,7 +121,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt Issued has been updated.");
-                    _frmReceiptsIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
+                    frmReceiptsIssued.LoadRecords();
                     Close();
                 }
             }

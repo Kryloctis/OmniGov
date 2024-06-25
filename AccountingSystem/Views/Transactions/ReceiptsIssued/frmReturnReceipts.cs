@@ -7,13 +7,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReturnReceipts : Form
     {
-        private readonly frmReceiptsIssued _frmReceiptsIssued;
+        private readonly frmReceiptsIssued frmReceiptsIssued;
         private readonly int issuanceId;
 
         public frmReturnReceipts(frmReceiptsIssued frmReceiptsIssued, int issuanceId, int returnSerialNumberFrom, int returnSerialNumberTo)
         {
             InitializeComponent();
-            _frmReceiptsIssued = frmReceiptsIssued;
+            this.frmReceiptsIssued = frmReceiptsIssued;
 
             this.issuanceId = issuanceId;
             txtReceiptNumberFrom.Text = returnSerialNumberFrom.ToString("D8");
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt successfully returned.");
-                    _frmReceiptsIssued.LoadRecords();
+                    frmReceiptsIssued.LoadRecords();
                     Close();
                 }
             }

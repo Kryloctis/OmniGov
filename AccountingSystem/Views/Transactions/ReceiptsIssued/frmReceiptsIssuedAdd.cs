@@ -7,23 +7,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReceiptsIssuedAdd : Form
     {
-        private readonly frmReceiptsIssued _frmReceiptIssued;
+        private readonly frmReceiptsIssued frmReceiptIssued;
         private readonly ucReceiptsIssued uc;
 
         public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued)
         {
             InitializeComponent();
-
-            _frmReceiptIssued = frmReceiptsIssued;
+            Helper.LoadFormIcon(this);
+            frmReceiptIssued = frmReceiptsIssued;
             uc = ucReceipts1;
         }
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
@@ -58,9 +54,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 receiptIssuedModel.JobOrderId = collectorId;
                 receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
             }
-
-            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-            return receiptIssuedRepository.Insert(receiptIssuedModel);
+            return AccFactory.ReceiptsIssuedRepository().Insert(receiptIssuedModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -70,14 +64,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Receipt issued has been saved.");
-                    _frmReceiptIssued.bgwLoadIssuedReceipts.RunWorkerAsync();
+                    frmReceiptIssued.LoadRecords();
                     uc.ResetForm();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
