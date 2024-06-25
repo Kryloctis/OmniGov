@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             OnLoad();
         }
+
         private void OnLoad()
         {
             LoadAuctionSchedule();
@@ -60,20 +61,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
         }
-
-
-        private void LoadBidders()
-        {
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            int rptAuctionId = 11;
-            var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
-
-            cmbxBidders.DisplayMember = "name";
-            cmbxBidders.ValueMember = "id";
-            cmbxBidders.DataSource = dtBidders;
-        }
-
-
 
 
         private void btnRunReport_Click(object sender, System.EventArgs e)
@@ -106,13 +93,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         }
 
 
-
-
-        private void cmbxProperty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadBidders();
-        }
-
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             var parameters = ((int auctionId, int bidderId))e.Argument;
@@ -138,6 +118,8 @@ namespace AccountingSystem.Views.Reports.Ltom
 
             var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
 
+
+
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
             reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
@@ -146,8 +128,15 @@ namespace AccountingSystem.Views.Reports.Ltom
             reportParameters.Add(new ReportParameter("paramBidderName", dictBidder["name"]));
             reportParameters.Add(new ReportParameter("paramTelephoneNo", dictBidder["contact_info"]));
             reportParameters.Add(new ReportParameter("paramEmail", string.Empty));
-            reportParameters.Add(new ReportParameter("paramCitizenship", string.Empty));
-            reportParameters.Add(new ReportParameter("paramSex", string.Empty));
+
+            if (isRepresentative)
+            {
+                var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(Convert.ToInt32(dictBidder["representative_registry_id"]));
+                reportParameters.Add(new ReportParameter("paramCitizenship", dictRegistry["nationality"]));
+                reportParameters.Add(new ReportParameter("paramSex", dictRegistry["sex"]));
+            }
+
+
 
             progressCount += tasks["Set Parameter Values"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

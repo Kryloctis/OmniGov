@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.Biddings.BiddingReports;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,12 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom28 : Form
     {
-        private ucRulesAndRegulation ucRulesAndRegulation;
+        int auctionId;
+        int bidderId;
+        int rptAuctionId;
+
+        private DataTable dtAuctionRpt;
+
         public frmLtom28()
         {
             InitializeComponent();
@@ -31,7 +35,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 progressBar1.Value = 0;
                 ToogleRunButton(false);
-                int rptAuctionId = Convert.ToInt32(cmbxProperty.SelectedValue);
                 int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
                 backgroundWorker1.RunWorkerAsync((rptAuctionId, biddersId));
@@ -45,12 +48,13 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
-            cmbxProperty.ValueMember = "rpt_auction_id";
-            cmbxProperty.DisplayMember = "complete_arp_no";
-            cmbxProperty.DataSource = auctionProperties;
+            var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCom = new AutoCompleteStringCollection();
+            autoCom.Clear();
+            autoCom.AddRange(autoCompleteSrc.ToArray());
+            txtRpt.AutoCompleteCustomSource = autoCom;
         }
 
         private void LoadAuctionSchedule()
@@ -61,12 +65,20 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadBidders()
         {
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            int rptAuctionId = Convert.ToInt32(cmbxProperty.SelectedValue);
+            rptAuctionId = Convert.ToInt32(dtAuctionRpt.AsEnumerable()
+                       .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                       .Select(row => row["rpt_auction_id"])
+                       .FirstOrDefault());
 
-            var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
+            if (rptAuctionId is not 0)
+            {
+                int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
 
-            HelperLoadRecords.BiddersCombobox(dtBidders, cmbxBidders, "name", "id");
+                cmbxBidders.DisplayMember = "name";
+                cmbxBidders.ValueMember = "id";
+                cmbxBidders.DataSource = dtBidders;
+            }
         }
 
         private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,7 +90,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 int biddersId = Convert.ToInt32(cmbxBidders.SelectedValue);
 
@@ -144,11 +155,11 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-
                 if (e.Cancelled)
                 {
                     reportViewer1.Clear();
                     progressBar1.Value = 100;
+                    ToogleRunButton(true);
                     return;
                 }
 
@@ -163,8 +174,15 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
 
+                ToogleRunButton(true);
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void txtRpt_TextChanged(object sender, EventArgs e)
+        {
+            LoadBidders();
         }
     }
 }

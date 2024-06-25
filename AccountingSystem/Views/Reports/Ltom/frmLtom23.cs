@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                ToogleRunButton(false);
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
                 if (cmbxAuctionSchedule.SelectedIndex == -1)
                     return;
@@ -135,6 +134,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+                ToogleRunButton(true);
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -144,6 +144,12 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             progressBar1.Value = e.ProgressPercentage;
         }
+
+        private double GetYearsFromMonths(int months)
+        {
+            return (double)months / 12;
+        }
+
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -195,6 +201,8 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                         var currentDate = Helper.GetCurrentDate();
                         monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(currentDate, (currentDate.Year, effectivityQuarter, effectivityYear), prevAssmntYear.HasValue ? prevAssmntYear : null);
+                        //monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(currentDate, (currentDate.Year, effectivityQuarter, effectivityYear), null);
+
                         decimal rowBasicRate = Convert.ToDecimal(dataRowDeliquency["basic_rate"]);
                         decimal rowSefRate = Convert.ToDecimal(dataRowDeliquency["sef_rate"]);
 
@@ -207,6 +215,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                         totalTaxDue = basicTaxDue + sefTaxDue;
                         total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
+                        break;
                     }
                     #endregion
 
@@ -215,7 +224,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     newRow["location_of_property"] = locationOfProperty;
                     newRow["kind_of_property"] = propertyKind;
                     newRow["assessed_value"] = assessedValue;
-                    newRow["years_delinquent"] = (double)monthsDelinquent / 12;
+                    newRow["years_delinquent"] = GetYearsFromMonths(monthsDelinquent);
                     newRow["total_delinquency_as_of"] = total;
                     newRow["cost_of_sale"] = 0;
 
