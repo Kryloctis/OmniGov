@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom29CertificateOfSale.rdlc";
                 report.DataSources.Clear();
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
+                string lguName = Helper.LGUDetails()["municipality"];
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
                 string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";

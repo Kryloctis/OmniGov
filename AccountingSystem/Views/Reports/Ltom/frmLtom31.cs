@@ -1,6 +1,8 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Transactions.Auction;
+using ACC.Domain.Models;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -8,12 +10,12 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom31 : Form
     {
-        private ucReportOfSale ucReportOfSale;
+        int auctionId;
 
         public frmLtom31()
         {
             InitializeComponent();
-            ucReportOfSale = ucReportOfSale1;
+            panel1.Controls.Add(reportViewer1);
         }
 
         private void ToogleRunButton(bool isGenerated)
@@ -30,11 +32,20 @@ namespace AccountingSystem.Views.Reports.Ltom
                 if (cmbxAuctionSchedule.SelectedIndex == -1)
                     return;
 
-                ucReportOfSale.OnLoad(auctionId);
-                ToogleRunButton(true);
-
+                LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
+        private void LoadReport()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                ToogleRunButton(false);
+                auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+                backgroundWorker1.RunWorkerAsync(auctionId);
+            }
         }
 
         private void LoadAuctionSchedule()
@@ -60,14 +71,79 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+
+        private DataTable ReportData()
         {
+            return new DataTable();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                int auctionId = (int)e.Argument;
+                var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+
+                int totalProgressCount = 0;
+                int progressCount = 0;
+
+
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                e.Result = ReportData();
+            }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
 
-        private void ucReportOfSale1_Load(object sender, EventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            progressBar1.Value = e.ProgressPercentage;
+        }
 
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Cancelled)
+                    return;
+                if (e.Result is not DataTable dataTable)
+                    return;
+
+                if (dataTable.Rows.Count < 1)
+                    progressBar1.Value = 100;
+
+
+                var report = reportViewer1.LocalReport;
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
+                report.DataSources.Clear();
+
+
+                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+
+                string lguName = Helper.LGUDetails()["lgu_name"];
+                string location = dtAuction["location"];
+                string date = dtAuction["start_date"];
+
+
+                var reportParameters = new ReportParameter[]
+                {
+                    new ReportParameter("paramLGU", lguName),
+                    new ReportParameter("paramDateOfPublicAuction", date)
+                };
+
+                report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
+                report.SetParameters(reportParameters);
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                reportViewer1.ZoomPercent = 100;
+                reportViewer1.RefreshReport();
+
+            }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

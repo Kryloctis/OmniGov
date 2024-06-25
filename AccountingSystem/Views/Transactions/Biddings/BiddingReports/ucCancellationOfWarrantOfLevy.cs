@@ -110,6 +110,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
