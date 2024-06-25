@@ -178,11 +178,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
-            var createdAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["created_at"].ColumnIndex);
-            var updatedAtIndex = Convert.ToByte(dgRCI.SelectedRows[0].Cells["updated_at"].ColumnIndex);
-
-            byte[] columnIndexTimestamp = { createdAtIndex, updatedAtIndex };
-            Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.ShowRecordTimestampMod(dgRCI, lblCreatedAt, lblUpdatedAt);
         }
 
         internal void LoadRci()

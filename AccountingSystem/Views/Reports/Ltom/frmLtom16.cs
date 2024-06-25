@@ -69,13 +69,14 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                                                       var monthsDelinquent = RealPropertyTaxComputations.GetMonthsDelinquent(parameter, (parameter.Year, (int)row["effectivity_quarterly"], (int)row["effectivity_year"]), null);
 
-                                                      var totalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue((decimal)row["basic_rate"], (decimal)row["sef_rate"], (decimal)row["assessed_value"]);
-                                                      var totalPenalty = RealPropertyTaxComputations.GetPenalty((decimal)row["penalty_rate"], monthsDelinquent, totalTaxDue);
+                                                      decimal totalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue((decimal)row["basic_rate"], (decimal)row["sef_rate"], (decimal)row["assessed_value"]);
+                                                      decimal totalPenalty = RealPropertyTaxComputations.GetPenalty((decimal)row["penalty_rate"], monthsDelinquent, totalTaxDue);
+                                                      string taxDecNo = row["complete_arp_no"].ToString();
 
                                                       return new
                                                       {
                                                           Owner = row["taxpayer_name"],
-                                                          TaxDecNo = row["complete_arp_no"],
+                                                          TaxDecNo = taxDecNo,
                                                           PropertyLocation = fullAddress,
                                                           PropertyKind = row["property_kind"],
                                                           AssessedValue = row["assessed_value"],

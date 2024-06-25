@@ -220,9 +220,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimizeBox = false;
             Name = "frmRCI";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transaction > Check Issuance";
+            Text = "Transactions > Check Issuance";
             Load += frmRCI_Load;
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
