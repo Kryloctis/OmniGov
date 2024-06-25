@@ -14,7 +14,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         int auctionId;
         int bidderId;
         int rptAuctionId;
-
         private DataTable dtAuctionRpt;
 
         public frmLtom25()

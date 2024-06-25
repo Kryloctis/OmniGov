@@ -16,6 +16,10 @@ namespace AccountingSystem.Views.Reports.Ltom
         int auctionId;
         int rptId;
 
+
+        int rptAuctionId;
+        private DataTable dtAuctionRpt;
+
         public frmLtom29()
         {
             InitializeComponent();
@@ -33,7 +37,8 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
+
+                if (cmbxAuctionSchedule.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtRpt.Text.Trim()))
                     return;
 
                 LoadReport();
@@ -50,7 +55,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                 progressBar1.Value = 0;
                 ToogleRunButton(false);
                 auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                rptId = Convert.ToInt32(cmbxProperty.SelectedValue);
                 backgroundWorker1.RunWorkerAsync((auctionId, rptId));
             }
         }
@@ -98,14 +102,9 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
-            cmbxProperty.ValueMember = "real_properties_id";
-            cmbxProperty.DisplayMember = "complete_arp_no";
-            cmbxProperty.DataSource = auctionProperties;
-
-            var autoCompleteSrc = auctionProperties.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
@@ -116,9 +115,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         private void OnLoad()
         {
             cmbxAuctionSchedule.ResetText();
-            cmbxProperty.ResetText();
             cmbxAuctionSchedule.SelectedIndex = -1;
-            cmbxProperty.SelectedIndex = -1;
 
             LoadAuctionSchedule();
             LoadProperties();
@@ -252,6 +249,10 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void txtRpt_TextChanged(object sender, EventArgs e)
         {
+            rptId = Convert.ToInt32(dtAuctionRpt.AsEnumerable()
+                                 .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                                 .Select(row => row["real_properties_id"])
+                                 .FirstOrDefault());
 
         }
     }
