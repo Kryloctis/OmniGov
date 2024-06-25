@@ -136,7 +136,7 @@ namespace AccountingSystem.Views.Transactions.Auction
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-29-certificate-of-sale.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom29CertificateOfSale.rdlc";
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["lgu_name"];

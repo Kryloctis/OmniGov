@@ -25,7 +25,20 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -114,7 +127,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value> 28 Art. 1491. The following persons cannot acquire by purchase, even at a public or judicial auction, either in person or through the  mediation of another</Value>
+                    <Value> 28       Art. 1491. The following persons cannot acquire by purchase, even at a public or judicial auction, either in person or through the  mediation of another</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
@@ -126,97 +139,192 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>The guardian, the property of the person or persons who may be under his guardianship:</Value>
+                    <Value />
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Agents, the property whose administration or s`ale may have been entrusted to them, unless the consent of the principal has been given;</Value>
+                    <Value>a</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>. The guardian, the property of the person or persons who may be under his guardianship</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Executors and administrators, the property of the estate under administration;</Value>
+                    <Value>b.</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>  Agents, the property whose administration or s`ale may have been entrusted to them, unless the consent of  the principal has been given;</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Public officers and employees, the property of the State or of any subdivision thereof, or of any government-owned or controlled corporation, or institution, the administration of which has been entrusted to them; this provision shall apply to judges and government experts who, in any manner whatsoever, take part in the sale; </Value>
+                    <Value>c</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>. Executors and administrators, the property of the estate under administration;</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Justices, judges, prosecuting attomeys, clerks of superior and inferior courts, and other officers and employees connected with the administration of justice, the property and rights in litigation or levied upon an execution before the court within whose jurisdiction or territory they exercise their respective functions; this prohibition includes the act of acquiring by assignment and shall apply to lawyers, with respect to the property and rights which may be the object of any litigation in which they may take part by virtue of their profession.</Value>
+                    <Value>d</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>. Public officers and employees, the property of the State or of any subdivision thereof, or of any government-owned or         controlled corporation, or institution, the administration of which has been entrusted to them; this provision shall apply to  judges and government experts who, in any manner whatsoever, take part in the sale;  </Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Any others specially disqualified by law.</Value>
+                    <Value>e. </Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Justices, judges, prosecuting attomeys, clerks of superior and inferior courts, and other officers and employees connected with the administration of justice, the property and rights in litigation or levied upon an execution before the court within  whose jurisdiction or territory they exercise their respective functions; this prohibition includes the act of acquiring by assignment and shall apply to lawyers, with respect to the property and rights which may be the object of any litigation in </Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>which they may take part by virtue of their profession.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>f</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>. Any others specially disqualified by law.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>29 SECTION 89. Prohibited Business and Pecuniary Interest.</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>a. </Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>It shall be unlawful for any local government official or employee, directly or indirectly, to:</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
@@ -230,106 +338,144 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>It shall be unlawful for any local government official or employee, directly or indirectly, to:</Value>
+                    <Value>1. Engage in any business transaction with the local government unit in which he is an official or employee or over                     which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys,  whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of the resources of the local government unit to such person or firm:</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Engage in any business transaction with the local government unit in which he is an official or employee or over which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys, whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of the resources of the local government unit to such person or firm:</Value>
+                    <Value>2. Hold such interests in any cockpit or other games licensed by a local government unit.</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Hold such interests in any cockpit or other games licensed by a local government unit.
-</Value>
+                    <Value>3.Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or                             assessment, or by virtue of a legal process at the instance of the said local government unit.  </Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or assessment, or by virtue of a legal process at the instance of the said local government unit.</Value>
+                    <Value>4. Be a surety for any person contracting or doing business with the local government unit for which a surety is required; and</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Be a surety for any person contracting or doing business with the local government unit for which a surety is required; and</Value>
+                    <Value>                    5. Posses of use any public property of the local government unit for private pur</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Posses of use any public property of the local government unit for private purposes.</Value>
+                    <Value />
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>4</ListLevel>
-                <SpaceAfter>5pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary interest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct and Ethical Standards for Public Officials and Employees and other laws shall also be applicable to local government officials and employees.</Value>
+                    <Value>b. </Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary nterest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct and Ethical Standards for  Public Officials and Employees and other laws shall also be applicable to localovernment officials and employees.</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
-                <ListLevel>3</ListLevel>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>   3.  </Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Duly  Authorize representative of person/s having legal interest to the property of the declared               owners;</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
                 <SpaceAfter>5pt</SpaceAfter>
                 <Style />
               </Paragraph>
@@ -338,78 +484,49 @@
                   <TextRun>
                     <Value />
                     <Style>
-                      <FontFamily>calibri</FontFamily>
+                      <FontFamily>calibi</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">
-</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style />
               </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.10582cm</Top>
-            <Height>8.41666in</Height>
-            <Width>5.70897in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-                <Width>1.5pt</Width>
-              </Border>
-              <BottomBorder>
-                <Style>None</Style>
-              </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>II. CONDUCT OF AUCTION :</Value>
+                    <Value>II. </Value>
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>CONDUCT OF AUCTION :</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <SpaceAfter>5pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
@@ -439,7 +556,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -456,7 +573,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -473,7 +590,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -490,7 +607,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -507,7 +624,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -524,7 +641,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -541,7 +658,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -558,7 +675,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -575,7 +692,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -590,60 +707,12 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>10pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">
-</Value>
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <ListLevel>6</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>calibri</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.63194in</Top>
-            <Height>4.10475in</Height>
-            <Width>5.70897in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -651,11 +720,30 @@
                     <Style>
                       <FontFamily>calibri</FontFamily>
                       <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
@@ -877,7 +965,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -894,7 +982,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -911,7 +999,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -945,7 +1033,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -962,7 +1050,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -979,7 +1067,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -996,7 +1084,23 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>3</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>3</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -1047,7 +1151,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -1064,7 +1168,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -1082,7 +1186,7 @@
                 </TextRuns>
                 <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
-                <SpaceAfter>10pt</SpaceAfter>
+                <SpaceAfter>5pt</SpaceAfter>
                 <Style>
                   <TextAlign>Left</TextAlign>
                 </Style>
@@ -1151,16 +1255,64 @@
                   <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <ListLevel>6</ListLevel>
+                <SpaceAfter>10pt</SpaceAfter>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>12.79225in</Top>
-            <Height>13.36112in</Height>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.49389cm</Top>
+            <Left>0.0386cm</Left>
+            <Height>24.85541in</Height>
             <Width>5.70897in</Width>
-            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
+                <Width>1.5pt</Width>
               </Border>
+              <BottomBorder>
+                <Style>None</Style>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1168,24 +1320,24 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>26.21586in</Height>
+        <Height>25.09152in</Height>
         <Style />
       </Body>
-      <Width>5.70897in</Width>
+      <Width>5.72417in</Width>
       <Page>
         <PageHeader>
-          <Height>1.84191in</Height>
+          <Height>2.40482in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox11">
+            <Textbox Name="Textbox57">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LTOM FORM NO. 28 - RULES AND REGULATION OF PUBLIC AUCTION</Value>
+                      <Value>RULES AND REGULATION OF PUBLIC AUCTION </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>14pt</FontSize>
@@ -1197,10 +1349,27 @@
                     <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>(SHALL BE READ BEFORE THE CONDUCT OF PUBLIC AUCTION)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Height>0.71452cm</Height>
-              <Width>14.50078cm</Width>
+              <Top>4.15701cm</Top>
+              <Left>0.0129cm</Left>
+              <Height>1.3268cm</Height>
+              <Width>14.41478cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1211,7 +1380,43 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox12">
+            <Textbox Name="Textbox53">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>OFFICE OF THE LOCAL TREASURER</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>3.3183cm</Top>
+              <Left>0.0129cm</Left>
+              <Height>0.66232cm</Height>
+              <Width>14.41478cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox42">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1221,7 +1426,7 @@
                       <Value>REPUBLIC OF THE PHILIPPINES </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1235,20 +1440,21 @@
                       <Value>Province/City/Municipality of</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!paramLGU.Value</Value>
+                      <Value xml:space="preserve">  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=UCase(Parameters!paramLGU.Value)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1258,45 +1464,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.7498cm</Top>
-              <Height>1.3579cm</Height>
-              <Width>14.50078cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox13">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>OFFICE OF THE LOCAL TREASURER</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.28409cm</Top>
-              <Height>0.55137cm</Height>
-              <Width>14.50078cm</Width>
+              <Top>1.91628cm</Top>
+              <Left>0.0386cm</Left>
+              <Height>1.2609cm</Height>
+              <Width>14.41478cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1308,58 +1479,29 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox15">
+            <Textbox Name="Textbox55">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>OFFICE OF THE LOCAL TREASURER RULES AND REGULATION OF PUBLIC AUCTION </Value>
+                      <Value> RULES AND REGULATION OF PUBLIC AUCTION</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>13.5pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>(</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>SHALL BE READ BEFORE THE CONDUCT OF PUBLIC AUCTION</Value>
-                      <Style>
-                        <FontFamily>Calibri Light</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>)</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Normal</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.90601cm</Top>
-              <Height>1.01032cm</Height>
-              <Width>14.50078cm</Width>
+              <rd:DefaultName>Textbox9</rd:DefaultName>
+              <Top>0.35155in</Top>
+              <Left>1.95847in</Left>
+              <Height>0.31955in</Height>
+              <Width>3.72172in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -1371,23 +1513,59 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox14">
+            <Textbox Name="Textbox29">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Date :</Value>
+                      <Value>FORM AND ANNEXES</Value>
                       <Style>
+                        <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#231f20</Color>
                       </Style>
                     </TextRun>
+                  </TextRuns>
+                  <LeftIndent>6pt</LeftIndent>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Left>0.0129cm</Left>
+              <Height>0.28211in</Height>
+              <Width>5.67511in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox56">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
                     <TextRun>
-                      <Value>=Globals!ExecutionTime</Value>
+                      <Value>LTOM FORM NO. 27 - </Value>
                       <Style>
+                        <FontStyle>Normal</FontStyle>
                         <FontFamily>Calibri</FontFamily>
-                        <Format>d</Format>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1397,10 +1575,74 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>4.02217cm</Top>
-              <Height>0.65629cm</Height>
-              <Width>14.50078cm</Width>
-              <ZIndex>4</ZIndex>
+              <Top>0.35155in</Top>
+              <Left>0.0129cm</Left>
+              <Height>0.81168cm</Height>
+              <Width>4.92633cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line2">
+              <Top>0.31614in</Top>
+              <Left>5.70899in</Left>
+              <Height>0in</Height>
+              <Width>-5.69885in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Orange</Color>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Textbox Name="Textbox14">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Date: </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value xml:space="preserve"> </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=CDate(Globals!ExecutionTime)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <Format>d</Format>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>5.48314cm</Top>
+              <Height>0.60039cm</Height>
+              <Width>14.42768cm</Width>
+              <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>

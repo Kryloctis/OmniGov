@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-26-list-of-registered-bidders.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom26ListOfRegisteredBidders.rdlc";
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["lgu_name"]; ;
