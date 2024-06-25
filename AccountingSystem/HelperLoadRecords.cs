@@ -601,40 +601,33 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
 
             datagrid.Columns["id"].Visible = false;
-
             datagrid.Columns["receipts"].HeaderText = "Receipt";
             datagrid.Columns["receipts"].Width = 450;
             datagrid.Columns["receipts"].MinimumWidth = 450;
-
             datagrid.Columns["serial_number_from"].HeaderText = "Serial Number From";
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
             datagrid.Columns["serial_number_from"].Width = 150;
             datagrid.Columns["serial_number_from"].MinimumWidth = 150;
             datagrid.Columns["serial_number_from"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             datagrid.Columns["serial_number_to"].HeaderText = "Serial Number To";
             datagrid.Columns["serial_number_to"].DefaultCellStyle.Format = "D7";
             datagrid.Columns["serial_number_to"].Width = 150;
             datagrid.Columns["serial_number_to"].MinimumWidth = 150;
             datagrid.Columns["serial_number_to"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             datagrid.Columns["quantity"].HeaderText = "Quantity";
             datagrid.Columns["quantity"].Width = 60;
             datagrid.Columns["quantity"].MinimumWidth = 60;
             datagrid.Columns["quantity"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
             datagrid.Columns["date_issued"].HeaderText = "Date Issued";
             datagrid.Columns["date_issued"].DefaultCellStyle.Format = "yyyy-dd-MM";
             datagrid.Columns["date_issued"].Width = 80;
             datagrid.Columns["date_issued"].MinimumWidth = 80;
-
             datagrid.Columns["collecting_officer"].HeaderText = "Collecting Officer";
             datagrid.Columns["collecting_officer"].Width = 150;
             datagrid.Columns["collecting_officer"].MinimumWidth = 150;
-
             datagrid.Columns["issued_by"].HeaderText = "Issued By";
             datagrid.Columns["issued_by"].Width = 150;
             datagrid.Columns["issued_by"].MinimumWidth = 150;

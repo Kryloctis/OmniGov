@@ -103,19 +103,19 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
         }
 
-        public DataTable GetRecordsBySearch(DateTime dateIssued, string searchText)
+        public DataTable GetRecordsBySearch(DateTime dateIssued, string searchText, int rowLimit)
         {
-            var parameter = new object[][] {
+            var parameters = new object[][]
+            {
                 new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
-                new object[]{"@month", DbType.Int32, dateIssued.Month},
-                new object[]{"@year", DbType.Int32, dateIssued.Year },
-                new object[]{"@day", DbType.Int32, dateIssued.Day}
+                new object[]{"@dateIssued", DbType.DateTime, dateIssued.Date},
+                new object[]{"@row_limit", DbType.Int32, rowLimit}
             };
 
-            string query = $"SELECT id, collecting_officer_id, collecting_officers_prefix, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, job_orders_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, acc_form_no, acc_form_desc, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date, issued_by FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey) AND (DAY(date_issued) <= @day AND MONTH(date_issued) <= @month AND YEAR(date_issued) = @year) AND accountable_forms LIKE @searchKey";
+            string query = $"SELECT * FROM {viewTableName} WHERE (collecting_officers_first_name LIKE @searchKey OR collecting_officers_last_name LIKE @searchKey OR job_orders_last_name LIKE @searchKey  OR job_orders_first_name LIKE @searchKey OR accountable_forms LIKE @searchKey) AND DATE(date_issued) <= @dateIssued LIMIT @row_limit";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)

@@ -74,78 +74,44 @@ namespace AccountingSystem.Views.Manage.Receipts
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private Dictionary<string, string> ReceiptsRecordParameters()
-        {
-            var dictParameters = new Dictionary<string, string>();
-
-            string searchKey = txtSearch.Text.Trim();
-            DateTime dateReceived = dtpReceivedDate.Value;
-
-            dictParameters.Add("search_key", searchKey);
-            dictParameters.Add("date_received", dateReceived.ToString());
-
-            return dictParameters;
-        }
-
         internal void LoadReceipts()
         {
             if (!bgwLoadReceipts.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                bgwLoadReceipts.RunWorkerAsync(ReceiptsRecordParameters());
+                string searchKey = txtSearch.Text.Trim();
+                DateTime dateReceived = dtpReceivedDate.Value;
+                int rowLimit = (int)cmbxRowFilter.SelectedValue;
+                bgwLoadReceipts.RunWorkerAsync((dateReceived, searchKey, rowLimit));
             }
-        }
-
-        private DataColumn[] ReceiptsColumns()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("accountable_form_code", typeof(string)),
-                new DataColumn("receipt", typeof(string)),
-                new DataColumn("receipt_number", typeof(string)),
-                new DataColumn("quantity", typeof(int)),
-                new DataColumn("received_date", typeof(DateTime)),
-                new DataColumn("officer", typeof(string)),
-            };
-
-            return dataColumns;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                if (e.Argument is not Dictionary<string, string> dictParameters)
-                    return;
+                var parameters = ((DateTime dateRecieved, string searchKey, int rowLimit))e.Argument;
 
-                string searchKey = dictParameters["search_key"];
-                DateTime dateReceived = Convert.ToDateTime(dictParameters["date_received"]);
+                var dataColumns = new DataColumn[]
+                {
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("accountable_form_code", typeof(string)),
+                    new DataColumn("receipt", typeof(string)),
+                    new DataColumn("receipt_number", typeof(string)),
+                    new DataColumn("quantity", typeof(int)),
+                    new DataColumn("received_date", typeof(DateTime)),
+                    new DataColumn("officer", typeof(string)),
+                };
 
                 var dataTable = new DataTable();
-                DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
-                dataTable.Columns.AddRange(ReceiptsColumns());
-
-                if (dtReceiptsDb.Rows.Count < 1)
-                {
-                    bgwLoadReceipts.ReportProgress(100);
-                    e.Result = dataTable;
-                    return;
-                }
+                dataTable.Columns.AddRange(dataColumns);
+                DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(parameters.dateRecieved, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtReceiptsDb.Rows.Count;
                 int progressCount = 0;
 
                 foreach (DataRow row in dtReceiptsDb.Rows)
                 {
-                    if (bgwLoadReceipts.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return;
-                    }
-
-                    var newRow = dataTable.NewRow();
-
                     int id = Convert.ToInt32(row["id"]);
                     string accountableFormCode = row["acc_form_no"].ToString();
                     string receipt = row["acc_form_desc"].ToString();
@@ -154,8 +120,9 @@ namespace AccountingSystem.Views.Manage.Receipts
                     string receiptNumber = receipNumberTo == 0 && receiptNumberFrom == 0 ? "--" : $"{receiptNumberFrom.ToString("D7")} > {receipNumberTo.ToString("D7")}";
                     int quantity = Convert.ToInt32(row["quantity"]);
                     DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
-                    string officer = row["officer"].ToString();
+                    string officer = string.Empty;
 
+                    var newRow = dataTable.NewRow();
                     newRow["id"] = id;
                     newRow["accountable_form_code"] = accountableFormCode;
                     newRow["receipt"] = receipt;
@@ -164,9 +131,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                     newRow["received_date"] = receivedDate;
                     newRow["officer"] = officer;
 
-                    progressCount++;
                     dataTable.Rows.Add(newRow);
-
+                    progressCount++;
                     Helper.ProgressCounter(bgwLoadReceipts, totalProgressCount, progressCount);
                 }
 
@@ -182,11 +148,14 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void bgwLoadReceipts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
-
             if (e.Result is not DataTable dataTable)
+            {
+                pbLoadRecords.Value = 100;
                 return;
+            }
+
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
 
             HelperLoadRecords.ReceiptsDatagridView(dataTable, dgReceipts);
             dgReceipts.CurrentCell = dgReceipts.FirstDisplayedCell;
@@ -205,9 +174,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgReceipts.Rows.Count == 0)
-                return;
-
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
 
             if (dgReceipts.SelectedRows.Count != 0)
@@ -218,19 +184,32 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
-        private void OnLoad()
-        {
-            LoadReceipts();
-            Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
-        }
-
         private void frmReceipts_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+                LoadReceipts();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReceipts();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadReceipts();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

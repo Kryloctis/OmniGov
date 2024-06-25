@@ -23,7 +23,6 @@ namespace ACC.Data
             string query = $"SELECT COUNT(*) FROM {tableName}";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query));
-
         }
 
         public bool Delete(List<ReceiptsModel> entityList)
@@ -207,20 +206,17 @@ namespace ACC.Data
             return true;
         }
 
-
-        public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch)
+        public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch, int rowLimit)
         {
-            var parameter = new object[][] {
-                new object[]{"@day", DbType.Int16, dateReceived.Day},
-                new object[]{"@month", DbType.Int16, dateReceived.Month},
-                new object[]{"@year", DbType.Int16, dateReceived.Year},
+            var parameter = new object[][]
+            {
+                new object[]{"@received_date", DbType.Date, dateReceived.Date},
                 new object[]{"@txt_search", DbType.String, $"%{txtSearch}%"},
+                new object[]{"@row_limit", DbType.Int32, rowLimit},
             };
 
-            string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} WHERE (DAY(received_date) <= @day AND MONTH(received_date) <= @month AND YEAR(received_date) = @year) AND acc_form_desc LIKE @txt_search AND acc_form_no LIKE @txt_search";
-
-            var dataTable = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search AND acc_form_no LIKE @txt_search) LIMIT @row_limit";
+            return _dbGenericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool ReceiptNumberExist(int accountableFormID, int receiptNumber)
