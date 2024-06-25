@@ -81,8 +81,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                ToogleRunButton(false);
-
                 if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxBidders.SelectedIndex == -1)
                     return;
 
@@ -190,6 +188,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
+                ToogleRunButton(true);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

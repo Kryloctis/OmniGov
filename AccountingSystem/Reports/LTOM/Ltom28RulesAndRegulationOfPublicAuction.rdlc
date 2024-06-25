@@ -316,13 +316,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve">              </Value>
-                    <Style>
-                      <FontFamily>calibi</FontFamily>
-                      <FontSize>7pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>a. </Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
@@ -338,60 +331,96 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <ListLevel>1</ListLevel>
                 <SpaceAfter>5pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>                                 1. Engage in any business transaction with the local government unit in which he is an official or employee or over                                              which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys,                                                        whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of                                         the resources of the local government unit to such person or firm:</Value>
+                    <Value>1. Engage in any business transaction with the local government unit in which he is an official or employee or over                     which he has the power of supervision, or with any of its authorized boards, officials, agents, or attomeys,  whereby money is to be paid, or property or any other thing of value is to be transferred, directly or indirectly, out of the resources of the local government unit to such person or firm:</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>                                   2. Hold such interests in any cockpit or other games licensed by a local government unit.
-                                   3. Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or                                                      assessment, or by virtue of a legal process at the instance of the said local government unit.                                                                               4. Be a surety for any person contracting or doing business with the local government unit for which a surety is                                                      required; and</Value>
+                    <Value>2. Hold such interests in any cockpit or other games licensed by a local government unit.</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>                                   5. Posses of use any public property of the local government unit for private purposes.</Value>
+                    <Value>3.Purchase any real estate or other property forfeited in favor of such local government unit for unpaid taxes or                             assessment, or by virtue of a legal process at the instance of the said local government unit.  </Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve">              </Value>
+                    <Value>4. Be a surety for any person contracting or doing business with the local government unit for which a surety is required; and</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
+                </TextRuns>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
                   <TextRun>
-                    <Value> b. </Value>
+                    <Value>                    5. Posses of use any public property of the local government unit for private pur</Value>
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>b. </Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>calibi</FontFamily>
@@ -399,14 +428,28 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary                                         interest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct                                         and Ethical Standards for Public Officials and Employees and other laws shall also be applicable to local                                                               government officials and employees.</Value>
+                    <Value>All other prohibitions governing the conduct of national public officers relating to prohibited business and pecuniary nterest so provided for under Republic Act Numbered 6713 (RA 6713) otherwise known as the "Code of Conduct and Ethical Standards for  Public Officials and Employees and other laws shall also be applicable to localovernment officials and employees.</Value>
                     <Style>
                       <FontFamily>calibi</FontFamily>
                       <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <SpaceAfter>5pt</SpaceAfter>
+                <ListLevel>1</ListLevel>
+                <SpaceAfter>0pt</SpaceAfter>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>calibi</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <SpaceAfter>0pt</SpaceAfter>
                 <Style />
               </Paragraph>
               <Paragraph>
@@ -1260,7 +1303,7 @@
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>0.49389cm</Top>
             <Left>0.0386cm</Left>
-            <Height>25.14708in</Height>
+            <Height>24.85541in</Height>
             <Width>5.70897in</Width>
             <Style>
               <Border>
@@ -1277,7 +1320,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>25.34152in</Height>
+        <Height>25.09152in</Height>
         <Style />
       </Body>
       <Width>5.72417in</Width>

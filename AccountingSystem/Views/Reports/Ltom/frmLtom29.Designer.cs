@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
-            label1 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
@@ -54,9 +54,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(txtRpt);
+            splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(cmbxProperty);
-            splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
@@ -70,6 +70,26 @@
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 6;
             // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(5, 80);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 38;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(5, 62);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 37;
+            label4.Text = "ARP No. :";
+            // 
             // btnRunReport
             // 
             btnRunReport.Location = new System.Drawing.Point(7, 114);
@@ -79,26 +99,6 @@
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
-            // 
-            // cmbxProperty
-            // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(7, 78);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 22;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(6, 61);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(66, 15);
-            label1.TabIndex = 20;
-            label1.Text = "Properties :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -189,13 +189,13 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Button btnRunReport;
-        private System.Windows.Forms.ComboBox cmbxProperty;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label4;
     }
 }

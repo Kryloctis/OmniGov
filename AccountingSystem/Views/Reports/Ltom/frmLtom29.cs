@@ -5,6 +5,7 @@ using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
@@ -103,6 +104,12 @@ namespace AccountingSystem.Views.Reports.Ltom
             cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
             cmbxProperty.DataSource = auctionProperties;
+
+            var autoCompleteSrc = auctionProperties.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCom = new AutoCompleteStringCollection();
+            autoCom.Clear();
+            autoCom.AddRange(autoCompleteSrc.ToArray());
+            txtRpt.AutoCompleteCustomSource = autoCom;
 
         }
 
@@ -241,6 +248,11 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtRpt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
