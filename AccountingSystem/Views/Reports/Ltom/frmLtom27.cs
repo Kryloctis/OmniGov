@@ -11,11 +11,10 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom27 : Form
     {
-        int auctionId;
-        int bidderId;
-        int rptAuctionId;
+        private int auctionId;
+        private int bidderId;
+        private int rptAuctionId;
         private DataTable dtAuctionRpt;
-
 
         public frmLtom27()
         {
@@ -120,7 +119,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             LoadProperties();
         }
-
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {

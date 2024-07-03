@@ -11,9 +11,8 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom24 : Form
     {
-
-        int auctionId;
-        int rptId;
+        private int auctionId;
+        private int rptId;
 
         public frmLtom24()
         {
@@ -56,14 +55,10 @@ namespace AccountingSystem.Views.Reports.Ltom
             cmbxProperty.DisplayMember = "complete_arp_no";
         }
 
-
         private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProperties();
-
         }
-
-
 
         private void OnLoad()
         {
@@ -76,7 +71,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             LoadProperties();
         }
 
-
         private void frmLtom24_Load(object sender, EventArgs e)
         {
             try
@@ -85,7 +79,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate,
                                                      (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters,
@@ -107,10 +100,8 @@ namespace AccountingSystem.Views.Reports.Ltom
             return (basicPenalty, sefPenalty);
         }
 
-
         private void LoadReport()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
@@ -127,17 +118,14 @@ namespace AccountingSystem.Views.Reports.Ltom
             {
                 var parameters = ((int auctionId, int rptId))e.Argument;
 
-
                 var dictAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(parameters.auctionId, parameters.rptId);
                 string completeArpNo = dictAuctionProperties["complete_arp_no"].ToString();
                 int taxPayersId = Convert.ToInt32(dictAuctionProperties["taxpayers_id"]);
-
 
                 var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, Helper.GetCurrentDate().Year, completeArpNo, true);
                 var dtRptAuctionProperties = new dsTreasury.dtLtom24DataTable();
                 int totalProgressCount = dtAssessmentPosting.Rows.Count;
                 int progressCount = 0;
-
 
                 foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
@@ -172,7 +160,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                     decimal totalSefPayment = sefTaxDue + sefPenaltyDiscount;
                     decimal totalTaxDue = totalBasicPayment + totalSefPayment;
 
-
                     var newRow = dtRptAuctionProperties.NewRow();
 
                     newRow["tax_year"] = assessmentYear;
@@ -189,7 +176,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -209,7 +195,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
-
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
@@ -255,7 +240,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 ToogleRunButton(true);
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

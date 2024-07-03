@@ -24,8 +24,8 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
             btnRunReport.Enabled = isGenerated;
-
         }
+
         private void LoadAuctionSchedule()
         {
             var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
@@ -47,7 +47,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void LoadReport()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
@@ -56,7 +55,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                 backgroundWorker1.RunWorkerAsync((auctionId));
             }
         }
-
 
         private void OnLoad()
         {
@@ -90,8 +88,8 @@ namespace AccountingSystem.Views.Reports.Ltom
             decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
 
             return (basicPenalty, sefPenalty);
-
         }
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             try
@@ -104,11 +102,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
                 report.DataSources.Clear();
-
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
@@ -125,7 +121,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                     new ReportParameter("paramPlaceOfAuction", location),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramSignatory", string.Empty),
-
                 };
 
                 report.DataSources.Add(new ReportDataSource("dsNoticeOfAuctionSaleOfDelinquentProperty", dataTable));
@@ -136,7 +131,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.Refresh();
                 ToogleRunButton(true);
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -149,7 +143,6 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             return (double)months / 12;
         }
-
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -185,6 +178,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                     decimal total = 0;
 
                     #region Computation
+
                     var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
 
                     foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
@@ -217,7 +211,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                         total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
                         break;
                     }
-                    #endregion
+
+                    #endregion Computation
 
                     newRow["declared_owner"] = taxPayer;
                     newRow["tax_declaration_number"] = completeArpNo;
@@ -235,11 +230,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
-
     }
 }

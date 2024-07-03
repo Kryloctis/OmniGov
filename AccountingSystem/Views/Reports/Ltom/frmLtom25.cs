@@ -11,9 +11,9 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom25 : Form
     {
-        int auctionId;
-        int bidderId;
-        int rptAuctionId;
+        private int auctionId;
+        private int bidderId;
+        private int rptAuctionId;
         private DataTable dtAuctionRpt;
 
         public frmLtom25()
@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             txtRpt.AutoCompleteCustomSource = autoCom;
         }
 
-
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
             try
@@ -90,7 +89,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
         }
 
-
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             var parameters = ((int auctionId, int bidderId))e.Argument;
@@ -116,8 +114,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
             var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
 
-
-
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
             reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
@@ -133,8 +129,6 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportParameters.Add(new ReportParameter("paramCitizenship", dictRegistry["nationality"]));
                 reportParameters.Add(new ReportParameter("paramSex", dictRegistry["sex"]));
             }
-
-
 
             progressCount += tasks["Set Parameter Values"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -200,7 +194,6 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void cmbxBidders_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom26 : Form
     {
-        int auctionId;
+        private int auctionId;
 
         public frmLtom26()
         {
@@ -63,7 +63,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
-
         private void frmLtom26_Load(object sender, EventArgs e)
         {
             try
@@ -106,9 +105,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
                 ToogleRunButton(true);
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
