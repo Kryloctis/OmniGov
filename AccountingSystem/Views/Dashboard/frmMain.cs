@@ -1,15 +1,12 @@
-﻿using ACC.Data;
-using AccountingSystem.Views.Dashboard.Accounting;
-using AccountingSystem.Views.Dashboard.AccountingDashboard;
+﻿using AccountingSystem.Views.Dashboard.Accounting;
 using AccountingSystem.Views.Dashboard.Budget;
+using AccountingSystem.Views.Dashboard.MyAccount;
 using AccountingSystem.Views.Dashboard.Reports;
 using AccountingSystem.Views.Dashboard.Settings;
 using AccountingSystem.Views.Dashboard.Treasury;
-using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -21,6 +18,7 @@ namespace AccountingSystem.Views.Dashboard
         private ucTreasury ucTreasury;
         private ucSettings ucSettings;
         private ucReports ucReports;
+        private ucMyAccount ucMyAccount;
 
         public frmMain(frmSignIn frmSignIn)
         {
@@ -40,6 +38,8 @@ namespace AccountingSystem.Views.Dashboard
             this.ucTreasury = ucTreasury1;
             this.ucSettings = ucSettings1;
             this.ucReports = ucReports1;
+            this.ucMyAccount = ucMyAccount1;
+
         }
 
         #region Permission Validations
@@ -109,6 +109,10 @@ namespace AccountingSystem.Views.Dashboard
                     ucReports.OnLoad();
                     radReports.Checked = true;
                     break;
+                case "tabPageMyAccount":
+                    ucMyAccount.OnLoad();
+                    radMyAccount.Checked = true;
+                    break;
             }
         }
 
@@ -159,6 +163,15 @@ namespace AccountingSystem.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void radMyAccount_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControlMain.SelectedTab = tabPageMyAccount;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void radSettings_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -185,5 +198,6 @@ namespace AccountingSystem.Views.Dashboard
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }

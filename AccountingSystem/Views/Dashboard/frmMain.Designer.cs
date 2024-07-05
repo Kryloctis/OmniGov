@@ -30,6 +30,7 @@
         {
             panel1 = new System.Windows.Forms.Panel();
             radReports = new System.Windows.Forms.RadioButton();
+            radMyAccount = new System.Windows.Forms.RadioButton();
             radSettings = new System.Windows.Forms.RadioButton();
             btnLogout = new System.Windows.Forms.Button();
             radTreasury = new System.Windows.Forms.RadioButton();
@@ -54,6 +55,9 @@
             tabPageReports = new System.Windows.Forms.TabPage();
             ucReports1 = new Reports.ucReports();
             label1 = new System.Windows.Forms.Label();
+            tabPageMyAccount = new System.Windows.Forms.TabPage();
+            ucMyAccount1 = new MyAccount.ucMyAccount();
+            label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panel1.SuspendLayout();
@@ -66,12 +70,14 @@
             panel4.SuspendLayout();
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
+            tabPageMyAccount.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.White;
             panel1.Controls.Add(radReports);
+            panel1.Controls.Add(radMyAccount);
             panel1.Controls.Add(radSettings);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(radTreasury);
@@ -102,6 +108,26 @@
             radReports.Text = "Reports";
             radReports.UseVisualStyleBackColor = true;
             radReports.CheckedChanged += radReports_CheckedChanged;
+            // 
+            // radMyAccount
+            // 
+            radMyAccount.Appearance = System.Windows.Forms.Appearance.Button;
+            radMyAccount.AutoSize = true;
+            radMyAccount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            radMyAccount.FlatAppearance.BorderSize = 0;
+            radMyAccount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radMyAccount.Image = Properties.Resources.users_20px;
+            radMyAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            radMyAccount.Location = new System.Drawing.Point(0, 566);
+            radMyAccount.Margin = new System.Windows.Forms.Padding(0);
+            radMyAccount.Name = "radMyAccount";
+            radMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radMyAccount.Size = new System.Drawing.Size(142, 34);
+            radMyAccount.TabIndex = 11;
+            radMyAccount.Text = "My Account";
+            radMyAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            radMyAccount.CheckedChanged += radMyAccount_CheckedChanged;
             // 
             // radSettings
             // 
@@ -205,6 +231,7 @@
             tabControlMain.Controls.Add(tabPageTreasury);
             tabControlMain.Controls.Add(tabPageSettings);
             tabControlMain.Controls.Add(tabPageReports);
+            tabControlMain.Controls.Add(tabPageMyAccount);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             tabControlMain.Location = new System.Drawing.Point(142, 0);
@@ -267,7 +294,7 @@
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(192, 72);
+            tabPageAccounting.Size = new System.Drawing.Size(1125, 638);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -280,7 +307,7 @@
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel3.Size = new System.Drawing.Size(192, 0);
+            panel3.Size = new System.Drawing.Size(1125, 558);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
@@ -289,7 +316,7 @@
             ucAccounting1.Location = new System.Drawing.Point(5, 4);
             ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(182, 0);
+            ucAccounting1.Size = new System.Drawing.Size(1115, 550);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -300,7 +327,7 @@
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label2.Size = new System.Drawing.Size(192, 80);
+            label2.Size = new System.Drawing.Size(1125, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -311,7 +338,7 @@
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(192, 72);
+            tabPageTreasury.Size = new System.Drawing.Size(1125, 638);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -324,7 +351,7 @@
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel4.Size = new System.Drawing.Size(192, 0);
+            panel4.Size = new System.Drawing.Size(1125, 558);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
@@ -333,7 +360,7 @@
             ucTreasury1.Location = new System.Drawing.Point(5, 4);
             ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(182, 0);
+            ucTreasury1.Size = new System.Drawing.Size(1115, 550);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -344,7 +371,7 @@
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label3.Size = new System.Drawing.Size(192, 80);
+            label3.Size = new System.Drawing.Size(1125, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 
@@ -355,7 +382,7 @@
             tabPageSettings.Location = new System.Drawing.Point(4, 24);
             tabPageSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageSettings.Name = "tabPageSettings";
-            tabPageSettings.Size = new System.Drawing.Size(192, 72);
+            tabPageSettings.Size = new System.Drawing.Size(1125, 638);
             tabPageSettings.TabIndex = 4;
             tabPageSettings.Text = "tabPageSettings";
             tabPageSettings.UseVisualStyleBackColor = true;
@@ -367,7 +394,7 @@
             ucSettings1.Location = new System.Drawing.Point(0, 80);
             ucSettings1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucSettings1.Name = "ucSettings1";
-            ucSettings1.Size = new System.Drawing.Size(192, 0);
+            ucSettings1.Size = new System.Drawing.Size(1125, 558);
             ucSettings1.TabIndex = 6;
             // 
             // label5
@@ -378,7 +405,7 @@
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(192, 80);
+            label5.Size = new System.Drawing.Size(1125, 80);
             label5.TabIndex = 5;
             label5.Text = "Settings";
             // 
@@ -414,6 +441,38 @@
             label1.Size = new System.Drawing.Size(1125, 80);
             label1.TabIndex = 6;
             label1.Text = "Reports";
+            // 
+            // tabPageMyAccount
+            // 
+            tabPageMyAccount.Controls.Add(ucMyAccount1);
+            tabPageMyAccount.Controls.Add(label6);
+            tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
+            tabPageMyAccount.Name = "tabPageMyAccount";
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 638);
+            tabPageMyAccount.TabIndex = 6;
+            tabPageMyAccount.Text = "tabPageMyAccount";
+            tabPageMyAccount.UseVisualStyleBackColor = true;
+            // 
+            // ucMyAccount1
+            // 
+            ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucMyAccount1.Location = new System.Drawing.Point(0, 80);
+            ucMyAccount1.Name = "ucMyAccount1";
+            ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
+            ucMyAccount1.Size = new System.Drawing.Size(1125, 558);
+            ucMyAccount1.TabIndex = 5;
+            // 
+            // label6
+            // 
+            label6.Dock = System.Windows.Forms.DockStyle.Top;
+            label6.Font = new System.Drawing.Font("Segoe UI Light", 20F);
+            label6.Location = new System.Drawing.Point(0, 0);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label6.Size = new System.Drawing.Size(1125, 80);
+            label6.TabIndex = 4;
+            label6.Text = "My Account";
             // 
             // taxRatesToolStripMenuItem
             // 
@@ -453,6 +512,7 @@
             panel4.ResumeLayout(false);
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
+            tabPageMyAccount.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -487,5 +547,9 @@
         private System.Windows.Forms.TabPage tabPageReports;
         private System.Windows.Forms.Label label1;
         private Reports.ucReports ucReports1;
+        private System.Windows.Forms.RadioButton radMyAccount;
+        private System.Windows.Forms.TabPage tabPageMyAccount;
+        private System.Windows.Forms.Label label6;
+        private MyAccount.ucMyAccount ucMyAccount1;
     }
 }
