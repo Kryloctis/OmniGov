@@ -32,6 +32,7 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             btnUpdateProfile = new System.Windows.Forms.Button();
             txtSuffix = new System.Windows.Forms.TextBox();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
             label10 = new System.Windows.Forms.Label();
             txtPrefix = new System.Windows.Forms.TextBox();
             label9 = new System.Windows.Forms.Label();
@@ -55,16 +56,15 @@
             txtNewPassword = new System.Windows.Forms.TextBox();
             label14 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
-            label1 = new System.Windows.Forms.Label();
-            label11 = new System.Windows.Forms.Label();
+            lblUserFullName = new System.Windows.Forms.Label();
+            lblUserDesignation = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -118,6 +118,7 @@
             btnUpdateProfile.TabIndex = 78;
             btnUpdateProfile.Text = "Update";
             btnUpdateProfile.UseVisualStyleBackColor = true;
+            btnUpdateProfile.Click += btnUpdateProfile_Click;
             // 
             // txtSuffix
             // 
@@ -127,6 +128,17 @@
             txtSuffix.Name = "txtSuffix";
             txtSuffix.Size = new System.Drawing.Size(86, 23);
             txtSuffix.TabIndex = 77;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.users_32px;
+            pictureBox1.InitialImage = Properties.Resources.users_32px;
+            pictureBox1.Location = new System.Drawing.Point(12, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(58, 55);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 76;
+            pictureBox1.TabStop = false;
             // 
             // label10
             // 
@@ -256,6 +268,7 @@
             btnUpdateAccountSec.TabIndex = 78;
             btnUpdateAccountSec.Text = "Update";
             btnUpdateAccountSec.UseVisualStyleBackColor = true;
+            btnUpdateAccountSec.Click += btnUpdateAccountSec_Click;
             // 
             // label5
             // 
@@ -368,49 +381,38 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(lblUserFullName);
+            panel1.Controls.Add(lblUserDesignation);
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label11);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(2, 2);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(832, 73);
             panel1.TabIndex = 3;
             // 
-            // pictureBox1
+            // lblUserFullName
             // 
-            pictureBox1.Image = Properties.Resources.users_32px;
-            pictureBox1.InitialImage = Properties.Resources.users_32px;
-            pictureBox1.Location = new System.Drawing.Point(12, 7);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(58, 55);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 76;
-            pictureBox1.TabStop = false;
+            lblUserFullName.AutoSize = true;
+            lblUserFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblUserFullName.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblUserFullName.Location = new System.Drawing.Point(76, 17);
+            lblUserFullName.Name = "lblUserFullName";
+            lblUserFullName.Size = new System.Drawing.Size(114, 20);
+            lblUserFullName.TabIndex = 77;
+            lblUserFullName.Text = "JOHN DOENUT";
             // 
-            // label1
+            // lblUserDesignation
             // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 8F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            label1.Location = new System.Drawing.Point(75, 38);
-            label1.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(104, 13);
-            label1.TabIndex = 75;
-            label1.Text = "Accounting Officer";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
-            label11.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            label11.Location = new System.Drawing.Point(75, 16);
-            label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(83, 20);
-            label11.TabIndex = 75;
-            label11.Text = "JOHN DOE";
+            lblUserDesignation.AutoSize = true;
+            lblUserDesignation.Font = new System.Drawing.Font("Segoe UI", 8F);
+            lblUserDesignation.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblUserDesignation.Location = new System.Drawing.Point(76, 38);
+            lblUserDesignation.Margin = new System.Windows.Forms.Padding(0);
+            lblUserDesignation.Name = "lblUserDesignation";
+            lblUserDesignation.Size = new System.Drawing.Size(115, 13);
+            lblUserDesignation.TabIndex = 75;
+            lblUserDesignation.Text = "System Administrator";
+            lblUserDesignation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // errorProvider1
             // 
@@ -432,9 +434,9 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
@@ -443,8 +445,7 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
-        internal System.Windows.Forms.Label label11;
-        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Label lblUserDesignation;
         private System.Windows.Forms.PictureBox pictureBox1;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label3;
@@ -471,5 +472,6 @@
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblUserFullName;
     }
 }
