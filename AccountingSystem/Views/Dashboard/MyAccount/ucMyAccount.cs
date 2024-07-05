@@ -104,6 +104,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private void UpdateAccountSecurity()
         {
+
         }
 
         private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -124,6 +125,36 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         private void txtLastName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtLastName);
+        }
+
+        private void txtOldPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtOldPassword, "Old Password.");
+        }
+
+        private void txtOldPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtOldPassword);
+        }
+
+        private void txtNewPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNewPassword, "New Password.");
+        }
+
+        private void txtNewPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtNewPassword);
+        }
+
+        private void txtConfirmPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.");
+        }
+
+        private void txtConfirmPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtConfirmPassword);
         }
     }
 }

@@ -295,6 +295,8 @@
             txtOldPassword.Name = "txtOldPassword";
             txtOldPassword.Size = new System.Drawing.Size(370, 23);
             txtOldPassword.TabIndex = 77;
+            txtOldPassword.Validating += txtOldPassword_Validating;
+            txtOldPassword.Validated += txtOldPassword_Validated;
             // 
             // label12
             // 
@@ -350,6 +352,8 @@
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.Size = new System.Drawing.Size(370, 23);
             txtConfirmPassword.TabIndex = 77;
+            txtConfirmPassword.Validating += txtConfirmPassword_Validating;
+            txtConfirmPassword.Validated += txtConfirmPassword_Validated;
             // 
             // txtNewPassword
             // 
@@ -359,6 +363,8 @@
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.Size = new System.Drawing.Size(370, 23);
             txtNewPassword.TabIndex = 77;
+            txtNewPassword.Validating += txtNewPassword_Validating;
+            txtNewPassword.Validated += txtNewPassword_Validated;
             // 
             // label14
             // 
@@ -420,6 +426,7 @@
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
             // ucMyAccount
