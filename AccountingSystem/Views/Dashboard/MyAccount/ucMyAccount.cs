@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -6,6 +7,8 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 {
     public partial class ucMyAccount : UserControl
     {
+        byte rolesId;
+
         public ucMyAccount()
         {
             InitializeComponent();
@@ -28,7 +31,12 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         internal void OnLoad()
         {
-            LoadCurrentUserAccount();
+            try
+            {
+                LoadCurrentUserAccount();
+            }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadCurrentUserAccount()
@@ -36,16 +44,15 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
             var dictUserData = Helper.LoggedInUserData();
 
-
+            rolesId = Convert.ToByte(dictUserData["roles_id"]);
             txtFirstName.Text = dictUserData["first_name"];
-            txtMiddleName.Text = dictUserData["mid_initial"];
+            txtMiddleInitial.Text = dictUserData["mid_initial"];
             txtLastName.Text = dictUserData["last_name"];
             txtPrefix.Text = dictUserData["prefix"];
             txtSuffix.Text = dictUserData["suffix"];
             txtUserName.Text = dictUserData["username"];
             lblUserFullName.Text = dictUserData["user_full_name"].Trim();
             lblUserDesignation.Text = dictUserData["role_name"];
-
 
         }
 
@@ -56,11 +63,38 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            UpdateProfile();
+            try
+            {
+                if (UpdateProfile())
+                {
+                    Helper.MessageBoxSuccess("Account Profile Updated.");
+                    LoadCurrentUserAccount();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void UpdateProfile()
+        private bool UpdateProfile()
         {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var userModel = new UsersModel()
+            {
+                Id = Helper.userId,
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,
+                Prefix = txtPrefix.Text,
+                Suffix = txtSuffix.Text,
+                MidInitial = txtMiddleInitial.Text,
+                UserName = txtUserName.Text,
+                RoleId = rolesId
+            };
+            return AccFactory.UsersRepository().Update(userModel);
+
         }
 
         private void btnUpdateAccountSec_Click(object sender, EventArgs e)
@@ -72,5 +106,24 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         {
         }
 
+        private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "First Name.");
+        }
+
+        private void txtFirstName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
+        }
+
+        private void txtLastName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, "Last Name.");
+        }
+
+        private void txtLastName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
+        }
     }
 }

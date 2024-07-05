@@ -32,11 +32,10 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             btnUpdateProfile = new System.Windows.Forms.Button();
             txtSuffix = new System.Windows.Forms.TextBox();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
             label10 = new System.Windows.Forms.Label();
             txtPrefix = new System.Windows.Forms.TextBox();
             label9 = new System.Windows.Forms.Label();
-            txtMiddleName = new System.Windows.Forms.TextBox();
+            txtMiddleInitial = new System.Windows.Forms.TextBox();
             txtLastName = new System.Windows.Forms.TextBox();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
@@ -55,6 +54,7 @@
             txtConfirmPassword = new System.Windows.Forms.TextBox();
             txtNewPassword = new System.Windows.Forms.TextBox();
             label14 = new System.Windows.Forms.Label();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
             panel1 = new System.Windows.Forms.Panel();
             lblUserFullName = new System.Windows.Forms.Label();
             lblUserDesignation = new System.Windows.Forms.Label();
@@ -82,7 +82,7 @@
             splitContainer1.Panel1.Controls.Add(label10);
             splitContainer1.Panel1.Controls.Add(txtPrefix);
             splitContainer1.Panel1.Controls.Add(label9);
-            splitContainer1.Panel1.Controls.Add(txtMiddleName);
+            splitContainer1.Panel1.Controls.Add(txtMiddleInitial);
             splitContainer1.Panel1.Controls.Add(txtLastName);
             splitContainer1.Panel1.Controls.Add(label7);
             splitContainer1.Panel1.Controls.Add(label8);
@@ -129,17 +129,6 @@
             txtSuffix.Size = new System.Drawing.Size(86, 23);
             txtSuffix.TabIndex = 77;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.users_32px;
-            pictureBox1.InitialImage = Properties.Resources.users_32px;
-            pictureBox1.Location = new System.Drawing.Point(12, 9);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(58, 55);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 76;
-            pictureBox1.TabStop = false;
-            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -173,14 +162,14 @@
             label9.TabIndex = 76;
             label9.Text = "Prefix";
             // 
-            // txtMiddleName
+            // txtMiddleInitial
             // 
-            txtMiddleName.Font = new System.Drawing.Font("Segoe UI", 9F);
-            txtMiddleName.Location = new System.Drawing.Point(12, 151);
-            txtMiddleName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtMiddleName.Name = "txtMiddleName";
-            txtMiddleName.Size = new System.Drawing.Size(370, 23);
-            txtMiddleName.TabIndex = 77;
+            txtMiddleInitial.Font = new System.Drawing.Font("Segoe UI", 9F);
+            txtMiddleInitial.Location = new System.Drawing.Point(12, 151);
+            txtMiddleInitial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtMiddleInitial.Name = "txtMiddleInitial";
+            txtMiddleInitial.Size = new System.Drawing.Size(370, 23);
+            txtMiddleInitial.TabIndex = 77;
             // 
             // txtLastName
             // 
@@ -190,6 +179,8 @@
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(370, 23);
             txtLastName.TabIndex = 77;
+            txtLastName.Validating += txtLastName_Validating;
+            txtLastName.Validated += txtLastName_Validated;
             // 
             // label7
             // 
@@ -199,9 +190,9 @@
             label7.Location = new System.Drawing.Point(12, 133);
             label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(79, 15);
+            label7.Size = new System.Drawing.Size(76, 15);
             label7.TabIndex = 76;
-            label7.Text = "Middle Name";
+            label7.Text = "Middle Initial";
             // 
             // label8
             // 
@@ -223,6 +214,8 @@
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(370, 23);
             txtFirstName.TabIndex = 77;
+            txtFirstName.Validating += txtFirstName_Validating;
+            txtFirstName.Validated += txtFirstName_Validated;
             // 
             // label6
             // 
@@ -379,6 +372,17 @@
             label14.TabIndex = 76;
             label14.Text = "Old password*";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.users_32px;
+            pictureBox1.InitialImage = Properties.Resources.users_32px;
+            pictureBox1.Location = new System.Drawing.Point(12, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(58, 55);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 76;
+            pictureBox1.TabStop = false;
+            // 
             // panel1
             // 
             panel1.Controls.Add(lblUserFullName);
@@ -453,7 +457,7 @@
         internal System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtMiddleName;
+        private System.Windows.Forms.TextBox txtMiddleInitial;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtPrefix;
         private System.Windows.Forms.Label label9;
