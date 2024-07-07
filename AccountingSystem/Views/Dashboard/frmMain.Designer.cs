@@ -117,8 +117,8 @@
             radMyAccount.FlatAppearance.BorderSize = 0;
             radMyAccount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
             radMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radMyAccount.Image = Properties.Resources.users_20px;
-            radMyAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            radMyAccount.Image = Properties.Resources.account_20;
+            radMyAccount.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             radMyAccount.Location = new System.Drawing.Point(0, 566);
             radMyAccount.Margin = new System.Windows.Forms.Padding(0);
             radMyAccount.Name = "radMyAccount";

@@ -380,7 +380,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.users_32px;
+            pictureBox1.Image = Properties.Resources.account_50;
             pictureBox1.InitialImage = Properties.Resources.users_32px;
             pictureBox1.Location = new System.Drawing.Point(12, 9);
             pictureBox1.Name = "pictureBox1";
