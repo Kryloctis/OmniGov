@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.MyAccount
@@ -220,5 +221,43 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         {
             Helper.ClearErrorTextBox(errorProvider1, txtConfirmPassword);
         }
+
+        private void btnPasswordVisibility_Click(object sender, EventArgs e)
+        {
+            ShowHidePassword(txtOldPassword, btnOldPasswordVisibility);
+        }
+
+        private void btnNewPasswordVisibility_Click(object sender, EventArgs e)
+        {
+            ShowHidePassword(txtNewPassword, btnNewPasswordVisibility);
+        }
+
+        private void btnConfirmPasswordVisibility_Click(object sender, EventArgs e)
+        {
+            ShowHidePassword(txtConfirmPassword, btnConfirmPasswordVisibility);
+        }
+
+        private void ShowHidePassword(TextBox textBox, Button buttonVisibility)
+        {
+            try
+            {
+                Image invisibleImage = Properties.Resources.invisible_16px;
+                Image visibleImage = Properties.Resources.visible_16px;
+
+                if (textBox.PasswordChar == '•')
+                {
+                    buttonVisibility.Image = invisibleImage;
+                    textBox.PasswordChar = default(char);
+                }
+                else
+                {
+                    buttonVisibility.Image = visibleImage;
+                    textBox.PasswordChar = '•';
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
     }
 }

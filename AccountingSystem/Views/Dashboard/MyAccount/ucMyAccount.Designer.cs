@@ -43,6 +43,9 @@
             label6 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            btnNewPasswordVisibility = new System.Windows.Forms.Button();
+            btnConfirmPasswordVisibility = new System.Windows.Forms.Button();
+            btnOldPasswordVisibility = new System.Windows.Forms.Button();
             btnUpdateAccountSec = new System.Windows.Forms.Button();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -94,6 +97,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(btnNewPasswordVisibility);
+            splitContainer1.Panel2.Controls.Add(btnConfirmPasswordVisibility);
+            splitContainer1.Panel2.Controls.Add(btnOldPasswordVisibility);
             splitContainer1.Panel2.Controls.Add(btnUpdateAccountSec);
             splitContainer1.Panel2.Controls.Add(label5);
             splitContainer1.Panel2.Controls.Add(label4);
@@ -252,6 +258,54 @@
             label3.Size = new System.Drawing.Size(172, 12);
             label3.TabIndex = 75;
             label3.Text = "This information to verify your identity";
+            // 
+            // btnNewPasswordVisibility
+            // 
+            btnNewPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnNewPasswordVisibility.FlatAppearance.BorderSize = 0;
+            btnNewPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            btnNewPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            btnNewPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnNewPasswordVisibility.Image = Properties.Resources.visible_16px;
+            btnNewPasswordVisibility.Location = new System.Drawing.Point(389, 205);
+            btnNewPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
+            btnNewPasswordVisibility.Name = "btnNewPasswordVisibility";
+            btnNewPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnNewPasswordVisibility.TabIndex = 77;
+            btnNewPasswordVisibility.UseVisualStyleBackColor = true;
+            btnNewPasswordVisibility.Click += btnNewPasswordVisibility_Click;
+            // 
+            // btnConfirmPasswordVisibility
+            // 
+            btnConfirmPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnConfirmPasswordVisibility.FlatAppearance.BorderSize = 0;
+            btnConfirmPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnConfirmPasswordVisibility.Image = Properties.Resources.visible_16px;
+            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(389, 256);
+            btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
+            btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
+            btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnConfirmPasswordVisibility.TabIndex = 77;
+            btnConfirmPasswordVisibility.UseVisualStyleBackColor = true;
+            btnConfirmPasswordVisibility.Click += btnConfirmPasswordVisibility_Click;
+            // 
+            // btnOldPasswordVisibility
+            // 
+            btnOldPasswordVisibility.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnOldPasswordVisibility.FlatAppearance.BorderSize = 0;
+            btnOldPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            btnOldPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            btnOldPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnOldPasswordVisibility.Image = Properties.Resources.visible_16px;
+            btnOldPasswordVisibility.Location = new System.Drawing.Point(389, 151);
+            btnOldPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
+            btnOldPasswordVisibility.Name = "btnOldPasswordVisibility";
+            btnOldPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnOldPasswordVisibility.TabIndex = 78;
+            btnOldPasswordVisibility.UseVisualStyleBackColor = true;
+            btnOldPasswordVisibility.Click += btnPasswordVisibility_Click;
             // 
             // btnUpdateAccountSec
             // 
@@ -484,5 +538,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label lblUserFullName;
+        private System.Windows.Forms.Button btnNewPasswordVisibility;
+        private System.Windows.Forms.Button btnConfirmPasswordVisibility;
+        private System.Windows.Forms.Button btnOldPasswordVisibility;
     }
 }
