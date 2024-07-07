@@ -74,8 +74,62 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void AccountValidationOnly(bool validate)
+        {
+            txtUserName.CausesValidation = !validate;
+            txtOldPassword.CausesValidation = !validate;
+            txtNewPassword.CausesValidation = !validate;
+            txtConfirmPassword.CausesValidation = !validate;
+
+
+            txtFirstName.CausesValidation = validate;
+            txtMiddleInitial.CausesValidation = validate;
+            txtLastName.CausesValidation = validate;
+
+        }
+
         private bool UpdateProfile()
         {
+            AccountValidationOnly(true);
+
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var userModel = new UsersModel()
+            {
+                Id = Helper.userId,
+                FirstName = txtFirstName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
+                Prefix = txtPrefix.Text.Trim(),
+                Suffix = txtSuffix.Text.Trim(),
+                MidInitial = txtMiddleInitial.Text.Trim(),
+                UserName = txtUserName.Text.Trim(),
+                RoleId = rolesId
+            };
+            return AccFactory.UsersRepository().Update(userModel);
+
+        }
+
+        private void btnUpdateAccountSec_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UpdateAccountSecurity())
+                {
+                    Helper.MessageBoxSuccess("Account Security Updated.");
+
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool UpdateAccountSecurity()
+        {
+            AccountValidationOnly(false);
+
             if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
@@ -91,19 +145,11 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 Suffix = txtSuffix.Text,
                 MidInitial = txtMiddleInitial.Text,
                 UserName = txtUserName.Text,
+                Password = txtNewPassword.Text.Trim(),
                 RoleId = rolesId
             };
-            return AccFactory.UsersRepository().Update(userModel);
 
-        }
-
-        private void btnUpdateAccountSec_Click(object sender, EventArgs e)
-        {
-            UpdateAccountSecurity();
-        }
-
-        private void UpdateAccountSecurity()
-        {
+            return AccFactory.UsersRepository().UpdateWithPassword(userModel);
 
         }
 
@@ -147,8 +193,26 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             Helper.ClearErrorTextBox(errorProvider1, txtNewPassword);
         }
 
+        private bool PasswordMatchValidation()
+        {
+            bool isValidated;
+            bool passwordMatch = txtNewPassword.Text.Trim() == txtConfirmPassword.Text.Trim();
+
+            isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.") && !passwordMatch;
+            errorProvider1.SetError(txtConfirmPassword, passwordMatch ? "Password doesn't match." : errorProvider1.GetError(txtConfirmPassword));
+
+            return !isValidated;
+
+        }
+
         private void txtConfirmPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            try
+            {
+                e.Cancel = !PasswordMatchValidation();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.");
         }
 

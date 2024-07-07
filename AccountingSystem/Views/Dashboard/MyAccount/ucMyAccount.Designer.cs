@@ -115,7 +115,7 @@
             btnUpdateProfile.Location = new System.Drawing.Point(252, 296);
             btnUpdateProfile.Name = "btnUpdateProfile";
             btnUpdateProfile.Size = new System.Drawing.Size(130, 23);
-            btnUpdateProfile.TabIndex = 78;
+            btnUpdateProfile.TabIndex = 5;
             btnUpdateProfile.Text = "Update";
             btnUpdateProfile.UseVisualStyleBackColor = true;
             btnUpdateProfile.Click += btnUpdateProfile_Click;
@@ -127,7 +127,7 @@
             txtSuffix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtSuffix.Name = "txtSuffix";
             txtSuffix.Size = new System.Drawing.Size(86, 23);
-            txtSuffix.TabIndex = 77;
+            txtSuffix.TabIndex = 4;
             // 
             // label10
             // 
@@ -148,7 +148,7 @@
             txtPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtPrefix.Name = "txtPrefix";
             txtPrefix.Size = new System.Drawing.Size(86, 23);
-            txtPrefix.TabIndex = 77;
+            txtPrefix.TabIndex = 3;
             // 
             // label9
             // 
@@ -169,7 +169,7 @@
             txtMiddleInitial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtMiddleInitial.Name = "txtMiddleInitial";
             txtMiddleInitial.Size = new System.Drawing.Size(370, 23);
-            txtMiddleInitial.TabIndex = 77;
+            txtMiddleInitial.TabIndex = 1;
             // 
             // txtLastName
             // 
@@ -178,7 +178,7 @@
             txtLastName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(370, 23);
-            txtLastName.TabIndex = 77;
+            txtLastName.TabIndex = 2;
             txtLastName.Validating += txtLastName_Validating;
             txtLastName.Validated += txtLastName_Validated;
             // 
@@ -213,7 +213,7 @@
             txtFirstName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(370, 23);
-            txtFirstName.TabIndex = 77;
+            txtFirstName.TabIndex = 0;
             txtFirstName.Validating += txtFirstName_Validating;
             txtFirstName.Validated += txtFirstName_Validated;
             // 
@@ -258,7 +258,7 @@
             btnUpdateAccountSec.Location = new System.Drawing.Point(258, 296);
             btnUpdateAccountSec.Name = "btnUpdateAccountSec";
             btnUpdateAccountSec.Size = new System.Drawing.Size(129, 23);
-            btnUpdateAccountSec.TabIndex = 78;
+            btnUpdateAccountSec.TabIndex = 4;
             btnUpdateAccountSec.Text = "Update";
             btnUpdateAccountSec.UseVisualStyleBackColor = true;
             btnUpdateAccountSec.Click += btnUpdateAccountSec_Click;
@@ -294,7 +294,7 @@
             txtOldPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtOldPassword.Name = "txtOldPassword";
             txtOldPassword.Size = new System.Drawing.Size(370, 23);
-            txtOldPassword.TabIndex = 77;
+            txtOldPassword.TabIndex = 1;
             txtOldPassword.Validating += txtOldPassword_Validating;
             txtOldPassword.Validated += txtOldPassword_Validated;
             // 
@@ -318,7 +318,7 @@
             txtUserName.Name = "txtUserName";
             txtUserName.ReadOnly = true;
             txtUserName.Size = new System.Drawing.Size(370, 23);
-            txtUserName.TabIndex = 77;
+            txtUserName.TabIndex = 0;
             // 
             // label15
             // 
@@ -351,7 +351,7 @@
             txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.Size = new System.Drawing.Size(370, 23);
-            txtConfirmPassword.TabIndex = 77;
+            txtConfirmPassword.TabIndex = 3;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
             txtConfirmPassword.Validated += txtConfirmPassword_Validated;
             // 
@@ -362,7 +362,7 @@
             txtNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.Size = new System.Drawing.Size(370, 23);
-            txtNewPassword.TabIndex = 77;
+            txtNewPassword.TabIndex = 2;
             txtNewPassword.Validating += txtNewPassword_Validating;
             txtNewPassword.Validated += txtNewPassword_Validated;
             // 
