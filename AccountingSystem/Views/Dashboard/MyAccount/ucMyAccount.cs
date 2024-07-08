@@ -9,6 +9,8 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
     public partial class ucMyAccount : UserControl
     {
         byte rolesId;
+        private frmMain frmMain;
+        private frmSignIn frmSignIn;
 
         public ucMyAccount()
         {
@@ -30,11 +32,14 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        internal void OnLoad()
+
+        internal void OnLoad(frmMain frmMain, frmSignIn frmSignIn)
         {
             try
             {
                 LoadCurrentUserAccount();
+                this.frmMain = frmMain;
+                this.frmSignIn = frmSignIn;
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -66,11 +71,13 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         {
             try
             {
+
                 if (UpdateProfile())
                 {
                     Helper.MessageBoxSuccess("Account Profile Updated.");
                     LoadCurrentUserAccount();
                 }
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -99,19 +106,23 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 return false;
             }
 
-            var userModel = new UsersModel()
+            if (Helper.MessageBoxConfirmCancel("Are you sure you want update account profile?"))
             {
-                Id = Helper.userId,
-                FirstName = txtFirstName.Text.Trim(),
-                LastName = txtLastName.Text.Trim(),
-                Prefix = txtPrefix.Text.Trim(),
-                Suffix = txtSuffix.Text.Trim(),
-                MidInitial = txtMiddleInitial.Text.Trim(),
-                UserName = txtUserName.Text.Trim(),
-                RoleId = rolesId
-            };
-            return AccFactory.UsersRepository().Update(userModel);
+                var userModel = new UsersModel()
+                {
+                    Id = Helper.userId,
+                    FirstName = txtFirstName.Text.Trim(),
+                    LastName = txtLastName.Text.Trim(),
+                    Prefix = txtPrefix.Text.Trim(),
+                    Suffix = txtSuffix.Text.Trim(),
+                    MidInitial = txtMiddleInitial.Text.Trim(),
+                    UserName = txtUserName.Text.Trim(),
+                    RoleId = rolesId
+                };
+                return AccFactory.UsersRepository().Update(userModel);
+            }
 
+            return false;
         }
 
         private void btnUpdateAccountSec_Click(object sender, EventArgs e)
@@ -120,8 +131,9 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             {
                 if (UpdateAccountSecurity())
                 {
-                    Helper.MessageBoxSuccess("Account Security Updated.");
-
+                    Helper.MessageBoxSuccess("Account Security Updated. Please log in with your new password to continue.");
+                    frmMain.Close();
+                    frmSignIn.Show();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -129,29 +141,32 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private bool UpdateAccountSecurity()
         {
-            AccountProfileValidation(false);
-
             if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
                 return false;
             }
 
-            var userModel = new UsersModel()
+            if (Helper.MessageBoxConfirmCancel("Are you sure you want to update your account security details?"))
             {
-                Id = Helper.userId,
-                FirstName = txtFirstName.Text,
-                LastName = txtLastName.Text,
-                Prefix = txtPrefix.Text,
-                Suffix = txtSuffix.Text,
-                MidInitial = txtMiddleInitial.Text,
-                UserName = txtUserName.Text,
-                Password = txtNewPassword.Text.Trim(),
-                RoleId = rolesId
-            };
 
-            return AccFactory.UsersRepository().UpdateWithPassword(userModel);
+                var userModel = new UsersModel()
+                {
+                    Id = Helper.userId,
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    Prefix = txtPrefix.Text,
+                    Suffix = txtSuffix.Text,
+                    MidInitial = txtMiddleInitial.Text,
+                    UserName = txtUserName.Text,
+                    Password = txtNewPassword.Text.Trim(),
+                    RoleId = rolesId
+                };
 
+                return AccFactory.UsersRepository().UpdateWithPassword(userModel);
+            }
+
+            return false;
         }
 
         private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)

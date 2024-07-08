@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Dashboard
                     radReports.Checked = true;
                     break;
                 case "tabPageMyAccount":
-                    ucMyAccount.OnLoad();
+                    ucMyAccount.OnLoad(this, frmSignIn);
                     radMyAccount.Checked = true;
                     break;
             }
