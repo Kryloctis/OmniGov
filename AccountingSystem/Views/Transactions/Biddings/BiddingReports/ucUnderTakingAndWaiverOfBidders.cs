@@ -94,25 +94,26 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                reportViewer1.Clear();
-                progressBar1.Value = 100;
-                return;
-            }
 
-            var parameters = (List<ReportParameter>)e.Result;
-            reportViewer1.Clear();
-            var localReport = reportViewer1.LocalReport;
-            localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-27-undertaking-and-waver-of-bidders.rdlc";
-            localReport.SetParameters(parameters);
-            localReport.Refresh();
-
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer1.ZoomMode = ZoomMode.FullPage;
-            reportViewer1.Refresh();
             try
             {
+                if (e.Cancelled)
+                {
+                    reportViewer1.Clear();
+                    progressBar1.Value = 100;
+                    return;
+                }
+
+                var parameters = (List<ReportParameter>)e.Result;
+                reportViewer1.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom27UndertakingAndWaiverOfBidders.rdlc";
+                localReport.SetParameters(parameters);
+                localReport.Refresh();
+
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.FullPage;
+                reportViewer1.Refresh();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 

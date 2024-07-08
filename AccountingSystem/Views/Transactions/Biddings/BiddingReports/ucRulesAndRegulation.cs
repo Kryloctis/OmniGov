@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ltom-28-rules-and-regulation-of-public-auction.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom28RulesAndRegulationOfPublicAuction.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

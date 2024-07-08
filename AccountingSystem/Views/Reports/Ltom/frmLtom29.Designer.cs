@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
-            label1 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
-            panel3 = new System.Windows.Forms.Panel();
-            ucCertificateOfSale1 = new Transactions.Auction.ucCertificateOfSale();
+            panel1 = new System.Windows.Forms.Panel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -53,50 +54,51 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(txtRpt);
+            splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
-            splitContainer1.Panel1.Controls.Add(cmbxProperty);
-            splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(panel3);
+            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(progressBar1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 6;
             // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(5, 80);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 38;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(5, 62);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 37;
+            label4.Text = "ARP No. :";
+            // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(7, 114);
+            btnRunReport.Location = new System.Drawing.Point(5, 114);
             btnRunReport.Name = "btnRunReport";
-            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.Size = new System.Drawing.Size(202, 23);
             btnRunReport.TabIndex = 24;
             btnRunReport.Text = "Run Report";
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
-            // 
-            // cmbxProperty
-            // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(7, 78);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 22;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(6, 61);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(66, 15);
-            label1.TabIndex = 20;
-            label1.Text = "Properties :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -119,23 +121,21 @@
             label3.TabIndex = 21;
             label3.Text = "Auction Schedule :";
             // 
-            // panel3
+            // panel1
             // 
-            panel3.Controls.Add(ucCertificateOfSale1);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(4, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(617, 398);
-            panel3.TabIndex = 12;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(4, 9);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(617, 393);
+            panel1.TabIndex = 5;
             // 
-            // ucCertificateOfSale1
+            // progressBar1
             // 
-            ucCertificateOfSale1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucCertificateOfSale1.Location = new System.Drawing.Point(0, 0);
-            ucCertificateOfSale1.Name = "ucCertificateOfSale1";
-            ucCertificateOfSale1.Size = new System.Drawing.Size(617, 398);
-            ucCertificateOfSale1.TabIndex = 0;
-            ucCertificateOfSale1.Load += ucCertificateOfSale1_Load;
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(617, 5);
+            progressBar1.TabIndex = 4;
             // 
             // statusStrip1
             // 
@@ -144,6 +144,23 @@
             statusStrip1.Size = new System.Drawing.Size(840, 22);
             statusStrip1.TabIndex = 7;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmLtom29
             // 
@@ -164,20 +181,21 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private Transactions.Auction.ucCertificateOfSale ucCertificateOfSale1;
         private System.Windows.Forms.Button btnRunReport;
-        private System.Windows.Forms.ComboBox cmbxProperty;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly string tableName = "rpt_auction";
         private readonly string viewTableName = "view_rpt_auction";
+
         private AccGenericCommands mySqlGenericCommandsLFS;
         public RptAuctionRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {

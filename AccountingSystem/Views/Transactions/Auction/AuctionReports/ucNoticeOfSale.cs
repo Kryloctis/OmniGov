@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Transactions.Auction
 
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-24-notice-of-sale.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom24NoticeSale.rdlc";
                 report.DataSources.Clear();
 
 

@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
-            label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            panel3 = new System.Windows.Forms.Panel();
-            ucDeclarationOfForfeitureOfDelinquentProperty1 = new Transactions.Auction.ucDeclarationOfForfeitureOfDelinquentProperty();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            panel1 = new System.Windows.Forms.Panel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -53,20 +54,41 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(txtRpt);
+            splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(cmbxAuctionSchedule);
             splitContainer1.Panel1.Controls.Add(label3);
-            splitContainer1.Panel1.Controls.Add(cmbxProperty);
-            splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
             splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(panel3);
+            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(progressBar1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 8;
+            // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(7, 75);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 40;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(7, 57);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 39;
+            label4.Text = "ARP No. :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -89,26 +111,6 @@
             label3.TabIndex = 28;
             label3.Text = "Auction Schedule :";
             // 
-            // cmbxProperty
-            // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(7, 72);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 27;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(6, 55);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(66, 15);
-            label1.TabIndex = 26;
-            label1.Text = "Properties :";
-            // 
             // btnRunReport
             // 
             btnRunReport.Location = new System.Drawing.Point(7, 101);
@@ -119,23 +121,6 @@
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(ucDeclarationOfForfeitureOfDelinquentProperty1);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(4, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(617, 398);
-            panel3.TabIndex = 12;
-            // 
-            // ucDeclarationOfForfeitureOfDelinquentProperty1
-            // 
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Location = new System.Drawing.Point(0, 0);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Name = "ucDeclarationOfForfeitureOfDelinquentProperty1";
-            ucDeclarationOfForfeitureOfDelinquentProperty1.Size = new System.Drawing.Size(617, 398);
-            ucDeclarationOfForfeitureOfDelinquentProperty1.TabIndex = 0;
-            // 
             // statusStrip1
             // 
             statusStrip1.Location = new System.Drawing.Point(0, 406);
@@ -143,6 +128,39 @@
             statusStrip1.Size = new System.Drawing.Size(840, 22);
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // panel1
+            // 
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(4, 9);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(617, 393);
+            panel1.TabIndex = 5;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(4, 4);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(617, 5);
+            progressBar1.TabIndex = 4;
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmLtom30
             // 
@@ -163,7 +181,6 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,12 +189,14 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnRunReport;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private Transactions.Auction.ucDeclarationOfForfeitureOfDelinquentProperty ucDeclarationOfForfeitureOfDelinquentProperty1;
-        private System.Windows.Forms.ComboBox cmbxProperty;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtRpt;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

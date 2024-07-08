@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Transactions.Auction
 
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ltom-23-notice-of-auction-sale-of-delinquent-real-properties.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
                 report.DataSources.Clear();
 
 
