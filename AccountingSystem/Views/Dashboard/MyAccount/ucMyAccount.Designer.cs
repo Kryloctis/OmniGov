@@ -73,6 +73,7 @@
             // 
             // splitContainer1
             // 
+            splitContainer1.BackColor = System.Drawing.Color.LightGray;
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             splitContainer1.Location = new System.Drawing.Point(2, 75);
@@ -80,6 +81,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel1.Controls.Add(btnUpdateProfile);
             splitContainer1.Panel1.Controls.Add(txtSuffix);
             splitContainer1.Panel1.Controls.Add(label10);
@@ -97,6 +99,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel2.Controls.Add(btnNewPasswordVisibility);
             splitContainer1.Panel2.Controls.Add(btnConfirmPasswordVisibility);
             splitContainer1.Panel2.Controls.Add(btnOldPasswordVisibility);
@@ -131,6 +134,7 @@
             txtSuffix.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtSuffix.Location = new System.Drawing.Point(110, 256);
             txtSuffix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtSuffix.MaxLength = 45;
             txtSuffix.Name = "txtSuffix";
             txtSuffix.Size = new System.Drawing.Size(86, 23);
             txtSuffix.TabIndex = 4;
@@ -152,6 +156,7 @@
             txtPrefix.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtPrefix.Location = new System.Drawing.Point(12, 256);
             txtPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtPrefix.MaxLength = 45;
             txtPrefix.Name = "txtPrefix";
             txtPrefix.Size = new System.Drawing.Size(86, 23);
             txtPrefix.TabIndex = 3;
@@ -173,6 +178,7 @@
             txtMiddleInitial.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtMiddleInitial.Location = new System.Drawing.Point(12, 151);
             txtMiddleInitial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtMiddleInitial.MaxLength = 1;
             txtMiddleInitial.Name = "txtMiddleInitial";
             txtMiddleInitial.Size = new System.Drawing.Size(370, 23);
             txtMiddleInitial.TabIndex = 1;
@@ -182,6 +188,7 @@
             txtLastName.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtLastName.Location = new System.Drawing.Point(12, 205);
             txtLastName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtLastName.MaxLength = 45;
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(370, 23);
             txtLastName.TabIndex = 2;
@@ -217,6 +224,7 @@
             txtFirstName.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtFirstName.Location = new System.Drawing.Point(12, 100);
             txtFirstName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtFirstName.MaxLength = 45;
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new System.Drawing.Size(370, 23);
             txtFirstName.TabIndex = 0;
@@ -346,6 +354,7 @@
             txtCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtCurrentPassword.Location = new System.Drawing.Point(17, 151);
             txtCurrentPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtCurrentPassword.MaxLength = 60;
             txtCurrentPassword.Name = "txtCurrentPassword";
             txtCurrentPassword.PasswordChar = '•';
             txtCurrentPassword.Size = new System.Drawing.Size(370, 23);
@@ -370,6 +379,7 @@
             txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtUserName.Location = new System.Drawing.Point(17, 100);
             txtUserName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtUserName.MaxLength = 45;
             txtUserName.Name = "txtUserName";
             txtUserName.ReadOnly = true;
             txtUserName.Size = new System.Drawing.Size(370, 23);
@@ -404,6 +414,7 @@
             txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtConfirmPassword.Location = new System.Drawing.Point(17, 256);
             txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtConfirmPassword.MaxLength = 60;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '•';
             txtConfirmPassword.Size = new System.Drawing.Size(370, 23);
@@ -416,6 +427,7 @@
             txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             txtNewPassword.Location = new System.Drawing.Point(17, 205);
             txtNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtNewPassword.MaxLength = 60;
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.PasswordChar = '•';
             txtNewPassword.Size = new System.Drawing.Size(370, 23);

@@ -32,6 +32,19 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
+        private void ResetForm()
+        {
+            txtFirstName.Clear();
+            txtMiddleInitial.Clear();
+            txtLastName.Clear();
+            txtUserName.Clear();
+            txtPrefix.Clear();
+            txtSuffix.Clear();
+            txtCurrentPassword.Clear();
+            txtNewPassword.Clear();
+            txtConfirmPassword.Clear();
+
+        }
 
         internal void OnLoad(frmMain frmMain, frmSignIn frmSignIn)
         {
@@ -75,6 +88,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 if (UpdateProfile())
                 {
                     Helper.MessageBoxSuccess("Account Profile Updated.");
+                    ResetForm();
                     LoadCurrentUserAccount();
                 }
 
@@ -84,6 +98,8 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private void AccountProfileValidation(bool validate)
         {
+            errorProvider1.Clear();
+
             txtUserName.CausesValidation = !validate;
             txtCurrentPassword.CausesValidation = !validate;
             txtNewPassword.CausesValidation = !validate;
@@ -93,7 +109,6 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             txtFirstName.CausesValidation = validate;
             txtMiddleInitial.CausesValidation = validate;
             txtLastName.CausesValidation = validate;
-
         }
 
         private bool UpdateProfile()
@@ -132,6 +147,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 if (UpdateAccountSecurity())
                 {
                     Helper.MessageBoxSuccess("Account Security Updated. Please log in with your new password to continue.");
+                    ResetForm();
                     frmMain.Close();
                     frmSignIn.Show();
                 }
@@ -141,6 +157,8 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private bool UpdateAccountSecurity()
         {
+            AccountProfileValidation(false);
+
             if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
