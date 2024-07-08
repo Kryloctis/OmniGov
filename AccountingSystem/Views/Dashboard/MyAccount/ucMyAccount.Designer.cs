@@ -49,7 +49,7 @@
             btnUpdateAccountSec = new System.Windows.Forms.Button();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            txtOldPassword = new System.Windows.Forms.TextBox();
+            txtCurrentPassword = new System.Windows.Forms.TextBox();
             label12 = new System.Windows.Forms.Label();
             txtUserName = new System.Windows.Forms.TextBox();
             label15 = new System.Windows.Forms.Label();
@@ -103,7 +103,7 @@
             splitContainer1.Panel2.Controls.Add(btnUpdateAccountSec);
             splitContainer1.Panel2.Controls.Add(label5);
             splitContainer1.Panel2.Controls.Add(label4);
-            splitContainer1.Panel2.Controls.Add(txtOldPassword);
+            splitContainer1.Panel2.Controls.Add(txtCurrentPassword);
             splitContainer1.Panel2.Controls.Add(label12);
             splitContainer1.Panel2.Controls.Add(txtUserName);
             splitContainer1.Panel2.Controls.Add(label15);
@@ -266,11 +266,11 @@
             btnNewPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             btnNewPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnNewPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnNewPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnNewPasswordVisibility.Location = new System.Drawing.Point(389, 205);
+            btnNewPasswordVisibility.Image = Properties.Resources.invisible_16px;
+            btnNewPasswordVisibility.Location = new System.Drawing.Point(366, 206);
             btnNewPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnNewPasswordVisibility.Name = "btnNewPasswordVisibility";
-            btnNewPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnNewPasswordVisibility.Size = new System.Drawing.Size(20, 20);
             btnNewPasswordVisibility.TabIndex = 77;
             btnNewPasswordVisibility.UseVisualStyleBackColor = true;
             btnNewPasswordVisibility.Click += btnNewPasswordVisibility_Click;
@@ -282,11 +282,11 @@
             btnConfirmPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnConfirmPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(389, 256);
+            btnConfirmPasswordVisibility.Image = Properties.Resources.invisible_16px;
+            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(366, 257);
             btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
-            btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnConfirmPasswordVisibility.Size = new System.Drawing.Size(20, 20);
             btnConfirmPasswordVisibility.TabIndex = 77;
             btnConfirmPasswordVisibility.UseVisualStyleBackColor = true;
             btnConfirmPasswordVisibility.Click += btnConfirmPasswordVisibility_Click;
@@ -298,11 +298,11 @@
             btnOldPasswordVisibility.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             btnOldPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnOldPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnOldPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnOldPasswordVisibility.Location = new System.Drawing.Point(389, 151);
+            btnOldPasswordVisibility.Image = Properties.Resources.invisible_16px;
+            btnOldPasswordVisibility.Location = new System.Drawing.Point(366, 152);
             btnOldPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnOldPasswordVisibility.Name = "btnOldPasswordVisibility";
-            btnOldPasswordVisibility.Size = new System.Drawing.Size(23, 23);
+            btnOldPasswordVisibility.Size = new System.Drawing.Size(20, 20);
             btnOldPasswordVisibility.TabIndex = 78;
             btnOldPasswordVisibility.UseVisualStyleBackColor = true;
             btnOldPasswordVisibility.Click += btnPasswordVisibility_Click;
@@ -341,16 +341,17 @@
             label4.TabIndex = 75;
             label4.Text = "Manage your password and login preferences";
             // 
-            // txtOldPassword
+            // txtCurrentPassword
             // 
-            txtOldPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
-            txtOldPassword.Location = new System.Drawing.Point(17, 151);
-            txtOldPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtOldPassword.Name = "txtOldPassword";
-            txtOldPassword.Size = new System.Drawing.Size(370, 23);
-            txtOldPassword.TabIndex = 1;
-            txtOldPassword.Validating += txtOldPassword_Validating;
-            txtOldPassword.Validated += txtOldPassword_Validated;
+            txtCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
+            txtCurrentPassword.Location = new System.Drawing.Point(17, 151);
+            txtCurrentPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtCurrentPassword.Name = "txtCurrentPassword";
+            txtCurrentPassword.PasswordChar = '•';
+            txtCurrentPassword.Size = new System.Drawing.Size(370, 23);
+            txtCurrentPassword.TabIndex = 1;
+            txtCurrentPassword.Validating += txtOldPassword_Validating;
+            txtCurrentPassword.Validated += txtOldPassword_Validated;
             // 
             // label12
             // 
@@ -404,6 +405,7 @@
             txtConfirmPassword.Location = new System.Drawing.Point(17, 256);
             txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtConfirmPassword.Name = "txtConfirmPassword";
+            txtConfirmPassword.PasswordChar = '•';
             txtConfirmPassword.Size = new System.Drawing.Size(370, 23);
             txtConfirmPassword.TabIndex = 3;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
@@ -415,6 +417,7 @@
             txtNewPassword.Location = new System.Drawing.Point(17, 205);
             txtNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtNewPassword.Name = "txtNewPassword";
+            txtNewPassword.PasswordChar = '•';
             txtNewPassword.Size = new System.Drawing.Size(370, 23);
             txtNewPassword.TabIndex = 2;
             txtNewPassword.Validating += txtNewPassword_Validating;
@@ -428,9 +431,9 @@
             label14.Location = new System.Drawing.Point(17, 133);
             label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(84, 15);
+            label14.Size = new System.Drawing.Size(105, 15);
             label14.TabIndex = 76;
-            label14.Text = "Old password*";
+            label14.Text = "Current password*";
             // 
             // pictureBox1
             // 
@@ -487,6 +490,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(splitContainer1);
             Controls.Add(panel1);
             Name = "ucMyAccount";
@@ -528,7 +532,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnUpdateProfile;
         private System.Windows.Forms.Button btnUpdateAccountSec;
-        private System.Windows.Forms.TextBox txtOldPassword;
+        private System.Windows.Forms.TextBox txtCurrentPassword;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label15;

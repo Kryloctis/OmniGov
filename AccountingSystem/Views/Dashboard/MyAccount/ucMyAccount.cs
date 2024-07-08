@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 errorProvider1.GetError(txtFirstName),
                 errorProvider1.GetError(txtLastName),
                 errorProvider1.GetError(txtUserName),
-                errorProvider1.GetError(txtOldPassword),
+                errorProvider1.GetError(txtCurrentPassword),
                 errorProvider1.GetError(txtNewPassword),
                 errorProvider1.GetError(txtConfirmPassword),
             };
@@ -75,10 +75,10 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void AccountValidationOnly(bool validate)
+        private void AccountProfileValidation(bool validate)
         {
             txtUserName.CausesValidation = !validate;
-            txtOldPassword.CausesValidation = !validate;
+            txtCurrentPassword.CausesValidation = !validate;
             txtNewPassword.CausesValidation = !validate;
             txtConfirmPassword.CausesValidation = !validate;
 
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private bool UpdateProfile()
         {
-            AccountValidationOnly(true);
+            AccountProfileValidation(true);
 
             if (!ValidateChildren())
             {
@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private bool UpdateAccountSecurity()
         {
-            AccountValidationOnly(false);
+            AccountProfileValidation(false);
 
             if (!ValidateChildren())
             {
@@ -176,12 +176,33 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private void txtOldPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtOldPassword, "Old Password.");
+            try
+            {
+                e.Cancel = !CurrentPasswordValidation();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool CurrentPasswordValidation()
+        {
+            bool isValid;
+            string currentPassword = txtCurrentPassword.Text.Trim();
+            string userName = txtUserName.Text.Trim();
+
+            byte userId = AccFactory.UsersRepository().ValidateLogin(userName, currentPassword);
+
+
+            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCurrentPassword, "Current Password.") && !(userId == 0);
+            errorProvider1.SetError(txtCurrentPassword, (userId == 0) ? "Current password is incorrect." : errorProvider1.GetError(txtCurrentPassword));
+
+            return isValid;
+
         }
 
         private void txtOldPassword_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtOldPassword);
+            Helper.ClearErrorTextBox(errorProvider1, txtCurrentPassword);
+
         }
 
         private void txtNewPassword_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -194,15 +215,15 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             Helper.ClearErrorTextBox(errorProvider1, txtNewPassword);
         }
 
-        private bool PasswordMatchValidation()
+        private bool PasswordMatch()
         {
-            bool isValidated;
+            bool isValid;
             bool passwordMatch = txtNewPassword.Text.Trim() == txtConfirmPassword.Text.Trim();
 
-            isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.") && !passwordMatch;
-            errorProvider1.SetError(txtConfirmPassword, passwordMatch ? "Password doesn't match." : errorProvider1.GetError(txtConfirmPassword));
+            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.") && passwordMatch;
+            errorProvider1.SetError(txtConfirmPassword, !passwordMatch ? "Password doesn't match." : errorProvider1.GetError(txtConfirmPassword));
 
-            return !isValidated;
+            return isValid;
 
         }
 
@@ -210,11 +231,9 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         {
             try
             {
-                e.Cancel = !PasswordMatchValidation();
+                e.Cancel = !PasswordMatch();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtConfirmPassword, "Confirm Password.");
         }
 
         private void txtConfirmPassword_Validated(object sender, EventArgs e)
@@ -224,7 +243,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
         private void btnPasswordVisibility_Click(object sender, EventArgs e)
         {
-            ShowHidePassword(txtOldPassword, btnOldPasswordVisibility);
+            ShowHidePassword(txtCurrentPassword, btnOldPasswordVisibility);
         }
 
         private void btnNewPasswordVisibility_Click(object sender, EventArgs e)
@@ -246,12 +265,12 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
 
                 if (textBox.PasswordChar == '•')
                 {
-                    buttonVisibility.Image = invisibleImage;
+                    buttonVisibility.Image = visibleImage;
                     textBox.PasswordChar = default(char);
                 }
                 else
                 {
-                    buttonVisibility.Image = visibleImage;
+                    buttonVisibility.Image = invisibleImage;
                     textBox.PasswordChar = '•';
                 }
             }
