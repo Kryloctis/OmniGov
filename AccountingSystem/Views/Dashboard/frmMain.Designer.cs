@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new System.Windows.Forms.Panel();
+            radioBtnMyAccount = new System.Windows.Forms.RadioButton();
             radReports = new System.Windows.Forms.RadioButton();
             radSettings = new System.Windows.Forms.RadioButton();
             btnLogout = new System.Windows.Forms.Button();
@@ -54,6 +55,10 @@
             tabPageReports = new System.Windows.Forms.TabPage();
             ucReports1 = new Reports.ucReports();
             label1 = new System.Windows.Forms.Label();
+            tabPageMyAccount = new System.Windows.Forms.TabPage();
+            panel5 = new System.Windows.Forms.Panel();
+            ucMyAccount1 = new MyAccount.ucMyAccount();
+            label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panel1.SuspendLayout();
@@ -66,11 +71,14 @@
             panel4.SuspendLayout();
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
+            tabPageMyAccount.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.White;
+            panel1.Controls.Add(radioBtnMyAccount);
             panel1.Controls.Add(radReports);
             panel1.Controls.Add(radSettings);
             panel1.Controls.Add(btnLogout);
@@ -84,6 +92,26 @@
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(142, 666);
             panel1.TabIndex = 1;
+            // 
+            // radioBtnMyAccount
+            // 
+            radioBtnMyAccount.Appearance = System.Windows.Forms.Appearance.Button;
+            radioBtnMyAccount.AutoSize = true;
+            radioBtnMyAccount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            radioBtnMyAccount.FlatAppearance.BorderSize = 0;
+            radioBtnMyAccount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radioBtnMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radioBtnMyAccount.Image = Properties.Resources.user_profile_man_20px;
+            radioBtnMyAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            radioBtnMyAccount.Location = new System.Drawing.Point(0, 566);
+            radioBtnMyAccount.Margin = new System.Windows.Forms.Padding(0);
+            radioBtnMyAccount.Name = "radioBtnMyAccount";
+            radioBtnMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radioBtnMyAccount.Size = new System.Drawing.Size(142, 34);
+            radioBtnMyAccount.TabIndex = 11;
+            radioBtnMyAccount.Text = "My account";
+            radioBtnMyAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            radioBtnMyAccount.CheckedChanged += radioBtnMyAccount_CheckedChanged;
             // 
             // radReports
             // 
@@ -205,6 +233,7 @@
             tabControlMain.Controls.Add(tabPageTreasury);
             tabControlMain.Controls.Add(tabPageSettings);
             tabControlMain.Controls.Add(tabPageReports);
+            tabControlMain.Controls.Add(tabPageMyAccount);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             tabControlMain.Location = new System.Drawing.Point(142, 0);
@@ -388,7 +417,7 @@
             tabPageReports.Controls.Add(label1);
             tabPageReports.Location = new System.Drawing.Point(4, 24);
             tabPageReports.Name = "tabPageReports";
-            tabPageReports.Size = new System.Drawing.Size(1125, 638);
+            tabPageReports.Size = new System.Drawing.Size(192, 72);
             tabPageReports.TabIndex = 5;
             tabPageReports.Text = "tabPageReports";
             tabPageReports.UseVisualStyleBackColor = true;
@@ -400,7 +429,7 @@
             ucReports1.Location = new System.Drawing.Point(0, 80);
             ucReports1.Name = "ucReports1";
             ucReports1.Padding = new System.Windows.Forms.Padding(4);
-            ucReports1.Size = new System.Drawing.Size(1125, 558);
+            ucReports1.Size = new System.Drawing.Size(192, 0);
             ucReports1.TabIndex = 9;
             // 
             // label1
@@ -411,9 +440,53 @@
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label1.Size = new System.Drawing.Size(1125, 80);
+            label1.Size = new System.Drawing.Size(192, 80);
             label1.TabIndex = 6;
             label1.Text = "Reports";
+            // 
+            // tabPageMyAccount
+            // 
+            tabPageMyAccount.Controls.Add(panel5);
+            tabPageMyAccount.Controls.Add(label6);
+            tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
+            tabPageMyAccount.Name = "tabPageMyAccount";
+            tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 638);
+            tabPageMyAccount.TabIndex = 6;
+            tabPageMyAccount.Text = "tabPageMyAccount";
+            tabPageMyAccount.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            panel5.AutoScroll = true;
+            panel5.Controls.Add(ucMyAccount1);
+            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel5.Location = new System.Drawing.Point(3, 83);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(1119, 552);
+            panel5.TabIndex = 8;
+            // 
+            // ucMyAccount1
+            // 
+            ucMyAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Top;
+            ucMyAccount1.Location = new System.Drawing.Point(0, 0);
+            ucMyAccount1.Name = "ucMyAccount1";
+            ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
+            ucMyAccount1.Size = new System.Drawing.Size(1102, 820);
+            ucMyAccount1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            label6.Dock = System.Windows.Forms.DockStyle.Top;
+            label6.Font = new System.Drawing.Font("Segoe UI Light", 20F);
+            label6.Location = new System.Drawing.Point(3, 3);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            label6.Size = new System.Drawing.Size(1119, 80);
+            label6.TabIndex = 7;
+            label6.Text = "My Account";
             // 
             // taxRatesToolStripMenuItem
             // 
@@ -453,6 +526,8 @@
             panel4.ResumeLayout(false);
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
+            tabPageMyAccount.ResumeLayout(false);
+            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -487,5 +562,10 @@
         private System.Windows.Forms.TabPage tabPageReports;
         private System.Windows.Forms.Label label1;
         private Reports.ucReports ucReports1;
+        private System.Windows.Forms.RadioButton radioBtnMyAccount;
+        private System.Windows.Forms.TabPage tabPageMyAccount;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel5;
+        private MyAccount.ucMyAccount ucMyAccount1;
     }
 }

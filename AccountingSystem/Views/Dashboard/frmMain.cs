@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Dashboard.Accounting;
 using AccountingSystem.Views.Dashboard.AccountingDashboard;
 using AccountingSystem.Views.Dashboard.Budget;
+using AccountingSystem.Views.Dashboard.MyAccount;
 using AccountingSystem.Views.Dashboard.Reports;
 using AccountingSystem.Views.Dashboard.Settings;
 using AccountingSystem.Views.Dashboard.Treasury;
@@ -21,6 +22,7 @@ namespace AccountingSystem.Views.Dashboard
         private ucTreasury ucTreasury;
         private ucSettings ucSettings;
         private ucReports ucReports;
+        private ucMyAccount ucMyAccount;
 
         public frmMain(frmSignIn frmSignIn)
         {
@@ -40,6 +42,7 @@ namespace AccountingSystem.Views.Dashboard
             this.ucTreasury = ucTreasury1;
             this.ucSettings = ucSettings1;
             this.ucReports = ucReports1;
+            this.ucMyAccount = ucMyAccount1;
         }
 
         #region Permission Validations
@@ -108,6 +111,11 @@ namespace AccountingSystem.Views.Dashboard
                 case "tabPageReports":
                     ucReports.OnLoad();
                     radReports.Checked = true;
+                    break;
+
+                case "tabPageMyAccount":
+                    ucMyAccount.OnLoad(this, frmSignIn);
+                    radioBtnMyAccount.Checked = true;
                     break;
             }
         }
@@ -182,6 +190,15 @@ namespace AccountingSystem.Views.Dashboard
             try
             {
                 tabControlMain.SelectedTab = tabPageReports;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radioBtnMyAccount_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControlMain.SelectedTab = tabPageMyAccount;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
