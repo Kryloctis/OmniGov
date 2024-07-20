@@ -2,6 +2,8 @@
 using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.MyAccount
@@ -52,10 +54,23 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             try
             {
                 LoadCurrentUserAccount();
+                LoadListOfPermissions();
                 this.frmMain = frmMain;
                 this.frmSignIn = frmSignIn;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadListOfPermissions()
+        {
+            byte userRoleId = rolesId;
+            var permissions = AccFactory.RoleHasPermissionsRepository()
+                                        .GetRecordsByRoleId(userRoleId)
+                                        .AsEnumerable()
+                                        .Select(dtRowPermissions => $"• {dtRowPermissions["permission_name"]}")
+                                        .ToList();
+
+            txtRolePermissions.Text = string.Join("\n\n", permissions);
         }
 
         private void LoadCurrentUserAccount()

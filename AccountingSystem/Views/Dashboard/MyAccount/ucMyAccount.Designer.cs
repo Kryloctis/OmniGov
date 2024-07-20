@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucMyAccount));
             btnUpdateProfile = new System.Windows.Forms.Button();
             txtSuffix = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
@@ -67,7 +66,7 @@
             txtUserName = new System.Windows.Forms.TextBox();
             txtConfirmPassword = new System.Windows.Forms.TextBox();
             panel2 = new System.Windows.Forms.Panel();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtRolePermissions = new System.Windows.Forms.RichTextBox();
             label11 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -82,7 +81,7 @@
             // btnUpdateProfile
             // 
             btnUpdateProfile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnUpdateProfile.Location = new System.Drawing.Point(8, 316);
+            btnUpdateProfile.Location = new System.Drawing.Point(45, 316);
             btnUpdateProfile.Name = "btnUpdateProfile";
             btnUpdateProfile.Size = new System.Drawing.Size(130, 23);
             btnUpdateProfile.TabIndex = 5;
@@ -142,7 +141,7 @@
             txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtMiddleInitial.MaxLength = 1;
             txtMiddleInitial.Name = "txtMiddleInitial";
-            txtMiddleInitial.Size = new System.Drawing.Size(271, 23);
+            txtMiddleInitial.Size = new System.Drawing.Size(308, 23);
             txtMiddleInitial.TabIndex = 1;
             // 
             // txtLastName
@@ -153,7 +152,7 @@
             txtLastName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtLastName.MaxLength = 45;
             txtLastName.Name = "txtLastName";
-            txtLastName.Size = new System.Drawing.Size(271, 23);
+            txtLastName.Size = new System.Drawing.Size(308, 23);
             txtLastName.TabIndex = 2;
             txtLastName.Validating += txtLastName_Validating;
             txtLastName.Validated += txtLastName_Validated;
@@ -190,7 +189,7 @@
             txtFirstName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtFirstName.MaxLength = 45;
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new System.Drawing.Size(271, 23);
+            txtFirstName.Size = new System.Drawing.Size(308, 23);
             txtFirstName.TabIndex = 0;
             txtFirstName.Validating += txtFirstName_Validating;
             txtFirstName.Validated += txtFirstName_Validated;
@@ -227,7 +226,7 @@
             panel1.Location = new System.Drawing.Point(2, 2);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(303, 94);
+            panel1.Size = new System.Drawing.Size(346, 94);
             panel1.TabIndex = 3;
             // 
             // lblUserFullName
@@ -260,17 +259,17 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(panel3, 0, 0);
             tableLayoutPanel1.Controls.Add(panel4, 0, 1);
-            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(2, 96);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(303, 722);
+            tableLayoutPanel1.Size = new System.Drawing.Size(340, 722);
             tableLayoutPanel1.TabIndex = 80;
             // 
             // panel3
@@ -293,9 +292,10 @@
             panel3.Controls.Add(label8);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(3, 3);
+            panel3.MinimumSize = new System.Drawing.Size(303, 0);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(4);
-            panel3.Size = new System.Drawing.Size(297, 355);
+            panel3.Size = new System.Drawing.Size(334, 355);
             panel3.TabIndex = 1;
             // 
             // label3
@@ -306,7 +306,7 @@
             label3.Location = new System.Drawing.Point(4, 23);
             label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 20);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(289, 15);
+            label3.Size = new System.Drawing.Size(326, 15);
             label3.TabIndex = 81;
             label3.Text = "This information to verify your identity";
             // 
@@ -317,7 +317,7 @@
             label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label2.Location = new System.Drawing.Point(4, 4);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(289, 19);
+            label2.Size = new System.Drawing.Size(326, 19);
             label2.TabIndex = 80;
             label2.Text = "My Profile";
             // 
@@ -330,7 +330,7 @@
             txtProfileCurrentPassword.MaxLength = 60;
             txtProfileCurrentPassword.Name = "txtProfileCurrentPassword";
             txtProfileCurrentPassword.PasswordChar = '•';
-            txtProfileCurrentPassword.Size = new System.Drawing.Size(266, 23);
+            txtProfileCurrentPassword.Size = new System.Drawing.Size(303, 23);
             txtProfileCurrentPassword.TabIndex = 78;
             txtProfileCurrentPassword.Validating += txtProfileCurrentPassword_Validating;
             txtProfileCurrentPassword.Validated += txtProfileCurrentPassword_Validated;
@@ -338,7 +338,7 @@
             // button1
             // 
             button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(144, 316);
+            button1.Location = new System.Drawing.Point(181, 316);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(130, 23);
             button1.TabIndex = 5;
@@ -374,15 +374,16 @@
             panel4.Controls.Add(txtConfirmPassword);
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             panel4.Location = new System.Drawing.Point(3, 364);
+            panel4.MinimumSize = new System.Drawing.Size(303, 0);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(4);
-            panel4.Size = new System.Drawing.Size(297, 355);
+            panel4.Size = new System.Drawing.Size(334, 355);
             panel4.TabIndex = 2;
             // 
             // button2
             // 
             button2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button2.Location = new System.Drawing.Point(145, 265);
+            button2.Location = new System.Drawing.Point(182, 265);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(130, 23);
             button2.TabIndex = 90;
@@ -397,7 +398,7 @@
             label4.Location = new System.Drawing.Point(4, 23);
             label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 20);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(289, 15);
+            label4.Size = new System.Drawing.Size(326, 15);
             label4.TabIndex = 89;
             label4.Text = "Manage your password and login preferences";
             // 
@@ -409,7 +410,7 @@
             label5.Location = new System.Drawing.Point(4, 4);
             label5.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(289, 19);
+            label5.Size = new System.Drawing.Size(326, 19);
             label5.TabIndex = 88;
             label5.Text = "Account Security";
             // 
@@ -470,7 +471,7 @@
             txtNewPassword.MaxLength = 60;
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.PasswordChar = '•';
-            txtNewPassword.Size = new System.Drawing.Size(266, 23);
+            txtNewPassword.Size = new System.Drawing.Size(303, 23);
             txtNewPassword.TabIndex = 79;
             txtNewPassword.Validating += txtNewPassword_Validating;
             txtNewPassword.Validated += txtNewPassword_Validated;
@@ -478,7 +479,7 @@
             // btnUpdateAccountSec
             // 
             btnUpdateAccountSec.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnUpdateAccountSec.Location = new System.Drawing.Point(10, 265);
+            btnUpdateAccountSec.Location = new System.Drawing.Point(47, 265);
             btnUpdateAccountSec.Name = "btnUpdateAccountSec";
             btnUpdateAccountSec.Size = new System.Drawing.Size(129, 23);
             btnUpdateAccountSec.TabIndex = 81;
@@ -495,7 +496,7 @@
             txtCurrentPassword.MaxLength = 60;
             txtCurrentPassword.Name = "txtCurrentPassword";
             txtCurrentPassword.PasswordChar = '•';
-            txtCurrentPassword.Size = new System.Drawing.Size(266, 23);
+            txtCurrentPassword.Size = new System.Drawing.Size(303, 23);
             txtCurrentPassword.TabIndex = 78;
             txtCurrentPassword.Validating += txtOldPassword_Validating;
             txtCurrentPassword.Validated += txtOldPassword_Validated;
@@ -510,7 +511,7 @@
             txtUserName.MaxLength = 45;
             txtUserName.Name = "txtUserName";
             txtUserName.ReadOnly = true;
-            txtUserName.Size = new System.Drawing.Size(266, 23);
+            txtUserName.Size = new System.Drawing.Size(303, 23);
             txtUserName.TabIndex = 77;
             // 
             // txtConfirmPassword
@@ -522,34 +523,36 @@
             txtConfirmPassword.MaxLength = 60;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '•';
-            txtConfirmPassword.Size = new System.Drawing.Size(266, 23);
+            txtConfirmPassword.Size = new System.Drawing.Size(303, 23);
             txtConfirmPassword.TabIndex = 80;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
             txtConfirmPassword.Validated += txtConfirmPassword_Validated;
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtRolePermissions);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            panel2.Location = new System.Drawing.Point(305, 2);
+            panel2.Location = new System.Drawing.Point(348, 2);
+            panel2.MinimumSize = new System.Drawing.Size(394, 0);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(400, 816);
+            panel2.Size = new System.Drawing.Size(491, 816);
             panel2.TabIndex = 81;
             // 
-            // textBox1
+            // txtRolePermissions
             // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.BackColor = System.Drawing.SystemColors.Control;
-            textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox1.Location = new System.Drawing.Point(7, 61);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(386, 748);
-            textBox1.TabIndex = 1;
-            textBox1.Text = resources.GetString("textBox1.Text");
+            txtRolePermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRolePermissions.BackColor = System.Drawing.SystemColors.Control;
+            txtRolePermissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtRolePermissions.BulletIndent = 5;
+            txtRolePermissions.Location = new System.Drawing.Point(17, 56);
+            txtRolePermissions.Name = "txtRolePermissions";
+            txtRolePermissions.ReadOnly = true;
+            txtRolePermissions.Size = new System.Drawing.Size(470, 756);
+            txtRolePermissions.TabIndex = 83;
+            txtRolePermissions.Text = "Lorem Ipsum";
             // 
             // label11
             // 
@@ -559,7 +562,7 @@
             label11.Location = new System.Drawing.Point(4, 23);
             label11.Margin = new System.Windows.Forms.Padding(3, 0, 3, 20);
             label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(392, 15);
+            label11.Size = new System.Drawing.Size(483, 15);
             label11.TabIndex = 82;
             label11.Text = " Your permissions and authorized accessibility.";
             // 
@@ -585,7 +588,7 @@
             Controls.Add(panel2);
             Name = "ucMyAccount";
             Padding = new System.Windows.Forms.Padding(2);
-            Size = new System.Drawing.Size(707, 820);
+            Size = new System.Drawing.Size(841, 820);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
@@ -638,11 +641,11 @@
         internal System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtProfileCurrentPassword;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox txtRolePermissions;
     }
 }
