@@ -50,7 +50,7 @@
             panel3 = new System.Windows.Forms.Panel();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtProfileCurrentPassword = new System.Windows.Forms.TextBox();
             button1 = new System.Windows.Forms.Button();
             label16 = new System.Windows.Forms.Label();
             panel4 = new System.Windows.Forms.Panel();
@@ -283,7 +283,7 @@
             panel3.Controls.Add(txtLastName);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(label7);
-            panel3.Controls.Add(textBox2);
+            panel3.Controls.Add(txtProfileCurrentPassword);
             panel3.Controls.Add(label9);
             panel3.Controls.Add(button1);
             panel3.Controls.Add(btnUpdateProfile);
@@ -321,20 +321,19 @@
             label2.TabIndex = 80;
             label2.Text = "My Profile";
             // 
-            // textBox2
+            // txtProfileCurrentPassword
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            textBox2.Location = new System.Drawing.Point(8, 280);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            textBox2.MaxLength = 60;
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '•';
-            textBox2.Size = new System.Drawing.Size(266, 23);
-            textBox2.TabIndex = 78;
-            textBox2.TextChanged += textBox2_TextChanged;
-            textBox2.Validating += txtOldPassword_Validating;
-            textBox2.Validated += txtOldPassword_Validated;
+            txtProfileCurrentPassword.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtProfileCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
+            txtProfileCurrentPassword.Location = new System.Drawing.Point(8, 280);
+            txtProfileCurrentPassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtProfileCurrentPassword.MaxLength = 60;
+            txtProfileCurrentPassword.Name = "txtProfileCurrentPassword";
+            txtProfileCurrentPassword.PasswordChar = '•';
+            txtProfileCurrentPassword.Size = new System.Drawing.Size(266, 23);
+            txtProfileCurrentPassword.TabIndex = 78;
+            txtProfileCurrentPassword.Validating += txtProfileCurrentPassword_Validating;
+            txtProfileCurrentPassword.Validated += txtProfileCurrentPassword_Validated;
             // 
             // button1
             // 
@@ -355,9 +354,9 @@
             label16.Location = new System.Drawing.Point(8, 262);
             label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(103, 15);
+            label16.Size = new System.Drawing.Size(105, 15);
             label16.TabIndex = 76;
-            label16.Text = "Current Password:";
+            label16.Text = "Current Password*";
             // 
             // panel4
             // 
@@ -641,7 +640,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtProfileCurrentPassword;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
