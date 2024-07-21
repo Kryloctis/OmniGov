@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
+            panel2.Controls.Add(reportViewer2);
         }
 
         private void ToogleRunButton(bool isGenerated)
@@ -119,6 +120,10 @@ namespace AccountingSystem.Views.Reports.Ltom
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
 
+                var report2 = reportViewer2.LocalReport;
+                report2.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ListOfSoldRptAtAuction.rdlc";
+                report2.DataSources.Clear();
+
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
@@ -136,14 +141,29 @@ namespace AccountingSystem.Views.Reports.Ltom
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
                 report.SetParameters(reportParameters);
 
+                report2.SetParameters(reportParameters);
+
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
 
+
+                reportViewer2.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer2.ZoomMode = ZoomMode.PageWidth;
+                reportViewer2.ZoomPercent = 100;
+                reportViewer2.RefreshReport();
+
+                ToogleRunButton(true);
+
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }
