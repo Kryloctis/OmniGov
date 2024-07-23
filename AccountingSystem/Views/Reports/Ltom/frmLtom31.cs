@@ -1,9 +1,11 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
+using AccountingSystem.DataSets;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
@@ -80,21 +82,80 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            //try
+            //{
+            //    int auctionId = (int)e.Argument;
+            //    var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+
+            //    int totalProgressCount = 0;
+            //    int progressCount = 0;
+
+
+            //    progressCount++;
+            //    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+            //    e.Result = ReportData();
+            //}
+
+            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
             try
             {
-                int auctionId = (int)e.Argument;
-                var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+                var date = (DateTime)e.Argument;
+                // Define tasks and their progress weights
+                var tasks = new Dictionary<string, int>
+                {
+                    { "Fetch LGU Details", 10 },
+                    { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 }
+                };
 
-                int totalProgressCount = 0;
+                var dtLtom22 = new dsTreasury.dtLtom22DataTable().Clone();
+                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(date);
+                int totalProgressCount = tasks.Sum(t => t.Value) + dtRptLevy.Rows.Count;
                 int progressCount = 0;
 
-
-                progressCount++;
+                // Fetch LGU Details
+                var lguDetails = Helper.LGUDetails();
+                progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                e.Result = ReportData();
-            }
 
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                // Initialize Parameters
+                List<ReportParameter> reportParameters1 = new List<ReportParameter>();
+                List<ReportParameter> reportParameters2 = new List<ReportParameter>();
+                progressCount += tasks["Initialize Parameters"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Set Parameter Values
+                reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters1.Add(new ReportParameter("paramReportDate", date.ToString()));
+                reportParameters1.Add(new ReportParameter("paramSignatory", string.Empty));
+                reportParameters1.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+
+                reportParameters2.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters2.Add(new ReportParameter("paramSignatory", string.Empty));
+                reportParameters2.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
+                progressCount += tasks["Set Parameter Values"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                foreach (DataRow dataRow in dtRptLevy.Rows)
+                {
+                    var newRow = dtLtom22.NewRow();
+                    string fullAddress = Helper.GenerateFullAddress(string.Empty, dataRow["barangay_name"].ToString(), dataRow["municipalities_name"].ToString(), dataRow["provinces_name"].ToString());
+
+                    newRow["declared_owner"] = dataRow["taxpayers_name"];
+                    newRow["tax_dec_no"] = dataRow["complete_arp_no"];
+                    newRow["location_of_property"] = fullAddress;
+                    newRow["kind_of_property"] = dataRow["property_kind"];
+                    newRow["assessed_value"] = dataRow["assessed_value"];
+
+                    progressCount++;
+                    dtLtom22.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                e.Result = (reportParameters1, reportParameters2, dtLtom22);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
 

@@ -258,6 +258,16 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtSoldRpt" msprop:Generator_RowEvHandlerName="dtSoldRptRowChangeEventHandler" msprop:Generator_RowDeletedName="dtSoldRptRowDeleted" msprop:Generator_RowDeletingName="dtSoldRptRowDeleting" msprop:Generator_RowEvArgName="dtSoldRptRowChangeEvent" msprop:Generator_TablePropName="dtSoldRpt" msprop:Generator_RowChangedName="dtSoldRptRowChanged" msprop:Generator_RowChangingName="dtSoldRptRowChanging" msprop:Generator_TableClassName="dtSoldRptDataTable" msprop:Generator_RowClassName="dtSoldRptRow" msprop:Generator_TableVarName="tabledtSoldRpt" msprop:Generator_UserTableName="dtSoldRpt">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="arp_no" msprop:Generator_ColumnPropNameInRow="arp_no" msprop:Generator_ColumnPropNameInTable="arp_noColumn" msprop:Generator_ColumnVarNameInTable="columnarp_no" msprop:Generator_UserColumnName="arp_no" type="xs:string" minOccurs="0" />
+              <xs:element name="date_of_auction" msprop:Generator_ColumnPropNameInRow="date_of_auction" msprop:Generator_ColumnPropNameInTable="date_of_auctionColumn" msprop:Generator_ColumnVarNameInTable="columndate_of_auction" msprop:Generator_UserColumnName="date_of_auction" type="xs:string" minOccurs="0" />
+              <xs:element name="sold_amount" msprop:Generator_ColumnPropNameInRow="sold_amount" msprop:Generator_ColumnPropNameInTable="sold_amountColumn" msprop:Generator_ColumnVarNameInTable="columnsold_amount" msprop:Generator_UserColumnName="sold_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sold_to" msprop:Generator_ColumnPropNameInRow="sold_to" msprop:Generator_ColumnPropNameInTable="sold_toColumn" msprop:Generator_ColumnVarNameInTable="columnsold_to" msprop:Generator_UserColumnName="sold_to" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
