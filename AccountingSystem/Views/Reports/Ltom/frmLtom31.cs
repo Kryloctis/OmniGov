@@ -82,25 +82,11 @@ namespace AccountingSystem.Views.Reports.Ltom
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //try
-            //{
-            //    int auctionId = (int)e.Argument;
-            //    var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-
-            //    int totalProgressCount = 0;
-            //    int progressCount = 0;
-
-
-            //    progressCount++;
-            //    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-            //    e.Result = ReportData();
-            //}
-
-            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
             try
             {
-                var date = (DateTime)e.Argument;
+
+                int auctionId = (int)e.Argument;
+
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
                 {
@@ -109,9 +95,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                     { "Set Parameter Values", 40 }
                 };
 
-                var dtLtom22 = new dsTreasury.dtLtom22DataTable().Clone();
-                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(date);
-                int totalProgressCount = tasks.Sum(t => t.Value) + dtRptLevy.Rows.Count;
+                var dtLTOM31 = new dsTreasury.dtSoldRptDataTable();
+                var dtSoldRpt = AccFactory.BidRepository().GetSoldRpt(auctionId);
+                int totalProgressCount = tasks.Sum(t => t.Value) + dtSoldRpt.Rows.Count;
                 int progressCount = 0;
 
                 // Fetch LGU Details
@@ -121,39 +107,33 @@ namespace AccountingSystem.Views.Reports.Ltom
 
                 // Initialize Parameters
                 List<ReportParameter> reportParameters1 = new List<ReportParameter>();
-                List<ReportParameter> reportParameters2 = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Set Parameter Values
                 reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
-                reportParameters1.Add(new ReportParameter("paramReportDate", date.ToString()));
-                reportParameters1.Add(new ReportParameter("paramSignatory", string.Empty));
-                reportParameters1.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
-
-                reportParameters2.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
-                reportParameters2.Add(new ReportParameter("paramSignatory", string.Empty));
-                reportParameters2.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
                 progressCount += tasks["Set Parameter Values"];
+
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                foreach (DataRow dataRow in dtRptLevy.Rows)
+                foreach (DataRow dataRow in dtSoldRpt.Rows)
                 {
-                    var newRow = dtLtom22.NewRow();
-                    string fullAddress = Helper.GenerateFullAddress(string.Empty, dataRow["barangay_name"].ToString(), dataRow["municipalities_name"].ToString(), dataRow["provinces_name"].ToString());
+                    var newRow = dtLTOM31.NewRow();
 
-                    newRow["declared_owner"] = dataRow["taxpayers_name"];
-                    newRow["tax_dec_no"] = dataRow["complete_arp_no"];
-                    newRow["location_of_property"] = fullAddress;
-                    newRow["kind_of_property"] = dataRow["property_kind"];
-                    newRow["assessed_value"] = dataRow["assessed_value"];
+                    newRow["arp_no"] = dataRow["complete_arp_no"];
+                    newRow["assessed_value"] = Convert.ToDecimal(dataRow["assessed_value"]);
+                    newRow["sold_amount"] = Convert.ToDecimal(dataRow["bid_amount"]);
+                    newRow["sold_to"] = dataRow["name"];
+                    newRow["sold_to_contact"] = "09052381040";
+                    newRow["sold_to_address"] = "San Jose";
 
                     progressCount++;
-                    dtLtom22.Rows.Add(newRow);
+                    dtLTOM31.Rows.Add(newRow);
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
-                e.Result = (reportParameters1, reportParameters2, dtLtom22);
+
+                e.Result = dtLTOM31;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -186,23 +166,18 @@ namespace AccountingSystem.Views.Reports.Ltom
                 report2.DataSources.Clear();
 
 
-                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
-
                 string lguName = Helper.LGUDetails()["lgu_name"];
-                string location = dtAuction["location"];
-                string date = dtAuction["start_date"];
-
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfPublicAuction", date)
                 };
 
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
                 report.SetParameters(reportParameters);
 
                 report2.SetParameters(reportParameters);
+                report2.DataSources.Add(new ReportDataSource("dsSoldRpt", dataTable));
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;

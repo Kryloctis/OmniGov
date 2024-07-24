@@ -7314,11 +7314,15 @@ namespace AccountingSystem.DataSets {
             
             private global::System.Data.DataColumn columnarp_no;
             
-            private global::System.Data.DataColumn columndate_of_auction;
+            private global::System.Data.DataColumn columnassessed_value;
             
             private global::System.Data.DataColumn columnsold_amount;
             
             private global::System.Data.DataColumn columnsold_to;
+            
+            private global::System.Data.DataColumn columnsold_to_contact;
+            
+            private global::System.Data.DataColumn columnsold_to_address;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -7363,9 +7367,9 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn date_of_auctionColumn {
+            public global::System.Data.DataColumn assessed_valueColumn {
                 get {
-                    return this.columndate_of_auction;
+                    return this.columnassessed_value;
                 }
             }
             
@@ -7382,6 +7386,22 @@ namespace AccountingSystem.DataSets {
             public global::System.Data.DataColumn sold_toColumn {
                 get {
                     return this.columnsold_to;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sold_to_contactColumn {
+                get {
+                    return this.columnsold_to_contact;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sold_to_addressColumn {
+                get {
+                    return this.columnsold_to_address;
                 }
             }
             
@@ -7422,13 +7442,15 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtSoldRptRow AdddtSoldRptRow(string arp_no, string date_of_auction, decimal sold_amount, string sold_to) {
+            public dtSoldRptRow AdddtSoldRptRow(string arp_no, decimal assessed_value, decimal sold_amount, string sold_to, string sold_to_contact, string sold_to_address) {
                 dtSoldRptRow rowdtSoldRptRow = ((dtSoldRptRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         arp_no,
-                        date_of_auction,
+                        assessed_value,
                         sold_amount,
-                        sold_to};
+                        sold_to,
+                        sold_to_contact,
+                        sold_to_address};
                 rowdtSoldRptRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtSoldRptRow);
                 return rowdtSoldRptRow;
@@ -7452,9 +7474,11 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnarp_no = base.Columns["arp_no"];
-                this.columndate_of_auction = base.Columns["date_of_auction"];
+                this.columnassessed_value = base.Columns["assessed_value"];
                 this.columnsold_amount = base.Columns["sold_amount"];
                 this.columnsold_to = base.Columns["sold_to"];
+                this.columnsold_to_contact = base.Columns["sold_to_contact"];
+                this.columnsold_to_address = base.Columns["sold_to_address"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7462,12 +7486,16 @@ namespace AccountingSystem.DataSets {
             private void InitClass() {
                 this.columnarp_no = new global::System.Data.DataColumn("arp_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnarp_no);
-                this.columndate_of_auction = new global::System.Data.DataColumn("date_of_auction", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_of_auction);
+                this.columnassessed_value = new global::System.Data.DataColumn("assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnassessed_value);
                 this.columnsold_amount = new global::System.Data.DataColumn("sold_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsold_amount);
                 this.columnsold_to = new global::System.Data.DataColumn("sold_to", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsold_to);
+                this.columnsold_to_contact = new global::System.Data.DataColumn("sold_to_contact", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsold_to_contact);
+                this.columnsold_to_address = new global::System.Data.DataColumn("sold_to_address", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsold_to_address);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11752,17 +11780,17 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string date_of_auction {
+            public decimal assessed_value {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSoldRpt.date_of_auctionColumn]));
+                        return ((decimal)(this[this.tabledtSoldRpt.assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date_of_auction\' in table \'dtSoldRpt\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'assessed_value\' in table \'dtSoldRpt\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSoldRpt.date_of_auctionColumn] = value;
+                    this[this.tabledtSoldRpt.assessed_valueColumn] = value;
                 }
             }
             
@@ -11800,6 +11828,38 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string sold_to_contact {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSoldRpt.sold_to_contactColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sold_to_contact\' in table \'dtSoldRpt\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSoldRpt.sold_to_contactColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string sold_to_address {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSoldRpt.sold_to_addressColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sold_to_address\' in table \'dtSoldRpt\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSoldRpt.sold_to_addressColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isarp_noNull() {
                 return this.IsNull(this.tabledtSoldRpt.arp_noColumn);
             }
@@ -11812,14 +11872,14 @@ namespace AccountingSystem.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isdate_of_auctionNull() {
-                return this.IsNull(this.tabledtSoldRpt.date_of_auctionColumn);
+            public bool Isassessed_valueNull() {
+                return this.IsNull(this.tabledtSoldRpt.assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setdate_of_auctionNull() {
-                this[this.tabledtSoldRpt.date_of_auctionColumn] = global::System.Convert.DBNull;
+            public void Setassessed_valueNull() {
+                this[this.tabledtSoldRpt.assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11844,6 +11904,30 @@ namespace AccountingSystem.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setsold_toNull() {
                 this[this.tabledtSoldRpt.sold_toColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Issold_to_contactNull() {
+                return this.IsNull(this.tabledtSoldRpt.sold_to_contactColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setsold_to_contactNull() {
+                this[this.tabledtSoldRpt.sold_to_contactColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Issold_to_addressNull() {
+                return this.IsNull(this.tabledtSoldRpt.sold_to_addressColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setsold_to_addressNull() {
+                this[this.tabledtSoldRpt.sold_to_addressColumn] = global::System.Convert.DBNull;
             }
         }
         
