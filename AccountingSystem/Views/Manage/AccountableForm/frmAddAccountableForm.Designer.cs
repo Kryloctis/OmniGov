@@ -45,29 +45,29 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 61);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 108);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(468, 30);
+            flowLayoutPanel1.Size = new System.Drawing.Size(315, 30);
             flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(390, 3);
+            btnCancel.Location = new System.Drawing.Point(162, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.Size = new System.Drawing.Size(150, 23);
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(309, 3);
+            btnSave.Location = new System.Drawing.Point(6, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(75, 23);
+            btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 1;
-            btnSave.Text = "Save";
+            btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += new System.EventHandler(btnSave_Click);
+            btnSave.Click += btnSave_Click;
             // 
             // panel1
             // 
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(468, 61);
+            panel1.Size = new System.Drawing.Size(315, 108);
             panel1.TabIndex = 7;
             // 
             // ucAccountable1
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ucAccountable1.Location = new System.Drawing.Point(4, 4);
             ucAccountable1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucAccountable1.Name = "ucAccountable1";
-            ucAccountable1.Size = new System.Drawing.Size(460, 53);
+            ucAccountable1.Size = new System.Drawing.Size(307, 100);
             ucAccountable1.TabIndex = 0;
             // 
             // frmAddAccountableForm
@@ -95,10 +95,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(468, 91);
+            ClientSize = new System.Drawing.Size(315, 138);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -106,6 +107,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Accountable Form";
+            KeyDown += frmAddAccountableForm_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

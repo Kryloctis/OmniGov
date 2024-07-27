@@ -809,12 +809,12 @@ namespace AccountingSystem
 
             datagridView.Columns["id"].Visible = false;
             datagridView.Columns["accountable_forms_id"].Visible = false;
-            datagridView.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagridView.Columns["date_effective"].DefaultCellStyle.Format = "MMM dd, yyyy";
             datagridView.Columns["amount"].HeaderText = "Amount";
             datagridView.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagridView.Columns["date"].HeaderText = "Date Effective";
-            datagridView.Columns["date"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagridView.Columns["date_effective"].HeaderText = "Date Effective";
+            datagridView.Columns["date_effective"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagridView.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagridView.Columns["is_default"].HeaderText = "Default";
             datagridView.Columns["is_default"].MinimumWidth = 10;

@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             var dictFaceValue = AccFactory.FaceValueRepository().GetRecordByID(faceValueId);
 
-            dtDateEffective.Value = Convert.ToDateTime(dictFaceValue["date"]);
+            dtDateEffective.Value = Convert.ToDateTime(dictFaceValue["date_effective"]);
             nudAmount.Value = Convert.ToDecimal(dictFaceValue["amount"]);
             chckDefault.Checked = Convert.ToBoolean(Convert.ToByte(dictFaceValue["is_default"]));
         }

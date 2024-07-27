@@ -69,7 +69,7 @@ namespace ACC.Data
 
                 record.Add("id", reader.Rows[0]["id"].ToString());
                 record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                record.Add("date", reader.Rows[0]["date"].ToString());
+                record.Add("date_effective", reader.Rows[0]["date_effective"].ToString());
                 record.Add("amount", reader.Rows[0]["amount"].ToString());
                 record.Add("is_default", reader.Rows[0]["is_default"].ToString());
             }
@@ -88,9 +88,9 @@ namespace ACC.Data
         public DataTable GetRecordsByAccountableFormId(int accountableFormId)
         {
             var parameter = new object[][] {
-                new object[] {"@accountableFormId", DbType.Int32, accountableFormId}
+                new object[] { "@accountable_forms_id", DbType.Int32, accountableFormId}
             };
-            string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountableFormId ORDER BY id DESC";
+            string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountable_forms_id ORDER BY id DESC";
 
             var dtBanks = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dtBanks, parameter);
@@ -100,7 +100,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE date LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} WHERE date_effective LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return mySqlGenericCommandsLFS.Fill(query, dtBanks);
@@ -121,12 +121,12 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                new object[] { "@date", DbType.DateTime, entity.facedate},
+                new object[] { "@date_effective", DbType.DateTime, entity.facedate},
                 new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 new object[] { "@is_default", DbType.Boolean, entity.isDefault}
             };
 
-            string query = $"INSERT INTO {tableName} (accountable_forms_id,date,amount, is_default) VALUES (@accountable_forms_id, @date, @amount, @is_default)";
+            string query = $"INSERT INTO {tableName} (accountable_forms_id, date_effective, amount, is_default) VALUES (@accountable_forms_id, @date_effective, @amount, @is_default)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -136,12 +136,12 @@ namespace ACC.Data
             {
                 new object[] { "@id", DbType.Int32, entity.id},
                 new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                new object[] { "@date", DbType.DateTime, entity.facedate},
+                new object[] { "@date_effective", DbType.DateTime, entity.facedate},
                 new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 new object[] { "@is_default", DbType.Boolean, entity.isDefault}
             };
 
-            string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id, date=@date, amount=@amount, is_default = @is_default WHERE id = @id";
+            string query = $"UPDATE {tableName} SET accountable_forms_id = @accountable_forms_id, date_effective = @date_effective, amount = @amount, is_default = @is_default WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
