@@ -1,19 +1,10 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Shared;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using DocumentFormat.OpenXml.Packaging;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
-using Org.BouncyCastle.Asn1.X509.Qualified;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
