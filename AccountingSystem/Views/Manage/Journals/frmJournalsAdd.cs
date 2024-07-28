@@ -42,6 +42,11 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Save();
+        }
+
+        private void Save()
+        {
             try
             {
                 if (SaveData())
@@ -52,6 +57,19 @@ namespace AccountingSystem.Views.Manage.Journals
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ucJournals1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmJournalsAdd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                Save();
+            }
         }
     }
 }

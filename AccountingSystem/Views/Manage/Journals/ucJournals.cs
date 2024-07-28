@@ -81,5 +81,10 @@ namespace AccountingSystem.Views.Manage.Journals
             if (dictLoggedInUser["role_name"] != "System Administrator")
                 txtName.Enabled = false;
         }
+
+        private void chkSpecialJournal_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

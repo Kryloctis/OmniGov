@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Windows.Forms;
 
@@ -65,6 +64,11 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Update();
+        }
+
+        private void Update()
+        {
             try
             {
                 if (SaveData())
@@ -75,5 +79,19 @@ namespace AccountingSystem.Views.Manage.Journals
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void ucJournals1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmJournalsEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                Update();
+            }
+        }
+
     }
 }
