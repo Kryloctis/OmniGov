@@ -13,6 +13,8 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 {
     public partial class frmFeesChargesConfig : Form
     {
+        string lastTextSearch;
+
         public frmFeesChargesConfig()
         {
             InitializeComponent();
@@ -51,7 +53,8 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
-            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(feesChargesClassificationId);
+            string textSearch = txtSearch.Text.Trim();
+            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
             List<TreeNode> nodes = new List<TreeNode>();
 
             foreach (DataRow row in dtFeesCharges.Rows)
@@ -87,6 +90,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 mainTreeView.ExpandAll();
 
                 var dataTable = AccFactory.TaxTypesRepository().GetRecords();
+
                 EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
                 int progressCount = 0;
@@ -344,6 +348,11 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadFeesCharges();
         }
     }
 }
