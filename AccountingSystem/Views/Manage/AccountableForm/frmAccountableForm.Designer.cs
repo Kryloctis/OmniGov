@@ -33,6 +33,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             statusStrip = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,8 +52,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnAddFV = new System.Windows.Forms.ToolStripButton();
             btnEditFV = new System.Windows.Forms.ToolStripButton();
             btnDeleteFV = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            btnSearch = new System.Windows.Forms.ToolStripButton();
             toolStrip.SuspendLayout();
             statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -111,6 +111,22 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
             btnDelete.Click += btnDelete_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // statusStrip
             // 
@@ -289,22 +305,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             btnDeleteFV.Text = "Delete";
             btnDeleteFV.Click += btnDeleteFV_Click;
             // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 27);
-            // 
-            // btnSearch
-            // 
-            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.Image = Properties.Resources.find_20px;
-            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(66, 24);
-            btnSearch.Text = "Search";
-            btnSearch.Click += btnSearch_Click;
-            // 
             // frmAccountableForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -322,7 +322,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Manage > Accountable Forms";
+            Text = "Settings > Accountable Forms";
             Load += frmAccountable_Load;
             toolStrip.ResumeLayout(false);
             toolStrip.PerformLayout();
