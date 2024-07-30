@@ -1,10 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Crypto.Prng;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Transactions;
 
 namespace ACC.Data
 {
@@ -97,17 +95,21 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@real_properties_id", DbType.Int32, entity.RealPropertiesId},
-                new object[] { "@prev_real_properties_id", DbType.Int32, entity.PrevPropertiesId},
+                new object[] { "@taxpayers_id", DbType.Int32, entity.TaxpayersModel.Id},
                 new object[] { "@arp_no", DbType.String, entity.CompleteArpNo},
                 new object[] { "@pin", DbType.String, entity.Pin},
-                new object[] { "@owner_name", DbType.String, entity.Owner},
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue},
-                new object[] { "@effectivity", DbType.String, entity.Effectivity},
+                new object[] { "@date_of_entry", DbType.DateTime2, entity.DateRecorded},
+                new object[] { "@effectivity_quarter", DbType.String, entity.EffectivityQtr},
+                new object[] { "@effectivity_year", DbType.String, entity.EffectivityYear},
                 new object[] { "@date_recorded", DbType.Date, entity.DateRecorded},
-                new object[] { "@recording_person", DbType.String, entity.RecordingPerson}
+                new object[] { "@recording_person", DbType.String, entity.RecordingPerson},
+                new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
+                new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (real_properties_id, prev_real_properties_id, arp_no, pin, owner_name, assessed_value, effectivity, recording_person, date_recorded) VALUES (@real_properties_id, @prev_real_properties_id, @arp_no, @pin, @owner_name, @assessed_value, @effectivity, @recording_person, @date_recorded)";
+            string query = $"INSERT INTO {tableName} (real_properties_id, taxpayers_id, complete_arp_no, pin,  assessed_value, date_of_entry, effectivity_quarter, effectivity_year, gr_year, is_taxable, is_cancelled, recording_person, created_by) VALUES (@real_properties_id, @taxpayers_id, @complete_arp_no, @pin,  @assessed_value, @date_of_entry, @effectivity_quarter, @effectivity_year, @gr_year, @is_taxable, @is_cancelled, @recording_person, @created_by)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
