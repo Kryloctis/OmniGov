@@ -10,13 +10,13 @@ namespace ACC.Domain.Models
         public string CompleteArpNo { get; set; }
         public string Pin { get; set; }
         public decimal AssessedValue { get; set; }
+        public DateTime DateRecorded { get; set; }
         public string EffectivityQtr { get; set; }
         public string EffectivityYear { get; set; }
         public int GrYear { get; set; }
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
         public string RecordingPerson { get; set; }
-        public DateTime DateRecorded { get; set; }
         public int CreatedBy { get; set; }
     }
 }

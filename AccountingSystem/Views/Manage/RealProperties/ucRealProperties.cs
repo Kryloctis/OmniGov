@@ -108,18 +108,25 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             foreach (DataRow row in dtRptPreviousAssessment.Rows)
             {
                 int prevRptId = Convert.ToInt32(row["real_property_id"]);
+                int prevTaxpayerId = Convert.ToInt32(row["taxpayers_id"]);
                 var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
                 decimal assessedValue = Convert.ToDecimal(dictPrevRpt["assessed_value"]);
                 decimal otherImprovements = Convert.ToDecimal(dictPrevRpt["other_improvements"]);
 
                 var rptPrevAssessmentModel = new RptPreviousAssessmentModel
                 {
+                    RealPropertiesId = prevRptId,
+                    TaxpayersModel = new TaxpayersModel { Id = prevTaxpayerId },
                     CompleteArpNo = dictPrevRpt["complete_arp_no"],
                     Pin = $"{dictPrevRpt["property_pin"]}",
                     AssessedValue = (assessedValue + otherImprovements),
                     DateRecorded = Convert.ToDateTime(dictPrevRpt["real_property_created_at"]),
                     EffectivityQtr = dictPrevRpt["effectivity_quarter"],
                     EffectivityYear = dictPrevRpt["effectivity_year"],
+                    GrYear = Convert.ToInt32(dictPrevRpt["gr_year"]),
+                    RecordingPerson = dictPrevRpt["recording_person"],
+                    IsCancelled = Convert.ToBoolean(dictPrevRpt["is_cancelled"]),
+                    IsTaxable = Convert.ToBoolean(dictPrevRpt["is_taxable"]),
 
                 };
 
@@ -278,9 +285,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 new DataColumn(Name = "taxpayer", typeof(string)),
                 new DataColumn(Name = "pin", typeof(string)),
                 new DataColumn(Name = "assessed_value", typeof(decimal)),
+                new DataColumn(Name = "date_of_entry", typeof(DateTime)),
                 new DataColumn(Name = "effectivity_quarter", typeof(string)),
                 new DataColumn(Name = "effectivity_year", typeof(string)),
                 new DataColumn(Name = "gr_year", typeof(string)),
+                new DataColumn(Name = "recording_person", typeof(string)),
+                new DataColumn(Name = "is_taxable", typeof(bool)),
+                new DataColumn(Name = "is_cancelled", typeof(bool)),
             };
 
             dataTable.Columns.AddRange(dataColumns);
@@ -415,9 +426,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 newRow["taxpayer"] = cmbxPreviousTaxpayer.Text;
                 newRow["pin"] = txtPreviousPin.Text;
                 newRow["assessed_value"] = nudPreviousAssessedValue.Text;
+                newRow["date_of_entry"] = dtpDateOfEntry.Value;
                 newRow["effectivity_quarter"] = nudPreviousEffectivityQuarter.Text;
                 newRow["effectivity_year"] = nudPreviousEffectivityYear.Text;
                 newRow["gr_year"] = nudPreviousGrYear.Text;
+                newRow["recording_person"] = txtRecordingPerson.Text;
+                newRow["is_taxable"] = cbxTaxable.Checked;
+                newRow["is_cancelled"] = cbxCancelled.Checked;
+
                 dataSource.Rows.Add(newRow);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -561,5 +577,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }
