@@ -994,6 +994,15 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["real_property_id"].Visible = false;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["taxpayer"].HeaderText = "Taxpayer";
+            dataGridView.Columns["pin"].HeaderText = "Pin";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["effectivity_quarter"].HeaderText = "Eff. Qtr";
+            dataGridView.Columns["effectivity_year"].HeaderText = "Eff. Year";
+            dataGridView.Columns["gr_year"].HeaderText = "GR Year";
+
         }
 
         public static void ClassificationCombobox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
