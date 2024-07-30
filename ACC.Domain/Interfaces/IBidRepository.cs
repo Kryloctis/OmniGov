@@ -14,5 +14,7 @@ namespace ACC.Domain.Interfaces
         bool UpdateBidDetails(BiddersModel biddersModel, BidModel bidModel);
 
         DataTable GetViewRecordsByAuctionId(int auctionId);
+
+        DataTable GetSoldRpt(int auctionId);
     }
 }

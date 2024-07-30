@@ -32,15 +32,22 @@
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            splitContainer2 = new System.Windows.Forms.SplitContainer();
             panel1 = new System.Windows.Forms.Panel();
+            panel2 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            reportViewer2 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -59,12 +66,13 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Panel2.Controls.Add(progressBar1);
             splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 10;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // cmbxAuctionSchedule
             // 
@@ -96,21 +104,38 @@
             btnRunReport.UseVisualStyleBackColor = true;
             btnRunReport.Click += btnRunReport_Click;
             // 
-            // statusStrip1
+            // splitContainer2
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 406);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(840, 22);
-            statusStrip1.TabIndex = 11;
-            statusStrip1.Text = "statusStrip1";
+            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer2.Location = new System.Drawing.Point(4, 9);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(panel1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(panel2);
+            splitContainer2.Size = new System.Drawing.Size(617, 393);
+            splitContainer2.SplitterDistance = 204;
+            splitContainer2.TabIndex = 6;
             // 
             // panel1
             // 
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(4, 9);
+            panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(617, 393);
-            panel1.TabIndex = 5;
+            panel1.Size = new System.Drawing.Size(204, 393);
+            panel1.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(409, 393);
+            panel2.TabIndex = 7;
             // 
             // progressBar1
             // 
@@ -119,6 +144,14 @@
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new System.Drawing.Size(617, 5);
             progressBar1.TabIndex = 4;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 406);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(840, 22);
+            statusStrip1.TabIndex = 11;
+            statusStrip1.Text = "statusStrip1";
             // 
             // reportViewer1
             // 
@@ -136,6 +169,15 @@
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // reportViewer2
+            // 
+            reportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer2.Location = new System.Drawing.Point(0, 0);
+            reportViewer2.Name = "ReportViewer";
+            reportViewer2.ServerReport.BearerToken = null;
+            reportViewer2.Size = new System.Drawing.Size(396, 246);
+            reportViewer2.TabIndex = 0;
             // 
             // frmLtom31
             // 
@@ -156,6 +198,10 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,9 +213,12 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ComboBox cmbxAuctionSchedule;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer2;
     }
 }

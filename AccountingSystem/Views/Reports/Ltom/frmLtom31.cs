@@ -1,9 +1,11 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
+using AccountingSystem.DataSets;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ltom
@@ -16,6 +18,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
+            panel2.Controls.Add(reportViewer2);
         }
 
         private void ToogleRunButton(bool isGenerated)
@@ -81,19 +84,58 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                int auctionId = (int)e.Argument;
-                var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
 
-                int totalProgressCount = 0;
+                int auctionId = (int)e.Argument;
+
+                // Define tasks and their progress weights
+                var tasks = new Dictionary<string, int>
+                {
+                    { "Fetch LGU Details", 10 },
+                    { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 }
+                };
+
+                var dtLTOM31 = new dsTreasury.dtSoldRptDataTable();
+                var dtSoldRpt = AccFactory.BidRepository().GetSoldRpt(auctionId);
+                int totalProgressCount = tasks.Sum(t => t.Value) + dtSoldRpt.Rows.Count;
                 int progressCount = 0;
 
-
-                progressCount++;
+                // Fetch LGU Details
+                var lguDetails = Helper.LGUDetails();
+                progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                e.Result = ReportData();
-            }
 
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                // Initialize Parameters
+                List<ReportParameter> reportParameters1 = new List<ReportParameter>();
+                progressCount += tasks["Initialize Parameters"];
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                // Set Parameter Values
+                reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                progressCount += tasks["Set Parameter Values"];
+
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                foreach (DataRow dataRow in dtSoldRpt.Rows)
+                {
+                    var newRow = dtLTOM31.NewRow();
+
+                    newRow["arp_no"] = dataRow["complete_arp_no"];
+                    newRow["assessed_value"] = Convert.ToDecimal(dataRow["assessed_value"]);
+                    newRow["sold_amount"] = Convert.ToDecimal(dataRow["bid_amount"]);
+                    newRow["sold_to"] = dataRow["name"];
+                    newRow["sold_to_contact"] = "09052381040";
+                    newRow["sold_to_address"] = "San Jose";
+
+                    progressCount++;
+                    dtLTOM31.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+
+                e.Result = dtLTOM31;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
 
@@ -119,31 +161,45 @@ namespace AccountingSystem.Views.Reports.Ltom
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
 
+                var report2 = reportViewer2.LocalReport;
+                report2.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ListOfSoldRptAtAuction.rdlc";
+                report2.DataSources.Clear();
 
-                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
-                string location = dtAuction["location"];
-                string date = dtAuction["start_date"];
-
 
                 var reportParameters = new ReportParameter[]
                 {
                     new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfPublicAuction", date)
                 };
 
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
                 report.SetParameters(reportParameters);
+
+                report2.SetParameters(reportParameters);
+                report2.DataSources.Add(new ReportDataSource("dsSoldRpt", dataTable));
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
 
+
+                reportViewer2.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer2.ZoomMode = ZoomMode.PageWidth;
+                reportViewer2.ZoomPercent = 100;
+                reportViewer2.RefreshReport();
+
+                ToogleRunButton(true);
+
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }

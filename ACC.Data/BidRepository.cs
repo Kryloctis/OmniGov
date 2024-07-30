@@ -88,6 +88,17 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetSoldRpt(int auctionId)
+        {
+            var parameters = new object[][] {
+                new object[] { "@auction_id", DbType.Int32, auctionId },
+            };
+
+            string query = $"SELECT rpt_auction_id, complete_arp_no, assessed_value, auction_id, name, address, municipality, province, contact_info, MAX(bid_amount) AS bid_amount FROM  {viewTableName} WHERE auction_id = @auction_id GROUP BY rpt_auction_id ORDER BY bid_amount DESC";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public Dictionary<string, string> GetViewRecordById(int bidId)
         {
             var recordDictionary = new Dictionary<string, string>();
