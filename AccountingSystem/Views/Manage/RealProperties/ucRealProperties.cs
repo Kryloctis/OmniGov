@@ -114,13 +114,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 var rptPrevAssessmentModel = new RptPreviousAssessmentModel
                 {
-                    PrevPropertiesId = prevRptId,
-                    AssessedValue = (assessedValue + otherImprovements),
                     CompleteArpNo = dictPrevRpt["complete_arp_no"],
-                    DateRecorded = Convert.ToDateTime(dictPrevRpt["real_property_created_at"]),
-                    Effectivity = $"{Helper.AddOrdinalSuffix(Convert.ToInt32(dictPrevRpt["effectivity_quarter"]))}, {dictPrevRpt["effectivity_year"]}",
-                    Owner = $"{dictPrevRpt["taxpayer_name"]}",
                     Pin = $"{dictPrevRpt["property_pin"]}",
+                    AssessedValue = (assessedValue + otherImprovements),
+                    DateRecorded = Convert.ToDateTime(dictPrevRpt["real_property_created_at"]),
+                    EffectivityQtr = dictPrevRpt["effectivity_quarter"],
+                    EffectivityYear = dictPrevRpt["effectivity_year"],
+
                 };
 
                 rptPrevAssessmentModels.Add(rptPrevAssessmentModel);
@@ -213,6 +213,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxTaxpayer, "id", "name");
+            HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxPreviousTaxpayer, "id", "name");
         }
 
         private void LoadSelectedTaxpayer(int taxpayerId)
@@ -262,7 +263,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 dataTable.Rows.Add(newRow);
             }
 
-            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxPreviousRpt.ComboBox, "real_property_id", "complete_arp_no");
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxPreviousRpt, "real_property_id", "complete_arp_no");
         }
 
         private void LoadPreviousAssessments()
@@ -272,7 +273,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dataColumns = new DataColumn[]
             {
                 new DataColumn(Name = "real_property_id", typeof(int)),
-                new DataColumn(Name = "complete_arp_no", typeof(string))
+                new DataColumn(Name = "complete_arp_no", typeof(string)),
+                new DataColumn(Name = "taxpayers_id", typeof(int)),
+                new DataColumn(Name = "taxpayer", typeof(string)),
+                new DataColumn(Name = "pin", typeof(string)),
+                new DataColumn(Name = "assessed_value", typeof(decimal)),
+                new DataColumn(Name = "effectivity_quarter", typeof(string)),
+                new DataColumn(Name = "effectivity_year", typeof(string)),
+                new DataColumn(Name = "gr_year", typeof(string)),
             };
 
             dataTable.Columns.AddRange(dataColumns);
@@ -389,7 +397,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 var dataSource = (DataTable)dataGridView1.DataSource;
-                int rptId = Convert.ToInt32(cmbxPreviousRpt.ComboBox.SelectedValue);
+                int rptId = Convert.ToInt32(cmbxPreviousRpt.SelectedValue);
 
                 if (IsDuplicateRow(rptId, dataSource))
                 {
@@ -402,8 +410,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 var newRow = dataSource.NewRow();
                 newRow["real_property_id"] = rptId;
-                newRow["complete_arp_no"] = cmbxPreviousRpt.ComboBox.Text;
-
+                newRow["complete_arp_no"] = cmbxPreviousRpt.Text;
+                newRow["taxpayers_id"] = Convert.ToInt32(cmbxPreviousTaxpayer.SelectedValue);
+                newRow["taxpayer"] = cmbxPreviousTaxpayer.Text;
+                newRow["pin"] = txtPreviousPin.Text;
+                newRow["assessed_value"] = nudPreviousAssessedValue.Text;
+                newRow["effectivity_quarter"] = nudPreviousEffectivityQuarter.Text;
+                newRow["effectivity_year"] = nudPreviousEffectivityYear.Text;
+                newRow["gr_year"] = nudPreviousGrYear.Text;
                 dataSource.Rows.Add(newRow);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -531,6 +545,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void cmbxTaxpayer_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxTaxpayer);
+        }
+
+        private void cmbxPreviousTaxpayer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
+                {
+                    LoadTaxpayers();
+                    cmbxPreviousTaxpayer.DroppedDown = cmbxPreviousTaxpayer.DroppedDown ? false : true;
+                    cmbxPreviousTaxpayer.DroppedDown = true;
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

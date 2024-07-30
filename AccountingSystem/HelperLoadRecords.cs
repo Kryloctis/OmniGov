@@ -999,10 +999,24 @@ namespace AccountingSystem
             dataGridView.Columns["pin"].HeaderText = "Pin";
             dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["effectivity_quarter"].HeaderText = "Eff. Qtr";
+            dataGridView.Columns["effectivity_quarter"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["effectivity_year"].HeaderText = "Eff. Year";
+            dataGridView.Columns["effectivity_year"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["gr_year"].HeaderText = "GR Year";
+            dataGridView.Columns["gr_year"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            dataGridView.Columns["taxpayer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["assessed_value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["effectivity_quarter"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["gr_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public static void ClassificationCombobox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)

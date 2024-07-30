@@ -69,12 +69,25 @@
             txtStreet = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             tabPagePreviousAsssessments = new System.Windows.Forms.TabPage();
+            label23 = new System.Windows.Forms.Label();
+            cmbxPreviousTaxpayer = new System.Windows.Forms.ComboBox();
+            btnDeleteRptPrev = new System.Windows.Forms.Button();
+            btnAddPrevRpt = new System.Windows.Forms.Button();
+            cmbxPreviousRpt = new System.Windows.Forms.ComboBox();
+            checkBox1 = new System.Windows.Forms.CheckBox();
+            checkBox2 = new System.Windows.Forms.CheckBox();
+            label22 = new System.Windows.Forms.Label();
+            nudPreviousGrYear = new System.Windows.Forms.NumericUpDown();
+            label20 = new System.Windows.Forms.Label();
+            label21 = new System.Windows.Forms.Label();
+            nudPreviousEffectivityQuarter = new System.Windows.Forms.NumericUpDown();
+            nudPreviousEffectivityYear = new System.Windows.Forms.NumericUpDown();
+            label19 = new System.Windows.Forms.Label();
+            nudPreviousAssessedValue = new System.Windows.Forms.NumericUpDown();
+            txtPreviousPin = new System.Windows.Forms.TextBox();
+            label18 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            cmbxPreviousRpt = new System.Windows.Forms.ToolStripComboBox();
-            btnAddPrevRpt = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            btnDeletePrevRpt = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityQuarter).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudEffectivityYear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAssessedValue).BeginInit();
@@ -86,8 +99,11 @@
             tabPageDetails.SuspendLayout();
             panel1.SuspendLayout();
             tabPagePreviousAsssessments.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousGrYear).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousEffectivityQuarter).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousEffectivityYear).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousAssessedValue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // txtArpNo
@@ -494,68 +510,219 @@
             // 
             // tabPagePreviousAsssessments
             // 
+            tabPagePreviousAsssessments.Controls.Add(label23);
+            tabPagePreviousAsssessments.Controls.Add(cmbxPreviousTaxpayer);
+            tabPagePreviousAsssessments.Controls.Add(btnDeleteRptPrev);
+            tabPagePreviousAsssessments.Controls.Add(btnAddPrevRpt);
+            tabPagePreviousAsssessments.Controls.Add(cmbxPreviousRpt);
+            tabPagePreviousAsssessments.Controls.Add(checkBox1);
+            tabPagePreviousAsssessments.Controls.Add(checkBox2);
+            tabPagePreviousAsssessments.Controls.Add(label22);
+            tabPagePreviousAsssessments.Controls.Add(nudPreviousGrYear);
+            tabPagePreviousAsssessments.Controls.Add(label20);
+            tabPagePreviousAsssessments.Controls.Add(label21);
+            tabPagePreviousAsssessments.Controls.Add(nudPreviousEffectivityQuarter);
+            tabPagePreviousAsssessments.Controls.Add(nudPreviousEffectivityYear);
+            tabPagePreviousAsssessments.Controls.Add(label19);
+            tabPagePreviousAsssessments.Controls.Add(nudPreviousAssessedValue);
+            tabPagePreviousAsssessments.Controls.Add(txtPreviousPin);
+            tabPagePreviousAsssessments.Controls.Add(label18);
+            tabPagePreviousAsssessments.Controls.Add(label6);
             tabPagePreviousAsssessments.Controls.Add(dataGridView1);
-            tabPagePreviousAsssessments.Controls.Add(toolStrip1);
             tabPagePreviousAsssessments.Location = new System.Drawing.Point(4, 24);
             tabPagePreviousAsssessments.Name = "tabPagePreviousAsssessments";
             tabPagePreviousAsssessments.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePreviousAsssessments.Size = new System.Drawing.Size(379, 505);
+            tabPagePreviousAsssessments.Size = new System.Drawing.Size(381, 505);
             tabPagePreviousAsssessments.TabIndex = 1;
             tabPagePreviousAsssessments.Text = "Previous Assessments";
             tabPagePreviousAsssessments.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // label23
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(3, 34);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(373, 468);
-            dataGridView1.TabIndex = 19;
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(17, 75);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(58, 15);
+            label23.TabIndex = 42;
+            label23.Text = "Taxpayer*";
             // 
-            // toolStrip1
+            // cmbxPreviousTaxpayer
             // 
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { cmbxPreviousRpt, btnAddPrevRpt, toolStripSeparator1, btnDeletePrevRpt });
-            toolStrip1.Location = new System.Drawing.Point(3, 3);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(373, 31);
-            toolStrip1.TabIndex = 18;
-            toolStrip1.Text = "toolStrip1";
+            cmbxPreviousTaxpayer.FormattingEnabled = true;
+            cmbxPreviousTaxpayer.Location = new System.Drawing.Point(123, 72);
+            cmbxPreviousTaxpayer.Name = "cmbxPreviousTaxpayer";
+            cmbxPreviousTaxpayer.Size = new System.Drawing.Size(230, 23);
+            cmbxPreviousTaxpayer.TabIndex = 1;
+            cmbxPreviousTaxpayer.KeyPress += cmbxPreviousTaxpayer_KeyPress;
             // 
-            // cmbxPreviousRpt
+            // btnDeleteRptPrev
             // 
-            cmbxPreviousRpt.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            cmbxPreviousRpt.Name = "cmbxPreviousRpt";
-            cmbxPreviousRpt.Size = new System.Drawing.Size(150, 23);
-            cmbxPreviousRpt.KeyPress += cmbxPreviousRpt_KeyPress;
+            btnDeleteRptPrev.Image = Properties.Resources.waste_bin_filled_14px;
+            btnDeleteRptPrev.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDeleteRptPrev.Location = new System.Drawing.Point(283, 246);
+            btnDeleteRptPrev.Name = "btnDeleteRptPrev";
+            btnDeleteRptPrev.Size = new System.Drawing.Size(70, 23);
+            btnDeleteRptPrev.TabIndex = 8;
+            btnDeleteRptPrev.Text = "Delete";
+            btnDeleteRptPrev.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnDeleteRptPrev.UseVisualStyleBackColor = true;
+            btnDeleteRptPrev.Click += btnDeleteRptPrev_Click;
             // 
             // btnAddPrevRpt
             // 
-            btnAddPrevRpt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnAddPrevRpt.Image = Properties.Resources.symbol_add_20px;
-            btnAddPrevRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAddPrevRpt.Image = Properties.Resources.symbol_add_14px;
+            btnAddPrevRpt.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnAddPrevRpt.Location = new System.Drawing.Point(207, 246);
             btnAddPrevRpt.Name = "btnAddPrevRpt";
-            btnAddPrevRpt.Size = new System.Drawing.Size(23, 20);
-            btnAddPrevRpt.Text = "Apply";
+            btnAddPrevRpt.Size = new System.Drawing.Size(70, 23);
+            btnAddPrevRpt.TabIndex = 7;
+            btnAddPrevRpt.Text = "Add";
+            btnAddPrevRpt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnAddPrevRpt.UseVisualStyleBackColor = true;
             btnAddPrevRpt.Click += btnAddPrevRpt_Click;
             // 
-            // toolStripSeparator1
+            // cmbxPreviousRpt
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
+            cmbxPreviousRpt.FormattingEnabled = true;
+            cmbxPreviousRpt.Location = new System.Drawing.Point(123, 43);
+            cmbxPreviousRpt.Name = "cmbxPreviousRpt";
+            cmbxPreviousRpt.Size = new System.Drawing.Size(230, 23);
+            cmbxPreviousRpt.TabIndex = 0;
+            cmbxPreviousRpt.KeyPress += cmbxPreviousRpt_KeyPress;
             // 
-            // btnDeletePrevRpt
+            // checkBox1
             // 
-            btnDeletePrevRpt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnDeletePrevRpt.Image = Properties.Resources.waste_bin_filled_20px;
-            btnDeletePrevRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnDeletePrevRpt.Name = "btnDeletePrevRpt";
-            btnDeletePrevRpt.Size = new System.Drawing.Size(23, 20);
-            btnDeletePrevRpt.Text = "Delete";
-            btnDeletePrevRpt.Click += btnDeleteRptPrev_Click;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new System.Drawing.Point(275, 18);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new System.Drawing.Size(78, 19);
+            checkBox1.TabIndex = 38;
+            checkBox1.Text = "Cancelled";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Checked = true;
+            checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBox2.Location = new System.Drawing.Point(204, 18);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new System.Drawing.Size(65, 19);
+            checkBox2.TabIndex = 37;
+            checkBox2.Text = "Taxable";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(17, 219);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(52, 15);
+            label22.TabIndex = 35;
+            label22.Text = "GR year*";
+            // 
+            // nudPreviousGrYear
+            // 
+            nudPreviousGrYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            nudPreviousGrYear.Location = new System.Drawing.Point(123, 217);
+            nudPreviousGrYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudPreviousGrYear.Name = "nudPreviousGrYear";
+            nudPreviousGrYear.Size = new System.Drawing.Size(230, 23);
+            nudPreviousGrYear.TabIndex = 6;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(17, 190);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(89, 15);
+            label20.TabIndex = 32;
+            label20.Text = "Effectivity Year*";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(17, 161);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(91, 15);
+            label21.TabIndex = 31;
+            label21.Text = "Effectivity Qrtr.*";
+            // 
+            // nudPreviousEffectivityQuarter
+            // 
+            nudPreviousEffectivityQuarter.BackColor = System.Drawing.SystemColors.Window;
+            nudPreviousEffectivityQuarter.Location = new System.Drawing.Point(123, 159);
+            nudPreviousEffectivityQuarter.Maximum = new decimal(new int[] { 4, 0, 0, 0 });
+            nudPreviousEffectivityQuarter.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudPreviousEffectivityQuarter.Name = "nudPreviousEffectivityQuarter";
+            nudPreviousEffectivityQuarter.ReadOnly = true;
+            nudPreviousEffectivityQuarter.Size = new System.Drawing.Size(230, 23);
+            nudPreviousEffectivityQuarter.TabIndex = 4;
+            nudPreviousEffectivityQuarter.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // nudPreviousEffectivityYear
+            // 
+            nudPreviousEffectivityYear.Location = new System.Drawing.Point(123, 188);
+            nudPreviousEffectivityYear.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
+            nudPreviousEffectivityYear.Minimum = new decimal(new int[] { 1930, 0, 0, 0 });
+            nudPreviousEffectivityYear.Name = "nudPreviousEffectivityYear";
+            nudPreviousEffectivityYear.Size = new System.Drawing.Size(230, 23);
+            nudPreviousEffectivityYear.TabIndex = 5;
+            nudPreviousEffectivityYear.Value = new decimal(new int[] { 2022, 0, 0, 0 });
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(17, 132);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(90, 15);
+            label19.TabIndex = 29;
+            label19.Text = "Assessed Value*";
+            // 
+            // nudPreviousAssessedValue
+            // 
+            nudPreviousAssessedValue.DecimalPlaces = 2;
+            nudPreviousAssessedValue.Location = new System.Drawing.Point(123, 130);
+            nudPreviousAssessedValue.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudPreviousAssessedValue.Name = "nudPreviousAssessedValue";
+            nudPreviousAssessedValue.Size = new System.Drawing.Size(230, 23);
+            nudPreviousAssessedValue.TabIndex = 3;
+            nudPreviousAssessedValue.ThousandsSeparator = true;
+            // 
+            // txtPreviousPin
+            // 
+            txtPreviousPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtPreviousPin.Location = new System.Drawing.Point(123, 101);
+            txtPreviousPin.Name = "txtPreviousPin";
+            txtPreviousPin.Size = new System.Drawing.Size(230, 23);
+            txtPreviousPin.TabIndex = 2;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(17, 103);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(74, 15);
+            label18.TabIndex = 28;
+            label18.Text = "Property PIN";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(17, 46);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(56, 15);
+            label6.TabIndex = 26;
+            label6.Text = "ARP No.*";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new System.Drawing.Point(3, 275);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new System.Drawing.Size(373, 227);
+            dataGridView1.TabIndex = 19;
             // 
             // ucRealProperties
             // 
@@ -578,9 +745,11 @@
             panel1.PerformLayout();
             tabPagePreviousAsssessments.ResumeLayout(false);
             tabPagePreviousAsssessments.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousGrYear).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousEffectivityQuarter).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousEffectivityYear).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPreviousAssessedValue).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -625,13 +794,26 @@
         private System.Windows.Forms.TabPage tabPageDetails;
         private System.Windows.Forms.TabPage tabPagePreviousAsssessments;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnDeletePrevRpt;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ToolStripComboBox cmbxPreviousRpt;
-        private System.Windows.Forms.ToolStripButton btnAddPrevRpt;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TextBox txtStreet;
         internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.TextBox txtPreviousPin;
+        internal System.Windows.Forms.Label label18;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.Label label19;
+        internal System.Windows.Forms.NumericUpDown nudPreviousAssessedValue;
+        internal System.Windows.Forms.Label label20;
+        internal System.Windows.Forms.Label label21;
+        internal System.Windows.Forms.NumericUpDown nudPreviousEffectivityQuarter;
+        internal System.Windows.Forms.NumericUpDown nudPreviousEffectivityYear;
+        internal System.Windows.Forms.CheckBox checkBox1;
+        internal System.Windows.Forms.CheckBox checkBox2;
+        internal System.Windows.Forms.Label label22;
+        internal System.Windows.Forms.NumericUpDown nudPreviousGrYear;
+        private System.Windows.Forms.ComboBox cmbxPreviousRpt;
+        private System.Windows.Forms.Button btnAddPrevRpt;
+        private System.Windows.Forms.Button btnDeleteRptPrev;
+        internal System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox cmbxPreviousTaxpayer;
     }
 }
