@@ -1012,7 +1012,6 @@ namespace AccountingSystem
             dataGridView.Columns["gr_year"].HeaderText = "GR Year";
             dataGridView.Columns["gr_year"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["recording_person"].HeaderText = "Recording Person";
-
             dataGridView.Columns["taxpayer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;

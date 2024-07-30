@@ -120,14 +120,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     CompleteArpNo = dictPrevRpt["complete_arp_no"],
                     Pin = $"{dictPrevRpt["property_pin"]}",
                     AssessedValue = (assessedValue + otherImprovements),
-                    DateRecorded = Convert.ToDateTime(dictPrevRpt["real_property_created_at"]),
+                    DateOfEntry = Convert.ToDateTime(row["date_of_entry"]),
                     EffectivityQtr = dictPrevRpt["effectivity_quarter"],
                     EffectivityYear = dictPrevRpt["effectivity_year"],
                     GrYear = Convert.ToInt32(dictPrevRpt["gr_year"]),
-                    RecordingPerson = dictPrevRpt["recording_person"],
-                    IsCancelled = Convert.ToBoolean(dictPrevRpt["is_cancelled"]),
-                    IsTaxable = Convert.ToBoolean(dictPrevRpt["is_taxable"]),
-
+                    RecordingPerson = row["recording_person"].ToString(),
+                    IsCancelled = 0,
+                    IsTaxable = 0,
+                    CreatedBy = Helper.userId,
                 };
 
                 rptPrevAssessmentModels.Add(rptPrevAssessmentModel);

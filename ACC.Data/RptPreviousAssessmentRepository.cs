@@ -96,16 +96,16 @@ namespace ACC.Data
             {
                 new object[] { "@real_properties_id", DbType.Int32, entity.RealPropertiesId},
                 new object[] { "@taxpayers_id", DbType.Int32, entity.TaxpayersModel.Id},
-                new object[] { "@arp_no", DbType.String, entity.CompleteArpNo},
+                new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo},
                 new object[] { "@pin", DbType.String, entity.Pin},
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue},
-                new object[] { "@date_of_entry", DbType.DateTime2, entity.DateRecorded},
+                new object[] { "@date_of_entry", DbType.DateTime2, entity.DateOfEntry},
                 new object[] { "@effectivity_quarter", DbType.String, entity.EffectivityQtr},
                 new object[] { "@effectivity_year", DbType.String, entity.EffectivityYear},
-                new object[] { "@date_recorded", DbType.Date, entity.DateRecorded},
                 new object[] { "@recording_person", DbType.String, entity.RecordingPerson},
-                new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
-                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
+                new object[] { "gr_year", DbType.String, entity.GrYear },
+                new object[] { "@is_taxable", DbType.Int16, entity.IsTaxable },
+                new object[] { "@is_cancelled", DbType.Int16, entity.IsCancelled },
                 new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
             };
 
