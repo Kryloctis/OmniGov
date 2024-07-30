@@ -2,6 +2,8 @@
 using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.MyAccount
@@ -26,6 +28,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 errorProvider1.GetError(txtUserName),
                 errorProvider1.GetError(txtCurrentPassword),
                 errorProvider1.GetError(txtNewPassword),
+                errorProvider1.GetError(txtProfileCurrentPassword),
                 errorProvider1.GetError(txtConfirmPassword),
             };
 
@@ -41,6 +44,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             txtPrefix.Clear();
             txtSuffix.Clear();
             txtCurrentPassword.Clear();
+            txtProfileCurrentPassword.Clear();
             txtNewPassword.Clear();
             txtConfirmPassword.Clear();
         }
@@ -50,10 +54,23 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             try
             {
                 LoadCurrentUserAccount();
+                LoadListOfPermissions();
                 this.frmMain = frmMain;
                 this.frmSignIn = frmSignIn;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadListOfPermissions()
+        {
+            byte userRoleId = rolesId;
+            var permissions = AccFactory.RoleHasPermissionsRepository()
+                                        .GetRecordsByRoleId(userRoleId)
+                                        .AsEnumerable()
+                                        .Select(dtRowPermissions => $"• {dtRowPermissions["permission_name"]}")
+                                        .ToList();
+
+            txtRolePermissions.Text = string.Join("\n\n", permissions);
         }
 
         private void LoadCurrentUserAccount()
@@ -97,6 +114,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             txtFirstName.CausesValidation = validate;
             txtMiddleInitial.CausesValidation = validate;
             txtLastName.CausesValidation = validate;
+            txtProfileCurrentPassword.CausesValidation = validate;
         }
 
         private bool UpdateProfile()
@@ -198,21 +216,21 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         {
             try
             {
-                e.Cancel = !CurrentPasswordValidation();
+                e.Cancel = !CurrentPasswordValidation(txtCurrentPassword);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool CurrentPasswordValidation()
+        private bool CurrentPasswordValidation(TextBox txtBoxCurrentPassowrd)
         {
             bool isValid;
-            string currentPassword = txtCurrentPassword.Text.Trim();
+            string currentPassword = txtBoxCurrentPassowrd.Text.Trim();
             string userName = txtUserName.Text.Trim();
 
             byte userId = AccFactory.UsersRepository().ValidateLogin(userName, currentPassword);
 
-            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCurrentPassword, "Current Password.") && !(userId == 0);
-            errorProvider1.SetError(txtCurrentPassword, (userId == 0) ? "Current password is incorrect." : errorProvider1.GetError(txtCurrentPassword));
+            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBoxCurrentPassowrd, "Current Password.") && !(userId == 0);
+            errorProvider1.SetError(txtBoxCurrentPassowrd, (userId == 0) ? "Current password is incorrect." : errorProvider1.GetError(txtBoxCurrentPassowrd));
 
             return isValid;
         }
@@ -257,8 +275,18 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             Helper.ClearErrorTextBox(errorProvider1, txtConfirmPassword);
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void txtProfileCurrentPassword_Validating(object sender, CancelEventArgs e)
         {
+            try
+            {
+                e.Cancel = !CurrentPasswordValidation(txtProfileCurrentPassword);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtProfileCurrentPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtProfileCurrentPassword);
         }
     }
 }
