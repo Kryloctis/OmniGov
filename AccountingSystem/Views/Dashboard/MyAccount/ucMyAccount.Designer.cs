@@ -50,10 +50,10 @@
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             txtProfileCurrentPassword = new System.Windows.Forms.TextBox();
-            button1 = new System.Windows.Forms.Button();
+            btnProfileCancel = new System.Windows.Forms.Button();
             label16 = new System.Windows.Forms.Label();
             panel4 = new System.Windows.Forms.Panel();
-            button2 = new System.Windows.Forms.Button();
+            btnSecurityCancel = new System.Windows.Forms.Button();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
@@ -284,7 +284,7 @@
             panel3.Controls.Add(label7);
             panel3.Controls.Add(txtProfileCurrentPassword);
             panel3.Controls.Add(label9);
-            panel3.Controls.Add(button1);
+            panel3.Controls.Add(btnProfileCancel);
             panel3.Controls.Add(btnUpdateProfile);
             panel3.Controls.Add(txtPrefix);
             panel3.Controls.Add(txtFirstName);
@@ -335,16 +335,16 @@
             txtProfileCurrentPassword.Validating += txtProfileCurrentPassword_Validating;
             txtProfileCurrentPassword.Validated += txtProfileCurrentPassword_Validated;
             // 
-            // button1
+            // btnProfileCancel
             // 
-            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(181, 316);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(130, 23);
-            button1.TabIndex = 5;
-            button1.Text = "Cancel";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnUpdateProfile_Click;
+            btnProfileCancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnProfileCancel.Location = new System.Drawing.Point(181, 316);
+            btnProfileCancel.Name = "btnProfileCancel";
+            btnProfileCancel.Size = new System.Drawing.Size(130, 23);
+            btnProfileCancel.TabIndex = 5;
+            btnProfileCancel.Text = "Cancel";
+            btnProfileCancel.UseVisualStyleBackColor = true;
+            btnProfileCancel.Click += btnProfileCancel_Click;
             // 
             // label16
             // 
@@ -360,7 +360,7 @@
             // 
             // panel4
             // 
-            panel4.Controls.Add(button2);
+            panel4.Controls.Add(btnSecurityCancel);
             panel4.Controls.Add(label4);
             panel4.Controls.Add(label5);
             panel4.Controls.Add(label13);
@@ -380,15 +380,16 @@
             panel4.Size = new System.Drawing.Size(334, 355);
             panel4.TabIndex = 2;
             // 
-            // button2
+            // btnSecurityCancel
             // 
-            button2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button2.Location = new System.Drawing.Point(182, 265);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(130, 23);
-            button2.TabIndex = 90;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = true;
+            btnSecurityCancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSecurityCancel.Location = new System.Drawing.Point(182, 265);
+            btnSecurityCancel.Name = "btnSecurityCancel";
+            btnSecurityCancel.Size = new System.Drawing.Size(130, 23);
+            btnSecurityCancel.TabIndex = 90;
+            btnSecurityCancel.Text = "Cancel";
+            btnSecurityCancel.UseVisualStyleBackColor = true;
+            btnSecurityCancel.Click += btnSecurityCancel_Click;
             // 
             // label4
             // 
@@ -547,6 +548,7 @@
             txtRolePermissions.BackColor = System.Drawing.SystemColors.Control;
             txtRolePermissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtRolePermissions.BulletIndent = 5;
+            txtRolePermissions.Font = new System.Drawing.Font("Segoe UI", 8F);
             txtRolePermissions.Location = new System.Drawing.Point(17, 56);
             txtRolePermissions.Name = "txtRolePermissions";
             txtRolePermissions.ReadOnly = true;
@@ -644,8 +646,8 @@
         internal System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtProfileCurrentPassword;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnProfileCancel;
+        private System.Windows.Forms.Button btnSecurityCancel;
         private System.Windows.Forms.RichTextBox txtRolePermissions;
     }
 }

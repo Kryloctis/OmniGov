@@ -124,8 +124,8 @@ namespace AccountingSystem.Views.Reports.Ltom
                     newRow["assessed_value"] = Convert.ToDecimal(dataRow["assessed_value"]);
                     newRow["sold_amount"] = Convert.ToDecimal(dataRow["bid_amount"]);
                     newRow["sold_to"] = dataRow["name"];
-                    newRow["sold_to_contact"] = "09052381040";
-                    newRow["sold_to_address"] = "San Jose";
+                    newRow["sold_to_contact"] = dataRow["contact_info"];
+                    newRow["sold_to_address"] = dataRow["address"];
 
                     progressCount++;
                     dtLTOM31.Rows.Add(newRow);
@@ -195,11 +195,6 @@ namespace AccountingSystem.Views.Reports.Ltom
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
         }
     }
 }

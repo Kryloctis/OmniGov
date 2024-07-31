@@ -35,18 +35,27 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
             return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private void ResetForm()
+        private void ResetForm(object sender)
         {
-            txtFirstName.Clear();
-            txtMiddleInitial.Clear();
-            txtLastName.Clear();
-            txtUserName.Clear();
-            txtPrefix.Clear();
-            txtSuffix.Clear();
-            txtCurrentPassword.Clear();
-            txtProfileCurrentPassword.Clear();
-            txtNewPassword.Clear();
-            txtConfirmPassword.Clear();
+            if (sender == btnProfileCancel)
+            {
+                txtFirstName.Clear();
+                txtMiddleInitial.Clear();
+                txtLastName.Clear();
+                txtUserName.Clear();
+                txtPrefix.Clear();
+                txtSuffix.Clear();
+                txtProfileCurrentPassword.Clear();
+                LoadCurrentUserAccount();
+            }
+            if (sender == btnSecurityCancel)
+            {
+                txtCurrentPassword.Clear();
+                txtNewPassword.Clear();
+                txtConfirmPassword.Clear();
+            }
+
+            errorProvider1.Clear();
         }
 
         internal void OnLoad(frmMain frmMain, frmSignIn frmSignIn)
@@ -70,7 +79,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                                         .Select(dtRowPermissions => $"• {dtRowPermissions["permission_name"]}")
                                         .ToList();
 
-            txtRolePermissions.Text = string.Join("\n\n", permissions);
+            txtRolePermissions.Text = string.Join("\n", permissions);
         }
 
         private void LoadCurrentUserAccount()
@@ -95,7 +104,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 if (UpdateProfile())
                 {
                     Helper.MessageBoxSuccess("Account Profile Updated.");
-                    ResetForm();
+                    ResetForm(btnProfileCancel);
                     LoadCurrentUserAccount();
                 }
             }
@@ -153,7 +162,7 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
                 if (UpdateAccountSecurity())
                 {
                     Helper.MessageBoxSuccess("Account Security Updated. Please log in with your new password to continue.");
-                    ResetForm();
+                    ResetForm(btnSecurityCancel);
                     frmMain.Close();
                     frmSignIn.Show();
                 }
@@ -287,6 +296,16 @@ namespace AccountingSystem.Views.Dashboard.MyAccount
         private void txtProfileCurrentPassword_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtProfileCurrentPassword);
+        }
+
+        private void btnProfileCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm(sender);
+        }
+
+        private void btnSecurityCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm(sender);
         }
     }
 }
