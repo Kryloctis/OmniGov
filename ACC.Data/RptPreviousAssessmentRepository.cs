@@ -40,7 +40,7 @@ namespace ACC.Data
         {
             var dict = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
-            string query = $"SELECT real_properties_id, property_pin, complete_arp_no, assessed_value, previous_owner_name, effectivity_assessment, date_recorded FROM {tableName} id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
             using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -50,12 +50,16 @@ namespace ACC.Data
                 foreach (DataRow row in reader.Rows)
                 {
                     dict.Add("real_properties_id", row["real_properties_id"].ToString());
-                    dict.Add("property_pin", row["property_pin"].ToString());
+                    dict.Add("taxpayers_id", row["taxpayers_id"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("pin", row["pin"].ToString());
                     dict.Add("assessed_value", row["assessed_value"].ToString());
-                    dict.Add("previous_owner_name", row["previous_owner_name"].ToString());
-                    dict.Add("effectivity_assessment", row["effectivity_assessment"].ToString());
-                    dict.Add("date_recorded", row["date_recorded"].ToString());
+                    dict.Add("date_of_entry", row["date_of_entry"].ToString());
+                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("recording_person", row["recording_person"].ToString());
                 }
                 return dict;
             }

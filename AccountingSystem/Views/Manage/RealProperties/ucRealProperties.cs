@@ -63,11 +63,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             foreach (DataRow row in dtPrevRptDb.Rows)
             {
                 var newRow = dtPrevRpt.NewRow();
-
-                int prevRptId = Convert.ToInt32(row["prev_real_properties_id"]);
-                var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
-                newRow["real_property_id"] = Convert.ToInt32(dictPrevRpt["real_property_id"]);
-                newRow["complete_arp_no"] = dictPrevRpt["complete_arp_no"];
+                newRow["real_property_id"] = Convert.ToInt32(row["real_properties_id"]);
+                newRow["complete_arp_no"] = row["complete_arp_no"];
+                newRow["taxpayers_id"] = row["taxpayers_id"];
+                newRow["taxpayer"] = row["complete_arp_no"];
+                newRow["pin"] = row["pin"];
+                newRow["assessed_value"] = row["assessed_value"];
+                newRow["date_of_entry"] = row["date_of_entry"];
+                newRow["effectivity_quarter"] = row["effectivity_quarter"];
+                newRow["effectivity_year"] = row["effectivity_year"];
+                newRow["gr_year"] = row["gr_year"];
+                newRow["recording_person"] = row["recording_person"];
+                newRow["is_taxable"] = row["is_taxable"];
+                newRow["is_cancelled"] = row["is_cancelled"];
 
                 dtPrevRpt.Rows.Add(newRow);
             }
