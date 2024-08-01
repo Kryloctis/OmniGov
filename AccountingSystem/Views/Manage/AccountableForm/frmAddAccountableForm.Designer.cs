@@ -45,14 +45,14 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 108);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 67);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(315, 30);
+            flowLayoutPanel1.Size = new System.Drawing.Size(381, 30);
             flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(162, 3);
+            btnCancel.Location = new System.Drawing.Point(228, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(150, 23);
             btnCancel.TabIndex = 2;
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(6, 3);
+            btnSave.Location = new System.Drawing.Point(72, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(150, 23);
             btnSave.TabIndex = 1;
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(315, 108);
+            panel1.Size = new System.Drawing.Size(381, 67);
             panel1.TabIndex = 7;
             // 
             // ucAccountable1
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ucAccountable1.Location = new System.Drawing.Point(4, 4);
             ucAccountable1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucAccountable1.Name = "ucAccountable1";
-            ucAccountable1.Size = new System.Drawing.Size(307, 100);
+            ucAccountable1.Size = new System.Drawing.Size(373, 59);
             ucAccountable1.TabIndex = 0;
             // 
             // frmAddAccountableForm
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(315, 138);
+            ClientSize = new System.Drawing.Size(381, 97);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
