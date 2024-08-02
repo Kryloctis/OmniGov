@@ -84,7 +84,6 @@ namespace AccountingSystem.Views.Manage.Journals
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucJournals";
             Size = new System.Drawing.Size(402, 58);
-            Load += ucJournals_Load;
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
             ResumeLayout(false);
             PerformLayout();

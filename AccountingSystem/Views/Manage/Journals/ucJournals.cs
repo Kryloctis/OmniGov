@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,7 +9,8 @@ namespace AccountingSystem.Views.Manage.Journals
 {
     public partial class ucJournals : UserControl
     {
-        internal int journalId = 0;
+        private int? journalId;
+        private bool isEdit;
 
         public ucJournals()
         {
@@ -40,49 +42,51 @@ namespace AccountingSystem.Views.Manage.Journals
             chkSpecialJournal.Checked = false;
         }
 
-        private void OnLoad()
+        internal void OnLoad(bool isEdit, int? journalId = null)
         {
             if (!DesignMode)
             {
+                this.isEdit = isEdit;
+                this.journalId = journalId;
                 UserVerification();
             }
         }
 
-        private void txtName_Validated(object sender, EventArgs e)
+        private bool JournalNameValidated()
         {
-            Helper.ClearErrorTextBox(epName, txtName);
+            string journalName = txtName.Text.Trim();
+            bool journalNameExist;
+            var isEmpty = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
+
+            if (isEmpty)
+                return false;
+
+            if (isEdit)
+                journalNameExist = AccFactory.JournalsRepository().NameExist(journalName, journalId.Value);
+            else
+                journalNameExist = AccFactory.JournalsRepository().NameExist(journalName);
+
+            if (journalNameExist)
+            {
+                epName.SetError(txtName, "Journal name is already in your records.");
+                return false;
+            }
+
+            return true;
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
-
-                string journalName = txtName.Text.Trim();
-                bool journalNameExist;
-
-                if (journalId == 0)
-                    journalNameExist = AccFactory.JournalsRepository().NameExist(journalName); // add form
-                else
-                    journalNameExist = AccFactory.JournalsRepository().NameExist(journalName, journalId); // edit form
-
-                if (journalNameExist)
-                {
-                    epName.SetError(txtName, "Journal name already exist in your records.");
-                    e.Cancel = true;
-                }
+                e.Cancel = !JournalNameValidated();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ucJournals_Load(object sender, EventArgs e)
+        private void txtName_Validated(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ClearErrorTextBox(epName, txtName);
         }
 
         private void UserVerification()

@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -14,6 +13,7 @@ namespace AccountingSystem.Views.Manage.Journals
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            uc = ucJournals1;
             this.frmJournals = frmJournals;
         }
 
@@ -30,6 +30,11 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void frmJournalsAdd_Load(object sender, EventArgs e)
         {
+            try
+            {
+                uc.OnLoad(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -44,10 +49,6 @@ namespace AccountingSystem.Views.Manage.Journals
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ucJournals1_Load(object sender, EventArgs e)
-        {
         }
 
         private void frmJournalsAdd_KeyDown(object sender, KeyEventArgs e)

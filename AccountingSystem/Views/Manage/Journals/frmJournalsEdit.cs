@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -9,20 +8,21 @@ namespace AccountingSystem.Views.Manage.Journals
     {
         private frmJournals frmJournals;
         private ucJournals uc;
+        private readonly int journalId;
 
         public frmJournalsEdit(frmJournals frmJournals, int journalId)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            this.frmJournals = frmJournals;
             uc = ucJournals1;
-            uc.journalId = journalId;
+            this.frmJournals = frmJournals;
+            this.journalId = journalId;
         }
 
         private void LoadSelectedRecord()
         {
-            var journalData = AccFactory.JournalsRepository().GetRecordByID(uc.journalId);
+            var journalData = AccFactory.JournalsRepository().GetRecordByID(journalId);
 
             uc.txtName.Text = journalData["journal_name"];
             uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
@@ -36,13 +36,16 @@ namespace AccountingSystem.Views.Manage.Journals
                 return false;
             }
 
-            return AccFactory.JournalsRepository().Update(uc.JournalsModel());
+            var model = uc.JournalsModel();
+            model.Id = journalId;
+            return AccFactory.JournalsRepository().Update(model);
         }
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)
         {
             try
             {
+                uc.OnLoad(true, journalId);
                 LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -54,7 +57,7 @@ namespace AccountingSystem.Views.Manage.Journals
             {
                 if (UpdateData())
                 {
-                    Helper.MessageBoxSuccess("Journal has been saved.");
+                    Helper.MessageBoxSuccess("Journal has been updated.");
                     frmJournals.LoadRecords();
                 }
             }
