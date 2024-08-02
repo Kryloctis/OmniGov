@@ -37,6 +37,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            SaveAccountableForm();
+        }
+
+        private void SaveAccountableForm()
+        {
             try
             {
                 if (SaveData())
@@ -47,6 +52,14 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmAddAccountableForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                SaveAccountableForm();
+            }
         }
     }
 }

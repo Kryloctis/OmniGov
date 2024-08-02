@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.RealProperties;
 using System;
-using System.Threading.Channels;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers

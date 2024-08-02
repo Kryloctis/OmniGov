@@ -1,19 +1,10 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Shared;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using DocumentFormat.OpenXml.Packaging;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
-using Org.BouncyCastle.Asn1.X509.Qualified;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -72,11 +63,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             foreach (DataRow row in dtPrevRptDb.Rows)
             {
                 var newRow = dtPrevRpt.NewRow();
-
-                int prevRptId = Convert.ToInt32(row["prev_real_properties_id"]);
-                var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
-                newRow["real_property_id"] = Convert.ToInt32(dictPrevRpt["real_property_id"]);
-                newRow["complete_arp_no"] = dictPrevRpt["complete_arp_no"];
+                newRow["real_property_id"] = Convert.ToInt32(row["real_properties_id"]);
+                newRow["complete_arp_no"] = row["complete_arp_no"];
+                newRow["taxpayers_id"] = row["taxpayers_id"];
+                newRow["taxpayer"] = row["complete_arp_no"];
+                newRow["pin"] = row["pin"];
+                newRow["assessed_value"] = row["assessed_value"];
+                newRow["date_of_entry"] = row["date_of_entry"];
+                newRow["effectivity_quarter"] = row["effectivity_quarter"];
+                newRow["effectivity_year"] = row["effectivity_year"];
+                newRow["gr_year"] = row["gr_year"];
+                newRow["recording_person"] = row["recording_person"];
+                newRow["is_taxable"] = row["is_taxable"];
+                newRow["is_cancelled"] = row["is_cancelled"];
 
                 dtPrevRpt.Rows.Add(newRow);
             }
@@ -117,19 +116,26 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             foreach (DataRow row in dtRptPreviousAssessment.Rows)
             {
                 int prevRptId = Convert.ToInt32(row["real_property_id"]);
+                int prevTaxpayerId = Convert.ToInt32(row["taxpayers_id"]);
                 var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
                 decimal assessedValue = Convert.ToDecimal(dictPrevRpt["assessed_value"]);
                 decimal otherImprovements = Convert.ToDecimal(dictPrevRpt["other_improvements"]);
 
                 var rptPrevAssessmentModel = new RptPreviousAssessmentModel
                 {
-                    PrevPropertiesId = prevRptId,
-                    AssessedValue = (assessedValue + otherImprovements),
+                    RealPropertiesId = prevRptId,
+                    TaxpayersModel = new TaxpayersModel { Id = prevTaxpayerId },
                     CompleteArpNo = dictPrevRpt["complete_arp_no"],
-                    DateRecorded = Convert.ToDateTime(dictPrevRpt["real_property_created_at"]),
-                    Effectivity = $"{Helper.AddOrdinalSuffix(Convert.ToInt32(dictPrevRpt["effectivity_quarter"]))}, {dictPrevRpt["effectivity_year"]}",
-                    Owner = $"{dictPrevRpt["taxpayer_name"]}",
                     Pin = $"{dictPrevRpt["property_pin"]}",
+                    AssessedValue = (assessedValue + otherImprovements),
+                    DateOfEntry = Convert.ToDateTime(row["date_of_entry"]),
+                    EffectivityQtr = dictPrevRpt["effectivity_quarter"],
+                    EffectivityYear = dictPrevRpt["effectivity_year"],
+                    GrYear = Convert.ToInt32(dictPrevRpt["gr_year"]),
+                    RecordingPerson = row["recording_person"].ToString(),
+                    IsCancelled = 0,
+                    IsTaxable = 0,
+                    CreatedBy = Helper.userId,
                 };
 
                 rptPrevAssessmentModels.Add(rptPrevAssessmentModel);
@@ -222,6 +228,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxTaxpayer, "id", "name");
+            HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxPreviousTaxpayer, "id", "name");
         }
 
         private void LoadSelectedTaxpayer(int taxpayerId)
@@ -271,7 +278,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 dataTable.Rows.Add(newRow);
             }
 
-            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxPreviousRpt.ComboBox, "real_property_id", "complete_arp_no");
+            HelperLoadRecords.SearchableCombobox2(dataTable, cmbxPreviousRpt, "real_property_id", "complete_arp_no");
         }
 
         private void LoadPreviousAssessments()
@@ -281,7 +288,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dataColumns = new DataColumn[]
             {
                 new DataColumn(Name = "real_property_id", typeof(int)),
-                new DataColumn(Name = "complete_arp_no", typeof(string))
+                new DataColumn(Name = "complete_arp_no", typeof(string)),
+                new DataColumn(Name = "taxpayers_id", typeof(int)),
+                new DataColumn(Name = "taxpayer", typeof(string)),
+                new DataColumn(Name = "pin", typeof(string)),
+                new DataColumn(Name = "assessed_value", typeof(decimal)),
+                new DataColumn(Name = "date_of_entry", typeof(DateTime)),
+                new DataColumn(Name = "effectivity_quarter", typeof(string)),
+                new DataColumn(Name = "effectivity_year", typeof(string)),
+                new DataColumn(Name = "gr_year", typeof(string)),
+                new DataColumn(Name = "recording_person", typeof(string)),
+                new DataColumn(Name = "is_taxable", typeof(bool)),
+                new DataColumn(Name = "is_cancelled", typeof(bool)),
             };
 
             dataTable.Columns.AddRange(dataColumns);
@@ -398,7 +416,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 var dataSource = (DataTable)dataGridView1.DataSource;
-                int rptId = Convert.ToInt32(cmbxPreviousRpt.ComboBox.SelectedValue);
+                int rptId = Convert.ToInt32(cmbxPreviousRpt.SelectedValue);
 
                 if (IsDuplicateRow(rptId, dataSource))
                 {
@@ -411,7 +429,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 var newRow = dataSource.NewRow();
                 newRow["real_property_id"] = rptId;
-                newRow["complete_arp_no"] = cmbxPreviousRpt.ComboBox.Text;
+                newRow["complete_arp_no"] = cmbxPreviousRpt.Text;
+                newRow["taxpayers_id"] = Convert.ToInt32(cmbxPreviousTaxpayer.SelectedValue);
+                newRow["taxpayer"] = cmbxPreviousTaxpayer.Text;
+                newRow["pin"] = txtPreviousPin.Text;
+                newRow["assessed_value"] = nudPreviousAssessedValue.Text;
+                newRow["date_of_entry"] = dtpDateOfEntry.Value;
+                newRow["effectivity_quarter"] = nudPreviousEffectivityQuarter.Text;
+                newRow["effectivity_year"] = nudPreviousEffectivityYear.Text;
+                newRow["gr_year"] = nudPreviousGrYear.Text;
+                newRow["recording_person"] = txtRecordingPerson.Text;
+                newRow["is_taxable"] = cbxTaxable.Checked;
+                newRow["is_cancelled"] = cbxCancelled.Checked;
 
                 dataSource.Rows.Add(newRow);
             }
@@ -541,5 +570,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxTaxpayer);
         }
+
+        private void cmbxPreviousTaxpayer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
+                {
+                    LoadTaxpayers();
+                    cmbxPreviousTaxpayer.DroppedDown = cmbxPreviousTaxpayer.DroppedDown ? false : true;
+                    cmbxPreviousTaxpayer.DroppedDown = true;
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
     }
 }

@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Windows.Forms;
 
@@ -8,72 +6,74 @@ namespace AccountingSystem.Views.Manage.Journals
 {
     public partial class frmJournalsEdit : Form
     {
-        private frmJournals _frmJournals;
+        private frmJournals frmJournals;
         private ucJournals uc;
+        private readonly int journalId;
 
         public frmJournalsEdit(frmJournals frmJournals, int journalId)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            _frmJournals = frmJournals;
             uc = ucJournals1;
-            uc.journalId = journalId;
+            this.frmJournals = frmJournals;
+            this.journalId = journalId;
         }
 
         private void LoadSelectedRecord()
         {
-            var journalData = AccFactory.JournalsRepository().GetRecordByID(uc.journalId);
+            var journalData = AccFactory.JournalsRepository().GetRecordByID(journalId);
 
             uc.txtName.Text = journalData["journal_name"];
             uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
         }
 
-        private bool SaveData()
+        private bool UpdateData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to update
-            var journalModel = new JournalsModel()
-            {
-                Id = uc.journalId,
-                JournalName = uc.txtName.Text.Trim(),
-                IsSpecialJournal = uc.chkSpecialJournal.Checked
-            };
-
-            return AccFactory.JournalsRepository().Update(journalModel);
+            var model = uc.JournalsModel();
+            model.Id = journalId;
+            return AccFactory.JournalsRepository().Update(model);
         }
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                uc.OnLoad(true, journalId);
+                LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (SaveData())
+                if (UpdateData())
                 {
-                    Helper.MessageBoxSuccess("Journal has been saved.");
-                    _frmJournals.LoadRecords();
+                    Helper.MessageBoxSuccess("Journal has been updated.");
+                    frmJournals.LoadRecords();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmJournalsEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Journal has been saved.");
+                    frmJournals.LoadRecords();
+                }
+            }
         }
     }
 }

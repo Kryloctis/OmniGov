@@ -41,6 +41,8 @@
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             btnUndelete = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -95,7 +97,7 @@
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { drpDownBtnNew, btnModify, toolStripSeparator2, btnDelete, btnUndelete });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { drpDownBtnNew, btnModify, toolStripSeparator2, btnDelete, btnUndelete, btnSearch, txtSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -158,6 +160,23 @@
             btnUndelete.Text = "Undelete";
             btnUndelete.Click += btnUndelete_Click;
             // 
+            // btnSearch
+            // 
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 27);
+            // 
             // frmFeesChargesConfig
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -170,10 +189,11 @@
             Controls.Add(toolStrip1);
             MinimizeBox = false;
             Name = "frmFeesChargesConfig";
+            ShowIcon = false;
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Manage > Fees & Charges Config.";
+            Text = "Treasury > Manage > Fees & Charges Config.";
             Load += frmFeesChargesConfig_Load;
             panel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
@@ -196,5 +216,7 @@
         private System.Windows.Forms.ToolStripDropDownButton drpDownBtnNew;
         private System.Windows.Forms.ToolStripMenuItem btnNewClassification;
         private System.Windows.Forms.ToolStripMenuItem btnNewFeesCharges;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

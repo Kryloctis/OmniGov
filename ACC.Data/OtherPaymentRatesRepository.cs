@@ -101,6 +101,22 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetRecordsByTaxTypeIDAndDescription(int taxTypeID, string description)
+        {
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@tax_type_id", DbType.Int32, taxTypeID},
+                new object[] { "@description", DbType.String, $"%{description}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE tax_type_id = @tax_type_id AND description LIKE @description";
+            var dataTable = new DataTable();
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

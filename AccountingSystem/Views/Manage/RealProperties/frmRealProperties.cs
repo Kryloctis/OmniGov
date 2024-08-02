@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
@@ -137,9 +136,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     foreach (DataRow rowPrevRpt in dtPrevRpt.Rows)
                     {
                         if (sb.Length < 1)
-                            sb.Append($"{rowPrevRpt["arp_no"]}");
+                            sb.Append($"{rowPrevRpt["complete_arp_no"]}");
                         else
-                            sb.Append($", {rowPrevRpt["arp_no"]}");
+                            sb.Append($", {rowPrevRpt["complete_arp_no"]}");
                     }
 
                     newRow["prev_assessments"] = sb.ToString();

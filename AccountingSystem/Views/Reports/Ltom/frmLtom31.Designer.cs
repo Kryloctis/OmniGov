@@ -72,7 +72,6 @@
             splitContainer1.Size = new System.Drawing.Size(840, 406);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 10;
-            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // cmbxAuctionSchedule
             // 

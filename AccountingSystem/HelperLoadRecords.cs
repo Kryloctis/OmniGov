@@ -809,12 +809,12 @@ namespace AccountingSystem
 
             datagridView.Columns["id"].Visible = false;
             datagridView.Columns["accountable_forms_id"].Visible = false;
-            datagridView.Columns["date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagridView.Columns["date_effective"].DefaultCellStyle.Format = "MMM dd, yyyy";
             datagridView.Columns["amount"].HeaderText = "Amount";
             datagridView.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagridView.Columns["date"].HeaderText = "Date Effective";
-            datagridView.Columns["date"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagridView.Columns["date_effective"].HeaderText = "Date Effective";
+            datagridView.Columns["date_effective"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagridView.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagridView.Columns["is_default"].HeaderText = "Default";
             datagridView.Columns["is_default"].MinimumWidth = 10;
@@ -994,6 +994,36 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["real_property_id"].Visible = false;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["is_taxable"].Visible = false;
+            dataGridView.Columns["is_cancelled"].Visible = false;
+            dataGridView.Columns["taxpayer"].HeaderText = "Taxpayer";
+            dataGridView.Columns["pin"].HeaderText = "Pin";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["date_of_entry"].HeaderText = "Date of Entry";
+            dataGridView.Columns["date_of_entry"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["date_of_entry"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["effectivity_quarter"].HeaderText = "Eff. Qtr";
+            dataGridView.Columns["effectivity_quarter"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["effectivity_year"].HeaderText = "Eff. Year";
+            dataGridView.Columns["effectivity_year"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["gr_year"].HeaderText = "GR Year";
+            dataGridView.Columns["gr_year"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["recording_person"].HeaderText = "Recording Person";
+            dataGridView.Columns["taxpayer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["assessed_value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["date_of_entry"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["effectivity_quarter"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["gr_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["recording_person"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public static void ClassificationCombobox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)

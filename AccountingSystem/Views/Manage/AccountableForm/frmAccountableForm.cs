@@ -214,7 +214,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             {
                 new DataColumn(Name = "id", typeof(int)),
                 new DataColumn(Name = "accountable_forms_id", typeof(int)),
-                new DataColumn(Name = "date", typeof(DateTime)),
+                new DataColumn(Name = "date_effective", typeof(DateTime)),
                 new DataColumn(Name = "amount", typeof(decimal)),
                 new DataColumn(Name = "is_default", typeof(bool))
             };
@@ -232,13 +232,13 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 var newRow = dataTable.NewRow();
                 int id = Convert.ToInt32(row["id"]);
                 int accFormId = Convert.ToInt32(row["accountable_forms_id"]);
-                DateTime date = Convert.ToDateTime(row["date"]);
+                DateTime date = Convert.ToDateTime(row["date_effective"]);
                 decimal amount = Convert.ToDecimal(row["amount"]);
                 bool isDefault = Convert.ToBoolean(row["is_default"]);
 
                 newRow["id"] = id;
                 newRow["accountable_forms_id"] = accFormId;
-                newRow["date"] = date;
+                newRow["date_effective"] = date;
                 newRow["amount"] = amount;
                 newRow["is_default"] = isDefault;
 

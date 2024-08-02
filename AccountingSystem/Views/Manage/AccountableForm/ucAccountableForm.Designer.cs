@@ -41,42 +41,43 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(0, 4);
+            label1.Location = new System.Drawing.Point(3, 6);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(60, 15);
+            label1.Size = new System.Drawing.Size(65, 15);
             label1.TabIndex = 0;
-            label1.Text = "Form No. ";
+            label1.Text = "Form No. *";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(0, 31);
+            label2.Location = new System.Drawing.Point(3, 34);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(67, 15);
+            label2.Size = new System.Drawing.Size(72, 15);
             label2.TabIndex = 1;
-            label2.Text = "Description";
+            label2.Text = "Description*";
             // 
             // txtFormNo
             // 
-            txtFormNo.Location = new System.Drawing.Point(73, 1);
-            txtFormNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtFormNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtFormNo.Location = new System.Drawing.Point(81, 3);
             txtFormNo.MaxLength = 10;
             txtFormNo.Name = "txtFormNo";
-            txtFormNo.Size = new System.Drawing.Size(370, 23);
+            txtFormNo.Size = new System.Drawing.Size(226, 23);
             txtFormNo.TabIndex = 0;
-            txtFormNo.Validating += new System.ComponentModel.CancelEventHandler(txtformno_Validating);
-            txtFormNo.Validated += new System.EventHandler(txtformno_Validated);
+            txtFormNo.Validating += txtformno_Validating;
+            txtFormNo.Validated += txtformno_Validated;
             // 
             // txtFormDescription
             // 
-            txtFormDescription.Location = new System.Drawing.Point(73, 28);
+            txtFormDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtFormDescription.Location = new System.Drawing.Point(81, 31);
             txtFormDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtFormDescription.MaxLength = 45;
             txtFormDescription.Name = "txtFormDescription";
-            txtFormDescription.Size = new System.Drawing.Size(370, 23);
+            txtFormDescription.Size = new System.Drawing.Size(226, 23);
             txtFormDescription.TabIndex = 1;
-            txtFormDescription.Validating += new System.ComponentModel.CancelEventHandler(txtformdesc_Validating);
-            txtFormDescription.Validated += new System.EventHandler(txtformdesc_Validated);
+            txtFormDescription.Validating += txtformdesc_Validating;
+            txtFormDescription.Validated += txtformdesc_Validated;
             // 
             // errorProvider1
             // 
@@ -93,7 +94,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Controls.Add(label1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucAccountableForm";
-            Size = new System.Drawing.Size(463, 53);
+            Size = new System.Drawing.Size(324, 61);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

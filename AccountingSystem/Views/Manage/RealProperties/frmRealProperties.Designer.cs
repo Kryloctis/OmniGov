@@ -67,7 +67,7 @@
             toolStrip.Name = "toolStrip";
             toolStrip.Padding = new System.Windows.Forms.Padding(4);
             toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            toolStrip.Size = new System.Drawing.Size(1016, 50);
+            toolStrip.Size = new System.Drawing.Size(1016, 35);
             toolStrip.TabIndex = 8;
             toolStrip.Text = "toolStrip1";
             // 
@@ -77,9 +77,8 @@
             btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(39, 39);
+            btnAdd.Size = new System.Drawing.Size(59, 24);
             btnAdd.Text = "&Add..";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnAdd.ToolTipText = "Add";
             btnAdd.Click += btnAdd_Click;
             // 
@@ -89,9 +88,8 @@
             btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(37, 39);
+            btnEdit.Size = new System.Drawing.Size(57, 24);
             btnEdit.Text = "&Edit..";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
@@ -100,20 +98,18 @@
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "&Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += btnDelete_Click;
             // 
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(24, 39);
-            btnSearch.Text = "toolStripButton1";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
             btnSearch.ToolTipText = "Search";
             btnSearch.Click += btnSearch_Click;
             // 
@@ -122,16 +118,16 @@
             txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
+            txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // panel1
             // 
             panel1.Controls.Add(dgRealProperties);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 85);
+            panel1.Location = new System.Drawing.Point(0, 70);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1016, 477);
+            panel1.Size = new System.Drawing.Size(1016, 492);
             panel1.TabIndex = 12;
             // 
             // dgRealProperties
@@ -144,7 +140,7 @@
             dgRealProperties.RowHeadersWidth = 51;
             dgRealProperties.RowTemplate.Height = 29;
             dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgRealProperties.Size = new System.Drawing.Size(1008, 469);
+            dgRealProperties.Size = new System.Drawing.Size(1008, 484);
             dgRealProperties.TabIndex = 9;
             dgRealProperties.SelectionChanged += dgRealProperties_SelectionChanged;
             // 
@@ -224,7 +220,7 @@
             panel2.Controls.Add(cmbxRowFilter);
             panel2.Controls.Add(chckShowCancelled);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            panel2.Location = new System.Drawing.Point(0, 50);
+            panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(1016, 30);
             panel2.TabIndex = 11;
@@ -250,7 +246,7 @@
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(0, 80);
+            pbLoadRecords.Location = new System.Drawing.Point(0, 65);
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new System.Drawing.Size(1016, 5);
             pbLoadRecords.TabIndex = 25;

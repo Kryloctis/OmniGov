@@ -58,6 +58,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            UpdateAccountableForm();
+        }
+
+        private void UpdateAccountableForm()
+        {
             try
             {
                 if (UpdateData())
@@ -68,6 +73,14 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmEditAccountableForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                UpdateAccountableForm();
+            }
         }
     }
 }
