@@ -84,7 +84,6 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void chkSpecialJournal_CheckedChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

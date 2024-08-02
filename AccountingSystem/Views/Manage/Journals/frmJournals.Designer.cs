@@ -60,52 +60,48 @@ namespace AccountingSystem.Views.Manage.Journals
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(699, 39);
+            toolStrip1.Size = new System.Drawing.Size(699, 31);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
             btnAdd.Image = Properties.Resources.button_rounded_add_24px;
-            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(66, 28);
+            btnAdd.Size = new System.Drawing.Size(58, 20);
             btnAdd.Text = "Add...";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
             btnEdit.Image = Properties.Resources.button_rounded_edit_24px;
-            btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(64, 28);
+            btnEdit.Size = new System.Drawing.Size(56, 20);
             btnEdit.Text = "Edit...";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
             btnDelete.Image = Properties.Resources.button_rounded_remove_24px;
-            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(68, 28);
+            btnDelete.Size = new System.Drawing.Size(60, 20);
             btnDelete.Text = "Delete";
             btnDelete.Click += btnDelete_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
             // 
             // btnDefaultAccounts
             // 
             btnDefaultAccounts.Image = Properties.Resources.account_book_24px;
-            btnDefaultAccounts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDefaultAccounts.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDefaultAccounts.Name = "btnDefaultAccounts";
-            btnDefaultAccounts.Size = new System.Drawing.Size(126, 28);
+            btnDefaultAccounts.Size = new System.Drawing.Size(118, 20);
             btnDefaultAccounts.Text = "Default Accounts";
             btnDefaultAccounts.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             btnDefaultAccounts.Click += btnDefaultAccounts_Click;
@@ -166,10 +162,10 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             panel1.Controls.Add(dgJournals);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 39);
+            panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(699, 340);
+            panel1.Size = new System.Drawing.Size(699, 348);
             panel1.TabIndex = 3;
             // 
             // dgJournals
@@ -182,7 +178,7 @@ namespace AccountingSystem.Views.Manage.Journals
             dgJournals.RowHeadersWidth = 51;
             dgJournals.RowTemplate.Height = 29;
             dgJournals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgJournals.Size = new System.Drawing.Size(691, 332);
+            dgJournals.Size = new System.Drawing.Size(691, 340);
             dgJournals.TabIndex = 1;
             dgJournals.SelectionChanged += dgJournals_SelectionChanged;
             // 

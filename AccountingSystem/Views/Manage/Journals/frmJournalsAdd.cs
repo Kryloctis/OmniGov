@@ -7,26 +7,24 @@ namespace AccountingSystem.Views.Manage.Journals
 {
     public partial class frmJournalsAdd : Form
     {
-        private frmJournals _frmJournals;
+        private frmJournals frmJournals;
+        private ucJournals uc;
 
         public frmJournalsAdd(frmJournals frmJournals)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmJournals = frmJournals;
+            this.frmJournals = frmJournals;
         }
 
         private bool SaveData()
         {
-            var uc = ucJournals1;
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to insert
             var journalModel = new JournalsModel()
             {
                 JournalName = uc.txtName.Text.Trim(),
@@ -42,17 +40,12 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Save();
-        }
-
-        private void Save()
-        {
             try
             {
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Journal has been saved.");
-                    _frmJournals.LoadRecords();
+                    frmJournals.LoadRecords();
                     ucJournals1.ResetForm();
                 }
             }
@@ -61,15 +54,23 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void ucJournals1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void frmJournalsAdd_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            try
             {
-                Save();
+                if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+                {
+                    if (SaveData())
+                    {
+                        Helper.MessageBoxSuccess("Journal has been saved.");
+                        frmJournals.LoadRecords();
+                        ucJournals1.ResetForm();
+                    }
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
