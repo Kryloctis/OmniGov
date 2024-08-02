@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -12,6 +13,15 @@ namespace AccountingSystem.Views.Manage.Journals
         public ucJournals()
         {
             InitializeComponent();
+        }
+
+        internal JournalsModel JournalsModel()
+        {
+            return new JournalsModel()
+            {
+                JournalName = txtName.Text.Trim(),
+                IsSpecialJournal = chkSpecialJournal.Checked
+            };
         }
 
         internal string GetFormErrors()

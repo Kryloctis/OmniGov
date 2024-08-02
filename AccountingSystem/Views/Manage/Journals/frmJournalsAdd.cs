@@ -25,13 +25,7 @@ namespace AccountingSystem.Views.Manage.Journals
                 return false;
             }
 
-            var journalModel = new JournalsModel()
-            {
-                JournalName = uc.txtName.Text.Trim(),
-                IsSpecialJournal = uc.chkSpecialJournal.Checked
-            };
-
-            return AccFactory.JournalsRepository().Insert(journalModel);
+            return AccFactory.JournalsRepository().Insert(uc.JournalsModel());
         }
 
         private void frmJournalsAdd_Load(object sender, EventArgs e)

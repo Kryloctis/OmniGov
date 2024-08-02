@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.Journals
 {
     public partial class frmJournalsEdit : Form
     {
-        private frmJournals _frmJournals;
+        private frmJournals frmJournals;
         private ucJournals uc;
 
         public frmJournalsEdit(frmJournals frmJournals, int journalId)
@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Manage.Journals
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            _frmJournals = frmJournals;
+            this.frmJournals = frmJournals;
             uc = ucJournals1;
             uc.journalId = journalId;
         }
@@ -28,70 +28,49 @@ namespace AccountingSystem.Views.Manage.Journals
             uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
         }
 
-        private bool SaveData()
+        private bool UpdateData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to update
-            var journalModel = new JournalsModel()
-            {
-                Id = uc.journalId,
-                JournalName = uc.txtName.Text.Trim(),
-                IsSpecialJournal = uc.chkSpecialJournal.Checked
-            };
-
-            return AccFactory.JournalsRepository().Update(journalModel);
+            return AccFactory.JournalsRepository().Update(uc.JournalsModel());
         }
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            LoadSelectedRecord();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Update();
-        }
-
-        private void Update()
-        {
             try
             {
-                if (SaveData())
+                if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Journal has been saved.");
-                    _frmJournals.LoadRecords();
+                    frmJournals.LoadRecords();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ucJournals1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void frmJournalsEdit_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
             {
-                Update();
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Journal has been saved.");
+                    frmJournals.LoadRecords();
+                }
             }
         }
-
     }
 }
