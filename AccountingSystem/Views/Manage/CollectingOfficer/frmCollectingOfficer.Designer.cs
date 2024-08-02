@@ -35,6 +35,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnDelete = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             btnJobOrder = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             dgCollectingOfficer = new System.Windows.Forms.DataGridView();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,8 +52,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             panel1 = new System.Windows.Forms.Panel();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            btnSearch = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgCollectingOfficer).BeginInit();
             statusStrip1.SuspendLayout();
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(62, 27);
+            btnAdd.Size = new System.Drawing.Size(62, 24);
             btnAdd.Text = "&Add...";
             btnAdd.Click += btnAdd_Click;
             // 
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(60, 43);
+            btnEdit.Size = new System.Drawing.Size(60, 24);
             btnEdit.Text = "&Edit...";
             btnEdit.Click += btnEdit_Click;
             // 
@@ -100,14 +100,14 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(64, 43);
+            btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
             btnDelete.Click += btnDelete_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnJobOrder
             // 
@@ -116,9 +116,26 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             btnJobOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnJobOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnJobOrder.Name = "btnJobOrder";
-            btnJobOrder.Size = new System.Drawing.Size(47, 43);
+            btnJobOrder.Size = new System.Drawing.Size(47, 24);
             btnJobOrder.Text = "J.O";
             btnJobOrder.Click += btnJobOrder_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // dgCollectingOfficer
             // 
@@ -230,22 +247,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
-            // btnSearch
-            // 
-            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.Image = Properties.Resources.find_20px;
-            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(66, 43);
-            btnSearch.Text = "Search";
-            btnSearch.Click += btnSearch_Click;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 46);
             // 
             // frmCollectingOfficer
             // 

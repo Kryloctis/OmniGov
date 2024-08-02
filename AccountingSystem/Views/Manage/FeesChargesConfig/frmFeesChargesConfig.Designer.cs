@@ -41,8 +41,8 @@
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             btnUndelete = new System.Windows.Forms.ToolStripButton();
-            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -160,12 +160,6 @@
             btnUndelete.Text = "Undelete";
             btnUndelete.Click += btnUndelete_Click;
             // 
-            // txtSearch
-            // 
-            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 27);
-            // 
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -175,6 +169,13 @@
             btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
             btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // frmFeesChargesConfig
             // 
@@ -188,10 +189,11 @@
             Controls.Add(toolStrip1);
             MinimizeBox = false;
             Name = "frmFeesChargesConfig";
+            ShowIcon = false;
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Manage > Fees & Charges Config.";
+            Text = "Treasury > Manage > Fees & Charges Config.";
             Load += frmFeesChargesConfig_Load;
             panel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);

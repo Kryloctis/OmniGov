@@ -125,6 +125,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // txtSearch
             // 
             txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
@@ -176,10 +177,12 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(groupBox1);
+            splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(groupBox2);
+            splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             splitContainer1.Size = new System.Drawing.Size(944, 355);
             splitContainer1.SplitterDistance = 586;
             splitContainer1.TabIndex = 27;
@@ -187,12 +190,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // groupBox1
             // 
             groupBox1.Controls.Add(panel1);
-            groupBox1.Controls.Add(pbLoadRecords);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            groupBox1.Location = new System.Drawing.Point(0, 0);
+            groupBox1.Location = new System.Drawing.Point(4, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(586, 355);
+            groupBox1.Size = new System.Drawing.Size(578, 347);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forms";
@@ -200,35 +202,36 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // panel1
             // 
             panel1.Controls.Add(dgAccountableForm);
+            panel1.Controls.Add(pbLoadRecords);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            panel1.Location = new System.Drawing.Point(3, 24);
+            panel1.Location = new System.Drawing.Point(3, 19);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(580, 328);
+            panel1.Size = new System.Drawing.Size(572, 325);
             panel1.TabIndex = 25;
             // 
             // dgAccountableForm
             // 
             dgAccountableForm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgAccountableForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgAccountableForm.Location = new System.Drawing.Point(4, 4);
+            dgAccountableForm.Location = new System.Drawing.Point(4, 9);
             dgAccountableForm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dgAccountableForm.Name = "dgAccountableForm";
             dgAccountableForm.RowHeadersWidth = 51;
             dgAccountableForm.RowTemplate.Height = 29;
             dgAccountableForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgAccountableForm.Size = new System.Drawing.Size(572, 320);
+            dgAccountableForm.Size = new System.Drawing.Size(564, 312);
             dgAccountableForm.TabIndex = 10;
             dgAccountableForm.SelectionChanged += dgAccountableForm_SelectionChanged;
             // 
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(3, 19);
+            pbLoadRecords.Location = new System.Drawing.Point(4, 4);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(580, 5);
-            pbLoadRecords.TabIndex = 26;
+            pbLoadRecords.Size = new System.Drawing.Size(564, 5);
+            pbLoadRecords.TabIndex = 27;
             // 
             // groupBox2
             // 
@@ -236,9 +239,9 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             groupBox2.Controls.Add(toolStrip1);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            groupBox2.Location = new System.Drawing.Point(0, 0);
+            groupBox2.Location = new System.Drawing.Point(4, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(354, 355);
+            groupBox2.Size = new System.Drawing.Size(346, 347);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Face Values";
@@ -251,7 +254,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             panel2.Location = new System.Drawing.Point(3, 44);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(348, 308);
+            panel2.Size = new System.Drawing.Size(340, 300);
             panel2.TabIndex = 0;
             // 
             // dgfacevalue
@@ -263,7 +266,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             dgfacevalue.Name = "dgfacevalue";
             dgfacevalue.RowHeadersWidth = 51;
             dgfacevalue.RowTemplate.Height = 29;
-            dgfacevalue.Size = new System.Drawing.Size(340, 300);
+            dgfacevalue.Size = new System.Drawing.Size(332, 292);
             dgfacevalue.TabIndex = 1;
             dgfacevalue.SelectionChanged += dgfacevalue_SelectionChanged;
             // 
@@ -274,7 +277,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAddFV, btnEditFV, btnDeleteFV });
             toolStrip1.Location = new System.Drawing.Point(3, 19);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(348, 25);
+            toolStrip1.Size = new System.Drawing.Size(340, 25);
             toolStrip1.TabIndex = 3;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -319,6 +322,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAccountableForm";
+            ShowIcon = false;
             ShowInTaskbar = false;
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -360,7 +364,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgAccountableForm;
-        private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgfacevalue;
@@ -370,5 +373,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.ToolStripButton btnDeleteFV;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ProgressBar pbLoadRecords;
     }
 }

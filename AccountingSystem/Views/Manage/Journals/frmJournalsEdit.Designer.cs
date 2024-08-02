@@ -29,22 +29,14 @@ namespace AccountingSystem.Views.Manage.Journals
         /// </summary>
         private void InitializeComponent()
         {
-            ucJournals1 = new ucJournals();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            ucJournals1 = new ucJournals();
             flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // ucJournals1
-            // 
-            ucJournals1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucJournals1.Location = new System.Drawing.Point(3, 3);
-            ucJournals1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            ucJournals1.Name = "ucJournals1";
-            ucJournals1.Size = new System.Drawing.Size(315, 113);
-            ucJournals1.TabIndex = 0;
-            ucJournals1.Load += ucJournals1_Load;
             // 
             // flowLayoutPanel1
             // 
@@ -52,16 +44,16 @@ namespace AccountingSystem.Views.Manage.Journals
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(3, 89);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 73);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            flowLayoutPanel1.Size = new System.Drawing.Size(315, 27);
+            flowLayoutPanel1.Size = new System.Drawing.Size(398, 27);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(162, 2);
+            btnCancel.Location = new System.Drawing.Point(245, 2);
             btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -73,7 +65,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // btnSave
             // 
             btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSave.Location = new System.Drawing.Point(6, 2);
+            btnSave.Location = new System.Drawing.Point(89, 2);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -83,6 +75,25 @@ namespace AccountingSystem.Views.Manage.Journals
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucJournals1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(398, 73);
+            panel1.TabIndex = 3;
+            // 
+            // ucJournals1
+            // 
+            ucJournals1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucJournals1.Location = new System.Drawing.Point(4, 4);
+            ucJournals1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            ucJournals1.Name = "ucJournals1";
+            ucJournals1.Size = new System.Drawing.Size(390, 65);
+            ucJournals1.TabIndex = 3;
+            // 
             // frmJournalsEdit
             // 
             AcceptButton = btnSave;
@@ -90,27 +101,31 @@ namespace AccountingSystem.Views.Manage.Journals
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(321, 119);
+            ClientSize = new System.Drawing.Size(398, 100);
+            Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(ucJournals1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             KeyPreview = true;
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmJournalsEdit";
-            Padding = new System.Windows.Forms.Padding(3);
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Journal";
             Load += frmJournalsEdit_Load;
             KeyDown += frmJournalsEdit_KeyDown;
             flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private ucJournals ucJournals1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel1;
+        private ucJournals ucJournals1;
     }
 }

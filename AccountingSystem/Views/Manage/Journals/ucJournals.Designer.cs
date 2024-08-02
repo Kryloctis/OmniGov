@@ -40,10 +40,10 @@ namespace AccountingSystem.Views.Manage.Journals
             // txtName
             // 
             txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtName.Location = new System.Drawing.Point(15, 24);
+            txtName.Location = new System.Drawing.Point(52, 25);
             txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(200, 23);
+            txtName.Size = new System.Drawing.Size(333, 23);
             txtName.TabIndex = 0;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -51,11 +51,11 @@ namespace AccountingSystem.Views.Manage.Journals
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(15, 7);
+            label1.Location = new System.Drawing.Point(2, 28);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(39, 15);
+            label1.Size = new System.Drawing.Size(44, 15);
             label1.TabIndex = 1;
-            label1.Text = "Name";
+            label1.Text = "Name*";
             // 
             // epName
             // 
@@ -63,8 +63,9 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // chkSpecialJournal
             // 
+            chkSpecialJournal.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chkSpecialJournal.AutoSize = true;
-            chkSpecialJournal.Location = new System.Drawing.Point(15, 51);
+            chkSpecialJournal.Location = new System.Drawing.Point(239, 2);
             chkSpecialJournal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             chkSpecialJournal.Name = "chkSpecialJournal";
             chkSpecialJournal.Size = new System.Drawing.Size(146, 19);
@@ -82,8 +83,7 @@ namespace AccountingSystem.Views.Manage.Journals
             Controls.Add(txtName);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucJournals";
-            Size = new System.Drawing.Size(234, 80);
-            Load += ucJournals_Load;
+            Size = new System.Drawing.Size(402, 58);
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
             ResumeLayout(false);
             PerformLayout();
