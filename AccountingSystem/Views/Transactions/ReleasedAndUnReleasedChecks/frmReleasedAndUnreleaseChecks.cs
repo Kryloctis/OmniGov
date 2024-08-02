@@ -1,16 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.RCI;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
-using DocumentFormat.OpenXml.Bibliography;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
@@ -28,17 +19,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
         {
-            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
-            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
-            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
-
             LoadBanks();
             LoadFunds();
             LoadChecks();
-
-            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
-            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
-            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
         }
 
         internal void LoadBanks()
@@ -47,9 +30,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             {
                 var bankRepository = AccFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
-                cmbxBank.DataSource = dtBank;
-                cmbxBank.ValueMember = "id";
-                cmbxBank.DisplayMember = "bank_name";
+                cmbxBanks.ComboBox.DataSource = dtBank;
+                cmbxBanks.ComboBox.ValueMember = "id";
+                cmbxBanks.ComboBox.DisplayMember = "bank_name";
                 LoadBankAccounts();
             }
             catch (Exception ex)
@@ -60,18 +43,18 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void LoadBankAccounts()
         {
-            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
+            int bankID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
-            cmbxBankAccountNo.DataSource = dtBankAccounts;
-            cmbxBankAccountNo.ValueMember = "id";
-            cmbxBankAccountNo.DisplayMember = "account_no";
+            cmbxBankAccounts.ComboBox.DataSource = dtBankAccounts;
+            cmbxBankAccounts.ComboBox.ValueMember = "id";
+            cmbxBankAccounts.ComboBox.DisplayMember = "account_no";
         }
 
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds.ComboBox, "fund_name", "id");
         }
 
         private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
@@ -83,9 +66,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             try
             {
-                string txtSeach = txtsearch.Text;
-                int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
-                int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
+                string txtSeach = txtSearch.Text;
+                int bankAccountID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
+                int fundsID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
                 var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
@@ -225,6 +208,16 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
         {
             LoadChecks();
+        }
+
+        private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

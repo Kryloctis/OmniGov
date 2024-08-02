@@ -28,214 +28,194 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.txtsearch = new System.Windows.Forms.TextBox();
-            this.cmbxFund = new System.Windows.Forms.ComboBox();
-            this.cmbxBank = new System.Windows.Forms.ComboBox();
-            this.cmbxBankAccountNo = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dgReleasedAndUnreleaseCheques = new System.Windows.Forms.DataGridView();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cbxShowReleasedChecks = new System.Windows.Forms.CheckBox();
-            this.toolStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgReleasedAndUnreleaseCheques)).BeginInit();
-            this.statusStrip.SuspendLayout();
-            this.SuspendLayout();
+            toolStrip = new System.Windows.Forms.ToolStrip();
+            btnAdd = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            cmbxFunds = new System.Windows.Forms.ToolStripComboBox();
+            cmbxBankAccounts = new System.Windows.Forms.ToolStripComboBox();
+            cmbxBanks = new System.Windows.Forms.ToolStripComboBox();
+            panel1 = new System.Windows.Forms.Panel();
+            dgReleasedAndUnreleaseCheques = new System.Windows.Forms.DataGridView();
+            statusStrip = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            cbxShowReleasedChecks = new System.Windows.Forms.CheckBox();
+            toolStrip.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgReleasedAndUnreleaseCheques).BeginInit();
+            statusStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // toolStrip
             // 
-            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAdd});
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(874, 54);
-            this.toolStrip.TabIndex = 8;
-            this.toolStrip.Text = "toolStrip1";
+            toolStrip.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnSearch, txtSearch, cmbxFunds, cmbxBankAccounts, cmbxBanks });
+            toolStrip.Location = new System.Drawing.Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip.Size = new System.Drawing.Size(874, 39);
+            toolStrip.TabIndex = 8;
+            toolStrip.Text = "toolStrip1";
+            toolStrip.ItemClicked += toolStrip_ItemClicked;
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.obligation_request_24px;
-            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 43);
-            this.btnAdd.Text = "Release";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            btnAdd.Image = Properties.Resources.obligation_request_24px;
+            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(74, 28);
+            btnAdd.Text = "Release";
+            btnAdd.Click += btnAdd_Click;
             // 
-            // txtsearch
+            // btnSearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtsearch.Location = new System.Drawing.Point(673, 9);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(191, 23);
-            this.txtsearch.TabIndex = 9;
-            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(66, 28);
+            btnSearch.Text = "Search";
+            btnSearch.ToolTipText = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
-            // cmbxFund
+            // txtSearch
             // 
-            this.cmbxFund.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxFund.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbxFund.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFund.FormattingEnabled = true;
-            this.cmbxFund.Location = new System.Drawing.Point(511, 9);
-            this.cmbxFund.Name = "cmbxFund";
-            this.cmbxFund.Size = new System.Drawing.Size(156, 23);
-            this.cmbxFund.TabIndex = 17;
+            txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(200, 31);
             // 
-            // cmbxBank
+            // cmbxFunds
             // 
-            this.cmbxBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxBank.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbxBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxBank.FormattingEnabled = true;
-            this.cmbxBank.Location = new System.Drawing.Point(117, 9);
-            this.cmbxBank.Name = "cmbxBank";
-            this.cmbxBank.Size = new System.Drawing.Size(219, 23);
-            this.cmbxBank.TabIndex = 17;
+            cmbxFunds.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(100, 31);
             // 
-            // cmbxBankAccountNo
+            // cmbxBankAccounts
             // 
-            this.cmbxBankAccountNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxBankAccountNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbxBankAccountNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbxBankAccountNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxBankAccountNo.FormattingEnabled = true;
-            this.cmbxBankAccountNo.Location = new System.Drawing.Point(341, 9);
-            this.cmbxBankAccountNo.Name = "cmbxBankAccountNo";
-            this.cmbxBankAccountNo.Size = new System.Drawing.Size(166, 23);
-            this.cmbxBankAccountNo.TabIndex = 17;
+            cmbxBankAccounts.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            cmbxBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBankAccounts.Name = "cmbxBankAccounts";
+            cmbxBankAccounts.Size = new System.Drawing.Size(200, 31);
+            // 
+            // cmbxBanks
+            // 
+            cmbxBanks.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            cmbxBanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBanks.Name = "cmbxBanks";
+            cmbxBanks.Size = new System.Drawing.Size(200, 31);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dgReleasedAndUnreleaseCheques);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 54);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(874, 352);
-            this.panel1.TabIndex = 18;
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Controls.Add(dgReleasedAndUnreleaseCheques);
+            panel1.Location = new System.Drawing.Point(0, 67);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(874, 339);
+            panel1.TabIndex = 18;
             // 
             // dgReleasedAndUnreleaseCheques
             // 
-            this.dgReleasedAndUnreleaseCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReleasedAndUnreleaseCheques.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgReleasedAndUnreleaseCheques.Location = new System.Drawing.Point(4, 4);
-            this.dgReleasedAndUnreleaseCheques.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgReleasedAndUnreleaseCheques.Name = "dgReleasedAndUnreleaseCheques";
-            this.dgReleasedAndUnreleaseCheques.RowHeadersWidth = 51;
-            this.dgReleasedAndUnreleaseCheques.RowTemplate.Height = 29;
-            this.dgReleasedAndUnreleaseCheques.Size = new System.Drawing.Size(866, 344);
-            this.dgReleasedAndUnreleaseCheques.TabIndex = 9;
+            dgReleasedAndUnreleaseCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgReleasedAndUnreleaseCheques.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgReleasedAndUnreleaseCheques.Location = new System.Drawing.Point(4, 4);
+            dgReleasedAndUnreleaseCheques.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dgReleasedAndUnreleaseCheques.Name = "dgReleasedAndUnreleaseCheques";
+            dgReleasedAndUnreleaseCheques.RowHeadersWidth = 51;
+            dgReleasedAndUnreleaseCheques.RowTemplate.Height = 29;
+            dgReleasedAndUnreleaseCheques.Size = new System.Drawing.Size(866, 331);
+            dgReleasedAndUnreleaseCheques.TabIndex = 9;
             // 
             // statusStrip
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblRecordCount,
-            this.toolStripStatusLabel4,
-            this.lblCreatedAt,
-            this.lblUpdatedAt});
-            this.statusStrip.Location = new System.Drawing.Point(0, 406);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip.Size = new System.Drawing.Size(874, 22);
-            this.statusStrip.TabIndex = 19;
-            this.statusStrip.Text = "statusStrip1";
+            statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, lblCreatedAt, lblUpdatedAt });
+            statusStrip.Location = new System.Drawing.Point(0, 406);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            statusStrip.Size = new System.Drawing.Size(874, 22);
+            statusStrip.TabIndex = 19;
+            statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Records:";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            this.lblRecordCount.Text = "0";
+            lblRecordCount.Name = "lblRecordCount";
+            lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(796, 17);
-            this.toolStripStatusLabel4.Spring = true;
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(796, 17);
+            toolStripStatusLabel4.Spring = true;
             // 
             // lblCreatedAt
             // 
-            this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            lblCreatedAt.Name = "lblCreatedAt";
+            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // lblUpdatedAt
             // 
-            this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            lblUpdatedAt.Name = "lblUpdatedAt";
+            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // cbxShowReleasedChecks
             // 
-            this.cbxShowReleasedChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxShowReleasedChecks.AutoSize = true;
-            this.cbxShowReleasedChecks.Location = new System.Drawing.Point(725, 35);
-            this.cbxShowReleasedChecks.Name = "cbxShowReleasedChecks";
-            this.cbxShowReleasedChecks.Size = new System.Drawing.Size(145, 19);
-            this.cbxShowReleasedChecks.TabIndex = 20;
-            this.cbxShowReleasedChecks.Text = "Show Released Checks";
-            this.cbxShowReleasedChecks.UseVisualStyleBackColor = true;
-            this.cbxShowReleasedChecks.CheckedChanged += new System.EventHandler(this.cbxShowReleasedChecks_CheckedChanged);
+            cbxShowReleasedChecks.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cbxShowReleasedChecks.AutoSize = true;
+            cbxShowReleasedChecks.Location = new System.Drawing.Point(725, 42);
+            cbxShowReleasedChecks.Name = "cbxShowReleasedChecks";
+            cbxShowReleasedChecks.Size = new System.Drawing.Size(145, 19);
+            cbxShowReleasedChecks.TabIndex = 20;
+            cbxShowReleasedChecks.Text = "Show Released Checks";
+            cbxShowReleasedChecks.UseVisualStyleBackColor = true;
+            cbxShowReleasedChecks.CheckedChanged += cbxShowReleasedChecks_CheckedChanged;
             // 
             // frmReleasedAndUnreleaseChecks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 428);
-            this.Controls.Add(this.cbxShowReleasedChecks);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.cmbxBankAccountNo);
-            this.Controls.Add(this.cmbxBank);
-            this.Controls.Add(this.cmbxFund);
-            this.Controls.Add(this.txtsearch);
-            this.Controls.Add(this.toolStrip);
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(890, 467);
-            this.Name = "frmReleasedAndUnreleaseChecks";
-            this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transaction > List of Schedule of Released and Unreleased Checks";
-            this.Load += new System.EventHandler(this.frmReleasedAndUnreleaseChecks_Load);
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgReleasedAndUnreleaseCheques)).EndInit();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(874, 428);
+            Controls.Add(panel1);
+            Controls.Add(cbxShowReleasedChecks);
+            Controls.Add(statusStrip);
+            Controls.Add(toolStrip);
+            MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(890, 467);
+            Name = "frmReleasedAndUnreleaseChecks";
+            ShowInTaskbar = false;
+            SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Transaction > List of Schedule of Released and Unreleased Checks";
+            Load += frmReleasedAndUnreleaseChecks_Load;
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgReleasedAndUnreleaseCheques).EndInit();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ComboBox cmbxFund;
         private System.Windows.Forms.ComboBox cmbxBank;
         private System.Windows.Forms.ComboBox cmbxBankAccountNo;
@@ -248,5 +228,10 @@
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.CheckBox cbxShowReleasedChecks;
+        private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ToolStripComboBox cmbxBanks;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripComboBox cmbxFunds;
+        private System.Windows.Forms.ToolStripComboBox cmbxBankAccounts;
     }
 }

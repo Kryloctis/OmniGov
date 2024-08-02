@@ -88,12 +88,11 @@
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(24, 24);
-            btnSearch.Text = "toolStripButton1";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
             btnSearch.ToolTipText = "Search";
             btnSearch.Click += btnSearch_Click;
             // 
