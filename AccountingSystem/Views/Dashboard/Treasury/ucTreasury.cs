@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Dashboard.Treasury
                 taxpayersTstrpMnuItm.Enabled = false;
 
             if (!Helper.HasPermission("Manage > Fees & Charges Config."))
-                feesChargesTstrpMnuItm.Enabled = false;
+                feesChargesTstrpMnuItm.Enabled = true;
 
             if (!Helper.HasPermission("Manage > Real Properties"))
                 realPropertiesTstrpMnuItm.Enabled = false;

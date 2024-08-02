@@ -88,6 +88,7 @@
             // txtSearch
             // 
             txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 31);
             // 
@@ -95,6 +96,7 @@
             // 
             cmbxFunds.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(100, 31);
             // 
@@ -102,6 +104,7 @@
             // 
             cmbxBankAccounts.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             cmbxBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBankAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             cmbxBankAccounts.Name = "cmbxBankAccounts";
             cmbxBankAccounts.Size = new System.Drawing.Size(200, 31);
             // 
@@ -109,6 +112,7 @@
             // 
             cmbxBanks.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             cmbxBanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBanks.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             cmbxBanks.Name = "cmbxBanks";
             cmbxBanks.Size = new System.Drawing.Size(200, 31);
             // 
