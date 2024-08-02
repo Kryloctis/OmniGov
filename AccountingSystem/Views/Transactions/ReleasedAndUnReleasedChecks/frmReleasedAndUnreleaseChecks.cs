@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             LoadBanks();
             LoadFunds();
-            LoadChecks();
         }
 
         internal void LoadBanks()
@@ -57,21 +56,102 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds.ComboBox, "fund_name", "id");
         }
 
-        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
+
+
+        private DataColumn[] ReleasedAndUnreleaseChequesColumn()
         {
-            LoadBankAccounts();
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("rci_id", typeof(string)),
+                new DataColumn("cheques_id", typeof(string)),
+                new DataColumn("bank_accounts_id", typeof(string)),
+                new DataColumn("funds_id", typeof(string)),
+                new DataColumn("cheque_no", typeof(string)),
+                new DataColumn("cheque_date", typeof(DateTime)),
+                new DataColumn("cheque_amount", typeof(decimal)),
+                new DataColumn("fund_code", typeof(string)),
+                new DataColumn("fund_name", typeof(string)),
+                new DataColumn("dv_no", typeof(string)),
+                new DataColumn("payee", typeof(string)),
+                new DataColumn("nature_of_payment", typeof(string)),
+                new DataColumn("released_date", typeof(string)),
+                new DataColumn("status", typeof(string)),
+        };
+
+            return dataColumns;
         }
 
-        internal void LoadChecks()
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
+                return;
+
+            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
+            {
+                if (ReleasedCheque())
+                {
+                    Helper.MessageBoxSuccess("Cheque has been released.");
+                }
+            }
+
+            return;
+        }
+
+        private bool ReleasedCheque()
         {
             try
             {
-                string txtSeach = txtSearch.Text;
-                int bankAccountID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
-                int fundsID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
+                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
+                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
+                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
+
+                var releasedChequesModel = new ReleasedChequesModel()
+                {
+                    RCIID = RCIID,
+                    DateReleased = DateTime.Now,
+                };
+
+                var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
+                return releasedChequesRepository.Insert(releasedChequesModel);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return false;
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadRecords()
+        {
+            if (!bgwListOfScheduleReleasedChecks.IsBusy)
+            {
+                pbLoadRecords.Value = 0;
+                DateTime searchDateIssued = dtpDateIssued.Value;
+                string searchText = txtSearch.Text.Trim();
+                int bankAccountID = Convert.ToInt32(cmbxBankAccounts.ComboBox.SelectedValue);
+                int fundId = Convert.ToInt32(cmbxFunds.ComboBox.SelectedValue);
+                bgwListOfScheduleReleasedChecks.RunWorkerAsync((bankAccountID, fundId, searchText, cbxShowReleasedChecks.Checked));
+            }
+        }
+
+        private void bgwListOfScheduleReleasedChecks_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                var parameters = ((int bankAccountId, int fundsID, string txtSearch, bool showAll))e.Argument;
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(parameters.bankAccountId, parameters.fundsID, parameters.txtSearch, parameters.showAll);
+
+                int totalProgressCount = dtViewReleasedCheques.Rows.Count;
+                int progressCount = 0;
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
@@ -111,11 +191,12 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     newRow["status"] = status;
 
                     releasedAndUnreleasedDT.Rows.Add(newRow);
+
+                    progressCount++;
+                    Helper.ProgressCounter(bgwListOfScheduleReleasedChecks, totalProgressCount, progressCount);
                 }
 
-                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
-
-                lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
+                e.Result = releasedAndUnreleasedDT;
             }
             catch (Exception ex)
             {
@@ -123,101 +204,31 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             }
         }
 
-        private DataColumn[] ReleasedAndUnreleaseChequesColumn()
+        private void bgwListOfScheduleReleasedChecks_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("rci_id", typeof(string)),
-                new DataColumn("cheques_id", typeof(string)),
-                new DataColumn("bank_accounts_id", typeof(string)),
-                new DataColumn("funds_id", typeof(string)),
-                new DataColumn("cheque_no", typeof(string)),
-                new DataColumn("cheque_date", typeof(string)),
-                new DataColumn("cheque_amount", typeof(decimal)),
-                new DataColumn("fund_code", typeof(string)),
-                new DataColumn("fund_name", typeof(string)),
-                new DataColumn("dv_no", typeof(string)),
-                new DataColumn("payee", typeof(string)),
-                new DataColumn("nature_of_payment", typeof(string)),
-                new DataColumn("released_date", typeof(string)),
-                new DataColumn("status", typeof(string)),
-        };
-
-            return dataColumns;
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
-                return;
-
-            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
-            {
-                if (ReleasedCheque())
-                {
-                    Helper.MessageBoxSuccess("Cheque has been released.");
-                    LoadChecks();
-                }
-            }
-
-            return;
-        }
-
-        private bool ReleasedCheque()
+        private void bgwListOfScheduleReleasedChecks_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             try
             {
-                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
-                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
-                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
-
-                var releasedChequesModel = new ReleasedChequesModel()
+                if (e.Result is not DataTable dataTable)
                 {
-                    RCIID = RCIID,
-                    DateReleased = DateTime.Now,
-                };
+                    pbLoadRecords.Value = 100;
+                    return;
+                }
 
-                var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
-                return releasedChequesRepository.Insert(releasedChequesModel);
+                if (dataTable.Rows.Count < 1)
+                    pbLoadRecords.Value = 100;
+
+
+                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
+                lblRecordCount.Text = dgReleasedAndUnreleaseCheques.Rows.Count.ToString();
+
+                //Helper.EnableDisableToolStripButtons(dgReleasedAndUnreleaseCheques, btnAdd, null);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
-        }
-
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadBankAccounts();
-            LoadChecks();
-        }
-
-        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

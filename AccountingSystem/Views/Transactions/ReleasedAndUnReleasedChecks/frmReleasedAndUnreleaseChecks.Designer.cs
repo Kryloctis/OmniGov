@@ -44,10 +44,16 @@
             lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             cbxShowReleasedChecks = new System.Windows.Forms.CheckBox();
+            panel2 = new System.Windows.Forms.Panel();
+            dtpDateIssued = new System.Windows.Forms.DateTimePicker();
+            label2 = new System.Windows.Forms.Label();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            bgwListOfScheduleReleasedChecks = new System.ComponentModel.BackgroundWorker();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgReleasedAndUnreleaseCheques).BeginInit();
             statusStrip.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip
@@ -62,7 +68,6 @@
             toolStrip.Size = new System.Drawing.Size(874, 39);
             toolStrip.TabIndex = 8;
             toolStrip.Text = "toolStrip1";
-            toolStrip.ItemClicked += toolStrip_ItemClicked;
             // 
             // btnAdd
             // 
@@ -118,12 +123,12 @@
             // 
             // panel1
             // 
-            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.Controls.Add(dgReleasedAndUnreleaseCheques);
-            panel1.Location = new System.Drawing.Point(0, 67);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 66);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(874, 339);
+            panel1.Size = new System.Drawing.Size(874, 340);
             panel1.TabIndex = 18;
             // 
             // dgReleasedAndUnreleaseCheques
@@ -135,7 +140,7 @@
             dgReleasedAndUnreleaseCheques.Name = "dgReleasedAndUnreleaseCheques";
             dgReleasedAndUnreleaseCheques.RowHeadersWidth = 51;
             dgReleasedAndUnreleaseCheques.RowTemplate.Height = 29;
-            dgReleasedAndUnreleaseCheques.Size = new System.Drawing.Size(866, 331);
+            dgReleasedAndUnreleaseCheques.Size = new System.Drawing.Size(866, 332);
             dgReleasedAndUnreleaseCheques.TabIndex = 9;
             // 
             // statusStrip
@@ -181,13 +186,60 @@
             // 
             cbxShowReleasedChecks.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbxShowReleasedChecks.AutoSize = true;
-            cbxShowReleasedChecks.Location = new System.Drawing.Point(725, 42);
+            cbxShowReleasedChecks.Location = new System.Drawing.Point(729, 2);
             cbxShowReleasedChecks.Name = "cbxShowReleasedChecks";
             cbxShowReleasedChecks.Size = new System.Drawing.Size(145, 19);
             cbxShowReleasedChecks.TabIndex = 20;
             cbxShowReleasedChecks.Text = "Show Released Checks";
             cbxShowReleasedChecks.UseVisualStyleBackColor = true;
-            cbxShowReleasedChecks.CheckedChanged += cbxShowReleasedChecks_CheckedChanged;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(dtpDateIssued);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(cbxShowReleasedChecks);
+            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Location = new System.Drawing.Point(0, 39);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(874, 22);
+            panel2.TabIndex = 38;
+            // 
+            // dtpDateIssued
+            // 
+            dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtpDateIssued.CustomFormat = "MMM dd, yyyy";
+            dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpDateIssued.Location = new System.Drawing.Point(1363, 3);
+            dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dtpDateIssued.Name = "dtpDateIssued";
+            dtpDateIssued.Size = new System.Drawing.Size(148, 23);
+            dtpDateIssued.TabIndex = 30;
+            // 
+            // label2
+            // 
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(1290, 7);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(67, 15);
+            label2.TabIndex = 31;
+            label2.Text = "Date Issued";
+            // 
+            // pbLoadRecords
+            // 
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(0, 61);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(874, 5);
+            pbLoadRecords.TabIndex = 39;
+            // 
+            // bgwListOfScheduleReleasedChecks
+            // 
+            bgwListOfScheduleReleasedChecks.WorkerReportsProgress = true;
+            bgwListOfScheduleReleasedChecks.WorkerSupportsCancellation = true;
+            bgwListOfScheduleReleasedChecks.DoWork += bgwListOfScheduleReleasedChecks_DoWork;
+            bgwListOfScheduleReleasedChecks.ProgressChanged += bgwListOfScheduleReleasedChecks_ProgressChanged;
+            bgwListOfScheduleReleasedChecks.RunWorkerCompleted += bgwListOfScheduleReleasedChecks_RunWorkerCompleted;
             // 
             // frmReleasedAndUnreleaseChecks
             // 
@@ -195,7 +247,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(874, 428);
             Controls.Add(panel1);
-            Controls.Add(cbxShowReleasedChecks);
+            Controls.Add(pbLoadRecords);
+            Controls.Add(panel2);
             Controls.Add(statusStrip);
             Controls.Add(toolStrip);
             MinimizeBox = false;
@@ -212,6 +265,8 @@
             ((System.ComponentModel.ISupportInitialize)dgReleasedAndUnreleaseCheques).EndInit();
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -237,5 +292,10 @@
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripComboBox cmbxFunds;
         private System.Windows.Forms.ToolStripComboBox cmbxBankAccounts;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DateTimePicker dtpDateIssued;
+        private System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.ProgressBar pbLoadRecords;
+        internal System.ComponentModel.BackgroundWorker bgwListOfScheduleReleasedChecks;
     }
 }

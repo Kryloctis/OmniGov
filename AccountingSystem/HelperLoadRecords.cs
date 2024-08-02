@@ -918,6 +918,7 @@ namespace AccountingSystem
             datagrid.Columns["cheque_amount"].MinimumWidth = 130;
             datagrid.Columns["cheque_date"].HeaderText = "Check date";
             datagrid.Columns["cheque_date"].MinimumWidth = 200;
+            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
             datagrid.Columns["cheque_amount"].HeaderText = "Amount";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";
             datagrid.Columns["fund_name"].HeaderText = "Fund Name";
@@ -932,7 +933,6 @@ namespace AccountingSystem
             datagrid.Columns["status"].HeaderText = "Status";
             datagrid.Columns["status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
         }
 
         public static void RealPropertiesDatagridView(DataGridView datagridView, DataTable dataTable)
