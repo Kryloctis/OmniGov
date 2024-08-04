@@ -27,8 +27,8 @@ namespace AccountingSystem.Views.Dashboard.Reports
 
         internal void OnLoad()
         {
-            ValidateAccountingPermissions();
-            ValidateTreasuryPermissions();
+            //ValidateAccountingPermissions();
+            //ValidateTreasuryPermissions();
         }
 
         private void ValidateAccountingPermissions()
@@ -420,6 +420,5 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
         }
-
     }
 }

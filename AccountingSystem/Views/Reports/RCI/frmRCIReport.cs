@@ -196,7 +196,7 @@ namespace AccountingSystem.Views.Reports.RCI
             {
                 LoadReport(reportViewer.LocalReport);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbBanks_Validating(object sender, CancelEventArgs e)
