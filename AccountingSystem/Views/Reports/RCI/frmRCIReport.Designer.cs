@@ -29,151 +29,173 @@ namespace AccountingSystem.Views.Reports.RCI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cmbBank = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
-            this.dtpPeriodCover = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panel1 = new System.Windows.Forms.Panel();
+            panel2 = new System.Windows.Forms.Panel();
+            cmbxBank = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            cmbxBankAccounts = new System.Windows.Forms.ComboBox();
+            dtpPeriodCover = new System.Windows.Forms.DateTimePicker();
+            label1 = new System.Windows.Forms.Label();
+            btnRunReport = new System.Windows.Forms.Button();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(4, 33);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(983, 525);
-            this.panel1.TabIndex = 12;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(230, 5);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(631, 438);
+            panel1.TabIndex = 12;
             // 
             // panel2
             // 
-            this.panel2.AutoSize = true;
-            this.panel2.Controls.Add(this.cmbBank);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.cmbBankAccounts);
-            this.panel2.Controls.Add(this.dtpPeriodCover);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btnRetrieve);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(4, 4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(983, 29);
-            this.panel2.TabIndex = 13;
+            panel2.Controls.Add(cmbxBank);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(cmbxBankAccounts);
+            panel2.Controls.Add(dtpPeriodCover);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(btnRunReport);
+            panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(230, 443);
+            panel2.TabIndex = 13;
             // 
-            // cmbBank
+            // cmbxBank
             // 
-            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(46, 3);
-            this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(316, 23);
-            this.cmbBank.TabIndex = 24;
-            this.cmbBank.SelectionChangeCommitted += new System.EventHandler(this.cmbBank_SelectionChangeCommitted);
+            cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBank.FormattingEnabled = true;
+            cmbxBank.Location = new System.Drawing.Point(12, 26);
+            cmbxBank.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxBank.Name = "cmbxBank";
+            cmbxBank.Size = new System.Drawing.Size(200, 23);
+            cmbxBank.TabIndex = 24;
+            cmbxBank.SelectionChangeCommitted += cmbxBank_SelectionChangeCommitted;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(368, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 15);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Bank Account ";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(12, 62);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(84, 15);
+            label2.TabIndex = 22;
+            label2.Text = "Bank Account:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 15);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Bank";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(12, 9);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(36, 15);
+            label3.TabIndex = 23;
+            label3.Text = "Bank:";
             // 
-            // cmbBankAccounts
+            // cmbxBankAccounts
             // 
-            this.cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBankAccounts.FormattingEnabled = true;
-            this.cmbBankAccounts.Location = new System.Drawing.Point(457, 3);
-            this.cmbBankAccounts.Name = "cmbBankAccounts";
-            this.cmbBankAccounts.Size = new System.Drawing.Size(243, 23);
-            this.cmbBankAccounts.TabIndex = 0;
-            this.cmbBankAccounts.Validating += new System.ComponentModel.CancelEventHandler(this.cmbBanks_Validating);
-            this.cmbBankAccounts.Validated += new System.EventHandler(this.cmbBanks_Validated);
+            cmbxBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBankAccounts.FormattingEnabled = true;
+            cmbxBankAccounts.Location = new System.Drawing.Point(12, 80);
+            cmbxBankAccounts.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxBankAccounts.Name = "cmbxBankAccounts";
+            cmbxBankAccounts.Size = new System.Drawing.Size(200, 23);
+            cmbxBankAccounts.TabIndex = 0;
+            cmbxBankAccounts.Validating += cmbxBanks_Validating;
+            cmbxBankAccounts.Validated += cmbxBanks_Validated;
             // 
             // dtpPeriodCover
             // 
-            this.dtpPeriodCover.CustomFormat = "MMMM - yyyy";
-            this.dtpPeriodCover.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPeriodCover.Location = new System.Drawing.Point(756, 3);
-            this.dtpPeriodCover.Name = "dtpPeriodCover";
-            this.dtpPeriodCover.Size = new System.Drawing.Size(131, 23);
-            this.dtpPeriodCover.TabIndex = 1;
+            dtpPeriodCover.CustomFormat = "MMMM - yyyy";
+            dtpPeriodCover.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpPeriodCover.Location = new System.Drawing.Point(12, 131);
+            dtpPeriodCover.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            dtpPeriodCover.Name = "dtpPeriodCover";
+            dtpPeriodCover.Size = new System.Drawing.Size(200, 23);
+            dtpPeriodCover.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(706, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 15);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Month";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(12, 113);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(46, 15);
+            label1.TabIndex = 19;
+            label1.Text = "Month:";
             // 
-            // btnRetrieve
+            // btnRunReport
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(893, 3);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(86, 23);
-            this.btnRetrieve.TabIndex = 2;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            btnRunReport.Location = new System.Drawing.Point(12, 167);
+            btnRunReport.Name = "btnRunReport";
+            btnRunReport.Size = new System.Drawing.Size(200, 23);
+            btnRunReport.TabIndex = 2;
+            btnRunReport.Text = "Run Report";
+            btnRunReport.UseVisualStyleBackColor = true;
+            btnRunReport.Click += btnRunReport_Click;
             // 
             // errorProvider1
             // 
-            this.errorProvider1.ContainerControl = this;
+            errorProvider1.ContainerControl = this;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 443);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(861, 22);
+            statusStrip1.TabIndex = 14;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(230, 0);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(631, 5);
+            progressBar1.TabIndex = 15;
             // 
             // frmRCIReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 562);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimizeBox = false;
-            this.Name = "frmRCIReport";
-            this.Padding = new System.Windows.Forms.Padding(4);
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report > Report of Checks Issued";
-            this.Load += new System.EventHandler(this.frmRCIReport_Load);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(861, 465);
+            Controls.Add(panel1);
+            Controls.Add(progressBar1);
+            Controls.Add(panel2);
+            Controls.Add(statusStrip1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MinimizeBox = false;
+            Name = "frmRCIReport";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Reports > Report of Checks Issued";
+            Load += frmRCIReport_Load;
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbBankAccounts;
+        private System.Windows.Forms.ComboBox cmbxBankAccounts;
         private System.Windows.Forms.DateTimePicker dtpPeriodCover;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.Button btnRunReport;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        internal System.Windows.Forms.ComboBox cmbBank;
+        internal System.Windows.Forms.ComboBox cmbxBank;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

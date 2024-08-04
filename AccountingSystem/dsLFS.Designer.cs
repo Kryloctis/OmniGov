@@ -3904,6 +3904,8 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columngross_amount;
             
+            private global::System.Data.DataColumn columntrust_liabilities;
+            
             private global::System.Data.DataColumn columnfpp_code_100;
             
             private global::System.Data.DataColumn columnfpp_code_200;
@@ -4033,6 +4035,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn trust_liabilitiesColumn {
+                get {
+                    return this.columntrust_liabilities;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn fpp_code_100Column {
                 get {
                     return this.columnfpp_code_100;
@@ -4092,7 +4102,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string office_code, string dv_no, string obligation_no, decimal gross_amount, string fpp_code_100, string fpp_code_200, string fpp_code_300) {
+            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string office_code, string dv_no, string obligation_no, decimal gross_amount, string trust_liabilities, string fpp_code_100, string fpp_code_200, string fpp_code_300) {
                 dtRCIRow rowdtRCIRow = ((dtRCIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_no,
@@ -4106,6 +4116,7 @@ namespace AccountingSystem {
                         dv_no,
                         obligation_no,
                         gross_amount,
+                        trust_liabilities,
                         fpp_code_100,
                         fpp_code_200,
                         fpp_code_300};
@@ -4142,6 +4153,7 @@ namespace AccountingSystem {
                 this.columndv_no = base.Columns["dv_no"];
                 this.columnobligation_no = base.Columns["obligation_no"];
                 this.columngross_amount = base.Columns["gross_amount"];
+                this.columntrust_liabilities = base.Columns["trust_liabilities"];
                 this.columnfpp_code_100 = base.Columns["fpp_code_100"];
                 this.columnfpp_code_200 = base.Columns["fpp_code_200"];
                 this.columnfpp_code_300 = base.Columns["fpp_code_300"];
@@ -4172,6 +4184,8 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnobligation_no);
                 this.columngross_amount = new global::System.Data.DataColumn("gross_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngross_amount);
+                this.columntrust_liabilities = new global::System.Data.DataColumn("trust_liabilities", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntrust_liabilities);
                 this.columnfpp_code_100 = new global::System.Data.DataColumn("fpp_code_100", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_code_100);
                 this.columnfpp_code_200 = new global::System.Data.DataColumn("fpp_code_200", typeof(string), null, global::System.Data.MappingType.Element);
@@ -15601,6 +15615,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string trust_liabilities {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRCI.trust_liabilitiesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'trust_liabilities\' in table \'dtRCI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRCI.trust_liabilitiesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string fpp_code_100 {
                 get {
                     try {
@@ -15777,6 +15807,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setgross_amountNull() {
                 this[this.tabledtRCI.gross_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Istrust_liabilitiesNull() {
+                return this.IsNull(this.tabledtRCI.trust_liabilitiesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Settrust_liabilitiesNull() {
+                this[this.tabledtRCI.trust_liabilitiesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

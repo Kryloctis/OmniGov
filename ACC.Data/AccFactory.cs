@@ -102,7 +102,7 @@ namespace ACC.Data
 
         public static IRCIDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(mySqlGenericCommandsLFS);
 
-        public static IRCIRepository RCIRepository() => new RCIRepository(mySqlGenericCommandsLFS);
+        public static IRciRepository RciRepository() => new RciRepository(mySqlGenericCommandsLFS);
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
@@ -217,6 +217,7 @@ namespace ACC.Data
         public static IRptAuctionRepository RptAuctionRepository() => new RptAuctionRepository(mySqlGenericCommandsLFS);
 
         public static IBiddersRepository BiddersRepository() => new BiddersRepository(mySqlGenericCommandsLFS);
+
         public static IBidRepository BidRepository() => new BidRepository(mySqlGenericCommandsLFS);
     }
 }

@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             string payee = uc.txtPayee.Text.Trim();
             string natureOfPayment = uc.txtNatureOfPayment.Text.Trim();
 
-            var RCIModel = new RCIModel()
+            var RCIModel = new RciModel()
             {
                 ChequeID = chequeID,
                 FundId = fundID,
@@ -62,12 +62,12 @@ namespace AccountingSystem.Views.Transactions.RCI
                 NaturePayment = natureOfPayment
             };
 
-            return AccFactory.RCIRepository().Insert(RCIModel);
+            return AccFactory.RciRepository().Insert(RCIModel);
         }
 
         internal void SaveDVObligationsNumber()
         {
-            int lastInsertedId = AccFactory.RCIRepository().GetLastInsertId();
+            int lastInsertedId = AccFactory.RciRepository().GetLastInsertId();
             string obligationNo;
             DateTime dateEntry;
 
@@ -75,13 +75,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 obligationNo = row["obligation_no"].ToString();
                 dateEntry = Convert.ToDateTime(row["date_entry"]);
-                AccFactory.RCIRepository().SaveRCIDVObligations(lastInsertedId, obligationNo, dateEntry);
+                AccFactory.RciRepository().SaveRciDvObligations(lastInsertedId, obligationNo, dateEntry);
             }
         }
 
         internal void SaveDeductions()
         {
-            int lastRecentRCIId = AccFactory.RCIRepository().GetLastInsertId();
+            int lastRecentRCIId = AccFactory.RciRepository().GetLastInsertId();
             string deductionDescription;
             decimal deductionAmount;
 
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 deductionAmount = Convert.ToDecimal(row["amount"]);
                 uc.totalDeduction += deductionAmount;
 
-                AccFactory.RCIRepository().SaveRCIDeductions(lastRecentRCIId, deductionDescription, deductionAmount);
+                AccFactory.RciRepository().SaveRciDeductions(lastRecentRCIId, deductionDescription, deductionAmount);
             }
         }
 

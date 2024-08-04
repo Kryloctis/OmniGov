@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
-    public class RCIModel
+    public class RciModel
     {
         public int Id { get; set; }
         public int ChequeID { get; set; }

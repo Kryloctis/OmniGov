@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.RCI
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(cmbBankAccounts)
+                errorProvider1.GetError(cmbxBankAccounts)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -52,35 +52,35 @@ namespace AccountingSystem.Views.Reports.RCI
         internal void LoadBanks()
         {
             var dtBank = AccFactory.BanksRepository().GetRecords();
-            HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
+            HelperLoadRecords.BankComboBox(dtBank, cmbxBank, "id", "bank_name");
         }
 
         private void LoadBankAccounts()
         {
-            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
-            cmbBankAccounts.DataSource = dtBankAccounts;
-            cmbBankAccounts.ValueMember = "id";
-            cmbBankAccounts.DisplayMember = "account_no";
+            cmbxBankAccounts.DataSource = dtBankAccounts;
+            cmbxBankAccounts.ValueMember = "id";
+            cmbxBankAccounts.DisplayMember = "account_no";
         }
 
         private DataTable DataTableRCI()
         {
-            int bankID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            int bankID = Convert.ToInt32(cmbxBankAccounts.SelectedValue);
             var dateYearMonth = Convert.ToDateTime(dtpPeriodCover.Value).ToString("MM/yyyy");
 
-            var dtRCI = new dsLFS.dtRCINewDataTable();
-            var dtCheckIssuance = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
+            var dtRci = new dsLFS.dtRCINewDataTable();
+            var dtCheckIssuance = AccFactory.RciRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
 
             if (dtCheckIssuance.Rows.Count == 0)
-                return dtRCI;
+                return dtRci;
 
             decimal netAmount = 0.0m;
 
             foreach (DataRow item in dtCheckIssuance.Rows)
             {
-                DataRow row = dtRCI.NewRow();
+                DataRow row = dtRci.NewRow();
                 netAmount = Convert.ToDecimal(item["amount"]) - Convert.ToDecimal(item["total_deductions"]);
 
                 row["cheque_date"] = item["cheque_date"];
@@ -91,8 +91,9 @@ namespace AccountingSystem.Views.Reports.RCI
                 row["nature_of_payment"] = item["nature_of_payment"];
                 row["office_code"] = item["fpp_code"];
                 row["obr_number"] = item["obligation_no"];
+                var dateEntry = item["date_entry"];
 
-                if (Convert.ToDateTime(item["date_entry"]).Year < dtpPeriodCover.Value.Year)
+                if (Convert.ToDateTime(dateEntry).Year < dtpPeriodCover.Value.Year)
                 {
                     row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
                 }
@@ -116,10 +117,10 @@ namespace AccountingSystem.Views.Reports.RCI
 
                 row["bir_vat_and_nonvat"] = Convert.ToDecimal(item["total_deductions"]);
                 row["gross_amount"] = Convert.ToDecimal(item["amount"]);
-                dtRCI.Rows.Add(row);
+                dtRci.Rows.Add(row);
             }
 
-            return dtRCI;
+            return dtRci;
         }
 
         private void LoadReport(LocalReport report)
@@ -160,7 +161,7 @@ namespace AccountingSystem.Views.Reports.RCI
             ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
             var lguDetails = Helper.LGUDetails();
-            int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            int bankAccountId = Convert.ToInt32(cmbxBankAccounts.SelectedValue);
             var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
             var fund = fundName;
 
@@ -190,26 +191,26 @@ namespace AccountingSystem.Views.Reports.RCI
             Cursor = Cursors.Default;
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
                 LoadReport(reportViewer.LocalReport);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbBanks_Validating(object sender, CancelEventArgs e)
+        private void cmbxBanks_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBankAccounts, "Bank Account");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBankAccounts, "Bank Account");
         }
 
-        private void cmbBanks_Validated(object sender, EventArgs e)
+        private void cmbxBanks_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbBankAccounts);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxBankAccounts);
         }
 
-        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadBankAccounts();
         }
