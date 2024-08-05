@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnAdd = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnDelete = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
             txtBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,11 +56,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, txtBoxSearch });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtBoxSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(800, 50);
+            toolStrip1.Size = new System.Drawing.Size(800, 35);
             toolStrip1.TabIndex = 6;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -69,9 +70,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(33, 39);
-            btnAdd.Text = "Add";
-            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnAdd.Size = new System.Drawing.Size(62, 24);
+            btnAdd.Text = "Add...";
             btnAdd.Click += BtnAdd_Click;
             // 
             // btnEdit
@@ -81,9 +81,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(31, 39);
-            btnEdit.Text = "Edit";
-            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Size = new System.Drawing.Size(60, 24);
+            btnEdit.Text = "Edit...";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
@@ -93,18 +92,26 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
-            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnDelete.Click += BtnDelete_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtBoxSearch
             // 
             txtBoxSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             txtBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtBoxSearch.Name = "txtBoxSearch";
-            txtBoxSearch.Size = new System.Drawing.Size(200, 42);
-            txtBoxSearch.TextChanged += txtBoxSearch_TextChanged;
+            txtBoxSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // statusStrip1
             // 
@@ -162,10 +169,10 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             panel1.Controls.Add(dgDisbursingOfficer);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(800, 378);
+            panel1.Size = new System.Drawing.Size(800, 393);
             panel1.TabIndex = 10;
             // 
             // dgDisbursingOfficer
@@ -175,7 +182,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             dgDisbursingOfficer.Location = new System.Drawing.Point(4, 4);
             dgDisbursingOfficer.Name = "dgDisbursingOfficer";
             dgDisbursingOfficer.RowTemplate.Height = 25;
-            dgDisbursingOfficer.Size = new System.Drawing.Size(792, 370);
+            dgDisbursingOfficer.Size = new System.Drawing.Size(792, 385);
             dgDisbursingOfficer.TabIndex = 8;
             dgDisbursingOfficer.SelectionChanged += dgDisbursingOfficer_SelectionChanged;
             // 
@@ -187,13 +194,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmDisbursingOfficer";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Disbursing Officers";
+            Text = "Treasury > Manage > Disbursing Officers";
             Load += frmDisbursingOfficer_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -222,5 +228,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgDisbursingOfficer;
         private System.Windows.Forms.ToolStripTextBox txtBoxSearch;
+        private System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

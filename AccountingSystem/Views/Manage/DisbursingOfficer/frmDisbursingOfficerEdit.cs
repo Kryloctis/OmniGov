@@ -1,13 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.DisbursingOfficer
@@ -43,14 +36,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private bool UpdateData()
         {
-            // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // proceed to insert
             var disbursingOfficerModel = new DisbursingOfficerModel()
             {
                 Id = uc.disbursingOfficerId,
@@ -84,14 +75,9 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             try
             {
-                OnLoad();
+                LoadSelectedRecord();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            LoadSelectedRecord();
         }
     }
 }
