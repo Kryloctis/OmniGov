@@ -81,63 +81,56 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         internal void LoadChecks()
         {
-            try
+            string txtSeach = txtSearch.Text;
+            int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
+            int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
+
+            var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
+            var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
+
+            releasedAndUnreleasedDT = new DataTable();
+            releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
+
+            foreach (DataRow row in dtViewReleasedCheques.Rows)
             {
-                string txtSeach = txtsearch.Text;
-                int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
-                int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
+                var newRow = releasedAndUnreleasedDT.NewRow();
 
-                var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
+                string id = row["rci_id"].ToString();
+                string chquesID = row["cheques_id"].ToString();
+                string bankAccountsID = row["bank_accounts_id"].ToString();
+                string fundID = row["funds_id"].ToString();
+                string chequeNo = row["cheque_no"].ToString();
+                string chequeDate = row["cheque_date"].ToString();
+                decimal amount = Convert.ToDecimal(row["cheque_amount"]);
+                string fundCode = row["fund_code"].ToString();
+                string fundName = row["fund_name"].ToString();
+                string dvNo = row["dv_no"].ToString();
+                string payee = row["payee"].ToString();
+                string natureOfPayment = row["nature_of_payment"].ToString();
+                string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
+                string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
 
-                releasedAndUnreleasedDT = new DataTable();
-                releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
+                newRow["rci_id"] = id;
+                newRow["cheques_id"] = chquesID;
+                newRow["bank_accounts_id"] = bankAccountsID;
+                newRow["funds_id"] = fundID;
+                newRow["cheque_no"] = chequeNo;
+                newRow["cheque_date"] = chequeDate;
+                newRow["cheque_amount"] = amount;
+                newRow["fund_code"] = fundCode;
+                newRow["fund_name"] = fundName;
+                newRow["dv_no"] = dvNo;
+                newRow["payee"] = payee;
+                newRow["nature_of_payment"] = natureOfPayment;
+                newRow["released_date"] = releasedDate;
+                newRow["status"] = status;
 
-                foreach (DataRow row in dtViewReleasedCheques.Rows)
-                {
-                    var newRow = releasedAndUnreleasedDT.NewRow();
-
-                    string id = row["rci_id"].ToString();
-                    string chquesID = row["cheques_id"].ToString();
-                    string bankAccountsID = row["bank_accounts_id"].ToString();
-                    string fundID = row["funds_id"].ToString();
-                    string chequeNo = row["cheque_no"].ToString();
-                    string chequeDate = row["cheque_date"].ToString();
-                    decimal amount = Convert.ToDecimal(row["cheque_amount"]);
-                    string fundCode = row["fund_code"].ToString();
-                    string fundName = row["fund_name"].ToString();
-                    string dvNo = row["dv_no"].ToString();
-                    string payee = row["payee"].ToString();
-                    string natureOfPayment = row["nature_of_payment"].ToString();
-                    string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
-                    string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
-
-                    newRow["rci_id"] = id;
-                    newRow["cheques_id"] = chquesID;
-                    newRow["bank_accounts_id"] = bankAccountsID;
-                    newRow["funds_id"] = fundID;
-                    newRow["cheque_no"] = chequeNo;
-                    newRow["cheque_date"] = chequeDate;
-                    newRow["cheque_amount"] = amount;
-                    newRow["fund_code"] = fundCode;
-                    newRow["fund_name"] = fundName;
-                    newRow["dv_no"] = dvNo;
-                    newRow["payee"] = payee;
-                    newRow["nature_of_payment"] = natureOfPayment;
-                    newRow["released_date"] = releasedDate;
-                    newRow["status"] = status;
-
-                    releasedAndUnreleasedDT.Rows.Add(newRow);
-                }
-
-                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
-
-                lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
+                releasedAndUnreleasedDT.Rows.Add(newRow);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
+
+            lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
         }
 
         private DataColumn[] ReleasedAndUnreleaseChequesColumn()
@@ -201,11 +194,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             return false;
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
         private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadBankAccounts();
@@ -225,6 +213,50 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
         {
             LoadChecks();
+        }
+
+        private void TogglePreviewPermissions()
+        {
+            switch (pnlFilter.Visible)
+            {
+                case true:
+                    pnlFilter.Visible = false;
+                    btnToggleFilter.Text = "☰";
+                    break;
+
+                case false:
+                    pnlFilter.Visible = true;
+                    btnToggleFilter.Text = "✕";
+                    break;
+            }
+        }
+
+        private void btnToggleFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TogglePreviewPermissions();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnApplyFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadChecks();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgReleasedAndUnreleaseCheques_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowCount = dgReleasedAndUnreleaseCheques.SelectedRows.Count;
+                btnAdd.Text = $"Release({selectedRowCount})";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
