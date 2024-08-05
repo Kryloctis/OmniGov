@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.DisbursingOfficer
@@ -17,23 +16,21 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             Helper.DatagridFullRowSelectStyle(dgDisbursingOfficer, true);
         }
 
-        private DataColumn[] DataColumnDisbursingOfficer()
+        private DataTable DataTableDisbursingOfficer(string searchText)
         {
-            return new DataColumn[]
-            {
+            var dataTable = new DataTable();
+
+            var dataColumns = new DataColumn[]
+           {
                 new DataColumn(Name = "id", typeof(int)),
                 new DataColumn(Name = "full_name", typeof(string)),
                 new DataColumn(Name = "job_title", typeof(string)),
                 new DataColumn(Name = "created_at", typeof(string)),
                 new DataColumn(Name = "updated_at", typeof(string)),
                 new DataColumn(Name = "users_id", typeof(string))
-            };
-        }
+           };
 
-        private DataTable DataTableDisbursingOfficer(string searchText)
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnDisbursingOfficer());
+            dataTable.Columns.AddRange(dataColumns);
             DataTable dtDisbursingOfficers;
 
             if (searchText.Length < 2)
@@ -75,20 +72,16 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             string searchText = txtBoxSearch.Text.Trim();
             HelperLoadRecords.DisbursingOfficerDatagridView(DataTableDisbursingOfficer(searchText), dgDisbursingOfficer);
             lblRecordCount.Text = dgDisbursingOfficer.Rows.Count.ToString();
+            dgDisbursingOfficer.CurrentCell = dgDisbursingOfficer.FirstDisplayedCell;
         }
 
         private void frmDisbursingOfficer_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            LoadRecords();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -130,8 +123,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             try
             {
+                int selectedRows = dgDisbursingOfficer.SelectedRows.Count;
+
                 if (DeleteData())
+                {
+                    Helper.MessageBoxSuccess($"{selectedRows} record/s has been deleted");
                     LoadRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -147,7 +145,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtBoxSearch_TextChanged(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {

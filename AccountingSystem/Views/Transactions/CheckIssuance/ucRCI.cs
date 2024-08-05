@@ -140,8 +140,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 if (table.Equals("functions"))
                 {
-                    var functionRepository = AccFactory.FunctionProgramProjectRepository();
-                    var functionData = functionRepository.GetRecordByID(Id);
+                    var functionData = AccFactory.FunctionProgramProjectRepository().GetRecordByID(Id);
                     fppId = Convert.ToInt16(functionData["id"]);
                     cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
                 }

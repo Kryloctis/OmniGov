@@ -56,8 +56,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void LoadSelectedValue()
         {
-            var rciRepository = AccFactory.RCIRepository();
-            var dictRCI = rciRepository.GetRecordByID(_rciID);
+            var dictRCI = AccFactory.RciRepository().GetViewRecordById(_rciID);
 
             if (dictRCI.Count == 0) return;
 
@@ -108,7 +107,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     obligationNo = row["obligation_no"].ToString();
                     dateEntry = Convert.ToDateTime(row["date_entry"]);
-                    AccFactory.RCIRepository().SaveRCIDVObligations(rciId, obligationNo, dateEntry);
+                    AccFactory.RciRepository().SaveRciDvObligations(rciId, obligationNo, dateEntry);
                 }
             }
         }
@@ -124,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     string description = row["description"].ToString();
                     decimal amount = Convert.ToDecimal(row["amount"]);
-                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
+                    AccFactory.RciRepository().SaveRciDeductions(rcid, description, amount);
                 }
             }
         }
@@ -158,7 +157,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             string payee = uc.txtPayee.Text.Trim();
             string natureOfPayment = uc.txtNatureOfPayment.Text.Trim();
 
-            var rciModel = new RCIModel()
+            var rciModel = new RciModel()
             {
                 Id = _rciID,
                 FundId = fundID,
@@ -168,7 +167,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 NaturePayment = natureOfPayment
             };
 
-            return AccFactory.RCIRepository().Update(rciModel);
+            return AccFactory.RciRepository().Update(rciModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Dashboard.Reports
         internal void OnLoad()
         {
             ValidateAccountingPermissions();
-            ValidateTreasuryPermissions();
+            //ValidateTreasuryPermissions();
         }
 
         private void ValidateAccountingPermissions()
@@ -173,10 +173,6 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         private void btnJournals_Click(object sender, EventArgs e)
         {
             try
@@ -253,7 +249,7 @@ namespace AccountingSystem.Views.Dashboard.Reports
         {
             try
             {
-                _ = new frmRCIReport().ShowDialog();
+                _ = new frmRciReport().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -420,6 +416,5 @@ namespace AccountingSystem.Views.Dashboard.Reports
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
         }
-
     }
 }

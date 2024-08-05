@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
                 var parameters = ((int bankId, int bankAccountId))e.Argument;
                 var dtCashBook = new dsLFS.dtCashbookDataTable().Clone();
                 var dtCashBookFromDb = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
-                var dtRci = AccFactory.RCIRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
+                var dtRci = AccFactory.RciRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
 
                 int totalProgressCount = dtCashBookFromDb.Rows.Count + dtRci.Rows.Count;
                 int progressCount = 0;

@@ -49,11 +49,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtFirstName
             // 
+            txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtFirstName.Location = new System.Drawing.Point(84, 45);
             txtFirstName.MaxLength = 45;
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new System.Drawing.Size(353, 23);
+            txtFirstName.Size = new System.Drawing.Size(203, 23);
             txtFirstName.TabIndex = 1;
             txtFirstName.Validating += txtFirstName_Validating;
             txtFirstName.Validated += txtFirstName_Validated;
@@ -78,11 +79,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtMidInitial
             // 
+            txtMidInitial.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtMidInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtMidInitial.Location = new System.Drawing.Point(84, 74);
             txtMidInitial.MaxLength = 1;
             txtMidInitial.Name = "txtMidInitial";
-            txtMidInitial.Size = new System.Drawing.Size(353, 23);
+            txtMidInitial.Size = new System.Drawing.Size(203, 23);
             txtMidInitial.TabIndex = 2;
             txtMidInitial.Validating += txtMidInitial_Validating;
             txtMidInitial.Validated += txtMidInitial_Validated;
@@ -98,11 +100,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtLastName
             // 
+            txtLastName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtLastName.Location = new System.Drawing.Point(84, 103);
             txtLastName.MaxLength = 45;
             txtLastName.Name = "txtLastName";
-            txtLastName.Size = new System.Drawing.Size(353, 23);
+            txtLastName.Size = new System.Drawing.Size(203, 23);
             txtLastName.TabIndex = 3;
             txtLastName.Validating += txtLastName_Validating;
             txtLastName.Validated += txtLastName_Validated;
@@ -118,11 +121,12 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtJobTitle
             // 
+            txtJobTitle.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtJobTitle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtJobTitle.Location = new System.Drawing.Point(84, 160);
             txtJobTitle.MaxLength = 99;
             txtJobTitle.Name = "txtJobTitle";
-            txtJobTitle.Size = new System.Drawing.Size(353, 23);
+            txtJobTitle.Size = new System.Drawing.Size(203, 23);
             txtJobTitle.TabIndex = 5;
             txtJobTitle.Text = "DISBURSING OFFICER";
             txtJobTitle.Validating += txtJobTitle_Validating;
@@ -130,9 +134,10 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // linkuser
             // 
+            linkuser.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             linkuser.AutoSize = true;
             linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
-            linkuser.Location = new System.Drawing.Point(382, 0);
+            linkuser.Location = new System.Drawing.Point(232, 0);
             linkuser.Name = "linkuser";
             linkuser.Size = new System.Drawing.Size(55, 15);
             linkuser.TabIndex = 15;
@@ -142,12 +147,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtPrefix
             // 
+            txtPrefix.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtPrefix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtPrefix.Location = new System.Drawing.Point(84, 17);
             txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtPrefix.MaxLength = 45;
             txtPrefix.Name = "txtPrefix";
-            txtPrefix.Size = new System.Drawing.Size(353, 23);
+            txtPrefix.Size = new System.Drawing.Size(203, 23);
             txtPrefix.TabIndex = 0;
             // 
             // label5
@@ -161,12 +167,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtSuffix
             // 
+            txtSuffix.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtSuffix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtSuffix.Location = new System.Drawing.Point(84, 132);
             txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtSuffix.MaxLength = 45;
             txtSuffix.Name = "txtSuffix";
-            txtSuffix.Size = new System.Drawing.Size(353, 23);
+            txtSuffix.Size = new System.Drawing.Size(203, 23);
             txtSuffix.TabIndex = 4;
             // 
             // label8
@@ -201,7 +208,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             Controls.Add(lblFirstName);
             Controls.Add(txtFirstName);
             Name = "ucDisbursingOfficer";
-            Size = new System.Drawing.Size(460, 188);
+            Size = new System.Drawing.Size(306, 200);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
