@@ -30,8 +30,8 @@
         {
             panel1 = new System.Windows.Forms.Panel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            cmbxBidders = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
-            txtBidder = new System.Windows.Forms.TextBox();
             txtRpt = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
@@ -62,8 +62,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(cmbxBidders);
             splitContainer1.Panel1.Controls.Add(label3);
-            splitContainer1.Panel1.Controls.Add(txtBidder);
             splitContainer1.Panel1.Controls.Add(txtRpt);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(btnRunReport);
@@ -78,6 +78,16 @@
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 16;
             // 
+            // cmbxBidders
+            // 
+            cmbxBidders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxBidders.FormattingEnabled = true;
+            cmbxBidders.Location = new System.Drawing.Point(6, 81);
+            cmbxBidders.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxBidders.Name = "cmbxBidders";
+            cmbxBidders.Size = new System.Drawing.Size(200, 23);
+            cmbxBidders.TabIndex = 34;
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -86,16 +96,6 @@
             label3.Size = new System.Drawing.Size(47, 15);
             label3.TabIndex = 33;
             label3.Text = "Bidder :";
-            // 
-            // txtBidder
-            // 
-            txtBidder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            txtBidder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtBidder.Location = new System.Drawing.Point(6, 81);
-            txtBidder.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtBidder.Name = "txtBidder";
-            txtBidder.Size = new System.Drawing.Size(200, 23);
-            txtBidder.TabIndex = 32;
             // 
             // txtRpt
             // 
@@ -106,6 +106,7 @@
             txtRpt.Name = "txtRpt";
             txtRpt.Size = new System.Drawing.Size(200, 23);
             txtRpt.TabIndex = 32;
+            txtRpt.TextChanged += txtRpt_TextChanged;
             // 
             // label1
             // 
@@ -173,6 +174,7 @@
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Reports > Treasury > LTOM No. 34 - Final Deed of Sale";
             TopMost = true;
+            Load += frmLtom34_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
@@ -194,6 +196,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TextBox txtBidder;
+        private System.Windows.Forms.ComboBox cmbxBidders;
     }
 }

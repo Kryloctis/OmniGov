@@ -171,6 +171,15 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        DataTable IBidRepository.GetHighestBidderByRptId(int rptId)
+        {
+            var parameters = new object[][] {
+                new object[] { "@real_properties_id", DbType.Int32, rptId },
+            };
 
+            string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id  ORDER BY bid_amount DESC LIMIT 1";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }

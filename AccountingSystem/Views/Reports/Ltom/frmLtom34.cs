@@ -2,6 +2,7 @@
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ namespace AccountingSystem.Views.Reports.Ltom
     public partial class frmLtom34 : Form
     {
         int rptOwnerId;
+        private DataTable dtRpt;
 
         public frmLtom34()
         {
@@ -128,6 +130,51 @@ namespace AccountingSystem.Views.Reports.Ltom
                 ToogleRunButton(true);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void LoadBidderWinner()
+        {
+            var rptId = dtRpt.AsEnumerable()
+                               .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
+                               .Select(row => row["real_property_id"])
+                               .FirstOrDefault();
+
+            if (rptId is not null)
+            {
+                var dtHighestBidder = AccFactory.BidRepository().GetHighestBidderByRptId(Convert.ToInt32(rptId));
+                cmbxBidders.DataSource = dtHighestBidder;
+                cmbxBidders.ValueMember = "taxpayers_id";
+                cmbxBidders.DisplayMember = "name";
+            }
+        }
+
+        private void frmLtom34_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRealProperties();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+        private void LoadRealProperties()
+        {
+            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
+
+            var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
+            var autoCom = new AutoCompleteStringCollection();
+            autoCom.Clear();
+            autoCom.AddRange(autoCompleteSrc.ToArray());
+            txtRpt.AutoCompleteCustomSource = autoCom;
+        }
+
+        private void txtBidder_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtRpt_TextChanged(object sender, EventArgs e)
+        {
+            LoadBidderWinner();
         }
     }
 }
