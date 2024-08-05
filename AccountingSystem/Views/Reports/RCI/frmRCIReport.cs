@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -65,137 +64,36 @@ namespace AccountingSystem.Views.Reports.RCI
             cmbxBankAccounts.DisplayMember = "account_no";
         }
 
-        private DataTable DataTableRCI()
+        private void ToogleRunButton(bool isGenerated)
         {
-            int bankID = Convert.ToInt32(cmbxBankAccounts.SelectedValue);
-            var dateYearMonth = Convert.ToDateTime(dtpPeriodCover.Value).ToString("MM/yyyy");
-
-            var dtRci = new dsLFS.dtRCINewDataTable();
-            var dtCheckIssuance = AccFactory.RciRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
-
-            if (dtCheckIssuance.Rows.Count == 0)
-                return dtRci;
-
-            decimal netAmount = 0.0m;
-
-            foreach (DataRow item in dtCheckIssuance.Rows)
-            {
-                DataRow row = dtRci.NewRow();
-                netAmount = Convert.ToDecimal(item["amount"]) - Convert.ToDecimal(item["total_deductions"]);
-
-                row["cheque_date"] = item["cheque_date"];
-                row["cheque_no"] = item["cheque_no"];
-                row["dv_no"] = item["dv_no"];
-                row["res_ctr"] = string.Empty;
-                row["payee"] = item["payee"];
-                row["nature_of_payment"] = item["nature_of_payment"];
-                row["office_code"] = item["fpp_code"];
-                row["obr_number"] = item["obligation_no"];
-                var dateEntry = item["date_entry"];
-
-                if (dateEntry == DBNull.Value || Convert.ToDateTime(dateEntry).Year < dtpPeriodCover.Value.Year)
-                {
-                    row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
-                }
-                else
-                {
-                    switch (item["fund_code"].ToString())
-                    {
-                        case "100":
-                            row["fpp_100"] = netAmount;
-                            break;
-
-                        case "200":
-                            row["fpp_200"] = netAmount;
-                            break;
-
-                        case "300":
-                            row["fpp_300"] = netAmount;
-                            break;
-                    }
-                }
-
-                row["bir_vat_and_nonvat"] = Convert.ToDecimal(item["total_deductions"]);
-                row["gross_amount"] = Convert.ToDecimal(item["amount"]);
-                dtRci.Rows.Add(row);
-            }
-
-            return dtRci;
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
+            btnRunReport.Enabled = isGenerated;
         }
 
-        private void LoadReport(LocalReport report)
+        private void LoadReport()
         {
-            Cursor = Cursors.WaitCursor;
-
-            if (!ValidateChildren())
+            if (!backgroundWorker1.IsBusy)
             {
-                Helper.MessageBoxError(GetFormErrors());
-                return;
-            }
-
-            var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
-            static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
-            {
-                if (dictSignatory.Count > 0)
+                if (!ValidateChildren())
                 {
-                    string prefix = dictSignatory["signatories_prefix"].ToString();
-                    string firstName = dictSignatory["signatories_first_name"].ToString();
-                    char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                    string lastName = dictSignatory["signatories_last_name"].ToString();
-                    string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                    string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                    signatory = signatoryName;
-                    signatoryTitle = dictSignatory["signatories_title"];
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
                 }
+
+                progressBar1.Value = 0;
+                ToogleRunButton(false);
+                int bankAccId = Convert.ToInt32(cmbxBankAccounts.SelectedValue);
+                var dateYearMonth = Convert.ToDateTime(dtpPeriodCover.Value).ToString("MM/yyyy");
+                var parameters = (bankAccId, dateYearMonth);
+                backgroundWorker1.RunWorkerAsync(parameters);
             }
-
-            string departmentHeadSignatory = string.Empty;
-            string departmentHeadSignatoryTitle = string.Empty;
-            ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
-
-            var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
-            string administrativeOfficerSignatory = string.Empty;
-            string administrativeOfficerSignatoryTitle = string.Empty;
-            ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
-
-            var lguDetails = Helper.LGUDetails();
-            int bankAccountId = Convert.ToInt32(cmbxBankAccounts.SelectedValue);
-            var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
-            var fund = fundName;
-
-            string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
-            var parameters = new[]
-            {
-                new ReportParameter("paramFund", fundName),
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramBankaccount", bankDetails),
-                new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
-                new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
-                new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
-                new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
-                new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
-            };
-
-            report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
-            report.DataSources.Clear();
-
-            report.DataSources.Add(new ReportDataSource("dtRCINew", DataTableRCI()));
-            report.SetParameters(parameters);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
-
-            Cursor = Cursors.Default;
         }
 
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -219,6 +117,113 @@ namespace AccountingSystem.Views.Reports.RCI
         {
             try
             {
+                var parameters = ((int bankAccId, string dateYearMonth))e.Argument;
+                var dtRci = new dsLFS.dtRCINewDataTable().Clone();
+                var dtCheckIssuance = AccFactory.RciRepository().GetViewRecordsByBankAccountIdAndMonth(parameters.bankAccId, parameters.dateYearMonth);
+                int totalProgressCount = dtCheckIssuance.Rows.Count;
+                int progressCount = 0;
+
+                decimal netAmount = 0.0m;
+
+                foreach (DataRow item in dtCheckIssuance.Rows)
+                {
+                    DataRow row = dtRci.NewRow();
+                    netAmount = Convert.ToDecimal(item["amount"]) - Convert.ToDecimal(item["total_deductions"]);
+
+                    row["cheque_date"] = item["cheque_date"];
+                    row["cheque_no"] = item["cheque_no"];
+                    row["dv_no"] = item["dv_no"];
+                    row["res_ctr"] = string.Empty;
+                    row["payee"] = item["payee"];
+                    row["nature_of_payment"] = item["nature_of_payment"];
+                    row["office_code"] = item["fpp_code"];
+                    row["obr_number"] = item["obligation_no"];
+                    var dateEntry = item["date_entry"];
+
+                    if (dateEntry == DBNull.Value || Convert.ToDateTime(dateEntry).Year < dtpPeriodCover.Value.Year)
+                    {
+                        row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
+                    }
+                    else
+                    {
+                        switch (item["fund_code"].ToString())
+                        {
+                            case "100":
+                                row["fpp_100"] = netAmount;
+                                break;
+
+                            case "200":
+                                row["fpp_200"] = netAmount;
+                                break;
+
+                            case "300":
+                                row["fpp_300"] = netAmount;
+                                break;
+                        }
+                    }
+
+                    row["bir_vat_and_nonvat"] = Convert.ToDecimal(item["total_deductions"]);
+                    row["gross_amount"] = Convert.ToDecimal(item["amount"]);
+                    dtRci.Rows.Add(row);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                }
+
+                //Report Parameters
+                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                string departmentHeadSignatory = string.Empty;
+                string departmentHeadSignatoryTitle = string.Empty;
+                ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
+
+                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
+                string administrativeOfficerSignatory = string.Empty;
+                string administrativeOfficerSignatoryTitle = string.Empty;
+                ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
+
+                var lguDetails = Helper.LGUDetails();
+                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(parameters.bankAccId);
+                var fund = fundName;
+
+                string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
+                var reportParameters = new List<ReportParameter>
+                {
+                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                    new ReportParameter("paramBankaccount", bankDetails),
+                    new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
+                    new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
+                    new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
+                    new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
+                    new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
+                };
+
+                //totalProgressCount += reportParameters.Count();
+
+                //for (int i = 0; i < reportParameters.Count(); i++)
+                //{
+                //    progressCount++;
+                //    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                //}
+
+                var result = (reportParameters, dtRci);
+                e.Result = result;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -232,6 +237,19 @@ namespace AccountingSystem.Views.Reports.RCI
         {
             try
             {
+                var localReport = reportViewer.LocalReport;
+                var parameters = ((List<ReportParameter> reportParameters, DataTable dataTable))e.Result;
+
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
+                localReport.DataSources.Clear();
+
+                localReport.DataSources.Add(new ReportDataSource("dtRCINew", parameters.dataTable));
+                localReport.SetParameters(parameters.reportParameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+                ToogleRunButton(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
