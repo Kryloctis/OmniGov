@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Reports.RCI
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            panel1 = new System.Windows.Forms.Panel();
             panel2 = new System.Windows.Forms.Panel();
             cmbxBank = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
@@ -41,19 +40,14 @@ namespace AccountingSystem.Views.Reports.RCI
             btnRunReport = new System.Windows.Forms.Button();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             statusStrip1 = new System.Windows.Forms.StatusStrip();
+            panel1 = new System.Windows.Forms.Panel();
+            panel3 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(230, 5);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(631, 438);
-            panel1.TabIndex = 12;
             // 
             // panel2
             // 
@@ -65,9 +59,9 @@ namespace AccountingSystem.Views.Reports.RCI
             panel2.Controls.Add(label1);
             panel2.Controls.Add(btnRunReport);
             panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Location = new System.Drawing.Point(4, 4);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(230, 443);
+            panel2.Size = new System.Drawing.Size(230, 435);
             panel2.TabIndex = 13;
             // 
             // cmbxBank
@@ -152,22 +146,48 @@ namespace AccountingSystem.Views.Reports.RCI
             statusStrip1.TabIndex = 14;
             statusStrip1.Text = "statusStrip1";
             // 
+            // panel1
+            // 
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(234, 9);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(623, 430);
+            panel1.TabIndex = 12;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(panel1);
+            panel3.Controls.Add(progressBar1);
+            panel3.Controls.Add(panel2);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(4);
+            panel3.Size = new System.Drawing.Size(861, 443);
+            panel3.TabIndex = 16;
+            // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(230, 0);
+            progressBar1.Location = new System.Drawing.Point(234, 4);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(631, 5);
-            progressBar1.TabIndex = 15;
+            progressBar1.Size = new System.Drawing.Size(623, 5);
+            progressBar1.TabIndex = 16;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
             // frmRCIReport
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(861, 465);
-            Controls.Add(panel1);
-            Controls.Add(progressBar1);
-            Controls.Add(panel2);
+            Controls.Add(panel3);
             Controls.Add(statusStrip1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimizeBox = false;
@@ -175,17 +195,17 @@ namespace AccountingSystem.Views.Reports.RCI
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Report of Checks Issued";
+            Text = "Reports > Treasury > Report of Checks Issued";
             Load += frmRCIReport_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbxBankAccounts;
@@ -196,6 +216,9 @@ namespace AccountingSystem.Views.Reports.RCI
         internal System.Windows.Forms.ComboBox cmbxBank;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

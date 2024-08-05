@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 row["obr_number"] = item["obligation_no"];
                 var dateEntry = item["date_entry"];
 
-                if (Convert.ToDateTime(dateEntry).Year < dtpPeriodCover.Value.Year)
+                if (dateEntry == DBNull.Value || Convert.ToDateTime(dateEntry).Year < dtpPeriodCover.Value.Year)
                 {
                     row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
                 }
@@ -213,6 +213,27 @@ namespace AccountingSystem.Views.Reports.RCI
         private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadBankAccounts();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
