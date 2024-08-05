@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         private DataTable InitializeRciDataTable(string searchText)
         {
             var dtRci = new DataTable();
-            var dtRciFromDb = AccFactory.RCIRepository().GetViewRecordsBySearch(searchText);
+            var dtRciFromDb = AccFactory.RciRepository().GetViewRecordsBySearch(searchText);
 
             int progressCount = 0;
             int totalProgressCount = dtRciFromDb.Rows.Count;
@@ -141,14 +141,14 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
             {
-                var rciModels = new List<RCIModel>();
+                var rciModels = new List<RciModel>();
                 foreach (DataGridViewRow row in dgRCI.SelectedRows)
                 {
                     int rciId = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    rciModels.Add(new RCIModel() { Id = rciId });
+                    rciModels.Add(new RciModel() { Id = rciId });
                 }
 
-                return AccFactory.RCIRepository().Delete(rciModels);
+                return AccFactory.RciRepository().Delete(rciModels);
             }
             return false;
         }

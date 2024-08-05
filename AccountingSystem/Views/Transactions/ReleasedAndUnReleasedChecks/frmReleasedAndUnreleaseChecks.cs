@@ -1,7 +1,16 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.RCI;
+using AccountingSystem.Views.Transactions.ReceiptsIssued;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
@@ -19,8 +28,17 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
         {
+            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
+
             LoadBanks();
             LoadFunds();
+            LoadChecks();
+
+            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
         }
 
         internal void LoadBanks()
@@ -29,9 +47,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             {
                 var bankRepository = AccFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
-                cmbxBanks.ComboBox.DataSource = dtBank;
-                cmbxBanks.ComboBox.ValueMember = "id";
-                cmbxBanks.ComboBox.DisplayMember = "bank_name";
+                cmbxBank.DataSource = dtBank;
+                cmbxBank.ValueMember = "id";
+                cmbxBank.DisplayMember = "bank_name";
                 LoadBankAccounts();
             }
             catch (Exception ex)
@@ -42,116 +60,35 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void LoadBankAccounts()
         {
-            int bankID = Convert.ToInt32(cmbxBanks.ComboBox.SelectedValue);
+            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
             DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
-            cmbxBankAccounts.ComboBox.DataSource = dtBankAccounts;
-            cmbxBankAccounts.ComboBox.ValueMember = "id";
-            cmbxBankAccounts.ComboBox.DisplayMember = "account_no";
+            cmbxBankAccountNo.DataSource = dtBankAccounts;
+            cmbxBankAccountNo.ValueMember = "id";
+            cmbxBankAccountNo.DisplayMember = "account_no";
         }
 
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds.ComboBox, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
         }
 
-
-
-        private DataColumn[] ReleasedAndUnreleaseChequesColumn()
+        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("rci_id", typeof(string)),
-                new DataColumn("cheques_id", typeof(string)),
-                new DataColumn("bank_accounts_id", typeof(string)),
-                new DataColumn("funds_id", typeof(string)),
-                new DataColumn("cheque_no", typeof(string)),
-                new DataColumn("cheque_date", typeof(DateTime)),
-                new DataColumn("cheque_amount", typeof(decimal)),
-                new DataColumn("fund_code", typeof(string)),
-                new DataColumn("fund_name", typeof(string)),
-                new DataColumn("dv_no", typeof(string)),
-                new DataColumn("payee", typeof(string)),
-                new DataColumn("nature_of_payment", typeof(string)),
-                new DataColumn("released_date", typeof(string)),
-                new DataColumn("status", typeof(string)),
-        };
-
-            return dataColumns;
+            LoadBankAccounts();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
-                return;
-
-            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
-            {
-                if (ReleasedCheque())
-                {
-                    Helper.MessageBoxSuccess("Cheque has been released.");
-                }
-            }
-
-            return;
-        }
-
-        private bool ReleasedCheque()
+        internal void LoadChecks()
         {
             try
             {
-                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
-                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
-                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
-
-                var releasedChequesModel = new ReleasedChequesModel()
-                {
-                    RCIID = RCIID,
-                    DateReleased = DateTime.Now,
-                };
-
-                var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
-                return releasedChequesRepository.Insert(releasedChequesModel);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
-        }
-
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadRecords()
-        {
-            if (!bgwListOfScheduleReleasedChecks.IsBusy)
-            {
-                pbLoadRecords.Value = 0;
-                DateTime searchDateIssued = dtpDateIssued.Value;
-                string searchText = txtSearch.Text.Trim();
-                int bankAccountID = Convert.ToInt32(cmbxBankAccounts.ComboBox.SelectedValue);
-                int fundId = Convert.ToInt32(cmbxFunds.ComboBox.SelectedValue);
-                bgwListOfScheduleReleasedChecks.RunWorkerAsync((bankAccountID, fundId, searchText, cbxShowReleasedChecks.Checked));
-            }
-        }
-
-        private void bgwListOfScheduleReleasedChecks_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                var parameters = ((int bankAccountId, int fundsID, string txtSearch, bool showAll))e.Argument;
+                string txtSeach = txtsearch.Text;
+                int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
+                int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(parameters.bankAccountId, parameters.fundsID, parameters.txtSearch, parameters.showAll);
-
-                int totalProgressCount = dtViewReleasedCheques.Rows.Count;
-                int progressCount = 0;
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
@@ -191,12 +128,11 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     newRow["status"] = status;
 
                     releasedAndUnreleasedDT.Rows.Add(newRow);
-
-                    progressCount++;
-                    Helper.ProgressCounter(bgwListOfScheduleReleasedChecks, totalProgressCount, progressCount);
                 }
 
-                e.Result = releasedAndUnreleasedDT;
+                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
+
+                lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -204,31 +140,91 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             }
         }
 
-        private void bgwListOfScheduleReleasedChecks_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private DataColumn[] ReleasedAndUnreleaseChequesColumn()
         {
-            pbLoadRecords.Value = e.ProgressPercentage;
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("rci_id", typeof(string)),
+                new DataColumn("cheques_id", typeof(string)),
+                new DataColumn("bank_accounts_id", typeof(string)),
+                new DataColumn("funds_id", typeof(string)),
+                new DataColumn("cheque_no", typeof(string)),
+                new DataColumn("cheque_date", typeof(string)),
+                new DataColumn("cheque_amount", typeof(decimal)),
+                new DataColumn("fund_code", typeof(string)),
+                new DataColumn("fund_name", typeof(string)),
+                new DataColumn("dv_no", typeof(string)),
+                new DataColumn("payee", typeof(string)),
+                new DataColumn("nature_of_payment", typeof(string)),
+                new DataColumn("released_date", typeof(string)),
+                new DataColumn("status", typeof(string)),
+        };
+
+            return dataColumns;
         }
 
-        private void bgwListOfScheduleReleasedChecks_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
+                return;
+
+            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
+            {
+                if (ReleasedCheque())
+                {
+                    Helper.MessageBoxSuccess("Cheque has been released.");
+                    LoadChecks();
+                }
+            }
+
+            return;
+        }
+
+        private bool ReleasedCheque()
         {
             try
             {
-                if (e.Result is not DataTable dataTable)
+                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
+                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
+                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
+
+                var releasedChequesModel = new ReleasedChequesModel()
                 {
-                    pbLoadRecords.Value = 100;
-                    return;
-                }
+                    RCIID = RCIID,
+                    DateReleased = DateTime.Now,
+                };
 
-                if (dataTable.Rows.Count < 1)
-                    pbLoadRecords.Value = 100;
-
-
-                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
-                lblRecordCount.Text = dgReleasedAndUnreleaseCheques.Rows.Count.ToString();
-
-                //Helper.EnableDisableToolStripButtons(dgReleasedAndUnreleaseCheques, btnAdd, null);
+                var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
+                return releasedChequesRepository.Insert(releasedChequesModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return false;
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+            LoadChecks();
+        }
+
+        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
         }
     }
 }
