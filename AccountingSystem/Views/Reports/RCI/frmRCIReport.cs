@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCI
 {
-    public partial class frmRCIReport : Form
+    public partial class frmRciReport : Form
     {
         private readonly ReportViewer reportViewer;
         private string fundName = "General Fund";
 
-        public frmRCIReport()
+        public frmRciReport()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

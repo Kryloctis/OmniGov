@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RCI
 {
-    partial class frmRCIReport
+    partial class frmRciReport
     {
         /// <summary>
         /// Required designer variable.
