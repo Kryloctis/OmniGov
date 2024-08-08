@@ -167,7 +167,6 @@
             ClientSize = new System.Drawing.Size(840, 428);
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
-            MinimizeBox = false;
             Name = "frmLtom34";
             ShowIcon = false;
             ShowInTaskbar = false;
