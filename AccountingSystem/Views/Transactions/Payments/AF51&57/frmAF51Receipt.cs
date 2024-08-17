@@ -79,14 +79,7 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
 
                 localReportPreview.DataSources.Clear();
                 localReportPreview.DataSources.Add(new ReportDataSource("dtAF51", (DataTable)aF51Parameters.dtAF51DataTable));
-                localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF51.rdlc";
                 localReportPreview.SetParameters(reportParameters);
-
-                localReportPrint.DataSources.Clear();
-                localReportPrint.DataSources.Add(new ReportDataSource("dtAF51", (DataTable)aF51Parameters.dtAF51DataTable));
-                localReportPrint.ReportPath = $"{Application.StartupPath}\\Receipts\\AF51.rdlc";
-                reportParameters.RemoveAll(param => param.Name == "paramBackground");
-                localReportPrint.SetParameters(reportParameters);
             });
 
             reportViewerPreview.RefreshReport();

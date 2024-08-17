@@ -41,11 +41,14 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
+            tabPageReceipt = new System.Windows.Forms.TabPage();
+            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFeesCharges.SuspendLayout();
             tabPagePayment.SuspendLayout();
+            tabPageReceipt.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel2
@@ -137,27 +140,24 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             // 
             // tabControlMain
             // 
-            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Controls.Add(tabPageReceipt);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
             tabControlMain.Location = new System.Drawing.Point(195, 0);
             tabControlMain.Margin = new System.Windows.Forms.Padding(0);
             tabControlMain.Name = "tabControlMain";
-            tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
             tabControlMain.Size = new System.Drawing.Size(832, 465);
-            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 6;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageFeesCharges
             // 
             tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
-            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 24);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 437);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
@@ -168,15 +168,15 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 437);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
-            tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            tabPagePayment.Location = new System.Drawing.Point(4, 24);
             tabPagePayment.Name = "tabPagePayment";
-            tabPagePayment.Size = new System.Drawing.Size(824, 456);
+            tabPagePayment.Size = new System.Drawing.Size(824, 437);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -187,8 +187,27 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(0, 0);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(824, 456);
+            ucPayment1.Size = new System.Drawing.Size(824, 437);
             ucPayment1.TabIndex = 0;
+            // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
+            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
+            tabPageReceipt.TabIndex = 3;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
+            ucPrintReceipt1.TabIndex = 0;
             // 
             // frmAF51_57
             // 
@@ -208,13 +227,14 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Payments > AF51 & 57";
+            Text = "Transactions > Payments > AF51 & 57";
             Load += frmAF51_57_Load;
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
             tabPageFeesCharges.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
+            tabPageReceipt.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -231,5 +251,7 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
         private System.Windows.Forms.TabPage tabPagePayment;
         private ucPayment ucPayment1;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
+        private System.Windows.Forms.TabPage tabPageReceipt;
+        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
     }
 }

@@ -244,9 +244,6 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                         tabControlMain.SelectedIndex++;
                         //if (ConfirmPayment())
                         //{
-                        //Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                        //ResetForm();
-                        //return;
                         //}
                     }
                     return;

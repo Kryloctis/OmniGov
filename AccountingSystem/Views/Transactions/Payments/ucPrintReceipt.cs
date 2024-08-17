@@ -7,6 +7,7 @@ using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -65,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             });
         }
 
-        private Task LoadReceiptAsync(string reportPath, Dictionary<string, string> dictParameters)
+        private Task LoadReceiptAsync(string reportPath, Dictionary<string, string> dictParameters, ReportDataSource reportDataSource)
         {
             TogglePrintComponents(false, "Preparing...");
 
@@ -77,6 +78,12 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 {
                     var reportParameter = new ReportParameter(item.Key, item.Value);
                     reportParameters.Add(reportParameter);
+                }
+
+                if (reportDataSource is not null)
+                {
+                    localReportReceipt.DataSources.Clear();
+                    localReportReceipt.DataSources.Add(reportDataSource);
                 }
 
                 localReportReceipt.ReportPath = reportPath;
@@ -91,9 +98,9 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             cmbxPrinter.Enabled = isTrue;
         }
 
-        private async Task MotherTask(string reportPath, Dictionary<string, string> reportParameters)
+        private async Task MotherTask(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource)
         {
-            await LoadReceiptAsync(reportPath, reportParameters);
+            await LoadReceiptAsync(reportPath, reportParameters, reportDataSource);
             lblStatus.Text = "Receipt is all set!";
             reportViewerPrint.RefreshReport();
 
@@ -101,9 +108,9 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             await PopulatePrinterComboBox(cmbxPrinter, localReport);
         }
 
-        internal async void Onload(string reportPath, Dictionary<string, string> reportParameters)
+        internal async void Onload(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource = null)
         {
-            await MotherTask(reportPath, reportParameters);
+            await MotherTask(reportPath, reportParameters, reportDataSource);
         }
 
         public static void PrintReport(ReportViewer reportViewer, string printerName)
