@@ -266,9 +266,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
                 <Top>2.39847in</Top>
-                <Left>0.20845in</Left>
+                <Left>0.16624in</Left>
                 <Height>0.28125in</Height>
-                <Width>3.55167in</Width>
+                <Width>3.59388in</Width>
                 <ZIndex>6</ZIndex>
                 <Style>
                   <Border>
@@ -300,9 +300,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
                 <Top>2.08667in</Top>
-                <Left>0.20845in</Left>
+                <Left>0.16624in</Left>
                 <Height>0.28125in</Height>
-                <Width>2.41667in</Width>
+                <Width>2.45888in</Width>
                 <ZIndex>7</ZIndex>
                 <Style>
                   <Border>
@@ -370,9 +370,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
                 <Top>1.72556in</Top>
-                <Left>0.20845in</Left>
+                <Left>0.16624in</Left>
                 <Height>0.29167in</Height>
-                <Width>1.6875in</Width>
+                <Width>1.72971in</Width>
                 <ZIndex>9</ZIndex>
                 <Style>
                   <Border>
@@ -819,12 +819,6 @@
       <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramBackground">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -900,11 +894,6 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>paramIsMoneyOrder</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>paramBackground</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
