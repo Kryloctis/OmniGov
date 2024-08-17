@@ -79,15 +79,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
                 localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF53.rdlc";
                 localReportPreview.SetParameters(reportParameters);
-
-                localReportPrint.ReportPath = $"{Application.StartupPath}\\Receipts\\AF53.rdlc";
-                reportParameters.RemoveAll(param => param.Name == "paramBackground");
-                localReportPrint.SetParameters(reportParameters);
             });
-
-            reportViewerPreview.RefreshReport();
-            reportViewerPreview.ZoomPercent = 100;
-            reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
 
             reportViewerPrint.RefreshReport();
             reportViewerPrint.ZoomPercent = 100;

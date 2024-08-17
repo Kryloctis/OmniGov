@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
@@ -105,21 +106,24 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
             var taxpayerId = ucCattleOwnership.CattleOwnershipModel().TaxpayerId;
             var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
 
-            var reportParameters = new frmCattleOwnershipReceipt.AF53Parameters
+            var dictParameters = new Dictionary<string, string>()
             {
-                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
-                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
-                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
-                OwnerName = dictTaxpayer["taxpayers_name"],
-                OwnerMunicipality = dictTaxpayer["taxpayers_municipality"],
-                OwnerProvince = dictTaxpayer["taxpayers_province"],
-                CattleName = ucCattleOwnership.CattleOwnershipModel().CattleName,
-                CattleAge = ucCattleOwnership.CattleOwnershipModel().CattleAge,
-                CattleSex = ucCattleOwnership.CattleOwnershipModel().CattleSex,
-                MunicipalTreasurerName = string.Empty,
-                MunicipalSecretaryName = string.Empty,
-                MunicipalMayor = string.Empty,
+                {"paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper()},
+                {"paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper()},
+                {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
+                {"paramOwnerName", dictTaxpayer["taxpayers_name"]},
+                {"paramOwnerMunicipality", dictTaxpayer["taxpayers_municipality"]},
+                {"paramOwnerProvince", dictTaxpayer["taxpayers_province"]},
+                {"paramCattleName", ucCattleOwnership.CattleOwnershipModel().CattleName},
+                {"paramCattleAge", ucCattleOwnership.CattleOwnershipModel().CattleAge.ToString()},
+                {"paramCattleSex", ucCattleOwnership.CattleOwnershipModel().CattleSex},
+                {"paramMunicipalTreasurerName", string.Empty},
+                {"paramMunicipalSecretaryName", string.Empty},
+                {"paramMunicipalMayor", string.Empty },
             };
+
+            string reportPath = $"{Application.StartupPath}\\Receipts\\AF53.rdlc";
+            ucPrintReceipt.Onload(reportPath, dictParameters);
         }
 
         private void LoadReceiptTab()
