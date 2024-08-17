@@ -2,6 +2,7 @@
 using AccountingSystem.DataSets;
 using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -22,6 +23,7 @@ public partial class frmAF51_57 : Form
     {
         InitializeComponent();
         Helper.LoadFormIcon(this);
+        Helper.RemoveTabcontrolTabs(tabControlMain);
         this.ucPaymentFeesCharges = ucPaymentFeesCharges1;
         this.ucPayment = ucPayment1;
         this.ucPrintReceipt = ucPrintReceipt1;
@@ -72,18 +74,18 @@ public partial class frmAF51_57 : Form
         {
             {"paramMunicipality",Helper.selectedServerModel.MunicipalityName.ToUpper()},
             {"paramTransactionDate",ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
-            {"paramAgency",ucPayment.PaymentCollectionsModel().Amount.ToString()},
-            {"paramPayee",new Helper.AmountToWords().ConvertAmountToWords(ucPayment.PaymentCollectionsModel().Amount.ToString())},
-            {"paramFund",ucPayment.PaymentCollectionsModel().Payee},
-            {"paramTotalPayment",ucPayment.radPaymentCash.Checked.ToString()},
-            {"paramTotalPaymentWords",ucPayment.radPaymentCheque.Checked.ToString()},
-            {"paramChequeBank",false.ToString()},
+            {"paramTotalPayment",ucPayment.PaymentCollectionsModel().Amount.ToString()},
+            {"paramTotalPaymentWords",new Helper.AmountToWords().ConvertAmountToWords(ucPayment.PaymentCollectionsModel().Amount.ToString())},
+            {"paramPayee",ucPayment.PaymentCollectionsModel().Payee},
+            {"paramIsCash",ucPayment.radPaymentCash.Checked.ToString()},
+            {"paramIsCheck",ucPayment.radPaymentCheque.Checked.ToString()},
+            {"paramIsMoneyOrder",false.ToString()},
+            {"paramAgency",string.Empty},
+            {"paramChequeBank",string.Empty},
             {"paramChequeNo",string.Empty},
             {"paramChequeDate",string.Empty},
-            {"paramCollectingOfficerName",string.Empty},
-            {"paramIsCash",string.Empty},
-            {"paramIsCheck",ucPayment.txtCollectingOfficer.Text.Trim()},
-            {"paramIsMoneyOrder",string.Empty},
+            {"paramCollectingOfficerName",ucPayment.txtCollectingOfficer.Text.Trim()},
+            {"paramFund",string.Empty},
         };
 
         string reportPath = $"{Application.StartupPath}\\Receipts\\AF51.rdlc";

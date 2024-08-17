@@ -724,11 +724,6 @@
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Database</Source>
-            <Value>=Parameters!paramBackground.Value</Value>
-            <MIMEType>image/bmp</MIMEType>
-          </BackgroundImage>
         </Style>
       </Body>
       <Width>3.96856in</Width>
