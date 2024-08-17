@@ -18,11 +18,6 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewerPreview.ShowFindControls = false;
-            reportViewerPreview.ShowExportButton = false;
-            reportViewerPreview.ShowPrintButton = false;
-            reportViewerPreview.ShowDocumentMapButton = false;
-            reportViewerPreview.ShowStopButton = false;
             reportViewerPreview.Dock = DockStyle.Fill;
             reportViewerReceipt = new ReportViewer();
             reportViewerReceipt.Dock = DockStyle.Fill;

@@ -594,22 +594,19 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>8.45in</Height>
+        <Height>8.5in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Database</Source>
-            <Value>=Parameters!paramBackground.Value</Value>
-            <MIMEType>image/jpeg</MIMEType>
-          </BackgroundImage>
         </Style>
       </Body>
-      <Width>4.02in</Width>
+      <Width>4in</Width>
       <Page>
-        <PageHeight>8.45in</PageHeight>
-        <PageWidth>4.02in</PageWidth>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>4in</PageWidth>
+        <InteractiveHeight>8.5in</InteractiveHeight>
+        <InteractiveWidth>4in</InteractiveWidth>
         <Style />
       </Page>
     </ReportSection>
@@ -734,12 +731,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramBackground">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -850,11 +841,6 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>paramRemainSex</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>paramBackground</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

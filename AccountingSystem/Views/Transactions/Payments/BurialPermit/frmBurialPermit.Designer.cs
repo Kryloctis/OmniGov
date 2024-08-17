@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ucPayment1 = new ucPayment();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabControlMain = new System.Windows.Forms.TabControl();
@@ -39,6 +38,9 @@
             groupBox2 = new System.Windows.Forms.GroupBox();
             ucRemainsInfo1 = new ucRemainsInfo();
             tabPagePayment = new System.Windows.Forms.TabPage();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            ucPayment1 = new ucPayment();
+            tabPageReceipt = new System.Windows.Forms.TabPage();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnNextMain = new System.Windows.Forms.Button();
@@ -55,26 +57,18 @@
             tabPageRemainsInfo.SuspendLayout();
             groupBox2.SuspendLayout();
             tabPagePayment.SuspendLayout();
+            groupBox3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
-            // ucPayment1
-            // 
-            ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPayment1.Location = new System.Drawing.Point(3, 3);
-            ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(818, 450);
-            ucPayment1.TabIndex = 0;
-            // 
             // tabPageFeesCharges
             // 
             tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
-            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 24);
             tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 437);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
@@ -85,34 +79,31 @@
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 437);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabControlMain
             // 
-            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             tabControlMain.Controls.Add(tabPageBurialDetails);
             tabControlMain.Controls.Add(tabPageRemainsInfo);
             tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Controls.Add(tabPageReceipt);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
             tabControlMain.Location = new System.Drawing.Point(195, 0);
             tabControlMain.Margin = new System.Windows.Forms.Padding(0);
             tabControlMain.Name = "tabControlMain";
-            tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
             tabControlMain.Size = new System.Drawing.Size(832, 465);
-            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageBurialDetails
             // 
             tabPageBurialDetails.Controls.Add(groupBox1);
-            tabPageBurialDetails.Location = new System.Drawing.Point(4, 5);
+            tabPageBurialDetails.Location = new System.Drawing.Point(4, 24);
             tabPageBurialDetails.Name = "tabPageBurialDetails";
-            tabPageBurialDetails.Size = new System.Drawing.Size(824, 456);
+            tabPageBurialDetails.Size = new System.Drawing.Size(824, 437);
             tabPageBurialDetails.TabIndex = 3;
             tabPageBurialDetails.Text = "tabPageBurialDetails";
             tabPageBurialDetails.UseVisualStyleBackColor = true;
@@ -124,7 +115,8 @@
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(824, 456);
+            groupBox1.Padding = new System.Windows.Forms.Padding(4, 10, 4, 4);
+            groupBox1.Size = new System.Drawing.Size(824, 437);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Burial Details";
@@ -133,17 +125,17 @@
             // 
             ucBurialDetails1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBurialDetails1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucBurialDetails1.Location = new System.Drawing.Point(3, 23);
+            ucBurialDetails1.Location = new System.Drawing.Point(4, 30);
             ucBurialDetails1.Name = "ucBurialDetails1";
-            ucBurialDetails1.Size = new System.Drawing.Size(818, 430);
+            ucBurialDetails1.Size = new System.Drawing.Size(816, 403);
             ucBurialDetails1.TabIndex = 1;
             // 
             // tabPageRemainsInfo
             // 
             tabPageRemainsInfo.Controls.Add(groupBox2);
-            tabPageRemainsInfo.Location = new System.Drawing.Point(4, 5);
+            tabPageRemainsInfo.Location = new System.Drawing.Point(4, 24);
             tabPageRemainsInfo.Name = "tabPageRemainsInfo";
-            tabPageRemainsInfo.Size = new System.Drawing.Size(824, 456);
+            tabPageRemainsInfo.Size = new System.Drawing.Size(824, 437);
             tabPageRemainsInfo.TabIndex = 4;
             tabPageRemainsInfo.Text = "tabPageRemainsInfo";
             tabPageRemainsInfo.UseVisualStyleBackColor = true;
@@ -155,7 +147,8 @@
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(824, 456);
+            groupBox2.Padding = new System.Windows.Forms.Padding(4, 10, 4, 4);
+            groupBox2.Size = new System.Drawing.Size(824, 437);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Remains Info.";
@@ -164,21 +157,54 @@
             // 
             ucRemainsInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucRemainsInfo1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ucRemainsInfo1.Location = new System.Drawing.Point(3, 23);
+            ucRemainsInfo1.Location = new System.Drawing.Point(4, 30);
             ucRemainsInfo1.Name = "ucRemainsInfo1";
-            ucRemainsInfo1.Size = new System.Drawing.Size(818, 430);
+            ucRemainsInfo1.Size = new System.Drawing.Size(816, 403);
             ucRemainsInfo1.TabIndex = 1;
             // 
             // tabPagePayment
             // 
-            tabPagePayment.Controls.Add(ucPayment1);
-            tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            tabPagePayment.Controls.Add(groupBox3);
+            tabPagePayment.Location = new System.Drawing.Point(4, 24);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(824, 456);
+            tabPagePayment.Size = new System.Drawing.Size(824, 437);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(ucPayment1);
+            groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            groupBox3.Location = new System.Drawing.Point(3, 3);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new System.Windows.Forms.Padding(4, 10, 4, 4);
+            groupBox3.Size = new System.Drawing.Size(818, 431);
+            groupBox3.TabIndex = 1;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Payment";
+            // 
+            // ucPayment1
+            // 
+            ucPayment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPayment1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            ucPayment1.Location = new System.Drawing.Point(4, 32);
+            ucPayment1.Name = "ucPayment1";
+            ucPayment1.Size = new System.Drawing.Size(810, 395);
+            ucPayment1.TabIndex = 0;
+            // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
+            tabPageReceipt.TabIndex = 5;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -312,9 +338,10 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmBurialPermit";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Payment > AF 58 - Burial Permit & Fee";
+            Text = "Transactions > Payments > AF 58 - Burial Permit & Fee";
             Load += frmBurialPermit_Load;
             tabPageFeesCharges.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
@@ -323,14 +350,13 @@
             tabPageRemainsInfo.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private ucPayment ucPayment1;
         private System.Windows.Forms.TabPage tabPageFeesCharges;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPagePayment;
@@ -350,5 +376,9 @@
         private Payments.BurialPermit.ucBurialDetails ucBurialDetails1;
         private System.Windows.Forms.GroupBox groupBox2;
         private Payments.BurialPermit.ucRemainsInfo ucRemainsInfo1;
+        private System.Windows.Forms.TabPage tabPageReceipt;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private ucPayment ucPayment1;
+        private ucPrintReceipt ucBurialPermitReceipt1;
     }
 }
