@@ -261,7 +261,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Payment > AF 52 - Certificate of Record of Transfer of Large Cattle";
+            Text = "Transactions > Payments > AF 52 - Certificate of Record of Transfer of Large Cattle";
             Load += frmCattleTransfer_Load;
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
