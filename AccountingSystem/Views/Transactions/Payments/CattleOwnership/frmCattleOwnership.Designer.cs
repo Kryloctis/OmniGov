@@ -262,7 +262,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Payment > AF 53 - Certificate of Ownership of Large Cattle";
+            Text = "Transactions > Payments > AF 53 - Certificate of Ownership of Large Cattle";
             Load += frmCattleOwnership_Load;
             flowLayoutPanel1.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);

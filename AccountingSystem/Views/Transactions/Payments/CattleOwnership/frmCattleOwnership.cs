@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
-using Microsoft.Reporting.WinForms;
 using System;
 using System.Windows.Forms;
 
