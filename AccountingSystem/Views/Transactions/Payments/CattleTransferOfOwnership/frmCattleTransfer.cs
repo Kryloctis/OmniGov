@@ -3,7 +3,6 @@ using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
