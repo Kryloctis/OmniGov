@@ -102,7 +102,6 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
 
         private void InitializeReceipt()
         {
-            var frmAF53Receipt = new frmCattleOwnershipReceipt();
             var taxpayerId = ucCattleOwnership.CattleOwnershipModel().TaxpayerId;
             var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
 
@@ -191,6 +190,12 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
                         //    return;
                         //}
                     }
+                    return;
+                }
+
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
                     return;
                 }
 

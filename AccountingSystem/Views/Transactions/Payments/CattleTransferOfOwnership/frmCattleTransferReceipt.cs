@@ -95,10 +95,6 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
                 localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
                 localReportPreview.SetParameters(reportParameters);
-
-                localReportPrint.ReportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
-                reportParameters.RemoveAll(param => param.Name == "paramBackground");
-                localReportPrint.SetParameters(reportParameters);
             });
 
             reportViewerPreview.RefreshReport();

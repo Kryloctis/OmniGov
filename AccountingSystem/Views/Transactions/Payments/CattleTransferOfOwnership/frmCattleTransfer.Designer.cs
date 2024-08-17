@@ -44,6 +44,8 @@
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
+            tabPageReceipt = new System.Windows.Forms.TabPage();
+            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -51,6 +53,7 @@
             groupBox1.SuspendLayout();
             tabPageFeesCharges.SuspendLayout();
             tabPagePayment.SuspendLayout();
+            tabPageReceipt.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel2
@@ -158,29 +161,25 @@
             // 
             // tabControlMain
             // 
-            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             tabControlMain.Controls.Add(tabPageCattleTransfer);
             tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Controls.Add(tabPageReceipt);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlMain.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
             tabControlMain.Location = new System.Drawing.Point(195, 0);
             tabControlMain.Name = "tabControlMain";
-            tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
             tabControlMain.Size = new System.Drawing.Size(832, 465);
-            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 13;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageCattleTransfer
             // 
             tabPageCattleTransfer.Controls.Add(groupBox1);
-            tabPageCattleTransfer.Location = new System.Drawing.Point(4, 5);
+            tabPageCattleTransfer.Location = new System.Drawing.Point(4, 24);
             tabPageCattleTransfer.Name = "tabPageCattleTransfer";
             tabPageCattleTransfer.Padding = new System.Windows.Forms.Padding(3);
-            tabPageCattleTransfer.Size = new System.Drawing.Size(824, 456);
+            tabPageCattleTransfer.Size = new System.Drawing.Size(824, 437);
             tabPageCattleTransfer.TabIndex = 0;
             tabPageCattleTransfer.Text = "tabPageCattleTransfer";
             tabPageCattleTransfer.UseVisualStyleBackColor = true;
@@ -192,7 +191,7 @@
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
             groupBox1.Location = new System.Drawing.Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(818, 450);
+            groupBox1.Size = new System.Drawing.Size(818, 431);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Cattle Transfer";
@@ -203,16 +202,16 @@
             ucCattleTransfer1.Font = new System.Drawing.Font("Segoe UI", 9F);
             ucCattleTransfer1.Location = new System.Drawing.Point(3, 25);
             ucCattleTransfer1.Name = "ucCattleTransfer1";
-            ucCattleTransfer1.Size = new System.Drawing.Size(812, 422);
+            ucCattleTransfer1.Size = new System.Drawing.Size(812, 403);
             ucCattleTransfer1.TabIndex = 3;
             // 
             // tabPageFeesCharges
             // 
             tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
-            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 24);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
             tabPageFeesCharges.Padding = new System.Windows.Forms.Padding(3);
-            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 437);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFeesCharges";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
@@ -223,16 +222,16 @@
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(3, 3);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(818, 450);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(818, 431);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
-            tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            tabPagePayment.Location = new System.Drawing.Point(4, 24);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(824, 456);
+            tabPagePayment.Size = new System.Drawing.Size(824, 437);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -243,8 +242,27 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(818, 450);
+            ucPayment1.Size = new System.Drawing.Size(818, 431);
             ucPayment1.TabIndex = 0;
+            // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
+            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
+            tabPageReceipt.TabIndex = 3;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
+            ucPrintReceipt1.TabIndex = 0;
             // 
             // frmCattleTransfer
             // 
@@ -270,6 +288,7 @@
             groupBox1.ResumeLayout(false);
             tabPageFeesCharges.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
+            tabPageReceipt.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -292,5 +311,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private OtherPayments.CattleTransferOfOwnership.ucCattleTransfer ucCattleTransfer1;
         private System.Windows.Forms.RadioButton radCattleTransfer;
+        private System.Windows.Forms.TabPage tabPageReceipt;
+        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
     }
 }
