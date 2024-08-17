@@ -1,15 +1,10 @@
 ﻿using ACC.Data;
 using AccountingSystem.DataSets;
-using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.Payments.AF51_57.frmAF51Receipt;
 
 namespace AccountingSystem.Views.Transactions.Payments.AF51_57;
 
@@ -56,7 +51,6 @@ public partial class frmAF51_57 : Form
 
     private void LoadReceipt()
     {
-        var frmReceipt = new frmAF51Receipt();
         var dataTable = new dsTreasury.dtAF51DataTable().Clone();
 
         foreach (var model in ucPaymentFeesCharges.PaymentFeesChargesModels())
