@@ -41,6 +41,7 @@
             groupBox3 = new System.Windows.Forms.GroupBox();
             ucPayment1 = new ucPayment();
             tabPageReceipt = new System.Windows.Forms.TabPage();
+            ucPrintReceipt1 = new ucPrintReceipt();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnNextMain = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             groupBox2.SuspendLayout();
             tabPagePayment.SuspendLayout();
             groupBox3.SuspendLayout();
+            tabPageReceipt.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -198,6 +200,7 @@
             // 
             // tabPageReceipt
             // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
             tabPageReceipt.Location = new System.Drawing.Point(4, 24);
             tabPageReceipt.Name = "tabPageReceipt";
             tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
@@ -205,6 +208,14 @@
             tabPageReceipt.TabIndex = 5;
             tabPageReceipt.Text = "tabPageReceipt";
             tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
+            ucPrintReceipt1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -351,6 +362,7 @@
             groupBox2.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
+            tabPageReceipt.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -379,6 +391,6 @@
         private System.Windows.Forms.TabPage tabPageReceipt;
         private System.Windows.Forms.GroupBox groupBox3;
         private ucPayment ucPayment1;
-        private ucPrintReceipt ucBurialPermitReceipt1;
+        private ucPrintReceipt ucPrintReceipt1;
     }
 }

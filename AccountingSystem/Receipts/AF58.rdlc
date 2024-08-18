@@ -14,7 +14,7 @@
                     <Value>=Parameters!paramMunicipality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -24,8 +24,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.99062in</Top>
-            <Left>0.89541in</Left>
+            <Top>1.14062in</Top>
+            <Left>1.02041in</Left>
             <Height>0.26042in</Height>
             <Width>2.22917in</Width>
             <Style>
@@ -44,7 +44,7 @@
                     <Value>=Parameters!paramTransactionDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <Format>MMMM dd, yyyy</Format>
                     </Style>
                   </TextRun>
@@ -55,8 +55,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.76875in</Top>
-            <Left>0.29125in</Left>
+            <Top>1.89375in</Top>
+            <Left>0.34125in</Left>
             <Height>0.29167in</Height>
             <Width>1.67709in</Width>
             <ZIndex>1</ZIndex>
@@ -80,7 +80,7 @@
                     <Value>=Parameters!paramRemainName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -88,8 +88,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.46041in</Top>
-            <Left>1.08291in</Left>
+            <Top>3.63541in</Top>
+            <Left>1.20791in</Left>
             <Height>0.19792in</Height>
             <Width>2.64584in</Width>
             <ZIndex>2</ZIndex>
@@ -109,7 +109,7 @@
                     <Value>=Parameters!paramRemainNationality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -117,8 +117,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.69375in</Top>
-            <Left>1.39542in</Left>
+            <Top>3.86875in</Top>
+            <Left>1.52042in</Left>
             <Height>0.19792in</Height>
             <Width>2.33334in</Width>
             <ZIndex>3</ZIndex>
@@ -138,7 +138,7 @@
                     <Value>=Parameters!paramRemainAge.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -148,8 +148,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.94861in</Top>
-            <Left>0.99958in</Left>
+            <Top>4.12361in</Top>
+            <Left>1.12458in</Left>
             <Height>0.19792in</Height>
             <Width>0.69792in</Width>
             <ZIndex>4</ZIndex>
@@ -169,7 +169,7 @@
                     <Value>=Parameters!paramRemainSex.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -179,8 +179,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.94861in</Top>
-            <Left>2.42666in</Left>
+            <Top>4.12361in</Top>
+            <Left>2.55166in</Left>
             <Height>0.19792in</Height>
             <Width>1.30209in</Width>
             <ZIndex>5</ZIndex>
@@ -200,7 +200,7 @@
                     <Value>=Parameters!paramRemainDeathDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <Format>MMMM dd, yyyy</Format>
                     </Style>
                   </TextRun>
@@ -211,8 +211,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.17709in</Top>
-            <Left>1.54229in</Left>
+            <Top>4.35209in</Top>
+            <Left>1.66729in</Left>
             <Height>0.19792in</Height>
             <Width>2.18646in</Width>
             <ZIndex>6</ZIndex>
@@ -232,7 +232,7 @@
                     <Value>=Parameters!paramCauseOfDeath.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -240,8 +240,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.40279in</Top>
-            <Left>1.61521in</Left>
+            <Top>4.57779in</Top>
+            <Left>1.74021in</Left>
             <Height>0.19792in</Height>
             <Width>2.11354in</Width>
             <ZIndex>7</ZIndex>
@@ -261,7 +261,7 @@
                     <Value>=Parameters!paramCemetery.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -269,8 +269,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.6396in</Top>
-            <Left>1.75531in</Left>
+            <Top>4.8146in</Top>
+            <Left>1.88031in</Left>
             <Height>0.19792in</Height>
             <Width>1.97344in</Width>
             <ZIndex>8</ZIndex>
@@ -290,7 +290,7 @@
                     <Value>=Parameters!paramDisinterment.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -298,8 +298,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.86668in</Top>
-            <Left>2.30687in</Left>
+            <Top>5.04168in</Top>
+            <Left>2.43187in</Left>
             <Height>0.19792in</Height>
             <Width>1.42188in</Width>
             <ZIndex>9</ZIndex>
@@ -319,7 +319,7 @@
                     <Value>=Parameters!paramIsInfectious.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -327,8 +327,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.10488in</Top>
-            <Left>2.30687in</Left>
+            <Top>5.27988in</Top>
+            <Left>2.43187in</Left>
             <Height>0.19792in</Height>
             <Width>1.42188in</Width>
             <ZIndex>10</ZIndex>
@@ -348,7 +348,7 @@
                     <Value>=Parameters!paramIsEmbalmed.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -356,8 +356,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.35836in</Top>
-            <Left>2.64021in</Left>
+            <Top>5.53336in</Top>
+            <Left>2.76521in</Left>
             <Height>0.19792in</Height>
             <Width>1.08855in</Width>
             <ZIndex>11</ZIndex>
@@ -377,7 +377,7 @@
                     <Value>=Parameters!paramDisposition.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -385,8 +385,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.61322in</Top>
-            <Left>2.02823in</Left>
+            <Top>5.78822in</Top>
+            <Left>2.15323in</Left>
             <Height>0.19792in</Height>
             <Width>1.70053in</Width>
             <ZIndex>12</ZIndex>
@@ -406,7 +406,7 @@
                     <Value>=Parameters!paramMunicipalFeeNo.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -414,8 +414,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.09479in</Top>
-            <Left>0.89541in</Left>
+            <Top>6.26979in</Top>
+            <Left>1.02041in</Left>
             <Height>0.19792in</Height>
             <Width>1.01042in</Width>
             <ZIndex>13</ZIndex>
@@ -435,7 +435,7 @@
                     <Value>=Parameters!paramMunicipalFeeDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -443,8 +443,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.09479in</Top>
-            <Left>2.35687in</Left>
+            <Top>6.26979in</Top>
+            <Left>2.48187in</Left>
             <Height>0.19792in</Height>
             <Width>1.37188in</Width>
             <ZIndex>14</ZIndex>
@@ -464,7 +464,7 @@
                     <Value>=Parameters!paramMunicipalFeeAmount.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -472,8 +472,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.33438in</Top>
-            <Left>0.89541in</Left>
+            <Top>6.50938in</Top>
+            <Left>1.02041in</Left>
             <Height>0.19792in</Height>
             <Width>1.29167in</Width>
             <ZIndex>15</ZIndex>
@@ -493,7 +493,7 @@
                     <Value>=Parameters!paramTotalPayment.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <Format>#,0.00;(#,0.00);'-'</Format>
                     </Style>
                   </TextRun>
@@ -504,8 +504,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>7.14062in</Top>
-            <Left>1.16417in</Left>
+            <Top>7.32812in</Top>
+            <Left>1.28917in</Left>
             <Height>0.19792in</Height>
             <Width>1.29167in</Width>
             <ZIndex>16</ZIndex>
@@ -525,7 +525,7 @@
                     <Value>=Parameters!paramCollectingOfficerName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -535,7 +535,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>7.65312in</Top>
+            <Top>7.82812in</Top>
             <Left>1.91625in</Left>
             <Height>0.19792in</Height>
             <Width>1.65625in</Width>
@@ -553,8 +553,8 @@
           </Textbox>
           <Rectangle Name="chckbxInter">
             <KeepTogether>true</KeepTogether>
-            <Top>2.82292in</Top>
-            <Left>0.51572in</Left>
+            <Top>2.96042in</Top>
+            <Left>0.62822in</Left>
             <Height>0.09521in</Height>
             <Width>0.10435in</Width>
             <ZIndex>18</ZIndex>
@@ -567,8 +567,8 @@
           </Rectangle>
           <Rectangle Name="chckbxDisinter">
             <KeepTogether>true</KeepTogether>
-            <Top>2.82292in</Top>
-            <Left>1.61521in</Left>
+            <Top>2.96042in</Top>
+            <Left>1.72771in</Left>
             <Height>0.09521in</Height>
             <Width>0.10435in</Width>
             <ZIndex>19</ZIndex>
@@ -581,8 +581,8 @@
           </Rectangle>
           <Rectangle Name="chckbxRemove">
             <KeepTogether>true</KeepTogether>
-            <Top>2.82292in</Top>
-            <Left>2.82592in</Left>
+            <Top>2.96042in</Top>
+            <Left>2.93842in</Left>
             <Height>0.09521in</Height>
             <Width>0.10435in</Width>
             <ZIndex>20</ZIndex>

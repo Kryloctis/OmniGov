@@ -12,7 +12,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         private readonly ucBurialDetails ucBurialDetails;
         private readonly ucRemainsInfo ucRemainsInfo;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
-        private readonly ucPrintReceipt ucBurialPermitReceipt;
+        private readonly ucPrintReceipt ucPrintReceipt;
 
         public frmBurialPermit()
         {
@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             ucBurialDetails = ucBurialDetails1;
             ucRemainsInfo = ucRemainsInfo1;
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
-            ucBurialPermitReceipt = ucBurialPermitReceipt1;
+            ucPrintReceipt = ucPrintReceipt1;
         }
 
         private void ResetForm()
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             string isInfectious = burialDetails.isInfectious ? "Infectious" : "Non-Infectious";
             string isEmbalmed = burialDetails.isEmbalmed ? "Embalmed" : "None";
             var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
-            var remainName = dictRegistry["first_name"];
+            var remainName = Helper.GenerateFullName(string.Empty, dictRegistry["first_name"], dictRegistry["middle_name"], dictRegistry["last_name"], string.Empty);
 
             var dictReportParameters = new Dictionary<string, string>()
             {
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
             string reportPath = $"{Application.StartupPath}\\Receipts\\AF58.rdlc";
 
-            ucBurialPermitReceipt.Onload(reportPath, dictReportParameters);
+            ucPrintReceipt.Onload(reportPath, dictReportParameters);
         }
 
         private void LoadTabContents()

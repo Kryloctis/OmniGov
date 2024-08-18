@@ -138,6 +138,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             // Set the PrintPage event handler
             printDoc.PrintPage += (sender, e) =>
             {
+                // Apply a 180-degree rotation transformation
+                e.Graphics.TranslateTransform(e.PageBounds.Width / 2, e.PageBounds.Height / 2);
+                e.Graphics.RotateTransform(180);
+                e.Graphics.TranslateTransform(-e.PageBounds.Width / 2, -e.PageBounds.Height / 2);
+
                 // Render the report content onto the print page
                 byte[] bytes = reportViewer.LocalReport.Render(
                     format: "Image",
