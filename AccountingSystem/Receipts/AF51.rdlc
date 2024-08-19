@@ -46,207 +46,6 @@
         <ReportItems>
           <Rectangle Name="Rectangle7">
             <ReportItems>
-              <Textbox Name="Textbox10">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramChequeDate.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>6.65057in</Top>
-                <Left>2.93727in</Left>
-                <Height>0.35371in</Height>
-                <Width>0.83269in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Middle</VerticalAlign>
-                  <PaddingLeft>0.5pt</PaddingLeft>
-                  <PaddingRight>0.5pt</PaddingRight>
-                  <PaddingTop>0.5pt</PaddingTop>
-                  <PaddingBottom>0.5pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox9">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramChequeNo.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>6.65057in</Top>
-                <Left>2.07925in</Left>
-                <Height>0.35371in</Height>
-                <Width>0.79481in</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Middle</VerticalAlign>
-                  <PaddingLeft>0.5pt</PaddingLeft>
-                  <PaddingRight>0.5pt</PaddingRight>
-                  <PaddingTop>0.5pt</PaddingTop>
-                  <PaddingBottom>0.5pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox8">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramChequeBank.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>6.65057in</Top>
-                <Left>1.22447in</Left>
-                <Height>0.35371in</Height>
-                <Width>0.81375in</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Middle</VerticalAlign>
-                  <PaddingLeft>0.5pt</PaddingLeft>
-                  <PaddingRight>0.5pt</PaddingRight>
-                  <PaddingTop>0.5pt</PaddingTop>
-                  <PaddingBottom>0.5pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox5">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramTotalPaymentWords.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>5.92521in</Top>
-                <Left>0.20844in</Left>
-                <Height>0.32292in</Height>
-                <Width>3.55167in</Width>
-                <ZIndex>3</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>0.5pt</PaddingLeft>
-                  <PaddingRight>0.5pt</PaddingRight>
-                  <PaddingTop>0.5pt</PaddingTop>
-                  <PaddingBottom>0.5pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox6">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramTotalPayment.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <Format>#,0.00;(#,0.00);'-'</Format>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>5.54062in</Top>
-                <Left>2.83665in</Left>
-                <Height>0.15625in</Height>
-                <Width>0.92347in</Width>
-                <ZIndex>4</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Middle</VerticalAlign>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox7">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramCollectingOfficerName.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Center</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>7.41706in</Top>
-                <Left>1.92406in</Left>
-                <Height>0.28125in</Height>
-                <Width>1.83606in</Width>
-                <ZIndex>5</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Bottom</VerticalAlign>
-                  <PaddingLeft>0.5pt</PaddingLeft>
-                  <PaddingRight>0.5pt</PaddingRight>
-                  <PaddingTop>0.5pt</PaddingTop>
-                  <PaddingBottom>0.5pt</PaddingBottom>
-                </Style>
-              </Textbox>
               <Textbox Name="Textbox4">
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
@@ -256,8 +55,8 @@
                         <Value>=Parameters!paramPayee.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
+                          <FontSize>9pt</FontSize>
+                          <Color>Red</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -265,11 +64,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>2.39847in</Top>
-                <Left>0.16624in</Left>
+                <Top>2.64847in</Top>
+                <Left>0.38606in</Left>
                 <Height>0.28125in</Height>
-                <Width>3.59388in</Width>
-                <ZIndex>6</ZIndex>
+                <Width>3.49906in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -290,8 +88,8 @@
                         <Value>=Parameters!paramAgency.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
+                          <FontSize>9pt</FontSize>
+                          <Color>Red</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -299,11 +97,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>2.08667in</Top>
-                <Left>0.16624in</Left>
+                <Top>2.33667in</Top>
+                <Left>0.38606in</Left>
                 <Height>0.28125in</Height>
-                <Width>2.45888in</Width>
-                <ZIndex>7</ZIndex>
+                <Width>2.36406in</Width>
+                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -324,8 +122,8 @@
                         <Value>=Parameters!paramFund.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
+                          <FontSize>9pt</FontSize>
+                          <Color>Red</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -333,11 +131,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>2.08666in</Top>
-                <Left>2.69456in</Left>
+                <Top>2.33666in</Top>
+                <Left>2.81956in</Left>
                 <Height>0.28125in</Height>
                 <Width>1.06557in</Width>
-                <ZIndex>8</ZIndex>
+                <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -358,8 +156,9 @@
                         <Value>=Parameters!paramTransactionDate.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
+                          <FontSize>9pt</FontSize>
                           <Format>MMM d, yyyy</Format>
+                          <Color>Red</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -369,11 +168,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>1.72556in</Top>
-                <Left>0.16624in</Left>
+                <Top>1.95056in</Top>
+                <Left>0.38606in</Left>
                 <Height>0.29167in</Height>
-                <Width>1.72971in</Width>
-                <ZIndex>9</ZIndex>
+                <Width>1.65966in</Width>
+                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -394,8 +193,8 @@
                         <Value>=Parameters!paramMunicipality.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
+                          <FontSize>9pt</FontSize>
+                          <Color>Red</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -405,11 +204,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>0.75847in</Top>
-                <Left>0.89387in</Left>
+                <Top>1.00847in</Top>
+                <Left>1.01887in</Left>
                 <Height>0.26042in</Height>
                 <Width>2.22917in</Width>
-                <ZIndex>10</ZIndex>
+                <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -417,319 +216,526 @@
                   <VerticalAlign>Bottom</VerticalAlign>
                 </Style>
               </Textbox>
-              <Rectangle Name="chckbxCash">
-                <Top>6.43399in</Top>
-                <Left>0.26106in</Left>
-                <Height>0.09132in</Height>
-                <Width>0.09653in</Width>
-                <ZIndex>11</ZIndex>
+              <Tablix Name="Tablix2">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>1.65966in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.76053in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>1.07886in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.3125in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox12">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox12</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>0.5pt</PaddingLeft>
+                                <PaddingRight>0.5pt</PaddingRight>
+                                <PaddingTop>0.5pt</PaddingTop>
+                                <PaddingBottom>0.5pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox13">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox13</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>0.5pt</PaddingLeft>
+                                <PaddingRight>0.5pt</PaddingRight>
+                                <PaddingTop>0.5pt</PaddingTop>
+                                <PaddingBottom>0.5pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox14">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox14</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>0.5pt</PaddingLeft>
+                                <PaddingRight>0.5pt</PaddingRight>
+                                <PaddingTop>0.5pt</PaddingTop>
+                                <PaddingBottom>0.5pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.22175in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="nature_of_collection">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!nature_of_collection.Value</Value>
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>nature_of_collection</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="account_code">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!account_code.Value</Value>
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>account_code</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="amount">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!amount.Value</Value>
+                                      <Style>
+                                        <FontFamily>Consolas</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
+                                        <Color>Red</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>amount</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details" />
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <KeepTogether>true</KeepTogether>
+                <DataSetName>dtAF51</DataSetName>
+                <Top>2.99916in</Top>
+                <Left>0.38606in</Left>
+                <Height>0.53425in</Height>
+                <Width>3.49905in</Width>
+                <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <BackgroundColor>=IIF(Parameters!paramIsCash.Value = true, "Black", "Transparent")</BackgroundColor>
+                  <FontFamily>Consolas</FontFamily>
+                  <FontSize>8pt</FontSize>
                 </Style>
-              </Rectangle>
-              <Rectangle Name="chckbxCheck">
-                <Top>6.63807in</Top>
-                <Left>0.26106in</Left>
-                <Height>0.09132in</Height>
-                <Width>0.09653in</Width>
-                <ZIndex>12</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <BackgroundColor>=IIF(Parameters!paramIsCheck.Value = true, "Black", "Transparent")</BackgroundColor>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="chckbxMoneyOrder">
-                <Top>6.85613in</Top>
-                <Left>0.25845in</Left>
-                <Height>0.09132in</Height>
-                <Width>0.09653in</Width>
-                <ZIndex>13</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <BackgroundColor>=IIF(Parameters!paramIsMoneyOrder.Value = true, "Black", "Transparent")</BackgroundColor>
-                </Style>
-              </Rectangle>
+              </Tablix>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Height>8.34in</Height>
-            <Width>3.96856in</Width>
+            <Height>5.48377in</Height>
+            <Width>4.01274in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Rectangle>
-          <Tablix Name="Tablix2">
-            <TablixBody>
-              <TablixColumns>
-                <TablixColumn>
-                  <Width>1.75448in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.76053in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.11167in</Width>
-                </TablixColumn>
-              </TablixColumns>
-              <TablixRows>
-                <TablixRow>
-                  <Height>0.3125in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox12">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>0.5pt</PaddingLeft>
-                            <PaddingRight>0.5pt</PaddingRight>
-                            <PaddingTop>0.5pt</PaddingTop>
-                            <PaddingBottom>0.5pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox13">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>0.5pt</PaddingLeft>
-                            <PaddingRight>0.5pt</PaddingRight>
-                            <PaddingTop>0.5pt</PaddingTop>
-                            <PaddingBottom>0.5pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox14">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>0.5pt</PaddingLeft>
-                            <PaddingRight>0.5pt</PaddingRight>
-                            <PaddingTop>0.5pt</PaddingTop>
-                            <PaddingBottom>0.5pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.22175in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="nature_of_collection">
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!nature_of_collection.Value</Value>
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>nature_of_collection</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="account_code">
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!account_code.Value</Value>
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>account_code</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="amount">
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!amount.Value</Value>
-                                  <Style>
-                                    <FontFamily>Consolas</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0.00;(#,0.00);'-'</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>amount</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-              </TablixRows>
-            </TablixBody>
-            <TablixColumnHierarchy>
-              <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-              </TablixMembers>
-            </TablixColumnHierarchy>
-            <TablixRowHierarchy>
-              <TablixMembers>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details" />
-                </TablixMember>
-              </TablixMembers>
-            </TablixRowHierarchy>
+          <Textbox Name="Textbox10">
             <KeepTogether>true</KeepTogether>
-            <DataSetName>dtAF51</DataSetName>
-            <Top>2.70472in</Top>
-            <Left>0.16624in</Left>
-            <Height>0.53425in</Height>
-            <Width>3.62668in</Width>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramChequeDate.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.88678in</Top>
+            <Left>3.06228in</Left>
+            <Height>0.35371in</Height>
+            <Width>0.83269in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <FontFamily>Consolas</FontFamily>
-              <FontSize>8pt</FontSize>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>0.5pt</PaddingLeft>
+              <PaddingRight>0.5pt</PaddingRight>
+              <PaddingTop>0.5pt</PaddingTop>
+              <PaddingBottom>0.5pt</PaddingBottom>
             </Style>
-          </Tablix>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramChequeNo.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.88678in</Top>
+            <Left>2.20426in</Left>
+            <Height>0.35371in</Height>
+            <Width>0.79481in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>0.5pt</PaddingLeft>
+              <PaddingRight>0.5pt</PaddingRight>
+              <PaddingTop>0.5pt</PaddingTop>
+              <PaddingBottom>0.5pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramChequeBank.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.88678in</Top>
+            <Left>1.34948in</Left>
+            <Height>0.35371in</Height>
+            <Width>0.81375in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>0.5pt</PaddingLeft>
+              <PaddingRight>0.5pt</PaddingRight>
+              <PaddingTop>0.5pt</PaddingTop>
+              <PaddingBottom>0.5pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramTotalPaymentWords.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>5.94892in</Top>
+            <Left>0.34595in</Left>
+            <Height>0.32292in</Height>
+            <Width>3.55167in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>0.5pt</PaddingLeft>
+              <PaddingRight>0.5pt</PaddingRight>
+              <PaddingTop>0.5pt</PaddingTop>
+              <PaddingBottom>0.5pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramTotalPayment.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>5.53933in</Top>
+            <Left>2.96166in</Left>
+            <Height>0.15625in</Height>
+            <Width>0.92347in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!paramCollectingOfficerName.Value</Value>
+                    <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>7.45327in</Top>
+            <Left>2.05891in</Left>
+            <Height>0.28125in</Height>
+            <Width>1.83606in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>0.5pt</PaddingLeft>
+              <PaddingRight>0.5pt</PaddingRight>
+              <PaddingTop>0.5pt</PaddingTop>
+              <PaddingBottom>0.5pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Rectangle Name="chckbxCash">
+            <Top>6.6577in</Top>
+            <Left>0.39857in</Left>
+            <Height>0.09132in</Height>
+            <Width>0.09653in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>=IIF(Parameters!paramIsCash.Value = true, "Black", "Transparent")</BackgroundColor>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="chckbxCheck">
+            <Top>6.86178in</Top>
+            <Left>0.39857in</Left>
+            <Height>0.09132in</Height>
+            <Width>0.09653in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>=IIF(Parameters!paramIsCheck.Value = true, "Black", "Transparent")</BackgroundColor>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="chckbxMoneyOrder">
+            <Top>7.07984in</Top>
+            <Left>0.39596in</Left>
+            <Height>0.09132in</Height>
+            <Width>0.09653in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>=IIF(Parameters!paramIsMoneyOrder.Value = true, "Black", "Transparent")</BackgroundColor>
+            </Style>
+          </Rectangle>
         </ReportItems>
-        <Height>8.34in</Height>
+        <Height>8.5in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>3.96856in</Width>
+      <Width>4.01274in</Width>
       <Page>
-        <PageHeight>8.34in</PageHeight>
-        <PageWidth>3.96856in</PageWidth>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>4in</PageWidth>
         <Style />
       </Page>
     </ReportSection>
