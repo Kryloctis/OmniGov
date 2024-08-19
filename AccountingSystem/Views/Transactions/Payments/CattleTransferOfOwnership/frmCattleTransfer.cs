@@ -1,7 +1,8 @@
 ﻿using ACC.Data;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
@@ -11,14 +12,17 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
         private readonly ucPayment ucPayment;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucCattleTransfer ucCattleTransfer;
+        private ucPrintReceipt ucPrintReceipt;
 
         public frmCattleTransfer()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.RemoveTabcontrolTabs(tabControlMain);
             ucPayment = ucPayment1;
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
             ucCattleTransfer = ucCattleTransfer1;
+            ucPrintReceipt = ucPrintReceipt1;
         }
 
         private void OnLoad()
@@ -41,13 +45,16 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                     break;
 
                 case "tabPageFeesCharges":
-                    radFeesCharges.Checked = true;
+
                     LoadFeesAndChargesTab();
                     break;
 
                 case "tabPagePayment":
-                    radPayment.Checked = true;
                     LoadPaymentTab();
+                    break;
+
+                case "tabPageReceipt":
+                    LoadReceiptTab();
                     break;
             }
         }
@@ -60,20 +67,58 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
 
         private void LoadFeesAndChargesTab()
         {
+            radFeesCharges.Checked = true;
             btnNextMain.Text = "Proceed to Payment";
             btnBackMain.Enabled = true;
-            radFeesCharges.Checked = true;
             ucPaymentFeesCharges.OnLoad();
         }
 
         private void LoadPaymentTab()
         {
+            radPayment.Checked = true;
             btnNextMain.Text = "Confirm Payment";
             btnBackMain.Enabled = true;
-            radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
             ucPayment.OnLoad(Helper.userId, "52", totalAmountPayable);
+        }
+
+        private void InitializeReceipt()
+        {
+            var cattleTransferDetails = ucCattleTransfer.GetCattleTransferReceiptContent();
+
+            var dictParameters = new Dictionary<string, string>
+            {
+                {"paramMunicipal", Helper.selectedServerModel.MunicipalityName.ToUpper()},
+                {"paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper()},
+                {"paramOldOwnerName", cattleTransferDetails.oldOwnerName},
+                {"paramOldOwnerAddress", cattleTransferDetails.oldOwnerAddress},
+                {"paramOldOwnerMunicipality", cattleTransferDetails.oldOwnerMunicipality},
+                {"paramOldOwnerProvince", cattleTransferDetails.oldOwnerProvince},
+                {"paramNewOwnerName", cattleTransferDetails.newOwnerName},
+                {"paramNewOwnerAddress", cattleTransferDetails.newOwnerAddress},
+                {"paramNewOwnerMunicipality", cattleTransferDetails.newOwnerMunicipality},
+                {"paramNewOwnerProvince", cattleTransferDetails.newOwnerProvince},
+                {"paramCattleName", cattleTransferDetails.cattleName},
+                {"paramCattleAge", cattleTransferDetails.cattleAge.ToString()},
+                {"paramCattlePrice", cattleTransferDetails.amountPurchase.ToString()},
+                {"paramCattlePriceWords", new Helper.AmountToWords().ConvertAmountToWords(cattleTransferDetails.amountPurchase.ToString("N2"))},
+                {"paramCattleSex", cattleTransferDetails.cattleSex},
+                {"paramCattleYears", cattleTransferDetails.cattleYears.ToString()},
+                {"paramCurrentDate", Helper.GetCurrentDate().ToString()},
+                {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
+                {"paramMunicipalMayorName", string.Empty},
+                {"paramMunicipalSecretaryName", string.Empty},
+            };
+
+            string reportPath = $"{Application.StartupPath}\\Receipts\\AF52.rdlc";
+            ucPrintReceipt.Onload(reportPath, dictParameters);
+        }
+
+        private void LoadReceiptTab()
+        {
+            btnNextMain.Text = "New Transaction";
+            InitializeReceipt();
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,44 +136,6 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
             ucPaymentFeesCharges.ResetForm();
             ucCattleTransfer.ResetForm();
             tabControlMain.SelectedIndex = 0;
-        }
-
-        private bool ConfirmPayment()
-        {
-            return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
-        }
-
-        private void LoadReceipt()
-        {
-            var frmReceipt = new frmCattleTransferReceipt();
-            var cattleTransferDetails = ucCattleTransfer.GetCattleTransferReceiptContent();
-
-            var receiptParameters = new frmCattleTransferReceipt.AF52Parameters()
-            {
-                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
-                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
-                OldOwnerName = cattleTransferDetails.oldOwnerName,
-                OldOwnerAddress = cattleTransferDetails.oldOwnerAddress,
-                OldOwnerMunicipality = cattleTransferDetails.oldOwnerMunicipality,
-                OldOwnerProvince = cattleTransferDetails.oldOwnerProvince,
-                NewOwnerName = cattleTransferDetails.newOwnerName,
-                NewOwnerAddress = cattleTransferDetails.newOwnerAddress,
-                NewOwnerMunicipality = cattleTransferDetails.newOwnerMunicipality,
-                NewOwnerProvince = cattleTransferDetails.newOwnerProvince,
-                CattleName = cattleTransferDetails.cattleName,
-                CattleAge = cattleTransferDetails.cattleAge,
-                CattlePrice = cattleTransferDetails.amountPurchase,
-                CattlePriceWords = new Helper.AmountToWords().ConvertAmountToWords(cattleTransferDetails.amountPurchase.ToString("N2")),
-                CattleSex = cattleTransferDetails.cattleSex,
-                CattleYears = cattleTransferDetails.cattleYears,
-                CurrentDate = Helper.GetCurrentDate(),
-                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
-                MunicipalMayor = string.Empty,
-                MunicipalSecretaryName = string.Empty
-            };
-
-            frmReceipt.OnLoad(receiptParameters);
-            frmReceipt.ShowDialog();
         }
 
         private bool TabValidated()
@@ -167,6 +174,11 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
             return true;
         }
 
+        private bool ConfirmPayment()
+        {
+            return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+        }
+
         private void btnNextMain_Click(object sender, EventArgs e)
         {
             try
@@ -178,15 +190,19 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        if (ConfirmPayment())
-                        {
-                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                            LoadReceipt();
-                            ResetForm();
-                            return;
-                        }
+                        tabControlMain.SelectedIndex++;
+                        //if (ConfirmPayment())
+                        //{
+                        //    return;
+                        //}
                     }
 
+                    return;
+                }
+
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
                     return;
                 }
 

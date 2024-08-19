@@ -29,13 +29,7 @@ namespace AccountingSystem.Views.Dashboard
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.frmSignIn = frmSignIn;
-
-            //Removes tabs to tabcontrol
-            tabControlMain.Padding = new Point(0, 0);
-            tabControlMain.ItemSize = new Size(0, 1);
-            tabControlMain.SizeMode = TabSizeMode.Fixed;
-            tabControlMain.Appearance = TabAppearance.FlatButtons;
-            tabControlMain.DrawMode = TabDrawMode.OwnerDrawFixed;
+            Helper.RemoveTabcontrolTabs(tabControlMain);
 
             this.ucBudget = ucBudget1;
             this.ucAccounting = ucAccounting1;

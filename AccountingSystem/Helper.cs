@@ -601,6 +601,16 @@ namespace AccountingSystem
             }
         }
 
+        public static void RemoveTabcontrolTabs(TabControl tabControl)
+        {
+            //Removes tabs to tabcontrol
+            tabControl.Padding = new Point(0, 0);
+            tabControl.ItemSize = new Size(0, 1);
+            tabControl.SizeMode = TabSizeMode.Fixed;
+            tabControl.Appearance = TabAppearance.FlatButtons;
+            tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+        }
+
         #endregion Miscellaneous
 
         #region Get User Data

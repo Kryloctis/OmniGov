@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
@@ -11,15 +12,18 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         private readonly ucBurialDetails ucBurialDetails;
         private readonly ucRemainsInfo ucRemainsInfo;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
+        private readonly ucPrintReceipt ucPrintReceipt;
 
         public frmBurialPermit()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.RemoveTabcontrolTabs(tabControlMain);
             ucPayment = ucPayment1;
             ucBurialDetails = ucBurialDetails1;
             ucRemainsInfo = ucRemainsInfo1;
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
+            ucPrintReceipt = ucPrintReceipt1;
         }
 
         private void ResetForm()
@@ -129,11 +133,56 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
         private void LoadPaymentTab()
         {
-            btnNextMain.Text = "Confirm Payment";
             radPayment.Checked = true;
+            btnNextMain.Text = "Confirm Payment";
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
             ucPayment.OnLoad(Helper.userId, "58", totalAmountPayable);
+        }
+
+        private void LoadReceiptTab()
+        {
+            btnNextMain.Text = "New Transaction";
+            InitializeReceipt();
+        }
+
+        private void InitializeReceipt()
+        {
+            var burialDetails = ucBurialDetails.GetBurialDetails();
+            var remainDetails = ucRemainsInfo.GetRemainsInfo();
+            string isInfectious = burialDetails.isInfectious ? "Infectious" : "Non-Infectious";
+            string isEmbalmed = burialDetails.isEmbalmed ? "Embalmed" : "None";
+            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
+            var remainName = Helper.GenerateFullName(string.Empty, dictRegistry["first_name"], dictRegistry["middle_name"], dictRegistry["last_name"], string.Empty);
+
+            var dictReportParameters = new Dictionary<string, string>()
+            {
+                {"paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper()},
+                {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
+                {"paramRemainName", remainName},
+                {"paramRemainSex", dictRegistry["sex"]},
+                {"paramRemainNationality", dictRegistry["nationality"]},
+                {"paramRemainAge", remainDetails.remainAge.ToString()},
+                {"paramRemainDeathDate", burialDetails.deathDate.ToShortDateString()},
+                {"paramCauseOfDeath", burialDetails.causeOfDeath},
+                {"paramCemetery", burialDetails.cemetery},
+                {"paramDisinterment", burialDetails.disinterment},
+                {"paramIsInfectious", isInfectious},
+                {"paramIsEmbalmed", isEmbalmed},
+                {"paramDisposition", burialDetails.disposition},
+                {"paramIsInter", "true"},
+                {"paramIsDisinter", "false"},
+                {"paramIsRemove", "false"},
+                {"paramTotalPayment", ucPayment.PaymentCollectionsModel().Amount.ToString()},
+                {"paramMunicipalFeeNo", string.Empty},
+                {"paramMunicipalFeeDate", string.Empty},
+                {"paramMunicipalFeeAmount", string.Empty},
+                {"paramCollectingOfficerName", ucPayment.txtCollectingOfficer.Text },
+            };
+
+            string reportPath = $"{Application.StartupPath}\\Receipts\\AF58.rdlc";
+
+            ucPrintReceipt.Onload(reportPath, dictReportParameters);
         }
 
         private void LoadTabContents()
@@ -158,9 +207,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                     break;
 
                 case "tabPagePayment":
-                    radPayment.Checked = true;
                     LoadPaymentTab();
-                    //ConfirmPayment();
+                    break;
+
+                case "tabPageReceipt":
+                    LoadReceiptTab();
                     break;
             }
         }
@@ -190,57 +241,23 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        if (ConfirmPayment())
-                        {
-                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                            LoadReceipt();
-                            ResetForm();
-                            return;
-                        }
+                        tabControlMain.SelectedIndex++;
+                        //if (ConfirmPayment())
+                        //{
+                        //}
                     }
+                    return;
+                }
+
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
                     return;
                 }
 
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadReceipt()
-        {
-            var af58Parameters = new frmBurialPermitReceipt();
-            var burialDetails = ucBurialDetails.GetBurialDetails();
-            var remainDetails = ucRemainsInfo.GetRemainsInfo();
-            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
-            var remainName = dictRegistry["first_name"];
-
-            var receiptParameters = new frmBurialPermitReceipt.AF58Parameters()
-            {
-                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
-                CauseOfDeath = burialDetails.causeOfDeath,
-                Cemetery = burialDetails.cemetery,
-                DeathDate = burialDetails.deathDate,
-                Disinterment = burialDetails.disinterment,
-                Disposition = burialDetails.disposition,
-                IsInfectious = burialDetails.isInfectious,
-                IsEmbalmed = burialDetails.isEmbalmed,
-                IsDisinter = false,
-                IsInter = true,
-                IsRemove = false,
-                MunicipalFeeAmount = string.Empty,
-                MunicipalFeeDate = string.Empty,
-                MunicipalFeeNo = string.Empty,
-                RemainAge = remainDetails.remainAge,
-                RemainName = remainName,
-                RemainNationality = dictRegistry["nationality"],
-                RemainSex = dictRegistry["sex"],
-                TransactionDate = ucPayment.PaymentCollectionsModel().PaymentDate,
-                CollectingOfficerName = ucPayment.txtCollectingOfficer.Text,
-                TotalPayment = ucPayment.PaymentCollectionsModel().Amount
-            };
-
-            af58Parameters.OnLoad(receiptParameters);
-            af58Parameters.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)

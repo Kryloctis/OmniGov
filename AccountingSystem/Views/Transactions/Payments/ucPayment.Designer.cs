@@ -32,10 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            groupBox6 = new System.Windows.Forms.GroupBox();
-            panel5 = new System.Windows.Forms.Panel();
-            lblTotalPayment = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             gpBxChequeDetails = new System.Windows.Forms.GroupBox();
             panel9 = new System.Windows.Forms.Panel();
@@ -61,8 +57,9 @@
             txtPayee = new System.Windows.Forms.TextBox();
             dtPaymentDate = new System.Windows.Forms.DateTimePicker();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            groupBox6.SuspendLayout();
-            panel5.SuspendLayout();
+            panel5 = new System.Windows.Forms.Panel();
+            lblTotalPayment = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -76,63 +73,15 @@
             groupBox5.SuspendLayout();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            panel5.SuspendLayout();
             SuspendLayout();
-            // 
-            // groupBox6
-            // 
-            groupBox6.Controls.Add(panel5);
-            groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            groupBox6.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            groupBox6.Location = new System.Drawing.Point(0, 0);
-            groupBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox6.Size = new System.Drawing.Size(796, 161);
-            groupBox6.TabIndex = 0;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "Total Payment";
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(lblTotalPayment);
-            panel5.Controls.Add(label5);
-            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            panel5.Location = new System.Drawing.Point(4, 23);
-            panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(788, 135);
-            panel5.TabIndex = 1;
-            // 
-            // lblTotalPayment
-            // 
-            lblTotalPayment.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F);
-            lblTotalPayment.Location = new System.Drawing.Point(4, 24);
-            lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            lblTotalPayment.Name = "lblTotalPayment";
-            lblTotalPayment.Size = new System.Drawing.Size(780, 65);
-            lblTotalPayment.TabIndex = 2;
-            lblTotalPayment.Text = "0.00";
-            lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(369, 89);
-            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(51, 15);
-            label5.TabIndex = 3;
-            label5.Text = "Amount";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer1
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             splitContainer1.IsSplitterFixed = true;
-            splitContainer1.Location = new System.Drawing.Point(0, 161);
+            splitContainer1.Location = new System.Drawing.Point(0, 118);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -144,7 +93,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(groupBox5);
-            splitContainer1.Size = new System.Drawing.Size(796, 355);
+            splitContainer1.Size = new System.Drawing.Size(796, 398);
             splitContainer1.SplitterDistance = 390;
             splitContainer1.TabIndex = 53;
             // 
@@ -157,7 +106,7 @@
             gpBxChequeDetails.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gpBxChequeDetails.Name = "gpBxChequeDetails";
             gpBxChequeDetails.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gpBxChequeDetails.Size = new System.Drawing.Size(390, 298);
+            gpBxChequeDetails.Size = new System.Drawing.Size(390, 341);
             gpBxChequeDetails.TabIndex = 9;
             gpBxChequeDetails.TabStop = false;
             gpBxChequeDetails.Text = "Cheque Details";
@@ -172,7 +121,7 @@
             panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel9.Name = "panel9";
             panel9.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel9.Size = new System.Drawing.Size(382, 276);
+            panel9.Size = new System.Drawing.Size(382, 319);
             panel9.TabIndex = 0;
             // 
             // dgCheques
@@ -207,7 +156,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgCheques.RowTemplate.Height = 25;
-            dgCheques.Size = new System.Drawing.Size(374, 245);
+            dgCheques.Size = new System.Drawing.Size(374, 288);
             dgCheques.TabIndex = 11;
             dgCheques.Tag = "\"\"";
             dgCheques.DataError += dgCheques_DataError;
@@ -327,7 +276,7 @@
             groupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox5.Size = new System.Drawing.Size(402, 355);
+            groupBox5.Size = new System.Drawing.Size(402, 398);
             groupBox5.TabIndex = 12;
             groupBox5.TabStop = false;
             groupBox5.Text = "Payment Details";
@@ -349,7 +298,7 @@
             panel7.Location = new System.Drawing.Point(4, 23);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(394, 329);
+            panel7.Size = new System.Drawing.Size(394, 372);
             panel7.TabIndex = 13;
             // 
             // txtCollectingOfficer
@@ -467,18 +416,50 @@
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // panel5
+            // 
+            panel5.Controls.Add(label5);
+            panel5.Controls.Add(lblTotalPayment);
+            panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            panel5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel5.Location = new System.Drawing.Point(0, 0);
+            panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(796, 118);
+            panel5.TabIndex = 54;
+            // 
+            // lblTotalPayment
+            // 
+            lblTotalPayment.Dock = System.Windows.Forms.DockStyle.Top;
+            lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F);
+            lblTotalPayment.Location = new System.Drawing.Point(0, 0);
+            lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblTotalPayment.Name = "lblTotalPayment";
+            lblTotalPayment.Size = new System.Drawing.Size(796, 65);
+            lblTotalPayment.TabIndex = 2;
+            lblTotalPayment.Text = "0.00";
+            lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            label5.Dock = System.Windows.Forms.DockStyle.Top;
+            label5.Location = new System.Drawing.Point(0, 65);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(796, 15);
+            label5.TabIndex = 3;
+            label5.Text = "Amount to pay";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ucPayment
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(splitContainer1);
-            Controls.Add(groupBox6);
+            Controls.Add(panel5);
             Name = "ucPayment";
             Size = new System.Drawing.Size(796, 516);
-            groupBox6.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -496,6 +477,7 @@
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -509,10 +491,6 @@
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtPayee;
         internal System.Windows.Forms.DateTimePicker dtPaymentDate;
-        internal System.Windows.Forms.GroupBox groupBox6;
-        internal System.Windows.Forms.Panel panel5;
-        internal System.Windows.Forms.Label lblTotalPayment;
-        internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.SplitContainer splitContainer1;
         internal System.Windows.Forms.GroupBox gpBxChequeDetails;
         internal System.Windows.Forms.Panel panel9;
@@ -529,5 +507,8 @@
         internal System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.ComboBox cmbxAccountableForm;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.Panel panel5;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label lblTotalPayment;
     }
 }
