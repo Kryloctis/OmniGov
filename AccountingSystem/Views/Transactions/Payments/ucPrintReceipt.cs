@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Properties;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.CodeAnalysis.Emit;
@@ -113,55 +114,66 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
             await MotherTask(reportPath, reportParameters, reportDataSource);
         }
 
-        public static void PrintReport(ReportViewer reportViewer, string printerName)
+        public void PrintReport(ReportViewer reportViewer, string printerName)
         {
+            var localReport = reportViewer.LocalReport;
+            int dpi = 300;
             // Create a PrintDocument and set the printer name
-            PrintDocument printDoc = new PrintDocument
+            using (PrintDocument printDoc = new PrintDocument())
             {
-                PrinterSettings = { PrinterName = printerName }
-            };
-
-            // Ensure the printer exists
-            if (!printDoc.PrinterSettings.IsValid)
-            {
-                throw new Exception($"The printer '{printerName}' is not valid.");
-            }
-
-            // Get the report page settings from the LocalReport
-            ReportPageSettings reportPageSettings = reportViewer.LocalReport.GetDefaultPageSettings();
-
-            // Apply these settings to the PrintDocument's DefaultPageSettings
-            printDoc.DefaultPageSettings.PaperSize = reportPageSettings.PaperSize;
-            printDoc.DefaultPageSettings.Margins = reportPageSettings.Margins;
-            printDoc.DefaultPageSettings.Landscape = reportPageSettings.IsLandscape;
-
-            // Set the PrintPage event handler
-            printDoc.PrintPage += (sender, e) =>
-            {
-                // Apply a 180-degree rotation transformation
-                e.Graphics.TranslateTransform(e.PageBounds.Width / 2, e.PageBounds.Height / 2);
-                e.Graphics.RotateTransform(180);
-                e.Graphics.TranslateTransform(-e.PageBounds.Width / 2, -e.PageBounds.Height / 2);
-
+                printDoc.PrinterSettings.PrinterName = printerName;
+                // Ensure the printer exists
+                if (!printDoc.PrinterSettings.IsValid)
+                {
+                    throw new Exception($"The printer '{printerName}' is not valid.");
+                }
+                // Get the report page settings from the LocalReport
+                ReportPageSettings reportPageSettings = localReport.GetDefaultPageSettings();
+                // Apply these settings to the PrintDocument's DefaultPageSettings
+                printDoc.DefaultPageSettings.PaperSize = reportPageSettings.PaperSize;
+                printDoc.DefaultPageSettings.Margins = reportPageSettings.Margins;
+                printDoc.DefaultPageSettings.Landscape = reportPageSettings.IsLandscape;
+                string deviceInfo = $@"
+                <DeviceInfo>
+                    <OutputFormat>PNG</OutputFormat>
+                    <DpiX>{300}</DpiX>
+                    <DpiY>{300}</DpiY>
+                </DeviceInfo>";
                 // Render the report content onto the print page
-                byte[] bytes = reportViewer.LocalReport.Render(
+                byte[] renderedBytes = localReport.Render(
                     format: "Image",
-                    deviceInfo: "<DeviceInfo><OutputFormat>EMF</OutputFormat></DeviceInfo>",
+                    deviceInfo,
                     out string mimeType,
                     out string encoding,
                     out string fileNameExtension,
                     out string[] streams,
                     out Warning[] warnings);
-
-                // Load the image into a Metafile and draw it
-                using (var stream = new MemoryStream(bytes))
-                using (var metafile = new System.Drawing.Imaging.Metafile(stream))
+                // Use float or double for dimensions with decimals
+                float widthInInches = 4.0f;
+                float heightInInches = 8.5f;
+                // Convert dimensions to pixels
+                int width = (int)(widthInInches * dpi);
+                int height = (int)(heightInInches * dpi);
+                using (var stream = new MemoryStream(renderedBytes))
                 {
-                    e.Graphics.DrawImage(metafile, e.PageBounds);
+                    using (Bitmap bitmap = new Bitmap(width, height))
+                    {
+                        using (Graphics graphics = Graphics.FromImage(bitmap))
+                        {
+                            graphics.DrawImage(Image.FromStream(stream), 0, 0, width, height);
+                            // Flip the image upside down
+                            bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        }
+                        // Handle the PrintPage event to print the image
+                        printDoc.PrintPage += (sender, e) =>
+                        {
+                            // Draw the image on the page
+                            e.Graphics.DrawImage(bitmap, e.PageBounds);
+                        };
+                        printDoc.Print();
+                    }
                 }
-            };
-
-            printDoc.Print();
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
