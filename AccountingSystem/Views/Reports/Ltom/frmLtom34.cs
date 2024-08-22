@@ -10,7 +10,8 @@ namespace AccountingSystem.Views.Reports.Ltom
 {
     public partial class frmLtom34 : Form
     {
-        int rptOwnerId;
+        int taxpayerId;
+        int rptId;
         private DataTable dtRpt;
 
         public frmLtom34()
@@ -42,7 +43,7 @@ namespace AccountingSystem.Views.Reports.Ltom
                 progressBar1.Value = 0;
                 ToogleRunButton(false);
 
-                backgroundWorker1.RunWorkerAsync(rptOwnerId);
+                backgroundWorker1.RunWorkerAsync();
             }
         }
 
@@ -50,9 +51,7 @@ namespace AccountingSystem.Views.Reports.Ltom
         {
             try
             {
-                var propertyOwnerId = e.Argument;
-
-                if (propertyOwnerId is null)
+                if (taxpayerId == 0)
                 {
                     backgroundWorker1.CancelAsync();
                     e.Cancel = true;
@@ -77,7 +76,9 @@ namespace AccountingSystem.Views.Reports.Ltom
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 //Fetch Record
-                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(propertyOwnerId)); //change to appropriate record
+                var dictBid = AccFactory.BidRepository().GetBidderWinnerAndBidDetails(taxpayerId, rptId);
+
+                var dictPropertyDetails = AccFactory.RealPropertiesRepository().GetViewRecordById(rptId);
 
                 progressCount += tasks["Fetch Record"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -91,6 +92,26 @@ namespace AccountingSystem.Views.Reports.Ltom
                 reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
                 reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
                 reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
+
+                //property details
+
+                reportParameters.Add(new ReportParameter("paramTaxDecNo", dictPropertyDetails["complete_arp_no"]));
+                reportParameters.Add(new ReportParameter("paramArp", dictPropertyDetails["complete_arp_no"]));
+                reportParameters.Add(new ReportParameter("paramPin", dictPropertyDetails["property_pin"]));
+                reportParameters.Add(new ReportParameter("paramDateOfSale", dictBid["date"]));
+
+                reportParameters.Add(new ReportParameter("paramYearsOfDelinquent", string.Empty));
+                reportParameters.Add(new ReportParameter("paramTaxDue", string.Empty));
+
+                //bid and auction details
+                reportParameters.Add(new ReportParameter("paramDateOfAuction", dictBid["start_date"]));
+                reportParameters.Add(new ReportParameter("paramBidder", dictBid["name"]));
+                reportParameters.Add(new ReportParameter("paramBidAmount", dictBid["bid_amount"]));
+
+                //payment details
+                reportParameters.Add(new ReportParameter("paramOfficialReceiptNo", dictBid["receipt_no"]));
+                reportParameters.Add(new ReportParameter("paramOfficialReceiptDate", dictBid["date"]));
+                reportParameters.Add(new ReportParameter("paramTreasurer", string.Empty));
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -145,7 +166,11 @@ namespace AccountingSystem.Views.Reports.Ltom
                 cmbxBidders.DataSource = dtHighestBidder;
                 cmbxBidders.ValueMember = "taxpayers_id";
                 cmbxBidders.DisplayMember = "name";
+
+                this.rptId = Convert.ToInt32(rptId);
+                taxpayerId = Convert.ToInt32(cmbxBidders.SelectedValue);
             }
+
         }
 
         private void frmLtom34_Load(object sender, EventArgs e)

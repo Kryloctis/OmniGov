@@ -23,6 +23,31 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
+        public Dictionary<string, string> GetBidderWinnerAndBidDetails(int taxpayersId, int rptId)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] {
+                new object[] { "@taxpayers_id", DbType.Int32, taxpayersId },
+                new object[] { "@real_properties_id", DbType.Int32, rptId }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id AND real_properties_id = @real_properties_id  ORDER BY bid_amount DESC LIMIT 1";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
+
         public Dictionary<string, string> GetHighestBidderByAuctionIdAndRptId(int auctionId, int rptId)
         {
             var recordDictionary = new Dictionary<string, string>();
