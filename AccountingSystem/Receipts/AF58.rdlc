@@ -31,7 +31,7 @@
                     <Value>=Parameters!paramMunicipality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -51,6 +51,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox2">
@@ -62,7 +66,7 @@
                     <Value>=Parameters!paramTransactionDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <Format>MMMM dd, yyyy</Format>
                     </Style>
                   </TextRun>
@@ -74,9 +78,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.90247in</Top>
-            <Left>0.32875in</Left>
+            <Left>0.36in</Left>
             <Height>0.28295in</Height>
-            <Width>1.769in</Width>
+            <Width>1.73775in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -98,7 +102,7 @@
                     <Value>=Parameters!paramRemainName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -129,7 +133,7 @@
                     <Value>=Parameters!paramRemainNationality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -158,7 +162,7 @@
                     <Value>=Parameters!paramRemainAge.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -189,7 +193,7 @@
                     <Value>=Parameters!paramRemainSex.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -220,7 +224,7 @@
                     <Value>=Parameters!paramRemainDeathDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <Format>MMMM dd, yyyy</Format>
                     </Style>
                   </TextRun>
@@ -252,7 +256,7 @@
                     <Value>=Parameters!paramCauseOfDeath.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -281,7 +285,7 @@
                     <Value>=Parameters!paramCemetery.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -310,7 +314,7 @@
                     <Value>=Parameters!paramDisinterment.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -339,7 +343,7 @@
                     <Value>=Parameters!paramIsInfectious.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -368,7 +372,7 @@
                     <Value>=Parameters!paramIsEmbalmed.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -397,7 +401,7 @@
                     <Value>=Parameters!paramDisposition.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -426,7 +430,7 @@
                     <Value>=Parameters!paramMunicipalFeeNo.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -455,7 +459,7 @@
                     <Value>=Parameters!paramMunicipalFeeDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -484,7 +488,7 @@
                     <Value>=Parameters!paramMunicipalFeeAmount.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -513,7 +517,7 @@
                     <Value>=Parameters!paramTotalPayment.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <Format>#,0.00;(#,0.00);'-'</Format>
                     </Style>
                   </TextRun>
@@ -545,7 +549,7 @@
                     <Value>=Parameters!paramCollectingOfficerName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -556,9 +560,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>7.81714in</Top>
-            <Left>1.99073in</Left>
+            <Left>1.7104in</Left>
             <Height>0.19792in</Height>
-            <Width>1.65625in</Width>
+            <Width>2.197in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
