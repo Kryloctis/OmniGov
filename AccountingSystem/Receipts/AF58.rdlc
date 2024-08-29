@@ -13,6 +13,9 @@
             <Left>0.13627in</Left>
             <Height>8.14546in</Height>
             <Width>3.86387in</Width>
+            <Visibility>
+              <Hidden>true</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -633,7 +636,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>4.00015in</Width>
+      <Width>4.00014in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>4in</PageWidth>
