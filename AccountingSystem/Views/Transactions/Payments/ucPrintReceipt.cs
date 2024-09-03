@@ -136,8 +136,8 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 string deviceInfo = $@"
                 <DeviceInfo>
                     <OutputFormat>PNG</OutputFormat>
-                    <DpiX>{300}</DpiX>
-                    <DpiY>{300}</DpiY>
+                    <DpiX>{600}</DpiX>
+                    <DpiY>{600}</DpiY>
                 </DeviceInfo>";
                 // Render the report content onto the print page
                 byte[] renderedBytes = localReport.Render(
