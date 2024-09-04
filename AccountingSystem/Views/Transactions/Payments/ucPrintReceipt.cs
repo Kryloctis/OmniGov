@@ -1,21 +1,12 @@
-﻿using AccountingSystem.Properties;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.Reporting.WinForms;
-using Org.BouncyCastle.Asn1.Cmp;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.BurialPermit

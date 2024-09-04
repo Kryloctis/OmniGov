@@ -1,9 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.DataSets;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using static AccountingSystem.Views.Transactions.Payments.MarriageLicense.frmMarriageLicenseReceipt;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -12,14 +17,16 @@ namespace AccountingSystem.Views.Transactions.Payments
         private readonly ucPaymentTaxpayers ucPaymentTaxpayers;
         private ucPaymentRptTaxDues ucPaymentRptTaxDues;
         private ucPayment ucPayment;
+        private ucPrintReceipt ucPrintReceipt;
 
         public frmPaymentRpt()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             ucPaymentTaxpayers = ucPaymentTaxpayers1;
-            this.ucPaymentRptTaxDues = ucPaymentRptTaxDues1;
+            ucPaymentRptTaxDues = ucPaymentRptTaxDues1;
             ucPayment = ucPayment1;
+            ucPrintReceipt = ucPrintReceipt1;
         }
 
         private void ResetForm()
@@ -48,10 +55,19 @@ namespace AccountingSystem.Views.Transactions.Payments
                     break;
 
                 case "tabPagePayment":
-                    radPayment.Checked = true;
                     LoadPaymentTab();
                     break;
+
+                case "tabPageReceipt":
+                    LoadReceiptTab();
+                    break;
             }
+        }
+
+        private void LoadReceiptTab()
+        {
+            btnNext.Text = "New Transaction";
+            LoadReceipt();
         }
 
         private void LoadTaxpayerTab()
@@ -68,6 +84,8 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void LoadPaymentTab()
         {
+            radPayment.Checked = true;
+
             if (!ucPaymentRptTaxDues.ValidateChildren())
             {
                 Helper.MessageBoxError(ucPaymentRptTaxDues.GetFormErrors());
@@ -125,16 +143,19 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
                 {
-                    if (Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        if (ConfirmPayment())
-                        {
-                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                            LoadReceipt();
-                            ResetForm();
-                            return;
-                        }
+                        tabControlMain.SelectedIndex++;
+                        //if (ConfirmPayment())
+                        //{
+                        //}
                     }
+                    return;
+                }
+
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
                     return;
                 }
 
@@ -152,25 +173,54 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void LoadReceipt()
         {
+            var dataTable = new dsTreasury.dtAF56DataTable().Clone();
+            var taxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId();
+            var dataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource;
+            var filteredRows = dataSource.AsEnumerable().Where(row => row.Field<bool>("is_selected")).CopyToDataTable();
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+
+            foreach (DataRow row in filteredRows.Rows)
+            {
+                var newRow = dataTable.NewRow();
+
+                newRow["owner"] = dictTaxpayer["name"];
+                newRow["location"] = "sample";
+                newRow["block_lot_no"] = "sample";
+                newRow["tax_dec_no"] = row["complete_arp_no"];
+                newRow["assessed_value"] = 100;
+                newRow["type"] = row["type"];
+                newRow["tax_due"] = row["tax_due_amount"];
+                newRow["penalt_discount"] = row["penalty_discount"];
+                newRow["total"] = row["total_payment"];
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            var reportDataSource = new ReportDataSource("dtAF51", dataTable);
+
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
             var frmPreviewReceipt = new frmRealPropertyReceipt();
-            var receiptParameters = new frmRealPropertyReceipt.AF56Parameters()
+
+            var dictParameters = new Dictionary<string, string>()
             {
-                TaxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId(),
-                TransactionDate = ucPayment.dtPaymentDate.Value,
-                ReceivedFrom = ucPayment.txtPayee.Text.Trim(),
-                SumAmountPaid = totalPayment,
-                SumAmountPaidWords = new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2")),
-                CalendarYear = (int)ucPaymentRptTaxDues.nudCalendarYear.Value,
-                TotalPayment = totalPayment,
-                PaidCash = totalPayment,
-                Municipality = Helper.selectedServerModel.MunicipalityName,
-                TotalPaid = totalPayment,
-                DataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource
+                { "paramAmountInFigures", new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2"))},
+                { "paramSumOf", totalPayment.ToString()},
+                { "paramReceivedFrom", ucPayment.txtPayee.Text.Trim()},
+                { "paramMunicipality", Helper.selectedServerModel.MunicipalityName},
+                { "paramDate", ucPayment.dtPaymentDate.Value.ToString()},
+                { "paramCalendarYear", ucPaymentRptTaxDues.nudCalendarYear.Value.ToString()},
+                { "paramMunicipalTreasurer", string.Empty},
+                { "paramProvincialTreasurer", string.Empty},
+                { "paramPaidCash", totalPayment.ToString()},
+                { "paramCheckNo", string.Empty},
+                { "paramTwPmo", string.Empty},
+                { "paramTotalPaid", totalPayment.ToString()},
+                { "paramTotalPayment", totalPayment.ToString()},
+                { "paramBankDate", string.Empty},
             };
 
-            frmPreviewReceipt.OnLoad(receiptParameters);
-            frmPreviewReceipt.ShowDialog();
+            string reportPath = $"{Application.StartupPath}\\Receipts\\AF56.rdlc";
+            ucPrintReceipt.Onload(reportPath, dictParameters, reportDataSource);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
