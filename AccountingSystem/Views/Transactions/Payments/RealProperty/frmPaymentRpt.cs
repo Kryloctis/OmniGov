@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.Payments.MarriageLicense.frmMarriageLicenseReceipt;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -187,7 +186,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            try
+                try
             {
                 if (!TabValidated())
                     return;

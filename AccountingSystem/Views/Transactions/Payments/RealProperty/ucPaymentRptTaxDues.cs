@@ -110,13 +110,9 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void LoadPostedProperties()
         {
-            try
-            {
-                HelperLoadRecords.DatagridViewPaymentTaxpayerProperties(dgProperties, DataTablePostedProperties());
-                chckBoxProperties.Checked = false;
-                LoadTaxDues(dgTaxDues);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.DatagridViewPaymentTaxpayerProperties(dgProperties, DataTablePostedProperties());
+            chckBoxProperties.Checked = false;
+            LoadTaxDues(dgTaxDues);
         }
 
         private void chckBoxProperties_MouseClick(object sender, MouseEventArgs e)
@@ -397,8 +393,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void dgTaxDues_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (dgTaxDues.CurrentCell is DataGridViewCheckBoxCell)
-                dgTaxDues.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            try
+            {
+                if (dgTaxDues.CurrentCell is DataGridViewCheckBoxCell)
+                    dgTaxDues.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgTaxDues_CellValueChanged(object sender, DataGridViewCellEventArgs e)
