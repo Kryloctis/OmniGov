@@ -22,6 +22,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.RemoveTabcontrolTabs(tabControlMain);
             ucPaymentTaxpayers = ucPaymentTaxpayers1;
             ucPaymentRptTaxDues = ucPaymentRptTaxDues1;
             ucPayment = ucPayment1;
@@ -186,7 +187,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-                try
+            try
             {
                 if (!TabValidated())
                     return;
