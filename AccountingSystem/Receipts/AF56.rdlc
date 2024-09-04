@@ -741,7 +741,7 @@
                 <Top>1.97583in</Top>
                 <Left>0.29132in</Left>
                 <Height>0.59407in</Height>
-                <Width>10.19165in</Width>
+                <Width>10.19166in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
@@ -1292,12 +1292,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramBackground">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1373,11 +1367,6 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>paramBankDate</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>paramBackground</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

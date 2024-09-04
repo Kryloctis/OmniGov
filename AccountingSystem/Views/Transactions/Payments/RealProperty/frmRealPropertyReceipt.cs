@@ -20,7 +20,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-         
             reportViewerPreview.ShowFindControls = false;
             reportViewerPreview.ShowExportButton = false;
             reportViewerPreview.ShowPrintButton = false;
@@ -32,39 +31,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             reportViewerReceipt = new ReportViewer();
             reportViewerReceipt.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewerReceipt);
-
-        }
-
-        internal class AF56Parameters
-        {
-            internal int TaxpayerId { get; set; }
-            internal string Municipality { get; set; }
-            internal string ReceivedFrom { get; set; }
-            internal string SumAmountPaidWords { get; set; }
-            internal decimal SumAmountPaid { get; set; }
-            internal int CalendarYear { get; set; }
-            internal DateTime TransactionDate { get; set; }
-            internal decimal TotalPayment { get; set; }
-            internal string MunicipalTreasurer { get; set; }
-            internal string ProvincialTreasurer { get; set; }
-            internal decimal PaidCash { get; set; }
-            internal string CheckNo { get; set; }
-            internal decimal TwPmo { get; set; }
-            internal decimal TotalPaid { get; set; }
-            internal DataTable DataSource { get; set; }
-        }
-
-        internal void OnLoad(AF56Parameters af56Parameters)
-        {
-            LoadReceipts(af56Parameters);
-        }
-
-        private void LoadReceipts(AF56Parameters af56Parameters)
-        {
-            if (!bgwAf56.IsBusy)
-            {
-                bgwAf56.RunWorkerAsync(af56Parameters);
-            }
         }
 
         private void bgwAf56_DoWork(object sender, DoWorkEventArgs e)
@@ -115,34 +81,10 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 if (e.Cancelled)
                     return;
 
-                if (e.Result is not (DataTable dataTable, AF56Parameters parameters))
-                    return;
-
-                if (dataTable.Rows.Count < 1)
-                    bgwAf56.ReportProgress(100);
-
                 var localReportPreview = reportViewerPreview.LocalReport;
                 var localReportReceipt = reportViewerReceipt.LocalReport;
                 localReportPreview.EnableExternalImages = true;
                 var backgroundImage = new Bitmap(Resources.AF56);
-
-                var reportParameters = new List<ReportParameter>
-                {
-                    new ReportParameter("paramDate", parameters.TransactionDate.ToString("MMM dd, yyyy")),
-                    new ReportParameter("paramReceivedFrom",parameters.ReceivedFrom),
-                    new ReportParameter("paramMunicipality",parameters.Municipality),
-                    new ReportParameter("paramSumOf", parameters.SumAmountPaidWords),
-                    new ReportParameter("paramAmountInFigures",parameters.SumAmountPaid.ToString("N2")),
-                    new ReportParameter("paramCalendarYear", parameters.CalendarYear.ToString()),
-                    new ReportParameter("paramTotalPayment", parameters.TotalPayment.ToString("N2")),
-                    new ReportParameter("paramPaidCash", parameters.PaidCash.ToString("N2")),
-                    new ReportParameter("paramCheckNo", parameters.CheckNo),
-                    new ReportParameter("paramTwPmo", parameters.TwPmo.ToString("N2")),
-                    new ReportParameter("paramTotalPaid", parameters.TotalPaid.ToString("N2")),
-                    new ReportParameter("paramMunicipalTreasurer", parameters.MunicipalTreasurer),
-                    new ReportParameter("paramProvincialTreasurer", parameters.ProvincialTreasurer),
-                    new ReportParameter("paramBackground",  Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
-                };
 
                 localReportPreview.ReportPath = $"{Application.StartupPath}\\Receipts\\AF56.rdlc";
                 localReportPreview.SetParameters(reportParameters);
@@ -151,15 +93,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 reportViewerPreview.RefreshReport();
                 reportViewerPreview.ZoomPercent = 100;
                 reportViewerPreview.SetDisplayMode(DisplayMode.PrintLayout);
-
-                reportParameters.RemoveAll(param => param.Name == "paramBackground");
-                localReportReceipt.ReportPath = $"{Application.StartupPath}\\Receipts\\AF56.rdlc";
-                localReportReceipt.SetParameters(reportParameters);
-                localReportReceipt.DataSources.Clear();
-                localReportReceipt.DataSources.Add(new ReportDataSource("dtAF56", dataTable));
-                reportViewerReceipt.RefreshReport();
-                reportViewerReceipt.ZoomPercent = 100;
-                reportViewerReceipt.SetDisplayMode(DisplayMode.PrintLayout);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

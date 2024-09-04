@@ -41,9 +41,9 @@ public partial class frmAF51_57 : Form
 
     private void LoadPaymentTab()
     {
+        radPayment.Checked = true;
         btnNextMain.Text = "Confirm Payment";
         btnBackMain.Enabled = true;
-        radPayment.Checked = true;
 
         decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
         ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
@@ -144,7 +144,7 @@ public partial class frmAF51_57 : Form
                 break;
 
             case "tabPagePayment":
-                radPayment.Checked = true;
+
                 LoadPaymentTab();
                 break;
 
