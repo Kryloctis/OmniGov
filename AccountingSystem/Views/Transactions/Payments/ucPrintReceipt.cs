@@ -109,17 +109,21 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
         {
             var localReport = reportViewer.LocalReport;
             int dpi = 300;
+
             // Create a PrintDocument and set the printer name
             using (PrintDocument printDoc = new PrintDocument())
             {
                 printDoc.PrinterSettings.PrinterName = printerName;
+
                 // Ensure the printer exists
                 if (!printDoc.PrinterSettings.IsValid)
                 {
                     throw new Exception($"The printer '{printerName}' is not valid.");
                 }
+
                 // Get the report page settings from the LocalReport
                 ReportPageSettings reportPageSettings = localReport.GetDefaultPageSettings();
+
                 // Apply these settings to the PrintDocument's DefaultPageSettings
                 printDoc.DefaultPageSettings.PaperSize = reportPageSettings.PaperSize;
                 printDoc.DefaultPageSettings.Margins = reportPageSettings.Margins;
@@ -130,6 +134,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                     <DpiX>{600}</DpiX>
                     <DpiY>{600}</DpiY>
                 </DeviceInfo>";
+
                 // Render the report content onto the print page
                 byte[] renderedBytes = localReport.Render(
                     format: "Image",
@@ -139,9 +144,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                     out string fileNameExtension,
                     out string[] streams,
                     out Warning[] warnings);
+
                 // Use float or double for dimensions with decimals
-                float widthInInches = 4.0f;
-                float heightInInches = 8.5f;
+                float widthInInches = reportPageSettings.PaperSize.Width / 100.0f;
+                float heightInInches = reportPageSettings.PaperSize.Height / 100.0f;
+
                 // Convert dimensions to pixels
                 int width = (int)(widthInInches * dpi);
                 int height = (int)(heightInInches * dpi);
@@ -152,9 +159,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                         using (Graphics graphics = Graphics.FromImage(bitmap))
                         {
                             graphics.DrawImage(Image.FromStream(stream), 0, 0, width, height);
+
                             // Flip the image upside down
                             bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
                         }
+
                         // Handle the PrintPage event to print the image
                         printDoc.PrintPage += (sender, e) =>
                         {

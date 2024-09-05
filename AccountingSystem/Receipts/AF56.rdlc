@@ -1192,16 +1192,11 @@
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Database</Source>
-            <Value>=Parameters!paramBackground.Value</Value>
-            <MIMEType>image/jpeg</MIMEType>
-          </BackgroundImage>
         </Style>
       </Body>
       <Width>10.58023in</Width>
       <Page>
-        <PageHeight>4.95in</PageHeight>
+        <PageHeight>5in</PageHeight>
         <PageWidth>10in</PageWidth>
         <Style />
       </Page>
