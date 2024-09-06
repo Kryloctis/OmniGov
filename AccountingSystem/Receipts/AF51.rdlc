@@ -44,23 +44,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>AF51</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.26389in</Top>
-            <Left>0.15219in</Left>
-            <Height>8.22917in</Height>
-            <Width>3.84781in</Width>
-            <Visibility>
-              <Hidden>true</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox4">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -82,7 +65,6 @@
             <Left>0.35844in</Left>
             <Height>0.28125in</Height>
             <Width>3.53918in</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -115,7 +97,7 @@
             <Left>0.35844in</Left>
             <Height>0.26428in</Height>
             <Width>2.41474in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -148,7 +130,7 @@
             <Left>2.83205in</Left>
             <Height>0.26428in</Height>
             <Width>1.08078in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -184,7 +166,7 @@
             <Left>0.35844in</Left>
             <Height>0.29167in</Height>
             <Width>1.68111in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -219,7 +201,7 @@
             <Left>1.00807in</Left>
             <Height>0.26042in</Height>
             <Width>2.22917in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -482,8 +464,8 @@
             <Top>2.97722in</Top>
             <Left>0.35844in</Left>
             <Height>0.53425in</Height>
-            <Width>9.02815cm</Width>
-            <ZIndex>6</ZIndex>
+            <Width>9.02816cm</Width>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -711,42 +693,42 @@
               </Style>
             </Textbox>
             <Rectangle Name="chckbxCash">
-              <Top>1.15865in</Top>
+              <Top>0.94615in</Top>
               <Left>0.41106in</Left>
-              <Height>0.09132in</Height>
-              <Width>0.09653in</Width>
+              <Height>0.10229in</Height>
+              <Width>0.10749in</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <BackgroundColor>=IIF(Parameters!paramIsCash.Value = true, "Black", "Transparent")</BackgroundColor>
+                <BackgroundColor>=IIF(Parameters!paramIsCash.Value, "Black", "Transparent")</BackgroundColor>
               </Style>
             </Rectangle>
             <Rectangle Name="chckbxCheck">
-              <Top>1.36273in</Top>
+              <Top>1.15023in</Top>
               <Left>0.41106in</Left>
-              <Height>0.09132in</Height>
-              <Width>0.09653in</Width>
+              <Height>0.10229in</Height>
+              <Width>0.10749in</Width>
               <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <BackgroundColor>=IIF(Parameters!paramIsCheck.Value = true, "Black", "Transparent")</BackgroundColor>
+                <BackgroundColor>=IIF(Parameters!paramIsCheck.Value,"Black", "Transparent")</BackgroundColor>
               </Style>
             </Rectangle>
             <Rectangle Name="chckbxMoneyOrder">
-              <Top>1.58079in</Top>
+              <Top>1.36829in</Top>
               <Left>0.40845in</Left>
-              <Height>0.09132in</Height>
-              <Width>0.09653in</Width>
+              <Height>0.10229in</Height>
+              <Width>0.10749in</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-                <BackgroundColor>=IIF(Parameters!paramIsMoneyOrder.Value = true, "Black", "Transparent")</BackgroundColor>
+                <BackgroundColor>=IIF(Parameters!paramIsMoneyOrder.Value, "Black", "Transparent")</BackgroundColor>
               </Style>
             </Rectangle>
             <Rectangle Name="Rectangle1">
