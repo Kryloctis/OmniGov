@@ -123,13 +123,13 @@ namespace AccountingSystem.Views.Transactions.Payments
                 dtAf56.Rows.Add(newRow);
             }
 
-            var reportDataSource = new ReportDataSource("dtAF51", dtAf56);
+            var reportDataSource = new ReportDataSource("dtAF56", dtAf56);
 
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
 
             var dictParameters = new Dictionary<string, string>()
             {
-                { "paramAmountInFigures", new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2"))},
+                { "paramAmountInFigures", $"{new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2"))} only."},
                 { "paramSumOf", totalPayment.ToString()},
                 { "paramReceivedFrom", ucPayment.txtPayee.Text.Trim()},
                 { "paramMunicipality", Helper.selectedServerModel.MunicipalityName},

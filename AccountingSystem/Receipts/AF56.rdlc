@@ -70,55 +70,40 @@
         <ReportItems>
           <Rectangle Name="Rectangle2">
             <ReportItems>
-              <Image Name="Image1">
-                <Source>Embedded</Source>
-                <Value>AF56_Trimmed</Value>
-                <Sizing>FitProportional</Sizing>
-                <Height>5.2in</Height>
-                <Width>10.58023in</Width>
-                <Visibility>
-                  <Hidden>true</Hidden>
-                </Visibility>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Image>
               <Tablix Name="Tablix1">
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>1.38132in</Width>
+                      <Width>1.24932in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.33516in</Width>
+                      <Width>1.19886in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.66698in</Width>
+                      <Width>0.63313in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.75396in</Width>
+                      <Width>0.65063in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.29195in</Width>
+                      <Width>1.16606in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.68593in</Width>
+                      <Width>0.65552in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.65439in</Width>
+                      <Width>0.51981in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>2.37505in</Width>
+                      <Width>2.16755in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.04692in</Width>
+                      <Width>0.89581in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
                     <TablixRow>
-                      <Height>0.35326in</Height>
+                      <Height>0.32459in</Height>
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
@@ -143,7 +128,6 @@
                               <rd:DefaultName>Textbox20</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -178,7 +162,6 @@
                               <rd:DefaultName>Textbox21</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -213,7 +196,6 @@
                               <rd:DefaultName>Textbox22</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -248,7 +230,6 @@
                               <rd:DefaultName>Textbox23</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -283,7 +264,6 @@
                               <rd:DefaultName>Textbox24</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -318,7 +298,6 @@
                               <rd:DefaultName>Textbox25</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -353,7 +332,6 @@
                               <rd:DefaultName>Textbox26</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -388,7 +366,6 @@
                               <rd:DefaultName>Textbox27</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -423,7 +400,6 @@
                               <rd:DefaultName>Textbox28</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -462,7 +438,6 @@
                               <rd:DefaultName>owner</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -492,7 +467,6 @@
                               <rd:DefaultName>location</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -522,7 +496,6 @@
                               <rd:DefaultName>block_lot_no</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -552,7 +525,6 @@
                               <rd:DefaultName>tax_dec_no</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -582,7 +554,6 @@
                               <rd:DefaultName>assessed_value</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -612,7 +583,6 @@
                               <rd:DefaultName>type</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -642,7 +612,6 @@
                               <rd:DefaultName>tax_due</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -672,7 +641,6 @@
                               <rd:DefaultName>penalt_discount</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -702,7 +670,6 @@
                               <rd:DefaultName>total</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Middle</VerticalAlign>
@@ -738,11 +705,10 @@
                   </TablixMembers>
                 </TablixRowHierarchy>
                 <DataSetName>dtAF56</DataSetName>
-                <Top>1.97583in</Top>
-                <Left>0.29132in</Left>
-                <Height>0.59407in</Height>
-                <Width>10.19166in</Width>
-                <ZIndex>1</ZIndex>
+                <Top>1.92583in</Top>
+                <Left>0.38132in</Left>
+                <Height>0.5654in</Height>
+                <Width>9.13668in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -757,10 +723,11 @@
                     <TextRuns>
                       <TextRun>
                         <Label>@paramDate</Label>
-                        <Value>=Parameters!paramDate.Value</Value>
+                        <Value>=CDate(Parameters!paramDate.Value).ToShortDateString()</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -768,11 +735,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.87521in</Top>
-                <Left>0.29132in</Left>
+                <Top>0.93771in</Top>
+                <Left>0.38132in</Left>
                 <Height>0.21875in</Height>
-                <Width>1.67516in</Width>
-                <ZIndex>2</ZIndex>
+                <Width>1.46224in</Width>
+                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -790,7 +757,8 @@
                         <Value>=Parameters!paramReceivedFrom.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -798,11 +766,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.27475in</Top>
-                <Left>0.29132in</Left>
-                <Height>0.26377in</Height>
-                <Width>3.54089in</Width>
-                <ZIndex>3</ZIndex>
+                <Top>1.32307in</Top>
+                <Left>0.38132in</Left>
+                <Height>0.21545in</Height>
+                <Width>3.18214in</Width>
+                <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -817,115 +785,26 @@
                     <TextRuns>
                       <TextRun>
                         <Label>@paramSumOf</Label>
-                        <Value>=Parameters!paramSumOf.Value</Value>
+                        <Value>=CDec(Parameters!paramSumOf.Value)</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.27475in</Top>
-                <Left>3.97565in</Left>
-                <Height>0.26377in</Height>
-                <Width>4.61854in</Width>
-                <ZIndex>4</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Middle</VerticalAlign>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox19">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Label>@paramProvincialTreasurer</Label>
-                        <Value>=Parameters!paramProvincialTreasurer.Value</Value>
-                        <Style>
-                          <FontFamily>consolas</FontFamily>
                           <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>#,0.00;(#,0.00);'-'</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
-                      <TextAlign>Center</TextAlign>
+                      <TextAlign>Left</TextAlign>
                     </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>4.67486in</Top>
-                <Left>7.88338in</Left>
-                <Height>0.16469in</Height>
-                <Width>2.42015in</Width>
-                <ZIndex>5</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Bottom</VerticalAlign>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox18">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Label>@paramMunicipalTreasurer</Label>
-                        <Value>=Parameters!paramMunicipalTreasurer.Value</Value>
-                        <Style>
-                          <FontFamily>consolas</FontFamily>
-                          <FontSize>9pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Center</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>4.67486in</Top>
-                <Left>5.24871in</Left>
-                <Height>0.16469in</Height>
-                <Width>2.42015in</Width>
-                <ZIndex>6</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <VerticalAlign>Bottom</VerticalAlign>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox8">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramTotalPayment.Value</Value>
-                        <Style>
-                          <FontFamily>Consolas</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox8</rd:DefaultName>
-                <Top>3.95372in</Top>
-                <Left>6.98364in</Left>
-                <Height>0.28208in</Height>
-                <Width>3.31989in</Width>
-                <ZIndex>7</ZIndex>
+                <Top>1.32307in</Top>
+                <Left>3.68068in</Left>
+                <Height>0.21545in</Height>
+                <Width>4.12649in</Width>
+                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -940,10 +819,11 @@
                     <TextRuns>
                       <TextRun>
                         <Label>@paramAmountInFigures</Label>
-                        <Value>=Parameters!paramAmountInFigures.Value</Value>
+                        <Value>=UCase(Parameters!paramAmountInFigures.Value)</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
-                          <FontSize>8pt</FontSize>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -952,10 +832,10 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
                 <Top>1.32307in</Top>
-                <Left>8.85546in</Left>
+                <Left>8.06588in</Left>
                 <Height>0.21545in</Height>
-                <Width>1.62751in</Width>
-                <ZIndex>8</ZIndex>
+                <Width>1.45212in</Width>
+                <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -973,6 +853,7 @@
                         <Value>=Parameters!paramCalendarYear.Value</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
+                          <FontSize>8pt</FontSize>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -980,11 +861,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.62851in</Top>
-                <Left>7.32065in</Left>
+                <Top>1.59656in</Top>
+                <Left>6.67757in</Left>
                 <Height>0.29038in</Height>
-                <Width>1.27354in</Width>
-                <ZIndex>9</ZIndex>
+                <Width>1.1296in</Width>
+                <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -999,9 +880,210 @@
                     <TextRuns>
                       <TextRun>
                         <Label>@paramMunicipality</Label>
-                        <Value>=Parameters!paramMunicipality.Value</Value>
+                        <Value>=UCase(Parameters!paramMunicipality.Value)</Value>
                         <Style>
                           <FontFamily>Consolas</FontFamily>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>0.8026in</Top>
+                <Left>2.67834in</Left>
+                <Height>0.19594in</Height>
+                <Width>2.125in</Width>
+                <ZIndex>6</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Bottom</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox14">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramPaidCash</Label>
+                        <Value>=CDec(Parameters!paramPaidCash.Value)</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>#,0.00;(#,0.00);'-'</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>3.79317in</Top>
+                <Left>3.58507in</Left>
+                <Height>0.14299in</Height>
+                <Width>1.03126in</Width>
+                <ZIndex>7</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox13">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramCheckNo</Label>
+                        <Value>=Parameters!paramCheckNo.Value</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>3.95422in</Top>
+                <Left>3.58507in</Left>
+                <Height>0.14299in</Height>
+                <Width>1.03126in</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox15">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramBankDate</Label>
+                        <Value>=Parameters!paramBankDate.Value</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>4.1236in</Top>
+                <Left>3.58507in</Left>
+                <Height>0.14299in</Height>
+                <Width>1.03126in</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox16">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramTwPmo</Label>
+                        <Value>=Parameters!paramTwPmo.Value</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>0.00;(0.00)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>4.29298in</Top>
+                <Left>3.58507in</Left>
+                <Height>0.14299in</Height>
+                <Width>1.03126in</Width>
+                <ZIndex>10</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox17">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramTotalPaid</Label>
+                        <Value>=CDec(Parameters!paramTotalPaid.Value)</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>#,0.00;(#,0.00);'-'</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>4.46375in</Top>
+                <Left>3.58507in</Left>
+                <Height>0.14299in</Height>
+                <Width>1.03126in</Width>
+                <ZIndex>11</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox18">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramMunicipalTreasurer</Label>
+                        <Value>=UCase(Parameters!paramMunicipalTreasurer.Value)</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
                           <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                         </Style>
@@ -1013,11 +1095,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.75468in</Top>
-                <Left>3.0078in</Left>
-                <Height>0.19594in</Height>
-                <Width>2.125in</Width>
-                <ZIndex>10</ZIndex>
+                <Top>4.27106in</Top>
+                <Left>4.73105in</Left>
+                <Height>0.16469in</Height>
+                <Width>2.34723in</Width>
+                <ZIndex>12</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1025,179 +1107,102 @@
                   <VerticalAlign>Bottom</VerticalAlign>
                 </Style>
               </Textbox>
+              <Textbox Name="Textbox19">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Label>@paramProvincialTreasurer</Label>
+                        <Value>=UCase(Parameters!paramProvincialTreasurer.Value)</Value>
+                        <Style>
+                          <FontFamily>consolas</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>4.27106in</Top>
+                <Left>7.1976in</Left>
+                <Height>0.16469in</Height>
+                <Width>2.3204in</Width>
+                <ZIndex>13</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Bottom</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox8">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=CDec(Parameters!paramTotalPayment.Value)</Value>
+                        <Style>
+                          <FontFamily>Consolas</FontFamily>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>#,0.00;(#,0.00);'-'</Format>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve"> </Value>
+                        <Style>
+                          <FontFamily>Consolas</FontFamily>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>#,0.00;(#,0.00);'-'</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox8</rd:DefaultName>
+                <Top>3.68326in</Top>
+                <Left>6.36453in</Left>
+                <Height>0.24041in</Height>
+                <Width>3.15347in</Width>
+                <ZIndex>14</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Height>5.2in</Height>
-            <Width>10.58023in</Width>
+            <Height>4.74in</Height>
+            <Width>9.65in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Rectangle>
-          <Textbox Name="Textbox14">
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Label>@paramPaidCash</Label>
-                    <Value>=Parameters!paramPaidCash.Value</Value>
-                    <Style>
-                      <FontFamily>consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.09426in</Top>
-            <Left>3.97565in</Left>
-            <Height>0.14299in</Height>
-            <Width>1.03126in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox13">
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Label>@paramCheckNo</Label>
-                    <Value>=Parameters!paramCheckNo.Value</Value>
-                    <Style>
-                      <FontFamily>consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.29281in</Top>
-            <Left>3.97565in</Left>
-            <Height>0.14299in</Height>
-            <Width>1.03126in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox15">
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Label>@paramBankDate</Label>
-                    <Value>=Parameters!paramBankDate.Value</Value>
-                    <Style>
-                      <FontFamily>consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.47469in</Top>
-            <Left>3.97565in</Left>
-            <Height>0.14299in</Height>
-            <Width>1.03126in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox16">
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Label>@paramTwPmo</Label>
-                    <Value>=Parameters!paramTwPmo.Value</Value>
-                    <Style>
-                      <FontFamily>consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
-                      <Format>0.00;(0.00)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.64407in</Top>
-            <Left>3.97565in</Left>
-            <Height>0.14299in</Height>
-            <Width>1.03126in</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox17">
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Label>@paramTotalPaid</Label>
-                    <Value>=Parameters!paramTotalPaid.Value</Value>
-                    <Style>
-                      <FontFamily>consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.82733in</Top>
-            <Left>3.97565in</Left>
-            <Height>0.14299in</Height>
-            <Width>1.03126in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>5.2in</Height>
+        <Height>4.74in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>10.58023in</Width>
+      <Width>9.65in</Width>
       <Page>
-        <PageHeight>5in</PageHeight>
-        <PageWidth>10in</PageWidth>
+        <PageHeight>4.74in</PageHeight>
+        <PageWidth>9.65in</PageWidth>
         <Style />
       </Page>
     </ReportSection>

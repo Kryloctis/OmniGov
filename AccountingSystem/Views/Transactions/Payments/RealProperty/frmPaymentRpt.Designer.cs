@@ -37,6 +37,8 @@
             ucPaymentRptTaxDues1 = new RealProperty.ucPaymentRptTaxDues();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
+            tabPageReceipt = new System.Windows.Forms.TabPage();
+            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnNext = new System.Windows.Forms.Button();
@@ -45,19 +47,17 @@
             radTaxpayer = new System.Windows.Forms.RadioButton();
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
-            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            tabPageReceipt = new System.Windows.Forms.TabPage();
             radReceipt = new System.Windows.Forms.RadioButton();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
             panel2.SuspendLayout();
             tabPageTaxDues.SuspendLayout();
             tabPagePayment.SuspendLayout();
+            tabPageReceipt.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
-            tabPageReceipt.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -163,6 +163,25 @@
             ucPayment1.Size = new System.Drawing.Size(816, 429);
             ucPayment1.TabIndex = 0;
             // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
+            tabPageReceipt.Location = new System.Drawing.Point(4, 26);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 435);
+            tabPageReceipt.TabIndex = 3;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 429);
+            ucPrintReceipt1.TabIndex = 0;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
@@ -266,25 +285,6 @@
             radPayment.Text = "Payment";
             radPayment.UseVisualStyleBackColor = true;
             // 
-            // reportViewer1
-            // 
-            reportViewer1.Location = new System.Drawing.Point(0, 0);
-            reportViewer1.Name = "ReportViewer";
-            reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.Size = new System.Drawing.Size(396, 246);
-            reportViewer1.TabIndex = 0;
-            // 
-            // tabPageReceipt
-            // 
-            tabPageReceipt.Controls.Add(ucPrintReceipt1);
-            tabPageReceipt.Location = new System.Drawing.Point(4, 26);
-            tabPageReceipt.Name = "tabPageReceipt";
-            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
-            tabPageReceipt.Size = new System.Drawing.Size(824, 435);
-            tabPageReceipt.TabIndex = 3;
-            tabPageReceipt.Text = "tabPageReceipt";
-            tabPageReceipt.UseVisualStyleBackColor = true;
-            // 
             // radReceipt
             // 
             radReceipt.Appearance = System.Windows.Forms.Appearance.Button;
@@ -299,13 +299,13 @@
             radReceipt.Text = "Receipt";
             radReceipt.UseVisualStyleBackColor = true;
             // 
-            // ucPrintReceipt1
+            // reportViewer1
             // 
-            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
-            ucPrintReceipt1.Name = "ucPrintReceipt1";
-            ucPrintReceipt1.Size = new System.Drawing.Size(818, 429);
-            ucPrintReceipt1.TabIndex = 0;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
             // 
             // frmPaymentRpt
             // 
@@ -331,9 +331,9 @@
             panel2.ResumeLayout(false);
             tabPageTaxDues.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
+            tabPageReceipt.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
-            tabPageReceipt.ResumeLayout(false);
             ResumeLayout(false);
         }
 

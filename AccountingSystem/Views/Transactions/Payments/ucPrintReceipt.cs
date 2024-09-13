@@ -183,7 +183,7 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 string printerName = cmbxPrinter.Text;
                 PrintReport(reportViewerPrint, printerName);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private async void lnkLblRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

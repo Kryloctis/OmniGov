@@ -17,6 +17,8 @@
 		<StartupObject>AccountingSystem.Program</StartupObject>
 		<DelaySign>false</DelaySign>
 		<AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
+		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Reports\LTOMs\**" />
@@ -101,21 +103,21 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Include="Reports\LTOM\ListOfSoldRptAtAuction.rdlc">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Reports\LTOM\Ltom23NoticeAuctionSaleDelinqRpt.rdlc">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Include="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Reports\LTOM\Ltom24NoticeSale.rdlc">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Reports\Ltom\Ltom26ListOfRegisteredBidders.rdlc">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
