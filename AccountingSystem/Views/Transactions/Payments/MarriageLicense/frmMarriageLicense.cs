@@ -99,6 +99,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
         private void LoadPaymentTab()
         {
+            radPayment.Checked = true;
             btnNextMain.Text = "Confirm Payment";
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
@@ -133,9 +134,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                     break;
 
                 case "tabPagePayment":
-                    radPayment.Checked = true;
                     LoadPaymentTab();
-                    //ConfirmPayment();
                     break;
             }
         }
@@ -203,14 +202,17 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        if (ConfirmPayment())
-                        {
-                            Helper.MessageBoxSuccess("Payment has been saved, initiating the printing of the receipt...");
-                            LoadReceipt();
-                            ResetForm();
-                            return;
-                        }
+                        tabControlMain.SelectedIndex++;
+                        //if (ConfirmPayment())
+                        //{
+                        //}
                     }
+                    return;
+                }
+
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
                     return;
                 }
 

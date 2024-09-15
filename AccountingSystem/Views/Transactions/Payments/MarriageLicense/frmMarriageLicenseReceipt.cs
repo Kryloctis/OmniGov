@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             internal DateTime DateIssued { get; set; }
             internal string RegistryNo { get; set; }
             internal string GroomResidence { get; set; }
+            internal string BrideResidence { get; set; }
         }
 
         internal async void OnLoad(AF54Parameters AF54Parameters)
@@ -71,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                     new ReportParameter("paramDateIssued", parameters.DateIssued.ToString()),
                     new ReportParameter("paramRegistryNo", parameters.RegistryNo),
                     new ReportParameter("paramGroomResidence", parameters.GroomResidence),
+                    new ReportParameter("paramBrideResidence", parameters.BrideResidence),
                     new ReportParameter("paramBackground", Convert.ToBase64String(Helper.ImageToByteArray(backgroundImage)))
                 };
 
