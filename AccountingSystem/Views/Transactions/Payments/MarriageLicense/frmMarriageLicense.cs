@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Windows.Forms;
 
@@ -12,12 +13,15 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
         private readonly ucSpouseInfo ucSpouseInfoBride;
         private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
         private readonly ucPayment ucPayment;
+        private readonly ucPrintReceipt ucPrintReceipt;
 
         public frmMarriageLicense()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.RemoveTabcontrolTabs(tabControlMain);
             ucPayment = ucPayment1;
+            ucPrintReceipt = ucPrintReceipt1;
             ucPaymentFeesCharges = ucPaymentFeesCharges1;
             ucMarriageDetails = ucMarriageDetails1;
             ucSpouseInfoGroom = ucSpouseInfoGroom1;
@@ -108,6 +112,33 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
             ucPayment.OnLoad(Helper.userId, "54", totalPayment);
         }
 
+        private void LoadReceiptTab()
+        {
+            int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
+            int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
+
+            var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
+            var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
+
+            string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
+
+            string brideName = Helper.GenerateFullName(string.Empty, dictBrideInfo["first_name"], dictBrideInfo["middle_name"], dictBrideInfo["last_name"], string.Empty);
+
+            var af54ReceiptParameters = new frmMarriageLicenseReceipt.AF54Parameters()
+            {
+                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
+                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
+                RegistryNo = ucMarriageDetails.GetMarriageDetails().registryNo,
+                DateIssued = ucMarriageDetails.GetMarriageDetails().issuedOn,
+                GroomName = groomName,
+                GroomAge = ucSpouseInfoGroom.GetSpouseInfo().age.ToString(),
+                GroomMonths = ucSpouseInfoGroom.GetSpouseInfo().months.ToString(),
+                BrideName = brideName,
+                BrideAge = ucSpouseInfoBride.GetSpouseInfo().age.ToString(),
+                BrideMonths = ucSpouseInfoBride.GetSpouseInfo().months.ToString()
+            };
+        }
+
         private void LoadTabContents()
         {
             if (tabControlMain.SelectedIndex == 0)
@@ -135,6 +166,10 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
 
                 case "tabPagePayment":
                     LoadPaymentTab();
+                    break;
+
+                case "tabPageReceipt":
+                    LoadReceiptTab();
                     break;
             }
         }
@@ -219,37 +254,6 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadReceipt()
-        {
-            int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
-            int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
-
-            var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
-            var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
-
-            string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
-
-            string brideName = Helper.GenerateFullName(string.Empty, dictBrideInfo["first_name"], dictBrideInfo["middle_name"], dictBrideInfo["last_name"], string.Empty);
-
-            var af54ReceiptParameters = new frmMarriageLicenseReceipt.AF54Parameters()
-            {
-                Municipality = Helper.selectedServerModel.MunicipalityName.ToUpper(),
-                Province = Helper.selectedServerModel.ProvinceName.ToUpper(),
-                RegistryNo = ucMarriageDetails.GetMarriageDetails().registryNo,
-                DateIssued = ucMarriageDetails.GetMarriageDetails().issuedOn,
-                GroomName = groomName,
-                GroomAge = ucSpouseInfoGroom.GetSpouseInfo().age.ToString(),
-                GroomMonths = ucSpouseInfoGroom.GetSpouseInfo().months.ToString(),
-                BrideName = brideName,
-                BrideAge = ucSpouseInfoBride.GetSpouseInfo().age.ToString(),
-                BrideMonths = ucSpouseInfoBride.GetSpouseInfo().months.ToString()
-            };
-
-            var frmAF54Receipt = new frmMarriageLicenseReceipt();
-            frmAF54Receipt.OnLoad(af54ReceiptParameters);
-            frmAF54Receipt.ShowDialog();
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)
