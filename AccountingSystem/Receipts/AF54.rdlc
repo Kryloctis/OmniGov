@@ -9,6 +9,8 @@
             <Source>Embedded</Source>
             <Value>af54</Value>
             <Sizing>FitProportional</Sizing>
+            <Top>0.13357in</Top>
+            <Left>0.13428in</Left>
             <Height>12.46643in</Height>
             <Width>8.13572in</Width>
             <Visibility>
@@ -35,12 +37,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramMunicipality</rd:DefaultName>
-            <Top>1.7256in</Top>
-            <Left>3.53766in</Left>
+            <Top>1.85917in</Top>
+            <Left>3.67194in</Left>
             <Height>0.25in</Height>
             <Width>2.11163in</Width>
             <ZIndex>1</ZIndex>
@@ -49,6 +53,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramGroomName">
@@ -65,12 +73,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomName</rd:DefaultName>
-            <Top>3.30708in</Top>
-            <Left>2.23833in</Left>
+            <Top>3.44065in</Top>
+            <Left>2.37261in</Left>
             <Height>0.25in</Height>
             <Width>2.34954in</Width>
             <ZIndex>2</ZIndex>
@@ -79,6 +89,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramGroomAge">
@@ -101,8 +115,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomAge</rd:DefaultName>
-            <Top>3.30708in</Top>
-            <Left>5.20292in</Left>
+            <Top>3.44065in</Top>
+            <Left>5.3372in</Left>
             <Height>0.25in</Height>
             <Width>0.51544in</Width>
             <ZIndex>3</ZIndex>
@@ -111,6 +125,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramGroomMonths">
@@ -133,8 +151,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomMonths</rd:DefaultName>
-            <Top>3.30708in</Top>
-            <Left>6.60083in</Left>
+            <Top>3.44065in</Top>
+            <Left>6.73511in</Left>
             <Height>0.25in</Height>
             <Width>0.49228in</Width>
             <ZIndex>4</ZIndex>
@@ -143,6 +161,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramBrideName">
@@ -159,12 +181,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideName</rd:DefaultName>
-            <Top>4.04412in</Top>
-            <Left>0.71796in</Left>
+            <Top>4.17769in</Top>
+            <Left>0.85224in</Left>
             <Height>0.25in</Height>
             <Width>3.04302in</Width>
             <ZIndex>5</ZIndex>
@@ -173,6 +197,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramBrideAge">
@@ -195,8 +223,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideAge</rd:DefaultName>
-            <Top>4.04412in</Top>
-            <Left>4.29257in</Left>
+            <Top>4.17769in</Top>
+            <Left>4.42685in</Left>
             <Height>0.25in</Height>
             <Width>0.53743in</Width>
             <ZIndex>6</ZIndex>
@@ -205,6 +233,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramBrideMonths">
@@ -227,8 +259,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideMonths</rd:DefaultName>
-            <Top>4.04412in</Top>
-            <Left>5.67537in</Left>
+            <Top>4.17769in</Top>
+            <Left>5.80965in</Left>
             <Height>0.25in</Height>
             <Width>0.52778in</Width>
             <ZIndex>7</ZIndex>
@@ -237,6 +269,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramGroomResidence">
@@ -253,12 +289,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
-            <Top>3.6702in</Top>
-            <Left>1.46969in</Left>
+            <Top>3.80377in</Top>
+            <Left>1.60397in</Left>
             <Height>0.25in</Height>
             <Width>4.02991in</Width>
             <ZIndex>8</ZIndex>
@@ -267,6 +305,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramDateIssued">
@@ -290,8 +332,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>6.83385in</Top>
-            <Left>5.07228in</Left>
+            <Top>6.96742in</Top>
+            <Left>5.20656in</Left>
             <Height>0.25in</Height>
             <Width>2.36805in</Width>
             <ZIndex>9</ZIndex>
@@ -300,6 +342,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramDateIssued2">
@@ -323,8 +369,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>7.19867in</Top>
-            <Left>0.66869in</Left>
+            <Top>7.33224in</Top>
+            <Left>0.80297in</Left>
             <Height>0.25in</Height>
             <Width>2.64275in</Width>
             <ZIndex>10</ZIndex>
@@ -333,6 +379,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramDateIssued3">
@@ -350,12 +400,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>7.19867in</Top>
-            <Left>3.74874in</Left>
+            <Top>7.33224in</Top>
+            <Left>3.88302in</Left>
             <Height>0.25in</Height>
             <Width>0.42207in</Width>
             <ZIndex>11</ZIndex>
@@ -364,6 +416,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramRegistryNo">
@@ -381,12 +437,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramRegistryNo</rd:DefaultName>
-            <Top>10.33417in</Top>
-            <Left>1.25708in</Left>
+            <Top>10.46774in</Top>
+            <Left>1.39136in</Left>
             <Height>0.25in</Height>
             <Width>1.8071in</Width>
             <ZIndex>12</ZIndex>
@@ -395,6 +453,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramMunicipality1">
@@ -410,12 +472,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramMunicipality1</rd:DefaultName>
-            <Top>10.02553in</Top>
-            <Left>5.44034in</Left>
+            <Top>10.1591in</Top>
+            <Left>5.57462in</Left>
             <Height>0.25in</Height>
             <Width>2.24652in</Width>
             <ZIndex>13</ZIndex>
@@ -424,6 +488,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="paramGroomResidence2">
@@ -440,12 +508,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
-            <Top>4.40346in</Top>
-            <Left>0.62046in</Left>
+            <Top>4.53703in</Top>
+            <Left>0.75474in</Left>
             <Height>0.25in</Height>
             <Width>4.22281in</Width>
             <ZIndex>14</ZIndex>
@@ -454,24 +524,24 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>32cm</Height>
+        <Height>12.6in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Database</Source>
-            <Value>=Parameters!paramBackground.Value</Value>
-            <MIMEType>image/jpeg</MIMEType>
-          </BackgroundImage>
         </Style>
       </Body>
-      <Width>21cm</Width>
+      <Width>8.27in</Width>
       <Page>
-        <PageHeight>12.5in</PageHeight>
+        <PageHeight>12.6in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
         <Style />
       </Page>
     </ReportSection>
@@ -537,12 +607,6 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramGroomResidence">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramBackground">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -614,11 +678,6 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramGroomResidence</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>paramBackground</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
