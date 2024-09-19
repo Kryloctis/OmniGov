@@ -29,11 +29,14 @@
                     <Value>=Parameters!paramProvince.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -47,6 +50,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox2">
@@ -58,11 +65,14 @@
                     <Value>=Parameters!paramMunicipal.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -76,6 +86,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox3">
@@ -87,7 +101,8 @@
                     <Value>=Parameters!paramCurrentDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Format>MMMM, dd</Format>
                     </Style>
                   </TextRun>
@@ -108,6 +123,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox4">
@@ -119,7 +138,8 @@
                     <Value>=Parameters!paramCurrentDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Format>yy</Format>
                     </Style>
                   </TextRun>
@@ -140,6 +160,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox5">
@@ -151,11 +175,14 @@
                     <Value>=Parameters!paramOldOwnerName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -169,6 +196,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox6">
@@ -180,11 +211,14 @@
                     <Value>=Parameters!paramOldOwnerAddress.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -198,6 +232,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox7">
@@ -209,24 +247,31 @@
                     <Value>=Parameters!paramOldOwnerMunicipality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.76875in</Top>
             <Left>3.59471in</Left>
             <Height>0.1875in</Height>
-            <Width>1.06176in</Width>
+            <Width>1.56323in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox8">
@@ -238,24 +283,31 @@
                     <Value>=Parameters!paramOldOwnerProvince.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.76875in</Top>
-            <Left>4.68424in</Left>
+            <Left>5.18571in</Left>
             <Height>0.1875in</Height>
-            <Width>2.0395in</Width>
+            <Width>1.53803in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox9">
@@ -267,11 +319,14 @@
                     <Value>=Parameters!paramNewOwnerName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -285,6 +340,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox10">
@@ -296,24 +355,31 @@
                     <Value>=Parameters!paramNewOwnerMunicipality.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>5.61667in</Top>
-            <Left>4.69343in</Left>
+            <Left>3.60859in</Left>
             <Height>0.1875in</Height>
-            <Width>2.03031in</Width>
+            <Width>1.51025in</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox11">
@@ -325,24 +391,31 @@
                     <Value>=Parameters!paramNewOwnerProvince.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>5.61667in</Top>
-            <Left>3.59471in</Left>
+            <Left>5.16051in</Left>
             <Height>0.1875in</Height>
-            <Width>1.06176in</Width>
+            <Width>1.56323in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox12">
@@ -354,11 +427,14 @@
                     <Value>=Parameters!paramCattlePriceWords.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -372,6 +448,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox13">
@@ -383,7 +463,8 @@
                     <Value>=Parameters!paramCattlePrice.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -403,6 +484,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox14">
@@ -414,7 +499,8 @@
                     <Value>=Parameters!paramCattleName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -434,6 +520,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox15">
@@ -445,7 +535,8 @@
                     <Value>=Parameters!paramCattleSex.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -465,6 +556,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox16">
@@ -476,7 +571,8 @@
                     <Value>=Parameters!paramCattleAge.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -496,6 +592,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox19">
@@ -507,11 +607,14 @@
                     <Value>=Parameters!paramMunicipal.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -525,6 +628,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox21">
@@ -536,13 +643,14 @@
                     <Value>=Parameters!paramTransactionDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Format>MMMM, dd</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -557,6 +665,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox22">
@@ -568,13 +680,14 @@
                     <Value>=Parameters!paramTransactionDate.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Format>yy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -589,6 +702,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox23">
@@ -600,7 +717,8 @@
                     <Value>=Parameters!paramMunicipalMayorName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -620,6 +738,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox24">
@@ -631,7 +753,8 @@
                     <Value>=Parameters!paramMunicipalSecretaryName.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -651,6 +774,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox25">
@@ -662,7 +789,8 @@
                     <Value>=Parameters!paramMunicipalTreasurer.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -682,6 +810,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox17">
@@ -693,11 +825,14 @@
                     <Value>=Parameters!paramNewOwnerAddress.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -711,6 +846,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox18">
@@ -722,11 +861,14 @@
                     <Value>=Parameters!paramMunicipal.Value</Value>
                     <Style>
                       <FontFamily>Consolas</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -740,6 +882,10 @@
                 <Style>None</Style>
               </Border>
               <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
@@ -752,8 +898,8 @@
       </Body>
       <Width>17.5cm</Width>
       <Page>
-        <PageHeight>11.25in</PageHeight>
-        <PageWidth>7.09in</PageWidth>
+        <PageHeight>10.83in</PageHeight>
+        <PageWidth>6.89in</PageWidth>
         <Style />
       </Page>
     </ReportSection>

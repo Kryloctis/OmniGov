@@ -107,6 +107,7 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                 {"paramCattleYears", cattleTransferDetails.cattleYears.ToString()},
                 {"paramCurrentDate", Helper.GetCurrentDate().ToString()},
                 {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
+                {"paramMunicipalTreasurer", string.Empty},
                 {"paramMunicipalMayorName", string.Empty},
                 {"paramMunicipalSecretaryName", string.Empty},
             };
