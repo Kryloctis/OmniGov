@@ -31,7 +31,7 @@
                   <TextRun>
                     <Value>=Parameters!paramMunicipality.Value</Value>
                     <Style>
-                      <FontFamily>ARIAL</FontFamily>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -68,6 +68,7 @@
                   <TextRun>
                     <Value>=Parameters!paramGroomName.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -80,7 +81,7 @@
             </Paragraphs>
             <rd:DefaultName>paramGroomName</rd:DefaultName>
             <Top>3.44065in</Top>
-            <Left>2.37261in</Left>
+            <Left>2.38588in</Left>
             <Height>0.25in</Height>
             <Width>2.34954in</Width>
             <ZIndex>2</ZIndex>
@@ -104,6 +105,7 @@
                   <TextRun>
                     <Value>=Parameters!paramGroomAge.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -116,7 +118,7 @@
             </Paragraphs>
             <rd:DefaultName>paramGroomAge</rd:DefaultName>
             <Top>3.44065in</Top>
-            <Left>5.3372in</Left>
+            <Left>5.35047in</Left>
             <Height>0.25in</Height>
             <Width>0.51544in</Width>
             <ZIndex>3</ZIndex>
@@ -140,6 +142,7 @@
                   <TextRun>
                     <Value>=Parameters!paramGroomMonths.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -152,7 +155,7 @@
             </Paragraphs>
             <rd:DefaultName>paramGroomMonths</rd:DefaultName>
             <Top>3.44065in</Top>
-            <Left>6.73511in</Left>
+            <Left>6.74838in</Left>
             <Height>0.25in</Height>
             <Width>0.49228in</Width>
             <ZIndex>4</ZIndex>
@@ -176,6 +179,7 @@
                   <TextRun>
                     <Value>=Parameters!paramBrideName.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -188,7 +192,7 @@
             </Paragraphs>
             <rd:DefaultName>paramBrideName</rd:DefaultName>
             <Top>4.17769in</Top>
-            <Left>0.85224in</Left>
+            <Left>0.86551in</Left>
             <Height>0.25in</Height>
             <Width>3.04302in</Width>
             <ZIndex>5</ZIndex>
@@ -212,6 +216,7 @@
                   <TextRun>
                     <Value>=Parameters!paramBrideAge.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -224,7 +229,7 @@
             </Paragraphs>
             <rd:DefaultName>paramBrideAge</rd:DefaultName>
             <Top>4.17769in</Top>
-            <Left>4.42685in</Left>
+            <Left>4.44012in</Left>
             <Height>0.25in</Height>
             <Width>0.53743in</Width>
             <ZIndex>6</ZIndex>
@@ -248,6 +253,7 @@
                   <TextRun>
                     <Value>=Parameters!paramBrideMonths.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -260,7 +266,7 @@
             </Paragraphs>
             <rd:DefaultName>paramBrideMonths</rd:DefaultName>
             <Top>4.17769in</Top>
-            <Left>5.80965in</Left>
+            <Left>5.82292in</Left>
             <Height>0.25in</Height>
             <Width>0.52778in</Width>
             <ZIndex>7</ZIndex>
@@ -284,6 +290,7 @@
                   <TextRun>
                     <Value>=Parameters!paramGroomResidence.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -296,7 +303,7 @@
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
             <Top>3.80377in</Top>
-            <Left>1.60397in</Left>
+            <Left>1.61724in</Left>
             <Height>0.25in</Height>
             <Width>4.02991in</Width>
             <ZIndex>8</ZIndex>
@@ -320,6 +327,7 @@
                   <TextRun>
                     <Value>=Parameters!paramDateIssued.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>dd</Format>
@@ -357,6 +365,7 @@
                   <TextRun>
                     <Value>=Parameters!paramDateIssued.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>MMMM</Format>
@@ -394,6 +403,7 @@
                   <TextRun>
                     <Value>=Parameters!paramDateIssued.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>yy</Format>
@@ -431,7 +441,7 @@
                   <TextRun>
                     <Value>=Parameters!paramRegistryNo.Value</Value>
                     <Style>
-                      <FontFamily>arial</FontFamily>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -443,7 +453,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramRegistryNo</rd:DefaultName>
-            <Top>10.46774in</Top>
+            <Top>10.45524in</Top>
             <Left>1.39136in</Left>
             <Height>0.25in</Height>
             <Width>1.8071in</Width>
@@ -468,6 +478,8 @@
                   <TextRun>
                     <Value>=Parameters!paramMunicipality.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -478,7 +490,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramMunicipality1</rd:DefaultName>
-            <Top>10.1591in</Top>
+            <Top>10.1466in</Top>
             <Left>5.57462in</Left>
             <Height>0.25in</Height>
             <Width>2.24652in</Width>
@@ -503,6 +515,7 @@
                   <TextRun>
                     <Value>=Parameters!paramBrideResidence.Value</Value>
                     <Style>
+                      <FontFamily>Consolas</FontFamily>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -515,7 +528,7 @@
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
             <Top>4.53703in</Top>
-            <Left>0.75474in</Left>
+            <Left>0.76801in</Left>
             <Height>0.25in</Height>
             <Width>4.22281in</Width>
             <ZIndex>14</ZIndex>
