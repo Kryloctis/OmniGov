@@ -56,29 +56,26 @@
             // dtDeathDate
             // 
             dtDeathDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dtDeathDate.Location = new System.Drawing.Point(188, 139);
-            dtDeathDate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            dtDeathDate.Location = new System.Drawing.Point(101, 65);
             dtDeathDate.Name = "dtDeathDate";
-            dtDeathDate.Size = new System.Drawing.Size(461, 39);
-            dtDeathDate.TabIndex = 0;
+            dtDeathDate.Size = new System.Drawing.Size(250, 23);
+            dtDeathDate.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(7, 151);
-            label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label1.Location = new System.Drawing.Point(4, 71);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(145, 32);
+            label1.Size = new System.Drawing.Size(70, 15);
             label1.TabIndex = 1;
             label1.Text = "Death Date*";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(6, 207);
-            label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label2.Location = new System.Drawing.Point(3, 97);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(188, 32);
+            label2.Size = new System.Drawing.Size(92, 15);
             label2.TabIndex = 1;
             label2.Text = "Cause of Death*";
             // 
@@ -86,22 +83,20 @@
             // 
             txtCauseOfDeath.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCauseOfDeath.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtCauseOfDeath.Location = new System.Drawing.Point(188, 201);
-            txtCauseOfDeath.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            txtCauseOfDeath.Location = new System.Drawing.Point(101, 94);
             txtCauseOfDeath.Multiline = true;
             txtCauseOfDeath.Name = "txtCauseOfDeath";
-            txtCauseOfDeath.Size = new System.Drawing.Size(461, 217);
-            txtCauseOfDeath.TabIndex = 2;
+            txtCauseOfDeath.Size = new System.Drawing.Size(250, 104);
+            txtCauseOfDeath.TabIndex = 7;
             txtCauseOfDeath.Validating += txtCauseOfDeath_Validating;
             txtCauseOfDeath.Validated += txtCauseOfDeath_Validated;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(6, 442);
-            label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label3.Location = new System.Drawing.Point(3, 207);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(127, 32);
+            label3.Size = new System.Drawing.Size(63, 15);
             label3.TabIndex = 1;
             label3.Text = "Cemetery*";
             // 
@@ -109,21 +104,19 @@
             // 
             txtCemetery.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtCemetery.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtCemetery.Location = new System.Drawing.Point(188, 435);
-            txtCemetery.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            txtCemetery.Location = new System.Drawing.Point(101, 204);
             txtCemetery.Name = "txtCemetery";
-            txtCemetery.Size = new System.Drawing.Size(461, 39);
-            txtCemetery.TabIndex = 3;
+            txtCemetery.Size = new System.Drawing.Size(250, 23);
+            txtCemetery.TabIndex = 8;
             txtCemetery.Validating += txtCemetery_Validating;
             txtCemetery.Validated += txtCemetery_Validated;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(6, 503);
-            label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label4.Location = new System.Drawing.Point(3, 236);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(152, 32);
+            label4.Size = new System.Drawing.Size(75, 15);
             label4.TabIndex = 1;
             label4.Text = "Disinterment";
             // 
@@ -131,20 +124,18 @@
             // 
             txtDisinterment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtDisinterment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtDisinterment.Location = new System.Drawing.Point(188, 497);
-            txtDisinterment.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            txtDisinterment.Location = new System.Drawing.Point(101, 233);
             txtDisinterment.Name = "txtDisinterment";
-            txtDisinterment.Size = new System.Drawing.Size(461, 39);
-            txtDisinterment.TabIndex = 3;
+            txtDisinterment.Size = new System.Drawing.Size(250, 23);
+            txtDisinterment.TabIndex = 9;
             // 
             // radInfectiousYes
             // 
             radInfectiousYes.AutoSize = true;
-            radInfectiousYes.Location = new System.Drawing.Point(6, 6);
-            radInfectiousYes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            radInfectiousYes.Location = new System.Drawing.Point(3, 3);
             radInfectiousYes.Name = "radInfectiousYes";
-            radInfectiousYes.Size = new System.Drawing.Size(79, 36);
-            radInfectiousYes.TabIndex = 4;
+            radInfectiousYes.Size = new System.Drawing.Size(42, 19);
+            radInfectiousYes.TabIndex = 1;
             radInfectiousYes.Text = "Yes";
             radInfectiousYes.UseVisualStyleBackColor = true;
             // 
@@ -152,11 +143,10 @@
             // 
             radInfectiousNo.AutoSize = true;
             radInfectiousNo.Checked = true;
-            radInfectiousNo.Location = new System.Drawing.Point(95, 6);
-            radInfectiousNo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            radInfectiousNo.Location = new System.Drawing.Point(51, 3);
             radInfectiousNo.Name = "radInfectiousNo";
-            radInfectiousNo.Size = new System.Drawing.Size(77, 36);
-            radInfectiousNo.TabIndex = 4;
+            radInfectiousNo.Size = new System.Drawing.Size(41, 19);
+            radInfectiousNo.TabIndex = 2;
             radInfectiousNo.TabStop = true;
             radInfectiousNo.Text = "No";
             radInfectiousNo.UseVisualStyleBackColor = true;
@@ -164,10 +154,9 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(6, 17);
-            label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label5.Location = new System.Drawing.Point(3, 8);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(128, 32);
+            label5.Size = new System.Drawing.Size(64, 15);
             label5.TabIndex = 1;
             label5.Text = "Infectious*";
             // 
@@ -176,19 +165,17 @@
             panelInfectious.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelInfectious.Controls.Add(radInfectiousYes);
             panelInfectious.Controls.Add(radInfectiousNo);
-            panelInfectious.Location = new System.Drawing.Point(188, 6);
-            panelInfectious.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            panelInfectious.Location = new System.Drawing.Point(101, 3);
             panelInfectious.Name = "panelInfectious";
-            panelInfectious.Size = new System.Drawing.Size(464, 53);
-            panelInfectious.TabIndex = 5;
+            panelInfectious.Size = new System.Drawing.Size(250, 25);
+            panelInfectious.TabIndex = 0;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(6, 83);
-            label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label6.Location = new System.Drawing.Point(3, 39);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(137, 32);
+            label6.Size = new System.Drawing.Size(69, 15);
             label6.TabIndex = 1;
             label6.Text = "Embalmed*";
             // 
@@ -197,20 +184,18 @@
             panelEmbalmed.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelEmbalmed.Controls.Add(radEmbalmedYes);
             panelEmbalmed.Controls.Add(radEmbalmedNo);
-            panelEmbalmed.Location = new System.Drawing.Point(188, 73);
-            panelEmbalmed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            panelEmbalmed.Location = new System.Drawing.Point(101, 34);
             panelEmbalmed.Name = "panelEmbalmed";
-            panelEmbalmed.Size = new System.Drawing.Size(464, 53);
-            panelEmbalmed.TabIndex = 5;
+            panelEmbalmed.Size = new System.Drawing.Size(250, 25);
+            panelEmbalmed.TabIndex = 3;
             // 
             // radEmbalmedYes
             // 
             radEmbalmedYes.AutoSize = true;
             radEmbalmedYes.Checked = true;
-            radEmbalmedYes.Location = new System.Drawing.Point(6, 6);
-            radEmbalmedYes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            radEmbalmedYes.Location = new System.Drawing.Point(3, 3);
             radEmbalmedYes.Name = "radEmbalmedYes";
-            radEmbalmedYes.Size = new System.Drawing.Size(79, 36);
+            radEmbalmedYes.Size = new System.Drawing.Size(42, 19);
             radEmbalmedYes.TabIndex = 4;
             radEmbalmedYes.TabStop = true;
             radEmbalmedYes.Text = "Yes";
@@ -219,21 +204,19 @@
             // radEmbalmedNo
             // 
             radEmbalmedNo.AutoSize = true;
-            radEmbalmedNo.Location = new System.Drawing.Point(95, 6);
-            radEmbalmedNo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            radEmbalmedNo.Location = new System.Drawing.Point(51, 3);
             radEmbalmedNo.Name = "radEmbalmedNo";
-            radEmbalmedNo.Size = new System.Drawing.Size(77, 36);
-            radEmbalmedNo.TabIndex = 4;
+            radEmbalmedNo.Size = new System.Drawing.Size(41, 19);
+            radEmbalmedNo.TabIndex = 5;
             radEmbalmedNo.Text = "No";
             radEmbalmedNo.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(6, 565);
-            label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label7.Location = new System.Drawing.Point(3, 265);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(133, 32);
+            label7.Size = new System.Drawing.Size(66, 15);
             label7.TabIndex = 1;
             label7.Text = "Disposition";
             // 
@@ -241,11 +224,10 @@
             // 
             txtDisposition.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtDisposition.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtDisposition.Location = new System.Drawing.Point(188, 559);
-            txtDisposition.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            txtDisposition.Location = new System.Drawing.Point(101, 262);
             txtDisposition.Name = "txtDisposition";
-            txtDisposition.Size = new System.Drawing.Size(461, 39);
-            txtDisposition.TabIndex = 3;
+            txtDisposition.Size = new System.Drawing.Size(250, 23);
+            txtDisposition.TabIndex = 10;
             // 
             // errorProvider1
             // 
@@ -254,7 +236,7 @@
             // 
             // ucBurialDetails
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panelEmbalmed);
             Controls.Add(panelInfectious);
@@ -270,9 +252,8 @@
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(dtDeathDate);
-            Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             Name = "ucBurialDetails";
-            Size = new System.Drawing.Size(693, 621);
+            Size = new System.Drawing.Size(373, 291);
             panelInfectious.ResumeLayout(false);
             panelInfectious.PerformLayout();
             panelEmbalmed.ResumeLayout(false);
