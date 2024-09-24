@@ -59,7 +59,7 @@
             dtDeathDate.Location = new System.Drawing.Point(101, 65);
             dtDeathDate.Name = "dtDeathDate";
             dtDeathDate.Size = new System.Drawing.Size(250, 23);
-            dtDeathDate.TabIndex = 0;
+            dtDeathDate.TabIndex = 6;
             // 
             // label1
             // 
@@ -82,11 +82,12 @@
             // txtCauseOfDeath
             // 
             txtCauseOfDeath.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtCauseOfDeath.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtCauseOfDeath.Location = new System.Drawing.Point(101, 94);
             txtCauseOfDeath.Multiline = true;
             txtCauseOfDeath.Name = "txtCauseOfDeath";
             txtCauseOfDeath.Size = new System.Drawing.Size(250, 104);
-            txtCauseOfDeath.TabIndex = 2;
+            txtCauseOfDeath.TabIndex = 7;
             txtCauseOfDeath.Validating += txtCauseOfDeath_Validating;
             txtCauseOfDeath.Validated += txtCauseOfDeath_Validated;
             // 
@@ -102,10 +103,11 @@
             // txtCemetery
             // 
             txtCemetery.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtCemetery.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtCemetery.Location = new System.Drawing.Point(101, 204);
             txtCemetery.Name = "txtCemetery";
             txtCemetery.Size = new System.Drawing.Size(250, 23);
-            txtCemetery.TabIndex = 3;
+            txtCemetery.TabIndex = 8;
             txtCemetery.Validating += txtCemetery_Validating;
             txtCemetery.Validated += txtCemetery_Validated;
             // 
@@ -121,10 +123,11 @@
             // txtDisinterment
             // 
             txtDisinterment.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDisinterment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtDisinterment.Location = new System.Drawing.Point(101, 233);
             txtDisinterment.Name = "txtDisinterment";
             txtDisinterment.Size = new System.Drawing.Size(250, 23);
-            txtDisinterment.TabIndex = 3;
+            txtDisinterment.TabIndex = 9;
             // 
             // radInfectiousYes
             // 
@@ -132,7 +135,7 @@
             radInfectiousYes.Location = new System.Drawing.Point(3, 3);
             radInfectiousYes.Name = "radInfectiousYes";
             radInfectiousYes.Size = new System.Drawing.Size(42, 19);
-            radInfectiousYes.TabIndex = 4;
+            radInfectiousYes.TabIndex = 1;
             radInfectiousYes.Text = "Yes";
             radInfectiousYes.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +146,7 @@
             radInfectiousNo.Location = new System.Drawing.Point(51, 3);
             radInfectiousNo.Name = "radInfectiousNo";
             radInfectiousNo.Size = new System.Drawing.Size(41, 19);
-            radInfectiousNo.TabIndex = 4;
+            radInfectiousNo.TabIndex = 2;
             radInfectiousNo.TabStop = true;
             radInfectiousNo.Text = "No";
             radInfectiousNo.UseVisualStyleBackColor = true;
@@ -165,7 +168,7 @@
             panelInfectious.Location = new System.Drawing.Point(101, 3);
             panelInfectious.Name = "panelInfectious";
             panelInfectious.Size = new System.Drawing.Size(250, 25);
-            panelInfectious.TabIndex = 5;
+            panelInfectious.TabIndex = 0;
             // 
             // label6
             // 
@@ -184,7 +187,7 @@
             panelEmbalmed.Location = new System.Drawing.Point(101, 34);
             panelEmbalmed.Name = "panelEmbalmed";
             panelEmbalmed.Size = new System.Drawing.Size(250, 25);
-            panelEmbalmed.TabIndex = 5;
+            panelEmbalmed.TabIndex = 3;
             // 
             // radEmbalmedYes
             // 
@@ -204,7 +207,7 @@
             radEmbalmedNo.Location = new System.Drawing.Point(51, 3);
             radEmbalmedNo.Name = "radEmbalmedNo";
             radEmbalmedNo.Size = new System.Drawing.Size(41, 19);
-            radEmbalmedNo.TabIndex = 4;
+            radEmbalmedNo.TabIndex = 5;
             radEmbalmedNo.Text = "No";
             radEmbalmedNo.UseVisualStyleBackColor = true;
             // 
@@ -220,10 +223,11 @@
             // txtDisposition
             // 
             txtDisposition.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDisposition.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             txtDisposition.Location = new System.Drawing.Point(101, 262);
             txtDisposition.Name = "txtDisposition";
             txtDisposition.Size = new System.Drawing.Size(250, 23);
-            txtDisposition.TabIndex = 3;
+            txtDisposition.TabIndex = 10;
             // 
             // errorProvider1
             // 

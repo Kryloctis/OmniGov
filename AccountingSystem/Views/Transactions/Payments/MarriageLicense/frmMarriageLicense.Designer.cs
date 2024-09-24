@@ -52,6 +52,8 @@
             tabPageBrideInfo = new System.Windows.Forms.TabPage();
             groupBox3 = new System.Windows.Forms.GroupBox();
             ucSpouseInfoBride1 = new ucSpouseInfo();
+            tabPageReceipt = new System.Windows.Forms.TabPage();
+            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             tabPagePayment.SuspendLayout();
@@ -63,6 +65,7 @@
             groupBox2.SuspendLayout();
             tabPageBrideInfo.SuspendLayout();
             groupBox3.SuspendLayout();
+            tabPageReceipt.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -201,10 +204,10 @@
             // tabPagePayment
             // 
             tabPagePayment.Controls.Add(ucPayment1);
-            tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            tabPagePayment.Location = new System.Drawing.Point(4, 24);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(3);
-            tabPagePayment.Size = new System.Drawing.Size(824, 456);
+            tabPagePayment.Size = new System.Drawing.Size(824, 437);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = "tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -215,16 +218,16 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(3, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(818, 450);
+            ucPayment1.Size = new System.Drawing.Size(818, 431);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageFeesCharges
             // 
             tabPageFeesCharges.Controls.Add(ucPaymentFeesCharges1);
-            tabPageFeesCharges.Location = new System.Drawing.Point(4, 5);
+            tabPageFeesCharges.Location = new System.Drawing.Point(4, 24);
             tabPageFeesCharges.Margin = new System.Windows.Forms.Padding(0);
             tabPageFeesCharges.Name = "tabPageFeesCharges";
-            tabPageFeesCharges.Size = new System.Drawing.Size(824, 456);
+            tabPageFeesCharges.Size = new System.Drawing.Size(824, 437);
             tabPageFeesCharges.TabIndex = 1;
             tabPageFeesCharges.Text = "tabPageFees";
             tabPageFeesCharges.UseVisualStyleBackColor = true;
@@ -235,35 +238,32 @@
             ucPaymentFeesCharges1.Location = new System.Drawing.Point(0, 0);
             ucPaymentFeesCharges1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentFeesCharges1.Name = "ucPaymentFeesCharges1";
-            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 456);
+            ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 437);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
             // tabControlMain
             // 
-            tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             tabControlMain.Controls.Add(tabPageMarriageDetails);
             tabControlMain.Controls.Add(tabPageGroomInfo);
             tabControlMain.Controls.Add(tabPageBrideInfo);
             tabControlMain.Controls.Add(tabPageFeesCharges);
             tabControlMain.Controls.Add(tabPagePayment);
+            tabControlMain.Controls.Add(tabPageReceipt);
             tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControlMain.ItemSize = new System.Drawing.Size(0, 1);
             tabControlMain.Location = new System.Drawing.Point(195, 0);
             tabControlMain.Margin = new System.Windows.Forms.Padding(0);
             tabControlMain.Name = "tabControlMain";
-            tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
             tabControlMain.Size = new System.Drawing.Size(832, 465);
-            tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             tabControlMain.TabIndex = 9;
             tabControlMain.SelectedIndexChanged += tabControlMain_SelectedIndexChanged;
             // 
             // tabPageMarriageDetails
             // 
             tabPageMarriageDetails.Controls.Add(groupBox1);
-            tabPageMarriageDetails.Location = new System.Drawing.Point(4, 5);
+            tabPageMarriageDetails.Location = new System.Drawing.Point(4, 24);
             tabPageMarriageDetails.Name = "tabPageMarriageDetails";
-            tabPageMarriageDetails.Size = new System.Drawing.Size(824, 456);
+            tabPageMarriageDetails.Size = new System.Drawing.Size(824, 437);
             tabPageMarriageDetails.TabIndex = 3;
             tabPageMarriageDetails.Text = "tabPageMarriageDetails";
             tabPageMarriageDetails.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            groupBox1.Size = new System.Drawing.Size(824, 456);
+            groupBox1.Size = new System.Drawing.Size(824, 437);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Marriage Details";
@@ -287,15 +287,15 @@
             ucMarriageDetails1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucMarriageDetails1.Location = new System.Drawing.Point(4, 24);
             ucMarriageDetails1.Name = "ucMarriageDetails1";
-            ucMarriageDetails1.Size = new System.Drawing.Size(816, 428);
+            ucMarriageDetails1.Size = new System.Drawing.Size(816, 409);
             ucMarriageDetails1.TabIndex = 1;
             // 
             // tabPageGroomInfo
             // 
             tabPageGroomInfo.Controls.Add(groupBox2);
-            tabPageGroomInfo.Location = new System.Drawing.Point(4, 5);
+            tabPageGroomInfo.Location = new System.Drawing.Point(4, 24);
             tabPageGroomInfo.Name = "tabPageGroomInfo";
-            tabPageGroomInfo.Size = new System.Drawing.Size(824, 456);
+            tabPageGroomInfo.Size = new System.Drawing.Size(824, 437);
             tabPageGroomInfo.TabIndex = 4;
             tabPageGroomInfo.Text = "tabPageGroomInfo";
             tabPageGroomInfo.UseVisualStyleBackColor = true;
@@ -308,7 +308,7 @@
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            groupBox2.Size = new System.Drawing.Size(824, 456);
+            groupBox2.Size = new System.Drawing.Size(824, 437);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Groom Info.";
@@ -319,15 +319,15 @@
             ucSpouseInfoGroom1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucSpouseInfoGroom1.Location = new System.Drawing.Point(4, 24);
             ucSpouseInfoGroom1.Name = "ucSpouseInfoGroom1";
-            ucSpouseInfoGroom1.Size = new System.Drawing.Size(816, 428);
+            ucSpouseInfoGroom1.Size = new System.Drawing.Size(816, 409);
             ucSpouseInfoGroom1.TabIndex = 0;
             // 
             // tabPageBrideInfo
             // 
             tabPageBrideInfo.Controls.Add(groupBox3);
-            tabPageBrideInfo.Location = new System.Drawing.Point(4, 5);
+            tabPageBrideInfo.Location = new System.Drawing.Point(4, 24);
             tabPageBrideInfo.Name = "tabPageBrideInfo";
-            tabPageBrideInfo.Size = new System.Drawing.Size(824, 456);
+            tabPageBrideInfo.Size = new System.Drawing.Size(824, 437);
             tabPageBrideInfo.TabIndex = 5;
             tabPageBrideInfo.Text = "tabPageBrideInfo";
             tabPageBrideInfo.UseVisualStyleBackColor = true;
@@ -340,7 +340,7 @@
             groupBox3.Location = new System.Drawing.Point(0, 0);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            groupBox3.Size = new System.Drawing.Size(824, 456);
+            groupBox3.Size = new System.Drawing.Size(824, 437);
             groupBox3.TabIndex = 1;
             groupBox3.TabStop = false;
             groupBox3.Text = "Bride Info.";
@@ -351,8 +351,27 @@
             ucSpouseInfoBride1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ucSpouseInfoBride1.Location = new System.Drawing.Point(4, 24);
             ucSpouseInfoBride1.Name = "ucSpouseInfoBride1";
-            ucSpouseInfoBride1.Size = new System.Drawing.Size(816, 428);
+            ucSpouseInfoBride1.Size = new System.Drawing.Size(816, 409);
             ucSpouseInfoBride1.TabIndex = 0;
+            // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
+            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
+            tabPageReceipt.TabIndex = 6;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
+            ucPrintReceipt1.TabIndex = 0;
             // 
             // frmMarriageLicense
             // 
@@ -367,9 +386,10 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmMarriageLicense";
+            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Payment > AF 54 - Marriage License";
+            Text = "Transactions > Payments > AF 54 - Marriage License";
             Load += frmMarriageLicense_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
@@ -382,6 +402,7 @@
             groupBox2.ResumeLayout(false);
             tabPageBrideInfo.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
+            tabPageReceipt.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -410,5 +431,7 @@
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
         private ucSpouseInfo ucSpouseInfoGroom1;
         private ucSpouseInfo ucSpouseInfoBride1;
+        private System.Windows.Forms.TabPage tabPageReceipt;
+        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
     }
 }
