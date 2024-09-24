@@ -26,4 +26,5 @@ Updates:
 		- Record insert, update, delete, and display of auction event.
 		- Record insert, update, delete, and display of real property auction scheduling.
 		- Record insert, update, delete, and display bidding records.
+		- Fixed AF-51 & 57, AF-52, AF-53, AF-54, AF-56, and AF-58 payment receipt printing configuration, orientation, resolution and user experience.
 		
