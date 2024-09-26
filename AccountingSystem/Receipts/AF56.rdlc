@@ -708,7 +708,7 @@
                 <Top>1.92583in</Top>
                 <Left>0.38132in</Left>
                 <Height>0.5654in</Height>
-                <Width>9.13668in</Width>
+                <Width>9.13669in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -745,6 +745,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox3">
@@ -776,6 +780,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox4">
@@ -810,6 +818,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox5">
@@ -841,6 +853,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox7">
@@ -871,6 +887,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox2">
@@ -904,6 +924,10 @@
                     <Style>None</Style>
                   </Border>
                   <VerticalAlign>Bottom</VerticalAlign>
+                  <PaddingLeft>1pt</PaddingLeft>
+                  <PaddingRight>1pt</PaddingRight>
+                  <PaddingTop>1pt</PaddingTop>
+                  <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="Textbox14">
@@ -1183,6 +1207,8 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
+            <Top>1.98in</Top>
+            <Left>1.34071in</Left>
             <Height>4.74in</Height>
             <Width>9.65in</Width>
             <Style>
@@ -1192,17 +1218,17 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>4.74in</Height>
+        <Height>8.5in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>9.65in</Width>
+      <Width>11in</Width>
       <Page>
-        <PageHeight>4.74in</PageHeight>
-        <PageWidth>9.65in</PageWidth>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11in</PageWidth>
         <Style />
       </Page>
     </ReportSection>
