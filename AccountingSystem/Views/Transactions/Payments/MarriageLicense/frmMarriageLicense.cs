@@ -250,10 +250,10 @@ namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        tabControlMain.SelectedIndex++;
-                        //if (ConfirmPayment())
-                        //{
-                        //}
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
                     }
                     return;
                 }

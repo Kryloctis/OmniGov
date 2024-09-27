@@ -241,10 +241,10 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        tabControlMain.SelectedIndex++;
-                        //if (ConfirmPayment())
-                        //{
-                        //}
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
                     }
                     return;
                 }

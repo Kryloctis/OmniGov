@@ -191,11 +191,10 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        tabControlMain.SelectedIndex++;
-                        //if (ConfirmPayment())
-                        //{
-                        //    return;
-                        //}
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
                     }
 
                     return;

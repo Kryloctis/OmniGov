@@ -165,10 +165,10 @@ public partial class frmAF51_57 : Form
             {
                 if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                 {
-                    tabControlMain.SelectedIndex++;
-                    //if (ConfirmPayment())
-                    //{
-                    //}
+                    if (ConfirmPayment())
+                    {
+                        tabControlMain.SelectedIndex++;
+                    }
                 }
                 return;
             }

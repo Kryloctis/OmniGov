@@ -196,10 +196,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        tabControlMain.SelectedIndex++;
-                        //if (ConfirmPayment())
-                        //{
-                        //}
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
                     }
                     return;
                 }
