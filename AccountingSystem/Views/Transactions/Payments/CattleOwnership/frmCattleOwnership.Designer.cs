@@ -42,18 +42,18 @@
             ucCattleOwnership1 = new ucCattleOwnership();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
-            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            radCattleOwnershipInfo = new System.Windows.Forms.RadioButton();
             tabPageReceipt = new System.Windows.Forms.TabPage();
             ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            radCattleOwnershipInfo = new System.Windows.Forms.RadioButton();
             flowLayoutPanel1.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageCattleOwnership.SuspendLayout();
             groupBox1.SuspendLayout();
             tabPageFeesCharges.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
             tabPageReceipt.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // radFeesCharges
@@ -218,6 +218,25 @@
             ucPaymentFeesCharges1.Size = new System.Drawing.Size(824, 437);
             ucPaymentFeesCharges1.TabIndex = 0;
             // 
+            // tabPageReceipt
+            // 
+            tabPageReceipt.Controls.Add(ucPrintReceipt1);
+            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
+            tabPageReceipt.Name = "tabPageReceipt";
+            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
+            tabPageReceipt.TabIndex = 5;
+            tabPageReceipt.Text = "tabPageReceipt";
+            tabPageReceipt.UseVisualStyleBackColor = true;
+            // 
+            // ucPrintReceipt1
+            // 
+            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
+            ucPrintReceipt1.Name = "ucPrintReceipt1";
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
+            ucPrintReceipt1.TabIndex = 0;
+            // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = System.Drawing.Color.White;
@@ -247,25 +266,6 @@
             radCattleOwnershipInfo.Text = "Cattle Ownership Info.";
             radCattleOwnershipInfo.UseVisualStyleBackColor = true;
             // 
-            // tabPageReceipt
-            // 
-            tabPageReceipt.Controls.Add(ucPrintReceipt1);
-            tabPageReceipt.Location = new System.Drawing.Point(4, 24);
-            tabPageReceipt.Name = "tabPageReceipt";
-            tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
-            tabPageReceipt.Size = new System.Drawing.Size(824, 437);
-            tabPageReceipt.TabIndex = 5;
-            tabPageReceipt.Text = "tabPageReceipt";
-            tabPageReceipt.UseVisualStyleBackColor = true;
-            // 
-            // ucPrintReceipt1
-            // 
-            ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
-            ucPrintReceipt1.Name = "ucPrintReceipt1";
-            ucPrintReceipt1.Size = new System.Drawing.Size(818, 431);
-            ucPrintReceipt1.TabIndex = 0;
-            // 
             // frmCattleOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -282,6 +282,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Payments > AF 53 - Certificate of Ownership of Large Cattle";
+            FormClosing += frmCattleOwnership_FormClosing;
             Load += frmCattleOwnership_Load;
             flowLayoutPanel1.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
@@ -289,8 +290,8 @@
             tabPageCattleOwnership.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             tabPageFeesCharges.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
             tabPageReceipt.ResumeLayout(false);
+            flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
