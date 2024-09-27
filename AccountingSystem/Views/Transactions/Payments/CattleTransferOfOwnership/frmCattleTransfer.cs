@@ -228,5 +228,19 @@ namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void frmCattleTransfer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool isInReceiptTab = tabControlMain.SelectedTab.Name == "tabPageReceipt";
+            string promptMessage = isInReceiptTab ? "Are you sure you want to close the form?" : "The transaction cannot be saved.\nAre you sure you want to close the form?";
+            bool confirmation = Helper.MessageBoxConfirmCancel(promptMessage);
+
+            if (confirmation)
+            {
+                e.Cancel = false;
+                return;
+            }
+            e.Cancel = true;
+        }
     }
 }
