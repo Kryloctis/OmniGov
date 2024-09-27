@@ -842,7 +842,7 @@ namespace AccountingSystem
         {
             string message = confirmMessage;
 
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(message, "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 return true;
 
             return false;

@@ -228,6 +228,7 @@ namespace AccountingSystem.Views.Transactions.Payments.AF51_57
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Payments > AF51 & 57";
+            FormClosing += frmAF51_57_FormClosing;
             Load += frmAF51_57_Load;
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
