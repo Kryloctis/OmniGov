@@ -196,10 +196,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                 {
                     if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                     {
-                        tabControlMain.SelectedIndex++;
-                        //if (ConfirmPayment())
-                        //{
-                        //}
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
                     }
                     return;
                 }
@@ -248,6 +248,20 @@ namespace AccountingSystem.Views.Transactions.Payments
                 LoadTabContents();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmPaymentRpt_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool isInReceiptTab = tabControlMain.SelectedTab.Name == "tabPageReceipt";
+            string promptMessage = isInReceiptTab ? "Are you sure you want to close the form?" : "The transaction cannot be saved.\nAre you sure you want to close the form?";
+            bool confirmation = Helper.MessageBoxConfirmCancel(promptMessage);
+
+            if (confirmation)
+            {
+                e.Cancel = false;
+                return;
+            }
+            e.Cancel = true;
         }
     }
 }

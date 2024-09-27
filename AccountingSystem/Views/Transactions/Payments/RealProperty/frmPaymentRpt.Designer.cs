@@ -128,7 +128,7 @@
             tabPageTaxDues.Location = new System.Drawing.Point(4, 26);
             tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxDues.Name = "tabPageTaxDues";
-            tabPageTaxDues.Size = new System.Drawing.Size(824, 435);
+            tabPageTaxDues.Size = new System.Drawing.Size(192, 70);
             tabPageTaxDues.TabIndex = 1;
             tabPageTaxDues.Text = "tabPageTaxDues";
             tabPageTaxDues.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             ucPaymentRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPaymentRptTaxDues1.Location = new System.Drawing.Point(0, 0);
             ucPaymentRptTaxDues1.Name = "ucPaymentRptTaxDues1";
-            ucPaymentRptTaxDues1.Size = new System.Drawing.Size(824, 435);
+            ucPaymentRptTaxDues1.Size = new System.Drawing.Size(192, 70);
             ucPaymentRptTaxDues1.TabIndex = 0;
             // 
             // tabPagePayment
@@ -149,7 +149,7 @@
             tabPagePayment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPagePayment.Size = new System.Drawing.Size(824, 435);
+            tabPagePayment.Size = new System.Drawing.Size(192, 70);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = " tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(4, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(816, 429);
+            ucPayment1.Size = new System.Drawing.Size(184, 64);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageReceipt
@@ -169,7 +169,7 @@
             tabPageReceipt.Location = new System.Drawing.Point(4, 26);
             tabPageReceipt.Name = "tabPageReceipt";
             tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
-            tabPageReceipt.Size = new System.Drawing.Size(824, 435);
+            tabPageReceipt.Size = new System.Drawing.Size(192, 70);
             tabPageReceipt.TabIndex = 3;
             tabPageReceipt.Text = "tabPageReceipt";
             tabPageReceipt.UseVisualStyleBackColor = true;
@@ -179,7 +179,7 @@
             ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
             ucPrintReceipt1.Name = "ucPrintReceipt1";
-            ucPrintReceipt1.Size = new System.Drawing.Size(818, 429);
+            ucPrintReceipt1.Size = new System.Drawing.Size(186, 64);
             ucPrintReceipt1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -324,6 +324,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Payments > AF 56 - Real Property Tax Receipts";
+            FormClosing += frmPaymentRpt_FormClosing;
             Load += frmRptPayments_Load;
             panel1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);

@@ -5,23 +5,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>af54</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.13357in</Top>
-            <Left>0.13428in</Left>
-            <Height>12.46643in</Height>
-            <Width>8.13572in</Width>
-            <Visibility>
-              <Hidden>true</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="paramMunicipality">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -43,11 +26,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramMunicipality</rd:DefaultName>
-            <Top>1.85917in</Top>
-            <Left>3.67194in</Left>
+            <Top>0.85917in</Top>
+            <Left>2.14751in</Left>
             <Height>0.25in</Height>
-            <Width>2.11163in</Width>
-            <ZIndex>1</ZIndex>
+            <Width>5.33881in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -80,11 +62,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomName</rd:DefaultName>
-            <Top>3.44065in</Top>
-            <Left>2.38588in</Left>
+            <Top>2.32815in</Top>
+            <Left>2.47159in</Left>
             <Height>0.25in</Height>
             <Width>2.34954in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -117,11 +99,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomAge</rd:DefaultName>
-            <Top>3.44065in</Top>
-            <Left>5.35047in</Left>
+            <Top>2.32815in</Top>
+            <Left>5.43618in</Left>
             <Height>0.25in</Height>
             <Width>0.51544in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -154,11 +136,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomMonths</rd:DefaultName>
-            <Top>3.44065in</Top>
-            <Left>6.74838in</Left>
+            <Top>2.32815in</Top>
+            <Left>6.83408in</Left>
             <Height>0.25in</Height>
             <Width>0.49228in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -191,11 +173,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideName</rd:DefaultName>
-            <Top>4.17769in</Top>
-            <Left>0.86551in</Left>
+            <Top>3.04019in</Top>
+            <Left>0.95122in</Left>
             <Height>0.25in</Height>
             <Width>3.04302in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -228,11 +210,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideAge</rd:DefaultName>
-            <Top>4.17769in</Top>
-            <Left>4.44012in</Left>
+            <Top>3.04019in</Top>
+            <Left>4.48833in</Left>
             <Height>0.25in</Height>
             <Width>0.53743in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -265,11 +247,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramBrideMonths</rd:DefaultName>
-            <Top>4.17769in</Top>
-            <Left>5.82292in</Left>
+            <Top>3.04019in</Top>
+            <Left>5.87113in</Left>
             <Height>0.25in</Height>
             <Width>0.52778in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -302,11 +284,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
-            <Top>3.80377in</Top>
-            <Left>1.61724in</Left>
+            <Top>2.66627in</Top>
+            <Left>1.70295in</Left>
             <Height>0.25in</Height>
             <Width>4.02991in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -340,11 +322,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>6.96742in</Top>
-            <Left>5.20656in</Left>
+            <Top>5.66742in</Top>
+            <Left>5.29227in</Left>
             <Height>0.25in</Height>
             <Width>2.36805in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -378,11 +360,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>7.33224in</Top>
-            <Left>0.80297in</Left>
+            <Top>6.03224in</Top>
+            <Left>0.88868in</Left>
             <Height>0.25in</Height>
             <Width>2.64275in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -416,11 +398,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramDateIssued</rd:DefaultName>
-            <Top>7.33224in</Top>
-            <Left>3.88302in</Left>
+            <Top>6.03224in</Top>
+            <Left>3.96873in</Left>
             <Height>0.25in</Height>
             <Width>0.42207in</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -453,11 +435,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramRegistryNo</rd:DefaultName>
-            <Top>10.45524in</Top>
-            <Left>1.39136in</Left>
+            <Top>9.03024in</Top>
+            <Left>1.47707in</Left>
             <Height>0.25in</Height>
             <Width>1.8071in</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -490,11 +472,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramMunicipality1</rd:DefaultName>
-            <Top>10.1466in</Top>
-            <Left>5.57462in</Left>
+            <Top>8.7341in</Top>
+            <Left>5.66033in</Left>
             <Height>0.25in</Height>
             <Width>2.24652in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -527,11 +509,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>paramGroomResidence</rd:DefaultName>
-            <Top>4.53703in</Top>
-            <Left>0.76801in</Left>
+            <Top>3.39953in</Top>
+            <Left>0.85372in</Left>
             <Height>0.25in</Height>
             <Width>4.22281in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -544,17 +526,15 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>12.6in</Height>
+        <Height>11in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>8.27in</Width>
+      <Width>8.5in</Width>
       <Page>
-        <PageHeight>12.6in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
         <Style />
       </Page>
     </ReportSection>

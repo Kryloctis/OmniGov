@@ -353,6 +353,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Transactions > Payments > AF 58 - Burial Permit & Fee";
+            FormClosing += frmBurialPermit_FormClosing;
             Load += frmBurialPermit_Load;
             tabPageFeesCharges.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);

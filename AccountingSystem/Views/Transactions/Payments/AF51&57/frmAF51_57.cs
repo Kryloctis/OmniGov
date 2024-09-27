@@ -165,10 +165,10 @@ public partial class frmAF51_57 : Form
             {
                 if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                 {
-                    tabControlMain.SelectedIndex++;
-                    //if (ConfirmPayment())
-                    //{
-                    //}
+                    if (ConfirmPayment())
+                    {
+                        tabControlMain.SelectedIndex++;
+                    }
                 }
                 return;
             }
@@ -207,6 +207,24 @@ public partial class frmAF51_57 : Form
         try
         {
             LoadTabContents();
+        }
+        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+    }
+
+    private void frmAF51_57_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        try
+        {
+            bool isInReceiptTab = tabControlMain.SelectedTab.Name == "tabPageReceipt";
+            string promptMessage = isInReceiptTab ? "Are you sure you want to close the form?" : "The transaction cannot be saved.\nAre you sure you want to close the form?";
+            bool confirmation = Helper.MessageBoxConfirmCancel(promptMessage);
+
+            if (confirmation)
+            {
+                e.Cancel = false;
+                return;
+            }
+            e.Cancel = true;
         }
         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
     }
