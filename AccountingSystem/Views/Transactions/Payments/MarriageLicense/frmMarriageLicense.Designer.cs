@@ -390,6 +390,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Transactions > Payments > AF 54 - Marriage License";
+            FormClosing += frmMarriageLicense_FormClosing;
             Load += frmMarriageLicense_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
