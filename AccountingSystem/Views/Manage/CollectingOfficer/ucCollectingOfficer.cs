@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             txtMiddleInitial.Clear();
             txtLastName.Clear();
             txtSuffix.Clear();
-            txtJobtitle.Text = "Collecting Officer";
+            txtJobtitle.Clear();
         }
 
         private void txtFname_Validated(object sender, EventArgs e)
@@ -122,6 +122,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     cmbxLinkedAcc.SelectedIndex = -1;
                     cmbxLinkedAcc.Text = string.Empty;
                     errorProvider1.SetError(chckLinkAcc, string.Empty);
+                    ResetForm();
                 }
                 else
                 {
@@ -210,6 +211,24 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(chckLinkAcc, string.Empty);
+        }
+
+        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadUserDetails();
+        }
+
+        private void LoadUserDetails()
+        {
+            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
+            var dtUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+
+            txtPrefix.Text = dtUser["prefix"];
+            txtFirstName.Text = dtUser["first_name"];
+            txtLastName.Text = dtUser["last_name"];
+            txtMiddleInitial.Text = dtUser["mid_initial"];
+            txtSuffix.Text = dtUser["suffix"];
+            txtJobtitle.Text = dtUser["role_name"];
         }
     }
 }
