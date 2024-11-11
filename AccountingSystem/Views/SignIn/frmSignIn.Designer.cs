@@ -56,6 +56,7 @@ namespace AccountingSystem
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new System.Drawing.Size(230, 23);
             txtUsername.TabIndex = 0;
+            txtUsername.Text = "john";
             txtUsername.Validating += Username_Password_Validating;
             txtUsername.Validated += Username_Password_Validated;
             // 
@@ -90,6 +91,7 @@ namespace AccountingSystem
             txtPassword.PasswordChar = '•';
             txtPassword.Size = new System.Drawing.Size(230, 23);
             txtPassword.TabIndex = 2;
+            txtPassword.Text = "123";
             txtPassword.Validating += Username_Password_Validating;
             txtPassword.Validated += Username_Password_Validated;
             // 

@@ -41,6 +41,7 @@
             feesChargesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             transactionsTstripDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
             paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aF41CommunityTaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             af56TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             af5157TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             af54TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,10 +155,17 @@
             // 
             // paymentsToolStripMenuItem
             // 
-            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { af56TstrpMnuItm, af5157TstrpMnuItm, af54TstrpMnuItm, af58TstrpMnuItm, af53TstrpMnuItm, af52TstrpMnuItm });
+            paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aF41CommunityTaxToolStripMenuItem, af56TstrpMnuItm, af5157TstrpMnuItm, af54TstrpMnuItm, af58TstrpMnuItm, af53TstrpMnuItm, af52TstrpMnuItm });
             paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             paymentsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             paymentsToolStripMenuItem.Text = "Payments";
+            // 
+            // aF41CommunityTaxToolStripMenuItem
+            // 
+            aF41CommunityTaxToolStripMenuItem.Name = "aF41CommunityTaxToolStripMenuItem";
+            aF41CommunityTaxToolStripMenuItem.Size = new System.Drawing.Size(369, 22);
+            aF41CommunityTaxToolStripMenuItem.Text = "AF 15 - Community Tax Certificate (CTC)";
+            aF41CommunityTaxToolStripMenuItem.Click += aF41CommunityTaxToolStripMenuItem_Click;
             // 
             // af56TstrpMnuItm
             // 
@@ -318,5 +326,6 @@
         private System.Windows.Forms.ToolStripMenuItem propertyTaxPostingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dellinquencyNoticesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warrantsOfLevyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aF41CommunityTaxToolStripMenuItem;
     }
 }
