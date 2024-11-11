@@ -205,5 +205,10 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void btnMarkAsVoid_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

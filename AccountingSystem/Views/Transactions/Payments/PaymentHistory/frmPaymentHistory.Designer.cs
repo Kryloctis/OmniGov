@@ -43,6 +43,7 @@
             dataGridView1 = new System.Windows.Forms.DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2 = new System.Windows.Forms.Panel();
+            btnMarkAsVoid = new System.Windows.Forms.Button();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -88,12 +89,11 @@
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(24, 24);
-            btnSearch.Text = "toolStripButton1";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
             btnSearch.ToolTipText = "Search";
             btnSearch.Click += btnSearch_Click;
             // 
@@ -172,12 +172,24 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnMarkAsVoid);
             panel2.Controls.Add(cmbxRowFilter);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(843, 30);
             panel2.TabIndex = 4;
+            // 
+            // btnMarkAsVoid
+            // 
+            btnMarkAsVoid.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnMarkAsVoid.Location = new System.Drawing.Point(739, 4);
+            btnMarkAsVoid.Name = "btnMarkAsVoid";
+            btnMarkAsVoid.Size = new System.Drawing.Size(100, 23);
+            btnMarkAsVoid.TabIndex = 3;
+            btnMarkAsVoid.Text = "Mark As Void";
+            btnMarkAsVoid.UseVisualStyleBackColor = true;
+            btnMarkAsVoid.Click += btnMarkAsVoid_Click;
             // 
             // cmbxRowFilter
             // 
@@ -234,5 +246,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox cmbxAccForm;
+        private System.Windows.Forms.Button btnMarkAsVoid;
     }
 }
