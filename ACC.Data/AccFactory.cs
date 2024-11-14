@@ -219,5 +219,9 @@ namespace ACC.Data
         public static IBiddersRepository BiddersRepository() => new BiddersRepository(mySqlGenericCommandsLFS);
 
         public static IBidRepository BidRepository() => new BidRepository(mySqlGenericCommandsLFS);
+
+        public static ICommunityTaxCertificateRepository CommunityTaxCertificateRepository() => new CommunityTaxCertificateRepository(mySqlGenericCommandsLFS);
+
     }
+
 }

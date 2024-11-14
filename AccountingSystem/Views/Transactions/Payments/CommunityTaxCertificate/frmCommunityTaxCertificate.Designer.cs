@@ -32,6 +32,7 @@
             tabPageTaxpayer = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
             ucPaymentTaxpayers1 = new RealProperty.ucPaymentTaxpayers();
+            tabPageTaxDues = new System.Windows.Forms.TabPage();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             tabPageReceipt = new System.Windows.Forms.TabPage();
@@ -41,13 +42,17 @@
             radTaxDues = new System.Windows.Forms.RadioButton();
             radPayment = new System.Windows.Forms.RadioButton();
             radReceipt = new System.Windows.Forms.RadioButton();
-            tabPageTaxDues = new System.Windows.Forms.TabPage();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnNext = new System.Windows.Forms.Button();
+            btnBackMain = new System.Windows.Forms.Button();
             tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
             panel2.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabPageReceipt.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlMain
@@ -63,7 +68,7 @@
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new System.Drawing.Point(0, 0);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(832, 496);
+            tabControlMain.Size = new System.Drawing.Size(832, 465);
             tabControlMain.TabIndex = 1;
             // 
             // tabPageTaxpayer
@@ -74,7 +79,7 @@
             tabPageTaxpayer.Location = new System.Drawing.Point(4, 26);
             tabPageTaxpayer.Margin = new System.Windows.Forms.Padding(0);
             tabPageTaxpayer.Name = "tabPageTaxpayer";
-            tabPageTaxpayer.Size = new System.Drawing.Size(824, 466);
+            tabPageTaxpayer.Size = new System.Drawing.Size(824, 435);
             tabPageTaxpayer.TabIndex = 0;
             tabPageTaxpayer.Text = "tabPageTaxpayer";
             // 
@@ -86,7 +91,7 @@
             panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel2.Size = new System.Drawing.Size(824, 466);
+            panel2.Size = new System.Drawing.Size(824, 435);
             panel2.TabIndex = 0;
             // 
             // ucPaymentTaxpayers1
@@ -95,8 +100,19 @@
             ucPaymentTaxpayers1.Location = new System.Drawing.Point(4, 3);
             ucPaymentTaxpayers1.Margin = new System.Windows.Forms.Padding(0);
             ucPaymentTaxpayers1.Name = "ucPaymentTaxpayers1";
-            ucPaymentTaxpayers1.Size = new System.Drawing.Size(816, 460);
+            ucPaymentTaxpayers1.Size = new System.Drawing.Size(816, 429);
             ucPaymentTaxpayers1.TabIndex = 0;
+            // 
+            // tabPageTaxDues
+            // 
+            tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F);
+            tabPageTaxDues.Location = new System.Drawing.Point(4, 26);
+            tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
+            tabPageTaxDues.Name = "tabPageTaxDues";
+            tabPageTaxDues.Size = new System.Drawing.Size(824, 435);
+            tabPageTaxDues.TabIndex = 1;
+            tabPageTaxDues.Text = "tabPageTaxDues";
+            tabPageTaxDues.UseVisualStyleBackColor = true;
             // 
             // tabPagePayment
             // 
@@ -106,7 +122,7 @@
             tabPagePayment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPagePayment.Name = "tabPagePayment";
             tabPagePayment.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPagePayment.Size = new System.Drawing.Size(824, 466);
+            tabPagePayment.Size = new System.Drawing.Size(824, 435);
             tabPagePayment.TabIndex = 2;
             tabPagePayment.Text = " tabPagePayment";
             tabPagePayment.UseVisualStyleBackColor = true;
@@ -117,7 +133,7 @@
             ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPayment1.Location = new System.Drawing.Point(4, 3);
             ucPayment1.Name = "ucPayment1";
-            ucPayment1.Size = new System.Drawing.Size(816, 460);
+            ucPayment1.Size = new System.Drawing.Size(816, 429);
             ucPayment1.TabIndex = 0;
             // 
             // tabPageReceipt
@@ -126,7 +142,7 @@
             tabPageReceipt.Location = new System.Drawing.Point(4, 26);
             tabPageReceipt.Name = "tabPageReceipt";
             tabPageReceipt.Padding = new System.Windows.Forms.Padding(3);
-            tabPageReceipt.Size = new System.Drawing.Size(824, 466);
+            tabPageReceipt.Size = new System.Drawing.Size(824, 435);
             tabPageReceipt.TabIndex = 3;
             tabPageReceipt.Text = "tabPageReceipt";
             tabPageReceipt.UseVisualStyleBackColor = true;
@@ -136,7 +152,7 @@
             ucPrintReceipt1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucPrintReceipt1.Location = new System.Drawing.Point(3, 3);
             ucPrintReceipt1.Name = "ucPrintReceipt1";
-            ucPrintReceipt1.Size = new System.Drawing.Size(818, 460);
+            ucPrintReceipt1.Size = new System.Drawing.Size(818, 429);
             ucPrintReceipt1.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -210,16 +226,49 @@
             radReceipt.Text = "Receipt";
             radReceipt.UseVisualStyleBackColor = true;
             // 
-            // tabPageTaxDues
+            // flowLayoutPanel1
             // 
-            tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F);
-            tabPageTaxDues.Location = new System.Drawing.Point(4, 26);
-            tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
-            tabPageTaxDues.Name = "tabPageTaxDues";
-            tabPageTaxDues.Size = new System.Drawing.Size(824, 466);
-            tabPageTaxDues.TabIndex = 1;
-            tabPageTaxDues.Text = "tabPageTaxDues";
-            tabPageTaxDues.UseVisualStyleBackColor = true;
+            flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnNext);
+            flowLayoutPanel1.Controls.Add(btnBackMain);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(195, 465);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(832, 31);
+            flowLayoutPanel1.TabIndex = 5;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new System.Drawing.Point(694, 3);
+            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(134, 23);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnNext
+            // 
+            btnNext.Location = new System.Drawing.Point(552, 3);
+            btnNext.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new System.Drawing.Size(134, 23);
+            btnNext.TabIndex = 0;
+            btnNext.Text = "Next";
+            btnNext.UseVisualStyleBackColor = true;
+            // 
+            // btnBackMain
+            // 
+            btnBackMain.Location = new System.Drawing.Point(410, 3);
+            btnBackMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnBackMain.Name = "btnBackMain";
+            btnBackMain.Size = new System.Drawing.Size(134, 23);
+            btnBackMain.TabIndex = 0;
+            btnBackMain.Text = "Back";
+            btnBackMain.UseVisualStyleBackColor = true;
             // 
             // frmCommunityTaxCertificate
             // 
@@ -227,6 +276,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1027, 496);
             Controls.Add(tabControlMain);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel2);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -242,6 +292,7 @@
             tabPagePayment.ResumeLayout(false);
             tabPageReceipt.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -261,5 +312,9 @@
         private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.RadioButton radReceipt;
         private System.Windows.Forms.TabPage tabPageTaxDues;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnBackMain;
     }
 }
