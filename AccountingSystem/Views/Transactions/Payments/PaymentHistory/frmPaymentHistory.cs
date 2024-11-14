@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            Helper.DatagridFullRowSelectStyle(dgPaymentHistory, true);
         }
 
         private void LoadCollectors()
@@ -101,8 +102,8 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
 
                 if (collectorId is null || accFormId is null)
                 {
-                    ((DataTable)dataGridView1.DataSource).Rows.Clear();
-                    dataGridView1.Refresh();
+                    ((DataTable)dgPaymentHistory.DataSource).Rows.Clear();
+                    dgPaymentHistory.Refresh();
                     progressBar1.Value = 100;
                     return;
                 }
@@ -183,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
                     progressBar1.Value = 100;
 
                 lblRecordCount.Text = dataTable.Rows.Count.ToString();
-                HelperLoadRecords.DatagridViewPaymentHistory(dataTable, dataGridView1);
+                HelperLoadRecords.DatagridViewPaymentHistory(dataTable, dgPaymentHistory);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -208,7 +209,49 @@ namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
 
         private void btnMarkAsVoid_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                if (Helper.MessageBoxConfirmCancel("Do you want to void this payment?"))
+                {
+                    if (VoidPayment())
+                    {
+                        Helper.MessageBoxSuccess("Payment has been voided.");
+                        LoadRecords();
+                    }
+                }
+                return;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool VoidPayment()
+        {
+            try
+            {
+                int index = dgPaymentHistory.CurrentRow.Index;
+                int paymentId = Convert.ToInt32(dgPaymentHistory.Rows[index].Cells["id"].Value);
+
+                var paymentCollectionModel = new PaymentCollectionsModel()
+                {
+                    Id = paymentId,
+                    IsCancelled = true
+                };
+
+                return AccFactory.PaymentCollectionsRepository().VoidPayment(paymentCollectionModel);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            return false;
+        }
+
+        private void dgPaymentHistory_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgPaymentHistory.SelectedRows.Count != 0)
+                btnMarkAsVoid.Enabled = true;
+            else
+                btnMarkAsVoid.Enabled = false;
         }
     }
 }

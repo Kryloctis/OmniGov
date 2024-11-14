@@ -114,6 +114,8 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
+
+
         public bool Delete(List<PaymentCollectionsModel> entityList)
         {
             using (var scope = new TransactionScope())
@@ -511,5 +513,19 @@ namespace ACC.Data
                 return true;
             }
         }
+
+        bool IPaymentCollectionsRepository.VoidPayment(PaymentCollectionsModel paymentCollectionModel)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, paymentCollectionModel.Id},
+                new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionModel.IsCancelled},
+            };
+
+            string query = $"UPDATE {tableName} SET  is_cancelled = @is_cancelled WHERE id = @id";
+
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
     }
 }
