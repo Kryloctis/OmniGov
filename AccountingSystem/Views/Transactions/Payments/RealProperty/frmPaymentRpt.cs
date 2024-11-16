@@ -187,28 +187,30 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            if (!TabValidated())
+                return;
+
+            if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+            {
+                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
+                {
+                    if (ConfirmPayment())
+                    {
+                        tabControlMain.SelectedIndex++;
+                    }
+                }
+                return;
+            }
+
+            if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+            {
+                ResetForm();
+                return;
+            }
+
             try
             {
-                if (!TabValidated())
-                    return;
 
-                if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
-                {
-                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
-                    {
-                        if (ConfirmPayment())
-                        {
-                            tabControlMain.SelectedIndex++;
-                        }
-                    }
-                    return;
-                }
-
-                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
-                {
-                    ResetForm();
-                    return;
-                }
 
                 tabControlMain.SelectedIndex++;
             }

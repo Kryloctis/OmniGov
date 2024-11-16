@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Augmentation;
 using AccountingSystem.Views.Manage.Realignment;
 using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
@@ -681,5 +682,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
         #endregion Validations
+
+        private void btnAugmentation_Click(object sender, EventArgs e)
+        {
+            _ = new frmAugmentation().ShowDialog();
+        }
     }
 }

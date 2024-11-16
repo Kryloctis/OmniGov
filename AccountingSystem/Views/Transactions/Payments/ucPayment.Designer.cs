@@ -58,8 +58,8 @@
             dtPaymentDate = new System.Windows.Forms.DateTimePicker();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             panel5 = new System.Windows.Forms.Panel();
-            lblTotalPayment = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
+            lblTotalPayment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -80,7 +80,6 @@
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            splitContainer1.IsSplitterFixed = true;
             splitContainer1.Location = new System.Drawing.Point(0, 118);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -94,7 +93,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(groupBox5);
             splitContainer1.Size = new System.Drawing.Size(796, 398);
-            splitContainer1.SplitterDistance = 390;
+            splitContainer1.SplitterDistance = 393;
             splitContainer1.TabIndex = 53;
             // 
             // gpBxChequeDetails
@@ -106,7 +105,7 @@
             gpBxChequeDetails.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gpBxChequeDetails.Name = "gpBxChequeDetails";
             gpBxChequeDetails.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gpBxChequeDetails.Size = new System.Drawing.Size(390, 341);
+            gpBxChequeDetails.Size = new System.Drawing.Size(393, 341);
             gpBxChequeDetails.TabIndex = 9;
             gpBxChequeDetails.TabStop = false;
             gpBxChequeDetails.Text = "Cheque Details";
@@ -121,7 +120,7 @@
             panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel9.Name = "panel9";
             panel9.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel9.Size = new System.Drawing.Size(382, 319);
+            panel9.Size = new System.Drawing.Size(385, 319);
             panel9.TabIndex = 0;
             // 
             // dgCheques
@@ -156,7 +155,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgCheques.RowTemplate.Height = 25;
-            dgCheques.Size = new System.Drawing.Size(374, 288);
+            dgCheques.Size = new System.Drawing.Size(377, 288);
             dgCheques.TabIndex = 11;
             dgCheques.Tag = "\"\"";
             dgCheques.DataError += dgCheques_DataError;
@@ -171,7 +170,7 @@
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnDeleteCheque, btnAddCheque });
             toolStrip1.Location = new System.Drawing.Point(4, 3);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(374, 25);
+            toolStrip1.Size = new System.Drawing.Size(377, 25);
             toolStrip1.TabIndex = 10;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -208,7 +207,7 @@
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox2.Size = new System.Drawing.Size(390, 57);
+            groupBox2.Size = new System.Drawing.Size(393, 57);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Payment Method";
@@ -226,13 +225,13 @@
             flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel6.Name = "flowLayoutPanel6";
             flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            flowLayoutPanel6.Size = new System.Drawing.Size(382, 31);
+            flowLayoutPanel6.Size = new System.Drawing.Size(385, 31);
             flowLayoutPanel6.TabIndex = 5;
             // 
             // radPaymentCashCheque
             // 
             radPaymentCashCheque.AutoSize = true;
-            radPaymentCashCheque.Location = new System.Drawing.Point(262, 6);
+            radPaymentCashCheque.Location = new System.Drawing.Point(265, 6);
             radPaymentCashCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             radPaymentCashCheque.Name = "radPaymentCashCheque";
             radPaymentCashCheque.Size = new System.Drawing.Size(108, 19);
@@ -244,7 +243,7 @@
             // radPaymentCheque
             // 
             radPaymentCheque.AutoSize = true;
-            radPaymentCheque.Location = new System.Drawing.Point(188, 6);
+            radPaymentCheque.Location = new System.Drawing.Point(191, 6);
             radPaymentCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             radPaymentCheque.Name = "radPaymentCheque";
             radPaymentCheque.Size = new System.Drawing.Size(66, 19);
@@ -257,7 +256,7 @@
             // 
             radPaymentCash.AutoSize = true;
             radPaymentCash.Checked = true;
-            radPaymentCash.Location = new System.Drawing.Point(129, 6);
+            radPaymentCash.Location = new System.Drawing.Point(132, 6);
             radPaymentCash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             radPaymentCash.Name = "radPaymentCash";
             radPaymentCash.Size = new System.Drawing.Size(51, 19);
@@ -276,7 +275,7 @@
             groupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox5.Size = new System.Drawing.Size(402, 398);
+            groupBox5.Size = new System.Drawing.Size(399, 398);
             groupBox5.TabIndex = 12;
             groupBox5.TabStop = false;
             groupBox5.Text = "Payment Details";
@@ -298,7 +297,7 @@
             panel7.Location = new System.Drawing.Point(4, 23);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(394, 372);
+            panel7.Size = new System.Drawing.Size(391, 372);
             panel7.TabIndex = 13;
             // 
             // txtCollectingOfficer
@@ -428,6 +427,17 @@
             panel5.Size = new System.Drawing.Size(796, 118);
             panel5.TabIndex = 54;
             // 
+            // label5
+            // 
+            label5.Dock = System.Windows.Forms.DockStyle.Top;
+            label5.Location = new System.Drawing.Point(0, 65);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(796, 15);
+            label5.TabIndex = 3;
+            label5.Text = "Amount to pay";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblTotalPayment
             // 
             lblTotalPayment.Dock = System.Windows.Forms.DockStyle.Top;
@@ -439,17 +449,6 @@
             lblTotalPayment.TabIndex = 2;
             lblTotalPayment.Text = "0.00";
             lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            label5.Dock = System.Windows.Forms.DockStyle.Top;
-            label5.Location = new System.Drawing.Point(0, 65);
-            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(796, 15);
-            label5.TabIndex = 3;
-            label5.Text = "Amount to pay";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ucPayment
             // 

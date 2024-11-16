@@ -29,62 +29,60 @@ namespace AccountingSystem.Views.Manage.Realignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucRealignment1 = new AccountingSystem.Views.Manage.Realignment.ucRealignment();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            ucRealignment1 = new ucRealignment();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnSave = new System.Windows.Forms.ToolStripButton();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // ucRealignment1
             // 
-            this.ucRealignment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucRealignment1.Location = new System.Drawing.Point(0, 54);
-            this.ucRealignment1.Name = "ucRealignment1";
-            this.ucRealignment1.Size = new System.Drawing.Size(550, 589);
-            this.ucRealignment1.TabIndex = 0;
+            ucRealignment1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucRealignment1.Location = new System.Drawing.Point(0, 54);
+            ucRealignment1.Name = "ucRealignment1";
+            ucRealignment1.Size = new System.Drawing.Size(550, 589);
+            ucRealignment1.TabIndex = 0;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(543, 50);
-            this.toolStrip1.TabIndex = 47;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSave });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(543, 50);
+            toolStrip1.TabIndex = 47;
+            toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 47);
-            this.btnSave.Text = "&Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSave.Image = Properties.Resources.save28px;
+            btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSave.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(35, 47);
+            btnSave.Text = "&Save";
+            btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // frmRealignmentAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(543, 547);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucRealignment1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmRealignmentAdd";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Realignment";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(543, 318);
+            Controls.Add(toolStrip1);
+            Controls.Add(ucRealignment1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmRealignmentAdd";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Add Realignment";
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

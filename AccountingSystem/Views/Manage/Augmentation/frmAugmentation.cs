@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Manage.Augmentation
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+
         }
     }
 }

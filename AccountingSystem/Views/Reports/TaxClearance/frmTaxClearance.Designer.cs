@@ -32,13 +32,13 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
-            cmbxOfficialReceipt = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
             txtPropertyOwner = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
             pbReport = new System.Windows.Forms.ProgressBar();
+            cmbxProperty = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -79,7 +79,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(cmbxOfficialReceipt);
+            splitContainer1.Panel1.Controls.Add(cmbxProperty);
             splitContainer1.Panel1.Controls.Add(label2);
             splitContainer1.Panel1.Controls.Add(txtPropertyOwner);
             splitContainer1.Panel1.Controls.Add(label1);
@@ -95,38 +95,29 @@
             splitContainer1.SplitterDistance = 228;
             splitContainer1.TabIndex = 4;
             // 
-            // cmbxOfficialReceipt
-            // 
-            cmbxOfficialReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxOfficialReceipt.FormattingEnabled = true;
-            cmbxOfficialReceipt.Location = new System.Drawing.Point(16, 100);
-            cmbxOfficialReceipt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxOfficialReceipt.Name = "cmbxOfficialReceipt";
-            cmbxOfficialReceipt.Size = new System.Drawing.Size(200, 23);
-            cmbxOfficialReceipt.TabIndex = 20;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label2.Location = new System.Drawing.Point(16, 82);
+            label2.Location = new System.Drawing.Point(12, 78);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(115, 15);
+            label2.Size = new System.Drawing.Size(52, 15);
             label2.TabIndex = 19;
-            label2.Text = "Official Receipt No. :";
+            label2.Text = "Property";
             // 
             // txtPropertyOwner
             // 
-            txtPropertyOwner.Location = new System.Drawing.Point(16, 43);
+            txtPropertyOwner.Location = new System.Drawing.Point(12, 39);
             txtPropertyOwner.Name = "txtPropertyOwner";
             txtPropertyOwner.Size = new System.Drawing.Size(200, 23);
             txtPropertyOwner.TabIndex = 0;
+            txtPropertyOwner.TextChanged += txtPropertyOwner_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            label1.Location = new System.Drawing.Point(16, 25);
+            label1.Location = new System.Drawing.Point(12, 21);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(96, 15);
             label1.TabIndex = 18;
@@ -134,7 +125,7 @@
             // 
             // btnRunReport
             // 
-            btnRunReport.Location = new System.Drawing.Point(16, 136);
+            btnRunReport.Location = new System.Drawing.Point(12, 132);
             btnRunReport.Name = "btnRunReport";
             btnRunReport.Size = new System.Drawing.Size(200, 23);
             btnRunReport.TabIndex = 12;
@@ -157,6 +148,16 @@
             pbReport.Name = "pbReport";
             pbReport.Size = new System.Drawing.Size(560, 5);
             pbReport.TabIndex = 9;
+            // 
+            // cmbxProperty
+            // 
+            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxProperty.FormattingEnabled = true;
+            cmbxProperty.Location = new System.Drawing.Point(12, 96);
+            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxProperty.Name = "cmbxProperty";
+            cmbxProperty.Size = new System.Drawing.Size(200, 23);
+            cmbxProperty.TabIndex = 20;
             // 
             // frmTaxClearance
             // 
@@ -194,7 +195,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ProgressBar pbReport;
         private System.Windows.Forms.TextBox txtPropertyOwner;
-        private System.Windows.Forms.ComboBox cmbxOfficialReceipt;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbxProperty;
     }
 }

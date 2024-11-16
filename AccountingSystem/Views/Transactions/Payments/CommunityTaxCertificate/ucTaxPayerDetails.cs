@@ -14,5 +14,10 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         {
 
         }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

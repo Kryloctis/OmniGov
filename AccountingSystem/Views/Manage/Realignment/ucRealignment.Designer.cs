@@ -29,344 +29,339 @@ namespace AccountingSystem.Views.Manage.Realignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.groupboxRealignToDetails = new System.Windows.Forms.GroupBox();
-            this.txtAppropriationBalance = new System.Windows.Forms.TextBox();
-            this.cmbAllotmentClass = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbFPP = new System.Windows.Forms.ComboBox();
-            this.cmbFunds = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbOthersFPP = new System.Windows.Forms.ComboBox();
-            this.groupboxRealignToAccounts = new System.Windows.Forms.GroupBox();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cmbAccount = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTotalAmountRealigned = new System.Windows.Forms.TextBox();
-            this.txtBudgetId = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupboxRealignToDetails.SuspendLayout();
-            this.groupboxRealignToAccounts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            btnAdd = new System.Windows.Forms.Button();
+            dtDateIssued = new System.Windows.Forms.DateTimePicker();
+            btnRemove = new System.Windows.Forms.Button();
+            txtRemarks = new System.Windows.Forms.TextBox();
+            groupboxRealignToDetails = new System.Windows.Forms.GroupBox();
+            txtAppropriationBalance = new System.Windows.Forms.TextBox();
+            cmbAllotmentClass = new System.Windows.Forms.ComboBox();
+            label5 = new System.Windows.Forms.Label();
+            cmbFPP = new System.Windows.Forms.ComboBox();
+            cmbFunds = new System.Windows.Forms.ComboBox();
+            label13 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            cmbOthersFPP = new System.Windows.Forms.ComboBox();
+            groupboxRealignToAccounts = new System.Windows.Forms.GroupBox();
+            dataGridView1 = new System.Windows.Forms.DataGridView();
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            label11 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            cmbAccount = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            txtTotalAmountRealigned = new System.Windows.Forms.TextBox();
+            txtBudgetId = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            groupboxRealignToDetails.SuspendLayout();
+            groupboxRealignToAccounts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(440, 46);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(76, 23);
-            this.btnAdd.TabIndex = 23;
-            this.btnAdd.Text = "Add Account and Amount";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            btnAdd.Location = new System.Drawing.Point(440, 46);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(76, 23);
+            btnAdd.TabIndex = 23;
+            btnAdd.Text = "Add Account and Amount";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // dtDateIssued
             // 
-            this.dtDateIssued.Location = new System.Drawing.Point(142, 172);
-            this.dtDateIssued.Name = "dtDateIssued";
-            this.dtDateIssued.Size = new System.Drawing.Size(373, 23);
-            this.dtDateIssued.TabIndex = 35;
+            dtDateIssued.Location = new System.Drawing.Point(142, 172);
+            dtDateIssued.Name = "dtDateIssued";
+            dtDateIssued.Size = new System.Drawing.Size(373, 23);
+            dtDateIssued.TabIndex = 35;
             // 
             // btnRemove
             // 
-            this.btnRemove.Enabled = false;
-            this.btnRemove.Location = new System.Drawing.Point(456, 217);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 40;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            btnRemove.Enabled = false;
+            btnRemove.Location = new System.Drawing.Point(456, 217);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new System.Drawing.Size(75, 23);
+            btnRemove.TabIndex = 40;
+            btnRemove.Text = "Remove";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(142, 201);
-            this.txtRemarks.Multiline = true;
-            this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(374, 41);
-            this.txtRemarks.TabIndex = 42;
-            this.txtRemarks.Validating += new System.ComponentModel.CancelEventHandler(this.txtRemarks_Validating);
-            this.txtRemarks.Validated += new System.EventHandler(this.txtRemarks_Validated);
+            txtRemarks.Location = new System.Drawing.Point(142, 201);
+            txtRemarks.Multiline = true;
+            txtRemarks.Name = "txtRemarks";
+            txtRemarks.Size = new System.Drawing.Size(374, 41);
+            txtRemarks.TabIndex = 42;
+            txtRemarks.Validating += txtRemarks_Validating;
+            txtRemarks.Validated += txtRemarks_Validated;
             // 
             // groupboxRealignToDetails
             // 
-            this.groupboxRealignToDetails.Controls.Add(this.txtAppropriationBalance);
-            this.groupboxRealignToDetails.Controls.Add(this.cmbAllotmentClass);
-            this.groupboxRealignToDetails.Controls.Add(this.txtRemarks);
-            this.groupboxRealignToDetails.Controls.Add(this.label5);
-            this.groupboxRealignToDetails.Controls.Add(this.cmbFPP);
-            this.groupboxRealignToDetails.Controls.Add(this.cmbFunds);
-            this.groupboxRealignToDetails.Controls.Add(this.label13);
-            this.groupboxRealignToDetails.Controls.Add(this.dtDateIssued);
-            this.groupboxRealignToDetails.Controls.Add(this.label6);
-            this.groupboxRealignToDetails.Controls.Add(this.label2);
-            this.groupboxRealignToDetails.Controls.Add(this.label7);
-            this.groupboxRealignToDetails.Controls.Add(this.label8);
-            this.groupboxRealignToDetails.Controls.Add(this.label9);
-            this.groupboxRealignToDetails.Controls.Add(this.cmbOthersFPP);
-            this.groupboxRealignToDetails.Location = new System.Drawing.Point(3, 9);
-            this.groupboxRealignToDetails.Name = "groupboxRealignToDetails";
-            this.groupboxRealignToDetails.Size = new System.Drawing.Size(535, 248);
-            this.groupboxRealignToDetails.TabIndex = 44;
-            this.groupboxRealignToDetails.TabStop = false;
-            this.groupboxRealignToDetails.Text = "Realign to ";
+            groupboxRealignToDetails.Controls.Add(txtAppropriationBalance);
+            groupboxRealignToDetails.Controls.Add(cmbAllotmentClass);
+            groupboxRealignToDetails.Controls.Add(txtRemarks);
+            groupboxRealignToDetails.Controls.Add(label5);
+            groupboxRealignToDetails.Controls.Add(cmbFPP);
+            groupboxRealignToDetails.Controls.Add(cmbFunds);
+            groupboxRealignToDetails.Controls.Add(label13);
+            groupboxRealignToDetails.Controls.Add(dtDateIssued);
+            groupboxRealignToDetails.Controls.Add(label6);
+            groupboxRealignToDetails.Controls.Add(label2);
+            groupboxRealignToDetails.Controls.Add(label7);
+            groupboxRealignToDetails.Controls.Add(label8);
+            groupboxRealignToDetails.Controls.Add(label9);
+            groupboxRealignToDetails.Controls.Add(cmbOthersFPP);
+            groupboxRealignToDetails.Location = new System.Drawing.Point(3, 9);
+            groupboxRealignToDetails.Name = "groupboxRealignToDetails";
+            groupboxRealignToDetails.Size = new System.Drawing.Size(535, 248);
+            groupboxRealignToDetails.TabIndex = 44;
+            groupboxRealignToDetails.TabStop = false;
+            groupboxRealignToDetails.Text = "Realign to ";
             // 
             // txtAppropriationBalance
             // 
-            this.txtAppropriationBalance.Location = new System.Drawing.Point(141, 21);
-            this.txtAppropriationBalance.Name = "txtAppropriationBalance";
-            this.txtAppropriationBalance.ReadOnly = true;
-            this.txtAppropriationBalance.Size = new System.Drawing.Size(374, 23);
-            this.txtAppropriationBalance.TabIndex = 50;
-            this.txtAppropriationBalance.TabStop = false;
-            this.txtAppropriationBalance.Text = "0.0";
+            txtAppropriationBalance.Location = new System.Drawing.Point(141, 21);
+            txtAppropriationBalance.Name = "txtAppropriationBalance";
+            txtAppropriationBalance.ReadOnly = true;
+            txtAppropriationBalance.Size = new System.Drawing.Size(374, 23);
+            txtAppropriationBalance.TabIndex = 50;
+            txtAppropriationBalance.TabStop = false;
+            txtAppropriationBalance.Text = "0.0";
             // 
             // cmbAllotmentClass
             // 
-            this.cmbAllotmentClass.FormattingEnabled = true;
-            this.cmbAllotmentClass.Location = new System.Drawing.Point(141, 143);
-            this.cmbAllotmentClass.Name = "cmbAllotmentClass";
-            this.cmbAllotmentClass.Size = new System.Drawing.Size(374, 23);
-            this.cmbAllotmentClass.TabIndex = 48;
-            this.cmbAllotmentClass.DropDownClosed += new System.EventHandler(this.cmbAllotmentClass_DropDownClosed);
-            this.cmbAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAllotmentClass_Validating);
-            this.cmbAllotmentClass.Validated += new System.EventHandler(this.cmbAllotmentClass_Validated);
+            cmbAllotmentClass.FormattingEnabled = true;
+            cmbAllotmentClass.Location = new System.Drawing.Point(141, 143);
+            cmbAllotmentClass.Name = "cmbAllotmentClass";
+            cmbAllotmentClass.Size = new System.Drawing.Size(374, 23);
+            cmbAllotmentClass.TabIndex = 48;
+            cmbAllotmentClass.DropDownClosed += cmbAllotmentClass_DropDownClosed;
+            cmbAllotmentClass.Validating += cmbAllotmentClass_Validating;
+            cmbAllotmentClass.Validated += cmbAllotmentClass_Validated;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 201);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 15);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "Remarks ";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(10, 201);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(55, 15);
+            label5.TabIndex = 41;
+            label5.Text = "Remarks ";
             // 
             // cmbFPP
             // 
-            this.cmbFPP.FormattingEnabled = true;
-            this.cmbFPP.Location = new System.Drawing.Point(141, 85);
-            this.cmbFPP.Name = "cmbFPP";
-            this.cmbFPP.Size = new System.Drawing.Size(374, 23);
-            this.cmbFPP.TabIndex = 47;
-            this.cmbFPP.DropDownClosed += new System.EventHandler(this.cmbFPP_DropDownClosed);
-            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
-            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
+            cmbFPP.FormattingEnabled = true;
+            cmbFPP.Location = new System.Drawing.Point(141, 85);
+            cmbFPP.Name = "cmbFPP";
+            cmbFPP.Size = new System.Drawing.Size(374, 23);
+            cmbFPP.TabIndex = 47;
+            cmbFPP.DropDownClosed += cmbFPP_DropDownClosed;
+            cmbFPP.Validating += cmbFPP_Validating;
+            cmbFPP.Validated += cmbFPP_Validated;
             // 
             // cmbFunds
             // 
-            this.cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFunds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cmbFunds.FormattingEnabled = true;
-            this.cmbFunds.Location = new System.Drawing.Point(141, 56);
-            this.cmbFunds.Name = "cmbFunds";
-            this.cmbFunds.Size = new System.Drawing.Size(374, 23);
-            this.cmbFunds.TabIndex = 46;
-            this.cmbFunds.DropDownClosed += new System.EventHandler(this.cmbFunds_DropDownClosed);
+            cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbFunds.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            cmbFunds.FormattingEnabled = true;
+            cmbFunds.Location = new System.Drawing.Point(141, 56);
+            cmbFunds.Name = "cmbFunds";
+            cmbFunds.Size = new System.Drawing.Size(374, 23);
+            cmbFunds.TabIndex = 46;
+            cmbFunds.DropDownClosed += cmbFunds_DropDownClosed;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 24);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(128, 15);
-            this.label13.TabIndex = 44;
-            this.label13.Text = "Appropriation Balance ";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(7, 24);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(128, 15);
+            label13.TabIndex = 44;
+            label13.Text = "Appropriation Balance ";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 172);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Date Issued";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(10, 172);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(67, 15);
+            label6.TabIndex = 36;
+            label6.Text = "Date Issued";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 15);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Allotment Class";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(10, 146);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(90, 15);
+            label2.TabIndex = 12;
+            label2.Text = "Allotment Class";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 117);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 15);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Sub FPP";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(10, 117);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(50, 15);
+            label7.TabIndex = 13;
+            label7.Text = "Sub FPP";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 59);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 15);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Type of Fund";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(10, 59);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(75, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Type of Fund";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 88);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 15);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "FPP";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(10, 88);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(27, 15);
+            label9.TabIndex = 15;
+            label9.Text = "FPP";
             // 
             // cmbOthersFPP
             // 
-            this.cmbOthersFPP.FormattingEnabled = true;
-            this.cmbOthersFPP.Location = new System.Drawing.Point(141, 114);
-            this.cmbOthersFPP.Name = "cmbOthersFPP";
-            this.cmbOthersFPP.Size = new System.Drawing.Size(374, 23);
-            this.cmbOthersFPP.TabIndex = 16;
-            this.cmbOthersFPP.DropDownClosed += new System.EventHandler(this.cmbOthersFPP_DropDownClosed);
-            this.cmbOthersFPP.TextChanged += new System.EventHandler(this.cmbOthersFPP_TextChanged);
+            cmbOthersFPP.FormattingEnabled = true;
+            cmbOthersFPP.Location = new System.Drawing.Point(141, 114);
+            cmbOthersFPP.Name = "cmbOthersFPP";
+            cmbOthersFPP.Size = new System.Drawing.Size(374, 23);
+            cmbOthersFPP.TabIndex = 16;
+            cmbOthersFPP.DropDownClosed += cmbOthersFPP_DropDownClosed;
+            cmbOthersFPP.TextChanged += cmbOthersFPP_TextChanged;
             // 
             // groupboxRealignToAccounts
             // 
-            this.groupboxRealignToAccounts.Controls.Add(this.dataGridView1);
-            this.groupboxRealignToAccounts.Controls.Add(this.nudAmount);
-            this.groupboxRealignToAccounts.Controls.Add(this.label11);
-            this.groupboxRealignToAccounts.Controls.Add(this.label12);
-            this.groupboxRealignToAccounts.Controls.Add(this.cmbAccount);
-            this.groupboxRealignToAccounts.Controls.Add(this.label1);
-            this.groupboxRealignToAccounts.Controls.Add(this.txtTotalAmountRealigned);
-            this.groupboxRealignToAccounts.Controls.Add(this.btnAdd);
-            this.groupboxRealignToAccounts.Controls.Add(this.btnRemove);
-            this.groupboxRealignToAccounts.Location = new System.Drawing.Point(554, 9);
-            this.groupboxRealignToAccounts.Name = "groupboxRealignToAccounts";
-            this.groupboxRealignToAccounts.Size = new System.Drawing.Size(537, 248);
-            this.groupboxRealignToAccounts.TabIndex = 45;
-            this.groupboxRealignToAccounts.TabStop = false;
-            this.groupboxRealignToAccounts.Text = "Accounts";
-            // 
-            // nudAmount
-            // 
-            this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(331, 46);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            -1530494976,
-            232830,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(92, 23);
-            this.nudAmount.TabIndex = 54;
-            this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
-            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(331, 28);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 15);
-            this.label11.TabIndex = 53;
-            this.label11.Text = "Amount";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 28);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(52, 15);
-            this.label12.TabIndex = 51;
-            this.label12.Text = "Account";
-            // 
-            // cmbAccount
-            // 
-            this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.IntegralHeight = false;
-            this.cmbAccount.Location = new System.Drawing.Point(10, 46);
-            this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(303, 23);
-            this.cmbAccount.TabIndex = 52;
-            this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
-            this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 221);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 50;
-            this.label1.Text = "Total ";
-            // 
-            // txtTotalAmountRealigned
-            // 
-            this.txtTotalAmountRealigned.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalAmountRealigned.Location = new System.Drawing.Point(50, 219);
-            this.txtTotalAmountRealigned.Name = "txtTotalAmountRealigned";
-            this.txtTotalAmountRealigned.ReadOnly = true;
-            this.txtTotalAmountRealigned.Size = new System.Drawing.Size(208, 23);
-            this.txtTotalAmountRealigned.TabIndex = 49;
-            this.txtTotalAmountRealigned.TabStop = false;
-            this.txtTotalAmountRealigned.Text = "0.0";
-            // 
-            // txtBudgetId
-            // 
-            this.txtBudgetId.AutoSize = true;
-            this.txtBudgetId.Location = new System.Drawing.Point(9, 47);
-            this.txtBudgetId.Name = "txtBudgetId";
-            this.txtBudgetId.Size = new System.Drawing.Size(21, 15);
-            this.txtBudgetId.TabIndex = 49;
-            this.txtBudgetId.Text = "ID ";
-            this.txtBudgetId.Visible = false;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider1.ContainerControl = this;
+            groupboxRealignToAccounts.Controls.Add(dataGridView1);
+            groupboxRealignToAccounts.Controls.Add(nudAmount);
+            groupboxRealignToAccounts.Controls.Add(label11);
+            groupboxRealignToAccounts.Controls.Add(label12);
+            groupboxRealignToAccounts.Controls.Add(cmbAccount);
+            groupboxRealignToAccounts.Controls.Add(label1);
+            groupboxRealignToAccounts.Controls.Add(txtTotalAmountRealigned);
+            groupboxRealignToAccounts.Controls.Add(btnAdd);
+            groupboxRealignToAccounts.Controls.Add(btnRemove);
+            groupboxRealignToAccounts.Location = new System.Drawing.Point(554, 9);
+            groupboxRealignToAccounts.Name = "groupboxRealignToAccounts";
+            groupboxRealignToAccounts.Size = new System.Drawing.Size(537, 248);
+            groupboxRealignToAccounts.TabIndex = 45;
+            groupboxRealignToAccounts.TabStop = false;
+            groupboxRealignToAccounts.Text = "Accounts";
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 74);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(521, 121);
-            this.dataGridView1.TabIndex = 55;
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new System.Drawing.Point(10, 74);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new System.Drawing.Size(521, 121);
+            dataGridView1.TabIndex = 55;
+            // 
+            // nudAmount
+            // 
+            nudAmount.DecimalPlaces = 2;
+            nudAmount.Location = new System.Drawing.Point(331, 46);
+            nudAmount.Maximum = new decimal(new int[] { -1530494976, 232830, 0, 0 });
+            nudAmount.Name = "nudAmount";
+            nudAmount.Size = new System.Drawing.Size(92, 23);
+            nudAmount.TabIndex = 54;
+            nudAmount.ThousandsSeparator = true;
+            nudAmount.Validating += nudAmount_Validating;
+            nudAmount.Validated += nudAmount_Validated;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(331, 28);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(51, 15);
+            label11.TabIndex = 53;
+            label11.Text = "Amount";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(10, 28);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(52, 15);
+            label12.TabIndex = 51;
+            label12.Text = "Account";
+            // 
+            // cmbAccount
+            // 
+            cmbAccount.FormattingEnabled = true;
+            cmbAccount.IntegralHeight = false;
+            cmbAccount.Location = new System.Drawing.Point(10, 46);
+            cmbAccount.Name = "cmbAccount";
+            cmbAccount.Size = new System.Drawing.Size(303, 23);
+            cmbAccount.TabIndex = 52;
+            cmbAccount.Validating += cmbAccount_Validating;
+            cmbAccount.Validated += cmbAccount_Validated;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(9, 221);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(35, 15);
+            label1.TabIndex = 50;
+            label1.Text = "Total ";
+            // 
+            // txtTotalAmountRealigned
+            // 
+            txtTotalAmountRealigned.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtTotalAmountRealigned.Location = new System.Drawing.Point(50, 219);
+            txtTotalAmountRealigned.Name = "txtTotalAmountRealigned";
+            txtTotalAmountRealigned.ReadOnly = true;
+            txtTotalAmountRealigned.Size = new System.Drawing.Size(208, 23);
+            txtTotalAmountRealigned.TabIndex = 49;
+            txtTotalAmountRealigned.TabStop = false;
+            txtTotalAmountRealigned.Text = "0.0";
+            // 
+            // txtBudgetId
+            // 
+            txtBudgetId.AutoSize = true;
+            txtBudgetId.Location = new System.Drawing.Point(9, 47);
+            txtBudgetId.Name = "txtBudgetId";
+            txtBudgetId.Size = new System.Drawing.Size(21, 15);
+            txtBudgetId.TabIndex = 49;
+            txtBudgetId.Text = "ID ";
+            txtBudgetId.Visible = false;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucRealignment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.groupboxRealignToAccounts);
-            this.Controls.Add(this.groupboxRealignToDetails);
-            this.Name = "ucRealignment";
-            this.Size = new System.Drawing.Size(1120, 327);
-            this.Load += new System.EventHandler(this.ucRealignment_Load);
-            this.groupboxRealignToDetails.ResumeLayout(false);
-            this.groupboxRealignToDetails.PerformLayout();
-            this.groupboxRealignToAccounts.ResumeLayout(false);
-            this.groupboxRealignToAccounts.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(groupboxRealignToAccounts);
+            Controls.Add(groupboxRealignToDetails);
+            Name = "ucRealignment";
+            Size = new System.Drawing.Size(1120, 262);
+            Load += ucRealignment_Load;
+            groupboxRealignToDetails.ResumeLayout(false);
+            groupboxRealignToDetails.PerformLayout();
+            groupboxRealignToAccounts.ResumeLayout(false);
+            groupboxRealignToAccounts.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
