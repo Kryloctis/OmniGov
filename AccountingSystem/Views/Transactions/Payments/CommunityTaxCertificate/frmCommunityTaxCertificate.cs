@@ -61,6 +61,35 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         private void InitializeReceipt()
         {
 
+            //int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
+            //int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
+
+            //var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
+            //var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
+
+            //string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
+
+            //string brideName = Helper.GenerateFullName(string.Empty, dictBrideInfo["first_name"], dictBrideInfo["middle_name"], dictBrideInfo["last_name"], string.Empty);
+
+            //var dictReportParameters = new Dictionary<string, string>()
+            //{
+            //    { "paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper() },
+            //    { "paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper() },
+            //    { "paramRegistryNo", ucMarriageDetails.GetMarriageDetails().registryNo },
+            //    { "paramDateIssued", ucMarriageDetails.GetMarriageDetails().issuedOn.ToString()},
+            //    { "paramGroomName", groomName },
+            //    { "paramGroomAge", ucSpouseInfoGroom.GetSpouseInfo().age.ToString() },
+            //    { "paramGroomMonths", ucSpouseInfoGroom.GetSpouseInfo().months.ToString() },
+            //    { "paramGroomResidence", ucSpouseInfoGroom.GetSpouseInfo().currentResidence.ToString()},
+            //    { "paramBrideName", brideName },
+            //    { "paramBrideAge", ucSpouseInfoBride.GetSpouseInfo().age.ToString() },
+            //    { "paramBrideMonths", ucSpouseInfoBride.GetSpouseInfo().months.ToString() },
+            //    { "paramBrideResidence", ucSpouseInfoBride.GetSpouseInfo().currentResidence.ToString()}
+            //};
+
+            //string reportPath = $"{Application.StartupPath}\\Receipts\\AF54.rdlc";
+
+            //ucPrintReceipt.Onload(reportPath, dictReportParameters);
         }
 
         private void LoadTabContents()

@@ -34,6 +34,7 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             ucTaxPayerDetails1 = new ucTaxPayerDetails();
             tabPageTaxDues = new System.Windows.Forms.TabPage();
+            groupBox2 = new System.Windows.Forms.GroupBox();
             ucTaxDue1 = new ucTaxDue();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
@@ -48,17 +49,16 @@
             btnCancel = new System.Windows.Forms.Button();
             btnNext = new System.Windows.Forms.Button();
             btnBackMain = new System.Windows.Forms.Button();
-            groupBox2 = new System.Windows.Forms.GroupBox();
             tabControlMain.SuspendLayout();
             tabPageTaxpayer.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             tabPageTaxDues.SuspendLayout();
+            groupBox2.SuspendLayout();
             tabPagePayment.SuspendLayout();
             tabPageReceipt.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlMain
@@ -135,6 +135,18 @@
             tabPageTaxDues.TabIndex = 1;
             tabPageTaxDues.Text = "tabPageTaxDues";
             tabPageTaxDues.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(ucTaxDue1);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            groupBox2.Location = new System.Drawing.Point(0, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(824, 530);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Tax Dues";
             // 
             // ucTaxDue1
             // 
@@ -305,18 +317,6 @@
             btnBackMain.UseVisualStyleBackColor = true;
             btnBackMain.Click += btnBackMain_Click;
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(ucTaxDue1);
-            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            groupBox2.Location = new System.Drawing.Point(0, 0);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(824, 530);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Tax Dues";
-            // 
             // frmCommunityTaxCertificate
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -340,11 +340,11 @@
             panel2.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             tabPageTaxDues.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             tabPagePayment.ResumeLayout(false);
             tabPageReceipt.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
