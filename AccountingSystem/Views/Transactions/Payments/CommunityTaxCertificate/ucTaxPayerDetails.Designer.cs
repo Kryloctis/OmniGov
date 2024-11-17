@@ -28,117 +28,122 @@
         /// </summary>
         private void InitializeComponent()
         {
-            radioButton3 = new System.Windows.Forms.RadioButton();
+            components = new System.ComponentModel.Container();
+            radWidow = new System.Windows.Forms.RadioButton();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            radioButton1 = new System.Windows.Forms.RadioButton();
-            radioButton2 = new System.Windows.Forms.RadioButton();
-            radioButton4 = new System.Windows.Forms.RadioButton();
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            radSingle = new System.Windows.Forms.RadioButton();
+            radMarried = new System.Windows.Forms.RadioButton();
+            radDivorced = new System.Windows.Forms.RadioButton();
+            nudYear = new System.Windows.Forms.NumericUpDown();
             label17 = new System.Windows.Forms.Label();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            dtpDateOfBirth = new System.Windows.Forms.DateTimePicker();
             label16 = new System.Windows.Forms.Label();
-            textBox6 = new System.Windows.Forms.TextBox();
+            txtPlaceOfBirth = new System.Windows.Forms.TextBox();
             label15 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
+            txtICR = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            txtCitizenship = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtTIN = new System.Windows.Forms.TextBox();
             txtLastName = new System.Windows.Forms.TextBox();
-            txtContactInfo = new System.Windows.Forms.TextBox();
+            txtMiddleName = new System.Windows.Forms.TextBox();
+            txtOccupation = new System.Windows.Forms.TextBox();
             label14 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
-            txtMiddleName = new System.Windows.Forms.TextBox();
+            txtFirstName = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
-            txtMunicipality = new System.Windows.Forms.TextBox();
+            txtAddress = new System.Windows.Forms.TextBox();
             radFemale = new System.Windows.Forms.RadioButton();
             radMale = new System.Windows.Forms.RadioButton();
             flowPanelSex = new System.Windows.Forms.FlowLayoutPanel();
-            txtFirstName = new System.Windows.Forms.TextBox();
+            txtPlaceOfIssue = new System.Windows.Forms.TextBox();
             label7 = new System.Windows.Forms.Label();
-            dtBirthDate = new System.Windows.Forms.DateTimePicker();
-            nudAge = new System.Windows.Forms.NumericUpDown();
-            nudMonths = new System.Windows.Forms.NumericUpDown();
+            dtpDateOfIssued = new System.Windows.Forms.DateTimePicker();
+            nudHeight = new System.Windows.Forms.NumericUpDown();
+            nudWeight = new System.Windows.Forms.NumericUpDown();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             flowPanelSex.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudMonths).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudWeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // radioButton3
+            // radWidow
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new System.Drawing.Point(138, 3);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new System.Drawing.Size(62, 19);
-            radioButton3.TabIndex = 6;
-            radioButton3.Text = "Widow";
-            radioButton3.UseVisualStyleBackColor = true;
-            radioButton3.CheckedChanged += radioButton3_CheckedChanged;
+            radWidow.AutoSize = true;
+            radWidow.Location = new System.Drawing.Point(138, 3);
+            radWidow.Name = "radWidow";
+            radWidow.Size = new System.Drawing.Size(62, 19);
+            radWidow.TabIndex = 2;
+            radWidow.Text = "Widow";
+            radWidow.UseVisualStyleBackColor = true;
+            radWidow.CheckedChanged += radioButton3_CheckedChanged;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            flowLayoutPanel1.Controls.Add(radioButton1);
-            flowLayoutPanel1.Controls.Add(radioButton2);
-            flowLayoutPanel1.Controls.Add(radioButton3);
-            flowLayoutPanel1.Controls.Add(radioButton4);
-            flowLayoutPanel1.Enabled = false;
+            flowLayoutPanel1.Controls.Add(radSingle);
+            flowLayoutPanel1.Controls.Add(radMarried);
+            flowLayoutPanel1.Controls.Add(radWidow);
+            flowLayoutPanel1.Controls.Add(radDivorced);
             flowLayoutPanel1.Location = new System.Drawing.Point(216, 363);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(289, 23);
             flowLayoutPanel1.TabIndex = 75;
             // 
-            // radioButton1
+            // radSingle
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new System.Drawing.Point(3, 3);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new System.Drawing.Size(57, 19);
-            radioButton1.TabIndex = 5;
-            radioButton1.Text = "Single";
-            radioButton1.UseVisualStyleBackColor = true;
+            radSingle.AutoSize = true;
+            radSingle.Checked = true;
+            radSingle.Location = new System.Drawing.Point(3, 3);
+            radSingle.Name = "radSingle";
+            radSingle.Size = new System.Drawing.Size(57, 19);
+            radSingle.TabIndex = 0;
+            radSingle.TabStop = true;
+            radSingle.Text = "Single";
+            radSingle.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radMarried
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new System.Drawing.Point(66, 3);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new System.Drawing.Size(66, 19);
-            radioButton2.TabIndex = 6;
-            radioButton2.Text = "Married";
-            radioButton2.UseVisualStyleBackColor = true;
+            radMarried.AutoSize = true;
+            radMarried.Location = new System.Drawing.Point(66, 3);
+            radMarried.Name = "radMarried";
+            radMarried.Size = new System.Drawing.Size(66, 19);
+            radMarried.TabIndex = 1;
+            radMarried.Text = "Married";
+            radMarried.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radDivorced
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new System.Drawing.Point(206, 3);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new System.Drawing.Size(72, 19);
-            radioButton4.TabIndex = 7;
-            radioButton4.Text = "Divorced";
-            radioButton4.UseVisualStyleBackColor = true;
+            radDivorced.AutoSize = true;
+            radDivorced.Location = new System.Drawing.Point(206, 3);
+            radDivorced.Name = "radDivorced";
+            radDivorced.Size = new System.Drawing.Size(72, 19);
+            radDivorced.TabIndex = 3;
+            radDivorced.Text = "Divorced";
+            radDivorced.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // nudYear
             // 
-            numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown1.Location = new System.Drawing.Point(216, 11);
-            numericUpDown1.Maximum = new decimal(new int[] { 2099, 0, 0, 0 });
-            numericUpDown1.Minimum = new decimal(new int[] { 2023, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(289, 23);
-            numericUpDown1.TabIndex = 74;
-            numericUpDown1.Value = new decimal(new int[] { 2024, 0, 0, 0 });
+            nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudYear.Location = new System.Drawing.Point(216, 11);
+            nudYear.Maximum = new decimal(new int[] { 2099, 0, 0, 0 });
+            nudYear.Minimum = new decimal(new int[] { 2023, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.ReadOnly = true;
+            nudYear.Size = new System.Drawing.Size(289, 23);
+            nudYear.TabIndex = 0;
+            nudYear.Value = new decimal(new int[] { 2024, 0, 0, 0 });
             // 
             // label17
             // 
@@ -149,16 +154,15 @@
             label17.TabIndex = 73;
             label17.Text = "Date of Birth";
             // 
-            // dateTimePicker1
+            // dtpDateOfBirth
             // 
-            dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dateTimePicker1.CustomFormat = "MMM dd, yyyy";
-            dateTimePicker1.Enabled = false;
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(216, 394);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(289, 23);
-            dateTimePicker1.TabIndex = 72;
+            dtpDateOfBirth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtpDateOfBirth.CustomFormat = "MMM dd, yyyy";
+            dtpDateOfBirth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpDateOfBirth.Location = new System.Drawing.Point(216, 394);
+            dtpDateOfBirth.Name = "dtpDateOfBirth";
+            dtpDateOfBirth.Size = new System.Drawing.Size(289, 23);
+            dtpDateOfBirth.TabIndex = 11;
             // 
             // label16
             // 
@@ -169,14 +173,15 @@
             label16.TabIndex = 71;
             label16.Text = "Civil Status";
             // 
-            // textBox6
+            // txtPlaceOfBirth
             // 
-            textBox6.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox6.Location = new System.Drawing.Point(216, 335);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new System.Drawing.Size(289, 23);
-            textBox6.TabIndex = 68;
+            txtPlaceOfBirth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtPlaceOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtPlaceOfBirth.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtPlaceOfBirth.Location = new System.Drawing.Point(216, 335);
+            txtPlaceOfBirth.Name = "txtPlaceOfBirth";
+            txtPlaceOfBirth.Size = new System.Drawing.Size(289, 23);
+            txtPlaceOfBirth.TabIndex = 10;
             // 
             // label15
             // 
@@ -187,14 +192,15 @@
             label15.TabIndex = 69;
             label15.Text = "Place of Birth";
             // 
-            // textBox5
+            // txtICR
             // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox5.Location = new System.Drawing.Point(216, 306);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(289, 23);
-            textBox5.TabIndex = 66;
+            txtICR.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtICR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtICR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtICR.Location = new System.Drawing.Point(216, 306);
+            txtICR.Name = "txtICR";
+            txtICR.Size = new System.Drawing.Size(289, 23);
+            txtICR.TabIndex = 9;
             // 
             // label3
             // 
@@ -214,14 +220,15 @@
             label2.TabIndex = 56;
             label2.Text = "Citizenship";
             // 
-            // textBox4
+            // txtCitizenship
             // 
-            textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox4.Location = new System.Drawing.Point(216, 277);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(289, 23);
-            textBox4.TabIndex = 46;
+            txtCitizenship.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtCitizenship.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtCitizenship.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtCitizenship.Location = new System.Drawing.Point(216, 277);
+            txtCitizenship.Name = "txtCitizenship";
+            txtCitizenship.Size = new System.Drawing.Size(289, 23);
+            txtCitizenship.TabIndex = 8;
             // 
             // label1
             // 
@@ -246,9 +253,9 @@
             label6.AutoSize = true;
             label6.Location = new System.Drawing.Point(10, 423);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(46, 15);
+            label6.Size = new System.Drawing.Size(87, 15);
             label6.TabIndex = 53;
-            label6.Text = "Height ";
+            label6.Text = "Height (in cm.)";
             // 
             // label5
             // 
@@ -259,42 +266,43 @@
             label5.TabIndex = 63;
             label5.Text = "TIN";
             // 
-            // textBox2
+            // txtTIN
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Location = new System.Drawing.Point(216, 98);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(289, 23);
-            textBox2.TabIndex = 62;
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            textBox1.Location = new System.Drawing.Point(216, 190);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(289, 23);
-            textBox1.TabIndex = 61;
+            txtTIN.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtTIN.Location = new System.Drawing.Point(216, 98);
+            txtTIN.Name = "txtTIN";
+            txtTIN.Size = new System.Drawing.Size(289, 23);
+            txtTIN.TabIndex = 3;
             // 
             // txtLastName
             // 
             txtLastName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtLastName.Location = new System.Drawing.Point(216, 158);
+            txtLastName.Location = new System.Drawing.Point(216, 190);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new System.Drawing.Size(289, 23);
-            txtLastName.TabIndex = 39;
+            txtLastName.TabIndex = 6;
             // 
-            // txtContactInfo
+            // txtMiddleName
             // 
-            txtContactInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtContactInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtContactInfo.Location = new System.Drawing.Point(216, 481);
-            txtContactInfo.Name = "txtContactInfo";
-            txtContactInfo.Size = new System.Drawing.Size(289, 23);
-            txtContactInfo.TabIndex = 46;
+            txtMiddleName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtMiddleName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtMiddleName.Location = new System.Drawing.Point(216, 158);
+            txtMiddleName.Name = "txtMiddleName";
+            txtMiddleName.Size = new System.Drawing.Size(289, 23);
+            txtMiddleName.TabIndex = 5;
+            // 
+            // txtOccupation
+            // 
+            txtOccupation.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtOccupation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtOccupation.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtOccupation.Location = new System.Drawing.Point(216, 481);
+            txtOccupation.Name = "txtOccupation";
+            txtOccupation.Size = new System.Drawing.Size(289, 23);
+            txtOccupation.TabIndex = 14;
             // 
             // label14
             // 
@@ -319,18 +327,18 @@
             label12.AutoSize = true;
             label12.Location = new System.Drawing.Point(10, 73);
             label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(81, 15);
+            label12.Size = new System.Drawing.Size(60, 15);
             label12.TabIndex = 57;
-            label12.Text = "Date of Issued";
+            label12.Text = "Date Issue";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Location = new System.Drawing.Point(10, 452);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(45, 15);
+            label4.Size = new System.Drawing.Size(85, 15);
             label4.TabIndex = 53;
-            label4.Text = "Weight";
+            label4.Text = "Weight (in kg.)";
             // 
             // label13
             // 
@@ -350,15 +358,15 @@
             label10.TabIndex = 60;
             label10.Text = "First Name";
             // 
-            // txtMiddleName
+            // txtFirstName
             // 
-            txtMiddleName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtMiddleName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtMiddleName.Location = new System.Drawing.Point(216, 129);
-            txtMiddleName.Name = "txtMiddleName";
-            txtMiddleName.Size = new System.Drawing.Size(289, 23);
-            txtMiddleName.TabIndex = 38;
+            txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtFirstName.Location = new System.Drawing.Point(216, 129);
+            txtFirstName.Name = "txtFirstName";
+            txtFirstName.Size = new System.Drawing.Size(289, 23);
+            txtFirstName.TabIndex = 4;
             // 
             // label8
             // 
@@ -369,16 +377,16 @@
             label8.TabIndex = 59;
             label8.Text = "Middle Name";
             // 
-            // txtMunicipality
+            // txtAddress
             // 
-            txtMunicipality.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtMunicipality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtMunicipality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtMunicipality.Location = new System.Drawing.Point(216, 219);
-            txtMunicipality.MinimumSize = new System.Drawing.Size(99, 23);
-            txtMunicipality.Name = "txtMunicipality";
-            txtMunicipality.Size = new System.Drawing.Size(289, 23);
-            txtMunicipality.TabIndex = 43;
+            txtAddress.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtAddress.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtAddress.Location = new System.Drawing.Point(216, 219);
+            txtAddress.MinimumSize = new System.Drawing.Size(99, 23);
+            txtAddress.Name = "txtAddress";
+            txtAddress.Size = new System.Drawing.Size(289, 23);
+            txtAddress.TabIndex = 7;
             // 
             // radFemale
             // 
@@ -386,7 +394,7 @@
             radFemale.Location = new System.Drawing.Point(60, 3);
             radFemale.Name = "radFemale";
             radFemale.Size = new System.Drawing.Size(63, 19);
-            radFemale.TabIndex = 6;
+            radFemale.TabIndex = 1;
             radFemale.Text = "Female";
             radFemale.UseVisualStyleBackColor = true;
             // 
@@ -397,7 +405,7 @@
             radMale.Location = new System.Drawing.Point(3, 3);
             radMale.Name = "radMale";
             radMale.Size = new System.Drawing.Size(51, 19);
-            radMale.TabIndex = 5;
+            radMale.TabIndex = 0;
             radMale.TabStop = true;
             radMale.Text = "Male";
             radMale.UseVisualStyleBackColor = true;
@@ -407,21 +415,20 @@
             flowPanelSex.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             flowPanelSex.Controls.Add(radMale);
             flowPanelSex.Controls.Add(radFemale);
-            flowPanelSex.Enabled = false;
             flowPanelSex.Location = new System.Drawing.Point(216, 248);
             flowPanelSex.Name = "flowPanelSex";
             flowPanelSex.Size = new System.Drawing.Size(289, 23);
             flowPanelSex.TabIndex = 40;
             // 
-            // txtFirstName
+            // txtPlaceOfIssue
             // 
-            txtFirstName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtFirstName.Location = new System.Drawing.Point(216, 40);
-            txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new System.Drawing.Size(289, 23);
-            txtFirstName.TabIndex = 37;
+            txtPlaceOfIssue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtPlaceOfIssue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtPlaceOfIssue.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtPlaceOfIssue.Location = new System.Drawing.Point(216, 40);
+            txtPlaceOfIssue.Name = "txtPlaceOfIssue";
+            txtPlaceOfIssue.Size = new System.Drawing.Size(289, 23);
+            txtPlaceOfIssue.TabIndex = 1;
             // 
             // label7
             // 
@@ -432,62 +439,67 @@
             label7.TabIndex = 51;
             label7.Text = "Place of Issue";
             // 
-            // dtBirthDate
+            // dtpDateOfIssued
             // 
-            dtBirthDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dtBirthDate.CustomFormat = "MMM dd, yyyy";
-            dtBirthDate.Enabled = false;
-            dtBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtBirthDate.Location = new System.Drawing.Point(216, 69);
-            dtBirthDate.Name = "dtBirthDate";
-            dtBirthDate.Size = new System.Drawing.Size(289, 23);
-            dtBirthDate.TabIndex = 42;
+            dtpDateOfIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtpDateOfIssued.CustomFormat = "MMM dd, yyyy";
+            dtpDateOfIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpDateOfIssued.Location = new System.Drawing.Point(216, 69);
+            dtpDateOfIssued.Name = "dtpDateOfIssued";
+            dtpDateOfIssued.Size = new System.Drawing.Size(289, 23);
+            dtpDateOfIssued.TabIndex = 2;
             // 
-            // nudAge
+            // nudHeight
             // 
-            nudAge.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudAge.DecimalPlaces = 2;
-            nudAge.Location = new System.Drawing.Point(216, 423);
-            nudAge.Name = "nudAge";
-            nudAge.Size = new System.Drawing.Size(289, 23);
-            nudAge.TabIndex = 47;
+            nudHeight.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudHeight.DecimalPlaces = 2;
+            nudHeight.Location = new System.Drawing.Point(216, 423);
+            nudHeight.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            nudHeight.Name = "nudHeight";
+            nudHeight.Size = new System.Drawing.Size(289, 23);
+            nudHeight.TabIndex = 12;
             // 
-            // nudMonths
+            // nudWeight
             // 
-            nudMonths.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudMonths.DecimalPlaces = 2;
-            nudMonths.Location = new System.Drawing.Point(216, 452);
-            nudMonths.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            nudMonths.Name = "nudMonths";
-            nudMonths.Size = new System.Drawing.Size(289, 23);
-            nudMonths.TabIndex = 48;
+            nudWeight.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudWeight.DecimalPlaces = 2;
+            nudWeight.Location = new System.Drawing.Point(216, 452);
+            nudWeight.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            nudWeight.Name = "nudWeight";
+            nudWeight.Size = new System.Drawing.Size(289, 23);
+            nudWeight.TabIndex = 13;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucTaxPayerDetails
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(numericUpDown1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(nudYear);
+            Controls.Add(dtpDateOfBirth);
             Controls.Add(label17);
             Controls.Add(label16);
             Controls.Add(label15);
-            Controls.Add(textBox6);
+            Controls.Add(txtPlaceOfBirth);
             Controls.Add(label3);
-            Controls.Add(textBox5);
+            Controls.Add(txtICR);
             Controls.Add(label1);
-            Controls.Add(textBox2);
+            Controls.Add(txtTIN);
             Controls.Add(label5);
-            Controls.Add(textBox1);
-            Controls.Add(nudMonths);
-            Controls.Add(nudAge);
-            Controls.Add(dtBirthDate);
+            Controls.Add(txtLastName);
+            Controls.Add(nudWeight);
+            Controls.Add(nudHeight);
+            Controls.Add(dtpDateOfIssued);
             Controls.Add(label7);
-            Controls.Add(txtFirstName);
+            Controls.Add(txtPlaceOfIssue);
             Controls.Add(flowPanelSex);
-            Controls.Add(txtMunicipality);
+            Controls.Add(txtAddress);
             Controls.Add(label8);
-            Controls.Add(txtMiddleName);
+            Controls.Add(txtFirstName);
             Controls.Add(label10);
             Controls.Add(label13);
             Controls.Add(label6);
@@ -497,64 +509,66 @@
             Controls.Add(label9);
             Controls.Add(label11);
             Controls.Add(label14);
-            Controls.Add(textBox4);
-            Controls.Add(txtContactInfo);
-            Controls.Add(txtLastName);
+            Controls.Add(txtCitizenship);
+            Controls.Add(txtOccupation);
+            Controls.Add(txtMiddleName);
             Name = "ucTaxPayerDetails";
             Size = new System.Drawing.Size(534, 509);
             Load += ucTaxPayerDetails_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
             flowPanelSex.ResumeLayout(false);
             flowPanelSex.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudMonths).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudWeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        internal System.Windows.Forms.RadioButton radioButton3;
+        internal System.Windows.Forms.RadioButton radWidow;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.RadioButton radioButton1;
-        internal System.Windows.Forms.RadioButton radioButton2;
-        internal System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        internal System.Windows.Forms.RadioButton radSingle;
+        internal System.Windows.Forms.RadioButton radMarried;
+        internal System.Windows.Forms.RadioButton radDivorced;
         internal System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         internal System.Windows.Forms.Label label16;
-        internal System.Windows.Forms.TextBox textBox6;
+        internal System.Windows.Forms.TextBox txtPlaceOfBirth;
         internal System.Windows.Forms.Label label15;
-        internal System.Windows.Forms.TextBox textBox5;
+        internal System.Windows.Forms.TextBox txtICR;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.TextBox textBox4;
+        internal System.Windows.Forms.TextBox txtCitizenship;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        internal System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.TextBox txtLastName;
-        internal System.Windows.Forms.TextBox txtContactInfo;
+        internal System.Windows.Forms.TextBox txtMiddleName;
+        internal System.Windows.Forms.TextBox txtOccupation;
         internal System.Windows.Forms.Label label14;
         internal System.Windows.Forms.Label label11;
         internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label13;
         internal System.Windows.Forms.Label label10;
-        internal System.Windows.Forms.TextBox txtMiddleName;
+        internal System.Windows.Forms.TextBox txtFirstName;
         internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.TextBox txtMunicipality;
+        internal System.Windows.Forms.TextBox txtAddress;
         internal System.Windows.Forms.RadioButton radFemale;
         internal System.Windows.Forms.RadioButton radMale;
         internal System.Windows.Forms.FlowLayoutPanel flowPanelSex;
-        internal System.Windows.Forms.TextBox txtFirstName;
+        internal System.Windows.Forms.TextBox txtPlaceOfIssue;
         internal System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dtBirthDate;
-        private System.Windows.Forms.NumericUpDown nudAge;
-        private System.Windows.Forms.NumericUpDown nudMonths;
+        internal System.Windows.Forms.NumericUpDown nudYear;
+        internal System.Windows.Forms.DateTimePicker dtpDateOfBirth;
+        internal System.Windows.Forms.TextBox txtTIN;
+        internal System.Windows.Forms.DateTimePicker dtpDateOfIssued;
+        internal System.Windows.Forms.NumericUpDown nudHeight;
+        internal System.Windows.Forms.NumericUpDown nudWeight;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

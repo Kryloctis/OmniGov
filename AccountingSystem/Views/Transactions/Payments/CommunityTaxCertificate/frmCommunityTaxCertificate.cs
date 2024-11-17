@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
@@ -8,6 +12,8 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
 
         private readonly ucTaxPayerDetails ucTaxPayerDetails;
         private readonly ucTaxDue ucTaxDue;
+        private readonly ucPayment ucPayment;
+        private readonly ucPrintReceipt ucPrintReceipt;
         public frmCommunityTaxCertificate()
         {
             InitializeComponent();
@@ -16,6 +22,8 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
 
             ucTaxDue = ucTaxDue1;
             ucTaxPayerDetails = ucTaxPayerDetails1;
+            ucPayment = ucPayment1;
+            ucPrintReceipt = ucPrintReceipt1;
         }
 
         private void btnBackMain_Click(object sender, System.EventArgs e)
@@ -48,8 +56,8 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
             btnBackMain.Enabled = true;
             radPayment.Checked = true;
 
-            //decimal totalPayment = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            //ucPayment.OnLoad(Helper.userId, "54", totalPayment);
+            decimal totalPayment = ucTaxDue.ComputeTotalAmountPayable();
+            ucPayment.OnLoad(Helper.userId, "15", totalPayment);
         }
 
         private void LoadReceiptTab()
@@ -61,35 +69,34 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         private void InitializeReceipt()
         {
 
-            //int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
-            //int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
+            var dictReportParameters = new Dictionary<string, string>()
+            {
 
-            //var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
-            //var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
+                { "paramYear", ucTaxPayerDetails.nudYear.Text},
+                { "paramPlaceOfIssue", ucTaxPayerDetails.txtPlaceOfIssue.Text },
+                { "paramDateIssued", ucTaxPayerDetails.dtpDateOfIssued.Text},
+                { "paramReceiptNo", ucPayment.txtReceipts.Text},
+                { "paramLastName", ucTaxPayerDetails.txtLastName.Text },
+                { "paramFirstName", ucTaxPayerDetails.txtFirstName.Text },
+                { "paramMiddleName", ucTaxPayerDetails.txtMiddleName.Text },
+                { "paramTIN", ucTaxPayerDetails.txtTIN.Text },
+                { "paramAddress", ucTaxPayerDetails.txtAddress.Text },
+                { "paramProfession", ucTaxPayerDetails.txtOccupation.Text },
+                { "paramDateOfBirth", ucTaxPayerDetails.dtpDateOfBirth.Text },
+                { "paramHeight", ucTaxPayerDetails.nudHeight.Value.ToString("N2") },
+                { "paramWeight", ucTaxPayerDetails.nudWeight.Value.ToString("N2") },
+                { "paramCommunityTaxDue", ucTaxDue.nudBasicTax.Value.ToString("N2") },
+                { "paramGrossReceipt", ucTaxDue.nudGrossReceipt.Value.ToString("N2") },
+                { "paramSalariesOrGrossReceipt", ucTaxDue.nudSalary.Value.ToString("N2") },
+                { "paramIncomeFromRealProperty", ucTaxDue.nudIncomeFromRpt.Value.ToString("N2") },
+                { "paramTotal", ucTaxDue.ComputeTotalAmountPayable().ToString("N2") },
+                { "paramInterest", "0" },
+                { "paramTotalAmountPaid", ucTaxDue.ComputeTotalAmountPayable().ToString("N2")},
+            };
 
-            //string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
+            string reportPath = $"{Application.StartupPath}\\Receipts\\AF15.rdlc";
 
-            //string brideName = Helper.GenerateFullName(string.Empty, dictBrideInfo["first_name"], dictBrideInfo["middle_name"], dictBrideInfo["last_name"], string.Empty);
-
-            //var dictReportParameters = new Dictionary<string, string>()
-            //{
-            //    { "paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper() },
-            //    { "paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper() },
-            //    { "paramRegistryNo", ucMarriageDetails.GetMarriageDetails().registryNo },
-            //    { "paramDateIssued", ucMarriageDetails.GetMarriageDetails().issuedOn.ToString()},
-            //    { "paramGroomName", groomName },
-            //    { "paramGroomAge", ucSpouseInfoGroom.GetSpouseInfo().age.ToString() },
-            //    { "paramGroomMonths", ucSpouseInfoGroom.GetSpouseInfo().months.ToString() },
-            //    { "paramGroomResidence", ucSpouseInfoGroom.GetSpouseInfo().currentResidence.ToString()},
-            //    { "paramBrideName", brideName },
-            //    { "paramBrideAge", ucSpouseInfoBride.GetSpouseInfo().age.ToString() },
-            //    { "paramBrideMonths", ucSpouseInfoBride.GetSpouseInfo().months.ToString() },
-            //    { "paramBrideResidence", ucSpouseInfoBride.GetSpouseInfo().currentResidence.ToString()}
-            //};
-
-            //string reportPath = $"{Application.StartupPath}\\Receipts\\AF54.rdlc";
-
-            //ucPrintReceipt.Onload(reportPath, dictReportParameters);
+            ucPrintReceipt.Onload(reportPath, dictReportParameters);
         }
 
         private void LoadTabContents()
@@ -144,35 +151,122 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
             e.Cancel = true;
         }
 
+
+        private void ResetForm()
+        {
+            ucPayment.ResetForm();
+            ucTaxDue.ResetForm();
+            ucTaxPayerDetails.ResetForm();
+            tabControlMain.SelectedIndex = 0;
+        }
+
+        private bool ConfirmPayment()
+        {
+            return AccFactory.PaymentCollectionsRepository().InsertWithCommunityTaxCertificate(ucPayment.PaymentCollectionsModel(), CommunityTaxCertificateModel());
+        }
+
+        private CommunityTaxCertificateModel CommunityTaxCertificateModel()
+        {
+            return new CommunityTaxCertificateModel()
+            {
+                Year = Convert.ToInt32(ucTaxPayerDetails.nudYear.Value),
+                PlaceOfIssued = ucTaxPayerDetails.txtPlaceOfIssue.Text,
+                DateOfIssued = ucTaxPayerDetails.dtpDateOfIssued.Value,
+                FirstName = ucTaxPayerDetails.txtFirstName.Text,
+                MiddleName = ucTaxPayerDetails.txtMiddleName.Text,
+                LastName = ucTaxPayerDetails.txtLastName.Text,
+                Sex = ucTaxPayerDetails.radMale.Checked,
+                Citizenship = ucTaxPayerDetails.txtCitizenship.Text,
+                Address = ucTaxPayerDetails.txtAddress.Text,
+                TIN = ucTaxPayerDetails.txtTIN.Text,
+                ICR = ucTaxPayerDetails.txtICR.Text,
+                PlaceOfBirth = ucTaxPayerDetails.txtPlaceOfBirth.Text,
+                Height = ucTaxPayerDetails.nudHeight.Value,
+                Weight = ucTaxPayerDetails.nudWeight.Value,
+                CivilStatus = "",
+                DateOfBirth = ucTaxPayerDetails.dtpDateOfBirth.Value,
+                Profession = ucTaxPayerDetails.txtOccupation.Text,
+                BasicCommunityTax = ucTaxDue.nudBasicTax.Value,
+                AdditionalCommunityTax = ucTaxDue.AdditionalCommunityTaxSum(),
+                CreatedBy = Helper.userId
+            };
+
+        }
+
+
         private void btnNext_Click(object sender, EventArgs e)
         {
             try
             {
-                //if (!TabValidated())
-                //    return;
+                if (!TabValidated())
+                    return;
 
-                //if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
-                //{
-                //    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
-                //    {
-                //        if (ConfirmPayment())
-                //        {
-                //            tabControlMain.SelectedIndex++;
-                //        }
-                //    }
-                //    return;
-                //}
+                if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+                {
+                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
+                    {
+                        if (ConfirmPayment())
+                        {
+                            tabControlMain.SelectedIndex++;
+                        }
+                    }
+                    return;
+                }
 
-                //if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
-                //{
-                //    ResetForm();
-                //    return;
-                //}
+                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+                {
+                    ResetForm();
+                    return;
+                }
 
-                //tabControlMain.SelectedIndex++;
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool TabValidated()
+        {
+            switch (tabControlMain.SelectedTab.Name)
+            {
+                case "tabPageTaxpayer":
+                    if (!ucTaxPayerDetails.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucTaxPayerDetails.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPageTaxDues":
+
+                    if (!ucTaxDue.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucTaxDue.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                case "tabPagePayment":
+                    if (!ucPayment.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPayment.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+
+                case "tabPageReceipt":
+                    if (!ucPrintReceipt.ValidateChildren())
+                    {
+                        Helper.MessageBoxError(ucPayment.GetFormErrors());
+                        return false;
+                    }
+                    break;
+
+                default:
+                    return true;
+            }
+
+            return true;
         }
 
         private void frmCommunityTaxCertificate_Load(object sender, EventArgs e)
@@ -185,6 +279,11 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         }
 
         private void ucTaxPayerDetails1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ucPrintReceipt1_Load(object sender, EventArgs e)
         {
 
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
@@ -8,6 +9,18 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         public ucTaxPayerDetails()
         {
             InitializeComponent();
+            nudYear.Maximum = DateTime.Now.Year;
+        }
+
+        internal string GetFormErrors()
+        {
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtFirstName),
+                errorProvider1.GetError(txtLastName)
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         private void ucTaxPayerDetails_Load(object sender, EventArgs e)
@@ -19,5 +32,27 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
         {
 
         }
+
+        internal void ResetForm()
+        {
+            nudYear.Value = DateTime.Now.Year;
+            txtPlaceOfIssue.Clear();
+            dtpDateOfIssued.Value = DateTime.Now.Date;
+            txtTIN.Clear();
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtMiddleName.Clear();
+            txtAddress.Clear();
+            radMale.Checked = true;
+            txtCitizenship.Clear();
+            txtICR.Clear();
+            txtPlaceOfBirth.Clear();
+            radSingle.Checked = true;
+            dtpDateOfBirth.Value = DateTime.Now.Date;
+            nudHeight.Value = 0;
+            nudWeight.Value = 0;
+            txtOccupation.Clear();
+        }
+
     }
 }

@@ -132,5 +132,18 @@ namespace ACC.Data
             }
             return recordDictionary;
         }
+
+        public DataTable GetRecordsByAssessmentPostId(int assessmentPostId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_assessment_post_id", DbType.Int32, assessmentPostId},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_assessment_post_id = @rpt_assessment_post_id ";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
     }
 }

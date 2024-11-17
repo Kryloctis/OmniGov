@@ -14,5 +14,6 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetViewRecordById(int Id);
 
         int GetLastInsertedID(int createdBy);
+        DataTable GetRecordsByAssessmentPostId(int v);
     }
 }

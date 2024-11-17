@@ -28,41 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            nudMonths = new System.Windows.Forms.NumericUpDown();
-            nudAge = new System.Windows.Forms.NumericUpDown();
+            components = new System.ComponentModel.Container();
+            nudAdditionalBasicTax = new System.Windows.Forms.NumericUpDown();
+            nudBasicTax = new System.Windows.Forms.NumericUpDown();
             label6 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            nudGrossReceipt = new System.Windows.Forms.NumericUpDown();
             label2 = new System.Windows.Forms.Label();
-            numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            nudSalary = new System.Windows.Forms.NumericUpDown();
             label3 = new System.Windows.Forms.Label();
-            numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)nudMonths).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
+            nudIncomeFromRpt = new System.Windows.Forms.NumericUpDown();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)nudAdditionalBasicTax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudBasicTax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudGrossReceipt).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudSalary).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudIncomeFromRpt).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // nudMonths
+            // nudAdditionalBasicTax
             // 
-            nudMonths.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudMonths.DecimalPlaces = 2;
-            nudMonths.Location = new System.Drawing.Point(168, 46);
-            nudMonths.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            nudMonths.Name = "nudMonths";
-            nudMonths.Size = new System.Drawing.Size(186, 23);
-            nudMonths.TabIndex = 55;
+            nudAdditionalBasicTax.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudAdditionalBasicTax.DecimalPlaces = 2;
+            nudAdditionalBasicTax.Location = new System.Drawing.Point(168, 46);
+            nudAdditionalBasicTax.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudAdditionalBasicTax.Name = "nudAdditionalBasicTax";
+            nudAdditionalBasicTax.Size = new System.Drawing.Size(186, 23);
+            nudAdditionalBasicTax.TabIndex = 1;
             // 
-            // nudAge
+            // nudBasicTax
             // 
-            nudAge.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudAge.DecimalPlaces = 2;
-            nudAge.Location = new System.Drawing.Point(168, 17);
-            nudAge.Name = "nudAge";
-            nudAge.Size = new System.Drawing.Size(186, 23);
-            nudAge.TabIndex = 54;
+            nudBasicTax.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudBasicTax.DecimalPlaces = 2;
+            nudBasicTax.Location = new System.Drawing.Point(168, 17);
+            nudBasicTax.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            nudBasicTax.Name = "nudBasicTax";
+            nudBasicTax.Size = new System.Drawing.Size(186, 23);
+            nudBasicTax.TabIndex = 0;
             // 
             // label6
             // 
@@ -91,15 +95,15 @@
             label1.TabIndex = 57;
             label1.Text = "Gross Receipt";
             // 
-            // numericUpDown1
+            // nudGrossReceipt
             // 
-            numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown1.DecimalPlaces = 2;
-            numericUpDown1.Location = new System.Drawing.Point(168, 75);
-            numericUpDown1.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(186, 23);
-            numericUpDown1.TabIndex = 55;
+            nudGrossReceipt.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudGrossReceipt.DecimalPlaces = 2;
+            nudGrossReceipt.Location = new System.Drawing.Point(168, 75);
+            nudGrossReceipt.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudGrossReceipt.Name = "nudGrossReceipt";
+            nudGrossReceipt.Size = new System.Drawing.Size(186, 23);
+            nudGrossReceipt.TabIndex = 2;
             // 
             // label2
             // 
@@ -110,15 +114,15 @@
             label2.TabIndex = 57;
             label2.Text = "Salaries / Grocess Receipt";
             // 
-            // numericUpDown2
+            // nudSalary
             // 
-            numericUpDown2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown2.DecimalPlaces = 2;
-            numericUpDown2.Location = new System.Drawing.Point(168, 104);
-            numericUpDown2.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new System.Drawing.Size(186, 23);
-            numericUpDown2.TabIndex = 55;
+            nudSalary.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudSalary.DecimalPlaces = 2;
+            nudSalary.Location = new System.Drawing.Point(168, 104);
+            nudSalary.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudSalary.Name = "nudSalary";
+            nudSalary.Size = new System.Drawing.Size(186, 23);
+            nudSalary.TabIndex = 3;
             // 
             // label3
             // 
@@ -129,53 +133,59 @@
             label3.TabIndex = 57;
             label3.Text = "Income from Real Property";
             // 
-            // numericUpDown3
+            // nudIncomeFromRpt
             // 
-            numericUpDown3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            numericUpDown3.DecimalPlaces = 2;
-            numericUpDown3.Location = new System.Drawing.Point(168, 133);
-            numericUpDown3.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new System.Drawing.Size(186, 23);
-            numericUpDown3.TabIndex = 55;
+            nudIncomeFromRpt.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            nudIncomeFromRpt.DecimalPlaces = 2;
+            nudIncomeFromRpt.Location = new System.Drawing.Point(168, 133);
+            nudIncomeFromRpt.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            nudIncomeFromRpt.Name = "nudIncomeFromRpt";
+            nudIncomeFromRpt.Size = new System.Drawing.Size(186, 23);
+            nudIncomeFromRpt.TabIndex = 4;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucTaxDue
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(numericUpDown3);
-            Controls.Add(numericUpDown2);
-            Controls.Add(numericUpDown1);
+            Controls.Add(nudIncomeFromRpt);
+            Controls.Add(nudSalary);
+            Controls.Add(nudGrossReceipt);
             Controls.Add(label3);
-            Controls.Add(nudMonths);
+            Controls.Add(nudAdditionalBasicTax);
             Controls.Add(label2);
-            Controls.Add(nudAge);
+            Controls.Add(nudBasicTax);
             Controls.Add(label1);
             Controls.Add(label6);
             Controls.Add(label4);
             Name = "ucTaxDue";
             Size = new System.Drawing.Size(380, 168);
             Load += ucTaxDue_Load;
-            ((System.ComponentModel.ISupportInitialize)nudMonths).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAdditionalBasicTax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudBasicTax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudGrossReceipt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudSalary).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudIncomeFromRpt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.NumericUpDown nudMonths;
-        private System.Windows.Forms.NumericUpDown nudAge;
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         internal System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
         internal System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.NumericUpDown nudAdditionalBasicTax;
+        internal System.Windows.Forms.NumericUpDown nudBasicTax;
+        internal System.Windows.Forms.NumericUpDown nudGrossReceipt;
+        internal System.Windows.Forms.NumericUpDown nudSalary;
+        internal System.Windows.Forms.NumericUpDown nudIncomeFromRpt;
     }
 }

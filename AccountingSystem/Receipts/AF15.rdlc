@@ -15,10 +15,15 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramYear.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
@@ -30,6 +35,7 @@
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -44,22 +50,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramPlaceOfIssue.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Left</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>1.95226cm</Top>
                 <Left>2.28557cm</Left>
                 <Height>0.6cm</Height>
-                <Width>4.90525cm</Width>
+                <Width>7.03645cm</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -74,7 +86,10 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramDateIssued.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -82,14 +97,15 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>1.95226cm</Top>
-                <Left>7.36721cm</Left>
+                <Left>9.49841cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.85892cm</Width>
+                <Width>1.91398cm</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -104,7 +120,10 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramLastName.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -120,6 +139,7 @@
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -134,7 +154,10 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramFirstName.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -144,12 +167,13 @@
                 <Top>2.72865cm</Top>
                 <Left>4.51348cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.67734cm</Width>
+                <Width>3.49629cm</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -164,7 +188,10 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramMiddleName.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -172,14 +199,15 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>2.72865cm</Top>
-                <Left>7.36721cm</Left>
+                <Left>8.18616cm</Left>
                 <Height>0.6cm</Height>
-                <Width>3.41018cm</Width>
+                <Width>3.18544cm</Width>
                 <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -194,22 +222,26 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramTIN.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>2.44567cm</Top>
+                <Top>2.72789cm</Top>
                 <Left>11.54799cm</Left>
                 <Height>0.6cm</Height>
-                <Width>3.93888cm</Width>
+                <Width>4.34399cm</Width>
                 <ZIndex>6</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -224,14 +256,17 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramCitizenship.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>3.62188cm</Top>
+                <Top>4.25688cm</Top>
                 <Left>0.92691cm</Left>
                 <Height>0.6cm</Height>
                 <Width>2.20139cm</Width>
@@ -240,6 +275,7 @@
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -254,15 +290,18 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramICR.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>3.62188cm</Top>
-                <Left>4.096cm</Left>
+                <Top>4.25688cm</Top>
+                <Left>3.30469cm</Left>
                 <Height>0.6cm</Height>
                 <Width>3.09482cm</Width>
                 <ZIndex>8</ZIndex>
@@ -270,6 +309,7 @@
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -284,22 +324,26 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramPlaceOfBirth.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>3.62188cm</Top>
-                <Left>7.73028cm</Left>
+                <Top>4.25688cm</Top>
+                <Left>6.5759cm</Left>
                 <Height>0.6cm</Height>
-                <Width>5.55522cm</Width>
+                <Width>7.42272cm</Width>
                 <ZIndex>9</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -314,22 +358,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramHeight.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>3.62188cm</Top>
-                <Left>13.35606cm</Left>
+                <Top>4.28067cm</Top>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>10</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -344,22 +394,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramWeight.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>4.39827cm</Top>
-                <Left>13.35606cm</Left>
+                <Top>5.03327cm</Top>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>11</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -374,22 +430,26 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramDateOfBirth.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>4.39827cm</Top>
-                <Left>11.21954cm</Left>
+                <Top>5.03327cm</Top>
+                <Left>10.40059cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.06596cm</Width>
+                <Width>3.59803cm</Width>
                 <ZIndex>12</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -404,22 +464,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramCommunityTaxDue.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>5.39194cm</Top>
-                <Left>13.35606cm</Left>
+                <Top>5.88836cm</Top>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>13</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -434,22 +500,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramTotalAmountPaid.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>9.70003cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>14</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -464,22 +536,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramInterest.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>9.02947cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>15</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -494,22 +572,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramTotal.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>8.35892cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>16</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -524,22 +608,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramIncomeFromRealProperty.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>7.75892cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>17</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -554,22 +644,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramSalariesOrGrossReceipt.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>7.12364cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>18</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -584,22 +680,28 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramGrossReceipt.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
                 <Top>6.52364cm</Top>
-                <Left>13.35606cm</Left>
+                <Left>14.17501cm</Left>
                 <Height>0.6cm</Height>
-                <Width>2.53592cm</Width>
+                <Width>1.71697cm</Width>
                 <ZIndex>19</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -614,22 +716,97 @@
                     <TextRuns>
                       <TextRun>
                         <Value>=Parameters!paramAddress.Value</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox16</rd:DefaultName>
-                <Top>3.18678cm</Top>
+                <Top>3.50428cm</Top>
                 <Left>0.92691cm</Left>
                 <Height>0.6cm</Height>
-                <Width>9.29922cm</Width>
+                <Width>14.96507cm</Width>
                 <ZIndex>20</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox19">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!paramReceiptNo.Value</Value>
+                        <Style>
+                          <FontFamily>arial</FontFamily>
+                          <FontSize>16pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox16</rd:DefaultName>
+                <Top>1.68692cm</Top>
+                <Left>11.51822cm</Left>
+                <Height>0.86458cm</Height>
+                <Width>4.37376cm</Width>
+                <ZIndex>21</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox34">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!paramProfession.Value</Value>
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox16</rd:DefaultName>
+                <Top>5.88836cm</Top>
+                <Left>0.92691cm</Left>
+                <Height>0.6cm</Height>
+                <Width>13.07171cm</Width>
+                <ZIndex>22</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -649,11 +826,21 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>8.45843in</Height>
+        <Height>5.55218in</Height>
         <Style />
       </Body>
       <Width>8.71318in</Width>
       <Page>
+        <PageFooter>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <InteractiveHeight>11in</InteractiveHeight>
         <InteractiveWidth>8.5in</InteractiveWidth>
         <LeftMargin>0cm</LeftMargin>
@@ -680,6 +867,8 @@
     </ReportParameter>
     <ReportParameter Name="paramDateIssued">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramFirstName">
@@ -762,6 +951,8 @@
     </ReportParameter>
     <ReportParameter Name="paramGrossReceipt">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramTotal">
@@ -772,6 +963,8 @@
     </ReportParameter>
     <ReportParameter Name="paramTotalAmountPaid">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramInterest">
@@ -784,6 +977,16 @@
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramReceiptNo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramProfession">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
@@ -896,6 +1099,16 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>paramLastName</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>paramReceiptNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>paramProfession</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

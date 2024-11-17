@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Reports.TaxClearance
     public partial class frmTaxClearance : Form
     {
 
-        private DataTable dtDelinquentNotice;
+        private DataTable dtPostedRealProperties;
 
         public frmTaxClearance()
         {
@@ -22,14 +22,13 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             txtPropertyOwner.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtPropertyOwner.AutoCompleteMode = AutoCompleteMode.Suggest;
 
-
         }
 
         private void LoadRealProperties()
         {
-            dtDelinquentNotice = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtPostedRealProperties = AccFactory.RptAssessmentPostsRepository().GetRecords();
 
-            var autoCompleteSrc = dtDelinquentNotice.AsEnumerable().Select(row => row.Field<string>("taxpayer_name")).ToList();
+            var autoCompleteSrc = dtPostedRealProperties.AsEnumerable().Select(row => row.Field<string>("taxpayer_name")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
@@ -156,15 +155,15 @@ namespace AccountingSystem.Views.Reports.TaxClearance
 
         private void LoadProperties()
         {
-            var rptId = dtDelinquentNotice.AsEnumerable()
+            var rptAssessmentPostId = dtPostedRealProperties.AsEnumerable()
                         .Where(row => row.Field<string>("taxpayer_name") == txtPropertyOwner.Text)
-                        .Select(row => row["real_property_id"])
+                        .Select(row => row["id"])
                         .FirstOrDefault();
 
 
-            if (rptId is not null)
+            if (rptAssessmentPostId is not null)
             {
-                var dtProperty = AccFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(rptId));
+                DataTable dtProperty = AccFactory.RptPaymentepository().GetRecordsByAssessmentPostId(Convert.ToInt32(rptAssessmentPostId));
                 cmbxProperty.DataSource = dtProperty;
                 cmbxProperty.ValueMember = "real_property_id";
                 cmbxProperty.DisplayMember = "complete_arp_no";
