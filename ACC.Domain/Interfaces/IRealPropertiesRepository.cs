@@ -33,5 +33,6 @@ namespace ACC.Domain.Interfaces
         bool InsertWithPreviousAssessments(RealPropertiesModel realPropertiesModel);
 
         bool UpdateWithPreviousAssessements(RealPropertiesModel realPropertiesModel);
+        DataTable GetPropertiesByOwnerId(int taxPayerId);
     }
 }

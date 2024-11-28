@@ -305,7 +305,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     decimal totalSefPayment = sefTaxDue + sefPenaltyDiscount;
 
                     var newRow = dataTable.NewRow();
-                    newRow["is_selected"] = false;
+                    newRow["is_selected"] = true;
                     newRow["assessment_posts_id"] = row["rpt_assessment_posts_id"];
                     newRow["year"] = row["year"];
                     newRow["complete_arp_no"] = completeArpNo;

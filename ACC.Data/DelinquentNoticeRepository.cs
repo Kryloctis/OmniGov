@@ -162,5 +162,26 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND notice_type = @notice_type";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public Dictionary<string, string> GetDelinquencyStatusByRptId(int rptId)
+        {
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, rptId } };
+            string query = $"SELECT * FROM {tableName} WHERE real_properties_id = @real_properties_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
     }
 }

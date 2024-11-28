@@ -11,7 +11,16 @@ namespace AccountingSystem.Views.Reports.TaxClearance
     public partial class frmTaxClearance : Form
     {
 
-        private DataTable dtPostedRealProperties;
+        private DataTable dtRealProperties;
+
+        private int year;
+        private decimal assessedValue;
+        private string completeARPNo;
+        private string receiptNo;
+        private string dateOfPayment;
+        private string locationOfProperty;
+        private string owner;
+        private string ownerAddress;
 
         public frmTaxClearance()
         {
@@ -26,9 +35,9 @@ namespace AccountingSystem.Views.Reports.TaxClearance
 
         private void LoadRealProperties()
         {
-            dtPostedRealProperties = AccFactory.RptAssessmentPostsRepository().GetRecords();
+            dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecords();
 
-            var autoCompleteSrc = dtPostedRealProperties.AsEnumerable().Select(row => row.Field<string>("taxpayer_name")).ToList();
+            var autoCompleteSrc = dtRealProperties.AsEnumerable().Select(row => row.Field<string>("taxpayer_name")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
@@ -52,10 +61,11 @@ namespace AccountingSystem.Views.Reports.TaxClearance
         {
             if (!backgroundWorker1.IsBusy)
             {
+                var completeARPNo = cmbxProperty.Text;
+                CheckProperty(completeARPNo);
                 pbReport.Value = 0;
                 ToogleRunButton(false);
-                var rptDelinquencyNoticeId = cmbxProperty.SelectedValue;
-                backgroundWorker1.RunWorkerAsync(rptDelinquencyNoticeId);
+                backgroundWorker1.RunWorkerAsync();
             }
         }
 
@@ -77,13 +87,14 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                     return;
                 }
 
+
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
                 {
                     { "Fetch LGU Details", 10 },
                     { "Fetch Record", 20 },
-                    { "Set Parameter Values", 40 },
                     { "Initialize Parameters", 30 },
+                    { "Set Parameter Values", 40 },
                 };
 
                 int totalProgressCount = tasks.Sum(t => t.Value);
@@ -104,11 +115,24 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
 
+                reportParameters.Add(new ReportParameter("paramOwner", owner));
+                reportParameters.Add(new ReportParameter("paramOwnerAddress", ownerAddress));
+                reportParameters.Add(new ReportParameter("paramTaxPaidFrom", "-"));
+                reportParameters.Add(new ReportParameter("paramTaxPaidTo", year.ToString()));
+                reportParameters.Add(new ReportParameter("paramOfficialReceipt", receiptNo));
+
+
+                reportParameters.Add(new ReportParameter("paramYear", year.ToString()));
+                reportParameters.Add(new ReportParameter("paramCompleteARPNo", completeARPNo));
+                reportParameters.Add(new ReportParameter("paramAssessedValue", assessedValue.ToString("N2")));
+                reportParameters.Add(new ReportParameter("paramOfficialReceiptNo", receiptNo));
+                reportParameters.Add(new ReportParameter("paramDateOfPayment", dateOfPayment));
+                reportParameters.Add(new ReportParameter("paramLocationOfProperty", locationOfProperty));
+
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -155,20 +179,62 @@ namespace AccountingSystem.Views.Reports.TaxClearance
 
         private void LoadProperties()
         {
-            var rptAssessmentPostId = dtPostedRealProperties.AsEnumerable()
+            var taxPayerId = dtRealProperties.AsEnumerable()
                         .Where(row => row.Field<string>("taxpayer_name") == txtPropertyOwner.Text)
-                        .Select(row => row["id"])
+                        .Select(row => row["taxpayers_id"])
                         .FirstOrDefault();
 
 
-            if (rptAssessmentPostId is not null)
+            if (taxPayerId is not null)
             {
-                DataTable dtProperty = AccFactory.RptPaymentepository().GetRecordsByAssessmentPostId(Convert.ToInt32(rptAssessmentPostId));
+                DataTable dtProperty = AccFactory.RealPropertiesRepository().GetPropertiesByOwnerId(Convert.ToInt32(taxPayerId));
+
                 cmbxProperty.DataSource = dtProperty;
                 cmbxProperty.ValueMember = "real_property_id";
                 cmbxProperty.DisplayMember = "complete_arp_no";
             }
             else { cmbxProperty.SelectedIndex = -1; }
+        }
+
+        private void CheckProperty(string completeArpNo)
+        {
+            int year = DateTime.Now.Year;
+            var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
+            int assessmentPostId = 0;
+
+            if (dictAssessmentPost.Count != 0)
+            {
+                assessmentPostId = Convert.ToInt32(dictAssessmentPost["id"]);
+
+
+                var rptPayment = AccFactory.RptPaymentepository().GetRecordByAssessmentPostId(assessmentPostId);
+
+                if (rptPayment.Count != 0)
+                {
+                    int paymentId = Convert.ToInt32(rptPayment["payment_collections_id"]);
+                    var paymentColllection = AccFactory.PaymentCollectionsRepository().GetRecordByID(paymentId);
+
+                    owner = dictAssessmentPost["taxpayer_name"];
+                    ownerAddress = dictAssessmentPost["taxpayer_address"];
+                    this.year = Convert.ToInt32(dictAssessmentPost["year"]);
+                    this.assessedValue = Convert.ToDecimal(dictAssessmentPost["assessed_value"]);
+                    this.completeARPNo = dictAssessmentPost["complete_arp_no"];
+                    this.receiptNo = rptPayment["payment_collections_receipt_no"];
+                    this.dateOfPayment = rptPayment["payment_collections_payment_date"];
+                    this.locationOfProperty = dictAssessmentPost["province_name"];
+                }
+                else
+                    Helper.MessageBoxError("Failed to generate Tax Clearance. Property May be delinquent.");
+
+
+            }
+            return;
+        }
+
+        private void cmbxProperty_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string completeArpNo = cmbxProperty.Text;
+            CheckProperty(completeArpNo);
         }
     }
 }

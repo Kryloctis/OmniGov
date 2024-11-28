@@ -32,13 +32,13 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            cmbxProperty = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
             txtPropertyOwner = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
             panel3 = new System.Windows.Forms.Panel();
             pbReport = new System.Windows.Forms.ProgressBar();
-            cmbxProperty = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -95,6 +95,17 @@
             splitContainer1.SplitterDistance = 228;
             splitContainer1.TabIndex = 4;
             // 
+            // cmbxProperty
+            // 
+            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxProperty.FormattingEnabled = true;
+            cmbxProperty.Location = new System.Drawing.Point(12, 96);
+            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxProperty.Name = "cmbxProperty";
+            cmbxProperty.Size = new System.Drawing.Size(200, 23);
+            cmbxProperty.TabIndex = 20;
+            cmbxProperty.SelectionChangeCommitted += cmbxProperty_SelectionChangeCommitted;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -148,16 +159,6 @@
             pbReport.Name = "pbReport";
             pbReport.Size = new System.Drawing.Size(560, 5);
             pbReport.TabIndex = 9;
-            // 
-            // cmbxProperty
-            // 
-            cmbxProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxProperty.FormattingEnabled = true;
-            cmbxProperty.Location = new System.Drawing.Point(12, 96);
-            cmbxProperty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            cmbxProperty.Name = "cmbxProperty";
-            cmbxProperty.Size = new System.Drawing.Size(200, 23);
-            cmbxProperty.TabIndex = 20;
             // 
             // frmTaxClearance
             // 
