@@ -129,6 +129,13 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 reportParameters.Add(new ReportParameter("paramDateOfPayment", dateOfPayment));
                 reportParameters.Add(new ReportParameter("paramLocationOfProperty", locationOfProperty));
 
+
+                reportParameters.Add(new ReportParameter("paramCertificateNo", string.Empty));
+                reportParameters.Add(new ReportParameter("paramCertificateIssuedAt", string.Empty));
+                reportParameters.Add(new ReportParameter("paramCertificateDateIssued", string.Empty));
+                reportParameters.Add(new ReportParameter("paramCertificateTaxpayerTIN", string.Empty));
+
+
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -201,6 +208,7 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             int year = DateTime.Now.Year;
             var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
             int assessmentPostId = 0;
+
 
             if (dictAssessmentPost.Count != 0)
             {

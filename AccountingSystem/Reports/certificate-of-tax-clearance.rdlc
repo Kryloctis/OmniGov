@@ -281,7 +281,79 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>This CERTIFIES FURTHER that he/she is a holder of Community Tax Certificate No. Issuead at , dated , and he/she possessed TIN: intention to any legal purpose that may serve him best. </Value>
+                    <Value>This CERTIFIES FURTHER that he/she is a holder of Community Tax Certificate No. </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCertificateNo.Value</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Issued at </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCertificateIssuedAt.Value</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> , dated </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCertificateDateIssued.Value</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, and he/she possessed TIN: </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!paramCertificateTaxpayerTIN.Value</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> intention to any legal purpose that may serve him best. </Value>
                     <Style>
                       <FontFamily>Calibri</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -297,7 +369,7 @@
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>7.43509cm</Top>
             <Left>0.00026cm</Left>
-            <Height>1.68509cm</Height>
+            <Height>2.13488cm</Height>
             <Width>14.81667cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -548,7 +620,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Height>1.0849cm</Height>
             <Width>1.60078cm</Width>
             <ZIndex>11</ZIndex>
@@ -605,7 +677,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Left>1.60079cm</Left>
             <Height>1.0849cm</Height>
             <Width>1.91882cm</Width>
@@ -663,7 +735,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Left>3.5196cm</Left>
             <Height>1.0849cm</Height>
             <Width>2.12994cm</Width>
@@ -721,7 +793,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Left>5.64955cm</Left>
             <Height>1.0849cm</Height>
             <Width>2.12994cm</Width>
@@ -779,7 +851,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Left>7.77949cm</Left>
             <Height>1.0849cm</Height>
             <Width>1.94473cm</Width>
@@ -837,7 +909,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.29657cm</Top>
+            <Top>9.93157cm</Top>
             <Left>9.72448cm</Left>
             <Height>1.0849cm</Height>
             <Width>4.79077cm</Width>
@@ -893,7 +965,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Height>0.57759cm</Height>
             <Width>1.60078cm</Width>
             <ZIndex>17</ZIndex>
@@ -948,7 +1020,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Left>1.60078cm</Left>
             <Height>0.57759cm</Height>
             <Width>1.91882cm</Width>
@@ -1005,7 +1077,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Left>3.5196cm</Left>
             <Height>0.57759cm</Height>
             <Width>2.12994cm</Width>
@@ -1061,7 +1133,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Left>5.64954cm</Left>
             <Height>0.57759cm</Height>
             <Width>2.12994cm</Width>
@@ -1118,7 +1190,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Left>7.77948cm</Left>
             <Height>0.57759cm</Height>
             <Width>1.94473cm</Width>
@@ -1174,7 +1246,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>10.38147cm</Top>
+            <Top>11.01647cm</Top>
             <Left>9.72448cm</Left>
             <Height>0.57759cm</Height>
             <Width>4.79077cm</Width>
@@ -1292,11 +1364,35 @@
       <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramCertificateNo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramCertificateIssuedAt">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramCertificateDateIssued">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramCertificateTaxpayerTIN">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1352,6 +1448,26 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramAssessedValue</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramCertificateNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramCertificateIssuedAt</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramCertificateDateIssued</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramCertificateTaxpayerTIN</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

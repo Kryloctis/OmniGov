@@ -92,6 +92,9 @@ namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
                 { "paramTotal", ucTaxDue.ComputeTotalAmountPayable().ToString("N2") },
                 { "paramInterest", "0" },
                 { "paramTotalAmountPaid", ucTaxDue.ComputeTotalAmountPayable().ToString("N2")},
+
+
+
             };
 
             string reportPath = $"{Application.StartupPath}\\Receipts\\AF15.rdlc";
