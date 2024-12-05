@@ -106,7 +106,7 @@ namespace ACC.Data
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository(), RcdCollectionsRepository(), RcdDepositsRepository(), BidRepository(), BiddersRepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository(), RcdCollectionsRepository(), RcdDepositsRepository(), BidRepository(), BiddersRepository(), CommunityTaxCertificateRepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS, RcdDepositsRepository());
 
@@ -219,5 +219,9 @@ namespace ACC.Data
         public static IBiddersRepository BiddersRepository() => new BiddersRepository(mySqlGenericCommandsLFS);
 
         public static IBidRepository BidRepository() => new BidRepository(mySqlGenericCommandsLFS);
+
+        public static ICommunityTaxCertificateRepository CommunityTaxCertificateRepository() => new CommunityTaxCertificateRepository(mySqlGenericCommandsLFS);
+
     }
+
 }

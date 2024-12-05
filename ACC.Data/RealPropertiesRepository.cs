@@ -493,5 +493,17 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE property_kind = @property_kind";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public DataTable GetPropertiesByOwnerId(int taxPayerId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayers_id", DbType.Int32, taxPayerId},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id";
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
     }
 }

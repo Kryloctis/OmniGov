@@ -178,10 +178,11 @@ namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            string printerName = cmbxPrinter.Text;
+            PrintReport(reportViewerPrint, printerName);
             try
             {
-                string printerName = cmbxPrinter.Text;
-                PrintReport(reportViewerPrint, printerName);
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }

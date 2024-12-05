@@ -46,5 +46,8 @@ namespace ACC.Domain.Interfaces
         List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy);
 
         List<RcdCollectionsModel> GetRcdCollections(RcdModel rcdModel);
+
+        bool VoidPayment(PaymentCollectionsModel paymentCollectionModel);
+        bool InsertWithCommunityTaxCertificate(PaymentCollectionsModel paymentCollectionsModel, CommunityTaxCertificateModel communityTaxCertificateModel);
     }
 }

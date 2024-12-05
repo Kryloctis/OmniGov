@@ -40,14 +40,15 @@
             toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
+            dgPaymentHistory = new System.Windows.Forms.DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2 = new System.Windows.Forms.Panel();
+            btnMarkAsVoid = new System.Windows.Forms.Button();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgPaymentHistory).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -88,12 +89,11 @@
             // btnSearch
             // 
             btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(24, 24);
-            btnSearch.Text = "toolStripButton1";
+            btnSearch.Size = new System.Drawing.Size(66, 24);
+            btnSearch.Text = "Search";
             btnSearch.ToolTipText = "Search";
             btnSearch.Click += btnSearch_Click;
             // 
@@ -144,7 +144,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(dataGridView1);
+            panel1.Controls.Add(dgPaymentHistory);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 70);
             panel1.Name = "panel1";
@@ -152,15 +152,17 @@
             panel1.Size = new System.Drawing.Size(843, 415);
             panel1.TabIndex = 3;
             // 
-            // dataGridView1
+            // dgPaymentHistory
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(4, 4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(835, 407);
-            dataGridView1.TabIndex = 0;
+            dgPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgPaymentHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgPaymentHistory.Location = new System.Drawing.Point(4, 4);
+            dgPaymentHistory.MultiSelect = false;
+            dgPaymentHistory.Name = "dgPaymentHistory";
+            dgPaymentHistory.RowTemplate.Height = 25;
+            dgPaymentHistory.Size = new System.Drawing.Size(835, 407);
+            dgPaymentHistory.TabIndex = 0;
+            dgPaymentHistory.SelectionChanged += dgPaymentHistory_SelectionChanged;
             // 
             // backgroundWorker1
             // 
@@ -172,12 +174,25 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnMarkAsVoid);
             panel2.Controls.Add(cmbxRowFilter);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(843, 30);
             panel2.TabIndex = 4;
+            // 
+            // btnMarkAsVoid
+            // 
+            btnMarkAsVoid.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnMarkAsVoid.Enabled = false;
+            btnMarkAsVoid.Location = new System.Drawing.Point(739, 4);
+            btnMarkAsVoid.Name = "btnMarkAsVoid";
+            btnMarkAsVoid.Size = new System.Drawing.Size(100, 23);
+            btnMarkAsVoid.TabIndex = 3;
+            btnMarkAsVoid.Text = "Mark As Void";
+            btnMarkAsVoid.UseVisualStyleBackColor = true;
+            btnMarkAsVoid.Click += btnMarkAsVoid_Click;
             // 
             // cmbxRowFilter
             // 
@@ -210,7 +225,7 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgPaymentHistory).EndInit();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -224,7 +239,7 @@
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgPaymentHistory;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
@@ -234,5 +249,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox cmbxAccForm;
+        private System.Windows.Forms.Button btnMarkAsVoid;
     }
 }

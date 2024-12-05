@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
 using AccountingSystem.Views.Shared;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.RealProperty
@@ -307,7 +305,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     decimal totalSefPayment = sefTaxDue + sefPenaltyDiscount;
 
                     var newRow = dataTable.NewRow();
-                    newRow["is_selected"] = false;
+                    newRow["is_selected"] = true;
                     newRow["assessment_posts_id"] = row["rpt_assessment_posts_id"];
                     newRow["year"] = row["year"];
                     newRow["complete_arp_no"] = completeArpNo;

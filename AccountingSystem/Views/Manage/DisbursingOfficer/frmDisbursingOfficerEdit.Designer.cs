@@ -44,7 +44,7 @@
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 204);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 220);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(461, 30);
             flowLayoutPanel1.TabIndex = 3;
@@ -75,7 +75,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(461, 204);
+            panel1.Size = new System.Drawing.Size(461, 220);
             panel1.TabIndex = 4;
             // 
             // ucDisbursingOfficer1
@@ -83,7 +83,7 @@
             ucDisbursingOfficer1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucDisbursingOfficer1.Location = new System.Drawing.Point(4, 4);
             ucDisbursingOfficer1.Name = "ucDisbursingOfficer1";
-            ucDisbursingOfficer1.Size = new System.Drawing.Size(453, 196);
+            ucDisbursingOfficer1.Size = new System.Drawing.Size(453, 212);
             ucDisbursingOfficer1.TabIndex = 0;
             // 
             // frmDisbursingOfficerEdit
@@ -92,7 +92,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(461, 234);
+            ClientSize = new System.Drawing.Size(461, 250);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

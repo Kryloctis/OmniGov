@@ -265,7 +265,7 @@
             dgTaxDues.TabIndex = 2;
             dgTaxDues.CellValueChanged += dgTaxDues_CellValueChanged;
             dgTaxDues.ColumnAdded += dgTaxDues_ColumnAdded;
-            dgTaxDues.CurrentCellDirtyStateChanged += dgTaxDues_CurrentCellDirtyStateChanged;
+            dgTaxDues.CurrentCellDirtyStateChanged += chckShowPaidUnpaid_CheckedChanged;
             dgTaxDues.Validating += dgTaxDues_Validating;
             // 
             // panel2

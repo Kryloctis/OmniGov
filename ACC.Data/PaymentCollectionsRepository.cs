@@ -23,8 +23,9 @@ namespace ACC.Data
         private IRcdDeposits rcdDepositsRepository;
         private IBidRepository biddingsRepository;
         private IBiddersRepository biddersRepository;
+        private ICommunityTaxCertificateRepository communityTaxCertificateRepository;
 
-        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBidRepository biddingsRepository, IBiddersRepository biddersRepository)
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBidRepository biddingsRepository, IBiddersRepository biddersRepository, ICommunityTaxCertificateRepository communityTaxCertificateRepository)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
             this.rptPaymentRepository = rptPaymentRepository;
@@ -38,6 +39,7 @@ namespace ACC.Data
             this.rcdDepositsRepository = rcdDeposits;
             this.biddingsRepository = biddingsRepository;
             this.biddersRepository = biddersRepository;
+            this.communityTaxCertificateRepository = communityTaxCertificateRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -113,6 +115,8 @@ namespace ACC.Data
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+
 
         public bool Delete(List<PaymentCollectionsModel> entityList)
         {
@@ -506,6 +510,35 @@ namespace ACC.Data
                 int lastInsertedBiddersId = biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);
                 bidModel.BiddersId = lastInsertedBiddersId;
                 biddingsRepository.Insert(bidModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        bool IPaymentCollectionsRepository.VoidPayment(PaymentCollectionsModel paymentCollectionModel)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, paymentCollectionModel.Id},
+                new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionModel.IsCancelled},
+            };
+
+            string query = $"UPDATE {tableName} SET  is_cancelled = @is_cancelled WHERE id = @id";
+
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool InsertWithCommunityTaxCertificate(PaymentCollectionsModel paymentCollectionsModel, CommunityTaxCertificateModel communityTaxCertificateModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(paymentCollectionsModel);
+                int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
+                //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                communityTaxCertificateModel.PaymentCollectionsId = paymentCollectionId;
+                communityTaxCertificateRepository.Insert(communityTaxCertificateModel);
+                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

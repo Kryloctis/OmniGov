@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(800, 35);
+            toolStrip1.Size = new System.Drawing.Size(794, 35);
             toolStrip1.TabIndex = 6;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(62, 24);
-            btnAdd.Text = "Add...";
+            btnAdd.Text = "&Add...";
             btnAdd.Click += BtnAdd_Click;
             // 
             // btnEdit
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new System.Drawing.Size(60, 24);
-            btnEdit.Text = "Edit...";
+            btnEdit.Text = "&Edit...";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
@@ -117,10 +117,10 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel3, lblUpdatedAt });
-            statusStrip1.Location = new System.Drawing.Point(0, 428);
+            statusStrip1.Location = new System.Drawing.Point(0, 377);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            statusStrip1.Size = new System.Drawing.Size(800, 22);
+            statusStrip1.Size = new System.Drawing.Size(794, 22);
             statusStrip1.SizingGrip = false;
             statusStrip1.TabIndex = 9;
             statusStrip1.Text = "statusStrip1";
@@ -172,7 +172,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             panel1.Location = new System.Drawing.Point(0, 35);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(800, 393);
+            panel1.Size = new System.Drawing.Size(794, 342);
             panel1.TabIndex = 10;
             // 
             // dgDisbursingOfficer
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             dgDisbursingOfficer.Location = new System.Drawing.Point(4, 4);
             dgDisbursingOfficer.Name = "dgDisbursingOfficer";
             dgDisbursingOfficer.RowTemplate.Height = 25;
-            dgDisbursingOfficer.Size = new System.Drawing.Size(792, 385);
+            dgDisbursingOfficer.Size = new System.Drawing.Size(786, 334);
             dgDisbursingOfficer.TabIndex = 8;
             dgDisbursingOfficer.SelectionChanged += dgDisbursingOfficer_SelectionChanged;
             // 
@@ -190,13 +190,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(794, 399);
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MinimizeBox = false;
             Name = "frmDisbursingOfficer";
-            ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Treasury > Manage > Disbursing Officers";

@@ -11,6 +11,7 @@ using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.RptReports;
 using AccountingSystem.Views.Reports.Saaob;
 using AccountingSystem.Views.Reports.Saaobb;
+using AccountingSystem.Views.Reports.TaxClearance;
 using AccountingSystem.Views.Reports.TrialBalance;
 using System;
 using System.Collections.Generic;
@@ -422,6 +423,16 @@ namespace AccountingSystem.Views.Dashboard.Reports
             try
             {
                 _ = new frmLtom34().ShowDialog();
+            }
+            catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmTaxClearance().ShowDialog();
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }

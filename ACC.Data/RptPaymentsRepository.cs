@@ -132,5 +132,44 @@ namespace ACC.Data
             }
             return recordDictionary;
         }
+
+        public DataTable GetRecordsByAssessmentPostId(int assessmentPostId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_assessment_posts_id", DbType.Int32, assessmentPostId},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_assessment_posts_id = @rpt_assessment_posts_id ";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        Dictionary<string, string> IRptPaymentRepository.GetRecordByAssessmentPostId(int assessmentPostId)
+        {
+
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_assessment_posts_id", DbType.Int32, assessmentPostId }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_assessment_posts_id = @rpt_assessment_posts_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
+        }
     }
 }

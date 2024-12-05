@@ -13,6 +13,7 @@ using AccountingSystem.Views.Transactions.Payments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
 using AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership;
+using AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate;
 using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
 using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 using AccountingSystem.Views.Transactions.RCI;
@@ -133,6 +134,8 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+
 
         private void feesChargesTstrpMnuItm_Click(object sender, EventArgs e)
         {
@@ -292,6 +295,15 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmWarrantLevy().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void aF41CommunityTaxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCommunityTaxCertificate().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

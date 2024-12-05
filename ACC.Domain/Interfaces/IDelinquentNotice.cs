@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
         public DataTable GetViewRecordsBySearch(int rowLimit, string searchKey);
 
         public Dictionary<string, string> GetViewRecordById(int Id);
+
+        public Dictionary<string, string> GetDelinquencyStatusByRptId(int rptId);
     }
 }

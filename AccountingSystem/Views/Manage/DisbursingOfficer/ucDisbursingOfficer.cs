@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.LinkUser;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -84,7 +85,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 if (UserId > 0)
                 {
                     UserId = 0;
-                    linkuser.Text = "+ Link User";
                 }
                 else
                 {
@@ -93,7 +93,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     if (fuser.ShowDialog() == DialogResult.OK)
                     {
                         UserId = fuser.UserId;
-                        linkuser.Text = String.Format("@{0}", fuser.userName);
                         if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
                         {
                             txtPrefix.Text = fuser.prefix;
@@ -114,13 +113,102 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             if (data.Count > 0)
             {
                 UserId = id;
-                linkuser.Text = String.Format("@{0}", data["username"]);
             }
             else
             {
                 UserId = 0;
-                linkuser.Text = "+ Link User";
             }
+        }
+
+        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!chckLinkAcc.Checked)
+                {
+                    chckLinkAcc.Image = Properties.Resources.link_14px;
+                    cmbxLinkedAcc.Enabled = false;
+                    cmbxLinkedAcc.SelectedIndex = -1;
+                    cmbxLinkedAcc.Text = string.Empty;
+                    errorProvider1.SetError(chckLinkAcc, string.Empty);
+                    ResetForm();
+                }
+                else
+                {
+                    chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                    cmbxLinkedAcc.Enabled = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ucDisbursingOfficer_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void OnLoad()
+        {
+            if (!DesignMode)
+            {
+                LoadUsers();
+            }
+        }
+        private void LoadUsers(bool isSearch = false)
+        {
+            string searchKey = cmbxLinkedAcc.Text.Trim();
+            var dtUsers = AccFactory.UsersRepository().GetRecords();
+            HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
+
+            var searchSources = new List<string>
+            {
+                "first_name",
+                "last_name",
+                "role_name"
+            };
+
+            HelperLoadRecords.SearchableComboboxParameters(cmbxLinkedAcc, dtUsers, "id", "first_name", searchSources, searchKey, isSearch);
+        }
+
+        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
+                {
+                    LoadUsers(true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.V))
+                    LoadUsers(true);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadUserDetails();
+        }
+        private void LoadUserDetails()
+        {
+            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
+            var dtUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+
+            txtPrefix.Text = dtUser["prefix"];
+            txtFirstName.Text = dtUser["first_name"];
+            txtLastName.Text = dtUser["last_name"];
+            txtMidInitial.Text = dtUser["mid_initial"];
+            txtSuffix.Text = dtUser["suffix"];
+            txtJobTitle.Text = dtUser["role_name"];
         }
     }
 }
