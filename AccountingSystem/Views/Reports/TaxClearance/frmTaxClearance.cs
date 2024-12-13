@@ -2,6 +2,7 @@
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,7 +11,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
 {
     public partial class frmTaxClearance : Form
     {
-
         private DataTable dtRealProperties;
 
         private int year;
@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             panel3.Controls.Add(reportViewer1);
             txtPropertyOwner.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtPropertyOwner.AutoCompleteMode = AutoCompleteMode.Suggest;
-
         }
 
         private void LoadRealProperties()
@@ -42,8 +41,8 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtPropertyOwner.AutoCompleteCustomSource = autoCom;
-
         }
+
         private void frmTaxClearance_Load(object sender, System.EventArgs e)
         {
             LoadRealProperties();
@@ -57,6 +56,7 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
@@ -69,14 +69,13 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             }
         }
 
-
         private void ToogleRunButton(bool isGenerated)
         {
             btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
             btnRunReport.Enabled = isGenerated;
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -86,7 +85,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                     e.Cancel = true;
                     return;
                 }
-
 
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>
@@ -105,7 +103,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-
                 progressCount += tasks["Fetch Record"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -114,13 +111,11 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-
                 reportParameters.Add(new ReportParameter("paramOwner", owner));
                 reportParameters.Add(new ReportParameter("paramOwnerAddress", ownerAddress));
                 reportParameters.Add(new ReportParameter("paramTaxPaidFrom", "-"));
                 reportParameters.Add(new ReportParameter("paramTaxPaidTo", year.ToString()));
                 reportParameters.Add(new ReportParameter("paramOfficialReceipt", receiptNo));
-
 
                 reportParameters.Add(new ReportParameter("paramYear", year.ToString()));
                 reportParameters.Add(new ReportParameter("paramCompleteARPNo", completeARPNo));
@@ -129,27 +124,25 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 reportParameters.Add(new ReportParameter("paramDateOfPayment", dateOfPayment));
                 reportParameters.Add(new ReportParameter("paramLocationOfProperty", locationOfProperty));
 
-
                 reportParameters.Add(new ReportParameter("paramCertificateNo", string.Empty));
                 reportParameters.Add(new ReportParameter("paramCertificateIssuedAt", string.Empty));
                 reportParameters.Add(new ReportParameter("paramCertificateDateIssued", string.Empty));
                 reportParameters.Add(new ReportParameter("paramCertificateTaxpayerTIN", string.Empty));
-
 
                 progressCount += tasks["Set Parameter Values"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.StackTrace); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbReport.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -191,7 +184,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                         .Select(row => row["taxpayers_id"])
                         .FirstOrDefault();
 
-
             if (taxPayerId is not null)
             {
                 DataTable dtProperty = AccFactory.RealPropertiesRepository().GetPropertiesByOwnerId(Convert.ToInt32(taxPayerId));
@@ -209,11 +201,9 @@ namespace AccountingSystem.Views.Reports.TaxClearance
             var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
             int assessmentPostId = 0;
 
-
             if (dictAssessmentPost.Count != 0)
             {
                 assessmentPostId = Convert.ToInt32(dictAssessmentPost["id"]);
-
 
                 var rptPayment = AccFactory.RptPaymentepository().GetRecordByAssessmentPostId(assessmentPostId);
 
@@ -233,8 +223,6 @@ namespace AccountingSystem.Views.Reports.TaxClearance
                 }
                 else
                     Helper.MessageBoxError("Failed to generate Tax Clearance. Property May be delinquent.");
-
-
             }
             return;
         }

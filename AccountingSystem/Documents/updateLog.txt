@@ -1,30 +1,16 @@
 ﻿Local Finance System
-Version 1.0.8.0
+Version 1.0.10.0
 
 Updates:
 
 	Reports
-		- LTOM Form No. 16 - Notice of Delinquency in the Payment of Real Property Tax
-		- LTOM Form No. 20 - Warrant of Levy
-		- LTOM Form No. 21 - Notice of Levy (Local Assessor and Registrar of deeds)
-		- LTOM Form No. 22 - Report of Levy (Sanggunian)
-		- LTOM Form No. 23 - Notice of Auction Sale of Delinquent Real Properties.
-		- LTOM Form No. 24 - Notice of Sale
-		- LTOM Form No. 25 - Public Auction Registration Form
-		- LTOM Form No. 26 - List of Registered Bidders
-		- LTOM Form No. 27 - Undertaking and Waivers of Bidders)
-		- LTOM Form No. 28 - Rules and Regulations of Public Auction
-		- LTOM Form No. 29 - Certificate of Sale
-		- LTOM Form No. 30 - Declaration of Forfeiture of Delinquent Property
-		- LTOM Form No. 31 - Report of Sale
-		- LTOM Form No. 32 - Certificate of Redemption
-		- LTOM Form No. 33 - Cancellation of Warrant of Levy (Local Assessor and Registrar of Deeds)
-
+		- Certificate of Tax Clearance Report Generation.
+	
+	Manage
+		- Fixed filter function to accountable forms inventory module.
+		- Improved linked user search of collecting officers and disbursing officers module.
 
 	Transactions
-		- Record insert, update, delete, and display of warrant of levy.
-		- Record insert, update, delete, and display of auction event.
-		- Record insert, update, delete, and display of real property auction scheduling.
-		- Record insert, update, delete, and display bidding records.
-		- Fixed AF-51 & 57, AF-52, AF-53, AF-54, AF-56, and AF-58 payment receipt printing configuration, orientation, resolution and user experience.
+		- Added Community Tax Certification payment module w/ receipt printing.
+		- Added void payment functionality at payment history.
 		
