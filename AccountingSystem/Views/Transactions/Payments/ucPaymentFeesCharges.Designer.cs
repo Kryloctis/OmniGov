@@ -38,8 +38,12 @@
             btnDelete = new System.Windows.Forms.Button();
             btnAdd = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
-            treeViewFeesCharges = new System.Windows.Forms.TreeView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            panel5 = new System.Windows.Forms.Panel();
+            txtSearch = new System.Windows.Forms.TextBox();
+            btnClear = new System.Windows.Forms.Button();
+            btnSearch = new System.Windows.Forms.Button();
+            treeViewFeesCharges = new System.Windows.Forms.TreeView();
             panel3 = new System.Windows.Forms.Panel();
             dgPaymentFeesCharges = new System.Windows.Forms.DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -48,6 +52,7 @@
             tableLayoutPanel1.SuspendLayout();
             panel4.SuspendLayout();
             panel1.SuspendLayout();
+            panel5.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).BeginInit();
             SuspendLayout();
@@ -111,7 +116,7 @@
             btnDelete.Location = new System.Drawing.Point(3, 138);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(31, 23);
-            btnDelete.TabIndex = 7;
+            btnDelete.TabIndex = 1;
             btnDelete.Text = "x";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
@@ -123,15 +128,16 @@
             btnAdd.Location = new System.Drawing.Point(3, 109);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(31, 23);
-            btnAdd.TabIndex = 6;
+            btnAdd.TabIndex = 0;
             btnAdd.Text = ">";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(treeViewFeesCharges);
             panel1.Controls.Add(progressBar1);
+            panel1.Controls.Add(panel5);
+            panel1.Controls.Add(treeViewFeesCharges);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(0);
@@ -139,22 +145,64 @@
             panel1.Size = new System.Drawing.Size(257, 290);
             panel1.TabIndex = 13;
             // 
-            // treeViewFeesCharges
-            // 
-            treeViewFeesCharges.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeViewFeesCharges.Location = new System.Drawing.Point(0, 5);
-            treeViewFeesCharges.Name = "treeViewFeesCharges";
-            treeViewFeesCharges.Size = new System.Drawing.Size(257, 285);
-            treeViewFeesCharges.TabIndex = 1;
-            treeViewFeesCharges.AfterSelect += treeViewFeesCharges_AfterSelect;
-            // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 0);
+            progressBar1.Location = new System.Drawing.Point(0, 29);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new System.Drawing.Size(257, 5);
             progressBar1.TabIndex = 13;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(txtSearch);
+            panel5.Controls.Add(btnClear);
+            panel5.Controls.Add(btnSearch);
+            panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            panel5.Location = new System.Drawing.Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(257, 29);
+            panel5.TabIndex = 8;
+            // 
+            // txtSearch
+            // 
+            txtSearch.AllowDrop = true;
+            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtSearch.Location = new System.Drawing.Point(3, 3);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search Fees and Charges";
+            txtSearch.Size = new System.Drawing.Size(150, 23);
+            txtSearch.TabIndex = 0;
+            // 
+            // btnClear
+            // 
+            btnClear.Image = Properties.Resources.symbol_cancel_14px;
+            btnClear.Location = new System.Drawing.Point(231, 3);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new System.Drawing.Size(22, 23);
+            btnClear.TabIndex = 2;
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Visible = false;
+            btnClear.Click += btnClear_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new System.Drawing.Point(155, 3);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(75, 23);
+            btnSearch.TabIndex = 1;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // treeViewFeesCharges
+            // 
+            treeViewFeesCharges.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            treeViewFeesCharges.Location = new System.Drawing.Point(0, 38);
+            treeViewFeesCharges.Name = "treeViewFeesCharges";
+            treeViewFeesCharges.Size = new System.Drawing.Size(257, 252);
+            treeViewFeesCharges.TabIndex = 1;
+            treeViewFeesCharges.AfterSelect += treeViewFeesCharges_AfterSelect;
             // 
             // panel3
             // 
@@ -227,6 +275,8 @@
             tableLayoutPanel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).EndInit();
             ResumeLayout(false);
@@ -245,5 +295,9 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dgPaymentFeesCharges;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Panel panel5;
     }
 }

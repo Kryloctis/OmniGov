@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         internal void OnLoad()
         {
-            LoadFeesCharges();
+            //LoadFeesCharges();
             ToggleTreeViewButtons(treeViewFeesCharges);
             LoadPaymentFeesCharges();
             ToggleDatagridViewButtons(dgPaymentFeesCharges);
@@ -166,8 +166,8 @@ namespace AccountingSystem.Views.Transactions.Payments
                 };
 
                 mainTreeView.ExpandAll();
-
                 var dataTable = AccFactory.TaxTypesRepository().GetRecords();
+
                 EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
                 int progressCount = 0;
@@ -364,7 +364,9 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
-            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(feesChargesClassificationId);
+            string searchText = txtSearch.Text.Trim();
+
+            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
             List<TreeNode> nodes = new List<TreeNode>();
 
             foreach (DataRow row in dtFeesCharges.Rows)
@@ -402,7 +404,11 @@ namespace AccountingSystem.Views.Transactions.Payments
                     btnAdd.Enabled = false;
             }
             else
+            {
                 btnAdd.Enabled = false;
+                treeView.Nodes.Clear();
+            }
+
         }
 
         private void ToggleDatagridViewButtons(DataGridView dataGridView)
@@ -445,6 +451,23 @@ namespace AccountingSystem.Views.Transactions.Payments
                 ToggleDatagridViewButtons(dgPaymentFeesCharges);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length < 3)
+
+                return;
+
+            LoadFeesCharges();
+            btnClear.Visible = true;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            treeViewFeesCharges.Nodes.Clear();
+            btnClear.Visible = false;
+            txtSearch.Clear();
         }
     }
 }
