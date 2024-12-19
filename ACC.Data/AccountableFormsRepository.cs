@@ -56,9 +56,11 @@ namespace ACC.Data
             {
                 new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
                 new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
+                new object[] { "@is_cash_ticket", DbType.Boolean, entity.IsCashTicket},
+
             };
 
-            string query = $"INSERT INTO {tableName} (acc_form_no,acc_form_desc) VALUES (@acc_form_no,@acc_form_desc)";
+            string query = $"INSERT INTO {tableName} (acc_form_no,acc_form_desc, is_cash_ticket) VALUES (@acc_form_no,@acc_form_desc, @is_cash_ticket)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -69,9 +71,10 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int16, entity.Id},
                 new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
                 new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
+                new object[] { "@is_cash_ticket", DbType.Boolean, entity.IsCashTicket},
             };
 
-            string query = $"UPDATE {tableName} SET acc_form_no = @acc_form_no, acc_form_desc = @acc_form_desc WHERE id = @id";
+            string query = $"UPDATE {tableName} SET acc_form_no = @acc_form_no, acc_form_desc = @acc_form_desc, is_cash_ticket = @is_cash_ticket WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
