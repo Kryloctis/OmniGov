@@ -59,6 +59,9 @@
             checkIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            cashTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            issuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,7 +81,7 @@
             // manageTstripDrpDwnBtn
             // 
             manageTstripDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            manageTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { receiptsToolStripMenuItem, realPropertiesTstrpMnuItm, taxpayersTstrpMnuItm, collectingOfficersTstrpMnuItm, disbursementOfficersTstrpMnuItm, feesChargesTstrpMnuItm });
+            manageTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { receiptsToolStripMenuItem, cashTicketsToolStripMenuItem, realPropertiesTstrpMnuItm, taxpayersTstrpMnuItm, collectingOfficersTstrpMnuItm, disbursementOfficersTstrpMnuItm, feesChargesTstrpMnuItm });
             manageTstripDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("manageTstripDrpDwnBtn.Image");
             manageTstripDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             manageTstripDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
@@ -96,14 +99,14 @@
             // receiptInventoryTstrpMnuItm
             // 
             receiptInventoryTstrpMnuItm.Name = "receiptInventoryTstrpMnuItm";
-            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
+            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
             receiptInventoryTstrpMnuItm.Text = "Inventory";
             receiptInventoryTstrpMnuItm.Click += receiptInventoryTstrpMnuItm_Click;
             // 
             // recieiptIssuanceTstrpMnuItm
             // 
             recieiptIssuanceTstrpMnuItm.Name = "recieiptIssuanceTstrpMnuItm";
-            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
+            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
             recieiptIssuanceTstrpMnuItm.Text = "Issuance";
             recieiptIssuanceTstrpMnuItm.Click += recieiptIssuanceTstrpMnuItm_Click;
             // 
@@ -282,6 +285,26 @@
             bankDepositTstrpMnuItm.Text = "Bank Deposit...";
             bankDepositTstrpMnuItm.Click += bankDepositTstrpMnuItm_Click;
             // 
+            // cashTicketsToolStripMenuItem
+            // 
+            cashTicketsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { inventoryToolStripMenuItem, issuanceToolStripMenuItem });
+            cashTicketsToolStripMenuItem.Name = "cashTicketsToolStripMenuItem";
+            cashTicketsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            cashTicketsToolStripMenuItem.Text = "Cash Tickets";
+            // 
+            // inventoryToolStripMenuItem
+            // 
+            inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
+            inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            inventoryToolStripMenuItem.Text = "Inventory";
+            inventoryToolStripMenuItem.Click += inventoryToolStripMenuItem_Click;
+            // 
+            // issuanceToolStripMenuItem
+            // 
+            issuanceToolStripMenuItem.Name = "issuanceToolStripMenuItem";
+            issuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            issuanceToolStripMenuItem.Text = "Issuance";
+            // 
             // ucTreasury
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -327,5 +350,8 @@
         private System.Windows.Forms.ToolStripMenuItem dellinquencyNoticesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warrantsOfLevyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aF41CommunityTaxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashTicketsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem issuanceToolStripMenuItem;
     }
 }

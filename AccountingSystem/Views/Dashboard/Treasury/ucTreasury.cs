@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.CollectingOfficer;
+﻿using AccountingSystem.Views.Manage.CashTickets;
+using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.RealProperties;
@@ -304,6 +305,15 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmCommunityTaxCertificate().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCashTickets().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
