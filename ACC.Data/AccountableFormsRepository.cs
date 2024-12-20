@@ -166,6 +166,14 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetCashTicketsAccountableForm()
+        {
+            string query = $"SELECT * FROM {viewTableName} WHERE is_cash_ticket = 1";
+
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+        }
+
         public Dictionary<string, string> GetRecordByAccFormNo(string accFormNo)
         {
             var dict = new Dictionary<string, string>();

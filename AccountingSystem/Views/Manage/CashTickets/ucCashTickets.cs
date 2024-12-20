@@ -1,10 +1,14 @@
-﻿using System;
+﻿using ACC.Data;
+using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.CashTickets
 {
     public partial class ucCashTickets : UserControl
     {
+        int cashTicketId;
+        int accountableFormId;
         public ucCashTickets()
         {
             InitializeComponent();
@@ -13,7 +17,41 @@ namespace AccountingSystem.Views.Manage.CashTickets
         private void ucCashTickets_Load(object sender, EventArgs e)
         {
             //LoadAccountableForms(); those cash tickets only.
-
+            LoadAccountableForms();
         }
+
+        internal void LoadAccountableForms()
+        {
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("accountable_form", typeof(string))
+            };
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(dataColumns);
+
+            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetCashTicketsAccountableForm();
+            foreach (DataRow row in dtAccoutnableForm.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                newRow["id"] = row["id"];
+                newRow["accountable_form"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                dataTable.Rows.Add(newRow);
+            }
+
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dataTable, "id", "accountable_form");
+        }
+
+        internal void ResetForm()
+        {
+            cashTicketId = 0;
+            accountableFormId = 0;
+
+            dtpReceivedDate.Value = DateTime.Today;
+            numericUpDown1.Value = 0;
+            txtRemark.Clear();
+        }
+
     }
 }
