@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
                 var dataColumns = new DataColumn[]
                 {
-                    new DataColumn("id", typeof(int)),
+                    new DataColumn("cash_tickets_id", typeof(int)),
                     new DataColumn("accountable_form_code", typeof(string)),
                     new DataColumn("quantity", typeof(int)),
                     new DataColumn("received_date", typeof(DateTime)),
@@ -71,14 +71,14 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
                 foreach (DataRow row in dtReceiptsDb.Rows)
                 {
-                    int id = Convert.ToInt32(row["id"]);
-                    string accountableFormCode = row["accountable_forms_id"].ToString();
+                    int id = Convert.ToInt32(row["cash_tickets_id"]);
+                    string accountableFormCode = row["acc_form_no"].ToString();
                     int quantity = Convert.ToInt32(row["quantity"]);
                     DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                     string remarks = row["remarks"].ToString();
 
                     var newRow = dataTable.NewRow();
-                    newRow["id"] = id;
+                    newRow["cash_tickets_id"] = id;
                     newRow["accountable_form_code"] = accountableFormCode;
                     newRow["quantity"] = quantity;
                     newRow["received_date"] = receivedDate;
@@ -114,6 +114,15 @@ namespace AccountingSystem.Views.Manage.CashTickets
             dgCashTickets.CurrentCell = dgCashTickets.FirstDisplayedCell;
             lblRecordCount.Text = dgCashTickets.Rows.Count.ToString();
             Helper.EnableDisableToolStripButtons(dgCashTickets, btnEdit, btnDelete);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadCashTickets();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

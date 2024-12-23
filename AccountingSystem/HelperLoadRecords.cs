@@ -716,7 +716,7 @@ namespace AccountingSystem
         internal static void CashTicketsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["cash_tickets_id"].Visible = false;
 
             datagrid.Columns["accountable_form_code"].Width = 80;
             datagrid.Columns["accountable_form_code"].MinimumWidth = 80;

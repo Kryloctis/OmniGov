@@ -169,6 +169,7 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 

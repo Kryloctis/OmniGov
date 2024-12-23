@@ -71,8 +71,7 @@ namespace ACC.Data
                 new object[]{"@row_limit", DbType.Int32, rowLimit},
                 };
 
-            //string query = $"SELECT * FROM {tableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
         }
     }
