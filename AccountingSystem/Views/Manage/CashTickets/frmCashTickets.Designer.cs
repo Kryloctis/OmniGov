@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
-            bgwLoadReceipts = new System.ComponentModel.BackgroundWorker();
+            bgwLoadCashTickets = new System.ComponentModel.BackgroundWorker();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
-            dgReceipts = new System.Windows.Forms.DataGridView();
+            dgCashTickets = new System.Windows.Forms.DataGridView();
             dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
             label1 = new System.Windows.Forms.Label();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,7 +47,7 @@
             panel2 = new System.Windows.Forms.Panel();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgReceipts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgCashTickets).BeginInit();
             statusStrip1.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -63,10 +63,13 @@
             cmbxRowFilter.Size = new System.Drawing.Size(120, 23);
             cmbxRowFilter.TabIndex = 14;
             // 
-            // bgwLoadReceipts
+            // bgwLoadCashTickets
             // 
-            bgwLoadReceipts.WorkerReportsProgress = true;
-            bgwLoadReceipts.WorkerSupportsCancellation = true;
+            bgwLoadCashTickets.WorkerReportsProgress = true;
+            bgwLoadCashTickets.WorkerSupportsCancellation = true;
+            bgwLoadCashTickets.DoWork += bgwLoadCashTickets_DoWork;
+            bgwLoadCashTickets.ProgressChanged += bgwLoadCashTickets_ProgressChanged;
+            bgwLoadCashTickets.RunWorkerCompleted += bgwLoadCashTickets_RunWorkerCompleted;
             // 
             // pbLoadRecords
             // 
@@ -78,7 +81,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(dgReceipts);
+            panel1.Controls.Add(dgCashTickets);
             panel1.Controls.Add(pbLoadRecords);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 65);
@@ -87,18 +90,18 @@
             panel1.Size = new System.Drawing.Size(840, 341);
             panel1.TabIndex = 27;
             // 
-            // dgReceipts
+            // dgCashTickets
             // 
-            dgReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgReceipts.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceipts.Location = new System.Drawing.Point(4, 9);
-            dgReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            dgReceipts.Name = "dgReceipts";
-            dgReceipts.RowHeadersWidth = 51;
-            dgReceipts.RowTemplate.Height = 29;
-            dgReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgReceipts.Size = new System.Drawing.Size(832, 328);
-            dgReceipts.TabIndex = 7;
+            dgCashTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCashTickets.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgCashTickets.Location = new System.Drawing.Point(4, 9);
+            dgCashTickets.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dgCashTickets.Name = "dgCashTickets";
+            dgCashTickets.RowHeadersWidth = 51;
+            dgCashTickets.RowTemplate.Height = 29;
+            dgCashTickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dgCashTickets.Size = new System.Drawing.Size(832, 328);
+            dgCashTickets.TabIndex = 7;
             // 
             // dtpReceivedDate
             // 
@@ -238,8 +241,9 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Treasury > Manage > Cash Tickets > Inventory";
+            Load += frmCashTickets_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgReceipts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgCashTickets).EndInit();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -253,10 +257,10 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cmbxRowFilter;
-        internal System.ComponentModel.BackgroundWorker bgwLoadReceipts;
+        internal System.ComponentModel.BackgroundWorker bgwLoadCashTickets;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgReceipts;
+        private System.Windows.Forms.DataGridView dgCashTickets;
         private System.Windows.Forms.DateTimePicker dtpReceivedDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
