@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -85,7 +86,22 @@ namespace ACC.Data
 
         public bool Delete(List<CashTicketsModel> entityList)
         {
-            throw new System.NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch, int rowLimit)

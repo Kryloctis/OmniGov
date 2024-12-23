@@ -1,5 +1,8 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -16,7 +19,11 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmCashTicketsAdd().ShowDialog();
+            try
+            {
+                _ = new frmCashTicketsAdd(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -129,6 +136,42 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 LoadCashTickets();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DeleteRecords())
+                {
+                    Helper.MessageBoxSuccess("Cash Ticket/s has been deleted.");
+                    LoadCashTickets();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1451)
+                    Helper.MessageBoxError("Can't delete Cash Ticket/s. The record was already used by a collecting officer.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgCashTickets.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var cashTicketsModelList = new List<CashTicketsModel>();
+                foreach (DataGridViewRow row in dgCashTickets.SelectedRows)
+                {
+                    int cashTicketId = Convert.ToInt32(row.Cells["cash_tickets_id"].Value);
+                    cashTicketsModelList.Add(new CashTicketsModel() { Id = cashTicketId });
+                }
+                return AccFactory.CashTicketsRepository().Delete(cashTicketsModelList);
+            }
+
+            return false;
         }
     }
 }

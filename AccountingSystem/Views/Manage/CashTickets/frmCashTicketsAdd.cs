@@ -8,11 +8,13 @@ namespace AccountingSystem.Views.Manage.CashTickets
     public partial class frmCashTicketsAdd : Form
     {
         private readonly ucCashTickets uc;
+        private frmCashTickets _frmCashTickets;
 
-        public frmCashTicketsAdd()
+        public frmCashTicketsAdd(frmCashTickets frmCashTickets)
         {
             InitializeComponent();
             uc = ucCashTickets1;
+            _frmCashTickets = frmCashTickets;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Cash Ticket has been added.");
-                    //_frmAccountable.LoadRecords();
+                    _frmCashTickets.LoadCashTickets();
                     uc.ResetForm();
                 }
             }
