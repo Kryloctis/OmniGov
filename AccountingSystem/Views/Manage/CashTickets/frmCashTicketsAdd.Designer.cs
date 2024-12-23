@@ -70,6 +70,7 @@
             btnSave.Text = "Save";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucCashTickets1
             // 

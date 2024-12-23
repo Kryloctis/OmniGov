@@ -14,6 +14,18 @@ namespace AccountingSystem.Views.Manage.CashTickets
             InitializeComponent();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbAccountableForms),
+                errorProvider1.GetError(nudQuantity),
+                errorProvider1.GetError(dtpReceivedDate)
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+
+        }
         private void ucCashTickets_Load(object sender, EventArgs e)
         {
             //LoadAccountableForms(); those cash tickets only.
@@ -49,7 +61,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
             accountableFormId = 0;
 
             dtpReceivedDate.Value = DateTime.Today;
-            numericUpDown1.Value = 0;
+            nudQuantity.Value = 0;
             txtRemark.Clear();
         }
 

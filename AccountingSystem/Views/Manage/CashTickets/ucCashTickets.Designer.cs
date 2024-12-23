@@ -37,9 +37,9 @@
             cmbAccountableForms = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            nudQuantity = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -66,7 +66,7 @@
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
             dtpReceivedDate.Size = new System.Drawing.Size(200, 23);
-            dtpReceivedDate.TabIndex = 18;
+            dtpReceivedDate.TabIndex = 2;
             // 
             // label4
             // 
@@ -85,7 +85,7 @@
             txtRemark.Multiline = true;
             txtRemark.Name = "txtRemark";
             txtRemark.Size = new System.Drawing.Size(200, 46);
-            txtRemark.TabIndex = 20;
+            txtRemark.TabIndex = 3;
             // 
             // cmbAccountableForms
             // 
@@ -96,7 +96,7 @@
             cmbAccountableForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             cmbAccountableForms.Name = "cmbAccountableForms";
             cmbAccountableForms.Size = new System.Drawing.Size(200, 23);
-            cmbAccountableForms.TabIndex = 25;
+            cmbAccountableForms.TabIndex = 0;
             // 
             // label3
             // 
@@ -111,19 +111,20 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // numericUpDown1
+            // nudQuantity
             // 
-            numericUpDown1.Location = new System.Drawing.Point(138, 41);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(200, 23);
-            numericUpDown1.TabIndex = 26;
-            numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudQuantity.Location = new System.Drawing.Point(138, 41);
+            nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            nudQuantity.Name = "nudQuantity";
+            nudQuantity.Size = new System.Drawing.Size(200, 23);
+            nudQuantity.TabIndex = 1;
+            nudQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ucCashTickets
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(numericUpDown1);
+            Controls.Add(nudQuantity);
             Controls.Add(cmbAccountableForms);
             Controls.Add(label3);
             Controls.Add(label6);
@@ -135,7 +136,7 @@
             Size = new System.Drawing.Size(359, 151);
             Load += ucCashTickets_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -150,6 +151,6 @@
         internal System.Windows.Forms.ComboBox cmbAccountableForms;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        internal System.Windows.Forms.NumericUpDown nudQuantity;
     }
 }

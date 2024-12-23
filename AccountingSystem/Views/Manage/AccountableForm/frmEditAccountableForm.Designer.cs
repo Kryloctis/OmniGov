@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             ucAccountable1.Location = new System.Drawing.Point(4, 4);
             ucAccountable1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucAccountable1.Name = "ucAccountable1";
-            ucAccountable1.Size = new System.Drawing.Size(373, 89);
+            ucAccountable1.Size = new System.Drawing.Size(373, 103);
             ucAccountable1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 67);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 81);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(381, 30);
             flowLayoutPanel1.TabIndex = 8;
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(381, 97);
+            panel1.Size = new System.Drawing.Size(381, 111);
             panel1.TabIndex = 9;
             // 
             // frmEditAccountableForm
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(381, 97);
+            ClientSize = new System.Drawing.Size(381, 111);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
