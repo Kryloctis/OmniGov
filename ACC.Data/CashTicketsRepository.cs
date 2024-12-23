@@ -34,7 +34,23 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public bool Insert(CashTicketsModel entity)
@@ -54,7 +70,17 @@ namespace ACC.Data
 
         public bool Update(CashTicketsModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
+                new object[] { "@quantity", DbType.Int32, entity.Quantity},
+                new object[] { "@received_date", DbType.Date, entity.ReceivedDate},
+                new object[] { "@remarks", DbType.String, entity.Remarks},
+            };
+
+            string query = $"UPDATE {tableName} SET  accountable_forms_id = @accountable_forms_id, quantity = @quantity, received_date = @received_date, remarks = @remarks WHERE id = @id;";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<CashTicketsModel> entityList)

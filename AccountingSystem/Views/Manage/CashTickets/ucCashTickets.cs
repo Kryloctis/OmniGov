@@ -7,8 +7,9 @@ namespace AccountingSystem.Views.Manage.CashTickets
 {
     public partial class ucCashTickets : UserControl
     {
-        int cashTicketId;
+        internal int cashTicketId;
         int accountableFormId;
+
         public ucCashTickets()
         {
             InitializeComponent();
@@ -65,5 +66,10 @@ namespace AccountingSystem.Views.Manage.CashTickets
             txtRemark.Clear();
         }
 
+
+        internal void OnLoad()
+        {
+            LoadAccountableForms();
+        }
     }
 }

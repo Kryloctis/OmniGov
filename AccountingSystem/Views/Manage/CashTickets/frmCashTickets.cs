@@ -21,7 +21,13 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmCashTicketEdit().ShowDialog();
+            try
+            {
+                int index = dgCashTickets.CurrentRow.Index;
+                int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[index].Cells["cash_tickets_id"].Value);
+                _ = new frmCashTicketEdit(this, cashTicketId).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmCashTickets_Load(object sender, EventArgs e)

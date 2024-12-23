@@ -78,6 +78,7 @@
             btnUpdate.Text = "Update";
             btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // frmCashTicketEdit
             // 
@@ -89,8 +90,10 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MinimizeBox = false;
             Name = "frmCashTicketEdit";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Cash Tickets";
+            Load += frmCashTicketEdit_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
