@@ -9,6 +9,7 @@ using AccountingSystem.Views.Transactions.Assessment;
 using AccountingSystem.Views.Transactions.Auction;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.Biddings;
+using AccountingSystem.Views.Transactions.CashTicketIssuance;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
@@ -314,6 +315,15 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmCashTickets().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void issuanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCashTicketIssuance().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

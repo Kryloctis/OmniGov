@@ -34,6 +34,9 @@
             receiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             receiptInventoryTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             recieiptIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            cashTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            issuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             realPropertiesTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             taxpayersTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             collectingOfficersTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,9 +62,6 @@
             checkIssuanceTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             releasedAndUnreleaseChecksTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             bankDepositTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            cashTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            issuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -109,6 +109,27 @@
             recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
             recieiptIssuanceTstrpMnuItm.Text = "Issuance";
             recieiptIssuanceTstrpMnuItm.Click += recieiptIssuanceTstrpMnuItm_Click;
+            // 
+            // cashTicketsToolStripMenuItem
+            // 
+            cashTicketsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { inventoryToolStripMenuItem, issuanceToolStripMenuItem });
+            cashTicketsToolStripMenuItem.Name = "cashTicketsToolStripMenuItem";
+            cashTicketsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            cashTicketsToolStripMenuItem.Text = "Cash Tickets";
+            // 
+            // inventoryToolStripMenuItem
+            // 
+            inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
+            inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            inventoryToolStripMenuItem.Text = "Inventory";
+            inventoryToolStripMenuItem.Click += inventoryToolStripMenuItem_Click;
+            // 
+            // issuanceToolStripMenuItem
+            // 
+            issuanceToolStripMenuItem.Name = "issuanceToolStripMenuItem";
+            issuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            issuanceToolStripMenuItem.Text = "Issuance";
+            issuanceToolStripMenuItem.Click += issuanceToolStripMenuItem_Click;
             // 
             // realPropertiesTstrpMnuItm
             // 
@@ -284,26 +305,6 @@
             bankDepositTstrpMnuItm.Size = new System.Drawing.Size(226, 22);
             bankDepositTstrpMnuItm.Text = "Bank Deposit...";
             bankDepositTstrpMnuItm.Click += bankDepositTstrpMnuItm_Click;
-            // 
-            // cashTicketsToolStripMenuItem
-            // 
-            cashTicketsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { inventoryToolStripMenuItem, issuanceToolStripMenuItem });
-            cashTicketsToolStripMenuItem.Name = "cashTicketsToolStripMenuItem";
-            cashTicketsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            cashTicketsToolStripMenuItem.Text = "Cash Tickets";
-            // 
-            // inventoryToolStripMenuItem
-            // 
-            inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            inventoryToolStripMenuItem.Text = "Inventory";
-            inventoryToolStripMenuItem.Click += inventoryToolStripMenuItem_Click;
-            // 
-            // issuanceToolStripMenuItem
-            // 
-            issuanceToolStripMenuItem.Name = "issuanceToolStripMenuItem";
-            issuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            issuanceToolStripMenuItem.Text = "Issuance";
             // 
             // ucTreasury
             // 
