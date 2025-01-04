@@ -109,10 +109,10 @@
             dtpReceivedDate.CustomFormat = "MMM dd, yyyy";
             dtpReceivedDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpReceivedDate.Location = new System.Drawing.Point(1326, 3);
+            dtpReceivedDate.Location = new System.Drawing.Point(715, 3);
             dtpReceivedDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpReceivedDate.Name = "dtpReceivedDate";
-            dtpReceivedDate.Size = new System.Drawing.Size(150, 23);
+            dtpReceivedDate.Size = new System.Drawing.Size(120, 23);
             dtpReceivedDate.TabIndex = 12;
             // 
             // label1

@@ -222,6 +222,7 @@ namespace ACC.Data
 
         public static ICommunityTaxCertificateRepository CommunityTaxCertificateRepository() => new CommunityTaxCertificateRepository(mySqlGenericCommandsLFS);
         public static ICashTicketsRepository CashTicketsRepository() => new CashTicketsRepository(mySqlGenericCommandsLFS);
+        public static ICashTicketsIssuedRepository CashTicketsIssuedRepository() => new CashTicketsIssuedRepository(mySqlGenericCommandsLFS);
 
     }
 

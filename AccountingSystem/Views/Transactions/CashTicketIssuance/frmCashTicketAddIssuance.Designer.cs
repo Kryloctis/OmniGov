@@ -87,6 +87,7 @@
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Name = "frmCashTicketAddIssuance";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Cash Ticket Issuance";
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

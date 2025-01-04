@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             cmbxRowFilter = new System.Windows.Forms.ComboBox();
-            bgwLoadIssuedReceipts = new System.ComponentModel.BackgroundWorker();
+            bgwLoadIssuedCashTickets = new System.ComponentModel.BackgroundWorker();
             lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             tsJOCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -39,7 +39,7 @@
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
             panel1 = new System.Windows.Forms.Panel();
-            dgReceiptIssued = new System.Windows.Forms.DataGridView();
+            dgCashTicketIssued = new System.Windows.Forms.DataGridView();
             panel2 = new System.Windows.Forms.Panel();
             dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             label2 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             statusStrip2.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgReceiptIssued).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgCashTicketIssued).BeginInit();
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -69,10 +69,13 @@
             cmbxRowFilter.Size = new System.Drawing.Size(120, 23);
             cmbxRowFilter.TabIndex = 32;
             // 
-            // bgwLoadIssuedReceipts
+            // bgwLoadIssuedCashTickets
             // 
-            bgwLoadIssuedReceipts.WorkerReportsProgress = true;
-            bgwLoadIssuedReceipts.WorkerSupportsCancellation = true;
+            bgwLoadIssuedCashTickets.WorkerReportsProgress = true;
+            bgwLoadIssuedCashTickets.WorkerSupportsCancellation = true;
+            bgwLoadIssuedCashTickets.DoWork += bgwLoadIssuedCashTickets_DoWork;
+            bgwLoadIssuedCashTickets.ProgressChanged += bgwLoadIssuedCashTickets_ProgressChanged;
+            bgwLoadIssuedCashTickets.RunWorkerCompleted += bgwLoadIssuedCashTickets_RunWorkerCompleted;
             // 
             // lblUpdatedAt
             // 
@@ -124,7 +127,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(dgReceiptIssued);
+            panel1.Controls.Add(dgCashTicketIssued);
             panel1.Controls.Add(pbLoadRecords);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 65);
@@ -133,18 +136,18 @@
             panel1.Size = new System.Drawing.Size(800, 385);
             panel1.TabIndex = 39;
             // 
-            // dgReceiptIssued
+            // dgCashTicketIssued
             // 
-            dgReceiptIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgReceiptIssued.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgReceiptIssued.Location = new System.Drawing.Point(4, 9);
-            dgReceiptIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            dgReceiptIssued.Name = "dgReceiptIssued";
-            dgReceiptIssued.RowHeadersWidth = 51;
-            dgReceiptIssued.RowTemplate.Height = 29;
-            dgReceiptIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgReceiptIssued.Size = new System.Drawing.Size(792, 372);
-            dgReceiptIssued.TabIndex = 8;
+            dgCashTicketIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCashTicketIssued.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgCashTicketIssued.Location = new System.Drawing.Point(4, 9);
+            dgCashTicketIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dgCashTicketIssued.Name = "dgCashTicketIssued";
+            dgCashTicketIssued.RowHeadersWidth = 51;
+            dgCashTicketIssued.RowTemplate.Height = 29;
+            dgCashTicketIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dgCashTicketIssued.Size = new System.Drawing.Size(792, 372);
+            dgCashTicketIssued.TabIndex = 8;
             // 
             // panel2
             // 
@@ -162,10 +165,10 @@
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "MMM dd, yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDateIssued.Location = new System.Drawing.Point(1289, 3);
+            dtpDateIssued.Location = new System.Drawing.Point(676, 3);
             dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dtpDateIssued.Name = "dtpDateIssued";
-            dtpDateIssued.Size = new System.Drawing.Size(148, 23);
+            dtpDateIssued.Size = new System.Drawing.Size(120, 23);
             dtpDateIssued.TabIndex = 30;
             // 
             // label2
@@ -263,13 +266,16 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(toolStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            MinimizeBox = false;
             Name = "frmCashTicketIssuance";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Treasury > Manage > Cash Tickets > Issuance";
+            Load += frmCashTicketIssuance_Load;
             statusStrip2.ResumeLayout(false);
             statusStrip2.PerformLayout();
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgReceiptIssued).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgCashTicketIssued).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -281,7 +287,7 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cmbxRowFilter;
-        internal System.ComponentModel.BackgroundWorker bgwLoadIssuedReceipts;
+        internal System.ComponentModel.BackgroundWorker bgwLoadIssuedCashTickets;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
@@ -290,7 +296,7 @@
         private System.Windows.Forms.StatusStrip statusStrip2;
         internal System.Windows.Forms.ProgressBar pbLoadRecords;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgReceiptIssued;
+        private System.Windows.Forms.DataGridView dgCashTicketIssued;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dtpDateIssued;
         private System.Windows.Forms.Label label2;
