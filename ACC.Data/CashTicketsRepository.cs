@@ -25,7 +25,10 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            string query = $"SELECT * FROM {viewTableName}";
+
+            var dtri = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dtri);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

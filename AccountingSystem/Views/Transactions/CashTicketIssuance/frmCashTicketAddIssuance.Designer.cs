@@ -70,6 +70,7 @@
             btnSave.Text = "Save";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucCashTicketIssuance1
             // 
@@ -82,11 +83,13 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(360, 170);
             Controls.Add(ucCashTicketIssuance1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Name = "frmCashTicketAddIssuance";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Cash Ticket Issuance";
             flowLayoutPanel1.ResumeLayout(false);

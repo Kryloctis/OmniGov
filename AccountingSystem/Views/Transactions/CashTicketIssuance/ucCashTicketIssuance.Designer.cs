@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             cmbCollector = new System.Windows.Forms.ComboBox();
             cbCollectingOfficerTypeJO = new System.Windows.Forms.CheckBox();
-            cmbReceipt = new System.Windows.Forms.ComboBox();
+            cmbxCashTickets = new System.Windows.Forms.ComboBox();
             dtpDateIssued = new System.Windows.Forms.DateTimePicker();
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            nudQuantity = new System.Windows.Forms.NumericUpDown();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -96,18 +99,20 @@
             cbCollectingOfficerTypeJO.TabIndex = 27;
             cbCollectingOfficerTypeJO.Text = "Show Job Orders";
             cbCollectingOfficerTypeJO.UseVisualStyleBackColor = true;
+            cbCollectingOfficerTypeJO.CheckedChanged += cbCollectingOfficerTypeJO_CheckedChanged;
             // 
-            // cmbReceipt
+            // cmbxCashTickets
             // 
-            cmbReceipt.DropDownHeight = 400;
-            cmbReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbReceipt.FormattingEnabled = true;
-            cmbReceipt.IntegralHeight = false;
-            cmbReceipt.Location = new System.Drawing.Point(126, 84);
-            cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            cmbReceipt.Name = "cmbReceipt";
-            cmbReceipt.Size = new System.Drawing.Size(200, 23);
-            cmbReceipt.TabIndex = 22;
+            cmbxCashTickets.DropDownHeight = 400;
+            cmbxCashTickets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxCashTickets.FormattingEnabled = true;
+            cmbxCashTickets.IntegralHeight = false;
+            cmbxCashTickets.Location = new System.Drawing.Point(126, 84);
+            cmbxCashTickets.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbxCashTickets.Name = "cmbxCashTickets";
+            cmbxCashTickets.Size = new System.Drawing.Size(200, 23);
+            cmbxCashTickets.TabIndex = 22;
+            cmbxCashTickets.SelectedIndexChanged += cmbxCashTickets_SelectedIndexChanged;
             // 
             // dtpDateIssued
             // 
@@ -119,31 +124,40 @@
             dtpDateIssued.Size = new System.Drawing.Size(200, 23);
             dtpDateIssued.TabIndex = 26;
             // 
-            // numericUpDown1
+            // nudQuantity
             // 
-            numericUpDown1.Location = new System.Drawing.Point(127, 112);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(199, 23);
-            numericUpDown1.TabIndex = 33;
-            numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudQuantity.Location = new System.Drawing.Point(127, 112);
+            nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            nudQuantity.Name = "nudQuantity";
+            nudQuantity.Size = new System.Drawing.Size(199, 23);
+            nudQuantity.TabIndex = 33;
+            nudQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudQuantity.Validating += nudQuantity_Validating;
+            nudQuantity.Validated += nudQuantity_Validated;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucCashTicketIssuance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(numericUpDown1);
+            Controls.Add(nudQuantity);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(cmbCollector);
             Controls.Add(cbCollectingOfficerTypeJO);
-            Controls.Add(cmbReceipt);
+            Controls.Add(cmbxCashTickets);
             Controls.Add(dtpDateIssued);
             Name = "ucCashTicketIssuance";
             Size = new System.Drawing.Size(343, 146);
             Load += ucCashTicketIssuance_Load;
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -156,8 +170,9 @@
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.ComboBox cmbCollector;
         internal System.Windows.Forms.CheckBox cbCollectingOfficerTypeJO;
-        internal System.Windows.Forms.ComboBox cmbReceipt;
+        internal System.Windows.Forms.ComboBox cmbxCashTickets;
         internal System.Windows.Forms.DateTimePicker dtpDateIssued;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        internal System.Windows.Forms.NumericUpDown nudQuantity;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

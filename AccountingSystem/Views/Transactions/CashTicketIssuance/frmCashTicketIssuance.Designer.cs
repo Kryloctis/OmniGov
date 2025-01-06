@@ -46,8 +46,6 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             txtSearch = new System.Windows.Forms.ToolStripTextBox();
             btnSearch = new System.Windows.Forms.ToolStripButton();
-            btnReturn = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             btnDelete = new System.Windows.Forms.ToolStripButton();
             btnEdit = new System.Windows.Forms.ToolStripButton();
             btnAdd = new System.Windows.Forms.ToolStripButton();
@@ -196,21 +194,7 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
-            // 
-            // btnReturn
-            // 
-            btnReturn.Enabled = false;
-            btnReturn.Image = Properties.Resources.account_book_20px;
-            btnReturn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            btnReturn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            btnReturn.Name = "btnReturn";
-            btnReturn.Size = new System.Drawing.Size(66, 24);
-            btnReturn.Text = "Return";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
@@ -221,6 +205,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(64, 24);
             btnDelete.Text = "Delete";
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnEdit
             // 
@@ -248,7 +233,7 @@
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, toolStripSeparator1, btnReturn, btnSearch, txtSearch });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete, btnSearch, txtSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Margin = new System.Windows.Forms.Padding(4);
             toolStrip1.Name = "toolStrip1";
@@ -269,6 +254,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MinimizeBox = false;
             Name = "frmCashTicketIssuance";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Treasury > Manage > Cash Tickets > Issuance";
             Load += frmCashTicketIssuance_Load;
@@ -303,8 +289,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSearch;
-        private System.Windows.Forms.ToolStripButton btnReturn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnAdd;

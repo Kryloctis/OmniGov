@@ -67,9 +67,10 @@
             btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             btnSave.Size = new System.Drawing.Size(82, 22);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
+            btnSave.Text = "Update";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucCashTicketIssuance1
             // 
@@ -82,13 +83,16 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ClientSize = new System.Drawing.Size(360, 170);
             Controls.Add(ucCashTicketIssuance1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Name = "frmCashTicketEditIssuance";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Cash Ticket Issuance";
+            Load += frmCashTicketEditIssuance_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }

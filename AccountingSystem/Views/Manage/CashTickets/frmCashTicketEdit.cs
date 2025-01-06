@@ -37,7 +37,6 @@ namespace AccountingSystem.Views.Manage.CashTickets
         {
             uc.OnLoad();
             LoadSelectedValue();
-            //SetUpdateRestrictions();
         }
 
         private void LoadSelectedValue()

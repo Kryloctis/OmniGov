@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
             try
             {
                 int index = dgCashTickets.CurrentRow.Index;
-                int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[index].Cells["cash_tickets_id"].Value);
+                int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[index].Cells["id"].Value);
                 _ = new frmCashTicketEdit(this, cashTicketId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
                 var dataColumns = new DataColumn[]
                 {
-                    new DataColumn("cash_tickets_id", typeof(int)),
+                    new DataColumn("id", typeof(int)),
                     new DataColumn("accountable_form_code", typeof(string)),
                     new DataColumn("quantity", typeof(int)),
                     new DataColumn("received_date", typeof(DateTime)),
@@ -84,14 +84,14 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
                 foreach (DataRow row in dtReceiptsDb.Rows)
                 {
-                    int id = Convert.ToInt32(row["cash_tickets_id"]);
+                    int id = Convert.ToInt32(row["id"]);
                     string accountableFormCode = row["acc_form_no"].ToString();
                     int quantity = Convert.ToInt32(row["quantity"]);
                     DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                     string remarks = row["remarks"].ToString();
 
                     var newRow = dataTable.NewRow();
-                    newRow["cash_tickets_id"] = id;
+                    newRow["id"] = id;
                     newRow["accountable_form_code"] = accountableFormCode;
                     newRow["quantity"] = quantity;
                     newRow["received_date"] = receivedDate;
@@ -165,7 +165,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 var cashTicketsModelList = new List<CashTicketsModel>();
                 foreach (DataGridViewRow row in dgCashTickets.SelectedRows)
                 {
-                    int cashTicketId = Convert.ToInt32(row.Cells["cash_tickets_id"].Value);
+                    int cashTicketId = Convert.ToInt32(row.Cells["id"].Value);
                     cashTicketsModelList.Add(new CashTicketsModel() { Id = cashTicketId });
                 }
                 return AccFactory.CashTicketsRepository().Delete(cashTicketsModelList);
