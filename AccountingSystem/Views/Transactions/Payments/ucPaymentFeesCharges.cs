@@ -1,10 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office2013.Word;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -14,12 +18,12 @@ namespace AccountingSystem.Views.Transactions.Payments
         public ucPaymentFeesCharges()
         {
             InitializeComponent();
-            Helper.DatagridEditableRowStyle(dgPaymentFeesCharges);
+            Helper.DatagridEditableRowStyle(dgPaymentFeesCharges, true);
         }
 
         internal void OnLoad()
         {
-            //LoadFeesCharges();
+            LoadFeesCharges();
             ToggleTreeViewButtons(treeViewFeesCharges);
             LoadPaymentFeesCharges();
             ToggleDatagridViewButtons(dgPaymentFeesCharges);
@@ -120,6 +124,9 @@ namespace AccountingSystem.Views.Transactions.Payments
             {
                 if (ValidatedFeesCharges(treeViewFeesCharges))
                     ApplyPaymentFeesCharges(treeViewFeesCharges.SelectedNode, dgPaymentFeesCharges);
+
+                treeViewFeesCharges.SelectedNode = null;
+                ToggleTreeViewButtons(treeViewFeesCharges);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -150,8 +157,34 @@ namespace AccountingSystem.Views.Transactions.Payments
                 progressBar1.Value = 0;
                 treeViewFeesCharges.ImageList = ImageList();
                 treeViewFeesCharges.Nodes.Clear();
-                backgroundWorker1.RunWorkerAsync();
+                backgroundWorker1.RunWorkerAsync(txtSearch.Text.Trim());
             }
+        }
+
+        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
+        {
+            string searchText = txtSearch.Text.Trim();
+
+            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (DataRow row in dtFeesCharges.Rows)
+            {
+                var imageKey = isDeleted ? "feescharges_disabled" : "feescharges_active";
+
+                var feesChargesNode = new TreeNode
+                {
+                    Text = row["description"].ToString(),
+                    Tag = $"feescharges-{row["id"]}",
+                    ImageKey = imageKey,
+                    SelectedImageKey = imageKey,
+                    ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
+                };
+
+                nodes.Add(feesChargesNode);
+            }
+
+            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -362,32 +395,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             return imageList;
         }
 
-        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
-        {
-            string searchText = txtSearch.Text.Trim();
-
-            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
-            List<TreeNode> nodes = new List<TreeNode>();
-
-            foreach (DataRow row in dtFeesCharges.Rows)
-            {
-                var imageKey = isDeleted ? "feescharges_disabled" : "feescharges_active";
-
-                var feesChargesNode = new TreeNode
-                {
-                    Text = row["description"].ToString(),
-                    Tag = $"feescharges-{row["id"]}",
-                    ImageKey = imageKey,
-                    SelectedImageKey = imageKey,
-                    ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
-                };
-
-                nodes.Add(feesChargesNode);
-            }
-
-            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
-        }
-
         private void ToggleTreeViewButtons(TreeView treeView)
         {
             btnAdd.Enabled = false;
@@ -403,12 +410,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 else
                     btnAdd.Enabled = false;
             }
-            else
-            {
-                btnAdd.Enabled = false;
-                treeView.Nodes.Clear();
-            }
-
         }
 
         private void ToggleDatagridViewButtons(DataGridView dataGridView)
@@ -455,19 +456,11 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text.Length < 3)
-
-                return;
-
-            LoadFeesCharges();
-            btnClear.Visible = true;
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            treeViewFeesCharges.Nodes.Clear();
-            btnClear.Visible = false;
-            txtSearch.Clear();
+            try
+            {
+                LoadFeesCharges();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
