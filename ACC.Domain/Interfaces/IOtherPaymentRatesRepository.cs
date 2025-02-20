@@ -8,7 +8,5 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByTaxTypeID(int taxTypeID);
 
         DataTable GetRecordsByTaxTypeIDAndDescription(int taxTypeID, string description);
-
-        DataTable GetViewRecords_Description(string description);
     }
 }

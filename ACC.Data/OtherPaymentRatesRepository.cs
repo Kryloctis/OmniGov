@@ -10,7 +10,6 @@ namespace ACC.Data
     internal class OtherPaymentRatesRepository : IOtherPaymentRatesRepository
     {
         private readonly string tableName = "other_payment_rates";
-        private readonly string viewTableName = "view_other_payment_rates";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
         public OtherPaymentRatesRepository(AccGenericCommands mySqlGenericCommandsLFS)
@@ -117,17 +116,6 @@ namespace ACC.Data
             var dataTable = new DataTable();
 
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable GetViewRecords_Description(string description)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@description", DbType.String, $"%{description}%"}
-            };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE description LIKE @description";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
