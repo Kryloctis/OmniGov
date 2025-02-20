@@ -79,7 +79,15 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] {"@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE description LIKE @search_text";
+
+            var dtFunds = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dtFunds, parameters);
         }
 
         public DataTable GetTaxTypeCodes()

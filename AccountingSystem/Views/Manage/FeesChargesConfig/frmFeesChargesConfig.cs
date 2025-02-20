@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.FeesChargesConfig
 
         private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
-            string textSearch = txtSearch.Text.Trim();
+            var textSearch = txtSearch.Text;
             var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
             List<TreeNode> nodes = new List<TreeNode>();
 
