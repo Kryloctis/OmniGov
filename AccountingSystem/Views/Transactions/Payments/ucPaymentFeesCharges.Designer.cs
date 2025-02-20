@@ -38,9 +38,9 @@
             panel1 = new System.Windows.Forms.Panel();
             treeViewFeesCharges = new System.Windows.Forms.TreeView();
             progressBar1 = new System.Windows.Forms.ProgressBar();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnSearch = new System.Windows.Forms.Button();
-            txtSearch = new System.Windows.Forms.TextBox();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            tStrpBtnSearch = new System.Windows.Forms.ToolStripButton();
+            tStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
             panel4 = new System.Windows.Forms.Panel();
             btnDelete = new System.Windows.Forms.Button();
             btnAdd = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).BeginInit();
             panel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            toolStrip1.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -139,7 +139,7 @@
             // 
             panel1.Controls.Add(treeViewFeesCharges);
             panel1.Controls.Add(progressBar1);
-            panel1.Controls.Add(flowLayoutPanel1);
+            panel1.Controls.Add(toolStrip1);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(0);
@@ -152,51 +152,49 @@
             treeViewFeesCharges.Dock = System.Windows.Forms.DockStyle.Fill;
             treeViewFeesCharges.FullRowSelect = true;
             treeViewFeesCharges.HideSelection = false;
-            treeViewFeesCharges.Location = new System.Drawing.Point(0, 36);
+            treeViewFeesCharges.Location = new System.Drawing.Point(0, 33);
             treeViewFeesCharges.Name = "treeViewFeesCharges";
-            treeViewFeesCharges.Size = new System.Drawing.Size(737, 199);
+            treeViewFeesCharges.Size = new System.Drawing.Size(737, 202);
             treeViewFeesCharges.TabIndex = 1;
             treeViewFeesCharges.AfterSelect += treeViewFeesCharges_AfterSelect;
             // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(0, 31);
+            progressBar1.Location = new System.Drawing.Point(0, 28);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new System.Drawing.Size(737, 5);
             progressBar1.TabIndex = 13;
             // 
-            // flowLayoutPanel1
+            // toolStrip1
             // 
-            flowLayoutPanel1.Controls.Add(btnSearch);
-            flowLayoutPanel1.Controls.Add(txtSearch);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(737, 31);
-            flowLayoutPanel1.TabIndex = 14;
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tStrpBtnSearch, tStrpTxtSearch });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 1, 5);
+            toolStrip1.Size = new System.Drawing.Size(737, 28);
+            toolStrip1.TabIndex = 15;
+            toolStrip1.Text = "toolStrip1";
             // 
-            // btnSearch
+            // tStrpBtnSearch
             // 
-            btnSearch.Image = Properties.Resources.find1;
-            btnSearch.Location = new System.Drawing.Point(708, 3);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(26, 23);
-            btnSearch.TabIndex = 3;
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            tStrpBtnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tStrpBtnSearch.Image = Properties.Resources.find_16px;
+            tStrpBtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tStrpBtnSearch.Name = "tStrpBtnSearch";
+            tStrpBtnSearch.Size = new System.Drawing.Size(62, 20);
+            tStrpBtnSearch.Text = "Search";
+            tStrpBtnSearch.ToolTipText = "Search...";
+            tStrpBtnSearch.Click += tStrpTxtSearch_Click;
             // 
-            // txtSearch
+            // tStrpTxtSearch
             // 
-            txtSearch.AllowDrop = true;
-            txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Location = new System.Drawing.Point(484, 3);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(218, 23);
-            txtSearch.TabIndex = 2;
+            tStrpTxtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tStrpTxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tStrpTxtSearch.Name = "tStrpTxtSearch";
+            tStrpTxtSearch.Size = new System.Drawing.Size(200, 23);
             // 
             // panel4
             // 
@@ -216,7 +214,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(31, 23);
             btnDelete.TabIndex = 1;
-            btnDelete.Text = "x";
+            btnDelete.Text = "▲";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
@@ -228,7 +226,7 @@
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(31, 23);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "✓";
+            btnAdd.Text = "▼";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
@@ -253,8 +251,9 @@
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgPaymentFeesCharges).EndInit();
             panel1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
+            panel1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -270,9 +269,10 @@
         private System.Windows.Forms.TreeView treeViewFeesCharges;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.DataGridView dgPaymentFeesCharges;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tStrpBtnSearch;
+        private System.Windows.Forms.ToolStripTextBox tStrpSearchg;
+        private System.Windows.Forms.ToolStripTextBox tStrpTxtSearch;
     }
 }

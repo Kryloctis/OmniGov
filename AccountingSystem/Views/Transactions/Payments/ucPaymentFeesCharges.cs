@@ -157,16 +157,15 @@ namespace AccountingSystem.Views.Transactions.Payments
                 progressBar1.Value = 0;
                 treeViewFeesCharges.ImageList = ImageList();
                 treeViewFeesCharges.Nodes.Clear();
-                backgroundWorker1.RunWorkerAsync(txtSearch.Text.Trim());
+                backgroundWorker1.RunWorkerAsync(tStrpTxtSearch.Text.Trim());
             }
         }
 
-        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
+        private bool LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
-            string searchText = txtSearch.Text.Trim();
-
+            string searchText = tStrpTxtSearch.Text.Trim();
             var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
-            List<TreeNode> nodes = new List<TreeNode>();
+            bool hasFeesCharges = false;
 
             foreach (DataRow row in dtFeesCharges.Rows)
             {
@@ -181,10 +180,35 @@ namespace AccountingSystem.Views.Transactions.Payments
                     ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
                 };
 
-                nodes.Add(feesChargesNode);
+                nodeFeesChargesClassification.Nodes.Add(feesChargesNode);
+                hasFeesCharges = true;
             }
 
-            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
+            return hasFeesCharges;
+        }
+
+        private bool RemoveEmptyNodes(TreeNodeCollection nodes)
+        {
+            bool hasValidChildren = false;
+
+            for (int i = nodes.Count - 1; i >= 0; i--)
+            {
+                TreeNode node = nodes[i];
+
+                // Recursively process child nodes
+                bool childHasFeesCharges = RemoveEmptyNodes(node.Nodes);
+
+                // Check if the node is a fees charge node
+                bool isFeesChargeNode = node.Tag != null && node.Tag.ToString().Contains("feescharges");
+
+                // Remove nodes that are classification but have no valid fees charge children
+                if (!isFeesChargeNode && !childHasFeesCharges)
+                    nodes.RemoveAt(i);
+                else
+                    hasValidChildren = true;
+            }
+
+            return hasValidChildren;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -199,59 +223,58 @@ namespace AccountingSystem.Views.Transactions.Payments
                 };
 
                 mainTreeView.ExpandAll();
-                var dataTable = AccFactory.TaxTypesRepository().GetRecords();
-
-                EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
+                var dtTaxTypes = AccFactory.TaxTypesRepository().GetRecords();
+                var parentNodes = dtTaxTypes.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
                 int progressCount = 0;
-                int totalProgressCount = dataTable.Rows.Count;
+                int totalProgressCount = parentNodes.Count();
 
                 foreach (DataRow parentRow in parentNodes)
                 {
-                    bool isParentDeleted = parentRow.Field<sbyte>("is_deleted") == 1 ? true : false;
+                    bool isParentDeleted = parentRow.Field<sbyte>("is_deleted") == 1;
                     string parentRawName = parentRow.Field<string>("description");
                     string parentNodeName = isParentDeleted ? $"{parentRawName} (Deleted)" : parentRawName;
-                    TreeNode parentNode = new TreeNode(parentNodeName);
-                    parentNode.Tag = $"classification-{parentRow.Field<int>("id")}";
 
-                    var parentImageKey = isParentDeleted ? "classification_disabled" : "classification_active";
-                    var parentForeColor = isParentDeleted ? System.Drawing.Color.Gray : parentNode.ForeColor;
-
-                    parentNode.ImageKey = parentImageKey;
-                    parentNode.SelectedImageKey = parentImageKey;
-                    parentNode.ForeColor = parentForeColor;
+                    TreeNode parentNode = new TreeNode(parentNodeName)
+                    {
+                        Tag = $"classification-{parentRow.Field<int>("id")}",
+                        ImageKey = isParentDeleted ? "classification_disabled" : "classification_active",
+                        SelectedImageKey = isParentDeleted ? "classification_disabled" : "classification_active",
+                        ForeColor = isParentDeleted ? System.Drawing.Color.Gray : System.Drawing.Color.Black
+                    };
 
                     mainTreeView.Nodes.Add(parentNode);
-                    LoadFeesChargesNodes(parentRow.Field<int>("id"), isParentDeleted, parentNode);
-
+                    // Update progress for each classification
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                    EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == parentRow.Field<int>("id"));
+                    bool hasFeesCharges = LoadFeesChargesNodes(parentRow.Field<int>("id"), isParentDeleted, parentNode);
 
+                    // Process child nodes
+                    var childNodes = dtTaxTypes.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == parentRow.Field<int>("id"));
                     foreach (DataRow childRow in childNodes)
                     {
                         string childRawName = childRow.Field<string>("description");
-                        bool isChildDeleted = childRow.Field<sbyte>("is_deleted") == 1 ? true : false;
-
+                        bool isChildDeleted = childRow.Field<sbyte>("is_deleted") == 1;
                         string childNodeName = isChildDeleted ? $"{childRawName} (Deleted)" : childRawName;
-                        TreeNode childNode = new TreeNode(childNodeName);
-                        childNode.Tag = $"classification-{childRow.Field<int>("id")}";
 
-                        var childImageKey = isChildDeleted ? "classification_disabled" : "classification_active";
-                        var childForeColor = isChildDeleted ? System.Drawing.Color.Gray : childNode.ForeColor;
-
-                        childNode.ImageKey = childImageKey;
-                        childNode.SelectedImageKey = childImageKey;
-                        childNode.ForeColor = childForeColor;
+                        TreeNode childNode = new TreeNode(childNodeName)
+                        {
+                            Tag = $"classification-{childRow.Field<int>("id")}",
+                            ImageKey = isChildDeleted ? "classification_disabled" : "classification_active",
+                            SelectedImageKey = isChildDeleted ? "classification_disabled" : "classification_active",
+                            ForeColor = isChildDeleted ? System.Drawing.Color.Gray : System.Drawing.Color.Black
+                        };
 
                         parentNode.Nodes.Add(childNode);
+                        bool hasChildFeesCharges = LoadFeesChargesNodes(childRow.Field<int>("id"), isChildDeleted, childNode);
 
-                        LoadFeesChargesNodes(childRow.Field<int>("id"), isChildDeleted, childNode);
-
-                        progressCount++;
-                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+                        if (!hasChildFeesCharges)
+                            RemoveEmptyNodes(childNode.Nodes);
                     }
+
+                    // Remove empty nodes from the main tree
+                    RemoveEmptyNodes(mainTreeView.Nodes);
                 }
 
                 e.Result = mainTreeView;
@@ -273,6 +296,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             treeViewFeesCharges.Nodes.Add(treeNode);
             treeViewFeesCharges.ExpandAll();
+            treeViewFeesCharges.SelectedNode = treeViewFeesCharges.Nodes[0];
         }
 
         private void ComputeSubTotal(DataGridView dataGridView)
@@ -454,7 +478,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void tStrpTxtSearch_Click(object sender, EventArgs e)
         {
             try
             {
