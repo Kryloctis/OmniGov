@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
     public partial class ucCashTickets : UserControl
     {
         internal int cashTicketId;
-        int accountableFormId;
+        private int accountableFormId;
 
         public ucCashTickets()
         {
@@ -25,12 +25,15 @@ namespace AccountingSystem.Views.Manage.CashTickets
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-
         }
+
         private void ucCashTickets_Load(object sender, EventArgs e)
         {
-            //LoadAccountableForms(); those cash tickets only.
-            LoadAccountableForms();
+            try
+            {
+                LoadAccountableForms();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadAccountableForms()
@@ -65,7 +68,6 @@ namespace AccountingSystem.Views.Manage.CashTickets
             nudQuantity.Value = 0;
             txtRemark.Clear();
         }
-
 
         internal void OnLoad()
         {
