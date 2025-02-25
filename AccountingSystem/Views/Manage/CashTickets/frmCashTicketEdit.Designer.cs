@@ -28,20 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ucCashTickets1 = new ucCashTickets();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnUpdate = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            ucCashTickets1 = new ucCashTickets();
             flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // ucCashTickets1
-            // 
-            ucCashTickets1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucCashTickets1.Location = new System.Drawing.Point(0, 0);
-            ucCashTickets1.Name = "ucCashTickets1";
-            ucCashTickets1.Size = new System.Drawing.Size(359, 177);
-            ucCashTickets1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -80,29 +74,48 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucCashTickets1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(359, 150);
+            panel1.TabIndex = 7;
+            // 
+            // ucCashTickets1
+            // 
+            ucCashTickets1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucCashTickets1.Location = new System.Drawing.Point(4, 4);
+            ucCashTickets1.Name = "ucCashTickets1";
+            ucCashTickets1.Size = new System.Drawing.Size(351, 142);
+            ucCashTickets1.TabIndex = 1;
+            // 
             // frmCashTicketEdit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(359, 177);
+            Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(ucCashTickets1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MinimizeBox = false;
             Name = "frmCashTicketEdit";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Edit Cash Tickets";
-            Load += frmCashTicketEdit_Load;
+            Text = "Edit Cash Ticket";
+            Load += FrmCashTicketEdit_Load;
             flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private ucCashTickets ucCashTickets1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Panel panel1;
+        private ucCashTickets ucCashTickets1;
     }
 }

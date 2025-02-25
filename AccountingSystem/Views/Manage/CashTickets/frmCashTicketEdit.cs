@@ -8,48 +8,37 @@ namespace AccountingSystem.Views.Manage.CashTickets
 {
     public partial class frmCashTicketEdit : Form
     {
-        private readonly frmCashTickets _frmCashTickets;
-        private readonly int _cashTicketId;
+        private readonly frmCashTickets frmCashTickets;
+        private readonly int cashTicketId;
         private readonly ucCashTickets uc;
-        private readonly int userId = Helper.userId;
 
         public frmCashTicketEdit(frmCashTickets frmCashTickets, int cashTicketId)
         {
-
             InitializeComponent();
-            _frmCashTickets = frmCashTickets;
-            _cashTicketId = cashTicketId;
-
+            this.frmCashTickets = frmCashTickets;
+            this.cashTicketId = cashTicketId;
             uc = ucCashTickets1;
-            uc.cashTicketId = _cashTicketId;
         }
 
-        private void frmCashTicketEdit_Load(object sender, System.EventArgs e)
+        private void FrmCashTicketEdit_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                uc.OnLoad(true, cashTicketId);
+                LoadSelectedValue();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
-        {
-            uc.OnLoad();
-            LoadSelectedValue();
-        }
-
         private void LoadSelectedValue()
         {
-            Dictionary<string, string> dictReceipts = AccFactory.CashTicketsRepository().GetRecordByID(_cashTicketId);
+            Dictionary<string, string> dictReceipts = AccFactory.CashTicketsRepository().GetRecordByID(cashTicketId);
 
-            int cashTicketId = Convert.ToInt32(dictReceipts["id"]);
-            int accountableFormID = Convert.ToInt32(dictReceipts["accountable_forms_id"]);
-            int quantity = Convert.ToInt32(dictReceipts["quantity"]);
-            DateTime dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
-            string remarks = dictReceipts["remarks"].ToString();
+            var description = dictReceipts["description"].ToString();
+            var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
+            var quantity = Convert.ToInt32(dictReceipts["quantity"]);
+            var remarks = dictReceipts["remarks"].ToString();
 
-            uc.cmbAccountableForms.SelectedValue = accountableFormID;
             uc.dtpReceivedDate.Value = dateReceived;
             uc.nudQuantity.Value = quantity;
             uc.txtRemark.Text = remarks;
@@ -61,8 +50,8 @@ namespace AccountingSystem.Views.Manage.CashTickets
             {
                 if (UpdateData())
                 {
-                    Helper.MessageBoxSuccess("Receipt has been updated.");
-                    _frmCashTickets.LoadCashTickets();
+                    Helper.MessageBoxSuccess("Cash Ticket has been updated.");
+                    frmCashTickets.LoadCashTickets();
                     Close();
                 }
             }
@@ -77,17 +66,12 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 return false;
             }
 
+            return AccFactory.CashTicketsRepository().Update(uc.CashTicketsModel());
+        }
 
-            var cashTicketsModel = new CashTicketsModel()
-            {
-                Id = _cashTicketId,
-                AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
-                Quantity = Convert.ToInt32(uc.nudQuantity.Value),
-                ReceivedDate = Convert.ToDateTime(uc.dtpReceivedDate.Value),
-                Remarks = uc.txtRemark.Text,
-            };
+        private void ucCashTickets1_Load(object sender, EventArgs e)
+        {
 
-            return AccFactory.CashTicketsRepository().Update(cashTicketsModel);
         }
     }
 }
