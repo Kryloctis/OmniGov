@@ -120,7 +120,7 @@
             txtDescription.Location = new System.Drawing.Point(94, 3);
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(200, 23);
-            txtDescription.TabIndex = 25;
+            txtDescription.TabIndex = 0;
             // 
             // ucCashTickets
             // 
