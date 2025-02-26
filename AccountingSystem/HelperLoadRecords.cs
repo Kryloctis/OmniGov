@@ -717,20 +717,14 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
-
-            datagrid.Columns["accountable_form_code"].Width = 80;
-            datagrid.Columns["accountable_form_code"].MinimumWidth = 80;
-            datagrid.Columns["accountable_form_code"].HeaderText = "Form";
-
+            datagrid.Columns["description"].HeaderText = "Description";
             datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
             datagrid.Columns["received_date"].HeaderText = "Date Received";
             datagrid.Columns["received_date"].Width = 100;
             datagrid.Columns["received_date"].MinimumWidth = 100;
-
             datagrid.Columns["quantity"].HeaderText = "Quantity";
             datagrid.Columns["quantity"].MinimumWidth = 80;
             datagrid.Columns["quantity"].Width = 80;
-
             datagrid.Columns["remarks"].Width = 300;
             datagrid.Columns["remarks"].MinimumWidth = 300;
             datagrid.Columns["remarks"].HeaderText = "Remarks";

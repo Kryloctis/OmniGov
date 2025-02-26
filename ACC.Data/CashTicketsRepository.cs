@@ -10,7 +10,6 @@ namespace ACC.Data
     internal class CashTicketsRepository : ICashTicketsRepository
     {
         private readonly string tableName = "cash_tickets";
-        private readonly string viewTableName = "view_cash_tickets";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
         public CashTicketsRepository(AccGenericCommands mySqlGenericCommandsLFS)
@@ -20,18 +19,18 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {viewTableName}";
+            string query = $"SELECT * FROM {tableName}";
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -75,7 +74,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@description", DbType.Int32, entity.Description},
+                new object[] { "@description", DbType.String, entity.Description},
                 new object[] { "@quantity", DbType.Int32, entity.Quantity},
                 new object[] { "@received_date", DbType.Date, entity.ReceivedDate},
                 new object[] { "@remarks", DbType.String, entity.Remarks},
@@ -105,16 +104,16 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsByDateAndText(DateTime dateReceived, string txtSearch, int rowLimit)
+        public DataTable GetRecordsBySearch(DateTime dateReceived, string txtSearch, int rowLimit)
         {
             var parameter = new object[][]
             {
                 new object[]{"@received_date", DbType.Date, dateReceived.Date},
-                new object[]{"@txt_search", DbType.String, $"%{txtSearch}%"},
+                new object[]{"@searchTxt", DbType.String, $"%{txtSearch}%"},
                 new object[]{"@row_limit", DbType.Int32, rowLimit},
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
+            string query = $"SELECT * FROM {tableName} WHERE DATE(received_date) <= @received_date AND (description LIKE @searchTxt) LIMIT @row_limit";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
         }

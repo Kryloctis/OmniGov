@@ -128,7 +128,5 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET  cash_tickets_id = @cash_tickets_id, collecting_officers_id = @collecting_officers_id, date_issued = @date_issued, quantity = @quantity WHERE id = @id;";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
-
-
     }
 }

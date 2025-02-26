@@ -25,23 +25,8 @@ namespace AccountingSystem.Views.Manage.CashTickets
             try
             {
                 uc.OnLoad(true, cashTicketId);
-                LoadSelectedValue();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadSelectedValue()
-        {
-            Dictionary<string, string> dictReceipts = AccFactory.CashTicketsRepository().GetRecordByID(cashTicketId);
-
-            var description = dictReceipts["description"].ToString();
-            var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
-            var quantity = Convert.ToInt32(dictReceipts["quantity"]);
-            var remarks = dictReceipts["remarks"].ToString();
-
-            uc.dtpReceivedDate.Value = dateReceived;
-            uc.nudQuantity.Value = quantity;
-            uc.txtRemark.Text = remarks;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -67,11 +52,6 @@ namespace AccountingSystem.Views.Manage.CashTickets
             }
 
             return AccFactory.CashTicketsRepository().Update(uc.CashTicketsModel());
-        }
-
-        private void ucCashTickets1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
