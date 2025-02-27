@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByAccFormNo(string accFormNo);
 
         DataTable GetRecordsByAccFormNo(string accFormNo);
+
+        DataTable GetCashTicketsAccountableForm();
     }
 }

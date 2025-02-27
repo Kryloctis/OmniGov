@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void LoadSelectedValue()
         {
-            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(uc.receiptIssuedId);
+            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(receiptIssuedID);
 
             string jobOrderID = receiptIssuedDict["job_orders_id"];
             var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officer_id"]);

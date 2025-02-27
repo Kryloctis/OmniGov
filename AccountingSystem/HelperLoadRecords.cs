@@ -713,6 +713,58 @@ namespace AccountingSystem
             datagrid.Columns["officer"].HeaderText = "Issued By";
         }
 
+        internal static void CashTicketsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+
+            datagrid.Columns["accountable_form_code"].Width = 80;
+            datagrid.Columns["accountable_form_code"].MinimumWidth = 80;
+            datagrid.Columns["accountable_form_code"].HeaderText = "Form";
+
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["received_date"].HeaderText = "Date Received";
+            datagrid.Columns["received_date"].Width = 100;
+            datagrid.Columns["received_date"].MinimumWidth = 100;
+
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
+            datagrid.Columns["quantity"].MinimumWidth = 80;
+            datagrid.Columns["quantity"].Width = 80;
+
+            datagrid.Columns["remarks"].Width = 300;
+            datagrid.Columns["remarks"].MinimumWidth = 300;
+            datagrid.Columns["remarks"].HeaderText = "Remarks";
+        }
+
+        internal static void CashTicketIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+
+            datagrid.Columns["acc_form_no"].Width = 120;
+            datagrid.Columns["acc_form_no"].MinimumWidth = 120;
+            datagrid.Columns["acc_form_no"].HeaderText = "Form";
+
+
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
+            datagrid.Columns["quantity"].MinimumWidth = 80;
+            datagrid.Columns["quantity"].Width = 80;
+
+            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["date_issued"].HeaderText = "Date Received";
+            datagrid.Columns["date_issued"].Width = 100;
+            datagrid.Columns["date_issued"].MinimumWidth = 100;
+
+            datagrid.Columns["collecting_officer"].Width = 300;
+            datagrid.Columns["collecting_officer"].MinimumWidth = 300;
+            datagrid.Columns["collecting_officer"].HeaderText = "Remarks";
+
+            datagrid.Columns["issued_by"].Width = 300;
+            datagrid.Columns["issued_by"].MinimumWidth = 300;
+            datagrid.Columns["issued_by"].HeaderText = "Issued By";
+
+        }
+
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
         {
             combobox.DataSource = dataTable;
