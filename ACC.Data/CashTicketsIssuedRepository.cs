@@ -64,7 +64,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetRecordsByDateAndText(DateTime dateIssued, string searchKey, int rowLimit)
+        public DataTable GetViewRecordsBySearch(DateTime dateIssued, string searchKey, int rowLimit)
         {
             var parameter = new object[][]
                 {

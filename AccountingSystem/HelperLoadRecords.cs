@@ -735,10 +735,8 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
 
-            datagrid.Columns["acc_form_no"].Width = 120;
-            datagrid.Columns["acc_form_no"].MinimumWidth = 120;
-            datagrid.Columns["acc_form_no"].HeaderText = "Form";
-
+            datagrid.Columns["cash_tickets_desc"].HeaderText = "Description";
+            datagrid.Columns["cash_tickets_desc"].MinimumWidth = 80;
 
             datagrid.Columns["quantity"].HeaderText = "Quantity";
             datagrid.Columns["quantity"].MinimumWidth = 80;
