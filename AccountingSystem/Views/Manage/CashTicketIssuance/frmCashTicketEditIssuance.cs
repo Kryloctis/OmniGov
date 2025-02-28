@@ -8,16 +8,16 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 {
     public partial class frmCashTicketEditIssuance : Form
     {
-        frmCashTicketIssuance _frmCashTicketIssuance;
-        private int _cashTicketIssuanceId;
+        private frmCashTicketIssuance frmCashTicketIssuance;
+        private int cashTicketIssuanceId;
         private ucCashTicketIssuance uc;
 
         public frmCashTicketEditIssuance(frmCashTicketIssuance frmCashTicketIssuance, int cashTicketIssuanceId)
         {
             InitializeComponent();
             uc = ucCashTicketIssuance1;
-            _frmCashTicketIssuance = frmCashTicketIssuance;
-            _cashTicketIssuanceId = cashTicketIssuanceId;
+            this.frmCashTicketIssuance = frmCashTicketIssuance;
+            this.cashTicketIssuanceId = cashTicketIssuanceId;
         }
 
         private void frmCashTicketEditIssuance_Load(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
         internal void LoadSelectedValue()
         {
-            Dictionary<string, string> cashTicketIssuedDict = AccFactory.CashTicketsIssuedRepository().GetRecordByID(_cashTicketIssuanceId);
+            Dictionary<string, string> cashTicketIssuedDict = AccFactory.CashTicketsIssuedRepository().GetRecordByID(cashTicketIssuanceId);
 
             string jobOrderID = cashTicketIssuedDict["job_orders_id"];
             var collectingOfficerID = Convert.ToInt32(cashTicketIssuedDict["collecting_officer_id"]);
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             if (!string.IsNullOrEmpty(jobOrderID))
                 uc.cbCollectingOfficerTypeJO.Checked = true;
 
-            uc.selectedCashTicketID = _cashTicketIssuanceId;
+            uc.selectedCashTicketID = cashTicketIssuanceId;
             uc.cmbCollector.SelectedValue = collector;
             uc.cmbxCashTickets.SelectedValue = cashTicketId;
             uc.dtpDateIssued.Value = dateIssued;
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Cash Ticket Issued has been updated.");
-                    _frmCashTicketIssuance.LoadIssuedCashTickets();
+                    frmCashTicketIssuance.LoadIssuedCashTickets();
                     Close();
                 }
             }
@@ -87,14 +87,13 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
             var cashTicketsIssuedModel = new CashTicketsIssuedModel()
             {
-                Id = _cashTicketIssuanceId,
+                Id = cashTicketIssuanceId,
                 CashTicketId = cashTicketId,
                 CollectorId = collectorID,
                 Quantity = quantity,
                 DateIssued = dateIssued,
                 IssuedBy = Helper.userId,
             };
-
 
             return cashTicketsIssuedRepository.Update(cashTicketsIssuedModel);
         }

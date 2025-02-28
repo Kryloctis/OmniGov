@@ -81,6 +81,7 @@
             // 
             // cmbCollector
             // 
+            cmbCollector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbCollector.FormattingEnabled = true;
             cmbCollector.Location = new System.Drawing.Point(114, 27);
@@ -91,6 +92,7 @@
             // 
             // cbCollectingOfficerTypeJO
             // 
+            cbCollectingOfficerTypeJO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbCollectingOfficerTypeJO.AutoSize = true;
             cbCollectingOfficerTypeJO.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(200, 5);
@@ -103,6 +105,7 @@
             // 
             // cmbxCashTickets
             // 
+            cmbxCashTickets.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxCashTickets.DropDownHeight = 400;
             cmbxCashTickets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxCashTickets.FormattingEnabled = true;
@@ -116,6 +119,7 @@
             // 
             // dtpDateIssued
             // 
+            dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "MMM dd, yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpDateIssued.Location = new System.Drawing.Point(114, 54);
@@ -126,6 +130,7 @@
             // 
             // nudQuantity
             // 
+            nudQuantity.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             nudQuantity.Location = new System.Drawing.Point(115, 110);
             nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";

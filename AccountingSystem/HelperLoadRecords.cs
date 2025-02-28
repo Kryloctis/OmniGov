@@ -754,17 +754,14 @@ namespace AccountingSystem
             datagrid.Columns["issued_by"].Width = 300;
             datagrid.Columns["issued_by"].MinimumWidth = 300;
             datagrid.Columns["issued_by"].HeaderText = "Issued By";
-
         }
 
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
         {
             combobox.DataSource = dataTable;
             combobox.ValueMember = "id";
-            combobox.DisplayMember = "acc_form_desc";
-
-            if (combobox.Items.Count == 0)
-                combobox.DropDownHeight = 106;
+            combobox.DisplayMember = "description";
+            combobox.DropDownHeight = 106;
         }
 
         internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable, string valueMember, string displayMember)
@@ -1065,7 +1062,6 @@ namespace AccountingSystem
             dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["gr_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["recording_person"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
 
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -2222,6 +2218,7 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
             comboBox.DataSource = dataTable;
         }
+
         internal static void BiddersCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.ValueMember = valueMember;
@@ -2244,7 +2241,6 @@ namespace AccountingSystem
             dataGridView.Columns["bid_amount"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["bid_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["bid_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-
         }
     }
 }

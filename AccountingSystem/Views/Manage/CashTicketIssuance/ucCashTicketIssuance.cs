@@ -111,12 +111,10 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             foreach (DataRow row in cashTicketsDT.Rows)
             {
                 int cashTicketId = Convert.ToInt32(row["id"]);
-                string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                string description = row["description"].ToString();
                 int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
                 cashTicketTotalIssued = AccFactory.CashTicketsIssuedRepository().GetTotalIssuedCashTicketById(cashTicketId);
                 cashTicketRemainingStockQty = cashTicketStockQty - cashTicketTotalIssued;
-
-                row["acc_form_desc"] = $"{accountableForm} ({cashTicketRemainingStockQty}) ";
 
                 if (cashTicketRemainingStockQty == 0)
                     row.Delete();
