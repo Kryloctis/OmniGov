@@ -61,7 +61,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsByDateAndText(DateTime dateIssued, string searchKey, int rowLimit)
@@ -73,18 +73,19 @@ namespace ACC.Data
                 new object[]{"@row_limit", DbType.Int32, rowLimit},
                 };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
+            string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued AND (cash_tickets_desc LIKE @txt_search) LIMIT @row_limit";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetTotalIssuedCashTicketById(int cashTicketId)
         {
-            var parameter = new object[][] {
+            var parameter = new object[][]
+            {
                 new object[]{ "@cash_tickets_id", DbType.Int32, cashTicketId }
             };
 
@@ -94,7 +95,7 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(CashTicketsIssuedModel entity)
