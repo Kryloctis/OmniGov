@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -7,7 +8,6 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 {
     public partial class ucCashTicketIssuance : UserControl
     {
-
         internal int selectedCashTicketID;
         internal bool isCollectorJO;
         internal bool isEdit;
@@ -91,7 +91,6 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
         }
 
-
         private void ucCashTicketIssuance_Load(object sender, EventArgs e)
         {
             try
@@ -112,12 +111,10 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             foreach (DataRow row in cashTicketsDT.Rows)
             {
                 int cashTicketId = Convert.ToInt32(row["id"]);
-                string accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                string description = row["description"].ToString();
                 int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
                 cashTicketTotalIssued = AccFactory.CashTicketsIssuedRepository().GetTotalIssuedCashTicketById(cashTicketId);
                 cashTicketRemainingStockQty = cashTicketStockQty - cashTicketTotalIssued;
-
-                row["acc_form_desc"] = $"{accountableForm} ({cashTicketRemainingStockQty}) ";
 
                 if (cashTicketRemainingStockQty == 0)
                     row.Delete();
@@ -148,31 +145,43 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void nudQuantity_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void nudQuantity_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
-            int quantity = Convert.ToInt32(nudQuantity.Value);
-
-            if (cashTicketRemainingStockQty < quantity)
+            try
             {
-                errorProvider1.SetError(nudQuantity, "Not enough quantity.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
+                int quantity = Convert.ToInt32(nudQuantity.Value);
+
+                if (cashTicketRemainingStockQty < quantity)
+                {
+                    errorProvider1.SetError(nudQuantity, "Not enough quantity.");
+                    e.Cancel = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudQuantity_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
+            try
+            {
+                Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxCashTickets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView item = cmbxCashTickets.SelectedItem as DataRowView;
-            if (item == null) return;
+            try
+            {
+                DataRowView item = cmbxCashTickets.SelectedItem as DataRowView;
+                if (item == null) return;
 
-            selectedCashTicketID = Convert.ToInt32(item["id"]);
-            int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedCashTicketID);
-            cashTicketRemainingStockQty = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
+                selectedCashTicketID = Convert.ToInt32(item["id"]);
+                int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedCashTicketID);
+                cashTicketRemainingStockQty = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

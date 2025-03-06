@@ -1,14 +1,15 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.CashTickets
 {
     public partial class ucCashTickets : UserControl
     {
-        internal int cashTicketId;
-        int accountableFormId;
+        private int? cashTicketId;
+        private bool isEdit;
 
         public ucCashTickets()
         {
@@ -19,57 +20,58 @@ namespace AccountingSystem.Views.Manage.CashTickets
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(cmbAccountableForms),
+                errorProvider1.GetError(txtDescription),
                 errorProvider1.GetError(nudQuantity),
                 errorProvider1.GetError(dtpReceivedDate)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-
-        }
-        private void ucCashTickets_Load(object sender, EventArgs e)
-        {
-            //LoadAccountableForms(); those cash tickets only.
-            LoadAccountableForms();
-        }
-
-        internal void LoadAccountableForms()
-        {
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("accountable_form", typeof(string))
-            };
-
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(dataColumns);
-
-            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetCashTicketsAccountableForm();
-            foreach (DataRow row in dtAccoutnableForm.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                newRow["id"] = row["id"];
-                newRow["accountable_form"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                dataTable.Rows.Add(newRow);
-            }
-
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dataTable, "id", "accountable_form");
         }
 
         internal void ResetForm()
         {
-            cashTicketId = 0;
-            accountableFormId = 0;
-
+            txtDescription.Clear();
             dtpReceivedDate.Value = DateTime.Today;
             nudQuantity.Value = 0;
             txtRemark.Clear();
         }
 
-
-        internal void OnLoad()
+        internal void LoadSelectedValue()
         {
-            LoadAccountableForms();
+            Dictionary<string, string> dictReceipts = AccFactory.CashTicketsRepository().GetRecordByID(cashTicketId.Value);
+
+            var description = dictReceipts["description"].ToString();
+            var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
+            var quantity = Convert.ToInt32(dictReceipts["quantity"]);
+            var remarks = dictReceipts["remarks"].ToString();
+
+            txtDescription.Text = description;
+            dtpReceivedDate.Value = dateReceived;
+            nudQuantity.Value = quantity;
+            txtRemark.Text = remarks;
+        }
+
+        internal CashTicketsModel CashTicketsModel()
+        {
+            var model = new CashTicketsModel
+            {
+                Description = txtDescription.Text.Trim(),
+                Quantity = (int)nudQuantity.Value,
+                ReceivedDate = dtpReceivedDate.Value,
+                Remarks = txtRemark.Text.Trim()
+            };
+
+            if (isEdit) model.Id = cashTicketId.Value;
+
+            return model;
+        }
+
+        internal void OnLoad(bool isEdit, int? cashTicketId)
+        {
+            this.isEdit = isEdit;
+            this.cashTicketId = cashTicketId;
+
+            if (isEdit) LoadSelectedValue();
         }
     }
 }

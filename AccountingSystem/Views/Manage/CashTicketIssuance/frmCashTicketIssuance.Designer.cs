@@ -88,7 +88,7 @@
             // tsJOCount
             // 
             tsJOCount.Name = "tsJOCount";
-            tsJOCount.Size = new System.Drawing.Size(722, 17);
+            tsJOCount.Size = new System.Drawing.Size(691, 17);
             tsJOCount.Spring = true;
             // 
             // lblRecordCount
@@ -131,7 +131,7 @@
             panel1.Location = new System.Drawing.Point(0, 65);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(800, 385);
+            panel1.Size = new System.Drawing.Size(800, 363);
             panel1.TabIndex = 39;
             // 
             // dgCashTicketIssued
@@ -144,7 +144,7 @@
             dgCashTicketIssued.RowHeadersWidth = 51;
             dgCashTicketIssued.RowTemplate.Height = 29;
             dgCashTicketIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgCashTicketIssued.Size = new System.Drawing.Size(792, 372);
+            dgCashTicketIssued.Size = new System.Drawing.Size(792, 350);
             dgCashTicketIssued.TabIndex = 8;
             // 
             // panel2
@@ -247,10 +247,10 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
-            Controls.Add(statusStrip2);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(toolStrip1);
+            Controls.Add(statusStrip2);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MinimizeBox = false;
             Name = "frmCashTicketIssuance";

@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 {
-    partial class frmCashTicketAddIssuance
+    partial class frmCashTicketEditIssuance
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,9 @@
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
             ucCashTicketIssuance1 = new ucCashTicketIssuance();
+            panel1 = new System.Windows.Forms.Panel();
             flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -41,12 +43,12 @@
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 143);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 148);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             flowLayoutPanel1.Size = new System.Drawing.Size(360, 27);
-            flowLayoutPanel1.TabIndex = 6;
+            flowLayoutPanel1.TabIndex = 7;
             // 
             // btnCancel
             // 
@@ -67,32 +69,49 @@
             btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             btnSave.Size = new System.Drawing.Size(82, 22);
             btnSave.TabIndex = 0;
-            btnSave.Text = "Save";
+            btnSave.Text = "Update";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
             // ucCashTicketIssuance1
             // 
-            ucCashTicketIssuance1.Location = new System.Drawing.Point(-1, 0);
+            ucCashTicketIssuance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucCashTicketIssuance1.Location = new System.Drawing.Point(4, 4);
             ucCashTicketIssuance1.Name = "ucCashTicketIssuance1";
-            ucCashTicketIssuance1.Size = new System.Drawing.Size(360, 144);
-            ucCashTicketIssuance1.TabIndex = 7;
+            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 140);
+            ucCashTicketIssuance1.TabIndex = 8;
             // 
-            // frmCashTicketAddIssuance
+            // panel1
             // 
+            panel1.Controls.Add(ucCashTicketIssuance1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(360, 148);
+            panel1.TabIndex = 9;
+            // 
+            // frmCashTicketEditIssuance
+            // 
+            AcceptButton = btnSave;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(360, 170);
-            Controls.Add(ucCashTicketIssuance1);
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(360, 175);
+            Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            Name = "frmCashTicketAddIssuance";
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmCashTicketEditIssuance";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Add Cash Ticket Issuance";
+            Text = "Edit Issued Cash Ticket";
+            Load += frmCashTicketEditIssuance_Load;
             flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -102,5 +121,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private ucCashTicketIssuance ucCashTicketIssuance1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

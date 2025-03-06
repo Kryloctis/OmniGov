@@ -8,12 +8,13 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
     public partial class frmCashTicketAddIssuance : Form
     {
         private readonly ucCashTicketIssuance uc;
-        private frmCashTicketIssuance _frmCashTicketIssuance;
+        private frmCashTicketIssuance frmCashTicketIssuance;
+
         public frmCashTicketAddIssuance(frmCashTicketIssuance frmCashTicketIssuance)
         {
             InitializeComponent();
             uc = ucCashTicketIssuance1;
-            _frmCashTicketIssuance = frmCashTicketIssuance;
+            this.frmCashTicketIssuance = frmCashTicketIssuance;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -23,7 +24,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Cash tickets has been issued.");
-                    _frmCashTicketIssuance.LoadIssuedCashTickets();
+                    frmCashTicketIssuance.LoadIssuedCashTickets();
                     uc.ResetForm();
                 }
             }
@@ -51,7 +52,6 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 DateIssued = dateIssued,
                 IssuedBy = Helper.userId,
             };
-
 
             if (uc.isCollectorJO)
             {

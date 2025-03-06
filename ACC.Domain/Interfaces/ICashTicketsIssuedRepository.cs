@@ -6,7 +6,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICashTicketsIssuedRepository : IAccRepository<CashTicketsIssuedModel>
     {
-        DataTable GetRecordsByDateAndText(DateTime dateIssued, string searchKey, int rowLimit);
+        DataTable GetViewRecordsBySearch(DateTime dateIssued, string searchKey, int rowLimit);
         int GetTotalIssuedCashTicketById(int cashTicketId);
     }
 }

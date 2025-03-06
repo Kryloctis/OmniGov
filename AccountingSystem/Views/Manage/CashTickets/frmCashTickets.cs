@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -30,8 +31,8 @@ namespace AccountingSystem.Views.Manage.CashTickets
         {
             try
             {
-                int index = dgCashTickets.CurrentRow.Index;
-                int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[index].Cells["id"].Value);
+                int rowIdex = dgCashTickets.CurrentRow.Index;
+                int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[rowIdex].Cells["id"].Value);
                 _ = new frmCashTicketEdit(this, cashTicketId).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -47,7 +48,6 @@ namespace AccountingSystem.Views.Manage.CashTickets
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         internal void LoadCashTickets()
         {
             if (!bgwLoadCashTickets.IsBusy)
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
             }
         }
 
-        private void bgwLoadCashTickets_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void bgwLoadCashTickets_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 var dataColumns = new DataColumn[]
                 {
                     new DataColumn("id", typeof(int)),
-                    new DataColumn("accountable_form_code", typeof(string)),
+                    new DataColumn("description", typeof(string)),
                     new DataColumn("quantity", typeof(int)),
                     new DataColumn("received_date", typeof(DateTime)),
                     new DataColumn("remarks", typeof(string)),
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.CashTickets
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                DataTable dtReceiptsDb = AccFactory.CashTicketsRepository().GetRecordsByDateAndText(parameters.dateReceived, parameters.searchKey, parameters.rowLimit);
+                DataTable dtReceiptsDb = AccFactory.CashTicketsRepository().GetRecordsBySearch(parameters.dateReceived, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtReceiptsDb.Rows.Count;
                 int progressCount = 0;
@@ -85,14 +85,14 @@ namespace AccountingSystem.Views.Manage.CashTickets
                 foreach (DataRow row in dtReceiptsDb.Rows)
                 {
                     int id = Convert.ToInt32(row["id"]);
-                    string accountableFormCode = row["acc_form_no"].ToString();
+                    string description = row["description"].ToString();
                     int quantity = Convert.ToInt32(row["quantity"]);
                     DateTime receivedDate = Convert.ToDateTime(row["received_date"]);
                     string remarks = row["remarks"].ToString();
 
                     var newRow = dataTable.NewRow();
                     newRow["id"] = id;
-                    newRow["accountable_form_code"] = accountableFormCode;
+                    newRow["description"] = description;
                     newRow["quantity"] = quantity;
                     newRow["received_date"] = receivedDate;
                     newRow["remarks"] = remarks;
@@ -107,12 +107,12 @@ namespace AccountingSystem.Views.Manage.CashTickets
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void bgwLoadCashTickets_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void bgwLoadCashTickets_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void bgwLoadCashTickets_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void bgwLoadCashTickets_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result is not DataTable dataTable)
             {

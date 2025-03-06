@@ -64,11 +64,10 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             {
                 var parameters = ((DateTime dateIssued, string searchKey, int rowLimit))e.Argument;
 
-
                 var dataColumns = new DataColumn[]
                 {
                     new DataColumn("id", typeof(int)),
-                    new DataColumn("acc_form_no", typeof(string)),
+                    new DataColumn("cash_tickets_desc", typeof(string)),
                     new DataColumn("quantity", typeof(int)),
                     new DataColumn("date_issued", typeof(DateTime)),
                     new DataColumn("collecting_officer", typeof(string)),
@@ -77,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                DataTable dtCashTicketDb = AccFactory.CashTicketsIssuedRepository().GetRecordsByDateAndText(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
+                DataTable dtCashTicketDb = AccFactory.CashTicketsIssuedRepository().GetViewRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtCashTicketDb.Rows.Count;
                 int progressCount = 0;
@@ -85,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 foreach (DataRow row in dtCashTicketDb.Rows)
                 {
                     int id = Convert.ToInt32(row["id"]);
-                    string cashTicket = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                    string cashTicket = row["cash_tickets_desc"].ToString();
                     int quantity = Convert.ToInt32(row["quantity"]);
                     DateTime dateIssued = Convert.ToDateTime(row["date_issued"]);
                     string collectingOfficer = CollectingOfficerFullName(row);
@@ -93,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
                     var newRow = dataTable.NewRow();
                     newRow["id"] = id;
-                    newRow["acc_form_no"] = cashTicket;
+                    newRow["cash_tickets_desc"] = cashTicket;
                     newRow["quantity"] = quantity;
                     newRow["date_issued"] = dateIssued;
                     newRow["collecting_officer"] = collectingOfficer;
@@ -107,28 +106,6 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private string CollectingOfficerFullName(DataRow row)
-        {
-            string jobOrdersID = row["job_orders_id"].ToString();
-
-            string prefix = row["collecting_officers_prefix"].ToString();
-            string firstName = row["collecting_officers_first_name"].ToString();
-            string midInitial = row["collecting_officers_mid_initial"].ToString();
-            string lastName = row["collecting_officers_last_name"].ToString();
-            string suffix = row["collecting_officers_suffix"].ToString();
-
-            if (!string.IsNullOrEmpty(jobOrdersID))
-            {
-                prefix = row["job_orders_prefix"].ToString();
-                firstName = row["job_orders_first_name"].ToString();
-                midInitial = row["job_orders_mid_initial"].ToString();
-                lastName = row["job_orders_last_name"].ToString();
-                suffix = row["job_orders_suffix"].ToString();
-            }
-
-            return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
         }
 
         private void bgwLoadIssuedCashTickets_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -151,6 +128,28 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             dgCashTicketIssued.CurrentCell = dgCashTicketIssued.FirstDisplayedCell;
             lblRecordCount.Text = dgCashTicketIssued.Rows.Count.ToString();
             Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
+        }
+
+        private string CollectingOfficerFullName(DataRow row)
+        {
+            string jobOrdersID = row["job_orders_id"].ToString();
+
+            string prefix = row["collecting_officers_prefix"].ToString();
+            string firstName = row["collecting_officers_first_name"].ToString();
+            string midInitial = row["collecting_officers_mid_initial"].ToString();
+            string lastName = row["collecting_officers_last_name"].ToString();
+            string suffix = row["collecting_officers_suffix"].ToString();
+
+            if (!string.IsNullOrEmpty(jobOrdersID))
+            {
+                prefix = row["job_orders_prefix"].ToString();
+                firstName = row["job_orders_first_name"].ToString();
+                midInitial = row["job_orders_mid_initial"].ToString();
+                lastName = row["job_orders_last_name"].ToString();
+                suffix = row["job_orders_suffix"].ToString();
+            }
+
+            return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -192,8 +191,11 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadIssuedCashTickets();
+            try
+            {
+                LoadIssuedCashTickets();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
     }
 }
