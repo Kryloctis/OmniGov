@@ -50,7 +50,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             {
                 Id = uc.accountableFormId,
                 AccFormNo = uc.txtFormNo.Text.Trim(),
-                AccFormDesc = uc.txtFormDescription.Text.Trim()
+                AccFormDesc = uc.txtFormDescription.Text.Trim(),
+                IsCashTicket = uc.cbIsCashTickets.Checked,
             };
 
             return AccFactory.AccountableFormsRepository().Update(accModel);

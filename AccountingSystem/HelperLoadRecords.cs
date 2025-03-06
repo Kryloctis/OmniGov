@@ -713,14 +713,55 @@ namespace AccountingSystem
             datagrid.Columns["officer"].HeaderText = "Issued By";
         }
 
+        internal static void CashTicketsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["description"].HeaderText = "Description";
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["received_date"].HeaderText = "Date Received";
+            datagrid.Columns["received_date"].Width = 100;
+            datagrid.Columns["received_date"].MinimumWidth = 100;
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
+            datagrid.Columns["quantity"].MinimumWidth = 80;
+            datagrid.Columns["quantity"].Width = 80;
+            datagrid.Columns["remarks"].Width = 300;
+            datagrid.Columns["remarks"].MinimumWidth = 300;
+            datagrid.Columns["remarks"].HeaderText = "Remarks";
+        }
+
+        internal static void CashTicketIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+
+            datagrid.Columns["cash_tickets_desc"].HeaderText = "Description";
+            datagrid.Columns["cash_tickets_desc"].MinimumWidth = 80;
+
+            datagrid.Columns["quantity"].HeaderText = "Quantity";
+            datagrid.Columns["quantity"].MinimumWidth = 80;
+            datagrid.Columns["quantity"].Width = 80;
+
+            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            datagrid.Columns["date_issued"].HeaderText = "Date Received";
+            datagrid.Columns["date_issued"].Width = 100;
+            datagrid.Columns["date_issued"].MinimumWidth = 100;
+
+            datagrid.Columns["collecting_officer"].Width = 300;
+            datagrid.Columns["collecting_officer"].MinimumWidth = 300;
+            datagrid.Columns["collecting_officer"].HeaderText = "Remarks";
+
+            datagrid.Columns["issued_by"].Width = 300;
+            datagrid.Columns["issued_by"].MinimumWidth = 300;
+            datagrid.Columns["issued_by"].HeaderText = "Issued By";
+        }
+
         internal static void ReceiptsCombobox(ComboBox combobox, DataTable dataTable)
         {
             combobox.DataSource = dataTable;
             combobox.ValueMember = "id";
-            combobox.DisplayMember = "acc_form_desc";
-
-            if (combobox.Items.Count == 0)
-                combobox.DropDownHeight = 106;
+            combobox.DisplayMember = "description";
+            combobox.DropDownHeight = 106;
         }
 
         internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable, string valueMember, string displayMember)
@@ -1021,7 +1062,6 @@ namespace AccountingSystem
             dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["gr_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["recording_person"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
 
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -2178,6 +2218,7 @@ namespace AccountingSystem
             comboBox.DisplayMember = displayMember;
             comboBox.DataSource = dataTable;
         }
+
         internal static void BiddersCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.ValueMember = valueMember;
@@ -2200,7 +2241,6 @@ namespace AccountingSystem
             dataGridView.Columns["bid_amount"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["bid_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["bid_amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-
         }
     }
 }

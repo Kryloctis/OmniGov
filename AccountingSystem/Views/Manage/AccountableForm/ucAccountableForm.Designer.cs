@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             txtFormNo = new System.Windows.Forms.TextBox();
             txtFormDescription = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            cbIsCashTickets = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -84,17 +85,29 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // cbIsCashTickets
+            // 
+            cbIsCashTickets.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cbIsCashTickets.AutoSize = true;
+            cbIsCashTickets.Location = new System.Drawing.Point(215, 56);
+            cbIsCashTickets.Name = "cbIsCashTickets";
+            cbIsCashTickets.Size = new System.Drawing.Size(97, 19);
+            cbIsCashTickets.TabIndex = 2;
+            cbIsCashTickets.Text = "Is Cash Ticket";
+            cbIsCashTickets.UseVisualStyleBackColor = true;
+            // 
             // ucAccountableForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(cbIsCashTickets);
             Controls.Add(txtFormDescription);
             Controls.Add(txtFormNo);
             Controls.Add(label2);
             Controls.Add(label1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucAccountableForm";
-            Size = new System.Drawing.Size(324, 61);
+            Size = new System.Drawing.Size(324, 77);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -107,5 +120,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         internal System.Windows.Forms.TextBox txtFormNo;
         internal System.Windows.Forms.TextBox txtFormDescription;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.CheckBox cbIsCashTickets;
     }
 }

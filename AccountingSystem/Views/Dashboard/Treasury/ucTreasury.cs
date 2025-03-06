@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.CollectingOfficer;
+﻿using AccountingSystem.Views.Manage.CashTickets;
+using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FeesChargesConfig;
 using AccountingSystem.Views.Manage.RealProperties;
@@ -8,6 +9,7 @@ using AccountingSystem.Views.Transactions.Assessment;
 using AccountingSystem.Views.Transactions.Auction;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.Biddings;
+using AccountingSystem.Views.Transactions.CashTicketIssuance;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.Payments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
@@ -304,6 +306,24 @@ namespace AccountingSystem.Views.Dashboard.Treasury
             try
             {
                 _ = new frmCommunityTaxCertificate().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCashTickets().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void issuanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmCashTicketIssuance().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
