@@ -102,6 +102,8 @@
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmCashTicketsAdd";
             ShowIcon = false;
             ShowInTaskbar = false;
