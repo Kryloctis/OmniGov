@@ -43,7 +43,7 @@
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 148);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 164);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -79,7 +79,7 @@
             ucCashTicketIssuance1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCashTicketIssuance1.Location = new System.Drawing.Point(4, 4);
             ucCashTicketIssuance1.Name = "ucCashTicketIssuance1";
-            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 140);
+            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 156);
             ucCashTicketIssuance1.TabIndex = 7;
             // 
             // panel1
@@ -89,7 +89,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(360, 148);
+            panel1.Size = new System.Drawing.Size(360, 164);
             panel1.TabIndex = 8;
             // 
             // frmCashTicketAddIssuance
@@ -99,7 +99,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(360, 175);
+            ClientSize = new System.Drawing.Size(360, 191);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -109,6 +109,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Issue Cash Ticket";
+            Load += frmCashTicketAddIssuance_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

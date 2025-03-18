@@ -82,7 +82,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public int GetTotalIssuedCashTicketById(int cashTicketId)
+        public int GetIssuedCountByCashTcktId(int cashTicketId)
         {
             var parameter = new object[][]
             {

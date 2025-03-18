@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
     public partial class frmCashTicketEditIssuance : Form
     {
         private frmCashTicketIssuance frmCashTicketIssuance;
-        private int cashTicketIssuanceId;
+        private int cashTckIssId;
         private ucCashTicketIssuance uc;
 
         public frmCashTicketEditIssuance(frmCashTicketIssuance frmCashTicketIssuance, int cashTicketIssuanceId)
@@ -17,46 +17,21 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             InitializeComponent();
             uc = ucCashTicketIssuance1;
             this.frmCashTicketIssuance = frmCashTicketIssuance;
-            this.cashTicketIssuanceId = cashTicketIssuanceId;
+            this.cashTckIssId = cashTicketIssuanceId;
         }
 
         private void frmCashTicketEditIssuance_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                var cashTicketIssuedDict = AccFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
+                uc.OnLoad(true);
+                uc.LoadSelectedValue(cashTicketIssuedDict);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void OnLoad()
-        {
-            uc.LoadCashTickets();
-            LoadSelectedValue();
-        }
-
-        internal void LoadSelectedValue()
-        {
-            Dictionary<string, string> cashTicketIssuedDict = AccFactory.CashTicketsIssuedRepository().GetRecordByID(cashTicketIssuanceId);
-
-            string jobOrderID = cashTicketIssuedDict["job_orders_id"];
-            var collectingOfficerID = Convert.ToInt32(cashTicketIssuedDict["collecting_officer_id"]);
-            int collector = string.IsNullOrEmpty(jobOrderID) ? collectingOfficerID : Convert.ToInt32(jobOrderID);
-            int cashTicketId = Convert.ToInt32(cashTicketIssuedDict["cash_tickets_id"]);
-            DateTime dateIssued = Convert.ToDateTime(cashTicketIssuedDict["date_issued"]);
-            int quantity = Convert.ToInt32(cashTicketIssuedDict["quantity"]);
-
-            if (!string.IsNullOrEmpty(jobOrderID))
-                uc.cbCollectingOfficerTypeJO.Checked = true;
-
-            uc.selectedCashTicketID = cashTicketIssuanceId;
-            uc.cmbCollector.SelectedValue = collector;
-            uc.cmbxCashTickets.SelectedValue = cashTicketId;
-            uc.dtpDateIssued.Value = dateIssued;
-            uc.nudQuantity.Text = quantity.ToString();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -78,24 +53,10 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 return false;
             }
 
-            var cashTicketsIssuedRepository = AccFactory.CashTicketsIssuedRepository();
+            var model = uc.CashTicketsIssuedModel();
+            model.Id = cashTckIssId;
 
-            int collectorID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-            int cashTicketId = Convert.ToInt32(uc.cmbxCashTickets.SelectedValue);
-            DateTime dateIssued = uc.dtpDateIssued.Value;
-            int quantity = Convert.ToInt32(uc.nudQuantity.Text);
-
-            var cashTicketsIssuedModel = new CashTicketsIssuedModel()
-            {
-                Id = cashTicketIssuanceId,
-                CashTicketId = cashTicketId,
-                CollectorId = collectorID,
-                Quantity = quantity,
-                DateIssued = dateIssued,
-                IssuedBy = Helper.userId,
-            };
-
-            return cashTicketsIssuedRepository.Update(cashTicketsIssuedModel);
+            return AccFactory.CashTicketsIssuedRepository().Update(model);
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
-            btnSave = new System.Windows.Forms.Button();
+            btnUpdate = new System.Windows.Forms.Button();
             ucCashTicketIssuance1 = new ucCashTicketIssuance();
             panel1 = new System.Windows.Forms.Panel();
             flowLayoutPanel1.SuspendLayout();
@@ -41,9 +41,9 @@
             // 
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 148);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 164);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -61,25 +61,25 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // btnUpdate
             // 
-            btnSave.Location = new System.Drawing.Point(187, 2);
-            btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            btnSave.Name = "btnSave";
-            btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnSave.Size = new System.Drawing.Size(82, 22);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "Update";
-            btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
+            btnUpdate.Location = new System.Drawing.Point(187, 2);
+            btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            btnUpdate.Size = new System.Drawing.Size(82, 22);
+            btnUpdate.TabIndex = 0;
+            btnUpdate.Text = "Update";
+            btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // ucCashTicketIssuance1
             // 
             ucCashTicketIssuance1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCashTicketIssuance1.Location = new System.Drawing.Point(4, 4);
             ucCashTicketIssuance1.Name = "ucCashTicketIssuance1";
-            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 140);
+            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 156);
             ucCashTicketIssuance1.TabIndex = 8;
             // 
             // panel1
@@ -89,17 +89,17 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(360, 148);
+            panel1.Size = new System.Drawing.Size(360, 164);
             panel1.TabIndex = 9;
             // 
             // frmCashTicketEditIssuance
             // 
-            AcceptButton = btnSave;
+            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(360, 175);
+            ClientSize = new System.Drawing.Size(360, 191);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -119,7 +119,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnUpdate;
         private ucCashTicketIssuance ucCashTicketIssuance1;
         private System.Windows.Forms.Panel panel1;
     }

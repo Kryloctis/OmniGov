@@ -1,5 +1,7 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -8,15 +10,105 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 {
     public partial class ucCashTicketIssuance : UserControl
     {
-        internal int selectedCashTicketID;
-        internal bool isCollectorJO;
-        internal bool isEdit;
-        internal int cashTicketRemainingStockQty;
-        internal int cashTicketTotalIssued;
+        private bool isEdit;
+
+        internal int unusedCashTcktCount;
+        internal int usedCashTcktCount;
 
         public ucCashTicketIssuance()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbCollector),
+                errorProvider1.GetError(cmbxCashTickets),
+                errorProvider1.GetError(nudQuantity),
+            };
+
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private void LoadCollectors()
+        {
+            DataTable dataTable = cbCollectingOfficerTypeJO.Checked ? DataTableJobOrderCollectionOfficers() : DataTableRegularCollectingOfficers();
+            HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
+        }
+
+        private void LoadCashTickets()
+        {
+            DataTable cashTicketsDT = AccFactory.CashTicketsRepository().GetRecords();
+
+            foreach (DataRow row in cashTicketsDT.Rows)
+            {
+                int cashTicketId = Convert.ToInt32(row["id"]);
+                string description = row["description"].ToString();
+                int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
+            }
+
+            HelperLoadRecords.ReceiptsCombobox(cmbxCashTickets, cashTicketsDT);
+        }
+
+        internal void LoadSelectedValue(Dictionary<string, string> dictSelectedData)
+        {
+            if (dictSelectedData == null) return;
+
+            string joId = dictSelectedData["jo_id"];
+            string coId = dictSelectedData["co_id"];
+
+            int.TryParse(string.IsNullOrEmpty(joId) ? coId : joId, out int collectorsId);
+            int.TryParse(dictSelectedData["cash_tickets_id"], out int cashTcktId);
+            int.TryParse(dictSelectedData["quantity"], out int quantity);
+            DateTime.TryParse(dictSelectedData["date_issued"], out DateTime dateIssued);
+
+            cbCollectingOfficerTypeJO.Checked = !string.IsNullOrEmpty(joId);
+            cmbCollector.SelectedValue = collectorsId;
+            cmbxCashTickets.SelectedValue = cashTcktId;
+            dtpDateIssued.Value = dateIssued;
+            nudQuantity.Text = quantity.ToString();
+        }
+
+        internal void OnLoad(bool isEdit)
+        {
+            this.isEdit = isEdit;
+
+            LoadCollectors();
+            LoadCashTickets();
+            GetCashTckStat();
+        }
+
+        private (int coId, int? joId) GetCollectorsId()
+        {
+            bool isJo = cbCollectingOfficerTypeJO.Checked;
+            int CoJoId = Convert.ToInt32(cmbCollector.SelectedValue);
+            (int coId, int? joId) collectorsId = (isJo ? (GetCoId(CoJoId), CoJoId) : (CoJoId, null));
+
+            int GetCoId(int joId)
+            {
+                var coId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(joId);
+                return coId;
+            }
+
+            return collectorsId;
+        }
+
+        internal CashTicketsIssuedModel CashTicketsIssuedModel()
+        {
+            var collectorsId = GetCollectorsId();
+            var model = new CashTicketsIssuedModel()
+            {
+                CollectorId = collectorsId.coId,
+                DateIssued = dtpDateIssued.Value,
+                IssuedBy = Helper.userId,
+                CashTicketId = Convert.ToInt32(cmbxCashTickets.SelectedValue),
+                JobOrderId = collectorsId.joId,
+                Quantity = (int)nudQuantity.Value
+            };
+
+            return model;
         }
 
         internal void ResetForm()
@@ -26,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             LoadCollectors();
             LoadCashTickets();
         }
-
+            
         private DataColumn[] DataColumnsCollectingOfficers()
         {
             return new DataColumn[]
@@ -68,12 +160,12 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
 
             foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
             {
-                int jobOrderId = Convert.ToInt32(row["job_orders_id"]);
-                string prefix = row["job_orders_prefix"].ToString();
-                string firstName = row["job_orders_first_name"].ToString();
-                string middleInitial = row["job_orders_mid_initial"].ToString();
-                string lastName = row["job_orders_last_name"].ToString();
-                string suffix = row["job_orders_suffix"].ToString();
+                int jobOrderId = Convert.ToInt32(row["jo_id"]);
+                string prefix = row["jo_prefix"].ToString();
+                string firstName = row["jo_first_name"].ToString();
+                string middleInitial = row["jo_mid_initial"].ToString();
+                string lastName = row["jo_last_name"].ToString();
+                string suffix = row["jo_suffix"].ToString();
                 string jobOrderFullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
 
                 var newRow = dataTable.NewRow();
@@ -85,64 +177,13 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             return dataTable;
         }
 
-        internal void LoadCollectors()
-        {
-            DataTable dataTable = cbCollectingOfficerTypeJO.Checked ? DataTableJobOrderCollectionOfficers() : DataTableRegularCollectingOfficers();
-            HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
-        }
-
-        private void ucCashTicketIssuance_Load(object sender, EventArgs e)
+        private void cbCollectingOfficerTypeJO_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                if (!DesignMode)
-                {
-                    LoadCollectors();
-                    LoadCashTickets();
-                }
+                LoadCollectors();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadCashTickets()
-        {
-            DataTable cashTicketsDT = AccFactory.CashTicketsRepository().GetRecords();
-
-            foreach (DataRow row in cashTicketsDT.Rows)
-            {
-                int cashTicketId = Convert.ToInt32(row["id"]);
-                string description = row["description"].ToString();
-                int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
-                cashTicketTotalIssued = AccFactory.CashTicketsIssuedRepository().GetTotalIssuedCashTicketById(cashTicketId);
-                cashTicketRemainingStockQty = cashTicketStockQty - cashTicketTotalIssued;
-
-                if (cashTicketRemainingStockQty == 0)
-                    row.Delete();
-            }
-
-            HelperLoadRecords.ReceiptsCombobox(cmbxCashTickets, cashTicketsDT);
-        }
-
-        private void cbCollectingOfficerTypeJO_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbCollectingOfficerTypeJO.Checked)
-                isCollectorJO = true;
-            else
-                isCollectorJO = false;
-
-            LoadCollectors();
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbCollector),
-                errorProvider1.GetError(cmbxCashTickets),
-                errorProvider1.GetError(nudQuantity),
-            };
-
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void nudQuantity_Validating(object sender, CancelEventArgs e)
@@ -152,7 +193,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
                 int quantity = Convert.ToInt32(nudQuantity.Value);
 
-                if (cashTicketRemainingStockQty < quantity)
+                if (unusedCashTcktCount < quantity)
                 {
                     errorProvider1.SetError(nudQuantity, "Not enough quantity.");
                     e.Cancel = true;
@@ -170,16 +211,28 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void GetCashTckStat()
+        {
+            if (cmbxCashTickets.SelectedValue is null) return;
+            var dtrCashTckt = cmbxCashTickets.SelectedItem as DataRowView;
+            int.TryParse(dtrCashTckt["quantity"].ToString(), out int origCashTcktQnty);
+            int.TryParse(dtrCashTckt["id"].ToString(), out int cashTcktId);
+
+            var issdCashTcktQnty = AccFactory.CashTicketsIssuedRepository().GetIssuedCountByCashTcktId(cashTcktId);
+
+            usedCashTcktCount = issdCashTcktQnty;
+            unusedCashTcktCount = origCashTcktQnty - issdCashTcktQnty;
+
+            nudQuantity.Maximum = unusedCashTcktCount;
+            var cashTcktStat = $"used:{usedCashTcktCount}       unused: {unusedCashTcktCount}";
+            lblCashTcktStat.Text = cashTcktStat;
+        }
+
         private void cmbxCashTickets_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                DataRowView item = cmbxCashTickets.SelectedItem as DataRowView;
-                if (item == null) return;
-
-                selectedCashTicketID = Convert.ToInt32(item["id"]);
-                int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedCashTicketID);
-                cashTicketRemainingStockQty = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
+                GetCashTckStat();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

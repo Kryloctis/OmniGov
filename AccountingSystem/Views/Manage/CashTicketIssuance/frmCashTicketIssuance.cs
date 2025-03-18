@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -58,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             }
         }
 
-        private void bgwLoadIssuedCashTickets_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void bgwLoadIssuedCashTickets_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -108,45 +109,49 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void bgwLoadIssuedCashTickets_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void bgwLoadIssuedCashTickets_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbLoadRecords.Value = e.ProgressPercentage;
         }
 
-        private void bgwLoadIssuedCashTickets_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void bgwLoadIssuedCashTickets_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Result is not DataTable dataTable)
+            try
             {
-                pbLoadRecords.Value = 100;
-                return;
+                if (e.Result is not DataTable dataTable)
+                {
+                    pbLoadRecords.Value = 100;
+                    return;
+                }
+
+                if (dataTable.Rows.Count < 1)
+                    pbLoadRecords.Value = 100;
+
+                HelperLoadRecords.CashTicketIssuedDatagridView(dataTable, dgCashTicketIssued);
+                dgCashTicketIssued.CurrentCell = dgCashTicketIssued.FirstDisplayedCell;
+                lblRecordCount.Text = dgCashTicketIssued.Rows.Count.ToString();
+                Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
             }
-
-            if (dataTable.Rows.Count < 1)
-                pbLoadRecords.Value = 100;
-
-            HelperLoadRecords.CashTicketIssuedDatagridView(dataTable, dgCashTicketIssued);
-            dgCashTicketIssued.CurrentCell = dgCashTicketIssued.FirstDisplayedCell;
-            lblRecordCount.Text = dgCashTicketIssued.Rows.Count.ToString();
-            Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private string CollectingOfficerFullName(DataRow row)
         {
-            string jobOrdersID = row["job_orders_id"].ToString();
+            string jobOrdersID = row["jo_id"].ToString();
 
-            string prefix = row["collecting_officers_prefix"].ToString();
-            string firstName = row["collecting_officers_first_name"].ToString();
-            string midInitial = row["collecting_officers_mid_initial"].ToString();
-            string lastName = row["collecting_officers_last_name"].ToString();
-            string suffix = row["collecting_officers_suffix"].ToString();
+            string prefix = row["co_prefix"].ToString();
+            string firstName = row["co_first_name"].ToString();
+            string midInitial = row["co_mid_initial"].ToString();
+            string lastName = row["co_last_name"].ToString();
+            string suffix = row["co_suffix"].ToString();
 
             if (!string.IsNullOrEmpty(jobOrdersID))
             {
-                prefix = row["job_orders_prefix"].ToString();
-                firstName = row["job_orders_first_name"].ToString();
-                midInitial = row["job_orders_mid_initial"].ToString();
-                lastName = row["job_orders_last_name"].ToString();
-                suffix = row["job_orders_suffix"].ToString();
+                prefix = row["jo_prefix"].ToString();
+                firstName = row["jo_first_name"].ToString();
+                midInitial = row["jo_mid_initial"].ToString();
+                lastName = row["jo_last_name"].ToString();
+                suffix = row["jo_suffix"].ToString();
             }
 
             return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);

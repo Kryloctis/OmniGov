@@ -39,6 +39,7 @@
             dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             nudQuantity = new System.Windows.Forms.NumericUpDown();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            lblCashTcktStat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -64,7 +65,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(3, 112);
+            label5.Location = new System.Drawing.Point(3, 130);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(58, 15);
             label5.TabIndex = 32;
@@ -111,7 +112,7 @@
             cmbxCashTickets.FormattingEnabled = true;
             cmbxCashTickets.IntegralHeight = false;
             cmbxCashTickets.Location = new System.Drawing.Point(114, 82);
-            cmbxCashTickets.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbxCashTickets.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             cmbxCashTickets.Name = "cmbxCashTickets";
             cmbxCashTickets.Size = new System.Drawing.Size(200, 23);
             cmbxCashTickets.TabIndex = 22;
@@ -131,12 +132,13 @@
             // nudQuantity
             // 
             nudQuantity.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudQuantity.Location = new System.Drawing.Point(115, 110);
+            nudQuantity.Location = new System.Drawing.Point(114, 128);
             nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";
-            nudQuantity.Size = new System.Drawing.Size(199, 23);
+            nudQuantity.Size = new System.Drawing.Size(200, 23);
             nudQuantity.TabIndex = 33;
             nudQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudQuantity.ThousandsSeparator = true;
             nudQuantity.Validating += nudQuantity_Validating;
             nudQuantity.Validated += nudQuantity_Validated;
             // 
@@ -145,10 +147,23 @@
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // lblCashTcktStat
+            // 
+            lblCashTcktStat.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lblCashTcktStat.AutoSize = true;
+            lblCashTcktStat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            lblCashTcktStat.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblCashTcktStat.Location = new System.Drawing.Point(210, 110);
+            lblCashTcktStat.Name = "lblCashTcktStat";
+            lblCashTcktStat.Size = new System.Drawing.Size(104, 15);
+            lblCashTcktStat.TabIndex = 34;
+            lblCashTcktStat.Text = "used:0     unused:0";
+            // 
             // ucCashTicketIssuance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(lblCashTcktStat);
             Controls.Add(nudQuantity);
             Controls.Add(label1);
             Controls.Add(label2);
@@ -159,8 +174,7 @@
             Controls.Add(cmbxCashTickets);
             Controls.Add(dtpDateIssued);
             Name = "ucCashTicketIssuance";
-            Size = new System.Drawing.Size(329, 142);
-            Load += ucCashTicketIssuance_Load;
+            Size = new System.Drawing.Size(329, 164);
             ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
@@ -179,5 +193,6 @@
         internal System.Windows.Forms.DateTimePicker dtpDateIssued;
         internal System.Windows.Forms.NumericUpDown nudQuantity;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblCashTcktStat;
     }
 }

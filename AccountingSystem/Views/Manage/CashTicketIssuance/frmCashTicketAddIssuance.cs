@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
 
@@ -15,6 +14,15 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
             InitializeComponent();
             uc = ucCashTicketIssuance1;
             this.frmCashTicketIssuance = frmCashTicketIssuance;
+        }
+
+        private void frmCashTicketAddIssuance_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                uc.OnLoad(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -39,27 +47,8 @@ namespace AccountingSystem.Views.Transactions.CashTicketIssuance
                 return false;
             }
 
-            int collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-            int cashTicketId = Convert.ToInt32(uc.cmbxCashTickets.SelectedValue);
-            DateTime dateIssued = uc.dtpDateIssued.Value;
-            int quantity = Convert.ToInt32(uc.nudQuantity.Value);
-
-            var cashTicketsIssuedModel = new CashTicketsIssuedModel()
-            {
-                CashTicketId = cashTicketId,
-                CollectorId = collectorId,
-                Quantity = quantity,
-                DateIssued = dateIssued,
-                IssuedBy = Helper.userId,
-            };
-
-            if (uc.isCollectorJO)
-            {
-                cashTicketsIssuedModel.JobOrderId = collectorId;
-                cashTicketsIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
-            }
-
-            return AccFactory.CashTicketsIssuedRepository().Insert(cashTicketsIssuedModel);
+            var model = uc.CashTicketsIssuedModel();
+            return AccFactory.CashTicketsIssuedRepository().Insert(model);
         }
     }
 }
