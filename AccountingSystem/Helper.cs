@@ -3,6 +3,8 @@ using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
+using System.Configuration.Provider;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -409,9 +411,20 @@ namespace AccountingSystem
             public string MunicipalityName { get; set; }
             public string ProvinceCode { get; set; }
             public string ProvinceName { get; set; }
-            public string LfsInstance { get; set; }
-            public string RpmInstance { get; set; }
             public Image Emblem { get; set; }
+            public ConnectionStringSettings LfsConnSettings { get; set; }
+            public ConnectionStringSettings RpmConnSettings { get; set; }
+        }
+
+        private static ConnectionStringSettings ServerConnections(string userIp, string name, string database, string Id, string password)
+        {
+            var connString = new ConnectionStringSettings()
+            {
+                Name = name,
+                ConnectionString = $"server={userIp};database={database};user id={Id};password={password}",
+                ProviderName = "MySql.Data.MySqlClient"
+            };
+            return connString;
         }
 
         public static List<LguServerModel> LguServerModels()
@@ -425,11 +438,21 @@ namespace AccountingSystem
                 MunicipalityName = "Buug",
                 ProvinceCode = "ZSI",
                 ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "bg_zsi_lfs_instance",
-                RpmInstance = "bg_zsi_rpm_instance",
-                Emblem = Properties.Resources.list_money_banknotes_18px
-            };
+                Emblem = Properties.Resources.list_money_banknotes_18px,
 
+                //connection strings here
+                LfsConnSettings = ServerConnections(name: "bg_zsi_lfs_instance",
+                                                    userIp: "local",
+                                                    database: "bg_zsi_lfs_db",
+                                                    Id: "acc_user",
+                                                    password: "acc_user123"),
+
+                RpmConnSettings = ServerConnections(name: "Bubg_zsi_rpt_instance",
+                                                    userIp: "local",
+                                                    database: "bg_zsi_rpt_db",
+                                                    Id: "rpt_user",
+                                                    password: "rpt_user123")
+            };
             var titayZsiModel = new LguServerModel()
             {
                 LguId = 2,
@@ -437,9 +460,20 @@ namespace AccountingSystem
                 MunicipalityName = "Titay",
                 ProvinceCode = "ZSI",
                 ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "tty_zsi_lfs_instance",
-                RpmInstance = "tty_zsi_rpm_instance",
-                Emblem = Properties.Resources.list_money_banknotes_18px
+                Emblem = Properties.Resources.list_money_banknotes_18px,
+
+                //connection strings here
+                LfsConnSettings = ServerConnections(name: "tty_zsi_lfs_instance",
+                                                    userIp: "local",
+                                                    database: "tty_zsi_lfs_db",
+                                                    Id: "acc_user",
+                                                    password: "acc_user123"),
+
+                RpmConnSettings = ServerConnections(name: "tty_zsi_rpt_instance",
+                                                    userIp: "local",
+                                                    database: "tty_zsi_rpt_db",
+                                                    Id: "rpt_user",
+                                                    password: "rpt_user123")
             };
 
             lguModelList.Add(buugZsiModel);
@@ -454,9 +488,6 @@ namespace AccountingSystem
 
             foreach (LguServerModel model in LguServerModels())
             {
-                string lfsInstance = model.LfsInstance;
-                string rpmInstance = model.RpmInstance;
-
                 bool isLfsConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
                 bool isRptmConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
 

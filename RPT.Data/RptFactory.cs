@@ -16,6 +16,6 @@ namespace RPT.Data
 
         public static IPreviousAssessment PreviousAssessmentRepository() => new PreviousAssessmentRepository(mySqlGenericCommandsRPT);
 
-        public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsRPT);
+        public static IServer ServerRepository() => new RptServerRepository(mySqlGenericCommandsRPT);
     }
 }

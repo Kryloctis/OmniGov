@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using K4os.Compression.LZ4.Encoders;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
@@ -125,18 +126,15 @@ namespace ACC.Data
             }
         }
 
-        public bool TestConnection(string testConnectionName)
+        public bool TestConnection(string connectionString)
         {
-            try
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
-                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
-                {
-                    connection.Open();
+                connection.Open();
+                if (connection.Ping())
                     return true;
-                }
+                return false;
             }
-            catch (MySqlException) { return false; }
         }
     }
 }

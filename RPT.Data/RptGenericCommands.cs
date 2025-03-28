@@ -125,18 +125,15 @@ namespace RPT.Data
             }
         }
 
-        public bool TestConnection(string testConnectionName)
+        public bool TestConnection(string connectionString)
         {
-            try
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
-                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
-                {
-                    connection.Open();
+                connection.Open();
+                if (connection.Ping())
                     return true;
-                }
+                return false;
             }
-            catch (MySqlException) { return false; }
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class ServerRepository : IServer
+    public class AccServerRepository : IServer
     {
         private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public ServerRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public AccServerRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

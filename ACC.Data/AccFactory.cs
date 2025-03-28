@@ -194,7 +194,7 @@ namespace ACC.Data
 
         public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(mySqlGenericCommandsLFS);
 
-        public static IServer ServerRepository() => new ServerRepository(mySqlGenericCommandsLFS);
+        public static IServer ServerRepository() => new AccServerRepository(mySqlGenericCommandsLFS);
 
         public static IRegistry RegistryRepository() => new RegistryRepository(mySqlGenericCommandsLFS);
 

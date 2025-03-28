@@ -1,13 +1,14 @@
 ﻿using RPT.Domain.Interfaces;
+using System.Configuration;
 using System.Transactions;
 
 namespace RPT.Data
 {
-    public class ServerRepository : IServer
+    public class RptServerRepository : IServer
     {
         private RptGenericCommands mySqlGenericCommandsRPT;
 
-        public ServerRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public RptServerRepository(RptGenericCommands mySqlGenericCommandsRPT)
         {
             this.mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }
@@ -16,7 +17,6 @@ namespace RPT.Data
         {
             using (var scope = new TransactionScope())
             {
-                _ = TestConnection(connectionName);
                 RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(connectionName);
 
                 scope.Complete();
@@ -24,10 +24,9 @@ namespace RPT.Data
             }
         }
 
-        public bool TestConnection(string connectionName)
+        public bool TestConnection(string connectionString)
         {
-            mySqlGenericCommandsRPT = new RptGenericCommands(connectionName);
-            return mySqlGenericCommandsRPT.TestConnection(connectionName);
+            return mySqlGenericCommandsRPT.TestConnection(connectionString);
         }
     }
 }
