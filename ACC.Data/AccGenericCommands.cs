@@ -1,7 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
-using K4os.Compression.LZ4.Encoders;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
@@ -11,9 +9,9 @@ namespace ACC.Data
     {
         private readonly string connectionString;
 
-        public AccGenericCommands(string connectionName)
+        public AccGenericCommands(string connectionString)
         {
-            connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            this.connectionString = connectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)

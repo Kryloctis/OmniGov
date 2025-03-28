@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using RPT.Domain.Interfaces;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
@@ -10,9 +9,9 @@ namespace RPT.Data
     {
         private readonly string connectionString;
 
-        public RptGenericCommands(string connectionName)
+        public RptGenericCommands(string connectionString)
         {
-            connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            this.connectionString = connectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)
