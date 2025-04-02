@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Configuration.Provider;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
