@@ -2,8 +2,6 @@
 using LFS.Properties;
 using LFS.Views.Dashboard;
 using LFS.Views.Help;
-using LFS.Views.SignIn;
-using LFS;
 using RPT.Data;
 using System;
 using System.ComponentModel;
@@ -11,7 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS
+namespace LFS.Views.SignIn
 {
     public partial class frmSignIn : Form
     {

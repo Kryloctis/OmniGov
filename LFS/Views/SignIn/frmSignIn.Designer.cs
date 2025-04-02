@@ -1,5 +1,5 @@
 ﻿
-namespace LFS
+namespace LFS.Views.SignIn
 {
     partial class frmSignIn
     {
