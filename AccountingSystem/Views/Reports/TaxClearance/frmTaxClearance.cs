@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.TaxClearance
+namespace LFS.Views.Reports.TaxClearance
 {
     public partial class frmTaxClearance : Form
     {

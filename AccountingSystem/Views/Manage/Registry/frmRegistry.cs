@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Registry
+namespace LFS.Views.Manage.Registry
 {
     public partial class frmRegistry : Form
     {

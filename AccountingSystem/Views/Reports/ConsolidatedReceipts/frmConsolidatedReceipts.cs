@@ -8,7 +8,7 @@ using System.Data;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
+namespace LFS.Views.Reports.ConsolidatedReceipts
 {
     public partial class frmConsolidatedReceipts : Form
     {

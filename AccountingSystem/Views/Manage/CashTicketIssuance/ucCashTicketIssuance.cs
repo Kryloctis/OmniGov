@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.CashTicketIssuance
+namespace LFS.Views.Transactions.CashTicketIssuance
 {
     public partial class ucCashTicketIssuance : UserControl
     {

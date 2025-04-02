@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
+﻿namespace LFS.Views.Manage.BusinessAdOnCharges
 {
     partial class frmBusinessAddOnCharges
     {
@@ -70,7 +70,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
+            this.btnAdd.Image = global::LFS.Properties.Resources.button_rounded_add_24px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -83,7 +83,7 @@
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_24px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -95,7 +95,7 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_24px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";

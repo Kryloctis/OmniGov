@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.LinkUser
+namespace LFS.Views.Manage.LinkUser
 {
     partial class frmLinkUser
     {

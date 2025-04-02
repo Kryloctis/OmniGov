@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Help
+﻿namespace LFS.Views.Help
 {
     partial class frmAbout
     {

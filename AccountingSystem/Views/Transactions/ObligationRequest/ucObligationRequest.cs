@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequest : UserControl
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Saaobb
+namespace LFS.Views.Reports.Saaobb
 {
     public partial class frmSaaobb : Form
     {

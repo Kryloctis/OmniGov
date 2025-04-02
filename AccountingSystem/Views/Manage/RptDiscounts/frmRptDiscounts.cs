@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Dashboard;
+using LFS.Views.Dashboard;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptDiscount
+namespace LFS.Views.Manage.RptDiscount
 {
     public partial class frmRptDiscounts : Form
     {

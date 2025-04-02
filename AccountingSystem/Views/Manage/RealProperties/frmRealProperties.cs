@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.TaxPayers;
+using LFS.Views.Manage.TaxPayers;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RealProperties
+namespace LFS.Views.Manage.RealProperties
 {
     public partial class frmRealProperties : Form
     {

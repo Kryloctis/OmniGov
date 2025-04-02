@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace LFS.Views.Manage.RptPenalties
 {
     partial class frmRptPenalties
     {
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnSave.Image = global::LFS.Properties.Resources.button_rounded_add_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";

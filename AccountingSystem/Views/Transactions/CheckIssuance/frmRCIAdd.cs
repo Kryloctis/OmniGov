@@ -6,7 +6,7 @@ using System.Data;
 using System.Transactions;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.RCI
+namespace LFS.Views.Transactions.RCI
 {
     public partial class frmRCIAdd : Form
     {

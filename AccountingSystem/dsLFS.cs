@@ -2,54 +2,54 @@ namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }
 
-namespace AccountingSystem
+namespace LFS
 {
 }

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.ReceiptsIssued
+namespace LFS.Views.Transactions.ReceiptsIssued
 {
     public partial class ucReceiptsIssued : UserControl
     {

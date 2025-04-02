@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Realignment
+namespace LFS.Views.Manage.Realignment
 {
     partial class frmRealignment
     {

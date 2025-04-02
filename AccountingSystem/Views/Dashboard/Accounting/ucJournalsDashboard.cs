@@ -1,10 +1,10 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Reports.Journals;
+using LFS.Views.Reports.Journals;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.AccountingDashboard
+namespace LFS.Views.Dashboard.AccountingDashboard
 {
     public partial class ucJournalsDashboard : UserControl
     {

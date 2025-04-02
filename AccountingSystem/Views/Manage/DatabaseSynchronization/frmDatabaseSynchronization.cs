@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.DatabaseSynchronization
+namespace LFS.Views.Manage.DatabaseSynchronization
 {
     public partial class frmDatabaseSynchronization : Form
     {

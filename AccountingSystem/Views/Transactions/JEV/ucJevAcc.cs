@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class ucJEVAccount : UserControl
     {

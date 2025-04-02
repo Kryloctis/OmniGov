@@ -1,10 +1,10 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.RealProperties;
+using LFS.Views.Manage.RealProperties;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.TaxPayers
+namespace LFS.Views.Manage.TaxPayers
 {
     public partial class frmEditRealProperties : Form
     {

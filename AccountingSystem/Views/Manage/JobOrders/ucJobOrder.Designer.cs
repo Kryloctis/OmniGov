@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.JobOrders
+namespace LFS.Views.Manage.JobOrders
 {
     partial class ucJobOrder
     {

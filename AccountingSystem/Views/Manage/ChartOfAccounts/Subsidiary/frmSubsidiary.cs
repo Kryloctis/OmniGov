@@ -1,14 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BeginningBalances;
-using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
+using LFS.Views.Manage.BeginningBalances;
+using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
+namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiary : Form
     {

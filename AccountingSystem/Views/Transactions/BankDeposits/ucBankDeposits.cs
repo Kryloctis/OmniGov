@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.BankDeposits
+namespace LFS.Views.Transactions.BankDeposits
 {
     public partial class ucBankDeposits : UserControl
     {

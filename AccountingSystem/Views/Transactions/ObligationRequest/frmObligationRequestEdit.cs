@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestEdit : Form
     {

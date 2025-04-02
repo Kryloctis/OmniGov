@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.RCI
+namespace LFS.Views.Transactions.RCI
 {
     partial class ucRCI
     {

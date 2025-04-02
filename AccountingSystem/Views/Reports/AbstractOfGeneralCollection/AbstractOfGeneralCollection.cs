@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.GeneralCollection
+namespace LFS.Views.Reports.GeneralCollection
 {
     public partial class AbstractOfGeneralCollection : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.Ledgers
+namespace LFS.Views.Reports.Ledgers
 {
     partial class ucGeneralLedger
     {

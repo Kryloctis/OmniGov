@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
+namespace LFS.Views.Transactions.Payments.BurialPermit
 {
     public partial class ucPrintReceipt : UserControl
     {

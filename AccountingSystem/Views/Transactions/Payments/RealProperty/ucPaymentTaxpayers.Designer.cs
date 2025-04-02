@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.RealProperty
+﻿namespace LFS.Views.Transactions.Payments.RealProperty
 {
     partial class ucPaymentTaxpayers
     {

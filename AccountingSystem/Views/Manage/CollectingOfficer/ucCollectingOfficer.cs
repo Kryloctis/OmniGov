@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.CollectingOfficer
+namespace LFS.Views.Manage.CollectingOfficer
 {
     public partial class ucCollectingOfficer : UserControl
     {

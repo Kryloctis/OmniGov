@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Dashboard.Accounting
+﻿namespace LFS.Views.Dashboard.Accounting
 {
     partial class ucAccounting
     {

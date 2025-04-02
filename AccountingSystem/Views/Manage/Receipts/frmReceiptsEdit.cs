@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Receipts
+namespace LFS.Views.Manage.Receipts
 {
     public partial class frmReceiptsEdit : Form
     {

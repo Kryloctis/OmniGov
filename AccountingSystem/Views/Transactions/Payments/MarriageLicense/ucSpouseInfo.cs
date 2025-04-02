@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
+namespace LFS.Views.Transactions.Payments.MarriageLicense
 {
     public partial class ucSpouseInfo : UserControl
     {

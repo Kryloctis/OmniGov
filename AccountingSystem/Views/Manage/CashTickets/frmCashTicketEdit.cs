@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.CashTickets
+namespace LFS.Views.Manage.CashTickets
 {
     public partial class frmCashTicketEdit : Form
     {

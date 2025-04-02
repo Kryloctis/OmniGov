@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     partial class frmJevAccEdit
     {

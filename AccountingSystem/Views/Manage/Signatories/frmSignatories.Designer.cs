@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Signatories
+namespace LFS.Views.Manage.Signatories
 {
     partial class frmSignatories
     {

@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
-using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using LFS.Views.Transactions.CheckIssuance.Deductions;
+using LFS.Views.Transactions.CheckIssuance.Obligations;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.RCI
+namespace LFS.Views.Transactions.RCI
 {
     public partial class ucRCI : UserControl
     {

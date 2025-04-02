@@ -1,5 +1,5 @@
-﻿using AccountingSystem.Views.Reports.Rcd;
-namespace AccountingSystem.Views.Reports.Rcd
+﻿using LFS.Views.Reports.Rcd;
+namespace LFS.Views.Reports.Rcd
 {
     partial class frmRcd
     {

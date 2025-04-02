@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.FeesChargesConfig.Classification;
-using AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges;
+using LFS.Views.Manage.FeesChargesConfig.Classification;
+using LFS.Views.Manage.FeesChargesConfig.FeesCharges;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FeesChargesConfig
+namespace LFS.Views.Manage.FeesChargesConfig
 {
     public partial class frmFeesChargesConfig : Form
     {

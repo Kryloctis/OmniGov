@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
+namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
 {
     public partial class ucCattleTransfer : UserControl
     {

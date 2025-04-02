@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
+using LFS.Views.Manage.BudgetAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using LFS;
 using System;

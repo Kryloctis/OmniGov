@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FeesChargesConfig
+namespace LFS.Views.Manage.FeesChargesConfig
 {
     public partial class frmAddFeesChargesClassification : Form
     {

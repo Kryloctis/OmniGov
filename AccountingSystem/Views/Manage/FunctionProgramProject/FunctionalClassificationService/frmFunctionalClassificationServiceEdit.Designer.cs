@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     partial class frmFunctionalClassificationServiceEdit
     {
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunctonalClassificationServices1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctionalClassificationServices();
+            this.ucFunctonalClassificationServices1 = new LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctionalClassificationServices();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(281, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";

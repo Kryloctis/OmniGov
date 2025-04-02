@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RptReports
+namespace LFS.Views.Reports.RptReports
 {
     partial class frmRealPropertyTaxStatementOfAccount
     {

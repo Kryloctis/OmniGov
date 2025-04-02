@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts
+namespace LFS.Views.Manage.ChartOfAccounts
 {
     partial class ucGeneralLedgerAccountSearch
     {

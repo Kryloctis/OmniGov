@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     public partial class UcMajorAccountGroup : UserControl
     {

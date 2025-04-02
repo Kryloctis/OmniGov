@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
+namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 {
     public partial class ucTaxPayerDetails : UserControl
     {

@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Registry
+namespace LFS.Views.Manage.Registry
 {
     public partial class ucRegistry : UserControl
     {

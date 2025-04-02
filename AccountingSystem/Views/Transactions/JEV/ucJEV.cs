@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class ucJev : UserControl
     {

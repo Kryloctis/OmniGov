@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptTaxRates
+namespace LFS.Views.Manage.RptTaxRates
 {
     partial class ucRptTaxRates
     {

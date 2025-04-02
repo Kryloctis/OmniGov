@@ -1,11 +1,11 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Dashboard.Accounting;
-using AccountingSystem.Views.Dashboard.AccountingDashboard;
-using AccountingSystem.Views.Dashboard.Budget;
-using AccountingSystem.Views.Dashboard.MyAccount;
-using AccountingSystem.Views.Dashboard.Reports;
-using AccountingSystem.Views.Dashboard.Settings;
-using AccountingSystem.Views.Dashboard.Treasury;
+using LFS.Views.Dashboard.Accounting;
+using LFS.Views.Dashboard.AccountingDashboard;
+using LFS.Views.Dashboard.Budget;
+using LFS.Views.Dashboard.MyAccount;
+using LFS.Views.Dashboard.Reports;
+using LFS.Views.Dashboard.Settings;
+using LFS.Views.Dashboard.Treasury;
 using LFS;
 using Org.BouncyCastle.Asn1.Esf;
 using System;
@@ -13,7 +13,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace AccountingSystem.Views.Dashboard
+namespace LFS.Views.Dashboard
 {
     public partial class frmMain : Form
     {

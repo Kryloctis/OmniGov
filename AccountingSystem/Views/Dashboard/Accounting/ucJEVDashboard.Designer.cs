@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Dashboard
+namespace LFS.Views.Dashboard
 {
     partial class ucJevDashboard
     {

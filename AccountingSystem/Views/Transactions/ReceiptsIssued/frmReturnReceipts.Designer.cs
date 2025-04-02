@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.ReceiptsIssued
+namespace LFS.Views.Transactions.ReceiptsIssued
 {
     partial class frmReturnReceipts
     {
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(124, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";

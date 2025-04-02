@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.TaxPayers;
+using LFS.Views.Manage.TaxPayers;
 using LFS;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     public partial class ucPaymentRegistry : UserControl
     {

@@ -8,7 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Assessment
+namespace LFS.Views.Transactions.Assessment
 {
     public partial class frmWarrantLevy : Form
     {

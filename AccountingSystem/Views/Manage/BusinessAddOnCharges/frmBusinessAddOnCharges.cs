@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
+namespace LFS.Views.Manage.BusinessAdOnCharges
 {
     public partial class frmBusinessAddOnCharges : Form
     {

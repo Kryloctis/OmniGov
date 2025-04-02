@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts
+namespace LFS.Views.Manage.ChartOfAccounts
 {
     public partial class ucGeneralLedgerAccountSearch : UserControl
     {

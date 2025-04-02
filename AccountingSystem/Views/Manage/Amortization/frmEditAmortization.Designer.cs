@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     partial class frmEditAmortization
     {
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAmortization1 = new AccountingSystem.Views.Manage.Amortization.ucAmortization();
+            this.ucAmortization1 = new LFS.Views.Manage.Amortization.ucAmortization();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(353, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

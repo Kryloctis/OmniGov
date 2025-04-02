@@ -1,8 +1,8 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
-using AccountingSystem.Views.Transactions.Payments.RealProperty;
+using LFS.DataSets;
+using LFS.Views.Transactions.Payments.BurialPermit;
+using LFS.Views.Transactions.Payments.RealProperty;
 using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     public partial class frmPaymentRpt : Form
     {

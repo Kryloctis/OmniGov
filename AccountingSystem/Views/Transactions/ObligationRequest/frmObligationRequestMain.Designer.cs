@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     partial class frmObligationRequestMain
     {
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
+            this.ucObligationRequestMain1 = new LFS.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_20px;
+            this.btnCancel.Image = global::LFS.Properties.Resources.symbol_cancel_20px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancel.Name = "btnCancel";
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_20px;
+            this.btnSearch.Image = global::LFS.Properties.Resources.find_20px;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Name = "btnSearch";
@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnApprove
             // 
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_color_green_ok_2_20px;
+            this.btnApprove.Image = global::LFS.Properties.Resources.document_color_green_ok_2_20px;
             this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApprove.Name = "btnApprove";
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_color_red_cancel_20px;
+            this.btnDisapprove.Image = global::LFS.Properties.Resources.document_color_red_cancel_20px;
             this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisapprove.Name = "btnDisapprove";
@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnCancelObligation
             // 
-            this.btnCancelObligation.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_forbidden_20px;
+            this.btnCancelObligation.Image = global::LFS.Properties.Resources.document_color_magenta_forbidden_20px;
             this.btnCancelObligation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelObligation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelObligation.Name = "btnCancelObligation";

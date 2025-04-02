@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
+namespace LFS.Views.Transactions.Payments.BurialPermit
 {
     public partial class ucBurialDetails : UserControl
     {

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Transactions;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.JobOrders
+namespace LFS.Views.Manage.JobOrders
 {
     public partial class frmJobOrderAdd : Form
     {

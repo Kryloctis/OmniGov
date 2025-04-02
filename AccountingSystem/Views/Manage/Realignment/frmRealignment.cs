@@ -1,9 +1,9 @@
-﻿using AccountingSystem.Views.Manage.BudgetAppropriations;
+﻿using LFS.Views.Manage.BudgetAppropriations;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Realignment
+namespace LFS.Views.Manage.Realignment
 {
     public partial class frmRealignment : Form
     {

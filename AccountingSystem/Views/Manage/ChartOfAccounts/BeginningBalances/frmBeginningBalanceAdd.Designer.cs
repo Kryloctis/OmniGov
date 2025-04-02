@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.BeginningBalances
+namespace LFS.Views.Manage.BeginningBalances
 {
     partial class frmBeginningBalanceAdd
     {
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucBeginningBalances1 = new AccountingSystem.Views.Manage.BeginningBalances.UcBeginningBalances();
+            this.ucBeginningBalances1 = new LFS.Views.Manage.BeginningBalances.UcBeginningBalances();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.Location = new System.Drawing.Point(342, 3);
             this.btnSave.Name = "btnSave";

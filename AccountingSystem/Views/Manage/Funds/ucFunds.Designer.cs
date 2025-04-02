@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Funds
+namespace LFS.Views.Manage.Funds
 {
     partial class ucFunds
     {

@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Funds
+namespace LFS.Views.Manage.Funds
 {
     public partial class frmFundAdd : Form
     {

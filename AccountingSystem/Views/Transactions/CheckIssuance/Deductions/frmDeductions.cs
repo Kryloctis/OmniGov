@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.RCI;
+using LFS.Views.Transactions.RCI;
 using LFS;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
+namespace LFS.Views.Transactions.CheckIssuance.Deductions
 {
     public partial class frmDeductions : Form
     {

@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.CashTicketIssuance
+namespace LFS.Views.Transactions.CashTicketIssuance
 {
     public partial class frmCashTicketAddIssuance : Form
     {

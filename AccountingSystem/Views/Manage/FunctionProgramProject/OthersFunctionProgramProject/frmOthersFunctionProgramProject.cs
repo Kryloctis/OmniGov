@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     public partial class frmOthersFunctionProgramProject : Form
     {

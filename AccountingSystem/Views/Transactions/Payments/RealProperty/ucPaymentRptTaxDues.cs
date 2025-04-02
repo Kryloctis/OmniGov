@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.RealProperty
+namespace LFS.Views.Transactions.Payments.RealProperty
 {
     public partial class ucPaymentRptTaxDues : UserControl
     {

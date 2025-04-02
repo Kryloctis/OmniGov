@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.DatabaseSynchronization
+﻿namespace LFS.Views.Manage.DatabaseSynchronization
 {
     partial class ucDatabaseSynchronization
     {

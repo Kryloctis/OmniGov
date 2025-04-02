@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
+﻿namespace LFS.Views.Manage.FeesChargesConfig.Classification
 {
     partial class frmEditFeesChargesClassification
     {

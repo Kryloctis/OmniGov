@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.TaxPayers
+namespace LFS.Views.Manage.TaxPayers
 {
     partial class frmTaxpayers
     {

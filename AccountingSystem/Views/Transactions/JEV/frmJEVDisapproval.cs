@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class frmJevDisapproval : Form
     {

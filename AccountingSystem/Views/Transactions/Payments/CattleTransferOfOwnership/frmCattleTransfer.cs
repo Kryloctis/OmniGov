@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
-using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
+using LFS.Views.Transactions.Payments.BurialPermit;
+using LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership
+namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 {
     public partial class frmCattleTransfer : Form
     {

@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AllotmentClasses
+namespace LFS.Views.Manage.AllotmentClasses
 {
     public partial class frmAddAllotmentClasses : Form
     {

@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Biddings
+namespace LFS.Views.Transactions.Biddings
 {
     public partial class ucBiddings : UserControl
     {

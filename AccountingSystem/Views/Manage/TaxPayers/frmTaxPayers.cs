@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.TaxPayers
+namespace LFS.Views.Manage.TaxPayers
 {
     public partial class frmTaxpayers : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
+namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     partial class ucSubsidiary
     {

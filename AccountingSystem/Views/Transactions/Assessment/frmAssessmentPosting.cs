@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Assessment
+namespace LFS.Views.Transactions.Assessment
 {
     public partial class frmAssessmentPosting : Form
     {

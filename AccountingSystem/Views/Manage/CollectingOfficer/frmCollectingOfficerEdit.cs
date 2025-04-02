@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.CollectingOfficer
+namespace LFS.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerEdit : Form
     {

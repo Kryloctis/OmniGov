@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Journals.DefaultAccounts;
+using LFS.Views.Manage.Journals.DefaultAccounts;
 using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals
+namespace LFS.Views.Manage.Journals
 {
     public partial class frmJournals : Form
     {

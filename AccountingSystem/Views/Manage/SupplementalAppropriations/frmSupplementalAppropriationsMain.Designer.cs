@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.SupplementalAppropriations
+namespace LFS.Views.Manage.SupplementalAppropriations
 {
     partial class frmSupplementalAppropriationsMain
     {
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(336, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Financial_Statements
+namespace LFS.Views.Reports.Financial_Statements
 {
     public partial class ucStatementOfCashFlows : UserControl
     {

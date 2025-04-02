@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges
+namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
 {
     public partial class ucFeesCharges : UserControl
     {

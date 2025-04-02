@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BusinessCategories
+﻿namespace LFS.Views.Manage.BusinessCategories
 {
     partial class frmBusinessCategories
     {
@@ -82,7 +82,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
+            this.btnAdd.Image = global::LFS.Properties.Resources.button_rounded_add_24px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -95,7 +95,7 @@
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_24px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -107,7 +107,7 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_24px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -131,7 +131,7 @@
             // 
             // btnAddOnCharges
             // 
-            this.btnAddOnCharges.Image = global::AccountingSystem.Properties.Resources.archive_box_add_filled_20px;
+            this.btnAddOnCharges.Image = global::LFS.Properties.Resources.archive_box_add_filled_20px;
             this.btnAddOnCharges.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddOnCharges.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddOnCharges.Name = "btnAddOnCharges";

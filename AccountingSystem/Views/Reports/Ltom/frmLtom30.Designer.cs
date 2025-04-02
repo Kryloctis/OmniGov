@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Reports.Ltom
+﻿namespace LFS.Views.Reports.Ltom
 {
     partial class frmLtom30
     {

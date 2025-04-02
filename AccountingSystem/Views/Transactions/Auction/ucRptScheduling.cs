@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Auction
+namespace LFS.Views.Transactions.Auction
 {
     public partial class ucRptScheduling : UserControl
     {

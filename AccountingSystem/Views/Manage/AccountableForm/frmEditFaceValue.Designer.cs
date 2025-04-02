@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.AccountableForm
+namespace LFS.Views.Manage.AccountableForm
 {
     partial class frmEditFaceValue
     {

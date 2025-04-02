@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace LFS.Views.Manage.RptPenalties
 {
     partial class ucRptPenalties
     {

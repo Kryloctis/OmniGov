@@ -1,9 +1,9 @@
-﻿using AccountingSystem.Properties;
+﻿using LFS.Properties;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Help
+namespace LFS.Views.Help
 {
     public partial class frmAbout : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
+﻿namespace LFS.Views.Manage.BusinessAdOnCharges
 {
     partial class ucBusinessAddOnCharges
     {

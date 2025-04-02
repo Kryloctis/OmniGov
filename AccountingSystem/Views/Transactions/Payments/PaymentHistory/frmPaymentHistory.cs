@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
+namespace LFS.Views.Transactions.Payments.PaymentHistory
 {
     public partial class frmPaymentHistory : Form
     {

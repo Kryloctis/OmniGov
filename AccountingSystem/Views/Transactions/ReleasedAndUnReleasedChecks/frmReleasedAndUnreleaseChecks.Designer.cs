@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
+﻿namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     partial class frmReleasedAndUnreleaseChecks
     {

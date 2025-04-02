@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
+namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
 {
     public partial class ucBudgetSummary : UserControl
     {

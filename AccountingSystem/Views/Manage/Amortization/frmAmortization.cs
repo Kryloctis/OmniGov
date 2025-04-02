@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     public partial class frmAmortization : Form
     {

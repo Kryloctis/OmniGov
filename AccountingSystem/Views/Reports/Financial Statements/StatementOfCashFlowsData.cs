@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AccountingSystem.Views.Reports.Financial_Statements
+namespace LFS.Views.Reports.Financial_Statements
 {
     public partial class StatementOfCashFlowsData
     {

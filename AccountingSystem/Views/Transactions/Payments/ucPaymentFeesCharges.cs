@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     public partial class ucPaymentFeesCharges : UserControl
     {

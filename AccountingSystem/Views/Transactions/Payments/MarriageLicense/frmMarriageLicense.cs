@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.MarriageLicense
+namespace LFS.Views.Transactions.Payments.MarriageLicense
 {
     public partial class frmMarriageLicense : Form
     {

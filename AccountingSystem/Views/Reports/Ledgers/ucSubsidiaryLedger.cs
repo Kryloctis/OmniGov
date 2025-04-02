@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Ledgers
+namespace LFS.Views.Reports.Ledgers
 {
     public partial class ucSubsidiaryLedger : UserControl
     {

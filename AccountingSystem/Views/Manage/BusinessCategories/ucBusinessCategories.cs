@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.BusinessCategories
+namespace LFS.Views.Manage.BusinessCategories
 {
     public partial class ucBusinessCategories : UserControl
     {

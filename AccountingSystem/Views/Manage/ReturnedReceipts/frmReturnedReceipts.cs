@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ReturnedReceipts
+namespace LFS.Views.Manage.ReturnedReceipts
 {
     public partial class frmReturnedReceipts : Form
     {

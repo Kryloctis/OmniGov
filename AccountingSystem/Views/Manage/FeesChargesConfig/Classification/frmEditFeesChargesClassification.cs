@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FeesChargesConfig.Classification
+namespace LFS.Views.Manage.FeesChargesConfig.Classification
 {
     public partial class frmEditFeesChargesClassification : Form
     {

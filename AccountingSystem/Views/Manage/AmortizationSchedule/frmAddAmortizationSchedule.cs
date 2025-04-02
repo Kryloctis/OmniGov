@@ -1,9 +1,9 @@
-﻿using AccountingSystem.Views.Manage.Amortization;
+﻿using LFS.Views.Manage.Amortization;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AmortizationSchedule
+namespace LFS.Views.Manage.AmortizationSchedule
 {
     public partial class frmAddAmortizationSchedule : Form
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.SupplementalAppropriations
+namespace LFS.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationsAdd : Form
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Augmentation
+namespace LFS.Views.Manage.Augmentation
 {
     public partial class frmAugmentation : Form
     {

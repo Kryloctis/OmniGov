@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     public partial class ucAmortization : UserControl
     {

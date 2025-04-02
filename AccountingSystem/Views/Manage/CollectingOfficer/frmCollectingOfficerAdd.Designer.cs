@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.CollectingOfficer
+namespace LFS.Views.Manage.CollectingOfficer
 {
     partial class frmCollectingOfficerAdd
     {
@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucCollectingOfficer1 = new AccountingSystem.Views.Manage.CollectingOfficer.ucCollectingOfficer();
+            this.ucCollectingOfficer1 = new LFS.Views.Manage.CollectingOfficer.ucCollectingOfficer();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

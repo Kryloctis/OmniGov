@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptDiscount
+namespace LFS.Views.Manage.RptDiscount
 {
     partial class frmRptDiscounts
     {
@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnSave.Image = global::LFS.Properties.Resources.button_rounded_add_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -134,7 +134,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";

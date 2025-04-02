@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.CashTicketIssuance
+namespace LFS.Views.Transactions.CashTicketIssuance
 {
     public partial class frmCashTicketEditIssuance : Form
     {

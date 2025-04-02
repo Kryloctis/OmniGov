@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RCI
+namespace LFS.Views.Reports.RCI
 {
     partial class frmRciReport
     {

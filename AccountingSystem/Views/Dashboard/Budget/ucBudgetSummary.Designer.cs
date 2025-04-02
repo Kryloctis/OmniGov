@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
+namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
 {
     partial class ucBudgetSummary
     {

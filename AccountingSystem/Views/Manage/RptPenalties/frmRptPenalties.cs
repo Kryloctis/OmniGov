@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Dashboard;
+using LFS.Views.Dashboard;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace LFS.Views.Manage.RptPenalties
 {
     public partial class frmRptPenalties : Form
     {

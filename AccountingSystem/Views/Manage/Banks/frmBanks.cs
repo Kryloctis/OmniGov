@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Banks
+namespace LFS.Views.Manage.Banks
 {
     public partial class frmBanks : Form
     {

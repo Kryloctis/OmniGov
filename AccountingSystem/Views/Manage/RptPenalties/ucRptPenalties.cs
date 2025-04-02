@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace LFS.Views.Manage.RptPenalties
 {
     public partial class ucRptPenalties : UserControl
     {

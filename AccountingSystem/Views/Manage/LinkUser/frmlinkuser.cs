@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.LinkUser
+namespace LFS.Views.Manage.LinkUser
 {
     public partial class frmLinkUser : Form
     {

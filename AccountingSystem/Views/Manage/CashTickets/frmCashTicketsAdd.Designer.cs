@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.CashTickets
+﻿namespace LFS.Views.Manage.CashTickets
 {
     partial class frmCashTicketsAdd
     {

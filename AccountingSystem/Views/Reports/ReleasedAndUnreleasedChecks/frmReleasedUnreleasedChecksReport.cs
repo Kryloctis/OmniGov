@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
+namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 {
     public partial class frmReleasedUnreleasedChecksReport : Form
     {

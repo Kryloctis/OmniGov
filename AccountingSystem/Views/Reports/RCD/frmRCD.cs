@@ -8,7 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Rcd
+namespace LFS.Views.Reports.Rcd
 {
     public partial class frmRcd : Form
     {

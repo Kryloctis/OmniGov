@@ -1,9 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification;
-using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject;
-using AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
-using AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
+using LFS.Views.Manage.FunctionProgramProject.FunctionalClassification;
+using LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject;
+using LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
+using LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using LFS;
 using MySql.Data.MySqlClient;
 using System;
@@ -12,7 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject
 {
     public partial class frmFunctionProgramProject : Form
     {

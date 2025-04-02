@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
 {
     partial class UcAccountGroup
     {

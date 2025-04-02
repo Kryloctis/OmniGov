@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Reports.TaxClearance
+﻿namespace LFS.Views.Reports.TaxClearance
 {
     partial class frmTaxClearance
     {

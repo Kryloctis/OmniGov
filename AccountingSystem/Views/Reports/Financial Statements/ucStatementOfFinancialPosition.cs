@@ -5,7 +5,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Financial_Statements
+namespace LFS.Views.Reports.Financial_Statements
 {
     public partial class ucStatementOfFinancialPosition : UserControl
     {

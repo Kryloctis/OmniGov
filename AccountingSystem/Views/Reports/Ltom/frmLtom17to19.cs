@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using AccountingSystem.DataSets;
+using LFS.DataSets;
 using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -10,7 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Ltom
+namespace LFS.Views.Reports.Ltom
 {
     public partial class frmLtom17to19 : Form
     {

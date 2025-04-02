@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
+using LFS.DataSets;
 using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -8,7 +8,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Auction
+namespace LFS.Views.Transactions.Auction
 {
     public partial class ucDeclarationOfForfeitureOfDelinquentProperty : UserControl
     {

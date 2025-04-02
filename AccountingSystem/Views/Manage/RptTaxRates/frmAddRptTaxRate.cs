@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptTaxRates
+namespace LFS.Views.Manage.RptTaxRates
 {
     public partial class frmAddRptTaxRate : Form
     {

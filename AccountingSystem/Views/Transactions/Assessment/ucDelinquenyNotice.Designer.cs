@@ -1,5 +1,5 @@
-﻿using AccountingSystem.Views.Transactions.Assessment;
-namespace AccountingSystem.Views.Transactions.Assessment
+﻿using LFS.Views.Transactions.Assessment;
+namespace LFS.Views.Transactions.Assessment
 {
     partial class ucDelinquenyNotice
     {

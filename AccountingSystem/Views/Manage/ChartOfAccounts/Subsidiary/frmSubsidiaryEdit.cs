@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
+namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiaryEdit : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Augmentation
+namespace LFS.Views.Manage.Augmentation
 {
     partial class frmAugmentation
     {
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.Augmentation
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.Image = global::LFS.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Augmentation
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.Image = global::LFS.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Manage.Augmentation
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::LFS.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -186,7 +186,7 @@ namespace AccountingSystem.Views.Manage.Augmentation
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find1;
+            this.btnSearch.Image = global::LFS.Properties.Resources.find1;
             this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSearch.Location = new System.Drawing.Point(731, 12);
             this.btnSearch.Name = "btnSearch";

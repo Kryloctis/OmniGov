@@ -1,14 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Transactions.Payments;
+using LFS.Views.Manage.TaxPayers;
+using LFS.Views.Transactions.Payments;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Biddings
+namespace LFS.Views.Transactions.Biddings
 {
     public partial class frmBiddings : Form
     {

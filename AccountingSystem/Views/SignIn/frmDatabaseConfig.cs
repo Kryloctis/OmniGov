@@ -16,7 +16,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using RadioButton = System.Windows.Forms.RadioButton;
 
-namespace AccountingSystem.Views.SignIn
+namespace LFS.Views.SignIn
 {
     public partial class frmDatabaseConfig : Form
     {

@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
+using LFS.Views.Manage.BudgetAppropriations;
 using LFS;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.SupplementalAppropriations
+namespace LFS.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationsMain : Form
     {

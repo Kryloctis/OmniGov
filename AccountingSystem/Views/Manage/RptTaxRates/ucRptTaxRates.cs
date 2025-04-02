@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptTaxRates
+namespace LFS.Views.Manage.RptTaxRates
 {
     public partial class ucRptTaxRates : UserControl
     {

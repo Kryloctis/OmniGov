@@ -1,7 +1,7 @@
-﻿using AccountingSystem.Views.Manage.LinkUser;
+﻿using LFS.Views.Manage.LinkUser;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.JobOrders
+namespace LFS.Views.Manage.JobOrders
 {
     public partial class ucJobOrder : UserControl
     {

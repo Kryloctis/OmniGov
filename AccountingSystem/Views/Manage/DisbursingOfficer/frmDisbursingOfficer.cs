@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.DisbursingOfficer
+namespace LFS.Views.Manage.DisbursingOfficer
 {
     public partial class frmDisbursingOfficer : Form
     {

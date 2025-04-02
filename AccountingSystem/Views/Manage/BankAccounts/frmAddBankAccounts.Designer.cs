@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BankAccounts
+﻿namespace LFS.Views.Manage.BankAccounts
 {
     partial class frmAddBankAccounts
     {

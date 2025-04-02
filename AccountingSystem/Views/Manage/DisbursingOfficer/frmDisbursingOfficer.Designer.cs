@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.DisbursingOfficer
+namespace LFS.Views.Manage.DisbursingOfficer
 {
     partial class frmDisbursingOfficer
     {

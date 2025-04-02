@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
     public partial class ucFunctionProgramProject : UserControl
     {

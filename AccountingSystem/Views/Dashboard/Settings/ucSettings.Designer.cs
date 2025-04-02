@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Dashboard.Settings
+﻿namespace LFS.Views.Dashboard.Settings
 {
     partial class ucSettings
     {

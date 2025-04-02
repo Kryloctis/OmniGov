@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Auction
+namespace LFS.Views.Transactions.Auction
 {
     public partial class ucAuctionEvents : UserControl
     {

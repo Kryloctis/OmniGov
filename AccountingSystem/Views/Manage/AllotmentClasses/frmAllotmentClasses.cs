@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AllotmentClasses
+namespace LFS.Views.Manage.AllotmentClasses
 {
     public partial class frmAllotmentClasses : Form
     {

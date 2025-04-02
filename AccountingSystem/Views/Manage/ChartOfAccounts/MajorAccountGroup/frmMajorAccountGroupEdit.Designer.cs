@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     partial class frmMajorAccountGroupEdit
     {
@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucMajorAccountGroup1 = new AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup();
+            this.ucMajorAccountGroup1 = new LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

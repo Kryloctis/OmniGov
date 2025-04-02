@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
-using AccountingSystem.DataSets;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using LFS.DataSets;
+using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.AF51_57;
+namespace LFS.Views.Transactions.Payments.AF51_57;
 
 public partial class frmAF51_57 : Form
 {

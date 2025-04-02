@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Biddings
+﻿namespace LFS.Views.Transactions.Biddings
 {
     partial class ucBiddings
     {

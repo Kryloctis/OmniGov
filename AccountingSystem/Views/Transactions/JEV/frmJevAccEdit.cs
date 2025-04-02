@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class frmJevAccEdit : Form
     {

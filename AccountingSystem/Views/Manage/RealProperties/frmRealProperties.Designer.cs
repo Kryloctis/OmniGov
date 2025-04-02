@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.RealProperties
+﻿namespace LFS.Views.Manage.RealProperties
 {
     partial class frmRealProperties
     {

@@ -1,9 +1,9 @@
-﻿using AccountingSystem.Views.Transactions.RCI;
+﻿using LFS.Views.Transactions.RCI;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
+namespace LFS.Views.Transactions.CheckIssuance.Obligations
 
 {
     public partial class frmObligations : Form

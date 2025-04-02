@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Dashboard.Treasury
+﻿namespace LFS.Views.Dashboard.Treasury
 {
     partial class ucTreasury
     {

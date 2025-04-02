@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.SupplementalAppropriations
+namespace LFS.Views.Manage.SupplementalAppropriations
 {
     partial class frmSupplementalAppropriationsEdit
     {
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSupplementalAppropriations1 = new AccountingSystem.Views.Manage.SupplementalAppropriations.ucSupplementalAppropriations();
+            this.ucSupplementalAppropriations1 = new LFS.Views.Manage.SupplementalAppropriations.ucSupplementalAppropriations();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnOk = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // 
             // btnOk
             // 
-            this.btnOk.Image = global::AccountingSystem.Properties.Resources.ok14px;
+            this.btnOk.Image = global::LFS.Properties.Resources.ok14px;
             this.btnOk.Location = new System.Drawing.Point(350, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);

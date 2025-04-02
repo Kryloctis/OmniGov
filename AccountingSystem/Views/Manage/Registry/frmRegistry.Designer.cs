@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.Registry
+﻿namespace LFS.Views.Manage.Registry
 {
     partial class frmRegistry
     {

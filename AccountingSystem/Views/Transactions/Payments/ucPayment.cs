@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
 
-namespace AccountingSystem.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     public partial class ucPayment : UserControl
     {

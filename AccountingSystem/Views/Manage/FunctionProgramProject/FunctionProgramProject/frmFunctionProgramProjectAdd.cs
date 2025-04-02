@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
     public partial class frmFunctionProgramProjectAdd : Form
     {

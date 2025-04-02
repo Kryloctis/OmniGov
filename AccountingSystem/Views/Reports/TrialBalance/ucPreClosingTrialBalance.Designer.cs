@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.TrialBalance
+namespace LFS.Views.Reports.TrialBalance
 {
     partial class ucPreClosingTrialBalance
     {

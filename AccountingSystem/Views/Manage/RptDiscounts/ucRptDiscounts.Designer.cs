@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptDiscount
+namespace LFS.Views.Manage.RptDiscount
 {
     partial class ucRptDiscounts
     {

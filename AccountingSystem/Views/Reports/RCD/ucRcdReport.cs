@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
+using LFS.DataSets;
 using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Rcd
+namespace LFS.Views.Reports.Rcd
 {
     public partial class ucRcdReport : UserControl
     {

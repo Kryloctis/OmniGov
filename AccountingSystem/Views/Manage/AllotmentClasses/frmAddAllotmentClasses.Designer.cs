@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.AllotmentClasses
+namespace LFS.Views.Manage.AllotmentClasses
 {
     partial class frmAddAllotmentClasses
     {

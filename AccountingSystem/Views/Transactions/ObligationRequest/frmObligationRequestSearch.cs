@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestSearch : Form
     {

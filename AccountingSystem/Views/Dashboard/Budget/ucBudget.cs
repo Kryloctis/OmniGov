@@ -1,14 +1,14 @@
-﻿using AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary;
-using AccountingSystem.Views.Manage.AllotmentRelease;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Transactions.ObligationRequest;
+﻿using LFS.Views.Dashboard.BudgetDashboard.BudgetSummary;
+using LFS.Views.Manage.AllotmentRelease;
+using LFS.Views.Manage.BudgetAppropriations;
+using LFS.Views.Transactions.ObligationRequest;
 using System;
 using System.Windows.Forms;
-using AccountingSystem.Views.Reports.Saaob;
-using AccountingSystem.Views.Reports.Saaobb;
+using LFS.Views.Reports.Saaob;
+using LFS.Views.Reports.Saaobb;
 using LFS;
 
-namespace AccountingSystem.Views.Dashboard.Budget
+namespace LFS.Views.Dashboard.Budget
 {
     public partial class ucBudget : UserControl
     {

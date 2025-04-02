@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AllotmentRelease
+namespace LFS.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseSearch : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Banks
+namespace LFS.Views.Manage.Banks
 {
     partial class frmAddBanks
     {

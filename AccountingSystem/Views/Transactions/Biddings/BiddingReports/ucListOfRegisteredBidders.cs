@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.DataSets;
+using LFS.DataSets;
 using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
+namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucListOfRegisteredBidders : UserControl
     {

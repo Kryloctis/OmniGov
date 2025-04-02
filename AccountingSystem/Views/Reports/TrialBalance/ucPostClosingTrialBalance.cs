@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.TrialBalance
+namespace LFS.Views.Reports.TrialBalance
 {
     public partial class ucPostClosingTrialBalance : UserControl
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     partial class frmObligationRequestEdit
     {
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
+            this.ucObligationRequest1 = new LFS.Views.Transactions.ObligationRequest.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnOk
             // 
-            this.btnOk.Image = global::AccountingSystem.Properties.Resources.ok14px;
+            this.btnOk.Image = global::LFS.Properties.Resources.ok14px;
             this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.Location = new System.Drawing.Point(391, 3);
             this.btnOk.Name = "btnOk";

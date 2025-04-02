@@ -8,7 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users.List
 {
     public partial class ucUsers : UserControl
     {

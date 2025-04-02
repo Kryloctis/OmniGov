@@ -1,8 +1,8 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Augmentation;
-using AccountingSystem.Views.Manage.Realignment;
-using AccountingSystem.Views.Manage.SupplementalAppropriations;
+using LFS.Views.Manage.Augmentation;
+using LFS.Views.Manage.Realignment;
+using LFS.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using LFS;
@@ -13,7 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.BudgetAppropriations
+namespace LFS.Views.Manage.BudgetAppropriations
 {
     public partial class frmBudgetAppropriations : Form
     {

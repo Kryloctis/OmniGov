@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.CollectingOfficer
+namespace LFS.Views.Manage.CollectingOfficer
 {
     partial class frmCollectingOfficer
     {

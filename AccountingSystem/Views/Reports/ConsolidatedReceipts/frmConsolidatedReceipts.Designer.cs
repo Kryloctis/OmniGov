@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
+namespace LFS.Views.Reports.ConsolidatedReceipts
 {
     partial class frmConsolidatedReceipts
     {

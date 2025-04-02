@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
+namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiaryAdd : Form
     {

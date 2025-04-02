@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dialogs
+namespace LFS.Views.Dialogs
 {
     public partial class dialogPayment : Form
     {

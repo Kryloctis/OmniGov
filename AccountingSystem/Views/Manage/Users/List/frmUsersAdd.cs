@@ -1,11 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Registry;
+using LFS.Views.Manage.Registry;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users.List
 {
     public partial class frmUsersAdd : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject
 {
     partial class frmFunctionProgramProject
     {

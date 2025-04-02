@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Reports.Journals
+﻿namespace LFS.Views.Reports.Journals
 {
     partial class ucCashDisbursementJrnlReport
     {

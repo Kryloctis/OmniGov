@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
+namespace LFS.Views.Transactions.CheckIssuance.Obligations
 {
     partial class frmObligations
     {

@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BeginningBalances;
-using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using LFS.Views.Manage.BeginningBalances;
+using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
+namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     public partial class frmBeginningBalanceEdit : Form
     {

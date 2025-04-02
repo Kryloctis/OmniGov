@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Receipts
+namespace LFS.Views.Manage.Receipts
 {
     public partial class frmReceiptsAdd : Form
     {

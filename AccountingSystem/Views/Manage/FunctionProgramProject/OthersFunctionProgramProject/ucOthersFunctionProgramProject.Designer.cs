@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
+namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     partial class ucOthersFunctionProgramProject
     {

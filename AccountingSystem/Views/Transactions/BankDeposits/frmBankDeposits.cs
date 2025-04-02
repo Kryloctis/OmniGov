@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.BankDeposits
+namespace LFS.Views.Transactions.BankDeposits
 {
     public partial class frmBankDeposits : Form
     {

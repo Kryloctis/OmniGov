@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BusinessCategories
+﻿namespace LFS.Views.Manage.BusinessCategories
 {
     partial class frmEditBusinessCategories
     {
@@ -32,7 +32,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucBusinessCategories1 = new AccountingSystem.Views.Manage.BusinessCategories.ucBusinessCategories();
+            this.ucBusinessCategories1 = new LFS.Views.Manage.BusinessCategories.ucBusinessCategories();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

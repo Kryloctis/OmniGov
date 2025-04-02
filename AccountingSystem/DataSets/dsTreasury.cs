@@ -2,66 +2,66 @@
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }
 
-namespace AccountingSystem.DataSets
+namespace LFS.DataSets
 {
 }

@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.BeginningBalances
+namespace LFS.Views.Manage.BeginningBalances
 {
     public partial class UcBeginningBalances : UserControl
     {

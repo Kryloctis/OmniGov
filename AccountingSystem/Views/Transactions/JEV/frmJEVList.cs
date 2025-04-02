@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Dashboard;
+using LFS.Views.Dashboard;
 using LFS;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class frmJevList : Form
     {

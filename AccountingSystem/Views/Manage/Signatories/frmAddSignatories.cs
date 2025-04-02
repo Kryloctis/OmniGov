@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Signatories
+namespace LFS.Views.Manage.Signatories
 {
     public partial class frmAddSignatories : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.DatabaseSynchronization
+﻿namespace LFS.Views.Manage.DatabaseSynchronization
 {
     partial class frmDatabaseSynchronization
     {
@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
-            this.ucDatabaseSynchronization1 = new AccountingSystem.Views.Manage.DatabaseSynchronization.ucDatabaseSynchronization();
+            this.ucDatabaseSynchronization1 = new LFS.Views.Manage.DatabaseSynchronization.ucDatabaseSynchronization();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 

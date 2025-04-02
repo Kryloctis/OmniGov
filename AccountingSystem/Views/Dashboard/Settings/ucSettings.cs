@@ -1,23 +1,23 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.AccountableForm;
-using AccountingSystem.Views.Manage.AllotmentClasses;
-using AccountingSystem.Views.Manage.BankAccounts;
-using AccountingSystem.Views.Manage.Banks;
-using AccountingSystem.Views.Manage.Barangay;
-using AccountingSystem.Views.Manage.FunctionProgramProject;
-using AccountingSystem.Views.Manage.Funds;
-using AccountingSystem.Views.Manage.Registry;
-using AccountingSystem.Views.Manage.RptDiscount;
-using AccountingSystem.Views.Manage.RptPenalties;
-using AccountingSystem.Views.Manage.RptTaxRates;
-using AccountingSystem.Views.Manage.Signatories;
-using AccountingSystem.Views.Manage.Users.List;
-using AccountingSystem.Views.Manage.Users.Roles;
+using LFS.Views.Manage.AccountableForm;
+using LFS.Views.Manage.AllotmentClasses;
+using LFS.Views.Manage.BankAccounts;
+using LFS.Views.Manage.Banks;
+using LFS.Views.Manage.Barangay;
+using LFS.Views.Manage.FunctionProgramProject;
+using LFS.Views.Manage.Funds;
+using LFS.Views.Manage.Registry;
+using LFS.Views.Manage.RptDiscount;
+using LFS.Views.Manage.RptPenalties;
+using LFS.Views.Manage.RptTaxRates;
+using LFS.Views.Manage.Signatories;
+using LFS.Views.Manage.Users.List;
+using LFS.Views.Manage.Users.Roles;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.Settings
+namespace LFS.Views.Dashboard.Settings
 {
     public partial class ucSettings : UserControl
     {

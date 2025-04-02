@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptDiscount
+namespace LFS.Views.Manage.RptDiscount
 {
     public partial class frmAddRptDiscount : Form
     {

@@ -8,7 +8,7 @@ using System.Data;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
-namespace AccountingSystem.Views.Reports.Cashbook
+namespace LFS.Views.Reports.Cashbook
 {
     public partial class frmCashbook : Form
     {

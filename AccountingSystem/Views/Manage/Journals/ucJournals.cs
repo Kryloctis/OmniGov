@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals
+namespace LFS.Views.Manage.Journals
 {
     public partial class ucJournals : UserControl
     {

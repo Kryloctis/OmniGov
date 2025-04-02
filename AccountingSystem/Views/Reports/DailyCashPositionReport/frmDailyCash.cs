@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using ZstdSharp.Unsafe;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AccountingSystem.Views.Reports.DailyCashPositionReport
+namespace LFS.Views.Reports.DailyCashPositionReport
 {
     public partial class frmDailyCash : Form
     {

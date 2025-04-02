@@ -1,11 +1,11 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Transactions.JEV;
+using LFS.Views.Transactions.JEV;
 using LFS;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard
+namespace LFS.Views.Dashboard
 {
     public partial class ucJevDashboard : UserControl
     {

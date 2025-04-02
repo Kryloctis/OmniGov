@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.BurialPermit
+namespace LFS.Views.Transactions.Payments.BurialPermit
 {
     public partial class frmBurialPermit : Form
     {

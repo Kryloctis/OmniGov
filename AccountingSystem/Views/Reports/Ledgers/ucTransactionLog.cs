@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Ledgers
+namespace LFS.Views.Reports.Ledgers
 {
     public partial class ucTransactionLog : UserControl
     {

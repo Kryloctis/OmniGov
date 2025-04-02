@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     public partial class frmFunctionalClassificationServiceAdd : Form
     {

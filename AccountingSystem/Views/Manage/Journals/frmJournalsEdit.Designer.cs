@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Journals
+namespace LFS.Views.Manage.Journals
 {
     partial class frmJournalsEdit
     {

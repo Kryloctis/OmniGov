@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptTaxRates
+namespace LFS.Views.Manage.RptTaxRates
 {
     partial class frmAddRptTaxRate
     {
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucRptTaxRates1 = new AccountingSystem.Views.Manage.RptTaxRates.ucRptTaxRates();
+            this.ucRptTaxRates1 = new LFS.Views.Manage.RptTaxRates.ucRptTaxRates();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

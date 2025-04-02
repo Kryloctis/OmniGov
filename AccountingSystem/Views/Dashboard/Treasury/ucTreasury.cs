@@ -1,31 +1,31 @@
-﻿using AccountingSystem.Views.Manage.CashTickets;
-using AccountingSystem.Views.Manage.CollectingOfficer;
-using AccountingSystem.Views.Manage.DisbursingOfficer;
-using AccountingSystem.Views.Manage.FeesChargesConfig;
-using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Manage.Receipts;
-using AccountingSystem.Views.Manage.TaxPayers;
-using AccountingSystem.Views.Transactions.Assessment;
-using AccountingSystem.Views.Transactions.Auction;
-using AccountingSystem.Views.Transactions.BankDeposits;
-using AccountingSystem.Views.Transactions.Biddings;
-using AccountingSystem.Views.Transactions.CashTicketIssuance;
-using AccountingSystem.Views.Transactions.Payments;
-using AccountingSystem.Views.Transactions.Payments.AF51_57;
-using AccountingSystem.Views.Transactions.Payments.BurialPermit;
-using AccountingSystem.Views.Transactions.Payments.CattleOwnership;
-using AccountingSystem.Views.Transactions.Payments.CattleTransferOfOwnership;
-using AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate;
-using AccountingSystem.Views.Transactions.Payments.MarriageLicense;
-using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
-using AccountingSystem.Views.Transactions.RCI;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
-using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
+﻿using LFS.Views.Manage.CashTickets;
+using LFS.Views.Manage.CollectingOfficer;
+using LFS.Views.Manage.DisbursingOfficer;
+using LFS.Views.Manage.FeesChargesConfig;
+using LFS.Views.Manage.RealProperties;
+using LFS.Views.Manage.Receipts;
+using LFS.Views.Manage.TaxPayers;
+using LFS.Views.Transactions.Assessment;
+using LFS.Views.Transactions.Auction;
+using LFS.Views.Transactions.BankDeposits;
+using LFS.Views.Transactions.Biddings;
+using LFS.Views.Transactions.CashTicketIssuance;
+using LFS.Views.Transactions.Payments;
+using LFS.Views.Transactions.Payments.AF51_57;
+using LFS.Views.Transactions.Payments.BurialPermit;
+using LFS.Views.Transactions.Payments.CattleOwnership;
+using LFS.Views.Transactions.Payments.CattleTransferOfOwnership;
+using LFS.Views.Transactions.Payments.CommunityTaxCertificate;
+using LFS.Views.Transactions.Payments.MarriageLicense;
+using LFS.Views.Transactions.Payments.PaymentHistory;
+using LFS.Views.Transactions.RCI;
+using LFS.Views.Transactions.ReceiptsIssued;
+using LFS.Views.Transactions.ReleasedAndUnReleasedChecks;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.Treasury
+namespace LFS.Views.Dashboard.Treasury
 {
     public partial class ucTreasury : UserControl
     {

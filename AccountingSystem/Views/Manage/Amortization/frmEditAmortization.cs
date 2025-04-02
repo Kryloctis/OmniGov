@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     public partial class frmEditAmortization : Form
     {

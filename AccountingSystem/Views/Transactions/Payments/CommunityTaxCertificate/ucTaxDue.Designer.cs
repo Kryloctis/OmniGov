@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.CommunityTaxCertificate
+﻿namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 {
     partial class ucTaxDue
     {

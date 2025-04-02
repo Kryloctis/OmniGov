@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.DailyCashPositionReport
+namespace LFS.Views.Reports.DailyCashPositionReport
 {
     partial class frmDailyCash
     {

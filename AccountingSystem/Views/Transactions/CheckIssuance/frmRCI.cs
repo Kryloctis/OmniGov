@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.RCI
+namespace LFS.Views.Transactions.RCI
 {
     public partial class frmRCI : Form
     {

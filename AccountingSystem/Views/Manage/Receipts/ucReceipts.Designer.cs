@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Receipts
+namespace LFS.Views.Manage.Receipts
 {
     partial class ucReceipts
     {

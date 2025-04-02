@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.SupplementalAppropriations
+namespace LFS.Views.Manage.SupplementalAppropriations
 {
     partial class ucSupplementalAppropriations
     {

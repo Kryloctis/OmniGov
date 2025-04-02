@@ -1,24 +1,24 @@
-﻿using AccountingSystem.Views.Reports.Cashbook;
-using AccountingSystem.Views.Reports.ConsolidatedReceipts;
-using AccountingSystem.Views.Reports.DailyCashPositionReport;
-using AccountingSystem.Views.Reports.Financial_Statements;
-using AccountingSystem.Views.Reports.Journals;
-using AccountingSystem.Views.Reports.Ledgers;
-using AccountingSystem.Views.Reports.Ltom;
-using AccountingSystem.Views.Reports.Rcd;
-using AccountingSystem.Views.Reports.RCI;
-using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
-using AccountingSystem.Views.Reports.RptReports;
-using AccountingSystem.Views.Reports.Saaob;
-using AccountingSystem.Views.Reports.Saaobb;
-using AccountingSystem.Views.Reports.TaxClearance;
-using AccountingSystem.Views.Reports.TrialBalance;
+﻿using LFS.Views.Reports.Cashbook;
+using LFS.Views.Reports.ConsolidatedReceipts;
+using LFS.Views.Reports.DailyCashPositionReport;
+using LFS.Views.Reports.Financial_Statements;
+using LFS.Views.Reports.Journals;
+using LFS.Views.Reports.Ledgers;
+using LFS.Views.Reports.Ltom;
+using LFS.Views.Reports.Rcd;
+using LFS.Views.Reports.RCI;
+using LFS.Views.Reports.ReleasedAndUnreleasedCheques;
+using LFS.Views.Reports.RptReports;
+using LFS.Views.Reports.Saaob;
+using LFS.Views.Reports.Saaobb;
+using LFS.Views.Reports.TaxClearance;
+using LFS.Views.Reports.TrialBalance;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.Reports
+namespace LFS.Views.Dashboard.Reports
 {
     public partial class ucReports : UserControl
     {

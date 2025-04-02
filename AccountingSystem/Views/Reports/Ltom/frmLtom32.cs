@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Ltom
+namespace LFS.Views.Reports.Ltom
 {
     public partial class frmLtom32 : Form
     {

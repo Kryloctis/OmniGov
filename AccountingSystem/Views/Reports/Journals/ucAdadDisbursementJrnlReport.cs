@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Journals
+namespace LFS.Views.Reports.Journals
 {
     public partial class ucAdadDisbursementJrnlReport : UserControl
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Dashboard.AccountingDashboard
+namespace LFS.Views.Dashboard.AccountingDashboard
 {
     partial class ucJournalsDashboard
     {

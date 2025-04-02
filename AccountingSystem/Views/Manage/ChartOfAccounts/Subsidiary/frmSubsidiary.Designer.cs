@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
+namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     partial class frmSubsidiary
     {
@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnAdd.Image = global::LFS.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -202,7 +202,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -213,7 +213,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -229,7 +229,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnSetBalance
             // 
-            this.btnSetBalance.Image = global::AccountingSystem.Properties.Resources.tool_notebook_filled_money_coins_filled_20px;
+            this.btnSetBalance.Image = global::LFS.Properties.Resources.tool_notebook_filled_money_coins_filled_20px;
             this.btnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSetBalance.Name = "btnSetBalance";

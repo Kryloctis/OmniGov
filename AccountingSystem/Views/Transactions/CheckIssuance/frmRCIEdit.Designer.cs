@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.RCI
+namespace LFS.Views.Transactions.RCI
 {
     partial class frmRCIEdit
     {
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
-            ucrci2 = new AccountingSystem.Views.Transactions.RCI.ucRCI();
+            ucrci2 = new LFS.Views.Transactions.RCI.ucRCI();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 

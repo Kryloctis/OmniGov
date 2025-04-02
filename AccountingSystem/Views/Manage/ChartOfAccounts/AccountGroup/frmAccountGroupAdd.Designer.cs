@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
 {
     partial class frmAccountGroupAdd
     {
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccountGroupAdd));
-            this.ucAccountGroup1 = new AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup.UcAccountGroup();
+            this.ucAccountGroup1 = new LFS.Views.Manage.ChartOfAccounts.AccountGroup.UcAccountGroup();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();

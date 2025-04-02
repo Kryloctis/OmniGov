@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Financial_Statements
+namespace LFS.Views.Reports.Financial_Statements
 {
     public partial class frmFinancialStatements : Form
     {

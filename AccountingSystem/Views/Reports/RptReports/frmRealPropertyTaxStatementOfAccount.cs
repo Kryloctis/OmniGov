@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
-using AccountingSystem.DataSets;
-using AccountingSystem.Views.Manage.RealProperties;
+using LFS.DataSets;
+using LFS.Views.Manage.RealProperties;
 using DocumentFormat.OpenXml.Office.Word;
 using LFS;
 using LFS.Views.Shared;
@@ -12,7 +12,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RptReports
+namespace LFS.Views.Reports.RptReports
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {

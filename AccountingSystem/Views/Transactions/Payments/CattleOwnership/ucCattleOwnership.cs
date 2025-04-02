@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Shared;
+using LFS.Views.Shared;
 using LFS;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Payments.CattleOwnership
+namespace LFS.Views.Transactions.Payments.CattleOwnership
 {
     public partial class ucCattleOwnership : UserControl
     {

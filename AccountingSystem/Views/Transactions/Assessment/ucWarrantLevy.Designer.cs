@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Assessment
+﻿namespace LFS.Views.Transactions.Assessment
 {
     partial class ucWarrantLevy
     {

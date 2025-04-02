@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Reports.Rcd
+﻿namespace LFS.Views.Reports.Rcd
 {
     partial class ucRcdReport
     {

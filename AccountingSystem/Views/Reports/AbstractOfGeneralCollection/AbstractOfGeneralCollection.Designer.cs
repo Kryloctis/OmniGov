@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.GeneralCollection
+namespace LFS.Views.Reports.GeneralCollection
 {
     partial class AbstractOfGeneralCollection
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Users.Roles
+namespace LFS.Views.Manage.Users.Roles
 {
     partial class frmRolesAdd
     {

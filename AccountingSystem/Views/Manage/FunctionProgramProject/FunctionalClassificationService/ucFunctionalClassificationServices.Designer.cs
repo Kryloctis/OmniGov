@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     partial class ucFunctionalClassificationServices
     {

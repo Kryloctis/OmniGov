@@ -9,7 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AccountingSystem.Views.Reports.Journals
+namespace LFS.Views.Reports.Journals
 {
     public partial class ucProcurementReceivedJrnlReport : UserControl
 

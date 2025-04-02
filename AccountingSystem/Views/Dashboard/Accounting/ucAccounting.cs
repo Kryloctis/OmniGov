@@ -1,10 +1,10 @@
-﻿using AccountingSystem.Views.Manage.ChartOfAccounts;
-using AccountingSystem.Views.Manage.Journals;
+﻿using LFS.Views.Manage.ChartOfAccounts;
+using LFS.Views.Manage.Journals;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.Accounting
+namespace LFS.Views.Dashboard.Accounting
 {
     public partial class ucAccounting : UserControl
     {

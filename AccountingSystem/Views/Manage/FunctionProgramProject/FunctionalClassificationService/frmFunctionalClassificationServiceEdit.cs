@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     public partial class frmFunctionalClassificationServiceEdit : Form
     {

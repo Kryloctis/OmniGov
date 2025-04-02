@@ -1,10 +1,10 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.Users.List;
+using LFS.Views.Manage.Users.List;
 using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Users.Roles
+namespace LFS.Views.Manage.Users.Roles
 {
     public partial class frmRolesEdit : Form
     {

@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Users.Roles
+namespace LFS.Views.Manage.Users.Roles
 {
     public partial class ucRoles : UserControl
     {

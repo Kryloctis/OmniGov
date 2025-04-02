@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.AllotmentRelease
+namespace LFS.Views.Manage.AllotmentRelease
 {
     partial class frmAllotmentReleaseMain
     {
@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
+            this.ucAllotmentReleaseMain1 = new LFS.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_20px;
+            this.btnSearch.Image = global::LFS.Properties.Resources.find_20px;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Name = "btnSearch";
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_20px;
+            this.btnCancel.Image = global::LFS.Properties.Resources.symbol_cancel_20px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancel.Name = "btnCancel";

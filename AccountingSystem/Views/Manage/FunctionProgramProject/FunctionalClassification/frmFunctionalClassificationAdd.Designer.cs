@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification
+namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     partial class frmFunctionalClassificationAdd
     {

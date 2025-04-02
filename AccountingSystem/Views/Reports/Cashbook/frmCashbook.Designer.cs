@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.Cashbook
+namespace LFS.Views.Reports.Cashbook
 {
     partial class frmCashbook
     {

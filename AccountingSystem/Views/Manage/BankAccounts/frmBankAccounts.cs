@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.BankAccounts
+namespace LFS.Views.Manage.BankAccounts
 {
     public partial class frmBankAccounts : Form
     {

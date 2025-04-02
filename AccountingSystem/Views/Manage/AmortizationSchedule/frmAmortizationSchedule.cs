@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.AmortizationSchedule;
+using LFS.Views.Manage.AmortizationSchedule;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     public partial class frmAmortizationSchedule : Form
     {

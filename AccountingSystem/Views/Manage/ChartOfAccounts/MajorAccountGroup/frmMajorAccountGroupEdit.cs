@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     public partial class frmMajorAccountGroupEdit : Form
     {

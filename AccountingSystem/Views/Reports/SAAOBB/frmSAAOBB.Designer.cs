@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Reports.Saaobb
+namespace LFS.Views.Reports.Saaobb
 {
     partial class frmSaaobb
     {

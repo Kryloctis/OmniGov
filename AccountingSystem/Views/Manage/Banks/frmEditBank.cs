@@ -3,7 +3,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Banks
+namespace LFS.Views.Manage.Banks
 {
     public partial class frmEditBank : Form
     {

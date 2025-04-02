@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AccountableForm
+namespace LFS.Views.Manage.AccountableForm
 {
     public partial class frmEditAccountableForm : Form
     {

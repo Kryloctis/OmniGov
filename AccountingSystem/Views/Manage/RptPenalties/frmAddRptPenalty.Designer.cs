@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace LFS.Views.Manage.RptPenalties
 {
     partial class frmAddRptPenalty
     {
@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucRptPenalties1 = new AccountingSystem.Views.Manage.RptPenalties.ucRptPenalties();
+            this.ucRptPenalties1 = new LFS.Views.Manage.RptPenalties.ucRptPenalties();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

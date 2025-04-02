@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Dashboard;
-using AccountingSystem.Views.Reports.JEV;
+using LFS.Views.Dashboard;
+using LFS.Views.Reports.JEV;
 using DocumentFormat.OpenXml.Drawing;
 using LFS;
 using System;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Transactions;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     public partial class frmJev : Form
     {

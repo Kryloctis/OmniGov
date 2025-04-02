@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     partial class frmObligationRequestDisapproval
     {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AccountableForm
+namespace LFS.Views.Manage.AccountableForm
 {
     public partial class frmFaceValue : Form
     {

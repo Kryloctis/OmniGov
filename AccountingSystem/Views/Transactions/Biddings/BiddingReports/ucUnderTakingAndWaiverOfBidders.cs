@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 
-namespace AccountingSystem.Views.Transactions.Biddings.BiddingReports
+namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucUnderTakingAndWaiverOfBidders : UserControl
     {

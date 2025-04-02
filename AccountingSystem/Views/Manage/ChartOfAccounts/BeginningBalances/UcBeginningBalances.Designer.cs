@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.BeginningBalances
+namespace LFS.Views.Manage.BeginningBalances
 {
     partial class UcBeginningBalances
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.RptDiscount
+namespace LFS.Views.Manage.RptDiscount
 {
     partial class frmEditRptDiscount
     {
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.ucRptDiscounts1 = new AccountingSystem.Views.Manage.RptDiscount.ucRptDiscounts();
+            this.ucRptDiscounts1 = new LFS.Views.Manage.RptDiscount.ucRptDiscounts();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
+namespace LFS.Views.Transactions.CheckIssuance.Deductions
 {
     partial class frmDeductions
     {

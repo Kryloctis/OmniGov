@@ -4,7 +4,7 @@ using LFS;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     public partial class frmMajorAccountGroupAdd : Form
     {

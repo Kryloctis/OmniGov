@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Barangay
+namespace LFS.Views.Manage.Barangay
 {
     public partial class ucBarangay : UserControl
     {

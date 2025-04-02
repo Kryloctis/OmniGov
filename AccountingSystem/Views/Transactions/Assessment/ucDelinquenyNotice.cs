@@ -10,7 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices.Marshalling;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.Assessment
+namespace LFS.Views.Transactions.Assessment
 {
     public partial class ucDelinquenyNotice : UserControl
     {

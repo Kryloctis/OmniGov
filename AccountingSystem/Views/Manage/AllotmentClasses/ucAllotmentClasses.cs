@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.AllotmentClasses
+namespace LFS.Views.Manage.AllotmentClasses
 {
     public partial class ucAllotmentClasses : UserControl
     {

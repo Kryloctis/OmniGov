@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
-using AccountingSystem.Views.Manage.LinkUser;
+using LFS.Views.Manage.LinkUser;
 using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.DisbursingOfficer
+namespace LFS.Views.Manage.DisbursingOfficer
 {
     public partial class ucDisbursingOfficer : UserControl
     {

@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.RCI;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
+using LFS.Views.Transactions.RCI;
+using LFS.Views.Transactions.ReceiptsIssued;
 using DocumentFormat.OpenXml.Bibliography;
 using LFS;
 using System;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
+namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     public partial class frmReleasedAndUnreleaseChecks : Form
     {

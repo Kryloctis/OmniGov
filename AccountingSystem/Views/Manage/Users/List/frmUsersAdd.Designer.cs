@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users.List
 {
     partial class frmUsersAdd
     {

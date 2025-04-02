@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Dashboard.MyAccount
+namespace LFS.Views.Dashboard.MyAccount
 {
     public partial class ucMyAccount : UserControl
     {

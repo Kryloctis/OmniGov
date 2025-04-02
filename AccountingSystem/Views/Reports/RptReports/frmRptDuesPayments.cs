@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using AccountingSystem.DataSets;
+using LFS.DataSets;
 using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -9,7 +9,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.RptReports
+namespace LFS.Views.Reports.RptReports
 {
     public partial class frmRptDuesPayments : Form
     {

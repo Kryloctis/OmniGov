@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.ObligationRequest
+namespace LFS.Views.Transactions.ObligationRequest
 {
     partial class frmObligationRequestAdd
     {
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
+            this.ucObligationRequest1 = new LFS.Views.Transactions.ObligationRequest.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddToList = new System.Windows.Forms.Button();

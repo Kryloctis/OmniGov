@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.AmortizationSchedule
+namespace LFS.Views.Manage.AmortizationSchedule
 {
     partial class frmAddAmortizationSchedule
     {
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucAmortizationSchedule1 = new AccountingSystem.Views.Manage.Amortization.ucAmortizationSchedule();
+            this.ucAmortizationSchedule1 = new LFS.Views.Manage.Amortization.ucAmortizationSchedule();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(266, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

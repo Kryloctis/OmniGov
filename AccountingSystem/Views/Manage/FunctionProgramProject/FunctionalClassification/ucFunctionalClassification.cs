@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification
+namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     public partial class ucFunctionalClassification : UserControl
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.Journals
+namespace LFS.Views.Reports.Journals
 {
     public partial class ucGenJrnlReport : UserControl
     {

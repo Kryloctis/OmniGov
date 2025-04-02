@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Dialogs
+﻿namespace LFS.Views.Dialogs
 {
     partial class dialogPayment
     {

@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
+﻿namespace LFS.Views.Manage.BusinessAdOnCharges
 {
     partial class frmAddBusinessAddOnCharges
     {
@@ -31,7 +31,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucBusinessAdOnCharges1 = new AccountingSystem.Views.Manage.BusinessAdOnCharges.ucBusinessAddOnCharges();
+            this.ucBusinessAdOnCharges1 = new LFS.Views.Manage.BusinessAdOnCharges.ucBusinessAddOnCharges();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

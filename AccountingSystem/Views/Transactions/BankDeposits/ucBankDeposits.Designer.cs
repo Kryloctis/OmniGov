@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.BankDeposits
+namespace LFS.Views.Transactions.BankDeposits
 {
     partial class ucBankDeposits
     {

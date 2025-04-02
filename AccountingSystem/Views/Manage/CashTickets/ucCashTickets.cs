@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.CashTickets
+namespace LFS.Views.Manage.CashTickets
 {
     public partial class ucCashTickets : UserControl
     {

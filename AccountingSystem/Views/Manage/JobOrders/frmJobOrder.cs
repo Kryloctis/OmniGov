@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.JobOrders
+namespace LFS.Views.Manage.JobOrders
 {
     public partial class frmJobOrder : Form
     {

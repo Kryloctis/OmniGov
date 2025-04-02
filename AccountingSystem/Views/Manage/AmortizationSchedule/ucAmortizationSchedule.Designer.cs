@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Amortization
+namespace LFS.Views.Manage.Amortization
 {
     partial class ucAmortizationSchedule
     {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
+namespace LFS.Views.Manage.Journals.DefaultAccounts
 {
     public partial class frmDefaultAccounts : Form
     {

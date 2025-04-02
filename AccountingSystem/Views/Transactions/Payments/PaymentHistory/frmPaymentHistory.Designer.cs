@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.Payments.PaymentHistory
+﻿namespace LFS.Views.Transactions.Payments.PaymentHistory
 {
     partial class frmPaymentHistory
     {

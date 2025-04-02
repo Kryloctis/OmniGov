@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ReturnedReceipts
+namespace LFS.Views.Manage.ReturnedReceipts
 {
     partial class frmReturnedReceipts
     {

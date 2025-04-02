@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Reports.Financial_Statements
+﻿namespace LFS.Views.Reports.Financial_Statements
 {
     partial class frmFinancialStatements
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace AccountingSystem
+namespace LFS
 {
     partial class frmSignIn
     {

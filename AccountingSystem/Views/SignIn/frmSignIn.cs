@@ -1,8 +1,8 @@
 ﻿using ACC.Data;
-using AccountingSystem.Properties;
-using AccountingSystem.Views.Dashboard;
-using AccountingSystem.Views.Help;
-using AccountingSystem.Views.SignIn;
+using LFS.Properties;
+using LFS.Views.Dashboard;
+using LFS.Views.Help;
+using LFS.Views.SignIn;
 using LFS;
 using RPT.Data;
 using System;
@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem
+namespace LFS
 {
     public partial class frmSignIn : Form
     {

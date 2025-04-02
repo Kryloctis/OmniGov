@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Manage.FeesChargesConfig
+﻿namespace LFS.Views.Manage.FeesChargesConfig
 {
     partial class ucFeesChargesClassification
     {
