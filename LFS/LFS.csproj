@@ -14,7 +14,7 @@
 		<PackageIconUrl />
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Copyright>Perzeus Corporation</Copyright>
-		<StartupObject>AccountingSystem.Program</StartupObject>
+		<StartupObject></StartupObject>
 		<DelaySign>false</DelaySign>
 		<AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
