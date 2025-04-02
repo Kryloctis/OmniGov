@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
