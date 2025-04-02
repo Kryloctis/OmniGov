@@ -2,7 +2,6 @@
 using ACC.Domain.Models;
 using LFS.Views.Manage.TaxPayers;
 using LFS.Views.Transactions.Payments;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +26,6 @@ namespace LFS.Views.Transactions.Biddings
             ucBiddings = ucBiddings1;
             ucPayment = ucPayment1;
             ucTaxPayers = ucTaxPayers1;
-
         }
 
         private void TextBoxSearchTaxpayer()
@@ -142,7 +140,6 @@ namespace LFS.Views.Transactions.Biddings
             return amountDue;
         }
 
-
         internal void Update()
         {
             try
@@ -176,7 +173,6 @@ namespace LFS.Views.Transactions.Biddings
             };
 
             return AccFactory.BidRepository().UpdateBidDetails(biddersModel, bidModel);
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -186,7 +182,6 @@ namespace LFS.Views.Transactions.Biddings
                 btnProceedToPayment.Text = "Update";
                 UpdateBidding();
             }
-
 
             if (ucBiddings.ValidateInput() && ucTaxPayers.ValidateChildren())
             {
@@ -365,7 +360,6 @@ namespace LFS.Views.Transactions.Biddings
 
                 e.Result = dataTable;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -379,7 +373,6 @@ namespace LFS.Views.Transactions.Biddings
             try
             {
                 Helper.EnableDisableToolStripButtons(dgBiddings, btnEdit, btnDelete);
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -392,7 +385,6 @@ namespace LFS.Views.Transactions.Biddings
             {
                 txtName.TextChanged -= txtName_TextChanged;
                 txtName.PlaceholderText = string.Empty;
-
             }
             else
             {
@@ -424,8 +416,6 @@ namespace LFS.Views.Transactions.Biddings
                     ucTaxPayers.cmbxRepresentative.Text = row["representative_name"].ToString();
                 }
             }
-
         }
-
     }
 }

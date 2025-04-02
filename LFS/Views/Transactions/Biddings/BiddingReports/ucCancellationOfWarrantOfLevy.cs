@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,8 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucCancellationOfWarrantOfLevy : UserControl
     {
-        int warrantOfLevyId;
+        private int warrantOfLevyId;
+
         public ucCancellationOfWarrantOfLevy()
         {
             InitializeComponent();
@@ -80,7 +80,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -111,7 +110,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

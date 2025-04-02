@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucCertificateOfRedemption : UserControl
     {
-
         private int rptAuctionId;
         private int rptId;
 
@@ -55,7 +53,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 int totalProgressCount = tasks.Sum(t => t.Value);
                 int progressCount = 0;
 
-
                 // Fetch LGU Details
                 var lguDetails = Helper.LGUDetails();
                 progressCount += tasks["Fetch LGU Details"];
@@ -76,7 +73,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRpt["barangay_name"], dictRpt["municipality_name"], dictRpt["province_name"]);
                 string kindOfProperty = dictRpt["property_kind"];
                 decimal assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
-
 
                 progressCount += tasks["Generate Bidder and Bidding Information"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -105,9 +101,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
-
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 

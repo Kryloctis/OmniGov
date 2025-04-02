@@ -1,11 +1,9 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -18,7 +16,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
-
         }
 
         internal void OnLoad(int rptAuctionId, int bidderId)
@@ -39,7 +36,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
             // Define tasks and their progress weights
@@ -95,7 +91,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
             try
             {
                 if (e.Cancelled)
@@ -117,7 +112,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.Refresh();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
     }
 }

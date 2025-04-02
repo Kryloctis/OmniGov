@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -10,6 +9,7 @@ namespace LFS.Views.Transactions.Biddings
     {
         internal bool isEdit = false;
         private int? biddingId;
+
         public ucBiddings()
         {
             InitializeComponent();
@@ -39,7 +39,6 @@ namespace LFS.Views.Transactions.Biddings
 
             return true;
         }
-
 
         internal void ResetForm()
         {
@@ -76,6 +75,7 @@ namespace LFS.Views.Transactions.Biddings
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void LoadSelectedRecord(int biddingId)
         {
             var dictBid = AccFactory.BidRepository().GetViewRecordById(biddingId);
@@ -97,7 +97,6 @@ namespace LFS.Views.Transactions.Biddings
             cmbxProperty.ValueMember = "rpt_auction_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
             cmbxProperty.DataSource = auctionProperties;
-
         }
 
         private void LoadAuctionSchedule()
@@ -113,7 +112,6 @@ namespace LFS.Views.Transactions.Biddings
 
         private void nudBidAmount_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void cmbxAuctionSchedule_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -183,6 +181,5 @@ namespace LFS.Views.Transactions.Biddings
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudBidAmount);
         }
-
     }
 }

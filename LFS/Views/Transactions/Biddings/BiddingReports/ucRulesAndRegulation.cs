@@ -1,5 +1,4 @@
-﻿using LFS;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +8,8 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucRulesAndRegulation : UserControl
     {
-        int rptAuctionId;
-        int bidderId;
+        private int rptAuctionId;
+        private int bidderId;
 
         public ucRulesAndRegulation()
         {
@@ -55,7 +54,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-
             progressBar1.Value = e.ProgressPercentage;
         }
 
@@ -63,7 +61,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
         {
             try
             {
-
                 if (e.Cancelled)
                 {
                     reportViewer1.Clear();
@@ -81,7 +78,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

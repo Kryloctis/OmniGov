@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;
@@ -72,6 +71,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
         {
             progressBar1.Value = e.ProgressPercentage;
         }
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             try
@@ -83,7 +83,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
-
 
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom26ListOfRegisteredBidders.rdlc";
@@ -106,7 +105,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

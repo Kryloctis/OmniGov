@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -10,14 +9,15 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucPublicAuctionRegistrationForm : UserControl
     {
-        int auctionId;
-        int bidderId;
+        private int auctionId;
+        private int bidderId;
 
         public ucPublicAuctionRegistrationForm()
         {
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
         }
+
         internal void OnLoad(int auctionId, int bidderId)
         {
             this.auctionId = auctionId;
@@ -49,7 +49,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
             var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
 
-
             var lguDetails = Helper.LGUDetails();
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];
@@ -79,7 +78,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
         {
             try
             {
-
                 if (e.Cancelled)
                 {
                     reportViewer1.Clear();
@@ -97,7 +95,6 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.FullPage;
                 reportViewer1.Refresh();
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
