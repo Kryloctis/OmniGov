@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Journals.DefaultAccounts;
+using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

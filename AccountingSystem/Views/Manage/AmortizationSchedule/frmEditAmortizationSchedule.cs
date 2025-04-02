@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.Amortization;
+using LFS;
 using System;
 using System.Windows.Forms;
 

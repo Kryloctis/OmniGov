@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Transactions.RCI;
+using LFS;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;

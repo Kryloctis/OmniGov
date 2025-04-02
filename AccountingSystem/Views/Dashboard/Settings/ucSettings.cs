@@ -13,6 +13,7 @@ using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
+using LFS;
 using System;
 using System.Windows.Forms;
 

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Data;

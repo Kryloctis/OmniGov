@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Views.Transactions.RCI;
+using LFS;
 using System;
 using System.Windows.Forms;
 

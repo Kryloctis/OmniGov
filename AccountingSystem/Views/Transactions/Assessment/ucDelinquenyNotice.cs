@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using AccountingSystem.Views.Shared;
+using LFS;
+using LFS.Views.Shared;
 using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;

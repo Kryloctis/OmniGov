@@ -6,6 +6,7 @@ using System;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.Saaob;
 using AccountingSystem.Views.Reports.Saaobb;
+using LFS;
 
 namespace AccountingSystem.Views.Dashboard.Budget
 {

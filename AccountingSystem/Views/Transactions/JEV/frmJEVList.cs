@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Dashboard;
+using LFS;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;

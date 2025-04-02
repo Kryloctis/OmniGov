@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using LFS;
 using System;
 using System.Data;
 using System.Windows.Forms;

@@ -1,8 +1,9 @@
 ﻿using ACC.Data;
 using AccountingSystem.DataSets;
 using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Shared;
 using DocumentFormat.OpenXml.Office.Word;
+using LFS;
+using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using MySqlX.XDevAPI.Common;
 using RPT.Data;

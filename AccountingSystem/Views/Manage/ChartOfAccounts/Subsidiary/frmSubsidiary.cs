@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
+using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

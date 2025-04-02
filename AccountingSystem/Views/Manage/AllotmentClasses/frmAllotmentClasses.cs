@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS;
 using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using System;
 using System.Collections.Generic;

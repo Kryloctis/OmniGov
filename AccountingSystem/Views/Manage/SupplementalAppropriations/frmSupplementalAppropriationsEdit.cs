@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LFS;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations

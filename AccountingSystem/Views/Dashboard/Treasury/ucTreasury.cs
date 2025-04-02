@@ -21,6 +21,7 @@ using AccountingSystem.Views.Transactions.Payments.PaymentHistory;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
+using LFS;
 using System;
 using System.Windows.Forms;
 

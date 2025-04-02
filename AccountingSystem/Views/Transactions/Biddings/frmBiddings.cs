@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Transactions.Payments;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.Data;

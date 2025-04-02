@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

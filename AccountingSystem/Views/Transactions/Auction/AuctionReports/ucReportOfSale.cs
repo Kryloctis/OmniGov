@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;

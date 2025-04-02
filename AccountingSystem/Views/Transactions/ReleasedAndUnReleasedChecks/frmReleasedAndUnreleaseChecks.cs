@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using DocumentFormat.OpenXml.Bibliography;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

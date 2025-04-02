@@ -1,3 +1,7 @@
+namespace LFS
+{
+}
+
 namespace AccountingSystem
 {
 }

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AccountingSystem
+namespace LFS
 {
     public class HelperLoadRecords
     {
@@ -1628,7 +1628,7 @@ namespace AccountingSystem
                     //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = supplementalAppropriation + rowAppropriationAmount;
 
-                    decimal appropriationBalance = (supplementalAppropriation + rowAppropriationAmount) - obligations;
+                    decimal appropriationBalance = supplementalAppropriation + rowAppropriationAmount - obligations;
 
                     decimal allotmentBalance = allotments - obligations;
 
@@ -1661,7 +1661,7 @@ namespace AccountingSystem
                     {
                         Color backgroundColor = Color.White;
 
-                        row.DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+                        row.DefaultCellStyle.Font = new Font(Control.DefaultFont, FontStyle.Bold);
                         row.DefaultCellStyle.BackColor = backgroundColor;
                         row.HeaderCell.Style.BackColor = backgroundColor;
                     }

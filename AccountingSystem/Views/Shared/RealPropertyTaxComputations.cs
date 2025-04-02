@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using System;
 
-namespace AccountingSystem.Views.Shared
+namespace LFS.Views.Shared
 {
     public static class RealPropertyTaxComputations
     {

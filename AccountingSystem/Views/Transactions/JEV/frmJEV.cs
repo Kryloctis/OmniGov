@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.JEV;
 using DocumentFormat.OpenXml.Drawing;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.DataSets;
-using AccountingSystem.Views.Shared;
+using LFS;
+using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;

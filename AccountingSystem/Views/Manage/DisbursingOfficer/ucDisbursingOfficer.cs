@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.LinkUser;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

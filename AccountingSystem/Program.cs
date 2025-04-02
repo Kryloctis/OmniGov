@@ -1,7 +1,8 @@
+using AccountingSystem;
 using System;
 using System.Windows.Forms;
 
-namespace AccountingSystem
+namespace LFS
 {
     internal static class Program
     {

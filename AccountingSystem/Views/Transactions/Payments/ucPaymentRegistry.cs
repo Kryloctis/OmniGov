@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Manage.TaxPayers;
+using LFS;
 using System;
 using System.ComponentModel;
 using System.Data;

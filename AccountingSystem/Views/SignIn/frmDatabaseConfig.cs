@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Presentation;
+using LFS;
 using Microsoft.Reporting.WinForms;
 using RPT.Data;
 using System;

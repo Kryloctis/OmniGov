@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS;
 using Microsoft.Reporting.WinForms;
 using Microsoft.ReportingServices.Interfaces;
 using Org.BouncyCastle.Asn1.X509.SigI;

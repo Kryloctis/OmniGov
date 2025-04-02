@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

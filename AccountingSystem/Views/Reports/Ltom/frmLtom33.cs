@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Transactions.Biddings.BiddingReports;
+using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;

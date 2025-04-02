@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Transactions.JEV;
+using LFS;
 using System;
 using System.Data;
 using System.Windows.Forms;

@@ -2,6 +2,7 @@
 using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.FeesChargesConfig.Classification;
 using AccountingSystem.Views.Manage.FeesChargesConfig.FeesCharges;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

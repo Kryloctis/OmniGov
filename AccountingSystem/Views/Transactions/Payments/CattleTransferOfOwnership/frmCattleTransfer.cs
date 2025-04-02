@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using AccountingSystem.Views.Transactions.Payments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
+using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

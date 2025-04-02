@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
 
-namespace AccountingSystem
+namespace LFS
 {
     public static class Helper
     {
@@ -124,7 +124,7 @@ namespace AccountingSystem
                         {
                             strDecimalPart = "0";
                         }
-                        if ((strDecimalPart.Length == 1) && (strDecimalPart[0] != '0'))
+                        if (strDecimalPart.Length == 1 && strDecimalPart[0] != '0')
                         {
                             strDecimalPart = strDecimalPart + '0';
                         }
@@ -278,7 +278,7 @@ namespace AccountingSystem
 
         #region DataGrid Default Styles
 
-        public static void DatagridDefaultStyle(DataGridView dgv, Boolean Fill = false)
+        public static void DatagridDefaultStyle(DataGridView dgv, bool Fill = false)
         {
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
@@ -302,7 +302,7 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        public static void DatagridEditableRowStyle(DataGridView dgv, Boolean Fill = false)
+        public static void DatagridEditableRowStyle(DataGridView dgv, bool Fill = false)
         {
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
@@ -674,7 +674,7 @@ namespace AccountingSystem
 
                 return dictUser;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { MessageBoxError(ex.Message); }
             return dictUser;
         }
 

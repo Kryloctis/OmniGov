@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using LFS;
 using System;
 using System.Windows.Forms;
 
