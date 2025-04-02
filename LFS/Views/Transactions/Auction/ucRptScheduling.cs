@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -37,7 +36,6 @@ namespace LFS.Views.Transactions.Auction
 
             if (isEdit) LoadSelectedRecord(rptScheduleId.Value); else ResetForm();
             errorProvider1.Clear();
-
         }
 
         internal bool Save(ref bool isEdit)
@@ -105,7 +103,6 @@ namespace LFS.Views.Transactions.Auction
 
         private void ResetForm()
         {
-
         }
 
         private RptAuctionModel RptAuctionModel()
@@ -144,7 +141,6 @@ namespace LFS.Views.Transactions.Auction
 
         private void ucRptScheduling_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

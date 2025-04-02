@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -90,6 +89,7 @@ namespace LFS.Views.Transactions.Auction
                     decimal total = 0;
 
                     #region Computation
+
                     var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
 
                     foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
@@ -119,7 +119,8 @@ namespace LFS.Views.Transactions.Auction
                         totalTaxDue = basicTaxDue + sefTaxDue;
                         total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
                     }
-                    #endregion
+
+                    #endregion Computation
 
                     newRow["declared_owner"] = taxPayer;
                     newRow["tax_declaration_number"] = completeArpNo;
@@ -137,7 +138,6 @@ namespace LFS.Views.Transactions.Auction
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -158,18 +158,15 @@ namespace LFS.Views.Transactions.Auction
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
                 report.DataSources.Clear();
-
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
-
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -178,8 +175,6 @@ namespace LFS.Views.Transactions.Auction
                     new ReportParameter("paramPlaceOfAuction", location),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
                     new ReportParameter("paramSignatory", string.Empty),
-
-
                 };
 
                 report.DataSources.Add(new ReportDataSource("dsNoticeOfAuctionSaleOfDelinquentProperty", dataTable));
@@ -190,7 +185,6 @@ namespace LFS.Views.Transactions.Auction
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

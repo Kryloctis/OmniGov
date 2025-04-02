@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +21,6 @@ namespace LFS.Views.Transactions.Auction
 
             ucAuctionEvents = ucAuctionEvents2;
             ucRptScheduling = ucRptScheduling2;
-
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -131,8 +129,6 @@ namespace LFS.Views.Transactions.Auction
             ucAuctionEvents.OnLoad(true, auctionId);
         }
 
-
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveAuction();
@@ -191,7 +187,6 @@ namespace LFS.Views.Transactions.Auction
             {
                 Helper.EnableDisableToolStripButtons(dgAuctionList, btnEdit, btnDelete);
                 btnRptSchedules.Enabled = btnEdit.Enabled;
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -272,14 +267,12 @@ namespace LFS.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         private void TabPageController(TabPage tabPageRoute)
         {
             try
             {
                 tabControl1.SelectedTab = tabPageRoute;
                 Text = $"Transactions > {tabPageRoute.Text} ";
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -314,13 +307,11 @@ namespace LFS.Views.Transactions.Auction
                 int rptScheduleId = Convert.ToInt32(dgRptSchedule.Rows[index].Cells["rpt_auction_id"].Value);
                 ucRptScheduling.OnLoad(true, rptScheduleId);
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-
             TabPageController(tabPageListOfRptSchedule);
         }
 
@@ -337,7 +328,6 @@ namespace LFS.Views.Transactions.Auction
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         #region Rpt Auction Schedule
 
@@ -478,9 +468,6 @@ namespace LFS.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion
-
-
-
+        #endregion Rpt Auction Schedule
     }
 }

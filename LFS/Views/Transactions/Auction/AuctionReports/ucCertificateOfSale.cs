@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -61,7 +60,6 @@ namespace LFS.Views.Transactions.Auction
         {
             try
             {
-
                 var parameters = ((int auctionId, int rptId))e.Argument;
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
 
@@ -72,7 +70,6 @@ namespace LFS.Views.Transactions.Auction
                 var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
-
 
                 foreach (DataRow drDelinquentProperty in dtDelinquentProperty.Rows)
                 {
@@ -113,9 +110,7 @@ namespace LFS.Views.Transactions.Auction
                 }
 
                 e.Result = dtRptAuctionProperties;
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -141,7 +136,6 @@ namespace LFS.Views.Transactions.Auction
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
-
 
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
                 string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";
@@ -177,7 +171,6 @@ namespace LFS.Views.Transactions.Auction
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

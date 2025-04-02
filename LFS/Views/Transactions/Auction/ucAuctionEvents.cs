@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -11,6 +10,7 @@ namespace LFS.Views.Transactions.Auction
     {
         private int? auctionId;
         private bool isEdit;
+
         public ucAuctionEvents()
         {
             InitializeComponent();
@@ -42,7 +42,6 @@ namespace LFS.Views.Transactions.Auction
             dtpStartDate.Value = Convert.ToDateTime(dictAuction["start_date"]);
             dtpEndDate.Value = Convert.ToDateTime(dictAuction["end_date"]);
             txtLocation.Text = dictAuction["location"];
-
         }
 
         internal void ResetForm()
@@ -51,6 +50,7 @@ namespace LFS.Views.Transactions.Auction
             dtpEndDate.Value = Helper.GetCurrentDate();
             txtLocation.Text = string.Empty;
         }
+
         internal bool Save(ref bool isEdit)
         {
             isEdit = this.isEdit;
@@ -63,6 +63,7 @@ namespace LFS.Views.Transactions.Auction
 
             return isEdit ? AccFactory.AuctionRepository().Update(AuctionModel()) : AccFactory.AuctionRepository().Insert(AuctionModel());
         }
+
         private AuctionModel AuctionModel()
         {
             var model = new AuctionModel()
@@ -80,9 +81,7 @@ namespace LFS.Views.Transactions.Auction
 
         private void ucAuction_Load(object sender, EventArgs e)
         {
-
         }
-
 
         #region Validation
 
@@ -95,7 +94,6 @@ namespace LFS.Views.Transactions.Auction
         {
             var startDate = dtpStartDate.Value;
             var endDate = dtpEndDate.Value;
-
 
             bool invalidDate = endDate < startDate;
 
@@ -116,8 +114,7 @@ namespace LFS.Views.Transactions.Auction
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLocation, "Location");
         }
 
-
-        #endregion
+        #endregion Validation
 
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {

@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -12,7 +11,6 @@ namespace LFS.Views.Transactions.Auction
 {
     public partial class ucDeclarationOfForfeitureOfDelinquentProperty : UserControl
     {
-
         private int auctionId;
         private int rptId;
 
@@ -58,7 +56,6 @@ namespace LFS.Views.Transactions.Auction
             return (basicPenalty, sefPenalty);
         }
 
-
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
@@ -73,7 +70,6 @@ namespace LFS.Views.Transactions.Auction
                 var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
-
 
                 foreach (DataRow drDelinquentProperty in dtDelinquentProperty.Rows)
                 {
@@ -115,7 +111,6 @@ namespace LFS.Views.Transactions.Auction
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -126,7 +121,6 @@ namespace LFS.Views.Transactions.Auction
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
             try
             {
                 if (e.Cancelled)
@@ -140,7 +134,6 @@ namespace LFS.Views.Transactions.Auction
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
                 report.DataSources.Clear();
-
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
@@ -167,7 +160,6 @@ namespace LFS.Views.Transactions.Auction
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -11,7 +10,6 @@ namespace LFS.Views.Transactions.Auction
 {
     public partial class ucReportOfSale : UserControl
     {
-
         private int auctionId;
 
         public ucReportOfSale()
@@ -50,14 +48,11 @@ namespace LFS.Views.Transactions.Auction
                 int totalProgressCount = 0;
                 int progressCount = 0;
 
-
                 progressCount++;
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 e.Result = ReportData();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -77,18 +72,15 @@ namespace LFS.Views.Transactions.Auction
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
-
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];
-
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -103,12 +95,8 @@ namespace LFS.Views.Transactions.Auction
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
     }
 }

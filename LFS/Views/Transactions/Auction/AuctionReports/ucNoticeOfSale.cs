@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -27,7 +26,6 @@ namespace LFS.Views.Transactions.Auction
             this.propertyId = propertyId;
             LoadReport();
         }
-
 
         private void LoadReport()
         {
@@ -58,7 +56,6 @@ namespace LFS.Views.Transactions.Auction
             return (basicPenalty, sefPenalty);
         }
 
-
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
@@ -88,6 +85,7 @@ namespace LFS.Views.Transactions.Auction
                     decimal total = 0;
 
                     #region Computation
+
                     //var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(propertyId);
                     var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
 
@@ -118,17 +116,15 @@ namespace LFS.Views.Transactions.Auction
                         totalTaxDue = basicTaxDue + sefTaxDue;
                         total = totalTaxDue + (penalties.basicPenalty + penalties.sefPenalty);
 
-
                         newRow["tax_year"] = assessmentYear;
                         newRow["basic_tax"] = basicTaxDue;
                         newRow["basic_penalty"] = penalties.basicPenalty;
                         newRow["sef_tax"] = sefTaxDue;
                         newRow["sef_penalty"] = penalties.sefPenalty;
                         newRow["total_amount"] = total;
-
                     }
-                    #endregion
 
+                    #endregion Computation
 
                     dtRptAuctionProperties.Rows.Add(newRow);
                     progressCount++;
@@ -137,7 +133,6 @@ namespace LFS.Views.Transactions.Auction
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -148,7 +143,6 @@ namespace LFS.Views.Transactions.Auction
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
             try
             {
                 if (e.Cancelled)
@@ -159,11 +153,9 @@ namespace LFS.Views.Transactions.Auction
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
                 var report = reportViewer1.LocalReport;
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom24NoticeSale.rdlc";
                 report.DataSources.Clear();
-
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
@@ -191,10 +183,7 @@ namespace LFS.Views.Transactions.Auction
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
-
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
