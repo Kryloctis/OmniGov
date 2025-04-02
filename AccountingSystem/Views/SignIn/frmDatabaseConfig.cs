@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.SignIn
                 if (radioButton.Checked)
                 {
                     var radTag = radioButton.Tag;
-                    var selectedModel = Helper.LguServerModels().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, LfsInstance = m.LfsInstance, RpmInstance = m.RpmInstance, Emblem = m.Emblem }).First();
+                    var selectedModel = Helper.LguServerModels().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, lfsInstance = m.lfsInstance, rpmInstance = m.rpmInstance, Emblem = m.Emblem }).First();
                     Helper.selectedServerModel = selectedModel;
                     return true;
                 }
@@ -119,10 +119,11 @@ namespace AccountingSystem.Views.SignIn
                 if (SetSelectedServer())
                 {
                     _frmSignIn.lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}";
-                    AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.LfsInstance);
-                    RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.RpmInstance);
+                    AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.lfsInstance);
+                    RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.rpmInstance);
                     this.Close();
-                };
+                }
+                ;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

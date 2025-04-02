@@ -1,5 +1,4 @@
 ﻿using RPT.Domain.Interfaces;
-using System.Configuration;
 using System.Transactions;
 
 namespace RPT.Data
@@ -18,7 +17,6 @@ namespace RPT.Data
             using (var scope = new TransactionScope())
             {
                 RptFactory.mySqlGenericCommandsRPT = new RptGenericCommands(connectionName);
-
                 scope.Complete();
                 return true;
             }
@@ -26,6 +24,7 @@ namespace RPT.Data
 
         public bool TestConnection(string connectionString)
         {
+            this.mySqlGenericCommandsRPT = new RptGenericCommands(connectionString);
             return mySqlGenericCommandsRPT.TestConnection(connectionString);
         }
     }

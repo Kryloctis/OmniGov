@@ -412,6 +412,8 @@ namespace AccountingSystem
             public string ProvinceCode { get; set; }
             public string ProvinceName { get; set; }
             public Image Emblem { get; set; }
+            public string lfsInstance { get; set; }
+            public string rpmInstance { get; set; }
             public ConnectionStringSettings LfsConnSettings { get; set; }
             public ConnectionStringSettings RpmConnSettings { get; set; }
         }
@@ -439,19 +441,21 @@ namespace AccountingSystem
                 ProvinceCode = "ZSI",
                 ProvinceName = "Zamboanga Sibugay",
                 Emblem = Properties.Resources.list_money_banknotes_18px,
+                lfsInstance = ConfigurationManager.ConnectionStrings["bg_zsi_lfs_instance"].ConnectionString,
+                rpmInstance = ConfigurationManager.ConnectionStrings["bg_zsi_rpm_instance"].ConnectionString,
 
                 //connection strings here
-                LfsConnSettings = ServerConnections(name: "bg_zsi_lfs_instance",
-                                                    userIp: "local",
-                                                    database: "bg_zsi_lfs_db",
-                                                    Id: "acc_user",
-                                                    password: "acc_user123"),
+                //LfsConnSettings = ServerConnections(name: "bg_zsi_lfs_instance",
+                //                                    userIp: "local",
+                //                                    database: "bg_zsi_lfs_db",
+                //                                    Id: "acc_user",
+                //                                    password: "acc_user123"),
 
-                RpmConnSettings = ServerConnections(name: "Bubg_zsi_rpt_instance",
-                                                    userIp: "local",
-                                                    database: "bg_zsi_rpt_db",
-                                                    Id: "rpt_user",
-                                                    password: "rpt_user123")
+                //RpmConnSettings = ServerConnections(name: "bg_zsi_rpt_instance",
+                //                                    userIp: "local",
+                //                                    database: "bg_zsi_rpt_db",
+                //                                    Id: "rpt_user",
+                //                                    password: "rpt_user123")
             };
             var titayZsiModel = new LguServerModel()
             {
@@ -461,22 +465,24 @@ namespace AccountingSystem
                 ProvinceCode = "ZSI",
                 ProvinceName = "Zamboanga Sibugay",
                 Emblem = Properties.Resources.list_money_banknotes_18px,
+                lfsInstance = ConfigurationManager.ConnectionStrings["tty_zsi_lfs_instance"].ConnectionString,
+                rpmInstance = ConfigurationManager.ConnectionStrings["tty_zsi_rpm_instance"].ConnectionString,
 
                 //connection strings here
-                LfsConnSettings = ServerConnections(name: "tty_zsi_lfs_instance",
-                                                    userIp: "local",
-                                                    database: "tty_zsi_lfs_db",
-                                                    Id: "acc_user",
-                                                    password: "acc_user123"),
+                //LfsConnSettings = ServerConnections(name: "tty_zsi_lfs_instance",
+                //                                    userIp: "local",
+                //                                    database: "tty_zsi_lfs_db",
+                //                                    Id: "acc_user",
+                //                                    password: "acc_user123"),
 
-                RpmConnSettings = ServerConnections(name: "tty_zsi_rpt_instance",
-                                                    userIp: "local",
-                                                    database: "tty_zsi_rpt_db",
-                                                    Id: "rpt_user",
-                                                    password: "rpt_user123")
+                //RpmConnSettings = ServerConnections(name: "tty_zsi_rpt_instance",
+                //                                    userIp: "local",
+                //                                    database: "tty_zsi_rpt_db",
+                //                                    Id: "rpt_user",
+                //                                    password: "rpt_user123")
             };
 
-            lguModelList.Add(buugZsiModel);
+            //lguModelList.Add(buugZsiModel);
             lguModelList.Add(titayZsiModel);
 
             return lguModelList;
@@ -488,8 +494,8 @@ namespace AccountingSystem
 
             foreach (LguServerModel model in LguServerModels())
             {
-                bool isLfsConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
-                bool isRptmConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
+                bool isLfsConnected = AccFactory.ServerRepository().TestConnection(model.lfsInstance);
+                bool isRptmConnected = RptFactory.ServerRepository().TestConnection(model.rpmInstance);
 
                 if (!isLfsConnected || !isRptmConnected)
                     continue;

@@ -111,8 +111,8 @@ namespace AccountingSystem
             var availableServerList = Helper.AvailableServerList();
             Helper.selectedServerModel = availableServerList.First();
 
-            AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.LfsInstance);
-            RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.RpmInstance);
+            AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.lfsInstance);
+            RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.rpmInstance);
             lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}.";
         }
 
@@ -167,8 +167,8 @@ namespace AccountingSystem
             if (!isServerNull)
             {
                 var selectedServerModel = Helper.selectedServerModel;
-                bool lfsTestConnection = AccFactory.ServerRepository().TestConnection(selectedServerModel.LfsInstance);
-                bool rptmTestConnection = RptFactory.ServerRepository().TestConnection(selectedServerModel.RpmInstance);
+                bool lfsTestConnection = AccFactory.ServerRepository().TestConnection(selectedServerModel.lfsInstance);
+                bool rptmTestConnection = RptFactory.ServerRepository().TestConnection(selectedServerModel.rpmInstance);
                 bool isTestConnectionSucceed = lfsTestConnection && rptmTestConnection;
                 if (!isTestConnectionSucceed)
                 {
