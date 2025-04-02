@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using LFS.Views.Shared;
 using System;
 using System.ComponentModel;
@@ -191,7 +190,8 @@ namespace LFS.Views.Transactions.Assessment
                 txtAssessedValue.Clear();
                 LoadRptDelinquencies();
                 return;
-            };
+            }
+            ;
 
             txtOwner.Text = dataRow["taxpayer_name"].ToString();
             txtLocation.Text = $"{dataRow["barangay_name"]}, {dataRow["municipality_name"]}, {dataRow["province_name"]}";

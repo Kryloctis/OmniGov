@@ -1,7 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Office2013.Drawing.Chart;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -118,6 +116,7 @@ namespace LFS.Views.Transactions.Assessment
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+
         private void SaveData()
         {
             if (isEdit)

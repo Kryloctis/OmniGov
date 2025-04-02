@@ -1,13 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using LFS.Views.Shared;
-using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.InteropServices.Marshalling;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.Assessment
@@ -224,7 +221,8 @@ namespace LFS.Views.Transactions.Assessment
                 txtAssessedValue.Clear();
                 LoadRptDelinquencies();
                 return;
-            };
+            }
+            ;
 
             txtOwner.Text = dataRow["taxpayer_name"].ToString();
             txtLocation.Text = $"{dataRow["barangay_name"]}, {dataRow["municipality_name"]}, {dataRow["province_name"]}";
