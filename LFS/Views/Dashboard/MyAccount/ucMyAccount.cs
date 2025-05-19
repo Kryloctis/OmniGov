@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LFS.Views.Dashboard.MyAccount
@@ -78,10 +79,14 @@ namespace LFS.Views.Dashboard.MyAccount
             var permissions = AccFactory.RoleHasPermissionsRepository()
                                         .GetRecordsByRoleId(userRoleId)
                                         .AsEnumerable()
-                                        .Select(dtRowPermissions => $"• {dtRowPermissions["permission_name"]}")
+                                        .Select(dtRowPermissions => $"  -{dtRowPermissions["permission_name"]}")
                                         .ToList();
+            var sb = new StringBuilder();
 
-            txtRolePermissions.Text = string.Join("\n", permissions);
+            foreach (var permission in permissions)
+                sb.AppendLine(permission.ToString());
+
+            txtPriviledges.Text = sb.ToString();
         }
 
         private void LoadCurrentUserAccount()
