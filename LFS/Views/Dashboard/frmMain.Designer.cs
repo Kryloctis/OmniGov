@@ -39,25 +39,24 @@
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
-            ucBudget1 = new Budget.ucBudget();
+            ucBudget1 = new LFS.Views.Dashboard.Budget.ucBudget();
             label4 = new System.Windows.Forms.Label();
             tabPageAccounting = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
-            ucAccounting1 = new Accounting.ucAccounting();
+            ucAccounting1 = new LFS.Views.Dashboard.Accounting.ucAccounting();
             label2 = new System.Windows.Forms.Label();
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel4 = new System.Windows.Forms.Panel();
-            ucTreasury1 = new Treasury.ucTreasury();
+            ucTreasury1 = new LFS.Views.Dashboard.Treasury.ucTreasury();
             label3 = new System.Windows.Forms.Label();
             tabPageSettings = new System.Windows.Forms.TabPage();
-            ucSettings1 = new Settings.ucSettings();
+            ucSettings1 = new LFS.Views.Dashboard.Settings.ucSettings();
             label5 = new System.Windows.Forms.Label();
             tabPageReports = new System.Windows.Forms.TabPage();
-            ucReports1 = new Reports.ucReports();
+            ucReports1 = new LFS.Views.Dashboard.Reports.ucReports();
             label1 = new System.Windows.Forms.Label();
             tabPageMyAccount = new System.Windows.Forms.TabPage();
-            panel5 = new System.Windows.Forms.Panel();
-            ucMyAccount1 = new MyAccount.ucMyAccount();
+            ucMyAccount1 = new LFS.Views.Dashboard.MyAccount.ucMyAccount();
             label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +71,6 @@
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
             tabPageMyAccount.SuspendLayout();
-            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -446,7 +444,7 @@
             // 
             // tabPageMyAccount
             // 
-            tabPageMyAccount.Controls.Add(panel5);
+            tabPageMyAccount.Controls.Add(ucMyAccount1);
             tabPageMyAccount.Controls.Add(label6);
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
@@ -456,25 +454,15 @@
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
             // 
-            // panel5
-            // 
-            panel5.AutoScroll = true;
-            panel5.Controls.Add(ucMyAccount1);
-            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel5.Location = new System.Drawing.Point(3, 83);
-            panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(1119, 552);
-            panel5.TabIndex = 8;
-            // 
             // ucMyAccount1
             // 
             ucMyAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucMyAccount1.Location = new System.Drawing.Point(0, 0);
+            ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucMyAccount1.Location = new System.Drawing.Point(3, 83);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(1102, 820);
-            ucMyAccount1.TabIndex = 0;
+            ucMyAccount1.Size = new System.Drawing.Size(1119, 552);
+            ucMyAccount1.TabIndex = 8;
             // 
             // label6
             // 
@@ -527,7 +515,6 @@
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
             tabPageMyAccount.ResumeLayout(false);
-            panel5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -565,7 +552,6 @@
         private System.Windows.Forms.RadioButton radioBtnMyAccount;
         private System.Windows.Forms.TabPage tabPageMyAccount;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel5;
         private MyAccount.ucMyAccount ucMyAccount1;
     }
 }
