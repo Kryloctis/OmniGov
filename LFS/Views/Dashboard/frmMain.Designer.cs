@@ -60,6 +60,10 @@
             label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            button1 = new System.Windows.Forms.Button();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -71,6 +75,7 @@
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
             tabPageMyAccount.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -79,6 +84,7 @@
             panel1.Controls.Add(radioBtnMyAccount);
             panel1.Controls.Add(radReports);
             panel1.Controls.Add(radSettings);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(radTreasury);
             panel1.Controls.Add(radAccounting);
@@ -88,7 +94,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(142, 666);
+            panel1.Size = new System.Drawing.Size(142, 702);
             panel1.TabIndex = 1;
             // 
             // radioBtnMyAccount
@@ -101,7 +107,7 @@
             radioBtnMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radioBtnMyAccount.Image = Properties.Resources.user_profile_man_20px;
             radioBtnMyAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            radioBtnMyAccount.Location = new System.Drawing.Point(0, 566);
+            radioBtnMyAccount.Location = new System.Drawing.Point(0, 569);
             radioBtnMyAccount.Margin = new System.Windows.Forms.Padding(0);
             radioBtnMyAccount.Name = "radioBtnMyAccount";
             radioBtnMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -139,7 +145,7 @@
             radSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radSettings.Image = Properties.Resources.gear_filled_16px;
             radSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radSettings.Location = new System.Drawing.Point(0, 600);
+            radSettings.Location = new System.Drawing.Point(0, 603);
             radSettings.Margin = new System.Windows.Forms.Padding(0);
             radSettings.Name = "radSettings";
             radSettings.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -156,7 +162,7 @@
             btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLogout.Image = Properties.Resources.logout_16px;
             btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLogout.Location = new System.Drawing.Point(0, 633);
+            btnLogout.Location = new System.Drawing.Point(0, 669);
             btnLogout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -238,7 +244,7 @@
             tabControlMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(1133, 666);
+            tabControlMain.Size = new System.Drawing.Size(1133, 680);
             tabControlMain.TabIndex = 2;
             tabControlMain.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -249,7 +255,7 @@
             tabPageBudget.Location = new System.Drawing.Point(4, 24);
             tabPageBudget.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageBudget.Name = "tabPageBudget";
-            tabPageBudget.Size = new System.Drawing.Size(1125, 638);
+            tabPageBudget.Size = new System.Drawing.Size(1125, 652);
             tabPageBudget.TabIndex = 1;
             tabPageBudget.Text = "tabPageBudget";
             tabPageBudget.UseVisualStyleBackColor = true;
@@ -262,7 +268,7 @@
             panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel2.Size = new System.Drawing.Size(1125, 558);
+            panel2.Size = new System.Drawing.Size(1125, 572);
             panel2.TabIndex = 4;
             // 
             // ucBudget1
@@ -272,7 +278,7 @@
             ucBudget1.Location = new System.Drawing.Point(5, 4);
             ucBudget1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucBudget1.Name = "ucBudget1";
-            ucBudget1.Size = new System.Drawing.Size(1115, 550);
+            ucBudget1.Size = new System.Drawing.Size(1115, 564);
             ucBudget1.TabIndex = 0;
             // 
             // label4
@@ -382,7 +388,7 @@
             tabPageSettings.Location = new System.Drawing.Point(4, 24);
             tabPageSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageSettings.Name = "tabPageSettings";
-            tabPageSettings.Size = new System.Drawing.Size(192, 72);
+            tabPageSettings.Size = new System.Drawing.Size(1125, 652);
             tabPageSettings.TabIndex = 4;
             tabPageSettings.Text = "tabPageSettings";
             tabPageSettings.UseVisualStyleBackColor = true;
@@ -394,7 +400,7 @@
             ucSettings1.Location = new System.Drawing.Point(0, 80);
             ucSettings1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucSettings1.Name = "ucSettings1";
-            ucSettings1.Size = new System.Drawing.Size(192, 0);
+            ucSettings1.Size = new System.Drawing.Size(1125, 572);
             ucSettings1.TabIndex = 6;
             // 
             // label5
@@ -405,7 +411,7 @@
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(192, 80);
+            label5.Size = new System.Drawing.Size(1125, 80);
             label5.TabIndex = 5;
             label5.Text = "Settings";
             // 
@@ -449,7 +455,7 @@
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(1125, 638);
+            tabPageMyAccount.Size = new System.Drawing.Size(192, 72);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -461,7 +467,7 @@
             ucMyAccount1.Location = new System.Drawing.Point(3, 83);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(1119, 552);
+            ucMyAccount1.Size = new System.Drawing.Size(186, 0);
             ucMyAccount1.TabIndex = 8;
             // 
             // label6
@@ -472,7 +478,7 @@
             label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label6.Size = new System.Drawing.Size(1119, 80);
+            label6.Size = new System.Drawing.Size(186, 80);
             label6.TabIndex = 7;
             label6.Text = "My Account";
             // 
@@ -488,16 +494,61 @@
             discountRatesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             discountRatesToolStripMenuItem.Text = "Discount Rates...";
             // 
+            // statusStrip1
+            // 
+            statusStrip1.AutoSize = false;
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, toolStripStatusLabel1 });
+            statusStrip1.Location = new System.Drawing.Point(142, 680);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1133, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(1003, 17);
+            toolStripStatusLabel2.Spring = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel1.LinkColor = System.Drawing.Color.Black;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(84, 17);
+            toolStripStatusLabel1.Text = "Version: 0.0.0.0";
+            toolStripStatusLabel1.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel1.Click += toolStripStatusLabel1_Click;
+            // 
+            // button1
+            // 
+            button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button1.Image = Properties.Resources.logout_16px;
+            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            button1.Location = new System.Drawing.Point(0, 636);
+            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            button1.Size = new System.Drawing.Size(142, 33);
+            button1.TabIndex = 12;
+            button1.Text = "What's New!";
+            button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            button1.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1275, 666);
+            ClientSize = new System.Drawing.Size(1275, 702);
             Controls.Add(tabControlMain);
+            Controls.Add(statusStrip1);
             Controls.Add(panel1);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MinimumSize = new System.Drawing.Size(1291, 705);
+            MinimumSize = new System.Drawing.Size(1291, 741);
             Name = "frmMain";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Local Finance System";
@@ -515,6 +566,8 @@
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
             tabPageMyAccount.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -553,5 +606,9 @@
         private System.Windows.Forms.TabPage tabPageMyAccount;
         private System.Windows.Forms.Label label6;
         private MyAccount.ucMyAccount ucMyAccount1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button button1;
     }
 }
