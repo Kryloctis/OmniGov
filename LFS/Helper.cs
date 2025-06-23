@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
@@ -17,6 +18,8 @@ namespace LFS
     {
         internal static byte userId;
         internal static LguServerModel selectedServerModel;
+        internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus-local-finance-system/products/lfs";
+        internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
         {
@@ -58,20 +61,6 @@ namespace LFS
         {
             form.Icon = Properties.Resources.accounting;
         }
-
-        #region Version Control
-
-        public static string GetVersionLog()
-        {
-            string filePath = $"{Application.StartupPath}\\Documents\\updateLog.txt";
-            // Read all text from the file
-            string fileContent = File.ReadAllText(filePath);
-
-            // Display the content
-            return fileContent;
-        }
-
-        #endregion Version Control
 
         #region Amount to Words
 
@@ -913,6 +902,11 @@ namespace LFS
         public static void MessageBoxWarning(string message)
         {
             _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public static bool MessageBoxConfirm(string message)
+        {
+            return MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes;
         }
 
         #endregion MessageBoxes

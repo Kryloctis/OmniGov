@@ -62,8 +62,9 @@
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            button1 = new System.Windows.Forms.Button();
+            tlStrpWhatsNew = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -84,7 +85,6 @@
             panel1.Controls.Add(radioBtnMyAccount);
             panel1.Controls.Add(radReports);
             panel1.Controls.Add(radSettings);
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(radTreasury);
             panel1.Controls.Add(radAccounting);
@@ -94,7 +94,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(142, 702);
+            panel1.Size = new System.Drawing.Size(142, 680);
             panel1.TabIndex = 1;
             // 
             // radioBtnMyAccount
@@ -107,13 +107,13 @@
             radioBtnMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radioBtnMyAccount.Image = Properties.Resources.user_profile_man_20px;
             radioBtnMyAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            radioBtnMyAccount.Location = new System.Drawing.Point(0, 569);
+            radioBtnMyAccount.Location = new System.Drawing.Point(0, 580);
             radioBtnMyAccount.Margin = new System.Windows.Forms.Padding(0);
             radioBtnMyAccount.Name = "radioBtnMyAccount";
             radioBtnMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             radioBtnMyAccount.Size = new System.Drawing.Size(142, 34);
             radioBtnMyAccount.TabIndex = 11;
-            radioBtnMyAccount.Text = "My account";
+            radioBtnMyAccount.Text = " Account";
             radioBtnMyAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             radioBtnMyAccount.CheckedChanged += radioBtnMyAccount_CheckedChanged;
             // 
@@ -145,13 +145,13 @@
             radSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radSettings.Image = Properties.Resources.gear_filled_16px;
             radSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radSettings.Location = new System.Drawing.Point(0, 603);
+            radSettings.Location = new System.Drawing.Point(0, 614);
             radSettings.Margin = new System.Windows.Forms.Padding(0);
             radSettings.Name = "radSettings";
             radSettings.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             radSettings.Size = new System.Drawing.Size(142, 33);
             radSettings.TabIndex = 9;
-            radSettings.Text = "Settings";
+            radSettings.Text = " Settings";
             radSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             radSettings.CheckedChanged += radSettings_CheckedChanged;
             // 
@@ -162,13 +162,13 @@
             btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLogout.Image = Properties.Resources.logout_16px;
             btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLogout.Location = new System.Drawing.Point(0, 669);
+            btnLogout.Location = new System.Drawing.Point(0, 647);
             btnLogout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             btnLogout.Size = new System.Drawing.Size(142, 33);
             btnLogout.TabIndex = 8;
-            btnLogout.Text = "Logout";
+            btnLogout.Text = " Logout";
             btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLogout.UseVisualStyleBackColor = true;
@@ -388,7 +388,7 @@
             tabPageSettings.Location = new System.Drawing.Point(4, 24);
             tabPageSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageSettings.Name = "tabPageSettings";
-            tabPageSettings.Size = new System.Drawing.Size(1125, 652);
+            tabPageSettings.Size = new System.Drawing.Size(192, 72);
             tabPageSettings.TabIndex = 4;
             tabPageSettings.Text = "tabPageSettings";
             tabPageSettings.UseVisualStyleBackColor = true;
@@ -400,7 +400,7 @@
             ucSettings1.Location = new System.Drawing.Point(0, 80);
             ucSettings1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucSettings1.Name = "ucSettings1";
-            ucSettings1.Size = new System.Drawing.Size(1125, 572);
+            ucSettings1.Size = new System.Drawing.Size(192, 0);
             ucSettings1.TabIndex = 6;
             // 
             // label5
@@ -411,7 +411,7 @@
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(1125, 80);
+            label5.Size = new System.Drawing.Size(192, 80);
             label5.TabIndex = 5;
             label5.Text = "Settings";
             // 
@@ -497,46 +497,47 @@
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, toolStripStatusLabel1 });
-            statusStrip1.Location = new System.Drawing.Point(142, 680);
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel4, tlStrpLblVersion });
+            statusStrip1.Location = new System.Drawing.Point(0, 680);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(1133, 22);
+            statusStrip1.Size = new System.Drawing.Size(1275, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(1003, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(1046, 17);
             toolStripStatusLabel2.Spring = true;
             // 
-            // toolStripStatusLabel1
+            // tlStrpWhatsNew
             // 
-            toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel1.LinkColor = System.Drawing.Color.Black;
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(84, 17);
-            toolStripStatusLabel1.Text = "Version: 0.0.0.0";
-            toolStripStatusLabel1.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel1.Click += toolStripStatusLabel1_Click;
+            tlStrpWhatsNew.ActiveLinkColor = System.Drawing.SystemColors.Highlight;
+            tlStrpWhatsNew.Image = Properties.Resources.loudspeaker_16px;
+            tlStrpWhatsNew.IsLink = true;
+            tlStrpWhatsNew.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            tlStrpWhatsNew.LinkColor = System.Drawing.SystemColors.ControlText;
+            tlStrpWhatsNew.Name = "tlStrpWhatsNew";
+            tlStrpWhatsNew.Size = new System.Drawing.Size(89, 17);
+            tlStrpWhatsNew.Text = "What's New!";
+            tlStrpWhatsNew.Click += tlStrpWhatsNew_Click;
             // 
-            // button1
+            // toolStripStatusLabel4
             // 
-            button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button1.Image = Properties.Resources.logout_16px;
-            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.Location = new System.Drawing.Point(0, 636);
-            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            button1.Name = "button1";
-            button1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            button1.Size = new System.Drawing.Size(142, 33);
-            button1.TabIndex = 12;
-            button1.Text = "What's New!";
-            button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel4.Text = "|";
+            toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tlStrpLblVersion
+            // 
+            tlStrpLblVersion.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblVersion.LinkColor = System.Drawing.Color.Black;
+            tlStrpLblVersion.Name = "tlStrpLblVersion";
+            tlStrpLblVersion.Size = new System.Drawing.Size(84, 17);
+            tlStrpLblVersion.Text = "Version: 0.0.0.0";
+            tlStrpLblVersion.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             // 
             // frmMain
             // 
@@ -544,8 +545,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1275, 702);
             Controls.Add(tabControlMain);
-            Controls.Add(statusStrip1);
             Controls.Add(panel1);
+            Controls.Add(statusStrip1);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             MinimumSize = new System.Drawing.Size(1291, 741);
@@ -609,6 +610,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpWhatsNew;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpLblVersion;
     }
 }

@@ -590,12 +590,12 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.user_profile_man_80px;
+            pictureBox1.Image = Properties.Resources.user_profile_man_32px;
             pictureBox1.InitialImage = Properties.Resources.users_32px;
             pictureBox1.Location = new System.Drawing.Point(8, 7);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(58, 55);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 76;
             pictureBox1.TabStop = false;
             // 

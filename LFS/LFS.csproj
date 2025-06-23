@@ -19,6 +19,7 @@
 		<AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+		<Version>1.0.11.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Reports\LTOMs\**" />

@@ -7,6 +7,7 @@ using LFS.Views.Dashboard.Treasury;
 using LFS.Views.SignIn;
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace LFS.Views.Dashboard
@@ -115,6 +116,7 @@ namespace LFS.Views.Dashboard
         {
             try
             {
+                tlStrpLblVersion.Text = $"Version: {Helper.version}";
                 ValidatePermissions();
                 LoadTabPagesContents(tabControlMain);
             }
@@ -143,8 +145,11 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                this.Close();
-                frmSignIn.Show();
+                if (Helper.MessageBoxConfirm("Logout Now?"))
+                {
+                    Close();
+                    frmSignIn.Show();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -194,13 +199,13 @@ namespace LFS.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void tlStrpWhatsNew_Click(object sender, EventArgs e)
         {
             try
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://sites.google.com/view/perzeus-local-finance-system/home/lfs",
+                    FileName = Helper.updateReleaseLnk,
                     UseShellExecute = true
                 });
             }

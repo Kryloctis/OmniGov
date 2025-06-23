@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using LFS.Properties;
 using LFS.Views.Dashboard;
-using LFS.Views.Help;
 using RPT.Data;
 using System;
 using System.ComponentModel;
@@ -81,16 +80,7 @@ namespace LFS.Views.SignIn
             ScanAvailableServers();
             txtUsername.Tag = string.Empty;
             txtPassword.Tag = string.Empty;
-            txtVersion.Text = Helper.GetVersionLog().Split('\n')[1];
-            if (Settings.Default.showAbout)
-                ShowAboutRptMgmtApp();
-        }
-
-        private static void ShowAboutRptMgmtApp()
-        {
-            var frmUpdatess = new frmAbout();
-            frmUpdatess.Show();
-            frmUpdatess.TopMost = true;
+            txtVersion.Text = Helper.version;
         }
 
         private void ScanAvailableServers()

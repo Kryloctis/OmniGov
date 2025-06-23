@@ -2493,6 +2493,56 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap loudspeaker_14px {
+            get {
+                object obj = ResourceManager.GetObject("loudspeaker@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loudspeaker_16px {
+            get {
+                object obj = ResourceManager.GetObject("loudspeaker@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loudspeaker_20px {
+            get {
+                object obj = ResourceManager.GetObject("loudspeaker@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loudspeaker_24px {
+            get {
+                object obj = ResourceManager.GetObject("loudspeaker@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loudspeaker_32px {
+            get {
+                object obj = ResourceManager.GetObject("loudspeaker@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mailbox_in_filled_16px {
             get {
                 object obj = ResourceManager.GetObject("mailbox-in-filled@16px", resourceCulture);
@@ -3843,19 +3893,9 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap user_profile_man_12px {
-            get {
-                object obj = ResourceManager.GetObject("user_profile_man_12px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap user_profile_man_14px {
             get {
-                object obj = ResourceManager.GetObject("user_profile_man_14px", resourceCulture);
+                object obj = ResourceManager.GetObject("user-profile-man@14px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3865,7 +3905,7 @@ namespace LFS.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap user_profile_man_16px {
             get {
-                object obj = ResourceManager.GetObject("user_profile_man_16px", resourceCulture);
+                object obj = ResourceManager.GetObject("user-profile-man@16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3875,7 +3915,7 @@ namespace LFS.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap user_profile_man_20px {
             get {
-                object obj = ResourceManager.GetObject("user_profile_man_20px", resourceCulture);
+                object obj = ResourceManager.GetObject("user-profile-man@20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3885,7 +3925,7 @@ namespace LFS.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap user_profile_man_24px {
             get {
-                object obj = ResourceManager.GetObject("user_profile_man_24px", resourceCulture);
+                object obj = ResourceManager.GetObject("user-profile-man@24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3895,17 +3935,7 @@ namespace LFS.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap user_profile_man_32px {
             get {
-                object obj = ResourceManager.GetObject("user_profile_man_32px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap user_profile_man_80px {
-            get {
-                object obj = ResourceManager.GetObject("user_profile_man_80px", resourceCulture);
+                object obj = ResourceManager.GetObject("user-profile-man@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
