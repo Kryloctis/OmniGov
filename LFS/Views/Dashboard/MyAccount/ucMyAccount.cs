@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS;
+using LFS.Properties;
 using LFS.Views.SignIn;
 using System;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LFS.Views.Dashboard.MyAccount
 {
@@ -89,6 +91,22 @@ namespace LFS.Views.Dashboard.MyAccount
             txtPriviledges.Text = sb.ToString();
         }
 
+        private void LoadGreetings(string userName)
+        {
+            string greeting;
+
+            int hour = DateTime.Now.Hour;
+
+            if (hour < 12)
+                greeting = "Good Morning";
+            else if (hour < 18)
+                greeting = "Good Afternoon";
+            else
+                greeting = "Good Evening";
+
+            lblGreetings.Text = $"{greeting}!";
+        }
+
         private void LoadCurrentUserAccount()
         {
             var dictUserData = Helper.LoggedInUserData();
@@ -100,8 +118,12 @@ namespace LFS.Views.Dashboard.MyAccount
             txtPrefix.Text = dictUserData["prefix"];
             txtSuffix.Text = dictUserData["suffix"];
             txtUserName.Text = dictUserData["username"];
-            lblUserFullName.Text = dictUserData["user_full_name"].Trim();
-            lblUserDesignation.Text = dictUserData["role_name"];
+
+            var userDesignation = dictUserData["role_name"];
+            var userName = dictUserData["user_full_name"].Trim();
+            LoadGreetings(userName);
+            lblPrivileges.Text = $"{userDesignation} Privileges";
+            lblUserName.Text = userName;
         }
 
         private void btnUpdateProfile_Click(object sender, EventArgs e)
@@ -313,6 +335,31 @@ namespace LFS.Views.Dashboard.MyAccount
         private void btnSecurityCancel_Click(object sender, EventArgs e)
         {
             ResetForm(sender);
+        }
+
+        private void TogglePanels()
+        {
+            if (splitContainer1.Panel2Collapsed)
+            {
+                splitContainer1.Panel2Collapsed = false;
+                splitContainer1.Panel1Collapsed = true;
+                btnEditAcc.Image = Resources.symbol_cancel_20px;
+            }
+            else
+            {
+                splitContainer1.Panel2Collapsed = true;
+                splitContainer1.Panel1Collapsed = false;
+                btnEditAcc.Image = Resources.tool_pencil_filled_20px;
+            }
+        }
+
+        private void btnEditAcc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TogglePanels();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

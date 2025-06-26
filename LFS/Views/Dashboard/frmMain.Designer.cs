@@ -57,7 +57,6 @@
             label1 = new System.Windows.Forms.Label();
             tabPageMyAccount = new System.Windows.Forms.TabPage();
             ucMyAccount1 = new LFS.Views.Dashboard.MyAccount.ucMyAccount();
-            label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -451,11 +450,10 @@
             // tabPageMyAccount
             // 
             tabPageMyAccount.Controls.Add(ucMyAccount1);
-            tabPageMyAccount.Controls.Add(label6);
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(192, 72);
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 652);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -464,23 +462,11 @@
             // 
             ucMyAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucMyAccount1.Location = new System.Drawing.Point(3, 83);
+            ucMyAccount1.Location = new System.Drawing.Point(3, 3);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(186, 0);
+            ucMyAccount1.Size = new System.Drawing.Size(1119, 646);
             ucMyAccount1.TabIndex = 8;
-            // 
-            // label6
-            // 
-            label6.Dock = System.Windows.Forms.DockStyle.Top;
-            label6.Font = new System.Drawing.Font("Segoe UI Light", 20F);
-            label6.Location = new System.Drawing.Point(3, 3);
-            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label6.Size = new System.Drawing.Size(186, 80);
-            label6.TabIndex = 7;
-            label6.Text = "My Account";
             // 
             // taxRatesToolStripMenuItem
             // 
@@ -507,7 +493,7 @@
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(1046, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(1075, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // tlStrpWhatsNew
@@ -518,8 +504,8 @@
             tlStrpWhatsNew.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             tlStrpWhatsNew.LinkColor = System.Drawing.SystemColors.ControlText;
             tlStrpWhatsNew.Name = "tlStrpWhatsNew";
-            tlStrpWhatsNew.Size = new System.Drawing.Size(89, 17);
-            tlStrpWhatsNew.Text = "What's New!";
+            tlStrpWhatsNew.Size = new System.Drawing.Size(91, 17);
+            tlStrpWhatsNew.Text = "What's New?";
             tlStrpWhatsNew.Click += tlStrpWhatsNew_Click;
             // 
             // toolStripStatusLabel4
@@ -605,7 +591,6 @@
         private Reports.ucReports ucReports1;
         private System.Windows.Forms.RadioButton radioBtnMyAccount;
         private System.Windows.Forms.TabPage tabPageMyAccount;
-        private System.Windows.Forms.Label label6;
         private MyAccount.ucMyAccount ucMyAccount1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
