@@ -57,9 +57,13 @@
             label1 = new System.Windows.Forms.Label();
             tabPageMyAccount = new System.Windows.Forms.TabPage();
             ucMyAccount1 = new LFS.Views.Dashboard.MyAccount.ucMyAccount();
-            label6 = new System.Windows.Forms.Label();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpWhatsNew = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -71,6 +75,7 @@
             tabPageSettings.SuspendLayout();
             tabPageReports.SuspendLayout();
             tabPageMyAccount.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -88,7 +93,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(142, 666);
+            panel1.Size = new System.Drawing.Size(142, 680);
             panel1.TabIndex = 1;
             // 
             // radioBtnMyAccount
@@ -101,13 +106,13 @@
             radioBtnMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radioBtnMyAccount.Image = Properties.Resources.user_profile_man_20px;
             radioBtnMyAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            radioBtnMyAccount.Location = new System.Drawing.Point(0, 566);
+            radioBtnMyAccount.Location = new System.Drawing.Point(0, 580);
             radioBtnMyAccount.Margin = new System.Windows.Forms.Padding(0);
             radioBtnMyAccount.Name = "radioBtnMyAccount";
             radioBtnMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             radioBtnMyAccount.Size = new System.Drawing.Size(142, 34);
             radioBtnMyAccount.TabIndex = 11;
-            radioBtnMyAccount.Text = "My account";
+            radioBtnMyAccount.Text = " Account";
             radioBtnMyAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             radioBtnMyAccount.CheckedChanged += radioBtnMyAccount_CheckedChanged;
             // 
@@ -139,13 +144,13 @@
             radSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radSettings.Image = Properties.Resources.gear_filled_16px;
             radSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radSettings.Location = new System.Drawing.Point(0, 600);
+            radSettings.Location = new System.Drawing.Point(0, 614);
             radSettings.Margin = new System.Windows.Forms.Padding(0);
             radSettings.Name = "radSettings";
             radSettings.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             radSettings.Size = new System.Drawing.Size(142, 33);
             radSettings.TabIndex = 9;
-            radSettings.Text = "Settings";
+            radSettings.Text = " Settings";
             radSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             radSettings.CheckedChanged += radSettings_CheckedChanged;
             // 
@@ -156,13 +161,13 @@
             btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnLogout.Image = Properties.Resources.logout_16px;
             btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLogout.Location = new System.Drawing.Point(0, 633);
+            btnLogout.Location = new System.Drawing.Point(0, 647);
             btnLogout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             btnLogout.Size = new System.Drawing.Size(142, 33);
             btnLogout.TabIndex = 8;
-            btnLogout.Text = "Logout";
+            btnLogout.Text = " Logout";
             btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnLogout.UseVisualStyleBackColor = true;
@@ -238,7 +243,7 @@
             tabControlMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new System.Drawing.Size(1133, 666);
+            tabControlMain.Size = new System.Drawing.Size(1133, 680);
             tabControlMain.TabIndex = 2;
             tabControlMain.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -249,7 +254,7 @@
             tabPageBudget.Location = new System.Drawing.Point(4, 24);
             tabPageBudget.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageBudget.Name = "tabPageBudget";
-            tabPageBudget.Size = new System.Drawing.Size(1125, 638);
+            tabPageBudget.Size = new System.Drawing.Size(1125, 652);
             tabPageBudget.TabIndex = 1;
             tabPageBudget.Text = "tabPageBudget";
             tabPageBudget.UseVisualStyleBackColor = true;
@@ -262,7 +267,7 @@
             panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel2.Size = new System.Drawing.Size(1125, 558);
+            panel2.Size = new System.Drawing.Size(1125, 572);
             panel2.TabIndex = 4;
             // 
             // ucBudget1
@@ -272,7 +277,7 @@
             ucBudget1.Location = new System.Drawing.Point(5, 4);
             ucBudget1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucBudget1.Name = "ucBudget1";
-            ucBudget1.Size = new System.Drawing.Size(1115, 550);
+            ucBudget1.Size = new System.Drawing.Size(1115, 564);
             ucBudget1.TabIndex = 0;
             // 
             // label4
@@ -445,11 +450,10 @@
             // tabPageMyAccount
             // 
             tabPageMyAccount.Controls.Add(ucMyAccount1);
-            tabPageMyAccount.Controls.Add(label6);
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(1125, 638);
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 652);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -458,23 +462,11 @@
             // 
             ucMyAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             ucMyAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucMyAccount1.Location = new System.Drawing.Point(3, 83);
+            ucMyAccount1.Location = new System.Drawing.Point(3, 3);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(1119, 552);
+            ucMyAccount1.Size = new System.Drawing.Size(1119, 646);
             ucMyAccount1.TabIndex = 8;
-            // 
-            // label6
-            // 
-            label6.Dock = System.Windows.Forms.DockStyle.Top;
-            label6.Font = new System.Drawing.Font("Segoe UI Light", 20F);
-            label6.Location = new System.Drawing.Point(3, 3);
-            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label6.Size = new System.Drawing.Size(1119, 80);
-            label6.TabIndex = 7;
-            label6.Text = "My Account";
             // 
             // taxRatesToolStripMenuItem
             // 
@@ -488,16 +480,62 @@
             discountRatesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             discountRatesToolStripMenuItem.Text = "Discount Rates...";
             // 
+            // statusStrip1
+            // 
+            statusStrip1.AutoSize = false;
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel4, tlStrpLblVersion });
+            statusStrip1.Location = new System.Drawing.Point(0, 680);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1275, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(1075, 17);
+            toolStripStatusLabel2.Spring = true;
+            // 
+            // tlStrpWhatsNew
+            // 
+            tlStrpWhatsNew.ActiveLinkColor = System.Drawing.SystemColors.Highlight;
+            tlStrpWhatsNew.Image = Properties.Resources.loudspeaker_16px;
+            tlStrpWhatsNew.IsLink = true;
+            tlStrpWhatsNew.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            tlStrpWhatsNew.LinkColor = System.Drawing.SystemColors.ControlText;
+            tlStrpWhatsNew.Name = "tlStrpWhatsNew";
+            tlStrpWhatsNew.Size = new System.Drawing.Size(91, 17);
+            tlStrpWhatsNew.Text = "What's New?";
+            tlStrpWhatsNew.Click += tlStrpWhatsNew_Click;
+            // 
+            // toolStripStatusLabel4
+            // 
+            toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel4.Text = "|";
+            toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tlStrpLblVersion
+            // 
+            tlStrpLblVersion.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblVersion.LinkColor = System.Drawing.Color.Black;
+            tlStrpLblVersion.Name = "tlStrpLblVersion";
+            tlStrpLblVersion.Size = new System.Drawing.Size(84, 17);
+            tlStrpLblVersion.Text = "Version: 0.0.0.0";
+            tlStrpLblVersion.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1275, 666);
+            ClientSize = new System.Drawing.Size(1275, 702);
             Controls.Add(tabControlMain);
             Controls.Add(panel1);
+            Controls.Add(statusStrip1);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MinimumSize = new System.Drawing.Size(1291, 705);
+            MinimumSize = new System.Drawing.Size(1291, 741);
             Name = "frmMain";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Local Finance System";
@@ -515,6 +553,8 @@
             tabPageSettings.ResumeLayout(false);
             tabPageReports.ResumeLayout(false);
             tabPageMyAccount.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -551,7 +591,12 @@
         private Reports.ucReports ucReports1;
         private System.Windows.Forms.RadioButton radioBtnMyAccount;
         private System.Windows.Forms.TabPage tabPageMyAccount;
-        private System.Windows.Forms.Label label6;
         private MyAccount.ucMyAccount ucMyAccount1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpWhatsNew;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpLblVersion;
     }
 }

@@ -1,18 +1,14 @@
-﻿using ACC.Data;
-using LFS.Views.Dashboard.Accounting;
-using LFS.Views.Dashboard.AccountingDashboard;
+﻿using LFS.Views.Dashboard.Accounting;
 using LFS.Views.Dashboard.Budget;
 using LFS.Views.Dashboard.MyAccount;
 using LFS.Views.Dashboard.Reports;
 using LFS.Views.Dashboard.Settings;
 using LFS.Views.Dashboard.Treasury;
-using LFS;
-using Org.BouncyCastle.Asn1.Esf;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using LFS.Views.SignIn;
+using System;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace LFS.Views.Dashboard
 {
@@ -120,6 +116,7 @@ namespace LFS.Views.Dashboard
         {
             try
             {
+                tlStrpLblVersion.Text = $"Version: {Helper.version}";
                 ValidatePermissions();
                 LoadTabPagesContents(tabControlMain);
             }
@@ -148,8 +145,11 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                this.Close();
-                frmSignIn.Show();
+                if (Helper.MessageBoxConfirm("Logout Now?"))
+                {
+                    Close();
+                    frmSignIn.Show();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -195,6 +195,19 @@ namespace LFS.Views.Dashboard
             try
             {
                 tabControlMain.SelectedTab = tabPageMyAccount;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpWhatsNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Helper.updateReleaseLnk,
+                    UseShellExecute = true
+                });
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

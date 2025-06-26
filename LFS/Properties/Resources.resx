@@ -1261,27 +1261,6 @@
   <data name="users_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\users-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="user_profile_man_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_profile_man_80px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user-profile-man-80px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="filter_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filter-12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1323,5 +1302,35 @@
   </data>
   <data name="button_ok_80px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\button-ok-80px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loudspeaker@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loudspeaker@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loudspeaker@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loudspeaker@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loudspeaker@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loudspeaker@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loudspeaker@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loudspeaker@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loudspeaker@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loudspeaker@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-man@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-man@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-man@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-man@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-man@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-man@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-man@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-man@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user-profile-man@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-profile-man@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

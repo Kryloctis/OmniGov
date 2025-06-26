@@ -22,17 +22,5 @@ namespace LFS.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool showAbout {
-            get {
-                return ((bool)(this["showAbout"]));
-            }
-            set {
-                this["showAbout"] = value;
-            }
-        }
     }
 }
