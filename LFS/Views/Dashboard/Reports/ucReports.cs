@@ -4,7 +4,7 @@ using LFS.Views.Reports.DailyCashPositionReport;
 using LFS.Views.Reports.Financial_Statements;
 using LFS.Views.Reports.Journals;
 using LFS.Views.Reports.Ledgers;
-using LFS.Views.Reports.Ltom;
+using LFS.Views.Reports.Ltoms;
 using LFS.Views.Reports.Rcd;
 using LFS.Views.Reports.RCI;
 using LFS.Views.Reports.ReleasedAndUnreleasedCheques;
