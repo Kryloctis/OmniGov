@@ -1,10 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,11 +13,10 @@ namespace LFS.Views.Reports.Ltoms
 {
     public partial class frmLtom30 : Form
     {
-        int auctionId;
-        int rptId;
+        private int auctionId;
+        private int rptId;
 
-
-        int rptAuctionId;
+        private int rptAuctionId;
         private DataTable dtAuctionRpt;
 
         public frmLtom30()
@@ -58,7 +57,6 @@ namespace LFS.Views.Reports.Ltoms
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
-
         }
 
         private void OnLoad()
@@ -80,14 +78,12 @@ namespace LFS.Views.Reports.Ltoms
                     return;
 
                 LoadReport();
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadReport()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
@@ -96,7 +92,6 @@ namespace LFS.Views.Reports.Ltoms
                 backgroundWorker1.RunWorkerAsync((auctionId, rptId));
             }
         }
-
 
         private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -131,7 +126,7 @@ namespace LFS.Views.Reports.Ltoms
             return (basicPenalty, sefPenalty);
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -145,7 +140,6 @@ namespace LFS.Views.Reports.Ltoms
                 var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
-
 
                 foreach (DataRow drDelinquentProperty in dtDelinquentProperty.Rows)
                 {
@@ -187,16 +181,15 @@ namespace LFS.Views.Reports.Ltoms
 
                 e.Result = dtRptAuctionProperties;
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -209,9 +202,8 @@ namespace LFS.Views.Reports.Ltoms
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
                 report.DataSources.Clear();
-
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
@@ -239,7 +231,6 @@ namespace LFS.Views.Reports.Ltoms
                 reportViewer1.RefreshReport();
                 ToogleRunButton(true);
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

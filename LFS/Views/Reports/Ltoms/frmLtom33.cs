@@ -1,9 +1,9 @@
 ﻿using ACC.Data;
 using LFS.Views.Transactions.Biddings.BiddingReports;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -31,7 +31,6 @@ namespace LFS.Views.Reports.Ltoms
         {
             try
             {
-
                 if (cmbxWarrantLevy.SelectedIndex == -1)
                     return;
 
@@ -87,12 +86,13 @@ namespace LFS.Views.Reports.Ltoms
                 backgroundWorker1.RunWorkerAsync(warrantOfLevyId);
             }
         }
+
         private void txtRpt_TextChanged(object sender, EventArgs e)
         {
             LoadIssuedWarrantLevy();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -145,17 +145,16 @@ namespace LFS.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -169,7 +168,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom33CancellationOfWarrantOfLevey.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom33CancellationOfWarrantOfLevey.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

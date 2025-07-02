@@ -1,10 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -91,7 +91,7 @@ namespace LFS.Views.Reports.Ltoms
             return (basicPenalty, sefPenalty);
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace LFS.Views.Reports.Ltoms
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
                 report.DataSources.Clear();
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
@@ -135,7 +135,7 @@ namespace LFS.Views.Reports.Ltoms
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
@@ -145,7 +145,7 @@ namespace LFS.Views.Reports.Ltoms
             return (double)months / 12;
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {

@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -157,7 +156,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom25PublicAuctionRegFrm.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom25PublicAuctionRegFrm.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

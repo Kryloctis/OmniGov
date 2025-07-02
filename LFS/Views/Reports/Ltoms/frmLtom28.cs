@@ -1,9 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,9 +12,9 @@ namespace LFS.Views.Reports.Ltoms
 {
     public partial class frmLtom28 : Form
     {
-        int auctionId;
-        int bidderId;
-        int rptAuctionId;
+        private int auctionId;
+        private int bidderId;
+        private int rptAuctionId;
 
         private DataTable dtAuctionRpt;
 
@@ -41,6 +41,7 @@ namespace LFS.Views.Reports.Ltoms
                 backgroundWorker1.RunWorkerAsync((rptAuctionId, biddersId));
             }
         }
+
         private void OnLoad()
         {
             LoadAuctionSchedule();
@@ -98,7 +99,6 @@ namespace LFS.Views.Reports.Ltoms
                     return;
 
                 LoadReport();
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -117,8 +117,7 @@ namespace LFS.Views.Reports.Ltoms
             LoadBidders();
         }
 
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
@@ -146,13 +145,12 @@ namespace LFS.Views.Reports.Ltoms
             e.Result = reportParameters;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -167,7 +165,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom28RulesAndRegulationOfPublicAuction.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom28RulesAndRegulationOfPublicAuction.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 
@@ -176,7 +174,6 @@ namespace LFS.Views.Reports.Ltoms
                 reportViewer1.Refresh();
 
                 ToogleRunButton(true);
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

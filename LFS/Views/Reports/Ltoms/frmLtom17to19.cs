@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -245,7 +244,7 @@ namespace LFS.Views.Reports.Ltoms
 
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\{reportPath}";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\{reportPath}";
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtLtom17_19", result.dataTable));
                 localReport.SetParameters(parameters);

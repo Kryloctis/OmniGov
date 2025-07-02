@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -126,7 +125,7 @@ namespace LFS.Views.Reports.Ltoms
                 // Default code here
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom16NoticeDelinqPymntRpt.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom16NoticeDelinqPymntRpt.rdlc";
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtLtom16", results.dataTable));
                 localReport.SetParameters(results.parameters);

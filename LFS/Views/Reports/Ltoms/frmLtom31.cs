@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ namespace LFS.Views.Reports.Ltoms
 {
     public partial class frmLtom31 : Form
     {
-        int auctionId;
+        private int auctionId;
 
         public frmLtom31()
         {
@@ -27,6 +26,7 @@ namespace LFS.Views.Reports.Ltoms
             btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
             btnRunReport.Enabled = isGenerated;
         }
+
         private void btnRunReport_Click(object sender, System.EventArgs e)
         {
             try
@@ -39,8 +39,8 @@ namespace LFS.Views.Reports.Ltoms
                 LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
+
         private void LoadReport()
         {
             if (!backgroundWorker1.IsBusy)
@@ -75,7 +75,6 @@ namespace LFS.Views.Reports.Ltoms
             }
         }
 
-
         private DataTable ReportData()
         {
             return new DataTable();
@@ -85,7 +84,6 @@ namespace LFS.Views.Reports.Ltoms
         {
             try
             {
-
                 int auctionId = (int)e.Argument;
 
                 // Define tasks and their progress weights
@@ -133,11 +131,9 @@ namespace LFS.Views.Reports.Ltoms
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
                 }
 
-
                 e.Result = dtLTOM31;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -157,15 +153,13 @@ namespace LFS.Views.Reports.Ltoms
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
 
                 var report2 = reportViewer2.LocalReport;
-                report2.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\ListOfSoldRptAtAuction.rdlc";
+                report2.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\ListOfSoldRptAtAuction.rdlc";
                 report2.DataSources.Clear();
-
 
                 string lguName = Helper.LGUDetails()["lgu_name"];
 
@@ -185,16 +179,13 @@ namespace LFS.Views.Reports.Ltoms
                 reportViewer1.ZoomPercent = 100;
                 reportViewer1.RefreshReport();
 
-
                 reportViewer2.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer2.ZoomMode = ZoomMode.PageWidth;
                 reportViewer2.ZoomPercent = 100;
                 reportViewer2.RefreshReport();
 
                 ToogleRunButton(true);
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }

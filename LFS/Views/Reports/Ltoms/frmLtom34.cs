@@ -1,8 +1,8 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,8 +11,8 @@ namespace LFS.Views.Reports.Ltoms
 {
     public partial class frmLtom34 : Form
     {
-        int taxpayerId;
-        int rptId;
+        private int taxpayerId;
+        private int rptId;
         private DataTable dtRpt;
 
         public frmLtom34()
@@ -20,7 +20,6 @@ namespace LFS.Views.Reports.Ltoms
             InitializeComponent();
             panel1.Controls.Add(reportViewer1);
         }
-
 
         private void ToogleRunButton(bool isGenerated)
         {
@@ -48,7 +47,7 @@ namespace LFS.Views.Reports.Ltoms
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -118,17 +117,16 @@ namespace LFS.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -142,7 +140,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom34FinalDeedOfSale.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom34FinalDeedOfSale.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 
@@ -171,7 +169,6 @@ namespace LFS.Views.Reports.Ltoms
                 this.rptId = Convert.ToInt32(rptId);
                 taxpayerId = Convert.ToInt32(cmbxBidders.SelectedValue);
             }
-
         }
 
         private void frmLtom34_Load(object sender, EventArgs e)
@@ -182,6 +179,7 @@ namespace LFS.Views.Reports.Ltoms
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void LoadRealProperties()
         {
             dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
@@ -195,7 +193,6 @@ namespace LFS.Views.Reports.Ltoms
 
         private void txtBidder_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void txtRpt_TextChanged(object sender, EventArgs e)

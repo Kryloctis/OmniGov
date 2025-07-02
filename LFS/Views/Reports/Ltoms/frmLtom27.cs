@@ -1,9 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -121,7 +121,7 @@ namespace LFS.Views.Reports.Ltoms
             LoadProperties();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
@@ -171,12 +171,12 @@ namespace LFS.Views.Reports.Ltoms
             e.Result = reportParameters;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -190,7 +190,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom27UndertakingAndWaiverOfBidders.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom27UndertakingAndWaiverOfBidders.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using DocumentFormat.OpenXml.Office.CustomUI;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -193,7 +191,7 @@ namespace LFS.Views.Reports.Ltoms
                 reportViewer1.Clear();
                 var parameters = (List<ReportParameter>)e.Result;
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom21NoticeOfLevy.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom21NoticeOfLevy.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 

@@ -1,24 +1,22 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace LFS.Views.Reports.Ltoms
 {
-
     public partial class frmLtom29 : Form
     {
-        int auctionId;
-        int rptId;
+        private int auctionId;
+        private int rptId;
 
-
-        int rptAuctionId;
+        private int rptAuctionId;
         private DataTable dtAuctionRpt;
 
         public frmLtom29()
@@ -38,19 +36,16 @@ namespace LFS.Views.Reports.Ltoms
         {
             try
             {
-
                 if (cmbxAuctionSchedule.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtRpt.Text.Trim()))
                     return;
 
                 LoadReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void LoadReport()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 progressBar1.Value = 0;
@@ -121,11 +116,10 @@ namespace LFS.Views.Reports.Ltoms
             LoadProperties();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-
                 var parameters = ((int auctionId, int rptId))e.Argument;
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
 
@@ -136,7 +130,6 @@ namespace LFS.Views.Reports.Ltoms
                 var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
-
 
                 foreach (DataRow drDelinquentProperty in dtDelinquentProperty.Rows)
                 {
@@ -177,19 +170,16 @@ namespace LFS.Views.Reports.Ltoms
                 }
 
                 e.Result = dtRptAuctionProperties;
-
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -202,7 +192,7 @@ namespace LFS.Views.Reports.Ltoms
                     progressBar1.Value = 100;
 
                 var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom29CertificateOfSale.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom29CertificateOfSale.rdlc";
                 report.DataSources.Clear();
 
                 string lguName = Helper.LGUDetails()["municipality"];
@@ -245,7 +235,6 @@ namespace LFS.Views.Reports.Ltoms
 
                 ToogleRunButton(true);
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -255,7 +244,6 @@ namespace LFS.Views.Reports.Ltoms
                                  .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
                                  .Select(row => row["real_properties_id"])
                                  .FirstOrDefault());
-
         }
     }
 }

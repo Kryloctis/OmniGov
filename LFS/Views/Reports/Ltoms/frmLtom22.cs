@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -134,14 +133,14 @@ namespace LFS.Views.Reports.Ltoms
 
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom22ReportOfLevy.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom22ReportOfLevy.rdlc";
                 localReport.SetParameters(parameters.reportParameters1);
                 localReport.Refresh();
 
                 reportViewer2.Clear();
                 var localReport2 = reportViewer2.LocalReport;
                 localReport2.DataSources.Clear();
-                localReport2.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\ListRptDelinquenciesWithLevy.rdlc";
+                localReport2.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\ListRptDelinquenciesWithLevy.rdlc";
                 localReport2.DataSources.Add(new ReportDataSource("dtLtom22", parameters.dtRptLevy));
                 localReport2.SetParameters(parameters.reportParameters2);
                 localReport2.Refresh();

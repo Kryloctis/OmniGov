@@ -1,9 +1,9 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,7 +12,6 @@ namespace LFS.Views.Reports.Ltoms
 {
     public partial class frmLtom32 : Form
     {
-
         public frmLtom32()
         {
             InitializeComponent();
@@ -61,7 +60,6 @@ namespace LFS.Views.Reports.Ltoms
             cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
             cmbxProperty.DataSource = auctionProperties;
-
         }
 
         private void ucCertificateOfRedemption1_Load(object sender, EventArgs e)
@@ -73,8 +71,6 @@ namespace LFS.Views.Reports.Ltoms
         {
             try
             {
-
-
                 if (cmbxAuctionSchedule.SelectedIndex == -1 || cmbxProperty.SelectedIndex == -1)
                     return;
 
@@ -102,7 +98,7 @@ namespace LFS.Views.Reports.Ltoms
             LoadProperties();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -119,7 +115,6 @@ namespace LFS.Views.Reports.Ltoms
 
                 int totalProgressCount = tasks.Sum(t => t.Value);
                 int progressCount = 0;
-
 
                 // Fetch LGU Details
                 var lguDetails = Helper.LGUDetails();
@@ -141,7 +136,6 @@ namespace LFS.Views.Reports.Ltoms
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRpt["barangay_name"], dictRpt["municipality_name"], dictRpt["province_name"]);
                 string kindOfProperty = dictRpt["property_kind"];
                 decimal assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
-
 
                 progressCount += tasks["Generate Bidder and Bidding Information"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -170,18 +164,16 @@ namespace LFS.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 e.Result = reportParameters;
-
             }
-
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -195,7 +187,7 @@ namespace LFS.Views.Reports.Ltoms
                 var parameters = (List<ReportParameter>)e.Result;
                 reportViewer1.Clear();
                 var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltom\\Ltom32CertificateOfRedemption.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom32CertificateOfRedemption.rdlc";
                 localReport.SetParameters(parameters);
                 localReport.Refresh();
 
