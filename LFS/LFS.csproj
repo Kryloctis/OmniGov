@@ -22,15 +22,12 @@
 		<Version>1.0.11.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Remove="Reports\LTOMs\**" />
 		<Compile Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<Compile Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<Compile Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
-		<EmbeddedResource Remove="Reports\LTOMs\**" />
 		<EmbeddedResource Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<EmbeddedResource Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
-		<None Remove="Reports\LTOMs\**" />
 		<None Remove="Views\Dashboard\TreasuryDashboard\**" />
 		<None Remove="Views\Manage\AllotmentReleaseDetails\**" />
 		<None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
@@ -62,27 +59,27 @@
 		<None Remove="Reports\journal-entry-voucher.rdlc" />
 		<None Remove="Reports\Ledgers\summary-subsidiary-ledger.rdlc" />
 		<None Remove="Reports\list_of_real-property-tax-delinquencies.rdlc" />
-		<None Remove="Reports\Ltom\ListOfSoldRptAtAuction.rdlc" />
-		<None Remove="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc" />
-		<None Remove="Reports\Ltom\ltom16NoticeDelinqPymntRpt.rdlc" />
-		<None Remove="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc" />
-		<None Remove="Reports\Ltom\Ltom18NoticeRptDelinq.rdlc" />
-		<None Remove="Reports\Ltom\Ltom19NoticeRptDelinq.rdlc" />
-		<None Remove="Reports\Ltom\Ltom20WarrantOfLevy.rdlc" />
-		<None Remove="Reports\Ltom\Ltom21NoticeOfLevy.rdlc" />
-		<None Remove="Reports\Ltom\Ltom22ReportOfLevy.rdlc" />
-		<None Remove="Reports\Ltom\Ltom23NoticeAuctionSaleDelinqRpt.rdlc" />
-		<None Remove="Reports\Ltom\Ltom24NoticeSale.rdlc" />
-		<None Remove="Reports\Ltom\Ltom25PublicAuctionRegFrm.rdlc" />
-		<None Remove="Reports\Ltom\Ltom26ListOfRegisteredBidders.rdlc" />
-		<None Remove="Reports\Ltom\Ltom27UndertakingAndWaiverOfBidders.rdlc" />
-		<None Remove="Reports\Ltom\Ltom28RulesAndRegulationOfPublicAuction.rdlc" />
-		<None Remove="Reports\Ltom\Ltom29CertificateOfSale.rdlc" />
-		<None Remove="Reports\Ltom\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc" />
-		<None Remove="Reports\Ltom\Ltom31ReportOfSale.rdlc" />
-		<None Remove="Reports\Ltom\Ltom32CertificateOfRedemption.rdlc" />
-		<None Remove="Reports\Ltom\Ltom33CancellationOfWarrantOfLevey.rdlc" />
-		<None Remove="Reports\Ltom\Ltom34FinalDeedOfSale.rdlc" />
+		<None Remove="Reports\Ltoms\ListOfSoldRptAtAuction.rdlc" />
+		<None Remove="Reports\Ltoms\ListRptDelinquenciesWithLevy.rdlc" />
+		<None Remove="Reports\Ltoms\ltom16NoticeDelinqPymntRpt.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom17NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom18NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom19NoticeRptDelinq.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom20WarrantOfLevy.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom21NoticeOfLevy.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom22ReportOfLevy.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom23NoticeAuctionSaleDelinqRpt.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom24NoticeSale.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom25PublicAuctionRegFrm.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom26ListOfRegisteredBidders.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom27UndertakingAndWaiverOfBidders.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom28RulesAndRegulationOfPublicAuction.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom29CertificateOfSale.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom31ReportOfSale.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom32CertificateOfRedemption.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom33CancellationOfWarrantOfLevey.rdlc" />
+		<None Remove="Reports\Ltoms\Ltom34FinalDeedOfSale.rdlc" />
 		<None Remove="Reports\notice-delinquency-in-the-payment-of-rpt.rdlc" />
 		<None Remove="Reports\post-trial-balance.rdlc" />
 		<None Remove="Reports\pre-trial-balance.rdlc" />
@@ -111,21 +108,21 @@
 	  <Content Include="Reports\certificate-of-tax-clearance.rdlc">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Reports\Ltom\ListOfSoldRptAtAuction.rdlc">
+	  <Content Include="Reports\Ltoms\ListOfSoldRptAtAuction.rdlc">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Reports\Ltom\Ltom23NoticeAuctionSaleDelinqRpt.rdlc">
+	  <Content Include="Reports\Ltoms\Ltom23NoticeAuctionSaleDelinqRpt.rdlc">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="Reports\Ltom\ListRptDelinquenciesWithLevy.rdlc">
+	  <Content Include="Reports\Ltoms\ListRptDelinquenciesWithLevy.rdlc">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Reports\Ltom\Ltom24NoticeSale.rdlc">
+	  <Content Include="Reports\Ltoms\Ltom24NoticeSale.rdlc">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Reports\Ltom\Ltom26ListOfRegisteredBidders.rdlc">
+	  <Content Include="Reports\Ltoms\Ltom26ListOfRegisteredBidders.rdlc">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
@@ -190,52 +187,52 @@
 		<Content Include="Reports\ListRptDelinquencies.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom16NoticeDelinqPymntRpt.rdlc">
+		<Content Include="Reports\Ltoms\Ltom16NoticeDelinqPymntRpt.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom17NoticeRptDelinq.rdlc">
+		<Content Include="Reports\Ltoms\Ltom17NoticeRptDelinq.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom18NoticeRptDelinq.rdlc">
+		<Content Include="Reports\Ltoms\Ltom18NoticeRptDelinq.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom19NoticeRptDelinq.rdlc">
+		<Content Include="Reports\Ltoms\Ltom19NoticeRptDelinq.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom20WarrantOfLevy.rdlc">
+		<Content Include="Reports\Ltoms\Ltom20WarrantOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom21NoticeOfLevy.rdlc">
+		<Content Include="Reports\Ltoms\Ltom21NoticeOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom22ReportOfLevy.rdlc">
+		<Content Include="Reports\Ltoms\Ltom22ReportOfLevy.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom25PublicAuctionRegFrm.rdlc">
+		<Content Include="Reports\Ltoms\Ltom25PublicAuctionRegFrm.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom27UndertakingAndWaiverOfBidders.rdlc">
+		<Content Include="Reports\Ltoms\Ltom27UndertakingAndWaiverOfBidders.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom28RulesAndRegulationOfPublicAuction.rdlc">
+		<Content Include="Reports\Ltoms\Ltom28RulesAndRegulationOfPublicAuction.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom29CertificateOfSale.rdlc">
+		<Content Include="Reports\Ltoms\Ltom29CertificateOfSale.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc">
+		<Content Include="Reports\Ltoms\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom31ReportOfSale.rdlc">
+		<Content Include="Reports\Ltoms\Ltom31ReportOfSale.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom32CertificateOfRedemption.rdlc">
+		<Content Include="Reports\Ltoms\Ltom32CertificateOfRedemption.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom34FinalDeedOfSale.rdlc">
+		<Content Include="Reports\Ltoms\Ltom34FinalDeedOfSale.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\Ltom\Ltom33CancellationOfWarrantOfLevey.rdlc">
+		<Content Include="Reports\Ltoms\Ltom33CancellationOfWarrantOfLevey.rdlc">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\post-trial-balance.rdlc">
