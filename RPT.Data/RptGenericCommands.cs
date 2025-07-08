@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using RPT.Domain.Interfaces;
+using System;
 using System.Data;
 using System.Data.Common;
 
@@ -126,13 +127,17 @@ namespace RPT.Data
 
         public bool TestConnection(string connectionString)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                if (connection.Ping())
-                    return true;
-                return false;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    if (connection.Ping())
+                        return true;
+                    return false;
+                }
             }
+            catch (Exception) { return false; }
         }
     }
 }

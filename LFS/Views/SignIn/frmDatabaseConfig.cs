@@ -84,7 +84,7 @@ namespace LFS.Views.SignIn
                 if (radioButton.Checked)
                 {
                     var radTag = radioButton.Tag;
-                    var selectedModel = Helper.LguServerModels().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, lfsInstance = m.lfsInstance, rpmInstance = m.rpmInstance, Emblem = m.Emblem }).First();
+                    var selectedModel = Helper.AvailableServerList().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, lfsInstance = m.lfsInstance, rpmInstance = m.rpmInstance, Emblem = m.Emblem }).First();
                     Helper.selectedServerModel = selectedModel;
                     return true;
                 }

@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Data.Common;
 
@@ -126,13 +127,15 @@ namespace ACC.Data
 
         public bool TestConnection(string connectionString)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                if (connection.Ping())
-                    return true;
-                return false;
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    return connection.Ping();
+                }
             }
+            catch (Exception) { return false; }
         }
     }
 }

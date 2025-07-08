@@ -470,7 +470,7 @@ namespace LFS
                 //                                    password: "rpt_user123")
             };
 
-            //lguModelList.Add(buugZsiModel);
+            lguModelList.Add(buugZsiModel);
             lguModelList.Add(titayZsiModel);
 
             return lguModelList;
