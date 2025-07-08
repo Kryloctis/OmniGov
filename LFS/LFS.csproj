@@ -19,7 +19,7 @@
 		<AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
-		<Version>1.0.11.0</Version>
+		<Version>1.0.11.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Views\Dashboard\TreasuryDashboard\**" />
@@ -33,7 +33,6 @@
 		<None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="Documents\updateLog.txt" />
 		<None Remove="Receipts\AF15.rdlc" />
 		<None Remove="Receipts\AF51.rdlc" />
 		<None Remove="Receipts\AF52.rdlc" />
@@ -127,9 +126,6 @@
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="Documents\updateLog.txt">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
 		<Content Include="Receipts\AF51.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
