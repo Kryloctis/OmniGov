@@ -445,6 +445,7 @@ namespace LFS
                 //                                    Id: "rpt_user",
                 //                                    password: "rpt_user123")
             };
+
             var titayZsiModel = new LguServerModel()
             {
                 LguId = 2,
@@ -470,6 +471,19 @@ namespace LFS
                 //                                    password: "rpt_user123")
             };
 
+            var demoModel = new LguServerModel()
+            {
+                LguId = 3,
+                MunicipalityCode = "Demo",
+                MunicipalityName = "Demo",
+                ProvinceCode = "Demo",
+                ProvinceName = "Demo",
+                Emblem = Properties.Resources.list_money_banknotes_18px,
+                lfsInstance = ConfigurationManager.ConnectionStrings["demo_lfs_instance"].ConnectionString,
+                rpmInstance = ConfigurationManager.ConnectionStrings["demo_rpm_instance"].ConnectionString,
+            };
+
+            lguModelList.Add(demoModel);
             lguModelList.Add(buugZsiModel);
             lguModelList.Add(titayZsiModel);
 

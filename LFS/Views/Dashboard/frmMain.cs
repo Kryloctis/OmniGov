@@ -116,6 +116,7 @@ namespace LFS.Views.Dashboard
         {
             try
             {
+                tlStrpLblServer.Text = Helper.selectedServerModel.MunicipalityName;
                 tlStrpLblVersion.Text = $"Version: {Helper.version}";
                 ValidatePermissions();
                 LoadTabPagesContents(tabControlMain);

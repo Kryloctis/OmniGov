@@ -64,6 +64,9 @@
             tlStrpWhatsNew = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblServer = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -453,7 +456,7 @@
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(1125, 652);
+            tabPageMyAccount.Size = new System.Drawing.Size(192, 72);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -465,7 +468,7 @@
             ucMyAccount1.Location = new System.Drawing.Point(3, 3);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(1119, 646);
+            ucMyAccount1.Size = new System.Drawing.Size(186, 66);
             ucMyAccount1.TabIndex = 8;
             // 
             // taxRatesToolStripMenuItem
@@ -483,7 +486,7 @@
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel4, tlStrpLblVersion });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel5, toolStripStatusLabel3, tlStrpLblServer, toolStripStatusLabel4, tlStrpLblVersion });
             statusStrip1.Location = new System.Drawing.Point(0, 680);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(1275, 22);
@@ -493,7 +496,7 @@
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(1075, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(975, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // tlStrpWhatsNew
@@ -524,6 +527,28 @@
             tlStrpLblVersion.Size = new System.Drawing.Size(84, 17);
             tlStrpLblVersion.Text = "Version: 0.0.0.0";
             tlStrpLblVersion.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(42, 17);
+            toolStripStatusLabel3.Text = "Server:";
+            // 
+            // tlStrpLblServer
+            // 
+            tlStrpLblServer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblServer.Name = "tlStrpLblServer";
+            tlStrpLblServer.Size = new System.Drawing.Size(17, 17);
+            tlStrpLblServer.Text = "--";
+            // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmMain
             // 
@@ -598,5 +623,8 @@
         private System.Windows.Forms.ToolStripStatusLabel tlStrpWhatsNew;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tlStrpLblVersion;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpLblServer;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }
