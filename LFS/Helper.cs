@@ -18,7 +18,7 @@ namespace LFS
     {
         internal static byte userId;
         internal static LguServerModel selectedServerModel;
-        internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus-local-finance-system/products/lfs";
+        internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
