@@ -288,7 +288,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="MySql.Data" Version="8.2.0" />
-		<PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
+		<PackageReference Include="ReportViewerCore.WinForms" Version="15.1.26" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 	</ItemGroup>
 	<ItemGroup>
