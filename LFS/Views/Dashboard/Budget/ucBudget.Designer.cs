@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucBudget));
-            ucBudgetSummary1 = new BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            ucBudgetSummary1 = new LFS.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             transactionsTstrpDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
             appropriationsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,28 +74,28 @@
             // appropriationsTStrpMnuItm
             // 
             appropriationsTStrpMnuItm.Name = "appropriationsTStrpMnuItm";
-            appropriationsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            appropriationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             appropriationsTStrpMnuItm.Text = "Appropriations...";
             appropriationsTStrpMnuItm.Click += appropriationsTStrpMnuItm_Click;
             // 
             // allotmentReleaseTStrpMnuItm
             // 
             allotmentReleaseTStrpMnuItm.Name = "allotmentReleaseTStrpMnuItm";
-            allotmentReleaseTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            allotmentReleaseTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             allotmentReleaseTStrpMnuItm.Text = "Allotment Release...";
             allotmentReleaseTStrpMnuItm.Click += allotmentReleaseTStrpMnuItm_Click;
             // 
             // obligationsTStrpMnuItm
             // 
             obligationsTStrpMnuItm.Name = "obligationsTStrpMnuItm";
-            obligationsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            obligationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
             obligationsTStrpMnuItm.Text = "Obligations...";
             obligationsTStrpMnuItm.Click += obligationsTStrpMnuItm_Click;
             // 
             // ucBudget
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             Controls.Add(ucBudgetSummary1);
             Controls.Add(toolStrip1);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);

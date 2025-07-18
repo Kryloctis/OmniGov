@@ -64,14 +64,14 @@
             // chartOfAccountsTStrpMnuItm
             // 
             chartOfAccountsTStrpMnuItm.Name = "chartOfAccountsTStrpMnuItm";
-            chartOfAccountsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            chartOfAccountsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
             chartOfAccountsTStrpMnuItm.Text = "Chart of Accounts...";
             chartOfAccountsTStrpMnuItm.Click += chartOfAccountsTStrpMnuItm_Click;
             // 
             // journalsTStrpMnuItm
             // 
             journalsTStrpMnuItm.Name = "journalsTStrpMnuItm";
-            journalsTStrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            journalsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
             journalsTStrpMnuItm.Text = "Journals...";
             journalsTStrpMnuItm.Click += journalsTStrpMnuItm_Click;
             // 
@@ -88,8 +88,8 @@
             // 
             // ucAccounting
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             Controls.Add(ucJevDashboard1);
             Controls.Add(toolStrip2);
             Name = "ucAccounting";

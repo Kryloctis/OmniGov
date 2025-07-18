@@ -29,381 +29,380 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lnkProcurementReceivedJournal = new System.Windows.Forms.LinkLabel();
-            this.lblProcurementReceivedJournalCount = new System.Windows.Forms.Label();
-            this.pnlPendingJEV = new System.Windows.Forms.Panel();
-            this.lnkCashDisbursementJournal = new System.Windows.Forms.LinkLabel();
-            this.lblCashDisbursementsJournalCount = new System.Windows.Forms.Label();
-            this.pnlApprovedJEV = new System.Windows.Forms.Panel();
-            this.lnkGeneralJournal = new System.Windows.Forms.LinkLabel();
-            this.lblGeneralJournalCount = new System.Windows.Forms.Label();
-            this.pnlJEV = new System.Windows.Forms.Panel();
-            this.lnkCashReceiptJournal = new System.Windows.Forms.LinkLabel();
-            this.lblCashReceiptsJournalCount = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lnkCheckDisbursementsJournal = new System.Windows.Forms.LinkLabel();
-            this.lblCheckDisbursementsJournalCount = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lnkADAdisbursementsJournal = new System.Windows.Forms.LinkLabel();
-            this.lblADADisbursementsJournal = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.pnlPendingJEV.SuspendLayout();
-            this.pnlApprovedJEV.SuspendLayout();
-            this.pnlJEV.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
+            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            panel3 = new System.Windows.Forms.Panel();
+            lnkProcurementReceivedJournal = new System.Windows.Forms.LinkLabel();
+            lblProcurementReceivedJournalCount = new System.Windows.Forms.Label();
+            pnlPendingJEV = new System.Windows.Forms.Panel();
+            lnkCashDisbursementJournal = new System.Windows.Forms.LinkLabel();
+            lblCashDisbursementsJournalCount = new System.Windows.Forms.Label();
+            pnlApprovedJEV = new System.Windows.Forms.Panel();
+            lnkGeneralJournal = new System.Windows.Forms.LinkLabel();
+            lblGeneralJournalCount = new System.Windows.Forms.Label();
+            pnlJEV = new System.Windows.Forms.Panel();
+            lnkCashReceiptJournal = new System.Windows.Forms.LinkLabel();
+            lblCashReceiptsJournalCount = new System.Windows.Forms.Label();
+            panel1 = new System.Windows.Forms.Panel();
+            lnkCheckDisbursementsJournal = new System.Windows.Forms.LinkLabel();
+            lblCheckDisbursementsJournalCount = new System.Windows.Forms.Label();
+            panel2 = new System.Windows.Forms.Panel();
+            lnkADAdisbursementsJournal = new System.Windows.Forms.LinkLabel();
+            lblADADisbursementsJournal = new System.Windows.Forms.Label();
+            flowLayoutPanel1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
+            pnlPendingJEV.SuspendLayout();
+            pnlApprovedJEV.SuspendLayout();
+            pnlJEV.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
-            this.flowLayoutPanel1.Controls.Add(this.dateTimePicker1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(941, 29);
-            this.flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.Controls.Add(cmbxFunds);
+            flowLayoutPanel1.Controls.Add(dateTimePicker1);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(941, 29);
+            flowLayoutPanel1.TabIndex = 0;
             // 
             // cmbxFunds
             // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(3, 3);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(208, 23);
-            this.cmbxFunds.TabIndex = 0;
-            this.cmbxFunds.SelectedValueChanged += new System.EventHandler(this.cmbxFunds_SelectedValueChanged);
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(3, 3);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(208, 23);
+            cmbxFunds.TabIndex = 0;
+            cmbxFunds.SelectedValueChanged += cmbxFunds_SelectedValueChanged;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "MMMM-  yyyy";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(217, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(211, 23);
-            this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            dateTimePicker1.CustomFormat = "MMMM-  yyyy";
+            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new System.Drawing.Point(217, 3);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new System.Drawing.Size(211, 23);
+            dateTimePicker1.TabIndex = 1;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlPendingJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlApprovedJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 4, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(941, 131);
-            this.tableLayoutPanel1.TabIndex = 15;
+            tableLayoutPanel1.ColumnCount = 6;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            tableLayoutPanel1.Controls.Add(panel3, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlPendingJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlApprovedJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel1, 3, 0);
+            tableLayoutPanel1.Controls.Add(panel2, 4, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(941, 131);
+            tableLayoutPanel1.TabIndex = 15;
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.lnkProcurementReceivedJournal);
-            this.panel3.Controls.Add(this.lblProcurementReceivedJournalCount);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(315, 13);
-            this.panel3.MinimumSize = new System.Drawing.Size(150, 113);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 115);
-            this.panel3.TabIndex = 30;
+            panel3.BackColor = System.Drawing.Color.White;
+            panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel3.Controls.Add(lnkProcurementReceivedJournal);
+            panel3.Controls.Add(lblProcurementReceivedJournalCount);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(315, 13);
+            panel3.MinimumSize = new System.Drawing.Size(150, 113);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(150, 115);
+            panel3.TabIndex = 30;
             // 
             // lnkProcurementReceivedJournal
             // 
-            this.lnkProcurementReceivedJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkProcurementReceivedJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkProcurementReceivedJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkProcurementReceivedJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkProcurementReceivedJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkProcurementReceivedJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkProcurementReceivedJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkProcurementReceivedJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkProcurementReceivedJournal.Name = "lnkProcurementReceivedJournal";
-            this.lnkProcurementReceivedJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkProcurementReceivedJournal.Size = new System.Drawing.Size(148, 42);
-            this.lnkProcurementReceivedJournal.TabIndex = 15;
-            this.lnkProcurementReceivedJournal.TabStop = true;
-            this.lnkProcurementReceivedJournal.Text = "Procurement Received Journal";
-            this.lnkProcurementReceivedJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkProcurementReceivedJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProcurementReceivedJournal_LinkClicked);
+            lnkProcurementReceivedJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkProcurementReceivedJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkProcurementReceivedJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkProcurementReceivedJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkProcurementReceivedJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkProcurementReceivedJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkProcurementReceivedJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkProcurementReceivedJournal.Location = new System.Drawing.Point(0, 61);
+            lnkProcurementReceivedJournal.Name = "lnkProcurementReceivedJournal";
+            lnkProcurementReceivedJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkProcurementReceivedJournal.Size = new System.Drawing.Size(148, 42);
+            lnkProcurementReceivedJournal.TabIndex = 15;
+            lnkProcurementReceivedJournal.TabStop = true;
+            lnkProcurementReceivedJournal.Text = "Procurement Received Journal";
+            lnkProcurementReceivedJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkProcurementReceivedJournal.LinkClicked += lnkProcurementReceivedJournal_LinkClicked;
             // 
             // lblProcurementReceivedJournalCount
             // 
-            this.lblProcurementReceivedJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProcurementReceivedJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblProcurementReceivedJournalCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblProcurementReceivedJournalCount.Location = new System.Drawing.Point(0, 0);
-            this.lblProcurementReceivedJournalCount.Name = "lblProcurementReceivedJournalCount";
-            this.lblProcurementReceivedJournalCount.Size = new System.Drawing.Size(148, 61);
-            this.lblProcurementReceivedJournalCount.TabIndex = 6;
-            this.lblProcurementReceivedJournalCount.Text = "0";
-            this.lblProcurementReceivedJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblProcurementReceivedJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
+            lblProcurementReceivedJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblProcurementReceivedJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblProcurementReceivedJournalCount.Location = new System.Drawing.Point(0, 0);
+            lblProcurementReceivedJournalCount.Name = "lblProcurementReceivedJournalCount";
+            lblProcurementReceivedJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblProcurementReceivedJournalCount.TabIndex = 6;
+            lblProcurementReceivedJournalCount.Text = "0";
+            lblProcurementReceivedJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlPendingJEV
             // 
-            this.pnlPendingJEV.BackColor = System.Drawing.Color.White;
-            this.pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPendingJEV.Controls.Add(this.lnkCashDisbursementJournal);
-            this.pnlPendingJEV.Controls.Add(this.lblCashDisbursementsJournalCount);
-            this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPendingJEV.Location = new System.Drawing.Point(471, 13);
-            this.pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlPendingJEV.Name = "pnlPendingJEV";
-            this.pnlPendingJEV.Size = new System.Drawing.Size(150, 115);
-            this.pnlPendingJEV.TabIndex = 29;
+            pnlPendingJEV.BackColor = System.Drawing.Color.White;
+            pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlPendingJEV.Controls.Add(lnkCashDisbursementJournal);
+            pnlPendingJEV.Controls.Add(lblCashDisbursementsJournalCount);
+            pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlPendingJEV.Location = new System.Drawing.Point(471, 13);
+            pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlPendingJEV.Name = "pnlPendingJEV";
+            pnlPendingJEV.Size = new System.Drawing.Size(150, 115);
+            pnlPendingJEV.TabIndex = 29;
             // 
             // lnkCashDisbursementJournal
             // 
-            this.lnkCashDisbursementJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCashDisbursementJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkCashDisbursementJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkCashDisbursementJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCashDisbursementJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkCashDisbursementJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkCashDisbursementJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCashDisbursementJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkCashDisbursementJournal.Name = "lnkCashDisbursementJournal";
-            this.lnkCashDisbursementJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkCashDisbursementJournal.Size = new System.Drawing.Size(148, 42);
-            this.lnkCashDisbursementJournal.TabIndex = 15;
-            this.lnkCashDisbursementJournal.TabStop = true;
-            this.lnkCashDisbursementJournal.Text = "Cash Disbursements Journal";
-            this.lnkCashDisbursementJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkCashDisbursementJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCashDisbursementJournal_LinkClicked);
+            lnkCashDisbursementJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCashDisbursementJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkCashDisbursementJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkCashDisbursementJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkCashDisbursementJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCashDisbursementJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkCashDisbursementJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCashDisbursementJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCashDisbursementJournal.Name = "lnkCashDisbursementJournal";
+            lnkCashDisbursementJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkCashDisbursementJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCashDisbursementJournal.TabIndex = 15;
+            lnkCashDisbursementJournal.TabStop = true;
+            lnkCashDisbursementJournal.Text = "Cash Disbursements Journal";
+            lnkCashDisbursementJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkCashDisbursementJournal.LinkClicked += lnkCashDisbursementJournal_LinkClicked;
             // 
             // lblCashDisbursementsJournalCount
             // 
-            this.lblCashDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCashDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCashDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCashDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
-            this.lblCashDisbursementsJournalCount.Name = "lblCashDisbursementsJournalCount";
-            this.lblCashDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
-            this.lblCashDisbursementsJournalCount.TabIndex = 6;
-            this.lblCashDisbursementsJournalCount.Text = "0";
-            this.lblCashDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblCashDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCashDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblCashDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCashDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
+            lblCashDisbursementsJournalCount.Name = "lblCashDisbursementsJournalCount";
+            lblCashDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCashDisbursementsJournalCount.TabIndex = 6;
+            lblCashDisbursementsJournalCount.Text = "0";
+            lblCashDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlApprovedJEV
             // 
-            this.pnlApprovedJEV.BackColor = System.Drawing.Color.White;
-            this.pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlApprovedJEV.Controls.Add(this.lnkGeneralJournal);
-            this.pnlApprovedJEV.Controls.Add(this.lblGeneralJournalCount);
-            this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlApprovedJEV.Location = new System.Drawing.Point(3, 13);
-            this.pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlApprovedJEV.Name = "pnlApprovedJEV";
-            this.pnlApprovedJEV.Size = new System.Drawing.Size(150, 115);
-            this.pnlApprovedJEV.TabIndex = 28;
+            pnlApprovedJEV.BackColor = System.Drawing.Color.White;
+            pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlApprovedJEV.Controls.Add(lnkGeneralJournal);
+            pnlApprovedJEV.Controls.Add(lblGeneralJournalCount);
+            pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlApprovedJEV.Location = new System.Drawing.Point(3, 13);
+            pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlApprovedJEV.Name = "pnlApprovedJEV";
+            pnlApprovedJEV.Size = new System.Drawing.Size(150, 115);
+            pnlApprovedJEV.TabIndex = 28;
             // 
             // lnkGeneralJournal
             // 
-            this.lnkGeneralJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkGeneralJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkGeneralJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkGeneralJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkGeneralJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkGeneralJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkGeneralJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkGeneralJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkGeneralJournal.Name = "lnkGeneralJournal";
-            this.lnkGeneralJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkGeneralJournal.Size = new System.Drawing.Size(148, 42);
-            this.lnkGeneralJournal.TabIndex = 14;
-            this.lnkGeneralJournal.TabStop = true;
-            this.lnkGeneralJournal.Text = "General Journal";
-            this.lnkGeneralJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkGeneralJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGeneralJournal_LinkClicked);
+            lnkGeneralJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkGeneralJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkGeneralJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkGeneralJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkGeneralJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkGeneralJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkGeneralJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkGeneralJournal.Location = new System.Drawing.Point(0, 61);
+            lnkGeneralJournal.Name = "lnkGeneralJournal";
+            lnkGeneralJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkGeneralJournal.Size = new System.Drawing.Size(148, 42);
+            lnkGeneralJournal.TabIndex = 14;
+            lnkGeneralJournal.TabStop = true;
+            lnkGeneralJournal.Text = "General Journal";
+            lnkGeneralJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkGeneralJournal.LinkClicked += lnkGeneralJournal_LinkClicked;
             // 
             // lblGeneralJournalCount
             // 
-            this.lblGeneralJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblGeneralJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblGeneralJournalCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblGeneralJournalCount.Location = new System.Drawing.Point(0, 0);
-            this.lblGeneralJournalCount.Name = "lblGeneralJournalCount";
-            this.lblGeneralJournalCount.Size = new System.Drawing.Size(148, 61);
-            this.lblGeneralJournalCount.TabIndex = 6;
-            this.lblGeneralJournalCount.Text = "0";
-            this.lblGeneralJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblGeneralJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
+            lblGeneralJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblGeneralJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblGeneralJournalCount.Location = new System.Drawing.Point(0, 0);
+            lblGeneralJournalCount.Name = "lblGeneralJournalCount";
+            lblGeneralJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblGeneralJournalCount.TabIndex = 6;
+            lblGeneralJournalCount.Text = "0";
+            lblGeneralJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlJEV
             // 
-            this.pnlJEV.BackColor = System.Drawing.Color.White;
-            this.pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlJEV.Controls.Add(this.lnkCashReceiptJournal);
-            this.pnlJEV.Controls.Add(this.lblCashReceiptsJournalCount);
-            this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlJEV.Location = new System.Drawing.Point(159, 13);
-            this.pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlJEV.Name = "pnlJEV";
-            this.pnlJEV.Size = new System.Drawing.Size(150, 115);
-            this.pnlJEV.TabIndex = 26;
+            pnlJEV.BackColor = System.Drawing.Color.White;
+            pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlJEV.Controls.Add(lnkCashReceiptJournal);
+            pnlJEV.Controls.Add(lblCashReceiptsJournalCount);
+            pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlJEV.Location = new System.Drawing.Point(159, 13);
+            pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlJEV.Name = "pnlJEV";
+            pnlJEV.Size = new System.Drawing.Size(150, 115);
+            pnlJEV.TabIndex = 26;
             // 
             // lnkCashReceiptJournal
             // 
-            this.lnkCashReceiptJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCashReceiptJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkCashReceiptJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkCashReceiptJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCashReceiptJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkCashReceiptJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkCashReceiptJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCashReceiptJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkCashReceiptJournal.Name = "lnkCashReceiptJournal";
-            this.lnkCashReceiptJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkCashReceiptJournal.Size = new System.Drawing.Size(148, 42);
-            this.lnkCashReceiptJournal.TabIndex = 15;
-            this.lnkCashReceiptJournal.TabStop = true;
-            this.lnkCashReceiptJournal.Text = "Cash Receipts Journal";
-            this.lnkCashReceiptJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkCashReceiptJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCashReceiptJournal_LinkClicked);
+            lnkCashReceiptJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCashReceiptJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkCashReceiptJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkCashReceiptJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkCashReceiptJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCashReceiptJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkCashReceiptJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCashReceiptJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCashReceiptJournal.Name = "lnkCashReceiptJournal";
+            lnkCashReceiptJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkCashReceiptJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCashReceiptJournal.TabIndex = 15;
+            lnkCashReceiptJournal.TabStop = true;
+            lnkCashReceiptJournal.Text = "Cash Receipts Journal";
+            lnkCashReceiptJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkCashReceiptJournal.LinkClicked += lnkCashReceiptJournal_LinkClicked;
             // 
             // lblCashReceiptsJournalCount
             // 
-            this.lblCashReceiptsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCashReceiptsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCashReceiptsJournalCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCashReceiptsJournalCount.Location = new System.Drawing.Point(0, 0);
-            this.lblCashReceiptsJournalCount.Name = "lblCashReceiptsJournalCount";
-            this.lblCashReceiptsJournalCount.Size = new System.Drawing.Size(148, 61);
-            this.lblCashReceiptsJournalCount.TabIndex = 6;
-            this.lblCashReceiptsJournalCount.Text = "0";
-            this.lblCashReceiptsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblCashReceiptsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCashReceiptsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblCashReceiptsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCashReceiptsJournalCount.Location = new System.Drawing.Point(0, 0);
+            lblCashReceiptsJournalCount.Name = "lblCashReceiptsJournalCount";
+            lblCashReceiptsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCashReceiptsJournalCount.TabIndex = 6;
+            lblCashReceiptsJournalCount.Text = "0";
+            lblCashReceiptsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lnkCheckDisbursementsJournal);
-            this.panel1.Controls.Add(this.lblCheckDisbursementsJournalCount);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(627, 13);
-            this.panel1.MinimumSize = new System.Drawing.Size(150, 113);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(150, 115);
-            this.panel1.TabIndex = 22;
+            panel1.BackColor = System.Drawing.Color.White;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Controls.Add(lnkCheckDisbursementsJournal);
+            panel1.Controls.Add(lblCheckDisbursementsJournalCount);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(627, 13);
+            panel1.MinimumSize = new System.Drawing.Size(150, 113);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(150, 115);
+            panel1.TabIndex = 22;
             // 
             // lnkCheckDisbursementsJournal
             // 
-            this.lnkCheckDisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCheckDisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkCheckDisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkCheckDisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCheckDisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkCheckDisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkCheckDisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCheckDisbursementsJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkCheckDisbursementsJournal.Name = "lnkCheckDisbursementsJournal";
-            this.lnkCheckDisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkCheckDisbursementsJournal.Size = new System.Drawing.Size(148, 42);
-            this.lnkCheckDisbursementsJournal.TabIndex = 16;
-            this.lnkCheckDisbursementsJournal.TabStop = true;
-            this.lnkCheckDisbursementsJournal.Text = "Check Disbursements Journal";
-            this.lnkCheckDisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkCheckDisbursementsJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCheckDisbursementsJournal_LinkClicked);
+            lnkCheckDisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCheckDisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkCheckDisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkCheckDisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkCheckDisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCheckDisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkCheckDisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCheckDisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCheckDisbursementsJournal.Name = "lnkCheckDisbursementsJournal";
+            lnkCheckDisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkCheckDisbursementsJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCheckDisbursementsJournal.TabIndex = 16;
+            lnkCheckDisbursementsJournal.TabStop = true;
+            lnkCheckDisbursementsJournal.Text = "Check Disbursements Journal";
+            lnkCheckDisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkCheckDisbursementsJournal.LinkClicked += lnkCheckDisbursementsJournal_LinkClicked;
             // 
             // lblCheckDisbursementsJournalCount
             // 
-            this.lblCheckDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCheckDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCheckDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCheckDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
-            this.lblCheckDisbursementsJournalCount.Name = "lblCheckDisbursementsJournalCount";
-            this.lblCheckDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
-            this.lblCheckDisbursementsJournalCount.TabIndex = 6;
-            this.lblCheckDisbursementsJournalCount.Text = "0";
-            this.lblCheckDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblCheckDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCheckDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblCheckDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCheckDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
+            lblCheckDisbursementsJournalCount.Name = "lblCheckDisbursementsJournalCount";
+            lblCheckDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCheckDisbursementsJournalCount.TabIndex = 6;
+            lblCheckDisbursementsJournalCount.Text = "0";
+            lblCheckDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.lnkADAdisbursementsJournal);
-            this.panel2.Controls.Add(this.lblADADisbursementsJournal);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(783, 13);
-            this.panel2.MinimumSize = new System.Drawing.Size(150, 113);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(155, 115);
-            this.panel2.TabIndex = 23;
+            panel2.BackColor = System.Drawing.Color.White;
+            panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel2.Controls.Add(lnkADAdisbursementsJournal);
+            panel2.Controls.Add(lblADADisbursementsJournal);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(783, 13);
+            panel2.MinimumSize = new System.Drawing.Size(150, 113);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(155, 115);
+            panel2.TabIndex = 23;
             // 
             // lnkADAdisbursementsJournal
             // 
-            this.lnkADAdisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkADAdisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
-            this.lnkADAdisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkADAdisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkADAdisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkADAdisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkADAdisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkADAdisbursementsJournal.Location = new System.Drawing.Point(0, 61);
-            this.lnkADAdisbursementsJournal.Name = "lnkADAdisbursementsJournal";
-            this.lnkADAdisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkADAdisbursementsJournal.Size = new System.Drawing.Size(153, 42);
-            this.lnkADAdisbursementsJournal.TabIndex = 15;
-            this.lnkADAdisbursementsJournal.TabStop = true;
-            this.lnkADAdisbursementsJournal.Text = "ADA Disbursements Journal";
-            this.lnkADAdisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lnkADAdisbursementsJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkADAdisbursementsJournal_LinkClicked);
+            lnkADAdisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkADAdisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
+            lnkADAdisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkADAdisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkADAdisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkADAdisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkADAdisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkADAdisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            lnkADAdisbursementsJournal.Name = "lnkADAdisbursementsJournal";
+            lnkADAdisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
+            lnkADAdisbursementsJournal.Size = new System.Drawing.Size(153, 42);
+            lnkADAdisbursementsJournal.TabIndex = 15;
+            lnkADAdisbursementsJournal.TabStop = true;
+            lnkADAdisbursementsJournal.Text = "ADA Disbursements Journal";
+            lnkADAdisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lnkADAdisbursementsJournal.LinkClicked += lnkADAdisbursementsJournal_LinkClicked;
             // 
             // lblADADisbursementsJournal
             // 
-            this.lblADADisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblADADisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblADADisbursementsJournal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblADADisbursementsJournal.Location = new System.Drawing.Point(0, 0);
-            this.lblADADisbursementsJournal.Name = "lblADADisbursementsJournal";
-            this.lblADADisbursementsJournal.Size = new System.Drawing.Size(153, 61);
-            this.lblADADisbursementsJournal.TabIndex = 6;
-            this.lblADADisbursementsJournal.Text = "0";
-            this.lblADADisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblADADisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            lblADADisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
+            lblADADisbursementsJournal.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblADADisbursementsJournal.Location = new System.Drawing.Point(0, 0);
+            lblADADisbursementsJournal.Name = "lblADADisbursementsJournal";
+            lblADADisbursementsJournal.Size = new System.Drawing.Size(153, 61);
+            lblADADisbursementsJournal.TabIndex = 6;
+            lblADADisbursementsJournal.Text = "0";
+            lblADADisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ucJournalsDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(941, 160);
-            this.Name = "ucJournalsDashboard";
-            this.Size = new System.Drawing.Size(941, 160);
-            this.Load += new System.EventHandler(this.ucJournalsDashboard_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.pnlPendingJEV.ResumeLayout(false);
-            this.pnlApprovedJEV.ResumeLayout(false);
-            this.pnlJEV.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(flowLayoutPanel1);
+            MinimumSize = new System.Drawing.Size(941, 160);
+            Name = "ucJournalsDashboard";
+            Size = new System.Drawing.Size(941, 160);
+            Load += ucJournalsDashboard_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            pnlPendingJEV.ResumeLayout(false);
+            pnlApprovedJEV.ResumeLayout(false);
+            pnlJEV.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

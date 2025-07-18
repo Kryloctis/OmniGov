@@ -395,9 +395,8 @@ namespace LFS.Views.Dashboard
             // 
             // ucJevDashboard
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoSize = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(0);
