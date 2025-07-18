@@ -1,11 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using BudgetSystem.Views.BudgetAppropriations;
+using BudgetSystem.Views.Manage.BudgetAppropriations;
 using LFS.Views.Manage.Augmentation;
 using LFS.Views.Manage.Realignment;
 using LFS.Views.Manage.SupplementalAppropriations;
-using BudgetSystem.Views.BudgetAppropriations;
-using BudgetSystem.Views.Manage.BudgetAppropriations;
-using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -603,7 +602,6 @@ namespace LFS.Views.Manage.BudgetAppropriations
         private void btnRealignment_Click(object sender, EventArgs e)
         {
             _ = new frmRealignment().ShowDialog();
-
         }
 
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

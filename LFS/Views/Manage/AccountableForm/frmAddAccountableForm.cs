@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +31,6 @@ namespace LFS.Views.Manage.AccountableForm
                 AccFormNo = uc.txtFormNo.Text.Trim(),
                 AccFormDesc = uc.txtFormDescription.Text.Trim(),
                 IsCashTicket = uc.cbIsCashTickets.Checked
-
             };
 
             return AccFactory.AccountableFormsRepository().Insert(accModel);

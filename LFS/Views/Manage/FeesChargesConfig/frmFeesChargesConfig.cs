@@ -2,7 +2,6 @@
 using ACC.Domain.Models;
 using LFS.Views.Manage.FeesChargesConfig.Classification;
 using LFS.Views.Manage.FeesChargesConfig.FeesCharges;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
 {
     public partial class frmFeesChargesConfig : Form
     {
-        string lastTextSearch;
+        private string lastTextSearch;
 
         public frmFeesChargesConfig()
         {

@@ -1,6 +1,5 @@
 ﻿using LFS.Views.Manage.ChartOfAccounts;
 using LFS.Views.Manage.Journals;
-using LFS;
 using System;
 using System.Windows.Forms;
 

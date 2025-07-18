@@ -1,12 +1,7 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using LFS.Views.Manage.RealProperties;
-using DocumentFormat.OpenXml.Office.Word;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
-using MySqlX.XDevAPI.Common;
-using RPT.Data;
 using System;
 using System.ComponentModel;
 using System.Data;

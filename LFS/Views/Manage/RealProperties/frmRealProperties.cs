@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.Views.Manage.TaxPayers;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

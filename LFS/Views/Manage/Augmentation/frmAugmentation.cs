@@ -1,5 +1,4 @@
-﻿using LFS;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace LFS.Views.Manage.Augmentation
@@ -19,7 +18,6 @@ namespace LFS.Views.Manage.Augmentation
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -1,15 +1,11 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
-using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ZstdSharp.Unsafe;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LFS.Views.Reports.DailyCashPositionReport
 {

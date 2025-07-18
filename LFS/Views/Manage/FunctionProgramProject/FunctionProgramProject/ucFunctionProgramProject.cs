@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +33,8 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
                 };
 
                 dtServiceName.Rows.Add(items);
-            };
+            }
+            ;
 
             HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
         }

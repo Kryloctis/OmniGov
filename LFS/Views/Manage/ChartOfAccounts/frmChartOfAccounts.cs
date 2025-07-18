@@ -5,7 +5,6 @@ using LFS.Views.Manage.ChartOfAccounts.AccountGroup;
 using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
-using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

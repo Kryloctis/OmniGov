@@ -1,13 +1,9 @@
 ﻿using ACC.Data;
-using DocumentFormat.OpenXml.Bibliography;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LFS.Views.Reports.Journals
 {

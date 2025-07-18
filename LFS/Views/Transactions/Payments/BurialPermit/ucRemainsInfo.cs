@@ -1,13 +1,7 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.Payments.BurialPermit
@@ -81,7 +75,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
             txtContactInfo.Clear();
         }
 
-        internal (int remainRegistryId, int remainAge) GetRemainsInfo() 
+        internal (int remainRegistryId, int remainAge) GetRemainsInfo()
         {
             return (Convert.ToInt32(cmbxRegistry.SelectedValue), (int)nudAge.Value);
         }

@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using LFS.Properties;
 using LFS.Views.SignIn;
 using System;
@@ -9,7 +8,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LFS.Views.Dashboard.MyAccount
 {

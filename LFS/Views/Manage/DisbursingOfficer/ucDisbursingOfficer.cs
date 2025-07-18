@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.Views.Manage.LinkUser;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -159,6 +158,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                 LoadUsers();
             }
         }
+
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
@@ -199,6 +199,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
         {
             LoadUserDetails();
         }
+
         private void LoadUserDetails()
         {
             int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);

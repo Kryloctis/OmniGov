@@ -1,12 +1,10 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LFS.Views.Reports.ConsolidatedReceipts
 {

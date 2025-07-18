@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.Views.Transactions.Payments.BurialPermit;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

@@ -13,7 +13,6 @@ using LFS.Views.Manage.RptTaxRates;
 using LFS.Views.Manage.Signatories;
 using LFS.Views.Manage.Users.List;
 using LFS.Views.Manage.Users.Roles;
-using LFS;
 using System;
 using System.Windows.Forms;
 

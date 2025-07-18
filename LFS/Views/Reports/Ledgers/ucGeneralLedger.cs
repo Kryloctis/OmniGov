@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -173,7 +172,8 @@ namespace LFS.Views.Reports.Ledgers
                 dtGeneralLedger.Rows.Add(dataRowBeginningBalance);
                 totalRecordCount++;
                 runningRecordCount++;
-            };
+            }
+            ;
 
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
             {

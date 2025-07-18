@@ -1,9 +1,7 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace LFS.Views.Reports.GeneralCollection

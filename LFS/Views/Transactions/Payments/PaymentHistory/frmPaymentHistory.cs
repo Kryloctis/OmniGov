@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -212,7 +211,6 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
         {
             try
             {
-
                 if (Helper.MessageBoxConfirmCancel("Do you want to void this payment?"))
                 {
                     if (VoidPayment())
@@ -240,7 +238,6 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
                 };
 
                 return AccFactory.PaymentCollectionsRepository().VoidPayment(paymentCollectionModel);
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

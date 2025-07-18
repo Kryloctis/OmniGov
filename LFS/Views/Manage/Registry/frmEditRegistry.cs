@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -54,7 +53,8 @@ namespace LFS.Views.Manage.Registry
                     Helper.MessageBoxSuccess("Registry has been updated");
                     frmRegistry.LoadRecords();
                     Close();
-                };
+                }
+                ;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -70,7 +70,8 @@ namespace LFS.Views.Manage.Registry
                         Helper.MessageBoxSuccess("Registry has been updated");
                         frmRegistry.LoadRecords();
                         Close();
-                    };
+                    }
+                    ;
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -51,7 +50,8 @@ namespace LFS.Views.Manage.AllotmentRelease
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (ChangesSaved()) { uc.ResetForm(); Close(); };
+            if (ChangesSaved()) { uc.ResetForm(); Close(); }
+            ;
         }
     }
 }

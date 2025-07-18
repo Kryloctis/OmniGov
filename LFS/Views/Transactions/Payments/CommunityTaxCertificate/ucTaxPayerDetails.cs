@@ -25,12 +25,10 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 
         private void ucTaxPayerDetails_Load(object sender, EventArgs e)
         {
-
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         internal void ResetForm()
@@ -53,6 +51,5 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             nudWeight.Value = 0;
             txtOccupation.Clear();
         }
-
     }
 }

@@ -21,7 +21,6 @@ using LFS.Views.Transactions.Payments.PaymentHistory;
 using LFS.Views.Transactions.RCI;
 using LFS.Views.Transactions.ReceiptsIssued;
 using LFS.Views.Transactions.ReleasedAndUnReleasedChecks;
-using LFS;
 using System;
 using System.Windows.Forms;
 
@@ -137,8 +136,6 @@ namespace LFS.Views.Dashboard.Treasury
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
 
         private void feesChargesTstrpMnuItm_Click(object sender, EventArgs e)
         {

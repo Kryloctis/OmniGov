@@ -7,7 +7,6 @@ using LFS.Views.Dashboard.Treasury;
 using LFS.Views.SignIn;
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace LFS.Views.Dashboard

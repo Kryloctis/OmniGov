@@ -1,5 +1,4 @@
-﻿using LFS;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -183,7 +182,6 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
             PrintReport(reportViewerPrint, printerName);
             try
             {
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }

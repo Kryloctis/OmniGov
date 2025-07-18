@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -586,6 +585,5 @@ namespace LFS.Views.Manage.TaxPayers
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
     }
 }

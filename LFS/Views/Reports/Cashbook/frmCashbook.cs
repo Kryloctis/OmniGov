@@ -1,12 +1,9 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
-using Microsoft.ReportingServices.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace LFS.Views.Reports.Cashbook
 {
@@ -48,9 +45,9 @@ namespace LFS.Views.Reports.Cashbook
             HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbxBankAcc, "id", "account_no");
         }
 
-        private void ToogleRunButton(bool isGenerated) 
+        private void ToogleRunButton(bool isGenerated)
         {
-            btnRunReport.Text = isGenerated? "Run Report" :  "Generating Report...";
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
             btnRunReport.Enabled = isGenerated;
         }
 

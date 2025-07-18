@@ -36,7 +36,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             decimal totalAmountPayable = 0;
 
             return totalAmountPayable += nudBasicTax.Value + nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
-
         }
 
         internal decimal AdditionalCommunityTaxSum()
@@ -44,10 +43,8 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             return nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
         }
 
-
         private void ucTaxDue_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

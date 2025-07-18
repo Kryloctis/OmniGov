@@ -1,9 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership

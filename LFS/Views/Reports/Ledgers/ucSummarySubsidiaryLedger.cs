@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -108,7 +107,8 @@ namespace LFS.Views.Reports.Ledgers
                 runningProgressCount++;
                 int progressPercentage = (runningProgressCount * 100) / totalProgressCount;
                 backgroundWorker1.ReportProgress(progressPercentage);
-            };
+            }
+            ;
 
             return dataTable;
         }

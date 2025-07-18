@@ -1,6 +1,4 @@
 ﻿using ACC.Data;
-using LFS.Views.Reports.Journals;
-using LFS;
 using System;
 using System.Windows.Forms;
 

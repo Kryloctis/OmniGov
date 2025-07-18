@@ -1,12 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Reflection.Metadata.Ecma335;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.ReceiptsIssued

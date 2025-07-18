@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,7 +71,8 @@ namespace LFS.Views.Manage.Realignment
                     cmbFPP.DataSource = null;
                     cmbFPP.DropDownHeight = 100;
                     return;
-                };
+                }
+                ;
 
                 var fppDict = new Dictionary<string, string>();
 

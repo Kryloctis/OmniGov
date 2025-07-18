@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,7 +118,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
             LoadCollectors();
             LoadCashTickets();
         }
-            
+
         private DataColumn[] DataColumnsCollectingOfficers()
         {
             return new DataColumn[]

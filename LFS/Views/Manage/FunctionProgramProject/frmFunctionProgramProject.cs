@@ -4,7 +4,6 @@ using LFS.Views.Manage.FunctionProgramProject.FunctionalClassification;
 using LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 using LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
-using LFS;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -74,7 +73,8 @@ namespace LFS.Views.Manage.FunctionProgramProject
                 };
 
                 dataTable.Rows.Add(items);
-            };
+            }
+            ;
 
             HelperLoadRecords.SectorNameComboBox(dataTable, cmbxSector, "sector_name", "id");
         }
@@ -147,7 +147,8 @@ namespace LFS.Views.Manage.FunctionProgramProject
                 };
 
                 dtServiceName.Rows.Add(items);
-            };
+            }
+            ;
 
             HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbServiceName, "service_name", "id");
             cmbServiceName.SelectedValueChanged += new EventHandler(CmbServiceName_SelectedValueChanged);

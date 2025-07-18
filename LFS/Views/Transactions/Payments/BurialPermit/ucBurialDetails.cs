@@ -1,9 +1,7 @@
 ﻿using ACC.Data;
-using LFS;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace LFS.Views.Transactions.Payments.BurialPermit
 {

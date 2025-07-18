@@ -1,7 +1,5 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
-using DocumentFormat.OpenXml.InkML;
-using LFS;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;

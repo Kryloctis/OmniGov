@@ -1,7 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.Views.Transactions.Payments.BurialPermit;
-using LFS;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,11 +9,11 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 {
     public partial class frmCommunityTaxCertificate : Form
     {
-
         private readonly ucTaxPayerDetails ucTaxPayerDetails;
         private readonly ucTaxDue ucTaxDue;
         private readonly ucPayment ucPayment;
         private readonly ucPrintReceipt ucPrintReceipt;
+
         public frmCommunityTaxCertificate()
         {
             InitializeComponent();
@@ -69,10 +68,8 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 
         private void InitializeReceipt()
         {
-
             var dictReportParameters = new Dictionary<string, string>()
             {
-
                 { "paramYear", ucTaxPayerDetails.nudYear.Text},
                 { "paramPlaceOfIssue", ucTaxPayerDetails.txtPlaceOfIssue.Text },
                 { "paramDateIssued", ucTaxPayerDetails.dtpDateOfIssued.Text},
@@ -93,9 +90,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 { "paramTotal", ucTaxDue.ComputeTotalAmountPayable().ToString("N2") },
                 { "paramInterest", "0" },
                 { "paramTotalAmountPaid", ucTaxDue.ComputeTotalAmountPayable().ToString("N2")},
-
-
-
             };
 
             string reportPath = $"{Application.StartupPath}\\Receipts\\AF15.rdlc";
@@ -109,7 +103,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 btnBackMain.Enabled = false;
             else
                 btnBackMain.Enabled = true;
-
 
             switch (tabControlMain.SelectedTab.Name)
             {
@@ -130,7 +123,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                     break;
             }
         }
-
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -154,7 +146,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             }
             e.Cancel = true;
         }
-
 
         private void ResetForm()
         {
@@ -194,9 +185,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 AdditionalCommunityTax = ucTaxDue.AdditionalCommunityTaxSum(),
                 CreatedBy = Helper.userId
             };
-
         }
-
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -257,7 +246,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                     }
                     break;
 
-
                 case "tabPageReceipt":
                     if (!ucPrintReceipt.ValidateChildren())
                     {
@@ -284,12 +272,10 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 
         private void ucTaxPayerDetails1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void ucPrintReceipt1_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

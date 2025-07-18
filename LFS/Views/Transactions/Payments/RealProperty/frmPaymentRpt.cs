@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using LFS.DataSets;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.RealProperty;
-using LFS;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -211,8 +210,6 @@ namespace LFS.Views.Transactions.Payments
 
             try
             {
-
-
                 tabControlMain.SelectedIndex++;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

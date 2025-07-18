@@ -1,17 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using DocumentFormat.OpenXml.Drawing.Spreadsheet;
-using DocumentFormat.OpenXml.Spreadsheet;
-using LFS;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace LFS.Views.Manage.Users.Roles

@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using LFS.Views.Manage.TaxPayers;
-using LFS;
 using System;
 using System.Windows.Forms;
 
