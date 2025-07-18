@@ -9,15 +9,11 @@ namespace LFS.Views.Reports.Saaobb
 {
     public partial class frmSaaobb : Form
     {
-        private readonly ReportViewer reportViewer;
-
         public frmSaaobb()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer = new ReportViewer();
-            reportViewer.Dock = DockStyle.Fill;
-            panelReport.Controls.Add(reportViewer);
+            panelReport.Controls.Add(reportViewer1);
             dtAsOf.Value = DateTime.Now;
         }
 
@@ -150,21 +146,22 @@ namespace LFS.Views.Reports.Saaobb
             }
         }
 
-        private bool LoadReport(LocalReport report)
+        private void LoadReport(LocalReport report)
         {
-            try
+            Cursor = Cursors.WaitCursor;
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOBB");
+            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            DateTime AsOf = dtAsOf.Value;
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+            var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
+
+            var parameters = new[]
             {
-                Cursor = Cursors.WaitCursor;
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOBB");
-                int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-                DateTime AsOf = dtAsOf.Value;
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-
-                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
-
-                var parameters = new[] {
+                    new ReportParameter("paramMunicipality", Helper.selectedServerModel.MunicipalityName),
+                    new ReportParameter("paramProvince", Helper.selectedServerModel.ProvinceName),
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
@@ -172,21 +169,16 @@ namespace LFS.Views.Reports.Saaobb
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-appropriations-allotments-obligations-and-balances.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtSAAOBB", DatatableSAAOBB()));
-                report.SetParameters(parameters);
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-appropriations-allotments-obligations-and-balances.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtSAAOBB", DatatableSAAOBB()));
+            report.SetParameters(parameters);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
 
-                reportViewer.RefreshReport();
-                Cursor = Cursors.Default;
-                return true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+            reportViewer1.RefreshReport();
+            Cursor = Cursors.Default;
         }
 
         private void LoadFunds()
@@ -208,9 +200,9 @@ namespace LFS.Views.Reports.Saaobb
         {
             try
             {
-                LoadReport(reportViewer.LocalReport);
+                LoadReport(reportViewer1.LocalReport);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
     }
 }
