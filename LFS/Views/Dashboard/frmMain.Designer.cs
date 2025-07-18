@@ -62,11 +62,11 @@
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpWhatsNew = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpLblServer = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageBudget.SuspendLayout();
@@ -302,7 +302,7 @@
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(192, 72);
+            tabPageAccounting.Size = new System.Drawing.Size(1125, 652);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -315,7 +315,7 @@
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel3.Size = new System.Drawing.Size(192, 0);
+            panel3.Size = new System.Drawing.Size(1125, 572);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
@@ -324,7 +324,7 @@
             ucAccounting1.Location = new System.Drawing.Point(5, 4);
             ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(182, 0);
+            ucAccounting1.Size = new System.Drawing.Size(1115, 564);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -335,7 +335,7 @@
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label2.Size = new System.Drawing.Size(192, 80);
+            label2.Size = new System.Drawing.Size(1125, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -346,7 +346,7 @@
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(192, 72);
+            tabPageTreasury.Size = new System.Drawing.Size(1125, 652);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -359,7 +359,7 @@
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel4.Size = new System.Drawing.Size(192, 0);
+            panel4.Size = new System.Drawing.Size(1125, 572);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
@@ -368,7 +368,7 @@
             ucTreasury1.Location = new System.Drawing.Point(5, 4);
             ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(182, 0);
+            ucTreasury1.Size = new System.Drawing.Size(1115, 564);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -379,7 +379,7 @@
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label3.Size = new System.Drawing.Size(192, 80);
+            label3.Size = new System.Drawing.Size(1125, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 
@@ -390,7 +390,7 @@
             tabPageSettings.Location = new System.Drawing.Point(4, 24);
             tabPageSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageSettings.Name = "tabPageSettings";
-            tabPageSettings.Size = new System.Drawing.Size(192, 72);
+            tabPageSettings.Size = new System.Drawing.Size(1125, 652);
             tabPageSettings.TabIndex = 4;
             tabPageSettings.Text = "tabPageSettings";
             tabPageSettings.UseVisualStyleBackColor = true;
@@ -402,7 +402,7 @@
             ucSettings1.Location = new System.Drawing.Point(0, 80);
             ucSettings1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucSettings1.Name = "ucSettings1";
-            ucSettings1.Size = new System.Drawing.Size(192, 0);
+            ucSettings1.Size = new System.Drawing.Size(1125, 572);
             ucSettings1.TabIndex = 6;
             // 
             // label5
@@ -413,7 +413,7 @@
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(192, 80);
+            label5.Size = new System.Drawing.Size(1125, 80);
             label5.TabIndex = 5;
             label5.Text = "Settings";
             // 
@@ -423,7 +423,7 @@
             tabPageReports.Controls.Add(label1);
             tabPageReports.Location = new System.Drawing.Point(4, 24);
             tabPageReports.Name = "tabPageReports";
-            tabPageReports.Size = new System.Drawing.Size(192, 72);
+            tabPageReports.Size = new System.Drawing.Size(1125, 652);
             tabPageReports.TabIndex = 5;
             tabPageReports.Text = "tabPageReports";
             tabPageReports.UseVisualStyleBackColor = true;
@@ -435,7 +435,7 @@
             ucReports1.Location = new System.Drawing.Point(0, 80);
             ucReports1.Name = "ucReports1";
             ucReports1.Padding = new System.Windows.Forms.Padding(4);
-            ucReports1.Size = new System.Drawing.Size(192, 0);
+            ucReports1.Size = new System.Drawing.Size(1125, 572);
             ucReports1.TabIndex = 9;
             // 
             // label1
@@ -446,7 +446,7 @@
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label1.Size = new System.Drawing.Size(192, 80);
+            label1.Size = new System.Drawing.Size(1125, 80);
             label1.TabIndex = 6;
             label1.Text = "Reports";
             // 
@@ -456,7 +456,7 @@
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(192, 72);
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 652);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -468,7 +468,7 @@
             ucMyAccount1.Location = new System.Drawing.Point(3, 3);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(186, 66);
+            ucMyAccount1.Size = new System.Drawing.Size(1119, 646);
             ucMyAccount1.TabIndex = 8;
             // 
             // taxRatesToolStripMenuItem
@@ -496,7 +496,7 @@
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(975, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(1006, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // tlStrpWhatsNew
@@ -510,6 +510,28 @@
             tlStrpWhatsNew.Size = new System.Drawing.Size(91, 17);
             tlStrpWhatsNew.Text = "What's New?";
             tlStrpWhatsNew.Click += tlStrpWhatsNew_Click;
+            // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(42, 17);
+            toolStripStatusLabel3.Text = "Server:";
+            // 
+            // tlStrpLblServer
+            // 
+            tlStrpLblServer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblServer.Name = "tlStrpLblServer";
+            tlStrpLblServer.Size = new System.Drawing.Size(17, 17);
+            tlStrpLblServer.Text = "--";
             // 
             // toolStripStatusLabel4
             // 
@@ -527,28 +549,6 @@
             tlStrpLblVersion.Size = new System.Drawing.Size(84, 17);
             tlStrpLblVersion.Text = "Version: 0.0.0.0";
             tlStrpLblVersion.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            // 
-            // toolStripStatusLabel3
-            // 
-            toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(42, 17);
-            toolStripStatusLabel3.Text = "Server:";
-            // 
-            // tlStrpLblServer
-            // 
-            tlStrpLblServer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            tlStrpLblServer.Name = "tlStrpLblServer";
-            tlStrpLblServer.Size = new System.Drawing.Size(17, 17);
-            tlStrpLblServer.Text = "--";
-            // 
-            // toolStripStatusLabel5
-            // 
-            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            toolStripStatusLabel5.Text = "|";
-            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmMain
             // 

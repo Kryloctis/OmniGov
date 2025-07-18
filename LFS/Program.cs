@@ -12,7 +12,6 @@ namespace LFS
         [STAThread]
         private static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmSignIn());
