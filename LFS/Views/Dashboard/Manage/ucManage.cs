@@ -16,11 +16,11 @@ using LFS.Views.Manage.Users.Roles;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Dashboard.Settings
+namespace LFS.Views.Dashboard.Manage
 {
-    public partial class ucSettings : UserControl
+    public partial class ucManage : UserControl
     {
-        public ucSettings()
+        public ucManage()
         {
             InitializeComponent();
         }

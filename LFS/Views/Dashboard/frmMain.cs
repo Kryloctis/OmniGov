@@ -2,7 +2,7 @@
 using LFS.Views.Dashboard.Budget;
 using LFS.Views.Dashboard.MyAccount;
 using LFS.Views.Dashboard.Reports;
-using LFS.Views.Dashboard.Settings;
+using LFS.Views.Dashboard.Manage;
 using LFS.Views.Dashboard.Treasury;
 using LFS.Views.SignIn;
 using System;
@@ -17,7 +17,7 @@ namespace LFS.Views.Dashboard
         private ucBudget ucBudget;
         private ucAccounting ucAccounting;
         private ucTreasury ucTreasury;
-        private ucSettings ucSettings;
+        private ucManage ucManage;
         private ucReports ucReports;
         private ucMyAccount ucMyAccount;
 
@@ -31,7 +31,7 @@ namespace LFS.Views.Dashboard
             this.ucBudget = ucBudget1;
             this.ucAccounting = ucAccounting1;
             this.ucTreasury = ucTreasury1;
-            this.ucSettings = ucSettings1;
+            this.ucManage = ucManage1;
             this.ucReports = ucReports1;
             this.ucMyAccount = ucMyAccount1;
         }
@@ -95,8 +95,8 @@ namespace LFS.Views.Dashboard
                     break;
 
                 case "tabPageSettings":
-                    ucSettings.OnLoad();
-                    radSettings.Checked = true;
+                    ucManage.OnLoad();
+                    radManage.Checked = true;
                     break;
 
                 case "tabPageReports":
@@ -163,11 +163,11 @@ namespace LFS.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void radSettings_CheckedChanged(object sender, EventArgs e)
+        private void radManage_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                tabControlMain.SelectedTab = tabPageSettings;
+                tabControlMain.SelectedTab = tabPageManage;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

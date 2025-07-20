@@ -1,6 +1,6 @@
-﻿namespace LFS.Views.Dashboard.Settings
+﻿namespace LFS.Views.Dashboard.Manage
 {
-    partial class ucSettings
+    partial class ucManage
     {
         /// <summary> 
         /// Required designer variable.
