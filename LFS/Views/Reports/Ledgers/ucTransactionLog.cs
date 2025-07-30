@@ -10,7 +10,6 @@ namespace LFS.Views.Reports.Ledgers
     public partial class ucTransactionLog : UserControl
     {
         private readonly ReportViewer reportViewer;
-        private decimal beginningBalance;
 
         public ucTransactionLog()
         {

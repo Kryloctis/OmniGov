@@ -828,7 +828,6 @@
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnSelectProperty;
         private System.Windows.Forms.ComboBox cmbxTaxpayer;
         private System.Windows.Forms.TextBox txtRepresentative;
         internal System.Windows.Forms.Label label3;

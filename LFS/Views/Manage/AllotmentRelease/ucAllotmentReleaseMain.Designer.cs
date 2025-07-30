@@ -362,8 +362,6 @@ namespace LFS.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.TextBox txtPurpose;
         internal System.Windows.Forms.MaskedTextBox mskYear;
         internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         internal System.Windows.Forms.DataGridView dgAllotmentRelease;
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.Label label5;

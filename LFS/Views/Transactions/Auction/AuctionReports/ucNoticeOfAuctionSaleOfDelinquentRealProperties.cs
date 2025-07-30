@@ -12,7 +12,6 @@ namespace LFS.Views.Transactions.Auction
     public partial class ucNoticeOfAuctionSaleOfDelinquentRealProperties : UserControl
     {
         private int auctionId;
-        private string auctionLocation;
 
         public ucNoticeOfAuctionSaleOfDelinquentRealProperties()
         {

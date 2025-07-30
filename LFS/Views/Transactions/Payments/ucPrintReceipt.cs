@@ -13,8 +13,6 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
 {
     public partial class ucPrintReceipt : UserControl
     {
-        private LocalReport LocalReport;
-
         public ucPrintReceipt()
         {
             InitializeComponent();

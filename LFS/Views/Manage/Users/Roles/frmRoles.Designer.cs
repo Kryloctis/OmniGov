@@ -338,7 +338,6 @@ namespace LFS.Views.Manage.Users.Roles
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.Panel panel1;

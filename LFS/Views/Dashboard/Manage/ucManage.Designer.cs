@@ -456,7 +456,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panelAdmin;
         private System.Windows.Forms.Panel panel1;

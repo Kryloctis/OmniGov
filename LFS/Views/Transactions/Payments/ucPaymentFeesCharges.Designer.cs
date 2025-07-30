@@ -272,7 +272,6 @@
         private System.Windows.Forms.DataGridView dgPaymentFeesCharges;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tStrpBtnSearch;
-        private System.Windows.Forms.ToolStripTextBox tStrpSearchg;
         private System.Windows.Forms.ToolStripTextBox tStrpTxtSearch;
     }
 }
