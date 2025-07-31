@@ -47,16 +47,6 @@ namespace LFS.Views.Manage.Users.Roles
             txtName.Text = roleDict["role_name"];
         }
 
-        private bool ToogleRolePermissions(int permissionId, string office)
-        {
-            if (isEdit)
-            {
-                var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
-                return office != roleDict["office"] ? false : AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId).AsEnumerable().Any(row => Convert.ToInt32(row.Field<byte>("permissions_id")) == permissionId);
-            }
-            return false;
-        }
-
         internal void OnLoad(bool isEdit, byte? roleId)
         {
             this.isEdit = isEdit;
@@ -66,6 +56,8 @@ namespace LFS.Views.Manage.Users.Roles
                 this.roleId = roleId.Value;
                 LoadSelectedRole();
             }
+
+            LoadPermissions();
         }
 
         internal void ResetForm()
@@ -76,7 +68,7 @@ namespace LFS.Views.Manage.Users.Roles
 
         internal void LoadPermissions()
         {
-            var dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
+            var dtPermissions = AccFactory.PermissionsRepository().GetRecords();
             var dataTable = new DataTable();
             var dataColumns = new DataColumn[]
             {
@@ -89,7 +81,7 @@ namespace LFS.Views.Manage.Users.Roles
             foreach (DataRow dataRow in dtPermissions.Rows)
             {
                 var newRow = dataTable.NewRow();
-                newRow["is_checked"] = ToogleRolePermissions(Convert.ToInt32(dataRow["id"]), office);
+                newRow["is_checked"] = false;
                 newRow["id"] = dataRow["id"];
                 newRow["permission_name"] = dataRow["permission_name"];
                 dataTable.Rows.Add(newRow);
@@ -98,22 +90,13 @@ namespace LFS.Views.Manage.Users.Roles
             HelperLoadRecords.RolesPermissionsDataGridView(dataTable, dgPermissions);
         }
 
-        private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadPermissions();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             string roleName = txtName.Text.Trim();
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
                 return false;
-            else if (isEdit ? AccFactory.RolesRepository().NameExist(roleName, office, roleId) : AccFactory.RolesRepository().NameExist(roleName, office))
+            else if (isEdit ? AccFactory.RolesRepository().NameExist(roleName, roleId) : AccFactory.RolesRepository().NameExist(roleName))
             {
                 errorProvider.SetError(textBox, "Role name already exist in this office.");
                 return false;

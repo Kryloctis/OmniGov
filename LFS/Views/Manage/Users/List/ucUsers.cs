@@ -86,8 +86,7 @@ namespace LFS.Views.Manage.Users.List
 
         internal void LoadRoles()
         {
-            string office = cmbOffice.Text;
-            DataTable dtRoleName = AccFactory.RolesRepository().GetRecordsByOffice(office);
+            DataTable dtRoleName = AccFactory.RolesRepository().GetRecords();
             HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
         }
 

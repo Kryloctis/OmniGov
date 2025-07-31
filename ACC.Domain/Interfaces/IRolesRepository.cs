@@ -5,12 +5,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRolesRepository : IAccRepository<RolesModel>
     {
-        DataTable GetRecordsByOffice(string office);
-
         DataTable GetRecords(int rowLimit, string searchText);
 
-        bool NameExist(string name, string office);
+        bool NameExist(string name);
 
-        bool NameExist(string name, string office, int id);
+        bool NameExist(string name, int id);
     }
 }

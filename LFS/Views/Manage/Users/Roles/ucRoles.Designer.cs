@@ -51,6 +51,7 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             // txtName
             // 
+            txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtName.Location = new System.Drawing.Point(11, 34);
             txtName.Margin = new System.Windows.Forms.Padding(5, 4, 5, 10);
             txtName.MaxLength = 99;
@@ -66,6 +67,7 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             // dgPermissions
             // 
+            dgPermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgPermissions.Location = new System.Drawing.Point(11, 119);
             dgPermissions.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -95,7 +97,7 @@ namespace LFS.Views.Manage.Users.Roles
             Controls.Add(txtName);
             Margin = new System.Windows.Forms.Padding(0);
             Name = "ucRoles";
-            Size = new System.Drawing.Size(481, 535);
+            Size = new System.Drawing.Size(476, 535);
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgPermissions).EndInit();
             ResumeLayout(false);
