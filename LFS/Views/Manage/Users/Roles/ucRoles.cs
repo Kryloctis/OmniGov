@@ -17,7 +17,6 @@ namespace LFS.Views.Manage.Users.Roles
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgPermissions, true, false);
-            dgPermissions.BorderStyle = BorderStyle.Fixed3D;
         }
 
         internal string GetFormErrors()
