@@ -37,7 +37,6 @@ namespace LFS.Views.Manage.Users.Roles
 
             return new RolesModel()
             {
-                Office = cmbxOffice.Text,
                 RoleName = txtName.Text.Trim(),
                 PermissionsModels = permissionModels,
             };
@@ -46,7 +45,6 @@ namespace LFS.Views.Manage.Users.Roles
         private void LoadSelectedRole()
         {
             var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
-            cmbxOffice.Text = roleDict["office"];
             txtName.Text = roleDict["role_name"];
         }
 
@@ -67,25 +65,18 @@ namespace LFS.Views.Manage.Users.Roles
             if (isEdit)
             {
                 this.roleId = roleId.Value;
-                LoadOffice();
                 LoadSelectedRole();
-            }
-            else
-            {
-                LoadOffice();
             }
         }
 
         internal void ResetForm()
         {
             txtName.Clear();
-            LoadOffice();
             LoadPermissions();
         }
 
         internal void LoadPermissions()
         {
-            string office = cmbxOffice.Text;
             var dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
             var dataTable = new DataTable();
             var dataColumns = new DataColumn[]
@@ -108,25 +99,6 @@ namespace LFS.Views.Manage.Users.Roles
             HelperLoadRecords.RolesPermissionsDataGridView(dataTable, dgPermissions);
         }
 
-        internal void LoadOffice()
-        {
-            var userDict = Helper.LoggedInUserData();
-            string[] offices;
-
-            switch (userDict["office"])
-            {
-                case "SysAdmin":
-                    offices = new string[] { "Budget", "Accounting", "Treasury" };
-                    break;
-
-                default:
-                    offices = new string[] { userDict["office"] };
-                    break;
-            }
-
-            cmbxOffice.DataSource = offices;
-        }
-
         private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -139,7 +111,6 @@ namespace LFS.Views.Manage.Users.Roles
         private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             string roleName = txtName.Text.Trim();
-            string office = cmbxOffice.Text;
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
                 return false;

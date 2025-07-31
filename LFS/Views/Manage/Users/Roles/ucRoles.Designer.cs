@@ -33,8 +33,6 @@ namespace LFS.Views.Manage.Users.Roles
             label1 = new System.Windows.Forms.Label();
             txtName = new System.Windows.Forms.TextBox();
             epName = new System.Windows.Forms.ErrorProvider(components);
-            cmbxOffice = new System.Windows.Forms.ComboBox();
-            label2 = new System.Windows.Forms.Label();
             dgPermissions = new System.Windows.Forms.DataGridView();
             label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)epName).BeginInit();
@@ -44,20 +42,20 @@ namespace LFS.Views.Manage.Users.Roles
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(1, 2);
+            label1.Location = new System.Drawing.Point(11, 0);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(44, 15);
+            label1.Size = new System.Drawing.Size(78, 30);
             label1.TabIndex = 3;
             label1.Text = "Name*";
             // 
             // txtName
             // 
-            txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtName.Location = new System.Drawing.Point(82, 2);
-            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtName.Location = new System.Drawing.Point(11, 34);
+            txtName.Margin = new System.Windows.Forms.Padding(5, 4, 5, 10);
             txtName.MaxLength = 99;
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(250, 23);
+            txtName.Size = new System.Drawing.Size(431, 35);
             txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -66,58 +64,38 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             epName.ContainerControl = this;
             // 
-            // cmbxOffice
-            // 
-            cmbxOffice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            cmbxOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxOffice.FormattingEnabled = true;
-            cmbxOffice.Location = new System.Drawing.Point(82, 30);
-            cmbxOffice.Name = "cmbxOffice";
-            cmbxOffice.Size = new System.Drawing.Size(250, 23);
-            cmbxOffice.TabIndex = 4;
-            cmbxOffice.SelectedValueChanged += CmbxOffice_SelectedValueChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(1, 33);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(44, 15);
-            label2.TabIndex = 5;
-            label2.Text = "Office*";
-            // 
             // dgPermissions
             // 
-            dgPermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgPermissions.Location = new System.Drawing.Point(82, 59);
+            dgPermissions.Location = new System.Drawing.Point(11, 119);
+            dgPermissions.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             dgPermissions.Name = "dgPermissions";
+            dgPermissions.RowHeadersWidth = 72;
             dgPermissions.RowTemplate.Height = 25;
-            dgPermissions.Size = new System.Drawing.Size(250, 198);
+            dgPermissions.Size = new System.Drawing.Size(434, 396);
             dgPermissions.TabIndex = 14;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(1, 59);
+            label3.Location = new System.Drawing.Point(8, 83);
+            label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(75, 15);
+            label3.Size = new System.Drawing.Size(130, 30);
             label3.TabIndex = 3;
             label3.Text = "Permissions*";
             // 
             // ucRoles
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(dgPermissions);
-            Controls.Add(label2);
-            Controls.Add(cmbxOffice);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(txtName);
             Margin = new System.Windows.Forms.Padding(0);
             Name = "ucRoles";
-            Size = new System.Drawing.Size(353, 267);
+            Size = new System.Drawing.Size(481, 535);
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgPermissions).EndInit();
             ResumeLayout(false);
@@ -129,8 +107,6 @@ namespace LFS.Views.Manage.Users.Roles
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ErrorProvider epName;
-        private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ComboBox cmbxOffice;
         internal System.Windows.Forms.DataGridView dgPermissions;
         private System.Windows.Forms.Label label3;
     }
