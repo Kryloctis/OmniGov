@@ -50,20 +50,36 @@ namespace LFS.Views.Manage.Users.Roles
         private void LoadSelectedRole()
         {
             var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
+            var rolePermissionIds = AccFactory.RoleHasPermissionsRepository()
+                                    .GetRecordsByRoleId(roleId)
+                                    .AsEnumerable()
+                                    .Select(row => Convert.ToInt32(row["permissions_id"]))
+                                    .ToList();
+
             txtName.Text = roleDict["role_name"];
+
+            for (int i = 0; i < chkBxPermissions.Items.Count; i++)
+            {
+                var item = (KeyValuePair<int, string>)chkBxPermissions.Items[i];
+                if (rolePermissionIds.Contains(item.Key))
+                {
+                    chkBxPermissions.SetItemChecked(i, true);
+                }
+            }
         }
 
         internal void OnLoad(bool isEdit, byte? roleId)
         {
             this.isEdit = isEdit;
+            LoadPermissions();
 
             if (isEdit)
             {
                 this.roleId = roleId.Value;
                 LoadSelectedRole();
             }
+            UpdateCheckedCountLabel(chkBxPermissions, lblPermissions);
 
-            LoadPermissions();
         }
 
         internal void ResetForm()
@@ -116,6 +132,40 @@ namespace LFS.Views.Manage.Users.Roles
         private void txtName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epName, txtName);
+        }
+
+        private void UpdateCheckedCountLabel(CheckedListBox checkedListBox, Label label)
+        {
+            int total = checkedListBox.Items.Count;
+            int checkedCount = checkedListBox.CheckedItems.Cast<object>().Count();
+
+            label.Text = $"Permissions ({checkedCount}/{total}):";
+        }
+
+        private void chkBxPermissions_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    UpdateCheckedCountLabel(chkBxPermissions, lblPermissions);
+                }));
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void chkBxSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var isAllCheck = chkBxSelectAll.Checked;
+
+                for (int i = 0; i < chkBxPermissions.Items.Count; i++)
+                {
+                    chkBxPermissions.SetItemChecked(i, isAllCheck);
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

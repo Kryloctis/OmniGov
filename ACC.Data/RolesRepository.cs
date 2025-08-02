@@ -187,7 +187,7 @@ namespace ACC.Data
                 new object[] { "@search_key", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE office <> 'SysAdmin' AND (office LIKE @search_key OR role_name LIKE @search_key) LIMIT @row_limit";
+            string query = $"SELECT * FROM {tableName} WHERE (role_name LIKE @search_key) LIMIT @row_limit";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }

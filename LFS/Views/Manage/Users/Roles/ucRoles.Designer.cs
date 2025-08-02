@@ -33,8 +33,9 @@ namespace LFS.Views.Manage.Users.Roles
             label1 = new System.Windows.Forms.Label();
             txtName = new System.Windows.Forms.TextBox();
             epName = new System.Windows.Forms.ErrorProvider(components);
-            label3 = new System.Windows.Forms.Label();
+            lblPermissions = new System.Windows.Forms.Label();
             chkBxPermissions = new System.Windows.Forms.CheckedListBox();
+            chkBxSelectAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)epName).BeginInit();
             SuspendLayout();
             // 
@@ -50,11 +51,12 @@ namespace LFS.Views.Manage.Users.Roles
             // txtName
             // 
             txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            epName.SetIconPadding(txtName, 2);
             txtName.Location = new System.Drawing.Point(7, 21);
-            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 10);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 20);
             txtName.MaxLength = 99;
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(245, 23);
+            txtName.Size = new System.Drawing.Size(243, 23);
             txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -64,15 +66,15 @@ namespace LFS.Views.Manage.Users.Roles
             epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             epName.ContainerControl = this;
             // 
-            // label3
+            // lblPermissions
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(7, 54);
-            label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(81, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Permissions* :";
+            lblPermissions.AutoSize = true;
+            lblPermissions.Location = new System.Drawing.Point(7, 64);
+            lblPermissions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
+            lblPermissions.Name = "lblPermissions";
+            lblPermissions.Size = new System.Drawing.Size(101, 15);
+            lblPermissions.TabIndex = 3;
+            lblPermissions.Text = "Permissions (0/0):";
             // 
             // chkBxPermissions
             // 
@@ -82,18 +84,33 @@ namespace LFS.Views.Manage.Users.Roles
             chkBxPermissions.CheckOnClick = true;
             chkBxPermissions.FormattingEnabled = true;
             chkBxPermissions.HorizontalScrollbar = true;
-            chkBxPermissions.Location = new System.Drawing.Point(18, 75);
+            chkBxPermissions.Location = new System.Drawing.Point(18, 92);
             chkBxPermissions.Name = "chkBxPermissions";
-            chkBxPermissions.Size = new System.Drawing.Size(252, 180);
+            chkBxPermissions.Size = new System.Drawing.Size(245, 180);
             chkBxPermissions.Sorted = true;
             chkBxPermissions.TabIndex = 4;
+            chkBxPermissions.ItemCheck += chkBxPermissions_ItemCheck;
+            // 
+            // chkBxSelectAll
+            // 
+            chkBxSelectAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            chkBxSelectAll.AutoSize = true;
+            chkBxSelectAll.Location = new System.Drawing.Point(175, 63);
+            chkBxSelectAll.Name = "chkBxSelectAll";
+            chkBxSelectAll.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            chkBxSelectAll.Size = new System.Drawing.Size(75, 19);
+            chkBxSelectAll.TabIndex = 5;
+            chkBxSelectAll.Text = "Select All";
+            chkBxSelectAll.UseVisualStyleBackColor = true;
+            chkBxSelectAll.CheckedChanged += chkBxSelectAll_CheckedChanged;
             // 
             // ucRoles
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(chkBxSelectAll);
             Controls.Add(chkBxPermissions);
-            Controls.Add(label3);
+            Controls.Add(lblPermissions);
             Controls.Add(label1);
             Controls.Add(txtName);
             Name = "ucRoles";
@@ -109,7 +126,8 @@ namespace LFS.Views.Manage.Users.Roles
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ErrorProvider epName;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPermissions;
         private System.Windows.Forms.CheckedListBox chkBxPermissions;
+        private System.Windows.Forms.CheckBox chkBxSelectAll;
     }
 }

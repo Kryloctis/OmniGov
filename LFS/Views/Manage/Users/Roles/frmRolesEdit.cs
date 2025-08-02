@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.Users.Roles
             {
                 if (UpdateData())
                 {
-                    Helper.MessageBoxSuccess("Role has been saved.");
+                    Helper.MessageBoxSuccess("Role has been upated");
                     frmRoles.LoadRoles();
                     Close();
                 }
@@ -71,6 +71,11 @@ namespace LFS.Views.Manage.Users.Roles
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            uc.OnLoad(true, roleId);
         }
     }
 }
