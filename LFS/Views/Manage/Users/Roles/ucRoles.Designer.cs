@@ -33,73 +33,73 @@ namespace LFS.Views.Manage.Users.Roles
             label1 = new System.Windows.Forms.Label();
             txtName = new System.Windows.Forms.TextBox();
             epName = new System.Windows.Forms.ErrorProvider(components);
-            dgPermissions = new System.Windows.Forms.DataGridView();
             label3 = new System.Windows.Forms.Label();
+            chkBxPermissions = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)epName).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgPermissions).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(11, 0);
-            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label1.Location = new System.Drawing.Point(7, 4);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(78, 30);
+            label1.Size = new System.Drawing.Size(76, 15);
             label1.TabIndex = 3;
-            label1.Text = "Name*";
+            label1.Text = "Role Name* :";
             // 
             // txtName
             // 
             txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtName.Location = new System.Drawing.Point(11, 34);
-            txtName.Margin = new System.Windows.Forms.Padding(5, 4, 5, 10);
+            txtName.Location = new System.Drawing.Point(7, 21);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 10);
             txtName.MaxLength = 99;
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(431, 35);
+            txtName.Size = new System.Drawing.Size(245, 23);
             txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
             // 
             // epName
             // 
+            epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             epName.ContainerControl = this;
-            // 
-            // dgPermissions
-            // 
-            dgPermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgPermissions.Location = new System.Drawing.Point(11, 119);
-            dgPermissions.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            dgPermissions.Name = "dgPermissions";
-            dgPermissions.RowHeadersWidth = 72;
-            dgPermissions.RowTemplate.Height = 25;
-            dgPermissions.Size = new System.Drawing.Size(434, 396);
-            dgPermissions.TabIndex = 14;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(8, 83);
-            label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label3.Location = new System.Drawing.Point(7, 54);
+            label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(130, 30);
+            label3.Size = new System.Drawing.Size(81, 15);
             label3.TabIndex = 3;
-            label3.Text = "Permissions*";
+            label3.Text = "Permissions* :";
+            // 
+            // chkBxPermissions
+            // 
+            chkBxPermissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            chkBxPermissions.BackColor = System.Drawing.SystemColors.Control;
+            chkBxPermissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            chkBxPermissions.CheckOnClick = true;
+            chkBxPermissions.FormattingEnabled = true;
+            chkBxPermissions.HorizontalScrollbar = true;
+            chkBxPermissions.Location = new System.Drawing.Point(18, 75);
+            chkBxPermissions.Name = "chkBxPermissions";
+            chkBxPermissions.Size = new System.Drawing.Size(252, 180);
+            chkBxPermissions.Sorted = true;
+            chkBxPermissions.TabIndex = 4;
             // 
             // ucRoles
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(dgPermissions);
+            Controls.Add(chkBxPermissions);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(txtName);
-            Margin = new System.Windows.Forms.Padding(0);
             Name = "ucRoles";
-            Size = new System.Drawing.Size(476, 535);
+            Padding = new System.Windows.Forms.Padding(4);
+            Size = new System.Drawing.Size(270, 277);
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgPermissions).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,7 +109,7 @@ namespace LFS.Views.Manage.Users.Roles
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ErrorProvider epName;
-        internal System.Windows.Forms.DataGridView dgPermissions;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckedListBox chkBxPermissions;
     }
 }

@@ -44,17 +44,18 @@ namespace LFS.Views.Manage.Users.Roles
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 273);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 286);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            flowLayoutPanel1.Size = new System.Drawing.Size(465, 27);
+            flowLayoutPanel1.Size = new System.Drawing.Size(465, 35);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
             btnCancel.CausesValidation = false;
-            btnCancel.Location = new System.Drawing.Point(312, 2);
+            btnCancel.Location = new System.Drawing.Point(304, 6);
             btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -66,7 +67,7 @@ namespace LFS.Views.Manage.Users.Roles
             // btnSave
             // 
             btnSave.CausesValidation = false;
-            btnSave.Location = new System.Drawing.Point(156, 2);
+            btnSave.Location = new System.Drawing.Point(148, 6);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(150, 22);
@@ -82,7 +83,7 @@ namespace LFS.Views.Manage.Users.Roles
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(465, 273);
+            panel1.Size = new System.Drawing.Size(465, 286);
             panel1.TabIndex = 4;
             // 
             // ucRoles1
@@ -92,7 +93,8 @@ namespace LFS.Views.Manage.Users.Roles
             ucRoles1.Location = new System.Drawing.Point(4, 4);
             ucRoles1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucRoles1.Name = "ucRoles1";
-            ucRoles1.Size = new System.Drawing.Size(457, 265);
+            ucRoles1.Padding = new System.Windows.Forms.Padding(4);
+            ucRoles1.Size = new System.Drawing.Size(457, 278);
             ucRoles1.TabIndex = 6;
             // 
             // frmRolesEdit
@@ -101,7 +103,7 @@ namespace LFS.Views.Manage.Users.Roles
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(465, 300);
+            ClientSize = new System.Drawing.Size(465, 321);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

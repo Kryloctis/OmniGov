@@ -323,9 +323,14 @@ namespace LFS
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true, bool showRowHeader = false)
+        public static void DatagridFullRowSelectStyle(DataGridView dgv,
+                                                        bool Fill = false,
+                                                        bool isReadOnly = true,
+                                                        bool showRowHeader = false,
+                                                        bool showColumnHeaders = true)
         {
             dgv.RowHeadersVisible = showRowHeader;
+            dgv.ColumnHeadersVisible = showColumnHeaders;
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;

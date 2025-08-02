@@ -16,7 +16,7 @@ namespace LFS.Views.Manage.Users.Roles
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgRoles, true);
+            Helper.DatagridFullRowSelectStyle(dgRoles, true, true, false, false);
         }
 
         private void frmRoles_Load(object sender, EventArgs e)
@@ -124,7 +124,6 @@ namespace LFS.Views.Manage.Users.Roles
                 var dataColumns = new DataColumn[]
                 {
                     new DataColumn("id", typeof(int)),
-                    new DataColumn("office", typeof(string)),
                     new DataColumn("role_name", typeof(string)),
                     new DataColumn("created_at", typeof(string)),
                     new DataColumn("updated_at", typeof(string))
@@ -137,7 +136,6 @@ namespace LFS.Views.Manage.Users.Roles
 
                     byte roleId = Convert.ToByte(dataRow["id"]);
                     newRow["id"] = roleId;
-                    newRow["office"] = dataRow["office"];
                     newRow["role_name"] = dataRow["role_name"];
                     newRow["created_at"] = dataRow["created_at"];
                     newRow["updated_at"] = dataRow["updated_at"];
@@ -171,7 +169,7 @@ namespace LFS.Views.Manage.Users.Roles
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-                HelperLoadRecords.RolesDatagridView(dataTable, dgRoles);
+                HelperLoadRecords.DgvRoles(dataTable, dgRoles);
                 dgRoles.CurrentCell = dgRoles.FirstDisplayedCell;
                 lblRecordCount.Text = dgRoles.Rows.Count.ToString();
             }
@@ -194,7 +192,7 @@ namespace LFS.Views.Manage.Users.Roles
                                                                             .ToList());
                 }
 
-                byte[] columnIndexTimestamp = { 3, 4 };
+                byte[] columnIndexTimestamp = { 2, 3 };
                 Helper.ShowRecordTimestamp(dgRoles, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
             }

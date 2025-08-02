@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace LFS.Views.Manage.Users.Roles
         public ucRoles()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgPermissions, true, false);
         }
 
         internal string GetFormErrors()
@@ -31,8 +31,14 @@ namespace LFS.Views.Manage.Users.Roles
 
         internal RolesModel RolesModel()
         {
-            DataTable dtPermissions = (DataTable)dgPermissions.DataSource;
-            var permissionModels = dtPermissions.AsEnumerable().Where(row => (bool)row["is_checked"] == true).Select(row => new PermissionsModel { Id = Convert.ToByte(row["id"]) }).ToList();
+            var selectedIds = chkBxPermissions.CheckedItems
+           .Cast<KeyValuePair<int, string>>()
+           .Select(item => item.Key)
+           .ToList();
+
+            var permissionModels = selectedIds
+                .Select(id => new PermissionsModel { Id = (byte)id })
+                .ToList();
 
             return new RolesModel()
             {
@@ -69,25 +75,19 @@ namespace LFS.Views.Manage.Users.Roles
         internal void LoadPermissions()
         {
             var dtPermissions = AccFactory.PermissionsRepository().GetRecords();
-            var dataTable = new DataTable();
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn("is_checked", typeof(bool)),
-                new DataColumn("id", typeof(int)),
-                new DataColumn("permission_name", typeof(string)),
-            };
-            dataTable.Columns.AddRange(dataColumns);
 
-            foreach (DataRow dataRow in dtPermissions.Rows)
+            chkBxPermissions.Items.Clear(); // Clear any existing items
+            chkBxPermissions.DisplayMember = "Value"; // Display the permission name
+
+            foreach (DataRow row in dtPermissions.Rows)
             {
-                var newRow = dataTable.NewRow();
-                newRow["is_checked"] = false;
-                newRow["id"] = dataRow["id"];
-                newRow["permission_name"] = dataRow["permission_name"];
-                dataTable.Rows.Add(newRow);
+                var item = new KeyValuePair<int, string>(
+                    Convert.ToInt32(row["id"]),
+                    row["permission_name"].ToString()
+                );
+
+                chkBxPermissions.Items.Add(item, false); // unchecked by default
             }
-
-            HelperLoadRecords.RolesPermissionsDataGridView(dataTable, dgPermissions);
         }
 
         private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
