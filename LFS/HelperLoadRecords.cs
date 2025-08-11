@@ -402,23 +402,6 @@ namespace LFS
             dataGridView.Columns["is_checked"].Width = 30;
         }
 
-        internal static void RoleNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            }
-        }
-
         internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1283,7 +1266,7 @@ namespace LFS
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["full_name"].HeaderText = "Name";
-            dataGridView.Columns["office_role"].HeaderText = "Office > Role";
+            dataGridView.Columns["role"].HeaderText = "Role";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
             dataGridView.Columns["is_active"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
