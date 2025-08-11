@@ -1,12 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.CustomTools;
+using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users
 {
     public partial class ucUsers : UserControl
     {
@@ -20,8 +22,8 @@ namespace LFS.Views.Manage.Users.List
 
         internal void OnLoad(bool isEdit, int? userId)
         {
+            LoadRoles(flwLytPnlRole);
             this.isEdit = isEdit;
-            LoadOffice();
 
             if (isEdit)
             {
@@ -41,7 +43,6 @@ namespace LFS.Views.Manage.Users.List
                 MidInitial = txtMiddleInitial.Text.Trim(),
                 LastName = txtLastname.Text.Trim(),
                 Suffix = txtSuffix.Text.Trim(),
-                RoleId = (byte)cmbRoles.SelectedValue,
             };
         }
 
@@ -50,8 +51,6 @@ namespace LFS.Views.Manage.Users.List
             var dictUser = AccFactory.UsersRepository().GetRecordByID(userId);
             var dictRoles = AccFactory.RolesRepository().GetRecordByID(Convert.ToInt32(dictUser["roles_id"]));
 
-            cmbOffice.Text = dictRoles["office"];
-            cmbRoles.SelectedValue = dictUser["roles_id"];
             txtPrefix.Text = dictUser["prefix"];
             txtFirstname.Text = dictUser["first_name"];
             txtMiddleInitial.Text = dictUser["mid_initial"];
@@ -60,41 +59,25 @@ namespace LFS.Views.Manage.Users.List
             txtUsername.Text = dictUser["username"];
         }
 
-        private void cmbOffice_SelectedValueChanged(object sender, EventArgs e)
+        internal void LoadRoles(FlowLayoutPanel flowLayoutPanel)
         {
-            try
+            DataTable dtRole = AccFactory.RolesRepository().GetRecords();
+
+            foreach (DataRow dtRow in dtRole.Rows)
             {
-                LoadRoles();
+                RadioButton radioButton = new RadioButton()
+                {
+                    Tag = dtRow["id"],
+                    Text = dtRow["role_name"].ToString(),
+                };
+                flowLayoutPanel.Controls.Add(radioButton);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadOffice()
-        {
-            var userDict = Helper.LoggedInUserData();
-            switch (userDict["office"])
-            {
-                case "SysAdmin":
-                    cmbOffice.Items.AddRange(new string[] { "Budget", "Accounting", "Treasury" });
-                    break;
-
-                default:
-                    cmbOffice.Items.Add(userDict["office"]);
-                    break;
-            }
-        }
-
-        internal void LoadRoles()
-        {
-            DataTable dtRoleName = AccFactory.RolesRepository().GetRecords();
-            HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
         }
 
         internal string GetFormErrors()
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(cmbRoles),
                 errorProvider1.GetError(txtFirstname),
                 errorProvider1.GetError(txtMiddleInitial),
                 errorProvider1.GetError(txtLastname),
@@ -108,7 +91,7 @@ namespace LFS.Views.Manage.Users.List
 
         internal void ResetForm()
         {
-            LoadRoles();
+            LoadRoles(flwLytPnlRole);
             txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
@@ -148,29 +131,6 @@ namespace LFS.Views.Manage.Users.List
             Helper.ClearErrorTextBox(errorProvider1, txtUsername);
         }
 
-        private void cmbRoles_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbRoles, "role name");
-
-                int roleId = Convert.ToByte(cmbRoles.SelectedValue);
-                bool idExist = AccFactory.RolesRepository().IdExist(roleId);
-
-                if (!idExist)
-                {
-                    errorProvider1.SetError(cmbRoles, "Invalid role name. Please select on the list.");
-                    e.Cancel = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbRoles_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbRoles);
-        }
-
         private void txtFirstname_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstname, "first name");
@@ -179,16 +139,6 @@ namespace LFS.Views.Manage.Users.List
         private void txtFirstname_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtFirstname);
-        }
-
-        private void txtMiddleInitial_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtMiddleInitial);
-        }
-
-        private void txtMiddleInitial_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMiddleInitial, "middle initial");
         }
 
         private void txtLastname_Validating(object sender, CancelEventArgs e)
@@ -295,6 +245,44 @@ namespace LFS.Views.Manage.Users.List
                     btnConfirmPasswordVisibility.Image = visibleImage;
                     txtConfirmPassword.PasswordChar = '•';
                 }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleTabs(CustomTabControl customTabControl)
+        {
+            var tabPage = customTabControl.SelectedTab;
+
+            switch (tabPage.Name)
+            {
+                case "tbPgRole":
+                    radRole.Checked = true;
+                    break;
+
+                case "tabPage2":
+                    radioButton2.Checked = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void btnNextRole_Click(object sender, EventArgs e)
+        {
+            customTabControl1.SelectedTab = tabPage2;
+        }
+
+        private void btnBck_Click(object sender, EventArgs e)
+        {
+            customTabControl1.SelectedTab = tbPgRole;
+        }
+
+        private void customTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleTabs(customTabControl1);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

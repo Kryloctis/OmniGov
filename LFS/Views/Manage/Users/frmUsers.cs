@@ -7,22 +7,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users
 {
     public partial class frmUsers : Form
     {
+        private ucUsers uc;
+
         public frmUsers()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
+            uc = ucUsers1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmUsersAdd(this).ShowDialog();
+                //_ = new frmUsersAdd(this).ShowDialog();
+                tabControl1.SelectedTab = tbPgUsrAdd;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -40,6 +44,7 @@ namespace LFS.Views.Manage.Users.List
         {
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
             LoadRecords();
+            uc.OnLoad(false, null);
         }
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
@@ -120,10 +125,9 @@ namespace LFS.Views.Manage.Users.List
             if (!backgroundWorker1.IsBusy)
             {
                 int rowLimit = int.Parse(cmbxFilter.SelectedValue.ToString());
-                string userOffice = Helper.LoggedInUserData()["office"];
                 string searchKey = searchTstrpTxt.Text.Trim();
                 progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync((rowLimit, userOffice, searchKey));
+                backgroundWorker1.RunWorkerAsync((rowLimit, searchKey));
             }
         }
 
@@ -131,17 +135,17 @@ namespace LFS.Views.Manage.Users.List
         {
             try
             {
-                var parameters = ((int rowLimit, string userOffice, string searchKey))e.Argument;
-                var dbDataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.userOffice, parameters.searchKey);
+                var parameters = ((int rowLimit, string searchKey))e.Argument;
+                var dbDataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
                 var dataTable = new DataTable();
                 var dataColumns = new DataColumn[]
                 {
-                    new DataColumn("id", typeof(int)),
-                    new DataColumn("full_name", typeof(string)),
-                    new DataColumn("office_role", typeof(string)),
-                    new DataColumn("is_active", typeof(bool)),
-                    new DataColumn("created_at", typeof(string)),
-                    new DataColumn("updated_at", typeof(string)),
+                        new DataColumn("id", typeof(int)),
+                        new DataColumn("full_name", typeof(string)),
+                        new DataColumn("role", typeof(string)),
+                        new DataColumn("is_active", typeof(bool)),
+                        new DataColumn("created_at", typeof(string)),
+                        new DataColumn("updated_at", typeof(string)),
                 };
                 dataTable.Columns.AddRange(dataColumns);
                 int totalProgressCount = dbDataTable.Rows.Count;
@@ -157,7 +161,7 @@ namespace LFS.Views.Manage.Users.List
                     newRow["id"] = dataRow["id"];
                     newRow["is_active"] = Convert.ToByte(dataRow["is_deleted"]) == 0;
                     newRow["full_name"] = userFullName;
-                    newRow["office_role"] = $"{dataRow["office"]} > {role}";
+                    newRow["role"] = role;
                     newRow["created_at"] = dataRow["created_at"];
                     newRow["updated_at"] = dataRow["updated_at"];
 
@@ -198,6 +202,15 @@ namespace LFS.Views.Manage.Users.List
             try
             {
                 LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnBck_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tabControl1.SelectedTab = tbPgUsrLst;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

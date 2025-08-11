@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users.List
+namespace LFS.Views.Manage.Users
 {
     public partial class frmUsersEdit : Form
     {

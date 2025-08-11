@@ -11,7 +11,7 @@ using LFS.Views.Manage.RptDiscount;
 using LFS.Views.Manage.RptPenalties;
 using LFS.Views.Manage.RptTaxRates;
 using LFS.Views.Manage.Signatories;
-using LFS.Views.Manage.Users.List;
+using LFS.Views.Manage.Users;
 using LFS.Views.Manage.Users.Roles;
 using System;
 using System.Windows.Forms;

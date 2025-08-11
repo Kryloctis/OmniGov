@@ -10,9 +10,6 @@ namespace ACC.Data
     public class UsersRepository : IUsersRepository
     {
         private readonly string tableName = "users";
-        private readonly string tableCollectionsOfficers = "collecting_officers";
-        private readonly string tableName3 = "disbursing_officers";
-        private readonly string tableName4 = "roles";
         private readonly string viewTableName = "view_users";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
@@ -105,72 +102,6 @@ namespace ACC.Data
             {
                 throw;
             }
-        }
-
-        public string GetUserRole(int id)
-        {
-            string data = string.Empty;
-            try
-            {
-                string query = $"SELECT {tableName4}.role_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.roles_id={tableName4}.id WHERE {tableName}.id='{id}'";
-                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        data = dt.Rows[i]["role_name"].ToString();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return data;
-        }
-
-        public string GetCollectorByUserId(int id)
-        {
-            string data = string.Empty;
-            try
-            {
-                string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id='{id}'";
-                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        data = dt.Rows[i]["id"].ToString();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return data;
-        }
-
-        public string GetDisbursingByUserId(int id)
-        {
-            string data = string.Empty;
-            try
-            {
-                string query = $"SELECT id FROM {tableName3} WHERE users_id='{id}'";
-                DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        data = dt.Rows[i]["id"].ToString();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return data;
         }
 
         public DataTable GetLinksCollectingOfficers(string searchText)
@@ -335,20 +266,6 @@ namespace ACC.Data
             }
         }
 
-        public int CountRecords()
-        {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool IdExist(int id)
         {
             try
@@ -367,62 +284,8 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
-            };
-
-            return false;
-        }
-
-        public bool LinkedJobOrder(int id)
-        {
-            var parameters = new object[][]
-            {
-               new object[] { "@users_id", DbType.Int32, id },
-            };
-
-            string query = $"SELECT id FROM job_orders WHERE users_id = @users_id AND is_deleted = 0";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
-        }
-
-        public bool LinkedCollector(int id)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@users_id", DbType.Int32, id },
-            };
-
-            string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id = @users_id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
-        }
-
-        public bool LinkedDisburser(int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@users_id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT id FROM {tableName3} WHERE users_id = @users_id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
             }
-            catch (Exception)
-            {
-                throw;
-            };
+            ;
 
             return false;
         }
@@ -461,7 +324,8 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
-            };
+            }
+            ;
 
             return false;
         }
@@ -485,7 +349,8 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
-            };
+            }
+            ;
 
             return 0;
         }
@@ -509,88 +374,21 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
-            };
+            }
+            ;
 
             return false;
         }
 
-        public DataTable GetViewRecords()
-        {
-            string query = $"SELECT " +
-                $"id, " +
-                $"roles_id, " +
-                $"prefix, " +
-                $"first_name, " +
-                $"mid_initial, " +
-                $"last_name, " +
-                $"suffix, " +
-                $"username, " +
-                $"password, " +
-                $"is_deleted, " +
-                $"created_at, " +
-                $"updated_at, " +
-                $"office, " +
-                $"role_name, " +
-                $"permission_name, " +
-                $"permission_office " +
-                $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
-
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
-        }
-
-        public string GetCollectorNameByUserId(int userId)
-        {
-            var parameter = new object[][] {
-                new object[]{"@user_id", DbType.Int32, userId}
-            };
-
-            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ' ,last_name) AS full_name FROM {tableCollectionsOfficers} WHERE users_id   = @user_id";
-
-            return string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter)) ? string.Empty : mySqlGenericCommandsLFS.ExecuteScalar(query, parameter);
-        }
-
-        public DataTable GetViewRecordsByOffice(string office)
-        {
-            var parameters = new dynamic[][]
-            {
-                new dynamic[] { "@office", DbType.String, office}
-            };
-
-            string Filter()
-            {
-                if (office == "SysAdmin")
-                    return string.Empty;
-                else
-                    return "AND office = @office";
-            }
-
-            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} GROUP BY id";
-
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable GetViewRecordsBySearch(int rowLimit, string office, string searchTxt)
+        public DataTable GetViewRecordsBySearch(int rowLimit, string searchTxt)
         {
             var parameters = new object[][]
             {
-                 new object[] { "@office", DbType.String, office},
                  new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                  new object[] { "@row_limit", DbType.Int32, rowLimit}
             };
 
-            string Filter()
-            {
-                if (office == "SysAdmin")
-                    return string.Empty;
-                else
-                    return "AND office = @office";
-            }
-
-            string query = $"SELECT * FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} AND (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR office LIKE @searchTxt OR role_name LIKE @searchTxt) GROUP BY id LIMIT @row_limit";
+            string query = $"SELECT * FROM {viewTableName} WHERE (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR role_name LIKE @searchTxt) GROUP BY id LIMIT @row_limit";
 
             var dataTable = new DataTable();
 
@@ -623,7 +421,6 @@ namespace ACC.Data
                 record.Add("password", reader.Rows[0]["password"]);
                 record.Add("created_at", reader.Rows[0]["created_at"]);
                 record.Add("updated_at", reader.Rows[0]["updated_at"]);
-                record.Add("office", reader.Rows[0]["office"]);
                 record.Add("role_name", reader.Rows[0]["role_name"]);
                 record.Add("permission_name", reader.Rows[0]["role_name"]);
                 record.Add("permission_office", reader.Rows[0]["permission_office"]);

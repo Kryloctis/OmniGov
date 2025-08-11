@@ -24,25 +24,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetLinksJOCollectingOfficers();
 
-        DataTable GetViewRecordsBySearch(int rowLimit, string office, string searchTxt);
-
-        DataTable GetViewRecords();
-
-        bool LinkedJobOrder(int id);
-
-        bool LinkedCollector(int id);
-
-        bool LinkedDisburser(int id);
-
-        string GetUserRole(int id);
-
-        string GetCollectorByUserId(int id);
-
-        string GetCollectorNameByUserId(int userId);
-
-        string GetDisbursingByUserId(int id);
-
-        DataTable GetViewRecordsByOffice(string office);
+        DataTable GetViewRecordsBySearch(int rowLimit, string searchTxt);
 
         Dictionary<string, dynamic> GetViewRecordById(int Id);
     }
