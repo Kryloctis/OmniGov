@@ -53,10 +53,10 @@ namespace LFS.Views.Manage.Users.Roles
             txtName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             epName.SetIconPadding(txtName, 2);
             txtName.Location = new System.Drawing.Point(7, 21);
-            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 20);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtName.MaxLength = 99;
             txtName.Name = "txtName";
-            txtName.Size = new System.Drawing.Size(243, 23);
+            txtName.Size = new System.Drawing.Size(338, 23);
             txtName.TabIndex = 2;
             txtName.Validating += txtName_Validating;
             txtName.Validated += txtName_Validated;
@@ -69,12 +69,11 @@ namespace LFS.Views.Manage.Users.Roles
             // lblPermissions
             // 
             lblPermissions.AutoSize = true;
-            lblPermissions.Location = new System.Drawing.Point(7, 64);
-            lblPermissions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
+            lblPermissions.Location = new System.Drawing.Point(7, 59);
             lblPermissions.Name = "lblPermissions";
-            lblPermissions.Size = new System.Drawing.Size(101, 15);
+            lblPermissions.Size = new System.Drawing.Size(88, 15);
             lblPermissions.TabIndex = 3;
-            lblPermissions.Text = "Permissions (0/0):";
+            lblPermissions.Text = "Privileges (0/0):";
             // 
             // chkBxPermissions
             // 
@@ -84,9 +83,9 @@ namespace LFS.Views.Manage.Users.Roles
             chkBxPermissions.CheckOnClick = true;
             chkBxPermissions.FormattingEnabled = true;
             chkBxPermissions.HorizontalScrollbar = true;
-            chkBxPermissions.Location = new System.Drawing.Point(18, 92);
+            chkBxPermissions.Location = new System.Drawing.Point(18, 87);
             chkBxPermissions.Name = "chkBxPermissions";
-            chkBxPermissions.Size = new System.Drawing.Size(245, 180);
+            chkBxPermissions.Size = new System.Drawing.Size(328, 198);
             chkBxPermissions.Sorted = true;
             chkBxPermissions.TabIndex = 4;
             chkBxPermissions.ItemCheck += chkBxPermissions_ItemCheck;
@@ -95,7 +94,7 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             chkBxSelectAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chkBxSelectAll.AutoSize = true;
-            chkBxSelectAll.Location = new System.Drawing.Point(175, 63);
+            chkBxSelectAll.Location = new System.Drawing.Point(270, 62);
             chkBxSelectAll.Name = "chkBxSelectAll";
             chkBxSelectAll.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
             chkBxSelectAll.Size = new System.Drawing.Size(75, 19);
@@ -115,7 +114,7 @@ namespace LFS.Views.Manage.Users.Roles
             Controls.Add(txtName);
             Name = "ucRoles";
             Padding = new System.Windows.Forms.Padding(4);
-            Size = new System.Drawing.Size(270, 277);
+            Size = new System.Drawing.Size(365, 304);
             ((System.ComponentModel.ISupportInitialize)epName).EndInit();
             ResumeLayout(false);
             PerformLayout();

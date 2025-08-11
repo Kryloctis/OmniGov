@@ -42,22 +42,22 @@ namespace LFS.Views.Manage.Users.Roles
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 286);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 311);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            flowLayoutPanel1.Size = new System.Drawing.Size(435, 35);
+            flowLayoutPanel1.Size = new System.Drawing.Size(422, 37);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnSave
             // 
             btnSave.CausesValidation = false;
-            btnSave.Location = new System.Drawing.Point(274, 6);
+            btnSave.Location = new System.Drawing.Point(286, 6);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnSave.Size = new System.Drawing.Size(150, 22);
+            btnSave.Size = new System.Drawing.Size(125, 23);
             btnSave.TabIndex = 0;
             btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
@@ -70,7 +70,7 @@ namespace LFS.Views.Manage.Users.Roles
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4, 20, 4, 4);
-            panel1.Size = new System.Drawing.Size(435, 286);
+            panel1.Size = new System.Drawing.Size(422, 311);
             panel1.TabIndex = 3;
             // 
             // ucRoles1
@@ -80,8 +80,7 @@ namespace LFS.Views.Manage.Users.Roles
             ucRoles1.Location = new System.Drawing.Point(4, 20);
             ucRoles1.Margin = new System.Windows.Forms.Padding(0);
             ucRoles1.Name = "ucRoles1";
-            ucRoles1.Padding = new System.Windows.Forms.Padding(4);
-            ucRoles1.Size = new System.Drawing.Size(427, 262);
+            ucRoles1.Size = new System.Drawing.Size(414, 287);
             ucRoles1.TabIndex = 6;
             // 
             // frmRolesAdd
@@ -89,7 +88,7 @@ namespace LFS.Views.Manage.Users.Roles
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(435, 321);
+            ClientSize = new System.Drawing.Size(422, 348);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

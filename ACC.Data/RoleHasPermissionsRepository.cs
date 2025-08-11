@@ -17,11 +17,6 @@ namespace ACC.Data
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(List<RoleHasPermissionsModel> entityList)
         {
             throw new NotImplementedException();
@@ -56,18 +51,6 @@ namespace ACC.Data
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE roles_id = @roles_id ORDER BY permission_name ASC";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
-        }
-
-        public DataTable GetViewRecordsByRoleId(byte roleId, string office)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@roles_id", DbType.Byte, roleId},
-                new object[] { "@office", DbType.String, office},
-            };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE roles_id = @roles_id AND office = @office ORDER BY permission_name ASC";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
