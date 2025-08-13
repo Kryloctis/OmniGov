@@ -68,8 +68,9 @@ namespace LFS.Views.Manage.Users.Roles
             }
         }
 
-        internal void OnLoad(bool isEdit, byte? roleId)
+        internal void OnLoad(bool isEdit, byte? roleId = null)
         {
+            epName.Clear();
             this.isEdit = isEdit;
             LoadPermissions();
 
@@ -79,7 +80,7 @@ namespace LFS.Views.Manage.Users.Roles
                 LoadSelectedRole();
             }
             UpdateCheckedCountLabel(chkBxPermissions, lblPermissions);
-
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
 
         internal void ResetForm()
@@ -114,7 +115,7 @@ namespace LFS.Views.Manage.Users.Roles
                 return false;
             else if (isEdit ? AccFactory.RolesRepository().NameExist(roleName, roleId) : AccFactory.RolesRepository().NameExist(roleName))
             {
-                errorProvider.SetError(textBox, "Role name already exist in this office.");
+                errorProvider.SetError(textBox, "Role name already exist");
                 return false;
             }
             return true;

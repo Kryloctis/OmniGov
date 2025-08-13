@@ -107,6 +107,7 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             Controls.Add(chkBxSelectAll);
             Controls.Add(chkBxPermissions);
             Controls.Add(lblPermissions);

@@ -5,16 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LFS.Views.Manage.Users.Roles
 {
     public partial class frmRoles : Form
     {
+        private bool isEdit;
+        private ucRoles uc;
+
         public frmRoles()
         {
             InitializeComponent();
+            uc = ucRoles1;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgRoles, true, true, false, false);
         }
@@ -26,16 +30,39 @@ namespace LFS.Views.Manage.Users.Roles
                 HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
                 LoadRoles();
                 Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
-                TogglePreviewPermissions();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleCrud(bool isEdit)
+        {
+            this.isEdit = isEdit;
+
+            if (this.isEdit)
+            {
+                int rowIndex = dgRoles.CurrentRow.Index;
+                bool isValid = sbyte.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out sbyte roleId);
+
+                lblTitle.Text = "Update Role";
+
+                if (isValid)
+                    uc.OnLoad(true, (byte)roleId);
+            }
+            else
+            {
+                lblTitle.Text = "Create Role";
+                uc.OnLoad(false);
+                uc.ResetForm();
+            }
+
+            customTabControl1.SelectedTab = tbPgCrud;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                _ = new frmRolesAdd(this).ShowDialog();
+                ToggleCrud(false);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -44,8 +71,7 @@ namespace LFS.Views.Manage.Users.Roles
         {
             try
             {
-                byte roleId = byte.Parse(dgRoles.SelectedCells[0].Value.ToString());
-                _ = new frmRolesEdit(this, roleId).ShowDialog();
+                ToggleCrud(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -183,20 +209,33 @@ namespace LFS.Views.Manage.Users.Roles
                 if (dgRoles.SelectedRows.Count == 1)
                 {
                     int rowIndex = dgRoles.CurrentRow.Index;
-                    byte roleId = Convert.ToByte(dgRoles.Rows[rowIndex].Cells["id"].Value);
+                    bool isValidRoleId = int.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out int roleId);
 
-                    rchTxtRolePermissions.Text = string.Join("\n", AccFactory.RoleHasPermissionsRepository()
-                                                                            .GetRecordsByRoleId(roleId)
-                                                                            .AsEnumerable()
-                                                                            .Select(dtRowPermissions => $" {dtRowPermissions["permission_name"]}")
-                                                                            .ToList());
+                    if (isValidRoleId)
+                    {
+                        var permissions = LoadPrivileges(roleId);
+                        rchTxtBxPrivileges.Text = permissions;
+                    }
                 }
 
-                byte[] columnIndexTimestamp = { 2, 3 };
-                Helper.ShowRecordTimestamp(dgRoles, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.ShowRecordTimestampMod(dgRoles, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private string LoadPrivileges(int? roleId)
+        {
+            if (roleId is null) return string.Empty;
+            var dtRolePermissions = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId((byte)roleId.Value);
+            var sb = new StringBuilder();
+
+            foreach (DataRow dataRow in dtRolePermissions.Rows)
+                sb.AppendLine($"- {dataRow["permission_name"]}");
+
+            if (sb.Length < 1) sb.AppendLine("- No Privileges");
+
+            return sb.ToString();
         }
 
         private void TogglePreviewPermissions()
@@ -229,6 +268,53 @@ namespace LFS.Views.Manage.Users.Roles
             try
             {
                 LoadRoles();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void SaveRole(bool isEdit)
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return;
+            }
+
+            bool isSaved = isEdit ?
+                AccFactory.RolesRepository().Insert(uc.RolesModel()) :
+                AccFactory.RolesRepository().Update(uc.RolesModel());
+
+            if (isSaved)
+            {
+                uc.ResetForm();
+                LoadRoles();
+
+                if (isEdit)
+                {
+                    customTabControl1.SelectedTab = tbPgList;
+                    Helper.MessageBoxSuccess("Role has been updated");
+                }
+                else
+                {
+                    Helper.MessageBoxSuccess("Role has been saved");
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveRole(isEdit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgList;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

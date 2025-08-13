@@ -27,7 +27,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT office, role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
