@@ -40,11 +40,18 @@ namespace LFS.Views.Manage.Users.Roles
                 .Select(id => new PermissionsModel { Id = (byte)id })
                 .ToList();
 
-            return new RolesModel()
+            var model = new RolesModel();
+
+            if (isEdit)
             {
-                RoleName = txtName.Text.Trim(),
-                PermissionsModels = permissionModels,
-            };
+                model.Id = roleId;
+            }
+
+            model.RoleName = txtName.Text.Trim();
+            model.PermissionsModels = permissionModels;
+
+
+            return model;
         }
 
         private void LoadSelectedRole()

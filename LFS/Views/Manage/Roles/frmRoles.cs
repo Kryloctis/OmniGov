@@ -281,8 +281,8 @@ namespace LFS.Views.Manage.Users.Roles
             }
 
             bool isSaved = isEdit ?
-                AccFactory.RolesRepository().Insert(uc.RolesModel()) :
-                AccFactory.RolesRepository().Update(uc.RolesModel());
+                AccFactory.RolesRepository().Update(uc.RolesModel()) :
+                AccFactory.RolesRepository().Insert(uc.RolesModel());
 
             if (isSaved)
             {
