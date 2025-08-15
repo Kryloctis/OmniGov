@@ -27,7 +27,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, role_name, permission_name FROM {viewTableName} WHERE id = @id";
 
             using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -44,7 +44,6 @@ namespace ACC.Data
                 record.Add("password", reader.Rows[0]["password"].ToString());
                 record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                 record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                record.Add("office", reader.Rows[0]["office"].ToString());
                 record.Add("role_name", reader.Rows[0]["role_name"].ToString());
                 record.Add("permission_name", reader.Rows[0]["permission_name"].ToString());
             }
@@ -111,7 +110,7 @@ namespace ACC.Data
                 new object[] { "@text_search", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE role_name LIKE '%collect%' AND last_name LIKE @text_search AND first_name LIKE @text_search AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) AND id NOT IN (SELECT users_id FROM collecting_officers) GROUP BY id";
+            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, role_name, permission_name, permission_office FROM {viewTableName} WHERE role_name LIKE '%collect%' AND last_name LIKE @text_search AND first_name LIKE @text_search AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) AND id NOT IN (SELECT users_id FROM collecting_officers) GROUP BY id";
 
             var dtUsers = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
@@ -133,10 +132,8 @@ namespace ACC.Data
                             $"is_deleted, " +
                             $"created_at, " +
                             $"updated_at, " +
-                            $"office, " +
                             $"role_name, " +
                             $"permission_name, " +
-                            $"permission_office " +
                             $"FROM view_users " +
                             $"WHERE role_name LIKE '%collect%' " +
                             $"AND id NOT IN (SELECT users_id FROM collecting_officers) " +
@@ -163,10 +160,8 @@ namespace ACC.Data
                 $"is_deleted, " +
                 $"created_at, " +
                 $"updated_at, " +
-                $"office, " +
                 $"role_name, " +
                 $"permission_name, " +
-                $"permission_office " +
                 $"FROM {viewTableName} WHERE role_name LIKE '%disburs%' GROUP BY id";
 
             var dtUsers = new DataTable();

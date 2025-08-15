@@ -1,11 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.CustomTools;
+using LFS.Properties;
 using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LFS.Views.Manage.Users
@@ -20,16 +22,19 @@ namespace LFS.Views.Manage.Users
             InitializeComponent();
         }
 
-        internal void OnLoad(bool isEdit, int? userId)
+        internal void OnLoad(bool isEdit, int? userId = null)
         {
-            LoadRoles(flwLytPnlRole);
             this.isEdit = isEdit;
+            errorProvider1.Clear();
+            LoadRoles(flwLytPnlRole);
 
             if (isEdit)
             {
                 this.userId = userId.Value;
                 LoadSelectedRecord(userId.Value);
             }
+
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
 
         internal UsersModel UsersModel()
@@ -49,7 +54,19 @@ namespace LFS.Views.Manage.Users
         private void LoadSelectedRecord(int userId)
         {
             var dictUser = AccFactory.UsersRepository().GetRecordByID(userId);
-            var dictRoles = AccFactory.RolesRepository().GetRecordByID(Convert.ToInt32(dictUser["roles_id"]));
+            int roleId = Convert.ToInt32(dictUser["roles_id"]);
+            var dictRoles = AccFactory.RolesRepository().GetRecordByID(roleId);
+
+            var radioButtons = flwLytPnlRole.Controls.OfType<RadioButton>();
+
+
+            foreach (RadioButton item in radioButtons)
+            {
+                if (Convert.ToInt32(item.Tag) == roleId)
+                {
+                    item.Checked = true;
+                }
+            }
 
             txtPrefix.Text = dictUser["prefix"];
             txtFirstname.Text = dictUser["first_name"];
@@ -59,8 +76,10 @@ namespace LFS.Views.Manage.Users
             txtUsername.Text = dictUser["username"];
         }
 
+
         internal void LoadRoles(FlowLayoutPanel flowLayoutPanel)
         {
+            flowLayoutPanel.Controls.Clear();
             DataTable dtRole = AccFactory.RolesRepository().GetRecords();
 
             foreach (DataRow dtRow in dtRole.Rows)
@@ -69,9 +88,24 @@ namespace LFS.Views.Manage.Users
                 {
                     Tag = dtRow["id"],
                     Text = dtRow["role_name"].ToString(),
+                    Appearance = Appearance.Button,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    TextImageRelation = TextImageRelation.ImageBeforeText,
+                    AutoSize = true,
+                    Padding = new Padding(2, 2, 2, 2)
                 };
+
+                radioButton.CheckedChanged += radRoles_CheckedChanged;
                 flowLayoutPanel.Controls.Add(radioButton);
             }
+        }
+
+        private void radRoles_CheckedChanged(object sender, EventArgs e)
+        {
+            var rb = (RadioButton)sender;
+
+            if (rb.Checked) rb.Image = Resources.symbol_ok_18px;
+            else rb.Image = null;
         }
 
         internal string GetFormErrors()
@@ -91,7 +125,6 @@ namespace LFS.Views.Manage.Users
 
         internal void ResetForm()
         {
-            LoadRoles(flwLytPnlRole);
             txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
@@ -249,42 +282,47 @@ namespace LFS.Views.Manage.Users
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ToggleTabs(CustomTabControl customTabControl)
+        private void customTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleIndicators(customTabControl1);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ToggleIndicators(CustomTabControl customTabControl)
         {
             var tabPage = customTabControl.SelectedTab;
+            radRole.Checked = radUserInfo.Checked = radAccInfo.Checked = false;
 
             switch (tabPage.Name)
             {
                 case "tbPgRole":
                     radRole.Checked = true;
+               
                     break;
 
-                case "tabPage2":
-                    radioButton2.Checked = true;
+                case "tbPgUserInfo":
+                    radUserInfo.Checked = true;
                     break;
 
-                default:
+                case "tbPgAccInf":
+                    radAccInfo.Checked = true;
                     break;
             }
         }
 
-        private void btnNextRole_Click(object sender, EventArgs e)
+        internal bool ToggleTab(bool next)
         {
-            customTabControl1.SelectedTab = tabPage2;
-        }
-
-        private void btnBck_Click(object sender, EventArgs e)
-        {
-            customTabControl1.SelectedTab = tbPgRole;
-        }
-
-        private void customTabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
+            if (customTabControl1?.TabPages.Count > 0)
             {
-                ToggleTabs(customTabControl1);
+                int maxIndex = customTabControl1.TabPages.Count - 1;
+                int newIndex = Math.Clamp(customTabControl1.SelectedIndex + (next ? 1 : -1), 0, maxIndex);
+                customTabControl1.SelectedIndex = newIndex;
+                return newIndex == maxIndex;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return false;
         }
     }
 }

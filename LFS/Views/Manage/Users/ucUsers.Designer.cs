@@ -53,27 +53,20 @@ namespace LFS.Views.Manage.Users
             panel2 = new System.Windows.Forms.Panel();
             customTabControl1 = new LFS.CustomTools.CustomTabControl();
             tbPgRole = new System.Windows.Forms.TabPage();
-            panel4 = new System.Windows.Forms.Panel();
-            btnNextRole = new System.Windows.Forms.Button();
             flwLytPnlRole = new System.Windows.Forms.FlowLayoutPanel();
-            tabPage2 = new System.Windows.Forms.TabPage();
-            panel5 = new System.Windows.Forms.Panel();
-            btnBck = new System.Windows.Forms.Button();
-            button1 = new System.Windows.Forms.Button();
-            tabPage1 = new System.Windows.Forms.TabPage();
+            tbPgUserInfo = new System.Windows.Forms.TabPage();
+            tbPgAccInf = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
-            radioButton3 = new System.Windows.Forms.RadioButton();
-            radioButton2 = new System.Windows.Forms.RadioButton();
+            radUserInfo = new System.Windows.Forms.RadioButton();
+            radAccInfo = new System.Windows.Forms.RadioButton();
             radRole = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             customTabControl1.SuspendLayout();
             tbPgRole.SuspendLayout();
-            panel4.SuspendLayout();
-            tabPage2.SuspendLayout();
-            panel5.SuspendLayout();
-            tabPage1.SuspendLayout();
+            tbPgUserInfo.SuspendLayout();
+            tbPgAccInf.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,6 +77,7 @@ namespace LFS.Views.Manage.Users
             // 
             // panel1
             // 
+            panel1.BackColor = System.Drawing.SystemColors.Control;
             panel1.Controls.Add(btnConfirmPasswordVisibility);
             panel1.Controls.Add(btnPasswordVisibility);
             panel1.Controls.Add(lblConfirmPassword);
@@ -96,8 +90,7 @@ namespace LFS.Views.Manage.Users
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(317, 303);
+            panel1.Size = new System.Drawing.Size(607, 394);
             panel1.TabIndex = 1;
             // 
             // btnConfirmPasswordVisibility
@@ -109,7 +102,7 @@ namespace LFS.Views.Manage.Users
             btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnConfirmPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(290, 131);
+            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(580, 131);
             btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
             btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
@@ -126,7 +119,7 @@ namespace LFS.Views.Manage.Users
             btnPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnPasswordVisibility.Location = new System.Drawing.Point(292, 75);
+            btnPasswordVisibility.Location = new System.Drawing.Point(582, 75);
             btnPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnPasswordVisibility.Name = "btnPasswordVisibility";
             btnPasswordVisibility.Size = new System.Drawing.Size(23, 23);
@@ -151,7 +144,7 @@ namespace LFS.Views.Manage.Users
             txtConfirmPassword.MaxLength = 60;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '*';
-            txtConfirmPassword.Size = new System.Drawing.Size(280, 23);
+            txtConfirmPassword.Size = new System.Drawing.Size(570, 23);
             txtConfirmPassword.TabIndex = 9;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
             txtConfirmPassword.Validated += txtConfirmPassword_Validated;
@@ -173,7 +166,7 @@ namespace LFS.Views.Manage.Users
             txtPassword.MaxLength = 60;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new System.Drawing.Size(282, 23);
+            txtPassword.Size = new System.Drawing.Size(572, 23);
             txtPassword.TabIndex = 8;
             txtPassword.Validating += txtPassword_Validating;
             txtPassword.Validated += txtPassword_Validated;
@@ -194,7 +187,7 @@ namespace LFS.Views.Manage.Users
             txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtUsername.MaxLength = 45;
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new System.Drawing.Size(282, 23);
+            txtUsername.Size = new System.Drawing.Size(572, 23);
             txtUsername.TabIndex = 7;
             txtUsername.Validating += txtUsername_Validating;
             txtUsername.Validated += txtUsername_Validated;
@@ -224,7 +217,7 @@ namespace LFS.Views.Manage.Users
             txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtLastname.MaxLength = 45;
             txtLastname.Name = "txtLastname";
-            txtLastname.Size = new System.Drawing.Size(296, 23);
+            txtLastname.Size = new System.Drawing.Size(592, 23);
             txtLastname.TabIndex = 5;
             txtLastname.Validating += txtLastname_Validating;
             txtLastname.Validated += txtLastname_Validated;
@@ -254,7 +247,7 @@ namespace LFS.Views.Manage.Users
             txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtMiddleInitial.MaxLength = 1;
             txtMiddleInitial.Name = "txtMiddleInitial";
-            txtMiddleInitial.Size = new System.Drawing.Size(296, 23);
+            txtMiddleInitial.Size = new System.Drawing.Size(592, 23);
             txtMiddleInitial.TabIndex = 4;
             // 
             // txtPrefix
@@ -273,7 +266,7 @@ namespace LFS.Views.Manage.Users
             txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtFirstname.MaxLength = 45;
             txtFirstname.Name = "txtFirstname";
-            txtFirstname.Size = new System.Drawing.Size(296, 23);
+            txtFirstname.Size = new System.Drawing.Size(592, 23);
             txtFirstname.TabIndex = 3;
             txtFirstname.Validating += txtFirstname_Validating;
             txtFirstname.Validated += txtFirstname_Validated;
@@ -310,179 +303,131 @@ namespace LFS.Views.Manage.Users
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            panel2.Location = new System.Drawing.Point(3, 3);
+            panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(317, 258);
+            panel2.Size = new System.Drawing.Size(613, 258);
             panel2.TabIndex = 1;
             // 
             // customTabControl1
             // 
             customTabControl1.Controls.Add(tbPgRole);
-            customTabControl1.Controls.Add(tabPage2);
-            customTabControl1.Controls.Add(tabPage1);
+            customTabControl1.Controls.Add(tbPgUserInfo);
+            customTabControl1.Controls.Add(tbPgAccInf);
             customTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             customTabControl1.Location = new System.Drawing.Point(0, 46);
             customTabControl1.Name = "customTabControl1";
             customTabControl1.SelectedIndex = 0;
-            customTabControl1.Size = new System.Drawing.Size(331, 337);
+            customTabControl1.Size = new System.Drawing.Size(621, 428);
             customTabControl1.TabIndex = 23;
             customTabControl1.SelectedIndexChanged += customTabControl1_SelectedIndexChanged;
             // 
             // tbPgRole
             // 
             tbPgRole.BackColor = System.Drawing.SystemColors.Control;
-            tbPgRole.Controls.Add(panel4);
             tbPgRole.Controls.Add(flwLytPnlRole);
             tbPgRole.Location = new System.Drawing.Point(4, 24);
             tbPgRole.Name = "tbPgRole";
-            tbPgRole.Padding = new System.Windows.Forms.Padding(3);
-            tbPgRole.Size = new System.Drawing.Size(323, 309);
+            tbPgRole.Size = new System.Drawing.Size(613, 400);
             tbPgRole.TabIndex = 0;
             tbPgRole.Text = "tbPgRole";
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(btnNextRole);
-            panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            panel4.Location = new System.Drawing.Point(3, 261);
-            panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(317, 31);
-            panel4.TabIndex = 26;
-            // 
-            // btnNextRole
-            // 
-            btnNextRole.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            btnNextRole.Location = new System.Drawing.Point(164, 3);
-            btnNextRole.Name = "btnNextRole";
-            btnNextRole.Size = new System.Drawing.Size(150, 23);
-            btnNextRole.TabIndex = 0;
-            btnNextRole.Text = "Next";
-            btnNextRole.UseVisualStyleBackColor = true;
-            btnNextRole.Click += btnNextRole_Click;
             // 
             // flwLytPnlRole
             // 
             flwLytPnlRole.Dock = System.Windows.Forms.DockStyle.Top;
             flwLytPnlRole.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            flwLytPnlRole.Location = new System.Drawing.Point(3, 3);
+            flwLytPnlRole.Location = new System.Drawing.Point(0, 0);
             flwLytPnlRole.Name = "flwLytPnlRole";
             flwLytPnlRole.Padding = new System.Windows.Forms.Padding(4);
-            flwLytPnlRole.Size = new System.Drawing.Size(317, 258);
+            flwLytPnlRole.Size = new System.Drawing.Size(613, 258);
             flwLytPnlRole.TabIndex = 3;
             // 
-            // tabPage2
+            // tbPgUserInfo
             // 
-            tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            tabPage2.Controls.Add(panel5);
-            tabPage2.Controls.Add(panel2);
-            tabPage2.Location = new System.Drawing.Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(323, 309);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tbPgPrsnlInf";
+            tbPgUserInfo.BackColor = System.Drawing.SystemColors.Control;
+            tbPgUserInfo.Controls.Add(panel2);
+            tbPgUserInfo.Location = new System.Drawing.Point(4, 24);
+            tbPgUserInfo.Name = "tbPgUserInfo";
+            tbPgUserInfo.Size = new System.Drawing.Size(613, 400);
+            tbPgUserInfo.TabIndex = 1;
+            tbPgUserInfo.Text = "tbPgUserInfo";
             // 
-            // panel5
+            // tbPgAccInf
             // 
-            panel5.Controls.Add(btnBck);
-            panel5.Controls.Add(button1);
-            panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            panel5.Location = new System.Drawing.Point(3, 261);
-            panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(317, 31);
-            panel5.TabIndex = 27;
-            // 
-            // btnBck
-            // 
-            btnBck.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnBck.Location = new System.Drawing.Point(8, 3);
-            btnBck.Name = "btnBck";
-            btnBck.Size = new System.Drawing.Size(150, 23);
-            btnBck.TabIndex = 0;
-            btnBck.Text = "Back";
-            btnBck.UseVisualStyleBackColor = true;
-            btnBck.Click += btnBck_Click;
-            // 
-            // button1
-            // 
-            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            button1.Location = new System.Drawing.Point(164, 3);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(150, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Next";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(panel1);
-            tabPage1.Location = new System.Drawing.Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(323, 309);
-            tabPage1.TabIndex = 2;
-            tabPage1.Text = "tbPgAccInf";
-            tabPage1.UseVisualStyleBackColor = true;
+            tbPgAccInf.BackColor = System.Drawing.SystemColors.Control;
+            tbPgAccInf.Controls.Add(panel1);
+            tbPgAccInf.Location = new System.Drawing.Point(4, 24);
+            tbPgAccInf.Name = "tbPgAccInf";
+            tbPgAccInf.Padding = new System.Windows.Forms.Padding(3);
+            tbPgAccInf.Size = new System.Drawing.Size(613, 400);
+            tbPgAccInf.TabIndex = 2;
+            tbPgAccInf.Text = "tbPgAccInf";
             // 
             // panel3
             // 
-            panel3.Controls.Add(radioButton3);
-            panel3.Controls.Add(radioButton2);
+            panel3.Controls.Add(radUserInfo);
+            panel3.Controls.Add(radAccInfo);
             panel3.Controls.Add(radRole);
             panel3.Dock = System.Windows.Forms.DockStyle.Top;
             panel3.Location = new System.Drawing.Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(331, 46);
+            panel3.Size = new System.Drawing.Size(621, 46);
             panel3.TabIndex = 24;
             // 
-            // radioButton3
+            // radUserInfo
             // 
-            radioButton3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            radioButton3.AutoSize = true;
-            radioButton3.Enabled = false;
-            radioButton3.Location = new System.Drawing.Point(104, 3);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new System.Drawing.Size(102, 19);
-            radioButton3.TabIndex = 0;
-            radioButton3.Text = "Personal Info -";
-            radioButton3.UseVisualStyleBackColor = true;
+            radUserInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            radUserInfo.AutoCheck = false;
+            radUserInfo.AutoSize = true;
+            radUserInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            radUserInfo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            radUserInfo.Location = new System.Drawing.Point(259, 3);
+            radUserInfo.Name = "radUserInfo";
+            radUserInfo.Size = new System.Drawing.Size(86, 23);
+            radUserInfo.TabIndex = 0;
+            radUserInfo.Text = "User Info.";
+            radUserInfo.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radAccInfo
             // 
-            radioButton2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            radioButton2.AutoSize = true;
-            radioButton2.Enabled = false;
-            radioButton2.Location = new System.Drawing.Point(212, 3);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new System.Drawing.Size(70, 19);
-            radioButton2.TabIndex = 0;
-            radioButton2.Text = "Account";
-            radioButton2.UseVisualStyleBackColor = true;
+            radAccInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            radAccInfo.AutoCheck = false;
+            radAccInfo.AutoSize = true;
+            radAccInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            radAccInfo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            radAccInfo.Location = new System.Drawing.Point(357, 3);
+            radAccInfo.Name = "radAccInfo";
+            radAccInfo.Size = new System.Drawing.Size(77, 23);
+            radAccInfo.TabIndex = 0;
+            radAccInfo.Text = "Account";
+            radAccInfo.UseVisualStyleBackColor = true;
             // 
             // radRole
             // 
             radRole.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            radRole.AutoCheck = false;
             radRole.AutoSize = true;
             radRole.Checked = true;
-            radRole.Enabled = false;
-            radRole.Location = new System.Drawing.Point(42, 3);
+            radRole.Font = new System.Drawing.Font("Segoe UI", 10F);
+            radRole.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            radRole.Location = new System.Drawing.Point(187, 3);
             radRole.Name = "radRole";
-            radRole.Size = new System.Drawing.Size(56, 19);
+            radRole.Size = new System.Drawing.Size(53, 23);
             radRole.TabIndex = 0;
             radRole.TabStop = true;
-            radRole.Text = "Role -";
+            radRole.Text = "Role";
             radRole.UseVisualStyleBackColor = true;
             // 
             // ucUsers
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             Controls.Add(customTabControl1);
             Controls.Add(panel3);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ucUsers";
-            Size = new System.Drawing.Size(331, 383);
+            Size = new System.Drawing.Size(621, 474);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -490,10 +435,8 @@ namespace LFS.Views.Manage.Users
             panel2.PerformLayout();
             customTabControl1.ResumeLayout(false);
             tbPgRole.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            tbPgUserInfo.ResumeLayout(false);
+            tbPgAccInf.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
@@ -523,17 +466,12 @@ namespace LFS.Views.Manage.Users
         private System.Windows.Forms.Label label1;
         private CustomTools.CustomTabControl customTabControl1;
         private System.Windows.Forms.TabPage tbPgRole;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tbPgUserInfo;
+        private System.Windows.Forms.TabPage tbPgAccInf;
         private System.Windows.Forms.FlowLayoutPanel flwLytPnlRole;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radUserInfo;
+        private System.Windows.Forms.RadioButton radAccInfo;
         private System.Windows.Forms.RadioButton radRole;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnNextRole;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnBck;
     }
 }

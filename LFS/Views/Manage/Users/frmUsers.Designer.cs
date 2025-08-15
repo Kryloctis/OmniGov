@@ -53,12 +53,15 @@ namespace LFS.Views.Manage.Users
             searchTstrpTxt = new System.Windows.Forms.ToolStripTextBox();
             miniToolStrip = new System.Windows.Forms.ToolStrip();
             tabControl1 = new LFS.CustomTools.CustomTabControl();
-            tbPgUsrAdd = new System.Windows.Forms.TabPage();
-            panel3 = new System.Windows.Forms.Panel();
+            tbPgCrud = new System.Windows.Forms.TabPage();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnSave = new System.Windows.Forms.Button();
+            btnNext = new System.Windows.Forms.Button();
+            btnBack = new System.Windows.Forms.Button();
             ucUsers1 = new ucUsers();
+            lblTitle = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBck = new System.Windows.Forms.ToolStripButton();
-            toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             tbPgUsrLst.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgUsers).BeginInit();
@@ -66,8 +69,8 @@ namespace LFS.Views.Manage.Users
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
-            tbPgUsrAdd.SuspendLayout();
-            panel3.SuspendLayout();
+            tbPgCrud.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -88,7 +91,7 @@ namespace LFS.Views.Manage.Users
             tbPgUsrLst.Controls.Add(toolStrip1);
             tbPgUsrLst.Location = new System.Drawing.Point(4, 24);
             tbPgUsrLst.Name = "tbPgUsrLst";
-            tbPgUsrLst.Size = new System.Drawing.Size(730, 406);
+            tbPgUsrLst.Size = new System.Drawing.Size(676, 463);
             tbPgUsrLst.TabIndex = 1;
             tbPgUsrLst.Text = "tbPgUsrLst";
             // 
@@ -100,7 +103,7 @@ namespace LFS.Views.Manage.Users
             panel1.Location = new System.Drawing.Point(0, 65);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(730, 319);
+            panel1.Size = new System.Drawing.Size(676, 376);
             panel1.TabIndex = 20;
             // 
             // dgUsers
@@ -113,7 +116,7 @@ namespace LFS.Views.Manage.Users
             dgUsers.RowHeadersWidth = 51;
             dgUsers.RowTemplate.Height = 29;
             dgUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgUsers.Size = new System.Drawing.Size(722, 306);
+            dgUsers.Size = new System.Drawing.Size(668, 363);
             dgUsers.TabIndex = 7;
             dgUsers.SelectionChanged += dgUsers_SelectionChanged;
             // 
@@ -122,46 +125,51 @@ namespace LFS.Views.Manage.Users
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
             progressBar1.Location = new System.Drawing.Point(4, 4);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(722, 5);
+            progressBar1.Size = new System.Drawing.Size(668, 5);
             progressBar1.TabIndex = 19;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblRecordCount, toolStripStatusLabel4, toolStripStatusLabel2, lblCreatedAt, toolStripStatusLabel5, toolStripStatusLabel3, lblUpdatedAt });
-            statusStrip1.Location = new System.Drawing.Point(0, 384);
+            statusStrip1.Location = new System.Drawing.Point(0, 441);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            statusStrip1.Size = new System.Drawing.Size(730, 22);
+            statusStrip1.Size = new System.Drawing.Size(676, 22);
             statusStrip1.TabIndex = 19;
             statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
+            toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
+            lblRecordCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblRecordCount.Name = "lblRecordCount";
             lblRecordCount.Size = new System.Drawing.Size(13, 17);
             lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
+            toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(476, 17);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(422, 17);
             toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
+            toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
             toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
+            lblCreatedAt.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblCreatedAt.Name = "lblCreatedAt";
             lblCreatedAt.Size = new System.Drawing.Size(17, 17);
             lblCreatedAt.Text = "--";
@@ -176,12 +184,14 @@ namespace LFS.Views.Manage.Users
             // 
             // toolStripStatusLabel3
             // 
+            toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
+            lblUpdatedAt.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblUpdatedAt.Name = "lblUpdatedAt";
             lblUpdatedAt.Size = new System.Drawing.Size(17, 17);
             lblUpdatedAt.Text = "--";
@@ -192,7 +202,7 @@ namespace LFS.Views.Manage.Users
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 35);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(730, 30);
+            panel2.Size = new System.Drawing.Size(676, 30);
             panel2.TabIndex = 17;
             // 
             // cmbxFilter
@@ -213,7 +223,7 @@ namespace LFS.Views.Manage.Users
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(730, 35);
+            toolStrip1.Size = new System.Drawing.Size(676, 35);
             toolStrip1.TabIndex = 13;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -222,8 +232,8 @@ namespace LFS.Views.Manage.Users
             btnAdd.Image = Properties.Resources.button_rounded_add_20px;
             btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(53, 24);
-            btnAdd.Text = "Add";
+            btnAdd.Size = new System.Drawing.Size(65, 24);
+            btnAdd.Text = "Create";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
@@ -231,8 +241,8 @@ namespace LFS.Views.Manage.Users
             btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
             btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new System.Drawing.Size(51, 24);
-            btnEdit.Text = "Edit";
+            btnEdit.Size = new System.Drawing.Size(69, 24);
+            btnEdit.Text = "Update";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
@@ -280,55 +290,104 @@ namespace LFS.Views.Manage.Users
             // tabControl1
             // 
             tabControl1.Controls.Add(tbPgUsrLst);
-            tabControl1.Controls.Add(tbPgUsrAdd);
+            tabControl1.Controls.Add(tbPgCrud);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl1.Location = new System.Drawing.Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(738, 434);
+            tabControl1.Size = new System.Drawing.Size(684, 491);
             tabControl1.TabIndex = 21;
             // 
-            // tbPgUsrAdd
+            // tbPgCrud
             // 
-            tbPgUsrAdd.Controls.Add(panel3);
-            tbPgUsrAdd.Controls.Add(toolStrip2);
-            tbPgUsrAdd.Location = new System.Drawing.Point(4, 24);
-            tbPgUsrAdd.Name = "tbPgUsrAdd";
-            tbPgUsrAdd.Size = new System.Drawing.Size(730, 406);
-            tbPgUsrAdd.TabIndex = 2;
-            tbPgUsrAdd.Text = "tbPgUsrAdd";
+            tbPgCrud.Controls.Add(flowLayoutPanel1);
+            tbPgCrud.Controls.Add(ucUsers1);
+            tbPgCrud.Controls.Add(lblTitle);
+            tbPgCrud.Controls.Add(toolStrip2);
+            tbPgCrud.Location = new System.Drawing.Point(4, 24);
+            tbPgCrud.Name = "tbPgCrud";
+            tbPgCrud.Padding = new System.Windows.Forms.Padding(4);
+            tbPgCrud.Size = new System.Drawing.Size(676, 463);
+            tbPgCrud.TabIndex = 2;
+            tbPgCrud.Text = "tbPgCrud";
             // 
-            // panel3
+            // flowLayoutPanel1
             // 
-            panel3.AutoScroll = true;
-            panel3.Controls.Add(ucUsers1);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(0, 35);
-            panel3.Name = "panel3";
-            panel3.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            panel3.Size = new System.Drawing.Size(730, 371);
-            panel3.TabIndex = 24;
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Controls.Add(btnNext);
+            flowLayoutPanel1.Controls.Add(btnBack);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(4, 364);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(100, 20, 0, 0);
+            flowLayoutPanel1.Size = new System.Drawing.Size(668, 52);
+            flowLayoutPanel1.TabIndex = 26;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new System.Drawing.Point(445, 23);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(120, 23);
+            btnSave.TabIndex = 2;
+            btnSave.Text = "Save (Ctrl + S)";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Visible = false;
+            // 
+            // btnNext
+            // 
+            btnNext.Location = new System.Drawing.Point(319, 23);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new System.Drawing.Size(120, 23);
+            btnNext.TabIndex = 0;
+            btnNext.Text = "Next";
+            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Click += btnNext_Click;
+            // 
+            // btnBack
+            // 
+            btnBack.Location = new System.Drawing.Point(193, 23);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new System.Drawing.Size(120, 23);
+            btnBack.TabIndex = 1;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
             // 
             // ucUsers1
             // 
-            ucUsers1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             ucUsers1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ucUsers1.Location = new System.Drawing.Point(209, 22);
+            ucUsers1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            ucUsers1.Dock = System.Windows.Forms.DockStyle.Top;
+            ucUsers1.Location = new System.Drawing.Point(4, 83);
             ucUsers1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             ucUsers1.Name = "ucUsers1";
-            ucUsers1.Size = new System.Drawing.Size(312, 342);
+            ucUsers1.Padding = new System.Windows.Forms.Padding(100, 20, 100, 0);
+            ucUsers1.Size = new System.Drawing.Size(668, 281);
             ucUsers1.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblTitle.Location = new System.Drawing.Point(4, 35);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Padding = new System.Windows.Forms.Padding(4);
+            lblTitle.Size = new System.Drawing.Size(668, 48);
+            lblTitle.TabIndex = 25;
+            lblTitle.Text = "Title";
+            lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // toolStrip2
             // 
             toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBck, toolStripLabel1 });
-            toolStrip2.Location = new System.Drawing.Point(0, 0);
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBck });
+            toolStrip2.Location = new System.Drawing.Point(4, 4);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(730, 35);
+            toolStrip2.Size = new System.Drawing.Size(668, 31);
             toolStrip2.TabIndex = 1;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -337,25 +396,16 @@ namespace LFS.Views.Manage.Users
             tlStrpBtnBck.Image = Properties.Resources.arrow_left_20px;
             tlStrpBtnBck.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnBck.Name = "tlStrpBtnBck";
-            tlStrpBtnBck.Size = new System.Drawing.Size(56, 24);
+            tlStrpBtnBck.Size = new System.Drawing.Size(52, 20);
             tlStrpBtnBck.Text = "Back";
             tlStrpBtnBck.Click += tlStrpBtnBck_Click;
-            // 
-            // toolStripLabel1
-            // 
-            toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            toolStripLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new System.Drawing.Size(74, 24);
-            toolStripLabel1.Text = "Add User";
             // 
             // frmUsers
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(738, 434);
+            ClientSize = new System.Drawing.Size(684, 491);
             Controls.Add(tabControl1);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimizeBox = false;
@@ -375,9 +425,9 @@ namespace LFS.Views.Manage.Users
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
-            tbPgUsrAdd.ResumeLayout(false);
-            tbPgUsrAdd.PerformLayout();
-            panel3.ResumeLayout(false);
+            tbPgCrud.ResumeLayout(false);
+            tbPgCrud.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             ResumeLayout(false);
@@ -408,11 +458,14 @@ namespace LFS.Views.Manage.Users
         private System.Windows.Forms.ToolStripTextBox searchTstrpTxt;
         private System.Windows.Forms.ToolStrip miniToolStrip;
         private LFS.CustomTools.CustomTabControl tabControl1;
-        private System.Windows.Forms.TabPage tbPgUsrAdd;
+        private System.Windows.Forms.TabPage tbPgCrud;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton tlStrpBtnBck;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.Panel panel3;
         private ucUsers ucUsers1;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnSave;
     }
 }

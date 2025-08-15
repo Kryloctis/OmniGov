@@ -11,6 +11,7 @@ namespace LFS.Views.Manage.Users
 {
     public partial class frmUsers : Form
     {
+        private bool isEdit;
         private ucUsers uc;
 
         public frmUsers()
@@ -19,16 +20,6 @@ namespace LFS.Views.Manage.Users
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
             uc = ucUsers1;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //_ = new frmUsersAdd(this).ShowDialog();
-                tabControl1.SelectedTab = tbPgUsrAdd;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -40,11 +31,34 @@ namespace LFS.Views.Manage.Users
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ToggleCrud(bool isEdit)
+        {
+            this.isEdit = isEdit;
+
+            if (this.isEdit)
+            {
+                int rowIndex = dgUsers.CurrentRow.Index;
+                bool isValid = sbyte.TryParse(dgUsers.Rows[rowIndex].Cells["id"].Value.ToString(), out sbyte roleId);
+
+                lblTitle.Text = "Update User";
+
+                if (isValid)
+                    uc.OnLoad(true, (byte)roleId);
+            }
+            else
+            {
+                lblTitle.Text = "Create User";
+                uc.OnLoad(false);
+                uc.ResetForm();
+            }
+
+            tabControl1.SelectedTab = tbPgCrud;
+        }
+
         private void OnLoad()
         {
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
             LoadRecords();
-            uc.OnLoad(false, null);
         }
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
@@ -58,13 +72,20 @@ namespace LFS.Views.Manage.Users
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleCrud(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             try
             {
-                int rowIndex = dgUsers.CurrentRow.Index;
-                int userId = Convert.ToInt32(dgUsers.Rows[rowIndex].Cells["id"].Value);
-                _ = new frmUsersEdit(this, userId).ShowDialog();
+                ToggleCrud(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -211,6 +232,29 @@ namespace LFS.Views.Manage.Users
             try
             {
                 tabControl1.SelectedTab = tbPgUsrLst;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var isLastTbPg = uc.ToggleTab(true);
+
+                btnNext.Visible = !isLastTbPg;
+                btnSave.Visible = isLastTbPg;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var isLastTbPg = uc.ToggleTab(false);
+                btnNext.Visible = !isLastTbPg;
+                btnSave.Visible = isLastTbPg;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
