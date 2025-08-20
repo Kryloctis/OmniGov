@@ -54,14 +54,15 @@ namespace LFS.Views.Manage.Users
             miniToolStrip = new System.Windows.Forms.ToolStrip();
             tabControl1 = new LFS.CustomTools.CustomTabControl();
             tbPgCrud = new System.Windows.Forms.TabPage();
+            ucUsers1 = new ucUsers();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnSave = new System.Windows.Forms.Button();
             btnNext = new System.Windows.Forms.Button();
             btnBack = new System.Windows.Forms.Button();
-            ucUsers1 = new ucUsers();
             lblTitle = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBck = new System.Windows.Forms.ToolStripButton();
+            panel3 = new System.Windows.Forms.Panel();
             tbPgUsrLst.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgUsers).BeginInit();
@@ -72,6 +73,7 @@ namespace LFS.Views.Manage.Users
             tbPgCrud.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             toolStrip2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // backgroundWorker1
@@ -207,6 +209,7 @@ namespace LFS.Views.Manage.Users
             // 
             // cmbxFilter
             // 
+            cmbxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFilter.FormattingEnabled = true;
             cmbxFilter.Location = new System.Drawing.Point(3, 3);
             cmbxFilter.Name = "cmbxFilter";
@@ -300,9 +303,7 @@ namespace LFS.Views.Manage.Users
             // 
             // tbPgCrud
             // 
-            tbPgCrud.Controls.Add(flowLayoutPanel1);
-            tbPgCrud.Controls.Add(ucUsers1);
-            tbPgCrud.Controls.Add(lblTitle);
+            tbPgCrud.Controls.Add(panel3);
             tbPgCrud.Controls.Add(toolStrip2);
             tbPgCrud.Location = new System.Drawing.Point(4, 24);
             tbPgCrud.Name = "tbPgCrud";
@@ -311,70 +312,68 @@ namespace LFS.Views.Manage.Users
             tbPgCrud.TabIndex = 2;
             tbPgCrud.Text = "tbPgCrud";
             // 
+            // ucUsers1
+            // 
+            ucUsers1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            ucUsers1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            ucUsers1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucUsers1.Location = new System.Drawing.Point(100, 50);
+            ucUsers1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            ucUsers1.Name = "ucUsers1";
+            ucUsers1.Size = new System.Drawing.Size(468, 324);
+            ucUsers1.TabIndex = 1;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Controls.Add(btnNext);
             flowLayoutPanel1.Controls.Add(btnBack);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(4, 364);
+            flowLayoutPanel1.Location = new System.Drawing.Point(100, 374);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(100, 20, 0, 0);
-            flowLayoutPanel1.Size = new System.Drawing.Size(668, 52);
+            flowLayoutPanel1.Size = new System.Drawing.Size(468, 30);
             flowLayoutPanel1.TabIndex = 26;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(445, 23);
+            btnSave.Location = new System.Drawing.Point(345, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(120, 23);
-            btnSave.TabIndex = 2;
+            btnSave.TabIndex = 0;
             btnSave.Text = "Save (Ctrl + S)";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Visible = false;
+            btnSave.Click += btnSave_Click;
             // 
             // btnNext
             // 
-            btnNext.Location = new System.Drawing.Point(319, 23);
+            btnNext.Location = new System.Drawing.Point(219, 3);
             btnNext.Name = "btnNext";
             btnNext.Size = new System.Drawing.Size(120, 23);
-            btnNext.TabIndex = 0;
+            btnNext.TabIndex = 1;
             btnNext.Text = "Next";
             btnNext.UseVisualStyleBackColor = true;
             btnNext.Click += btnNext_Click;
             // 
             // btnBack
             // 
-            btnBack.Location = new System.Drawing.Point(193, 23);
+            btnBack.Location = new System.Drawing.Point(93, 3);
             btnBack.Name = "btnBack";
             btnBack.Size = new System.Drawing.Size(120, 23);
-            btnBack.TabIndex = 1;
+            btnBack.TabIndex = 2;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
             btnBack.Click += btnBack_Click;
-            // 
-            // ucUsers1
-            // 
-            ucUsers1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ucUsers1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            ucUsers1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucUsers1.Location = new System.Drawing.Point(4, 83);
-            ucUsers1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            ucUsers1.Name = "ucUsers1";
-            ucUsers1.Padding = new System.Windows.Forms.Padding(100, 20, 100, 0);
-            ucUsers1.Size = new System.Drawing.Size(668, 281);
-            ucUsers1.TabIndex = 1;
             // 
             // lblTitle
             // 
             lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
             lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             lblTitle.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblTitle.Location = new System.Drawing.Point(4, 35);
+            lblTitle.Location = new System.Drawing.Point(100, 0);
             lblTitle.Name = "lblTitle";
             lblTitle.Padding = new System.Windows.Forms.Padding(4);
-            lblTitle.Size = new System.Drawing.Size(668, 48);
+            lblTitle.Size = new System.Drawing.Size(468, 50);
             lblTitle.TabIndex = 25;
             lblTitle.Text = "Title";
             lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -399,6 +398,18 @@ namespace LFS.Views.Manage.Users
             tlStrpBtnBck.Size = new System.Drawing.Size(52, 20);
             tlStrpBtnBck.Text = "Back";
             tlStrpBtnBck.Click += tlStrpBtnBck_Click;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(ucUsers1);
+            panel3.Controls.Add(lblTitle);
+            panel3.Controls.Add(flowLayoutPanel1);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(4, 35);
+            panel3.Name = "panel3";
+            panel3.Padding = new System.Windows.Forms.Padding(100, 0, 100, 20);
+            panel3.Size = new System.Drawing.Size(668, 424);
+            panel3.TabIndex = 27;
             // 
             // frmUsers
             // 
@@ -430,6 +441,7 @@ namespace LFS.Views.Manage.Users
             flowLayoutPanel1.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -464,8 +476,9 @@ namespace LFS.Views.Manage.Users
         private ucUsers ucUsers1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel3;
     }
 }

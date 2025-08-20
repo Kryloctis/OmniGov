@@ -88,9 +88,10 @@ namespace LFS.Views.Manage.Users
             panel1.Controls.Add(txtUsername);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            panel1.Location = new System.Drawing.Point(3, 3);
+            panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(607, 394);
+            panel1.Padding = new System.Windows.Forms.Padding(20, 4, 20, 4);
+            panel1.Size = new System.Drawing.Size(613, 400);
             panel1.TabIndex = 1;
             // 
             // btnConfirmPasswordVisibility
@@ -102,7 +103,7 @@ namespace LFS.Views.Manage.Users
             btnConfirmPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnConfirmPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnConfirmPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(580, 131);
+            btnConfirmPasswordVisibility.Location = new System.Drawing.Point(590, 133);
             btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
             btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
@@ -119,7 +120,7 @@ namespace LFS.Views.Manage.Users
             btnPasswordVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             btnPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnPasswordVisibility.Image = Properties.Resources.visible_16px;
-            btnPasswordVisibility.Location = new System.Drawing.Point(582, 75);
+            btnPasswordVisibility.Location = new System.Drawing.Point(590, 75);
             btnPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             btnPasswordVisibility.Name = "btnPasswordVisibility";
             btnPasswordVisibility.Size = new System.Drawing.Size(23, 23);
@@ -130,7 +131,7 @@ namespace LFS.Views.Manage.Users
             // lblConfirmPassword
             // 
             lblConfirmPassword.AutoSize = true;
-            lblConfirmPassword.Location = new System.Drawing.Point(7, 114);
+            lblConfirmPassword.Location = new System.Drawing.Point(23, 117);
             lblConfirmPassword.Name = "lblConfirmPassword";
             lblConfirmPassword.Size = new System.Drawing.Size(107, 15);
             lblConfirmPassword.TabIndex = 31;
@@ -139,12 +140,12 @@ namespace LFS.Views.Manage.Users
             // txtConfirmPassword
             // 
             txtConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtConfirmPassword.Location = new System.Drawing.Point(7, 131);
+            txtConfirmPassword.Location = new System.Drawing.Point(23, 134);
             txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtConfirmPassword.MaxLength = 60;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '*';
-            txtConfirmPassword.Size = new System.Drawing.Size(570, 23);
+            txtConfirmPassword.Size = new System.Drawing.Size(564, 23);
             txtConfirmPassword.TabIndex = 9;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
             txtConfirmPassword.Validated += txtConfirmPassword_Validated;
@@ -152,7 +153,7 @@ namespace LFS.Views.Manage.Users
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new System.Drawing.Point(7, 59);
+            lblPassword.Location = new System.Drawing.Point(23, 59);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new System.Drawing.Size(60, 15);
             lblPassword.TabIndex = 29;
@@ -161,12 +162,12 @@ namespace LFS.Views.Manage.Users
             // txtPassword
             // 
             txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtPassword.Location = new System.Drawing.Point(7, 76);
+            txtPassword.Location = new System.Drawing.Point(23, 76);
             txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtPassword.MaxLength = 60;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new System.Drawing.Size(572, 23);
+            txtPassword.Size = new System.Drawing.Size(567, 23);
             txtPassword.TabIndex = 8;
             txtPassword.Validating += txtPassword_Validating;
             txtPassword.Validated += txtPassword_Validated;
@@ -174,7 +175,7 @@ namespace LFS.Views.Manage.Users
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(7, 4);
+            label4.Location = new System.Drawing.Point(23, 4);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(63, 15);
             label4.TabIndex = 28;
@@ -183,11 +184,11 @@ namespace LFS.Views.Manage.Users
             // txtUsername
             // 
             txtUsername.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtUsername.Location = new System.Drawing.Point(7, 21);
+            txtUsername.Location = new System.Drawing.Point(23, 21);
             txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtUsername.MaxLength = 45;
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new System.Drawing.Size(572, 23);
+            txtUsername.Size = new System.Drawing.Size(567, 23);
             txtUsername.TabIndex = 7;
             txtUsername.Validating += txtUsername_Validating;
             txtUsername.Validated += txtUsername_Validated;
@@ -195,7 +196,7 @@ namespace LFS.Views.Manage.Users
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(167, 169);
+            label1.Location = new System.Drawing.Point(170, 168);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(40, 15);
             label1.TabIndex = 5;
@@ -204,7 +205,7 @@ namespace LFS.Views.Manage.Users
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(3, 114);
+            label3.Location = new System.Drawing.Point(23, 114);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(66, 15);
             label3.TabIndex = 9;
@@ -213,11 +214,13 @@ namespace LFS.Views.Manage.Users
             // txtLastname
             // 
             txtLastname.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtLastname.Location = new System.Drawing.Point(7, 131);
+            txtLastname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtLastname.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtLastname.Location = new System.Drawing.Point(23, 131);
             txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtLastname.MaxLength = 45;
             txtLastname.Name = "txtLastname";
-            txtLastname.Size = new System.Drawing.Size(592, 23);
+            txtLastname.Size = new System.Drawing.Size(568, 22);
             txtLastname.TabIndex = 5;
             txtLastname.Validating += txtLastname_Validating;
             txtLastname.Validated += txtLastname_Validated;
@@ -225,7 +228,7 @@ namespace LFS.Views.Manage.Users
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(7, 169);
+            label8.Location = new System.Drawing.Point(23, 168);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(40, 15);
             label8.TabIndex = 5;
@@ -234,7 +237,7 @@ namespace LFS.Views.Manage.Users
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(7, 59);
+            label2.Location = new System.Drawing.Point(23, 60);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(79, 15);
             label2.TabIndex = 7;
@@ -243,47 +246,55 @@ namespace LFS.Views.Manage.Users
             // txtMiddleInitial
             // 
             txtMiddleInitial.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtMiddleInitial.Location = new System.Drawing.Point(7, 76);
+            txtMiddleInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtMiddleInitial.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtMiddleInitial.Location = new System.Drawing.Point(23, 77);
             txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtMiddleInitial.MaxLength = 1;
             txtMiddleInitial.Name = "txtMiddleInitial";
-            txtMiddleInitial.Size = new System.Drawing.Size(592, 23);
+            txtMiddleInitial.Size = new System.Drawing.Size(567, 22);
             txtMiddleInitial.TabIndex = 4;
             // 
             // txtPrefix
             // 
-            txtPrefix.Location = new System.Drawing.Point(167, 186);
+            txtPrefix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtPrefix.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtPrefix.Location = new System.Drawing.Point(170, 185);
             txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtPrefix.MaxLength = 45;
             txtPrefix.Name = "txtPrefix";
-            txtPrefix.Size = new System.Drawing.Size(83, 23);
+            txtPrefix.Size = new System.Drawing.Size(83, 22);
             txtPrefix.TabIndex = 2;
             // 
             // txtFirstname
             // 
             txtFirstname.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtFirstname.Location = new System.Drawing.Point(7, 21);
+            txtFirstname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtFirstname.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtFirstname.Location = new System.Drawing.Point(23, 23);
             txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 15);
             txtFirstname.MaxLength = 45;
             txtFirstname.Name = "txtFirstname";
-            txtFirstname.Size = new System.Drawing.Size(592, 23);
+            txtFirstname.Size = new System.Drawing.Size(567, 22);
             txtFirstname.TabIndex = 3;
             txtFirstname.Validating += txtFirstname_Validating;
             txtFirstname.Validated += txtFirstname_Validated;
             // 
             // txtSuffix
             // 
-            txtSuffix.Location = new System.Drawing.Point(7, 186);
+            txtSuffix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtSuffix.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtSuffix.Location = new System.Drawing.Point(23, 185);
             txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             txtSuffix.MaxLength = 45;
             txtSuffix.Name = "txtSuffix";
-            txtSuffix.Size = new System.Drawing.Size(95, 23);
+            txtSuffix.Size = new System.Drawing.Size(95, 22);
             txtSuffix.TabIndex = 6;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(7, 4);
+            label7.Location = new System.Drawing.Point(23, 4);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(67, 15);
             label7.TabIndex = 5;
@@ -301,12 +312,12 @@ namespace LFS.Views.Manage.Users
             panel2.Controls.Add(txtLastname);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label1);
-            panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(613, 258);
+            panel2.Padding = new System.Windows.Forms.Padding(20, 4, 20, 4);
+            panel2.Size = new System.Drawing.Size(613, 400);
             panel2.TabIndex = 1;
             // 
             // customTabControl1
@@ -334,12 +345,13 @@ namespace LFS.Views.Manage.Users
             // 
             // flwLytPnlRole
             // 
-            flwLytPnlRole.Dock = System.Windows.Forms.DockStyle.Top;
+            flwLytPnlRole.AutoScroll = true;
+            flwLytPnlRole.Dock = System.Windows.Forms.DockStyle.Fill;
             flwLytPnlRole.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             flwLytPnlRole.Location = new System.Drawing.Point(0, 0);
             flwLytPnlRole.Name = "flwLytPnlRole";
             flwLytPnlRole.Padding = new System.Windows.Forms.Padding(4);
-            flwLytPnlRole.Size = new System.Drawing.Size(613, 258);
+            flwLytPnlRole.Size = new System.Drawing.Size(613, 400);
             flwLytPnlRole.TabIndex = 3;
             // 
             // tbPgUserInfo
@@ -358,7 +370,6 @@ namespace LFS.Views.Manage.Users
             tbPgAccInf.Controls.Add(panel1);
             tbPgAccInf.Location = new System.Drawing.Point(4, 24);
             tbPgAccInf.Name = "tbPgAccInf";
-            tbPgAccInf.Padding = new System.Windows.Forms.Padding(3);
             tbPgAccInf.Size = new System.Drawing.Size(613, 400);
             tbPgAccInf.TabIndex = 2;
             tbPgAccInf.Text = "tbPgAccInf";
@@ -448,9 +459,7 @@ namespace LFS.Views.Manage.Users
         private System.Windows.Forms.Button btnConfirmPasswordVisibility;
         private System.Windows.Forms.Button btnPasswordVisibility;
         internal System.Windows.Forms.Label lblConfirmPassword;
-        internal System.Windows.Forms.TextBox txtConfirmPassword;
         internal System.Windows.Forms.Label lblPassword;
-        internal System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Panel panel2;
@@ -473,5 +482,7 @@ namespace LFS.Views.Manage.Users
         private System.Windows.Forms.RadioButton radUserInfo;
         private System.Windows.Forms.RadioButton radAccInfo;
         private System.Windows.Forms.RadioButton radRole;
+        internal System.Windows.Forms.TextBox txtConfirmPassword;
+        internal System.Windows.Forms.TextBox txtPassword;
     }
 }

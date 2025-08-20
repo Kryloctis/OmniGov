@@ -2,7 +2,6 @@
 using ACC.Domain.Models;
 using LFS.CustomTools;
 using LFS.Properties;
-using Org.BouncyCastle.Pqc.Crypto.Utilities;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -26,6 +25,7 @@ namespace LFS.Views.Manage.Users
         {
             this.isEdit = isEdit;
             errorProvider1.Clear();
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
             LoadRoles(flwLytPnlRole);
 
             if (isEdit)
@@ -33,32 +33,33 @@ namespace LFS.Views.Manage.Users
                 this.userId = userId.Value;
                 LoadSelectedRecord(userId.Value);
             }
-
-            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
 
         internal UsersModel UsersModel()
         {
-            return new UsersModel()
-            {
-                UserName = txtUsername.Text.Trim(),
-                Password = txtPassword.Text.Trim(),
-                Prefix = txtPrefix.Text.Trim(),
-                FirstName = txtFirstname.Text.Trim(),
-                MidInitial = txtMiddleInitial.Text.Trim(),
-                LastName = txtLastname.Text.Trim(),
-                Suffix = txtSuffix.Text.Trim(),
-            };
+            var model = new UsersModel();
+
+            if (isEdit) model.Id = userId;
+
+            model.UserName = txtUsername.Text.Trim();
+            model.Password = txtPassword.Text.Trim();
+            model.Prefix = txtPrefix.Text.Trim();
+            model.FirstName = txtFirstname.Text.Trim();
+            model.MidInitial = txtMiddleInitial.Text.Trim();
+            model.LastName = txtLastname.Text.Trim();
+            model.Suffix = txtSuffix.Text.Trim();
+            model.RoleId = GetSelectedRoleId().Value;
+
+            return model;
         }
 
         private void LoadSelectedRecord(int userId)
         {
-            var dictUser = AccFactory.UsersRepository().GetRecordByID(userId);
+            var dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
             int roleId = Convert.ToInt32(dictUser["roles_id"]);
             var dictRoles = AccFactory.RolesRepository().GetRecordByID(roleId);
 
             var radioButtons = flwLytPnlRole.Controls.OfType<RadioButton>();
-
 
             foreach (RadioButton item in radioButtons)
             {
@@ -76,6 +77,14 @@ namespace LFS.Views.Manage.Users
             txtUsername.Text = dictUser["username"];
         }
 
+        private byte? GetSelectedRoleId()
+        {
+            var checkedRadio = flwLytPnlRole.Controls
+                .OfType<RadioButton>()
+                .FirstOrDefault(rb => rb.Checked);
+
+            return checkedRadio != null ? Convert.ToByte(checkedRadio.Tag) : (byte?)null;
+        }
 
         internal void LoadRoles(FlowLayoutPanel flowLayoutPanel)
         {
@@ -116,8 +125,8 @@ namespace LFS.Views.Manage.Users
                 errorProvider1.GetError(txtMiddleInitial),
                 errorProvider1.GetError(txtLastname),
                 errorProvider1.GetError(txtUsername),
-                txtPassword.Tag.ToString(),
-                txtConfirmPassword.Tag.ToString()
+                errorProvider1.GetError(txtPassword),
+                errorProvider1.GetError(txtConfirmPassword),
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -125,6 +134,7 @@ namespace LFS.Views.Manage.Users
 
         internal void ResetForm()
         {
+            customTabControl1.SelectedTab = tbPgRole;
             txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
@@ -133,6 +143,7 @@ namespace LFS.Views.Manage.Users
             txtUsername.Clear();
             txtPassword.Clear();
             txtConfirmPassword.Clear();
+            LoadRoles(flwLytPnlRole);
         }
 
         private void txtUsername_Validating(object sender, CancelEventArgs e)
@@ -184,23 +195,14 @@ namespace LFS.Views.Manage.Users
             Helper.ClearErrorTextBox(errorProvider1, txtLastname);
         }
 
-        private bool textBoxIsEmpty(TextBox textBox, string field)
-        {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                textBox.Tag = field;
-                return true;
-            }
-
-            textBox.Tag = string.Empty;
-            return false;
-        }
-
         private void txtPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (userId != 0) return;
-
-            e.Cancel = textBoxIsEmpty(txtPassword, Helper.ErrorMessage("Password"));
+            try
+            {
+                if (isEdit)
+                    e.Cancel = !PasswordValidated(errorProvider1, txtPassword, txtConfirmPassword);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtPassword_Validated(object sender, EventArgs e)
@@ -208,29 +210,35 @@ namespace LFS.Views.Manage.Users
             Helper.ClearErrorTextBox(errorProvider1, txtPassword);
         }
 
-        private bool PasswordDoesNotMatch(TextBox txtBox)
+        private bool PasswordValidated(ErrorProvider errorProvider, TextBox txtPass, TextBox txtCnfrmPass)
         {
-            if (txtPassword.Text != txtConfirmPassword.Text)
+            string notMatchMssg = "Password does not match. Please try again.";
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, txtPass, "Password"))
             {
-                txtBox.Tag = "Password does not match. Please try again.";
+                return false;
+            }
+            else if (Helper.ShowErrorTextBoxEmpty(errorProvider, txtPass, "Confirm Password"))
+            {
+                return false;
+            }
+            else if (txtPassword.Text != txtConfirmPassword.Text)
+            {
+                errorProvider.SetError(txtCnfrmPass, notMatchMssg);
+                return false;
+            }
+            else
+            {
                 return true;
             }
-
-            txtBox.Tag = string.Empty;
-            return false;
         }
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                if (userId != 0) return;
-                e.Cancel = textBoxIsEmpty(txtConfirmPassword, "Please confirm password");
-
-                if (!string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtConfirmPassword.Text))
-                {
-                    e.Cancel = PasswordDoesNotMatch(txtConfirmPassword);
-                }
+                if (isEdit)
+                    e.Cancel = !PasswordValidated(errorProvider1, txtPassword, txtConfirmPassword);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -300,7 +308,7 @@ namespace LFS.Views.Manage.Users
             {
                 case "tbPgRole":
                     radRole.Checked = true;
-               
+
                     break;
 
                 case "tbPgUserInfo":
@@ -313,16 +321,43 @@ namespace LFS.Views.Manage.Users
             }
         }
 
-        internal bool ToggleTab(bool next)
+        internal void TogglePages(bool next)
         {
             if (customTabControl1?.TabPages.Count > 0)
             {
                 int maxIndex = customTabControl1.TabPages.Count - 1;
                 int newIndex = Math.Clamp(customTabControl1.SelectedIndex + (next ? 1 : -1), 0, maxIndex);
                 customTabControl1.SelectedIndex = newIndex;
-                return newIndex == maxIndex;
             }
-            return false;
+        }
+
+        internal void ToggleButtons(Button btnBck, Button btnNxt, Button btnSave)
+        {
+            var selectedTab = customTabControl1.SelectedTab.Name;
+
+            switch (selectedTab)
+            {
+                case "tbPgRole":
+                    btnBck.Visible = false;
+                    btnNxt.Visible = true;
+                    btnSave.Visible = false;
+                    break;
+
+                case "tbPgUserInfo":
+                    btnBck.Visible = true;
+                    btnNxt.Visible = true;
+                    btnSave.Visible = false;
+                    break;
+
+                case "tbPgAccInf":
+                    btnBck.Visible = true;
+                    btnNxt.Visible = false;
+                    btnSave.Visible = true;
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

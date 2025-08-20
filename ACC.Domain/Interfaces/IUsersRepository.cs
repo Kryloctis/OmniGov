@@ -6,8 +6,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IUsersRepository : IAccRepository<UsersModel>
     {
-        bool HasPermission(byte userId, string permissionName);
-
         bool NameExist(string name);
 
         bool NameExist(string name, int id);
@@ -16,8 +14,6 @@ namespace ACC.Domain.Interfaces
 
         bool UpdateWithPassword(UsersModel entity);
 
-        Dictionary<string, string> GetUserByID(int Id);
-
         DataTable GetLinksCollectingOfficers(string searchText);
 
         DataTable GetLinksDisbursingOfficers();
@@ -25,6 +21,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetLinksJOCollectingOfficers();
 
         DataTable GetViewRecordsBySearch(int rowLimit, string searchTxt);
+
+        DataTable GetViewRecords();
 
         Dictionary<string, dynamic> GetViewRecordById(int Id);
     }

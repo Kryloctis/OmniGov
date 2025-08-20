@@ -34,6 +34,7 @@ namespace LFS.Views.Manage.Users
         private void ToggleCrud(bool isEdit)
         {
             this.isEdit = isEdit;
+            uc.ResetForm();
 
             if (this.isEdit)
             {
@@ -49,24 +50,24 @@ namespace LFS.Views.Manage.Users
             {
                 lblTitle.Text = "Create User";
                 uc.OnLoad(false);
-                uc.ResetForm();
             }
 
             tabControl1.SelectedTab = tbPgCrud;
+            uc.ToggleButtons(btnBack, btnNext, btnSave);
         }
 
         private void OnLoad()
         {
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
             LoadRecords();
+            uc.ToggleButtons(btnBack, btnNext, btnSave);
         }
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                byte[] columnIndexTimestamp = { 4, 5 };
-                Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+                Helper.ShowRecordTimestampMod(dgUsers, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -161,13 +162,14 @@ namespace LFS.Views.Manage.Users
                 var dataTable = new DataTable();
                 var dataColumns = new DataColumn[]
                 {
-                        new DataColumn("id", typeof(int)),
-                        new DataColumn("full_name", typeof(string)),
-                        new DataColumn("role", typeof(string)),
-                        new DataColumn("is_active", typeof(bool)),
-                        new DataColumn("created_at", typeof(string)),
-                        new DataColumn("updated_at", typeof(string)),
+                    new DataColumn("id", typeof(int)),
+                    new DataColumn("full_name", typeof(string)),
+                    new DataColumn("role", typeof(string)),
+                    new DataColumn("is_active", typeof(bool)),
+                    new DataColumn("created_at", typeof(string)),
+                    new DataColumn("updated_at", typeof(string)),
                 };
+
                 dataTable.Columns.AddRange(dataColumns);
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;
@@ -240,10 +242,8 @@ namespace LFS.Views.Manage.Users
         {
             try
             {
-                var isLastTbPg = uc.ToggleTab(true);
-
-                btnNext.Visible = !isLastTbPg;
-                btnSave.Visible = isLastTbPg;
+                uc.TogglePages(true);
+                uc.ToggleButtons(btnBack, btnNext, btnSave);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -252,11 +252,49 @@ namespace LFS.Views.Manage.Users
         {
             try
             {
-                var isLastTbPg = uc.ToggleTab(false);
-                btnNext.Visible = !isLastTbPg;
-                btnSave.Visible = isLastTbPg;
+                uc.TogglePages(false);
+                uc.ToggleButtons(btnBack, btnNext, btnSave);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void SaveUser(bool isEdit)
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return;
+            }
+
+            bool isSaved = isEdit ?
+                AccFactory.UsersRepository().Update(uc.UsersModel()) :
+                AccFactory.UsersRepository().Insert(uc.UsersModel());
+
+            if (isSaved)
+            {
+                uc.ResetForm();
+                uc.ToggleButtons(btnBack, btnNext, btnSave);
+                LoadRecords();
+
+                if (isEdit)
+                {
+                    tabControl1.SelectedTab = tbPgUsrLst;
+                    Helper.MessageBoxSuccess("User has been updated");
+                }
+                else
+                {
+                    Helper.MessageBoxSuccess("User has been saved");
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveUser(isEdit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
     }
 }

@@ -20,87 +20,32 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, Id},
+                new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, role_name, permission_name FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return record;
+                DataRow row = dataTable.Rows[0];
 
-                record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
-                record.Add("prefix", reader.Rows[0]["prefix"].ToString());
-                record.Add("first_name", reader.Rows[0]["first_name"].ToString());
-                record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
-                record.Add("last_name", reader.Rows[0]["last_name"].ToString());
-                record.Add("suffix", reader.Rows[0]["suffix"].ToString());
-                record.Add("username", reader.Rows[0]["username"].ToString());
-                record.Add("password", reader.Rows[0]["password"].ToString());
-                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                record.Add("role_name", reader.Rows[0]["role_name"].ToString());
-                record.Add("permission_name", reader.Rows[0]["permission_name"].ToString());
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-
-            return record;
-        }
-
-        public Dictionary<string, string> GetUserByID(int Id)
-        {
-            var record = new Dictionary<string, string>();
-
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
-
-                string query = $"SELECT * FROM {tableName} WHERE id = @id";
-
-                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
-                    record.Add("prefix", reader.Rows[0]["prefix"].ToString());
-                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
-                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
-                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
-                    record.Add("suffix", reader.Rows[0]["suffix"].ToString());
-                    record.Add("username", reader.Rows[0]["username"].ToString());
-                    record.Add("password", reader.Rows[0]["password"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return record;
+            return recordDictionary;
         }
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE b.role_name <> 'System Administrator'";
-                var dtUsers = new DataTable();
-                return mySqlGenericCommandsLFS.Fill(query, dtUsers);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public DataTable GetLinksCollectingOfficers(string searchText)
@@ -175,37 +120,27 @@ namespace ACC.Data
                 new object[] { "@search_text", DbType.String, $"%{searchText}%"},
             };
 
-            var srchtxt = searchText;
+            string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text)";
 
-            string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
-
-            var dtUsers = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool Insert(UsersModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@roles_id", DbType.Byte, entity.RoleId},
-                    new object[] { "@prefix", DbType.String, entity.Prefix},
-                    new object[] { "@first_name", DbType.String  , entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@suffix", DbType.String, entity.Suffix},
-                    new object[] { "@username", DbType.String, entity.UserName},
-                    new object[] { "@password", DbType.String, entity.Password},
-                };
+                new object[] { "@roles_id", DbType.Byte, entity.RoleId},
+                new object[] { "@prefix", DbType.String, entity.Prefix},
+                new object[] { "@first_name", DbType.String  , entity.FirstName},
+                new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                new object[] { "@last_name", DbType.String, entity.LastName},
+                new object[] { "@suffix", DbType.String, entity.Suffix},
+                new object[] { "@username", DbType.String, entity.UserName},
+                new object[] { "@password", DbType.String, entity.Password},
+            };
 
-                string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
-                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(UsersModel entity)
@@ -263,26 +198,16 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                };
+                new object[] { "@id", DbType.Int32, id },
+            };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
+            // if query is not null, means found some record, so true
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool NameExist(string userName)
@@ -350,49 +275,22 @@ namespace ACC.Data
             return 0;
         }
 
-        public bool HasPermission(byte userId, string permissionName)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Byte, userId },
-                    new object[] { "@permission_name", DbType.String, permissionName},
-                };
-
-                string query = $"SELECT id FROM {viewTableName} WHERE id = @id AND permission_name = @permission_name";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
-        }
-
         public DataTable GetViewRecordsBySearch(int rowLimit, string searchTxt)
         {
             var parameters = new object[][]
             {
-                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                 new object[] { "@row_limit", DbType.Int32, rowLimit}
+                new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
+                new object[] { "@row_limit", DbType.Int32, rowLimit}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR role_name LIKE @searchTxt) GROUP BY id LIMIT @row_limit";
+            string query = $"SELECT * FROM {viewTableName} WHERE (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR role_name LIKE @searchTxt) AND is_super = 0 GROUP BY id LIMIT @row_limit";
 
-            var dataTable = new DataTable();
-
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, dynamic> GetViewRecordById(int Id)
         {
-            var record = new Dictionary<string, dynamic>();
+            var recordDictionary = new Dictionary<string, dynamic>();
 
             var parameters = new object[][]
             {
@@ -401,26 +299,24 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
-            {
-                if (reader.Rows.Count < 1)
-                    return record;
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-                record.Add("roles_id", reader.Rows[0]["roles_id"]);
-                record.Add("prefix", reader.Rows[0]["prefix"].ToString());
-                record.Add("first_name", reader.Rows[0]["first_name"]);
-                record.Add("mid_initial", reader.Rows[0]["mid_initial"]);
-                record.Add("last_name", reader.Rows[0]["last_name"]);
-                record.Add("suffix", reader.Rows[0]["suffix"].ToString());
-                record.Add("username", reader.Rows[0]["username"]);
-                record.Add("password", reader.Rows[0]["password"]);
-                record.Add("created_at", reader.Rows[0]["created_at"]);
-                record.Add("updated_at", reader.Rows[0]["updated_at"]);
-                record.Add("role_name", reader.Rows[0]["role_name"]);
-                record.Add("permission_name", reader.Rows[0]["role_name"]);
-                record.Add("permission_office", reader.Rows[0]["permission_office"]);
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-            return record;
+            return recordDictionary;
+        }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
     }
 }
