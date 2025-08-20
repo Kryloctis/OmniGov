@@ -32,7 +32,7 @@ namespace LFS.Views.Manage.CollectingOfficer
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
-            var dtUsers = AccFactory.UsersRepository().GetRecords();
+            var dtUsers = AccFactory.UsersRepository().GetViewRecords();
             HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
 
             var searchSources = new List<string>

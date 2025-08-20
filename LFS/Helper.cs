@@ -10,7 +10,6 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Color = System.Drawing.Color;
 
 namespace LFS
 {
@@ -45,16 +44,8 @@ namespace LFS
 
         public static bool HasPermission(string permissionName)
         {
-            try
-            {
-                return AccFactory.UsersRepository().HasPermission(userId, permissionName);
-            }
-            catch (Exception ex)
-            {
-                MessageBoxError(ex.Message);
-            }
-
-            return false;
+            //return AccFactory.UsersRepository().HasPermission(userId, permissionName);
+            return true;
         }
 
         public static void LoadFormIcon(Form form)

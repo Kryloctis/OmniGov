@@ -109,7 +109,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
 
         internal void LoadLink(int id)
         {
-            var data = AccFactory.UsersRepository().GetUserByID(id);
+            var data = AccFactory.UsersRepository().GetViewRecordById(id);
             if (data.Count > 0)
             {
                 UserId = id;
@@ -162,7 +162,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
-            var dtUsers = AccFactory.UsersRepository().GetRecords();
+            var dtUsers = AccFactory.UsersRepository().GetViewRecords();
             HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
 
             var searchSources = new List<string>
@@ -189,10 +189,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                 if (e.KeyData == (Keys.Control | Keys.V))
                     LoadUsers(true);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)

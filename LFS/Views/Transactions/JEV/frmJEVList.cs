@@ -337,7 +337,7 @@ namespace LFS.Views.Transactions.JEV
                 string rowExplanation = row["explanation"].ToString();
                 string rowCreatedAt = row["created_at"].ToString();
                 string rowCreatedById = row["created_by"].ToString();
-                var dictUserCreatedBy = AccFactory.UsersRepository().GetUserByID(Convert.ToByte(rowCreatedById));
+                var dictUserCreatedBy = AccFactory.UsersRepository().GetViewRecordById(Convert.ToByte(rowCreatedById));
                 var rowCreatedByName = string.IsNullOrEmpty(rowCreatedById) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(rowCreatedById))["user_full_name"];
                 string rowUpdatedAt = row["updated_at"].ToString();
                 string rowUpdatedById = row["updated_by"].ToString();

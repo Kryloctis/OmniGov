@@ -138,7 +138,7 @@ namespace LFS.Views.Reports.JEV
                 string full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
                 Dictionary<string, string> dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
-                Dictionary<string, string> dictUser = AccFactory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
+                Dictionary<string, dynamic> dictUser = AccFactory.UsersRepository().GetViewRecordById(Convert.ToInt32(dictJev["created_by"]));
 
                 SetJournalCustomFields();
 

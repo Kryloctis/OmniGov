@@ -22,8 +22,7 @@ namespace LFS.Views.Manage.AccountableForm
         private void LoadSelectedRecord()
         {
             var uc = ucAccountable1;
-            var accRepository = AccFactory.AccountableFormsRepository();
-            var accData = accRepository.GetRecordByID(uc.accountableFormId);
+            var accData = AccFactory.AccountableFormsRepository().GetRecordByID(uc.accountableFormId);
             uc.txtFormNo.Text = accData["acc_form_no"];
             uc.txtFormDescription.Text = accData["acc_form_desc"];
         }

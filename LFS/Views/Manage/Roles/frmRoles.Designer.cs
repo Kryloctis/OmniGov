@@ -350,7 +350,7 @@ namespace LFS.Views.Manage.Users.Roles
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 376);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 385);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 110, 20);
             flowLayoutPanel1.Size = new System.Drawing.Size(676, 52);
@@ -370,7 +370,7 @@ namespace LFS.Views.Manage.Users.Roles
             // 
             ucRoles1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucRoles1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucRoles1.Location = new System.Drawing.Point(0, 72);
+            ucRoles1.Location = new System.Drawing.Point(0, 81);
             ucRoles1.Name = "ucRoles1";
             ucRoles1.Padding = new System.Windows.Forms.Padding(100, 20, 100, 4);
             ucRoles1.Size = new System.Drawing.Size(676, 304);
@@ -379,15 +379,15 @@ namespace LFS.Views.Manage.Users.Roles
             // lblTitle
             // 
             lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F);
             lblTitle.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblTitle.Location = new System.Drawing.Point(0, 31);
             lblTitle.Name = "lblTitle";
-            lblTitle.Padding = new System.Windows.Forms.Padding(4, 4, 110, 4);
-            lblTitle.Size = new System.Drawing.Size(676, 41);
+            lblTitle.Padding = new System.Windows.Forms.Padding(4);
+            lblTitle.Size = new System.Drawing.Size(676, 50);
             lblTitle.TabIndex = 7;
             lblTitle.Text = "Title";
-            lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // toolStrip3
             // 
