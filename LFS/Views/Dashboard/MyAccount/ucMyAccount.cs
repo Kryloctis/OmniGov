@@ -75,9 +75,8 @@ namespace LFS.Views.Dashboard.MyAccount
 
         private void LoadListOfPermissions()
         {
-            byte userRoleId = rolesId;
-            var permissions = AccFactory.RoleHasPermissionsRepository()
-                                        .GetRecordsByRoleId(userRoleId)
+            var permissions = AccFactory.RolesPermissionsRepository()
+                                        .GetViewRecordsByRoleId(rolesId)
                                         .AsEnumerable()
                                         .Select(dtRowPermissions => $"  -{dtRowPermissions["permission_name"]}")
                                         .ToList();

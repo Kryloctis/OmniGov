@@ -56,9 +56,9 @@ namespace ACC.Data
 
         public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(mySqlGenericCommandsLFS);
 
-        public static IRoleHasPermissionsRepository RoleHasPermissionsRepository() => new RoleHasPermissionsRepository(mySqlGenericCommandsLFS);
+        public static IRolesPermissionsRepository RolesPermissionsRepository() => new RolesPermissionsRepository(mySqlGenericCommandsLFS);
 
-        public static IRolesRepository RolesRepository() => new RolesRepository(mySqlGenericCommandsLFS, RoleHasPermissionsRepository());
+        public static IRolesRepository RolesRepository() => new RolesRepository(mySqlGenericCommandsLFS, RolesPermissionsRepository());
 
         public static IUsersRepository UsersRepository() => new UsersRepository(mySqlGenericCommandsLFS);
 

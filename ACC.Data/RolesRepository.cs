@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     public class RolesRepository : IRolesRepository
     {
-        private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
+        private readonly IRolesPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public RolesRepository(AccGenericCommands mySqlGenericCommandsLFS, IRoleHasPermissionsRepository roleHasPermissionsRepository)
+        public RolesRepository(AccGenericCommands mySqlGenericCommandsLFS, IRolesPermissionsRepository roleHasPermissionsRepository)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             this.roleHasPermissionsRepository = roleHasPermissionsRepository;
@@ -82,7 +82,7 @@ namespace ACC.Data
                 string query = $"INSERT INTO {tableName} (role_name) VALUES (@role_name)";
                 _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
-                var roleHasPermissionModel = new RoleHasPermissionsModel();
+                var roleHasPermissionModel = new RolesPermissionsModel();
                 foreach (var permissionsModel in entity.PermissionsModels)
                 {
                     roleHasPermissionModel.RolesId = GetLastInsertedID();
@@ -101,14 +101,14 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Byte, entity.Id},
+                    new object[] { "@id", DbType.Int32, entity.Id},
                     new object[] { "@role_name", DbType.String, entity.RoleName},
                 };
 
                 string query = $"UPDATE {tableName} SET role_name = @role_name WHERE id = @id";
                 _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
-                var roleHasPermissionModel = new RoleHasPermissionsModel();
+                var roleHasPermissionModel = new RolesPermissionsModel();
                 foreach (var permissionsModel in entity.PermissionsModels)
                 {
                     roleHasPermissionModel.RolesId = entity.Id;

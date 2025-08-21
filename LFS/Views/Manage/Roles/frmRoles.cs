@@ -227,7 +227,7 @@ namespace LFS.Views.Manage.Users.Roles
         private string LoadPrivileges(int? roleId)
         {
             if (roleId is null) return string.Empty;
-            var dtRolePermissions = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId((byte)roleId.Value);
+            var dtRolePermissions = AccFactory.RolesPermissionsRepository().GetViewRecordsByRoleId(roleId.Value);
             var sb = new StringBuilder();
 
             foreach (DataRow dataRow in dtRolePermissions.Rows)

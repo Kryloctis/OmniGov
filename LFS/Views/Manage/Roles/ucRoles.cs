@@ -11,7 +11,7 @@ namespace LFS.Views.Manage.Users.Roles
 {
     public partial class ucRoles : UserControl
     {
-        private byte roleId;
+        private int roleId;
         private bool isEdit;
 
         public ucRoles()
@@ -50,15 +50,14 @@ namespace LFS.Views.Manage.Users.Roles
             model.RoleName = txtName.Text.Trim();
             model.PermissionsModels = permissionModels;
 
-
             return model;
         }
 
         private void LoadSelectedRole()
         {
             var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
-            var rolePermissionIds = AccFactory.RoleHasPermissionsRepository()
-                                    .GetRecordsByRoleId(roleId)
+            var rolePermissionIds = AccFactory.RolesPermissionsRepository()
+                                    .GetViewRecordsByRoleId(roleId)
                                     .AsEnumerable()
                                     .Select(row => Convert.ToInt32(row["permissions_id"]))
                                     .ToList();

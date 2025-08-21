@@ -6,23 +6,23 @@ using System.Data;
 
 namespace ACC.Data
 {
-    public class RoleHasPermissionsRepository : IRoleHasPermissionsRepository
+    public class RolesPermissionsRepository : IRolesPermissionsRepository
     {
         private readonly string tableName = "role_has_permissions";
         private readonly string viewTableName = "view_role_has_permissions";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public RoleHasPermissionsRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public RolesPermissionsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
-        public bool Delete(List<RoleHasPermissionsModel> entityList)
+        public bool Delete(List<RolesPermissionsModel> entityList)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteByRoleId(byte roleId)
+        public bool DeleteByRoleId(int roleId)
         {
             var parameters = new object[][]
             {
@@ -43,7 +43,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetRecordsByRoleId(byte roleId)
+        public DataTable GetViewRecordsByRoleId(int roleId)
         {
             var parameters = new object[][]
             {
@@ -64,7 +64,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RoleHasPermissionsModel entity)
+        public bool Insert(RolesPermissionsModel entity)
         {
             var parameters = new object[][]
             {
@@ -76,7 +76,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(RoleHasPermissionsModel entity)
+        public bool Update(RolesPermissionsModel entity)
         {
             throw new NotImplementedException();
         }
