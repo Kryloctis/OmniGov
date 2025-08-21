@@ -2253,6 +2253,26 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lgu_buug_zsi {
+            get {
+                object obj = ResourceManager.GetObject("lgu_buug_zsi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lgu_titay_zsi {
+            get {
+                object obj = ResourceManager.GetObject("lgu_titay_zsi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap link_12px {
             get {
                 object obj = ResourceManager.GetObject("link_12px", resourceCulture);
