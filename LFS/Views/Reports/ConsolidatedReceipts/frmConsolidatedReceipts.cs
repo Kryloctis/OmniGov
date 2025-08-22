@@ -165,7 +165,7 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                     new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new("paramTreasurer", treasurer),
-                    new("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
+                    new("paramPreparedBySignatory", UserHelper.loggedUser.FullName),
                     new("paramPreparedBySignatoryTitle", preparedBySignatoryTitle)
                 };
 

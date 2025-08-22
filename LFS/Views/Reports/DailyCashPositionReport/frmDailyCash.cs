@@ -203,7 +203,7 @@ namespace LFS.Views.Reports.DailyCashPositionReport
                     new("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
                     new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
+                    new("paramPreparedBySignatory", UserHelper.loggedUser.FullName),
                     new("paramPreparedBySignatoryTitle", preparedBySignatoryTitle),
                     new("paramNotedSignatory", notedSignatory),
                     new("paramNotedSignatoryTitle", notedSignatoryTitle)

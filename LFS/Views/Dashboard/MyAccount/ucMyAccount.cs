@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.SignIn;
 using System;
@@ -13,7 +14,7 @@ namespace LFS.Views.Dashboard.MyAccount
 {
     public partial class ucMyAccount : UserControl
     {
-        private byte rolesId;
+        private int rolesId;
         private frmMain frmMain;
         private frmSignIn frmSignIn;
 
@@ -106,18 +107,16 @@ namespace LFS.Views.Dashboard.MyAccount
 
         private void LoadCurrentUserAccount()
         {
-            var dictUserData = Helper.LoggedInUserData();
+            rolesId = UserHelper.loggedUser.RoleId;
+            txtFirstName.Text = UserHelper.loggedUser.FirstName;
+            txtMiddleInitial.Text = UserHelper.loggedUser.MiddleName;
+            txtLastName.Text = UserHelper.loggedUser.LastName;
+            txtPrefix.Text = UserHelper.loggedUser.Prefix;
+            txtSuffix.Text = UserHelper.loggedUser.Suffix;
+            txtUserName.Text = UserHelper.loggedUser.UserName;
 
-            rolesId = Convert.ToByte(dictUserData["roles_id"]);
-            txtFirstName.Text = dictUserData["first_name"];
-            txtMiddleInitial.Text = dictUserData["mid_initial"];
-            txtLastName.Text = dictUserData["last_name"];
-            txtPrefix.Text = dictUserData["prefix"];
-            txtSuffix.Text = dictUserData["suffix"];
-            txtUserName.Text = dictUserData["username"];
-
-            var userDesignation = dictUserData["role_name"];
-            var userName = dictUserData["user_full_name"].Trim();
+            var userDesignation = UserHelper.loggedUser.RoleName;
+            var userName = UserHelper.loggedUser.FullName;
             LoadGreetings(userName);
             lblPrivileges.Text = $"{userDesignation} Privileges";
             lblUserName.Text = userName;

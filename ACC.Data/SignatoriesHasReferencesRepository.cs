@@ -155,24 +155,5 @@ namespace ACC.Data
             }
             return recordDictionary;
         }
-
-        public DataTable GetViewRecordsByOffice(string office)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@office", DbType.String, $"%{office}%"}
-            };
-
-            string Filter()
-            {
-                if (office == "SysAdmin")
-                    return string.Empty;
-                else
-                    return "WHERE office LIKE @office";
-            }
-
-            string query = $"SELECT * FROM {viewTableName} {Filter()} GROUP BY signatories_id";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
-        }
     }
 }

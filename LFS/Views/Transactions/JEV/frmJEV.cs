@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using LFS.Views.Dashboard;
 using LFS.Views.Reports.JEV;
 using System;
@@ -17,7 +18,6 @@ namespace LFS.Views.Transactions.JEV
         internal frmJevList frmJEVList;
         internal ucJevDashboard ucJEVDashboard;
         internal int createdById;
-        private Dictionary<string, dynamic> userDict;
 
         public frmJev(bool isEdit, frmJevList frmJEVList, ucJevDashboard ucJEVDashboard)
         {
@@ -26,7 +26,6 @@ namespace LFS.Views.Transactions.JEV
             uc.isEdit = isEdit;
             this.frmJEVList = frmJEVList;
             this.ucJEVDashboard = ucJEVDashboard;
-            userDict = Helper.LoggedInUserData();
             Helper.LoadFormIcon(this);
         }
 
@@ -40,7 +39,7 @@ namespace LFS.Views.Transactions.JEV
             if (uc.isEdit)
                 LoadSelectedJEV(uc.jevId);
 
-            lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            lblCreatedBy.Text = UserHelper.loggedUser.FullName;
             uc.SumDebitCredit();
             VerifyPermissions();
         }
@@ -103,14 +102,12 @@ namespace LFS.Views.Transactions.JEV
 
         internal bool FormValidations()
         {
-            // validate form
             if (uc.fundId == 0 || uc.journalId == 0 || !uc.ValidateChildren() || uc.dgAccounts.Rows.Count == 0)
             {
                 Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            // if debit & credit not equal, show error
             if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
             {
                 Helper.MessageBoxError("Debit & Credit amounts must be equal.");

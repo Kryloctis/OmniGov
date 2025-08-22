@@ -16,16 +16,6 @@ namespace LFS.Views.Manage.Journals
             Helper.LoadFormIcon(this);
         }
 
-        private void UserVerification()
-        {
-            var dictLoggedInUser = Helper.LoggedInUserData();
-            if (dictLoggedInUser["role_name"] != "System Administrator")
-            {
-                btnAdd.Enabled = false;
-                btnDelete.Enabled = false;
-            }
-        }
-
         internal void LoadRecords()
         {
             HelperLoadRecords.JournalsDatagridView(dgJournals);
@@ -43,7 +33,6 @@ namespace LFS.Views.Manage.Journals
 
         private void OnLoad()
         {
-            UserVerification();
             Helper.DatagridFullRowSelectStyle(dgJournals, true);
             LoadRecords();
         }
@@ -58,7 +47,6 @@ namespace LFS.Views.Manage.Journals
                 int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
                 if (journalId == 1) btnDefaultAccounts.Enabled = false;
                 else btnDefaultAccounts.Enabled = true;
-                UserVerification();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

@@ -131,9 +131,6 @@ namespace LFS.Views.Reports.JEV
                 Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
                 ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
 
-                Dictionary<string, dynamic> preparedByData = Helper.LoggedInUserData();
-                dynamic preparedByFullName = preparedByData["user_full_name"];
-
                 string full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
                 Dictionary<string, string> dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);

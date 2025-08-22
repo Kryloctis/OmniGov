@@ -72,7 +72,6 @@ namespace LFS.Views.Manage.Journals
             chkSpecialJournal.TabIndex = 2;
             chkSpecialJournal.Text = "This is a special journal";
             chkSpecialJournal.UseVisualStyleBackColor = true;
-            chkSpecialJournal.CheckedChanged += chkSpecialJournal_CheckedChanged;
             // 
             // ucJournals
             // 

@@ -45,33 +45,6 @@ namespace LFS.Views.Manage.Signatories
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ValidatePermissions()
-        {
-            string office = Helper.LoggedInUserData()["office"];
-
-            switch (office)
-            {
-                case "Budget":
-                    cmbxOfficeFilter.Text = "Budget";
-                    cmbxOfficeFilter.Enabled = false;
-                    break;
-
-                case "Accounting":
-                    cmbxOfficeFilter.Text = "Accounting";
-                    cmbxOfficeFilter.Enabled = false;
-                    break;
-
-                case "Treasury":
-                    cmbxOfficeFilter.Text = "Treasury";
-                    cmbxOfficeFilter.Enabled = false;
-                    break;
-
-                default:
-                    cmbxOfficeFilter.Enabled = true;
-                    break;
-            }
-        }
-
         internal void ValidateReferenced()
         {
             foreach (DataGridViewRow row in dgReferences.Rows)
@@ -135,7 +108,6 @@ namespace LFS.Views.Manage.Signatories
             if (!DesignMode)
             {
                 cmbxOfficeFilter.SelectedIndex = 0;
-                ValidatePermissions();
             }
         }
 

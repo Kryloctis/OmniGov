@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -60,7 +61,7 @@ namespace LFS.Views.Transactions.BankDeposits
                 else
                 {
                     ResetForm();
-                    txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
+                    txtAccountableOfficer.Text = UserHelper.loggedUser.FullName;
                 }
             }
         }

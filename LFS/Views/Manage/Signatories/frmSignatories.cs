@@ -134,24 +134,24 @@ namespace LFS.Views.Manage.Signatories
                 };
 
                 dataTable.Columns.AddRange(dataColumns);
-                var dtSignatories = AccFactory.SignatoriesHasReferencesRepository().GetViewRecordsByOffice(Helper.LoggedInUserData()["office"]);
+                var dtSignatories = AccFactory.SignatoriesRepository().GetRecords();
                 int totalProgressCount = dtSignatories.Rows.Count;
                 int progressCount = 0;
 
                 foreach (DataRow row in dtSignatories.Rows)
                 {
                     var newRow = dataTable.NewRow();
-                    string prefix = row["signatories_prefix"].ToString();
-                    string firstName = row["signatories_first_name"].ToString();
-                    string middleInitial = row["signatories_middle_initial"].ToString();
-                    string lastName = row["signatories_last_name"].ToString();
-                    string suffix = row["signatories_suffix"].ToString();
+                    string prefix = row["prefix"].ToString();
+                    string firstName = row["first_name"].ToString();
+                    string middleInitial = row["middle_initial"].ToString();
+                    string lastName = row["last_name"].ToString();
+                    string suffix = row["suffix"].ToString();
 
-                    newRow["id"] = row["signatories_id"];
+                    newRow["id"] = row["id"];
                     newRow["name"] = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
-                    newRow["title"] = row["signatories_title"];
-                    newRow["created_at"] = row["signatories_created_at"];
-                    newRow["updated_at"] = row["signatories_updated_at"];
+                    newRow["title"] = row["title"];
+                    newRow["created_at"] = row["created_at"];
+                    newRow["updated_at"] = row["updated_at"];
 
                     dataTable.Rows.Add(newRow);
                     progressCount++;

@@ -10,9 +10,16 @@ namespace LFS.Helpers
         private Dictionary<string, string> userDt;
 
         internal int Id;
+        internal string Prefix;
+        internal string Suffix;
+        internal string FirstName;
+        internal string MiddleName;
+        internal string LastName;
         internal string FullName;
         internal int RoleId;
         internal string RoleName;
+        internal string UserName;
+        internal string Password;
         internal string[] UserPriviledges;
 
         public UserHelper(Dictionary<string, string> userDt)

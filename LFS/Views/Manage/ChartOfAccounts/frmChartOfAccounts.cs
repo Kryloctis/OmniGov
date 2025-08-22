@@ -31,16 +31,6 @@ namespace LFS.Views.Manage.ChartOfAccounts
             BtnSubsidiary.Enabled = false;
         }
 
-        private void UserVerfication()
-        {
-            if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
-            {
-                btnAdd.Enabled = false;
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
-            }
-        }
-
         internal void LoadAccountGroup()
         {
             var dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
@@ -422,8 +412,6 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             Helper.ShowRecordTimestamp(dataGrid, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
-
-            UserVerfication();
         }
 
         private void EnableDisableSubsidiaryButton()

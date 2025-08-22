@@ -510,16 +510,16 @@ namespace LFS
             tabControl.Padding = new Point(0, 0);
         }
 
-        #endregion Miscellaneous
-
-        #region Get User Data
-
         public static string GenerateFullName(string prefix, string firstName, string MiddleName, string LastName, string suffix)
         {
             string fullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {firstName} {(string.IsNullOrWhiteSpace(MiddleName) ? string.Empty : MiddleName.Substring(0, 1))}. {LastName} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
 
             return fullName;
         }
+
+        #endregion Miscellaneous
+
+        #region Get User Data
 
         public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
@@ -537,28 +537,6 @@ namespace LFS
                 return dictUser;
             }
             catch (Exception ex) { MessageBoxError(ex.Message); }
-            return dictUser;
-        }
-
-        internal static Dictionary<string, dynamic> LoggedInUserData()
-        {
-            var dictUser = new Dictionary<string, dynamic>();
-            try
-            {
-                dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
-                string prefix = dictUser["prefix"];
-                string suffix = dictUser["suffix"];
-
-                string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
-                dictUser.Add("user_full_name", userFullName);
-
-                return dictUser;
-            }
-            catch (Exception ex)
-            {
-                MessageBoxError(ex.Message);
-            }
-
             return dictUser;
         }
 

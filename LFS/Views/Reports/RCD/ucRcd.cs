@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace LFS.Views.Reports.Rcd
         internal void ResetForm()
         {
             rcdId = null;
-            txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
+            txtAccountableOfficer.Text = UserHelper.loggedUser.FullName;
             dtDate.Value = Helper.GetCurrentDate();
             txtReportNo.Clear();
             checkBox1.Checked = false;
@@ -53,7 +54,7 @@ namespace LFS.Views.Reports.Rcd
             this.rcdId = rcdId;
             this.isEdit = isEdit;
             dtDate.Value = Helper.GetCurrentDate();
-            txtAccountableOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
+            txtAccountableOfficer.Text = UserHelper.loggedUser.FullName;
             LoadFunds();
             LoadCollections();
             LoadDeposits();

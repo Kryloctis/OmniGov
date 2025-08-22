@@ -47,7 +47,6 @@ namespace LFS.Views.Manage.Journals
             {
                 this.isEdit = isEdit;
                 this.journalId = journalId;
-                UserVerification();
             }
         }
 
@@ -86,17 +85,6 @@ namespace LFS.Views.Manage.Journals
         private void txtName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epName, txtName);
-        }
-
-        private void UserVerification()
-        {
-            var dictLoggedInUser = Helper.LoggedInUserData();
-            if (dictLoggedInUser["role_name"] != "System Administrator")
-                txtName.Enabled = false;
-        }
-
-        private void chkSpecialJournal_CheckedChanged(object sender, EventArgs e)
-        {
         }
     }
 }
