@@ -1,9 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -54,7 +56,7 @@ namespace LFS.Views.Transactions.Auction
             return (basicPenalty, sefPenalty);
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -140,12 +142,12 @@ namespace LFS.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -163,17 +165,16 @@ namespace LFS.Views.Transactions.Auction
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfAuction", date),
-                    new ReportParameter("paramPlaceOfAuction", location),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramSignatory", string.Empty),
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramDateOfAuction", date),
+                    new("paramPlaceOfAuction", location),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramSignatory", string.Empty),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dsNoticeOfAuctionSaleOfDelinquentProperty", dataTable));

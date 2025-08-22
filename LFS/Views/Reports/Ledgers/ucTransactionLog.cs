@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -220,7 +221,6 @@ namespace LFS.Views.Reports.Ledgers
             short year = Convert.ToInt16(nudYear.Value);
             ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
 
-            var lguDict = Helper.LGUDetails();
             var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             var fundName = cmbxFunds.Text;
             report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
@@ -228,13 +228,15 @@ namespace LFS.Views.Reports.Ledgers
 
             report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
 
-            ReportParameter[] parameters = new[]
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+            var parameters = new ReportParameter[]
             {
-                new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                new ReportParameter("paramFund", fundName),
-                new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
-                new ReportParameter("paramAccount", generalLedgerDict["ledger_name"]),
-                new ReportParameter("paramYear",year.ToString())
+                new("paramLGUName", lguName),
+                new("paramFund", fundName),
+                new("paramAccountCode", generalLedgerDict["account_code"]),
+                new("paramAccount", generalLedgerDict["ledger_name"]),
+                new("paramYear",year.ToString())
             };
 
             report.SetParameters(parameters);

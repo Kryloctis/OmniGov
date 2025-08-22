@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -199,7 +200,6 @@ namespace LFS.Views.Reports.Ltoms
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
-                string lguName = Helper.LGUDetails()["municipality"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
@@ -211,20 +211,20 @@ namespace LFS.Views.Reports.Ltoms
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfAuction", date),
-                    new ReportParameter("paramPlaceOfAuction", location),
-                    new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
-                    new ReportParameter("paramCompleteAddress", dictAuctionProperty["taxpayer_address"]),
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramDateOfAuction", date),
+                    new("paramPlaceOfAuction", location),
+                    new("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
+                    new("paramCompleteAddress", dictAuctionProperty["taxpayer_address"]),
 
-                    new ReportParameter("paramTaxDeclaractionNo", dictAuctionProperty["complete_arp_no"]),
-                    new ReportParameter("paramTCT", string.Empty),
-                    new ReportParameter("paramLocationOfProperty", propertyLocation),
-                    new ReportParameter("paramPropertyKind", dictAuctionProperty["property_kind"]),
-                    new ReportParameter("paramAssessedValue", assessedValue.ToString("N2")),
+                    new("paramTaxDeclaractionNo", dictAuctionProperty["complete_arp_no"]),
+                    new("paramTCT", string.Empty),
+                    new("paramLocationOfProperty", propertyLocation),
+                    new("paramPropertyKind", dictAuctionProperty["property_kind"]),
+                    new("paramAssessedValue", assessedValue.ToString("N2")),
 
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramSignatory", string.Empty),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramSignatory", string.Empty),
                 };
 
                 reportViewer1.Clear();

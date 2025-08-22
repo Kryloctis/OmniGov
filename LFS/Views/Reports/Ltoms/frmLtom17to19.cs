@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -207,20 +208,22 @@ namespace LFS.Views.Reports.Ltoms
                                      .OfType<RadioButton>()
                                      .FirstOrDefault(rb => rb.Checked);
                 string reportPath;
-                var lguDetails = Helper.LGUDetails();
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
+
+                string lguName = ServerHelper.selectedServer.MunicipalityName;
+
                 var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLgu", lguDetails["municipality"]),
-                    new ReportParameter("paramNoticeDate", result.dictDelinquentNotice["notice_date"]),
-                    new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
-                    new ReportParameter("paramSignatory", string.Empty),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramTaxDecNo", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramTctNo", string.Empty),
-                    new ReportParameter("paramPropertyLocation", propertyLocation),
-                    new ReportParameter("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
-                    new ReportParameter("paramAssessedValue", result.dictDelinquentNotice["assessed_value"])
+                    new("paramLgu", lguName),
+                    new("paramNoticeDate", result.dictDelinquentNotice["notice_date"]),
+                    new("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
+                    new("paramSignatory", string.Empty),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramTaxDecNo", result.dictDelinquentNotice["complete_arp_no"]),
+                    new("paramTctNo", string.Empty),
+                    new("paramPropertyLocation", propertyLocation),
+                    new("paramPropertyKind", result.dictDelinquentNotice["complete_arp_no"]),
+                    new("paramAssessedValue", result.dictDelinquentNotice["assessed_value"])
                 };
 
                 switch (checkedRadioButton.Name)

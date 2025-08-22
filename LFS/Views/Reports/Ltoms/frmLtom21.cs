@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -137,23 +138,18 @@ namespace LFS.Views.Reports.Ltoms
                 int totalProgressCount = tasks.Sum(t => t.Value);
                 int progressCount = 0;
 
-                // Fetch LGU Details
-                var lguDetails = Helper.LGUDetails();
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Generate Property Location
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRptAssessmentPost["barangay_name"], dictRptAssessmentPost["municipality_name"], dictRptAssessmentPost["province_name"]);
                 progressCount += tasks["Generate Property Location"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Initialize Parameters
                 List<ReportParameter> reportParameters = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Set Parameter Values
-                reportParameters.Add(new ReportParameter("paramLgu", lguDetails["municipality"]));
+                reportParameters.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
                 reportParameters.Add(new ReportParameter("paramDeclaredOwners", dictRptAssessmentPost["taxpayer_name"]));
                 reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
                 reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));

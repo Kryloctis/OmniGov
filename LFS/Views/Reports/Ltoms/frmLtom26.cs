@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -85,13 +86,11 @@ namespace LFS.Views.Reports.Ltoms
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-                string lguName = Helper.LGUDetails()["lgu_name"]; ;
-
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramSignatory", string.Empty),
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramSignatory", string.Empty),
                 };
 
                 reportViewer1.Clear();

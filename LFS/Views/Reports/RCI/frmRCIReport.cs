@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -197,21 +198,21 @@ namespace LFS.Views.Reports.RCI
                 string administrativeOfficerSignatoryTitle = string.Empty;
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
-                var lguDetails = Helper.LGUDetails();
                 var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(parameters.bankAccId);
                 var fund = fundName;
 
                 string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
+
                 var reportParameters = new List<ReportParameter>
                 {
-                    new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramBankaccount", bankDetails),
-                    new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
-                    new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
-                    new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
-                    new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
-                    new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
+                    new("paramFund", fundName),
+                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramBankaccount", bankDetails),
+                    new("paramMonth", dtpPeriodCover.Value.ToString()),
+                    new("paramDepartmentHeadSignatory", departmentHeadSignatory),
+                    new("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
+                    new("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
+                    new("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
                 };
 
                 //totalProgressCount += reportParameters.Count();

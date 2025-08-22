@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -168,12 +169,13 @@ namespace LFS.Views.Reports.Cashbook
                     progressBar1.Value = 100;
 
                 var localReport = reportViewer1.LocalReport;
-                var lguDetails = Helper.LGUDetails();
                 var account = cmbxBank.Text;
-                var parameters = new[]
+                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+                var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramBankaccount", account)
+                    new("paramLGUName", lguName),
+                    new("paramBankaccount", account)
                 };
 
                 localReport.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";

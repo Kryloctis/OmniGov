@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -190,21 +191,22 @@ namespace LFS.Views.Reports.DailyCashPositionReport
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;
 
+                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
                 ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
-                var lguDetails = Helper.LGUDetails();
-                var parameters = new[]
+                var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramDate", dtdate.Value.ToString("MMMM dd, yyyy")),
-                    new ReportParameter("paramMayor", notedSignatory),
-                    new ReportParameter("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
-                    new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle),
-                    new ReportParameter("paramNotedSignatory", notedSignatory),
-                    new ReportParameter("paramNotedSignatoryTitle", notedSignatoryTitle)
+                    new("paramLGUName", lguName),
+                    new("paramDate", dtdate.Value.ToString("MMMM dd, yyyy")),
+                    new("paramMayor", notedSignatory),
+                    new("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
+                    new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                    new("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
+                    new("paramPreparedBySignatoryTitle", preparedBySignatoryTitle),
+                    new("paramNotedSignatory", notedSignatory),
+                    new("paramNotedSignatoryTitle", notedSignatoryTitle)
                 };
 
                 localReport.ReportPath = $"{Application.StartupPath}Reports\\daily-cash-position-report.rdlc";

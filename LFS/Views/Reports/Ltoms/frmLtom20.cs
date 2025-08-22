@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -178,12 +179,11 @@ namespace LFS.Views.Reports.Ltoms
                 if (result.dataTable.Rows.Count < 1)
                     pbReport.Value = 100;
 
-                var lguDetails = Helper.LGUDetails();
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
 
                 var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLgu", lguDetails["municipality"]),
+                    new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName),
                     new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
                     new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramSignatoryTitle", string.Empty),

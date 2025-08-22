@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -78,14 +79,13 @@ namespace LFS.Views.Transactions.Auction
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramDateOfPublicAuction", date)
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramDateOfPublicAuction", date)
                 };
 
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));

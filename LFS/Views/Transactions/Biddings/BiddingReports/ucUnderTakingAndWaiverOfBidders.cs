@@ -1,7 +1,9 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -34,7 +36,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
 
@@ -50,12 +52,9 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             int totalProgressCount = tasks.Sum(t => t.Value);
             int progressCount = 0;
 
-            // Fetch LGU Details
-            var lguDetails = Helper.LGUDetails();
             progressCount += tasks["Fetch LGU Details"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            //Generate Bidder and Bidding Information
             var dictBid = AccFactory.BidRepository().GetRecordByAuctionIdAndBidderId(rptAuctionId, bidderId);
             string nameOfBidder = dictBid["name"].ToString();
             string bidderCompleteAddress = dictBid["address"].ToString();
@@ -65,13 +64,11 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             progressCount += tasks["Generate Bidder and Bidding Information"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            // Initialize Parameters
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            // Set Parameter Values
-            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
             reportParameters.Add(new ReportParameter("paramNameOfBidder", nameOfBidder));
             reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", bidderCompleteAddress));
             reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
@@ -84,12 +81,12 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             e.Result = reportParameters;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {

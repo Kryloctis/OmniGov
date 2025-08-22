@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -99,18 +100,14 @@ namespace LFS.Views.Reports.Ltoms
                 int totalProgressCount = tasks.Sum(t => t.Value) + dtSoldRpt.Rows.Count;
                 int progressCount = 0;
 
-                // Fetch LGU Details
-                var lguDetails = Helper.LGUDetails();
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Initialize Parameters
                 List<ReportParameter> reportParameters1 = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Set Parameter Values
-                reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters1.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
                 progressCount += tasks["Set Parameter Values"];
 
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -161,11 +158,9 @@ namespace LFS.Views.Reports.Ltoms
                 report2.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\ListOfSoldRptAtAuction.rdlc";
                 report2.DataSources.Clear();
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
-
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
+                    new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName),
                 };
 
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));

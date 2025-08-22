@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Collections.Generic;
@@ -107,8 +108,8 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
 
             var dictParameters = new Dictionary<string, string>()
             {
-                {"paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper()},
-                {"paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper()},
+                {"paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper()},
+                {"paramProvince", ServerHelper.selectedServer.ProvinceName.ToUpper()},
                 {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
                 {"paramOwnerName", dictTaxpayer["taxpayers_name"]},
                 {"paramOwnerMunicipality", dictTaxpayer["taxpayers_municipality"]},

@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -99,11 +100,11 @@ namespace LFS.Views.Reports.Ltoms
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLgu", Helper.LGUDetails()["municipality"]),
-                    new ReportParameter("paramAsOf", parameter.ToString()),
-                    new ReportParameter("paramDate", parameter.ToString()),
-                    new ReportParameter("paramSignatory", ""),
-                    new ReportParameter("paramSignatoryTitle", "")
+                    new("paramLgu", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramAsOf", parameter.ToString()),
+                    new("paramDate", parameter.ToString()),
+                    new("paramSignatory", ""),
+                    new("paramSignatoryTitle", "")
                 };
 
                 e.Result = (reportParameters, dtLtom16);

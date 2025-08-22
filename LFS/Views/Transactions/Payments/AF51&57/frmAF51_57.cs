@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -66,7 +67,7 @@ public partial class frmAF51_57 : Form
 
         var dictParameters = new Dictionary<string, string>()
         {
-            {"paramMunicipality",Helper.selectedServerModel.MunicipalityName.ToUpper()},
+            {"paramMunicipality",ServerHelper.selectedServer.MunicipalityName.ToUpper()},
             {"paramTransactionDate",ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
             {"paramTotalPayment",ucPayment.PaymentCollectionsModel().Amount.ToString()},
             {"paramTotalPaymentWords",new Helper.AmountToWords().ConvertAmountToWords(ucPayment.PaymentCollectionsModel().Amount.ToString())},

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using RPT.Data;
 using System;
 using System.ComponentModel;
@@ -23,13 +24,13 @@ namespace LFS.Views.SignIn
 
         private void LoadServers()
         {
-            int totalServers = Helper.AvailableServerList().Count;
+            int totalServers = ServerHelper.AvailableServerList().Count;
             int serverCount = 0;
 
             flowLayoutPanel1.Controls.Clear();
             progressBar1.Value = 0;
 
-            foreach (var model in Helper.AvailableServerList())
+            foreach (var model in ServerHelper.AvailableServerList())
             {
                 int lguId = model.LguId;
                 string municipalityName = model.MunicipalityName;
@@ -54,12 +55,12 @@ namespace LFS.Views.SignIn
 
         private void SelectCurrentServer()
         {
-            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1 || Helper.selectedServerModel == null)
+            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1 || ServerHelper.selectedServer == null)
                 return;
 
             foreach (RadioButton radioButton in flowLayoutPanel1.Controls)
             {
-                if (Convert.ToInt32(radioButton.Tag) == Helper.selectedServerModel.LguId)
+                if (Convert.ToInt32(radioButton.Tag) == ServerHelper.selectedServer.LguId)
 
                     radioButton.Select();
             }
@@ -75,8 +76,19 @@ namespace LFS.Views.SignIn
                 if (radioButton.Checked)
                 {
                     var radTag = radioButton.Tag;
-                    var selectedModel = Helper.AvailableServerList().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new Helper.LguServerModel { LguId = m.LguId, MunicipalityCode = m.MunicipalityCode, MunicipalityName = m.MunicipalityName, ProvinceCode = m.ProvinceCode, ProvinceName = m.ProvinceName, lfsInstance = m.lfsInstance, rpmInstance = m.rpmInstance, Emblem = m.Emblem }).First();
-                    Helper.selectedServerModel = selectedModel;
+                    var selectedModel = ServerHelper.ServerProfiles().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new ServerHelper
+                    {
+                        LguId = m.LguId,
+                        MunicipalityCode = m.MunicipalityCode,
+                        MunicipalityName = m.MunicipalityName,
+                        ProvinceCode = m.ProvinceCode,
+                        ProvinceName = m.ProvinceName,
+                        LfsInstance = m.LfsInstance,
+                        RpmsInstance = m.RpmsInstance,
+                        Emblem = m.Emblem
+                    }).First();
+
+                    ServerHelper.selectedServer = selectedModel;
                     return true;
                 }
             }
@@ -110,9 +122,9 @@ namespace LFS.Views.SignIn
             {
                 if (SetSelectedServer())
                 {
-                    _frmSignIn.lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}";
-                    AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.lfsInstance);
-                    RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.rpmInstance);
+                    _frmSignIn.lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
+                    AccFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
+                    RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
                     this.Close();
                 }
                 ;

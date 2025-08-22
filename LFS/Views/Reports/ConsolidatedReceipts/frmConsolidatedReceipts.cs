@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -119,7 +120,6 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                     progressBar1.Value = 100;
 
                 var localReport = reportViewer1.LocalReport;
-                var lguDetails = Helper.LGUDetails();
                 var date = string.Format("{0:yyyy-MM-dd}", dtpEndingDate.Value);
 
                 string certifiedCorrectSignatory = string.Empty;
@@ -156,15 +156,17 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                 ParseSignatory(dictTreasurer, ref treasurer, ref treasurerTitle);
                 ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
-                var parameters = new[]
+                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+                var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramForTheMonthOf", dtpEndingDate.Value.ToString("MMMM, yyyy")),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramTreasurer", treasurer),
-                    new ReportParameter("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
-                    new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle)
+                    new("paramLGUName", lguName),
+                    new("paramForTheMonthOf", dtpEndingDate.Value.ToString("MMMM, yyyy")),
+                    new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                    new("paramTreasurer", treasurer),
+                    new("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
+                    new("paramPreparedBySignatoryTitle", preparedBySignatoryTitle)
                 };
 
                 localReport.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";

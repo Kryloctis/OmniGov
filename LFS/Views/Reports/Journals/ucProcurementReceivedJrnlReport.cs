@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -156,15 +157,16 @@ namespace LFS.Views.Reports.Journals
                 }
             }
 
-            var lguDetails = Helper.LGUDetails();
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-            var parameters = new[]
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+            var parameters = new ReportParameter[]
             {
                 new ReportParameter("paramDate", date.ToString()),
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramLGUName", lguName),
                 new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),

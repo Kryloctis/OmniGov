@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -29,7 +30,7 @@ namespace LFS.Views.Manage.Barangay
             {
                 Code = txtCode.Text.Trim(),
                 Name = txtName.Text.Trim(),
-                MunicipalityId = Helper.selectedServerModel.LguId,
+                MunicipalityId = ServerHelper.selectedServer.LguId,
             };
         }
 

@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -112,11 +113,6 @@ namespace LFS.Views.Reports.Ltoms
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxProperty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadBidders();
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var parameters = ((int rptAuctionId, int bidderId))e.Argument;
@@ -131,14 +127,13 @@ namespace LFS.Views.Reports.Ltoms
             int progressCount = 0;
 
             // Fetch LGU Details
-            var lguDetails = Helper.LGUDetails();
             progressCount += tasks["Fetch LGU Details"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             List<ReportParameter> reportParameters = new List<ReportParameter>();
 
             reportParameters.Add(new ReportParameter("paramLGU", "Titay"));
-            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
 
             progressCount += tasks["Initialize Parameters"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

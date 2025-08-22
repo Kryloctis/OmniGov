@@ -1,9 +1,11 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -56,7 +58,7 @@ namespace LFS.Views.Transactions.Auction
             return (basicPenalty, sefPenalty);
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -114,7 +116,7 @@ namespace LFS.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
@@ -135,21 +137,20 @@ namespace LFS.Views.Transactions.Auction
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
                 report.DataSources.Clear();
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
                 var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramSignatory", string.Empty),
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramSignatory", string.Empty),
 
-                    new ReportParameter("paramPlaceOfAuction", dictAuctionProperty["location"]),
-                    new ReportParameter("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
-                    new ReportParameter("paramPropertyLocation", dictAuctionProperty["taxpayer_address"]),
-                    new ReportParameter("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
-                    new ReportParameter("paramTCT", string.Empty),
-                    new ReportParameter("paramKindOfProperty", dictAuctionProperty["property_kind"]),
+                    new("paramPlaceOfAuction", dictAuctionProperty["location"]),
+                    new("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
+                    new("paramPropertyLocation", dictAuctionProperty["taxpayer_address"]),
+                    new("paramTaxDec", dictAuctionProperty["complete_arp_no"]),
+                    new("paramTCT", string.Empty),
+                    new("paramKindOfProperty", dictAuctionProperty["property_kind"]),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dsLtom30", dataTable));

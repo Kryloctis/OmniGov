@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -171,21 +172,21 @@ namespace LFS.Views.Reports.RptReports
                 var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(Convert.ToInt32(cmbxOwner.SelectedValue));
                 var taxpayerAddress = Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty, dictTaxpayer["municipality"], dictTaxpayer["province"]);
 
-                var parameter = new ReportParameter[]
+                var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGUName", Helper.LGUDetails()["lgu_name"]),
-                    new ReportParameter("paramAssessedValue", result.propertyAssessedValue.ToString("N2")),
-                    new ReportParameter("paramARPNo", result.completeArpNo),
-                    new ReportParameter("paramOwner", dictTaxpayer["name"]),
-                    new ReportParameter("paramOwnerAddress", taxpayerAddress),
-                    new ReportParameter("paramDate", $"{dtPeriodFrom.Value.ToString("MMM dd, yyyy")} - {dtPeriodTo.Value.ToString("MMM dd, yyyy")}"),
+                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramAssessedValue", result.propertyAssessedValue.ToString("N2")),
+                    new("paramARPNo", result.completeArpNo),
+                    new("paramOwner", dictTaxpayer["name"]),
+                    new("paramOwnerAddress", taxpayerAddress),
+                    new("paramDate", $"{dtPeriodFrom.Value.ToString("MMM dd, yyyy")} - {dtPeriodTo.Value.ToString("MMM dd, yyyy")}"),
                 };
 
                 reportViewer1.LocalReport.ReportPath = $"{Application.StartupPath}\\Reports\\RptStatementOfAccounts.rdlc";
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dtRptStamentOfAccounts", dataTable));
 
-                reportViewer1.LocalReport.SetParameters(parameter);
+                reportViewer1.LocalReport.SetParameters(reportParameters);
 
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.PageWidth;

@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.RealProperty;
 using Microsoft.Reporting.WinForms;
@@ -127,12 +128,14 @@ namespace LFS.Views.Transactions.Payments
 
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
 
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName}";
+
             var dictParameters = new Dictionary<string, string>()
             {
                 { "paramAmountInFigures", $"{new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2"))} only."},
                 { "paramSumOf", totalPayment.ToString()},
                 { "paramReceivedFrom", ucPayment.txtPayee.Text.Trim()},
-                { "paramMunicipality", Helper.selectedServerModel.MunicipalityName},
+                { "paramMunicipality", lguName},
                 { "paramDate", ucPayment.dtPaymentDate.Value.ToString()},
                 { "paramCalendarYear", ucPaymentRptTaxDues.nudCalendarYear.Value.ToString()},
                 { "paramMunicipalTreasurer", string.Empty},

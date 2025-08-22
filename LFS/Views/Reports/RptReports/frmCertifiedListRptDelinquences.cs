@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -174,15 +175,14 @@ namespace LFS.Views.Reports.RptReports
                 if (dataTable.Rows.Count < 1)
                     pbLoadRecords.Value = 100;
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
                 string barangayName = cmbxBarangays.Text.Trim();
                 string datePeriod = $"{dtFrom.Value.ToString("MMM dd, yyyy")} - {dtTo.Value.ToString("MMM dd, yyyy")}";
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGUName", lguName),
-                    new ReportParameter("paramDatePeriod", datePeriod),
-                    new ReportParameter("paramBarangay", barangayName)
+                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramDatePeriod", datePeriod),
+                    new("paramBarangay", barangayName)
                 };
 
                 reportViewer.LocalReport.ReportPath = $"{Application.StartupPath}\\Reports\\CertifiedListRptDelinquences.rdlc";

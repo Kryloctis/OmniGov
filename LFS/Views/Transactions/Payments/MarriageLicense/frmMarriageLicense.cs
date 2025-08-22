@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Collections.Generic;
@@ -128,8 +129,8 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
 
             var dictReportParameters = new Dictionary<string, string>()
             {
-                { "paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper() },
-                { "paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper() },
+                { "paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper() },
+                { "paramProvince", ServerHelper.selectedServer.ProvinceName.ToUpper() },
                 { "paramRegistryNo", ucMarriageDetails.GetMarriageDetails().registryNo },
                 { "paramDateIssued", ucMarriageDetails.GetMarriageDetails().issuedOn.ToString()},
                 { "paramGroomName", groomName },

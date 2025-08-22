@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -124,8 +125,6 @@ namespace LFS.Views.Reports.JEV
                 Cursor.Current = Cursors.WaitCursor;
                 Dictionary<string, string> data = AccFactory.JEVRepository().GetRecordByID(_jevId);
 
-                var lguDetails = Helper.LGUDetails();
-
                 string CertifiedBySignatory = string.Empty;
                 string CertifiedBysignatoryTitle = string.Empty;
 
@@ -140,34 +139,37 @@ namespace LFS.Views.Reports.JEV
                 Dictionary<string, string> dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
                 Dictionary<string, dynamic> dictUser = AccFactory.UsersRepository().GetViewRecordById(Convert.ToInt32(dictJev["created_by"]));
 
+                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
                 SetJournalCustomFields();
 
-                ReportParameter[] parameters = new[] {
-                    new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", data["fund_name"]),
-                    new ReportParameter("paramJournalType", data["journal_name"]),
-                    new ReportParameter("paramJEVNo", full_jev),
-                    new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
-                    new ReportParameter("paramPayee", data["payee"]),
-                    new ReportParameter("paramExplanation", data["explanation"]),
-                    new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
-                    new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
-                    new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
-                    new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
+                var parameters = new ReportParameter[]
+                {
+                    new("paramLGU",  lguName),
+                    new("paramFund", data["fund_name"]),
+                    new("paramJournalType", data["journal_name"]),
+                    new("paramJEVNo", full_jev),
+                    new("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
+                    new("paramPayee", data["payee"]),
+                    new("paramExplanation", data["explanation"]),
+                    new("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
+                    new("paramPreparedByRole",dictUser["role_name"]),
+                    new("paramCertifiedBySignatory", CertifiedBySignatory),
+                    new("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
 
                     //For fields label
-                    new ReportParameter("paramAsTextCheckDate", checkDate),
-                    new ReportParameter("paramAsTextCheckNo", checkNo),
-                    new ReportParameter("paramAsTextOR", orNo),
-                    new ReportParameter("paramAsTextDV", dv),
-                    new ReportParameter("paramAsTextOfficer", officer),
+                    new("paramAsTextCheckDate", checkDate),
+                    new("paramAsTextCheckNo", checkNo),
+                    new("paramAsTextOR", orNo),
+                    new("paramAsTextDV", dv),
+                    new("paramAsTextOfficer", officer),
 
                     //for fields values
-                    new ReportParameter("paramCheckDate", paramCheckDate),
-                    new ReportParameter("paramCheckNo", paramCheckNo),
-                    new ReportParameter("paramORNumber", paramORNo),
-                    new ReportParameter("paramDVNo", paramDVNo),
-                    new ReportParameter("paramDisbursementOfficer", paramOfficer)
+                    new("paramCheckDate", paramCheckDate),
+                    new("paramCheckNo", paramCheckNo),
+                    new("paramORNumber", paramORNo),
+                    new("paramDVNo", paramDVNo),
+                    new("paramDisbursementOfficer", paramOfficer)
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";

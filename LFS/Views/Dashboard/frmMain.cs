@@ -1,8 +1,9 @@
-﻿using LFS.Views.Dashboard.Accounting;
+﻿using LFS.Helpers;
+using LFS.Views.Dashboard.Accounting;
 using LFS.Views.Dashboard.Budget;
+using LFS.Views.Dashboard.Manage;
 using LFS.Views.Dashboard.MyAccount;
 using LFS.Views.Dashboard.Reports;
-using LFS.Views.Dashboard.Manage;
 using LFS.Views.Dashboard.Treasury;
 using LFS.Views.SignIn;
 using System;
@@ -115,7 +116,7 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                tlStrpLblServer.Text = Helper.selectedServerModel.MunicipalityName;
+                tlStrpLblServer.Text = ServerHelper.selectedServer.MunicipalityName;
                 tlStrpLblVersion.Text = $"Version: {Helper.version}";
                 ValidatePermissions();
                 LoadTabPagesContents(tabControlMain);

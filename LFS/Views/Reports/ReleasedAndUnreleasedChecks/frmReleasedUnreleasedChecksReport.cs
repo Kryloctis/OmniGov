@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -143,7 +144,6 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
                     progressBar1.Value = 100;
 
                 var localReport = reportViewer1.LocalReport;
-                var lguDetails = Helper.LGUDetails();
                 int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
                 var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
                 string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
@@ -191,16 +191,16 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
                     return (string.Empty, string.Empty);
                 }
 
-                var parameters = new[]
+                var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramPeriodCovered", dtpPeriodCovered.Value.ToString()),
-                    new ReportParameter("paramFund", "General Fund"),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramBankAccount", bankDetails),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSig.signatoryName),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSig.signatoryTitle),
-                    new ReportParameter("paramReceivedBySignatory", receivedBySig.signatoryName),
-                    new ReportParameter("paramReceivedBySignatoryTitle", receivedBySig.signatoryTitle)
+                    new("paramPeriodCovered", dtpPeriodCovered.Value.ToString()),
+                    new("paramFund", "General Fund"),
+                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramBankAccount", bankDetails),
+                    new("paramCertifiedCorrectSignatory", certifiedCorrectSig.signatoryName),
+                    new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSig.signatoryTitle),
+                    new("paramReceivedBySignatory", receivedBySig.signatoryName),
+                    new("paramReceivedBySignatoryTitle", receivedBySig.signatoryTitle)
                 };
 
                 localReport.ReportPath = localReportParam.reportPath;

@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -138,7 +139,6 @@ namespace LFS.Views.Reports.Ltoms
             int progressCount = 0;
 
             // Fetch LGU Details
-            var lguDetails = Helper.LGUDetails();
             progressCount += tasks["Fetch LGU Details"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -158,7 +158,7 @@ namespace LFS.Views.Reports.Ltoms
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
             // Set Parameter Values
-            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
             reportParameters.Add(new ReportParameter("paramNameOfBidder", nameOfBidder));
             reportParameters.Add(new ReportParameter("paramCompleteAddressOfBidder", bidderCompleteAddress));
             reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));

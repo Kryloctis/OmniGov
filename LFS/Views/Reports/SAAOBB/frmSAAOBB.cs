@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -199,8 +200,8 @@ namespace LFS.Views.Reports.Saaobb
                 var fundRepo = AccFactory.FundsRepository().GetRecordByID(args.fundId);
                 var parameters = new[]
                 {
-                    new ReportParameter("paramMunicipality", Helper.selectedServerModel.MunicipalityName),
-                    new ReportParameter("paramProvince", Helper.selectedServerModel.ProvinceName),
+                    new ReportParameter("paramMunicipality", ServerHelper.selectedServer.MunicipalityName),
+                    new ReportParameter("paramProvince", ServerHelper.selectedServer.ProvinceName),
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", args.dtAsOf.ToString("MMMM dd, yyyy")),

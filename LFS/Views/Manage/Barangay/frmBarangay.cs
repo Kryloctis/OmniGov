@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -103,7 +104,7 @@ namespace LFS.Views.Manage.Barangay
                 };
                 dataTable.Columns.AddRange(dataColumns);
 
-                var dtBarangayFromDb = AccFactory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, Helper.selectedServerModel.LguId);
+                var dtBarangayFromDb = AccFactory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, ServerHelper.selectedServer.LguId);
                 int totalProgressCount = dtBarangayFromDb.Rows.Count;
                 int progressCount = 0;
 

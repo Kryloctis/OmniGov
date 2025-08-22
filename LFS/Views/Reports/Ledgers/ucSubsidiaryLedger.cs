@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -274,8 +275,11 @@ namespace LFS.Views.Reports.Ledgers
 
             report.DataSources.Add(new ReportDataSource("dtSubsidiaryLedger", DataTableSubsidiaryLedgerReport()));
 
-            ReportParameter[] parameters = new[] {
-                new ReportParameter("paramLGUName", $"{Helper.LGUDetails()["municipality"]}, {Helper.LGUDetails()["lgu_province"]}"),
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+            var parameters = new ReportParameter[]
+            {
+                new ReportParameter("paramLGUName",lguName),
                 new ReportParameter("paramFund", fundName),
                 new ReportParameter("paramGLCode", generalLedgerDict["account_code"]),
                 new ReportParameter("paramSLCode", subsidiaryLedgerDict["sub_code"]),
@@ -285,6 +289,7 @@ namespace LFS.Views.Reports.Ledgers
                 new ReportParameter("paramContactNoEmail", subsidiaryLedgerDict["contact"]),
                 new ReportParameter("paramYear",year.ToString())
             };
+
             report.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;

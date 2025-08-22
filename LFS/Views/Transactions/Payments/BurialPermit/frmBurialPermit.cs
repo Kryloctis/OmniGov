@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -157,7 +158,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
 
             var dictReportParameters = new Dictionary<string, string>()
             {
-                {"paramMunicipality", Helper.selectedServerModel.MunicipalityName.ToUpper()},
+                {"paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper()},
                 {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
                 {"paramRemainName", remainName},
                 {"paramRemainSex", dictRegistry["sex"]},

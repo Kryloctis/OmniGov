@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -230,17 +231,16 @@ namespace LFS.Views.Reports.RptReports
                 progressBar1.Value = 100;
 
             var localReport = reportViewer1.LocalReport;
-            var lguDetails = Helper.LGUDetails();
             int taxpayerId = Convert.ToInt32(cmbxOwners.SelectedValue);
             var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             var parameter = new ReportParameter[]
             {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramOwner", dictTaxpayer["name"]),
-                new ReportParameter("paramOwerTin", dictTaxpayer["tin"]),
-                new ReportParameter("paramOwnerAddress", Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty,  dictTaxpayer["municipality"],  dictTaxpayer["province"])),
-                new ReportParameter("paramDate", dtTo.Value.ToString())
+                new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                new("paramOwner", dictTaxpayer["name"]),
+                new("paramOwerTin", dictTaxpayer["tin"]),
+                new("paramOwnerAddress", Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty,  dictTaxpayer["municipality"],  dictTaxpayer["province"])),
+                new("paramDate", dtTo.Value.ToString())
             };
 
             localReport.ReportPath = $"{Application.StartupPath}\\Reports\\RealPropertyTaxDuesAndPayments.rdlc";

@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -109,14 +110,13 @@ namespace LFS.Views.Reports.Ltoms
 
                 var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
 
-                string lguName = Helper.LGUDetails()["lgu_name"];
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
                 string time = $"{Convert.ToDateTime(dtAuction["start_date"]):HH:mm:tt} - {Convert.ToDateTime(dtAuction["start_date"]):HH:mm:tt}";
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
+                    new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName),
                     new ReportParameter("paramDateOfAuction", date),
                     new ReportParameter("paramTimeOfAuction", time),
                     new ReportParameter("paramPlaceOfAuction", location),

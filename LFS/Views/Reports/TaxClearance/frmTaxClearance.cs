@@ -98,15 +98,12 @@ namespace LFS.Views.Reports.TaxClearance
                 int totalProgressCount = tasks.Sum(t => t.Value);
                 int progressCount = 0;
 
-                // Fetch LGU Details
-                var lguDetails = Helper.LGUDetails();
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 progressCount += tasks["Fetch Record"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                // Initialize Parameters
                 List<ReportParameter> reportParameters = new List<ReportParameter>();
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -229,8 +226,12 @@ namespace LFS.Views.Reports.TaxClearance
 
         private void cmbxProperty_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string completeArpNo = cmbxProperty.Text;
-            CheckProperty(completeArpNo);
+            try
+            {
+                string completeArpNo = cmbxProperty.Text;
+                CheckProperty(completeArpNo);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

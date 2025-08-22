@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -107,7 +108,6 @@ namespace LFS.Views.Reports.Ltoms
             progressCount += tasks["Fetch Bidder"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            var lguDetails = Helper.LGUDetails();
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -115,7 +115,7 @@ namespace LFS.Views.Reports.Ltoms
             var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
 
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
-            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
             reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
             reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));

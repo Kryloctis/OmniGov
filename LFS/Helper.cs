@@ -1,9 +1,7 @@
 using ACC.Data;
-using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -16,7 +14,6 @@ namespace LFS
     public static class Helper
     {
         internal static byte userId;
-        internal static LguServerModel selectedServerModel;
         internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -385,138 +382,6 @@ namespace LFS
         }
 
         #endregion Check Box Column Utility Datagrid
-
-        #region ServerConfig and Server List
-
-        public class LguServerModel
-        {
-            public int LguId { get; set; }
-            public string MunicipalityCode { get; set; }
-            public string MunicipalityName { get; set; }
-            public string ProvinceCode { get; set; }
-            public string ProvinceName { get; set; }
-            public Image Emblem { get; set; }
-            public string lfsInstance { get; set; }
-            public string rpmInstance { get; set; }
-            public ConnectionStringSettings LfsConnSettings { get; set; }
-            public ConnectionStringSettings RpmConnSettings { get; set; }
-        }
-
-        private static ConnectionStringSettings ServerConnections(string userIp, string name, string database, string Id, string password)
-        {
-            var connString = new ConnectionStringSettings()
-            {
-                Name = name,
-                ConnectionString = $"server={userIp};database={database};user id={Id};password={password}",
-                ProviderName = "MySql.Data.MySqlClient"
-            };
-            return connString;
-        }
-
-        public static List<LguServerModel> LguServerModels()
-        {
-            var lguModelList = new List<LguServerModel>();
-
-            var buugZsiModel = new LguServerModel()
-            {
-                LguId = 1,
-                MunicipalityCode = "BG",
-                MunicipalityName = "Buug",
-                ProvinceCode = "ZSI",
-                ProvinceName = "Zamboanga Sibugay",
-                Emblem = Properties.Resources.list_money_banknotes_18px,
-                lfsInstance = ConfigurationManager.ConnectionStrings["bg_zsi_lfs_instance"].ConnectionString,
-                rpmInstance = ConfigurationManager.ConnectionStrings["bg_zsi_rpm_instance"].ConnectionString,
-
-                //connection strings here
-                //LfsConnSettings = ServerConnections(name: "bg_zsi_lfs_instance",
-                //                                    userIp: "local",
-                //                                    database: "bg_zsi_lfs_db",
-                //                                    Id: "acc_user",
-                //                                    password: "acc_user123"),
-
-                //RpmConnSettings = ServerConnections(name: "bg_zsi_rpt_instance",
-                //                                    userIp: "local",
-                //                                    database: "bg_zsi_rpt_db",
-                //                                    Id: "rpt_user",
-                //                                    password: "rpt_user123")
-            };
-
-            var titayZsiModel = new LguServerModel()
-            {
-                LguId = 2,
-                MunicipalityCode = "TTY",
-                MunicipalityName = "Titay",
-                ProvinceCode = "ZSI",
-                ProvinceName = "Zamboanga Sibugay",
-                Emblem = Properties.Resources.list_money_banknotes_18px,
-                lfsInstance = ConfigurationManager.ConnectionStrings["tty_zsi_lfs_instance"].ConnectionString,
-                rpmInstance = ConfigurationManager.ConnectionStrings["tty_zsi_rpm_instance"].ConnectionString,
-
-                //connection strings here
-                //LfsConnSettings = ServerConnections(name: "tty_zsi_lfs_instance",
-                //                                    userIp: "local",
-                //                                    database: "tty_zsi_lfs_db",
-                //                                    Id: "acc_user",
-                //                                    password: "acc_user123"),
-
-                //RpmConnSettings = ServerConnections(name: "tty_zsi_rpt_instance",
-                //                                    userIp: "local",
-                //                                    database: "tty_zsi_rpt_db",
-                //                                    Id: "rpt_user",
-                //                                    password: "rpt_user123")
-            };
-
-            var demoModel = new LguServerModel()
-            {
-                LguId = 3,
-                MunicipalityCode = "Demo",
-                MunicipalityName = "Demo",
-                ProvinceCode = "Demo",
-                ProvinceName = "Demo",
-                Emblem = Properties.Resources.list_money_banknotes_18px,
-                lfsInstance = ConfigurationManager.ConnectionStrings["demo_lfs_instance"].ConnectionString,
-                rpmInstance = ConfigurationManager.ConnectionStrings["demo_rpm_instance"].ConnectionString,
-            };
-
-            lguModelList.Add(demoModel);
-            lguModelList.Add(buugZsiModel);
-            lguModelList.Add(titayZsiModel);
-
-            return lguModelList;
-        }
-
-        public static List<LguServerModel> AvailableServerList()
-        {
-            var availableServerList = new List<LguServerModel>();
-
-            foreach (LguServerModel model in LguServerModels())
-            {
-                bool isLfsConnected = AccFactory.ServerRepository().TestConnection(model.lfsInstance);
-                bool isRptmConnected = RptFactory.ServerRepository().TestConnection(model.rpmInstance);
-
-                if (!isLfsConnected || !isRptmConnected)
-                    continue;
-
-                availableServerList.Add(model);
-            }
-
-            return availableServerList;
-        }
-
-        public static Dictionary<string, dynamic> LGUDetails()
-        {
-            var lguDict = new Dictionary<string, dynamic>
-            {
-                { "municipality", selectedServerModel.MunicipalityName },
-                { "lgu_name", $"Municipality of {selectedServerModel.MunicipalityName}" },
-                { "lgu_province", selectedServerModel.ProvinceName},
-            };
-
-            return lguDict;
-        }
-
-        #endregion ServerConfig and Server List
 
         #region Miscellaneous
 

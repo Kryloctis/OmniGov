@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
@@ -89,8 +90,8 @@ namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 
             var dictParameters = new Dictionary<string, string>
             {
-                {"paramMunicipal", Helper.selectedServerModel.MunicipalityName.ToUpper()},
-                {"paramProvince", Helper.selectedServerModel.ProvinceName.ToUpper()},
+                {"paramMunicipal", ServerHelper.selectedServer.MunicipalityName.ToUpper()},
+                {"paramProvince", ServerHelper.selectedServer.ProvinceName.ToUpper()},
                 {"paramOldOwnerName", cattleTransferDetails.oldOwnerName},
                 {"paramOldOwnerAddress", cattleTransferDetails.oldOwnerAddress},
                 {"paramOldOwnerMunicipality", cattleTransferDetails.oldOwnerMunicipality},

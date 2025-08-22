@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using LFS.DataSets;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,6 @@ namespace LFS.Views.Reports.Ltoms
                 int progressCount = 0;
 
                 // Fetch LGU Details
-                var lguDetails = Helper.LGUDetails();
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -88,12 +88,12 @@ namespace LFS.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Set Parameter Values
-                reportParameters1.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters1.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
                 reportParameters1.Add(new ReportParameter("paramReportDate", date.ToString()));
                 reportParameters1.Add(new ReportParameter("paramSignatory", string.Empty));
                 reportParameters1.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
 
-                reportParameters2.Add(new ReportParameter("paramLgu", lguDetails["lgu_name"]));
+                reportParameters2.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
                 reportParameters2.Add(new ReportParameter("paramSignatory", string.Empty));
                 reportParameters2.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
                 progressCount += tasks["Set Parameter Values"];

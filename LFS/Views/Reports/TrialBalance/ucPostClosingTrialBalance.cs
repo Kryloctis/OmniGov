@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,6 @@ namespace LFS.Views.Reports.TrialBalance
             Cursor.Current = Cursors.WaitCursor;
 
             var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Post Trial Balance");
-            var lguDict = Helper.LGUDetails();
             report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
             report.DataSources.Clear();
 
@@ -165,13 +165,14 @@ namespace LFS.Views.Reports.TrialBalance
             var fundName = cmbFund.Text;
             var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
-            var parameters = new[] {
-                        new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                        new ReportParameter("paramFund", fundName),
-                        new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                        new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                        new ReportParameter("paramAsOf", asOfDate),
-                      };
+            var parameters = new ReportParameter[]
+            {
+                new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                new("paramFund", fundName),
+                new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new("paramAsOf", asOfDate),
+            };
 
             cbHideZeroBalance.Enabled = true;
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);

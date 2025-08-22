@@ -1,6 +1,8 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.Dashboard;
+using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using RPT.Data;
 using System;
 using System.ComponentModel;
@@ -85,7 +87,7 @@ namespace LFS.Views.SignIn
 
         private void ScanAvailableServers()
         {
-            var availableServerList = Helper.AvailableServerList();
+            var availableServerList = ServerHelper.AvailableServerList();
             if (availableServerList.Count < 1)
             {
                 lblServer.Text = $"(F12) Server: No server found.";
@@ -97,12 +99,13 @@ namespace LFS.Views.SignIn
 
         private void SelectFirstServerLoaded()
         {
-            var availableServerList = Helper.AvailableServerList();
-            Helper.selectedServerModel = availableServerList.First();
+            var availableServerList = ServerHelper.AvailableServerList();
+            ServerHelper.selectedServer = availableServerList.First();
 
-            AccFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.lfsInstance);
-            RptFactory.ServerRepository().ApplyConnection(Helper.selectedServerModel.rpmInstance);
-            lblServer.Text = $"(F12) Server: {Helper.selectedServerModel.MunicipalityName}, {Helper.selectedServerModel.ProvinceName}.";
+            AccFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
+            RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
+
+            lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}.";
         }
 
         private void SignInForm_KeyDown(object sender, KeyEventArgs e)
@@ -151,13 +154,12 @@ namespace LFS.Views.SignIn
         private bool Server_Validated()
         {
             string errorMessage;
-            bool isServerNull = Helper.selectedServerModel == null;
+            bool isServerNull = ServerHelper.selectedServer == null;
 
             if (!isServerNull)
             {
-                var selectedServerModel = Helper.selectedServerModel;
-                bool lfsTestConnection = AccFactory.ServerRepository().TestConnection(selectedServerModel.lfsInstance);
-                bool rptmTestConnection = RptFactory.ServerRepository().TestConnection(selectedServerModel.rpmInstance);
+                bool lfsTestConnection = AccFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
+                bool rptmTestConnection = RptFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.RpmsInstance);
                 bool isTestConnectionSucceed = lfsTestConnection && rptmTestConnection;
                 if (!isTestConnectionSucceed)
                 {

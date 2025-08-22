@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,12 @@ namespace LFS.Views.Reports.TrialBalance
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
+        }
+
+        internal void OnLoad()
+        {
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -105,7 +112,6 @@ namespace LFS.Views.Reports.TrialBalance
             Cursor.Current = Cursors.WaitCursor;
 
             var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Pre Trial Balance");
-            var lguDict = Helper.LGUDetails();
             report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
             report.DataSources.Clear();
 
@@ -118,13 +124,15 @@ namespace LFS.Views.Reports.TrialBalance
             var fundName = cmbFund.Text;
             var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
-            var parameters = new[] {
-                    new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramAsOf", asOfDate),
-                  };
+            var parameters = new ReportParameter[]
+            {
+                new ReportParameter("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                new ReportParameter("paramFund", fundName),
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new ReportParameter("paramAsOf", asOfDate),
+            };
+
             report.SetParameters(parameters);
             Cursor.Current = Cursors.Default;
 
@@ -152,12 +160,6 @@ namespace LFS.Views.Reports.TrialBalance
                 RecordsFilter(reportViewer.LocalReport, 1);
             else
                 RecordsFilter(reportViewer.LocalReport, 0);
-        }
-
-        internal void OnLoad()
-        {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
         }
     }
 }

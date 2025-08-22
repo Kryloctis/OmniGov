@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -145,12 +146,12 @@ namespace LFS.Views.Reports.Rcd
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLguName", Helper.LGUDetails()["lgu_name"]),
-                    new ReportParameter("paramVerfSig", string.Empty),
-                    new ReportParameter("paramReportNo", dictRcd["report_no"]),
-                    new ReportParameter("paramDate", dictRcd["date"]),
-                    new ReportParameter("paramAccOfficer", Helper.GetUserDataById(Convert.ToInt32(dictRcd["created_by_id"]))["user_full_name"]),
-                    new ReportParameter("paramFund", dictRcd["fund_name"])
+                    new("paramLguName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramVerfSig", string.Empty),
+                    new("paramReportNo", dictRcd["report_no"]),
+                    new("paramDate", dictRcd["date"]),
+                    new("paramAccOfficer", Helper.GetUserDataById(Convert.ToInt32(dictRcd["created_by_id"]))["user_full_name"]),
+                    new("paramFund", dictRcd["fund_name"])
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtRcdCollections", dtRcdCollections));

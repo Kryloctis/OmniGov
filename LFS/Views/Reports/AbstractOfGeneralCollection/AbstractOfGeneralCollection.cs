@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,6 @@ namespace LFS.Views.Reports.GeneralCollection
             string collectionFrom = dtpFrom.Value.ToString("yyyy-MM-dd");
             string collectionTo = dtpTo.Value.ToString("yyyy-MM-dd");
 
-            var lguDetails = Helper.LGUDetails();
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
 
@@ -49,11 +49,13 @@ namespace LFS.Views.Reports.GeneralCollection
 
             ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-            var parameters = new[]
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
+            var parameters = new ReportParameter[]
             {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
+                new("paramLGUName", lguName),
+                new("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
             };
 
             report.ReportPath = $"{Application.StartupPath}Reports\\abstract-of-general-collection.rdlc";

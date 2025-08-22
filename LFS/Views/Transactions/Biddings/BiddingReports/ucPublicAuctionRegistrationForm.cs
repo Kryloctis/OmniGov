@@ -1,7 +1,9 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -34,7 +36,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var parameters = ((int auctionId, int bidderId))e.Argument;
 
@@ -49,14 +51,13 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
 
             var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
 
-            var lguDetails = Helper.LGUDetails();
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];
 
             var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
 
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
-            reportParameters.Add(new ReportParameter("paramLGU", lguDetails["municipality"]));
+            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
             reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
             reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));
@@ -69,12 +70,12 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             e.Result = reportParameters;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {

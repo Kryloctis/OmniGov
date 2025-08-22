@@ -1,8 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.DataSets;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -33,7 +35,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -67,12 +69,12 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -88,13 +90,11 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom26ListOfRegisteredBidders.rdlc";
                 report.DataSources.Clear();
 
-                string lguName = Helper.LGUDetails()["lgu_name"]; ;
-
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", lguName),
-                    new ReportParameter("paramSignatoryTitle", string.Empty),
-                    new ReportParameter("paramSignatory", string.Empty),
+                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramSignatoryTitle", string.Empty),
+                    new("paramSignatory", string.Empty),
                 };
 
                 report.DataSources.Add(new ReportDataSource("dtLtom26_27_28", dataTable));

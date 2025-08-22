@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -115,7 +116,6 @@ namespace LFS.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport localReport)
         {
-            var lguDict = Helper.LGUDetails();
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
             string fundName = cmbxFunds.Text;
             Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
@@ -125,9 +125,11 @@ namespace LFS.Views.Reports.Ledgers
 
             localReport.DataSources.Add(new ReportDataSource("dtSummarySubsidiaryLedger", DataTableSummarySubsidiaryLedger()));
 
+            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+
             var reportParameters = new ReportParameter[]
             {
-                new ReportParameter("paramLgu", $"{lguDict["municipality"]} - {lguDict["lgu_province"]}"),
+                new ReportParameter("paramLgu", lguName),
                 new ReportParameter("paramAccountName", generalLedgerDict["ledger_name"]),
                 new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
                 new ReportParameter("paramYear", nudYear.Value.ToString()),

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            txtRpt = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             cmbxAuctionSchedule = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             btnRunReport = new System.Windows.Forms.Button();
@@ -38,8 +40,6 @@
             progressBar1 = new System.Windows.Forms.ProgressBar();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            txtRpt = new System.Windows.Forms.TextBox();
-            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -72,6 +72,26 @@
             splitContainer1.Size = new System.Drawing.Size(800, 450);
             splitContainer1.SplitterDistance = 211;
             splitContainer1.TabIndex = 14;
+            // 
+            // txtRpt
+            // 
+            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtRpt.Location = new System.Drawing.Point(7, 78);
+            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            txtRpt.Name = "txtRpt";
+            txtRpt.Size = new System.Drawing.Size(200, 23);
+            txtRpt.TabIndex = 36;
+            txtRpt.TextChanged += txtRpt_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(7, 60);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(57, 15);
+            label4.TabIndex = 35;
+            label4.Text = "ARP No. :";
             // 
             // cmbxAuctionSchedule
             // 
@@ -120,9 +140,9 @@
             label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             label3.Location = new System.Drawing.Point(5, 111);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(51, 15);
+            label3.Size = new System.Drawing.Size(48, 15);
             label3.TabIndex = 20;
-            label3.Text = "Biiders : ";
+            label3.Text = "Biders : ";
             // 
             // panel1
             // 
@@ -156,26 +176,6 @@
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
-            // txtRpt
-            // 
-            txtRpt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            txtRpt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            txtRpt.Location = new System.Drawing.Point(7, 78);
-            txtRpt.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtRpt.Name = "txtRpt";
-            txtRpt.Size = new System.Drawing.Size(200, 23);
-            txtRpt.TabIndex = 36;
-            txtRpt.TextChanged += txtRpt_TextChanged;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(7, 60);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(57, 15);
-            label4.TabIndex = 35;
-            label4.Text = "ARP No. :";
             // 
             // frmLtom28
             // 
