@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
@@ -12,7 +13,7 @@ namespace ACC.Data
 
         public AccGenericCommands(string connectionString)
         {
-            this.connectionString = connectionString;
+            this.connectionString = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)
@@ -125,17 +126,18 @@ namespace ACC.Data
             }
         }
 
-        public bool TestConnection(string connectionString)
+        public bool TestConnection(string testConnectionName)
         {
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
+                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
                 {
                     connection.Open();
-                    return connection.Ping();
+                    return true;
                 }
             }
-            catch (Exception) { return false; }
+            catch (MySqlException) { return false; }
         }
     }
 }

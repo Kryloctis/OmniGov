@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LFS.Views.SignIn
 {
@@ -36,7 +37,29 @@ namespace LFS.Views.SignIn
         {
             try
             {
-                ValidateLoginCredentials();
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                Image visibleImage = Resources.visible_16px;
+
+                if (!this.ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
+
+                var userDict = AccFactory.UsersRepository().GetUserRecordByAcc(username, password);
+                _ = new UserHelper(userDict);
+
+                var dashboardForm = new frmMain(this);
+                txtUsername.SelectAll();
+                txtUsername.Focus();
+                txtPassword.Clear();
+
+                dashboardForm.Show();
+                Hide();
+
+                btnVisibility.Image = visibleImage;
+                txtPassword.PasswordChar = '•';
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -127,30 +150,6 @@ namespace LFS.Views.SignIn
         {
         }
 
-        private void ValidateLoginCredentials()
-        {
-            if (!this.ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-                return;
-            }
-
-            Image visibleImage = Resources.visible_16px;
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-
-            Helper.userId = AccFactory.UsersRepository().ValidateLogin(username, password);
-            txtUsername.SelectAll();
-            txtUsername.Focus();
-            txtPassword.Clear();
-
-            new frmMain(this).Show();
-            Hide();
-
-            btnVisibility.Image = visibleImage;
-            txtPassword.PasswordChar = '•';
-        }
-
         private bool Server_Validated()
         {
             string errorMessage;
@@ -158,9 +157,13 @@ namespace LFS.Views.SignIn
 
             if (!isServerNull)
             {
-                bool lfsTestConnection = AccFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
-                bool rptmTestConnection = RptFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.RpmsInstance);
+                bool lfsTestConnection =
+                    AccFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
+                bool rptmTestConnection =
+                    RptFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.RpmsInstance);
+
                 bool isTestConnectionSucceed = lfsTestConnection && rptmTestConnection;
+
                 if (!isTestConnectionSucceed)
                 {
                     errorMessage = "Server connection failed";
@@ -179,12 +182,8 @@ namespace LFS.Views.SignIn
             }
         }
 
-        private bool Username_Password_Validated()
+        private bool Username_Password_Validated(string username, string password)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-
-            int userId = AccFactory.UsersRepository().ValidateLogin(username, password);
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 string errorMessage = "Please enter username and password.";
@@ -192,7 +191,7 @@ namespace LFS.Views.SignIn
                 txtPassword.Tag = errorMessage;
                 return false;
             }
-            else if (userId == 0)
+            else if (!AccFactory.UsersRepository().AccIsValidated(username, password))
             {
                 string errorMessage = "Incorrect username or password.";
                 txtUsername.Tag = errorMessage;
@@ -212,7 +211,9 @@ namespace LFS.Views.SignIn
         {
             try
             {
-                e.Cancel = !Server_Validated() || !Username_Password_Validated();
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                e.Cancel = !Server_Validated() || !Username_Password_Validated(username, password);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

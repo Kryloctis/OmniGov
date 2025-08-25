@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Views.Transactions.JEV;
 using System;
 using System.Data;

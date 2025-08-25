@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Views.Transactions.RCI;
 using System;
 using System.ComponentModel;

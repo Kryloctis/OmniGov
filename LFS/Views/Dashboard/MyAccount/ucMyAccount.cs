@@ -261,10 +261,12 @@ namespace LFS.Views.Dashboard.MyAccount
             string currentPassword = txtBoxCurrentPassowrd.Text.Trim();
             string userName = txtUserName.Text.Trim();
 
-            byte userId = AccFactory.UsersRepository().ValidateLogin(userName, currentPassword);
+            bool userCredIsValid = AccFactory.UsersRepository().AccIsValidated(userName, currentPassword);
 
-            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBoxCurrentPassowrd, "Current Password.") && !(userId == 0);
-            errorProvider1.SetError(txtBoxCurrentPassowrd, (userId == 0) ? "Current password is incorrect." : errorProvider1.GetError(txtBoxCurrentPassowrd));
+            isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBoxCurrentPassowrd, "Current Password.")
+                      && !userCredIsValid;
+
+            errorProvider1.SetError(txtBoxCurrentPassowrd, (!userCredIsValid) ? "Current password is incorrect." : errorProvider1.GetError(txtBoxCurrentPassowrd));
 
             return isValid;
         }

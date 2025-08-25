@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using BudgetSystem.Views.BudgetAppropriations;
-using LFS;
+using LFS.Helpers;
 using LFS.Views.Manage.BudgetAppropriations;
 using System;
 using System.Windows.Forms;

@@ -1,4 +1,5 @@
-﻿using LFS.Views.Manage.Amortization;
+﻿using LFS.Helpers;
+using LFS.Views.Manage.Amortization;
 using System;
 using System.Windows.Forms;
 

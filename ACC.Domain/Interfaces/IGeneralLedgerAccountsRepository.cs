@@ -8,11 +8,9 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecords();
 
-        Dictionary<string, string> GetViewRecordByID(ushort generalLedgerId);
+        Dictionary<string, string> GetViewRecordByID(int generalLedgerId);
 
         DataTable GetViewRecordsBySearch(string searchText);
-
-        DataTable GetRecordsBySearch();
 
         DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText);
 

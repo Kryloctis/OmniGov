@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
 using LFS.Views.Transactions.Payments;
 using System;

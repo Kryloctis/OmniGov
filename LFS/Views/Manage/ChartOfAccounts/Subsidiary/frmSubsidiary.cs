@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using MySql.Data.MySqlClient;

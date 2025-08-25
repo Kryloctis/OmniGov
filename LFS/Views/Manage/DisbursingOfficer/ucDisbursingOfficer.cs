@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using LFS.Views.Manage.LinkUser;
 using System;
 using System.Collections.Generic;
