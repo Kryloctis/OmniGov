@@ -84,9 +84,9 @@
             // panel1
             // 
             panel1.BackColor = System.Drawing.Color.White;
+            panel1.Controls.Add(radManage);
             panel1.Controls.Add(radioBtnMyAccount);
             panel1.Controls.Add(radReports);
-            panel1.Controls.Add(radManage);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(radTreasury);
             panel1.Controls.Add(radAccounting);
@@ -109,7 +109,7 @@
             radioBtnMyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radioBtnMyAccount.Image = Properties.Resources.user_profile_man_20px;
             radioBtnMyAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            radioBtnMyAccount.Location = new System.Drawing.Point(0, 580);
+            radioBtnMyAccount.Location = new System.Drawing.Point(0, 613);
             radioBtnMyAccount.Margin = new System.Windows.Forms.Padding(0);
             radioBtnMyAccount.Name = "radioBtnMyAccount";
             radioBtnMyAccount.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -141,13 +141,12 @@
             // 
             radManage.Appearance = System.Windows.Forms.Appearance.Button;
             radManage.AutoSize = true;
-            radManage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            radManage.Dock = System.Windows.Forms.DockStyle.Top;
             radManage.FlatAppearance.BorderSize = 0;
             radManage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
             radManage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radManage.Image = Properties.Resources.gear_filled_16px;
             radManage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radManage.Location = new System.Drawing.Point(0, 614);
+            radManage.Location = new System.Drawing.Point(0, 132);
             radManage.Margin = new System.Windows.Forms.Padding(0);
             radManage.Name = "radManage";
             radManage.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -390,7 +389,7 @@
             tabPageManage.Location = new System.Drawing.Point(4, 24);
             tabPageManage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageManage.Name = "tabPageManage";
-            tabPageManage.Size = new System.Drawing.Size(1125, 652);
+            tabPageManage.Size = new System.Drawing.Size(192, 72);
             tabPageManage.TabIndex = 4;
             tabPageManage.Text = "tabPageManage";
             tabPageManage.UseVisualStyleBackColor = true;
@@ -402,7 +401,7 @@
             ucManage1.Location = new System.Drawing.Point(0, 80);
             ucManage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucManage1.Name = "ucManage1";
-            ucManage1.Size = new System.Drawing.Size(1125, 572);
+            ucManage1.Size = new System.Drawing.Size(192, 0);
             ucManage1.TabIndex = 6;
             // 
             // label5
@@ -413,7 +412,7 @@
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(1125, 80);
+            label5.Size = new System.Drawing.Size(192, 80);
             label5.TabIndex = 5;
             label5.Text = "Manage";
             // 
