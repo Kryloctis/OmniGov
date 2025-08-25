@@ -301,7 +301,7 @@
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(192, 72);
+            tabPageAccounting.Size = new System.Drawing.Size(1125, 652);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -314,7 +314,7 @@
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel3.Size = new System.Drawing.Size(192, 0);
+            panel3.Size = new System.Drawing.Size(1125, 572);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
@@ -323,7 +323,7 @@
             ucAccounting1.Location = new System.Drawing.Point(5, 4);
             ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(182, 0);
+            ucAccounting1.Size = new System.Drawing.Size(1115, 564);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -334,7 +334,7 @@
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label2.Size = new System.Drawing.Size(192, 80);
+            label2.Size = new System.Drawing.Size(1125, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -345,7 +345,7 @@
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(192, 72);
+            tabPageTreasury.Size = new System.Drawing.Size(1125, 652);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -358,7 +358,7 @@
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel4.Size = new System.Drawing.Size(192, 0);
+            panel4.Size = new System.Drawing.Size(1125, 572);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
@@ -367,7 +367,7 @@
             ucTreasury1.Location = new System.Drawing.Point(5, 4);
             ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(182, 0);
+            ucTreasury1.Size = new System.Drawing.Size(1115, 564);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -378,7 +378,7 @@
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label3.Size = new System.Drawing.Size(192, 80);
+            label3.Size = new System.Drawing.Size(1125, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 
