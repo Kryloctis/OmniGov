@@ -27,11 +27,15 @@ namespace LFS.Helpers
             this.userDt = userDt;
             Id = int.Parse(userDt["id"]);
             FullName = GetUserFullName(Id);
-
-            var dictRole = AccFactory.UsersRepository().GetRecordByID(Id);
-
-            RoleId = int.Parse(dictRole["roles_id"]);
-            RoleName = dictRole["role_name"].ToString();
+            Prefix = userDt["prefix"];
+            Suffix = userDt["suffix"];
+            FirstName = userDt["first_name"];
+            MiddleName = userDt["mid_initial"];
+            LastName = userDt["last_name"];
+            UserName = userDt["username"];
+            Password = userDt["password"];
+            RoleId = int.Parse(userDt["roles_id"]);
+            RoleName = userDt["role_name"].ToString();
             UserPriviledges = PrivilegesHelper.UserPrivileges(RoleId);
             loggedUser = this;
         }

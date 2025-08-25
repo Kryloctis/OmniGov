@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LFS.Helpers;
+using System;
 using System.Windows.Forms;
 
 namespace LFS.Views.Reports.Ledgers

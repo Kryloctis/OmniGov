@@ -26,8 +26,8 @@ namespace ACC.Data
 
         public bool TestConnection(string connectionName)
         {
-            var test = new AccGenericCommands(connectionName);
-            return test.TestConnection(connectionName);
+            mySqlGenericCommandsLFS = new AccGenericCommands(connectionName);
+            return mySqlGenericCommandsLFS.TestConnection(connectionName);
         }
     }
 }

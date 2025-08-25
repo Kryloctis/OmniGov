@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.CustomTools;
+using LFS.Helpers;
 using LFS.Properties;
 using System;
 using System.ComponentModel;
@@ -24,7 +25,6 @@ namespace LFS.Views.Manage.Users
         internal void OnLoad(bool isEdit, int? userId = null)
         {
             this.isEdit = isEdit;
-            errorProvider1.Clear();
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
             LoadRoles(flwLytPnlRole);
 
@@ -134,6 +134,7 @@ namespace LFS.Views.Manage.Users
 
         internal void ResetForm()
         {
+            errorProvider1.Clear();
             customTabControl1.SelectedTab = tbPgRole;
             txtPrefix.Clear();
             txtFirstname.Clear();

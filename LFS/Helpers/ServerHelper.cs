@@ -80,8 +80,8 @@ namespace LFS.Helpers
                 string lfsInstance = model.LfsInstance;
                 string rpmInstance = model.RpmsInstance;
 
-                bool isRpmsdbConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
                 bool isLfsdbConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
+                bool isRpmsdbConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
 
                 if (!isRpmsdbConnected && !isLfsdbConnected)
                     continue;

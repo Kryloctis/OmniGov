@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace LFS
+namespace LFS.Helpers
 {
     public static class Helper
     {

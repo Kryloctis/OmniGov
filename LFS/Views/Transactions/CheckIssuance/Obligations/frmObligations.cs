@@ -1,4 +1,5 @@
-﻿using LFS.Views.Transactions.RCI;
+﻿using LFS.Helpers;
+using LFS.Views.Transactions.RCI;
 using System;
 using System.Windows.Forms;
 

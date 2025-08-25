@@ -250,29 +250,30 @@ namespace ACC.Data
             return false;
         }
 
-        public byte ValidateLogin(string username, string password)
+        public Dictionary<string, string> GetUserRecordByAcc(string username, string password)
         {
-            try
+            var recordDictionary = new Dictionary<string, string>();
+
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@username", DbType.String, username },
-                    new object[] { "@password", DbType.String, password },
-                };
+                new object[] { "@username", DbType.String, username },
+                new object[] { "@password", DbType.String, password },
+            };
 
-                string query = $"SELECT id FROM {tableName} WHERE BINARY username = @username AND password = sha2(@password, 224)";
-                string userId = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string query = $"SELECT * FROM {viewTableName} WHERE is_deleted = 0 AND username = @username AND password = sha2(@password, 224)";
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(userId)) return Convert.ToByte(userId);
-            }
-            catch (Exception)
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
-            }
-            ;
+                DataRow row = dataTable.Rows[0];
 
-            return 0;
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public DataTable GetViewRecordsBySearch(int rowLimit, string searchTxt)
@@ -286,6 +287,18 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR role_name LIKE @searchTxt) AND is_super = 0 GROUP BY id LIMIT @row_limit";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public bool AccIsValidated(string username, string password)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@username", DbType.String, username },
+                new object[] { "@password", DbType.String, password },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE is_deleted = 0 AND username = @username AND password = sha2(@password, 224)";
+            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, dynamic> GetViewRecordById(int Id)

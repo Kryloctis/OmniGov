@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using RPT.Domain.Interfaces;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
@@ -12,7 +13,7 @@ namespace RPT.Data
 
         public RptGenericCommands(string connectionString)
         {
-            this.connectionString = connectionString;
+            this.connectionString = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)
@@ -125,19 +126,18 @@ namespace RPT.Data
             }
         }
 
-        public bool TestConnection(string connectionString)
+        public bool TestConnection(string testConnectionName)
         {
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
+                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
                 {
                     connection.Open();
-                    if (connection.Ping())
-                        return true;
-                    return false;
+                    return true;
                 }
             }
-            catch (Exception) { return false; }
+            catch (MySqlException) { return false; }
         }
     }
 }

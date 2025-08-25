@@ -219,7 +219,7 @@ namespace LFS.Views.Reports.Ledgers
         {
             byte fundId = (byte)cmbxFunds.SelectedValue;
             short year = Convert.ToInt16(nudYear.Value);
-            ushort generalLedgerId = (ushort)cmbxAccount.SelectedValue;
+            int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
             var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             var fundName = cmbxFunds.Text;
