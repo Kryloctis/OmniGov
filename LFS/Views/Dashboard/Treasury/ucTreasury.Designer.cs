@@ -53,7 +53,7 @@
             af52TstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             pymntHstoryTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            propertyTaxPostingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            tStrpMenuItmPrptyTaxPosting = new System.Windows.Forms.ToolStripMenuItem();
             dellinquencyNoticesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             warrantsOfLevyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             auctionTstrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,14 +99,14 @@
             // receiptInventoryTstrpMnuItm
             // 
             receiptInventoryTstrpMnuItm.Name = "receiptInventoryTstrpMnuItm";
-            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            receiptInventoryTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
             receiptInventoryTstrpMnuItm.Text = "Inventory";
             receiptInventoryTstrpMnuItm.Click += receiptInventoryTstrpMnuItm_Click;
             // 
             // recieiptIssuanceTstrpMnuItm
             // 
             recieiptIssuanceTstrpMnuItm.Name = "recieiptIssuanceTstrpMnuItm";
-            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(180, 22);
+            recieiptIssuanceTstrpMnuItm.Size = new System.Drawing.Size(124, 22);
             recieiptIssuanceTstrpMnuItm.Text = "Issuance";
             recieiptIssuanceTstrpMnuItm.Click += recieiptIssuanceTstrpMnuItm_Click;
             // 
@@ -120,14 +120,14 @@
             // inventoryToolStripMenuItem
             // 
             inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            inventoryToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             inventoryToolStripMenuItem.Text = "Inventory";
             inventoryToolStripMenuItem.Click += inventoryToolStripMenuItem_Click;
             // 
             // issuanceToolStripMenuItem
             // 
             issuanceToolStripMenuItem.Name = "issuanceToolStripMenuItem";
-            issuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            issuanceToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             issuanceToolStripMenuItem.Text = "Issuance";
             issuanceToolStripMenuItem.Click += issuanceToolStripMenuItem_Click;
             // 
@@ -169,7 +169,7 @@
             // transactionsTstripDrpDwnBtn
             // 
             transactionsTstripDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            transactionsTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, pymntHstoryTstrpMnuItm, toolStripSeparator10, propertyTaxPostingToolStripMenuItem1, dellinquencyNoticesToolStripMenuItem, warrantsOfLevyToolStripMenuItem, auctionTstrpMnuItm, biddingTstrpMnuItm, toolStripSeparator11, checkIssuanceTstrpMnuItm, releasedAndUnreleaseChecksTstrpMnuItm, bankDepositTstrpMnuItm });
+            transactionsTstripDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { paymentsToolStripMenuItem, pymntHstoryTstrpMnuItm, toolStripSeparator10, tStrpMenuItmPrptyTaxPosting, dellinquencyNoticesToolStripMenuItem, warrantsOfLevyToolStripMenuItem, auctionTstrpMnuItm, biddingTstrpMnuItm, toolStripSeparator11, checkIssuanceTstrpMnuItm, releasedAndUnreleaseChecksTstrpMnuItm, bankDepositTstrpMnuItm });
             transactionsTstripDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("transactionsTstripDrpDwnBtn.Image");
             transactionsTstripDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             transactionsTstripDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
@@ -245,12 +245,12 @@
             toolStripSeparator10.Name = "toolStripSeparator10";
             toolStripSeparator10.Size = new System.Drawing.Size(223, 6);
             // 
-            // propertyTaxPostingToolStripMenuItem1
+            // tStrpMenuItmPrptyTaxPosting
             // 
-            propertyTaxPostingToolStripMenuItem1.Name = "propertyTaxPostingToolStripMenuItem1";
-            propertyTaxPostingToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
-            propertyTaxPostingToolStripMenuItem1.Text = "Tax Posting..";
-            propertyTaxPostingToolStripMenuItem1.Click += propertyTaxPostingToolStripMenuItem1_Click;
+            tStrpMenuItmPrptyTaxPosting.Name = "tStrpMenuItmPrptyTaxPosting";
+            tStrpMenuItmPrptyTaxPosting.Size = new System.Drawing.Size(226, 22);
+            tStrpMenuItmPrptyTaxPosting.Text = "Tax Posting..";
+            tStrpMenuItmPrptyTaxPosting.Click += propertyTaxPostingToolStripMenuItem1_Click;
             // 
             // dellinquencyNoticesToolStripMenuItem
             // 
@@ -347,7 +347,7 @@
         private System.Windows.Forms.ToolStripMenuItem receiptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptInventoryTstrpMnuItm;
         private System.Windows.Forms.ToolStripMenuItem recieiptIssuanceTstrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem propertyTaxPostingToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tStrpMenuItmPrptyTaxPosting;
         private System.Windows.Forms.ToolStripMenuItem dellinquencyNoticesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warrantsOfLevyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aF41CommunityTaxToolStripMenuItem;

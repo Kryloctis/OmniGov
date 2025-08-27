@@ -41,21 +41,19 @@ namespace LFS.Views.Transactions.JEV
 
             lblCreatedBy.Text = UserHelper.loggedUser.FullName;
             uc.SumDebitCredit();
-            VerifyPermissions();
+            VerifyUserPrivileges();
         }
 
-        private void VerifyPermissions()
+        private void VerifyUserPrivileges()
         {
-            //1. Verify logged in user have JEV permission
-            if (!Helper.HasPermission("Transaction > JEV"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.TransJEV))
             {
                 btnSave.Enabled = false;
                 btnDelete.Enabled = false;
                 uc.SetJevReadOnly(true);
             }
 
-            //2. Check if user has permission of JEV approval
-            if (!Helper.HasPermission("Transaction > JEV Approval"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval))
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
@@ -63,15 +61,13 @@ namespace LFS.Views.Transactions.JEV
                 toolStripSeparator2.Visible = false;
             }
 
-            //3. Check if user has permission to view JEV report
-            if (!Helper.HasPermission("Report > JEVs"))
-                btnPrint.Enabled = false;
+            btnPrint.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptJEVs);
 
-            //4. Verify logged in user if able to access dissaproval message
-            if (createdById != Helper.userId && !Helper.HasPermission("Transaction > JEV Approval"))
-                lblShowMessage.Enabled = false;
+            //Verify logged in user if able to access dissaproval message
+            lblShowMessage.Enabled = createdById != Helper.userId
+                                     && !PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
 
-            //5. Verify logged in user if user is the same who create the JEV for edit purposes only
+            //Verify logged in user if user is the same who create the JEV for edit purposes only
             if (uc.isEdit && Helper.userId != createdById)
             {
                 string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
@@ -80,7 +76,7 @@ namespace LFS.Views.Transactions.JEV
                 btnDelete.Enabled = false;
                 uc.SetJevReadOnly(true);
 
-                if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
+                if (PrivilegesHelper.HasPrivilege(Privileges.TransEditApprJEV) && jevStatus == "approved")
                 {
                     btnSave.Enabled = true;
                     uc.SetJevReadOnly(false);
@@ -133,7 +129,8 @@ namespace LFS.Views.Transactions.JEV
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
             jevModel.IsEdited = jevStatus == "approved" && uc.isEdit ? true : false;
 
-            if (Helper.HasPermission("Transaction > JEV Approved"))
+            //Verify User Privileges
+            if (PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproved))
             {
                 jevModel.IsApproved = true;
                 jevModel.JEVNumber = uc.GetJEVSeriesNo();
@@ -519,7 +516,7 @@ namespace LFS.Views.Transactions.JEV
                         int jevId = uc.jevId;
                         Helper.MessageBoxSuccess("JEV has been updated");
                         GetJevStatus(jevId);
-                        VerifyPermissions();
+                        VerifyUserPrivileges();
                         frmJEVList.LoadJEVList();
                         ucJEVDashboard.LoadJEVCounter();
                         Close();

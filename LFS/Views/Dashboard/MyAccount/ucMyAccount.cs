@@ -107,7 +107,7 @@ namespace LFS.Views.Dashboard.MyAccount
 
         private void LoadCurrentUserAccount()
         {
-            rolesId = UserHelper.loggedUser.RoleId;
+            rolesId = UserHelper.loggedUser.RoleId.Value;
             txtFirstName.Text = UserHelper.loggedUser.FirstName;
             txtMiddleInitial.Text = UserHelper.loggedUser.MiddleName;
             txtLastName.Text = UserHelper.loggedUser.LastName;

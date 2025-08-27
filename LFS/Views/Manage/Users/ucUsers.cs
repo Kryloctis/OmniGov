@@ -48,7 +48,7 @@ namespace LFS.Views.Manage.Users
             model.MidInitial = txtMiddleInitial.Text.Trim();
             model.LastName = txtLastname.Text.Trim();
             model.Suffix = txtSuffix.Text.Trim();
-            model.RoleId = GetSelectedRoleId().Value;
+            model.RoleId = GetSelectedRoleId();
 
             return model;
         }
@@ -83,7 +83,7 @@ namespace LFS.Views.Manage.Users
                 .OfType<RadioButton>()
                 .FirstOrDefault(rb => rb.Checked);
 
-            return checkedRadio != null ? Convert.ToByte(checkedRadio.Tag) : (byte?)null;
+            return checkedRadio != null ? Convert.ToByte(checkedRadio.Tag) : null;
         }
 
         internal void LoadRoles(FlowLayoutPanel flowLayoutPanel)

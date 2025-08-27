@@ -39,12 +39,6 @@ namespace LFS.Helpers
             return dictSignatoriesReferencedDocument;
         }
 
-        public static bool HasPermission(string permissionName)
-        {
-            //return AccFactory.UsersRepository().HasPermission(userId, permissionName);
-            return true;
-        }
-
         public static void LoadFormIcon(Form form)
         {
             form.Icon = Properties.Resources.accounting;

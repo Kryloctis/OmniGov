@@ -21,15 +21,18 @@ namespace LFS.Views.Manage.ChartOfAccounts
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            // validate if it has permission
-            if (!Helper.HasPermission("Manage > Subsidiary Ledger Account"))
-                BtnSubsidiary.Visible = false;
+            VerifyUserPrivileges();
 
             btnAdd.Enabled = false;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             BtnSetBalance.Enabled = false;
             BtnSubsidiary.Enabled = false;
+        }
+
+        private void VerifyUserPrivileges()
+        {
+            BtnSubsidiary.Visible = PrivilegesHelper.HasPrivilege(Privileges.MngSubsidiaryAcct);
         }
 
         internal void LoadAccountGroup()

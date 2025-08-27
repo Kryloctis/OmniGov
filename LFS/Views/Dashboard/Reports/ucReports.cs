@@ -30,94 +30,64 @@ namespace LFS.Views.Dashboard.Reports
         internal void OnLoad()
         {
             ValidateAccountingPermissions();
-            //ValidateTreasuryPermissions();
+            ValidateTreasuryPermissions();
         }
 
         private void ValidateAccountingPermissions()
         {
-            if (!Helper.HasPermission("Report > SAAOB"))
-                btnSaaob.Enabled = false;
+            btnSaaob.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOB);
+            btnSaaobb.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOBB);
 
-            if (!Helper.HasPermission("Report > SAAOBB"))
-                btnSaaobb.Enabled = false;
-
-            var journalReportPermissions = new List<string>
+            var rptJrnlsPrivileges = new List<bool>
             {
-                "Report > General Journal",
-                "Report > Cash Receipts Journal",
-                "Report > Procurement Received Journal",
-                "Report > Cash Disbursements Journal",
-                "Report > Check Disbursements Journal",
-                "Report > Authority to Debit Account Disbursements Journal",
+                PrivilegesHelper.HasPrivilege(Privileges.RptGenJournal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptCashRecvJournal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptProcRecvJournal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptCashDisbJournal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptChkDisbJournal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptAuthDebitAcctDJ),
             };
 
-            var ledgerReportPermissions = new List<string>
+            var rptLedgerPrivileges = new List<bool>
             {
-                "Report > General Ledger",
-                "Report > Subsidiary Ledger",
-                "Report > Summary Subsidiary Ledger",
-                "Report > Transaction Log",
+                PrivilegesHelper.HasPrivilege(Privileges.RptGenLedger),
+                PrivilegesHelper.HasPrivilege(Privileges.RptSubsidiaryLedger),
+                PrivilegesHelper.HasPrivilege(Privileges.RptSummarySubLedger),
+                PrivilegesHelper.HasPrivilege(Privileges.RptTransLog),
             };
 
-            var trialBalanceReportPermissions = new List<string>
+            var rptTrialBalPrivileges = new List<bool>
             {
-                "Report > Pre Trial Balance",
-                "Report > Post Trial Balance",
+                PrivilegesHelper.HasPrivilege(Privileges.RptPreTrialBal),
+                PrivilegesHelper.HasPrivilege(Privileges.RptPostTrialBal),
             };
 
-            var financialStatementsReportPermissions = new List<string>
+            var rptFsPrivileges = new List<bool>
             {
-                "Report > Statement of Financial Position",
-                "Report > Statement of Financial Performance",
-                "Report > Statement of Changes in Net Assets Equity",
-                "Report > Statement of Cash Flows",
+                PrivilegesHelper.HasPrivilege(Privileges.RptFinPosition),
+                PrivilegesHelper.HasPrivilege(Privileges.RptFinPerformance),
+                PrivilegesHelper.HasPrivilege(Privileges.RptChangesNetAssets),
+                PrivilegesHelper.HasPrivilege(Privileges.RptCashFlows),
             };
 
-            var validateJournals = new List<bool>();
-            journalReportPermissions.ForEach(x => { validateJournals.Add(!Helper.HasPermission(x)); });
-            btnJournals.Enabled = validateJournals.Contains(false);
-
-            var validateLedgers = new List<bool>();
-            ledgerReportPermissions.ForEach(x => { validateLedgers.Add(!Helper.HasPermission(x)); });
-            btnLedgers.Enabled = validateLedgers.Contains(false);
-
-            var validateTrialBalance = new List<bool>();
-            trialBalanceReportPermissions.ForEach(x => { validateTrialBalance.Add(!Helper.HasPermission(x)); });
-            btnTrialBalance.Enabled = validateTrialBalance.Contains(false);
-
-            var validateFinancialStatements = new List<bool>();
-            financialStatementsReportPermissions.ForEach(x => { validateFinancialStatements.Add(!Helper.HasPermission(x)); });
-            btnFs.Enabled = validateFinancialStatements.Contains(false);
+            btnJournals.Enabled = !rptJrnlsPrivileges.Contains(false);
+            btnLedgers.Enabled = !rptLedgerPrivileges.Contains(false);
+            btnTrialBalance.Enabled = !rptTrialBalPrivileges.Contains(false);
+            btnFs.Enabled = !rptFsPrivileges.Contains(false);
         }
 
         private void ValidateTreasuryPermissions()
         {
-            if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
-                btnRcd.Enabled = false;
-
-            if (!Helper.HasPermission("Report > List of Delinquent Accounts"))
-                btnLstRptDelinquencies.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Report of Checks Issued"))
-                btnRci.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Bank Cashbook"))
-                btnBankCashbook.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Consolidated Receipts"))
-                btnConsRprtAccForms.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Daily Cash Position"))
-                btnDlyCashPstn.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Real Property Tax Account Register (RPTAR)"))
-                btnRptDuesPayments.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Consolidated Real Property Tax Dues"))
-                btnConsRprtAccForms.Enabled = false;
-
-            if (!Helper.HasPermission("Report > Schedule of Released Cheques") || !Helper.HasPermission("Report > Schedule of Unreleased Cheques"))
-                btnSchedRc.Enabled = false;
+            btnRcd.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptCollDeposits);
+            btnLstRptDelinquencies.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptDelinqAccts);
+            btnRci.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptChkIssued);
+            btnBankCashbook.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptBankCashbook);
+            btnConsRprtAccForms.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptConsReceipts);
+            btnDlyCashPstn.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptDailyCashPos);
+            btnRptDuesPayments.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptRPTAR);
+            btnConsRprtAccForms.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptConsPropTaxDues);
+            btnSchedRc.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSchedReleasedChk)
+                                 || PrivilegesHelper.HasPrivilege(Privileges.RptSchedUnreleasedChk);
         }
 
         private void btnLtom17and19_Click(object sender, EventArgs e)

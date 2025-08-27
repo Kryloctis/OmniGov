@@ -29,7 +29,8 @@ namespace LFS.Views.Transactions.JEV
             if (_frmJEV.createdById != Helper.userId)
                 btnAccept.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction > JEV Approval"))
+            //Verify User Privileges
+            if (!PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval))
             {
                 txtRemarks.ReadOnly = true;
                 btnSaveMessage.Enabled = false;

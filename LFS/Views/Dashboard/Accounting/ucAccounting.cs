@@ -24,9 +24,9 @@ namespace LFS.Views.Dashboard.Accounting
 
         private void ValidatePermissions()
         {
-            ucJevDashboard.Enabled = Helper.HasPermission("Transaction > JEV");
-            chartOfAccountsTStrpMnuItm.Enabled = Helper.HasPermission("Manage > Chart of Accounts");
-            journalsTStrpMnuItm.Enabled = Helper.HasPermission("Manage > Journals");
+            ucJevDashboard.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransJEV);
+            chartOfAccountsTStrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngChartAccounts);
+            journalsTStrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngJournals);
         }
 
         private void chartOfAccountsTStrpMnuItm_Click(object sender, EventArgs e)

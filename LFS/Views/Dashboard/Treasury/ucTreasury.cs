@@ -41,65 +41,20 @@ namespace LFS.Views.Dashboard.Treasury
 
         private void ValidatePermissions()
         {
-            //if (!Helper.HasPermission("Manage > Returned Receipts"))
-            //    ret.Enabled = false;
-
-            //if (!Helper.HasPermission("Manage > Database Synchronization"))
-            //    databaseSynchronizationToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Manage > Business Categories"))
-            //    businessCategoriesToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Manage > Business Add-on Charges"))
-            //    businessAddOnToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Transaction > Generate RCD"))
-            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Transaction > RCD Approval"))
-            //    liquidatorsRCDToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Report > Collector's RCD"))
-            //    //collectorsRCDToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Collecting Officer"))
-                collectingOfficersTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Disbursing Officer"))
-                disbursementOfficersTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Taxpayers"))
-                taxpayersTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Fees & Charges Config."))
-                feesChargesTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Real Properties"))
-                realPropertiesTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Issue Check"))
-                checkIssuanceTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Bank Deposits"))
-                bankDepositTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Receipts"))
-                receiptInventoryTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Issue Receipt"))
-                recieiptIssuanceTstrpMnuItm.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Receipts") && !Helper.HasPermission("Transaction > Issue Receipt"))
-                receiptsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Payments"))
-                paymentsToolStripMenuItem.Enabled = false;
-
-            //if (!Helper.HasPermission("Transaction > Assessment Posting"))
-            //    propertyTaxPostingToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction > Release / Unreleased Checks"))
-                releasedAndUnreleaseChecksTstrpMnuItm.Enabled = false;
+            collectingOfficersTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngCollOfficer);
+            disbursementOfficersTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngDisbOfficer);
+            taxpayersTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngTaxpayers);
+            feesChargesTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngFeesChargesCfg);
+            realPropertiesTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngRealProps);
+            checkIssuanceTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransIssueChk);
+            bankDepositTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransBankDeposits);
+            receiptInventoryTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngReceipts);
+            recieiptIssuanceTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransIssueReceipt);
+            receiptsToolStripMenuItem.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngReceipts)
+                && PrivilegesHelper.HasPrivilege(Privileges.TransIssueReceipt);
+            paymentsToolStripMenuItem.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransPayments);
+            releasedAndUnreleaseChecksTstrpMnuItm.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransReleaseChk);
+            tStrpMenuItmPrptyTaxPosting.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransAssessPosting);
         }
 
         private void taxpayersTstrpMnuItm_Click(object sender, EventArgs e)

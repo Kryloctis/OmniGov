@@ -198,7 +198,7 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void VerifyPermissions()
         {
-            if (!Helper.HasPermission("Transaction > Obligation Request Approval"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.TransObligationAppr))
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
@@ -288,7 +288,7 @@ namespace LFS.Views.Transactions.ObligationRequest
                     CreatedBy = Helper.userId
                 };
 
-                if (Helper.HasPermission("Transaction > Obligation Request Approved"))
+                if (PrivilegesHelper.HasPrivilege(Privileges.TransObligationApproved))
                 {
                     obligationRequestModel.IsApproved = true;
                     obligationRequestModel.IsDisapproved = false;

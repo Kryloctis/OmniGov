@@ -106,7 +106,7 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void VerifyPermissions()
         {
-            if (!Helper.HasPermission("Transaction > Obligation Request Approval"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.TransObligationAppr))
             {
                 btnSaveMessage.Visible = false;
                 txtDissaprovalMessage.SelectionStart = 0;

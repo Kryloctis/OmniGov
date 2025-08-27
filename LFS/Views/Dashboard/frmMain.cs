@@ -37,35 +37,32 @@ namespace LFS.Views.Dashboard
             this.ucMyAccount = ucMyAccount1;
         }
 
-        #region Permission Validations
-
-        private void ValidatePermissions()
+        private void VerifyUserPrivileges()
         {
-            ValidateMainPermissions();
+            UserPrivileges();
         }
 
-        private void ValidateMainPermissions()
+        private void UserPrivileges()
         {
-            if (!Helper.HasPermission("Dashboard > Budget"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.DashBudget))
             {
                 tabControlMain.TabPages.Remove(tabPageBudget);
                 radBudget.Visible = false;
             }
 
-            if (!Helper.HasPermission("Dashboard > Accounting"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.DashAccounting))
             {
                 tabControlMain.TabPages.Remove(tabPageAccounting);
                 radAccounting.Visible = false;
             }
 
-            if (!Helper.HasPermission("Dashboard > Treasury"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.DashTreasury))
             {
                 tabControlMain.TabPages.Remove(tabPageTreasury);
                 radTreasury.Visible = false;
             }
-        }
 
-        #endregion Permission Validations
+        }
 
         private void radBudget_CheckedChanged(object sender, EventArgs e)
         {
@@ -118,7 +115,7 @@ namespace LFS.Views.Dashboard
             {
                 tlStrpLblServer.Text = ServerHelper.selectedServer.MunicipalityName;
                 tlStrpLblVersion.Text = $"Version: {Helper.version}";
-                ValidatePermissions();
+                VerifyUserPrivileges();
                 LoadTabPagesContents(tabControlMain);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

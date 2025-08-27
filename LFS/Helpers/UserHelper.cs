@@ -1,4 +1,6 @@
 ﻿using ACC.Data;
+using Microsoft.CodeAnalysis.VisualBasic;
+using System;
 using System.Collections.Generic;
 
 namespace LFS.Helpers
@@ -16,14 +18,17 @@ namespace LFS.Helpers
         internal string MiddleName;
         internal string LastName;
         internal string FullName;
-        internal int RoleId;
+        internal int? RoleId;
         internal string RoleName;
         internal string UserName;
         internal string Password;
+        internal bool isSuper;
         internal string[] UserPriviledges;
 
         public UserHelper(Dictionary<string, string> userDt)
         {
+            bool isValidRoleId = int.TryParse(userDt["roles_id"], out int roleId);
+
             this.userDt = userDt;
             Id = int.Parse(userDt["id"]);
             FullName = GetUserFullName(Id);
@@ -34,9 +39,10 @@ namespace LFS.Helpers
             LastName = userDt["last_name"];
             UserName = userDt["username"];
             Password = userDt["password"];
-            RoleId = int.Parse(userDt["roles_id"]);
+            RoleId = isValidRoleId ? roleId : null;
             RoleName = userDt["role_name"].ToString();
-            UserPriviledges = PrivilegesHelper.UserPrivileges(RoleId);
+            isSuper = Convert.ToByte(userDt["is_super"]) == 1;
+            UserPriviledges = isValidRoleId ? PrivilegesHelper.UserPrivileges(Convert.ToInt32(roleId)) : [];
             loggedUser = this;
         }
 

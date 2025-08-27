@@ -33,32 +33,15 @@ namespace LFS.Views.Dashboard.Manage
 
         private void ValidatePermissions()
         {
-            bool isAdmin = AccFactory.UsersRepository().GetViewRecordById(Helper.userId)["office"] == "SysAdmin";
-            panelAdmin.Enabled = isAdmin;
-
-            if (!Helper.HasPermission("Manage > Banks"))
-                btnBanks.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Accountable Forms"))
-                btnAccForms.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Bank Accounts"))
-                btnBankAccs.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Signatories"))
-                btnDocSignatories.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Barangays"))
-                btnBarangays.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Function/Program/Project"))
-                btnFpp.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Users"))
-                btnUsers.Enabled = false;
-
-            if (!Helper.HasPermission("Manage > Roles"))
-                btnRoles.Enabled = false;
+            panelAdmin.Enabled = UserHelper.loggedUser.isSuper;
+            btnBanks.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngBanks);
+            btnBankAccs.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngBankAccounts);
+            btnAccForms.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngAccForms);
+            btnDocSignatories.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngSignatories);
+            btnBarangays.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngBarangays);
+            btnFpp.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngFuncProgProj);
+            btnUsers.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngUsers);
+            btnRoles.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngRoles);
         }
 
         private void btnUsers_Click(object sender, EventArgs e)

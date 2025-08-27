@@ -98,7 +98,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void ValidatePermissions()
         {
-            if (!Helper.HasPermission("Manage > Subsidiary Ledger Account"))
+            if (!PrivilegesHelper.HasPrivilege(Privileges.MngSubsidiaryAcct))
                 btnSubsidiaryLedger.Visible = false;
         }
 

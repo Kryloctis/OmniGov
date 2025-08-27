@@ -180,12 +180,12 @@ namespace LFS.Views.Manage.Users
                     var newRow = dataTable.NewRow();
                     int userId = Convert.ToInt32(dataRow["id"]);
                     string userFullName = Helper.GenerateFullName(dataRow["prefix"].ToString(), dataRow["first_name"].ToString(), dataRow["mid_initial"].ToString(), dataRow["last_name"].ToString(), dataRow["suffix"].ToString());
-                    string role = dataRow["role_name"].ToString();
+                    string role = $"{dataRow["role_name"]}";
 
                     newRow["id"] = dataRow["id"];
                     newRow["is_active"] = Convert.ToByte(dataRow["is_deleted"]) == 0;
                     newRow["full_name"] = userFullName;
-                    newRow["role"] = role;
+                    newRow["role"] = string.IsNullOrWhiteSpace(role) ? "N/A" : role;
                     newRow["created_at"] = dataRow["created_at"];
                     newRow["updated_at"] = dataRow["updated_at"];
 
@@ -295,7 +295,7 @@ namespace LFS.Views.Manage.Users
             {
                 SaveUser(isEdit);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

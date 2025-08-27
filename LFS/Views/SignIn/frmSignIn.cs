@@ -61,7 +61,7 @@ namespace LFS.Views.SignIn
                 btnVisibility.Image = visibleImage;
                 txtPassword.PasswordChar = '•';
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void ToggleCharVisibility(TextBox textBox, Button button)
