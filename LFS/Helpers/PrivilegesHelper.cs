@@ -196,12 +196,9 @@ namespace LFS.Helpers
         internal static string[] UserPrivileges(int rolesId)
         {
             var dtUserPriviledges = AccFactory.RolesPermissionsRepository().GetViewRecordsByRoleId(rolesId);
-            var filtered = dtUserPriviledges
-                                 .AsEnumerable()
-                                 .Select(row => row.Field<string>("permission_name"))
-                                 .ToList();
-            filtered.ForEach(x => Debug.WriteLine(x));
-            return filtered.ToArray(); ;
+            return dtUserPriviledges.AsEnumerable()
+                                    .Select(row => row.Field<string>("permission_name"))
+                                    .ToArray();
         }
     }
 }

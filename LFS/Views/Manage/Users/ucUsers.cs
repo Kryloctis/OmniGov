@@ -56,16 +56,19 @@ namespace LFS.Views.Manage.Users
         private void LoadSelectedRecord(int userId)
         {
             var dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
-            int roleId = Convert.ToInt32(dictUser["roles_id"]);
+            bool isRoleIdValid = int.TryParse(dictUser["roles_id"], out int roleId);
             var dictRoles = AccFactory.RolesRepository().GetRecordByID(roleId);
 
             var radioButtons = flwLytPnlRole.Controls.OfType<RadioButton>();
 
-            foreach (RadioButton item in radioButtons)
+            if (isRoleIdValid)
             {
-                if (Convert.ToInt32(item.Tag) == roleId)
+                foreach (RadioButton item in radioButtons)
                 {
-                    item.Checked = true;
+                    if (Convert.ToInt32(item.Tag) == roleId)
+                    {
+                        item.Checked = true;
+                    }
                 }
             }
 
