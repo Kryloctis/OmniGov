@@ -1,9 +1,14 @@
 ﻿using ACC.Data;
+using MySql.Data.MySqlClient;
 using RPT.Data;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,6 +76,15 @@ namespace LFS.Helpers
             return lguModelList;
         }
 
+        private static bool HostReachable(string connectionName)
+        {
+            string testConnectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            var server = new MySqlConnectionStringBuilder(testConnectionString).Server;
+            int timeoutMillis = 500;
+            PingReply reply = new Ping().Send(server, timeoutMillis);
+            return reply.Status == IPStatus.Success;
+        }
+
         internal static List<ServerHelper> AvailableServerList()
         {
             var availableServerList = new List<ServerHelper>();
@@ -79,6 +93,8 @@ namespace LFS.Helpers
             {
                 string lfsInstance = model.LfsInstance;
                 string rpmInstance = model.RpmsInstance;
+
+                if (!HostReachable(lfsInstance)) continue;
 
                 bool isLfsdbConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
                 bool isRpmsdbConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
