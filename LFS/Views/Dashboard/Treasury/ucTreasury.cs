@@ -241,7 +241,7 @@ namespace LFS.Views.Dashboard.Treasury
         {
             try
             {
-                _ = new frmAssessmentPosting().ShowDialog();
+                _ = new frmPrptyTaxPosting().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

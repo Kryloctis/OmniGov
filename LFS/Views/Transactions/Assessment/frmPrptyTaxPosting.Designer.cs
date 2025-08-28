@@ -1,7 +1,7 @@
 ﻿
 namespace LFS.Views.Transactions.Assessment
 {
-    partial class frmAssessmentPosting
+    partial class frmPrptyTaxPosting
     {
         /// <summary>
         /// Required designer variable.
@@ -98,13 +98,12 @@ namespace LFS.Views.Transactions.Assessment
             dgProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             dgProperties.Location = new System.Drawing.Point(4, 4);
             dgProperties.Name = "dgProperties";
-            dgProperties.RowTemplate.Height = 25;
             dgProperties.Size = new System.Drawing.Size(907, 437);
             dgProperties.TabIndex = 15;
             dgProperties.CellEnter += dgProperties_CellEnter;
             dgProperties.CellValueChanged += dgProperties_CellValueChanged;
             dgProperties.CurrentCellDirtyStateChanged += dgProperties_CurrentCellDirtyStateChanged;
-            dgProperties.SelectionChanged += DgProperties_SelectionChanged;
+            dgProperties.SelectionChanged += dgProperties_SelectionChanged;
             // 
             // nudYear
             // 
@@ -145,7 +144,7 @@ namespace LFS.Views.Transactions.Assessment
             btnSearch.Image = Properties.Resources.find_20px;
             btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new System.Drawing.Size(66, 39);
+            btnSearch.Size = new System.Drawing.Size(66, 24);
             btnSearch.Text = "Search";
             btnSearch.Click += BtnSearch_Click;
             // 
@@ -154,7 +153,7 @@ namespace LFS.Views.Transactions.Assessment
             txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(200, 42);
+            txtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // statusStrip1
             // 
@@ -181,7 +180,7 @@ namespace LFS.Views.Transactions.Assessment
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(846, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(745, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -285,7 +284,7 @@ namespace LFS.Views.Transactions.Assessment
             // toolStripStatusLabel11
             // 
             toolStripStatusLabel11.Name = "toolStripStatusLabel11";
-            toolStripStatusLabel11.Size = new System.Drawing.Size(636, 17);
+            toolStripStatusLabel11.Size = new System.Drawing.Size(535, 17);
             toolStripStatusLabel11.Spring = true;
             // 
             // toolStripStatusLabel12
@@ -322,7 +321,7 @@ namespace LFS.Views.Transactions.Assessment
             progressBar1.Size = new System.Drawing.Size(915, 5);
             progressBar1.TabIndex = 20;
             // 
-            // frmAssessmentPosting
+            // frmPrptyTaxPosting
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -335,11 +334,11 @@ namespace LFS.Views.Transactions.Assessment
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
-            Name = "frmAssessmentPosting";
+            Name = "frmPrptyTaxPosting";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Transactions > Assessment > Real Properties";
+            Text = "Transactions > Property Tax Posting";
             Load += FrmAssessmentPosting_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

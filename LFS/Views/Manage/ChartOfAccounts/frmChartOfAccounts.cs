@@ -40,6 +40,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
             var dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
             HelperLoadRecords.AccountGroupDatagridView(dtAccountGroup, dgAccountGroup);
             DisplayRecordCount(dgAccountGroup);
+            dgAccountGroup.CurrentCell = dgAccountGroup.FirstDisplayedCell;
         }
 
         internal void LoadMajorAccountGroup()
@@ -48,6 +49,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
             var dtMajorAccountGroup = AccFactory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
             HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
             DisplayRecordCount(dgMajorAccountGroup);
+            dgMajorAccountGroup.CurrentCell = dgMajorAccountGroup.FirstDisplayedCell;
         }
 
         private void LoadSubMajorAccountGroup()
@@ -55,9 +57,10 @@ namespace LFS.Views.Manage.ChartOfAccounts
             if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
             {
                 short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
-                DataTable dtSubMajorAccountGroup = AccFactory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
+                var dtSubMajorAccountGroup = AccFactory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
                 HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
                 DisplayRecordCount(dgSubMajorAccount);
+                dgSubMajorAccount.CurrentCell = dgSubMajorAccount.FirstDisplayedCell;
             }
         }
 
@@ -370,36 +373,32 @@ namespace LFS.Views.Manage.ChartOfAccounts
             {
                 if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
                 {
-                    byte[] columnIndexTimestamp = { 3, 4 };
                     DisplayRecordCount(dgGeneralLedgerAccounts);
                     DisableEditDeleteButtons();
-                    SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+                    SetActionControls(dgGeneralLedgerAccounts);
                     dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
                 }
                 else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
                 {
-                    byte[] columnIndexTimestamp = { 3, 4 };
                     LoadSubMajorAccountGroup();
                     DisableEditDeleteButtons();
                     BtnSubsidiary.Enabled = false;
                     BtnSetBalance.Enabled = false;
-                    SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
+                    SetActionControls(dgSubMajorAccount);
                 }
                 else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
                 {
-                    byte[] columnIndexTimestamp = { 3, 4 };
                     LoadMajorAccountGroup();
                     DisableEditDeleteButtons();
-                    SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+                    SetActionControls(dgMajorAccountGroup);
                     BtnSubsidiary.Enabled = false;
                     BtnSetBalance.Enabled = false;
                 }
                 else
                 {
-                    byte[] columnIndexTimestamp = { 3, 4 };
                     LoadAccountGroup();
                     DisableEditDeleteButtons();
-                    SetActionControls(dgAccountGroup, columnIndexTimestamp);
+                    SetActionControls(dgAccountGroup);
                     BtnSubsidiary.Enabled = false;
                     BtnSetBalance.Enabled = false;
                 }
@@ -412,9 +411,9 @@ namespace LFS.Views.Manage.ChartOfAccounts
             lblRecordCount.Text = dataGridView.Rows.Count.ToString();
         }
 
-        private void SetActionControls(DataGridView dataGrid, byte[] columnIndexTimestamp)
+        private void SetActionControls(DataGridView dataGrid)
         {
-            Helper.ShowRecordTimestamp(dataGrid, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.ShowRecordTimestampMod(dataGrid, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
         }
 
@@ -435,8 +434,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             try
             {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+                SetActionControls(dgGeneralLedgerAccounts);
 
                 if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
                 {
@@ -455,8 +453,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             try
             {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                SetActionControls(dgAccountGroup, columnIndexTimestamp);
+                SetActionControls(dgAccountGroup);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -465,8 +462,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             try
             {
-                byte[] columnIndexTimestamp = { 4, 5 };
-                SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+                SetActionControls(dgMajorAccountGroup);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -519,8 +515,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             try
             {
-                byte[] columnIndexTimestamp = { 4, 5 };
-                SetActionControls(dgSubMajorAccount, columnIndexTimestamp);
+                SetActionControls(dgSubMajorAccount);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

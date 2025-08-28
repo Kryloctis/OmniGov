@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.Assessment
 {
-    public partial class frmAssessmentPosting : Form
+    public partial class frmPrptyTaxPosting : Form
     {
-        public frmAssessmentPosting()
+        public frmPrptyTaxPosting()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -82,8 +82,6 @@ namespace LFS.Views.Transactions.Assessment
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region LoadRptAssessmentsRecords
 
         private DataColumn[] AssessmentPostsDataColumns()
         {
@@ -225,10 +223,6 @@ namespace LFS.Views.Transactions.Assessment
             ToogleButtons(dgProperties, btnPost);
         }
 
-        #endregion LoadRptAssessmentsRecords
-
-        #region RptPosting
-
         private void BtnPost_Click(object sender, EventArgs e)
         {
             try
@@ -333,10 +327,6 @@ namespace LFS.Views.Transactions.Assessment
             lblPost.Visible = false;
         }
 
-        #endregion RptPosting
-
-        #region Seletion Methods
-
         private void dgProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -363,29 +353,6 @@ namespace LFS.Views.Transactions.Assessment
                 ToogleButtons(dgProperties, btnPost);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void DgProperties_SelectionChanged(object sender, EventArgs e)
-        {
-            //int selectedRowCount = dgProperties.SelectedRows.Count;
-            //if (selectedRowCount > 0)
-            //{
-            //    int rowIndex = dgProperties.CurrentRow.Index;
-
-            //    string postedAt = GetDatagridViewValue(dgProperties, rowIndex, "posted_at");
-            //    string postedBy = GetDatagridViewValue(dgProperties, rowIndex, "posted_by");
-
-            //    if (selectedRowCount == 1)
-            //    {
-            //        lblPostedAt.Text = postedAt;
-            //        lblPostedBy.Text = postedBy;
-            //    }
-            //    else
-            //    {
-            //        lblPostedAt.Text = "-";
-            //        lblPostedBy.Text = "-";
-            //    }
-            //}
         }
 
         private void CheckAll_MouseClick(object sender, MouseEventArgs e)
@@ -441,6 +408,12 @@ namespace LFS.Views.Transactions.Assessment
             ToogleButtons(dgProperties, btnPost);
         }
 
-        #endregion Seletion Methods
+        private void dgProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }
