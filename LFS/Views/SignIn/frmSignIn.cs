@@ -2,17 +2,13 @@
 using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.Dashboard;
-using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using RPT.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LFS.Views.SignIn
 {
