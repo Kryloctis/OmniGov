@@ -5,9 +5,12 @@ using LFS.Views.Dashboard;
 using Microsoft.Reporting.WinForms.Internal.Soap.ReportingServices2005.Execution;
 using RPT.Data;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -23,6 +26,8 @@ namespace LFS.Views.SignIn
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            var availableServerList = ServerHelper.AvailableServerList();
+            e.Result = availableServerList.Count < 1 ? false : true;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -31,6 +36,17 @@ namespace LFS.Views.SignIn
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            bool hostFound = (bool)e.Result;
+
+            if (hostFound)
+            {
+                var serverHelpers = ServerHelper.AvailableServerList();
+                SelectFirstServerLoaded(serverHelpers);
+            }
+            else
+            {
+                lblServer.Text = $"(F12) Server: No server found.";
+            }
         }
 
         private void btnSignIn_Click(object sender, EventArgs e)
@@ -102,29 +118,21 @@ namespace LFS.Views.SignIn
 
         private void OnLoad()
         {
-            ScanAvailableServers();
+            lblServer.Text = "Scanning Server";
+
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+
             txtUsername.Tag = string.Empty;
             txtPassword.Tag = string.Empty;
             txtVersion.Text = Helper.version;
         }
 
-        private void ScanAvailableServers()
+        private void SelectFirstServerLoaded(List<ServerHelper> serverHelpers)
         {
-            var availableServerList = ServerHelper.AvailableServerList();
-            if (availableServerList.Count < 1)
-            {
-                lblServer.Text = $"(F12) Server: No server found.";
-                return;
-            }
-            else
-                SelectFirstServerLoaded();
-        }
-
-        private void SelectFirstServerLoaded()
-        {
-            var availableServerList = ServerHelper.AvailableServerList();
-            ServerHelper.selectedServer = availableServerList.First();
-
+            ServerHelper.selectedServer = serverHelpers.First();
             AccFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
             RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
 

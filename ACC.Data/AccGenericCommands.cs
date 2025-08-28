@@ -4,6 +4,7 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.Net.NetworkInformation;
 
 namespace ACC.Data
 {
@@ -131,6 +132,7 @@ namespace ACC.Data
             try
             {
                 string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
+
                 using (MySqlConnection connection = new MySqlConnection(testConnectionString))
                 {
                     connection.Open();
