@@ -22,8 +22,12 @@ namespace LFS.Views.SignIn
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var availableServerList = ServerHelper.AvailableServerList();
-            e.Result = availableServerList.Count < 1 ? false : true;
+            try
+            {
+                var availableServerList = ServerHelper.AvailableServerList();
+                e.Result = availableServerList.Count < 1 ? false : true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -32,17 +36,21 @@ namespace LFS.Views.SignIn
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            bool hostFound = (bool)e.Result;
+            try
+            {
+                bool hostFound = (bool)e.Result;
 
-            if (hostFound)
-            {
-                var serverHelpers = ServerHelper.AvailableServerList();
-                SelectFirstServerLoaded(serverHelpers);
+                if (hostFound)
+                {
+                    var serverHelpers = ServerHelper.AvailableServerList();
+                    SelectFirstServerLoaded(serverHelpers);
+                }
+                else
+                {
+                    lblServer.Text = $"(F12) Server: No server found.";
+                }
             }
-            else
-            {
-                lblServer.Text = $"(F12) Server: No server found.";
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSignIn_Click(object sender, EventArgs e)
