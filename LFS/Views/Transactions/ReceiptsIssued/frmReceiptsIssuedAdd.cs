@@ -37,7 +37,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             int receiptNumberFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
             int receiptNumberToTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
             int quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text);
-            int userId = Helper.userId;
+            int userId = UserHelper.loggedUser.Id;
 
             var receiptIssuedModel = new ReceiptsIssuedModel()
             {

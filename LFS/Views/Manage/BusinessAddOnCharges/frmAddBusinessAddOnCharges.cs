@@ -36,7 +36,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
                 Code = code,
                 Description = description,
                 IsAppliedEachBusiness = appliedEachBusiness,
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             return AccFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);

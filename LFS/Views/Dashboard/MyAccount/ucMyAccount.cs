@@ -165,7 +165,7 @@ namespace LFS.Views.Dashboard.MyAccount
             {
                 var userModel = new UsersModel()
                 {
-                    Id = Helper.userId,
+                    Id = UserHelper.loggedUser.Id,
                     FirstName = txtFirstName.Text.Trim(),
                     LastName = txtLastName.Text.Trim(),
                     Prefix = txtPrefix.Text.Trim(),
@@ -209,7 +209,7 @@ namespace LFS.Views.Dashboard.MyAccount
             {
                 var userModel = new UsersModel()
                 {
-                    Id = Helper.userId,
+                    Id = UserHelper.loggedUser.Id,
                     FirstName = txtFirstName.Text,
                     LastName = txtLastName.Text,
                     Prefix = txtPrefix.Text,

@@ -30,7 +30,7 @@ namespace LFS.Views.Manage.Registry
 
             var registryModel = uc.RegistryModel();
             registryModel.Id = registryId;
-            registryModel.UpdatedBy = Helper.userId;
+            registryModel.UpdatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.RegistryRepository().Update(registryModel);
         }

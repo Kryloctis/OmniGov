@@ -17,7 +17,7 @@ namespace LFS.Views.Manage.Receipts
             InitializeComponent();
 
             _frmReceipts = frmReceipts;
-            userId = Helper.userId;
+            userId = UserHelper.loggedUser.Id;
             uc = ucReceipts;
         }
 

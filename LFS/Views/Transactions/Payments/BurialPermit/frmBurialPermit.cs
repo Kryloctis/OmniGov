@@ -64,7 +64,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
                 Disposition = ucBurialDetails.GetBurialDetails().disposition,
                 DeathDate = ucBurialDetails.GetBurialDetails().deathDate,
                 RemainsAge = ucRemainsInfo.GetRemainsInfo().remainAge,
-                CreatedBy = Helper.userId,
+                CreatedBy = UserHelper.loggedUser.Id,
             };
         }
 
@@ -138,7 +138,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
             btnNextMain.Text = "Confirm Payment";
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.userId, "58", totalAmountPayable);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "58", totalAmountPayable);
         }
 
         private void LoadReceiptTab()

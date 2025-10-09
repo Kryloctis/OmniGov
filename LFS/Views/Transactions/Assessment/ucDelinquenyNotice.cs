@@ -84,7 +84,7 @@ namespace LFS.Views.Transactions.Assessment
                 NoticeDate = dtPckrDate.Value,
                 NoticeType = GetNoticeType(),
                 RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
-                CreatedBy = Helper.userId,
+                CreatedBy = UserHelper.loggedUser.Id,
             };
         }
 
@@ -98,7 +98,7 @@ namespace LFS.Views.Transactions.Assessment
                 NoticeDate = dtPckrDate.Value,
                 NoticeType = GetNoticeType(),
                 RealPropertiesId = Convert.ToInt32(dictRpt["real_property_id"]),
-                UpdatedBy = Helper.userId,
+                UpdatedBy = UserHelper.loggedUser.Id,
             };
         }
 

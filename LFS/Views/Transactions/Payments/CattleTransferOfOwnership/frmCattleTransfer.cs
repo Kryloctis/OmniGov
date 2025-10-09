@@ -81,7 +81,7 @@ namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
             btnBackMain.Enabled = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.userId, "52", totalAmountPayable);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "52", totalAmountPayable);
         }
 
         private void InitializeReceipt()

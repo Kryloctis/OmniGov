@@ -161,7 +161,7 @@ namespace LFS.Views.Transactions.Biddings
             {
                 AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
                 BidderNo = ucBiddings.txtAssignedBidderNo.Text,
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             var bidModel = new BidModel()
@@ -170,7 +170,7 @@ namespace LFS.Views.Transactions.Biddings
                 OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
                 Date = ucBiddings.dtpDate.Value,
                 BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             return AccFactory.BidRepository().UpdateBidDetails(biddersModel, bidModel);
@@ -188,7 +188,7 @@ namespace LFS.Views.Transactions.Biddings
             {
                 TabPageController(tabPagePayment);
                 decimal totalAmountPayable = ComputeAmountDue();
-                ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
+                ucPayment1.OnLoad(UserHelper.loggedUser.Id, string.Empty, totalAmountPayable);
             }
         }
 
@@ -270,7 +270,7 @@ namespace LFS.Views.Transactions.Biddings
             {
                 AuctionId = Convert.ToInt32(ucBiddings.cmbxAuctionSchedule.SelectedValue),
                 BidderNo = ucBiddings.txtAssignedBidderNo.Text,
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             var bidModel = new BidModel()
@@ -279,7 +279,7 @@ namespace LFS.Views.Transactions.Biddings
                 OrdinanceNo = ucBiddings.txtOrdinanceNo.Text,
                 Date = ucBiddings.dtpDate.Value,
                 BidAmount = Convert.ToDecimal(ucBiddings.nudBidAmount.Value),
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), bidModel, biddersModel);

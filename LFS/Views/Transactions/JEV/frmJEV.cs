@@ -64,11 +64,11 @@ namespace LFS.Views.Transactions.JEV
             btnPrint.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptJEVs);
 
             //Verify logged in user if able to access dissaproval message
-            lblShowMessage.Enabled = createdById != Helper.userId
+            lblShowMessage.Enabled = createdById != UserHelper.loggedUser.Id
                                      && !PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
 
             //Verify logged in user if user is the same who create the JEV for edit purposes only
-            if (uc.isEdit && Helper.userId != createdById)
+            if (uc.isEdit && UserHelper.loggedUser.Id != createdById)
             {
                 string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
@@ -137,9 +137,9 @@ namespace LFS.Views.Transactions.JEV
             }
 
             if (!uc.isEdit)
-                jevModel.CreatedBy = Helper.userId;
+                jevModel.CreatedBy = (byte)UserHelper.loggedUser.Id;
             else
-                jevModel.UpdatedBy = Helper.userId;
+                jevModel.UpdatedBy = (byte)UserHelper.loggedUser.Id;
 
             return jevModel;
         }

@@ -58,7 +58,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             radPayment.Checked = true;
 
             decimal totalPayment = ucTaxDue.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.userId, "15", totalPayment);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "15", totalPayment);
         }
 
         private void LoadReceiptTab()
@@ -184,7 +184,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 Profession = ucTaxPayerDetails.txtOccupation.Text,
                 BasicCommunityTax = ucTaxDue.nudBasicTax.Value,
                 AdditionalCommunityTax = ucTaxDue.AdditionalCommunityTaxSum(),
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
         }
 
@@ -269,10 +269,6 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 LoadTabContents();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ucTaxPayerDetails1_Load(object sender, EventArgs e)
-        {
         }
 
         private void ucPrintReceipt1_Load(object sender, EventArgs e)

@@ -72,7 +72,7 @@ namespace LFS.Views.Transactions.Auction
                 StartDate = dtpStartDate.Value,
                 EndDate = dtpEndDate.Value,
                 Location = txtLocation.Text,
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             if (isEdit) model.Id = auctionId.Value;

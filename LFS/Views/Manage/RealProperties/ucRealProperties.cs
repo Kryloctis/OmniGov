@@ -136,7 +136,7 @@ namespace LFS.Views.Manage.TaxPayers
                     RecordingPerson = row["recording_person"].ToString(),
                     IsCancelled = 0,
                     IsTaxable = 0,
-                    CreatedBy = Helper.userId,
+                    CreatedBy = UserHelper.loggedUser.Id,
                 };
 
                 rptPrevAssessmentModels.Add(rptPrevAssessmentModel);

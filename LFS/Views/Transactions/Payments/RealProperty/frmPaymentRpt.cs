@@ -90,7 +90,7 @@ namespace LFS.Views.Transactions.Payments
             radPayment.Checked = true;
             btnNext.Text = "Confirm Payment";
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
-            ucPayment.OnLoad(Helper.userId, "56", totalPayment);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "56", totalPayment);
         }
 
         private void LoadReceiptTab()
@@ -220,7 +220,7 @@ namespace LFS.Views.Transactions.Payments
 
         private bool ConfirmPayment()
         {
-            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.userId, };
+            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = UserHelper.loggedUser.Id, };
 
             return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
         }

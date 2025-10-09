@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
                 Description = uc.txtDescription.Text.Trim(),
                 Amount = uc.nudAmount.Value,
                 StartingYear = (int)uc.nudStartingYear.Value,
-                UpdatedBy = Helper.userId
+                UpdatedBy = UserHelper.loggedUser.Id
             };
 
             return AccFactory.OtherPaymentRatesRepository().Update(feesChargesModel);

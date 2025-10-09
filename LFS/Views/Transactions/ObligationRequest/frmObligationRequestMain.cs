@@ -94,7 +94,7 @@ namespace LFS.Views.Transactions.ObligationRequest
                 GetObligationStatus();
                 ClearAllErrors();
 
-                if (createById == Helper.userId)
+                if (createById == UserHelper.loggedUser.Id)
                 {
                     uc.SetFieldsReadOnly(false);
                     btnSave.Enabled = true;
@@ -285,7 +285,7 @@ namespace LFS.Views.Transactions.ObligationRequest
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
                     DateRequested = uc.dtDateRequest.Value,
-                    CreatedBy = Helper.userId
+                    CreatedBy = UserHelper.loggedUser.Id
                 };
 
                 if (PrivilegesHelper.HasPrivilege(Privileges.TransObligationApproved))
@@ -328,7 +328,7 @@ namespace LFS.Views.Transactions.ObligationRequest
                         Explanation = uc.txtExplanation.Text,
                         ReferenceNo = uc.txtReferenceNo.Text,
                         DateRequested = uc.dtDateRequest.Value,
-                        UpdatedBy = Helper.userId
+                        UpdatedBy = UserHelper.loggedUser.Id
                     };
 
                     string ObligationRequestStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);

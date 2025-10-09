@@ -27,7 +27,7 @@ namespace LFS.Views.Manage.TaxPayers
             }
 
             var taxpayersModel = uc.TaxpayersModel();
-            taxpayersModel.CreatedBy = Helper.userId;
+            taxpayersModel.CreatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.TaxpayersRepository().Insert(taxpayersModel);
         }

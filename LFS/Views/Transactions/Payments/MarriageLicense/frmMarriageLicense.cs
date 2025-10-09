@@ -67,7 +67,7 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
                 BrideMonths = ucSpouseInfoBride.GetSpouseInfo().months,
                 BrideReligion = ucSpouseInfoBride.GetSpouseInfo().religion,
                 BrideResidence = ucSpouseInfoBride.GetSpouseInfo().currentResidence,
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
         }
 
@@ -106,7 +106,7 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
             radPayment.Checked = true;
 
             decimal totalPayment = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.userId, "54", totalPayment);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "54", totalPayment);
         }
 
         private void LoadReceiptTab()

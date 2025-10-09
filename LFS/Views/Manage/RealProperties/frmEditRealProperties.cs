@@ -31,7 +31,7 @@ namespace LFS.Views.Manage.TaxPayers
 
             var rptModel = uc.RealPropertiesModel();
             rptModel.Id = rptId;
-            rptModel.UpdatedBy = Helper.userId;
+            rptModel.UpdatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
         }

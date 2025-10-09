@@ -289,7 +289,7 @@ namespace LFS.Views.Transactions.Assessment
                     PenaltyFrequency = penaltyFrequency,
                     BasicRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Basic"),
                     SefRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Special Educational Fund"),
-                    PostedBy = Helper.userId,
+                    PostedBy = UserHelper.loggedUser.Id,
                     DueYear = Convert.ToInt32(txtYear.Text)
                 };
 

@@ -12,7 +12,7 @@ namespace LFS.Views.Manage.Receipts
         private readonly frmReceipts _frmReceipts;
         private readonly int _receiptID;
         private readonly ucReceipts uc;
-        private readonly int userId = Helper.userId;
+        private readonly int userId = UserHelper.loggedUser.Id;
 
         public frmReceiptsEdit(frmReceipts frmReceipts, int receiptID)
         {

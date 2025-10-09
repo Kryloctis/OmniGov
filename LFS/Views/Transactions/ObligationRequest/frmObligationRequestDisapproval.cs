@@ -117,7 +117,7 @@ namespace LFS.Views.Transactions.ObligationRequest
 
             int obligationRequestCreatedById = Convert.ToInt32(dictObligationRequest["created_by_id"]);
 
-            if (obligationRequestCreatedById != Helper.userId)
+            if (obligationRequestCreatedById != UserHelper.loggedUser.Id)
                 btnAccept.Enabled = false;
         }
 

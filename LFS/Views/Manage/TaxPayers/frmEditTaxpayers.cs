@@ -30,7 +30,7 @@ namespace LFS.Views.Manage.TaxPayers
 
             var taxpayersModel = uc.TaxpayersModel();
             taxpayersModel.Id = taxpayerId;
-            taxpayersModel.UpdatedBy = Helper.userId;
+            taxpayersModel.UpdatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.TaxpayersRepository().Update(taxpayersModel);
         }

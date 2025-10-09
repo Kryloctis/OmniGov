@@ -112,7 +112,7 @@ namespace LFS.Views.Transactions.Auction
             {
                 RptPropertiesId = Convert.ToInt32(cmbxProperty.SelectedValue),
                 AuctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue),
-                CreatedBy = Helper.userId
+                CreatedBy = UserHelper.loggedUser.Id
             };
 
             if (isEdit) model.Id = rptScheduleId.Value;

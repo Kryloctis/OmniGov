@@ -84,7 +84,7 @@ namespace LFS.Views.Reports.Rcd
             else
             {
                 var date = dtDate.Value;
-                var userModel = new UsersModel() { Id = Helper.userId };
+                var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
                 return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(date, userModel);
             }
         }
@@ -135,7 +135,7 @@ namespace LFS.Views.Reports.Rcd
             else
             {
                 var date = dtDate.Value;
-                var userModel = new UsersModel() { Id = Helper.userId };
+                var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
                 return AccFactory.BankDepositsRepository().GetViewRcdRecord(date, userModel);
             }
         }
@@ -260,7 +260,7 @@ namespace LFS.Views.Reports.Rcd
             {
                 ReportNo = txtReportNo.Text.Trim(),
                 FundsModel = checkBox1.Checked ? new FundsModel() { Id = Convert.ToInt32(cmbxFunds.SelectedValue) } : null,
-                CreatedBy = new UsersModel() { Id = Helper.userId },
+                CreatedBy = new UsersModel() { Id = UserHelper.loggedUser.Id },
                 Date = dtDate.Value,
             };
 
@@ -279,7 +279,7 @@ namespace LFS.Views.Reports.Rcd
             else
             {
                 var date = dtDate.Value;
-                var userModel = new UsersModel() { Id = Helper.userId };
+                var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
                 return AccFactory.PaymentCollectionsRepository().GetRcdCollections(date, userModel);
             }
         }

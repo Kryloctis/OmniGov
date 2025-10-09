@@ -92,13 +92,13 @@ namespace LFS.Views.Transactions.BankDeposits
             {
                 var model = BankDepositsModel();
                 model.Id = bankDepositId.Value;
-                model.UpdatedBy = Helper.userId;
+                model.UpdatedBy = UserHelper.loggedUser.Id;
                 return AccFactory.BankDepositsRepository().Update(model);
             }
             else
             {
                 var model = BankDepositsModel();
-                model.CreatedBy = Helper.userId;
+                model.CreatedBy = UserHelper.loggedUser.Id;
                 return AccFactory.BankDepositsRepository().Insert(model);
             }
         }

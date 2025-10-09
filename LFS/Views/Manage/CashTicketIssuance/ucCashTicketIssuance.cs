@@ -103,7 +103,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
             {
                 CollectorId = collectorsId.coId,
                 DateIssued = dtpDateIssued.Value,
-                IssuedBy = Helper.userId,
+                IssuedBy = UserHelper.loggedUser.Id,
                 CashTicketId = Convert.ToInt32(cmbxCashTickets.SelectedValue),
                 JobOrderId = collectorsId.joId,
                 Quantity = (int)nudQuantity.Value

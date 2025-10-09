@@ -98,7 +98,7 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
             radPayment.Checked = true;
 
             decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-            ucPayment.OnLoad(Helper.userId, "53", totalAmountPayable);
+            ucPayment.OnLoad(UserHelper.loggedUser.Id, "53", totalAmountPayable);
         }
 
         private void InitializeReceipt()

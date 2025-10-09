@@ -26,7 +26,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void PermissionVerification()
         {
-            if (_frmJEV.createdById != Helper.userId)
+            if (_frmJEV.createdById != UserHelper.loggedUser.Id)
                 btnAccept.Enabled = false;
 
             //Verify User Privileges

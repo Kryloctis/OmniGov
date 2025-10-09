@@ -27,7 +27,7 @@ namespace LFS.Views.Manage.Registry
             }
 
             var registryModel = uc.RegistryModel();
-            registryModel.CreatedBy = Helper.userId;
+            registryModel.CreatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.RegistryRepository().Insert(registryModel);
         }

@@ -13,7 +13,6 @@ namespace LFS.Helpers
 {
     public static class Helper
     {
-        internal static byte userId;
         internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 

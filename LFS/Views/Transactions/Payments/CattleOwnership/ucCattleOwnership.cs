@@ -40,7 +40,7 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
                 CattleSex = radCattleMale.Checked ? "Male" : "Female",
                 CattleYears = (int)nudAge.Value,
                 Description = txtDescription.Text.Trim(),
-                CreatedBy = Helper.userId,
+                CreatedBy = UserHelper.loggedUser.Id,
             };
         }
 

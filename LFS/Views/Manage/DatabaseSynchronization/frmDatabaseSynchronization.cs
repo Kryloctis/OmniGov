@@ -151,8 +151,8 @@ namespace LFS.Views.Manage.DatabaseSynchronization
                         Municipality = realTaxpayerMunicipality,
                         Province = realTaxpayerProvince,
                         ContactInfo = realTaxpayerContactInfo,
-                        CreatedBy = Helper.userId,
-                        UpdatedBy = Helper.userId
+                        CreatedBy = UserHelper.loggedUser.Id,
+                        UpdatedBy = UserHelper.loggedUser.Id
                     };
 
                     var barangayModel = new BarangayModel()
@@ -198,8 +198,8 @@ namespace LFS.Views.Manage.DatabaseSynchronization
                         GrYear = propertyGrYear,
                         IsCancelled = propertyIsCancelled,
                         IsTaxable = propertyIsTaxable,
-                        CreatedBy = Helper.userId,
-                        UpdatedBy = Helper.userId,
+                        CreatedBy = UserHelper.loggedUser.Id,
+                        UpdatedBy = UserHelper.loggedUser.Id,
                         TaxpayerTypeModel = taxpayerTypeModel,
                         TaxpayersModel = taxpayersModel,
                         ProvincesModel = provincesModel,

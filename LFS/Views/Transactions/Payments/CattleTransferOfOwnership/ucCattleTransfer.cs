@@ -21,7 +21,7 @@ namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnershi
             return new CattleOwnershipModel()
             {
                 TaxpayerId = cattleOwnerId,
-                CreatedBy = Helper.userId,
+                CreatedBy = UserHelper.loggedUser.Id,
                 CattleAge = (int)nudCattleAge.Value,
                 CattleYears = (int)nudCattleYears.Value,
                 Description = txtDescription.Text.Trim(),

@@ -47,7 +47,7 @@ public partial class frmAF51_57 : Form
         btnBackMain.Enabled = true;
 
         decimal totalAmountPayable = ucPaymentFeesCharges.ComputeTotalAmountPayable();
-        ucPayment1.OnLoad(Helper.userId, string.Empty, totalAmountPayable);
+        ucPayment1.OnLoad(UserHelper.loggedUser.Id, string.Empty, totalAmountPayable);
     }
 
     private void LoadReceipt()

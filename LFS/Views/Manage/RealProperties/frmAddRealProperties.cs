@@ -27,7 +27,7 @@ namespace LFS.Views.Manage.RealProperties
             }
 
             var rptModel = uc.RealPropertiesModel();
-            rptModel.CreatedBy = Helper.userId;
+            rptModel.CreatedBy = UserHelper.loggedUser.Id;
 
             return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
         }
