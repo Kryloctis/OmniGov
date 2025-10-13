@@ -51,7 +51,7 @@ namespace ACC.Domain.Interfaces
 
         int JevCounterByJournal(string fundName, int month, int year, string journalName);
 
-        int GetJEVCount(string status, string journalName, string fundName, short month, short year);
+        int GetJevCount(string status, string journalName, string fundName, short year);
 
         int TotalApproveJEV(short month, short year);
 

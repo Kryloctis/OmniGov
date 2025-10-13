@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new System.Windows.Forms.Panel();
+            radManage = new System.Windows.Forms.RadioButton();
             radioBtnMyAccount = new System.Windows.Forms.RadioButton();
             radReports = new System.Windows.Forms.RadioButton();
-            radManage = new System.Windows.Forms.RadioButton();
             btnLogout = new System.Windows.Forms.Button();
             radTreasury = new System.Windows.Forms.RadioButton();
             radAccounting = new System.Windows.Forms.RadioButton();
@@ -99,6 +99,25 @@
             panel1.Size = new System.Drawing.Size(142, 680);
             panel1.TabIndex = 1;
             // 
+            // radManage
+            // 
+            radManage.Appearance = System.Windows.Forms.Appearance.Button;
+            radManage.AutoSize = true;
+            radManage.Dock = System.Windows.Forms.DockStyle.Top;
+            radManage.FlatAppearance.BorderSize = 0;
+            radManage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            radManage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            radManage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            radManage.Location = new System.Drawing.Point(0, 132);
+            radManage.Margin = new System.Windows.Forms.Padding(0);
+            radManage.Name = "radManage";
+            radManage.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            radManage.Size = new System.Drawing.Size(142, 33);
+            radManage.TabIndex = 9;
+            radManage.Text = "Manage";
+            radManage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            radManage.CheckedChanged += radManage_CheckedChanged;
+            // 
             // radioBtnMyAccount
             // 
             radioBtnMyAccount.Appearance = System.Windows.Forms.Appearance.Button;
@@ -136,25 +155,6 @@
             radReports.Text = "Reports";
             radReports.UseVisualStyleBackColor = true;
             radReports.CheckedChanged += radReports_CheckedChanged;
-            // 
-            // radManage
-            // 
-            radManage.Appearance = System.Windows.Forms.Appearance.Button;
-            radManage.AutoSize = true;
-            radManage.Dock = System.Windows.Forms.DockStyle.Top;
-            radManage.FlatAppearance.BorderSize = 0;
-            radManage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            radManage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            radManage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radManage.Location = new System.Drawing.Point(0, 132);
-            radManage.Margin = new System.Windows.Forms.Padding(0);
-            radManage.Name = "radManage";
-            radManage.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            radManage.Size = new System.Drawing.Size(142, 33);
-            radManage.TabIndex = 9;
-            radManage.Text = "Manage";
-            radManage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            radManage.CheckedChanged += radManage_CheckedChanged;
             // 
             // btnLogout
             // 
@@ -345,7 +345,7 @@
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(1125, 652);
+            tabPageTreasury.Size = new System.Drawing.Size(192, 72);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -358,7 +358,7 @@
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel4.Size = new System.Drawing.Size(1125, 572);
+            panel4.Size = new System.Drawing.Size(192, 0);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
@@ -367,7 +367,7 @@
             ucTreasury1.Location = new System.Drawing.Point(5, 4);
             ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(1115, 564);
+            ucTreasury1.Size = new System.Drawing.Size(182, 0);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -378,7 +378,7 @@
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label3.Size = new System.Drawing.Size(1125, 80);
+            label3.Size = new System.Drawing.Size(192, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 

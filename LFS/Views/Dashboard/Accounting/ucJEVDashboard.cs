@@ -16,7 +16,6 @@ namespace LFS.Views.Dashboard
 
         internal void OnLoad()
         {
-            LoadMonths();
             LoadJournals();
             LoadJEVCounter();
             LoadFunds();
@@ -56,25 +55,17 @@ namespace LFS.Views.Dashboard
             HelperLoadRecords.ComboboxJournals(DatatableJournals(), cmbxJournals, "id", "journal_name");
         }
 
-        private void LoadMonths()
-        {
-            cmbxMonth.DataSource = new BindingSource(Helper.MonthsDatasource(), null);
-            cmbxMonth.ValueMember = "Key";
-            cmbxMonth.DisplayMember = "Value";
-        }
-
         internal void LoadJEVCounter()
         {
             string journalName = cmbxJournals.Text.Trim();
             string fundName = cmbxFunds.Text.Trim();
-            short month = Convert.ToInt16(cmbxMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = AccFactory.JEVRepository().GetJEVCount(string.Empty, journalName, fundName, month, year);
-            var approvedJEVCount = AccFactory.JEVRepository().GetJEVCount("approved", journalName, fundName, month, year);
-            var pendingJEVCount = AccFactory.JEVRepository().GetJEVCount("pending", journalName, fundName, month, year);
-            var disapprovedJEVCOunt = AccFactory.JEVRepository().GetJEVCount("disapproved", journalName, fundName, month, year);
-            var cancelledJEVCount = AccFactory.JEVRepository().GetJEVCount("cancelled", journalName, fundName, month, year);
+            var jevCount = AccFactory.JEVRepository().GetJevCount(string.Empty, journalName, fundName, year);
+            var approvedJEVCount = AccFactory.JEVRepository().GetJevCount("approved", journalName, fundName, year);
+            var pendingJEVCount = AccFactory.JEVRepository().GetJevCount("pending", journalName, fundName, year);
+            var disapprovedJEVCOunt = AccFactory.JEVRepository().GetJevCount("disapproved", journalName, fundName, year);
+            var cancelledJEVCount = AccFactory.JEVRepository().GetJevCount("cancelled", journalName, fundName, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
@@ -96,9 +87,8 @@ namespace LFS.Views.Dashboard
         {
             string journalName = cmbxJournals.Text.Trim();
             string fundName = cmbxFunds.Text.Trim();
-            byte month = Convert.ToByte(cmbxMonth.SelectedValue);
             short year = (short)nudYear.Value;
-            var frmJEVList = new frmJevList(journalName, fundName, month, year, this);
+            var frmJEVList = new frmJevList(journalName, fundName, year, this);
 
             switch (jevStatus)
             {
@@ -171,15 +161,6 @@ namespace LFS.Views.Dashboard
             try
             {
                 LoadJEVList("all");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadJEVCounter();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

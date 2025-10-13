@@ -48,7 +48,6 @@ namespace LFS.Views.Dashboard
             lblCancelledJEVCounter = new System.Windows.Forms.Label();
             cmbxJournals = new System.Windows.Forms.ComboBox();
             cmbxFunds = new System.Windows.Forms.ComboBox();
-            cmbxMonth = new System.Windows.Forms.ComboBox();
             nudYear = new System.Windows.Forms.NumericUpDown();
             panel1 = new System.Windows.Forms.Panel();
             btnAdd = new System.Windows.Forms.Button();
@@ -325,7 +324,7 @@ namespace LFS.Views.Dashboard
             cmbxJournals.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxJournals.FormattingEnabled = true;
-            cmbxJournals.Location = new System.Drawing.Point(348, 7);
+            cmbxJournals.Location = new System.Drawing.Point(493, 9);
             cmbxJournals.Name = "cmbxJournals";
             cmbxJournals.Size = new System.Drawing.Size(200, 23);
             cmbxJournals.TabIndex = 30;
@@ -336,22 +335,11 @@ namespace LFS.Views.Dashboard
             cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(554, 7);
+            cmbxFunds.Location = new System.Drawing.Point(699, 9);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(189, 23);
             cmbxFunds.TabIndex = 32;
             cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
-            // 
-            // cmbxMonth
-            // 
-            cmbxMonth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxMonth.FormattingEnabled = true;
-            cmbxMonth.Location = new System.Drawing.Point(749, 7);
-            cmbxMonth.Name = "cmbxMonth";
-            cmbxMonth.Size = new System.Drawing.Size(139, 23);
-            cmbxMonth.TabIndex = 28;
-            cmbxMonth.SelectedIndexChanged += cbMonth_SelectedIndexChanged;
             // 
             // nudYear
             // 
@@ -373,7 +361,6 @@ namespace LFS.Views.Dashboard
             panel1.Controls.Add(cmbxJournals);
             panel1.Controls.Add(cmbxFunds);
             panel1.Controls.Add(btnRefresh);
-            panel1.Controls.Add(cmbxMonth);
             panel1.Controls.Add(nudYear);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 0);
@@ -385,7 +372,7 @@ namespace LFS.Views.Dashboard
             // btnAdd
             // 
             btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnAdd.Location = new System.Drawing.Point(192, 7);
+            btnAdd.Location = new System.Drawing.Point(337, 9);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(150, 23);
             btnAdd.TabIndex = 33;
@@ -420,7 +407,6 @@ namespace LFS.Views.Dashboard
         private System.Windows.Forms.Panel pnlDisapproved;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        private System.Windows.Forms.ComboBox cmbxMonth;
         private System.Windows.Forms.ComboBox cmbxJournals;
         private System.Windows.Forms.Panel pnlCancelled;
         internal System.Windows.Forms.LinkLabel lnkCancelled;

@@ -13,17 +13,15 @@ namespace LFS.Views.Transactions.JEV
     {
         private string journalName;
         private string fundName;
-        private byte month;
         private short year;
         internal ucJevDashboard ucJevDashboard;
 
-        public frmJevList(string journalName, string fundName, byte month, short year, ucJevDashboard ucJevDashboard)
+        public frmJevList(string journalName, string fundName, short year, ucJevDashboard ucJevDashboard)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.journalName = journalName;
             this.fundName = fundName;
-            this.month = month;
             this.year = year;
             this.ucJevDashboard = ucJevDashboard;
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
@@ -34,7 +32,6 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 LoadJournals();
-                LoadMonths();
                 LoadJEVList();
                 LoadFunds();
                 nudYear.Value = year == 0 ? DateTime.Now.Year : year;
@@ -115,13 +112,6 @@ namespace LFS.Views.Transactions.JEV
                 LoadJEVList();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadMonths()
-        {
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = month == 0 ? DateTime.Now.Month - 1 : month;
         }
 
         private void EnableDisableButtons()
@@ -252,7 +242,6 @@ namespace LFS.Views.Transactions.JEV
             dictParameters.Add("search_key", searchKey);
             dictParameters.Add("journal", journalName);
             dictParameters.Add("fund", fundName);
-            dictParameters.Add("month", month.ToString());
             dictParameters.Add("year", year.ToString());
 
             return dictParameters;
