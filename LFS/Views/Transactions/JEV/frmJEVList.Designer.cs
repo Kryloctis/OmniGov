@@ -43,15 +43,6 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnSearch = new System.Windows.Forms.ToolStripButton();
             tlStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel12 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             panel1 = new System.Windows.Forms.Panel();
             btnApplyFltr = new System.Windows.Forms.Button();
@@ -64,14 +55,13 @@ namespace LFS.Views.Transactions.JEV
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
-            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
             toolStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -88,7 +78,7 @@ namespace LFS.Views.Transactions.JEV
             cmbxFunds.Location = new System.Drawing.Point(23, 178);
             cmbxFunds.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbxFunds.Name = "cmbxFunds";
-            cmbxFunds.Size = new System.Drawing.Size(200, 23);
+            cmbxFunds.Size = new System.Drawing.Size(209, 23);
             cmbxFunds.TabIndex = 30;
             // 
             // cmbxJournals
@@ -98,18 +88,17 @@ namespace LFS.Views.Transactions.JEV
             cmbxJournals.Location = new System.Drawing.Point(23, 122);
             cmbxJournals.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbxJournals.Name = "cmbxJournals";
-            cmbxJournals.Size = new System.Drawing.Size(200, 23);
+            cmbxJournals.Size = new System.Drawing.Size(209, 23);
             cmbxJournals.TabIndex = 29;
             // 
             // nudYear
             // 
             nudYear.Location = new System.Drawing.Point(23, 234);
-            nudYear.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            nudYear.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
             nudYear.Name = "nudYear";
-            nudYear.ReadOnly = true;
-            nudYear.Size = new System.Drawing.Size(200, 23);
+            nudYear.Size = new System.Drawing.Size(209, 23);
             nudYear.TabIndex = 27;
             nudYear.Value = new decimal(new int[] { 2021, 0, 0, 0 });
             // 
@@ -121,7 +110,7 @@ namespace LFS.Views.Transactions.JEV
             panel7.Location = new System.Drawing.Point(0, 0);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(629, 389);
+            panel7.Size = new System.Drawing.Size(623, 389);
             panel7.TabIndex = 9;
             // 
             // dgJEV
@@ -131,7 +120,7 @@ namespace LFS.Views.Transactions.JEV
             dgJEV.Location = new System.Drawing.Point(4, 9);
             dgJEV.Margin = new System.Windows.Forms.Padding(1);
             dgJEV.Name = "dgJEV";
-            dgJEV.Size = new System.Drawing.Size(621, 376);
+            dgJEV.Size = new System.Drawing.Size(615, 376);
             dgJEV.TabIndex = 7;
             dgJEV.ColumnAdded += dgJEV_ColumnAdded;
             dgJEV.SelectionChanged += dgJEV_SelectionChanged;
@@ -141,7 +130,7 @@ namespace LFS.Views.Transactions.JEV
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
             pbLoadRecords.Location = new System.Drawing.Point(4, 4);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(621, 5);
+            pbLoadRecords.Size = new System.Drawing.Size(615, 5);
             pbLoadRecords.TabIndex = 25;
             // 
             // backgroundWorker1
@@ -167,35 +156,42 @@ namespace LFS.Views.Transactions.JEV
             // 
             // tlStrpBtnCreate
             // 
+            tlStrpBtnCreate.AutoToolTip = false;
             tlStrpBtnCreate.Image = Properties.Resources.button_rounded_add_20px;
             tlStrpBtnCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnCreate.Name = "tlStrpBtnCreate";
             tlStrpBtnCreate.Size = new System.Drawing.Size(65, 24);
             tlStrpBtnCreate.Text = "Create";
+            tlStrpBtnCreate.Click += tlStrpBtnCreate_Click;
             // 
             // tlStrpBtnUpdate
             // 
+            tlStrpBtnUpdate.AutoToolTip = false;
             tlStrpBtnUpdate.Image = Properties.Resources.button_rounded_edit_20px;
             tlStrpBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnUpdate.Name = "tlStrpBtnUpdate";
             tlStrpBtnUpdate.Size = new System.Drawing.Size(69, 24);
             tlStrpBtnUpdate.Text = "Update";
+            tlStrpBtnUpdate.Click += tlStrpBtnUpdate_Click;
             // 
             // tlStrpBtnDelete
             // 
+            tlStrpBtnDelete.AutoToolTip = false;
             tlStrpBtnDelete.Image = Properties.Resources.button_rounded_remove_20px;
             tlStrpBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnDelete.Name = "tlStrpBtnDelete";
             tlStrpBtnDelete.Size = new System.Drawing.Size(64, 24);
             tlStrpBtnDelete.Text = "Delete";
+            tlStrpBtnDelete.Click += tlStrpBtnDelete_Click;
             // 
             // tlStrpBtnSearch
             // 
             tlStrpBtnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             tlStrpBtnSearch.Image = Properties.Resources.find_20px;
             tlStrpBtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnSearch.Name = "tlStrpBtnSearch";
-            tlStrpBtnSearch.Size = new System.Drawing.Size(66, 24);
+            tlStrpBtnSearch.Size = new System.Drawing.Size(24, 24);
             tlStrpBtnSearch.Text = "Search";
             tlStrpBtnSearch.Click += tlStrpBtnSearch_Click;
             // 
@@ -208,78 +204,16 @@ namespace LFS.Views.Transactions.JEV
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, toolStripStatusLabel4, toolStripStatusLabel11, toolStripStatusLabel6, toolStripStatusLabel10, toolStripStatusLabel8, toolStripStatusLabel12, toolStripStatusLabel9 });
             statusStrip1.Location = new System.Drawing.Point(0, 455);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(882, 22);
             statusStrip1.TabIndex = 13;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            toolStripStatusLabel1.Text = "Legend: ";
-            // 
-            // toolStripStatusLabel2
-            // 
-            toolStripStatusLabel2.BackColor = System.Drawing.Color.MediumSeaGreen;
-            toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(16, 17);
-            toolStripStatusLabel2.Text = "   ";
-            // 
-            // toolStripStatusLabel4
-            // 
-            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(68, 17);
-            toolStripStatusLabel4.Text = "Approved   ";
-            // 
-            // toolStripStatusLabel11
-            // 
-            toolStripStatusLabel11.BackColor = System.Drawing.Color.FromArgb(246, 169, 169);
-            toolStripStatusLabel11.Name = "toolStripStatusLabel11";
-            toolStripStatusLabel11.Size = new System.Drawing.Size(16, 17);
-            toolStripStatusLabel11.Text = "   ";
-            // 
-            // toolStripStatusLabel6
-            // 
-            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            toolStripStatusLabel6.Size = new System.Drawing.Size(82, 17);
-            toolStripStatusLabel6.Text = "Disapproved   ";
-            // 
-            // toolStripStatusLabel10
-            // 
-            toolStripStatusLabel10.ActiveLinkColor = System.Drawing.Color.Red;
-            toolStripStatusLabel10.BackColor = System.Drawing.Color.FromArgb(255, 230, 153);
-            toolStripStatusLabel10.Name = "toolStripStatusLabel10";
-            toolStripStatusLabel10.Size = new System.Drawing.Size(16, 17);
-            toolStripStatusLabel10.Text = "   ";
-            // 
-            // toolStripStatusLabel8
-            // 
-            toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            toolStripStatusLabel8.Size = new System.Drawing.Size(60, 17);
-            toolStripStatusLabel8.Text = "Pending   ";
-            // 
-            // toolStripStatusLabel12
-            // 
-            toolStripStatusLabel12.BackColor = System.Drawing.Color.FromArgb(200, 198, 198);
-            toolStripStatusLabel12.Name = "toolStripStatusLabel12";
-            toolStripStatusLabel12.Size = new System.Drawing.Size(16, 17);
-            toolStripStatusLabel12.Text = "   ";
-            // 
-            // toolStripStatusLabel9
-            // 
-            toolStripStatusLabel9.Name = "toolStripStatusLabel9";
-            toolStripStatusLabel9.Size = new System.Drawing.Size(59, 17);
-            toolStripStatusLabel9.Text = "Cancelled";
-            // 
             // splitContainer1
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            splitContainer1.IsSplitterFixed = true;
             splitContainer1.Location = new System.Drawing.Point(0, 66);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -289,11 +223,11 @@ namespace LFS.Views.Transactions.JEV
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
+            splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(label5);
             splitContainer1.Size = new System.Drawing.Size(882, 389);
-            splitContainer1.SplitterDistance = 629;
+            splitContainer1.SplitterDistance = 623;
             splitContainer1.TabIndex = 14;
             // 
             // panel1
@@ -311,14 +245,14 @@ namespace LFS.Views.Transactions.JEV
             panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(249, 358);
+            panel1.Size = new System.Drawing.Size(255, 358);
             panel1.TabIndex = 13;
             // 
             // btnApplyFltr
             // 
-            btnApplyFltr.Location = new System.Drawing.Point(23, 290);
+            btnApplyFltr.Location = new System.Drawing.Point(23, 280);
             btnApplyFltr.Name = "btnApplyFltr";
-            btnApplyFltr.Size = new System.Drawing.Size(200, 23);
+            btnApplyFltr.Size = new System.Drawing.Size(209, 23);
             btnApplyFltr.TabIndex = 35;
             btnApplyFltr.Text = "Apply Filter";
             btnApplyFltr.UseVisualStyleBackColor = true;
@@ -333,7 +267,7 @@ namespace LFS.Views.Transactions.JEV
             flowLayoutPanel1.Location = new System.Drawing.Point(23, 38);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(200, 51);
+            flowLayoutPanel1.Size = new System.Drawing.Size(209, 51);
             flowLayoutPanel1.TabIndex = 34;
             // 
             // radPending
@@ -414,6 +348,18 @@ namespace LFS.Views.Transactions.JEV
             label1.TabIndex = 31;
             label1.Text = "Status:";
             // 
+            // label5
+            // 
+            label5.Dock = System.Windows.Forms.DockStyle.Top;
+            label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label5.Location = new System.Drawing.Point(0, 0);
+            label5.Name = "label5";
+            label5.Padding = new System.Windows.Forms.Padding(4);
+            label5.Size = new System.Drawing.Size(255, 31);
+            label5.TabIndex = 32;
+            label5.Text = "Filter Records";
+            // 
             // toolStrip2
             // 
             toolStrip2.BackColor = System.Drawing.SystemColors.Control;
@@ -432,18 +378,6 @@ namespace LFS.Views.Transactions.JEV
             tlStrpCmbxLimit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             tlStrpCmbxLimit.Name = "tlStrpCmbxLimit";
             tlStrpCmbxLimit.Size = new System.Drawing.Size(121, 23);
-            // 
-            // label5
-            // 
-            label5.Dock = System.Windows.Forms.DockStyle.Top;
-            label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label5.Location = new System.Drawing.Point(0, 0);
-            label5.Name = "label5";
-            label5.Padding = new System.Windows.Forms.Padding(4);
-            label5.Size = new System.Drawing.Size(249, 31);
-            label5.TabIndex = 32;
-            label5.Text = "Filter Records";
             // 
             // frmJevList
             // 
@@ -467,8 +401,6 @@ namespace LFS.Views.Transactions.JEV
             ((System.ComponentModel.ISupportInitialize)dgJEV).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -499,15 +431,6 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripButton tlStrpBtnSearch;
         private System.Windows.Forms.ToolStripTextBox tlStrpTxtSearch;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel10;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel12;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;

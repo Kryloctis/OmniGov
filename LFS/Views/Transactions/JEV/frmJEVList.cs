@@ -34,6 +34,7 @@ namespace LFS.Views.Transactions.JEV
                 HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
                 nudYear.Value = Helper.GetCurrentDate().Year;
                 LoadJEVList();
+                MonitorControlChanges(panel1, btnApplyFltr);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -46,10 +47,6 @@ namespace LFS.Views.Transactions.JEV
 
             var dtJournals = AccFactory.JournalsRepository().GetRecords();
             dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
-            DataRow dr = dataTable.NewRow();
-            dr["id"] = "0";
-            dr["journal_name"] = "All";
-            dataTable.Rows.InsertAt(dr, 0);
 
             return dataTable;
         }
@@ -57,17 +54,33 @@ namespace LFS.Views.Transactions.JEV
         internal void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            DataRow dr = dtFunds.NewRow();
-            dr["id"] = 0;
-            dr["fund_name"] = "All";
-            dtFunds.Rows.InsertAt(dr, 0);
-
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadJournals()
         {
             HelperLoadRecords.ComboboxJournals(DatatableJournals(), cmbxJournals, "id", "journal_name");
+        }
+
+        private void MonitorControlChanges(Control parent, Button targetButton)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is TextBox tb)
+                    tb.TextChanged += (s, e) => btnApplyFltr.Enabled = true;
+                else if (ctrl is RadioButton rb)
+                    rb.CheckedChanged += (s, e) => btnApplyFltr.Enabled = true;
+                else if (ctrl is ComboBox cb)
+                    cb.SelectedIndexChanged += (s, e) => btnApplyFltr.Enabled = true;
+                else if (ctrl is CheckBox chk)
+                    chk.CheckedChanged += (s, e) => btnApplyFltr.Enabled = true;
+                else if (ctrl is DateTimePicker dp)
+                    dp.ValueChanged += (s, e) => btnApplyFltr.Enabled = true;
+
+                // Recurse into child containers
+                if (ctrl.HasChildren)
+                    MonitorControlChanges(ctrl, btnApplyFltr);
+            }
         }
 
         private void LoadSelected()
@@ -83,17 +96,6 @@ namespace LFS.Views.Transactions.JEV
             ucFrmJev.jevId = jevId;
             frmJev.createdById = createdById;
             frmJev.ShowDialog();
-        }
-
-        private void LoadStatusColors()
-        {
-            foreach (DataGridViewRow row in dgJEV.Rows)
-            {
-                string status = row.Cells["status"].Value.ToString();
-                row.Cells["status"].Style.BackColor = Helper.StatusColor(status);
-                row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor(status);
-                row.Cells["status"].Style.Format.ToUpper();
-            }
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -122,6 +124,18 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
+        private string GetFltrStatus()
+        {
+            if (radApproved.Checked)
+                return "Approved";
+            else if (radDisapproved.Checked)
+                return "Disapproved";
+            else if (radCancelled.Checked)
+                return "Cancelled";
+            else
+                return "Pending";
+        }
+
         internal void LoadJEVList()
         {
             if (!backgroundWorker1.IsBusy)
@@ -131,6 +145,7 @@ namespace LFS.Views.Transactions.JEV
                 var parameters = new (string name, object value)[]
                 {
                     ("search_key", tlStrpTxtSearch.Text),
+                    ("status", GetFltrStatus()),
                     ("journal", cmbxJournals.Text),
                     ("fund", cmbxFunds.Text),
                     ("year", nudYear.Value)
@@ -139,12 +154,6 @@ namespace LFS.Views.Transactions.JEV
                 backgroundWorker1.RunWorkerAsync(parameters);
             }
         }
-
-        private string GetJevStatus(bool isApproved, bool isDisapproved, bool isCancelled) =>
-            isCancelled ? "Cancelled" :
-            isApproved ? "Approved" :
-            isDisapproved ? "Disapproved" :
-            "Pending";
 
         private string GetUserFullName(string userId)
         {
@@ -162,7 +171,6 @@ namespace LFS.Views.Transactions.JEV
             dataTable.Columns.AddRange(new[]
             {
                 new DataColumn("id", typeof(int)),
-                new DataColumn("status", typeof(string)),
                 new DataColumn("TRN. No.", typeof(string)),
                 new DataColumn("jev_no", typeof(string)),
                 new DataColumn("full_jev_no", typeof(string)),
@@ -181,7 +189,7 @@ namespace LFS.Views.Transactions.JEV
             var dict = args.ToDictionary(x => x.Item1, x => x.Item2);
 
             string searchKey = dict["search_key"]?.ToString() ?? string.Empty;
-            string jevStatus = "All"; // Default value
+            string jevStatus = dict["status"]?.ToString().ToLower();
             string journal = dict["journal"]?.ToString() ?? string.Empty;
             string fund = dict["fund"]?.ToString() ?? string.Empty;
             short year = Convert.ToInt16(dict["year"]);
@@ -225,7 +233,6 @@ namespace LFS.Views.Transactions.JEV
                 newRow["created_by_name"] = GetUserFullName(createdById);
                 newRow["updated_by_id"] = updatedById;
                 newRow["updated_by_name"] = GetUserFullName(updatedById);
-                newRow["status"] = GetJevStatus(isApproved, isDisapproved, isCancelled);
 
                 dataTable.Rows.Add(newRow);
 
@@ -248,9 +255,11 @@ namespace LFS.Views.Transactions.JEV
             if (e.Result is not DataTable dataTable)
                 return;
 
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
+
             HelperLoadRecords.JevDatagridView(dgJEV, dataTable);
             dgJEV.CurrentCell = dgJEV.FirstDisplayedCell;
-            LoadStatusColors();
         }
 
         private void frmJEVList_FormClosed(object sender, FormClosedEventArgs e)
@@ -267,6 +276,31 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 LoadJEVList();
+                btnApplyFltr.Enabled = false;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnCreate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

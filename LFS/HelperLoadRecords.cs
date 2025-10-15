@@ -1687,11 +1687,6 @@ namespace LFS
             datagrid.Columns["full_jev_no"].MinimumWidth = 60;
             datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns["status"].MinimumWidth = 40;
-            datagrid.Columns["status"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["status"].HeaderText = "Status";
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
             datagrid.Columns["date_entry"].MinimumWidth = 60;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
