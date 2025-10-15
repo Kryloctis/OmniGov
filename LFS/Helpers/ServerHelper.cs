@@ -78,11 +78,17 @@ namespace LFS.Helpers
 
         private static bool HostReachable(string connectionName)
         {
-            string testConnectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
-            var server = new MySqlConnectionStringBuilder(testConnectionString).Server;
-            int timeoutMillis = 500;
-            PingReply reply = new Ping().Send(server, timeoutMillis);
-            return reply.Status == IPStatus.Success;
+            string connStr = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+            var builder = new MySqlConnectionStringBuilder(connStr);
+            string server = builder.Server;
+
+            // Always true for localhost or offline testing
+            if (server.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
+                server is "127.0.0.1" or "::1")
+                return true;
+
+            using var ping = new Ping();
+            return ping.Send(server, 500)?.Status == IPStatus.Success;
         }
 
         internal static List<ServerHelper> AvailableServerList()

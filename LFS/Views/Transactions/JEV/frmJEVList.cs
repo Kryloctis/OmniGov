@@ -114,33 +114,6 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadJEVList();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadJEVList();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void nudYear_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadJEVList();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void dgJEV_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             foreach (DataGridViewColumn column in dgJEV.Columns)
@@ -285,18 +258,6 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 backgroundWorker1.CancelAsync();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnFilter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
-                tlStrpBtnFilter.Image = splitContainer1.Panel2Collapsed ?
-                                        Resources.filter_20px : Resources.symbol_cancel_20px;
-                tlStrpBtnFilter.Text = splitContainer1.Panel2Collapsed ? "Filter" : "Close";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

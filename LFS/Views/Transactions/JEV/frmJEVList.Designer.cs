@@ -40,9 +40,8 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnCreate = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnUpdate = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnDelete = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            tlStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
             tlStrpBtnSearch = new System.Windows.Forms.ToolStripButton();
+            tlStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -67,7 +66,7 @@ namespace LFS.Views.Transactions.JEV
             label1 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
-            tlStrpBtnFilter = new System.Windows.Forms.ToolStripButton();
+            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
@@ -91,7 +90,6 @@ namespace LFS.Views.Transactions.JEV
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(200, 23);
             cmbxFunds.TabIndex = 30;
-            cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
             // 
             // cmbxJournals
             // 
@@ -102,7 +100,6 @@ namespace LFS.Views.Transactions.JEV
             cmbxJournals.Name = "cmbxJournals";
             cmbxJournals.Size = new System.Drawing.Size(200, 23);
             cmbxJournals.TabIndex = 29;
-            cmbxJournals.SelectionChangeCommitted += cmbxJournals_SelectionChangeCommitted;
             // 
             // nudYear
             // 
@@ -115,7 +112,6 @@ namespace LFS.Views.Transactions.JEV
             nudYear.Size = new System.Drawing.Size(200, 23);
             nudYear.TabIndex = 27;
             nudYear.Value = new decimal(new int[] { 2021, 0, 0, 0 });
-            nudYear.ValueChanged += nudYear_ValueChanged;
             // 
             // panel7
             // 
@@ -161,7 +157,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, toolStripSeparator1, tlStrpTxtSearch, tlStrpBtnSearch });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnSearch, tlStrpTxtSearch });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -193,26 +189,22 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnDelete.Size = new System.Drawing.Size(64, 24);
             tlStrpBtnDelete.Text = "Delete";
             // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // tlStrpTxtSearch
-            // 
-            tlStrpTxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tlStrpTxtSearch.Name = "tlStrpTxtSearch";
-            tlStrpTxtSearch.Size = new System.Drawing.Size(200, 27);
-            // 
             // tlStrpBtnSearch
             // 
+            tlStrpBtnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             tlStrpBtnSearch.Image = Properties.Resources.find_20px;
             tlStrpBtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnSearch.Name = "tlStrpBtnSearch";
             tlStrpBtnSearch.Size = new System.Drawing.Size(66, 24);
             tlStrpBtnSearch.Text = "Search";
             tlStrpBtnSearch.Click += tlStrpBtnSearch_Click;
+            // 
+            // tlStrpTxtSearch
+            // 
+            tlStrpTxtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpTxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tlStrpTxtSearch.Name = "tlStrpTxtSearch";
+            tlStrpTxtSearch.Size = new System.Drawing.Size(200, 27);
             // 
             // statusStrip1
             // 
@@ -297,7 +289,9 @@ namespace LFS.Views.Transactions.JEV
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Panel2.Controls.Add(label5);
             splitContainer1.Size = new System.Drawing.Size(882, 389);
             splitContainer1.SplitterDistance = 629;
             splitContainer1.TabIndex = 14;
@@ -314,10 +308,10 @@ namespace LFS.Views.Transactions.JEV
             panel1.Controls.Add(cmbxFunds);
             panel1.Controls.Add(cmbxJournals);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(249, 389);
+            panel1.Size = new System.Drawing.Size(249, 358);
             panel1.TabIndex = 13;
             // 
             // btnApplyFltr
@@ -326,7 +320,7 @@ namespace LFS.Views.Transactions.JEV
             btnApplyFltr.Name = "btnApplyFltr";
             btnApplyFltr.Size = new System.Drawing.Size(200, 23);
             btnApplyFltr.TabIndex = 35;
-            btnApplyFltr.Text = "Apply";
+            btnApplyFltr.Text = "Apply Filter";
             btnApplyFltr.UseVisualStyleBackColor = true;
             btnApplyFltr.Click += btnApplyFltr_Click;
             // 
@@ -424,12 +418,12 @@ namespace LFS.Views.Transactions.JEV
             // 
             toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpCmbxLimit, tlStrpBtnFilter });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpCmbxLimit });
             toolStrip2.Location = new System.Drawing.Point(0, 35);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
             toolStrip2.Size = new System.Drawing.Size(882, 31);
-            toolStrip2.TabIndex = 15;
+            toolStrip2.TabIndex = 17;
             toolStrip2.Text = "toolStrip2";
             // 
             // tlStrpCmbxLimit
@@ -439,15 +433,17 @@ namespace LFS.Views.Transactions.JEV
             tlStrpCmbxLimit.Name = "tlStrpCmbxLimit";
             tlStrpCmbxLimit.Size = new System.Drawing.Size(121, 23);
             // 
-            // tlStrpBtnFilter
+            // label5
             // 
-            tlStrpBtnFilter.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnFilter.Image = Properties.Resources.filter_20px;
-            tlStrpBtnFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnFilter.Name = "tlStrpBtnFilter";
-            tlStrpBtnFilter.Size = new System.Drawing.Size(56, 20);
-            tlStrpBtnFilter.Text = " Filter";
-            tlStrpBtnFilter.Click += tlStrpBtnFilter_Click;
+            label5.Dock = System.Windows.Forms.DockStyle.Top;
+            label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label5.Location = new System.Drawing.Point(0, 0);
+            label5.Name = "label5";
+            label5.Padding = new System.Windows.Forms.Padding(4);
+            label5.Size = new System.Drawing.Size(249, 31);
+            label5.TabIndex = 32;
+            label5.Text = "Filter Records";
             // 
             // frmJevList
             // 
@@ -523,10 +519,9 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.RadioButton radApproved;
         private System.Windows.Forms.RadioButton radDisapproved;
         private System.Windows.Forms.RadioButton radCancelled;
+        private System.Windows.Forms.Button btnApplyFltr;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripComboBox tlStrpCmbxLimit;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnFilter;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Button btnApplyFltr;
+        private System.Windows.Forms.Label label5;
     }
 }
