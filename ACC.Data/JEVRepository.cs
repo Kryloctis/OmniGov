@@ -653,14 +653,13 @@ namespace ACC.Data
             return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
-        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year)
+        public DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journal_name", DbType.String, journalName},
                 new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                new object[] { "@month", DbType.Int16, month},
                 new object[] { "@year", DbType.Int16, year}
             };
 
@@ -690,10 +689,8 @@ namespace ACC.Data
                     jevStatusQuery = string.Empty;
                     break;
             }
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
-
-            var dtGeneralLedgers = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtGeneralLedgers, parameters);
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         //SFPs

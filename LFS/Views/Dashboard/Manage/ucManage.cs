@@ -5,8 +5,10 @@ using LFS.Views.Manage.AllotmentClasses;
 using LFS.Views.Manage.BankAccounts;
 using LFS.Views.Manage.Banks;
 using LFS.Views.Manage.Barangay;
+using LFS.Views.Manage.ChartOfAccounts;
 using LFS.Views.Manage.FunctionProgramProject;
 using LFS.Views.Manage.Funds;
+using LFS.Views.Manage.Journals;
 using LFS.Views.Manage.Registry;
 using LFS.Views.Manage.RptDiscount;
 using LFS.Views.Manage.RptPenalties;
@@ -42,6 +44,8 @@ namespace LFS.Views.Dashboard.Manage
             btnFpp.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngFuncProgProj);
             btnUsers.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngUsers);
             btnRoles.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngRoles);
+            btnChrtAccs.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngChartAccounts);
+            btnJrnls.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngJournals);
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
@@ -166,6 +170,24 @@ namespace LFS.Views.Dashboard.Manage
             try
             {
                 _ = new frmRptDiscounts().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnChrtAccs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmChartOfAccounts().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnJrnls_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmJournals().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

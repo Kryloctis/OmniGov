@@ -83,39 +83,14 @@ namespace LFS.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadJEVList(string jevStatus)
+        private void LoadJEVList()
         {
             string journalName = cmbxJournals.Text.Trim();
             string fundName = cmbxFunds.Text.Trim();
             short year = (short)nudYear.Value;
-            var frmJEVList = new frmJevList(journalName, fundName, year, this);
-
-            switch (jevStatus)
-            {
-                case "all":
-                    frmJEVList.cmbxJevStatus.SelectedIndex = 0;
-                    break;
-
-                case "pending":
-                    frmJEVList.cmbxJevStatus.SelectedIndex = 1;
-                    break;
-
-                case "approved":
-                    frmJEVList.cmbxJevStatus.SelectedIndex = 2;
-                    break;
-
-                case "disapproved":
-                    frmJEVList.cmbxJevStatus.SelectedIndex = 3;
-                    break;
-
-                case "cancelled":
-                    frmJEVList.cmbxJevStatus.SelectedIndex = 4;
-                    break;
-            }
+            var frmJEVList = new frmJevList(this);
 
             frmJEVList.cmbxJournals.Enabled = false;
-            frmJEVList.cmbxJevStatus.Enabled = false;
-            frmJEVList.cbMonth.Enabled = false;
             frmJEVList.nudYear.Enabled = false;
             frmJEVList.ShowDialog();
         }
@@ -124,7 +99,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVList("pending");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -133,7 +107,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVList("approved");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -142,7 +115,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVList("disapproved");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -151,7 +123,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVList("cancelled");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -160,7 +131,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVList("all");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -199,6 +169,10 @@ namespace LFS.Views.Dashboard
                 LoadJEVCounter();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }

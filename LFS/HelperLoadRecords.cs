@@ -11,22 +11,6 @@ namespace LFS
 {
     public class HelperLoadRecords
     {
-        public static Dictionary<int, string> SexDataSource()
-        {
-            var sex = new Dictionary<int, string>();
-            sex.Add(1, "Male");
-            sex.Add(2, "Female");
-
-            return sex;
-        }
-
-        internal static void SexComboBox(ComboBox comboBox)
-        {
-            foreach (var item in SexDataSource().Values)
-                comboBox.Items.Add(item);
-            comboBox.SelectedIndex = 0;
-        }
-
         internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
         {
             datagrid.Rows.Clear();
@@ -218,22 +202,6 @@ namespace LFS
             comboBox.DropDownHeight = 200;
         }
 
-        internal static void MunicipalitiesCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 200;
-        }
-
-        internal static void ProvinceCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 200;
-        }
-
         internal static void RptAssessmentDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
@@ -389,18 +357,6 @@ namespace LFS
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        internal static void RolesPermissionsDataGridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.ColumnHeadersVisible = false;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["permission_name"].HeaderText = "Permissions";
-            dataGridView.Columns["permission_name"].ReadOnly = true;
-            dataGridView.Columns["is_checked"].HeaderText = "";
-            dataGridView.Columns["is_checked"].MinimumWidth = 30;
-            dataGridView.Columns["is_checked"].Width = 30;
         }
 
         internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
@@ -1727,20 +1683,15 @@ namespace LFS
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["funds_id"].Visible = false;
-            datagrid.Columns["fund_name"].HeaderText = "Fund";
-            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
             datagrid.Columns["payee"].HeaderText = "Payee";
-            datagrid.Columns["journals_id"].Visible = false;
             datagrid.Columns["full_jev_no"].MinimumWidth = 60;
             datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
+            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.NotSortable;
             datagrid.Columns["status"].MinimumWidth = 40;
             datagrid.Columns["status"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["status"].HeaderText = "Status";
-            datagrid.Columns["created_by_name"].Width = 50;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
             datagrid.Columns["date_entry"].MinimumWidth = 60;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
@@ -1749,13 +1700,9 @@ namespace LFS
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
-            datagrid.Columns["created_by_name"].HeaderText = "Recording Person";
+            datagrid.Columns["created_by_name"].HeaderText = "Rec. Person";
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
-            datagrid.Columns["explanation"].MinimumWidth = 100;
-            datagrid.Columns["explanation"].HeaderText = "Explanation";
-            datagrid.Columns["journal_name"].MinimumWidth = 200;
-            datagrid.Columns["journal_name"].HeaderText = "Journal";
         }
 
         internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView)
@@ -1837,29 +1784,6 @@ namespace LFS
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
             dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
             dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
-        }
-
-        internal static void CattleDatagridView(DataGridView datagrid, DataTable dataTable)
-        {
-            datagrid.DataSource = dataTable;
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["cattle_type"].HeaderText = "Type";
-            datagrid.Columns["cattle_sex"].HeaderText = "Sex";
-            datagrid.Columns["cattle_age"].HeaderText = "Age";
-            datagrid.Columns["description"].HeaderText = "Description";
-
-            datagrid.RowHeadersVisible = false;
-            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            datagrid.Columns["cattle_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns["cattle_type"].MinimumWidth = 100;
-            datagrid.Columns["cattle_sex"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns["cattle_sex"].MinimumWidth = 80;
-            datagrid.Columns["cattle_sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["description"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["description"].MinimumWidth = 150;
         }
 
         internal static void SearchableComboboxParameters(ComboBox comboBox, DataTable dataTable, string valueMember, string displayMember, List<string> searchSources, string searchText = "", bool isSearch = false)
@@ -2040,60 +1964,6 @@ namespace LFS
             datagridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
-        internal static void RptDelinquenciesDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["rpt_assessment_posts_id"].Visible = false;
-
-            dataGridView.Columns["complete_arp_no"].HeaderText = "Complete Arp No.";
-            dataGridView.Columns["complete_arp_no"].MinimumWidth = 120;
-            dataGridView.Columns["complete_arp_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["complete_arp_no"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataGridView.Columns["taxpayer_name"].HeaderText = "Tax Payer";
-            dataGridView.Columns["taxpayer_name"].MinimumWidth = 200;
-            dataGridView.Columns["taxpayer_name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["taxpayer_name"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
-            dataGridView.Columns["property_kind"].MinimumWidth = 80;
-            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["property_kind"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataGridView.Columns["property_pin"].HeaderText = "Property Pin";
-            dataGridView.Columns["property_pin"].MinimumWidth = 80;
-            dataGridView.Columns["property_pin"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["property_pin"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
-            dataGridView.Columns["tax_due"].MinimumWidth = 100;
-            dataGridView.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridView.Columns["tax_due"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
-
-            dataGridView.Columns["delinquency_status"].HeaderText = "Delinquency Status";
-            dataGridView.Columns["delinquency_status"].MinimumWidth = 200;
-            dataGridView.Columns["delinquency_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["delinquency_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataGridView.Columns["created_at"].HeaderText = "Date";
-            dataGridView.Columns["created_at"].MinimumWidth = 100;
-            dataGridView.Columns["created_at"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["created_at"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["created_at"].DefaultCellStyle.Format = "MM-dd-yyyy";
-
-            dataGridView.Columns["created_at"].Visible = true;
-            dataGridView.Columns["created_by"].Visible = false;
-            dataGridView.Columns["updated_at"].Visible = false;
-            dataGridView.Columns["updated_by"].Visible = false;
-
-            dataGridView.Columns["complete_arp_no"].ReadOnly = false;
-            dataGridView.Columns["taxpayer_name"].ReadOnly = false;
-            dataGridView.Columns["property_kind"].ReadOnly = false;
-            dataGridView.Columns["delinquency_status"].ReadOnly = false;
-        }
-
         internal static void DgvRcd(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
@@ -2196,13 +2066,6 @@ namespace LFS
         }
 
         internal static void AuctionScheduleCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.ValueMember = valueMember;
-            comboBox.DisplayMember = displayMember;
-            comboBox.DataSource = dataTable;
-        }
-
-        internal static void BiddersCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.ValueMember = valueMember;
             comboBox.DisplayMember = displayMember;

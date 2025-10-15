@@ -28,83 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucAccounting));
-            toolStrip2 = new System.Windows.Forms.ToolStrip();
-            manageTstrpDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
-            chartOfAccountsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            journalsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            panel1 = new System.Windows.Forms.Panel();
+            btnRecordJev = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
             ucJevDashboard1 = new ucJevDashboard();
-            toolStrip2.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // toolStrip2
+            // panel1
             // 
-            toolStrip2.BackColor = System.Drawing.Color.Transparent;
-            toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { manageTstrpDrpDwnBtn });
-            toolStrip2.Location = new System.Drawing.Point(0, 0);
-            toolStrip2.Name = "toolStrip2";
-            toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.ShowItemToolTips = false;
-            toolStrip2.Size = new System.Drawing.Size(990, 30);
-            toolStrip2.TabIndex = 9;
-            toolStrip2.Text = "toolStrip2";
+            panel1.Controls.Add(btnRecordJev);
+            panel1.Controls.Add(label1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4, 20, 4, 4);
+            panel1.Size = new System.Drawing.Size(990, 53);
+            panel1.TabIndex = 17;
             // 
-            // manageTstrpDrpDwnBtn
+            // btnRecordJev
             // 
-            manageTstrpDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            manageTstrpDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { chartOfAccountsTStrpMnuItm, journalsTStrpMnuItm });
-            manageTstrpDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("manageTstrpDrpDwnBtn.Image");
-            manageTstrpDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            manageTstrpDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
-            manageTstrpDrpDwnBtn.Name = "manageTstrpDrpDwnBtn";
-            manageTstrpDrpDwnBtn.Size = new System.Drawing.Size(73, 19);
-            manageTstrpDrpDwnBtn.Text = "● Manage";
+            btnRecordJev.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRecordJev.Location = new System.Drawing.Point(783, 23);
+            btnRecordJev.Name = "btnRecordJev";
+            btnRecordJev.Size = new System.Drawing.Size(200, 23);
+            btnRecordJev.TabIndex = 1;
+            btnRecordJev.Text = "Record JEV";
+            btnRecordJev.UseVisualStyleBackColor = true;
+            btnRecordJev.Click += btnRecordJev_Click;
             // 
-            // chartOfAccountsTStrpMnuItm
+            // label1
             // 
-            chartOfAccountsTStrpMnuItm.Name = "chartOfAccountsTStrpMnuItm";
-            chartOfAccountsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
-            chartOfAccountsTStrpMnuItm.Text = "Chart of Accounts...";
-            chartOfAccountsTStrpMnuItm.Click += chartOfAccountsTStrpMnuItm_Click;
-            // 
-            // journalsTStrpMnuItm
-            // 
-            journalsTStrpMnuItm.Name = "journalsTStrpMnuItm";
-            journalsTStrpMnuItm.Size = new System.Drawing.Size(179, 22);
-            journalsTStrpMnuItm.Text = "Journals...";
-            journalsTStrpMnuItm.Click += journalsTStrpMnuItm_Click;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label1.Location = new System.Drawing.Point(7, 29);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(181, 17);
+            label1.TabIndex = 0;
+            label1.Text = "Journal Entry Voucher (JEV)";
             // 
             // ucJevDashboard1
             // 
-            ucJevDashboard1.AutoSize = true;
             ucJevDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
-            ucJevDashboard1.Location = new System.Drawing.Point(0, 30);
+            ucJevDashboard1.Location = new System.Drawing.Point(0, 53);
             ucJevDashboard1.Margin = new System.Windows.Forms.Padding(0);
-            ucJevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
             ucJevDashboard1.Name = "ucJevDashboard1";
-            ucJevDashboard1.Size = new System.Drawing.Size(990, 170);
-            ucJevDashboard1.TabIndex = 10;
+            ucJevDashboard1.Padding = new System.Windows.Forms.Padding(4);
+            ucJevDashboard1.Size = new System.Drawing.Size(990, 133);
+            ucJevDashboard1.TabIndex = 18;
             // 
             // ucAccounting
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             Controls.Add(ucJevDashboard1);
-            Controls.Add(toolStrip2);
+            Controls.Add(panel1);
             Name = "ucAccounting";
             Size = new System.Drawing.Size(990, 525);
-            toolStrip2.ResumeLayout(false);
-            toolStrip2.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripDropDownButton manageTstrpDrpDwnBtn;
-        private System.Windows.Forms.ToolStripMenuItem chartOfAccountsTStrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem journalsTStrpMnuItm;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnRecordJev;
+        private System.Windows.Forms.Label label1;
         private ucJevDashboard ucJevDashboard1;
     }
 }

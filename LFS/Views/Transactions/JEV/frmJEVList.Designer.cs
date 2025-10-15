@@ -29,374 +29,504 @@ namespace LFS.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.cmbxJournals = new System.Windows.Forms.ComboBox();
-            this.cmbxJevStatus = new System.Windows.Forms.ComboBox();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.cbMonth = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.dgJEV = new System.Windows.Forms.DataGridView();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.pbLoadRecords = new System.Windows.Forms.ProgressBar();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.cmbxFunds);
-            this.panel1.Controls.Add(this.cmbxJournals);
-            this.panel1.Controls.Add(this.cmbxJevStatus);
-            this.panel1.Controls.Add(this.nudYear);
-            this.panel1.Controls.Add(this.cbMonth);
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Controls.Add(this.txtSearch);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1316, 29);
-            this.panel1.TabIndex = 7;
+            cmbxFunds = new System.Windows.Forms.ComboBox();
+            cmbxJournals = new System.Windows.Forms.ComboBox();
+            nudYear = new System.Windows.Forms.NumericUpDown();
+            panel7 = new System.Windows.Forms.Panel();
+            dgJEV = new System.Windows.Forms.DataGridView();
+            pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            tlStrpBtnCreate = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnUpdate = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnDelete = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            tlStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
+            tlStrpBtnSearch = new System.Windows.Forms.ToolStripButton();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel12 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            panel1 = new System.Windows.Forms.Panel();
+            btnApplyFltr = new System.Windows.Forms.Button();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            radPending = new System.Windows.Forms.RadioButton();
+            radApproved = new System.Windows.Forms.RadioButton();
+            radDisapproved = new System.Windows.Forms.RadioButton();
+            radCancelled = new System.Windows.Forms.RadioButton();
+            label4 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            toolStrip2 = new System.Windows.Forms.ToolStrip();
+            tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
+            tlStrpBtnFilter = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
+            toolStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            panel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            toolStrip2.SuspendLayout();
+            SuspendLayout();
             // 
             // cmbxFunds
             // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.Enabled = false;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(434, 3);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(189, 23);
-            this.cmbxFunds.TabIndex = 30;
-            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(23, 178);
+            cmbxFunds.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(200, 23);
+            cmbxFunds.TabIndex = 30;
+            cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
             // 
             // cmbxJournals
             // 
-            this.cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxJournals.FormattingEnabled = true;
-            this.cmbxJournals.Location = new System.Drawing.Point(162, 3);
-            this.cmbxJournals.Name = "cmbxJournals";
-            this.cmbxJournals.Size = new System.Drawing.Size(266, 23);
-            this.cmbxJournals.TabIndex = 29;
-            this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
-            // 
-            // cmbxJevStatus
-            // 
-            this.cmbxJevStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxJevStatus.FormattingEnabled = true;
-            this.cmbxJevStatus.Items.AddRange(new object[] {
-            "All",
-            "Pending",
-            "Approved",
-            "Disapproved",
-            "Cancelled"});
-            this.cmbxJevStatus.Location = new System.Drawing.Point(4, 3);
-            this.cmbxJevStatus.Name = "cmbxJevStatus";
-            this.cmbxJevStatus.Size = new System.Drawing.Size(152, 23);
-            this.cmbxJevStatus.TabIndex = 28;
-            this.cmbxJevStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbxJevStatus_SelectionChangeCommitted);
+            cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxJournals.FormattingEnabled = true;
+            cmbxJournals.Location = new System.Drawing.Point(23, 122);
+            cmbxJournals.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            cmbxJournals.Name = "cmbxJournals";
+            cmbxJournals.Size = new System.Drawing.Size(200, 23);
+            cmbxJournals.TabIndex = 29;
+            cmbxJournals.SelectionChangeCommitted += cmbxJournals_SelectionChangeCommitted;
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(774, 3);
-            this.nudYear.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudYear.Minimum = new decimal(new int[] {
-            1987,
-            0,
-            0,
-            0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.ReadOnly = true;
-            this.nudYear.Size = new System.Drawing.Size(109, 23);
-            this.nudYear.TabIndex = 27;
-            this.nudYear.Value = new decimal(new int[] {
-            2021,
-            0,
-            0,
-            0});
-            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
-            // 
-            // cbMonth
-            // 
-            this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMonth.FormattingEnabled = true;
-            this.cbMonth.Location = new System.Drawing.Point(629, 3);
-            this.cbMonth.Name = "cbMonth";
-            this.cbMonth.Size = new System.Drawing.Size(139, 23);
-            this.cbMonth.TabIndex = 26;
-            this.cbMonth.SelectionChangeCommitted += new System.EventHandler(this.cbMonth_SelectionChangeCommitted);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(1237, 3);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 23;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(980, 3);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(253, 23);
-            this.txtSearch.TabIndex = 22;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panel6);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnSelect);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 497);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1316, 28);
-            this.panel2.TabIndex = 8;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(396, 8);
-            this.panel6.Margin = new System.Windows.Forms.Padding(0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(22, 13);
-            this.panel6.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(424, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Cancelled";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(280, 8);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(22, 13);
-            this.panel5.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(308, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Disapproved";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(153)))));
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(182, 8);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(22, 13);
-            this.panel4.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(210, 6);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Pending";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(228)))), ((int)(((byte)(197)))));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(68, 8);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(22, 13);
-            this.panel3.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(96, 6);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Approved";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Legend: ";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(1230, 2);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnClose.Size = new System.Drawing.Size(82, 22);
-            this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelect.Location = new System.Drawing.Point(1142, 2);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSelect.Size = new System.Drawing.Size(82, 22);
-            this.btnSelect.TabIndex = 4;
-            this.btnSelect.Text = "Select";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            nudYear.Location = new System.Drawing.Point(23, 234);
+            nudYear.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.ReadOnly = true;
+            nudYear.Size = new System.Drawing.Size(200, 23);
+            nudYear.TabIndex = 27;
+            nudYear.Value = new decimal(new int[] { 2021, 0, 0, 0 });
+            nudYear.ValueChanged += nudYear_ValueChanged;
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.dgJEV);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(0, 34);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(4);
-            this.panel7.Size = new System.Drawing.Size(1316, 463);
-            this.panel7.TabIndex = 9;
+            panel7.Controls.Add(dgJEV);
+            panel7.Controls.Add(pbLoadRecords);
+            panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel7.Location = new System.Drawing.Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Padding = new System.Windows.Forms.Padding(4);
+            panel7.Size = new System.Drawing.Size(629, 389);
+            panel7.TabIndex = 9;
             // 
             // dgJEV
             // 
-            this.dgJEV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgJEV.Location = new System.Drawing.Point(4, 4);
-            this.dgJEV.Margin = new System.Windows.Forms.Padding(1);
-            this.dgJEV.Name = "dgJEV";
-            this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(1308, 455);
-            this.dgJEV.TabIndex = 7;
-            this.dgJEV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgJEV_CellDoubleClick);
-            this.dgJEV.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgJEV_ColumnAdded);
-            this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            dgJEV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgJEV.Location = new System.Drawing.Point(4, 9);
+            dgJEV.Margin = new System.Windows.Forms.Padding(1);
+            dgJEV.Name = "dgJEV";
+            dgJEV.Size = new System.Drawing.Size(621, 376);
+            dgJEV.TabIndex = 7;
+            dgJEV.ColumnAdded += dgJEV_ColumnAdded;
+            dgJEV.SelectionChanged += dgJEV_SelectionChanged;
             // 
             // pbLoadRecords
             // 
-            this.pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbLoadRecords.Location = new System.Drawing.Point(0, 29);
-            this.pbLoadRecords.Name = "pbLoadRecords";
-            this.pbLoadRecords.Size = new System.Drawing.Size(1316, 5);
-            this.pbLoadRecords.TabIndex = 24;
+            pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            pbLoadRecords.Location = new System.Drawing.Point(4, 4);
+            pbLoadRecords.Name = "pbLoadRecords";
+            pbLoadRecords.Size = new System.Drawing.Size(621, 5);
+            pbLoadRecords.TabIndex = 25;
             // 
-            // frmJEVList
+            // backgroundWorker1
             // 
-            this.AcceptButton = this.btnSearch;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1316, 525);
-            this.Controls.Add(this.panel7);
-            this.Controls.Add(this.pbLoadRecords);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1332, 564);
-            this.Name = "frmJEVList";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "List of JEVs";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmJEVList_FormClosed);
-            this.Load += new System.EventHandler(this.frmJEVList_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, toolStripSeparator1, tlStrpTxtSearch, tlStrpBtnSearch });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(882, 35);
+            toolStrip1.TabIndex = 11;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tlStrpBtnCreate
+            // 
+            tlStrpBtnCreate.Image = Properties.Resources.button_rounded_add_20px;
+            tlStrpBtnCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnCreate.Name = "tlStrpBtnCreate";
+            tlStrpBtnCreate.Size = new System.Drawing.Size(65, 24);
+            tlStrpBtnCreate.Text = "Create";
+            // 
+            // tlStrpBtnUpdate
+            // 
+            tlStrpBtnUpdate.Image = Properties.Resources.button_rounded_edit_20px;
+            tlStrpBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnUpdate.Name = "tlStrpBtnUpdate";
+            tlStrpBtnUpdate.Size = new System.Drawing.Size(69, 24);
+            tlStrpBtnUpdate.Text = "Update";
+            // 
+            // tlStrpBtnDelete
+            // 
+            tlStrpBtnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            tlStrpBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnDelete.Name = "tlStrpBtnDelete";
+            tlStrpBtnDelete.Size = new System.Drawing.Size(64, 24);
+            tlStrpBtnDelete.Text = "Delete";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tlStrpTxtSearch
+            // 
+            tlStrpTxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tlStrpTxtSearch.Name = "tlStrpTxtSearch";
+            tlStrpTxtSearch.Size = new System.Drawing.Size(200, 27);
+            // 
+            // tlStrpBtnSearch
+            // 
+            tlStrpBtnSearch.Image = Properties.Resources.find_20px;
+            tlStrpBtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnSearch.Name = "tlStrpBtnSearch";
+            tlStrpBtnSearch.Size = new System.Drawing.Size(66, 24);
+            tlStrpBtnSearch.Text = "Search";
+            tlStrpBtnSearch.Click += tlStrpBtnSearch_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, toolStripStatusLabel4, toolStripStatusLabel11, toolStripStatusLabel6, toolStripStatusLabel10, toolStripStatusLabel8, toolStripStatusLabel12, toolStripStatusLabel9 });
+            statusStrip1.Location = new System.Drawing.Point(0, 455);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(882, 22);
+            statusStrip1.TabIndex = 13;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            toolStripStatusLabel1.Text = "Legend: ";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.BackColor = System.Drawing.Color.MediumSeaGreen;
+            toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(16, 17);
+            toolStripStatusLabel2.Text = "   ";
+            // 
+            // toolStripStatusLabel4
+            // 
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(68, 17);
+            toolStripStatusLabel4.Text = "Approved   ";
+            // 
+            // toolStripStatusLabel11
+            // 
+            toolStripStatusLabel11.BackColor = System.Drawing.Color.FromArgb(246, 169, 169);
+            toolStripStatusLabel11.Name = "toolStripStatusLabel11";
+            toolStripStatusLabel11.Size = new System.Drawing.Size(16, 17);
+            toolStripStatusLabel11.Text = "   ";
+            // 
+            // toolStripStatusLabel6
+            // 
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(82, 17);
+            toolStripStatusLabel6.Text = "Disapproved   ";
+            // 
+            // toolStripStatusLabel10
+            // 
+            toolStripStatusLabel10.ActiveLinkColor = System.Drawing.Color.Red;
+            toolStripStatusLabel10.BackColor = System.Drawing.Color.FromArgb(255, 230, 153);
+            toolStripStatusLabel10.Name = "toolStripStatusLabel10";
+            toolStripStatusLabel10.Size = new System.Drawing.Size(16, 17);
+            toolStripStatusLabel10.Text = "   ";
+            // 
+            // toolStripStatusLabel8
+            // 
+            toolStripStatusLabel8.Name = "toolStripStatusLabel8";
+            toolStripStatusLabel8.Size = new System.Drawing.Size(60, 17);
+            toolStripStatusLabel8.Text = "Pending   ";
+            // 
+            // toolStripStatusLabel12
+            // 
+            toolStripStatusLabel12.BackColor = System.Drawing.Color.FromArgb(200, 198, 198);
+            toolStripStatusLabel12.Name = "toolStripStatusLabel12";
+            toolStripStatusLabel12.Size = new System.Drawing.Size(16, 17);
+            toolStripStatusLabel12.Text = "   ";
+            // 
+            // toolStripStatusLabel9
+            // 
+            toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            toolStripStatusLabel9.Size = new System.Drawing.Size(59, 17);
+            toolStripStatusLabel9.Text = "Cancelled";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            splitContainer1.IsSplitterFixed = true;
+            splitContainer1.Location = new System.Drawing.Point(0, 66);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(panel7);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panel1);
+            splitContainer1.Size = new System.Drawing.Size(882, 389);
+            splitContainer1.SplitterDistance = 629;
+            splitContainer1.TabIndex = 14;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(btnApplyFltr);
+            panel1.Controls.Add(flowLayoutPanel1);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(nudYear);
+            panel1.Controls.Add(cmbxFunds);
+            panel1.Controls.Add(cmbxJournals);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(20);
+            panel1.Size = new System.Drawing.Size(249, 389);
+            panel1.TabIndex = 13;
+            // 
+            // btnApplyFltr
+            // 
+            btnApplyFltr.Location = new System.Drawing.Point(23, 290);
+            btnApplyFltr.Name = "btnApplyFltr";
+            btnApplyFltr.Size = new System.Drawing.Size(200, 23);
+            btnApplyFltr.TabIndex = 35;
+            btnApplyFltr.Text = "Apply";
+            btnApplyFltr.UseVisualStyleBackColor = true;
+            btnApplyFltr.Click += btnApplyFltr_Click;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(radPending);
+            flowLayoutPanel1.Controls.Add(radApproved);
+            flowLayoutPanel1.Controls.Add(radDisapproved);
+            flowLayoutPanel1.Controls.Add(radCancelled);
+            flowLayoutPanel1.Location = new System.Drawing.Point(23, 38);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(200, 51);
+            flowLayoutPanel1.TabIndex = 34;
+            // 
+            // radPending
+            // 
+            radPending.AutoSize = true;
+            radPending.Checked = true;
+            radPending.Location = new System.Drawing.Point(3, 3);
+            radPending.Name = "radPending";
+            radPending.Size = new System.Drawing.Size(69, 19);
+            radPending.TabIndex = 0;
+            radPending.TabStop = true;
+            radPending.Text = "Pending";
+            radPending.UseVisualStyleBackColor = true;
+            // 
+            // radApproved
+            // 
+            radApproved.AutoSize = true;
+            radApproved.Location = new System.Drawing.Point(78, 3);
+            radApproved.Name = "radApproved";
+            radApproved.Size = new System.Drawing.Size(77, 19);
+            radApproved.TabIndex = 0;
+            radApproved.Text = "Approved";
+            radApproved.UseVisualStyleBackColor = true;
+            // 
+            // radDisapproved
+            // 
+            radDisapproved.AutoSize = true;
+            radDisapproved.Location = new System.Drawing.Point(3, 28);
+            radDisapproved.Name = "radDisapproved";
+            radDisapproved.Size = new System.Drawing.Size(89, 19);
+            radDisapproved.TabIndex = 0;
+            radDisapproved.Text = "Dissaproved";
+            radDisapproved.UseVisualStyleBackColor = true;
+            // 
+            // radCancelled
+            // 
+            radCancelled.AutoSize = true;
+            radCancelled.Location = new System.Drawing.Point(98, 28);
+            radCancelled.Name = "radCancelled";
+            radCancelled.Size = new System.Drawing.Size(77, 19);
+            radCancelled.TabIndex = 0;
+            radCancelled.Text = "Cancelled";
+            radCancelled.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(23, 216);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(32, 15);
+            label4.TabIndex = 33;
+            label4.Text = "Year:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(23, 160);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(78, 15);
+            label3.TabIndex = 33;
+            label3.Text = "Type of Fund:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(23, 104);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(48, 15);
+            label2.TabIndex = 32;
+            label2.Text = "Journal:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(23, 20);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(42, 15);
+            label1.TabIndex = 31;
+            label1.Text = "Status:";
+            // 
+            // toolStrip2
+            // 
+            toolStrip2.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpCmbxLimit, tlStrpBtnFilter });
+            toolStrip2.Location = new System.Drawing.Point(0, 35);
+            toolStrip2.Name = "toolStrip2";
+            toolStrip2.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip2.Size = new System.Drawing.Size(882, 31);
+            toolStrip2.TabIndex = 15;
+            toolStrip2.Text = "toolStrip2";
+            // 
+            // tlStrpCmbxLimit
+            // 
+            tlStrpCmbxLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            tlStrpCmbxLimit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            tlStrpCmbxLimit.Name = "tlStrpCmbxLimit";
+            tlStrpCmbxLimit.Size = new System.Drawing.Size(121, 23);
+            // 
+            // tlStrpBtnFilter
+            // 
+            tlStrpBtnFilter.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnFilter.Image = Properties.Resources.filter_20px;
+            tlStrpBtnFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnFilter.Name = "tlStrpBtnFilter";
+            tlStrpBtnFilter.Size = new System.Drawing.Size(56, 20);
+            tlStrpBtnFilter.Text = " Filter";
+            tlStrpBtnFilter.Click += tlStrpBtnFilter_Click;
+            // 
+            // frmJevList
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(882, 477);
+            Controls.Add(splitContainer1);
+            Controls.Add(statusStrip1);
+            Controls.Add(toolStrip2);
+            Controls.Add(toolStrip1);
+            MinimizeBox = false;
+            Name = "frmJevList";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Accounting > Transactions > Journal Entry Voucher (JEV)";
+            FormClosed += frmJEVList_FormClosed;
+            Load += frmJEVList_Load;
+            ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
+            panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgJEV).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            toolStrip2.ResumeLayout(false);
+            toolStrip2.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtSearch;
-        internal System.Windows.Forms.ComboBox cmbxJevStatus;
-        internal System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.ComboBox cmbxJournals;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnClose;
-        internal System.Windows.Forms.Button btnSelect;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.DataGridView dgJEV;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar pbLoadRecords;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnCreate;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnUpdate;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnDelete;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnSearch;
+        private System.Windows.Forms.ToolStripTextBox tlStrpTxtSearch;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel10;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel12;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.RadioButton radPending;
+        private System.Windows.Forms.RadioButton radApproved;
+        private System.Windows.Forms.RadioButton radDisapproved;
+        private System.Windows.Forms.RadioButton radCancelled;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripComboBox tlStrpCmbxLimit;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnFilter;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btnApplyFltr;
     }
 }
