@@ -486,77 +486,49 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                    new object[] { "@fund_name", DbType.String, fundName },
-                    new object[] { "@month", DbType.Int32, month},
-                    new object[] { "@year", DbType.Int32, year},
-                    new object[] { "@journal_name", DbType.String, journalName }
+                new object[] { "@fund_name", DbType.String, fundName },
+                new object[] { "@month", DbType.Int32, month},
+                new object[] { "@year", DbType.Int32, year},
+                new object[] { "@journal_name", DbType.String, journalName }
             };
 
-            string query = $"SELECT COUNT(*) " +
-                $"FROM {viewTableName} " +
-                $"WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 " +
-                $"AND fund_name = @fund_name " +
-                $"AND journal_name = @journal_name " +
-                $"AND MONTH(date_entry) = @month " +
-                $"AND YEAR(date_entry) = @year";
+            string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND fund_name = @fund_name AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
 
-            if (string.IsNullOrWhiteSpace(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters)))
-                return 0;
-            else
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object [] { "@jev_no", DbType.String, jevNo },
-                    new object [] { "@funds_id", DbType.Int32, fundId},
-                    new object [] { "@year", DbType.Int16, year},
-                };
+                new object [] { "@jev_no", DbType.String, jevNo },
+                new object [] { "@funds_id", DbType.Int32, fundId},
+                new object [] { "@year", DbType.Int16, year},
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
+            // if query is not null, means found some record, so true
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public bool JevNumberExistBy_JevId_JevNo_FundId_Year(int id, string jevNo, int fundId, int year)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@year", DbType.Int16, year}
-                };
+                new object[] { "@id", DbType.Int32, id },
+                new object[] { "@jev_no", DbType.String, jevNo },
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@year", DbType.Int16, year}
+            };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
+            // if query is not null, means found some record, so true
+            return !string.IsNullOrEmpty(queryResult);
         }
 
         public int GetJevCount(string status, string journalName, string fundName, short year)
@@ -598,7 +570,8 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public int TotalApproveJEV(short month, short year)
@@ -611,7 +584,8 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public int TotalPendingJEV(short month, short year)
@@ -624,7 +598,8 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public int TotalDisapprovedJEV(short month, short year)
@@ -637,7 +612,8 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public int TotalCancelledJEV(short month, short year)
@@ -650,7 +626,8 @@ namespace ACC.Data
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year)
@@ -706,8 +683,9 @@ namespace ACC.Data
             };
 
             string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND a.date_entry <= @date_entry AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
-            decimal amount = Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
-            return amount;
+
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry)
@@ -720,8 +698,9 @@ namespace ACC.Data
                 new object[] { "@is_debit", DbType.Byte, isDebit}
             };
             string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
-            decimal amount = Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
-            return amount;
+
+            bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
+            return isResultValid ? result : 0;
         }
 
         public string GetLastJevNoSeries(int fundId)
