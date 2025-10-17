@@ -49,7 +49,7 @@ namespace ACC.Domain.Interfaces
 
         #endregion Validations
 
-        int JevCounterByJournal(string fundName, int month, int year, string journalName);
+        int JevCounterByJournal(string fundName, int year, string journalName);
 
         int GetJevCount(string status, string journalName, string fundName, short year);
 

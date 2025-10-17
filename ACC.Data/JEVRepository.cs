@@ -482,17 +482,16 @@ namespace ACC.Data
             return record;
         }
 
-        public int JevCounterByJournal(string fundName, int month, int year, string journalName)
+        public int JevCounterByJournal(string fundName, int year, string journalName)
         {
             var parameters = new object[][]
             {
-                new object[] { "@fund_name", DbType.String, fundName },
-                new object[] { "@month", DbType.Int32, month},
+                new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@year", DbType.Int32, year},
                 new object[] { "@journal_name", DbType.String, journalName }
             };
 
-            string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND fund_name = @fund_name AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
+            string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
 
             bool isResultValid = int.TryParse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
