@@ -567,6 +567,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel1.Size = new System.Drawing.Size(1112, 37);
             flowLayoutPanel1.TabIndex = 72;
             // 
@@ -576,9 +577,9 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             btnRefresh.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             btnRefresh.Image = Properties.Resources.symbol_refresh_14px;
             btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRefresh.Location = new System.Drawing.Point(999, 3);
+            btnRefresh.Location = new System.Drawing.Point(991, 7);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(110, 27);
+            btnRefresh.Size = new System.Drawing.Size(110, 23);
             btnRefresh.TabIndex = 82;
             btnRefresh.Text = "Refresh";
             btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -592,7 +593,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             dtAsOf.CustomFormat = "MMM dd, yyyy";
             dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtAsOf.Location = new System.Drawing.Point(879, 3);
+            dtAsOf.Location = new System.Drawing.Point(871, 7);
             dtAsOf.Name = "dtAsOf";
             dtAsOf.Size = new System.Drawing.Size(114, 23);
             dtAsOf.TabIndex = 81;
@@ -603,7 +604,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(713, 3);
+            cmbxFunds.Location = new System.Drawing.Point(705, 7);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(160, 23);
             cmbxFunds.TabIndex = 80;
@@ -614,7 +615,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             cmbSubFPP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbSubFPP.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             cmbSubFPP.FormattingEnabled = true;
-            cmbSubFPP.Location = new System.Drawing.Point(507, 3);
+            cmbSubFPP.Location = new System.Drawing.Point(499, 7);
             cmbSubFPP.Name = "cmbSubFPP";
             cmbSubFPP.Size = new System.Drawing.Size(200, 23);
             cmbSubFPP.TabIndex = 83;
@@ -625,7 +626,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             cmbxFpp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFpp.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             cmbxFpp.FormattingEnabled = true;
-            cmbxFpp.Location = new System.Drawing.Point(301, 3);
+            cmbxFpp.Location = new System.Drawing.Point(293, 7);
             cmbxFpp.Name = "cmbxFpp";
             cmbxFpp.Size = new System.Drawing.Size(200, 23);
             cmbxFpp.TabIndex = 79;
@@ -2249,36 +2250,36 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
-            label9.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label9.Location = new System.Drawing.Point(3, 0);
             label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(106, 20);
+            label9.Size = new System.Drawing.Size(98, 17);
             label9.TabIndex = 72;
             label9.Text = "GRAND TOTAL";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
-            label10.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label10.Location = new System.Drawing.Point(3, 295);
             label10.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(102, 20);
+            label10.Size = new System.Drawing.Size(90, 17);
             label10.TabIndex = 73;
             label10.Text = "CONTINUING";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
-            label11.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label11.Location = new System.Drawing.Point(3, 83);
             label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
             label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(115, 20);
+            label11.Size = new System.Drawing.Size(102, 17);
             label11.TabIndex = 74;
             label11.Text = "CURRENT YEAR";
             // 
