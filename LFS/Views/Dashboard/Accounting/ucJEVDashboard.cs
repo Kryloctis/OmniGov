@@ -78,7 +78,6 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                LoadJEVCounter();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -173,6 +172,15 @@ namespace LFS.Views.Dashboard
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void btnRecordJev_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmJevList(this).ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

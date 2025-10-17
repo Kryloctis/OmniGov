@@ -29,7 +29,6 @@ namespace LFS.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            btnRefresh = new System.Windows.Forms.Button();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pnlPendingJEV = new System.Windows.Forms.Panel();
             lnkPending = new System.Windows.Forms.LinkLabel();
@@ -50,6 +49,7 @@ namespace LFS.Views.Dashboard
             cmbxFunds = new System.Windows.Forms.ComboBox();
             nudYear = new System.Windows.Forms.NumericUpDown();
             panel1 = new System.Windows.Forms.Panel();
+            btnRecordJev = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             pnlPendingJEV.SuspendLayout();
             pnlApprovedJEV.SuspendLayout();
@@ -60,27 +60,14 @@ namespace LFS.Views.Dashboard
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnRefresh
-            // 
-            btnRefresh.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRefresh.Location = new System.Drawing.Point(519, 3);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(95, 23);
-            btnRefresh.TabIndex = 13;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnRefresh.UseVisualStyleBackColor = true;
-            btnRefresh.Click += btnRefreshCounter_Click;
-            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 5;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel1.Controls.Add(pnlPendingJEV, 0, -1);
             tableLayoutPanel1.Controls.Add(pnlApprovedJEV, 0, -1);
             tableLayoutPanel1.Controls.Add(pnlJEV, 0, -1);
@@ -92,7 +79,7 @@ namespace LFS.Views.Dashboard
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1166, 91);
+            tableLayoutPanel1.Size = new System.Drawing.Size(756, 91);
             tableLayoutPanel1.TabIndex = 14;
             // 
             // pnlPendingJEV
@@ -101,9 +88,10 @@ namespace LFS.Views.Dashboard
             pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlPendingJEV.Controls.Add(lnkPending);
             pnlPendingJEV.Controls.Add(lblPendingJEVCounter);
+            pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             pnlPendingJEV.Location = new System.Drawing.Point(3, 3);
             pnlPendingJEV.Name = "pnlPendingJEV";
-            pnlPendingJEV.Size = new System.Drawing.Size(227, 83);
+            pnlPendingJEV.Size = new System.Drawing.Size(145, 85);
             pnlPendingJEV.TabIndex = 29;
             // 
             // lnkPending
@@ -117,9 +105,9 @@ namespace LFS.Views.Dashboard
             lnkPending.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkPending.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkPending.Location = new System.Drawing.Point(0, 42);
+            lnkPending.Location = new System.Drawing.Point(0, 40);
             lnkPending.Name = "lnkPending";
-            lnkPending.Size = new System.Drawing.Size(225, 23);
+            lnkPending.Size = new System.Drawing.Size(143, 23);
             lnkPending.TabIndex = 15;
             lnkPending.TabStop = true;
             lnkPending.Text = "Pending";
@@ -133,7 +121,7 @@ namespace LFS.Views.Dashboard
             lblPendingJEVCounter.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
             lblPendingJEVCounter.Name = "lblPendingJEVCounter";
-            lblPendingJEVCounter.Size = new System.Drawing.Size(225, 42);
+            lblPendingJEVCounter.Size = new System.Drawing.Size(143, 40);
             lblPendingJEVCounter.TabIndex = 6;
             lblPendingJEVCounter.Text = "0";
             lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -144,9 +132,10 @@ namespace LFS.Views.Dashboard
             pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlApprovedJEV.Controls.Add(lnkApproved);
             pnlApprovedJEV.Controls.Add(lblApprovedJEVCounter);
-            pnlApprovedJEV.Location = new System.Drawing.Point(236, 3);
+            pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlApprovedJEV.Location = new System.Drawing.Point(154, 3);
             pnlApprovedJEV.Name = "pnlApprovedJEV";
-            pnlApprovedJEV.Size = new System.Drawing.Size(227, 83);
+            pnlApprovedJEV.Size = new System.Drawing.Size(145, 85);
             pnlApprovedJEV.TabIndex = 28;
             // 
             // lnkApproved
@@ -160,9 +149,9 @@ namespace LFS.Views.Dashboard
             lnkApproved.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkApproved.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkApproved.Location = new System.Drawing.Point(0, 42);
+            lnkApproved.Location = new System.Drawing.Point(0, 40);
             lnkApproved.Name = "lnkApproved";
-            lnkApproved.Size = new System.Drawing.Size(225, 23);
+            lnkApproved.Size = new System.Drawing.Size(143, 23);
             lnkApproved.TabIndex = 14;
             lnkApproved.TabStop = true;
             lnkApproved.Text = "Approved";
@@ -176,7 +165,7 @@ namespace LFS.Views.Dashboard
             lblApprovedJEVCounter.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
-            lblApprovedJEVCounter.Size = new System.Drawing.Size(225, 42);
+            lblApprovedJEVCounter.Size = new System.Drawing.Size(143, 40);
             lblApprovedJEVCounter.TabIndex = 6;
             lblApprovedJEVCounter.Text = "0";
             lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -187,9 +176,10 @@ namespace LFS.Views.Dashboard
             pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlJEV.Controls.Add(lnkJEV);
             pnlJEV.Controls.Add(lblJEVCounter);
-            pnlJEV.Location = new System.Drawing.Point(469, 3);
+            pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlJEV.Location = new System.Drawing.Point(305, 3);
             pnlJEV.Name = "pnlJEV";
-            pnlJEV.Size = new System.Drawing.Size(227, 83);
+            pnlJEV.Size = new System.Drawing.Size(145, 85);
             pnlJEV.TabIndex = 26;
             // 
             // lnkJEV
@@ -203,9 +193,9 @@ namespace LFS.Views.Dashboard
             lnkJEV.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkJEV.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkJEV.Location = new System.Drawing.Point(0, 42);
+            lnkJEV.Location = new System.Drawing.Point(0, 40);
             lnkJEV.Name = "lnkJEV";
-            lnkJEV.Size = new System.Drawing.Size(225, 23);
+            lnkJEV.Size = new System.Drawing.Size(143, 23);
             lnkJEV.TabIndex = 15;
             lnkJEV.TabStop = true;
             lnkJEV.Text = "Total";
@@ -219,7 +209,7 @@ namespace LFS.Views.Dashboard
             lblJEVCounter.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblJEVCounter.Location = new System.Drawing.Point(0, 0);
             lblJEVCounter.Name = "lblJEVCounter";
-            lblJEVCounter.Size = new System.Drawing.Size(225, 42);
+            lblJEVCounter.Size = new System.Drawing.Size(143, 40);
             lblJEVCounter.TabIndex = 6;
             lblJEVCounter.Text = "0";
             lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -230,9 +220,10 @@ namespace LFS.Views.Dashboard
             pnlDisapproved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlDisapproved.Controls.Add(linkDisapproved);
             pnlDisapproved.Controls.Add(lblDisapprovedJEVCounter);
-            pnlDisapproved.Location = new System.Drawing.Point(702, 3);
+            pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlDisapproved.Location = new System.Drawing.Point(456, 3);
             pnlDisapproved.Name = "pnlDisapproved";
-            pnlDisapproved.Size = new System.Drawing.Size(227, 83);
+            pnlDisapproved.Size = new System.Drawing.Size(145, 85);
             pnlDisapproved.TabIndex = 22;
             // 
             // linkDisapproved
@@ -246,9 +237,9 @@ namespace LFS.Views.Dashboard
             linkDisapproved.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            linkDisapproved.Location = new System.Drawing.Point(0, 42);
+            linkDisapproved.Location = new System.Drawing.Point(0, 40);
             linkDisapproved.Name = "linkDisapproved";
-            linkDisapproved.Size = new System.Drawing.Size(225, 23);
+            linkDisapproved.Size = new System.Drawing.Size(143, 23);
             linkDisapproved.TabIndex = 16;
             linkDisapproved.TabStop = true;
             linkDisapproved.Text = "Disapproved";
@@ -262,7 +253,7 @@ namespace LFS.Views.Dashboard
             lblDisapprovedJEVCounter.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
-            lblDisapprovedJEVCounter.Size = new System.Drawing.Size(225, 42);
+            lblDisapprovedJEVCounter.Size = new System.Drawing.Size(143, 40);
             lblDisapprovedJEVCounter.TabIndex = 6;
             lblDisapprovedJEVCounter.Text = "0";
             lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -273,9 +264,10 @@ namespace LFS.Views.Dashboard
             pnlCancelled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlCancelled.Controls.Add(lnkCancelled);
             pnlCancelled.Controls.Add(lblCancelledJEVCounter);
-            pnlCancelled.Location = new System.Drawing.Point(935, 3);
+            pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlCancelled.Location = new System.Drawing.Point(607, 3);
             pnlCancelled.Name = "pnlCancelled";
-            pnlCancelled.Size = new System.Drawing.Size(228, 83);
+            pnlCancelled.Size = new System.Drawing.Size(146, 85);
             pnlCancelled.TabIndex = 23;
             // 
             // lnkCancelled
@@ -289,9 +281,9 @@ namespace LFS.Views.Dashboard
             lnkCancelled.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkCancelled.Location = new System.Drawing.Point(0, 42);
+            lnkCancelled.Location = new System.Drawing.Point(0, 40);
             lnkCancelled.Name = "lnkCancelled";
-            lnkCancelled.Size = new System.Drawing.Size(226, 23);
+            lnkCancelled.Size = new System.Drawing.Size(144, 23);
             lnkCancelled.TabIndex = 15;
             lnkCancelled.TabStop = true;
             lnkCancelled.Text = "Cancelled";
@@ -305,16 +297,17 @@ namespace LFS.Views.Dashboard
             lblCancelledJEVCounter.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
             lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
-            lblCancelledJEVCounter.Size = new System.Drawing.Size(226, 42);
+            lblCancelledJEVCounter.Size = new System.Drawing.Size(144, 40);
             lblCancelledJEVCounter.TabIndex = 6;
             lblCancelledJEVCounter.Text = "0";
             lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // cmbxJournals
             // 
+            cmbxJournals.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxJournals.FormattingEnabled = true;
-            cmbxJournals.Location = new System.Drawing.Point(3, 3);
+            cmbxJournals.Location = new System.Drawing.Point(239, 6);
             cmbxJournals.Name = "cmbxJournals";
             cmbxJournals.Size = new System.Drawing.Size(200, 23);
             cmbxJournals.TabIndex = 30;
@@ -322,9 +315,10 @@ namespace LFS.Views.Dashboard
             // 
             // cmbxFunds
             // 
+            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(209, 3);
+            cmbxFunds.Location = new System.Drawing.Point(445, 6);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(189, 23);
             cmbxFunds.TabIndex = 32;
@@ -332,8 +326,9 @@ namespace LFS.Views.Dashboard
             // 
             // nudYear
             // 
+            nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             nudYear.BackColor = System.Drawing.Color.White;
-            nudYear.Location = new System.Drawing.Point(404, 3);
+            nudYear.Location = new System.Drawing.Point(640, 6);
             nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
             nudYear.Name = "nudYear";
@@ -345,16 +340,29 @@ namespace LFS.Views.Dashboard
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnRecordJev);
             panel1.Controls.Add(cmbxJournals);
             panel1.Controls.Add(cmbxFunds);
-            panel1.Controls.Add(btnRefresh);
             panel1.Controls.Add(nudYear);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(1166, 36);
+            panel1.Size = new System.Drawing.Size(756, 36);
             panel1.TabIndex = 16;
+            // 
+            // btnRecordJev
+            // 
+            btnRecordJev.Image = Properties.Resources.symbol_add_14px;
+            btnRecordJev.Location = new System.Drawing.Point(7, 6);
+            btnRecordJev.Name = "btnRecordJev";
+            btnRecordJev.Size = new System.Drawing.Size(120, 23);
+            btnRecordJev.TabIndex = 33;
+            btnRecordJev.Text = "Record JEV";
+            btnRecordJev.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRecordJev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRecordJev.UseVisualStyleBackColor = true;
+            btnRecordJev.Click += btnRecordJev_Click;
             // 
             // ucJevDashboard
             // 
@@ -364,7 +372,7 @@ namespace LFS.Views.Dashboard
             Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(0);
             Name = "ucJevDashboard";
-            Size = new System.Drawing.Size(1166, 134);
+            Size = new System.Drawing.Size(756, 134);
             tableLayoutPanel1.ResumeLayout(false);
             pnlPendingJEV.ResumeLayout(false);
             pnlApprovedJEV.ResumeLayout(false);
@@ -377,7 +385,6 @@ namespace LFS.Views.Dashboard
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlDisapproved;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
@@ -398,5 +405,6 @@ namespace LFS.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkJEV;
         internal System.Windows.Forms.ComboBox cmbxFunds;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnRecordJev;
     }
 }

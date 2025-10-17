@@ -31,7 +31,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             cmbxFunds = new System.Windows.Forms.ComboBox();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel3 = new System.Windows.Forms.Panel();
             lnkProcurementReceivedJournal = new System.Windows.Forms.LinkLabel();
@@ -51,6 +50,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             panel2 = new System.Windows.Forms.Panel();
             lnkADAdisbursementsJournal = new System.Windows.Forms.LinkLabel();
             lblADADisbursementsJournal = new System.Windows.Forms.Label();
+            numdYear = new System.Windows.Forms.NumericUpDown();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -59,38 +59,31 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlJEV.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numdYear).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.Controls.Add(numdYear);
             flowLayoutPanel1.Controls.Add(cmbxFunds);
-            flowLayoutPanel1.Controls.Add(dateTimePicker1);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(941, 29);
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
+            flowLayoutPanel1.Size = new System.Drawing.Size(938, 37);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // cmbxFunds
             // 
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(3, 3);
+            cmbxFunds.Location = new System.Drawing.Point(593, 7);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(208, 23);
             cmbxFunds.TabIndex = 0;
             cmbxFunds.SelectedValueChanged += cmbxFunds_SelectedValueChanged;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CustomFormat = "MMMM-  yyyy";
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(217, 3);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(211, 23);
-            dateTimePicker1.TabIndex = 1;
-            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -108,14 +101,12 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             tableLayoutPanel1.Controls.Add(panel1, 3, 0);
             tableLayoutPanel1.Controls.Add(panel2, 4, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 37);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(941, 131);
+            tableLayoutPanel1.Size = new System.Drawing.Size(938, 91);
             tableLayoutPanel1.TabIndex = 15;
             // 
             // panel3
@@ -125,10 +116,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             panel3.Controls.Add(lnkProcurementReceivedJournal);
             panel3.Controls.Add(lblProcurementReceivedJournalCount);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(315, 13);
-            panel3.MinimumSize = new System.Drawing.Size(150, 113);
+            panel3.Location = new System.Drawing.Point(315, 3);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(150, 115);
+            panel3.Size = new System.Drawing.Size(150, 85);
             panel3.TabIndex = 30;
             // 
             // lnkProcurementReceivedJournal
@@ -137,13 +127,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkProcurementReceivedJournal.BackColor = System.Drawing.Color.Transparent;
             lnkProcurementReceivedJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkProcurementReceivedJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkProcurementReceivedJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkProcurementReceivedJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkProcurementReceivedJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkProcurementReceivedJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkProcurementReceivedJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkProcurementReceivedJournal.Location = new System.Drawing.Point(0, 61);
+            lnkProcurementReceivedJournal.Location = new System.Drawing.Point(0, 40);
             lnkProcurementReceivedJournal.Name = "lnkProcurementReceivedJournal";
             lnkProcurementReceivedJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkProcurementReceivedJournal.Size = new System.Drawing.Size(148, 42);
+            lnkProcurementReceivedJournal.Size = new System.Drawing.Size(148, 40);
             lnkProcurementReceivedJournal.TabIndex = 15;
             lnkProcurementReceivedJournal.TabStop = true;
             lnkProcurementReceivedJournal.Text = "Procurement Received Journal";
@@ -153,11 +144,11 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblProcurementReceivedJournalCount
             // 
             lblProcurementReceivedJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            lblProcurementReceivedJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblProcurementReceivedJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblProcurementReceivedJournalCount.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblProcurementReceivedJournalCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblProcurementReceivedJournalCount.Location = new System.Drawing.Point(0, 0);
             lblProcurementReceivedJournalCount.Name = "lblProcurementReceivedJournalCount";
-            lblProcurementReceivedJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblProcurementReceivedJournalCount.Size = new System.Drawing.Size(148, 40);
             lblProcurementReceivedJournalCount.TabIndex = 6;
             lblProcurementReceivedJournalCount.Text = "0";
             lblProcurementReceivedJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -169,10 +160,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlPendingJEV.Controls.Add(lnkCashDisbursementJournal);
             pnlPendingJEV.Controls.Add(lblCashDisbursementsJournalCount);
             pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlPendingJEV.Location = new System.Drawing.Point(471, 13);
-            pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlPendingJEV.Location = new System.Drawing.Point(471, 3);
             pnlPendingJEV.Name = "pnlPendingJEV";
-            pnlPendingJEV.Size = new System.Drawing.Size(150, 115);
+            pnlPendingJEV.Size = new System.Drawing.Size(150, 85);
             pnlPendingJEV.TabIndex = 29;
             // 
             // lnkCashDisbursementJournal
@@ -181,13 +171,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkCashDisbursementJournal.BackColor = System.Drawing.Color.Transparent;
             lnkCashDisbursementJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkCashDisbursementJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkCashDisbursementJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCashDisbursementJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkCashDisbursementJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkCashDisbursementJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkCashDisbursementJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkCashDisbursementJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCashDisbursementJournal.Location = new System.Drawing.Point(0, 40);
             lnkCashDisbursementJournal.Name = "lnkCashDisbursementJournal";
             lnkCashDisbursementJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkCashDisbursementJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCashDisbursementJournal.Size = new System.Drawing.Size(148, 40);
             lnkCashDisbursementJournal.TabIndex = 15;
             lnkCashDisbursementJournal.TabStop = true;
             lnkCashDisbursementJournal.Text = "Cash Disbursements Journal";
@@ -197,11 +188,11 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblCashDisbursementsJournalCount
             // 
             lblCashDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            lblCashDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblCashDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCashDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblCashDisbursementsJournalCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblCashDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
             lblCashDisbursementsJournalCount.Name = "lblCashDisbursementsJournalCount";
-            lblCashDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCashDisbursementsJournalCount.Size = new System.Drawing.Size(148, 40);
             lblCashDisbursementsJournalCount.TabIndex = 6;
             lblCashDisbursementsJournalCount.Text = "0";
             lblCashDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -213,10 +204,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlApprovedJEV.Controls.Add(lnkGeneralJournal);
             pnlApprovedJEV.Controls.Add(lblGeneralJournalCount);
             pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlApprovedJEV.Location = new System.Drawing.Point(3, 13);
-            pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlApprovedJEV.Location = new System.Drawing.Point(3, 3);
             pnlApprovedJEV.Name = "pnlApprovedJEV";
-            pnlApprovedJEV.Size = new System.Drawing.Size(150, 115);
+            pnlApprovedJEV.Size = new System.Drawing.Size(150, 85);
             pnlApprovedJEV.TabIndex = 28;
             // 
             // lnkGeneralJournal
@@ -225,13 +215,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkGeneralJournal.BackColor = System.Drawing.Color.Transparent;
             lnkGeneralJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkGeneralJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkGeneralJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkGeneralJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkGeneralJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkGeneralJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkGeneralJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkGeneralJournal.Location = new System.Drawing.Point(0, 61);
+            lnkGeneralJournal.Location = new System.Drawing.Point(0, 40);
             lnkGeneralJournal.Name = "lnkGeneralJournal";
             lnkGeneralJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkGeneralJournal.Size = new System.Drawing.Size(148, 42);
+            lnkGeneralJournal.Size = new System.Drawing.Size(148, 40);
             lnkGeneralJournal.TabIndex = 14;
             lnkGeneralJournal.TabStop = true;
             lnkGeneralJournal.Text = "General Journal";
@@ -241,11 +232,11 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblGeneralJournalCount
             // 
             lblGeneralJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            lblGeneralJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblGeneralJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblGeneralJournalCount.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblGeneralJournalCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblGeneralJournalCount.Location = new System.Drawing.Point(0, 0);
             lblGeneralJournalCount.Name = "lblGeneralJournalCount";
-            lblGeneralJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblGeneralJournalCount.Size = new System.Drawing.Size(148, 40);
             lblGeneralJournalCount.TabIndex = 6;
             lblGeneralJournalCount.Text = "0";
             lblGeneralJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -257,10 +248,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlJEV.Controls.Add(lnkCashReceiptJournal);
             pnlJEV.Controls.Add(lblCashReceiptsJournalCount);
             pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlJEV.Location = new System.Drawing.Point(159, 13);
-            pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlJEV.Location = new System.Drawing.Point(159, 3);
             pnlJEV.Name = "pnlJEV";
-            pnlJEV.Size = new System.Drawing.Size(150, 115);
+            pnlJEV.Size = new System.Drawing.Size(150, 85);
             pnlJEV.TabIndex = 26;
             // 
             // lnkCashReceiptJournal
@@ -269,13 +259,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkCashReceiptJournal.BackColor = System.Drawing.Color.Transparent;
             lnkCashReceiptJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkCashReceiptJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkCashReceiptJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCashReceiptJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkCashReceiptJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkCashReceiptJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkCashReceiptJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkCashReceiptJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCashReceiptJournal.Location = new System.Drawing.Point(0, 40);
             lnkCashReceiptJournal.Name = "lnkCashReceiptJournal";
             lnkCashReceiptJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkCashReceiptJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCashReceiptJournal.Size = new System.Drawing.Size(148, 40);
             lnkCashReceiptJournal.TabIndex = 15;
             lnkCashReceiptJournal.TabStop = true;
             lnkCashReceiptJournal.Text = "Cash Receipts Journal";
@@ -285,11 +276,11 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblCashReceiptsJournalCount
             // 
             lblCashReceiptsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            lblCashReceiptsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblCashReceiptsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCashReceiptsJournalCount.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblCashReceiptsJournalCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblCashReceiptsJournalCount.Location = new System.Drawing.Point(0, 0);
             lblCashReceiptsJournalCount.Name = "lblCashReceiptsJournalCount";
-            lblCashReceiptsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCashReceiptsJournalCount.Size = new System.Drawing.Size(148, 40);
             lblCashReceiptsJournalCount.TabIndex = 6;
             lblCashReceiptsJournalCount.Text = "0";
             lblCashReceiptsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -301,10 +292,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             panel1.Controls.Add(lnkCheckDisbursementsJournal);
             panel1.Controls.Add(lblCheckDisbursementsJournalCount);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(627, 13);
-            panel1.MinimumSize = new System.Drawing.Size(150, 113);
+            panel1.Location = new System.Drawing.Point(627, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(150, 115);
+            panel1.Size = new System.Drawing.Size(150, 85);
             panel1.TabIndex = 22;
             // 
             // lnkCheckDisbursementsJournal
@@ -313,13 +303,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkCheckDisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
             lnkCheckDisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkCheckDisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkCheckDisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkCheckDisbursementsJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkCheckDisbursementsJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkCheckDisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkCheckDisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkCheckDisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            lnkCheckDisbursementsJournal.Location = new System.Drawing.Point(0, 40);
             lnkCheckDisbursementsJournal.Name = "lnkCheckDisbursementsJournal";
             lnkCheckDisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkCheckDisbursementsJournal.Size = new System.Drawing.Size(148, 42);
+            lnkCheckDisbursementsJournal.Size = new System.Drawing.Size(148, 40);
             lnkCheckDisbursementsJournal.TabIndex = 16;
             lnkCheckDisbursementsJournal.TabStop = true;
             lnkCheckDisbursementsJournal.Text = "Check Disbursements Journal";
@@ -329,11 +320,11 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblCheckDisbursementsJournalCount
             // 
             lblCheckDisbursementsJournalCount.Dock = System.Windows.Forms.DockStyle.Top;
-            lblCheckDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblCheckDisbursementsJournalCount.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCheckDisbursementsJournalCount.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblCheckDisbursementsJournalCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblCheckDisbursementsJournalCount.Location = new System.Drawing.Point(0, 0);
             lblCheckDisbursementsJournalCount.Name = "lblCheckDisbursementsJournalCount";
-            lblCheckDisbursementsJournalCount.Size = new System.Drawing.Size(148, 61);
+            lblCheckDisbursementsJournalCount.Size = new System.Drawing.Size(148, 40);
             lblCheckDisbursementsJournalCount.TabIndex = 6;
             lblCheckDisbursementsJournalCount.Text = "0";
             lblCheckDisbursementsJournalCount.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -345,10 +336,9 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             panel2.Controls.Add(lnkADAdisbursementsJournal);
             panel2.Controls.Add(lblADADisbursementsJournal);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(783, 13);
-            panel2.MinimumSize = new System.Drawing.Size(150, 113);
+            panel2.Location = new System.Drawing.Point(783, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(155, 115);
+            panel2.Size = new System.Drawing.Size(152, 85);
             panel2.TabIndex = 23;
             // 
             // lnkADAdisbursementsJournal
@@ -357,13 +347,14 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lnkADAdisbursementsJournal.BackColor = System.Drawing.Color.Transparent;
             lnkADAdisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             lnkADAdisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lnkADAdisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            lnkADAdisbursementsJournal.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            lnkADAdisbursementsJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lnkADAdisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             lnkADAdisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            lnkADAdisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            lnkADAdisbursementsJournal.Location = new System.Drawing.Point(0, 40);
             lnkADAdisbursementsJournal.Name = "lnkADAdisbursementsJournal";
             lnkADAdisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
-            lnkADAdisbursementsJournal.Size = new System.Drawing.Size(153, 42);
+            lnkADAdisbursementsJournal.Size = new System.Drawing.Size(150, 40);
             lnkADAdisbursementsJournal.TabIndex = 15;
             lnkADAdisbursementsJournal.TabStop = true;
             lnkADAdisbursementsJournal.Text = "ADA Disbursements Journal";
@@ -373,14 +364,23 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             // lblADADisbursementsJournal
             // 
             lblADADisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
-            lblADADisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
-            lblADADisbursementsJournal.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblADADisbursementsJournal.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            lblADADisbursementsJournal.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             lblADADisbursementsJournal.Location = new System.Drawing.Point(0, 0);
             lblADADisbursementsJournal.Name = "lblADADisbursementsJournal";
-            lblADADisbursementsJournal.Size = new System.Drawing.Size(153, 61);
+            lblADADisbursementsJournal.Size = new System.Drawing.Size(150, 40);
             lblADADisbursementsJournal.TabIndex = 6;
             lblADADisbursementsJournal.Text = "0";
             lblADADisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // numdYear
+            // 
+            numdYear.Location = new System.Drawing.Point(807, 7);
+            numdYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            numdYear.Name = "numdYear";
+            numdYear.Size = new System.Drawing.Size(120, 23);
+            numdYear.TabIndex = 1;
+            numdYear.ValueChanged += numdYear_ValueChanged;
             // 
             // ucJournalsDashboard
             // 
@@ -389,10 +389,8 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(tableLayoutPanel1);
             Controls.Add(flowLayoutPanel1);
-            MinimumSize = new System.Drawing.Size(941, 160);
             Name = "ucJournalsDashboard";
-            Size = new System.Drawing.Size(941, 160);
-            Load += ucJournalsDashboard_Load;
+            Size = new System.Drawing.Size(938, 135);
             flowLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -401,6 +399,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlJEV.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numdYear).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -410,7 +409,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.ComboBox cmbxFunds;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlPendingJEV;
         internal System.Windows.Forms.Label lblCashDisbursementsJournalCount;
@@ -430,5 +428,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         internal System.Windows.Forms.LinkLabel lnkGeneralJournal;
         internal System.Windows.Forms.LinkLabel lnkCashReceiptJournal;
         internal System.Windows.Forms.LinkLabel lnkCheckDisbursementsJournal;
+        private System.Windows.Forms.NumericUpDown numdYear;
     }
 }

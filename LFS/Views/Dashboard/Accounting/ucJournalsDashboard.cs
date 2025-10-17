@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using LFS.Helpers;
 using System;
 using System.Windows.Forms;
 
@@ -11,18 +12,12 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             InitializeComponent();
         }
 
-        private void ucJournalsDashboard_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadFunds();
-                LoadCounters();
-            }
-        }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        internal void Onload()
         {
+            LoadFunds();
             LoadCounters();
+            numdYear.Value = Helper.GetCurrentDate().Year;
         }
 
         private void cmbxFunds_SelectedValueChanged(object sender, EventArgs e)
@@ -33,20 +28,36 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var newRow = dtFunds.NewRow();
+            newRow["id"] = 0;
+            newRow["fund_name"] = "All";
+
+            dtFunds.Rows.InsertAt(newRow, 0);
+
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadCounters()
         {
             string fundName = cmbxFunds.Text.Trim();
-            int month = dateTimePicker1.Value.Month;
-            int year = dateTimePicker1.Value.Year;
-            int generalJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "General Journal");
-            int cashReceiptsJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Receipts Journal");
-            int procurementReceivedJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Procurement Received Journal");
-            int cashDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Disbursements Journal");
-            int checkDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Check Disbursements Journal");
-            int adaDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Authority to Debit Account Disbursement Journal");
+            int year = (int)numdYear.Value;
+            int generalJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "General Journal");
+
+            int cashReceiptsJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "Cash Receipts Journal");
+
+            int procurementReceivedJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "Procurement Received Journal");
+
+            int cashDisbursementJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "Cash Disbursements Journal");
+
+            int checkDisbursementJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "Check Disbursements Journal");
+
+            int adaDisbursementJournalCount = AccFactory.JEVRepository()
+                                    .JevCounterByJournal(fundName, year, "Authority to Debit Account Disbursement Journal");
 
             lblGeneralJournalCount.Text = generalJournalCount.ToString();
             lblCashReceiptsJournalCount.Text = cashReceiptsJournalCount.ToString();
@@ -78,6 +89,15 @@ namespace LFS.Views.Dashboard.AccountingDashboard
 
         private void lnkProcurementReceivedJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+        }
+
+        private void numdYear_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadCounters();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

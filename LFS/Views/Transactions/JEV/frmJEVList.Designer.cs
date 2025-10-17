@@ -58,6 +58,12 @@ namespace LFS.Views.Transactions.JEV
             label5 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
+            customTabControl1 = new LFS.CustomTools.CustomTabControl();
+            tbPgMain = new System.Windows.Forms.TabPage();
+            tbPgCrud = new System.Windows.Forms.TabPage();
+            ucJev1 = new ucJev();
+            toolStrip3 = new System.Windows.Forms.ToolStrip();
+            tlStrpBtnBack = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
@@ -69,6 +75,10 @@ namespace LFS.Views.Transactions.JEV
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             toolStrip2.SuspendLayout();
+            customTabControl1.SuspendLayout();
+            tbPgMain.SuspendLayout();
+            tbPgCrud.SuspendLayout();
+            toolStrip3.SuspendLayout();
             SuspendLayout();
             // 
             // cmbxFunds
@@ -110,7 +120,7 @@ namespace LFS.Views.Transactions.JEV
             panel7.Location = new System.Drawing.Point(0, 0);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(623, 389);
+            panel7.Size = new System.Drawing.Size(616, 361);
             panel7.TabIndex = 9;
             // 
             // dgJEV
@@ -120,7 +130,7 @@ namespace LFS.Views.Transactions.JEV
             dgJEV.Location = new System.Drawing.Point(4, 9);
             dgJEV.Margin = new System.Windows.Forms.Padding(1);
             dgJEV.Name = "dgJEV";
-            dgJEV.Size = new System.Drawing.Size(615, 376);
+            dgJEV.Size = new System.Drawing.Size(608, 348);
             dgJEV.TabIndex = 7;
             dgJEV.ColumnAdded += dgJEV_ColumnAdded;
             dgJEV.SelectionChanged += dgJEV_SelectionChanged;
@@ -130,7 +140,7 @@ namespace LFS.Views.Transactions.JEV
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
             pbLoadRecords.Location = new System.Drawing.Point(4, 4);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(615, 5);
+            pbLoadRecords.Size = new System.Drawing.Size(608, 5);
             pbLoadRecords.TabIndex = 25;
             // 
             // backgroundWorker1
@@ -150,7 +160,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(882, 35);
+            toolStrip1.Size = new System.Drawing.Size(874, 35);
             toolStrip1.TabIndex = 11;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -204,16 +214,18 @@ namespace LFS.Views.Transactions.JEV
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 455);
+            statusStrip1.Location = new System.Drawing.Point(0, 427);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(882, 22);
+            statusStrip1.Size = new System.Drawing.Size(874, 22);
             statusStrip1.TabIndex = 13;
             statusStrip1.Text = "statusStrip1";
             // 
             // splitContainer1
             // 
+            splitContainer1.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            splitContainer1.IsSplitterFixed = true;
             splitContainer1.Location = new System.Drawing.Point(0, 66);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -226,8 +238,8 @@ namespace LFS.Views.Transactions.JEV
             splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(label5);
-            splitContainer1.Size = new System.Drawing.Size(882, 389);
-            splitContainer1.SplitterDistance = 623;
+            splitContainer1.Size = new System.Drawing.Size(874, 361);
+            splitContainer1.SplitterDistance = 616;
             splitContainer1.TabIndex = 14;
             // 
             // panel1
@@ -245,7 +257,7 @@ namespace LFS.Views.Transactions.JEV
             panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(255, 358);
+            panel1.Size = new System.Drawing.Size(254, 330);
             panel1.TabIndex = 13;
             // 
             // btnApplyFltr
@@ -356,7 +368,7 @@ namespace LFS.Views.Transactions.JEV
             label5.Location = new System.Drawing.Point(0, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(4);
-            label5.Size = new System.Drawing.Size(255, 31);
+            label5.Size = new System.Drawing.Size(254, 31);
             label5.TabIndex = 32;
             label5.Text = "Filter Records";
             // 
@@ -368,7 +380,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip2.Location = new System.Drawing.Point(0, 35);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(882, 31);
+            toolStrip2.Size = new System.Drawing.Size(874, 31);
             toolStrip2.TabIndex = 17;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -379,15 +391,78 @@ namespace LFS.Views.Transactions.JEV
             tlStrpCmbxLimit.Name = "tlStrpCmbxLimit";
             tlStrpCmbxLimit.Size = new System.Drawing.Size(121, 23);
             // 
+            // customTabControl1
+            // 
+            customTabControl1.Controls.Add(tbPgMain);
+            customTabControl1.Controls.Add(tbPgCrud);
+            customTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTabControl1.Location = new System.Drawing.Point(0, 0);
+            customTabControl1.Name = "customTabControl1";
+            customTabControl1.SelectedIndex = 0;
+            customTabControl1.Size = new System.Drawing.Size(882, 477);
+            customTabControl1.TabIndex = 18;
+            // 
+            // tbPgMain
+            // 
+            tbPgMain.Controls.Add(splitContainer1);
+            tbPgMain.Controls.Add(toolStrip2);
+            tbPgMain.Controls.Add(toolStrip1);
+            tbPgMain.Controls.Add(statusStrip1);
+            tbPgMain.Location = new System.Drawing.Point(4, 24);
+            tbPgMain.Name = "tbPgMain";
+            tbPgMain.Size = new System.Drawing.Size(874, 449);
+            tbPgMain.TabIndex = 0;
+            tbPgMain.Text = "tbPgMain";
+            tbPgMain.UseVisualStyleBackColor = true;
+            // 
+            // tbPgCrud
+            // 
+            tbPgCrud.Controls.Add(ucJev1);
+            tbPgCrud.Controls.Add(toolStrip3);
+            tbPgCrud.Location = new System.Drawing.Point(4, 24);
+            tbPgCrud.Name = "tbPgCrud";
+            tbPgCrud.Size = new System.Drawing.Size(874, 449);
+            tbPgCrud.TabIndex = 1;
+            tbPgCrud.Text = "tbPgCrud";
+            tbPgCrud.UseVisualStyleBackColor = true;
+            // 
+            // ucJev1
+            // 
+            ucJev1.AutoSize = true;
+            ucJev1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucJev1.Location = new System.Drawing.Point(0, 35);
+            ucJev1.Name = "ucJev1";
+            ucJev1.Size = new System.Drawing.Size(874, 414);
+            ucJev1.TabIndex = 0;
+            // 
+            // toolStrip3
+            // 
+            toolStrip3.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBack });
+            toolStrip3.Location = new System.Drawing.Point(0, 0);
+            toolStrip3.Name = "toolStrip3";
+            toolStrip3.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip3.Size = new System.Drawing.Size(874, 35);
+            toolStrip3.TabIndex = 1;
+            toolStrip3.Text = "toolStrip3";
+            // 
+            // tlStrpBtnBack
+            // 
+            tlStrpBtnBack.Image = Properties.Resources.arrow_left_20px;
+            tlStrpBtnBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnBack.Name = "tlStrpBtnBack";
+            tlStrpBtnBack.Size = new System.Drawing.Size(56, 24);
+            tlStrpBtnBack.Text = "Back";
+            tlStrpBtnBack.Click += tlStrpBtnBack_Click;
+            // 
             // frmJevList
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(882, 477);
-            Controls.Add(splitContainer1);
-            Controls.Add(statusStrip1);
-            Controls.Add(toolStrip2);
-            Controls.Add(toolStrip1);
+            Controls.Add(customTabControl1);
             MinimizeBox = false;
             Name = "frmJevList";
             ShowIcon = false;
@@ -411,8 +486,14 @@ namespace LFS.Views.Transactions.JEV
             flowLayoutPanel1.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            customTabControl1.ResumeLayout(false);
+            tbPgMain.ResumeLayout(false);
+            tbPgMain.PerformLayout();
+            tbPgCrud.ResumeLayout(false);
+            tbPgCrud.PerformLayout();
+            toolStrip3.ResumeLayout(false);
+            toolStrip3.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
 
         }
 
@@ -446,5 +527,11 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripComboBox tlStrpCmbxLimit;
         private System.Windows.Forms.Label label5;
+        private CustomTools.CustomTabControl customTabControl1;
+        private System.Windows.Forms.TabPage tbPgMain;
+        private System.Windows.Forms.TabPage tbPgCrud;
+        private ucJev ucJev1;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnBack;
     }
 }

@@ -285,6 +285,7 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
+                customTabControl1.SelectedTab = tbPgCrud;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -293,6 +294,7 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
+                customTabControl1.SelectedTab = tbPgCrud;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -301,6 +303,15 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
