@@ -45,8 +45,8 @@ namespace LFS.Views.Transactions.JEV
                 textBox.ReadOnly = isReadOnly;
             }
 
-            groupFunds.Enabled = !isReadOnly;
-            groupJournals.Enabled = !isReadOnly;
+            flowLayoutPanelFunds.Enabled = !isReadOnly;
+            flowLayoutPanelJournals.Enabled = !isReadOnly;
             btnAddAccount.Enabled = !isReadOnly;
             btnEditAccount.Enabled = !isReadOnly;
             btnRemoveAccount.Enabled = !isReadOnly;
@@ -110,8 +110,6 @@ namespace LFS.Views.Transactions.JEV
                     Text = fund["fund_name"].ToString(),
                     Tag = fund["id"],
                     AutoSize = true,
-                    Appearance = Appearance.Button,
-                    TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
                 // making general fund as default
@@ -119,7 +117,6 @@ namespace LFS.Views.Transactions.JEV
                 {
                     radFund.Checked = true;
                     fundId = Convert.ToByte(fund["id"]);
-                    ShowCheckIcon(radFund);
                 }
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
@@ -140,15 +137,12 @@ namespace LFS.Views.Transactions.JEV
                 radJournal.Text = journal["journal_name"].ToString();
                 radJournal.Tag = journal["id"];
                 radJournal.AutoSize = true;
-                radJournal.Appearance = Appearance.Button;
-                radJournal.TextImageRelation = TextImageRelation.ImageBeforeText;
 
                 if (journal["journal_name"].ToString() == CheckedJournal)
                 {
                     radJournal.Checked = true;
                     journalId = Convert.ToByte(journal["id"]);
                     journalName = CheckedJournal;
-                    ShowCheckIcon(radJournal);
                 }
 
                 flowLayoutPanelJournals.Controls.Add(radJournal);
@@ -250,14 +244,6 @@ namespace LFS.Views.Transactions.JEV
             HelperLoadRecords.DisbursingOfficerComboBox(DataTableDisbursingOfficer(), cmbCollectingDisbursingOfficer, "full_name", "id");
         }
 
-        private void ShowCheckIcon(RadioButton radioButton)
-        {
-            if (radioButton.Checked)
-                radioButton.Image = Properties.Resources.ok14px;
-            else
-                radioButton.Image = null;
-        }
-
         internal string GetJEVSeriesNo()
         {
             try
@@ -296,7 +282,6 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 var radFund = sender as RadioButton;
-                ShowCheckIcon(radFund);
                 btnAddAccount.Enabled = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -505,7 +490,6 @@ namespace LFS.Views.Transactions.JEV
             {
                 var radJournal = sender as RadioButton;
                 journalId = Convert.ToByte(radJournal.Tag);
-                ShowCheckIcon(radJournal);
                 journalName = radJournal.Text.Trim();
                 SetJournalFields(journalName);
             }
@@ -703,6 +687,24 @@ namespace LFS.Views.Transactions.JEV
         private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
+        }
+
+        private void radBtnStep1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgDetails;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radBtnStep2_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgAccEntries;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

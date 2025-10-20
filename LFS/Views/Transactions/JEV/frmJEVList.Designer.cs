@@ -429,6 +429,7 @@ namespace LFS.Views.Transactions.JEV
             // ucJev1
             // 
             ucJev1.AutoSize = true;
+            ucJev1.BackColor = System.Drawing.SystemColors.Control;
             ucJev1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucJev1.Location = new System.Drawing.Point(0, 35);
             ucJev1.Name = "ucJev1";
