@@ -1,6 +1,6 @@
-﻿namespace LFS.Views.Transactions.JEV
+﻿namespace LFS.Views.Transactions.JEV.JournalForms
 {
-    partial class ucGenJrnl
+    partial class ucCshDsbrsmntJrnl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,42 +29,52 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             label2 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
-            label5 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
             textBox4 = new System.Windows.Forms.TextBox();
-            label6 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
+            // 
+            // comboBox1
+            // 
+            comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(23, 150);
+            comboBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(229, 23);
+            comboBox1.TabIndex = 33;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dateTimePicker2.Location = new System.Drawing.Point(23, 38);
+            dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new System.Drawing.Size(229, 23);
+            dateTimePicker2.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(23, 20);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(62, 15);
-            label2.TabIndex = 0;
-            label2.Text = "Check No.";
+            label2.Size = new System.Drawing.Size(60, 15);
+            label2.TabIndex = 18;
+            label2.Text = "Date Paid:";
             // 
-            // textBox2
+            // label8
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Location = new System.Drawing.Point(23, 38);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(229, 23);
-            textBox2.TabIndex = 1;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 76);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(45, 15);
-            label5.TabIndex = 0;
-            label5.Text = "OR No.";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(23, 132);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(105, 15);
+            label8.TabIndex = 20;
+            label8.Text = "Disbursing Officer:";
             // 
             // textBox4
             // 
@@ -73,56 +83,48 @@
             textBox4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             textBox4.Name = "textBox4";
             textBox4.Size = new System.Drawing.Size(229, 23);
-            textBox4.TabIndex = 1;
+            textBox4.TabIndex = 28;
             // 
-            // label6
+            // label5
             // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 132);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(44, 15);
-            label6.TabIndex = 0;
-            label6.Text = "DV No.";
-            // 
-            // textBox5
-            // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.Location = new System.Drawing.Point(23, 150);
-            textBox5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(229, 23);
-            textBox5.TabIndex = 1;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(23, 76);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(44, 15);
+            label5.TabIndex = 23;
+            label5.Text = "DV No.";
             // 
             // errorProvider1
             // 
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
-            // ucGenJrnl
+            // ucCshDsbrsmntJrnl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(textBox5);
-            Controls.Add(label6);
+            Controls.Add(comboBox1);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(label2);
+            Controls.Add(label8);
             Controls.Add(textBox4);
             Controls.Add(label5);
-            Controls.Add(textBox2);
-            Controls.Add(label2);
-            Name = "ucGenJrnl";
+            Name = "ucCshDsbrsmntJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 204);
+            Size = new System.Drawing.Size(278, 207);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

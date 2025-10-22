@@ -120,7 +120,7 @@ namespace LFS.Views.Transactions.JEV
             panel7.Location = new System.Drawing.Point(0, 0);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(616, 361);
+            panel7.Size = new System.Drawing.Size(560, 491);
             panel7.TabIndex = 9;
             // 
             // dgJEV
@@ -130,7 +130,7 @@ namespace LFS.Views.Transactions.JEV
             dgJEV.Location = new System.Drawing.Point(4, 9);
             dgJEV.Margin = new System.Windows.Forms.Padding(1);
             dgJEV.Name = "dgJEV";
-            dgJEV.Size = new System.Drawing.Size(608, 348);
+            dgJEV.Size = new System.Drawing.Size(552, 478);
             dgJEV.TabIndex = 7;
             dgJEV.ColumnAdded += dgJEV_ColumnAdded;
             dgJEV.SelectionChanged += dgJEV_SelectionChanged;
@@ -140,7 +140,7 @@ namespace LFS.Views.Transactions.JEV
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
             pbLoadRecords.Location = new System.Drawing.Point(4, 4);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(608, 5);
+            pbLoadRecords.Size = new System.Drawing.Size(552, 5);
             pbLoadRecords.TabIndex = 25;
             // 
             // backgroundWorker1
@@ -160,7 +160,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip1.Size = new System.Drawing.Size(874, 35);
+            toolStrip1.Size = new System.Drawing.Size(818, 35);
             toolStrip1.TabIndex = 11;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -214,9 +214,9 @@ namespace LFS.Views.Transactions.JEV
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 427);
+            statusStrip1.Location = new System.Drawing.Point(0, 557);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(874, 22);
+            statusStrip1.Size = new System.Drawing.Size(818, 22);
             statusStrip1.TabIndex = 13;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -238,8 +238,8 @@ namespace LFS.Views.Transactions.JEV
             splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(label5);
-            splitContainer1.Size = new System.Drawing.Size(874, 361);
-            splitContainer1.SplitterDistance = 616;
+            splitContainer1.Size = new System.Drawing.Size(818, 491);
+            splitContainer1.SplitterDistance = 560;
             splitContainer1.TabIndex = 14;
             // 
             // panel1
@@ -257,7 +257,7 @@ namespace LFS.Views.Transactions.JEV
             panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(254, 330);
+            panel1.Size = new System.Drawing.Size(254, 460);
             panel1.TabIndex = 13;
             // 
             // btnApplyFltr
@@ -380,7 +380,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip2.Location = new System.Drawing.Point(0, 35);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip2.Size = new System.Drawing.Size(874, 31);
+            toolStrip2.Size = new System.Drawing.Size(818, 31);
             toolStrip2.TabIndex = 17;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -399,7 +399,7 @@ namespace LFS.Views.Transactions.JEV
             customTabControl1.Location = new System.Drawing.Point(0, 0);
             customTabControl1.Name = "customTabControl1";
             customTabControl1.SelectedIndex = 0;
-            customTabControl1.Size = new System.Drawing.Size(882, 477);
+            customTabControl1.Size = new System.Drawing.Size(826, 607);
             customTabControl1.TabIndex = 18;
             // 
             // tbPgMain
@@ -410,7 +410,7 @@ namespace LFS.Views.Transactions.JEV
             tbPgMain.Controls.Add(statusStrip1);
             tbPgMain.Location = new System.Drawing.Point(4, 24);
             tbPgMain.Name = "tbPgMain";
-            tbPgMain.Size = new System.Drawing.Size(874, 449);
+            tbPgMain.Size = new System.Drawing.Size(818, 579);
             tbPgMain.TabIndex = 0;
             tbPgMain.Text = "tbPgMain";
             tbPgMain.UseVisualStyleBackColor = true;
@@ -421,7 +421,7 @@ namespace LFS.Views.Transactions.JEV
             tbPgCrud.Controls.Add(toolStrip3);
             tbPgCrud.Location = new System.Drawing.Point(4, 24);
             tbPgCrud.Name = "tbPgCrud";
-            tbPgCrud.Size = new System.Drawing.Size(874, 449);
+            tbPgCrud.Size = new System.Drawing.Size(818, 579);
             tbPgCrud.TabIndex = 1;
             tbPgCrud.Text = "tbPgCrud";
             tbPgCrud.UseVisualStyleBackColor = true;
@@ -433,7 +433,7 @@ namespace LFS.Views.Transactions.JEV
             ucJev1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucJev1.Location = new System.Drawing.Point(0, 35);
             ucJev1.Name = "ucJev1";
-            ucJev1.Size = new System.Drawing.Size(874, 414);
+            ucJev1.Size = new System.Drawing.Size(818, 544);
             ucJev1.TabIndex = 0;
             // 
             // toolStrip3
@@ -445,7 +445,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip3.Location = new System.Drawing.Point(0, 0);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(4);
-            toolStrip3.Size = new System.Drawing.Size(874, 35);
+            toolStrip3.Size = new System.Drawing.Size(818, 35);
             toolStrip3.TabIndex = 1;
             toolStrip3.Text = "toolStrip3";
             // 
@@ -462,7 +462,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(882, 477);
+            ClientSize = new System.Drawing.Size(826, 607);
             Controls.Add(customTabControl1);
             MinimizeBox = false;
             Name = "frmJevList";

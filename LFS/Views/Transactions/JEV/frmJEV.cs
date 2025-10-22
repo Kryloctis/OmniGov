@@ -104,7 +104,7 @@ namespace LFS.Views.Transactions.JEV
                 return false;
             }
 
-            if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+            if (uc.tlStrpLblDebit.Text != uc.tlStrpLblCredit.Text)
             {
                 Helper.MessageBoxError("Debit & Credit amounts must be equal.");
                 return false;
@@ -193,10 +193,10 @@ namespace LFS.Views.Transactions.JEV
 
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
-                CheckDate = uc.dtpCheckORPaid.Value,
-                CheckNo = uc.txtCheckNo.Text.Trim(),
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                RCINo = uc.txtRCIORADA.Text.Trim()
+                //CheckDate = uc.dtpCheckORPaid.Value,
+                //CheckNo = uc.txtCheckNo.Text.Trim(),
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
             return AccFactory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
@@ -208,10 +208,10 @@ namespace LFS.Views.Transactions.JEV
 
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
-                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                RCDNo = uc.txtDVRCDNo.Text.Trim(),
-                ORNo = uc.txtRCIORADA.Text.Trim(),
-                ORDate = uc.dtpCheckORPaid.Value
+                //CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                //RCDNo = uc.txtDVRCDNo.Text.Trim(),
+                //ORNo = uc.txtRCIORADA.Text.Trim(),
+                //ORDate = uc.dtpCheckORPaid.Value
             };
 
             return AccFactory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
@@ -223,8 +223,8 @@ namespace LFS.Views.Transactions.JEV
 
             var aDADisbursementsJournalModel = new ADADisbursementsJournalModel()
             {
-                ADANumber = uc.txtRCIORADA.Text.Trim(),
-                DVNo = uc.txtDVRCDNo.Text.Trim()
+                //ADANumber = uc.txtRCIORADA.Text.Trim(),
+                //DVNo = uc.txtDVRCDNo.Text.Trim()
             };
 
             return AccFactory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
@@ -236,9 +236,9 @@ namespace LFS.Views.Transactions.JEV
 
             var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
             {
-                DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                DatePaid = uc.dtpCheckORPaid.Value
+                //DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //DatePaid = uc.dtpCheckORPaid.Value
             };
 
             return AccFactory.JEVRepository().InsertWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
@@ -250,9 +250,9 @@ namespace LFS.Views.Transactions.JEV
 
             var generalJournalModel = new GeneralJournalModel()
             {
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                CheckNo = uc.txtCheckNo.Text.Trim(),
-                ORNo = uc.txtRCIORADA.Text.Trim()
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //CheckNo = uc.txtCheckNo.Text.Trim(),
+                //ORNo = uc.txtRCIORADA.Text.Trim()
             };
 
             return AccFactory.JEVRepository().InsertWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
@@ -269,10 +269,10 @@ namespace LFS.Views.Transactions.JEV
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
                 JevId = uc.jevId,
-                CheckDate = uc.dtpCheckORPaid.Value,
-                CheckNo = uc.txtCheckNo.Text.Trim(),
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                RCINo = uc.txtRCIORADA.Text.Trim()
+                //CheckDate = uc.dtpCheckORPaid.Value,
+                //CheckNo = uc.txtCheckNo.Text.Trim(),
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
             return AccFactory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
@@ -283,10 +283,10 @@ namespace LFS.Views.Transactions.JEV
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
                 JevId = uc.jevId,
-                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                RCDNo = uc.txtRCIORADA.Text.Trim(),
-                ORNo = uc.txtRCIORADA.Text.Trim(),
-                ORDate = uc.dtpCheckORPaid.Value
+                //CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                //RCDNo = uc.txtRCIORADA.Text.Trim(),
+                //ORNo = uc.txtRCIORADA.Text.Trim(),
+                //ORDate = uc.dtpCheckORPaid.Value
             };
 
             return AccFactory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
@@ -297,8 +297,8 @@ namespace LFS.Views.Transactions.JEV
             var aDADisbursementsJournalModel = new ADADisbursementsJournalModel()
             {
                 JevId = uc.jevId,
-                ADANumber = uc.txtRCIORADA.Text.Trim(),
-                DVNo = uc.txtDVRCDNo.Text.Trim()
+                //ADANumber = uc.txtRCIORADA.Text.Trim(),
+                //DVNo = uc.txtDVRCDNo.Text.Trim()
             };
 
             return AccFactory.JEVRepository().UpdateWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
@@ -309,9 +309,9 @@ namespace LFS.Views.Transactions.JEV
             var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
             {
                 JevId = uc.jevId,
-                DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                DatePaid = uc.dtpCheckORPaid.Value
+                //DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //DatePaid = uc.dtpCheckORPaid.Value
             };
 
             return AccFactory.JEVRepository().UpdateWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
@@ -322,9 +322,9 @@ namespace LFS.Views.Transactions.JEV
             var generalJournalModel = new GeneralJournalModel()
             {
                 JevId = uc.jevId,
-                DVNo = uc.txtDVRCDNo.Text.Trim(),
-                CheckNo = uc.txtCheckNo.Text.Trim(),
-                ORNo = uc.txtRCIORADA.Text.Trim()
+                //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                //CheckNo = uc.txtCheckNo.Text.Trim(),
+                //ORNo = uc.txtRCIORADA.Text.Trim()
             };
 
             return AccFactory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
@@ -534,9 +534,9 @@ namespace LFS.Views.Transactions.JEV
                     var generalJournalModel = new GeneralJournalModel()
                     {
                         JevId = uc.jevId,
-                        DVNo = uc.txtDVRCDNo.Text.Trim(),
-                        CheckNo = uc.txtCheckNo.Text.Trim(),
-                        ORNo = uc.txtRCIORADA.Text.Trim()
+                        //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        //CheckNo = uc.txtCheckNo.Text.Trim(),
+                        //ORNo = uc.txtRCIORADA.Text.Trim()
                     };
 
                     AccFactory.GeneralJournalRepository().Insert(generalJournalModel);
@@ -546,10 +546,10 @@ namespace LFS.Views.Transactions.JEV
                     var cashReceiptsJournalModel = new CashReceiptsJournalModel()
                     {
                         JevId = uc.jevId,
-                        CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                        RCDNo = uc.txtDVRCDNo.Text.Trim(),
-                        ORNo = uc.txtRCIORADA.Text.Trim(),
-                        ORDate = uc.dtpCheckORPaid.Value
+                        //CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                        //RCDNo = uc.txtDVRCDNo.Text.Trim(),
+                        //ORNo = uc.txtRCIORADA.Text.Trim(),
+                        //ORDate = uc.dtpCheckORPaid.Value
                     };
 
                     AccFactory.CashReceiptsJournalRepository().Insert(cashReceiptsJournalModel);
@@ -563,9 +563,9 @@ namespace LFS.Views.Transactions.JEV
                     var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
                     {
                         JevId = uc.jevId,
-                        DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                        DVNo = uc.txtDVRCDNo.Text.Trim(),
-                        DatePaid = uc.dtpCheckORPaid.Value
+                        //DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                        //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        //DatePaid = uc.dtpCheckORPaid.Value
                     };
 
                     AccFactory.CashDisbursementsJournalRepository().Insert(cashDisbursementsJournalModel);
@@ -576,10 +576,10 @@ namespace LFS.Views.Transactions.JEV
                     var checkDisbursementsModel = new CheckDisbursementsJournalModel()
                     {
                         JevId = uc.jevId,
-                        CheckDate = uc.dtpCheckORPaid.Value,
-                        CheckNo = uc.txtCheckNo.Text.Trim(),
-                        DVNo = uc.txtDVRCDNo.Text.Trim(),
-                        RCINo = uc.txtRCIORADA.Text.Trim()
+                        //CheckDate = uc.dtpCheckORPaid.Value,
+                        //CheckNo = uc.txtCheckNo.Text.Trim(),
+                        //DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        //RCINo = uc.txtRCIORADA.Text.Trim()
                     };
 
                     AccFactory.CheckDisbursementsJournalRepository().Insert(checkDisbursementsModel);
@@ -832,10 +832,10 @@ namespace LFS.Views.Transactions.JEV
             {
                 Dictionary<string, string> checkDisbursementsDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
 
-                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["check_date"]);
-                uc.txtCheckNo.Text = checkDisbursementsDict["check_no"];
-                uc.txtDVRCDNo.Text = checkDisbursementsDict["dv_no"];
-                uc.txtRCIORADA.Text = checkDisbursementsDict["rci_no"];
+                //uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["check_date"]);
+                //uc.txtCheckNo.Text = checkDisbursementsDict["check_no"];
+                //uc.txtDVRCDNo.Text = checkDisbursementsDict["dv_no"];
+                //uc.txtRCIORADA.Text = checkDisbursementsDict["rci_no"];
             }
         }
 
@@ -847,10 +847,10 @@ namespace LFS.Views.Transactions.JEV
             {
                 Dictionary<string, string> checkDisbursementsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtDVRCDNo.Text = checkDisbursementsDict["rcd_no"];
-                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
-                uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
-                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
+                //uc.txtDVRCDNo.Text = checkDisbursementsDict["rcd_no"];
+                //uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
+                //uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
+                //uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
             }
         }
 
@@ -862,8 +862,8 @@ namespace LFS.Views.Transactions.JEV
             {
                 Dictionary<string, string> adaDisbursementsDict = aDADisbursementsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtDVRCDNo.Text = adaDisbursementsDict["dv_no"];
-                uc.txtRCIORADA.Text = adaDisbursementsDict["ada_no"];
+                //uc.txtDVRCDNo.Text = adaDisbursementsDict["dv_no"];
+                //uc.txtRCIORADA.Text = adaDisbursementsDict["ada_no"];
             }
         }
 
@@ -875,9 +875,9 @@ namespace LFS.Views.Transactions.JEV
             {
                 Dictionary<string, string> cashDisbursementsDict = cashDisbursementsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.dtpCheckORPaid.Value = Convert.ToDateTime(cashDisbursementsDict["date_paid"]);
-                uc.txtDVRCDNo.Text = cashDisbursementsDict["dv_no"];
-                uc.cmbCollectingDisbursingOfficer.SelectedValue = Convert.ToInt32(cashDisbursementsDict["disbursing_officers_id"]);
+                //uc.dtpCheckORPaid.Value = Convert.ToDateTime(cashDisbursementsDict["date_paid"]);
+                //uc.txtDVRCDNo.Text = cashDisbursementsDict["dv_no"];
+                //uc.cmbCollectingDisbursingOfficer.SelectedValue = Convert.ToInt32(cashDisbursementsDict["disbursing_officers_id"]);
             }
         }
 
@@ -889,9 +889,9 @@ namespace LFS.Views.Transactions.JEV
             {
                 Dictionary<string, string> generalJournalDict = generalJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtCheckNo.Text = generalJournalDict["check_no"];
-                uc.txtDVRCDNo.Text = generalJournalDict["dv_no"];
-                uc.txtRCIORADA.Text = generalJournalDict["or_no"];
+                //uc.txtCheckNo.Text = generalJournalDict["check_no"];
+                //uc.txtDVRCDNo.Text = generalJournalDict["dv_no"];
+                //uc.txtRCIORADA.Text = generalJournalDict["or_no"];
             }
         }
 

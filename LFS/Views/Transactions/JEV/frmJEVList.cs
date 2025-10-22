@@ -15,6 +15,7 @@ namespace LFS.Views.Transactions.JEV
     public partial class frmJevList : Form
     {
         internal ucJevDashboard ucJevDashboard;
+        private ucJev ucJev;
 
         public frmJevList(ucJevDashboard ucJevDashboard)
         {
@@ -22,7 +23,8 @@ namespace LFS.Views.Transactions.JEV
             Helper.LoadFormIcon(this);
 
             this.ucJevDashboard = ucJevDashboard;
-            Helper.DatagridFullRowSelectStyle(dgJEV, true);
+            ucJev = ucJev1;
+            Helper.DatagridFullRowSelectStyle(dgJEV);
         }
 
         private void frmJEVList_Load(object sender, EventArgs e)
@@ -35,6 +37,7 @@ namespace LFS.Views.Transactions.JEV
                 nudYear.Value = Helper.GetCurrentDate().Year;
                 LoadJEVList();
                 MonitorControlChanges(panel1, btnApplyFltr);
+                ucJev.OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
