@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            textBox5 = new System.Windows.Forms.TextBox();
+            txtRcdNo = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            txtOrNo = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            dtOrDate = new System.Windows.Forms.DateTimePicker();
+            cmbxCollctngOffcr = new System.Windows.Forms.ComboBox();
             label8 = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // textBox5
+            // txtRcdNo
             // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.Location = new System.Drawing.Point(23, 150);
-            textBox5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(229, 23);
-            textBox5.TabIndex = 11;
+            txtRcdNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRcdNo.Location = new System.Drawing.Point(23, 150);
+            txtRcdNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtRcdNo.Name = "txtRcdNo";
+            txtRcdNo.Size = new System.Drawing.Size(229, 23);
+            txtRcdNo.TabIndex = 11;
             // 
             // label6
             // 
@@ -59,14 +59,14 @@
             label6.TabIndex = 5;
             label6.Text = "RCD No.";
             // 
-            // textBox4
+            // txtOrNo
             // 
-            textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox4.Location = new System.Drawing.Point(23, 38);
-            textBox4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(229, 23);
-            textBox4.TabIndex = 12;
+            txtOrNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtOrNo.Location = new System.Drawing.Point(23, 38);
+            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtOrNo.Name = "txtOrNo";
+            txtOrNo.Size = new System.Drawing.Size(229, 23);
+            txtOrNo.TabIndex = 12;
             // 
             // label5
             // 
@@ -86,24 +86,26 @@
             label2.TabIndex = 3;
             label2.Text = "OR Date:";
             // 
-            // dateTimePicker2
+            // dtOrDate
             // 
-            dateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dateTimePicker2.Location = new System.Drawing.Point(23, 94);
-            dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new System.Drawing.Size(229, 23);
-            dateTimePicker2.TabIndex = 16;
+            dtOrDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtOrDate.Location = new System.Drawing.Point(23, 94);
+            dtOrDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dtOrDate.Name = "dtOrDate";
+            dtOrDate.Size = new System.Drawing.Size(229, 23);
+            dtOrDate.TabIndex = 16;
             // 
-            // comboBox1
+            // cmbxCollctngOffcr
             // 
-            comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(23, 206);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(229, 23);
-            comboBox1.TabIndex = 17;
+            cmbxCollctngOffcr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxCollctngOffcr.FormattingEnabled = true;
+            cmbxCollctngOffcr.Location = new System.Drawing.Point(23, 206);
+            cmbxCollctngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            cmbxCollctngOffcr.Name = "cmbxCollctngOffcr";
+            cmbxCollctngOffcr.Size = new System.Drawing.Size(229, 23);
+            cmbxCollctngOffcr.TabIndex = 17;
+            cmbxCollctngOffcr.Validating += cmbxCollctngOffcr_Validating;
+            cmbxCollctngOffcr.Validated += cmbxCollctngOffcr_Validated;
             // 
             // label8
             // 
@@ -123,13 +125,14 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(comboBox1);
-            Controls.Add(dateTimePicker2);
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(cmbxCollctngOffcr);
+            Controls.Add(dtOrDate);
             Controls.Add(label2);
             Controls.Add(label8);
-            Controls.Add(textBox5);
+            Controls.Add(txtRcdNo);
             Controls.Add(label6);
-            Controls.Add(textBox4);
+            Controls.Add(txtOrNo);
             Controls.Add(label5);
             Name = "ucCshRcptsJrnl";
             Padding = new System.Windows.Forms.Padding(20);
@@ -140,13 +143,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtRcdNo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtOrNo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dtOrDate;
+        private System.Windows.Forms.ComboBox cmbxCollctngOffcr;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
