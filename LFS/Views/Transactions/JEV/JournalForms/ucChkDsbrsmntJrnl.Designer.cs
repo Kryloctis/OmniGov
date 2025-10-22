@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            dtChkDate = new System.Windows.Forms.DateTimePicker();
             label2 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
+            txtDvNo = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            txtRciNo = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtChkNo = new System.Windows.Forms.TextBox();
             SuspendLayout();
             // 
-            // dateTimePicker2
+            // dtChkDate
             // 
-            dateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dateTimePicker2.Location = new System.Drawing.Point(23, 94);
-            dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new System.Drawing.Size(229, 23);
-            dateTimePicker2.TabIndex = 31;
+            dtChkDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dtChkDate.Location = new System.Drawing.Point(23, 94);
+            dtChkDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dtChkDate.Name = "dtChkDate";
+            dtChkDate.Size = new System.Drawing.Size(229, 23);
+            dtChkDate.TabIndex = 31;
             // 
             // label2
             // 
@@ -56,14 +56,14 @@
             label2.TabIndex = 18;
             label2.Text = "Check Date:";
             // 
-            // textBox5
+            // txtDvNo
             // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.Location = new System.Drawing.Point(23, 206);
-            textBox5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(229, 23);
-            textBox5.TabIndex = 27;
+            txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDvNo.Location = new System.Drawing.Point(23, 206);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Name = "txtDvNo";
+            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.TabIndex = 27;
             // 
             // label6
             // 
@@ -74,14 +74,14 @@
             label6.TabIndex = 22;
             label6.Text = "DV No.";
             // 
-            // textBox4
+            // txtRciNo
             // 
-            textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox4.Location = new System.Drawing.Point(23, 150);
-            textBox4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(229, 23);
-            textBox4.TabIndex = 28;
+            txtRciNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRciNo.Location = new System.Drawing.Point(23, 150);
+            txtRciNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtRciNo.Name = "txtRciNo";
+            txtRciNo.Size = new System.Drawing.Size(229, 23);
+            txtRciNo.TabIndex = 28;
             // 
             // label5
             // 
@@ -101,26 +101,27 @@
             label9.TabIndex = 24;
             label9.Text = "Check No.";
             // 
-            // textBox2
+            // txtChkNo
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Location = new System.Drawing.Point(23, 38);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(229, 23);
-            textBox2.TabIndex = 29;
+            txtChkNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtChkNo.Location = new System.Drawing.Point(23, 38);
+            txtChkNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtChkNo.Name = "txtChkNo";
+            txtChkNo.Size = new System.Drawing.Size(229, 23);
+            txtChkNo.TabIndex = 29;
             // 
             // ucChkDsbrsmntJrnl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(dateTimePicker2);
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(dtChkDate);
             Controls.Add(label2);
-            Controls.Add(textBox5);
+            Controls.Add(txtDvNo);
             Controls.Add(label6);
-            Controls.Add(textBox4);
+            Controls.Add(txtRciNo);
             Controls.Add(label5);
-            Controls.Add(textBox2);
+            Controls.Add(txtChkNo);
             Controls.Add(label9);
             Name = "ucChkDsbrsmntJrnl";
             Padding = new System.Windows.Forms.Padding(20);
@@ -130,13 +131,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtChkDate;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtDvNo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtRciNo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtChkNo;
     }
 }
