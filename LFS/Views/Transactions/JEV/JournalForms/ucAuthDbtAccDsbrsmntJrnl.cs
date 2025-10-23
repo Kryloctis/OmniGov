@@ -6,9 +6,14 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 {
     public partial class ucAuthDbtAccDsbrsmntJrnl : UserControl
     {
-        public ucAuthDbtAccDsbrsmntJrnl()
+        private bool isEdit;
+        private int? jevId;
+
+        public ucAuthDbtAccDsbrsmntJrnl(bool isEdit, int? jevId)
         {
             InitializeComponent();
+            this.isEdit = isEdit;
+            this.jevId = jevId;
         }
 
         private void OnLoad()
@@ -23,11 +28,14 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         internal ADADisbursementsJournalModel ADADisbursementsJournalModel()
         {
-            return new ADADisbursementsJournalModel
+            var model = new ADADisbursementsJournalModel
             {
                 ADANumber = txtAdaNo.Text.Trim(),
                 DVNo = txtDvNo.Text.Trim(),
             };
+
+            if (isEdit) model.JevId = jevId.Value;
+            return model;
         }
     }
 }

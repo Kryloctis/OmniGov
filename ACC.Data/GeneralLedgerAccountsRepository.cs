@@ -97,17 +97,17 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
-        public bool Insert(GeneralLedgerAccountsModal entity)
+        public bool Insert(GeneralLedgerAccountsModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(GeneralLedgerAccountsModal entity)
+        public bool Update(GeneralLedgerAccountsModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<GeneralLedgerAccountsModal> entityList)
+        public bool Delete(List<GeneralLedgerAccountsModel> entityList)
         {
             throw new NotImplementedException();
         }

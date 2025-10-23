@@ -1,6 +1,6 @@
 ﻿namespace ACC.Domain.Models
 {
-    public class GeneralLedgerAccountsModal
+    public class GeneralLedgerAccountsModel
     {
         public int Id { get; set; }
         public short SubMajorAccountGroupId { get; set; }
