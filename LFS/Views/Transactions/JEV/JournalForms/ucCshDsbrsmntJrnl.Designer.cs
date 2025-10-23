@@ -42,12 +42,15 @@
             // cmbxDsbrsngOffcr
             // 
             cmbxDsbrsngOffcr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxDsbrsngOffcr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxDsbrsngOffcr.FormattingEnabled = true;
             cmbxDsbrsngOffcr.Location = new System.Drawing.Point(23, 150);
             cmbxDsbrsngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbxDsbrsngOffcr.Name = "cmbxDsbrsngOffcr";
             cmbxDsbrsngOffcr.Size = new System.Drawing.Size(229, 23);
             cmbxDsbrsngOffcr.TabIndex = 33;
+            cmbxDsbrsngOffcr.Validating += cmbxDsbrsngOffcr_Validating;
+            cmbxDsbrsngOffcr.Validated += cmbxDsbrsngOffcr_Validated;
             // 
             // dtDatePaid
             // 
@@ -72,9 +75,9 @@
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(23, 132);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(105, 15);
+            label8.Size = new System.Drawing.Size(113, 15);
             label8.TabIndex = 20;
-            label8.Text = "Disbursing Officer:";
+            label8.Text = "Disbursing Officer: *";
             // 
             // txtDvNo
             // 
@@ -103,6 +106,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(cmbxDsbrsngOffcr);
             Controls.Add(dtDatePaid);
             Controls.Add(label2);

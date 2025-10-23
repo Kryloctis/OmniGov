@@ -112,9 +112,9 @@
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(23, 188);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(103, 15);
+            label8.Size = new System.Drawing.Size(111, 15);
             label8.TabIndex = 4;
-            label8.Text = "Collecting Officer:";
+            label8.Text = "Collecting Officer: *";
             // 
             // errorProvider1
             // 

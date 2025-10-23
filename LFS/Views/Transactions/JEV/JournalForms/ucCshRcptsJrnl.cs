@@ -11,9 +11,9 @@ namespace LFS.Views.Transactions.JEV.JournalForms
     public partial class ucCshRcptsJrnl : UserControl
     {
         private bool isEdit;
-        private int jevId;
+        private int? jevId;
 
-        public ucCshRcptsJrnl(bool isEdit, int jevId)
+        public ucCshRcptsJrnl(bool isEdit, int? jevId)
         {
             InitializeComponent();
             this.isEdit = isEdit;
@@ -90,7 +90,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
                 CollectingOfficerId = (byte)cllctngOffcrId
             };
 
-            if (isEdit) model.JevId = jevId;
+            if (isEdit) model.JevId = jevId.Value;
 
             return model;
         }

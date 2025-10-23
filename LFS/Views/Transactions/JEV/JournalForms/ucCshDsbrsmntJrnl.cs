@@ -1,20 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using LFS.Helpers;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
 {
     public partial class ucCshDsbrsmntJrnl : UserControl
     {
-        public ucCshDsbrsmntJrnl()
+        private bool isEdit;
+        private int? jevId;
+
+        public ucCshDsbrsmntJrnl(bool isEdit, int? jevId)
         {
             InitializeComponent();
+            this.isEdit = isEdit;
+            this.jevId = jevId;
+        }
+
+        internal string[] GetFormErrors()
+        {
+            return new string[]
+            {
+                errorProvider1.GetError(cmbxDsbrsngOffcr)
+            };
+        }
+
+        internal void ResetForm()
+        {
+            dtDatePaid.Value = Helper.GetCurrentDate();
+            txtDvNo.Clear();
+            LoadDisbursingOfficer();
+        }
+
+        internal void OnLoad()
+        {
+            dtDatePaid.Value = Helper.GetCurrentDate();
+            LoadDisbursingOfficer();
+        }
+
+        private DataTable DataTableDisbursingOfficer()
+        {
+            var dtColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string)),
+                new DataColumn(Name = "job_title", typeof(string)),
+                new DataColumn(Name = "created_at", typeof(string)),
+                new DataColumn(Name = "updated_at", typeof(string)),
+                new DataColumn(Name = "users_id", typeof(string))
+            };
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(dtColumns);
+            DataTable dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dtDisbursingOfficers.Rows)
+            {
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowPrefix = row["prefix"].ToString();
+                string rowFirstName = row["first_name"].ToString();
+                string rowMiddleInitial = row["mid_initial"].ToString();
+                string rowLastName = row["last_name"].ToString();
+                string rowSuffix = row["suffix"].ToString();
+                string rowJobTitle = row["job_title"].ToString();
+                string rowCreatedAt = row["created_at"].ToString();
+                string rowUpdatedAt = row["updated_at"].ToString();
+                string rowUsersId = row["users_id"].ToString();
+
+                var disbursingOfficerFullName = Helper.GenerateFullName(rowPrefix, rowFirstName, rowMiddleInitial, rowLastName, rowSuffix);
+
+                var dtRow = dataTable.NewRow();
+                dtRow["id"] = rowId;
+                dtRow["full_name"] = disbursingOfficerFullName;
+                dtRow["job_title"] = rowJobTitle;
+                dtRow["created_at"] = rowCreatedAt;
+                dtRow["updated_at"] = rowUpdatedAt;
+                dtRow["users_id"] = rowUsersId;
+
+                dataTable.Rows.Add(dtRow);
+            }
+
+            return dataTable;
+        }
+
+        internal void LoadDisbursingOfficer()
+        {
+            HelperLoadRecords.DisbursingOfficerComboBox(DataTableDisbursingOfficer(), cmbxDsbrsngOffcr, "full_name", "id");
+        }
+
+        internal CashDisbursementsJournalModel CashDisbursementsJournalModel()
+        {
+            int.TryParse(cmbxDsbrsngOffcr.SelectedValue.ToString(), out int dsbursingOffcrId);
+
+            var model = new CashDisbursementsJournalModel()
+            {
+                DVNo = txtDvNo.Text.Trim(),
+                DatePaid = dtDatePaid.Value,
+                DisbursingOfficerId = dsbursingOffcrId
+            };
+
+            if (isEdit) model.JevId = jevId.Value;
+
+            return model;
+        }
+
+        private void cmbxDsbrsngOffcr_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxDsbrsngOffcr, "Disbursing Officer");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxDsbrsngOffcr_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxDsbrsngOffcr);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

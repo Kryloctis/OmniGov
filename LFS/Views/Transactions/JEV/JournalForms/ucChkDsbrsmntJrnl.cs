@@ -7,9 +7,9 @@ namespace LFS.Views.Transactions.JEV.JournalForms
     public partial class ucChkDsbrsmntJrnl : UserControl
     {
         private bool isEdit;
-        private int jevId;
+        private int? jevId;
 
-        public ucChkDsbrsmntJrnl(bool isEdit, int jevId)
+        public ucChkDsbrsmntJrnl(bool isEdit, int? jevId)
         {
             InitializeComponent();
             this.isEdit = isEdit;
@@ -39,7 +39,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
                 DVNo = txtDvNo.Text.Trim(),
             };
 
-            if (isEdit) model.JevId = jevId;
+            if (isEdit) model.JevId = jevId.Value;
 
             return model;
         }
