@@ -30,11 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             label2 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtChckNo = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            txtOrNo = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
+            txtDvNo = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -48,14 +48,14 @@
             label2.TabIndex = 0;
             label2.Text = "Check No.";
             // 
-            // textBox2
+            // txtChckNo
             // 
-            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox2.Location = new System.Drawing.Point(23, 38);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(229, 23);
-            textBox2.TabIndex = 1;
+            txtChckNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtChckNo.Location = new System.Drawing.Point(23, 38);
+            txtChckNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtChckNo.Name = "txtChckNo";
+            txtChckNo.Size = new System.Drawing.Size(229, 23);
+            txtChckNo.TabIndex = 1;
             // 
             // label5
             // 
@@ -66,14 +66,14 @@
             label5.TabIndex = 0;
             label5.Text = "OR No.";
             // 
-            // textBox4
+            // txtOrNo
             // 
-            textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox4.Location = new System.Drawing.Point(23, 94);
-            textBox4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(229, 23);
-            textBox4.TabIndex = 1;
+            txtOrNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtOrNo.Location = new System.Drawing.Point(23, 94);
+            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtOrNo.Name = "txtOrNo";
+            txtOrNo.Size = new System.Drawing.Size(229, 23);
+            txtOrNo.TabIndex = 1;
             // 
             // label6
             // 
@@ -84,14 +84,14 @@
             label6.TabIndex = 0;
             label6.Text = "DV No.";
             // 
-            // textBox5
+            // txtDvNo
             // 
-            textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox5.Location = new System.Drawing.Point(23, 150);
-            textBox5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(229, 23);
-            textBox5.TabIndex = 1;
+            txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDvNo.Location = new System.Drawing.Point(23, 150);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Name = "txtDvNo";
+            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.TabIndex = 1;
             // 
             // errorProvider1
             // 
@@ -102,11 +102,12 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(textBox5);
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(txtDvNo);
             Controls.Add(label6);
-            Controls.Add(textBox4);
+            Controls.Add(txtOrNo);
             Controls.Add(label5);
-            Controls.Add(textBox2);
+            Controls.Add(txtChckNo);
             Controls.Add(label2);
             Name = "ucGenJrnl";
             Padding = new System.Windows.Forms.Padding(20);
@@ -118,11 +119,11 @@
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtChckNo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtOrNo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtDvNo;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
