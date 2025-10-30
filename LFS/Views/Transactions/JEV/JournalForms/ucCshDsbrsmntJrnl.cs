@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using LFS.Helpers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -13,11 +14,9 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         private bool isEdit;
         private int? jevId;
 
-        public ucCshDsbrsmntJrnl(bool isEdit, int? jevId)
+        public ucCshDsbrsmntJrnl()
         {
             InitializeComponent();
-            this.isEdit = isEdit;
-            this.jevId = jevId;
         }
 
         internal string[] GetFormErrors()
@@ -35,10 +34,30 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             LoadDisbursingOfficer();
         }
 
-        internal void OnLoad()
+        internal void OnLoad(bool isEdit, int? jevId)
         {
             dtDatePaid.Value = Helper.GetCurrentDate();
             LoadDisbursingOfficer();
+
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.jevId = jevId;
+                LoadCshDsbrsmntData(jevId.Value);
+            }
+        }
+
+        private void LoadCshDsbrsmntData(int jevId)
+        {
+            var cashDisbursementsDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+
+            if (cashDisbursementsDict is not null && cashDisbursementsDict.Count > 0)
+            {
+                dtDatePaid.Value = Convert.ToDateTime(cashDisbursementsDict["date_paid"]);
+                txtDvNo.Text = cashDisbursementsDict["dv_no"];
+                cmbxDsbrsngOffcr.SelectedValue = Convert.ToInt32(cashDisbursementsDict["disbursing_officers_id"]);
+            }
         }
 
         private DataTable DataTableDisbursingOfficer()

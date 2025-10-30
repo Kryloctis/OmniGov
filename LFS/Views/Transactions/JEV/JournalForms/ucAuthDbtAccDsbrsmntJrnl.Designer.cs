@@ -40,16 +40,16 @@
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDvNo.Location = new System.Drawing.Point(23, 94);
-            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Location = new System.Drawing.Point(85, 59);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";
-            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.Size = new System.Drawing.Size(236, 23);
             txtDvNo.TabIndex = 42;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 76);
+            label6.Location = new System.Drawing.Point(26, 63);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(44, 15);
             label6.TabIndex = 36;
@@ -58,16 +58,16 @@
             // txtAdaNo
             // 
             txtAdaNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtAdaNo.Location = new System.Drawing.Point(23, 38);
-            txtAdaNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtAdaNo.Location = new System.Drawing.Point(85, 23);
+            txtAdaNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtAdaNo.Name = "txtAdaNo";
-            txtAdaNo.Size = new System.Drawing.Size(229, 23);
+            txtAdaNo.Size = new System.Drawing.Size(236, 23);
             txtAdaNo.TabIndex = 43;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 20);
+            label5.Location = new System.Drawing.Point(26, 27);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(53, 15);
             label5.TabIndex = 37;
@@ -88,7 +88,7 @@
             Controls.Add(label5);
             Name = "ucAuthDbtAccDsbrsmntJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 138);
+            Size = new System.Drawing.Size(344, 96);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

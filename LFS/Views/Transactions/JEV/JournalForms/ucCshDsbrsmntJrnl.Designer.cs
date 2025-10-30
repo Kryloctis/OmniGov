@@ -44,10 +44,10 @@
             cmbxDsbrsngOffcr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxDsbrsngOffcr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxDsbrsngOffcr.FormattingEnabled = true;
-            cmbxDsbrsngOffcr.Location = new System.Drawing.Point(23, 150);
-            cmbxDsbrsngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            cmbxDsbrsngOffcr.Location = new System.Drawing.Point(85, 95);
+            cmbxDsbrsngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxDsbrsngOffcr.Name = "cmbxDsbrsngOffcr";
-            cmbxDsbrsngOffcr.Size = new System.Drawing.Size(229, 23);
+            cmbxDsbrsngOffcr.Size = new System.Drawing.Size(226, 23);
             cmbxDsbrsngOffcr.TabIndex = 33;
             cmbxDsbrsngOffcr.Validating += cmbxDsbrsngOffcr_Validating;
             cmbxDsbrsngOffcr.Validated += cmbxDsbrsngOffcr_Validated;
@@ -55,43 +55,43 @@
             // dtDatePaid
             // 
             dtDatePaid.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dtDatePaid.Location = new System.Drawing.Point(23, 38);
-            dtDatePaid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dtDatePaid.Location = new System.Drawing.Point(85, 23);
+            dtDatePaid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             dtDatePaid.Name = "dtDatePaid";
-            dtDatePaid.Size = new System.Drawing.Size(229, 23);
+            dtDatePaid.Size = new System.Drawing.Size(226, 23);
             dtDatePaid.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(23, 20);
+            label2.Location = new System.Drawing.Point(23, 27);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(60, 15);
+            label2.Size = new System.Drawing.Size(57, 15);
             label2.TabIndex = 18;
-            label2.Text = "Date Paid:";
+            label2.Text = "Date Paid";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(23, 132);
+            label8.Location = new System.Drawing.Point(23, 99);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(113, 15);
+            label8.Size = new System.Drawing.Size(56, 15);
             label8.TabIndex = 20;
-            label8.Text = "Disbursing Officer: *";
+            label8.Text = "Disb. Off.";
             // 
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDvNo.Location = new System.Drawing.Point(23, 94);
-            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Location = new System.Drawing.Point(85, 59);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";
-            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.Size = new System.Drawing.Size(226, 23);
             txtDvNo.TabIndex = 28;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 76);
+            label5.Location = new System.Drawing.Point(23, 63);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(44, 15);
             label5.TabIndex = 23;
@@ -115,7 +115,7 @@
             Controls.Add(label5);
             Name = "ucCshDsbrsmntJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 207);
+            Size = new System.Drawing.Size(334, 137);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

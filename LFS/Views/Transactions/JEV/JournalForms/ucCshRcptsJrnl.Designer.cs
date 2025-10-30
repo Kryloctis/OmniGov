@@ -44,16 +44,16 @@
             // txtRcdNo
             // 
             txtRcdNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtRcdNo.Location = new System.Drawing.Point(23, 150);
-            txtRcdNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtRcdNo.Location = new System.Drawing.Point(83, 95);
+            txtRcdNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRcdNo.Name = "txtRcdNo";
-            txtRcdNo.Size = new System.Drawing.Size(229, 23);
+            txtRcdNo.Size = new System.Drawing.Size(249, 23);
             txtRcdNo.TabIndex = 11;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 132);
+            label6.Location = new System.Drawing.Point(23, 99);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(52, 15);
             label6.TabIndex = 5;
@@ -62,16 +62,16 @@
             // txtOrNo
             // 
             txtOrNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtOrNo.Location = new System.Drawing.Point(23, 38);
-            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtOrNo.Location = new System.Drawing.Point(83, 23);
+            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtOrNo.Name = "txtOrNo";
-            txtOrNo.Size = new System.Drawing.Size(229, 23);
+            txtOrNo.Size = new System.Drawing.Size(249, 23);
             txtOrNo.TabIndex = 12;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 20);
+            label5.Location = new System.Drawing.Point(23, 27);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(45, 15);
             label5.TabIndex = 6;
@@ -80,29 +80,29 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(23, 76);
+            label2.Location = new System.Drawing.Point(23, 63);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(53, 15);
+            label2.Size = new System.Drawing.Size(50, 15);
             label2.TabIndex = 3;
-            label2.Text = "OR Date:";
+            label2.Text = "OR Date";
             // 
             // dtOrDate
             // 
             dtOrDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dtOrDate.Location = new System.Drawing.Point(23, 94);
-            dtOrDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dtOrDate.Location = new System.Drawing.Point(83, 59);
+            dtOrDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             dtOrDate.Name = "dtOrDate";
-            dtOrDate.Size = new System.Drawing.Size(229, 23);
+            dtOrDate.Size = new System.Drawing.Size(249, 23);
             dtOrDate.TabIndex = 16;
             // 
             // cmbxCollctngOffcr
             // 
             cmbxCollctngOffcr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbxCollctngOffcr.FormattingEnabled = true;
-            cmbxCollctngOffcr.Location = new System.Drawing.Point(23, 206);
-            cmbxCollctngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            cmbxCollctngOffcr.Location = new System.Drawing.Point(83, 131);
+            cmbxCollctngOffcr.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             cmbxCollctngOffcr.Name = "cmbxCollctngOffcr";
-            cmbxCollctngOffcr.Size = new System.Drawing.Size(229, 23);
+            cmbxCollctngOffcr.Size = new System.Drawing.Size(249, 23);
             cmbxCollctngOffcr.TabIndex = 17;
             cmbxCollctngOffcr.Validating += cmbxCollctngOffcr_Validating;
             cmbxCollctngOffcr.Validated += cmbxCollctngOffcr_Validated;
@@ -110,11 +110,11 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(23, 188);
+            label8.Location = new System.Drawing.Point(23, 135);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(111, 15);
+            label8.Size = new System.Drawing.Size(54, 15);
             label8.TabIndex = 4;
-            label8.Text = "Collecting Officer: *";
+            label8.Text = "Coll. Off.";
             // 
             // errorProvider1
             // 
@@ -136,7 +136,7 @@
             Controls.Add(label5);
             Name = "ucCshRcptsJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 259);
+            Size = new System.Drawing.Size(355, 181);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

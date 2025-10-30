@@ -42,7 +42,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(23, 20);
+            label2.Location = new System.Drawing.Point(23, 27);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(62, 15);
             label2.TabIndex = 0;
@@ -51,16 +51,16 @@
             // txtChckNo
             // 
             txtChckNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtChckNo.Location = new System.Drawing.Point(23, 38);
-            txtChckNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtChckNo.Location = new System.Drawing.Point(91, 23);
+            txtChckNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtChckNo.Name = "txtChckNo";
-            txtChckNo.Size = new System.Drawing.Size(229, 23);
+            txtChckNo.Size = new System.Drawing.Size(236, 23);
             txtChckNo.TabIndex = 1;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 76);
+            label5.Location = new System.Drawing.Point(23, 63);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(45, 15);
             label5.TabIndex = 0;
@@ -69,16 +69,16 @@
             // txtOrNo
             // 
             txtOrNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtOrNo.Location = new System.Drawing.Point(23, 94);
-            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtOrNo.Location = new System.Drawing.Point(91, 59);
+            txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtOrNo.Name = "txtOrNo";
-            txtOrNo.Size = new System.Drawing.Size(229, 23);
+            txtOrNo.Size = new System.Drawing.Size(236, 23);
             txtOrNo.TabIndex = 1;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 132);
+            label6.Location = new System.Drawing.Point(23, 99);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(44, 15);
             label6.TabIndex = 0;
@@ -87,10 +87,10 @@
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDvNo.Location = new System.Drawing.Point(23, 150);
-            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Location = new System.Drawing.Point(91, 95);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";
-            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.Size = new System.Drawing.Size(236, 23);
             txtDvNo.TabIndex = 1;
             // 
             // errorProvider1
@@ -111,7 +111,7 @@
             Controls.Add(label2);
             Name = "ucGenJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 204);
+            Size = new System.Drawing.Size(350, 139);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

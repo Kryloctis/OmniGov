@@ -1,4 +1,6 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -8,15 +10,31 @@ namespace LFS.Views.Transactions.JEV
         private bool isEdit;
         private int? jevId;
 
-        public ucGenJrnl(bool isEdit, int? jevId)
+        public ucGenJrnl()
         {
             InitializeComponent();
-            this.isEdit = isEdit;
-            this.jevId = jevId;
         }
 
-        internal void OnLoad()
+        internal void OnLoad(bool isEdit, int? jevId)
         {
+            this.isEdit = isEdit;
+            if (isEdit)
+            {
+                this.jevId = jevId;
+                LoadGenJrnlData(jevId.Value);
+            }
+        }
+
+        private void LoadGenJrnlData(int jevId)
+        {
+            var generalJournalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
+
+            if (generalJournalDict is not null && generalJournalDict.Count > 0)
+            {
+                txtChckNo.Text = generalJournalDict["check_no"];
+                txtDvNo.Text = generalJournalDict["dv_no"];
+                txtOrNo.Text = generalJournalDict["or_no"];
+            }
         }
 
         internal void ResetForm()

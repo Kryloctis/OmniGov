@@ -13,17 +13,36 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         private bool isEdit;
         private int? jevId;
 
-        public ucCshRcptsJrnl(bool isEdit, int? jevId)
+        public ucCshRcptsJrnl()
         {
             InitializeComponent();
-            this.isEdit = isEdit;
-            this.jevId = jevId;
         }
 
-        internal void OnLoad()
+        internal void OnLoad(bool isEdit, int? jevId)
         {
+            this.isEdit = isEdit;
+
             LoadCollectingOfficer();
             dtOrDate.Value = Helper.GetCurrentDate();
+
+            if (isEdit)
+            {
+                this.jevId = jevId;
+                LoadCshRcptsData(jevId.Value);
+            }
+        }
+
+        private void LoadCshRcptsData(int jevId)
+        {
+            var checkDisbursementsDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
+
+            if (checkDisbursementsDict is not null && checkDisbursementsDict.Count > 0)
+            {
+                txtRcdNo.Text = checkDisbursementsDict["rcd_no"];
+                cmbxCollctngOffcr.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
+                txtOrNo.Text = checkDisbursementsDict["or_no"];
+                dtOrDate.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
+            }
         }
 
         internal string[] GetFormErrors()

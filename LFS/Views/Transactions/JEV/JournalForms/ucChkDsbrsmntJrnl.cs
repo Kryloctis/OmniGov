@@ -1,5 +1,7 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
 using LFS.Helpers;
+using System;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
@@ -9,16 +11,34 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         private bool isEdit;
         private int? jevId;
 
-        public ucChkDsbrsmntJrnl(bool isEdit, int? jevId)
+        public ucChkDsbrsmntJrnl()
         {
             InitializeComponent();
-            this.isEdit = isEdit;
-            this.jevId = jevId;
         }
 
-        internal void OnLoad()
+        internal void OnLoad(bool isEdit, int? jevId)
         {
+            this.isEdit = isEdit;
+            if (isEdit)
+            {
+                this.jevId = jevId;
+                LoadChkDsbrsmntsDataIfExist(jevId.Value);
+            }
+
             dtChkDate.Value = Helper.GetCurrentDate();
+        }
+
+        private void LoadChkDsbrsmntsDataIfExist(int jevId)
+        {
+            var chkDsbrsmntsDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
+
+            if (chkDsbrsmntsDict is not null && chkDsbrsmntsDict.Count > 0)
+            {
+                dtChkDate.Value = Convert.ToDateTime(chkDsbrsmntsDict["check_date"]);
+                txtChkNo.Text = chkDsbrsmntsDict["check_no"];
+                txtDvNo.Text = chkDsbrsmntsDict["dv_no"];
+                txtRciNo.Text = chkDsbrsmntsDict["rci_no"];
+            }
         }
 
         internal void ResetFields()

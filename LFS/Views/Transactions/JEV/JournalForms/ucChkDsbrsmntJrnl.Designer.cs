@@ -41,34 +41,34 @@
             // dtChkDate
             // 
             dtChkDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dtChkDate.Location = new System.Drawing.Point(23, 94);
-            dtChkDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            dtChkDate.Location = new System.Drawing.Point(99, 59);
+            dtChkDate.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             dtChkDate.Name = "dtChkDate";
-            dtChkDate.Size = new System.Drawing.Size(229, 23);
+            dtChkDate.Size = new System.Drawing.Size(221, 23);
             dtChkDate.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(23, 76);
+            label2.Location = new System.Drawing.Point(23, 63);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(70, 15);
+            label2.Size = new System.Drawing.Size(67, 15);
             label2.TabIndex = 18;
-            label2.Text = "Check Date:";
+            label2.Text = "Check Date";
             // 
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtDvNo.Location = new System.Drawing.Point(23, 206);
-            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtDvNo.Location = new System.Drawing.Point(99, 131);
+            txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";
-            txtDvNo.Size = new System.Drawing.Size(229, 23);
+            txtDvNo.Size = new System.Drawing.Size(221, 23);
             txtDvNo.TabIndex = 27;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 188);
+            label6.Location = new System.Drawing.Point(23, 134);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(44, 15);
             label6.TabIndex = 22;
@@ -77,16 +77,16 @@
             // txtRciNo
             // 
             txtRciNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtRciNo.Location = new System.Drawing.Point(23, 150);
-            txtRciNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtRciNo.Location = new System.Drawing.Point(99, 95);
+            txtRciNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRciNo.Name = "txtRciNo";
-            txtRciNo.Size = new System.Drawing.Size(229, 23);
+            txtRciNo.Size = new System.Drawing.Size(221, 23);
             txtRciNo.TabIndex = 28;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 132);
+            label5.Location = new System.Drawing.Point(23, 99);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(47, 15);
             label5.TabIndex = 23;
@@ -95,7 +95,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(23, 20);
+            label9.Location = new System.Drawing.Point(23, 27);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(62, 15);
             label9.TabIndex = 24;
@@ -104,10 +104,10 @@
             // txtChkNo
             // 
             txtChkNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtChkNo.Location = new System.Drawing.Point(23, 38);
-            txtChkNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            txtChkNo.Location = new System.Drawing.Point(99, 23);
+            txtChkNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtChkNo.Name = "txtChkNo";
-            txtChkNo.Size = new System.Drawing.Size(229, 23);
+            txtChkNo.Size = new System.Drawing.Size(221, 23);
             txtChkNo.TabIndex = 29;
             // 
             // ucChkDsbrsmntJrnl
@@ -125,7 +125,7 @@
             Controls.Add(label9);
             Name = "ucChkDsbrsmntJrnl";
             Padding = new System.Windows.Forms.Padding(20);
-            Size = new System.Drawing.Size(278, 258);
+            Size = new System.Drawing.Size(343, 180);
             ResumeLayout(false);
             PerformLayout();
         }
