@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -301,6 +302,18 @@ namespace ACC.Data
                     dictionary.Add("total_credit", row["total_credit"].ToString());
                 }
                 return dictionary;
+            }
+        }
+
+        public bool BulkInsert(List<JEVAccountsModel> jEVAccountsModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (JEVAccountsModel model in jEVAccountsModels)
+                    _ = Insert(model);
+
+                scope.Complete();
+                return true;
             }
         }
     }

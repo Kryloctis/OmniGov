@@ -2,6 +2,7 @@
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Transactions;
 
@@ -9,27 +10,33 @@ namespace ACC.Data
 {
     public class JEVRepository : IJEVRepository
     {
-        private readonly IJEVAccountsRepository _jevAccountsRepository;
-        private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
-        private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
-        private readonly IADADisbursementsJournalRepository _aDADisbursementsJournalRepository;
-        private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
-        private readonly IGeneralJournalRepository _generalJournalRepository;
+        private readonly IJEVAccountsRepository iJevAccountsRepository;
+        private readonly IGeneralJournalRepository iGeneralJournalRepository;
+        private readonly ICashDisbursementsJournalRepository iCashDisbursementsJournalRepository;
+        private readonly ICheckDisbursementsJournalRepository iCheckDisbursementsJournalRepository;
+        private readonly ICashReceiptsJournalRepository iCashReceiptsJournalRepository;
+        private readonly IADADisbursementsJournalRepository iADADisbursementsJournalRepository;
+
         private AccGenericCommands mySqlGenericCommandsLFS;
         private IJEVAccountsRepository iJEVAccountsRepository;
-        private IADADisbursementsJournalRepository iADADisbursementsJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
-        public JEVRepository(AccGenericCommands mySqlGenericCommandsLFS, IJEVAccountsRepository iJEVAccountsRepository, ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository, ICashReceiptsJournalRepository cashReceiptsJournalRepository, IADADisbursementsJournalRepository iADADisbursementsJournalRepository, ICashDisbursementsJournalRepository cashDisbursementsJournalRepository, IGeneralJournalRepository generalJournalRepository)
+        public JEVRepository(AccGenericCommands mySqlGenericCommandsLFS,
+            IJEVAccountsRepository iJEVAccountsRepository,
+            ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
+            ICashReceiptsJournalRepository cashReceiptsJournalRepository,
+            IADADisbursementsJournalRepository iADADisbursementsJournalRepository,
+            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
+            IGeneralJournalRepository generalJournalRepository)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             this.iJEVAccountsRepository = iJEVAccountsRepository;
-            _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
-            _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
+            this.iCheckDisbursementsJournalRepository = checkDisbursementsJournalRepository;
+            this.iCashReceiptsJournalRepository = cashReceiptsJournalRepository;
             this.iADADisbursementsJournalRepository = iADADisbursementsJournalRepository;
-            _cashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
-            _generalJournalRepository = generalJournalRepository;
+            iCashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
+            iGeneralJournalRepository = generalJournalRepository;
         }
 
         public bool Delete(List<JevModel> entityList)
@@ -114,306 +121,270 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool InsertWithCheckDisbursement(JevModel jevModel,
-                                                List<JEVAccountsModel> jevAccountsModelList,
-                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Insert(jevModel, jevAccountsModelList);
-
-                // assigning jev_id kay karon paman nato makuha tungod sa na insert na sa taas
-                checkDisbursementsJournalModel.JevId = GetLastInsertedID();
-
-                _checkDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithCashReceipts(JevModel entity,
-                                           List<JEVAccountsModel> jevAccountsModelList,
-                                           CashReceiptsJournalModel cashReceiptsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Insert(entity, jevAccountsModelList);
-
-                cashReceiptsJournalModel.JevId = GetLastInsertedID();
-
-                _ = _cashReceiptsJournalRepository.Insert(cashReceiptsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithADADisbursements(JevModel entity,
-                                               List<JEVAccountsModel> jevAccountsModelList,
-                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Insert(entity, jevAccountsModelList);
-
-                aDADisbursementsJournalModel.JevId = GetLastInsertedID();
-
-                _ = _aDADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithCashDisbursements(JevModel entity,
-                                               List<JEVAccountsModel> jevAccountsModelList,
-                                               CashDisbursementsJournalModel cashDisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Insert(entity, jevAccountsModelList);
-
-                cashDisbursementsJournalModel.JevId = GetLastInsertedID();
-
-                _ = _cashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool InsertWithGeneralJournal(JevModel entity,
-                                               List<JEVAccountsModel> jevAccountsModelList,
-                                               GeneralJournalModel generalJournalModel)
-        {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {
-                    _ = Insert(entity, jevAccountsModelList);
-
-                    generalJournalModel.JevId = GetLastInsertedID();
-
-                    _ = _generalJournalRepository.Insert(generalJournalModel);
-
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool Insert(JevModel entity, List<JEVAccountsModel> jevAccountsModelList)
-        {
-            using (var scope = new TransactionScope())
-            {
-                object[][] parameters = new object[][]
-                {
-                        new object[] { "@funds_id", DbType.Byte, entity.FundsId },
-                        new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                        new object[] { "@jev_no", DbType.String, entity.JEVNumber },
-                        new object[] { "@date_entry", DbType.Date, entity.DateEntry },
-                        new object[] { "@ref_no", DbType.String, entity.RefNo },
-                        new object[] { "@payee", DbType.String, entity.Payee },
-                        new object[] { "@explanation", DbType.String, entity.Explanation },
-                        new object[] { "@is_approved", DbType.Boolean, entity.IsApproved },
-                        new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
-                };
-
-                string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
-
-                // save and get the last inserted id
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                // loop jev accounts list then insert each using the latest Jev Id
-                foreach (var jevAccounts in jevAccountsModelList)
-                {
-                    jevAccounts.JEVId = GetLastInsertedID();
-                    _ = _jevAccountsRepository.Insert(jevAccounts);
-                }
-
-                scope.Complete();
-
-                return true;
-            }
-        }
-
         public bool Insert(JevModel entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateWithCheckDisbursement(JevModel entity,
-                                                List<JEVAccountsModel> jevAccountsModelList,
-                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
+            object[][] parameters = new object[][]
             {
-                _ = Update(entity, jevAccountsModelList);
+                new object[] { "@funds_id", DbType.Byte, entity.FundsId },
+                new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
+                new object[] { "@jev_no", DbType.String, entity.JEVNumber },
+                new object[] { "@date_entry", DbType.Date, entity.DateEntry },
+                new object[] { "@ref_no", DbType.String, entity.RefNo },
+                new object[] { "@payee", DbType.String, entity.Payee },
+                new object[] { "@explanation", DbType.String, entity.Explanation },
+                new object[] { "@is_approved", DbType.Boolean, entity.IsApproved },
+                new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
+            };
 
-                _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
-                scope.Complete();
-                return true;
-            }
-        }
+            string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
 
-        public bool UpdateWithCashReceipts(JevModel entity,
-                                           List<JEVAccountsModel> jevAccountsModelList,
-                                           CashReceiptsJournalModel cashReceiptsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Update(entity, jevAccountsModelList);
-
-                _ = _cashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool UpdateWithADADisbursements(JevModel entity,
-                                               List<JEVAccountsModel> jevAccountsModelList,
-                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
-        {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {
-                    _ = Update(entity, jevAccountsModelList);
-
-                    _ = _aDADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
-
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool UpdateWithCashDisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Update(entity, jevAccountsModelList);
-
-                _ = _cashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool UpdateWithGeneralJournal(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Update(entity, jevAccountsModelList);
-
-                _ = _generalJournalRepository.UpdateByJevId(generalJournalModel);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool SetJEVStatus(int jevId, int fundId, string status)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int64, jevId },
-                    new object[] { "@jev_no", DbType.String, GetLastJevNoSeries(fundId) }
-                };
-
-                string Status()
-                {
-                    switch (status)
-                    {
-                        case "approve":
-                            return "is_approved = 1, is_disapproved = 0, is_cancelled = 0, jev_no = @jev_no";
-
-                        case "disapprove":
-                            return "is_approved = 0, is_disapproved = 1, is_cancelled = 0, jev_no = NULL";
-
-                        case "cancel":
-                            return "is_cancelled = 1";
-
-                        case "pending":
-                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0, jev_no = NULL";
-
-                        default:
-                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0, jev_no = NULL";
-                    }
-                }
-
-                string query = $"UPDATE {tableName} SET {Status()} WHERE id = @jev_id";
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool Update(JevModel entity, List<JEVAccountsModel> jevAccountsModelList)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id },
-                    new object[] { "@funds_id", DbType.Byte, entity.FundsId },
-                    new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                    new object[] { "@jev_no", DbType.String, entity.JEVNumber },
-                    new object[] { "@date_entry", DbType.Date, entity.DateEntry },
-                    new object[] { "@ref_no", DbType.String, entity.RefNo },
-                    new object[] { "@payee", DbType.String, entity.Payee },
-                    new object[] { "@explanation", DbType.String, entity.Explanation },
-                    new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
-                    new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
-                    new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
-                    new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
-                    new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
-                    new object[] { "@remarks", DbType.String, entity.Remarks},
-                };
-
-                string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
-
-                // save and get the last inserted id
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
-                // delete all the jev accounts first
-                _ = _jevAccountsRepository.DeleteByJevId(entity.Id);
-
-                // loop jev accounts list then insert each using the latest Jev Id
-                foreach (var jevAccounts in jevAccountsModelList)
-                {
-                    jevAccounts.JEVId = entity.Id;
-                    _ = _jevAccountsRepository.Insert(jevAccounts);
-                }
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool Update(JevModel entity)
-        {
-            throw new NotImplementedException();
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public int GetLastInsertedID()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
             return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
+
+        public bool InsertJevGenJrnl(JevModel entity,
+                                              List<JEVAccountsModel> jevAccountsModelList,
+                                              GeneralJournalModel generalJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(entity);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                generalJournalModel.JevId = GetLastInsertedID();
+                _ = iGeneralJournalRepository.Insert(generalJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertJevCashDsbrsmntsJrnl(JevModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(entity);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                cashDisbursementsJournalModel.JevId = GetLastInsertedID();
+                _ = iCashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertJevChkDsbrsmntJrnl(JevModel jevModel,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(jevModel);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                checkDisbursementsJournalModel.JevId = GetLastInsertedID();
+                iCheckDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertJevCashRcptsJrnl(JevModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(entity);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                cashReceiptsJournalModel.JevId = lstInsrtId;
+                _ = iCashReceiptsJournalRepository.Insert(cashReceiptsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertJevAdaDsbrsmntsJrnl(JevModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(entity);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                aDADisbursementsJournalModel.JevId = GetLastInsertedID();
+                _ = iADADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool InsertJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(JevModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.Id },
+                new object[] { "@funds_id", DbType.Byte, entity.FundsId },
+                new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
+                new object[] { "@jev_no", DbType.String, entity.JEVNumber },
+                new object[] { "@date_entry", DbType.Date, entity.DateEntry },
+                new object[] { "@ref_no", DbType.String, entity.RefNo },
+                new object[] { "@payee", DbType.String, entity.Payee },
+                new object[] { "@explanation", DbType.String, entity.Explanation },
+                new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
+                new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
+                new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
+                new object[] { "@remarks", DbType.String, entity.Remarks},
+            };
+
+            string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
+
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool UpdateJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                _ = iGeneralJournalRepository.DeleteGenJrnlJevId(entity.Id);
+                _ = iCashReceiptsJournalRepository.DeleteCshRcptsJrnlJevId(entity.Id);
+                _ = iCashDisbursementsJournalRepository.DeleteCshDsbrsmntJrnlJevId(entity.Id);
+                _ = iCheckDisbursementsJournalRepository.DeleteChckDsbrsmntJrnlJevId(entity.Id);
+
+                _ = iGeneralJournalRepository.UpdateByJevId(generalJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevChkDsbrsmntJrnl(JevModel entity,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                iCheckDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                _ = iCashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevCshRcptsJrnl(JevModel entity,
+                                         List<JEVAccountsModel> jevAccountsModelList,
+                                         CashReceiptsJournalModel cashReceiptsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                _ = iCashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModels.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModels);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity,
+                                              List<JEVAccountsModel> jevAccountsModelList,
+                                              ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(entity);
+
+                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                _ = iADADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
@@ -750,6 +721,40 @@ namespace ACC.Data
 
             string query = $"SELECT remarks FROM {tableName} WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters).ToString();
+        }
+
+        //Audit
+        public bool CancelJev(int jevId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, jevId}
+            };
+
+            string query = $"UPDATE {tableName} SET is_cancelled = 1 WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool ApproveJev(int jevId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, jevId}
+            };
+
+            string query = $"UPDATE {tableName} SET is_approved = 1 WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool DisapproveJev(int jevId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, jevId}
+            };
+
+            string query = $"UPDATE {tableName} SET is_disapproved = 1 WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

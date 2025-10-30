@@ -7,29 +7,29 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVRepository : IAccRepository<JevModel>
     {
-        bool InsertWithGeneralJournal(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+        bool InsertJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
-        bool InsertWithCashDisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+        bool InsertJevCashDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
-        bool UpdateWithCashDisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+        bool InsertJevChkDsbrsmntJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
-        bool InsertWithCheckDisbursement(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool InsertJevCashRcptsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
-        bool UpdateWithCheckDisbursement(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool InsertJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels);
 
-        bool InsertWithCashReceipts(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
+        bool InsertJevAdaDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
-        bool UpdateWithCashReceipts(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
+        bool UpdateJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
-        bool InsertWithADADisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+        bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
-        bool UpdateWithADADisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+        bool UpdateJevChkDsbrsmntJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
-        bool UpdateWithGeneralJournal(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+        bool UpdateJevCshRcptsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
-        bool Insert(JevModel entity, List<JEVAccountsModel> jevAccountsModelList);
+        bool UpdateJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels);
 
-        bool Update(JevModel entity, List<JEVAccountsModel> jevAccountsModelList);
+        bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
         bool Delete(JevModel entity);
 
@@ -61,7 +61,11 @@ namespace ACC.Domain.Interfaces
 
         int TotalCancelledJEV(short month, short year);
 
-        bool SetJEVStatus(int jevId, int fundId, string status);
+        bool CancelJev(int jevId);
+
+        bool ApproveJev(int jevId);
+
+        bool DisapproveJev(int jevId);
 
         string GetRemarks(int jevId);
 

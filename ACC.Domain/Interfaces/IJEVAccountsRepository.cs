@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVAccountsRepository : IAccRepository<JEVAccountsModel>
     {
+        bool BulkInsert(List<JEVAccountsModel> jEVAccountsModels);
+
         DataTable GetViewRecordsByLedgerAccounts();
 
         DataTable GetViewRecords();

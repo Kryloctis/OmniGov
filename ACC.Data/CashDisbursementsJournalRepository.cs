@@ -154,7 +154,7 @@ namespace ACC.Data
             return record;
         }
 
-        public bool DeleteCashDisbursementJournalByJevID(int jevId)
+        public bool DeleteCshDsbrsmntJrnlJevId(int jevId)
         {
             var parameters = new object[][]
             {
