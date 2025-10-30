@@ -132,7 +132,6 @@ namespace LFS.Views.Transactions.JEV
             btnCancelJEV.Size = new System.Drawing.Size(67, 39);
             btnCancelJEV.Text = "Cancel JEV";
             btnCancelJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            btnCancelJEV.Click += btnCancelJEV_Click;
             // 
             // toolStripSeparator3
             // 

@@ -1,10 +1,7 @@
 ﻿using ACC.Data;
-using Google.Protobuf.WellKnownTypes;
 using LFS.Helpers;
-using LFS.Properties;
 using LFS.Views.Dashboard;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -37,7 +34,6 @@ namespace LFS.Views.Transactions.JEV
                 nudYear.Value = Helper.GetCurrentDate().Year;
                 LoadJEVList();
                 MonitorControlChanges(panel1, btnApplyFltr);
-                ucJev.OnLoad();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -57,7 +53,7 @@ namespace LFS.Views.Transactions.JEV
         internal void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void LoadJournals()
@@ -84,21 +80,6 @@ namespace LFS.Views.Transactions.JEV
                 if (ctrl.HasChildren)
                     MonitorControlChanges(ctrl, btnApplyFltr);
             }
-        }
-
-        private void LoadSelected()
-        {
-            int rowIndex = dgJEV.CurrentCell.RowIndex;
-            string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
-            int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-            int createdById = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["created_by_id"].Value);
-
-            var frmJev = new frmJev(true, this, ucJevDashboard);
-            var ucFrmJev = frmJev.ucjev1;
-            ucFrmJev.jevNo = jevNo;
-            ucFrmJev.jevId = jevId;
-            frmJev.createdById = createdById;
-            frmJev.ShowDialog();
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -289,6 +270,7 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 customTabControl1.SelectedTab = tbPgCrud;
+                ucJev.OnLoad(false, null);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -297,7 +279,10 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
+                int rowIndex = dgJEV.CurrentCell.RowIndex;
+                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
                 customTabControl1.SelectedTab = tbPgCrud;
+                ucJev.OnLoad(true, jevId);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -318,5 +303,242 @@ namespace LFS.Views.Transactions.JEV
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        private void tbPgCrud_Click(object sender, EventArgs e)
+        {
+        }
+
+        ////////////////
+        ////////////////
+
+        //INSERT
+        private bool InsertProcuremntRcvJournal()
+        {
+            var models = ucJev.JevProcurementRcvJrnl();
+            return AccFactory.JEVRepository().InsertJevProcRcvJrnl(models.JevModel, models.jevAccountsModels);
+        }
+
+        private bool InsertCheckDisbursementJournal()
+        {
+            var models = ucJev.JevChkDsbrsmntJrnlModels();
+            return AccFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(models.JevModel, models.jEVAccountsModels, models.CheckDisbursementsJournalModel);
+        }
+
+        private bool InsertCashReceiptsJournal()
+        {
+            var models = ucJev.JevCshRcptsJrnlModels();
+            return AccFactory.JEVRepository().InsertJevCashRcptsJrnl(models.JevModel, models.jEVAccountsModels, models.CashReceiptsJournalModel);
+        }
+
+        private bool InsertADADisbursementsJournal()
+        {
+            var models = ucJev.JevAuthDbtAccDsbrsmntModels();
+            return AccFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.ADADisbursementsJournalModel);
+        }
+
+        private bool InsertCashDisbursementsJournal()
+        {
+            var models = ucJev.JevCshDsbrsmntJrnlModels();
+            return AccFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.CashDisbursementsJournalModel);
+        }
+
+        private bool InsertGeneralJournal()
+        {
+            var models = ucJev.JevGenJrnlModels();
+            return AccFactory.JEVRepository().InsertJevGenJrnl(models.JevModel, models.jEVAccountsModels, models.GeneralJournalModel);
+        }
+
+        //UPDATE
+
+        private bool UpdateGenJrnl()
+        {
+            var models = ucJev.JevGenJrnlModels();
+            return AccFactory.JEVRepository().UpdateJevGenJrnl(models.JevModel, models.jEVAccountsModels, models.GeneralJournalModel);
+        }
+
+        private bool UpdateCshDsbrsmntsJrnl()
+        {
+            var models = ucJev.JevCshDsbrsmntJrnlModels();
+            return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.CashDisbursementsJournalModel);
+        }
+
+        private bool UpdateChkDsbrsmntJrnl()
+        {
+            var models = ucJev.JevChkDsbrsmntJrnlModels();
+            return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(models.JevModel, models.jEVAccountsModels, models.CheckDisbursementsJournalModel);
+        }
+
+        private bool UpdateCshRcptsJrnl()
+        {
+            var models = ucJev.JevCshRcptsJrnlModels();
+            return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(models.JevModel, models.jEVAccountsModels, models.CashReceiptsJournalModel);
+        }
+
+        private bool UpdateProctRcvJrnl()
+        {
+            var models = ucJev.JevProcurementRcvJrnl();
+            return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(models.JevModel, models.jevAccountsModels);
+        }
+
+        private bool UpdateAdaDsbrsmntsJrnl()
+        {
+            var models = ucJev.JevAuthDbtAccDsbrsmntModels();
+            return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.ADADisbursementsJournalModel);
+        }
+
+        private void ucJev1_Load(object sender, EventArgs e)
+        {
+        }
+
+        //private bool InsertData()
+        //{
+        //    switch ()
+        //    {
+        //        case "General Journal":
+        //            return InsertGeneralJournal();
+
+        //        case "Procurement Received Journal":
+        //            return InsertProcuremntRcvJournal();
+
+        //        case "Cash Disbursements Journal":
+        //            return InsertCashDisbursementsJournal();
+
+        //        case "Cash Receipts Journal":
+        //            return InsertCashReceiptsJournal();
+
+        //        case "Check Disbursements Journal":
+        //            return InsertCheckDisbursementJournal();
+
+        //        case "Authority to Debit Account Disbursement Journal":
+        //            return InsertADADisbursementsJournal();
+
+        //        default: return false;
+        //    }
+        //}
+
+        //internal bool UpdateData()
+        //{
+        //    bool updated;
+
+        //    //switch (jevStatus.ToLower())
+        //    //{
+        //    //    case "pending":
+        //    //        jevModel.JEVNumber = null;
+        //    //        jevModel.IsApproved = false;
+        //    //        jevModel.IsDisapproved = false;
+        //    //        jevModel.IsCancelled = false;
+        //    //        jevModel.Remarks = remarks;
+        //    //        break;
+
+        //    //    case "disapproved":
+        //    //        jevModel.JEVNumber = null;
+        //    //        jevModel.IsApproved = false;
+        //    //        jevModel.IsDisapproved = true;
+        //    //        jevModel.Remarks = remarks;
+        //    //        break;
+
+        //    //    case "approved":
+        //    //        jevModel.JEVNumber = AccFactory.JEVRepository().GetLastJevNoSeries(uc.fundId);
+        //    //        jevModel.IsApproved = true;
+        //    //        jevModel.IsDisapproved = false;
+        //    //        jevModel.IsCancelled = false;
+        //    //        jevModel.Remarks = remarks;
+        //    //        break;
+
+        //    //    case "cancelled":
+        //    //        jevModel.IsCancelled = true;
+        //    //        jevModel.Remarks = remarks;
+        //    //        break;
+        //    //}
+
+        //    switch ()
+        //    {
+        //        case "General Journal":
+        //            updated = UpdateGenJrnl();
+        //            break;
+
+        //        case "Cash Disbursements Journal":
+        //            updated = UpdateCshDsbrsmntsJrnl();
+        //            break;
+
+        //        case "Cash Receipts Journal":
+        //            updated = UpdateCshRcptsJrnl();
+        //            break;
+
+        //        case "Check Disbursements Journal":
+        //            updated = UpdateChkDsbrsmntJrnl();
+        //            break;
+
+        //        case "Procurement Received Journal":
+        //            updated = UpdateProctRcvJrnl();
+        //            break;
+
+        //        case "Authority to Debit Account Disbursement Journal":
+        //            updated = UpdateAdaDsbrsmntsJrnl();
+        //            break;
+
+        //        default:
+        //            updated = false;
+        //            break;
+        //    }
+
+        //    if (journalId != oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
+        //    {
+        //        switch (oldJournalId)
+        //        {
+        //            case 1:
+        //                AccFactory.GeneralJournalRepository().DeleteGenJrnlJevId(jevId);
+        //                break;
+
+        //            case 2:
+        //                AccFactory.CashReceiptsJournalRepository().DeleteCshRcptsJrnlJevId(jevId);
+        //                break;
+
+        //            case 3:
+        //                //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+        //                break;
+
+        //            case 4:
+        //                AccFactory.CashDisbursementsJournalRepository().DeleteCshDsbrsmntJrnlJevId(jevId);
+        //                break;
+
+        //            case 5:
+        //                AccFactory.CheckDisbursementsJournalRepository().DeleteChckDsbrsmntJrnlJevId(jevId);
+        //                break;
+
+        //            case 6:
+        //                //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+        //                break;
+        //        }
+        //    }
+
+        //    return updated;
+        //}
+
+        //private bool SaveData()
+        //{
+        //    if (!FormValidations())
+        //        return false;
+
+        //    bool saveData;
+
+        //    if (isEdit)
+        //    {
+        //        string currentJevStatus = AccFactory.JEVRepository().GetJevStatus(jevId);
+        //        if (currentJevStatus.ToLower() == "disapproved")
+        //        {
+        //            if (Helper.MessageBoxConfirmCancel("This JEV will be return into Pending.\nConfirm if you want to proceed..."))
+        //                saveData = UpdateData("pending");
+        //            else
+        //                return false;
+        //        }
+        //        else
+        //            saveData = UpdateData(currentJevStatus);
+        //    }
+        //    else
+        //        saveData = InsertData();
+
+        //    return saveData;
+        //}
     }
 }

@@ -18,10 +18,10 @@ namespace LFS.Views.Transactions.JEV
 
         private void frmRemarks_Load(object sender, EventArgs e)
         {
-            int jevId = _frmJEV.ucjev1.jevId;
-            txtRemarks.Text = AccFactory.JEVRepository().GetRemarks(jevId);
-            txtRemarks.SelectionStart = 0;
-            PermissionVerification();
+            //int jevId = _frmJEV.ucjev1.jevId;
+            //txtRemarks.Text = AccFactory.JEVRepository().GetRemarks(jevId);
+            //txtRemarks.SelectionStart = 0;
+            //PermissionVerification();
         }
 
         private void PermissionVerification()
@@ -48,50 +48,48 @@ namespace LFS.Views.Transactions.JEV
             Close();
         }
 
-        private bool DissaproveJev()
-        {
-            string remarks = txtRemarks.Text.Trim();
+        //private bool DissaproveJev()
+        //{
+        //    string remarks = txtRemarks.Text.Trim();
 
-            if (!_frmJEV.FormValidations())
-                return false;
+        //    if (!_frmJEV.FormValidations())
+        //        return false;
 
-            if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                return _frmJEV.UpdateData("disapproved", remarks);
-            }
-            return false;
-        }
+        //    if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+        //    {
+        //        return _frmJEV.UpdateData("disapproved", remarks);
+        //    }
+        //    return false;
+        //}
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (DissaproveJev())
-                {
-                    Helper.MessageBoxSuccess("JEV has been disapproved.");
-                    _frmJEV.GetJevStatus(_frmJEV.ucjev1.jevId);
-                    _frmJEV.frmJEVList.LoadJEVList();
-                    _frmJEV.ucJEVDashboard.LoadJEVCounter();
-                    Close();
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            //try
+            //{
+            //    if (DissaproveJev())
+            //    {
+            //        Helper.MessageBoxSuccess("JEV has been disapproved.");
+            //        _frmJEV.ucJEVDashboard.LoadJEVCounter();
+            //        Close();
+            //    }
+            //}
+            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveDisapprovalMessage()
-        {
-            string remarks = txtRemarks.Text.Trim();
+        //private bool SaveDisapprovalMessage()
+        //{
+        //    string remarks = txtRemarks.Text.Trim();
 
-            return _frmJEV.UpdateData("disapproved", remarks);
-        }
+        //    return _frmJEV.UpdateData("disapproved", remarks);
+        //}
 
         private void btnSaveMessage_Click(object sender, EventArgs e)
         {
             try
             {
-                if (SaveDisapprovalMessage())
+                //if (SaveDisapprovalMessage())
 
-                    Helper.MessageBoxSuccess("Dissaproval message has been saved.");
+                //    Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

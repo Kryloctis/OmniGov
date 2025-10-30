@@ -10,13 +10,14 @@ namespace LFS.Views.Transactions.JEV
     {
         private readonly ucJev ucJEV;
         internal readonly ucJEVAccount ucJEVAccount;
+        private string journalName;
 
-        public frmJevAccAdd(ucJev _ucJEV)
+        public frmJevAccAdd(ucJev _ucJEV, string journalName)
         {
             InitializeComponent();
             ucJEV = _ucJEV;
             ucJEVAccount = ucjevAccount1;
-            ucJEVAccount.fundId = ucJEV.fundId;
+            this.journalName = journalName;
         }
 
         private bool AddAccount()
@@ -101,16 +102,20 @@ namespace LFS.Views.Transactions.JEV
 
         private void frmJEVAccountAdd_Load(object sender, EventArgs e)
         {
-            ucJEVAccount.LoadFPP();
-            ucJEVAccount.cmbFPP.SelectedIndex = -1;
-            ucJEVAccount.cmbFPP.TextChanged += new EventHandler(ucJEVAccount.cmbxFPP_TextChanged);
-            ucJEVAccount.cmbxAccount.SelectedIndex = -1;
-            ShowHideRadioButtons();
+            try
+            {
+                ucJEVAccount.LoadFPP();
+                ucJEVAccount.cmbFPP.SelectedIndex = -1;
+                ucJEVAccount.cmbFPP.TextChanged += new EventHandler(ucJEVAccount.cmbxFPP_TextChanged);
+                ucJEVAccount.cmbxAccount.SelectedIndex = -1;
+                ShowHideRadioButtons();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowHideRadioButtons()
         {
-            if (ucJEV.journalName == "Cash Receipts Journal")
+            if (journalName == "Cash Receipts Journal")
             {
                 ucJEVAccount.pnlCollectionsDeposits.Visible = true;
                 ucJEVAccount.radCollections.Checked = true;
@@ -125,8 +130,12 @@ namespace LFS.Views.Transactions.JEV
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (AddAccount())
-                ucJEVAccount.ResetForm();
+            try
+            {
+                if (AddAccount())
+                    ucJEVAccount.ResetForm();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
