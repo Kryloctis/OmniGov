@@ -123,7 +123,7 @@ namespace LFS.Views.Transactions.BankDeposits
         private void LoadFunds()
         {
             var dataTable = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dataTable, cmbFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dataTable, cmbFund, "id", "fund_name");
         }
 
         private void cmbbanks_Validating(object sender, CancelEventArgs e)

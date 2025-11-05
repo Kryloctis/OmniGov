@@ -26,7 +26,7 @@ namespace LFS.Views.Reports.Journals
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void btnRunReport_Click(object sender, System.EventArgs e)

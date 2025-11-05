@@ -124,7 +124,7 @@ namespace LFS.Views.Transactions.RCI
         {
             var fundRepository = AccFactory.FundsRepository();
             var dtFunds = fundRepository.GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
         }
 
         internal void LoadBanks()

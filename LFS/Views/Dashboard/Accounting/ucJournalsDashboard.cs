@@ -12,7 +12,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             InitializeComponent();
         }
 
-
         internal void Onload()
         {
             LoadFunds();
@@ -34,7 +33,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
 
             dtFunds.Rows.InsertAt(newRow, 0);
 
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void LoadCounters()

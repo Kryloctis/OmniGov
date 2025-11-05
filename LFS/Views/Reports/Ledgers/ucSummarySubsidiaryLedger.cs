@@ -34,7 +34,7 @@ namespace LFS.Views.Reports.Ledgers
         private void LoadFunds()
         {
             DataTable dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private decimal GetBeginningBalance(int fundId, short year, int generalLedgerId, ushort subsidiaryLedgerId)

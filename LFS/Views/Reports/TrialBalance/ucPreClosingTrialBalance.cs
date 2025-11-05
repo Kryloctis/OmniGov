@@ -24,7 +24,7 @@ namespace LFS.Views.Reports.TrialBalance
         internal void OnLoad()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

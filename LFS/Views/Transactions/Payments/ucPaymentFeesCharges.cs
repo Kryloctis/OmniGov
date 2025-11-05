@@ -15,7 +15,9 @@ namespace LFS.Views.Transactions.Payments
         public ucPaymentFeesCharges()
         {
             InitializeComponent();
-            Helper.DatagridEditableRowStyle(dgPaymentFeesCharges, true);
+            Helper.DatagridEditableRowStyle(dgPaymentFeesCharges, 
+                                            DataGridViewTriState.False, 
+                                            DataGridViewAutoSizeColumnsMode.Fill);
         }
 
         internal void OnLoad()

@@ -41,7 +41,7 @@ namespace LFS.Views.Reports.Saaobb
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
         private void frmSAAOBB_Load(object sender, EventArgs e)

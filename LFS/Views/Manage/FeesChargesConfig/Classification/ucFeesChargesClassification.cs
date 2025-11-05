@@ -43,7 +43,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
         internal void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
         internal void ResetForm()

@@ -63,7 +63,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
         private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)

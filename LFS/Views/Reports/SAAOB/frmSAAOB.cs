@@ -28,7 +28,7 @@ namespace LFS.Views.Reports.Saaob
             {
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
 
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

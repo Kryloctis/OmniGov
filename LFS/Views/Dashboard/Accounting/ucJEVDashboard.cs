@@ -47,7 +47,7 @@ namespace LFS.Views.Dashboard
             newRow["fund_name"] = "All";
             dtFunds.Rows.InsertAt(newRow, 0);
 
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void LoadJournals()
@@ -147,7 +147,7 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                _ = new frmJev(false, null, this).ShowDialog();
+                _ = new frmJev(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

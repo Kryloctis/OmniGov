@@ -131,8 +131,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(AccFactory.FundsRepository().GetRecords(), cmbxFund, "id", "fund_name");
         }
 
         private void LoadYear()

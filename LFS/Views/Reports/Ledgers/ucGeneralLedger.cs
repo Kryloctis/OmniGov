@@ -71,7 +71,7 @@ namespace LFS.Views.Reports.Ledgers
         private void LoadFunds()
         {
             DataTable dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFunds, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFunds, "id", "fund_name");
         }
 
         private void LoadYear()

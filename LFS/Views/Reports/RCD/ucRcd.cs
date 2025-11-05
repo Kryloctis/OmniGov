@@ -208,7 +208,7 @@ namespace LFS.Views.Reports.Rcd
             {
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
                 cmbxFunds.Enabled = true;
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
             }
             else
             {

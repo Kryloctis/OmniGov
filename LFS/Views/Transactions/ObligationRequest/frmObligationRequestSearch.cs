@@ -94,7 +94,7 @@ namespace LFS.Views.Transactions.ObligationRequest
             try
             {
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
             }
             catch (Exception ex)
             {

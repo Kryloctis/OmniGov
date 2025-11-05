@@ -725,7 +725,7 @@ namespace LFS
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        internal static void FundsComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void FundsComboBox(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
