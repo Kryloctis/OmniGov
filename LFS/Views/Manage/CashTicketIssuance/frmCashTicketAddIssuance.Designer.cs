@@ -43,7 +43,7 @@
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnSave);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 164);
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 254);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -52,22 +52,22 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(275, 2);
+            btnCancel.Location = new System.Drawing.Point(257, 2);
             btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnCancel.Size = new System.Drawing.Size(82, 22);
+            btnCancel.Size = new System.Drawing.Size(100, 22);
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            btnSave.Location = new System.Drawing.Point(187, 2);
+            btnSave.Location = new System.Drawing.Point(151, 2);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            btnSave.Size = new System.Drawing.Size(82, 22);
+            btnSave.Size = new System.Drawing.Size(100, 22);
             btnSave.TabIndex = 0;
             btnSave.Text = "Save";
             btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -79,7 +79,8 @@
             ucCashTicketIssuance1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCashTicketIssuance1.Location = new System.Drawing.Point(4, 4);
             ucCashTicketIssuance1.Name = "ucCashTicketIssuance1";
-            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 156);
+            ucCashTicketIssuance1.Padding = new System.Windows.Forms.Padding(20);
+            ucCashTicketIssuance1.Size = new System.Drawing.Size(352, 246);
             ucCashTicketIssuance1.TabIndex = 7;
             // 
             // panel1
@@ -89,7 +90,7 @@
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(360, 164);
+            panel1.Size = new System.Drawing.Size(360, 254);
             panel1.TabIndex = 8;
             // 
             // frmCashTicketAddIssuance
@@ -99,7 +100,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(360, 191);
+            ClientSize = new System.Drawing.Size(360, 281);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

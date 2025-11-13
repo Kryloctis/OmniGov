@@ -88,7 +88,7 @@
             // tsJOCount
             // 
             tsJOCount.Name = "tsJOCount";
-            tsJOCount.Size = new System.Drawing.Size(691, 17);
+            tsJOCount.Size = new System.Drawing.Size(975, 17);
             tsJOCount.Spring = true;
             // 
             // lblRecordCount
@@ -127,7 +127,6 @@
             // 
             panel1.Controls.Add(dgCashTicketIssued);
             panel1.Controls.Add(pbLoadRecords);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 65);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(4);

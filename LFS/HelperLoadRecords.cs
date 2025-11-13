@@ -703,6 +703,14 @@ namespace LFS
             combobox.DropDownHeight = 106;
         }
 
+        internal static void CashTicketsCmbx(ComboBox comboBox, DataTable dataTable)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = "id";
+            comboBox.DisplayMember = "description";
+            comboBox.DropDownHeight = 106;
+        }
+
         internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable, string valueMember, string displayMember)
         {
             combobox.DataSource = dataTable;

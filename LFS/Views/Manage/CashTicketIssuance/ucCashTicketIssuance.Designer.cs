@@ -47,7 +47,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(3, 30);
+            label1.Location = new System.Drawing.Point(23, 20);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(105, 15);
             label1.TabIndex = 28;
@@ -56,7 +56,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(3, 84);
+            label2.Location = new System.Drawing.Point(23, 132);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(72, 15);
             label2.TabIndex = 29;
@@ -65,7 +65,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(3, 130);
+            label5.Location = new System.Drawing.Point(23, 188);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(58, 15);
             label5.TabIndex = 32;
@@ -74,7 +74,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(3, 58);
+            label3.Location = new System.Drawing.Point(23, 76);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(75, 15);
             label3.TabIndex = 30;
@@ -85,8 +85,8 @@
             cmbCollector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbCollector.FormattingEnabled = true;
-            cmbCollector.Location = new System.Drawing.Point(114, 27);
-            cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            cmbCollector.Location = new System.Drawing.Point(23, 38);
+            cmbCollector.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbCollector.Name = "cmbCollector";
             cmbCollector.Size = new System.Drawing.Size(200, 23);
             cmbCollector.TabIndex = 21;
@@ -96,11 +96,11 @@
             cbCollectingOfficerTypeJO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbCollectingOfficerTypeJO.AutoSize = true;
             cbCollectingOfficerTypeJO.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(200, 5);
+            cbCollectingOfficerTypeJO.Location = new System.Drawing.Point(182, 20);
             cbCollectingOfficerTypeJO.Name = "cbCollectingOfficerTypeJO";
-            cbCollectingOfficerTypeJO.Size = new System.Drawing.Size(114, 17);
+            cbCollectingOfficerTypeJO.Size = new System.Drawing.Size(42, 17);
             cbCollectingOfficerTypeJO.TabIndex = 27;
-            cbCollectingOfficerTypeJO.Text = "Show Job Orders";
+            cbCollectingOfficerTypeJO.Text = "J.O";
             cbCollectingOfficerTypeJO.UseVisualStyleBackColor = true;
             cbCollectingOfficerTypeJO.CheckedChanged += cbCollectingOfficerTypeJO_CheckedChanged;
             // 
@@ -111,8 +111,8 @@
             cmbxCashTickets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxCashTickets.FormattingEnabled = true;
             cmbxCashTickets.IntegralHeight = false;
-            cmbxCashTickets.Location = new System.Drawing.Point(114, 82);
-            cmbxCashTickets.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            cmbxCashTickets.Location = new System.Drawing.Point(23, 150);
+            cmbxCashTickets.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbxCashTickets.Name = "cmbxCashTickets";
             cmbxCashTickets.Size = new System.Drawing.Size(200, 23);
             cmbxCashTickets.TabIndex = 22;
@@ -123,8 +123,8 @@
             dtpDateIssued.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dtpDateIssued.CustomFormat = "MMM dd, yyyy";
             dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtpDateIssued.Location = new System.Drawing.Point(114, 54);
-            dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dtpDateIssued.Location = new System.Drawing.Point(23, 94);
+            dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             dtpDateIssued.Name = "dtpDateIssued";
             dtpDateIssued.Size = new System.Drawing.Size(200, 23);
             dtpDateIssued.TabIndex = 26;
@@ -132,7 +132,7 @@
             // nudQuantity
             // 
             nudQuantity.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            nudQuantity.Location = new System.Drawing.Point(114, 128);
+            nudQuantity.Location = new System.Drawing.Point(23, 206);
             nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";
             nudQuantity.Size = new System.Drawing.Size(200, 23);
@@ -153,7 +153,7 @@
             lblCashTcktStat.AutoSize = true;
             lblCashTcktStat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             lblCashTcktStat.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCashTcktStat.Location = new System.Drawing.Point(210, 110);
+            lblCashTcktStat.Location = new System.Drawing.Point(120, 188);
             lblCashTcktStat.Name = "lblCashTcktStat";
             lblCashTcktStat.Size = new System.Drawing.Size(104, 15);
             lblCashTcktStat.TabIndex = 34;
@@ -174,7 +174,8 @@
             Controls.Add(cmbxCashTickets);
             Controls.Add(dtpDateIssued);
             Name = "ucCashTicketIssuance";
-            Size = new System.Drawing.Size(329, 164);
+            Padding = new System.Windows.Forms.Padding(20);
+            Size = new System.Drawing.Size(248, 256);
             ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);

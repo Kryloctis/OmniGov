@@ -50,7 +50,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
                 int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
             }
 
-            HelperLoadRecords.ReceiptsCombobox(cmbxCashTickets, cashTicketsDT);
+            HelperLoadRecords.CashTicketsCmbx(cmbxCashTickets, cashTicketsDT);
         }
 
         internal void LoadSelectedValue(Dictionary<string, string> dictSelectedData)
