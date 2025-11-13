@@ -126,7 +126,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
 
         internal void LoadReceipts()
         {
-            DataTable receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
+            DataTable receiptsDt = AccFactory.ReceiptsRepository().GetViewRecords();
 
             foreach (DataRow row in receiptsDt.Rows)
             {

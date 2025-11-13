@@ -9,20 +9,13 @@ namespace ACC.Data
 {
     public class ReceiptsRepository : IReceiptsRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "receipts";
         private readonly string viewTableName = "view_receipts";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public ReceiptsRepository(IAccGenericCommands dbGenericCommands)
+        public ReceiptsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            string query = $"SELECT COUNT(*) FROM {tableName}";
-
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public bool Delete(List<ReceiptsModel> entityList)
@@ -37,7 +30,7 @@ namespace ACC.Data
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -47,67 +40,59 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, Id},
+                new object[] { "@id", DbType.Int32, Id},
             };
 
             string query = $"SELECT * FROM {tableName} WHERE {tableName}.id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return record;
+                DataRow row = dataTable.Rows[0];
 
-                record.Add("id", reader.Rows[0]["id"].ToString());
-                record.Add("receipt_number_from", reader.Rows[0]["receipt_number_from"].ToString());
-                record.Add("receipt_number_to", reader.Rows[0]["receipt_number_to"].ToString());
-                record.Add("received_date", reader.Rows[0]["received_date"].ToString());
-                record.Add("quantity", reader.Rows[0]["quantity"].ToString());
-                record.Add("remarks", reader.Rows[0]["remarks"].ToString());
-                record.Add("users_id", reader.Rows[0]["users_id"].ToString());
-                record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-
-            return record;
+            return recordDictionary;
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} ORDER BY accountable_forms_id ";
 
-            var dtri = new DataTable();
-            return _dbGenericCommands.Fill(query, dtri);
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameter = new object[][] {
+            var parameter = new object[][]
+            {
                 new object[]{"@searchText", DbType.String, $"%{searchText}%"},
             };
 
             string query = $"SELECT id, CONCAT(acc_form_no, ' ', acc_form_desc) AS accountable_forms, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer, FROM {viewTableName} WHERE acc_form_no like @searchText OR acc_form_desc LIKE @searchText OR user LIKE @searchText ORDER BY received_date DESC";
 
-            var dtri = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtri, parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool IdExist(int id)
         {
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, id },
+                new object[] { "@id", DbType.Int32, id },
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            return false;
+            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
@@ -118,7 +103,7 @@ namespace ACC.Data
                            $"FROM {tableName} " +
                            $"WHERE accountable_forms_id = {accountableFormId}";
 
-            DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+            DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -135,7 +120,7 @@ namespace ACC.Data
             string query = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno " +
                             $"FROM {tableName} " +
                             $"WHERE accountable_forms_id = {accountableFormId}";
-            DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+            DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -159,7 +144,7 @@ namespace ACC.Data
             };
 
             string query = $"INSERT INTO {tableName} (accountable_forms_id, receipt_number_from, receipt_number_to, received_date, quantity, users_id, remarks) VALUES (@accountable_forms_id, @receipt_number_from, @receipt_number_to, @received_date, @quantity, @users_id, @remarks)";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ReceiptsModel entity)
@@ -176,17 +161,9 @@ namespace ACC.Data
                 new object[] { "@remarks", DbType.String, entity.Remarks}
             };
 
-            string query = $"UPDATE {tableName} SET " +
-                            $"users_id = @users_id, " +
-                            $"accountable_forms_id = @accountable_forms_id, " +
-                            $"receipt_number_from = @receipt_number_from, " +
-                            $"receipt_number_to = @receipt_number_to, " +
-                            $"received_date = @received_date, " +
-                            $"quantity = @quantity, " +
-                            $"remarks = @remarks " +
-                            $"WHERE id = @id";
+            string query = $"UPDATE {tableName} SET users_id = @users_id, accountable_forms_id = @accountable_forms_id, receipt_number_from = @receipt_number_from, receipt_number_to = @receipt_number_to, received_date = @received_date, quantity = @quantity, remarks = @remarks WHERE id = @id";
 
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool ReceiptNumberInRange(int receiptId, int receiptNumber)
@@ -198,7 +175,7 @@ namespace ACC.Data
             };
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND id = @receipt_id";
 
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return false;
@@ -216,7 +193,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
-            return _dbGenericCommands.FillBySearch(query, new DataTable(), parameter);
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool ReceiptNumberExist(int accountableFormID, int receiptNumber)
@@ -229,7 +206,7 @@ namespace ACC.Data
 
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return false;
@@ -248,12 +225,14 @@ namespace ACC.Data
 
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id AND id <> @id ";
 
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
 
-            if (string.IsNullOrEmpty(queryResult))
-                return false;
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
 
-            return true;
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
     }
 }

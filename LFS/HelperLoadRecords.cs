@@ -699,7 +699,7 @@ namespace LFS
         {
             combobox.DataSource = dataTable;
             combobox.ValueMember = "id";
-            combobox.DisplayMember = "description";
+            combobox.DisplayMember = "acc_form_desc";
             combobox.DropDownHeight = 106;
         }
 

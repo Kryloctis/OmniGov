@@ -6,6 +6,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IReceiptsRepository : IAccRepository<ReceiptsModel>
     {
+        DataTable GetViewRecords();
+
         int GetMaxReceiptNumberByAccountableFormId(int accountableFormId);
 
         int GetMinReceiptNumberByAccountableFormId(int accountableFormId);
