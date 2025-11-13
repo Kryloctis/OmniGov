@@ -2,6 +2,7 @@
 using LFS.Helpers;
 using LFS.Views.Dashboard;
 using System;
+using System.CodeDom;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace LFS.Views.Transactions.JEV
                 nudYear.Value = Helper.GetCurrentDate().Year;
                 LoadJEVList();
                 MonitorControlChanges(panel1, btnApplyFltr);
+                Helper.EnableDisableToolStripButtons(dgJEV, tlStrpBtnUpdate, tlStrpBtnDelete);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -265,12 +267,33 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ToggleCrud(bool isEdit)
+        {
+            string crudIndct;
+
+            if (isEdit)
+            {
+                int rowIndex = dgJEV.CurrentCell.RowIndex;
+                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                customTabControl1.SelectedTab = tbPgCrud;
+                ucJev.OnLoad(true, jevId);
+                crudIndct = "Create Journal Entry Voucher";
+            }
+            else
+            {
+                customTabControl1.SelectedTab = tbPgCrud;
+                ucJev.OnLoad(false, null);
+                crudIndct = "Update Journal Entry Voucher";
+            }
+
+            lblCrudStat.Text = crudIndct;
+        }
+
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
             try
             {
-                customTabControl1.SelectedTab = tbPgCrud;
-                ucJev.OnLoad(false, null);
+                ToggleCrud(false);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -279,10 +302,7 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                int rowIndex = dgJEV.CurrentCell.RowIndex;
-                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-                customTabControl1.SelectedTab = tbPgCrud;
-                ucJev.OnLoad(true, jevId);
+                ToggleCrud(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -304,90 +324,31 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void tbPgCrud_Click(object sender, EventArgs e)
+        private void btnSubmit_Click(object sender, EventArgs e)
         {
-        }
+            try
+            {
+                if (!ucJev.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucJev.GetFormErrors());
+                    return;
+                }
 
-        ////////////////
-        ////////////////
+                bool jevIsSubmitted = ucJev.SubmitJev(out string message, out bool isEdit);
 
-        //INSERT
-        private bool InsertProcuremntRcvJournal()
-        {
-            var models = ucJev.JevProcurementRcvJrnl();
-            return AccFactory.JEVRepository().InsertJevProcRcvJrnl(models.JevModel, models.jevAccountsModels);
-        }
+                if (jevIsSubmitted)
+                {
+                    Helper.MessageBoxSuccess(message);
+                    LoadJEVList();
 
-        private bool InsertCheckDisbursementJournal()
-        {
-            var models = ucJev.JevChkDsbrsmntJrnlModels();
-            return AccFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(models.JevModel, models.jEVAccountsModels, models.CheckDisbursementsJournalModel);
-        }
-
-        private bool InsertCashReceiptsJournal()
-        {
-            var models = ucJev.JevCshRcptsJrnlModels();
-            return AccFactory.JEVRepository().InsertJevCashRcptsJrnl(models.JevModel, models.jEVAccountsModels, models.CashReceiptsJournalModel);
-        }
-
-        private bool InsertADADisbursementsJournal()
-        {
-            var models = ucJev.JevAuthDbtAccDsbrsmntModels();
-            return AccFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.ADADisbursementsJournalModel);
-        }
-
-        private bool InsertCashDisbursementsJournal()
-        {
-            var models = ucJev.JevCshDsbrsmntJrnlModels();
-            return AccFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.CashDisbursementsJournalModel);
-        }
-
-        private bool InsertGeneralJournal()
-        {
-            var models = ucJev.JevGenJrnlModels();
-            return AccFactory.JEVRepository().InsertJevGenJrnl(models.JevModel, models.jEVAccountsModels, models.GeneralJournalModel);
-        }
-
-        //UPDATE
-
-        private bool UpdateGenJrnl()
-        {
-            var models = ucJev.JevGenJrnlModels();
-            return AccFactory.JEVRepository().UpdateJevGenJrnl(models.JevModel, models.jEVAccountsModels, models.GeneralJournalModel);
-        }
-
-        private bool UpdateCshDsbrsmntsJrnl()
-        {
-            var models = ucJev.JevCshDsbrsmntJrnlModels();
-            return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.CashDisbursementsJournalModel);
-        }
-
-        private bool UpdateChkDsbrsmntJrnl()
-        {
-            var models = ucJev.JevChkDsbrsmntJrnlModels();
-            return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(models.JevModel, models.jEVAccountsModels, models.CheckDisbursementsJournalModel);
-        }
-
-        private bool UpdateCshRcptsJrnl()
-        {
-            var models = ucJev.JevCshRcptsJrnlModels();
-            return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(models.JevModel, models.jEVAccountsModels, models.CashReceiptsJournalModel);
-        }
-
-        private bool UpdateProctRcvJrnl()
-        {
-            var models = ucJev.JevProcurementRcvJrnl();
-            return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(models.JevModel, models.jevAccountsModels);
-        }
-
-        private bool UpdateAdaDsbrsmntsJrnl()
-        {
-            var models = ucJev.JevAuthDbtAccDsbrsmntModels();
-            return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(models.JevModel, models.jEVAccountsModels, models.ADADisbursementsJournalModel);
-        }
-
-        private void ucJev1_Load(object sender, EventArgs e)
-        {
+                    if (!isEdit)
+                    {
+                        ucJev.ResetForm();
+                        customTabControl1.SelectedTab = tbPgMain;
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         //private bool InsertData()

@@ -14,7 +14,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             InitializeComponent();
         }
 
-        private void OnLoad(bool isEdit, int? jevId)
+        internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
             if (isEdit)

@@ -272,22 +272,20 @@ namespace LFS.Helpers
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        public static void DatagridEditableRowStyle(DataGridView dgv,
-                                                    DataGridViewTriState dataGridViewTriState = DataGridViewTriState.False,
-                                                    DataGridViewAutoSizeColumnsMode dataGridViewAutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None)
+        public static void DatagridEditableRowStyle(DataGridView dgv)
         {
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToOrderColumns = false;
             dgv.AllowUserToResizeColumns = true;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 8f);
             dgv.BackgroundColor = Color.White;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
             dgv.BorderStyle = BorderStyle.FixedSingle;
             dgv.ReadOnly = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.AllowUserToResizeRows = true;
             dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
             dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
@@ -297,14 +295,14 @@ namespace LFS.Helpers
             dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
             dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgv.RowHeadersWidth = 25;
-            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            //dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+
             dgv.AdvancedColumnHeadersBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             dgv.DefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.Control);
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgv.DefaultCellStyle.WrapMode = dataGridViewTriState;
-            dgv.AutoSizeColumnsMode = dataGridViewAutoSizeColumnsMode;
+            dgv.RowTemplate.MinimumHeight = 30;
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.ShowCellToolTips = false;
         }
 
         public static void DatagridFullRowSelectStyle(DataGridView dgv,

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using LFS.Helpers;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
@@ -17,6 +18,29 @@ namespace LFS.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
+        }
+
+        internal void OnLoad()
+        {
+            LoadFPP();
+            LoadAccounts();
+            ValidatePermissions();
+            cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
+        }
+
+        internal void ShowHideRadioButtons()
+        {
+            if (journalName == "Cash Receipts Journal")
+            {
+                pnlCollectionsDeposits.Visible = true;
+                radCollections.Checked = true;
+            }
+            else
+            {
+                pnlCollectionsDeposits.Visible = false;
+                radDeposits.Checked = false;
+                radCollections.Checked = false;
+            }
         }
 
         internal string GetFormErrors()
@@ -102,25 +126,6 @@ namespace LFS.Views.Transactions.JEV
                 btnSubsidiaryLedger.Visible = false;
         }
 
-        private void ucJEVAccount_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                ValidatePermissions();
-                LoadAccounts();
-                cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
-            }
-        }
-
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -133,33 +138,23 @@ namespace LFS.Views.Transactions.JEV
             return dtFPP;
         }
 
-        internal void LoadFPP()
+        private void LoadFPP()
         {
-            try
+            if (DataTableFPP().Rows.Count == 0) return;
+
+            var fppDict = new Dictionary<int, string>();
+            foreach (DataRow item in DataTableFPP().Rows)
             {
-                cmbFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
+                int fppId = Convert.ToInt32(item["id"]);
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
 
-                if (DataTableFPP().Rows.Count == 0) return;
-
-                var fppDict = new Dictionary<int, string>();
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    int fppId = Convert.ToInt32(item["id"]);
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbFPP.DataSource = new BindingSource(fppDict, null);
-                cmbFPP.DisplayMember = "value";
-                cmbFPP.ValueMember = "key";
-                cmbFPP.DropDownHeight = 200;
+                fppDict.Add(fppId, fppName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbFPP.DataSource = new BindingSource(fppDict, null);
+            cmbFPP.DisplayMember = "value";
+            cmbFPP.ValueMember = "key";
+            cmbFPP.DropDownHeight = 200;
         }
 
         internal void cmbxFPP_TextChanged(object sender, EventArgs e)
@@ -198,34 +193,26 @@ namespace LFS.Views.Transactions.JEV
                 return AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
         }
 
-        internal void LoadAccounts()
+        private void LoadAccounts()
         {
-            try
+            cmbxAccount.SelectedValueChanged -= new EventHandler(cmxbAccount_SelectedValueChanged);
+
+            if (DatatableAccounts().Rows.Count == 0) return;
+
+            var accountDict = new Dictionary<ushort, string>();
+            foreach (DataRow item in DatatableAccounts().Rows)
             {
-                cmbxAccount.SelectedValueChanged -= new EventHandler(cmxbAccount_SelectedValueChanged);
+                ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
+                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
 
-                if (DatatableAccounts().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<ushort, string>();
-                foreach (DataRow item in DatatableAccounts().Rows)
-                {
-                    ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxAccount.DisplayMember = "value";
-                cmbxAccount.ValueMember = "key";
-                cmbxAccount.DropDownHeight = 200;
-                cmbxAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
-                Cursor.Current = Cursors.Default;
+                accountDict.Add(accountId, accountName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbxAccount.DataSource = new BindingSource(accountDict, null);
+            cmbxAccount.DisplayMember = "value";
+            cmbxAccount.ValueMember = "key";
+            cmbxAccount.DropDownHeight = 200;
+            cmbxAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
         }
 
         private void CmbxAccout_TextChanged(object sender, EventArgs e)

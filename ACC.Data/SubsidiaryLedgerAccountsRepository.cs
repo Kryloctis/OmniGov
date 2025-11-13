@@ -116,12 +116,12 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId)
+        public DataTable GetRecordsByFundAndGeneralLedger(int fundId, int generalLedgerId)
         {
             object[][] parameters = new object[][]
             {
-                new object[] { "@funds_id", DbType.Byte, fundId},
-                new object[] { "@generalLedgerId", DbType.UInt16, generalLedgerId},
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@generalLedgerId", DbType.Int32, generalLedgerId},
             };
 
             string query = $"SELECT * FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";

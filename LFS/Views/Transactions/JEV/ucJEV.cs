@@ -1,16 +1,17 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.Helpers;
-using LFS.Views.Dashboard;
-using LFS.Views.Reports.Journals;
 using LFS.Views.Transactions.JEV.JournalForms;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace LFS.Views.Transactions.JEV
 {
@@ -28,8 +29,7 @@ namespace LFS.Views.Transactions.JEV
         public ucJev()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-
+            Helper.DatagridEditableRowStyle(dgAccounts);
             ucGenJrnl = ucGenJrnl1;
             ucCshDsbrsmntJrnl = ucCshDsbrsmntJrnl1;
             ucChkDsbrsmntJrnl = ucChkDsbrsmntJrnl1;
@@ -37,20 +37,76 @@ namespace LFS.Views.Transactions.JEV
             ucAuthDbtAccDsbrsmntJrnl = ucAuthDbtAccDsbrsmntJrnl1;
         }
 
-        internal void LoadJournals()
+        /// <summary>
+        /// Initializes the form during load, including loading lookup data and toggling UI based on journal type.
+        /// Also loads existing JE V data if in edit mode.
+        /// </summary>
+        /// <param name="isEdit">Indicates whether the form is in edit mode.</param>
+        /// <param name="jevId">The JE V identifier if editing an existing record.</param>
+        internal void OnLoad(bool isEdit, int? jevId)
+        {
+            LoadFunds();
+            LoadJournals();
+
+            ucGenJrnl.OnLoad(isEdit, jevId);
+            ucCshRcptsJrnl.OnLoad(isEdit, jevId);
+            ucCshDsbrsmntJrnl.OnLoad(isEdit, jevId);
+            ucChkDsbrsmntJrnl.OnLoad(isEdit, jevId);
+            ucAuthDbtAccDsbrsmntJrnl.OnLoad(isEdit, jevId);
+
+            if (isEdit)
+            {
+                this.jevId = jevId;
+                LoadSelectedJEV(jevId.Value);
+            }
+
+            string journalName = cmbxJournal.Text;
+            ToggleJournalFields(journalName);
+
+            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
+        }
+
+        /// <summary>
+        /// Retrieves all form-level validation errors, including journal-specific row validation errors,
+        /// and formats them into a single consolidated error message.
+        /// </summary>
+        /// <returns>A formatted error message string if any validation errors exist; otherwise, an empty or null-like message.</returns>
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbxJournal),
+                errorProvider1.GetError(cmbxFunds),
+                errorProvider1.GetError(txtPayee),
+            };
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        /// <summary>
+        /// Clears all error messages currently displayed by the error provider for specified controls.
+        /// </summary>
+        internal void ClearErrors()
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+            Helper.ClearErrorTextBox(errorProvider1, txtJevNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
+            //Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
+        }
+
+        /// <summary>
+        /// Loads journal types from the repository and populates the journal ComboBox.
+        /// </summary>
+        private void LoadJournals()
         {
             var dtJournals = AccFactory.JournalsRepository().GetRecords();
             HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournal, "id", "journal_name");
         }
 
-        private void SetCashReceiptsJournalFields()
-        {
-            dgAccounts.Columns["IsDeposit"].Visible = true;
-            dgAccounts.Rows.Clear();
-        }
-
-        #region Models
-
+        /// <summary>
+        /// Constructs and returns a populated <see cref="JevModel"/> based on current form input.
+        /// Handles both new and edit scenarios and auto-approves if user has required privilege.
+        /// </summary>
+        /// <returns>A fully configured <see cref="JevModel"/> instance.</returns>
         private JevModel JevModel()
         {
             var model = new JevModel();
@@ -74,51 +130,35 @@ namespace LFS.Views.Transactions.JEV
             else
                 model.CreatedBy = (byte)UserHelper.loggedUser.Id;
 
-            //Verify User Privileges
-            if (PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproved))
-            {
-                model.IsApproved = true;
-                model.JEVNumber = GetJEVSeriesNo();
-            }
-
             return model;
         }
 
-        private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
-        {
-            if (subsidiaryCellValue != null)
-                return Convert.ToUInt16(subsidiaryCellValue);
-
-            return null;
-        }
-
+        /// <summary>
+        /// Builds a list of <see cref="JEVAccountsModel"/> from the current rows in the accounts DataGridView.
+        /// </summary>
+        /// <returns>A list of account entry models ready for persistence.</returns>
         private List<JEVAccountsModel> JevAcountsModelList()
         {
             var jevAccountsModelList = new List<JEVAccountsModel>();
             foreach (DataGridViewRow item in dgAccounts.Rows)
             {
-                string fppId = item.Cells["FPPId"].Value.ToString();
-                ushort generalLedgerId = Convert.ToUInt16(item.Cells["GeneralLedgerId"].Value);
-                ushort? subsidiaryLedgerId = ValidateNullSubsidiary(item.Cells["SubsidiaryLedgerId"].Value);
-                string obligationNo = item.Cells["obligationNo"].Value.ToString();
-                bool isDebit = Convert.ToBoolean(item.Cells["IsDebit"].Value);
-                bool? isDeposit = (bool?)item.Cells["IsDeposit"].Value;
-
-                decimal amount;
-                if (isDebit)
-                    amount = Convert.ToDecimal(item.Cells["Debit"].Value);
-                else
-                    amount = Convert.ToDecimal(item.Cells["Credit"].Value);
+                int? fppId = item.Cells["fpp"]?.Value is int rwFppId && rwFppId != 0 ? rwFppId : null;
+                ushort generalLedgerId = (ushort)item.Cells["gen_ldgr_acc"].Value;
+                ushort? subsidiaryLedgerId = item.Cells["subsidiary_acc"].Value is ushort rwSbLdgrId && rwSbLdgrId != 0 ? rwSbLdgrId : null;
+                string obligationNo = item.Cells["obligation_no"].Value.ToString();
+                bool isDebit = $"{item.Cells["is_debit"].Value}" == "Debit";
+                bool isDeposit = $"{item.Cells["is_deposit"].Value}" == "Deposit";
+                decimal amount = (decimal)item.Cells["amount"].Value;
 
                 var jevAccountModel = new JEVAccountsModel()
                 {
-                    FPPId = string.IsNullOrWhiteSpace(fppId) ? null : Convert.ToInt32(fppId),
+                    FPPId = fppId,
                     GeneralLedgerId = generalLedgerId,
                     SubsidiaryLedgerId = subsidiaryLedgerId,
                     ObligationNo = obligationNo,
                     IsDeposit = isDeposit,
                     IsDebit = isDebit,
-                    Amount = amount
+                    Amount = amount,
                 };
 
                 jevAccountsModelList.Add(jevAccountModel);
@@ -127,66 +167,92 @@ namespace LFS.Views.Transactions.JEV
             return jevAccountsModelList;
         }
 
-        internal (JevModel JevModel, List<JEVAccountsModel> jEVAccountsModels, GeneralJournalModel GeneralJournalModel) JevGenJrnlModels()
+        internal bool SubmitJev(out string message, out bool isEdit)
         {
-            return (JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
-        }
+            string jrnlTyp = cmbxJournal.Text;
 
-        internal (JevModel JevModel, List<JEVAccountsModel> jEVAccountsModels, CashReceiptsJournalModel CashReceiptsJournalModel) JevCshRcptsJrnlModels()
-        {
-            return (JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
-        }
-
-        internal (JevModel JevModel, List<JEVAccountsModel> jEVAccountsModels, CashDisbursementsJournalModel CashDisbursementsJournalModel) JevCshDsbrsmntJrnlModels()
-        {
-            return (JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
-        }
-
-        internal (JevModel JevModel, List<JEVAccountsModel> jEVAccountsModels, CheckDisbursementsJournalModel CheckDisbursementsJournalModel) JevChkDsbrsmntJrnlModels()
-        {
-            return (JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
-        }
-
-        internal (JevModel JevModel, List<JEVAccountsModel> jEVAccountsModels, ADADisbursementsJournalModel ADADisbursementsJournalModel) JevAuthDbtAccDsbrsmntModels()
-        {
-            return (JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
-        }
-
-        internal (JevModel JevModel, List<JEVAccountsModel> jevAccountsModels) JevProcurementRcvJrnl()
-        {
-            return (JevModel(), JevAcountsModelList());
-        }
-
-        #endregion Models
-
-        internal void OnLoad(bool isEdit, int? jevId)
-        {
-            LoadFunds();
-            LoadJournals();
-
-            if (isEdit)
+            if (this.isEdit)
             {
-                this.jevId = jevId;
-                LoadSelectedJEV(jevId.Value);
+                message = $"{jrnlTyp} has been submitted";
+                isEdit = this.isEdit;
+                return UpdateData(jrnlTyp);
+            }
+            else
+            {
+                message = $"{jrnlTyp} modification has been submitted";
+                isEdit = this.isEdit;
+                return InsertData(jrnlTyp);
             }
         }
 
+        private bool InsertData(string jrnlTyp)
+        {
+            switch (jrnlTyp)
+            {
+                case "General Journal":
+                    return AccFactory.JEVRepository().InsertJevGenJrnl(JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+
+                case "Procurement Received Journal":
+                    return AccFactory.JEVRepository().InsertJevProcRcvJrnl(JevModel(), JevAcountsModelList());
+
+                case "Cash Receipts Journal":
+                    return AccFactory.JEVRepository().InsertJevCashRcptsJrnl(JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+
+                case "Cash Disbursements Journal":
+                    return AccFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+
+                case "Check Disbursements Journal":
+                    return AccFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+
+                case "Authority to Debit Account Disbursement Journal":
+                    return AccFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+
+                default:
+                    return false;
+            }
+        }
+
+        private bool UpdateData(string jrnlTyp)
+        {
+            switch (jrnlTyp)
+            {
+                case "General Journal":
+                    return AccFactory.JEVRepository().UpdateJevGenJrnl(JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+
+                case "Procurement Received Journal":
+                    return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(JevModel(), JevAcountsModelList());
+
+                case "Cash Receipts Journal":
+                    return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+
+                case "Cash Disbursements Journal":
+                    return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+
+                case "Check Disbursements Journal":
+                    return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+
+                case "Authority to Debit Account Disbursement Journal":
+                    return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Sets the entire form to read-only or editable mode.
+        /// </summary>
+        /// <param name="isReadOnly">True to disable editing; false to enable.</param>
         internal void SetJevReadOnly(bool isReadOnly)
         {
             foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
-            {
                 dateTimePicker.Enabled = !isReadOnly;
-            }
 
             foreach (Button button in Controls.OfType<Button>())
-            {
                 button.Enabled = !isReadOnly;
-            }
 
             foreach (TextBox textBox in Controls.OfType<TextBox>())
-            {
                 textBox.ReadOnly = isReadOnly;
-            }
 
             cmbxJournal.Enabled = !isReadOnly;
             cmbxFunds.Enabled = !isReadOnly;
@@ -194,28 +260,11 @@ namespace LFS.Views.Transactions.JEV
             //btnEditAccount.Enabled = !isReadOnly;
             //btnRemoveAccount.Enabled = !isReadOnly;
             //cmbCollectingDisbursingOfficer.Enabled = !isReadOnly;
-
-            if (isReadOnly)
-                dgAccounts.SelectionChanged -= new EventHandler(dgAccounts_SelectionChanged);
-            else
-                dgAccounts.SelectionChanged += new EventHandler(dgAccounts_SelectionChanged);
         }
 
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbxJournal),
-                errorProvider1.GetError(cmbxFunds),
-                errorProvider1.GetError(txtJevNo),
-                dgAccounts.Rows.Count < 1 ? "Please add a FPP, account & amount in the table provided." : string.Empty,
-                errorProvider1.GetError(txtPayee),
-                errorProvider1.GetError(txtExplanation),
-            };
-
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
+        /// <summary>
+        /// Resets all form fields and reloads default data (e.g., journals and funds).
+        /// </summary>
         internal void ResetForm()
         {
             txtJevNo.Text = string.Empty;
@@ -232,65 +281,62 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Value = DateTime.Now;
         }
 
-        internal void LoadFunds()
+        /// <summary>
+        /// Loads fund data from the repository and binds it to the funds ComboBox.
+        /// </summary>
+        private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
-        internal string GetJEVSeriesNo()
-        {
-            try
-            {
-                bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
-                var jev = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
-                return jev.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return "0000";
-        }
-
-        internal string GenerateJevTemplateNo()
+        private string GenerateJevTemplateNo()
         {
             bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
-            Dictionary<string, string> fund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
             string fundCode = fund["fund_code"];
-
-            string year = dtpDateEntry.Value.Year.ToString();
             string month = dtpDateEntry.Value.ToString("MM");
+            string year = dtpDateEntry.Value.Year.ToString();
+            var jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
 
-            return $"{fundCode}-{year}-{month}";
+            return $"{fundCode}-{year}-{month}-{jevSeriesNo}";
         }
 
         /// <summary>
-        /// Sums the debit credit.
+        /// Calculates and displays the total debit and credit amounts from the accounts grid.
         /// </summary>
-        internal void SumDebitCredit()
+        private void SumDebitCredit()
         {
             decimal totalDebit = 0;
             decimal totalCredit = 0;
-
             if (dgAccounts.Rows.Count > 0)
             {
                 foreach (DataGridViewRow item in dgAccounts.Rows)
                 {
-                    decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
-                    decimal creditValue = string.IsNullOrWhiteSpace(item.Cells["Credit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Credit"].Value);
+                    string rowIsDebit = $"{item.Cells["is_debit"].Value}";
 
-                    totalDebit += Convert.ToDecimal(debitValue);
-                    totalCredit += Convert.ToDecimal(creditValue);
+                    if (string.IsNullOrWhiteSpace(rowIsDebit)) continue;
+                    bool isDebit = $"{item.Cells["is_debit"].Value}" == "Debit";
+                    decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
+
+                    totalDebit += isDebit ? amount : 0m;
+                    totalCredit += isDebit ? 0m : amount;
                 }
             }
 
             tlStrpLblDebit.Text = totalDebit.ToString("N2");
             tlStrpLblCredit.Text = totalCredit.ToString("N2");
+
+            bool isBlncd = totalDebit == totalCredit;
+            tlStrpLblBlncIndctr.Text = isBlncd ? "Debit and Credit are equal" : "Debit and Credit totals must be equal!";
+            tlStrpLblBlncIndctr.ForeColor = isBlncd ? Color.DarkOliveGreen : Color.IndianRed;
         }
 
         /// <summary>
-        /// Toggles the journal fields.
+        /// Shows or hides journal-specific panels and initializes the accounts grid based on selected journal type.
         /// </summary>
-        /// <param name="journal">The journal.</param>
+        /// <param name="journal">The name of the selected journal.</param>
         private void ToggleJournalFields(string journal)
         {
             splitContainer1.Panel2Collapsed = false;
@@ -321,26 +367,26 @@ namespace LFS.Views.Transactions.JEV
                     splitContainer1.Panel2Collapsed = true;
                     break;
             }
+
+            InitializeJevAccTbl(journal);
         }
 
-        private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnEdit, ToolStripButton btnDelete)
+        /// <summary>
+        /// Updates the state and text of the "Remove Account" button based on selected rows.
+        /// </summary>
+        /// <param name="dgv">The accounts DataGridView.</param>
+        /// <param name="btnDelete">The ToolStrip button to update.</param>
+        private void ToggleAccEntriesButtons(DataGridView dgv, ToolStripButton btnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
-            if (SelectedRows == 1)
+
+            if (SelectedRows == 1 || SelectedRows > 1)
             {
-                btnEdit.Enabled = true;
-                btnDelete.Enabled = true;
-                btnDelete.Text = "Remove (" + SelectedRows + ")";
-            }
-            else if (SelectedRows > 1)
-            {
-                btnEdit.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Remove (" + SelectedRows + ")";
             }
             else
             {
-                btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Remove";
             }
@@ -350,31 +396,9 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                EnableDisableButtons(dgAccounts, tlStrpBtnEditAcc, tlStrpBtnRemoveAcc);
+                ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            try
-            {
-                var grid = (DataGridView)sender;
-                if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
-                {
-                    e.Value = (bool)e.Value ? "Deposit" : "Collection";
-                    e.FormattingApplied = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void ClearErrors()
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
-            Helper.ClearErrorTextBox(errorProvider1, txtJevNo);
-            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
-            //Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
@@ -394,43 +418,23 @@ namespace LFS.Views.Transactions.JEV
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
-        private void txtExplanation_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                if (txtExplanation.Enabled)
-                {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtExplanation, lblExplanation.Text);
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void txtExplanation_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
-        }
-
         private void tlStrpBtnAddAcc_Click(object sender, EventArgs e)
         {
             try
             {
-                string journalName = cmbxJournal.Text;
-                var frmJevAccountAdd = new frmJevAccAdd(this, journalName);
-                frmJevAccountAdd.ucJEVAccount.journalName = journalName;
-                frmJevAccountAdd.ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+                string jrnlType = cmbxJournal.Text;
+                var validateRow = ValidateRows(dgAccounts, jrnlType);
 
-        private void tlStrpBtnEditAcc_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string journalName = cmbxJournal.Text;
-                var frmJevAccountEdit = new frmJevAccEdit(this, journalName);
-                frmJevAccountEdit.ucJEVAccount.journalName = journalName;
-                frmJevAccountEdit.ShowDialog();
+                if (!validateRow.isValidated)
+                {
+                    var errMssg = AccFactory.CreateErrors(validateRow.errors).GenerateErrorMessage();
+                    Helper.MessageBoxError(errMssg);
+                    return;
+                }
+
+                int r = dgAccounts.Rows.Add();
+                dgAccounts.CurrentCell = dgAccounts.Rows[r].Cells["is_debit"];
+                dgAccounts.BeginEdit(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -439,12 +443,18 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to remove this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                int count = dgAccounts.SelectedRows.Count;
+                if (count == 0) return;
+
+                string msg = $"Are you sure you want to remove {(count == 1 ? "the accounting entry" : $"{count} accounting entries")}?";
+
+                if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    foreach (DataGridViewRow row in dgAccounts.SelectedRows)
+                    foreach (DataGridViewRow dgvRow in dgAccounts.SelectedRows)
                     {
-                        dgAccounts.Rows.Remove(row);
+                        dgAccounts.Rows.RemoveAt(dgvRow.Index);
                     }
+
                     SumDebitCredit();
                 }
             }
@@ -452,34 +462,10 @@ namespace LFS.Views.Transactions.JEV
         }
 
         /// <summary>
-        /// Loads the selected jev.
+        /// Retrieves and processes the current status of a JE V (not yet implemented beyond retrieval).
         /// </summary>
-        /// <param name="jevId">The jev identifier.</param>
-        ///
-
-        private void LoadSelectedJEV(int jevId)
-        {
-            var jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
-
-            cmbxJournal.SelectedValue = Convert.ToByte(jevDict["journals_id"]);
-            cmbxFunds.SelectedValue = Convert.ToByte(jevDict["funds_id"]);
-            txtExplanation.Text = jevDict["explanation"];
-            dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
-            txtRefNo.Text = jevDict["ref_no"];
-            txtPayee.Text = jevDict["payee"];
-            txtJevNo.Text = $"{GenerateJevTemplateNo()}-{jevDict["jev_no"]}";
-
-            bool isEdited = Convert.ToByte(jevDict["is_edited"]) == 1;
-            //tlStrpLblCreatedBy.Text = $"Created By: {(isEdited ? "(Edited)" : string.Empty)} {jevDict["created_by_name"]}";
-
-            dgAccounts.Rows.Clear();
-            LoadJevAccEntries(jevId);
-            SumDebitCredit();
-            GetJevStatus(jevId);
-            ClearErrors();
-        }
-
-        internal void GetJevStatus(int jevId)
+        /// <param name="jevId">The JE V identifier.</param>
+        private void GetJevStatus(int jevId)
         {
             string jevStatus = AccFactory.JEVRepository().GetJevStatus(jevId).ToLower();
 
@@ -503,6 +489,35 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
+        /// <summary>
+        /// Loads an existing JE V record and populates the form fields and account grid.
+        /// </summary>
+        /// <param name="jevId">The JE V identifier to load.</param>
+        private void LoadSelectedJEV(int jevId)
+        {
+            var jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+
+            cmbxJournal.SelectedValue = Convert.ToByte(jevDict["journals_id"]);
+            cmbxFunds.SelectedValue = Convert.ToByte(jevDict["funds_id"]);
+            txtExplanation.Text = jevDict["explanation"];
+            dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
+            txtRefNo.Text = jevDict["ref_no"];
+            txtPayee.Text = jevDict["payee"];
+            txtJevNo.Text = $"{GenerateJevTemplateNo()}-{jevDict["jev_no"]}";
+
+            bool isEdited = Convert.ToByte(jevDict["is_edited"]) == 1;
+            //tlStrpLblCreatedBy.Text = $"Created By: {(isEdited ? "(Edited)" : string.Empty)} {jevDict["created_by_name"]}";
+
+            dgAccounts.Rows.Clear();
+            LoadJevAccEntries(jevId);
+            SumDebitCredit();
+            GetJevStatus(jevId);
+        }
+
+        /// <summary>
+        /// Loads account entries for a given JE V and populates the accounts DataGridView.
+        /// </summary>
+        /// <param name="jevId">The JE V identifier.</param>
         private void LoadJevAccEntries(int jevId)
         {
             DataTable dtJEV = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
@@ -515,8 +530,7 @@ namespace LFS.Views.Transactions.JEV
                 string subsidiaryId = !string.IsNullOrWhiteSpace(row["subsidiary_ledger_accounts_id"].ToString()) ? row["subsidiary_ledger_accounts_id"].ToString() : null;
                 string subsidiaryName = row["subsidiary_ledger_accounts_name"].ToString();
                 string obligationNo = row["obligation_no"].ToString();
-                string generalLedgerName = row["general_ledger_accounts_name"].ToString();
-                string accountCode = row["account_code"].ToString();
+                string account = $"{row["account_code"]} - {row["general_ledger_accounts_name"]}";
                 decimal amount = Convert.ToDecimal(row["amount"]);
                 bool isDebit = Convert.ToBoolean(row["is_debit"]);
                 bool? isDeposit;
@@ -537,8 +551,7 @@ namespace LFS.Views.Transactions.JEV
                         subsidiaryId,
                         isDebit,
                         fppName,
-                        generalLedgerName,
-                        accountCode,
+                        account,
                         subsidiaryName,
                         obligationNo,
                         amount.ToString("N2"),
@@ -558,8 +571,7 @@ namespace LFS.Views.Transactions.JEV
                         subsidiaryId,
                         isDebit,
                         fppName,
-                        $"     {generalLedgerName}",
-                        accountCode,
+                        $"     {account}",
                         subsidiaryName,
                         obligationNo,
                         "",
@@ -582,8 +594,40 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
+        private void cmbxJournal_Validating(object sender, CancelEventArgs e)
         {
+            try
+            {
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxJournal, "Journal");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxJournal_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxJournal);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFunds_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFunds, "Fund");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxFunds);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         //internal bool CancelJev(int jevId)
@@ -593,5 +637,309 @@ namespace LFS.Views.Transactions.JEV
         //        return AccFactory.JEVRepository().CancelJev(jevId);
         //    }
         //}
+
+        /// <summary>
+        /// Configures the accounts DataGridView columns and visibility based on journal type.
+        /// </summary>
+        /// <param name="jrnlName">The selected journal name.</param>
+        private void InitializeJevAccTbl(string jrnlName)
+        {
+            var dgColumns = DgvColumns();
+
+            if (dgAccounts.Columns.Count != dgColumns.Count)
+            {
+                dgAccounts.Columns.Clear();
+                dgAccounts.Columns.AddRange(dgColumns.ToArray());
+            }
+
+            dgAccounts.Columns["is_deposit"].Visible = jrnlName == "Cash Receipts Journal";
+        }
+
+        private DataTable DtFpp()
+        {
+            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dt = new DataTable();
+            var dtColmns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "fpp_name", typeof(string)),
+            };
+
+            dt.Columns.AddRange(dtColmns);
+            dt.Rows.Add(0, "N/A");
+
+            foreach (DataRow dr in dtFpp.Rows)
+                dt.Rows.Add(dr["id"], dr["fpp_name"]);
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Defines and configures the columns for the accounts DataGridView.
+        /// </summary>
+        /// <returns>A list of configured <see cref="DataGridViewColumn"/> instances.</returns>
+        private List<DataGridViewColumn> DgvColumns()
+        {
+            var dtGenLdgrAcc = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+
+            var dtColumns = new List<DataGridViewColumn>
+            {
+                new DataGridViewComboBoxColumn ()
+                {
+                    HeaderText = "D/C",
+                    Name = "is_debit",
+                    FlatStyle = FlatStyle.Flat,
+
+                    Items = {"Debit", "Credit"},
+                },
+
+                new DataGridViewComboBoxColumn ()
+                {
+                    HeaderText = "FPP",
+                    Name = "fpp",
+                    FlatStyle = FlatStyle.Flat,
+                    DataSource = DtFpp(),
+                    ValueMember = "id",
+                    DisplayMember = "fpp_name",
+                    MinimumWidth = 200,
+                },
+
+                new DataGridViewComboBoxColumn ()
+                {
+                    HeaderText = "Account",
+                    Name = "gen_ldgr_acc",
+                    FlatStyle = FlatStyle.Flat,
+                    DataSource =dtGenLdgrAcc,
+                    ValueMember = "general_ledger_accounts_id",
+                    DisplayMember = "ledger_name",
+                    MinimumWidth = 200,
+                },
+
+                new DataGridViewComboBoxColumn()
+                {
+                    HeaderText = "Subsidiary",
+                    Name = "subsidiary_acc",
+                    FlatStyle = FlatStyle.Flat,
+                    MaxDropDownItems = 10,
+                    MinimumWidth = 200,
+                },
+
+                new DataGridViewComboBoxColumn()
+                {
+                    HeaderText = "Mode",
+                    Name = "is_deposit",
+                    FlatStyle = FlatStyle.Flat,
+                    Items = { "Collection", "Deposit" },
+                },
+
+                new DataGridViewTextBoxColumn ()
+                {
+                    HeaderText = "Amount",
+                    Name = "amount",
+                    MinimumWidth = 200,
+                    ValueType = typeof(decimal),
+                    DefaultCellStyle = { Format = "N2"}
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Obligation No.",
+                    Name = "obligation_no",
+                },
+            };
+
+            return dtColumns;
+        }
+
+        /// <summary>
+        /// Dynamically loads subsidiary accounts based on selected General Ledger and Fund.
+        /// </summary>
+        /// <param name="rowIndex">The index of the row being edited.</param>
+        private void LoadSubsidiaryAccounts(int rowIndex)
+        {
+            //Prevents error on selection of gen_ldgr_acc loading subsidiary_acc
+            dgAccounts.Rows[rowIndex].Cells["subsidiary_acc"].Value = null;
+            var val = dgAccounts.Rows[rowIndex].Cells["gen_ldgr_acc"].Value;
+            bool genAccIdValid = int.TryParse(val.ToString(), out int accId);
+            bool fundValid = int.TryParse(cmbxFunds.SelectedValue?.ToString(), out int fundId);
+
+            if (genAccIdValid && fundValid)
+            {
+                var dtDbSub = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, accId);
+
+                // Use LINQ to populate dtTemp without foreach
+                var dtDbRows = dtDbSub.AsEnumerable()
+                                  .Select(r => new object[]
+                                  {
+                                      r.Field<ushort>("id"),
+                                      r.Field<string>("sub_name")
+                                  })
+                                  .ToArray();
+
+                var dtSubAcc = new DataTable();
+                var dtClmns = new DataColumn[]
+                {
+                    new DataColumn(Name = "id", typeof(int)),
+                    new DataColumn(Name = "sub_name", typeof(string))
+                };
+                dtSubAcc.Columns.AddRange(dtClmns);
+                dtSubAcc.Rows.Add(0, "N/A");
+
+                foreach (var dtDbRow in dtDbRows)
+                {
+                    var newRow2 = dtSubAcc.NewRow();
+                    newRow2["id"] = dtDbRow[0];
+                    newRow2["sub_name"] = dtDbRow[1];
+                    dtSubAcc.Rows.Add(newRow2);
+                }
+
+                if (dgAccounts.Rows[rowIndex].Cells["subsidiary_acc"] is DataGridViewComboBoxCell subCell)
+                {
+                    subCell.DataSource = dtSubAcc;
+                    subCell.ValueMember = "id";
+                    subCell.DisplayMember = "sub_name";
+                    subCell.Value = 0;
+                }
+            }
+        }
+
+        private void dgAccounts_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                SumDebitCredit();
+                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+                if (dgAccounts.Columns[e.ColumnIndex].Name == "gen_ldgr_acc")
+                    LoadSubsidiaryAccounts(e.RowIndex);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        /// <summary>
+        /// Validates an entire grid row based on journal type and returns validation results.
+        /// </summary>
+        /// <param name="dgv">The DataGridView containing account rows.</param>
+        /// <param name="journalType">The type of journal currently selected.</param>
+        /// <returns>A tuple indicating overall validity and an array of error messages per invalid row.</returns>
+        private (bool isValidated, string[] errors) ValidateRows(DataGridView dgv, string journalType)
+        {
+            var errors = new List<string>();
+            var validations = new List<bool>();
+
+            foreach (DataGridViewRow dgvRow in dgv.Rows)
+            {
+                var sb = new StringBuilder();
+                var rowValid = new List<bool>();
+                sb.AppendLine($"Errors on row {dgvRow.Index + 1}");
+
+                foreach (DataGridViewCell cell in dgvRow.Cells)
+                {
+                    string err = ValidateCell(cell, cell.Value, journalType);
+                    bool cellValid = string.IsNullOrEmpty(err);
+
+                    if (!cellValid)
+                    {
+                        rowValid.Add(cellValid);
+                        sb.AppendLine($"        - {err}");
+                    }
+                }
+
+                bool isRowValid = !rowValid.Contains(false);
+
+                if (!isRowValid)
+                {
+                    validations.Add(isRowValid);
+                    errors.Add(sb.ToString());
+                }
+            }
+
+            return (!validations.Contains(false), errors.ToArray());
+        }
+
+        /// <summary>
+        /// Validates a single DataGridView cell based on its column and current journal type.
+        /// </summary>
+        /// <param name="cell">The cell to validate.</param>
+        /// <param name="formattedValue">The value to validate.</param>
+        /// <param name="journalType">The active journal type (affects conditional validation).</param>
+        /// <returns>An error message if invalid; otherwise, an empty string.</returns>
+        private string ValidateCell(DataGridViewCell cell, object formattedValue, string journalType)
+        {
+            string col = cell.OwningColumn.Name;
+            string val = formattedValue?.ToString()?.Trim() ?? ""; // <-- this is correct
+
+            switch (col)
+            {
+                case "fpp":
+                    return string.IsNullOrWhiteSpace(val) ? "FPP is required" : "";
+
+                case "gen_ldgr_acc":
+                    return string.IsNullOrWhiteSpace(val) ? "Account is required" : "";
+
+                case "is_debit":
+                    return string.IsNullOrWhiteSpace(val) ? "D/C is required" : "";
+
+                case "subsidiary_acc":
+                    return string.IsNullOrWhiteSpace(val) ? "Select Subsidiary" : "";
+
+                case "is_deposit":
+                    if (journalType == "Cash Receipts Journal")
+                        return string.IsNullOrWhiteSpace(val) ? "Mode is required" : "";
+
+                    return "";
+
+                case "amount":
+                    if (!decimal.TryParse(val, out var amt) || amt <= 0m)
+                        return "Amount must be greater than 0";
+                    return "";
+
+                default:
+                    return "";
+            }
+        }
+
+        private void dgAccounts_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                var g = (DataGridView)sender;
+                var cell = g.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string jrnlName = cmbxJournal.Text;
+
+                string err = ValidateCell(cell, e.FormattedValue, jrnlName);
+                cell.ErrorText = err; // empty = no error
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgAccounts_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            try
+            {
+                if (dgAccounts.CurrentCell?.OwningColumn?.Name == "amount" && e.Control is TextBox tb)
+                {
+                    tb.KeyPress -= Tb_KeyPress;
+                    tb.KeyPress += Tb_KeyPress;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        /// <summary>
+        /// Restricts input in amount fields to digits and a single decimal point.
+        /// </summary>
+        private void Tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+
+            // Allow control characters (e.g., backspace)
+            if (char.IsControl(e.KeyChar)) return;
+
+            bool isDigit = char.IsDigit(e.KeyChar);
+            bool isDecimal = e.KeyChar == '.' && !tb.Text.Contains('.');
+
+            e.Handled = !(isDigit || isDecimal);
+        }
     }
 }

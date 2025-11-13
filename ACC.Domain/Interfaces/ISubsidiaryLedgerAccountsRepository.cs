@@ -9,7 +9,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsBySearchByReference(string srchtxt, int Id);
 
-        DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId);
+        DataTable GetRecordsByFundAndGeneralLedger(int fundId, int generalLedgerId);
 
         bool HasSubsidiary(ushort generalLedgerId, byte fundId);
 

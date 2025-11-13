@@ -34,7 +34,6 @@ namespace LFS.Views.Transactions.JEV
         private void OnLoad()
         {
             lblCreatedBy.Text = UserHelper.loggedUser.FullName;
-            uc.SumDebitCredit();
             //VerifyUserPrivileges();
         }
 
