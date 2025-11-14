@@ -22,7 +22,7 @@ namespace LFS.Views.Transactions.JEV
 
             this.ucJevDashboard = ucJevDashboard;
             ucJev = ucJev1;
-            Helper.DatagridFullRowSelectStyle(dgJEV);
+            Helper.DatagridFullRowSelectStyle(dgJEV, true);
         }
 
         private void frmJEVList_Load(object sender, EventArgs e)
@@ -157,7 +157,7 @@ namespace LFS.Views.Transactions.JEV
             dataTable.Columns.AddRange(new[]
             {
                 new DataColumn("id", typeof(int)),
-                new DataColumn("TRN. No.", typeof(string)),
+                new DataColumn("trnsction_no", typeof(string)),
                 new DataColumn("jev_no", typeof(string)),
                 new DataColumn("full_jev_no", typeof(string)),
                 new DataColumn("date_entry", typeof(DateTime)),

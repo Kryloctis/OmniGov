@@ -66,6 +66,8 @@ namespace LFS.Views.Transactions.JEV
             toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpLblCredit = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblBlncIndctr = new System.Windows.Forms.ToolStripStatusLabel();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnRemoveAcc = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnAddAcc = new System.Windows.Forms.ToolStripButton();
@@ -74,14 +76,10 @@ namespace LFS.Views.Transactions.JEV
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             lblCreatedBy = new System.Windows.Forms.Label();
             lblStatus = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
             txtJevNo = new System.Windows.Forms.TextBox();
             tabControl2 = new System.Windows.Forms.TabControl();
             tbPgJevDetails = new System.Windows.Forms.TabPage();
             tbPgAccEntries = new System.Windows.Forms.TabPage();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            tlStrpLblBlncIndctr = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)dgAccounts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -131,6 +129,8 @@ namespace LFS.Views.Transactions.JEV
             dgAccounts.TabIndex = 37;
             dgAccounts.CellEndEdit += dgAccounts_CellEndEdit;
             dgAccounts.CellValidating += dgAccounts_CellValidating;
+            dgAccounts.CellValueChanged += dgAccounts_CellValueChanged;
+            dgAccounts.CurrentCellDirtyStateChanged += dgAccounts_CurrentCellDirtyStateChanged;
             dgAccounts.EditingControlShowing += dgAccounts_EditingControlShowing;
             dgAccounts.SelectionChanged += dgAccounts_SelectionChanged;
             // 
@@ -501,6 +501,19 @@ namespace LFS.Views.Transactions.JEV
             tlStrpLblCredit.Size = new System.Drawing.Size(33, 31);
             tlStrpLblCredit.Text = "0.00";
             // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(502, 31);
+            toolStripStatusLabel1.Spring = true;
+            // 
+            // tlStrpLblBlncIndctr
+            // 
+            tlStrpLblBlncIndctr.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblBlncIndctr.Name = "tlStrpLblBlncIndctr";
+            tlStrpLblBlncIndctr.Size = new System.Drawing.Size(17, 31);
+            tlStrpLblBlncIndctr.Text = "--";
+            // 
             // toolStrip1
             // 
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
@@ -570,8 +583,6 @@ namespace LFS.Views.Transactions.JEV
             // 
             splitContainer2.Panel2.Controls.Add(lblCreatedBy);
             splitContainer2.Panel2.Controls.Add(lblStatus);
-            splitContainer2.Panel2.Controls.Add(label5);
-            splitContainer2.Panel2.Controls.Add(label3);
             splitContainer2.Panel2.Controls.Add(txtJevNo);
             splitContainer2.Panel2.Controls.Add(label1);
             splitContainer2.Panel2.Padding = new System.Windows.Forms.Padding(15);
@@ -583,48 +594,25 @@ namespace LFS.Views.Transactions.JEV
             // 
             lblCreatedBy.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             lblCreatedBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCreatedBy.Location = new System.Drawing.Point(89, 68);
+            lblCreatedBy.Location = new System.Drawing.Point(20, 68);
             lblCreatedBy.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             lblCreatedBy.Name = "lblCreatedBy";
-            lblCreatedBy.Size = new System.Drawing.Size(267, 13);
+            lblCreatedBy.Size = new System.Drawing.Size(336, 13);
             lblCreatedBy.TabIndex = 34;
-            lblCreatedBy.Text = "John Doe";
+            lblCreatedBy.Text = "Created by: --";
             // 
             // lblStatus
             // 
             lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            lblStatus.AutoSize = true;
             lblStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             lblStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblStatus.Location = new System.Drawing.Point(323, 19);
+            lblStatus.Location = new System.Drawing.Point(131, 22);
             lblStatus.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new System.Drawing.Size(33, 13);
+            lblStatus.Size = new System.Drawing.Size(225, 13);
             lblStatus.TabIndex = 34;
-            lblStatus.Text = "Draft";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label5.Location = new System.Drawing.Point(19, 68);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(64, 13);
-            label5.TabIndex = 34;
-            label5.Text = "Created By:";
-            // 
-            // label3
-            // 
-            label3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label3.Location = new System.Drawing.Point(275, 19);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(42, 13);
-            label3.TabIndex = 34;
-            label3.Text = "Status:";
+            lblStatus.Text = "Status: Draft";
+            lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtJevNo
             // 
@@ -671,19 +659,6 @@ namespace LFS.Views.Transactions.JEV
             tbPgAccEntries.TabIndex = 1;
             tbPgAccEntries.Text = "Accounting Entries";
             tbPgAccEntries.UseVisualStyleBackColor = true;
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(282, 31);
-            toolStripStatusLabel1.Spring = true;
-            // 
-            // tlStrpLblBlncIndctr
-            // 
-            tlStrpLblBlncIndctr.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            tlStrpLblBlncIndctr.Name = "tlStrpLblBlncIndctr";
-            tlStrpLblBlncIndctr.Size = new System.Drawing.Size(17, 31);
-            tlStrpLblBlncIndctr.Text = "--";
             // 
             // ucJev
             // 
@@ -775,9 +750,7 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.TextBox txtJevNo;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCreatedBy;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgAccounts;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tlStrpLblBlncIndctr;

@@ -268,11 +268,10 @@ namespace LFS.Helpers
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = Fill ? DataGridViewAutoSizeColumnsMode.Fill : DataGridViewAutoSizeColumnsMode.None;
         }
 
-        public static void DatagridEditableRowStyle(DataGridView dgv)
+        public static void DatagridEditableRowStyle(DataGridView dgv, bool Fill = false)
         {
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
@@ -303,6 +302,7 @@ namespace LFS.Helpers
             dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgv.ShowCellToolTips = false;
+            dgv.AutoSizeColumnsMode = Fill ? DataGridViewAutoSizeColumnsMode.Fill : DataGridViewAutoSizeColumnsMode.None;
         }
 
         public static void DatagridFullRowSelectStyle(DataGridView dgv,
@@ -378,6 +378,18 @@ namespace LFS.Helpers
         #endregion Check Box Column Utility Datagrid
 
         #region Miscellaneous
+
+        public static string GetStatus(bool isApproved, bool isDisapproved, bool isCancelled)
+        {
+            if (isCancelled)
+                return "Cancelled";
+            else if (isDisapproved)
+                return "Disapproved";
+            else if (isApproved)
+                return "Approved";
+            else
+                return "Pending";
+        }
 
         public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
         {

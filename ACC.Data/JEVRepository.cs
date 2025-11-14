@@ -249,7 +249,17 @@ namespace ACC.Data
 
         public bool InsertJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                _ = Insert(entity);
+                var lstInsrtId = GetLastInsertedID();
+
+                jevAccountsModels.ForEach(x => x.JEVId = lstInsrtId);
+                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModels);
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool Update(JevModel entity)
@@ -389,68 +399,27 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, jevId},
+                new object[] { "@id", DbType.Int32, jevId},
             };
 
-            string query = $"SELECT id, " +
-                $"funds_id, " +
-                $"fund_code, " +
-                $"fund_name, " +
-                $"journals_id, " +
-                $"journal_name, " +
-                $"is_special, " +
-                $"jev_no, " +
-                $"date_entry, " +
-                $"ref_no, " +
-                $"payee, " +
-                $"explanation, " +
-                $"is_approved, " +
-                $"is_disapproved, " +
-                $"is_cancelled, " +
-                $"is_edited, " +
-                $"created_at, " +
-                $"created_by, " +
-                $"created_by_name, " +
-                $"updated_at, " +
-                $"updated_by, " +
-                $"updated_by_name " +
-                $"FROM {viewTableName} " +
-                $"WHERE id = @id";
+            string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, is_cancelled, is_edited, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
             {
-                if (reader.Rows.Count < 1)
-                    return record;
+                DataRow row = dataTable.Rows[0];
 
-                record.Add("id", reader.Rows[0]["id"].ToString());
-                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                record.Add("fund_code", reader.Rows[0]["fund_code"].ToString());
-                record.Add("fund_name", reader.Rows[0]["fund_name"].ToString());
-                record.Add("journals_id", reader.Rows[0]["journals_id"].ToString());
-                record.Add("journal_name", reader.Rows[0]["journal_name"].ToString());
-                record.Add("is_special", reader.Rows[0]["is_special"].ToString());
-                record.Add("jev_no", reader.Rows[0]["jev_no"].ToString());
-                record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
-                record.Add("ref_no", reader.Rows[0]["ref_no"].ToString());
-                record.Add("payee", reader.Rows[0]["payee"].ToString());
-                record.Add("explanation", reader.Rows[0]["explanation"].ToString());
-                record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
-                record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
-                record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
-                record.Add("is_edited", reader.Rows[0]["is_edited"].ToString());
-                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                record.Add("created_by", reader.Rows[0]["created_by"].ToString());
-                record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());
-                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
-                record.Add("updated_by_name", reader.Rows[0]["updated_by_name"].ToString());
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
             }
-
-            return record;
+            return recordDictionary;
         }
 
         public int JevCounterByJournal(string fundName, int year, string journalName)

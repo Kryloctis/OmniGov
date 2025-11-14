@@ -1691,19 +1691,23 @@ namespace LFS
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["payee"].HeaderText = "Payee";
-            datagrid.Columns["full_jev_no"].MinimumWidth = 60;
+            datagrid.Columns["trnsction_no"].HeaderText = "Trans. No.";
+            datagrid.Columns["trnsction_no"].MinimumWidth = 150;
+            datagrid.Columns["full_jev_no"].MinimumWidth = 150;
             datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
-            datagrid.Columns["date_entry"].MinimumWidth = 60;
+            datagrid.Columns["date_entry"].MinimumWidth = 100;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["date_entry"].HeaderText = "Date Entry";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["payee"].MinimumWidth = 200;
             datagrid.Columns["created_by_name"].HeaderText = "Rec. Person";
+            datagrid.Columns["created_by_name"].MinimumWidth = 200;
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
         }

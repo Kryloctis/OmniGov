@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using ZstdSharp.Unsafe;
 
 namespace LFS.Views.Transactions.JEV
 {
@@ -29,7 +30,7 @@ namespace LFS.Views.Transactions.JEV
         public ucJev()
         {
             InitializeComponent();
-            Helper.DatagridEditableRowStyle(dgAccounts);
+            Helper.DatagridEditableRowStyle(dgAccounts, true);
             ucGenJrnl = ucGenJrnl1;
             ucCshDsbrsmntJrnl = ucCshDsbrsmntJrnl1;
             ucChkDsbrsmntJrnl = ucChkDsbrsmntJrnl1;
@@ -54,16 +55,15 @@ namespace LFS.Views.Transactions.JEV
             ucChkDsbrsmntJrnl.OnLoad(isEdit, jevId);
             ucAuthDbtAccDsbrsmntJrnl.OnLoad(isEdit, jevId);
 
+            string journalName = cmbxJournal.Text;
+            ToggleJournalFields(journalName);
+            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
+
             if (isEdit)
             {
                 this.jevId = jevId;
                 LoadSelectedJEV(jevId.Value);
             }
-
-            string journalName = cmbxJournal.Text;
-            ToggleJournalFields(journalName);
-
-            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
         }
 
         /// <summary>
@@ -143,9 +143,9 @@ namespace LFS.Views.Transactions.JEV
             foreach (DataGridViewRow item in dgAccounts.Rows)
             {
                 int? fppId = item.Cells["fpp"]?.Value is int rwFppId && rwFppId != 0 ? rwFppId : null;
-                ushort generalLedgerId = (ushort)item.Cells["gen_ldgr_acc"].Value;
-                ushort? subsidiaryLedgerId = item.Cells["subsidiary_acc"].Value is ushort rwSbLdgrId && rwSbLdgrId != 0 ? rwSbLdgrId : null;
-                string obligationNo = item.Cells["obligation_no"].Value.ToString();
+                ushort generalLedgerId = Convert.ToUInt16(item.Cells["gen_ldgr_acc"].Value);
+                ushort? subsidiaryLedgerId = ushort.TryParse($"{item.Cells["subsidiary_acc"].Value}", out ushort val)? (val == 0? null : val) : null;
+                string obligationNo = item.Cells["obligation_no"].Value?.ToString() ?? "";
                 bool isDebit = $"{item.Cells["is_debit"].Value}" == "Debit";
                 bool isDeposit = $"{item.Cells["is_deposit"].Value}" == "Deposit";
                 decimal amount = (decimal)item.Cells["amount"].Value;
@@ -170,17 +170,16 @@ namespace LFS.Views.Transactions.JEV
         internal bool SubmitJev(out string message, out bool isEdit)
         {
             string jrnlTyp = cmbxJournal.Text;
+            isEdit = this.isEdit;
 
             if (this.isEdit)
             {
-                message = $"{jrnlTyp} has been submitted";
-                isEdit = this.isEdit;
+                message = $"{jrnlTyp} modification has been submitted";
                 return UpdateData(jrnlTyp);
             }
             else
             {
-                message = $"{jrnlTyp} modification has been submitted";
-                isEdit = this.isEdit;
+                message = $"{jrnlTyp} has been submitted";
                 return InsertData(jrnlTyp);
             }
         }
@@ -462,34 +461,6 @@ namespace LFS.Views.Transactions.JEV
         }
 
         /// <summary>
-        /// Retrieves and processes the current status of a JE V (not yet implemented beyond retrieval).
-        /// </summary>
-        /// <param name="jevId">The JE V identifier.</param>
-        private void GetJevStatus(int jevId)
-        {
-            string jevStatus = AccFactory.JEVRepository().GetJevStatus(jevId).ToLower();
-
-            switch (jevStatus)
-            {
-                case "pending":
-
-                    break;
-
-                case "approved":
-
-                    break;
-
-                case "disapproved":
-
-                    break;
-
-                case "cancelled":
-
-                    break;
-            }
-        }
-
-        /// <summary>
         /// Loads an existing JE V record and populates the form fields and account grid.
         /// </summary>
         /// <param name="jevId">The JE V identifier to load.</param>
@@ -505,13 +476,35 @@ namespace LFS.Views.Transactions.JEV
             txtPayee.Text = jevDict["payee"];
             txtJevNo.Text = $"{GenerateJevTemplateNo()}-{jevDict["jev_no"]}";
 
-            bool isEdited = Convert.ToByte(jevDict["is_edited"]) == 1;
-            //tlStrpLblCreatedBy.Text = $"Created By: {(isEdited ? "(Edited)" : string.Empty)} {jevDict["created_by_name"]}";
+            var isValid = new List<bool>()
+            {
+                byte.TryParse($"{jevDict["is_approved"]}", out byte isApproved),
+                byte.TryParse($"{jevDict["is_disapproved"]}", out byte isDisapproved),
+                byte.TryParse($"{jevDict["is_cancelled"]}", out byte isCancelled)
+            };
+
+            if (!isValid.Contains(false))
+            {
+                string status = Helper.GetStatus(isApproved == 1, isDisapproved == 1, isCancelled == 1);
+                lblStatus.Text = $"Status: {status}";
+            }
+            else
+                throw new Exception();
+
+            bool createdByValid = int.TryParse($"{jevDict["created_by"]}", out int createdById);
+            var dictCrtdBy = AccFactory.UsersRepository().GetRecordByID(createdById);
+            string crtdByName = !createdByValid ? string.Empty :
+                Helper.GenerateFullName(dictCrtdBy["prefix"],
+                                        dictCrtdBy["first_name"],
+                                        dictCrtdBy["mid_initial"],
+                                        dictCrtdBy["last_name"],
+                                        dictCrtdBy["suffix"]);
+
+            lblCreatedBy.Text = $"Submitted by: {crtdByName}";
 
             dgAccounts.Rows.Clear();
             LoadJevAccEntries(jevId);
             SumDebitCredit();
-            GetJevStatus(jevId);
         }
 
         /// <summary>
@@ -524,63 +517,30 @@ namespace LFS.Views.Transactions.JEV
 
             foreach (DataRow row in dtJEV.Rows)
             {
-                string fppId = row["fpp_id"].ToString();
-                string fppName = row["fpp_name"].ToString();
-                string generalLedgerId = row["general_ledger_accounts_id"].ToString();
-                string subsidiaryId = !string.IsNullOrWhiteSpace(row["subsidiary_ledger_accounts_id"].ToString()) ? row["subsidiary_ledger_accounts_id"].ToString() : null;
-                string subsidiaryName = row["subsidiary_ledger_accounts_name"].ToString();
-                string obligationNo = row["obligation_no"].ToString();
-                string account = $"{row["account_code"]} - {row["general_ledger_accounts_name"]}";
-                decimal amount = Convert.ToDecimal(row["amount"]);
-                bool isDebit = Convert.ToBoolean(row["is_debit"]);
-                bool? isDeposit;
+                int newIndex = dgAccounts.Rows.Add(
+                    Convert.ToBoolean(row["is_debit"]) ? "Debit" : "Credit",
+                    Convert.ToInt32(row["fpp_id"]),
+                    Convert.ToInt32(row["general_ledger_accounts_id"]),
+                    null,
+                    byte.TryParse($"{row["is_deposit"]}", out byte val)
+                        ? (val == 1 ? "Deposit" : "Collection")
+                        : "Collection",
+                    Convert.ToDecimal(row["amount"]),
+                    row["obligation_no"].ToString()
+                );
 
-                if (!string.IsNullOrWhiteSpace(row["is_deposit"].ToString()))
-                    isDeposit = Convert.ToBoolean(row["is_deposit"]);
+                // === OPTIMIZED LOADING OF SUBSIDIARY LEDGER ===
+                PopulateSubsidiaryCell(newIndex);
+
+                // Assign sub-ledger value safely
+                var cell = (DataGridViewComboBoxCell)dgAccounts.Rows[newIndex].Cells["subsidiary_acc"];
+                int subId = row["subsidiary_ledger_accounts_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["subsidiary_ledger_accounts_id"]);
+
+                if (cell.DataSource is DataTable dtSub &&
+                    dtSub.AsEnumerable().Any(r => r.Field<int>("id") == subId))
+                    cell.Value = subId;
                 else
-                    isDeposit = null;
-
-                object[] accountRow;
-                if (isDebit)
-                {
-                    // for debit row
-                    accountRow = new object[]
-                    {
-                        fppId,
-                        generalLedgerId,
-                        subsidiaryId,
-                        isDebit,
-                        fppName,
-                        account,
-                        subsidiaryName,
-                        obligationNo,
-                        amount.ToString("N2"),
-                        "",
-                        isDeposit
-                    };
-
-                    dgAccounts.Rows.Add(accountRow);
-                }
-                else
-                {
-                    // for credit row
-                    accountRow = new object[]
-                    {
-                        fppId,
-                        generalLedgerId,
-                        subsidiaryId,
-                        isDebit,
-                        fppName,
-                        $"     {account}",
-                        subsidiaryName,
-                        obligationNo,
-                        "",
-                        amount.ToString("N2"),
-                        isDeposit
-                    };
-
-                    dgAccounts.Rows.Add(accountRow);
-                }
+                    cell.Value = 0;  // fallback
             }
         }
 
@@ -674,14 +634,29 @@ namespace LFS.Views.Transactions.JEV
             return dt;
         }
 
+        private DataTable DtGenLdgrAccs()
+        {
+            var dtGenLdgrAcc = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dt = new DataTable();
+            var dtColmns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "gen_ldgr_acc_name", typeof(string)),
+            };
+            dt.Columns.AddRange(dtColmns);
+
+            foreach (DataRow dr in dtGenLdgrAcc.Rows)
+                dt.Rows.Add(dr["general_ledger_accounts_id"], dr["ledger_name"]);
+
+            return dt;
+        }
+
         /// <summary>
         /// Defines and configures the columns for the accounts DataGridView.
         /// </summary>
         /// <returns>A list of configured <see cref="DataGridViewColumn"/> instances.</returns>
         private List<DataGridViewColumn> DgvColumns()
         {
-            var dtGenLdgrAcc = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
-
             var dtColumns = new List<DataGridViewColumn>
             {
                 new DataGridViewComboBoxColumn ()
@@ -689,6 +664,7 @@ namespace LFS.Views.Transactions.JEV
                     HeaderText = "D/C",
                     Name = "is_debit",
                     FlatStyle = FlatStyle.Flat,
+                    MinimumWidth = 100,
 
                     Items = {"Debit", "Credit"},
                 },
@@ -709,9 +685,9 @@ namespace LFS.Views.Transactions.JEV
                     HeaderText = "Account",
                     Name = "gen_ldgr_acc",
                     FlatStyle = FlatStyle.Flat,
-                    DataSource =dtGenLdgrAcc,
-                    ValueMember = "general_ledger_accounts_id",
-                    DisplayMember = "ledger_name",
+                    DataSource = DtGenLdgrAccs(),
+                    ValueMember = "id",
+                    DisplayMember = "gen_ldgr_acc_name",
                     MinimumWidth = 200,
                 },
 
@@ -729,6 +705,7 @@ namespace LFS.Views.Transactions.JEV
                     HeaderText = "Mode",
                     Name = "is_deposit",
                     FlatStyle = FlatStyle.Flat,
+                    MinimumWidth = 100,
                     Items = { "Collection", "Deposit" },
                 },
 
@@ -745,6 +722,8 @@ namespace LFS.Views.Transactions.JEV
                 {
                     HeaderText = "Obligation No.",
                     Name = "obligation_no",
+                    MinimumWidth = 200,
+                   DefaultCellStyle = { NullValue = "" }
                 },
             };
 
@@ -755,52 +734,37 @@ namespace LFS.Views.Transactions.JEV
         /// Dynamically loads subsidiary accounts based on selected General Ledger and Fund.
         /// </summary>
         /// <param name="rowIndex">The index of the row being edited.</param>
-        private void LoadSubsidiaryAccounts(int rowIndex)
+        private DataTable DtSubLdrAccs(int genLdgrId, int fundId)
         {
-            //Prevents error on selection of gen_ldgr_acc loading subsidiary_acc
-            dgAccounts.Rows[rowIndex].Cells["subsidiary_acc"].Value = null;
-            var val = dgAccounts.Rows[rowIndex].Cells["gen_ldgr_acc"].Value;
-            bool genAccIdValid = int.TryParse(val.ToString(), out int accId);
-            bool fundValid = int.TryParse(cmbxFunds.SelectedValue?.ToString(), out int fundId);
+            var dtDbSub = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, genLdgrId);
 
-            if (genAccIdValid && fundValid)
-            {
-                var dtDbSub = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, accId);
-
-                // Use LINQ to populate dtTemp without foreach
-                var dtDbRows = dtDbSub.AsEnumerable()
-                                  .Select(r => new object[]
-                                  {
+            var dtDbRows = dtDbSub.AsEnumerable()
+                              .Select(r => new object[]
+                              {
                                       r.Field<ushort>("id"),
                                       r.Field<string>("sub_name")
-                                  })
-                                  .ToArray();
+                              })
+                              .ToArray();
 
-                var dtSubAcc = new DataTable();
-                var dtClmns = new DataColumn[]
-                {
-                    new DataColumn(Name = "id", typeof(int)),
-                    new DataColumn(Name = "sub_name", typeof(string))
-                };
-                dtSubAcc.Columns.AddRange(dtClmns);
-                dtSubAcc.Rows.Add(0, "N/A");
+            var dtSubAcc = new DataTable();
+            var dtClmns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "sub_name", typeof(string))
+            };
 
-                foreach (var dtDbRow in dtDbRows)
-                {
-                    var newRow2 = dtSubAcc.NewRow();
-                    newRow2["id"] = dtDbRow[0];
-                    newRow2["sub_name"] = dtDbRow[1];
-                    dtSubAcc.Rows.Add(newRow2);
-                }
+            dtSubAcc.Columns.AddRange(dtClmns);
+            dtSubAcc.Rows.Add(0, "N/A");
 
-                if (dgAccounts.Rows[rowIndex].Cells["subsidiary_acc"] is DataGridViewComboBoxCell subCell)
-                {
-                    subCell.DataSource = dtSubAcc;
-                    subCell.ValueMember = "id";
-                    subCell.DisplayMember = "sub_name";
-                    subCell.Value = 0;
-                }
+            foreach (var dtDbRow in dtDbRows)
+            {
+                var newRow2 = dtSubAcc.NewRow();
+                newRow2["id"] = dtDbRow[0];
+                newRow2["sub_name"] = dtDbRow[1];
+                dtSubAcc.Rows.Add(newRow2);
             }
+
+            return dtSubAcc;
         }
 
         private void dgAccounts_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -808,12 +772,40 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 SumDebitCredit();
-                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
-
-                if (dgAccounts.Columns[e.ColumnIndex].Name == "gen_ldgr_acc")
-                    LoadSubsidiaryAccounts(e.RowIndex);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void PopulateSubsidiaryCell(int rowIndex)
+        {
+            var genIdObj = dgAccounts.Rows[rowIndex].Cells["gen_ldgr_acc"].Value;
+            var fundObj = cmbxFunds.SelectedValue;
+
+            if (genIdObj == null || fundObj == null) return;
+
+            int genId = Convert.ToInt32(genIdObj);
+            int fundId = Convert.ToInt32(fundObj);
+
+            // Build DataSource
+            var dtSub = DtSubLdrAccs(genId, fundId);
+
+            var cell = (DataGridViewComboBoxCell)dgAccounts.Rows[rowIndex].Cells["subsidiary_acc"];
+            cell.DataSource = dtSub;
+            cell.DisplayMember = "sub_name";
+            cell.ValueMember = "id";
+
+            // Safely assign existing value (or fallback)
+            var currentValue = cell.Value;
+
+            if (currentValue != null &&
+                dtSub.AsEnumerable().Any(r => r.Field<int>("id") == Convert.ToInt32(currentValue)))
+            {
+                // keep original
+                return;
+            }
+
+            // fallback to N/A
+            cell.Value = 0;
         }
 
         /// <summary>
@@ -940,6 +932,30 @@ namespace LFS.Views.Transactions.JEV
             bool isDecimal = e.KeyChar == '.' && !tb.Text.Contains('.');
 
             e.Handled = !(isDigit || isDecimal);
+        }
+
+        private void dgAccounts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+                string col = dgAccounts.Columns[e.ColumnIndex].Name;
+
+                if (col == "gen_ldgr_acc")
+                    PopulateSubsidiaryCell(e.RowIndex);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgAccounts_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgAccounts.IsCurrentCellDirty)
+                    dgAccounts.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
