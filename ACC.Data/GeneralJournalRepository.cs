@@ -113,7 +113,7 @@ namespace ACC.Data
             return recordDictionary;
         }
 
-        public bool DeleteGenJrnlJevId(int jevId)
+        public bool DeleteByJevId(int jevId)
         {
             object[][] parameters = new object[][]
             {

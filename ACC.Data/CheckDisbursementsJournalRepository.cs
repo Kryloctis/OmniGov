@@ -153,7 +153,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool DeleteChckDsbrsmntJrnlJevId(int jevId)
+        public bool DeleteByJevId(int jevId)
         {
             var parameters = new object[][]
             {

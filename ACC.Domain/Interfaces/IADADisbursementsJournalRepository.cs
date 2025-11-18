@@ -12,5 +12,7 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetViewRecordByJevID(int jevId);
 
         bool JevIdExist(int jevId);
+
+        bool DeleteByJevId(int jevId);
     }
 }

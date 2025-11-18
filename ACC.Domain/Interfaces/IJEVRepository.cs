@@ -19,20 +19,20 @@ namespace ACC.Domain.Interfaces
 
         bool InsertJevAdaDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
-        bool UpdateJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+        bool UpdateJevGenJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
-        bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+        bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
-        bool UpdateJevChkDsbrsmntJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool UpdateJevChkDsbrsmntJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
-        bool UpdateJevCshRcptsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
+        bool UpdateJevCshRcptsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
-        bool UpdateJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels);
+        bool UpdateJevProcRcvJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModels);
 
-        bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+        bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
         bool Delete(JevModel entity);
-
+        bool DeletePrevJournals(int jevId, string journalName);
         int GetLastInsertedID();
 
         string GetLastJevNoSeries(int fundId);

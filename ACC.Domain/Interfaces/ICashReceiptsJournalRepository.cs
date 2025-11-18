@@ -11,6 +11,6 @@ namespace ACC.Domain.Interfaces
 
         bool UpdateByJevId(CashReceiptsJournalModel entity);
 
-        bool DeleteCshRcptsJrnlJevId(int jevId);
+        bool DeleteByJevId(int jevId);
     }
 }

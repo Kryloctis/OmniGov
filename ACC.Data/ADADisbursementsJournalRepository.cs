@@ -3,22 +3,18 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace ACC.Data
 {
     public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "ada_disbursement_journal";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public ADADisbursementsJournalRepository(IAccGenericCommands dbGenericCommands)
+        public ADADisbursementsJournalRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public bool Delete(List<ADADisbursementsJournalModel> entityList)
@@ -43,32 +39,27 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByJevID(int jevId)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId},
-                };
+                new object[] { "@jev_id", DbType.Int32, jevId},
+            };
 
-                string query = $"SELECT id, ada_no FROM {tableName} WHERE jev_id = @jev_id";
+            string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-                    record.Add("id", reader.Rows[0][0].ToString());
-                    record.Add("ada_no", reader.Rows[0][1].ToString());
-                }
-            }
-            catch (Exception)
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
-            }
+                DataRow row = dataTable.Rows[0];
 
-            return record;
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public bool IdExist(int id)
@@ -78,22 +69,15 @@ namespace ACC.Data
 
         public bool Insert(ADADisbursementsJournalModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@ada_no", DbType.String, entity.ADANumber},
-                    new object[] { "@dv_no", DbType.String, entity.DVNo},
-                };
+                new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                new object[] { "@ada_no", DbType.String, entity.AdaNo},
+                new object[] { "@dv_no", DbType.String, entity.DvNo},
+            };
 
-                string query = $"INSERT INTO {tableName} (jev_id, ada_no, dv_no) VALUES (@jev_id, @ada_no, @dv_no)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (jev_id, ada_no, dv_no) VALUES (@jev_id, @ada_no, @dv_no)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ADADisbursementsJournalModel entity)
@@ -103,53 +87,40 @@ namespace ACC.Data
 
         public bool UpdateByJevId(ADADisbursementsJournalModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@ada_no", DbType.String, entity.ADANumber},
-                    new object[] { "@dv_no", DbType.String, entity.DVNo},
-                };
+                new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                new object[] { "@ada_no", DbType.String, entity.AdaNo},
+                new object[] { "@dv_no", DbType.String, entity.DvNo},
+            };
 
-                string query = $"UPDATE {tableName} SET ada_no = @ada_no, dv_no = @dv_no WHERE jev_id = @jev_id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET ada_no = @ada_no, dv_no = @dv_no WHERE jev_id = @jev_id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId},
-                };
+                new object[] { "@jev_id", DbType.Int32, jevId},
+            };
 
-                string query = $"SELECT id, ada_no, dv_no FROM {tableName} WHERE jev_id = @jev_id";
+            string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("ada_no", reader.Rows[0]["ada_no"].ToString());
-                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
-                }
-            }
-            catch (Exception)
+            if (dataTable.Rows.Count > 0)
             {
-                throw;
-            }
+                DataRow row = dataTable.Rows[0];
 
-            return record;
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public bool JevIdExist(int jevId)
@@ -162,7 +133,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -170,9 +141,21 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
-            };
+            }
+            ;
 
             return false;
+        }
+
+        public bool DeleteByJevId(int jevId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@jev_id", DbType.Int32, jevId}
+            };
+
+            string query = $"DELETE FROM {tableName} WHERE jev_id = @jev_id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

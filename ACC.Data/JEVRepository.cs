@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using Mysqlx.Cursor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,6 @@ namespace ACC.Data
         private readonly IADADisbursementsJournalRepository iADADisbursementsJournalRepository;
 
         private AccGenericCommands mySqlGenericCommandsLFS;
-        private IJEVAccountsRepository iJEVAccountsRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
@@ -31,7 +31,7 @@ namespace ACC.Data
             IGeneralJournalRepository generalJournalRepository)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
-            this.iJEVAccountsRepository = iJEVAccountsRepository;
+            this.iJevAccountsRepository = iJEVAccountsRepository;
             this.iCheckDisbursementsJournalRepository = checkDisbursementsJournalRepository;
             this.iCashReceiptsJournalRepository = cashReceiptsJournalRepository;
             this.iADADisbursementsJournalRepository = iADADisbursementsJournalRepository;
@@ -157,7 +157,7 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
                 generalJournalModel.JevId = GetLastInsertedID();
                 _ = iGeneralJournalRepository.Insert(generalJournalModel);
@@ -177,7 +177,7 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
                 cashDisbursementsJournalModel.JevId = GetLastInsertedID();
                 _ = iCashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
@@ -197,7 +197,7 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
                 checkDisbursementsJournalModel.JevId = GetLastInsertedID();
                 iCheckDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
@@ -217,7 +217,7 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
                 cashReceiptsJournalModel.JevId = lstInsrtId;
                 _ = iCashReceiptsJournalRepository.Insert(cashReceiptsJournalModel);
@@ -237,7 +237,7 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModelList.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
                 aDADisbursementsJournalModel.JevId = GetLastInsertedID();
                 _ = iADADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
@@ -255,10 +255,34 @@ namespace ACC.Data
                 var lstInsrtId = GetLastInsertedID();
 
                 jevAccountsModels.ForEach(x => x.JEVId = lstInsrtId);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModels);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModels);
 
                 scope.Complete();
                 return true;
+            }
+        }
+
+        public bool DeletePrevJournals(int jevId, string journalName)
+        {
+            switch (journalName)
+            {
+                case "General Journal":
+                    return iGeneralJournalRepository.DeleteByJevId(jevId);
+
+                case "Cash Receipts Journal":
+                    return iCashReceiptsJournalRepository.DeleteByJevId(jevId);
+
+                case "Cash Disbursements Journal":
+                    return iCashDisbursementsJournalRepository.DeleteByJevId(jevId);
+
+                case "Check Disbursements Journal":
+                    return iCheckDisbursementsJournalRepository.DeleteByJevId(jevId);
+
+                case "Authority to Debit Account Disbursement Journal":
+                    return iADADisbursementsJournalRepository.DeleteByJevId(jevId);
+
+                default:
+                    return false;
             }
         }
 
@@ -287,110 +311,150 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool UpdateJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        public bool UpdateJevGenJrnl(JevModel currentJev,
+                                    (int jrnlId, string jrnlName) prevJournal,
+                                    List<JEVAccountsModel> jevAccountsModelList,
+                                    GeneralJournalModel generalJournalModel)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Update(entity);
+                _ = Update(currentJev);
 
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
-                _ = iGeneralJournalRepository.DeleteGenJrnlJevId(entity.Id);
-                _ = iCashReceiptsJournalRepository.DeleteCshRcptsJrnlJevId(entity.Id);
-                _ = iCashDisbursementsJournalRepository.DeleteCshDsbrsmntJrnlJevId(entity.Id);
-                _ = iCheckDisbursementsJournalRepository.DeleteChckDsbrsmntJrnlJevId(entity.Id);
-
-                _ = iGeneralJournalRepository.UpdateByJevId(generalJournalModel);
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                {
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+                    _ = iGeneralJournalRepository.Insert(generalJournalModel);
+                }
+                else
+                    _ = iGeneralJournalRepository.UpdateByJevId(generalJournalModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool UpdateJevChkDsbrsmntJrnl(JevModel entity,
-                                                List<JEVAccountsModel> jevAccountsModelList,
-                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool UpdateJevChkDsbrsmntJrnl(JevModel currentJev,
+                                            (int jrnlId, string jrnlName) prevJournal,
+                                            List<JEVAccountsModel> jevAccountsModelList,
+                                            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Update(entity);
+                _ = Update(currentJev);
 
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
-                iCheckDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
-        {
-            using (var scope = new TransactionScope())
-            {
-                _ = Update(entity);
-
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
-
-                _ = iCashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                {
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+                    _ = iCheckDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
+                }
+                else
+                    iCheckDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool UpdateJevCshRcptsJrnl(JevModel entity,
-                                         List<JEVAccountsModel> jevAccountsModelList,
-                                         CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool UpdateJevCshDsbrsmntsJrnl(JevModel currentJev,
+                                            (int jrnlId, string jrnlName) prevJournal,
+                                            List<JEVAccountsModel> jevAccountsModelList,
+                                            CashDisbursementsJournalModel cashDisbursementsJournalModel)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Update(entity);
+                _ = Update(currentJev);
 
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
 
-                _ = iCashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                {
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+                    _ = iCashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
+                }
+                else
+                    _ = iCashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool UpdateJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
+        public bool UpdateJevCshRcptsJrnl(JevModel currentJev,
+                                        (int jrnlId, string jrnlName) prevJournal,
+                                        List<JEVAccountsModel> jevAccountsModelList,
+                                        CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Update(entity);
+                _ = Update(currentJev);
 
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModels.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModels);
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                {
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+                    _ = iCashReceiptsJournalRepository.Insert(cashReceiptsJournalModel);
+                }
+                else
+                    _ = iCashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity,
-                                              List<JEVAccountsModel> jevAccountsModelList,
-                                              ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        public bool UpdateJevProcRcvJrnl(JevModel currentJev,
+                                        (int jrnlId, string jrnlName) prevJournal,
+                                        List<JEVAccountsModel> jevAccountsModels)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Update(entity);
+                _ = Update(currentJev);
 
-                _ = iJevAccountsRepository.DeleteByJevId(entity.Id);
-                jevAccountsModelList.ForEach(x => x.JEVId = entity.Id);
-                _ = iJEVAccountsRepository.BulkInsert(jevAccountsModelList);
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModels.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModels);
 
-                _ = iADADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool UpdateJevAdaDsbrsmntsJrnl(JevModel currentJev,
+                                            (int jrnlId, string jrnlName) prevJournal,
+                                            List<JEVAccountsModel> jevAccountsModelList,
+                                            ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = Update(currentJev);
+
+                _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
+                jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
+                _ = iJevAccountsRepository.BulkInsert(jevAccountsModelList);
+
+                if (currentJev.JournalsId != prevJournal.jrnlId)
+                {
+                    _ = DeletePrevJournals(prevJournal.jrnlId, prevJournal.jrnlName);
+                    _ = iADADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
+                }
+                else
+                    _ = iADADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
 
                 scope.Complete();
                 return true;
