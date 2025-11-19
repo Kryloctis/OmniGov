@@ -2,7 +2,6 @@
 using ACC.Domain.Models;
 using LFS.Helpers;
 using LFS.Views.Transactions.JEV.JournalForms;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,8 +10,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using ZstdSharp.Unsafe;
 
 namespace LFS.Views.Transactions.JEV
 {
@@ -20,6 +17,7 @@ namespace LFS.Views.Transactions.JEV
     {
         private bool isEdit;
         private int? jevId;
+        private (int jrnlId, string jrnlName) prevJournal;
 
         private ucGenJrnl ucGenJrnl;
         private ucCshDsbrsmntJrnl ucCshDsbrsmntJrnl;
@@ -46,24 +44,28 @@ namespace LFS.Views.Transactions.JEV
         /// <param name="jevId">The JE V identifier if editing an existing record.</param>
         internal void OnLoad(bool isEdit, int? jevId)
         {
+            this.isEdit = isEdit;
+            ResetForm();
             LoadFunds();
             LoadJournals();
 
-            ucGenJrnl.OnLoad(isEdit, jevId);
-            ucCshRcptsJrnl.OnLoad(isEdit, jevId);
-            ucCshDsbrsmntJrnl.OnLoad(isEdit, jevId);
-            ucChkDsbrsmntJrnl.OnLoad(isEdit, jevId);
-            ucAuthDbtAccDsbrsmntJrnl.OnLoad(isEdit, jevId);
-
-            string journalName = cmbxJournal.Text;
-            ToggleJournalFields(journalName);
-            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
+            string journalName;
 
             if (isEdit)
             {
                 this.jevId = jevId;
-                LoadSelectedJEV(jevId.Value);
+                LoadSelectedJev(jevId.Value);
+                journalName = cmbxJournal.Text;
+                ToggleJournalFields(journalName);
+                LoadJevAccEntries(jevId.Value);
             }
+            else
+            {
+                journalName = cmbxJournal.Text;
+                ToggleJournalFields(journalName);
+            }
+
+            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
         }
 
         /// <summary>
@@ -144,7 +146,7 @@ namespace LFS.Views.Transactions.JEV
             {
                 int? fppId = item.Cells["fpp"]?.Value is int rwFppId && rwFppId != 0 ? rwFppId : null;
                 ushort generalLedgerId = Convert.ToUInt16(item.Cells["gen_ldgr_acc"].Value);
-                ushort? subsidiaryLedgerId = ushort.TryParse($"{item.Cells["subsidiary_acc"].Value}", out ushort val)? (val == 0? null : val) : null;
+                ushort? subsidiaryLedgerId = ushort.TryParse($"{item.Cells["subsidiary_acc"].Value}", out ushort val) ? (val == 0 ? null : val) : null;
                 string obligationNo = item.Cells["obligation_no"].Value?.ToString() ?? "";
                 bool isDebit = $"{item.Cells["is_debit"].Value}" == "Debit";
                 bool isDeposit = $"{item.Cells["is_deposit"].Value}" == "Deposit";
@@ -211,27 +213,27 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
-        private bool UpdateData(string jrnlTyp)
+        private bool UpdateData(string currentJrnlTyp)
         {
-            switch (jrnlTyp)
+            switch (currentJrnlTyp)
             {
                 case "General Journal":
-                    return AccFactory.JEVRepository().UpdateJevGenJrnl(JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+                    return AccFactory.JEVRepository().UpdateJevGenJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
 
                 case "Procurement Received Journal":
-                    return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(JevModel(), JevAcountsModelList());
+                    return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(JevModel(), prevJournal, JevAcountsModelList());
 
                 case "Cash Receipts Journal":
-                    return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+                    return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
 
                 case "Cash Disbursements Journal":
-                    return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+                    return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
 
                 case "Check Disbursements Journal":
-                    return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+                    return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
 
                 case "Authority to Debit Account Disbursement Journal":
-                    return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+                    return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
 
                 default:
                     return false;
@@ -266,10 +268,16 @@ namespace LFS.Views.Transactions.JEV
         /// </summary>
         internal void ResetForm()
         {
+            if (isEdit)
+            {
+                jevId = null;
+            }
+
             txtJevNo.Text = string.Empty;
             txtRefNo.Text = string.Empty;
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
+            tabControl2.SelectedTab = tbPgJevDetails;
 
             dgAccounts.Rows.Clear();
             tlStrpLblDebit.Text = 0.ToString("N2");
@@ -287,19 +295,6 @@ namespace LFS.Views.Transactions.JEV
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
-        }
-
-        private string GenerateJevTemplateNo()
-        {
-            bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
-            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
-
-            string fundCode = fund["fund_code"];
-            string month = dtpDateEntry.Value.ToString("MM");
-            string year = dtpDateEntry.Value.Year.ToString();
-            var jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
-
-            return $"{fundCode}-{year}-{month}-{jevSeriesNo}";
         }
 
         /// <summary>
@@ -343,22 +338,27 @@ namespace LFS.Views.Transactions.JEV
             switch (journal)
             {
                 case "General Journal":
+                    ucGenJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgGenJrnl;
                     break;
 
                 case "Cash Receipts Journal":
+                    ucCshRcptsJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgCshRcptsJrnl;
                     break;
 
                 case "Cash Disbursements Journal":
+                    ucCshDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgCshDsbrsmntJrnl;
                     break;
 
                 case "Check Disbursements Journal":
+                    ucChkDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgChkDsbrsmntJrnl;
                     break;
 
                 case "Authority to Debit Account Disbursement Journal":
+                    ucAuthDbtAccDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgAuthDbtAccDsbrsmntJrnl;
                     break;
 
@@ -460,28 +460,60 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private string CreateNewJevNo()
+        {
+            bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
+            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
+
+            if (fundValid)
+            {
+                string fundCode = fund["fund_code"];
+                string month = dtpDateEntry.Value.ToString("MM");
+                string year = dtpDateEntry.Value.Year.ToString();
+                var jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
+
+                return $"{fundCode}-{year}-{month}-{jevSeriesNo}";
+            }
+            else
+                throw new Exception();
+        }
+
         /// <summary>
         /// Loads an existing JE V record and populates the form fields and account grid.
         /// </summary>
         /// <param name="jevId">The JE V identifier to load.</param>
-        private void LoadSelectedJEV(int jevId)
+        private void LoadSelectedJev(int jevId)
         {
-            var jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+            var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+            if (dictJev.Count < 1) { throw new ArgumentException("Settings dictionary cannot be null or empty.", nameof(dictJev)); }
 
-            cmbxJournal.SelectedValue = Convert.ToByte(jevDict["journals_id"]);
-            cmbxFunds.SelectedValue = Convert.ToByte(jevDict["funds_id"]);
-            txtExplanation.Text = jevDict["explanation"];
-            dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
-            txtRefNo.Text = jevDict["ref_no"];
-            txtPayee.Text = jevDict["payee"];
-            txtJevNo.Text = $"{GenerateJevTemplateNo()}-{jevDict["jev_no"]}";
+            byte journalId = Convert.ToByte(dictJev["journals_id"]);
+            string journalName = dictJev["journal_name"];
+            byte fundId = Convert.ToByte(dictJev["funds_id"]);
+            string fundCode = dictJev["fund_code"];
+            DateTime dateEntry = Convert.ToDateTime(dictJev["date_entry"]);
+            string yearMonthPart = dateEntry.ToString("yyyy-MM");
+            string jevSeriesNo = string.IsNullOrWhiteSpace(dictJev["jev_no"]) ? "_ _ _" : dictJev["jev_no"];
+            string fullJevNo = $"{fundCode}-{yearMonthPart}-{jevSeriesNo}";
+            string refNo = dictJev["ref_no"];
+            string payee = dictJev["payee"];
+            string explanation = dictJev["explanation"];
+
+            prevJournal = (jevId, journalName);
+            cmbxJournal.SelectedValue = journalId;
+            cmbxFunds.SelectedValue = fundId;
+            txtExplanation.Text = explanation;
+            dtpDateEntry.Value = dateEntry;
+            txtRefNo.Text = refNo;
+            txtPayee.Text = payee;
+            txtJevNo.Text = fullJevNo;
 
             var isValid = new List<bool>()
-            {
-                byte.TryParse($"{jevDict["is_approved"]}", out byte isApproved),
-                byte.TryParse($"{jevDict["is_disapproved"]}", out byte isDisapproved),
-                byte.TryParse($"{jevDict["is_cancelled"]}", out byte isCancelled)
-            };
+                {
+                    byte.TryParse($"{dictJev["is_approved"]}", out byte isApproved),
+                    byte.TryParse($"{dictJev["is_disapproved"]}", out byte isDisapproved),
+                    byte.TryParse($"{dictJev["is_cancelled"]}", out byte isCancelled)
+                };
 
             if (!isValid.Contains(false))
             {
@@ -491,7 +523,7 @@ namespace LFS.Views.Transactions.JEV
             else
                 throw new Exception();
 
-            bool createdByValid = int.TryParse($"{jevDict["created_by"]}", out int createdById);
+            bool createdByValid = int.TryParse($"{dictJev["created_by"]}", out int createdById);
             var dictCrtdBy = AccFactory.UsersRepository().GetRecordByID(createdById);
             string crtdByName = !createdByValid ? string.Empty :
                 Helper.GenerateFullName(dictCrtdBy["prefix"],
@@ -503,7 +535,6 @@ namespace LFS.Views.Transactions.JEV
             lblCreatedBy.Text = $"Submitted by: {crtdByName}";
 
             dgAccounts.Rows.Clear();
-            LoadJevAccEntries(jevId);
             SumDebitCredit();
         }
 

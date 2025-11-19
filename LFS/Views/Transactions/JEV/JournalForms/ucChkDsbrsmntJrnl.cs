@@ -19,6 +19,8 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
+            ResetForm();
+
             if (isEdit)
             {
                 this.jevId = jevId;
@@ -41,8 +43,13 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             }
         }
 
-        internal void ResetFields()
+        internal void ResetForm()
         {
+            if (isEdit)
+            {
+                jevId = null;
+            }
+
             txtChkNo.Clear();
             dtChkDate.Value = Helper.GetCurrentDate();
             txtRciNo.Clear();

@@ -17,6 +17,8 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
+            ResetForm();
+
             if (isEdit)
             {
                 this.jevId = jevId;
@@ -40,6 +42,11 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         internal void ResetForm()
         {
+            if (isEdit)
+            {
+                jevId = null;
+            }
+
             txtAdaNo.Clear();
             txtDvNo.Clear();
         }
@@ -48,8 +55,8 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         {
             var model = new ADADisbursementsJournalModel
             {
-                ADANumber = txtAdaNo.Text.Trim(),
-                DVNo = txtDvNo.Text.Trim(),
+                AdaNo = txtAdaNo.Text.Trim(),
+                DvNo = txtDvNo.Text.Trim(),
             };
 
             if (isEdit) model.JevId = jevId.Value;

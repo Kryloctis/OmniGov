@@ -18,6 +18,8 @@ namespace LFS.Views.Transactions.JEV
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
+            ResetForm();
+
             if (isEdit)
             {
                 this.jevId = jevId;
@@ -39,6 +41,11 @@ namespace LFS.Views.Transactions.JEV
 
         internal void ResetForm()
         {
+            if (isEdit)
+            {
+                jevId = null;
+            }
+
             txtOrNo.Clear();
             txtChckNo.Clear();
             txtDvNo.Clear();

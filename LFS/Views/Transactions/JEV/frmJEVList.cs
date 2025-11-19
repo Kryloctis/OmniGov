@@ -275,15 +275,15 @@ namespace LFS.Views.Transactions.JEV
             {
                 int rowIndex = dgJEV.CurrentCell.RowIndex;
                 int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-                customTabControl1.SelectedTab = tbPgCrud;
                 ucJev.OnLoad(true, jevId);
-                crudIndct = "Create Journal Entry Voucher";
+                customTabControl1.SelectedTab = tbPgCrud;
+                crudIndct = "Update Journal Entry Voucher";
             }
             else
             {
-                customTabControl1.SelectedTab = tbPgCrud;
                 ucJev.OnLoad(false, null);
-                crudIndct = "Update Journal Entry Voucher";
+                customTabControl1.SelectedTab = tbPgCrud;
+                crudIndct = "Create Journal Entry Voucher";
             }
 
             lblCrudStat.Text = crudIndct;

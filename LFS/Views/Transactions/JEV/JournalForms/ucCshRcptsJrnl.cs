@@ -4,6 +4,7 @@ using LFS.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
@@ -21,8 +22,8 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
+            ResetForm();
 
-            LoadCollectingOfficer();
             dtOrDate.Value = Helper.GetCurrentDate();
 
             if (isEdit)
@@ -53,8 +54,13 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             };
         }
 
-        internal void ResetFields()
+        internal void ResetForm()
         {
+            if (isEdit)
+            {
+                jevId = null;
+            }
+
             txtOrNo.Clear();
             dtOrDate.Value = Helper.GetCurrentDate();
             txtRcdNo.Clear();
@@ -73,20 +79,27 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             dataTable.Columns.AddRange(dtColumns);
             var dtCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecords();
 
-            foreach (DataRow row in dtCollectingOfficer.Rows)
+            var officerData = dtCollectingOfficer
+                .AsEnumerable()
+                .Select(o => new
+                {
+                    Id = o.Field<byte>("id"),
+                    FullName = Helper.GenerateFullName(
+                        o.Field<string>("prefix"),
+                        o.Field<string>("first_name"),
+                        o.Field<string>("mid_initial"),
+                        o.Field<string>("last_name"),
+                        o.Field<string>("suffix")
+                    )
+                })
+                .ToList();
+
+            // Fill target DataTable
+            foreach (var item in officerData)
             {
-                string prefix = row["prefix"].ToString();
-                string firstName = row["first_name"].ToString();
-                string midInitial = row["mid_initial"].ToString();
-                string lastName = row["last_name"].ToString();
-                string suffix = row["suffix"].ToString();
-                string fullName = Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
-                int Id = Convert.ToInt32(row["id"]);
-
                 var newRow = dataTable.NewRow();
-
-                newRow["id"] = Id;
-                newRow["full_name"] = fullName;
+                newRow["id"] = item.Id;
+                newRow["full_name"] = item.FullName;
                 dataTable.Rows.Add(newRow);
             }
             return dataTable;
