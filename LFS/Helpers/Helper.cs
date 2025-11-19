@@ -736,9 +736,9 @@ namespace LFS.Helpers
             string message = string.Empty;
 
             if (rowCount == 1)
-                message = "Are you sure you want to delete a record?";
+                message = "This action cannot be undone.\nDo you wish to delete record?";
             else if (rowCount > 1)
-                message = $"Are you sure you want to delete {rowCount} records?";
+                message = $"This action cannot be undone.\nDo you wish to delete {rowCount} records?";
 
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 return true;

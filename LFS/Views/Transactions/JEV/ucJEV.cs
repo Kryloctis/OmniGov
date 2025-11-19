@@ -535,7 +535,6 @@ namespace LFS.Views.Transactions.JEV
             lblCreatedBy.Text = $"Submitted by: {crtdByName}";
 
             dgAccounts.Rows.Clear();
-            SumDebitCredit();
         }
 
         /// <summary>
@@ -573,6 +572,8 @@ namespace LFS.Views.Transactions.JEV
                 else
                     cell.Value = 0;  // fallback
             }
+
+            SumDebitCredit();
         }
 
         private void cmbxJournal_SelectionChangeCommitted(object sender, EventArgs e)

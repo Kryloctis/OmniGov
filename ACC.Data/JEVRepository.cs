@@ -1,9 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Mysqlx.Cursor;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Transactions;
 
@@ -41,7 +39,22 @@ namespace ACC.Data
 
         public bool Delete(List<JevModel> entityList)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (JevModel jevModel in entityList)
+                {
+                    _ = iJevAccountsRepository.DeleteByJevId(jevModel.Id);
+                    _ = iGeneralJournalRepository.DeleteByJevId(jevModel.Id);
+                    _ = iCashReceiptsJournalRepository.DeleteByJevId(jevModel.Id);
+                    _ = iCashDisbursementsJournalRepository.DeleteByJevId(jevModel.Id);
+                    _ = iCheckDisbursementsJournalRepository.DeleteByJevId(jevModel.Id);
+                    _ = iADADisbursementsJournalRepository.DeleteByJevId(jevModel.Id);
+                    _ = Delete(jevModel);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool Delete(JevModel entity)
