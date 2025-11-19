@@ -36,13 +36,12 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
             dtDatePaid.Value = Helper.GetCurrentDate();
             txtDvNo.Clear();
-            LoadDisbursingOfficer();
+            cmbxDsbrsngOffcr.Refresh();
         }
 
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
-            ResetForm();
 
             dtDatePaid.Value = Helper.GetCurrentDate();
             LoadDisbursingOfficer();

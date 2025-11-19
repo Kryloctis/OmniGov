@@ -283,6 +283,7 @@ namespace LFS.Views.Transactions.JEV
             cmbxJournal.Name = "cmbxJournal";
             cmbxJournal.Size = new System.Drawing.Size(247, 23);
             cmbxJournal.TabIndex = 62;
+            cmbxJournal.SelectedIndexChanged += cmbxJournal_SelectedIndexChanged;
             cmbxJournal.SelectionChangeCommitted += cmbxJournal_SelectionChangeCommitted;
             cmbxJournal.Validating += cmbxJournal_Validating;
             cmbxJournal.Validated += cmbxJournal_Validated;

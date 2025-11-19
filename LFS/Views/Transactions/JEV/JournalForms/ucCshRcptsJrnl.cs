@@ -22,7 +22,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
-            ResetForm();
+            LoadCollectingOfficer();
 
             dtOrDate.Value = Helper.GetCurrentDate();
 
@@ -64,7 +64,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
             txtOrNo.Clear();
             dtOrDate.Value = Helper.GetCurrentDate();
             txtRcdNo.Clear();
-            LoadCollectingOfficer();
+            cmbxCollctngOffcr.Refresh();
         }
 
         private DataTable DataTableCollectingOfficer()

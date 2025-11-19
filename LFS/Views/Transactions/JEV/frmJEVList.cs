@@ -301,11 +301,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleCrud(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleCrud(true);
         }
 
         private bool DeleteJev(DataGridViewSelectedRowCollection dataGridViewSelectedRowCollection)
@@ -364,12 +360,10 @@ namespace LFS.Views.Transactions.JEV
                 {
                     Helper.MessageBoxSuccess(message);
                     LoadJevRecords();
+                    ucJev.ResetForm();
 
-                    if (!isEdit)
-                    {
-                        ucJev.ResetForm();
+                    if (isEdit)
                         customTabControl1.SelectedTab = tbPgMain;
-                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

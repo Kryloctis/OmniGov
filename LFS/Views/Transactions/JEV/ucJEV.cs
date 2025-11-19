@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,23 +47,21 @@ namespace LFS.Views.Transactions.JEV
         {
             this.isEdit = isEdit;
             ResetForm();
-            LoadFunds();
             LoadJournals();
-
-            string journalName;
+            LoadFunds();
 
             if (isEdit)
             {
                 this.jevId = jevId;
                 LoadSelectedJev(jevId.Value);
-                journalName = cmbxJournal.Text;
-                ToggleJournalFields(journalName);
-                LoadJevAccEntries(jevId.Value);
+                var cmbxIndex = cmbxJournal.SelectedIndex;
+                ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
+                LoadJevAccEntries(jevId.Value, dgAccounts);
             }
             else
             {
-                journalName = cmbxJournal.Text;
-                ToggleJournalFields(journalName);
+                var cmbxIndex = cmbxJournal.SelectedIndex;
+                ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
             }
 
             ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
@@ -102,6 +101,7 @@ namespace LFS.Views.Transactions.JEV
         {
             var dtJournals = AccFactory.JournalsRepository().GetRecords();
             HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournal, "id", "journal_name");
+            cmbxJournal.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -285,6 +285,11 @@ namespace LFS.Views.Transactions.JEV
             LoadJournals();
             LoadFunds();
 
+            ucGenJrnl.ResetForm();
+            ucCshRcptsJrnl.ResetForm();
+            ucCshDsbrsmntJrnl.ResetForm();
+            ucAuthDbtAccDsbrsmntJrnl.ResetForm();
+
             dtpDateEntry.Value = DateTime.Now;
         }
 
@@ -333,33 +338,36 @@ namespace LFS.Views.Transactions.JEV
         /// <param name="journal">The name of the selected journal.</param>
         private void ToggleJournalFields(string journal)
         {
-            splitContainer1.Panel2Collapsed = false;
-
             switch (journal)
             {
                 case "General Journal":
                     ucGenJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgGenJrnl;
+                    splitContainer1.Panel2Collapsed = false;
                     break;
 
                 case "Cash Receipts Journal":
                     ucCshRcptsJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgCshRcptsJrnl;
+                    splitContainer1.Panel2Collapsed = false;
                     break;
 
                 case "Cash Disbursements Journal":
                     ucCshDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgCshDsbrsmntJrnl;
+                    splitContainer1.Panel2Collapsed = false;
                     break;
 
                 case "Check Disbursements Journal":
                     ucChkDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgChkDsbrsmntJrnl;
+                    splitContainer1.Panel2Collapsed = false;
                     break;
 
                 case "Authority to Debit Account Disbursement Journal":
                     ucAuthDbtAccDsbrsmntJrnl.OnLoad(isEdit, jevId);
                     cstmTbCtrlJrnls.SelectedTab = tbPgAuthDbtAccDsbrsmntJrnl;
+                    splitContainer1.Panel2Collapsed = false;
                     break;
 
                 default:
@@ -541,15 +549,15 @@ namespace LFS.Views.Transactions.JEV
         /// Loads account entries for a given JE V and populates the accounts DataGridView.
         /// </summary>
         /// <param name="jevId">The JE V identifier.</param>
-        private void LoadJevAccEntries(int jevId)
+        private void LoadJevAccEntries(int jevId, DataGridView dgv)
         {
             DataTable dtJEV = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
 
             foreach (DataRow row in dtJEV.Rows)
             {
-                int newIndex = dgAccounts.Rows.Add(
+                int newIndex = dgv.Rows.Add(
                     Convert.ToBoolean(row["is_debit"]) ? "Debit" : "Credit",
-                    Convert.ToInt32(row["fpp_id"]),
+                    (row["fpp_id"] as int?) ?? 0,
                     Convert.ToInt32(row["general_ledger_accounts_id"]),
                     null,
                     byte.TryParse($"{row["is_deposit"]}", out byte val)
@@ -563,7 +571,7 @@ namespace LFS.Views.Transactions.JEV
                 PopulateSubsidiaryCell(newIndex);
 
                 // Assign sub-ledger value safely
-                var cell = (DataGridViewComboBoxCell)dgAccounts.Rows[newIndex].Cells["subsidiary_acc"];
+                var cell = (DataGridViewComboBoxCell)dgv.Rows[newIndex].Cells["subsidiary_acc"];
                 int subId = row["subsidiary_ledger_accounts_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["subsidiary_ledger_accounts_id"]);
 
                 if (cell.DataSource is DataTable dtSub &&
@@ -580,8 +588,8 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                string journalName = cmbxJournal.Text;
-                ToggleJournalFields(journalName);
+                var cmbxIndex = cmbxJournal.SelectedIndex;
+                ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -986,6 +994,14 @@ namespace LFS.Views.Transactions.JEV
             {
                 if (dgAccounts.IsCurrentCellDirty)
                     dgAccounts.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxJournal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

@@ -1629,8 +1629,6 @@ namespace LFS
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
-            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
         internal static void SupplementalDatagridView(DataGridView dgv)
