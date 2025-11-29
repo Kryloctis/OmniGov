@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Google.Protobuf.WellKnownTypes;
 using LFS.Helpers;
 using LFS.Views.Transactions.JEV.JournalForms;
 using System;
@@ -8,7 +9,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,12 +37,6 @@ namespace LFS.Views.Transactions.JEV
             ucAuthDbtAccDsbrsmntJrnl = ucAuthDbtAccDsbrsmntJrnl1;
         }
 
-        /// <summary>
-        /// Initializes the form during load, including loading lookup data and toggling UI based on journal type.
-        /// Also loads existing JE V data if in edit mode.
-        /// </summary>
-        /// <param name="isEdit">Indicates whether the form is in edit mode.</param>
-        /// <param name="jevId">The JE V identifier if editing an existing record.</param>
         internal void OnLoad(bool isEdit, int? jevId)
         {
             this.isEdit = isEdit;
@@ -64,39 +58,23 @@ namespace LFS.Views.Transactions.JEV
                 ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
             }
 
+            txtJevNo.Text = GenerateJevNoTemplate();
             ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
         }
 
-        /// <summary>
-        /// Retrieves all form-level validation errors, including journal-specific row validation errors,
-        /// and formats them into a single consolidated error message.
-        /// </summary>
-        /// <returns>A formatted error message string if any validation errors exist; otherwise, an empty or null-like message.</returns>
         internal string GetFormErrors()
         {
-            var errorArray = new string[]
+            var errs = new string[]
             {
                 errorProvider1.GetError(cmbxJournal),
                 errorProvider1.GetError(cmbxFunds),
                 errorProvider1.GetError(txtPayee),
+                AccEntriesValidated().errMssg,
             };
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+
+            return AccFactory.CreateErrors(errs).GenerateErrorMessage();
         }
 
-        /// <summary>
-        /// Clears all error messages currently displayed by the error provider for specified controls.
-        /// </summary>
-        internal void ClearErrors()
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
-            Helper.ClearErrorTextBox(errorProvider1, txtJevNo);
-            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
-            //Helper.ClearErrorComboBox(errorProvider1, cmbCollectingDisbursingOfficer);
-        }
-
-        /// <summary>
-        /// Loads journal types from the repository and populates the journal ComboBox.
-        /// </summary>
         private void LoadJournals()
         {
             var dtJournals = AccFactory.JournalsRepository().GetRecords();
@@ -104,11 +82,6 @@ namespace LFS.Views.Transactions.JEV
             cmbxJournal.SelectedIndex = 0;
         }
 
-        /// <summary>
-        /// Constructs and returns a populated <see cref="JevModel"/> based on current form input.
-        /// Handles both new and edit scenarios and auto-approves if user has required privilege.
-        /// </summary>
-        /// <returns>A fully configured <see cref="JevModel"/> instance.</returns>
         private JevModel JevModel()
         {
             var model = new JevModel();
@@ -135,10 +108,6 @@ namespace LFS.Views.Transactions.JEV
             return model;
         }
 
-        /// <summary>
-        /// Builds a list of <see cref="JEVAccountsModel"/> from the current rows in the accounts DataGridView.
-        /// </summary>
-        /// <returns>A list of account entry models ready for persistence.</returns>
         private List<JEVAccountsModel> JevAcountsModelList()
         {
             var jevAccountsModelList = new List<JEVAccountsModel>();
@@ -240,10 +209,6 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
-        /// <summary>
-        /// Sets the entire form to read-only or editable mode.
-        /// </summary>
-        /// <param name="isReadOnly">True to disable editing; false to enable.</param>
         internal void SetJevReadOnly(bool isReadOnly)
         {
             foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
@@ -263,9 +228,6 @@ namespace LFS.Views.Transactions.JEV
             //cmbCollectingDisbursingOfficer.Enabled = !isReadOnly;
         }
 
-        /// <summary>
-        /// Resets all form fields and reloads default data (e.g., journals and funds).
-        /// </summary>
         internal void ResetForm()
         {
             if (isEdit)
@@ -293,18 +255,12 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Value = DateTime.Now;
         }
 
-        /// <summary>
-        /// Loads fund data from the repository and binds it to the funds ComboBox.
-        /// </summary>
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
-        /// <summary>
-        /// Calculates and displays the total debit and credit amounts from the accounts grid.
-        /// </summary>
         private void SumDebitCredit()
         {
             decimal totalDebit = 0;
@@ -332,10 +288,6 @@ namespace LFS.Views.Transactions.JEV
             tlStrpLblBlncIndctr.ForeColor = isBlncd ? Color.DarkOliveGreen : Color.IndianRed;
         }
 
-        /// <summary>
-        /// Shows or hides journal-specific panels and initializes the accounts grid based on selected journal type.
-        /// </summary>
-        /// <param name="journal">The name of the selected journal.</param>
         private void ToggleJournalFields(string journal)
         {
             switch (journal)
@@ -378,11 +330,6 @@ namespace LFS.Views.Transactions.JEV
             InitializeJevAccTbl(journal);
         }
 
-        /// <summary>
-        /// Updates the state and text of the "Remove Account" button based on selected rows.
-        /// </summary>
-        /// <param name="dgv">The accounts DataGridView.</param>
-        /// <param name="btnDelete">The ToolStrip button to update.</param>
         private void ToggleAccEntriesButtons(DataGridView dgv, ToolStripButton btnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
@@ -414,7 +361,7 @@ namespace LFS.Views.Transactions.JEV
             {
                 if (txtPayee.Enabled)
                 {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, lblPayee.Text);
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -430,7 +377,7 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 string jrnlType = cmbxJournal.Text;
-                var validateRow = ValidateRows(dgAccounts, jrnlType);
+                var validateRow = RowsValidated(dgAccounts, jrnlType);
 
                 if (!validateRow.isValidated)
                 {
@@ -468,7 +415,7 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private string CreateNewJevNo()
+        private string GenerateJevNoTemplate(string seriesNo = "_ _ _")
         {
             bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
             var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
@@ -478,18 +425,13 @@ namespace LFS.Views.Transactions.JEV
                 string fundCode = fund["fund_code"];
                 string month = dtpDateEntry.Value.ToString("MM");
                 string year = dtpDateEntry.Value.Year.ToString();
-                var jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
 
-                return $"{fundCode}-{year}-{month}-{jevSeriesNo}";
+                return $"{fundCode}-{year}-{month}-{seriesNo}";
             }
             else
                 throw new Exception();
         }
 
-        /// <summary>
-        /// Loads an existing JE V record and populates the form fields and account grid.
-        /// </summary>
-        /// <param name="jevId">The JE V identifier to load.</param>
         private void LoadSelectedJev(int jevId)
         {
             var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
@@ -502,9 +444,9 @@ namespace LFS.Views.Transactions.JEV
             DateTime dateEntry = Convert.ToDateTime(dictJev["date_entry"]);
             string yearMonthPart = dateEntry.ToString("yyyy-MM");
             string jevSeriesNo = string.IsNullOrWhiteSpace(dictJev["jev_no"]) ? "_ _ _" : dictJev["jev_no"];
-            string fullJevNo = $"{fundCode}-{yearMonthPart}-{jevSeriesNo}";
             string refNo = dictJev["ref_no"];
             string payee = dictJev["payee"];
+            string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
             string explanation = dictJev["explanation"];
 
             prevJournal = (jevId, journalName);
@@ -545,10 +487,6 @@ namespace LFS.Views.Transactions.JEV
             dgAccounts.Rows.Clear();
         }
 
-        /// <summary>
-        /// Loads account entries for a given JE V and populates the accounts DataGridView.
-        /// </summary>
-        /// <param name="jevId">The JE V identifier.</param>
         private void LoadJevAccEntries(int jevId, DataGridView dgv)
         {
             DataTable dtJEV = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
@@ -638,10 +576,6 @@ namespace LFS.Views.Transactions.JEV
         //    }
         //}
 
-        /// <summary>
-        /// Configures the accounts DataGridView columns and visibility based on journal type.
-        /// </summary>
-        /// <param name="jrnlName">The selected journal name.</param>
         private void InitializeJevAccTbl(string jrnlName)
         {
             var dgColumns = DgvColumns();
@@ -691,10 +625,6 @@ namespace LFS.Views.Transactions.JEV
             return dt;
         }
 
-        /// <summary>
-        /// Defines and configures the columns for the accounts DataGridView.
-        /// </summary>
-        /// <returns>A list of configured <see cref="DataGridViewColumn"/> instances.</returns>
         private List<DataGridViewColumn> DgvColumns()
         {
             var dtColumns = new List<DataGridViewColumn>
@@ -770,10 +700,6 @@ namespace LFS.Views.Transactions.JEV
             return dtColumns;
         }
 
-        /// <summary>
-        /// Dynamically loads subsidiary accounts based on selected General Ledger and Fund.
-        /// </summary>
-        /// <param name="rowIndex">The index of the row being edited.</param>
         private DataTable DtSubLdrAccs(int genLdgrId, int fundId)
         {
             var dtDbSub = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, genLdgrId);
@@ -848,13 +774,31 @@ namespace LFS.Views.Transactions.JEV
             cell.Value = 0;
         }
 
-        /// <summary>
-        /// Validates an entire grid row based on journal type and returns validation results.
-        /// </summary>
-        /// <param name="dgv">The DataGridView containing account rows.</param>
-        /// <param name="journalType">The type of journal currently selected.</param>
-        /// <returns>A tuple indicating overall validity and an array of error messages per invalid row.</returns>
-        private (bool isValidated, string[] errors) ValidateRows(DataGridView dgv, string journalType)
+        internal (bool isValid, string errMssg) AccEntriesValidated()
+        {
+            var errMssg = string.Empty;
+            if (dgAccounts.Rows.Count <= 0)
+                return (Fail("No account entries found."));
+
+            decimal.TryParse(tlStrpLblDebit.Text, out decimal debit);
+            decimal.TryParse(tlStrpLblCredit.Text, out decimal credit);
+
+            var rowVal = RowsValidated(dgAccounts, cmbxJournal.Text);
+            if (!rowVal.isValidated)
+                return Fail("Invalid accounting entry");
+
+            if (debit != credit)
+                return Fail("Debit and credit totals are not balanced.");
+
+            return (true, string.Empty);
+
+            (bool isValid, string errMssg) Fail(string msg)
+            {
+                return (false, msg);
+            }
+        }
+
+        private (bool isValidated, string[] errors) RowsValidated(DataGridView dgv, string journalType)
         {
             var errors = new List<string>();
             var validations = new List<bool>();
@@ -889,13 +833,6 @@ namespace LFS.Views.Transactions.JEV
             return (!validations.Contains(false), errors.ToArray());
         }
 
-        /// <summary>
-        /// Validates a single DataGridView cell based on its column and current journal type.
-        /// </summary>
-        /// <param name="cell">The cell to validate.</param>
-        /// <param name="formattedValue">The value to validate.</param>
-        /// <param name="journalType">The active journal type (affects conditional validation).</param>
-        /// <returns>An error message if invalid; otherwise, an empty string.</returns>
         private string ValidateCell(DataGridViewCell cell, object formattedValue, string journalType)
         {
             string col = cell.OwningColumn.Name;
@@ -958,9 +895,6 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        /// <summary>
-        /// Restricts input in amount fields to digits and a single decimal point.
-        /// </summary>
         private void Tb_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -1002,6 +936,24 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                txtJevNo.Text = GenerateJevNoTemplate();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtpDateEntry_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtJevNo.Text = GenerateJevNoTemplate();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

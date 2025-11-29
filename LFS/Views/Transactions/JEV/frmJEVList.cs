@@ -348,7 +348,7 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                if (!ucJev.ValidateChildren())
+                if (!ucJev.ValidateChildren() || !ucJev.AccEntriesValidated().isValid)
                 {
                     Helper.MessageBoxError(ucJev.GetFormErrors());
                     return;

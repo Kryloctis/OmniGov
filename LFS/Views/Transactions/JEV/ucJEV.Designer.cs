@@ -176,6 +176,7 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Name = "dtpDateEntry";
             dtpDateEntry.Size = new System.Drawing.Size(247, 23);
             dtpDateEntry.TabIndex = 4;
+            dtpDateEntry.ValueChanged += dtpDateEntry_ValueChanged;
             // 
             // label1
             // 
@@ -270,6 +271,7 @@ namespace LFS.Views.Transactions.JEV
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(247, 23);
             cmbxFunds.TabIndex = 62;
+            cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
             cmbxFunds.Validating += cmbxFunds_Validating;
             cmbxFunds.Validated += cmbxFunds_Validated;
             // 
