@@ -55,10 +55,10 @@ namespace LFS.Views.Transactions.JEV
             else
             {
                 var cmbxIndex = cmbxJournal.SelectedIndex;
+                txtJevNo.Text = GenerateJevNoTemplate();
                 ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
             }
 
-            txtJevNo.Text = GenerateJevNoTemplate();
             ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
         }
 
@@ -209,23 +209,41 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
+        private void SetControlsReadOnly(Control parent, bool isReadOnly)
+        {
+            foreach (var c in parent.Controls.Cast<Control>()
+                         .Where(c => c is ComboBox || c is DateTimePicker || c is TextBoxBase))
+            {
+                if (c is TextBoxBase tb)
+                {
+                    tb.ReadOnly = isReadOnly;
+                    continue;
+                }
+
+                c.Enabled = !isReadOnly;
+            }
+
+            dgAccounts.SelectionChanged -= dgAccounts_SelectionChanged;
+        }
+
         internal void SetJevReadOnly(bool isReadOnly)
         {
-            foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
-                dateTimePicker.Enabled = !isReadOnly;
+            var parents = new Control[]
+            {
+                splitContainer2.Panel1,
+                panel2,
+                ucChkDsbrsmntJrnl,
+                ucGenJrnl,
+                ucCshDsbrsmntJrnl,
+                ucCshRcptsJrnl,
+                ucAuthDbtAccDsbrsmntJrnl,
+            };
 
-            foreach (Button button in Controls.OfType<Button>())
-                button.Enabled = !isReadOnly;
-
-            foreach (TextBox textBox in Controls.OfType<TextBox>())
-                textBox.ReadOnly = isReadOnly;
-
-            cmbxJournal.Enabled = !isReadOnly;
-            cmbxFunds.Enabled = !isReadOnly;
-            //btnAddAccount.Enabled = !isReadOnly;
-            //btnEditAccount.Enabled = !isReadOnly;
-            //btnRemoveAccount.Enabled = !isReadOnly;
-            //cmbCollectingDisbursingOfficer.Enabled = !isReadOnly;
+            foreach (var p in parents)
+                SetControlsReadOnly(p, isReadOnly);
+            tlStrpBtnAddAcc.Enabled = !isReadOnly;
+            tlStrpBtnRemoveAcc.Enabled = !isReadOnly;
+            dgAccounts.ReadOnly = isReadOnly;
         }
 
         internal void ResetForm()
@@ -283,9 +301,16 @@ namespace LFS.Views.Transactions.JEV
             tlStrpLblDebit.Text = totalDebit.ToString("N2");
             tlStrpLblCredit.Text = totalCredit.ToString("N2");
 
-            bool isBlncd = totalDebit == totalCredit;
-            tlStrpLblBlncIndctr.Text = isBlncd ? "Debit and Credit are equal" : "Debit and Credit totals must be equal!";
-            tlStrpLblBlncIndctr.ForeColor = isBlncd ? Color.DarkOliveGreen : Color.IndianRed;
+            bool isBlncd = (totalDebit == totalCredit);
+            bool isZero = totalDebit == 0;
+            tlStrpLblBlncIndctr.Text = isZero ? "No Record of Accounting Entries" :
+                                    (isBlncd ?
+                                    "Debit and Credit are equal" :
+                                    "Debit and Credit totals must be equal!");
+
+            tlStrpLblBlncIndctr.ForeColor = isZero
+            ? Color.FromKnownColor(KnownColor.ControlDarkDark)
+            : (isBlncd ? Color.DarkOliveGreen : Color.IndianRed);
         }
 
         private void ToggleJournalFields(string journal)
@@ -446,7 +471,6 @@ namespace LFS.Views.Transactions.JEV
             string jevSeriesNo = string.IsNullOrWhiteSpace(dictJev["jev_no"]) ? "_ _ _" : dictJev["jev_no"];
             string refNo = dictJev["ref_no"];
             string payee = dictJev["payee"];
-            string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
             string explanation = dictJev["explanation"];
 
             prevJournal = (jevId, journalName);
@@ -456,14 +480,16 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Value = dateEntry;
             txtRefNo.Text = refNo;
             txtPayee.Text = payee;
+
+            string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
             txtJevNo.Text = fullJevNo;
 
             var isValid = new List<bool>()
-                {
-                    byte.TryParse($"{dictJev["is_approved"]}", out byte isApproved),
-                    byte.TryParse($"{dictJev["is_disapproved"]}", out byte isDisapproved),
-                    byte.TryParse($"{dictJev["is_cancelled"]}", out byte isCancelled)
-                };
+            {
+                byte.TryParse($"{dictJev["is_approved"]}", out byte isApproved),
+                byte.TryParse($"{dictJev["is_disapproved"]}", out byte isDisapproved),
+                byte.TryParse($"{dictJev["is_cancelled"]}", out byte isCancelled)
+            };
 
             if (!isValid.Contains(false))
             {

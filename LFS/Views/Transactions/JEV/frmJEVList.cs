@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -15,6 +16,7 @@ namespace LFS.Views.Transactions.JEV
     {
         internal ucJevDashboard ucJevDashboard;
         private ucJev ucJev;
+        private ucJev ucJevView;
 
         public frmJevList(ucJevDashboard ucJevDashboard)
         {
@@ -23,6 +25,7 @@ namespace LFS.Views.Transactions.JEV
 
             this.ucJevDashboard = ucJevDashboard;
             ucJev = ucJev1;
+            ucJevView = ucJev2;
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
         }
 
@@ -85,11 +88,41 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
+        private void EnableDisableButtons(DataGridView dataGridView)
+        {
+            Helper.EnableDisableToolStripButtons(dgJEV, tlStrpBtnUpdate, tlStrpBtnDelete);
+
+            var dgvSlctdRows = dataGridView.SelectedRows;
+            var rowIndex = dataGridView.CurrentCell.RowIndex;
+
+            if (dgvSlctdRows.Count > 1)
+            {
+                tlStrpBtnView.Enabled = false;
+                tlStrpBtnAudit.Enabled = false;
+            }
+            else
+            {
+                tlStrpBtnView.Enabled = true;
+                tlStrpBtnAudit.Enabled = true;
+            }
+
+            if (dgvSlctdRows.Count == 1)
+            {
+                bool isApproved = dataGridView.Rows[rowIndex].Cells["status"].Value.ToString() == "approved";
+                tlStrpBtnView.Visible = isApproved;
+                tlStrpBtnView.Enabled = isApproved;
+
+                tlStrpBtnAudit.Enabled = !isApproved;
+                tlStrpBtnDelete.Enabled = !isApproved;
+                tlStrpBtnUpdate.Visible = !isApproved;
+            }
+        }
+
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                Helper.EnableDisableToolStripButtons(dgJEV, tlStrpBtnUpdate, tlStrpBtnDelete);
+                EnableDisableButtons(dgJEV);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -163,6 +196,7 @@ namespace LFS.Views.Transactions.JEV
                 new DataColumn("full_jev_no", typeof(string)),
                 new DataColumn("date_entry", typeof(DateTime)),
                 new DataColumn("payee", typeof(string)),
+                new DataColumn("status", typeof(string)),
                 new DataColumn("created_at", typeof(string)),
                 new DataColumn("created_by_id", typeof(string)),
                 new DataColumn("created_by_name", typeof(string)),
@@ -209,6 +243,7 @@ namespace LFS.Views.Transactions.JEV
                 newRow["full_jev_no"] = row["full_jev_no"]?.ToString();
                 newRow["date_entry"] = Convert.ToDateTime(row["date_entry"]);
                 newRow["payee"] = row["payee"]?.ToString();
+                newRow["status"] = jevStatus;
                 newRow["created_at"] = row["created_at"]?.ToString();
                 newRow["updated_at"] = row["updated_at"]?.ToString();
 
@@ -290,6 +325,15 @@ namespace LFS.Views.Transactions.JEV
             lblCrudStat.Text = crudIndct;
         }
 
+        private void ToggleView()
+        {
+            int rowIndex = dgJEV.CurrentCell.RowIndex;
+            int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+            ucJevView.OnLoad(true, jevId);
+            ucJevView.SetJevReadOnly(true);
+            customTabControl1.SelectedTab = tbPgView;
+        }
+
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
             try
@@ -301,7 +345,11 @@ namespace LFS.Views.Transactions.JEV
 
         private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
         {
-            ToggleCrud(true);
+            try
+            {
+                ToggleCrud(true);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteJev(DataGridViewSelectedRowCollection dataGridViewSelectedRowCollection)
@@ -365,6 +413,74 @@ namespace LFS.Views.Transactions.JEV
                     if (isEdit)
                         customTabControl1.SelectedTab = tbPgMain;
                 }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleView();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnAudit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgAudit;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnApprv_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnDissprv_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnCncl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radApproved_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

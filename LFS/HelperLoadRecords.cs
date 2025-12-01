@@ -1704,6 +1704,8 @@ namespace LFS
             datagrid.Columns["created_by_id"].Visible = false;
             datagrid.Columns["payee"].HeaderText = "Payee";
             datagrid.Columns["payee"].MinimumWidth = 200;
+            datagrid.Columns["status"].Visible = false;
+            datagrid.Columns["status"].MinimumWidth = 200;
             datagrid.Columns["created_by_name"].HeaderText = "Rec. Person";
             datagrid.Columns["created_by_name"].MinimumWidth = 200;
             datagrid.Columns["updated_by_id"].Visible = false;

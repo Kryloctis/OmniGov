@@ -1339,4 +1339,34 @@
   <data name="lgu_titay_zsi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lgu_titay_zsi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="details@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\details@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="details@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\details@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="details@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\details@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="details@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\details@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="details@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\details@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-text-ok-filled@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-text-ok-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-text-ok-filled@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-text-ok-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-text-ok-filled@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-text-ok-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-text-ok-filled@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-text-ok-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-text-ok-filled@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-text-ok-filled@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -507,15 +507,15 @@ namespace LFS.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(502, 31);
+            toolStripStatusLabel1.Size = new System.Drawing.Size(308, 31);
             toolStripStatusLabel1.Spring = true;
             // 
             // tlStrpLblBlncIndctr
             // 
             tlStrpLblBlncIndctr.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             tlStrpLblBlncIndctr.Name = "tlStrpLblBlncIndctr";
-            tlStrpLblBlncIndctr.Size = new System.Drawing.Size(17, 31);
-            tlStrpLblBlncIndctr.Text = "--";
+            tlStrpLblBlncIndctr.Size = new System.Drawing.Size(180, 31);
+            tlStrpLblBlncIndctr.Text = "No Record of Accounting Entries";
             // 
             // toolStrip1
             // 

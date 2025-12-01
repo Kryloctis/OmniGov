@@ -39,9 +39,12 @@ namespace LFS.Views.Transactions.JEV
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnCreate = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnUpdate = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnView = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnDelete = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnSearch = new System.Windows.Forms.ToolStripButton();
             tlStrpTxtSearch = new System.Windows.Forms.ToolStripTextBox();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            tlStrpBtnAudit = new System.Windows.Forms.ToolStripButton();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             panel1 = new System.Windows.Forms.Panel();
             btnApplyFltr = new System.Windows.Forms.Button();
@@ -67,6 +70,17 @@ namespace LFS.Views.Transactions.JEV
             lblCrudStat = new System.Windows.Forms.Label();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBack = new System.Windows.Forms.ToolStripButton();
+            tbPgView = new System.Windows.Forms.TabPage();
+            ucJev2 = new ucJev();
+            label6 = new System.Windows.Forms.Label();
+            toolStrip4 = new System.Windows.Forms.ToolStrip();
+            tlsStrpBtnBckView = new System.Windows.Forms.ToolStripButton();
+            tbPgAudit = new System.Windows.Forms.TabPage();
+            toolStrip5 = new System.Windows.Forms.ToolStrip();
+            tlStrpBtnBckAudit = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnCncl = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnDissprv = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnApprv = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
@@ -83,6 +97,10 @@ namespace LFS.Views.Transactions.JEV
             tbPgCrud.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip3.SuspendLayout();
+            tbPgView.SuspendLayout();
+            toolStrip4.SuspendLayout();
+            tbPgAudit.SuspendLayout();
+            toolStrip5.SuspendLayout();
             SuspendLayout();
             // 
             // cmbxFunds
@@ -160,7 +178,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnSearch, tlStrpTxtSearch });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnView, tlStrpBtnDelete, tlStrpBtnSearch, tlStrpTxtSearch, toolStripSeparator2, tlStrpBtnAudit });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -187,6 +205,15 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnUpdate.Size = new System.Drawing.Size(69, 24);
             tlStrpBtnUpdate.Text = "Update";
             tlStrpBtnUpdate.Click += tlStrpBtnUpdate_Click;
+            // 
+            // tlStrpBtnView
+            // 
+            tlStrpBtnView.Image = Properties.Resources.details_20px;
+            tlStrpBtnView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnView.Name = "tlStrpBtnView";
+            tlStrpBtnView.Size = new System.Drawing.Size(56, 24);
+            tlStrpBtnView.Text = "View";
+            tlStrpBtnView.Click += tlStrpBtnView_Click;
             // 
             // tlStrpBtnDelete
             // 
@@ -215,6 +242,20 @@ namespace LFS.Views.Transactions.JEV
             tlStrpTxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tlStrpTxtSearch.Name = "tlStrpTxtSearch";
             tlStrpTxtSearch.Size = new System.Drawing.Size(200, 27);
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tlStrpBtnAudit
+            // 
+            tlStrpBtnAudit.Image = Properties.Resources.document_text_ok_filled_20px;
+            tlStrpBtnAudit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnAudit.Name = "tlStrpBtnAudit";
+            tlStrpBtnAudit.Size = new System.Drawing.Size(60, 24);
+            tlStrpBtnAudit.Text = "Audit";
+            tlStrpBtnAudit.Click += tlStrpBtnAudit_Click;
             // 
             // splitContainer1
             // 
@@ -299,6 +340,7 @@ namespace LFS.Views.Transactions.JEV
             radApproved.TabIndex = 0;
             radApproved.Text = "Approved";
             radApproved.UseVisualStyleBackColor = true;
+            radApproved.CheckedChanged += radApproved_CheckedChanged;
             // 
             // radDisapproved
             // 
@@ -391,6 +433,8 @@ namespace LFS.Views.Transactions.JEV
             // 
             customTabControl1.Controls.Add(tbPgMain);
             customTabControl1.Controls.Add(tbPgCrud);
+            customTabControl1.Controls.Add(tbPgView);
+            customTabControl1.Controls.Add(tbPgAudit);
             customTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             customTabControl1.Location = new System.Drawing.Point(0, 0);
             customTabControl1.Name = "customTabControl1";
@@ -499,6 +543,127 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnBack.Text = "Back";
             tlStrpBtnBack.Click += tlStrpBtnBack_Click;
             // 
+            // tbPgView
+            // 
+            tbPgView.BackColor = System.Drawing.SystemColors.Control;
+            tbPgView.Controls.Add(ucJev2);
+            tbPgView.Controls.Add(label6);
+            tbPgView.Controls.Add(toolStrip4);
+            tbPgView.Location = new System.Drawing.Point(4, 24);
+            tbPgView.Name = "tbPgView";
+            tbPgView.Size = new System.Drawing.Size(818, 534);
+            tbPgView.TabIndex = 2;
+            tbPgView.Text = "tbPgView";
+            // 
+            // ucJev2
+            // 
+            ucJev2.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucJev2.BackColor = System.Drawing.SystemColors.Control;
+            ucJev2.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucJev2.Location = new System.Drawing.Point(0, 70);
+            ucJev2.Name = "ucJev2";
+            ucJev2.Size = new System.Drawing.Size(818, 464);
+            ucJev2.TabIndex = 22;
+            // 
+            // label6
+            // 
+            label6.BackColor = System.Drawing.SystemColors.Control;
+            label6.Dock = System.Windows.Forms.DockStyle.Top;
+            label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label6.Location = new System.Drawing.Point(0, 35);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(818, 35);
+            label6.TabIndex = 21;
+            label6.Text = "Journal Entry Voucher";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // toolStrip4
+            // 
+            toolStrip4.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlsStrpBtnBckView });
+            toolStrip4.Location = new System.Drawing.Point(0, 0);
+            toolStrip4.Name = "toolStrip4";
+            toolStrip4.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip4.Size = new System.Drawing.Size(818, 35);
+            toolStrip4.TabIndex = 2;
+            toolStrip4.Text = "toolStrip4";
+            // 
+            // tlsStrpBtnBckView
+            // 
+            tlsStrpBtnBckView.Image = Properties.Resources.arrow_left_20px;
+            tlsStrpBtnBckView.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            tlsStrpBtnBckView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlsStrpBtnBckView.Name = "tlsStrpBtnBckView";
+            tlsStrpBtnBckView.Size = new System.Drawing.Size(56, 24);
+            tlsStrpBtnBckView.Text = "Back";
+            tlsStrpBtnBckView.Click += tlsStrpBtnBckView_Click;
+            // 
+            // tbPgAudit
+            // 
+            tbPgAudit.BackColor = System.Drawing.SystemColors.Control;
+            tbPgAudit.Controls.Add(toolStrip5);
+            tbPgAudit.Location = new System.Drawing.Point(4, 24);
+            tbPgAudit.Name = "tbPgAudit";
+            tbPgAudit.Size = new System.Drawing.Size(818, 534);
+            tbPgAudit.TabIndex = 3;
+            tbPgAudit.Text = "tbPgAudit";
+            // 
+            // toolStrip5
+            // 
+            toolStrip5.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBckAudit, tlStrpBtnCncl, tlStrpBtnDissprv, tlStrpBtnApprv });
+            toolStrip5.Location = new System.Drawing.Point(0, 0);
+            toolStrip5.Name = "toolStrip5";
+            toolStrip5.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip5.Size = new System.Drawing.Size(818, 35);
+            toolStrip5.TabIndex = 3;
+            toolStrip5.Text = "toolStrip5";
+            // 
+            // tlStrpBtnBckAudit
+            // 
+            tlStrpBtnBckAudit.Image = Properties.Resources.arrow_left_20px;
+            tlStrpBtnBckAudit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            tlStrpBtnBckAudit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnBckAudit.Name = "tlStrpBtnBckAudit";
+            tlStrpBtnBckAudit.Size = new System.Drawing.Size(56, 24);
+            tlStrpBtnBckAudit.Text = "Back";
+            tlStrpBtnBckAudit.Click += tlStrpBtnBckAudit_Click;
+            // 
+            // tlStrpBtnCncl
+            // 
+            tlStrpBtnCncl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnCncl.Image = Properties.Resources.document_color_magenta_forbidden_20px;
+            tlStrpBtnCncl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnCncl.Name = "tlStrpBtnCncl";
+            tlStrpBtnCncl.Size = new System.Drawing.Size(67, 24);
+            tlStrpBtnCncl.Text = "Cancel";
+            tlStrpBtnCncl.Click += tlStrpBtnCncl_Click;
+            // 
+            // tlStrpBtnDissprv
+            // 
+            tlStrpBtnDissprv.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnDissprv.Image = Properties.Resources.document_disapprove_28px;
+            tlStrpBtnDissprv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnDissprv.Name = "tlStrpBtnDissprv";
+            tlStrpBtnDissprv.Size = new System.Drawing.Size(90, 24);
+            tlStrpBtnDissprv.Text = "Disapprove";
+            tlStrpBtnDissprv.Click += tlStrpBtnDissprv_Click;
+            // 
+            // tlStrpBtnApprv
+            // 
+            tlStrpBtnApprv.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnApprv.Image = Properties.Resources.document_color_green_ok_2_20px;
+            tlStrpBtnApprv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnApprv.Name = "tlStrpBtnApprv";
+            tlStrpBtnApprv.Size = new System.Drawing.Size(76, 24);
+            tlStrpBtnApprv.Text = "Approve";
+            tlStrpBtnApprv.Click += tlStrpBtnApprv_Click;
+            // 
             // frmJevList
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -536,6 +701,14 @@ namespace LFS.Views.Transactions.JEV
             panel2.ResumeLayout(false);
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
+            tbPgView.ResumeLayout(false);
+            tbPgView.PerformLayout();
+            toolStrip4.ResumeLayout(false);
+            toolStrip4.PerformLayout();
+            tbPgAudit.ResumeLayout(false);
+            tbPgAudit.PerformLayout();
+            toolStrip5.ResumeLayout(false);
+            toolStrip5.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -581,5 +754,19 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.Label lblCrudStat;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnView;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnAudit;
+        private System.Windows.Forms.TabPage tbPgView;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton tlsStrpBtnBckView;
+        private System.Windows.Forms.TabPage tbPgAudit;
+        private System.Windows.Forms.ToolStrip toolStrip5;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnBckAudit;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnApprv;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnDissprv;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnCncl;
+        private System.Windows.Forms.Label label6;
+        private ucJev ucJev2;
     }
 }
