@@ -483,7 +483,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, jevId},
             };
 
-            string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, is_cancelled, is_edited, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 

@@ -7,8 +7,6 @@ namespace ACC.Domain.Interfaces
     {
         Dictionary<string, string> GetViewRecordByJevID(int jevId);
 
-        bool JevIdExist(int jevId);
-
         bool UpdateByJevId(CashReceiptsJournalModel entity);
 
         bool DeleteByJevId(int jevId);
