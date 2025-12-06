@@ -17,26 +17,25 @@ namespace LFS.Helpers
         internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
+        public static Dictionary<string, string> GetSigtryByRefDoc(string reference, string documentName)
         {
-            var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
+            var dictSigRefDoc = new Dictionary<string, string>();
 
-            dictSignatoriesReferencedDocument = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+            dictSigRefDoc = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc(reference, documentName);
 
-            if (dictSignatoriesReferencedDocument.Count < 1)
-                return dictSignatoriesReferencedDocument;
+            if (dictSigRefDoc.Count < 1)
+                return dictSigRefDoc;
 
-            string prefix = dictSignatoriesReferencedDocument["signatories_prefix"].ToString();
-            string firstName = dictSignatoriesReferencedDocument["signatories_first_name"].ToString();
-            string middleInitial = dictSignatoriesReferencedDocument["signatories_middle_initial"].ToString();
-            string lastName = dictSignatoriesReferencedDocument["signatories_last_name"].ToString();
-            string suffix = dictSignatoriesReferencedDocument["signatories_suffix"].ToString();
+            string prefix = dictSigRefDoc["signatories_prefix"].ToString();
+            string firstName = dictSigRefDoc["signatories_first_name"].ToString();
+            string middleInitial = dictSigRefDoc["signatories_middle_initial"].ToString();
+            string lastName = dictSigRefDoc["signatories_last_name"].ToString();
+            string suffix = dictSigRefDoc["signatories_suffix"].ToString();
 
-            string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+            var signatoryName = GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+            dictSigRefDoc.Add("signatories_full_name", signatoryName);
 
-            dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
-
-            return dictSignatoriesReferencedDocument;
+            return dictSigRefDoc;
         }
 
         public static void LoadFormIcon(Form form)

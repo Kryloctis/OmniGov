@@ -8,18 +8,13 @@ namespace ACC.Data
 {
     public class CheckDisbursementsJournalRepository : ICheckDisbursementsJournalRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "check_disbursements_journal";
         private const string viewTableName = "view_check_disbursement_journal";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public CheckDisbursementsJournalRepository(IAccGenericCommands dbGenericCommands)
+        public CheckDisbursementsJournalRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public bool Delete(List<CheckDisbursementsJournalModel> entityList)
@@ -49,24 +44,17 @@ namespace ACC.Data
 
         public bool Insert(CheckDisbursementsJournalModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@check_date", DbType.Date, entity.CheckDate},
-                    new object[] { "@check_no", DbType.String, entity.CheckNo},
-                    new object[] { "@dv_no", DbType.String, entity.DVNo},
-                    new object[] { "@rci_no", DbType.String, entity.RCINo},
-                };
+                new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                new object[] { "@check_date", DbType.Date, entity.CheckDate},
+                new object[] { "@check_no", DbType.String, entity.CheckNo},
+                new object[] { "@dv_no", DbType.String, entity.DVNo},
+                new object[] { "@rci_no", DbType.String, entity.RCINo},
+            };
 
-                string query = $"INSERT INTO {tableName} (jev_id, check_date, check_no, dv_no, rci_no) VALUES (@jev_id, @check_date, @check_no, @dv_no, @rci_no)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (jev_id, check_date, check_no, dv_no, rci_no) VALUES (@jev_id, @check_date, @check_no, @dv_no, @rci_no)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CheckDisbursementsJournalModel entity)
@@ -76,81 +64,42 @@ namespace ACC.Data
 
         public bool UpdateByJevID(CheckDisbursementsJournalModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@check_date", DbType.Date, entity.CheckDate},
-                    new object[] { "@check_no", DbType.String, entity.CheckNo},
-                    new object[] { "@dv_no", DbType.String, entity.DVNo},
-                    new object[] { "@rci_no", DbType.String, entity.RCINo},
-                };
+                new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                new object[] { "@check_date", DbType.Date, entity.CheckDate},
+                new object[] { "@check_no", DbType.String, entity.CheckNo},
+                new object[] { "@dv_no", DbType.String, entity.DVNo},
+                new object[] { "@rci_no", DbType.String, entity.RCINo},
+            };
 
-                string query = $"UPDATE {tableName} SET check_date = @check_date, check_no = @check_no, dv_no = @dv_no, rci_no = @rci_no WHERE jev_id = @jev_id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET check_date = @check_date, check_no = @check_no, dv_no = @dv_no, rci_no = @rci_no WHERE jev_id = @jev_id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByJevID(int jevId)
         {
-            var record = new Dictionary<string, string>();
+            var recordDictionary = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId},
-                };
-
-                string query = $"SELECT id, payee, check_date, check_no, dv_no, rci_no FROM {viewTableName} WHERE jev_id = @jev_id";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("payee", reader.Rows[0]["payee"].ToString());
-                    record.Add("check_date", reader.Rows[0]["check_date"].ToString());
-                    record.Add("check_no", reader.Rows[0]["check_no"].ToString());
-                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
-                    record.Add("rci_no", reader.Rows[0]["rci_no"].ToString());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return record;
-        }
-
-        public bool JevIdExist(int jevId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@jev_id", DbType.Int32, jevId},
             };
 
-            return false;
+            string query = $"SELECT id, payee, check_date, check_no, dv_no, rci_no FROM {viewTableName} WHERE jev_id = @jev_id";
+
+            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+
+                foreach (DataColumn column in dataTable.Columns)
+                    recordDictionary[column.ColumnName] = row[column].ToString();
+
+                return recordDictionary;
+            }
+            return recordDictionary;
         }
 
         public bool DeleteByJevId(int jevId)
@@ -161,7 +110,7 @@ namespace ACC.Data
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

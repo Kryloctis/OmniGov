@@ -171,7 +171,7 @@ namespace LFS.Views.Reports.RCI
                 }
 
                 //Report Parameters
-                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
+                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Department Head", "Report of Check Issued");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -193,7 +193,7 @@ namespace LFS.Views.Reports.RCI
                 string departmentHeadSignatoryTitle = string.Empty;
                 ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
 
-                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
+                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Administrative Officer", "Report of Check Issued");
                 string administrativeOfficerSignatory = string.Empty;
                 string administrativeOfficerSignatoryTitle = string.Empty;
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);

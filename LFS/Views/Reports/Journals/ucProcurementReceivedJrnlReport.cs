@@ -147,7 +147,7 @@ namespace LFS.Views.Reports.Journals
                 dtProcurementsReceivedJournal.Rows.Add(row);
             }
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Procurement Received Journal");
             static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatoryTitle)
             {
                 if (dictSignatory.Count > 0)

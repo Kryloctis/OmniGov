@@ -127,8 +127,8 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                 string treasurer = string.Empty;
                 string treasurerTitle = string.Empty;
 
-                var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
-                var dictTreasurer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
+                var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
+                var dictTreasurer = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
 
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
@@ -147,7 +147,7 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                     }
                 }
 
-                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Prepared By", "Consolidated Report of Accountability for Accountable Forms");
+                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Consolidated Report of Accountability for Accountable Forms");
 
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;

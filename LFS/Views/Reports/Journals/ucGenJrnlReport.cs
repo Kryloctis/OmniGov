@@ -107,7 +107,7 @@ namespace LFS.Views.Reports.Journals
                 AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
             }
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "General Journal");
             Cursor.Current = Cursors.WaitCursor;
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;

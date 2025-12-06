@@ -130,7 +130,7 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public Dictionary<string, string> GetSignatoryBy_Reference_DocumentName(string reference, string documentName)
+        public Dictionary<string, string> GetSigntryByRefDoc(string reference, string documentName)
         {
             var recordDictionary = new Dictionary<string, string>();
 

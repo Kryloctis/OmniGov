@@ -29,7 +29,7 @@ namespace LFS.Views.Reports.GeneralCollection
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
 
-            var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Report of General Collections ");
+            var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Report of General Collections ");
             static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
             {
                 if (dictSignatory.Count > 0)

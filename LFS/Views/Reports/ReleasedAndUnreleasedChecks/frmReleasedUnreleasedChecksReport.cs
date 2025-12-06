@@ -162,13 +162,13 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 
                 var dictCertifiedCorrect =
                     radReleased.Checked ?
-                    AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Schedule of Released Checks") :
-                    AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Schedule of UnReleased Checks");
+                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of Released Checks") :
+                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of UnReleased Checks");
 
                 var dictReceivedBy =
                     radReleased.Checked ?
-                    AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Received By", "Schedule of Released Checks") :
-                    AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Received By", "Schedule of UnReleased Checks");
+                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of Released Checks") :
+                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of UnReleased Checks");
 
                 var certifiedCorrectSig = ParseSignatory(dictCertifiedCorrect);
                 var receivedBySig = ParseSignatory(dictReceivedBy);

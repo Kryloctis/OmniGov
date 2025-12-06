@@ -192,7 +192,7 @@ namespace LFS.Views.Reports.Saaobb
                 #endregion Data
 
                 ///Parameters
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOBB");
+                var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "SAAOBB");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

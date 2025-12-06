@@ -136,7 +136,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void ParseSignatory(out string signatoryName, out string signatoryTitle)
         {
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Journal Entry Voucher");
 
             if (dictSignatory.Count > 0)
             {

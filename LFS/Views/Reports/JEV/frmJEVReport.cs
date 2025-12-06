@@ -128,7 +128,7 @@ namespace LFS.Views.Reports.JEV
                 string CertifiedBySignatory = string.Empty;
                 string CertifiedBysignatoryTitle = string.Empty;
 
-                Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
+                Dictionary<string, string> dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Journal Entry Voucher");
                 ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
 
                 string full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";

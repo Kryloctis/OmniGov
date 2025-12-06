@@ -152,7 +152,7 @@ namespace LFS.Views.Reports.TrialBalance
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Post Trial Balance");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Post Trial Balance");
             report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
             report.DataSources.Clear();
 

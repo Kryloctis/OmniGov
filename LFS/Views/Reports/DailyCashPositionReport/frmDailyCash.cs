@@ -176,17 +176,17 @@ namespace LFS.Views.Reports.DailyCashPositionReport
                     }
                 }
 
-                var dictCertifiedCorrectSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Daily Cash Position Report");
+                var dictCertifiedCorrectSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Daily Cash Position Report");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var dictNotedSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Noted", "Daily Cash Position Report");
+                var dictNotedSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Noted", "Daily Cash Position Report");
                 string notedSignatory = string.Empty;
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);
 
-                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Prepared By", "Daily Cash Position Report");
+                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Daily Cash Position Report");
 
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;

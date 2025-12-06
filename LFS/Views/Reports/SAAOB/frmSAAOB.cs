@@ -145,7 +145,7 @@ namespace LFS.Views.Reports.Saaob
         {
             Cursor = Cursors.WaitCursor;
             var localReport = reportViewer.LocalReport;
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "SAAOB");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "SAAOB");
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

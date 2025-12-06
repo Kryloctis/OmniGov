@@ -164,7 +164,7 @@ namespace LFS.Views.Reports.Journals
                 dtCashDisbursementsJournal.Rows.Add(row);
             }
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Cash Disbursements Journal");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Cash Disbursements Journal");
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

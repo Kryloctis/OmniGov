@@ -77,7 +77,7 @@ namespace LFS.Views.Reports.Financial_Statements
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Cash Flows");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Statement of Cash Flows");
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

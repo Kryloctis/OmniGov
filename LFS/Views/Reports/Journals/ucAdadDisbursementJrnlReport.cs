@@ -158,7 +158,7 @@ namespace LFS.Views.Reports.Journals
                 dtADADisbursementsJournal.Rows.Add(row);
             }
 
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "ADA Disbursements Journal");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "ADA Disbursements Journal");
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);

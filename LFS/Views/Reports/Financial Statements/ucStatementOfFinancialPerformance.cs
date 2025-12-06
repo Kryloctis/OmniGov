@@ -91,7 +91,7 @@ namespace LFS.Views.Reports.Financial_Statements
         private void LoadReport(LocalReport report)
         {
             Cursor.Current = Cursors.WaitCursor;
-            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Statement of Financial Performance");
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Statement of Financial Performance");
             string certifiedCorrectSignatory = string.Empty;
             string certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
