@@ -17,6 +17,7 @@ namespace LFS.Views.Transactions.JEV
         internal ucJevDashboard ucJevDashboard;
         private ucJev ucJev;
         private ucJev ucJevView;
+        private ucJevAud ucJevAud;
 
         public frmJevList(ucJevDashboard ucJevDashboard)
         {
@@ -26,6 +27,7 @@ namespace LFS.Views.Transactions.JEV
             this.ucJevDashboard = ucJevDashboard;
             ucJev = ucJev1;
             ucJevView = ucJev2;
+            ucJevAud = ucJevAud1;
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
         }
 
@@ -426,13 +428,22 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ToggleAudit()
+        {
+            int rowIndex = dgJEV.CurrentCell.RowIndex;
+            int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+            byte journalId = Convert.ToByte(cmbxJournals.SelectedValue);
+            ucJevAud.OnLoad(jevId, journalId);
+            customTabControl1.SelectedTab = tbPgAudit;
+        }
+
         private void tlStrpBtnAudit_Click(object sender, EventArgs e)
         {
             try
             {
-                customTabControl1.SelectedTab = tbPgAudit;
+                ToggleAudit();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void tlsStrpBtnBckView_Click(object sender, EventArgs e)

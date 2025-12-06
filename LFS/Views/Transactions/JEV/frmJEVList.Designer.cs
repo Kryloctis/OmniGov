@@ -78,9 +78,11 @@ namespace LFS.Views.Transactions.JEV
             tbPgAudit = new System.Windows.Forms.TabPage();
             toolStrip5 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBckAudit = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnCncl = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnDissprv = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnApprv = new System.Windows.Forms.ToolStripButton();
+            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            ucJevAud1 = new ucJevAud();
             ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgJEV).BeginInit();
@@ -604,6 +606,7 @@ namespace LFS.Views.Transactions.JEV
             // tbPgAudit
             // 
             tbPgAudit.BackColor = System.Drawing.SystemColors.Control;
+            tbPgAudit.Controls.Add(ucJevAud1);
             tbPgAudit.Controls.Add(toolStrip5);
             tbPgAudit.Location = new System.Drawing.Point(4, 24);
             tbPgAudit.Name = "tbPgAudit";
@@ -616,7 +619,7 @@ namespace LFS.Views.Transactions.JEV
             toolStrip5.BackColor = System.Drawing.SystemColors.Control;
             toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBckAudit, tlStrpBtnCncl, tlStrpBtnDissprv, tlStrpBtnApprv });
+            toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBckAudit, toolStripButton1, toolStripButton2, toolStripButton3 });
             toolStrip5.Location = new System.Drawing.Point(0, 0);
             toolStrip5.Name = "toolStrip5";
             toolStrip5.Padding = new System.Windows.Forms.Padding(4);
@@ -634,35 +637,48 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnBckAudit.Text = "Back";
             tlStrpBtnBckAudit.Click += tlStrpBtnBckAudit_Click;
             // 
-            // tlStrpBtnCncl
+            // toolStripButton1
             // 
-            tlStrpBtnCncl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnCncl.Image = Properties.Resources.document_color_magenta_forbidden_20px;
-            tlStrpBtnCncl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnCncl.Name = "tlStrpBtnCncl";
-            tlStrpBtnCncl.Size = new System.Drawing.Size(67, 24);
-            tlStrpBtnCncl.Text = "Cancel";
-            tlStrpBtnCncl.Click += tlStrpBtnCncl_Click;
+            toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripButton1.Image = Properties.Resources.document_approve_28px;
+            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new System.Drawing.Size(76, 24);
+            toolStripButton1.Text = "Approve";
             // 
-            // tlStrpBtnDissprv
+            // toolStripButton2
             // 
-            tlStrpBtnDissprv.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnDissprv.Image = Properties.Resources.document_disapprove_28px;
-            tlStrpBtnDissprv.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnDissprv.Name = "tlStrpBtnDissprv";
-            tlStrpBtnDissprv.Size = new System.Drawing.Size(90, 24);
-            tlStrpBtnDissprv.Text = "Disapprove";
-            tlStrpBtnDissprv.Click += tlStrpBtnDissprv_Click;
+            toolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripButton2.Image = Properties.Resources.document_disapprove_28px;
+            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new System.Drawing.Size(90, 24);
+            toolStripButton2.Text = "Disapprove";
             // 
-            // tlStrpBtnApprv
+            // toolStripButton3
             // 
-            tlStrpBtnApprv.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnApprv.Image = Properties.Resources.document_color_green_ok_2_20px;
-            tlStrpBtnApprv.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnApprv.Name = "tlStrpBtnApprv";
-            tlStrpBtnApprv.Size = new System.Drawing.Size(76, 24);
-            tlStrpBtnApprv.Text = "Approve";
-            tlStrpBtnApprv.Click += tlStrpBtnApprv_Click;
+            toolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripButton3.Image = Properties.Resources.document_color_magenta_filled_forbidden_28px;
+            toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new System.Drawing.Size(67, 24);
+            toolStripButton3.Text = "Cancel";
+            // 
+            // reportViewer1
+            // 
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            // 
+            // ucJevAud1
+            // 
+            ucJevAud1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucJevAud1.Location = new System.Drawing.Point(0, 35);
+            ucJevAud1.Name = "ucJevAud1";
+            ucJevAud1.Size = new System.Drawing.Size(818, 499);
+            ucJevAud1.TabIndex = 4;
             // 
             // frmJevList
             // 
@@ -763,10 +779,12 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.TabPage tbPgAudit;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripButton tlStrpBtnBckAudit;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnApprv;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnDissprv;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnCncl;
         private System.Windows.Forms.Label label6;
         private ucJev ucJev2;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private ucJevAud ucJevAud1;
     }
 }

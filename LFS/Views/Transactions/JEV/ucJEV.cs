@@ -520,15 +520,15 @@ namespace LFS.Views.Transactions.JEV
             foreach (DataRow row in dtJEV.Rows)
             {
                 int newIndex = dgv.Rows.Add(
-                    Convert.ToBoolean(row["is_debit"]) ? "Debit" : "Credit",
-                    (row["fpp_id"] as int?) ?? 0,
-                    Convert.ToInt32(row["general_ledger_accounts_id"]),
-                    null,
+                    Convert.ToBoolean(row["is_debit"]) ? "Debit" : "Credit", //Credit or Debit Column
+                    int.TryParse(row["fpp_id"].ToString(), out int fppId) ? fppId : 0, //FPP Column
+                    Convert.ToInt32(row["general_ledger_accounts_id"]), //Account Column
+                    int.TryParse(row["subsidiary_ledger_accounts_id"].ToString(), out int subId)? subId : 0, //Subsidiary Column
                     byte.TryParse($"{row["is_deposit"]}", out byte val)
                         ? (val == 1 ? "Deposit" : "Collection")
-                        : "Collection",
-                    Convert.ToDecimal(row["amount"]),
-                    row["obligation_no"].ToString()
+                        : "Collection", //Deposit or Collection Column
+                    Convert.ToDecimal(row["amount"]), //Amount Column
+                    row["obligation_no"].ToString() //Obligation Column
                 );
 
                 // === OPTIMIZED LOADING OF SUBSIDIARY LEDGER ===
@@ -536,7 +536,6 @@ namespace LFS.Views.Transactions.JEV
 
                 // Assign sub-ledger value safely
                 var cell = (DataGridViewComboBoxCell)dgv.Rows[newIndex].Cells["subsidiary_acc"];
-                int subId = row["subsidiary_ledger_accounts_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["subsidiary_ledger_accounts_id"]);
 
                 if (cell.DataSource is DataTable dtSub &&
                     dtSub.AsEnumerable().Any(r => r.Field<int>("id") == subId))
