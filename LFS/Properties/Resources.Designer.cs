@@ -513,6 +513,56 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap button_cancel_14px {
+            get {
+                object obj = ResourceManager.GetObject("button-cancel@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_cancel_16px {
+            get {
+                object obj = ResourceManager.GetObject("button-cancel@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_cancel_20px {
+            get {
+                object obj = ResourceManager.GetObject("button-cancel@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_cancel_24px {
+            get {
+                object obj = ResourceManager.GetObject("button-cancel@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_cancel_32px {
+            get {
+                object obj = ResourceManager.GetObject("button-cancel@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_info_14px {
             get {
                 object obj = ResourceManager.GetObject("button_info_14px", resourceCulture);
@@ -3626,6 +3676,46 @@ namespace LFS.Properties {
         internal static System.Drawing.Bitmap symbol_cancel_32px {
             get {
                 object obj = ResourceManager.GetObject("symbol-cancel-32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_forbidden_16px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-forbidden@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_forbidden_20px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-forbidden@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_forbidden_24px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-forbidden@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_forbidden_32px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-forbidden@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
