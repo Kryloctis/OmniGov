@@ -44,6 +44,7 @@
             // txtRcdNo
             // 
             txtRcdNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRcdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtRcdNo.Location = new System.Drawing.Point(83, 95);
             txtRcdNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRcdNo.Name = "txtRcdNo";
@@ -62,6 +63,7 @@
             // txtOrNo
             // 
             txtOrNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtOrNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtOrNo.Location = new System.Drawing.Point(83, 23);
             txtOrNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtOrNo.Name = "txtOrNo";

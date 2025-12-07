@@ -42,7 +42,7 @@ namespace LFS.Views.Transactions.JEV
             this.jevId = jevId;
             this.journalId = journalId;
 
-            if (!DesignMode && !backgroundWorker1.IsBusy)
+            if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
                 progressBar1.Value = 0;
@@ -157,7 +157,7 @@ namespace LFS.Views.Transactions.JEV
                 int totalCount = 0;
                 int progressCount = 0;
 
-                var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable().Clone();
+                var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable();
                 var dtJevAccEntriesDb = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
                 totalCount = dtJevAccEntriesDb.Rows.Count;
 
@@ -187,7 +187,7 @@ namespace LFS.Views.Transactions.JEV
 
                 e.Result = (dictJev, dtJevAccEntries, CertSignatory, CertSignatoryTitle);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -204,7 +204,7 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 var rprtParams = ((Dictionary<string, string> dictJev,
-                                DataTable dtJevAccEntries,
+                                dsLFS.dtJournalVoucherDataTable dtJevAccEntries,
                                 string certSigntry,
                                 string certSigntryTitle))e.Result;
 
@@ -219,38 +219,39 @@ namespace LFS.Views.Transactions.JEV
 
                 var parameters = new ReportParameter[]
                 {
-                    new("paramLGU",  lguName),
-                    new("paramFund", rprtParams.dictJev["fund_name"]),
-                    new("paramJournalType", rprtParams.dictJev["journal_name"]),
-                    new("paramJEVNo", fullJevNo),
-                    new("paramJEVDate", dateEntry.ToString("MM/dd/yy")),
-                    new("paramPayee", rprtParams.dictJev["payee"]),
-                    new("paramExplanation", rprtParams.dictJev["explanation"]),
-                    new("paramPreparedBy",rprtParams.dictJev["created_by_name"].ToUpper()),
-                    new("paramPreparedByRole", "NEED TO BE FIXED"),
-                    new("paramCertifiedBySignatory", rprtParams.certSigntry),
-                    new("paramCertifiedBySignatoryTitle", rprtParams.certSigntryTitle),
+                        new("paramLGU",  lguName),
+                        new("paramFund", rprtParams.dictJev["fund_name"]),
+                        new("paramJournalType", rprtParams.dictJev["journal_name"]),
+                        new("paramJEVNo", fullJevNo),
+                        new("paramJEVDate", dateEntry.ToString("MM/dd/yy")),
+                        new("paramPayee", rprtParams.dictJev["payee"]),
+                        new("paramExplanation", rprtParams.dictJev["explanation"]),
+                        new("paramPreparedBy",rprtParams.dictJev["created_by_name"].ToUpper()),
+                        new("paramPreparedByRole", "NEED TO BE FIXED"),
+                        new("paramCertifiedBySignatory", rprtParams.certSigntry),
+                        new("paramCertifiedBySignatoryTitle", rprtParams.certSigntryTitle),
 
-                    //For fields label
-                    new("paramAsTextCheckDate", checkDate),
-                    new("paramAsTextCheckNo", checkNo),
-                    new("paramAsTextOR", orNo),
-                    new("paramAsTextDV", dv),
-                    new("paramAsTextOfficer", officer),
+                        //For fields label
+                        new("paramAsTextCheckDate", checkDate),
+                        new("paramAsTextCheckNo", checkNo),
+                        new("paramAsTextOR", orNo),
+                        new("paramAsTextDV", dv),
+                        new("paramAsTextOfficer", officer),
 
-                    //for fields values
-                    new("paramCheckDate", paramCheckDate),
-                    new("paramCheckNo", paramCheckNo),
-                    new("paramORNumber", paramORNo),
-                    new("paramDVNo", paramDVNo),
-                    new("paramDisbursementOfficer", paramOfficer)
+                        //for fields values
+                        new("paramCheckDate", paramCheckDate),
+                        new("paramCheckNo", paramCheckNo),
+                        new("paramORNumber", paramORNo),
+                        new("paramDVNo", paramDVNo),
+                        new("paramDisbursementOfficer", paramOfficer)
                 };
 
                 var localReport = reportViewer1.LocalReport;
                 localReport.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
                 localReport.DataSources.Clear();
 
-                localReport.DataSources.Add(new ReportDataSource("dtJournalVoucher", rprtParams.dtJevAccEntries));
+                var dt = (DataTable)rprtParams.dtJevAccEntries;
+                localReport.DataSources.Add(new ReportDataSource("dtJournalVoucher", dt));
                 localReport.SetParameters(parameters);
 
                 reportViewer1.RefreshReport();

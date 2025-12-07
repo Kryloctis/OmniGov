@@ -82,6 +82,7 @@
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDvNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtDvNo.Location = new System.Drawing.Point(85, 59);
             txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";

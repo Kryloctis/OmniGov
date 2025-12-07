@@ -17,7 +17,6 @@ namespace LFS.Views.Transactions.JEV
         internal ucJevDashboard ucJevDashboard;
         private ucJev ucJev;
         private ucJev ucJevView;
-        private ucJevAud ucJevAud;
 
         public frmJevList(ucJevDashboard ucJevDashboard)
         {
@@ -27,14 +26,19 @@ namespace LFS.Views.Transactions.JEV
             this.ucJevDashboard = ucJevDashboard;
             ucJev = ucJev1;
             ucJevView = ucJev2;
-            ucJevAud = ucJevAud1;
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
+        }
+
+        private void VerifyUserPrivileges()
+        {
+            tlStrpBtnAudit.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
         }
 
         private void frmJEVList_Load(object sender, EventArgs e)
         {
             try
             {
+                VerifyUserPrivileges();
                 LoadJournals();
                 LoadFunds();
                 HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
@@ -118,6 +122,7 @@ namespace LFS.Views.Transactions.JEV
                 tlStrpBtnDelete.Enabled = !isApproved;
                 tlStrpBtnUpdate.Visible = !isApproved;
             }
+
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -125,6 +130,7 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 EnableDisableButtons(dgJEV);
+                VerifyUserPrivileges();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -432,8 +438,8 @@ namespace LFS.Views.Transactions.JEV
         {
             int rowIndex = dgJEV.CurrentCell.RowIndex;
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-            byte journalId = Convert.ToByte(cmbxJournals.SelectedValue);
-            ucJevAud.OnLoad(jevId, journalId);
+            ucJevAudit.OnLoad(true, jevId);
+            ucJevAudit.SetJevReadOnly(true);
             customTabControl1.SelectedTab = tbPgAudit;
         }
 
@@ -443,7 +449,7 @@ namespace LFS.Views.Transactions.JEV
             {
                 ToggleAudit();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tlsStrpBtnBckView_Click(object sender, EventArgs e)

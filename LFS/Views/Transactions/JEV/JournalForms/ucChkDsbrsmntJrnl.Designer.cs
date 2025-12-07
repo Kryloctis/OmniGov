@@ -59,6 +59,7 @@
             // txtDvNo
             // 
             txtDvNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtDvNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtDvNo.Location = new System.Drawing.Point(99, 131);
             txtDvNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtDvNo.Name = "txtDvNo";
@@ -77,6 +78,7 @@
             // txtRciNo
             // 
             txtRciNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRciNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtRciNo.Location = new System.Drawing.Point(99, 95);
             txtRciNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtRciNo.Name = "txtRciNo";
@@ -104,6 +106,7 @@
             // txtChkNo
             // 
             txtChkNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtChkNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtChkNo.Location = new System.Drawing.Point(99, 23);
             txtChkNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtChkNo.Name = "txtChkNo";

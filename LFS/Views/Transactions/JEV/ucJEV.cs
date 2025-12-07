@@ -37,8 +37,14 @@ namespace LFS.Views.Transactions.JEV
             ucAuthDbtAccDsbrsmntJrnl = ucAuthDbtAccDsbrsmntJrnl1;
         }
 
+        private void VerifyUserPrivileges()
+        {
+            txtRemarks.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
+        }
+
         internal void OnLoad(bool isEdit, int? jevId)
         {
+            VerifyUserPrivileges();
             this.isEdit = isEdit;
             ResetForm();
             LoadJournals();
@@ -243,6 +249,7 @@ namespace LFS.Views.Transactions.JEV
                 SetControlsReadOnly(p, isReadOnly);
             tlStrpBtnAddAcc.Enabled = !isReadOnly;
             tlStrpBtnRemoveAcc.Enabled = !isReadOnly;
+            txtExplanation.ReadOnly = isReadOnly;
             dgAccounts.ReadOnly = isReadOnly;
         }
 
@@ -257,6 +264,7 @@ namespace LFS.Views.Transactions.JEV
             txtRefNo.Text = string.Empty;
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
+            txtRemarks.Clear();
             tabControl2.SelectedTab = tbPgJevDetails;
 
             dgAccounts.Rows.Clear();
@@ -269,6 +277,8 @@ namespace LFS.Views.Transactions.JEV
             ucCshRcptsJrnl.ResetForm();
             ucCshDsbrsmntJrnl.ResetForm();
             ucAuthDbtAccDsbrsmntJrnl.ResetForm();
+            lblStatus.Text = "Status: Draft";
+            lblCreatedBy.Text = $"Submitted by: {UserHelper.loggedUser.FullName}";
 
             dtpDateEntry.Value = DateTime.Now;
         }
@@ -472,6 +482,7 @@ namespace LFS.Views.Transactions.JEV
             string refNo = dictJev["ref_no"];
             string payee = dictJev["payee"];
             string explanation = dictJev["explanation"];
+            string remarks = dictJev["remarks"];
 
             prevJournal = (jevId, journalName);
             cmbxJournal.SelectedValue = journalId;
@@ -480,6 +491,7 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Value = dateEntry;
             txtRefNo.Text = refNo;
             txtPayee.Text = payee;
+            txtRemarks.Text = remarks;
 
             string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
             txtJevNo.Text = fullJevNo;
@@ -523,7 +535,7 @@ namespace LFS.Views.Transactions.JEV
                     Convert.ToBoolean(row["is_debit"]) ? "Debit" : "Credit", //Credit or Debit Column
                     int.TryParse(row["fpp_id"].ToString(), out int fppId) ? fppId : 0, //FPP Column
                     Convert.ToInt32(row["general_ledger_accounts_id"]), //Account Column
-                    int.TryParse(row["subsidiary_ledger_accounts_id"].ToString(), out int subId)? subId : 0, //Subsidiary Column
+                    int.TryParse(row["subsidiary_ledger_accounts_id"].ToString(), out int subId) ? subId : 0, //Subsidiary Column
                     byte.TryParse($"{row["is_deposit"]}", out byte val)
                         ? (val == 1 ? "Deposit" : "Collection")
                         : "Collection", //Deposit or Collection Column
