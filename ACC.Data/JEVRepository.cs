@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Transactions;
 
 namespace ACC.Data
@@ -332,6 +333,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -358,6 +360,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -384,6 +387,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -410,6 +414,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -435,6 +440,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModels.ForEach(x => x.JEVId = currentJev.Id);
@@ -456,6 +462,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
+                _ = PendingJev(currentJev);
 
                 _ = iJevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -769,37 +776,52 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters).ToString();
         }
 
-        //Audit
-        public bool CancelJev(int jevId)
+        //Auditing Section
+        public bool PendingJev(JevModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, jevId}
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@remarks", DbType.String, entity.Remarks }
             };
-
-            string query = $"UPDATE {tableName} SET is_cancelled = 1 WHERE id = @id";
+            string query = $"UPDATE {tableName} SET is_approved = 0, is_disapproved = 0, is_cancelled = 0, remarks = NULL WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool ApproveJev(int jevId)
+        public bool CancelJev(JevModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, jevId}
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@remarks", DbType.String, entity.Remarks }
             };
 
-            string query = $"UPDATE {tableName} SET is_approved = 1 WHERE id = @id";
+            string query = $"UPDATE {tableName} SET is_cancelled = 1, remarks = @remarks WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool DisapproveJev(int jevId)
+        public bool ApproveJev(JevModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, jevId}
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@jev_no", DbType.String, entity.JEVNumber},
+                new object[] { "@remarks", DbType.String, entity.Remarks }
             };
 
-            string query = $"UPDATE {tableName} SET is_disapproved = 1 WHERE id = @id";
+            string query = $"UPDATE {tableName} SET jev_no = @jev_no, is_approved = 1, remarks = @remarks  WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool DisapproveJev(JevModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@remarks", DbType.String, entity.Remarks }
+            };
+
+            string query = $"UPDATE {tableName} SET is_disapproved = 1, remarks = @remarks WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }

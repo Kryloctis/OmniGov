@@ -78,9 +78,9 @@ namespace LFS.Views.Transactions.JEV
             tbPgAudit = new System.Windows.Forms.TabPage();
             ucJevAudit = new ucJev();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            button1 = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
-            button3 = new System.Windows.Forms.Button();
+            btnApprove = new System.Windows.Forms.Button();
+            btnDisapprove = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
             toolStrip5 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBckAudit = new System.Windows.Forms.ToolStripButton();
             toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -622,9 +622,9 @@ namespace LFS.Views.Transactions.JEV
             // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.Controls.Add(button1);
-            flowLayoutPanel2.Controls.Add(button2);
-            flowLayoutPanel2.Controls.Add(button3);
+            flowLayoutPanel2.Controls.Add(btnApprove);
+            flowLayoutPanel2.Controls.Add(btnDisapprove);
+            flowLayoutPanel2.Controls.Add(btnCancel);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel2.Location = new System.Drawing.Point(0, 491);
@@ -633,44 +633,47 @@ namespace LFS.Views.Transactions.JEV
             flowLayoutPanel2.Size = new System.Drawing.Size(818, 43);
             flowLayoutPanel2.TabIndex = 24;
             // 
-            // button1
+            // btnApprove
             // 
-            button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            button1.Image = Properties.Resources.button_ok_16px;
-            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            button1.Location = new System.Drawing.Point(707, 7);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(100, 30);
-            button1.TabIndex = 0;
-            button1.Text = "Approve";
-            button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnApprove.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnApprove.Image = Properties.Resources.button_ok_16px;
+            btnApprove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnApprove.Location = new System.Drawing.Point(707, 7);
+            btnApprove.Name = "btnApprove";
+            btnApprove.Size = new System.Drawing.Size(100, 30);
+            btnApprove.TabIndex = 0;
+            btnApprove.Text = "Approve";
+            btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnApprove.UseVisualStyleBackColor = true;
+            btnApprove.Click += btnApprove_Click;
             // 
-            // button2
+            // btnDisapprove
             // 
-            button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            button2.Image = Properties.Resources.button_cancel_16px;
-            button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            button2.Location = new System.Drawing.Point(601, 7);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(100, 30);
-            button2.TabIndex = 0;
-            button2.Text = "Disapprove";
-            button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            button2.UseVisualStyleBackColor = true;
+            btnDisapprove.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnDisapprove.Image = Properties.Resources.button_cancel_16px;
+            btnDisapprove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnDisapprove.Location = new System.Drawing.Point(601, 7);
+            btnDisapprove.Name = "btnDisapprove";
+            btnDisapprove.Size = new System.Drawing.Size(100, 30);
+            btnDisapprove.TabIndex = 0;
+            btnDisapprove.Text = "Disapprove";
+            btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnDisapprove.UseVisualStyleBackColor = true;
+            btnDisapprove.Click += btnDisapprove_Click;
             // 
-            // button3
+            // btnCancel
             // 
-            button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            button3.Image = Properties.Resources.symbol_forbidden_16px;
-            button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            button3.Location = new System.Drawing.Point(495, 7);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(100, 30);
-            button3.TabIndex = 0;
-            button3.Text = "Cancel";
-            button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            button3.UseVisualStyleBackColor = true;
+            btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCancel.Image = Properties.Resources.symbol_forbidden_16px;
+            btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnCancel.Location = new System.Drawing.Point(495, 7);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(100, 30);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // toolStrip5
             // 
@@ -817,8 +820,8 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripLabel lblCrudStat;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnApprove;
+        private System.Windows.Forms.Button btnDisapprove;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

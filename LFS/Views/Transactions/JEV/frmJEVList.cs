@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -112,6 +111,8 @@ namespace LFS.Views.Transactions.JEV
                 tlStrpBtnAudit.Enabled = true;
             }
 
+            VerifyUserPrivileges();
+
             if (dgvSlctdRows.Count == 1)
             {
                 bool isApproved = dataGridView.Rows[rowIndex].Cells["status"].Value.ToString() == "approved";
@@ -122,7 +123,6 @@ namespace LFS.Views.Transactions.JEV
                 tlStrpBtnDelete.Enabled = !isApproved;
                 tlStrpBtnUpdate.Visible = !isApproved;
             }
-
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -130,7 +130,6 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 EnableDisableButtons(dgJEV);
-                VerifyUserPrivileges();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -470,34 +469,47 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void tlStrpBtnApprv_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnDissprv_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnCncl_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void radApproved_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ucJevAudit.ApproveJev(out string jevNo, out string trnsctionCode))
+                {
+                    Helper.MessageBoxSuccess($"JEV {trnsctionCode} approved. Generated JEV No. {jevNo}.");
+                    int rowIndex = dgJEV.CurrentCell.RowIndex;
+                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                    ucJevView.OnLoad(true, jevId);
+                    ucJevView.SetJevReadOnly(true);
+                    customTabControl1.SelectedTab = tbPgView;
+                    ucJevAudit.ResetForm();
+                    LoadJevRecords();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ucJevAudit.DisapproveJev();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ucJevAudit.CancelJev();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

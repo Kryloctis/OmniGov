@@ -1,6 +1,5 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using Google.Protobuf.WellKnownTypes;
 using LFS.Helpers;
 using LFS.Views.Transactions.JEV.JournalForms;
 using System;
@@ -279,6 +278,7 @@ namespace LFS.Views.Transactions.JEV
             ucAuthDbtAccDsbrsmntJrnl.ResetForm();
             lblStatus.Text = "Status: Draft";
             lblCreatedBy.Text = $"Submitted by: {UserHelper.loggedUser.FullName}";
+            ToggleJevStatIndctr(lblStatIndctr);
 
             dtpDateEntry.Value = DateTime.Now;
         }
@@ -450,6 +450,13 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private string GenTransctnNo(string seriesNo = "_ _ _ _")
+        {
+            DateTime dateEntry = dtpDateEntry.Value;
+            string trnsctnNo = $"{dateEntry:yy}-{seriesNo}";
+            return trnsctnNo;
+        }
+
         private string GenerateJevNoTemplate(string seriesNo = "_ _ _")
         {
             bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
@@ -465,6 +472,36 @@ namespace LFS.Views.Transactions.JEV
             }
             else
                 throw new Exception();
+        }
+
+        private void ToggleJevStatIndctr(Label label, string status = "")
+        {
+            var indctrColor = new Color();
+
+            switch (status)
+            {
+                case "Pending":
+                    indctrColor = Color.Gold;
+                    break;
+
+                case "Approved":
+                    indctrColor = Color.Green;
+                    break;
+
+                case "Disapproved":
+                    indctrColor = Color.Red;
+                    break;
+
+                case "Cancelled":
+                    indctrColor = Color.Purple;
+                    break;
+
+                default:
+                    indctrColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
+                    break;
+            }
+
+            label.ForeColor = indctrColor;
         }
 
         private void LoadSelectedJev(int jevId)
@@ -507,6 +544,7 @@ namespace LFS.Views.Transactions.JEV
             {
                 string status = Helper.GetStatus(isApproved == 1, isDisapproved == 1, isCancelled == 1);
                 lblStatus.Text = $"Status: {status}";
+                ToggleJevStatIndctr(lblStatIndctr, status);
             }
             else
                 throw new Exception();
@@ -604,14 +642,6 @@ namespace LFS.Views.Transactions.JEV
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        //internal bool CancelJev(int jevId)
-        //{
-        //    if (MessageBox.Show("Confirm cancellation of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-        //    {
-        //        return AccFactory.JEVRepository().CancelJev(jevId);
-        //    }
-        //}
 
         private void InitializeJevAccTbl(string jrnlName)
         {
@@ -991,6 +1021,89 @@ namespace LFS.Views.Transactions.JEV
             try
             {
                 txtJevNo.Text = GenerateJevNoTemplate();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void lblStatus_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        /////Auditing Section
+        internal bool CancelJev()
+        {
+            if (MessageBox.Show("Confirm cancellation of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                var model = new JevModel()
+                {
+                    Id = jevId.Value,
+                    Remarks = txtRemarks.Text.Trim(),
+                };
+                return AccFactory.JEVRepository().CancelJev(model);
+            }
+            return false;
+        }
+
+        internal bool DisapproveJev()
+        {
+            if (MessageBox.Show("Confirm disapproval of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                var model = new JevModel()
+                {
+                    Id = jevId.Value,
+                    Remarks = txtRemarks.Text.Trim(),
+                };
+                return AccFactory.JEVRepository().DisapproveJev(model);
+            }
+            return false;
+        }
+
+        internal bool ApproveJev(out string jevNo, out string trnsctionCode)
+        {
+            if (Helper.MessageBoxConfirmCancel("Confirm approval of JEV."))
+            {
+                bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
+                string jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
+                string genJevNo = GenerateJevNoTemplate(jevSeriesNo);
+
+                if (fundValid)
+                {
+                    var model = new JevModel()
+                    {
+                        Id = jevId.Value,
+                        Remarks = txtRemarks.Text.Trim(),
+                        JEVNumber = jevSeriesNo,
+                    };
+
+                    trnsctionCode = mskTxtTransNo.Text;
+                    jevNo = genJevNo;
+                    return AccFactory.JEVRepository().ApproveJev(model);
+                }
+                else
+                    throw new Exception("Fund is invalid.");
+            }
+
+            trnsctionCode = string.Empty;
+            jevNo = string.Empty;
+            return false;
+        }
+
+        private void mskTxtTransNo_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void mskTxtTransNo_Validated(object sender, EventArgs e)
+        {
+            try
+            {
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

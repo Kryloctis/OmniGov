@@ -74,6 +74,7 @@ namespace LFS.Views.Transactions.JEV
             mskTxtTransNo = new System.Windows.Forms.MaskedTextBox();
             panel4 = new System.Windows.Forms.Panel();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
+            lblStatIndctr = new System.Windows.Forms.Label();
             lblCreatedBy = new System.Windows.Forms.Label();
             lblStatus = new System.Windows.Forms.Label();
             txtJevNo = new System.Windows.Forms.TextBox();
@@ -165,7 +166,7 @@ namespace LFS.Views.Transactions.JEV
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label2.Location = new System.Drawing.Point(23, 20);
+            label2.Location = new System.Drawing.Point(23, 25);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(67, 15);
             label2.TabIndex = 34;
@@ -557,11 +558,13 @@ namespace LFS.Views.Transactions.JEV
             mskTxtTransNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             mskTxtTransNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mskTxtTransNo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            mskTxtTransNo.Location = new System.Drawing.Point(23, 38);
+            mskTxtTransNo.Location = new System.Drawing.Point(23, 43);
             mskTxtTransNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             mskTxtTransNo.Name = "mskTxtTransNo";
             mskTxtTransNo.Size = new System.Drawing.Size(332, 23);
             mskTxtTransNo.TabIndex = 63;
+            mskTxtTransNo.Validating += mskTxtTransNo_Validating;
+            mskTxtTransNo.Validated += mskTxtTransNo_Validated;
             // 
             // panel4
             // 
@@ -587,6 +590,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(lblStatIndctr);
             splitContainer2.Panel2.Controls.Add(lblCreatedBy);
             splitContainer2.Panel2.Controls.Add(lblStatus);
             splitContainer2.Panel2.Controls.Add(txtJevNo);
@@ -595,6 +599,20 @@ namespace LFS.Views.Transactions.JEV
             splitContainer2.Size = new System.Drawing.Size(756, 97);
             splitContainer2.SplitterDistance = 378;
             splitContainer2.TabIndex = 65;
+            // 
+            // lblStatIndctr
+            // 
+            lblStatIndctr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lblStatIndctr.AutoSize = true;
+            lblStatIndctr.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblStatIndctr.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblStatIndctr.Location = new System.Drawing.Point(338, 23);
+            lblStatIndctr.Margin = new System.Windows.Forms.Padding(0);
+            lblStatIndctr.Name = "lblStatIndctr";
+            lblStatIndctr.Size = new System.Drawing.Size(16, 17);
+            lblStatIndctr.TabIndex = 65;
+            lblStatIndctr.Text = "●";
+            lblStatIndctr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCreatedBy
             // 
@@ -612,13 +630,14 @@ namespace LFS.Views.Transactions.JEV
             lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             lblStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblStatus.Location = new System.Drawing.Point(126, 24);
-            lblStatus.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            lblStatus.Location = new System.Drawing.Point(133, 26);
+            lblStatus.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new System.Drawing.Size(225, 13);
+            lblStatus.Size = new System.Drawing.Size(205, 13);
             lblStatus.TabIndex = 34;
             lblStatus.Text = "Status: Draft";
             lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            lblStatus.TextChanged += lblStatus_TextChanged;
             // 
             // txtJevNo
             // 
@@ -812,5 +831,6 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblStatIndctr;
     }
 }

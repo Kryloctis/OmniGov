@@ -32,7 +32,9 @@ namespace ACC.Domain.Interfaces
         bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
         bool Delete(JevModel entity);
+
         bool DeletePrevJournals(int jevId, string journalName);
+
         int GetLastInsertedID();
 
         string GetLastJevNoSeries(int fundId);
@@ -61,13 +63,13 @@ namespace ACC.Domain.Interfaces
 
         int TotalCancelledJEV(short month, short year);
 
-        bool CancelJev(int jevId);
+        bool PendingJev(JevModel jevModel);
 
-        bool ApproveJev(int jevId);
+        bool CancelJev(JevModel jevModel);
 
-        bool DisapproveJev(int jevId);
+        bool ApproveJev(JevModel jevModel);
 
-        string GetRemarks(int jevId);
+        bool DisapproveJev(JevModel jevModel);
 
         DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year);
 
