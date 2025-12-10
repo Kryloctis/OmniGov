@@ -346,7 +346,6 @@ namespace LFS.Views.Transactions.JEV
             radApproved.TabIndex = 0;
             radApproved.Text = "Approved";
             radApproved.UseVisualStyleBackColor = true;
-            radApproved.CheckedChanged += radApproved_CheckedChanged;
             // 
             // radDisapproved
             // 
@@ -483,7 +482,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // ucJev1
             // 
-            ucJev1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucJev1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucJev1.BackColor = System.Drawing.SystemColors.Control;
             ucJev1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucJev1.Location = new System.Drawing.Point(0, 47);
@@ -558,7 +557,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // ucJev2
             // 
-            ucJev2.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucJev2.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucJev2.BackColor = System.Drawing.SystemColors.Control;
             ucJev2.Dock = System.Windows.Forms.DockStyle.Fill;
             ucJev2.Location = new System.Drawing.Point(0, 47);
@@ -612,7 +611,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // ucJevAudit
             // 
-            ucJevAudit.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucJevAudit.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucJevAudit.BackColor = System.Drawing.SystemColors.Control;
             ucJevAudit.Dock = System.Windows.Forms.DockStyle.Fill;
             ucJevAudit.Location = new System.Drawing.Point(0, 47);

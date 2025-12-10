@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -43,6 +44,7 @@ namespace LFS.Views.Transactions.JEV
 
         internal void OnLoad(bool isEdit, int? jevId)
         {
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
             VerifyUserPrivileges();
             this.isEdit = isEdit;
             ResetForm();
@@ -60,7 +62,6 @@ namespace LFS.Views.Transactions.JEV
             else
             {
                 var cmbxIndex = cmbxJournal.SelectedIndex;
-                txtJevNo.Text = GenerateJevNoTemplate();
                 ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
             }
 
@@ -74,6 +75,7 @@ namespace LFS.Views.Transactions.JEV
                 errorProvider1.GetError(cmbxJournal),
                 errorProvider1.GetError(cmbxFunds),
                 errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(mskTxtTransNo),
                 AccEntriesValidated().errMssg,
             };
 
@@ -97,6 +99,7 @@ namespace LFS.Views.Transactions.JEV
             bool journalValid = int.TryParse(cmbxJournal.SelectedValue.ToString(), out int journalId);
             model.JournalsId = (byte)journalId;
 
+            model.TrnsctionNo = new string(mskTxtTransNo.Text.Where(char.IsDigit).TakeLast(4).ToArray());
             model.DateEntry = dtpDateEntry.Value;
             model.RefNo = txtRefNo.Text.Trim();
             model.Payee = txtPayee.Text.Trim();
@@ -150,12 +153,16 @@ namespace LFS.Views.Transactions.JEV
 
             if (this.isEdit)
             {
-                message = $"{jrnlTyp} modification has been submitted";
+                string trnsctnNo = mskTxtTransNo.Text;
+                message = $"{jrnlTyp} modification (Transaction No.{trnsctnNo}) has been submitted";
                 return UpdateData(jrnlTyp);
             }
             else
             {
-                message = $"{jrnlTyp} has been submitted";
+                string trnsctnNo = GenTransctnNo();
+                mskTxtTransNo.Text = trnsctnNo;
+
+                message = $"{jrnlTyp} (Transaction No.{trnsctnNo}) has been submitted";
                 return InsertData(jrnlTyp);
             }
         }
@@ -217,7 +224,7 @@ namespace LFS.Views.Transactions.JEV
         private void SetControlsReadOnly(Control parent, bool isReadOnly)
         {
             foreach (var c in parent.Controls.Cast<Control>()
-                         .Where(c => c is ComboBox || c is DateTimePicker || c is TextBoxBase))
+                         .Where(c => c is ComboBox || c is DateTimePicker || c is TextBoxBase || c is LinkLabel))
             {
                 if (c is TextBoxBase tb)
                 {
@@ -259,7 +266,7 @@ namespace LFS.Views.Transactions.JEV
                 jevId = null;
             }
 
-            txtJevNo.Text = string.Empty;
+            mskTxtJevNo.Text = string.Empty;
             txtRefNo.Text = string.Empty;
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
@@ -279,6 +286,7 @@ namespace LFS.Views.Transactions.JEV
             lblStatus.Text = "Status: Draft";
             lblCreatedBy.Text = $"Submitted by: {UserHelper.loggedUser.FullName}";
             ToggleJevStatIndctr(lblStatIndctr);
+            mskTxtTransNo.ResetText();
 
             dtpDateEntry.Value = DateTime.Now;
         }
@@ -450,9 +458,10 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private string GenTransctnNo(string seriesNo = "_ _ _ _")
+        private string GenTransctnNo()
         {
             DateTime dateEntry = dtpDateEntry.Value;
+            string seriesNo = AccFactory.JEVRepository().GetLastTrnsctionNo(dateEntry.Year);
             string trnsctnNo = $"{dateEntry:yy}-{seriesNo}";
             return trnsctnNo;
         }
@@ -520,8 +529,10 @@ namespace LFS.Views.Transactions.JEV
             string payee = dictJev["payee"];
             string explanation = dictJev["explanation"];
             string remarks = dictJev["remarks"];
+            string trnsctnNo = $"{dateEntry:yy}-{dictJev["trns_no"]}";
 
             prevJournal = (jevId, journalName);
+            mskTxtTransNo.Text = trnsctnNo;
             cmbxJournal.SelectedValue = journalId;
             cmbxFunds.SelectedValue = fundId;
             txtExplanation.Text = explanation;
@@ -531,7 +542,7 @@ namespace LFS.Views.Transactions.JEV
             txtRemarks.Text = remarks;
 
             string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
-            txtJevNo.Text = fullJevNo;
+            mskTxtJevNo.Text = fullJevNo;
 
             var isValid = new List<bool>()
             {
@@ -1007,24 +1018,6 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                txtJevNo.Text = GenerateJevNoTemplate();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dtpDateEntry_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                txtJevNo.Text = GenerateJevNoTemplate();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void lblStatus_TextChanged(object sender, EventArgs e)
         {
             try
@@ -1034,9 +1027,14 @@ namespace LFS.Views.Transactions.JEV
         }
 
         /////Auditing Section
-        internal bool CancelJev()
+        internal bool CancelJev(out string trnsctnNo)
         {
-            if (MessageBox.Show("Confirm cancellation of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            trnsctnNo = mskTxtTransNo.Text;
+
+            if (MessageBox.Show($"Confirm cancellation of JEV (Transaction No.{trnsctnNo})",
+                                "Confirmation",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 var model = new JevModel()
                 {
@@ -1048,9 +1046,14 @@ namespace LFS.Views.Transactions.JEV
             return false;
         }
 
-        internal bool DisapproveJev()
+        internal bool DisapproveJev(out string trnsctnNo)
         {
-            if (MessageBox.Show("Confirm disapproval of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            trnsctnNo = mskTxtTransNo.Text;
+
+            if (MessageBox.Show($"Confirm disapproval of JEV (Transaction No.{trnsctnNo})",
+                                "Confirmation",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 var model = new JevModel()
                 {
@@ -1062,9 +1065,11 @@ namespace LFS.Views.Transactions.JEV
             return false;
         }
 
-        internal bool ApproveJev(out string jevNo, out string trnsctionCode)
+        internal bool ApproveJev(out string jevNo, out string trnsctnNo)
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm approval of JEV."))
+            trnsctnNo = mskTxtTransNo.Text;
+
+            if (Helper.MessageBoxConfirmCancel($"Confirm approval of JEV (Transaction No.{trnsctnNo})"))
             {
                 bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
                 string jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
@@ -1079,7 +1084,6 @@ namespace LFS.Views.Transactions.JEV
                         JevNo = jevSeriesNo,
                     };
 
-                    trnsctionCode = mskTxtTransNo.Text;
                     jevNo = genJevNo;
                     return AccFactory.JEVRepository().ApproveJev(model);
                 }
@@ -1087,25 +1091,9 @@ namespace LFS.Views.Transactions.JEV
                     throw new Exception("Fund is invalid.");
             }
 
-            trnsctionCode = string.Empty;
+            trnsctnNo = string.Empty;
             jevNo = string.Empty;
             return false;
-        }
-
-        private void mskTxtTransNo_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void mskTxtTransNo_Validated(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

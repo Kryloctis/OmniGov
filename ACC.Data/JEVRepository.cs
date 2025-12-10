@@ -826,5 +826,28 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET is_disapproved = 1, remarks = @remarks WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public bool TrnsctnNoExist(string trnsctnNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@trns_no", DbType.String, trnsctnNo }
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE trns_no = @trns_no";
+            return !string.IsNullOrWhiteSpace(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
+
+        public bool TrnsctnNoExist(int jevId, string trnsctnNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, jevId },
+                new object[] { "@trns_no", DbType.String, trnsctnNo }
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id <> @id AND trns_no = @trns_no";
+            return !string.IsNullOrWhiteSpace(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
     }
 }

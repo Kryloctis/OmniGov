@@ -74,10 +74,10 @@ namespace LFS.Views.Transactions.JEV
             mskTxtTransNo = new System.Windows.Forms.MaskedTextBox();
             panel4 = new System.Windows.Forms.Panel();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
+            mskTxtJevNo = new System.Windows.Forms.MaskedTextBox();
             lblStatIndctr = new System.Windows.Forms.Label();
             lblCreatedBy = new System.Windows.Forms.Label();
             lblStatus = new System.Windows.Forms.Label();
-            txtJevNo = new System.Windows.Forms.TextBox();
             tabControl2 = new System.Windows.Forms.TabControl();
             tbPgJevDetails = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
@@ -131,7 +131,7 @@ namespace LFS.Views.Transactions.JEV
             dgAccounts.Location = new System.Drawing.Point(15, 46);
             dgAccounts.Name = "dgAccounts";
             dgAccounts.RowHeadersWidth = 51;
-            dgAccounts.Size = new System.Drawing.Size(712, 266);
+            dgAccounts.Size = new System.Drawing.Size(712, 264);
             dgAccounts.TabIndex = 37;
             dgAccounts.CellEndEdit += dgAccounts_CellEndEdit;
             dgAccounts.CellValidating += dgAccounts_CellValidating;
@@ -182,7 +182,6 @@ namespace LFS.Views.Transactions.JEV
             dtpDateEntry.Name = "dtpDateEntry";
             dtpDateEntry.Size = new System.Drawing.Size(247, 23);
             dtpDateEntry.TabIndex = 4;
-            dtpDateEntry.ValueChanged += dtpDateEntry_ValueChanged;
             // 
             // label1
             // 
@@ -275,7 +274,6 @@ namespace LFS.Views.Transactions.JEV
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(247, 23);
             cmbxFunds.TabIndex = 62;
-            cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
             cmbxFunds.Validating += cmbxFunds_Validating;
             cmbxFunds.Validated += cmbxFunds_Validated;
             // 
@@ -453,7 +451,7 @@ namespace LFS.Views.Transactions.JEV
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(15);
-            panel1.Size = new System.Drawing.Size(742, 363);
+            panel1.Size = new System.Drawing.Size(742, 361);
             panel1.TabIndex = 67;
             // 
             // statusStrip2
@@ -461,7 +459,7 @@ namespace LFS.Views.Transactions.JEV
             statusStrip2.AutoSize = false;
             statusStrip2.BackColor = System.Drawing.Color.Transparent;
             statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel3, tlStrpLblDebit, toolStripStatusLabel5, toolStripStatusLabel6, tlStrpLblCredit, toolStripStatusLabel1, tlStrpLblBlncIndctr });
-            statusStrip2.Location = new System.Drawing.Point(15, 312);
+            statusStrip2.Location = new System.Drawing.Point(15, 310);
             statusStrip2.Name = "statusStrip2";
             statusStrip2.Size = new System.Drawing.Size(712, 36);
             statusStrip2.SizingGrip = false;
@@ -556,15 +554,15 @@ namespace LFS.Views.Transactions.JEV
             // mskTxtTransNo
             // 
             mskTxtTransNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            mskTxtTransNo.BackColor = System.Drawing.SystemColors.Control;
             mskTxtTransNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mskTxtTransNo.Font = new System.Drawing.Font("Segoe UI", 9F);
             mskTxtTransNo.Location = new System.Drawing.Point(23, 43);
-            mskTxtTransNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            mskTxtTransNo.Mask = " 00-0000";
             mskTxtTransNo.Name = "mskTxtTransNo";
+            mskTxtTransNo.ReadOnly = true;
             mskTxtTransNo.Size = new System.Drawing.Size(332, 23);
             mskTxtTransNo.TabIndex = 63;
-            mskTxtTransNo.Validating += mskTxtTransNo_Validating;
-            mskTxtTransNo.Validated += mskTxtTransNo_Validated;
             // 
             // panel4
             // 
@@ -572,7 +570,7 @@ namespace LFS.Views.Transactions.JEV
             panel4.Dock = System.Windows.Forms.DockStyle.Top;
             panel4.Location = new System.Drawing.Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(756, 97);
+            panel4.Size = new System.Drawing.Size(756, 99);
             panel4.TabIndex = 65;
             // 
             // splitContainer2
@@ -590,15 +588,25 @@ namespace LFS.Views.Transactions.JEV
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(mskTxtJevNo);
             splitContainer2.Panel2.Controls.Add(lblStatIndctr);
             splitContainer2.Panel2.Controls.Add(lblCreatedBy);
             splitContainer2.Panel2.Controls.Add(lblStatus);
-            splitContainer2.Panel2.Controls.Add(txtJevNo);
             splitContainer2.Panel2.Controls.Add(label1);
             splitContainer2.Panel2.Padding = new System.Windows.Forms.Padding(20);
-            splitContainer2.Size = new System.Drawing.Size(756, 97);
+            splitContainer2.Size = new System.Drawing.Size(756, 99);
             splitContainer2.SplitterDistance = 378;
             splitContainer2.TabIndex = 65;
+            // 
+            // mskTxtJevNo
+            // 
+            mskTxtJevNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            mskTxtJevNo.Location = new System.Drawing.Point(23, 43);
+            mskTxtJevNo.Mask = "000-0000-00-000";
+            mskTxtJevNo.Name = "mskTxtJevNo";
+            mskTxtJevNo.ReadOnly = true;
+            mskTxtJevNo.Size = new System.Drawing.Size(328, 23);
+            mskTxtJevNo.TabIndex = 66;
             // 
             // lblStatIndctr
             // 
@@ -639,28 +647,17 @@ namespace LFS.Views.Transactions.JEV
             lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             lblStatus.TextChanged += lblStatus_TextChanged;
             // 
-            // txtJevNo
-            // 
-            txtJevNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtJevNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtJevNo.Location = new System.Drawing.Point(23, 43);
-            txtJevNo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            txtJevNo.Name = "txtJevNo";
-            txtJevNo.ReadOnly = true;
-            txtJevNo.Size = new System.Drawing.Size(328, 23);
-            txtJevNo.TabIndex = 64;
-            // 
             // tabControl2
             // 
             tabControl2.Controls.Add(tbPgJevDetails);
             tabControl2.Controls.Add(tbPgAccEntries);
             tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl2.HotTrack = true;
-            tabControl2.Location = new System.Drawing.Point(0, 97);
+            tabControl2.Location = new System.Drawing.Point(0, 99);
             tabControl2.Name = "tabControl2";
             tabControl2.Padding = new System.Drawing.Point(30, 5);
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(756, 401);
+            tabControl2.Size = new System.Drawing.Size(756, 399);
             tabControl2.TabIndex = 68;
             // 
             // tbPgJevDetails
@@ -670,7 +667,7 @@ namespace LFS.Views.Transactions.JEV
             tbPgJevDetails.Location = new System.Drawing.Point(4, 28);
             tbPgJevDetails.Name = "tbPgJevDetails";
             tbPgJevDetails.Padding = new System.Windows.Forms.Padding(3);
-            tbPgJevDetails.Size = new System.Drawing.Size(748, 369);
+            tbPgJevDetails.Size = new System.Drawing.Size(748, 367);
             tbPgJevDetails.TabIndex = 0;
             tbPgJevDetails.Text = "Journal Details";
             tbPgJevDetails.UseVisualStyleBackColor = true;
@@ -726,7 +723,7 @@ namespace LFS.Views.Transactions.JEV
             tbPgAccEntries.Location = new System.Drawing.Point(4, 28);
             tbPgAccEntries.Name = "tbPgAccEntries";
             tbPgAccEntries.Padding = new System.Windows.Forms.Padding(3);
-            tbPgAccEntries.Size = new System.Drawing.Size(748, 369);
+            tbPgAccEntries.Size = new System.Drawing.Size(748, 367);
             tbPgAccEntries.TabIndex = 1;
             tbPgAccEntries.Text = "Accounting Entries";
             tbPgAccEntries.UseVisualStyleBackColor = true;
@@ -735,7 +732,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             Controls.Add(tabControl2);
             Controls.Add(panel4);
             Name = "ucJev";
@@ -820,7 +817,6 @@ namespace LFS.Views.Transactions.JEV
         private CustomTools.CustomTabControl cstmTbCtrlJrnls;
         private System.Windows.Forms.TabPage tbPgCshRcptsJrnl;
         private JournalForms.ucCshRcptsJrnl ucCshRcptsJrnl1;
-        private System.Windows.Forms.TextBox txtJevNo;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblCreatedBy;
@@ -832,5 +828,6 @@ namespace LFS.Views.Transactions.JEV
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblStatIndctr;
+        private System.Windows.Forms.MaskedTextBox mskTxtJevNo;
     }
 }

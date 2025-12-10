@@ -73,6 +73,10 @@ namespace ACC.Domain.Interfaces
 
         bool DisapproveJev(JevModel jevModel);
 
+        bool TrnsctnNoExist(string trnsctnNo);
+
+        bool TrnsctnNoExist(int jevId, string trnsctnNo);
+
         DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year);
 
         string GetJevStatus(int jevId);

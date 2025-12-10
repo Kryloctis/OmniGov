@@ -473,21 +473,13 @@ namespace LFS.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void radApproved_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void btnApprove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (ucJevAudit.ApproveJev(out string jevNo, out string trnsctionCode))
+                if (ucJevAudit.ApproveJev(out string jevNo, out string trnsctnNo))
                 {
-                    Helper.MessageBoxSuccess($"JEV {trnsctionCode} approved. Generated JEV No. {jevNo}.");
+                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Approved\nJEV No. {jevNo}");
                     int rowIndex = dgJEV.CurrentCell.RowIndex;
                     int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
                     ucJevView.OnLoad(true, jevId);
@@ -504,7 +496,15 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                ucJevAudit.DisapproveJev();
+                if (ucJevAudit.DisapproveJev(out string trnsctnNo))
+                {
+                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Disapproved");
+                    int rowIndex = dgJEV.CurrentCell.RowIndex;
+                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                    ucJevAudit.OnLoad(true, jevId);
+                    ucJevAudit.SetJevReadOnly(true);
+                    LoadJevRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -513,7 +513,15 @@ namespace LFS.Views.Transactions.JEV
         {
             try
             {
-                ucJevAudit.CancelJev();
+                if (ucJevAudit.CancelJev(out string trnsctnNo))
+                {
+                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Cancelled");
+                    int rowIndex = dgJEV.CurrentCell.RowIndex;
+                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                    ucJevAudit.OnLoad(true, jevId);
+                    ucJevAudit.SetJevReadOnly(true);
+                    LoadJevRecords();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
