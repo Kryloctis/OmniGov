@@ -93,43 +93,70 @@ namespace LFS.Views.Transactions.JEV
             }
         }
 
-        private void EnableDisableButtons(DataGridView dataGridView)
+        private void EnableDisableButtons(DataGridView dgv,
+                                      ToolStripButton btnCrt,
+                                      ToolStripButton btnEdit,
+                                      ToolStripButton btnDelete,
+                                      ToolStripButton btnView,
+                                      ToolStripButton btnAudit)
         {
-            Helper.EnableDisableToolStripButtons(dgJEV, tlStrpBtnUpdate, tlStrpBtnDelete);
+            int selected = dgv.SelectedRows.Count;
 
-            var dgvSlctdRows = dataGridView.SelectedRows;
-            var rowIndex = dataGridView.CurrentCell.RowIndex;
-
-            if (dgvSlctdRows.Count > 1)
+            if (dgv.Rows.Count == 0)
             {
-                tlStrpBtnView.Enabled = false;
-                tlStrpBtnAudit.Enabled = false;
+                btnCrt.Enabled = true;
+
+                btnView.Visible = false;
+                btnView.Enabled = false;
+
+                btnEdit.Visible = false;
+                btnEdit.Enabled = false;
+
+                btnDelete.Enabled = false;
+
+                btnAudit.Enabled = false;
+
+                return;
             }
-            else
+
+            string status = GetFltrStatus()?.ToLower() ?? "";
+
+            btnDelete.Text = selected > 0 ? $"Delete ({selected})" : "Delete";
+
+            var config = new Dictionary<string, (bool create,
+                                                 bool viewVisible, bool viewEnabled,
+                                                 bool editVisible, bool editEnabled,
+                                                 bool deleteEnabled, bool auditEnabled)>
             {
-                tlStrpBtnView.Enabled = true;
-                tlStrpBtnAudit.Enabled = true;
-            }
+                ["approved"] = (true, true, true, false, false, false, false),
+                ["cancelled"] = (true, false, false, true, false, false, true),
+                ["disapproved"] = (true, false, false, true, true, true, true),
+                [""] = (true, false, false, true, true, true, true),
+            };
 
-            VerifyUserPrivileges();
+            var c = config.ContainsKey(status) ? config[status] : config[""];
 
-            if (dgvSlctdRows.Count == 1)
-            {
-                bool isApproved = dataGridView.Rows[rowIndex].Cells["status"].Value.ToString() == "approved";
-                tlStrpBtnView.Visible = isApproved;
-                tlStrpBtnView.Enabled = isApproved;
+            btnCrt.Enabled = c.create;
 
-                tlStrpBtnAudit.Enabled = !isApproved;
-                tlStrpBtnDelete.Enabled = !isApproved;
-                tlStrpBtnUpdate.Visible = !isApproved;
-            }
+            btnView.Visible = c.viewVisible;
+            btnView.Enabled = c.viewEnabled && selected == 1;
+
+            btnEdit.Visible = c.editVisible;
+            btnEdit.Enabled = c.editEnabled && selected == 1;
+
+            btnDelete.Enabled = c.deleteEnabled && selected > 0;
+
+            bool auditFromStatus = c.auditEnabled;
+            bool hasPrivilege = PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
+
+            btnAudit.Enabled = auditFromStatus && hasPrivilege && selected > 0;
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                EnableDisableButtons(dgJEV);
+                EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

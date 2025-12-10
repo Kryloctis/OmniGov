@@ -600,9 +600,10 @@ namespace LFS.Views.Transactions.JEV
             // 
             // mskTxtJevNo
             // 
+            mskTxtJevNo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             mskTxtJevNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mskTxtJevNo.Location = new System.Drawing.Point(23, 43);
-            mskTxtJevNo.Mask = "000-0000-00-000";
+            mskTxtJevNo.Mask = "000-0000-00-0000";
             mskTxtJevNo.Name = "mskTxtJevNo";
             mskTxtJevNo.ReadOnly = true;
             mskTxtJevNo.Size = new System.Drawing.Size(328, 23);
