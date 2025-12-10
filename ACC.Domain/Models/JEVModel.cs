@@ -8,7 +8,8 @@ namespace ACC.Domain.Models
         public int Id { get; set; }
         public byte FundsId { get; set; }
         public byte JournalsId { get; set; }
-        public string JEVNumber { get; set; }
+        public string TrnsctionNo { get; set; }
+        public string JevNo { get; set; }
         public DateTime DateEntry { get; set; }
         public string RefNo { get; set; }
         public string Payee { get; set; }

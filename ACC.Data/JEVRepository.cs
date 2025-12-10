@@ -141,7 +141,8 @@ namespace ACC.Data
             {
                 new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                 new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@jev_no", DbType.String, entity.JEVNumber },
+                new object[] { "@trns_no", DbType.String, entity.TrnsctionNo},
+                new object[] { "@jev_no", DbType.String, entity.JevNo },
                 new object[] { "@date_entry", DbType.Date, entity.DateEntry },
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
                 new object[] { "@payee", DbType.String, entity.Payee },
@@ -150,7 +151,7 @@ namespace ACC.Data
                 new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
+            string query = $"INSERT INTO {tableName} (funds_id, journals_id, trns_no, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @trns_no, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -307,7 +308,8 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, entity.Id },
                 new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                 new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@jev_no", DbType.String, entity.JEVNumber },
+                new object[] { "@trns_no", DbType.String, entity.TrnsctionNo},
+                new object[] { "@jev_no", DbType.String, entity.JevNo },
                 new object[] { "@date_entry", DbType.Date, entity.DateEntry },
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
                 new object[] { "@payee", DbType.String, entity.Payee },
@@ -320,7 +322,7 @@ namespace ACC.Data
                 new object[] { "@remarks", DbType.String, entity.Remarks},
             };
 
-            string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
+            string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, trns_no = @trns_no, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -737,6 +739,17 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
         }
 
+        public string GetLastTrnsctionNo(int year)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@date_entry_year", DbType.Int32, year}
+            };
+
+            string query = $"SELECT COALESCE(LPAD(MAX(trns_no)+1, 4, '0'), '0001') AS trns_no FROM {tableName} WHERE YEAR(date_entry) = @date_entry_year";
+            return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+        }
+
         public string GetJevStatus(int jevId)
         {
             var parameters = new object[][]
@@ -763,17 +776,6 @@ namespace ACC.Data
                     return "Pending";
             }
             return string.Empty;
-        }
-
-        public string GetRemarks(int jevId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, jevId}
-            };
-
-            string query = $"SELECT remarks FROM {tableName} WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters).ToString();
         }
 
         //Auditing Section
@@ -805,7 +807,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@jev_no", DbType.String, entity.JEVNumber},
+                new object[] { "@jev_no", DbType.String, entity.JevNo},
                 new object[] { "@remarks", DbType.String, entity.Remarks }
             };
 

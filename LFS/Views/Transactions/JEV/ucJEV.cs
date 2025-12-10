@@ -1076,7 +1076,7 @@ namespace LFS.Views.Transactions.JEV
                     {
                         Id = jevId.Value,
                         Remarks = txtRemarks.Text.Trim(),
-                        JEVNumber = jevSeriesNo,
+                        JevNo = jevSeriesNo,
                     };
 
                     trnsctionCode = mskTxtTransNo.Text;

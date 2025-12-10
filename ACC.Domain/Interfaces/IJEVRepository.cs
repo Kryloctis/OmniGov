@@ -37,6 +37,8 @@ namespace ACC.Domain.Interfaces
 
         int GetLastInsertedID();
 
+        string GetLastTrnsctionNo(int year);
+
         string GetLastJevNoSeries(int fundId);
 
         Dictionary<string, string> GetViewRecordByJEVId(int jevId);

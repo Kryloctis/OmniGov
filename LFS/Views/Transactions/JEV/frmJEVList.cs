@@ -244,11 +244,15 @@ namespace LFS.Views.Transactions.JEV
                 bool isDisapproved = Convert.ToInt32(row["is_disapproved"]) == 1;
                 bool isCancelled = Convert.ToInt32(row["is_cancelled"]) == 1;
 
+                DateTime dateEntry = Convert.ToDateTime(row["date_entry"]);
+                string trnsctnNo = $"{dateEntry:yy}-{row["trns_no"]}";
+
                 // Safely convert mixed numeric and string fields
                 newRow["id"] = Convert.ToInt32(row["id"]);
+                newRow["trnsction_no"] = trnsctnNo;
                 newRow["jev_no"] = row["jev_no"]?.ToString();
                 newRow["full_jev_no"] = row["full_jev_no"]?.ToString();
-                newRow["date_entry"] = Convert.ToDateTime(row["date_entry"]);
+                newRow["date_entry"] = dateEntry;
                 newRow["payee"] = row["payee"]?.ToString();
                 newRow["status"] = jevStatus;
                 newRow["created_at"] = row["created_at"]?.ToString();

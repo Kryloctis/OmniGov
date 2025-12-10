@@ -635,6 +635,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // btnApprove
             // 
+            btnApprove.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             btnApprove.Image = Properties.Resources.button_ok_16px;
             btnApprove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -649,6 +650,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // btnDisapprove
             // 
+            btnDisapprove.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnDisapprove.Cursor = System.Windows.Forms.Cursors.Hand;
             btnDisapprove.Image = Properties.Resources.button_cancel_16px;
             btnDisapprove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -663,6 +665,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             // btnCancel
             // 
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             btnCancel.Image = Properties.Resources.symbol_forbidden_16px;
             btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
