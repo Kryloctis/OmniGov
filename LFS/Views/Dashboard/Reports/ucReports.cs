@@ -38,6 +38,7 @@ namespace LFS.Views.Dashboard.Reports
         {
             btnSaaob.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOB);
             btnSaaobb.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOBB);
+            btnJevRprt.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptJEVs);
 
             var rptJrnlsPrivileges = new List<bool>
             {

@@ -62,8 +62,9 @@
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpWhatsNew = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            tlStrpLblLoggedUser = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpLblServer = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             tlStrpLblVersion = new System.Windows.Forms.ToolStripStatusLabel();
@@ -301,7 +302,7 @@
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(1125, 652);
+            tabPageAccounting.Size = new System.Drawing.Size(192, 72);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -314,7 +315,7 @@
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel3.Size = new System.Drawing.Size(1125, 572);
+            panel3.Size = new System.Drawing.Size(192, 0);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
@@ -323,7 +324,7 @@
             ucAccounting1.Location = new System.Drawing.Point(5, 4);
             ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(1115, 564);
+            ucAccounting1.Size = new System.Drawing.Size(182, 0);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -334,7 +335,7 @@
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label2.Size = new System.Drawing.Size(1125, 80);
+            label2.Size = new System.Drawing.Size(192, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -485,7 +486,7 @@
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel5, toolStripStatusLabel3, tlStrpLblServer, toolStripStatusLabel4, tlStrpLblVersion });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel2, tlStrpWhatsNew, toolStripStatusLabel6, tlStrpLblLoggedUser, toolStripStatusLabel5, tlStrpLblServer, toolStripStatusLabel4, tlStrpLblVersion });
             statusStrip1.Location = new System.Drawing.Point(0, 680);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(1275, 22);
@@ -495,7 +496,7 @@
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(1006, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(856, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // tlStrpWhatsNew
@@ -510,31 +511,42 @@
             tlStrpWhatsNew.Text = "What's New?";
             tlStrpWhatsNew.Click += tlStrpWhatsNew_Click;
             // 
+            // toolStripStatusLabel6
+            // 
+            toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDark;
+            toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel6.Text = "|";
+            toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tlStrpLblLoggedUser
+            // 
+            tlStrpLblLoggedUser.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            tlStrpLblLoggedUser.Name = "tlStrpLblLoggedUser";
+            tlStrpLblLoggedUser.Size = new System.Drawing.Size(89, 17);
+            tlStrpLblLoggedUser.Text = "Logged User: --";
+            // 
             // toolStripStatusLabel5
             // 
             toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
             toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
             toolStripStatusLabel5.Text = "|";
             toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // toolStripStatusLabel3
-            // 
-            toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new System.Drawing.Size(42, 17);
-            toolStripStatusLabel3.Text = "Server:";
-            // 
             // tlStrpLblServer
             // 
             tlStrpLblServer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             tlStrpLblServer.Name = "tlStrpLblServer";
-            tlStrpLblServer.Size = new System.Drawing.Size(17, 17);
-            tlStrpLblServer.Text = "--";
+            tlStrpLblServer.Size = new System.Drawing.Size(55, 17);
+            tlStrpLblServer.Text = "Server: --";
             // 
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
             toolStripStatusLabel4.Text = "|";
@@ -622,8 +634,9 @@
         private System.Windows.Forms.ToolStripStatusLabel tlStrpWhatsNew;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tlStrpLblVersion;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tlStrpLblServer;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel tlStrpLblLoggedUser;
     }
 }

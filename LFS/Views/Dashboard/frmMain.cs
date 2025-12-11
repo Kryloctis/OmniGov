@@ -61,7 +61,6 @@ namespace LFS.Views.Dashboard
                 tabControlMain.TabPages.Remove(tabPageTreasury);
                 radTreasury.Visible = false;
             }
-
         }
 
         private void radBudget_CheckedChanged(object sender, EventArgs e)
@@ -113,8 +112,9 @@ namespace LFS.Views.Dashboard
         {
             try
             {
-                tlStrpLblServer.Text = ServerHelper.selectedServer.MunicipalityName;
-                tlStrpLblVersion.Text = $"Version: {Helper.version}";
+                tlStrpLblServer.Text = $"Server:{ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
+                tlStrpLblVersion.Text = $"Version:{Helper.version}";
+                tlStrpLblLoggedUser.Text = $"Logged User:{UserHelper.loggedUser.FullName}";
                 VerifyUserPrivileges();
                 LoadTabPagesContents(tabControlMain);
             }
