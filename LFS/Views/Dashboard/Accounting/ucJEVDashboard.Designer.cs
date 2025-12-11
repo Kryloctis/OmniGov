@@ -353,12 +353,12 @@ namespace LFS.Views.Dashboard
             // 
             // btnRecordJev
             // 
-            btnRecordJev.Image = Properties.Resources.document_color_green_filled_14px;
+            btnRecordJev.Image = Properties.Resources.folder_filled_14px;
             btnRecordJev.Location = new System.Drawing.Point(7, 6);
             btnRecordJev.Name = "btnRecordJev";
             btnRecordJev.Size = new System.Drawing.Size(120, 23);
             btnRecordJev.TabIndex = 33;
-            btnRecordJev.Text = "Record JEV";
+            btnRecordJev.Text = " JEV Records";
             btnRecordJev.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             btnRecordJev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnRecordJev.UseVisualStyleBackColor = true;

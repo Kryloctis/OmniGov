@@ -823,7 +823,7 @@ namespace ACC.Data
                 new object[] { "@remarks", DbType.String, entity.Remarks }
             };
 
-            string query = $"UPDATE {tableName} SET is_disapproved = 1, remarks = @remarks WHERE id = @id";
+            string query = $"UPDATE {tableName} SET is_disapproved = 1, is_cancelled = 0, remarks = @remarks WHERE id = @id";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
