@@ -28,7 +28,6 @@ namespace LFS.Views.Reports.Ltoms
         private void LoadRealProperties()
         {
             dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
-
             var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();

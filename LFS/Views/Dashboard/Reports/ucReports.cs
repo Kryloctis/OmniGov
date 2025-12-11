@@ -3,6 +3,7 @@ using LFS.Views.Reports.Cashbook;
 using LFS.Views.Reports.ConsolidatedReceipts;
 using LFS.Views.Reports.DailyCashPositionReport;
 using LFS.Views.Reports.Financial_Statements;
+using LFS.Views.Reports.JEV;
 using LFS.Views.Reports.Journals;
 using LFS.Views.Reports.Ledgers;
 using LFS.Views.Reports.Ltoms;
@@ -407,6 +408,15 @@ namespace LFS.Views.Dashboard.Reports
             }
             catch (Exception ex)
             { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnJevRprt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ = new frmJEVReport().ShowDialog();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -849,5 +849,11 @@ namespace ACC.Data
             string query = $"SELECT * FROM {tableName} WHERE id <> @id AND trns_no = @trns_no";
             return !string.IsNullOrWhiteSpace(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName} WHERE is_approved = 1";
+            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+        }
     }
 }

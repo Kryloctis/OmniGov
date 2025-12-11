@@ -353,7 +353,7 @@ namespace LFS.Views.Dashboard
             // 
             // btnRecordJev
             // 
-            btnRecordJev.Image = Properties.Resources.symbol_add_14px;
+            btnRecordJev.Image = Properties.Resources.document_color_green_filled_14px;
             btnRecordJev.Location = new System.Drawing.Point(7, 6);
             btnRecordJev.Name = "btnRecordJev";
             btnRecordJev.Size = new System.Drawing.Size(120, 23);

@@ -74,26 +74,6 @@ namespace LFS.Views.Dashboard
             lblCancelledJEVCounter.Text = cancelledJEVCount.ToString();
         }
 
-        private void btnRefreshCounter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadJEVList()
-        {
-            string journalName = cmbxJournals.Text.Trim();
-            string fundName = cmbxFunds.Text.Trim();
-            short year = (short)nudYear.Value;
-            var frmJEVList = new frmJevList(this);
-
-            frmJEVList.cmbxJournals.Enabled = false;
-            frmJEVList.nudYear.Enabled = false;
-            frmJEVList.ShowDialog();
-        }
-
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
@@ -143,15 +123,6 @@ namespace LFS.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _ = new frmJev(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
@@ -168,10 +139,6 @@ namespace LFS.Views.Dashboard
                 LoadJEVCounter();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         private void btnRecordJev_Click(object sender, EventArgs e)

@@ -79,6 +79,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year);
 
+        DataTable GetViewRecords();
+
         string GetJevStatus(int jevId);
 
         //SFPs

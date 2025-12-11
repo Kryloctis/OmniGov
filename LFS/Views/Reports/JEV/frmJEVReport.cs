@@ -3,18 +3,17 @@ using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LFS.Views.Reports.JEV
 {
     public partial class frmJEVReport : Form
     {
-        private ReportViewer reportViewer;
         private Dictionary<string, string> journalDict;
-
-        private int _jevId;
-        private byte _journalId;
 
         internal string checkDate;
         internal string checkNo;
@@ -28,15 +27,12 @@ namespace LFS.Views.Reports.JEV
         internal string paramDVNo;
         internal string paramOfficer;
 
-        public frmJEVReport(int jevId, byte journalId)
+        public frmJEVReport()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            reportViewer = new ReportViewer();
-            panel1.Controls.Add(reportViewer);
-            reportViewer.Dock = DockStyle.Fill;
-            _jevId = jevId;
-            _journalId = journalId;
+            pnlRprt.Controls.Add(reportViewer1);
+            reportViewer1.Dock = DockStyle.Fill;
         }
 
         private void SetJournalData(string checkDate, string checkNo, string orNo, string dv, string officer)
@@ -48,36 +44,48 @@ namespace LFS.Views.Reports.JEV
             this.officer = officer;
         }
 
-        private void SetJournalCustomFields()
+        private void SetJournalCustomFields(int jevId, int journalId)
         {
-            switch (_journalId)
+            var journalDict = new Dictionary<string, string>();
+
+            switch (journalId)
             {
                 case 1:
-                    journalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(_jevId);
+
+                    journalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
+
                     paramCheckDate = "";
                     paramOfficer = "";
                     paramCheckNo = journalDict["check_no"];
                     paramORNo = journalDict["or_no"];
                     paramDVNo = journalDict["dv_no"];
+
                     SetJournalData("", "Check No. :", "OR No. :", "DV No. :", "");
+
                     return;
 
                 case 2:
-                    journalDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(_jevId);
+
+                    journalDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["or_date"]).ToString("MM/dd/yy");
+
                     paramORNo = journalDict["or_no"];
                     paramCheckNo = "";
                     paramDVNo = journalDict["rcd_no"];
                     paramOfficer = journalDict["full_name"];
+
                     SetJournalData("OR Date :", "", "OR No. :", "RCD No. :", "Collecting Officer: ");
+
                     return;
 
                 case 3:     //NO OTHER FIELDS ASIDE FROM DATE OF ENTRY
                     return;
 
                 case 4:
-                    journalDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
+
+                    journalDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+
                     paramCheckDate = Convert.ToDateTime(journalDict["date_paid"]).ToString("MM/dd/yy");
                     paramCheckNo = "";
                     paramORNo = "";
@@ -89,7 +97,8 @@ namespace LFS.Views.Reports.JEV
                     return;
 
                 case 5:
-                    journalDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
+
+                    journalDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy");
                     paramCheckNo = journalDict["check_no"];
@@ -100,7 +109,9 @@ namespace LFS.Views.Reports.JEV
                     return;
 
                 case 6:
-                    journalDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
+
+                    journalDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+
                     SetJournalData("", "", "ADA No. :", "DV No. :", "");
                     return;
 
@@ -109,119 +120,170 @@ namespace LFS.Views.Reports.JEV
             }
         }
 
-        private void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatory_title)
+        private void ParseSignatory(out string signatoryName, out string signatoryTitle)
         {
+            var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Journal Entry Voucher");
+
             if (dictSignatory.Count > 0)
             {
                 signatoryName = dictSignatory["signatories_full_name"];
-                signatory_title = dictSignatory["signatories_title"];
+                signatoryTitle = dictSignatory["signatories_title"];
+            }
+            else
+            {
+                signatoryName = string.Empty;
+                signatoryTitle = string.Empty;
             }
         }
 
-        private void LoadReport(LocalReport report)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (_jevId != 0)
+            try
             {
-                Cursor.Current = Cursors.WaitCursor;
-                Dictionary<string, string> data = AccFactory.JEVRepository().GetRecordByID(_jevId);
+                int totalCount = 0;
+                int progressCount = 0;
 
-                string CertifiedBySignatory = string.Empty;
-                string CertifiedBysignatoryTitle = string.Empty;
+                int jevId = (int)e.Argument;
+                var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable();
+                var dtJevAccEntriesDb = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
+                totalCount = dtJevAccEntriesDb.Rows.Count;
 
-                Dictionary<string, string> dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "Journal Entry Voucher");
-                ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
+                ParseSignatory(out string CertSignatory, out string CertSignatoryTitle);
 
-                string full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
+                var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+                int jrnlId = Convert.ToInt32(dictJev["journals_id"]);
+                SetJournalCustomFields(jevId, jrnlId);
 
-                Dictionary<string, string> dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
-                Dictionary<string, dynamic> dictUser = AccFactory.UsersRepository().GetViewRecordById(Convert.ToInt32(dictJev["created_by"]));
+                foreach (DataRow item in dtJevAccEntriesDb.Rows)
+                {
+                    DataRow row = dtJevAccEntries.NewRow();
+
+                    row["fpp"] = item["fpp_code"];
+                    row["account_and_explanation"] = item["general_ledger_accounts_name"];
+                    row["account_code"] = item["account_code"];
+
+                    if (Convert.ToBoolean(item["is_debit"]))
+                        row["debit"] = item["amount"];
+                    else
+                        row["credit"] = item["amount"];
+
+                    dtJevAccEntries.Rows.Add(row);
+                    progressCount++;
+                    Helper.ProgressCounter(backgroundWorker1, totalCount, progressCount);
+                }
+
+                e.Result = (dictJev, dtJevAccEntries, CertSignatory, CertSignatoryTitle);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                pbJevRprt.Value = e.ProgressPercentage;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                var rprtParams = ((Dictionary<string, string> dictJev,
+                                dsLFS.dtJournalVoucherDataTable dtJevAccEntries,
+                                string certSigntry,
+                                string certSigntryTitle))e.Result;
+
+                DateTime dateEntry = Convert.ToDateTime(rprtParams.dictJev["date_entry"]);
+                string fundCode = rprtParams.dictJev["fund_code"];
+                string month = dateEntry.ToString("MM");
+                string year = dateEntry.Year.ToString();
+                string jevNo = rprtParams.dictJev["jev_no"];
+                string fullJevNo = string.IsNullOrWhiteSpace(jevNo) ? "_ - _ - _ - _ " : $"{fundCode}-{year}-{month}-{jevNo}";
 
                 string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
 
-                SetJournalCustomFields();
-
                 var parameters = new ReportParameter[]
                 {
-                    new("paramLGU",  lguName),
-                    new("paramFund", data["fund_name"]),
-                    new("paramJournalType", data["journal_name"]),
-                    new("paramJEVNo", full_jev),
-                    new("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
-                    new("paramPayee", data["payee"]),
-                    new("paramExplanation", data["explanation"]),
-                    new("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
-                    new("paramPreparedByRole",dictUser["role_name"]),
-                    new("paramCertifiedBySignatory", CertifiedBySignatory),
-                    new("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
+                        new("paramLGU",  lguName),
+                        new("paramFund", rprtParams.dictJev["fund_name"]),
+                        new("paramJournalType", rprtParams.dictJev["journal_name"]),
+                        new("paramJEVNo", fullJevNo),
+                        new("paramJEVDate", dateEntry.ToString("MM/dd/yy")),
+                        new("paramPayee", rprtParams.dictJev["payee"]),
+                        new("paramExplanation", rprtParams.dictJev["explanation"]),
+                        new("paramPreparedBy",rprtParams.dictJev["created_by_name"].ToUpper()),
+                        new("paramPreparedByRole", "NEED TO BE FIXED"),
+                        new("paramCertifiedBySignatory", rprtParams.certSigntry),
+                        new("paramCertifiedBySignatoryTitle", rprtParams.certSigntryTitle),
 
-                    //For fields label
-                    new("paramAsTextCheckDate", checkDate),
-                    new("paramAsTextCheckNo", checkNo),
-                    new("paramAsTextOR", orNo),
-                    new("paramAsTextDV", dv),
-                    new("paramAsTextOfficer", officer),
+                        //For fields label
+                        new("paramAsTextCheckDate", checkDate),
+                        new("paramAsTextCheckNo", checkNo),
+                        new("paramAsTextOR", orNo),
+                        new("paramAsTextDV", dv),
+                        new("paramAsTextOfficer", officer),
 
-                    //for fields values
-                    new("paramCheckDate", paramCheckDate),
-                    new("paramCheckNo", paramCheckNo),
-                    new("paramORNumber", paramORNo),
-                    new("paramDVNo", paramDVNo),
-                    new("paramDisbursementOfficer", paramOfficer)
+                        //for fields values
+                        new("paramCheckDate", paramCheckDate),
+                        new("paramCheckNo", paramCheckNo),
+                        new("paramORNumber", paramORNo),
+                        new("paramDVNo", paramDVNo),
+                        new("paramDisbursementOfficer", paramOfficer)
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
-                report.DataSources.Clear();
+                var localReport = reportViewer1.LocalReport;
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
+                localReport.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
-                report.SetParameters(parameters);
+                var dt = (DataTable)rprtParams.dtJevAccEntries;
+                localReport.DataSources.Add(new ReportDataSource("dtJournalVoucher", dt));
+                localReport.SetParameters(parameters);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
-                reportViewer.ZoomPercent = 100;
+                if (reportViewer1 != null && localReport != null)
+                {
+                    reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                    reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                }
 
-                reportViewer.RefreshReport();
-
-                Cursor.Current = Cursors.Default;
+                reportViewer1.RefreshReport();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable DataTableJournalEntryVoucherAccount()
+        private void LoadJevCombobox()
         {
-            var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
-            var dtJEVAccountsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
-
-            byte i = 0;
-
-            foreach (DataRow item in dtJEVAccountsFromDB.Rows)
-            {
-                DataRow row = dtJEVAccounts.NewRow();
-
-                row["fpp"] = item["fpp_code"];
-                row["account_and_explanation"] = item["general_ledger_accounts_name"];
-                row["account_code"] = item["account_code"];
-
-                if (Convert.ToBoolean(item["is_debit"]))
-                    row["debit"] = item["amount"];
-                else
-                    row["credit"] = item["amount"];
-
-                dtJEVAccounts.Rows.Add(row);
-
-                i++;
-            }
-            return dtJEVAccounts;
-        }
-
-        private void OnLoad()
-        {
-            LoadReport(reportViewer.LocalReport);
+            var dtJev = AccFactory.JEVRepository().GetViewRecords();
+            cmbxJev.DataSource = dtJev;
+            cmbxJev.DisplayMember = "full_jev_no";
+            cmbxJev.ValueMember = "id";
+            cmbxJev.DropDownHeight = 200;
         }
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                reportViewer1.ShowFindControls = false;
+                LoadJevCombobox();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnRunRprt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!backgroundWorker1.IsBusy)
+                {
+                    bool isJevIdValid = int.TryParse(cmbxJev.SelectedValue.ToString(), out int jevId);
+                    if (isJevIdValid)
+                    {
+                        backgroundWorker1.RunWorkerAsync(jevId);
+                        pbJevRprt.Value = 0;
+                    }
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
