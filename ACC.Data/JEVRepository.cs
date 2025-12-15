@@ -655,18 +655,17 @@ namespace ACC.Data
             return isResultValid ? result : 0;
         }
 
-        public DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year)
+        public DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year, int rowLimit)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journal_name", DbType.String, journalName},
                 new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                new object[] { "@year", DbType.Int16, year}
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@row_limit", DbType.Int32, rowLimit},
             };
 
-            string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
-            string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
             string jevStatusQuery;
 
             switch (jevStatus)
@@ -691,7 +690,8 @@ namespace ACC.Data
                     jevStatusQuery = string.Empty;
                     break;
             }
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} journal_name = @journal_name AND fund_name = @fund_name AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no LIMIT @row_limit";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 

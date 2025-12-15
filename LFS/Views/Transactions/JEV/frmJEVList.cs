@@ -41,10 +41,11 @@ namespace LFS.Views.Transactions.JEV
                 LoadJournals();
                 LoadFunds();
                 HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
+                tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadJevRecords();
                 nudYear.Value = Helper.GetCurrentDate().Year;
                 LoadJevRecords();
                 MonitorControlChanges(panel1, btnApplyFltr);
-                Helper.EnableDisableToolStripButtons(dgJEV, tlStrpBtnUpdate, tlStrpBtnDelete);
+                EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -109,7 +110,6 @@ namespace LFS.Views.Transactions.JEV
                 btnView.Visible = false;
                 btnView.Enabled = false;
 
-                btnEdit.Visible = false;
                 btnEdit.Enabled = false;
 
                 btnDelete.Enabled = false;
@@ -195,6 +195,7 @@ namespace LFS.Views.Transactions.JEV
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
+                int rowLimit = Convert.ToInt32(tlStrpCmbxLimit.ComboBox.SelectedValue);
 
                 var parameters = new (string name, object value)[]
                 {
@@ -202,7 +203,8 @@ namespace LFS.Views.Transactions.JEV
                     ("status", GetFltrStatus()),
                     ("journal", cmbxJournals.Text),
                     ("fund", cmbxFunds.Text),
-                    ("year", nudYear.Value)
+                    ("year", nudYear.Value),
+                    ("row_limit", rowLimit),
                 };
 
                 backgroundWorker1.RunWorkerAsync(parameters);
@@ -245,13 +247,14 @@ namespace LFS.Views.Transactions.JEV
 
             string searchKey = dict["search_key"]?.ToString() ?? string.Empty;
             string jevStatus = dict["status"]?.ToString().ToLower();
+            int rowLimit = Convert.ToInt32(dict["row_limit"]);
             string journal = dict["journal"]?.ToString() ?? string.Empty;
             string fund = dict["fund"]?.ToString() ?? string.Empty;
             short year = Convert.ToInt16(dict["year"]);
 
             // Retrieve data
             var dtJevDb = AccFactory.JEVRepository()
-                .GetViewRecords(jevStatus, searchKey, journal, fund, year);
+                .GetViewRecords(jevStatus, searchKey, journal, fund, year, rowLimit);
 
             int totalCount = dtJevDb.Rows.Count;
             int progress = 0;
